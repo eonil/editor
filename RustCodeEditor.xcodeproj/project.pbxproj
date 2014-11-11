@@ -18,6 +18,9 @@
 		452A12211A107FF000E38F35 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A12201A107FF000E38F35 /* TableViewController.swift */; };
 		452A12231A1082B900E38F35 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A12221A1082B900E38F35 /* LayoutConstraint.swift */; };
 		454ECC341A11D67800DFD460 /* RustProgramExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */; };
+		454ECC361A11E1C600DFD460 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 454ECC351A11E1C600DFD460 /* LICENSE */; };
+		454ECC381A11E1DE00DFD460 /* Preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 454ECC371A11E1DE00DFD460 /* Preview.png */; };
+		454ECC3A1A11E1E700DFD460 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 454ECC391A11E1E700DFD460 /* README.md */; };
 		4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557D8951A116D6800D6C53B /* FileTreeViewController.swift */; };
 		4557D8981A11738E00D6C53B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557D8971A11738E00D6C53B /* ViewController.swift */; };
 		45700B721A11661000D84249 /* AppKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700B6F1A11661000D84249 /* AppKitExtensions.swift */; };
@@ -54,6 +57,9 @@
 		452A12201A107FF000E38F35 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		452A12221A1082B900E38F35 /* LayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraint.swift; sourceTree = "<group>"; };
 		454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProgramExecutionController.swift; sourceTree = "<group>"; };
+		454ECC351A11E1C600DFD460 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		454ECC371A11E1DE00DFD460 /* Preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Preview.png; sourceTree = "<group>"; };
+		454ECC391A11E1E700DFD460 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4557D8951A116D6800D6C53B /* FileTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController.swift; sourceTree = "<group>"; };
 		4557D8971A11738E00D6C53B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		45700B6F1A11661000D84249 /* AppKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtensions.swift; sourceTree = "<group>"; };
@@ -182,7 +188,10 @@
 		45BBB0DB1A1022A10055232E = {
 			isa = PBXGroup;
 			children = (
-				45BBB0E61A1022A10055232E /* RustREPL */,
+				454ECC351A11E1C600DFD460 /* LICENSE */,
+				454ECC391A11E1E700DFD460 /* README.md */,
+				454ECC371A11E1DE00DFD460 /* Preview.png */,
+				45BBB0E61A1022A10055232E /* Sources */,
 				45BBB0E51A1022A10055232E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -195,7 +204,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		45BBB0E61A1022A10055232E /* RustREPL */ = {
+		45BBB0E61A1022A10055232E /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				45BBB0E91A1022A10055232E /* AppDelegate.swift */,
@@ -209,7 +218,6 @@
 				4597F81B1A113D100089FC66 /* MonolithCandidates */,
 				45BBB0E71A1022A10055232E /* Supporting Files */,
 			);
-			name = RustREPL;
 			path = Sources;
 			sourceTree = "<group>";
 		};
@@ -302,6 +310,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				454ECC381A11E1DE00DFD460 /* Preview.png in Resources */,
+				454ECC361A11E1C600DFD460 /* LICENSE in Resources */,
 				45BBB0EC1A1022A10055232E /* Images.xcassets in Resources */,
 				45BBB0EF1A1022A10055232E /* MainMenu.xib in Resources */,
 			);
@@ -336,6 +346,7 @@
 				4557D8981A11738E00D6C53B /* ViewController.swift in Sources */,
 				452A121D1A107E4C00E38F35 /* IssueListingViewController.swift in Sources */,
 				45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */,
+				454ECC3A1A11E1E700DFD460 /* README.md in Sources */,
 				45700B741A11661000D84249 /* SwiftLevelExtensions.swift in Sources */,
 				45700B761A11671800D84249 /* RustProjectWindowController.swift in Sources */,
 				4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */,

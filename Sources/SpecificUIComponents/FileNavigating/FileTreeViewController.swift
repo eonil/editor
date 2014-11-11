@@ -125,7 +125,7 @@ class FileTreeViewController : NSViewController, NSOutlineViewDataSource, NSOutl
 		let	n1	=	item as FileNode
 		assert(n1.existing)
 		iv1.image						=	NSWorkspace.sharedWorkspace().iconForFile(n1.absolutePath)
-		cv1.textField!.stringValue		=	n1.relativePath
+		cv1.textField!.stringValue		=	n1.displayName
 		cv1.textField!.bordered			=	false
 		cv1.textField!.backgroundColor	=	NSColor.clearColor()
 		cv1.textField!.editable			=	false
@@ -223,6 +223,20 @@ final class FileNode {
 		}
 	}
 }
+
+extension FileNode {
+	
+	var	displayName:String {
+		get {
+			return	NSFileManager.defaultManager().displayNameAtPath(absolutePath)
+		}
+	}
+}
+
+
+
+
+
 
 
 

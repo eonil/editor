@@ -43,6 +43,7 @@ private func run2(command:String) -> String {
 	println(command)
 	
 	let	t1	=	NSTask()
+	
 	t1.launchPath			=	"/bin/bash"
 	t1.arguments			=	["--login", "-s"]
 	
