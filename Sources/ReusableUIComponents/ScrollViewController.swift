@@ -9,6 +9,7 @@
 import Foundation
 import Cocoa
 
+///	`translatesAutoresizingMaskIntoConstraints` set to `false` implicitly.
 class ScrollViewController: NSViewController {
 	
 	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -59,5 +60,6 @@ class ScrollViewController: NSViewController {
 		scrollView.hasVerticalScroller		=	true
 		scrollView.hasHorizontalScroller	=	true
 		
+		scrollView.translatesAutoresizingMaskIntoConstraints	=	false		///	This shall benefit everyone in the universe...
 	}
 }

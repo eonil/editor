@@ -12,7 +12,8 @@ import Foundation
 import AppKit
 
 class RustProjectWindowController : NSWindowController {
-	let	mainSplitViewController	=	MainSplitViewController()
+	
+	let	mainViewController	=	MainViewController()
 	
 	override init() {
 		super.init()
@@ -32,49 +33,62 @@ class RustProjectWindowController : NSWindowController {
 	}
 	override func windowDidLoad() {
 		super.windowDidLoad()
-		self.contentViewController	=	mainSplitViewController
+		self.contentViewController	=	mainViewController		
 	}
 }
 
 
 
 
-
 extension RustProjectWindowController {
 	
-	class MainSplitViewController : NSSplitViewController {
-		let	codeEditingViewController		=	CodeEditingViewController()
-		let	sideSplitViewController			=	SideSplitViewController()
+	class MainViewController : NSSplitViewController {
+		private let	editingViewController		=	EditingViewController()
+		let	navigationViewController	=	NavigationViewController()
+//		let	utilityViewController		=	UtilityViewController()
 		
 		private var	_channels	=	[] as [AnyObject]
+		
+		var codeEditingViewController:CodeEditingViewController {
+			get {
+				return	editingViewController.codeEditorViewController
+			}
+		}
+		var	commandConsoleViewController:CommandConsoleViewController {
+			get {
+				return	editingViewController.commandConsoleViewController
+			}
+		}
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
 			
 			self.splitView.vertical	=	true
-			self.addChildViewController(sideSplitViewController)
-			self.addChildViewController(codeEditingViewController)
-			self.addSplitViewItem(NSSplitViewItem(viewController: sideSplitViewController))
-			self.addSplitViewItem(NSSplitViewItem(viewController: codeEditingViewController))
-
+			self.addChildViewControllerAsASplitViewItem(navigationViewController)
+			self.addChildViewControllerAsASplitViewItem(editingViewController)
+//			self.addChildViewControllerAsASplitViewItem(utilityViewController)
+			
 			//	The priority constant doesn't work in Xcode 6.1. I am not sure that is a bug or feature.
-			self.view.layoutConstraints	=	[
-				codeEditingViewController..width >= EDITOR_WIDTH_MINIMUM ~~ 5,
-				sideSplitViewController..width >= REPORTER_WIDTH_MINIMUM ~~ 4,
-				codeEditingViewController..width >= EDITOR_WIDTH_PREFEREED ~~ 3,
-//				codeEditingViewController..width >= CGFloat.max ~~ 2,
-				sideSplitViewController..width == REPORTER_WIDTH_PREFERRED ~~ 1,
+			self.splitView.layoutConstraints	=	[
+				editingViewController..width >= 400,
+				navigationViewController..width >= 200,
+//				utilityViewController..width >= 200,
+//				codeEditingViewController..width >= 800 ~~ 100,
+//				navigationViewController..width >= 300 ~~ 90,
+//				utilityViewController..width >= 300 ~~ 11,
+				
+				editingViewController..width >= NSScreen.mainScreen()!.frame.width ~~ 3,
+				navigationViewController..width >= NSScreen.mainScreen()!.frame.width ~~ 2,
+//				utilityViewController..width >= NSScreen.mainScreen()!.frame.width ~~ 1,
 			]
-
+			
 			_channels	=	[
-				channel(sideSplitViewController.issueListingViewController.userIsWantingToHighlightIssues, codeEditingViewController.highlightRangesOfIssues),
-				channel(sideSplitViewController.issueListingViewController.userIsWantingToNavigateToIssue, codeEditingViewController.navigateRangeOfIssue),
+				channel(navigationViewController.issueListingViewController.userIsWantingToHighlightIssues, codeEditingViewController.highlightRangesOfIssues),
+				channel(navigationViewController.issueListingViewController.userIsWantingToNavigateToIssue, codeEditingViewController.navigateRangeOfIssue),
 			]
 		}
 		override func viewDidAppear() {
 			super.viewDidAppear()
-			
-			sideSplitViewController.fileTreeViewController.pathRepresentation	=	"/Users/Eonil/Documents"
 		}
 		
 		
@@ -83,47 +97,74 @@ extension RustProjectWindowController {
 	
 	
 	
-	
-	
-	class SideSplitViewController : NSSplitViewController {
-		let	fileTreeScrollViewController	=	ScrollViewController()
-		let	fileTreeViewController			=	FileTreeViewController()
-		let	resultPrintingViewController	=	ResultPrintingViewController()
-		let	issueListingViewController		=	IssueListingViewController()
-		let	issueScrollingViewController	=	ScrollViewController()
+	class EditingViewController : NSSplitViewController {
+		let	codeEditorViewController		=	CodeEditingViewController()
+		let	commandConsoleViewController	=	CommandConsoleViewController()
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
 			
-			fileTreeScrollViewController.documentViewController	=	fileTreeViewController
-			
 			self.splitView.vertical	=	false
-			self.addChildViewController(fileTreeScrollViewController)
-			self.addSplitViewItem(NSSplitViewItem(viewController: fileTreeScrollViewController))
-			self.addChildViewController(resultPrintingViewController)
-			self.addSplitViewItem(NSSplitViewItem(viewController: resultPrintingViewController))
-			self.addChildViewController(issueScrollingViewController)
-			self.addSplitViewItem(NSSplitViewItem(viewController: issueScrollingViewController))
-			issueScrollingViewController.documentViewController	=	issueListingViewController
-
+			self.addChildViewControllerAsASplitViewItem(codeEditorViewController)
+			self.addChildViewControllerAsASplitViewItem(commandConsoleViewController)
+			
 			//	The priority constant doesn't work in Xcode 6.1. I am not sure that is a bug or feature.
 			self.view.layoutConstraints	=	[
-				fileTreeScrollViewController..height >= 100,
-				resultPrintingViewController..height >= 100,
-				issueScrollingViewController..height >= 100,
-				fileTreeScrollViewController..height >= 400 ~~ 3,
-				issueScrollingViewController..height >= 100 ~~ 2,
-				resultPrintingViewController..height == 100 ~~ 1,
+				codeEditorViewController..height >= 300,
+				commandConsoleViewController..height >= 100,
+				codeEditorViewController..height >= 800 ~~ 3,
+				commandConsoleViewController..height >= 200 ~~ 2
 			]
 		}
 	}
-
-	class ResultPrintingViewController : TextScrollViewController {
-		override func viewDidAppear() {
-			super.viewDidAppear()
-			self.textViewController.textView.font	=	Palette.current.codeFont
+	
+	class NavigationViewController : NSSplitViewController {
+		let	fileTreeScrollViewController	=	ScrollViewController()
+		let	issueScrollingViewController	=	ScrollViewController()
+		
+		let	fileTreeViewController			=	FileTreeViewController()
+		let	issueListingViewController		=	IssueListingViewController()
+		
+		override func viewDidLoad() {
+			super.viewDidLoad()
+			
+			fileTreeScrollViewController.documentViewController		=	fileTreeViewController
+			issueScrollingViewController.documentViewController		=	issueListingViewController
+			
+			self.splitView.vertical	=	false
+			self.addChildViewControllerAsASplitViewItem(fileTreeScrollViewController)
+			self.addChildViewControllerAsASplitViewItem(issueScrollingViewController)
+			
+			//	The priority constant doesn't work in Xcode 6.1. I am not sure that is a bug or feature.
+			self.view.layoutConstraints	=	[
+				fileTreeScrollViewController..height >= 100,
+				issueScrollingViewController..height >= 100,
+				fileTreeScrollViewController..height >= 400 ~~ 3,
+				issueScrollingViewController..height >= 200 ~~ 2,
+			]
 		}
 	}
+	
+//	class UtilityViewController : NSSplitViewController {
+//		let	commandConsoleViewController	=	CommandConsoleViewController()
+//		
+//		override func viewDidLoad() {
+//			super.viewDidLoad()
+//			
+//			self.splitView.vertical	=	false
+//			self.addChildViewControllerAsASplitViewItem(commandConsoleViewController)
+//
+//			//	The priority constant doesn't work in Xcode 6.1. I am not sure that is a bug or feature.
+//			self.view.layoutConstraints	=	[
+//				commandConsoleViewController..height >= 100,
+////				commandConsoleViewController..height == 100 ~~ 1,
+//			]
+//		}
+//	}
+
+	
+	
+	
 
 
 

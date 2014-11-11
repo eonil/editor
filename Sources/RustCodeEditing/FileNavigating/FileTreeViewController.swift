@@ -72,9 +72,9 @@ class FileTreeViewController : NSViewController, NSOutlineViewDataSource, NSOutl
 	
 	
 	
-	func outlineView(outlineView: NSOutlineView, heightOfRowByItem item: AnyObject) -> CGFloat {
-		return	16
-	}
+//	func outlineView(outlineView: NSOutlineView, heightOfRowByItem item: AnyObject) -> CGFloat {
+//		return	16
+//	}
 	
 	func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
 		let	n1	=	item as FileNode?
@@ -113,14 +113,16 @@ class FileTreeViewController : NSViewController, NSOutlineViewDataSource, NSOutl
 //	}
 	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		let	tv1	=	NSTextField()
-//		let	iv1	=	NSImageView()
+		let	iv1	=	NSImageView()
 		let	cv1	=	NSTableCellView()
 		cv1.textField	=	tv1
-//		cv1.imageView	=	iv1
+		cv1.imageView	=	iv1
 		cv1.addSubview(tv1)
-//		cv1.addSubview(iv1)
+		cv1.addSubview(iv1)
 
 		let	n1	=	item as FileNode
+		assert(n1.existing)
+		iv1.image						=	NSWorkspace.sharedWorkspace().iconForFile(n1.absolutePath)
 		cv1.textField!.stringValue		=	n1.relativePath
 		cv1.textField!.bordered			=	false
 		cv1.textField!.backgroundColor	=	NSColor.clearColor()
@@ -146,6 +148,15 @@ final class FileNode {
 	init(path:String) {
 		self.relativePath	=	path
 	}
+	init(supernode:FileNode, relativePath:String) {
+		self.supernode		=	supernode
+		self.relativePath	=	relativePath
+	}
+	var absoluteURL:NSURL {
+		get {
+			return	NSURL(fileURLWithPath: absolutePath)!
+		}
+	}
 	var	absolutePath:String {
 		get {
 			return	supernode == nil ? relativePath : supernode!.absolutePath.stringByAppendingPathComponent(relativePath)
@@ -167,20 +178,38 @@ final class FileNode {
 	}
 	var subnodes:[FileNode]? {
 		get {
+			
 			if NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(absolutePath) {
 				if _subnodes == nil {
 					_subnodes	=	[]
-					let	e1	=	NSFileManager.defaultManager().enumeratorAtPath(absolutePath)!
-					while let o1 = e1.nextObject() as? String {
-						let	n1	=	FileNode(path: o1)
+					let	u1	=	absoluteURL
+					let	e1	=	NSFileManager.defaultManager().enumeratorAtURL(u1, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles | NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants, errorHandler: { (url:NSURL!, error:NSError!) -> Bool in
+						return	false
+					})
+					let	e2	=	e1!
+					while let o1 = e2.nextObject() as? NSURL {
+						let	p2	=	o1.path!.lastPathComponent
+						let	n1	=	FileNode(supernode: self, relativePath: p2)
 						_subnodes!.append(n1)
-						
-						e1.skipDescendants()
 					}
 				}
 				return	_subnodes!
 			}
 			return	nil
+			
+//			if NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(absolutePath) {
+//				if _subnodes == nil {
+//					_subnodes	=	[]
+//					let	e1	=	NSFileManager.defaultManager().enumeratorAtPath(absolutePath)!
+//					e1.skipDescendants()
+//					while let o1 = e1.nextObject() as? String {
+//						let	n1	=	FileNode(path: o1)
+//						_subnodes!.append(n1)
+//					}
+//				}
+//				return	_subnodes!
+//			}
+//			return	nil
 		}
 	}
 }

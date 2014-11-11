@@ -36,14 +36,17 @@ class IssueListingViewController : TableViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		tableView.rowSizeStyle	=	NSTableViewRowSizeStyle.Small
+		tableView.headerView				=	nil
+		tableView.rowSizeStyle				=	NSTableViewRowSizeStyle.Small
+		tableView.selectionHighlightStyle	=	NSTableViewSelectionHighlightStyle.SourceList
+		
 		tableView.addTableColumn <<< NSTableColumn(identifier: NAME, title: "Name", width: 40)
 //		tableView.addTableColumn <<< NSTableColumn(identifier: RANGE, title: "Range")
-		tableView.addTableColumn <<< NSTableColumn(identifier: CLASS, title: "Class", width: 40)
+		tableView.addTableColumn <<< NSTableColumn(identifier: CLASS, title: "Class", width: 60)
 		tableView.addTableColumn <<< NSTableColumn(identifier: DESC, title: "Description")
 		
-		tableView.target		=	self
-		tableView.doubleAction	=	"userDidDoubleClick:"
+		tableView.target			=	self
+		tableView.doubleAction		=	"userDidDoubleClick:"
 	}
 	
 	func numberOfRowsInTableView(tableView: NSTableView) -> Int {

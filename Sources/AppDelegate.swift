@@ -17,6 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //		main.loadWindow()
 //		main.windowDidLoad()
 //		main.window!.orderFront(self)
+		
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
@@ -53,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //
 //class MainSplit : NSSplitViewController {
 //	let	codeEditingViewController		=	CodeEditingViewController()
-//	let	resultPrintingViewController	=	ResultPrintingViewController()
+//	let	commandConsoleViewController	=	CommandConsoleViewController()
 //	
 //	override func viewDidLoad() {
 //		super.viewDidLoad()
@@ -61,12 +62,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //		self.splitView.vertical	=	false
 //		
 //		self.addChildViewController(codeEditingViewController)
-//		self.addChildViewController(resultPrintingViewController)
+//		self.addChildViewController(commandConsoleViewController)
 //		self.addSplitViewItem(NSSplitViewItem(viewController: codeEditingViewController))
-//		self.addSplitViewItem(NSSplitViewItem(viewController: resultPrintingViewController))
+//		self.addSplitViewItem(NSSplitViewItem(viewController: commandConsoleViewController))
 //		
 //		self.view.addConstraint(NSLayoutConstraint(item: codeEditingViewController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 0, constant: 200))
-//		self.view.addConstraint(NSLayoutConstraint(item: resultPrintingViewController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 0, constant: 200))
+//		self.view.addConstraint(NSLayoutConstraint(item: commandConsoleViewController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 0, constant: 200))
 //	}
 //	override func viewDidAppear() {
 //		super.viewDidAppear()
@@ -78,7 +79,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //class CodeEditingViewController : TextScrollViewController {
 //}
 //
-//class ResultPrintingViewController : TextScrollViewController {
+//class CommandConsoleViewController : TextScrollViewController {
 //	override func viewDidAppear() {
 //		super.viewDidAppear()
 //	}

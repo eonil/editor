@@ -30,6 +30,8 @@ typealias	LayoutArgument	=	(view: NSView, attribute:NSLayoutAttribute)
 
 let	width	=	NSLayoutAttribute.Width
 let	height	=	NSLayoutAttribute.Height
+let	centerX	=	NSLayoutAttribute.CenterX
+let	centerY	=	NSLayoutAttribute.CenterY
 
 let	left	=	NSLayoutAttribute.Left
 let	right	=	NSLayoutAttribute.Right
@@ -65,6 +67,7 @@ func * (left:LayoutArgument, right:CGFloat) -> LayoutExpression {
 func + (left:LayoutExpression, right:CGFloat) -> LayoutExpression {
 	return	LayoutExpression(argument: left.argument, multiplier: left.multiplier, constant: right)
 }
+
 
 func == (left:LayoutArgument, right:LayoutExpression) -> NSLayoutConstraint {
 	return	NSLayoutConstraint(item: left.view, attribute: left.attribute, relatedBy: NSLayoutRelation.Equal, toItem: right.argument.view, attribute: right.argument.attribute, multiplier: right.multiplier, constant: right.constant)

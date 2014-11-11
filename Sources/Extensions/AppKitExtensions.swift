@@ -9,6 +9,16 @@
 import Foundation
 import AppKit
 
+
+
+
+extension NSSplitViewController {
+	public func addChildViewControllerAsASplitViewItem(childViewController: NSViewController) {
+		self.addChildViewController(childViewController)
+		self.addSplitViewItem(NSSplitViewItem(viewController: childViewController))
+	}
+}
+
 extension NSViewController {
 //	var childViewControllers:[NSViewController] {
 //		get {
@@ -40,7 +50,9 @@ extension NSView {
 			return	self.constraints as [NSLayoutConstraint]
 		}
 		set(v) {
-			self.removeConstraints(self.constraints)
+			let	cs1	=	self.constraints
+			self.removeConstraints(cs1)
+			assert(self.constraints.count == 0)
 			self.addConstraints(v as [AnyObject])
 		}
 	}

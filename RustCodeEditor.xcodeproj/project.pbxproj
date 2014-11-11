@@ -37,6 +37,8 @@
 		45D7F6DD1A114C3900E792D1 /* UserActionSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DC1A114C3900E792D1 /* UserActionSignal.swift */; };
 		45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */; };
 		45F341111A104DCD00F0F63B /* RustProgramExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F341101A104DCD00F0F63B /* RustProgramExecutionController.swift */; };
+		45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */; };
+		45F6C1151A119726005D8EEA /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		45D7F6DC1A114C3900E792D1 /* UserActionSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActionSignal.swift; sourceTree = "<group>"; };
 		45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayoutQuery.swift; sourceTree = "<group>"; };
 		45F341101A104DCD00F0F63B /* RustProgramExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProgramExecutionController.swift; sourceTree = "<group>"; };
+		45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandConsoleViewController.swift; sourceTree = "<group>"; };
+		45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 				4557D8941A116D5F00D6C53B /* FileNavigating */,
 				45D158F31A113FD900B25657 /* CodeEditing */,
 				452A121B1A107E3A00E38F35 /* IssueListing */,
+				45F6C1111A11959C005D8EEA /* CommandConsole */,
 				45D158F81A11401800B25657 /* Presets */,
 			);
 			path = RustCodeEditing;
@@ -108,6 +113,7 @@
 				452A12201A107FF000E38F35 /* TableViewController.swift */,
 				451740DD1A102FA300861ECC /* ScrollViewController.swift */,
 				451740DF1A102FA300861ECC /* TextViewController.swift */,
+				45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */,
 				452A12221A1082B900E38F35 /* LayoutConstraint.swift */,
 				45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */,
 				4557D8971A11738E00D6C53B /* ViewController.swift */,
@@ -212,6 +218,14 @@
 			path = Presets;
 			sourceTree = "<group>";
 		};
+		45F6C1111A11959C005D8EEA /* CommandConsole */ = {
+			isa = PBXGroup;
+			children = (
+				45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */,
+			);
+			path = CommandConsole;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,6 +315,7 @@
 				4597F8281A113D100089FC66 /* NotifierAndObserver.swift in Sources */,
 				4557D8981A11738E00D6C53B /* ViewController.swift in Sources */,
 				452A121D1A107E4C00E38F35 /* IssueListingViewController.swift in Sources */,
+				45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */,
 				45700B741A11661000D84249 /* SwiftLevelExtensions.swift in Sources */,
 				45700B761A11671800D84249 /* RustProjectWindowController.swift in Sources */,
 				4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */,
@@ -308,6 +323,7 @@
 				452A121F1A107EC500E38F35 /* TableScrollViewController.swift in Sources */,
 				4597F8251A113D100089FC66 /* Box.swift in Sources */,
 				4529620F1A10A0D4004A0958 /* IssueReportParser.swift in Sources */,
+				45F6C1151A119726005D8EEA /* VisualEffectViewController.swift in Sources */,
 				45D7F6DD1A114C3900E792D1 /* UserActionSignal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
