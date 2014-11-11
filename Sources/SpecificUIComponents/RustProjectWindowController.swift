@@ -35,6 +35,21 @@ class RustProjectWindowController : NSWindowController {
 		super.windowDidLoad()
 		self.contentViewController	=	mainViewController		
 	}
+	
+	
+	
+	
+	var codeEditingViewController:CodeEditingViewController {
+		get {
+			return	mainViewController.editingViewController.codeEditorViewController
+		}
+	}
+	var	commandConsoleViewController:CommandConsoleViewController {
+		get {
+			return	mainViewController.editingViewController.commandConsoleViewController
+		}
+	}
+	
 }
 
 
@@ -44,21 +59,10 @@ extension RustProjectWindowController {
 	
 	class MainViewController : NSSplitViewController {
 		private let	editingViewController		=	EditingViewController()
-		let	navigationViewController	=	NavigationViewController()
-//		let	utilityViewController		=	UtilityViewController()
+		let	navigationViewController			=	NavigationViewController()
+//		let	utilityViewController				=	UtilityViewController()
 		
 		private var	_channels	=	[] as [AnyObject]
-		
-		var codeEditingViewController:CodeEditingViewController {
-			get {
-				return	editingViewController.codeEditorViewController
-			}
-		}
-		var	commandConsoleViewController:CommandConsoleViewController {
-			get {
-				return	editingViewController.commandConsoleViewController
-			}
-		}
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
@@ -83,8 +87,11 @@ extension RustProjectWindowController {
 			]
 			
 			_channels	=	[
-				channel(navigationViewController.issueListingViewController.userIsWantingToHighlightIssues, codeEditingViewController.highlightRangesOfIssues),
-				channel(navigationViewController.issueListingViewController.userIsWantingToNavigateToIssue, codeEditingViewController.navigateRangeOfIssue),
+				channel(navigationViewController.issueListingViewController.userIsWantingToHighlightIssues, editingViewController.codeEditorViewController.highlightRangesOfIssues),
+				channel(navigationViewController.issueListingViewController.userIsWantingToNavigateToIssue, editingViewController.codeEditorViewController.navigateRangeOfIssue),
+				channel(navigationViewController.fileTreeViewController.userIsWantingToEditFileAtPath) { [unowned self] path in
+					self.editingViewController.codeEditorViewController.pathRepresentation	=	path
+				},
 			]
 		}
 		override func viewDidAppear() {
@@ -98,22 +105,26 @@ extension RustProjectWindowController {
 	
 	
 	class EditingViewController : NSSplitViewController {
+		let	commandScrollViewController		=	ScrollViewController()
+		
 		let	codeEditorViewController		=	CodeEditingViewController()
 		let	commandConsoleViewController	=	CommandConsoleViewController()
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
 			
+			commandScrollViewController.documentViewController	=	commandConsoleViewController
+			
 			self.splitView.vertical	=	false
 			self.addChildViewControllerAsASplitViewItem(codeEditorViewController)
-			self.addChildViewControllerAsASplitViewItem(commandConsoleViewController)
+			self.addChildViewControllerAsASplitViewItem(commandScrollViewController)
 			
 			//	The priority constant doesn't work in Xcode 6.1. I am not sure that is a bug or feature.
 			self.view.layoutConstraints	=	[
 				codeEditorViewController..height >= 300,
-				commandConsoleViewController..height >= 100,
+				commandScrollViewController..height >= 100,
 				codeEditorViewController..height >= 800 ~~ 3,
-				commandConsoleViewController..height >= 200 ~~ 2
+				commandScrollViewController..height >= 200 ~~ 2
 			]
 		}
 	}

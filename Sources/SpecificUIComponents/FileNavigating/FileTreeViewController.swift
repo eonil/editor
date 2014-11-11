@@ -11,6 +11,8 @@ import AppKit
 
 class FileTreeViewController : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
 	
+	let	userIsWantingToEditFileAtPath	=	Notifier<String>()
+	
 	private	var	_root:FileNode?
 	
 	var pathRepresentation:String? {
@@ -129,6 +131,14 @@ class FileTreeViewController : NSViewController, NSOutlineViewDataSource, NSOutl
 		cv1.textField!.editable			=	false
 		(cv1.textField!.cell() as NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingHead
 		return	cv1
+	}
+	
+	
+	
+	func outlineViewSelectionDidChange(notification: NSNotification) {
+		let	idx1	=	self.outlineView.selectedRow
+		let	n1		=	self.outlineView.itemAtRow(idx1) as FileNode
+		userIsWantingToEditFileAtPath.signal(n1.absolutePath)
 	}
 }
 

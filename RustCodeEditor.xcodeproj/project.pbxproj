@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		451740D91A102F2A00861ECC /* RustSourceCodeDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740D81A102F2A00861ECC /* RustSourceCodeDocument.swift */; };
+		4514A76D1A11C7D200F25ED8 /* RustProjectDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */; };
+		4514A7731A11C81200F25ED8 /* RustSourceCodeFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */; };
 		451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DD1A102FA300861ECC /* ScrollViewController.swift */; };
 		451740E11A102FA300861ECC /* TextScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DE1A102FA300861ECC /* TextScrollViewController.swift */; };
 		451740E21A102FA300861ECC /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DF1A102FA300861ECC /* TextViewController.swift */; };
@@ -16,6 +17,7 @@
 		452A121F1A107EC500E38F35 /* TableScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A121E1A107EC500E38F35 /* TableScrollViewController.swift */; };
 		452A12211A107FF000E38F35 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A12201A107FF000E38F35 /* TableViewController.swift */; };
 		452A12231A1082B900E38F35 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A12221A1082B900E38F35 /* LayoutConstraint.swift */; };
+		454ECC341A11D67800DFD460 /* RustProgramExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */; };
 		4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557D8951A116D6800D6C53B /* FileTreeViewController.swift */; };
 		4557D8981A11738E00D6C53B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557D8971A11738E00D6C53B /* ViewController.swift */; };
 		45700B721A11661000D84249 /* AppKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700B6F1A11661000D84249 /* AppKitExtensions.swift */; };
@@ -36,13 +38,13 @@
 		45D158FA1A11401D00B25657 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D158F91A11401D00B25657 /* Palette.swift */; };
 		45D7F6DD1A114C3900E792D1 /* UserActionSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DC1A114C3900E792D1 /* UserActionSignal.swift */; };
 		45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */; };
-		45F341111A104DCD00F0F63B /* RustProgramExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F341101A104DCD00F0F63B /* RustProgramExecutionController.swift */; };
 		45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */; };
 		45F6C1151A119726005D8EEA /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		451740D81A102F2A00861ECC /* RustSourceCodeDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustSourceCodeDocument.swift; sourceTree = "<group>"; };
+		4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectDocument.swift; sourceTree = "<group>"; };
+		4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustSourceCodeFileDocument.swift; sourceTree = "<group>"; };
 		451740DD1A102FA300861ECC /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
 		451740DE1A102FA300861ECC /* TextScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextScrollViewController.swift; sourceTree = "<group>"; };
 		451740DF1A102FA300861ECC /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		452A121E1A107EC500E38F35 /* TableScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableScrollViewController.swift; sourceTree = "<group>"; };
 		452A12201A107FF000E38F35 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		452A12221A1082B900E38F35 /* LayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConstraint.swift; sourceTree = "<group>"; };
+		454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProgramExecutionController.swift; sourceTree = "<group>"; };
 		4557D8951A116D6800D6C53B /* FileTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController.swift; sourceTree = "<group>"; };
 		4557D8971A11738E00D6C53B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		45700B6F1A11661000D84249 /* AppKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtensions.swift; sourceTree = "<group>"; };
@@ -73,7 +76,6 @@
 		45D158F91A11401D00B25657 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		45D7F6DC1A114C3900E792D1 /* UserActionSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActionSignal.swift; sourceTree = "<group>"; };
 		45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayoutQuery.swift; sourceTree = "<group>"; };
-		45F341101A104DCD00F0F63B /* RustProgramExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProgramExecutionController.swift; sourceTree = "<group>"; };
 		45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandConsoleViewController.swift; sourceTree = "<group>"; };
 		45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,12 +91,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		451740D71A102F1900861ECC /* RustCodeEditing */ = {
+		4514A76B1A11C7CB00F25ED8 /* Documents */ = {
 			isa = PBXGroup;
 			children = (
-				451740D81A102F2A00861ECC /* RustSourceCodeDocument.swift */,
+				4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */,
+				4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */,
+			);
+			path = Documents;
+			sourceTree = "<group>";
+		};
+		451740D71A102F1900861ECC /* SpecificUIComponents */ = {
+			isa = PBXGroup;
+			children = (
 				45700B751A11671800D84249 /* RustProjectWindowController.swift */,
-				45F341101A104DCD00F0F63B /* RustProgramExecutionController.swift */,
 				45D7F6DC1A114C3900E792D1 /* UserActionSignal.swift */,
 				4557D8941A116D5F00D6C53B /* FileNavigating */,
 				45D158F31A113FD900B25657 /* CodeEditing */,
@@ -102,10 +111,10 @@
 				45F6C1111A11959C005D8EEA /* CommandConsole */,
 				45D158F81A11401800B25657 /* Presets */,
 			);
-			path = RustCodeEditing;
+			path = SpecificUIComponents;
 			sourceTree = "<group>";
 		};
-		451740DC1A102FA300861ECC /* ReusableUIComponents */ = {
+		451740DC1A102FA300861ECC /* ProtoUIComponents */ = {
 			isa = PBXGroup;
 			children = (
 				452A121E1A107EC500E38F35 /* TableScrollViewController.swift */,
@@ -118,7 +127,7 @@
 				45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */,
 				4557D8971A11738E00D6C53B /* ViewController.swift */,
 			);
-			path = ReusableUIComponents;
+			path = ProtoUIComponents;
 			sourceTree = "<group>";
 		};
 		452A121B1A107E3A00E38F35 /* IssueListing */ = {
@@ -129,6 +138,14 @@
 				4597F8151A1136810089FC66 /* Issue.swift */,
 			);
 			path = IssueListing;
+			sourceTree = "<group>";
+		};
+		454ECC321A11D66100DFD460 /* BackstageWorks */ = {
+			isa = PBXGroup;
+			children = (
+				454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */,
+			);
+			path = BackstageWorks;
 			sourceTree = "<group>";
 		};
 		4557D8941A116D5F00D6C53B /* FileNavigating */ = {
@@ -185,8 +202,10 @@
 				45BBB0EB1A1022A10055232E /* Images.xcassets */,
 				45BBB0ED1A1022A10055232E /* MainMenu.xib */,
 				45700B6E1A11661000D84249 /* Extensions */,
-				451740D71A102F1900861ECC /* RustCodeEditing */,
-				451740DC1A102FA300861ECC /* ReusableUIComponents */,
+				4514A76B1A11C7CB00F25ED8 /* Documents */,
+				454ECC321A11D66100DFD460 /* BackstageWorks */,
+				451740D71A102F1900861ECC /* SpecificUIComponents */,
+				451740DC1A102FA300861ECC /* ProtoUIComponents */,
 				4597F81B1A113D100089FC66 /* MonolithCandidates */,
 				45BBB0E71A1022A10055232E /* Supporting Files */,
 			);
@@ -299,8 +318,8 @@
 				4597F8271A113D100089FC66 /* LinkList.swift in Sources */,
 				45D158FA1A11401D00B25657 /* Palette.swift in Sources */,
 				45700B721A11661000D84249 /* AppKitExtensions.swift in Sources */,
-				451740D91A102F2A00861ECC /* RustSourceCodeDocument.swift in Sources */,
 				4597F8161A1136810089FC66 /* Issue.swift in Sources */,
+				4514A7731A11C81200F25ED8 /* RustSourceCodeFileDocument.swift in Sources */,
 				4597F8291A113D100089FC66 /* XML.Navigator.swift in Sources */,
 				45BBB0EA1A1022A10055232E /* AppDelegate.swift in Sources */,
 				4597F82B1A113D100089FC66 /* XML.Test.swift in Sources */,
@@ -308,8 +327,9 @@
 				4597F82A1A113D100089FC66 /* XML.swift in Sources */,
 				45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */,
 				451740E11A102FA300861ECC /* TextScrollViewController.swift in Sources */,
+				454ECC341A11D67800DFD460 /* RustProgramExecutionController.swift in Sources */,
+				4514A76D1A11C7D200F25ED8 /* RustProjectDocument.swift in Sources */,
 				451740E21A102FA300861ECC /* TextViewController.swift in Sources */,
-				45F341111A104DCD00F0F63B /* RustProgramExecutionController.swift in Sources */,
 				452A12211A107FF000E38F35 /* TableViewController.swift in Sources */,
 				45D158F51A113FE900B25657 /* CodeEditingViewController.swift in Sources */,
 				4597F8281A113D100089FC66 /* NotifierAndObserver.swift in Sources */,

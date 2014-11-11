@@ -9,6 +9,29 @@
 import Foundation
 
 class CodeEditingViewController : TextScrollViewController {
+	
+	
+	var	pathRepresentation:String? {
+		get {
+			return	self.representedObject as String?
+		}
+		set(v) {
+			self.representedObject	=	v
+		}
+	}
+	override var representedObject:AnyObject? {
+		willSet(v) {
+			precondition(v == nil || v! is String)
+		}
+		didSet {
+			if let p2 = pathRepresentation {
+				_openFileAtPath(p2)
+			} else {
+				_closeFile()
+			}
+		}
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		self.textViewController.textView.font	=	Palette.current.codeFont
@@ -34,4 +57,37 @@ class CodeEditingViewController : TextScrollViewController {
 		} else {
 		}
 	}
+	
+	
+	
+	
+	private func _openFileAtPath(path:String) {
+		assert(NSFileManager.defaultManager().fileExistsAtPath(path))
+		
+		var	e1	=	nil as NSError?
+		let	s1	=	NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: &e1)
+		if let s2 = s1 {
+			self.textViewController.textView.editable	=	true
+			self.textViewController.textView.string		=	s2
+		} else {
+			self.textViewController.textView.editable	=	false
+			self.textViewController.textView.string		=	e1!.localizedDescription
+		}
+	}
+	private func _closeFile() {
+		self.textViewController.textView.string	=	nil
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

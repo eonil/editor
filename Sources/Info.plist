@@ -9,20 +9,30 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>rs</string>
+				<string>rustproj</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>RustSourceCodeFile</string>
-			<key>CFBundleTypeOSTypes</key>
-			<array>
-				<string>????</string>
-			</array>
+			<string>RustProjectDocument</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
 			<integer>0</integer>
 			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).RustSourceCodeDocument</string>
+			<string>$(PRODUCT_MODULE_NAME).RustProjectDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>rs</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>RustSourceCodeFileDocument</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSTypeIsPackage</key>
+			<integer>0</integer>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).RustSourceCodeFileDocument</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>

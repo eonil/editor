@@ -9,9 +9,9 @@
 import Foundation
 
 
-class CommandConsoleViewController : TextScrollViewController {
+class CommandConsoleViewController : TextViewController {
 	override func viewDidAppear() {
 		super.viewDidAppear()
-		self.textViewController.textView.font	=	Palette.current.codeFont
+		self.textView.font	=	Palette.current.codeFont
 	}
 }
