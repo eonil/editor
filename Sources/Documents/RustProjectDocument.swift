@@ -27,9 +27,12 @@ class RustProjectDocument : NSDocument {
 	override func readFromData(data: NSData, ofType typeName: String, error outError: NSErrorPointer) -> Bool {
 		let	s1	=	NSString(data: data, encoding: NSUTF8StringEncoding)!
 		projectWindowController.codeEditingViewController.textViewController.textView.string	=	s1
-		let	p2	=	self.fileURL!.path!
-		let	p3	=	p2.stringByDeletingLastPathComponent
-		projectWindowController.mainViewController.navigationViewController.fileTreeViewController.pathRepresentation	=	p3
+//		let	p2	=	self.fileURL!.path!
+//		let	p3	=	p2.stringByDeletingLastPathComponent
+//		projectWindowController.mainViewController.navigationViewController.fileTreeViewController.pathRepresentation	=	p3
+		
+		let	u2	=	self.fileURL!.URLByDeletingLastPathComponent
+		projectWindowController.mainViewController.navigationViewController.fileTreeViewController.URLRepresentation	=	u2
 		return	true
 	}
 	

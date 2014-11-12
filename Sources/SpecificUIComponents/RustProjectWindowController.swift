@@ -133,7 +133,7 @@ extension RustProjectWindowController {
 		let	fileTreeScrollViewController	=	ScrollViewController()
 		let	issueScrollingViewController	=	ScrollViewController()
 		
-		let	fileTreeViewController			=	FileTreeViewController()
+		let	fileTreeViewController			=	FileTreeViewController3()
 		let	issueListingViewController		=	IssueListingViewController()
 		
 		override func viewDidLoad() {

@@ -1,38 +1,50 @@
 ////
-////  FileTreeViewController.swift
+////  FileTreeViewController2.swift
 ////  RustCodeEditor
 ////
-////  Created by Hoon H. on 11/11/14.
+////  Created by Hoon H. on 11/12/14.
 ////  Copyright (c) 2014 Eonil. All rights reserved.
 ////
 //
 //import Foundation
 //import AppKit
 //
-//class FileTreeViewController : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+//class FileTreeViewController2 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
 //	
 //	let	userIsWantingToEditFileAtPath	=	Notifier<String>()
 //	
-//	private	var	_root:FileNode1?
+//	private	var	_root:FileNode2?
+//	private var	_errorChannel			=	nil as Observer<NSError>?
+//	private var	_invalidationChannel	=	nil as Observer<FileNode2>?
 //	
-//	var pathRepresentation:String? {
+//	private func onError(e:NSError) {
+//		NSAlert(error: e).runModal()
+//	}
+//	private func onInvalidation(n:FileNode2) {
+//		self.outlineView.reloadItem(n, reloadChildren: true)
+//	}
+//	
+//	var URLRepresentation:NSURL? {
 //		get {
-//			return	self.representedObject as String?
+//			return	self.representedObject as NSURL?
 //		}
 //		set(v) {
 //			self.representedObject	=	v
 //		}
 //	}
 //	override var representedObject:AnyObject? {
-//		get {
-//			return	super.representedObject
-//		}
-//		set(v) {
-//			precondition(v is String)
-//			super.representedObject	=	v
+//		willSet(v) {
+//			if let r2 = _root {
+//				_root!.notifyAnyError.unregister(_errorChannel!)
+//			}
 //			
-//			if let v2 = v as String? {
-//				_root	=	FileNode1(path: pathRepresentation!)
+//			precondition(v is NSURL)
+//		}
+//		didSet {
+//			if let u2 = URLRepresentation {
+//				_root					=	FileNode2(absoluteURL: u2)
+//				_errorChannel			=	channel(_root!.notifyAnyError, onError)
+//				_invalidationChannel	=	channel(_root!.notifyInvalidationOfNode, onInvalidation)
 //			} else {
 //				_root	=	nil
 //			}
@@ -79,38 +91,32 @@
 ////	}
 //	
 //	func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
-//		let	n1	=	item as FileNode1?
+//		let	n1	=	item as FileNode2?
 //		if let n2 = n1 {
-//			if let ns3 = n2.subnodes {
-//				return	ns3.count
-//			} else {
-//				return	0
-//			}
+//			return	n2.subnodes.count
 //		} else {
 //			return	_root == nil ? 0 : 1
 //		}
 //	}
 //	func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
-//		let	n1	=	item as FileNode1?
+//		let	n1	=	item as FileNode2?
 //		if let n2 = n1 {
-//			let ns3 = n2.subnodes!
-//			return	ns3[index]
+//			return	n2.subnodes[index]
 //		} else {
 //			return	_root!
 //		}
 //	}
 ////	func outlineView(outlineView: NSOutlineView, isGroupItem item: AnyObject) -> Bool {
-////		let	n1	=	item as FileNode1
+////		let	n1	=	item as FileNode2
 ////		let	ns2	=	n1.subnodes
 ////		return	ns2 != nil
 ////	}
 //	func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-//		let	n1	=	item as FileNode1
-//		let	ns2	=	n1.subnodes
-//		return	ns2 != nil
+//		let	n1	=	item as FileNode2
+//		return	n1.directory
 //	}
 ////	func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
-////		let	n1	=	item as FileNode1
+////		let	n1	=	item as FileNode2
 ////		return	n1.relativePath
 ////	}
 //	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
@@ -122,7 +128,7 @@
 //		cv1.addSubview(tv1)
 //		cv1.addSubview(iv1)
 //
-//		let	n1	=	item as FileNode1
+//		let	n1	=	item as FileNode2
 //		assert(n1.existing)
 //		iv1.image						=	NSWorkspace.sharedWorkspace().iconForFile(n1.absolutePath)
 //		cv1.textField!.stringValue		=	n1.displayName
@@ -136,9 +142,9 @@
 //	
 //	
 //	func outlineViewSelectionDidChange(notification: NSNotification) {
-//		let	idx1	=	self.outlineView.selectedRow
-//		let	n1		=	self.outlineView.itemAtRow(idx1) as FileNode1
-//		userIsWantingToEditFileAtPath.signal(n1.absolutePath)
+////		let	idx1	=	self.outlineView.selectedRow
+////		let	n1		=	self.outlineView.itemAtRow(idx1) as FileNode2
+////		userIsWantingToEditFileAtPath.signal(n1.absolutePath)
 //	}
 //}
 //
@@ -150,4 +156,5 @@
 //
 //
 //private let	NAME	=	"NAME"
+//
 //
