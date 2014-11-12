@@ -20,9 +20,12 @@
 		452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B92B81A12C6A100E66E87 /* FileTreeViewController3.swift */; };
 		452B92BD1A12CA1300E66E87 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B92BC1A12CA1300E66E87 /* Set.swift */; };
 		452B92C11A12CC3B00E66E87 /* Deduplicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B92C01A12CC3B00E66E87 /* Deduplicate.swift */; };
+		454E42AB1A13D244007BEE79 /* FileNode4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E42AA1A13D244007BEE79 /* FileNode4.swift */; };
+		454E42AD1A13D24F007BEE79 /* FileTreeViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */; };
 		454ECC341A11D67800DFD460 /* RustProgramExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */; };
 		454ECC361A11E1C600DFD460 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 454ECC351A11E1C600DFD460 /* LICENSE */; };
 		454ECC381A11E1DE00DFD460 /* Preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 454ECC371A11E1DE00DFD460 /* Preview.png */; };
+		454FFBF91A13DE40000C0200 /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 454FFBF61A13DE2F000C0200 /* EonilDispatch.framework */; };
 		4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557D8951A116D6800D6C53B /* FileTreeViewController.swift */; };
 		4557D8981A11738E00D6C53B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557D8971A11738E00D6C53B /* ViewController.swift */; };
 		455F5DE71A1289B900A17A31 /* FileNode3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455F5DE61A1289B900A17A31 /* FileNode3.swift */; };
@@ -51,6 +54,23 @@
 		45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE101C1A12994300834358 /* FileTreeViewController2.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		454FFBF51A13DE2F000C0200 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C1A4901A12EA0700BC4B23;
+			remoteInfo = EonilDispatch;
+		};
+		454FFBF71A13DE2F000C0200 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C1A49B1A12EA0700BC4B23;
+			remoteInfo = EonilDispatchTests;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectDocument.swift; sourceTree = "<group>"; };
 		4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustSourceCodeFileDocument.swift; sourceTree = "<group>"; };
@@ -65,10 +85,13 @@
 		452B92B81A12C6A100E66E87 /* FileTreeViewController3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController3.swift; sourceTree = "<group>"; };
 		452B92BC1A12CA1300E66E87 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		452B92C01A12CC3B00E66E87 /* Deduplicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deduplicate.swift; sourceTree = "<group>"; };
+		454E42AA1A13D244007BEE79 /* FileNode4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode4.swift; sourceTree = "<group>"; };
+		454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController4.swift; sourceTree = "<group>"; };
 		454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProgramExecutionController.swift; sourceTree = "<group>"; };
 		454ECC351A11E1C600DFD460 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		454ECC371A11E1DE00DFD460 /* Preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Preview.png; sourceTree = "<group>"; };
 		454ECC391A11E1E700DFD460 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilDispatch.xcodeproj; path = EonilDispatch/EonilDispatch.xcodeproj; sourceTree = "<group>"; };
 		4557D8951A116D6800D6C53B /* FileTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController.swift; sourceTree = "<group>"; };
 		4557D8971A11738E00D6C53B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		455F5DE61A1289B900A17A31 /* FileNode3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode3.swift; sourceTree = "<group>"; };
@@ -104,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				454FFBF91A13DE40000C0200 /* EonilDispatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,15 +183,7 @@
 			path = IssueListing;
 			sourceTree = "<group>";
 		};
-		454ECC321A11D66100DFD460 /* BackstageWorks */ = {
-			isa = PBXGroup;
-			children = (
-				454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */,
-			);
-			path = BackstageWorks;
-			sourceTree = "<group>";
-		};
-		4557D8941A116D5F00D6C53B /* FileNavigating */ = {
+		454E42AE1A13D257007BEE79 /* (junkyard) */ = {
 			isa = PBXGroup;
 			children = (
 				4557D8951A116D6800D6C53B /* FileTreeViewController.swift */,
@@ -176,6 +192,33 @@
 				457DD5D11A125C3D00324681 /* FileNode2.swift */,
 				452B92B81A12C6A100E66E87 /* FileTreeViewController3.swift */,
 				455F5DE61A1289B900A17A31 /* FileNode3.swift */,
+			);
+			name = "(junkyard)";
+			sourceTree = "<group>";
+		};
+		454ECC321A11D66100DFD460 /* BackstageWorks */ = {
+			isa = PBXGroup;
+			children = (
+				454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */,
+			);
+			path = BackstageWorks;
+			sourceTree = "<group>";
+		};
+		454FFBF11A13DE2F000C0200 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				454FFBF61A13DE2F000C0200 /* EonilDispatch.framework */,
+				454FFBF81A13DE2F000C0200 /* EonilDispatchTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4557D8941A116D5F00D6C53B /* FileNavigating */ = {
+			isa = PBXGroup;
+			children = (
+				454E42AE1A13D257007BEE79 /* (junkyard) */,
+				454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */,
+				454E42AA1A13D244007BEE79 /* FileNode4.swift */,
 			);
 			path = FileNavigating;
 			sourceTree = "<group>";
@@ -209,6 +252,7 @@
 				454ECC351A11E1C600DFD460 /* LICENSE */,
 				454ECC391A11E1E700DFD460 /* README.md */,
 				454ECC371A11E1DE00DFD460 /* Preview.png */,
+				454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */,
 				45BBB0E61A1022A10055232E /* Sources */,
 				45BBB0E51A1022A10055232E /* Products */,
 			);
@@ -318,12 +362,35 @@
 			mainGroup = 45BBB0DB1A1022A10055232E;
 			productRefGroup = 45BBB0E51A1022A10055232E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 454FFBF11A13DE2F000C0200 /* Products */;
+					ProjectRef = 454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				45BBB0E31A1022A10055232E /* RustCodeEditor */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		454FFBF61A13DE2F000C0200 /* EonilDispatch.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilDispatch.framework;
+			remoteRef = 454FFBF51A13DE2F000C0200 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		454FFBF81A13DE2F000C0200 /* EonilDispatchTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EonilDispatchTests.xctest;
+			remoteRef = 454FFBF71A13DE2F000C0200 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		45BBB0E21A1022A10055232E /* Resources */ = {
@@ -347,6 +414,7 @@
 				45700B731A11661000D84249 /* FoundationExtensions.swift in Sources */,
 				4597F8271A113D100089FC66 /* LinkList.swift in Sources */,
 				45700EE11A11F65100415EB2 /* FileNode.swift in Sources */,
+				454E42AD1A13D24F007BEE79 /* FileTreeViewController4.swift in Sources */,
 				45D158FA1A11401D00B25657 /* Palette.swift in Sources */,
 				45700B721A11661000D84249 /* AppKitExtensions.swift in Sources */,
 				4597F8161A1136810089FC66 /* Issue.swift in Sources */,
@@ -366,6 +434,7 @@
 				451740E21A102FA300861ECC /* TextViewController.swift in Sources */,
 				452A12211A107FF000E38F35 /* TableViewController.swift in Sources */,
 				45D158F51A113FE900B25657 /* CodeEditingViewController.swift in Sources */,
+				454E42AB1A13D244007BEE79 /* FileNode4.swift in Sources */,
 				4597F8281A113D100089FC66 /* NotifierAndObserver.swift in Sources */,
 				4557D8981A11738E00D6C53B /* ViewController.swift in Sources */,
 				45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */,
