@@ -15,9 +15,9 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	let	userIsWantingToEditFileAtPath	=	Notifier<String>()
 	
 	private	var	_fileTreeRepository		=	nil as FileTreeRepository4?
-	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor?
+	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor2?
 	
-	private var	_channelsHolding:Any?
+	private var	_channelsHolding:Any	=	()
 	
 	var URLRepresentation:NSURL? {
 		get {
@@ -27,48 +27,7 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 			self.representedObject	=	v
 		}
 	}
-	private func onError(e:NSError) {
-		NSAlert(error: e).runModal()
-	}
-	private func onAddingNodes(ns:[FileNode4]) {
-		let	ns2	=	ns.map({$0.supernode}).filter({$0 != nil}).map({$0!})
-		let	ns3	=	deduplicate(ns2)
-		println(ns3)
-		
-		self.outlineView.beginUpdates()
-		for n in ns3 {
-			self.outlineView.reloadItem(n, reloadChildren: true)
-		}
-		self.outlineView.endUpdates()
-	}
-	private func onRemovingNodes(ns:[FileNode4]) {
-//		let	ns2	=	ns.map({$0.supernode}).filter({$0 != nil}).map({$0!})
-//		let	ns3	=	deduplicate(ns2)
-//		
-//		self.outlineView.beginUpdates()
-//		for n in ns3 {
-//			self.outlineView.reloadItem(n, reloadChildren: true)
-//		}
-//		self.outlineView.endUpdates()
-		
-		self.outlineView.beginUpdates()
-		for n in ns {
-			let	idx1	=	self.outlineView.rowForItem(n)
-			self.outlineView.removeItemsAtIndexes(NSIndexSet(index: idx1), inParent: n.supernode!, withAnimation: NSTableViewAnimationOptions.EffectFade)
-		}
-		self.outlineView.endUpdates()
-	}
-	
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
 	
 	
 	
@@ -76,7 +35,7 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	override var representedObject:AnyObject? {
 		willSet(v) {
 			precondition(v is NSURL)
-			_channelsHolding	=	nil
+			_channelsHolding	=	()
 			_fileSystemMonitor	=	nil
 			_fileTreeRepository	=	nil
 		}
@@ -85,7 +44,7 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 				_fileTreeRepository	=	FileTreeRepository4(rootlink: v3)
 				_fileTreeRepository!.reload()
 				
-				_fileSystemMonitor	=	FileSystemMonitor(v3)
+				_fileSystemMonitor	=	FileSystemMonitor2(rootLocationToMonitor: v3)
 			}
 			self.outlineView.reloadData()
 			
@@ -133,9 +92,6 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		if let n2 = n1 {
 			if n2.subnodes.count == 0 {
 				n2.reloadSubnodes()
-				for u1 in n2.subnodes.links {
-					_fileSystemMonitor!.addWatchForURL(u1)
-				}
 			}
 			return	n2.subnodes.count
 		} else {
@@ -203,9 +159,6 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	func outlineViewItemDidCollapse(notification: NSNotification) {
 		assert(notification.name == NSOutlineViewItemDidCollapseNotification)
 		let	n1	=	notification.userInfo!["NSObject"]! as FileNode4
-		for u1 in n1.subnodes.links {
-			_fileSystemMonitor!.removeWatchForURL(u1)
-		}
 		n1.resetSubnodes()
 	}
 }
@@ -243,36 +196,21 @@ private let	NAME	=	"NAME"
 
 
 ///	Keep the returned object to keep the connection.
-private func connectMonitorToTree(m:FileSystemMonitor, t:FileTreeRepository4, v:NSOutlineView) -> Any {
+private func connectMonitorToTree(m:FileSystemMonitor2, t:FileTreeRepository4, v:NSOutlineView) -> Any {
 	unowned let	v2	=	v
-	func onVNodeEvent(u:NSURL) {
+	func onFileEvent(u:NSURL) {
 		assert(NSThread.currentThread() == NSThread.mainThread())
-		//	Updated. Includes changes in direct subnodes.
 		
-		///	A vnnode event can be arrived later, and
-		///	the node informations may be already updated 
-		///	to reflect deleted files. So a file node fot
-		///	the event may does not exists at this point.
-		if let n1 = t[u] {
-			let	r1	=	v.rowForItem(n1)
-			for u1 in n1.subnodes.links {
-				m.removeWatchForURL(u1)
-			}
+		let	u2	=	u.URLByDeletingLastPathComponent!
+		
+		//	File-system notifications are sent asynchronously, then
+		//	a file-node always can not nil for the URL.
+		if let n1 = t[u2] {
 			n1.reloadSubnodes()
-			for u1 in n1.subnodes.links {
-				m.addWatchForURL(u1)
-			}
-			
-			v2.beginUpdates()
 			v2.reloadItem(n1, reloadChildren: true)
-			v2.endUpdates()
 		}
-		
-		
 	}
-	
-	let	ch1	=	channel(m.notifyEventOnWatchForURL, onVNodeEvent)
-	return	(ch1)
+	return	channel(m.notifyEventForURL, onFileEvent)
 }
 
 

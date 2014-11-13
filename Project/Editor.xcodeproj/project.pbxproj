@@ -20,8 +20,7 @@
 		452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B92B81A12C6A100E66E87 /* FileTreeViewController3.swift */; };
 		452B92BD1A12CA1300E66E87 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B92BC1A12CA1300E66E87 /* Set.swift */; };
 		452B92C11A12CC3B00E66E87 /* Deduplicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B92C01A12CC3B00E66E87 /* Deduplicate.swift */; };
-		45402AB81A153C0200127E50 /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45402A8A1A153B4A00127E50 /* EonilDispatch.framework */; };
-		45402AB91A153C0200127E50 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45402AA41A153B5A00127E50 /* EonilFileSystemEvents.framework */; };
+		45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45402ABA1A153C4E00127E50 /* FileSystemMonitor2.swift */; };
 		454E42AB1A13D244007BEE79 /* FileNode4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E42AA1A13D244007BEE79 /* FileNode4.swift */; };
 		454E42AD1A13D24F007BEE79 /* FileTreeViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */; };
 		454ECC341A11D67800DFD460 /* RustProgramExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */; };
@@ -52,6 +51,10 @@
 		45D158FA1A11401D00B25657 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D158F91A11401D00B25657 /* Palette.swift */; };
 		45D7F6DD1A114C3900E792D1 /* UserActionSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DC1A114C3900E792D1 /* UserActionSignal.swift */; };
 		45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */; };
+		45D970F51A15741E0037649F /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D970E61A1573F50037649F /* EonilFileSystemEvents.framework */; };
+		45D970F61A15741E0037649F /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45D970E61A1573F50037649F /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45D970F91A15741E0037649F /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45402A8A1A153B4A00127E50 /* EonilDispatch.framework */; };
+		45D970FA1A15741E0037649F /* EonilDispatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45402A8A1A153B4A00127E50 /* EonilDispatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */; };
 		45F6C1151A119726005D8EEA /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */; };
 		45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE101C1A12994300834358 /* FileTreeViewController2.swift */; };
@@ -72,35 +75,57 @@
 			remoteGlobalIDString = 45C1A49B1A12EA0700BC4B23;
 			remoteInfo = EonilDispatchTests;
 		};
-		45402AA31A153B5A00127E50 /* PBXContainerItemProxy */ = {
+		45D970E51A1573F50037649F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 45402A9C1A153B5A00127E50 /* EonilFileSystemEvents.xcodeproj */;
+			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 45BF99931A130C55004E4E2E;
+			remoteGlobalIDString = 45D970A61A1569090037649F;
 			remoteInfo = EonilFileSystemEvents;
 		};
-		45402AA51A153B5A00127E50 /* PBXContainerItemProxy */ = {
+		45D970E71A1573F50037649F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 45402A9C1A153B5A00127E50 /* EonilFileSystemEvents.xcodeproj */;
+			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 45BF999E1A130C55004E4E2E;
-			remoteInfo = EonilFileSystemEventsTests;
+			remoteGlobalIDString = 45D970961A155DD50037649F;
+			remoteInfo = InternalTester;
 		};
-		45402AA71A153B5A00127E50 /* PBXContainerItemProxy */ = {
+		45D970E91A1573F50037649F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 45402A9C1A153B5A00127E50 /* EonilFileSystemEvents.xcodeproj */;
+			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 45BF99C51A131E3A004E4E2E;
 			remoteInfo = TestdriveApp;
 		};
-		45402AA91A153B5A00127E50 /* PBXContainerItemProxy */ = {
+		45D970F71A15741E0037649F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 45402A9C1A153B5A00127E50 /* EonilFileSystemEvents.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45BF99D41A131E3A004E4E2E;
-			remoteInfo = TestdriveAppTests;
+			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45D970A51A1569090037649F;
+			remoteInfo = EonilFileSystemEvents;
+		};
+		45D970FB1A15741E0037649F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45402A841A153B4A00127E50 /* EonilDispatch.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45C1A48F1A12EA0700BC4B23;
+			remoteInfo = EonilDispatch;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		45D970FD1A15741E0037649F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				45D970FA1A15741E0037649F /* EonilDispatch.framework in Embed Frameworks */,
+				45D970F61A15741E0037649F /* EonilFileSystemEvents.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectDocument.swift; sourceTree = "<group>"; };
@@ -117,7 +142,7 @@
 		452B92BC1A12CA1300E66E87 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		452B92C01A12CC3B00E66E87 /* Deduplicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deduplicate.swift; sourceTree = "<group>"; };
 		45402A841A153B4A00127E50 /* EonilDispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilDispatch.xcodeproj; path = Subprojects/EonilDispatch/EonilDispatch.xcodeproj; sourceTree = "<group>"; };
-		45402A9C1A153B5A00127E50 /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = Subprojects/EonilFileSystemEvents/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
+		45402ABA1A153C4E00127E50 /* FileSystemMonitor2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemMonitor2.swift; sourceTree = "<group>"; };
 		454E42AA1A13D244007BEE79 /* FileNode4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode4.swift; sourceTree = "<group>"; };
 		454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController4.swift; sourceTree = "<group>"; };
 		454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProgramExecutionController.swift; sourceTree = "<group>"; };
@@ -150,6 +175,7 @@
 		45D158F91A11401D00B25657 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		45D7F6DC1A114C3900E792D1 /* UserActionSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActionSignal.swift; sourceTree = "<group>"; };
 		45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayoutQuery.swift; sourceTree = "<group>"; };
+		45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = Subprojects/EonilFileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandConsoleViewController.swift; sourceTree = "<group>"; };
 		45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectViewController.swift; sourceTree = "<group>"; };
 		45FE101C1A12994300834358 /* FileTreeViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController2.swift; sourceTree = "<group>"; };
@@ -160,8 +186,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45402AB81A153C0200127E50 /* EonilDispatch.framework in Frameworks */,
-				45402AB91A153C0200127E50 /* EonilFileSystemEvents.framework in Frameworks */,
+				45D970F91A15741E0037649F /* EonilDispatch.framework in Frameworks */,
+				45D970F51A15741E0037649F /* EonilFileSystemEvents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,21 +252,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		45402A9D1A153B5A00127E50 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45402AA41A153B5A00127E50 /* EonilFileSystemEvents.framework */,
-				45402AA61A153B5A00127E50 /* EonilFileSystemEventsTests.xctest */,
-				45402AA81A153B5A00127E50 /* TestdriveApp.app */,
-				45402AAA1A153B5A00127E50 /* TestdriveAppTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		45402AAB1A153B5F00127E50 /* Subprojects */ = {
 			isa = PBXGroup;
 			children = (
-				45402A9C1A153B5A00127E50 /* EonilFileSystemEvents.xcodeproj */,
+				45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */,
 				45402A841A153B4A00127E50 /* EonilDispatch.xcodeproj */,
 			);
 			name = Subprojects;
@@ -249,6 +264,7 @@
 		454E42AE1A13D257007BEE79 /* (junkyard) */ = {
 			isa = PBXGroup;
 			children = (
+				454FFC0B1A142DF3000C0200 /* FileSystemMonitor.swift */,
 				4557D8951A116D6800D6C53B /* FileTreeViewController.swift */,
 				45700EE01A11F65100415EB2 /* FileNode.swift */,
 				45FE101C1A12994300834358 /* FileTreeViewController2.swift */,
@@ -274,7 +290,7 @@
 				454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */,
 				454E42AA1A13D244007BEE79 /* FileNode4.swift */,
 				454FFC071A141461000C0200 /* FileSystemService.swift */,
-				454FFC0B1A142DF3000C0200 /* FileSystemMonitor.swift */,
+				45402ABA1A153C4E00127E50 /* FileSystemMonitor2.swift */,
 			);
 			path = FileNavigating;
 			sourceTree = "<group>";
@@ -364,6 +380,16 @@
 			path = Presets;
 			sourceTree = "<group>";
 		};
+		45D970DE1A1573F50037649F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45D970E61A1573F50037649F /* EonilFileSystemEvents.framework */,
+				45D970E81A1573F50037649F /* InternalTester */,
+				45D970EA1A1573F50037649F /* TestdriveApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45F6C1111A11959C005D8EEA /* CommandConsole */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,10 +408,13 @@
 				45BBB0E01A1022A10055232E /* Sources */,
 				45BBB0E11A1022A10055232E /* Frameworks */,
 				45BBB0E21A1022A10055232E /* Resources */,
+				45D970FD1A15741E0037649F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				45D970F81A15741E0037649F /* PBXTargetDependency */,
+				45D970FC1A15741E0037649F /* PBXTargetDependency */,
 			);
 			name = Editor;
 			productName = RustREPL;
@@ -423,8 +452,8 @@
 					ProjectRef = 45402A841A153B4A00127E50 /* EonilDispatch.xcodeproj */;
 				},
 				{
-					ProductGroup = 45402A9D1A153B5A00127E50 /* Products */;
-					ProjectRef = 45402A9C1A153B5A00127E50 /* EonilFileSystemEvents.xcodeproj */;
+					ProductGroup = 45D970DE1A1573F50037649F /* Products */;
+					ProjectRef = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -449,32 +478,25 @@
 			remoteRef = 45402A8B1A153B4A00127E50 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45402AA41A153B5A00127E50 /* EonilFileSystemEvents.framework */ = {
+		45D970E61A1573F50037649F /* EonilFileSystemEvents.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = EonilFileSystemEvents.framework;
-			remoteRef = 45402AA31A153B5A00127E50 /* PBXContainerItemProxy */;
+			remoteRef = 45D970E51A1573F50037649F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45402AA61A153B5A00127E50 /* EonilFileSystemEventsTests.xctest */ = {
+		45D970E81A1573F50037649F /* InternalTester */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = EonilFileSystemEventsTests.xctest;
-			remoteRef = 45402AA51A153B5A00127E50 /* PBXContainerItemProxy */;
+			fileType = "compiled.mach-o.executable";
+			path = InternalTester;
+			remoteRef = 45D970E71A1573F50037649F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45402AA81A153B5A00127E50 /* TestdriveApp.app */ = {
+		45D970EA1A1573F50037649F /* TestdriveApp.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = TestdriveApp.app;
-			remoteRef = 45402AA71A153B5A00127E50 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45402AAA1A153B5A00127E50 /* TestdriveAppTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = TestdriveAppTests.xctest;
-			remoteRef = 45402AA91A153B5A00127E50 /* PBXContainerItemProxy */;
+			remoteRef = 45D970E91A1573F50037649F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -526,6 +548,7 @@
 				4597F8281A113D100089FC66 /* NotifierAndObserver.swift in Sources */,
 				4557D8981A11738E00D6C53B /* ViewController.swift in Sources */,
 				45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */,
+				45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */,
 				452A121D1A107E4C00E38F35 /* IssueListingViewController.swift in Sources */,
 				457DD5D21A125C3D00324681 /* FileNode2.swift in Sources */,
 				45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */,
@@ -544,6 +567,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		45D970F81A15741E0037649F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EonilFileSystemEvents;
+			targetProxy = 45D970F71A15741E0037649F /* PBXContainerItemProxy */;
+		};
+		45D970FC1A15741E0037649F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EonilDispatch;
+			targetProxy = 45D970FB1A15741E0037649F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		45BBB0ED1A1022A10055232E /* MainMenu.xib */ = {
@@ -639,6 +675,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = Editor;
@@ -650,6 +687,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = Editor;

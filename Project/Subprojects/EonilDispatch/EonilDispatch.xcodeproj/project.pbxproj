@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45402ABD1A153F3000127E50 /* Interop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45402ABC1A153F3000127E50 /* Interop.swift */; };
 		457637BF1A12F8F800432D16 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457637BE1A12F8F800432D16 /* Semaphore.swift */; };
 		45828ECA1A1450A600FFC8E2 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45828EC91A1450A600FFC8E2 /* Functions.swift */; };
 		45C1A4961A12EA0700BC4B23 /* EonilDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C1A4951A12EA0700BC4B23 /* EonilDispatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		45402ABC1A153F3000127E50 /* Interop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interop.swift; sourceTree = "<group>"; };
 		457637BE1A12F8F800432D16 /* Semaphore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semaphore.swift; sourceTree = "<group>"; };
 		45828EC91A1450A600FFC8E2 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		45C1A4901A12EA0700BC4B23 /* EonilDispatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EonilDispatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +89,7 @@
 				45C1A4AC1A12EA0F00BC4B23 /* Source.swift */,
 				45C1A4AE1A12EA6800BC4B23 /* Queue.swift */,
 				457637BE1A12F8F800432D16 /* Semaphore.swift */,
+				45402ABC1A153F3000127E50 /* Interop.swift */,
 				45C1A4931A12EA0700BC4B23 /* Supporting Files */,
 			);
 			path = EonilDispatch;
@@ -229,6 +232,7 @@
 				457637BF1A12F8F800432D16 /* Semaphore.swift in Sources */,
 				45828ECA1A1450A600FFC8E2 /* Functions.swift in Sources */,
 				45C1A4AF1A12EA6800BC4B23 /* Queue.swift in Sources */,
+				45402ABD1A153F3000127E50 /* Interop.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

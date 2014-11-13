@@ -9,10 +9,13 @@
 import Foundation
 import EonilDispatch
 struct Debug {
-	static func log<T>(v:@autoclosure()->T) {
+	static func logOnMainQueueAsynchronously<T>(v:@autoclosure()->T) {
 		let	v2	=	v()
 		async(Queue.main) {
-			println(v2)
+			Debug.log(v2)
 		}
+	}
+	static func log<T>(v:@autoclosure()->T) {
+		println(v())
 	}
 }

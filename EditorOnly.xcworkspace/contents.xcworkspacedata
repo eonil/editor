@@ -2,16 +2,16 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:LICENSE">
+      location = "group:README.md">
    </FileRef>
    <FileRef
       location = "group:NOTE.md">
    </FileRef>
    <FileRef
-      location = "group:Preview.png">
+      location = "group:LICENSE">
    </FileRef>
    <FileRef
-      location = "group:README.md">
+      location = "group:Preview.png">
    </FileRef>
    <FileRef
       location = "container:Project/Editor.xcodeproj">
