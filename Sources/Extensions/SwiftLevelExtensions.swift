@@ -34,7 +34,11 @@ extension String {
 	}
 }
 
-
+//extension Array {
+//	mutating func removeAllValueEqualsToValue(value:Element) {
+//		self	=	self.filter({$0 != value})
+//	}
+//}
 
 
 

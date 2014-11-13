@@ -26,7 +26,7 @@ import Foundation
 ///	unique ownership semantics, and if you retain it anywhere else
 ///	it will leak memory or crash the app.
 final class FileTreeRepository4 {
-	private var	_allNodes	=	[:] as [NSURL:FileNode4]
+	private var	_allNodes				=	[:] as [NSURL:FileNode4]
 	
 	var	_rootlink:NSURL
 	
@@ -52,43 +52,48 @@ final class FileTreeRepository4 {
 	///	If the root node does not exist anymore,
 	///	it will be removed, and will be set to `nil`.
 	func reload() {
-//		if root != nil && root!.existing {
-//			root!.reloadSubnodes()
-//			return
-//		}
-//		
 		if root != nil {
-			_deleteNodeForURL(_rootlink)
+			deleteNodeForURL(_rootlink)
 		}
 		assert(_allNodes.count == 0, "All nodes must be also removed as an effect of killing root.")
-		_createNodeForURL(_rootlink)
+		createNodeForURL(_rootlink)
 	}
 	
-	private func _deleteNodeForURL(u:NSURL) {
+	///	Supplied URL must be already stored.
+	func deleteNodeForURL(u:NSURL) {
 		assert(_allNodes[u] != nil)
 		let	n1	=	_allNodes[u]!
 		_allNodes.removeValueForKey(u)
-		_deleteNodesForURLs(n1.subnodes._sublinks)	//	Cleanup subnodes.
+		deleteNodesForURLs(n1.subnodes._sublinks)	//	Cleanup subnodes.
+		
+		Debug.log("FileNode4 count: \(_allNodes.count)")
 	}
-	private func _createNodeForURL(u:NSURL) {
+	///	Supplied URL must be unstored a child of a stored node.
+	func createNodeForURL(u:NSURL) {
 		assert(_allNodes[u] == nil)
 		let	n1	=	FileNode4(repository: self, link: u)
 		_allNodes[u]	=	n1
+		
+		Debug.log("FileNode4 count: \(_allNodes.count)")
 	}
-	private func _deleteNodesForURLs(us:[NSURL]) {
+	
+	///	Supplied URLs must be already stored.
+	func deleteNodesForURLs(us:[NSURL]) {
 		for u in us {
-			_deleteNodeForURL(u)
+			deleteNodeForURL(u)
 		}
 	}
-	private func _createNodesForURLs(us:[NSURL]) {
+	///	Supplied URLs must be unstored children of stored nodes.
+	func createNodesForURLs(us:[NSURL]) {
 		for u in us {
-			_createNodeForURL(u)
+			createNodeForURL(u)
 		}
 	}
 }
 
 
-///	A view for a `NSOutlineView`.
+
+///	A data object for a `NSOutlineView`.
 ///	This only exists because the view needs strongly alive class instances.
 final class FileNode4 {
 	unowned let	repository:FileTreeRepository4
@@ -103,11 +108,6 @@ final class FileNode4 {
 		self.link			=	link
 		self.subnodes		=	FileSubnodeList4(repository: repository, superlink: link)
 	}
-	var existing:Bool {
-		get {
-			return	NSFileManager.defaultManager().fileExistsAtPath(link.path!)
-		}
-	}
 	var supernode:FileNode4? {
 		get {
 			if repository.root === self {
@@ -116,23 +116,6 @@ final class FileNode4 {
 				return	repository[link.URLByDeletingLastPathComponent!]!
 			}
 		}
-	}
-	
-	///	Synchronise subnodes with the file system.
-	///	This will try to reuse existing subnodes as many as possible.
-	///	(keeps existing one unless it has been deleted)
-	func reloadSubnodes() {
-		
-		resetSubnodes()
-		subnodes._sublinks	=	_subnodeAbsoluteURLsOfURL(link)
-		repository._createNodesForURLs(subnodes._sublinks)
-	}
-	
-	///	Removes all cached subnodes.
-	///	It will remain as empty until you order `reloadSubnodes` explicitly.
-	func resetSubnodes() {
-		repository._deleteNodesForURLs(subnodes._sublinks)
-		subnodes._sublinks	=	[]
 	}
 }
 
@@ -149,6 +132,16 @@ final class FileSubnodeList4 : SequenceType {
 		self._sublinks		=	[]
 	}
 	
+	var	links:[NSURL] {
+		get {
+			return	_sublinks
+		}
+		set(v) {
+			_repository.deleteNodesForURLs(_sublinks)
+			_sublinks	=	v
+			_repository.createNodesForURLs(_sublinks)
+		}
+	}
 	var count:Int {
 		get {
 			return	_sublinks.count
@@ -189,19 +182,6 @@ final class FileSubnodeList4 : SequenceType {
 
 
 
-extension FileNode4 {
-	var displayName:String {
-		get {
-			return	NSFileManager.defaultManager().displayNameAtPath(link.path!)
-		}
-	}
-	var directory:Bool {
-		get {
-			var	f1	=	false as ObjCBool
-			return	NSFileManager.defaultManager().fileExistsAtPath(link.path!, isDirectory: &f1) && f1.boolValue
-		}
-	}
-}
 
 
 
@@ -223,34 +203,6 @@ extension FileNode4 {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-private func _subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
-	var	us1	=	[] as [NSURL]
-	if NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(absoluteURL.path!) {
-		let	u1	=	absoluteURL
-		let	it1	=	NSFileManager.defaultManager().enumeratorAtURL(u1, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles | NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants, errorHandler: { (url:NSURL!, error:NSError!) -> Bool in
-			fatalError("Unhandled file I/O error!")	//	TODO:
-			return	false
-		})
-		let	it2	=	it1!
-		while let o1 = it2.nextObject() as? NSURL {
-			us1.append(o1)
-		}
-	}
-	return	us1
-}
 
 
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		457637BF1A12F8F800432D16 /* Semaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457637BE1A12F8F800432D16 /* Semaphore.swift */; };
+		45828ECA1A1450A600FFC8E2 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45828EC91A1450A600FFC8E2 /* Functions.swift */; };
 		45C1A4961A12EA0700BC4B23 /* EonilDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C1A4951A12EA0700BC4B23 /* EonilDispatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45C1A49C1A12EA0700BC4B23 /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C1A4901A12EA0700BC4B23 /* EonilDispatch.framework */; };
 		45C1A4A31A12EA0700BC4B23 /* EonilDispatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C1A4A21A12EA0700BC4B23 /* EonilDispatchTests.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		457637BE1A12F8F800432D16 /* Semaphore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Semaphore.swift; sourceTree = "<group>"; };
+		45828EC91A1450A600FFC8E2 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		45C1A4901A12EA0700BC4B23 /* EonilDispatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EonilDispatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C1A4941A12EA0700BC4B23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45C1A4951A12EA0700BC4B23 /* EonilDispatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EonilDispatch.h; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				45C1A4951A12EA0700BC4B23 /* EonilDispatch.h */,
+				45828EC91A1450A600FFC8E2 /* Functions.swift */,
 				45C1A4B81A12F02400BC4B23 /* Object.swift */,
 				45C1A4AC1A12EA0F00BC4B23 /* Source.swift */,
 				45C1A4AE1A12EA6800BC4B23 /* Queue.swift */,
@@ -224,6 +227,7 @@
 				45C1A4AD1A12EA0F00BC4B23 /* Source.swift in Sources */,
 				45C1A4B91A12F02400BC4B23 /* Object.swift in Sources */,
 				457637BF1A12F8F800432D16 /* Semaphore.swift in Sources */,
+				45828ECA1A1450A600FFC8E2 /* Functions.swift in Sources */,
 				45C1A4AF1A12EA6800BC4B23 /* Queue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

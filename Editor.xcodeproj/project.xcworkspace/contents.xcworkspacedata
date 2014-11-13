@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:RustCodeEditor.xcodeproj">
+      location = "self:Editor.xcodeproj">
    </FileRef>
 </Workspace>

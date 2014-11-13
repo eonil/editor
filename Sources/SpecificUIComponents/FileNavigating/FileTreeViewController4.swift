@@ -14,7 +14,9 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	let	userIsWantingToEditFileAtPath	=	Notifier<String>()
 	
 	private	var	_fileTreeRepository		=	nil as FileTreeRepository4?
-	private var	_channelsHolding		=	[] as [AnyObject]
+	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor?
+	
+	private var	_channelsHolding:Any?
 	
 	var URLRepresentation:NSURL? {
 		get {
@@ -73,14 +75,20 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	override var representedObject:AnyObject? {
 		willSet(v) {
 			precondition(v is NSURL)
+			_channelsHolding	=	nil
+			_fileSystemMonitor	=	nil
 			_fileTreeRepository	=	nil
 		}
 		didSet {
 			if let v3 = URLRepresentation {
 				_fileTreeRepository	=	FileTreeRepository4(rootlink: v3)
 				_fileTreeRepository!.reload()
+				
+				_fileSystemMonitor	=	FileSystemMonitor(v3)
 			}
 			self.outlineView.reloadData()
+			
+			_channelsHolding	=	connectMonitorToTree(_fileSystemMonitor!, _fileTreeRepository!, outlineView)
 		}
 	}
 	
@@ -110,9 +118,6 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		
 		outlineView.setDataSource(self)
 		outlineView.setDelegate(self)
-		
-		_channelsHolding	=	[
-		]
 	}
 	
 	
@@ -127,6 +132,9 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		if let n2 = n1 {
 			if n2.subnodes.count == 0 {
 				n2.reloadSubnodes()
+				for u1 in n2.subnodes.links {
+					_fileSystemMonitor!.addWatchForURL(u1)
+				}
 			}
 			return	n2.subnodes.count
 		} else {
@@ -181,6 +189,14 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 //		let	n1		=	self.outlineView.itemAtRow(idx1) as FileNode4
 //		userIsWantingToEditFileAtPath.signal(n1.absolutePath)
 	}
+	func outlineViewItemDidCollapse(notification: NSNotification) {
+		assert(notification.name == NSOutlineViewItemDidCollapseNotification)
+		let	n1	=	notification.userInfo!["NSObject"]! as FileNode4
+		for u1 in n1.subnodes.links {
+			_fileSystemMonitor!.removeWatchForURL(u1)
+		}
+		n1.resetSubnodes()
+	}
 }
 
 
@@ -212,6 +228,32 @@ private let	NAME	=	"NAME"
 
 
 
+
+
+
+///	Keep the returned object to keep the connection.
+private func connectMonitorToTree(m:FileSystemMonitor, t:FileTreeRepository4, v:NSOutlineView) -> Any {
+	let reloadUIForNode	=	{ [unowned v] (n:FileNode4)->() in
+		v.reloadItem(n, reloadChildren: true)
+	}
+	func onVNodeEvent(u:NSURL) {
+		if let n1 = t[u] {
+			if n1.existing {
+				n1.reloadSubnodes()
+				reloadUIForNode(n1)
+			} else {
+				n1.supernode!.reloadSubnodes()
+				reloadUIForNode(n1.supernode!)
+			}
+		} else {
+			t.createNodeForURL(u)
+			reloadUIForNode(t[u]!)
+		}
+	}
+	
+	let	ch1	=	channel(m.notifyEventOnWatchForURL, onVNodeEvent)
+	return	(ch1)
+}
 
 
 

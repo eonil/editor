@@ -14,10 +14,24 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45BBB0E31A1022A10055232E"
-               BuildableName = "RustCodeEditor.app"
-               BlueprintName = "RustCodeEditor"
-               ReferencedContainer = "container:RustCodeEditor.xcodeproj">
+               BlueprintIdentifier = "45C1A48F1A12EA0700BC4B23"
+               BuildableName = "EonilDispatch.framework"
+               BlueprintName = "EonilDispatch"
+               ReferencedContainer = "container:EonilDispatch.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45C1A49A1A12EA0700BC4B23"
+               BuildableName = "EonilDispatchTests.xctest"
+               BlueprintName = "EonilDispatchTests"
+               ReferencedContainer = "container:EonilDispatch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,14 +42,24 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45C1A49A1A12EA0700BC4B23"
+               BuildableName = "EonilDispatchTests.xctest"
+               BlueprintName = "EonilDispatchTests"
+               ReferencedContainer = "container:EonilDispatch.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45BBB0E31A1022A10055232E"
-            BuildableName = "RustCodeEditor.app"
-            BlueprintName = "RustCodeEditor"
-            ReferencedContainer = "container:RustCodeEditor.xcodeproj">
+            BlueprintIdentifier = "45C1A48F1A12EA0700BC4B23"
+            BuildableName = "EonilDispatch.framework"
+            BlueprintName = "EonilDispatch"
+            ReferencedContainer = "container:EonilDispatch.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -48,15 +72,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45BBB0E31A1022A10055232E"
-            BuildableName = "RustCodeEditor.app"
-            BlueprintName = "RustCodeEditor"
-            ReferencedContainer = "container:RustCodeEditor.xcodeproj">
+            BlueprintIdentifier = "45C1A48F1A12EA0700BC4B23"
+            BuildableName = "EonilDispatch.framework"
+            BlueprintName = "EonilDispatch"
+            ReferencedContainer = "container:EonilDispatch.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -66,15 +90,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45BBB0E31A1022A10055232E"
-            BuildableName = "RustCodeEditor.app"
-            BlueprintName = "RustCodeEditor"
-            ReferencedContainer = "container:RustCodeEditor.xcodeproj">
+            BlueprintIdentifier = "45C1A48F1A12EA0700BC4B23"
+            BuildableName = "EonilDispatch.framework"
+            BlueprintName = "EonilDispatch"
+            ReferencedContainer = "container:EonilDispatch.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

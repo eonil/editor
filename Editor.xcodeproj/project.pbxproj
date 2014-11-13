@@ -25,7 +25,11 @@
 		454ECC341A11D67800DFD460 /* RustProgramExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */; };
 		454ECC361A11E1C600DFD460 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 454ECC351A11E1C600DFD460 /* LICENSE */; };
 		454ECC381A11E1DE00DFD460 /* Preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 454ECC371A11E1DE00DFD460 /* Preview.png */; };
-		454FFBF91A13DE40000C0200 /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 454FFBF61A13DE2F000C0200 /* EonilDispatch.framework */; };
+		454FFC061A140C45000C0200 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454FFC051A140C45000C0200 /* Debug.swift */; };
+		454FFC081A141461000C0200 /* FileSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454FFC071A141461000C0200 /* FileSystemService.swift */; };
+		454FFC0A1A14178D000C0200 /* Dilist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454FFC091A14178D000C0200 /* Dilist.swift */; };
+		454FFC0C1A142DF3000C0200 /* FileSystemMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454FFC0B1A142DF3000C0200 /* FileSystemMonitor.swift */; };
+		454FFC0D1A142E15000C0200 /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 454FFC021A140B30000C0200 /* EonilDispatch.framework */; };
 		4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557D8951A116D6800D6C53B /* FileTreeViewController.swift */; };
 		4557D8981A11738E00D6C53B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4557D8971A11738E00D6C53B /* ViewController.swift */; };
 		455F5DE71A1289B900A17A31 /* FileNode3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455F5DE61A1289B900A17A31 /* FileNode3.swift */; };
@@ -55,16 +59,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		454FFBF51A13DE2F000C0200 /* PBXContainerItemProxy */ = {
+		454FFC011A140B30000C0200 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */;
+			containerPortal = 454FFBFC1A140B30000C0200 /* EonilDispatch.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 45C1A4901A12EA0700BC4B23;
 			remoteInfo = EonilDispatch;
 		};
-		454FFBF71A13DE2F000C0200 /* PBXContainerItemProxy */ = {
+		454FFC031A140B30000C0200 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */;
+			containerPortal = 454FFBFC1A140B30000C0200 /* EonilDispatch.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 45C1A49B1A12EA0700BC4B23;
 			remoteInfo = EonilDispatchTests;
@@ -91,7 +95,12 @@
 		454ECC351A11E1C600DFD460 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		454ECC371A11E1DE00DFD460 /* Preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Preview.png; sourceTree = "<group>"; };
 		454ECC391A11E1E700DFD460 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilDispatch.xcodeproj; path = EonilDispatch/EonilDispatch.xcodeproj; sourceTree = "<group>"; };
+		454FFBFA1A13F40E000C0200 /* NOTE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = NOTE.md; sourceTree = "<group>"; };
+		454FFBFC1A140B30000C0200 /* EonilDispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilDispatch.xcodeproj; path = EonilDispatch/EonilDispatch.xcodeproj; sourceTree = "<group>"; };
+		454FFC051A140C45000C0200 /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		454FFC071A141461000C0200 /* FileSystemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemService.swift; sourceTree = "<group>"; };
+		454FFC091A14178D000C0200 /* Dilist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dilist.swift; sourceTree = "<group>"; };
+		454FFC0B1A142DF3000C0200 /* FileSystemMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemMonitor.swift; sourceTree = "<group>"; };
 		4557D8951A116D6800D6C53B /* FileTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController.swift; sourceTree = "<group>"; };
 		4557D8971A11738E00D6C53B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		455F5DE61A1289B900A17A31 /* FileNode3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode3.swift; sourceTree = "<group>"; };
@@ -108,7 +117,7 @@
 		4597F8211A113D100089FC66 /* XML.Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.Navigator.swift; sourceTree = "<group>"; };
 		4597F8221A113D100089FC66 /* XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.swift; sourceTree = "<group>"; };
 		4597F8231A113D100089FC66 /* XML.Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.Test.swift; sourceTree = "<group>"; };
-		45BBB0E41A1022A10055232E /* RustCodeEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RustCodeEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45BBB0E41A1022A10055232E /* Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BBB0E81A1022A10055232E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45BBB0E91A1022A10055232E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45BBB0EB1A1022A10055232E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -127,7 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				454FFBF91A13DE40000C0200 /* EonilDispatch.framework in Frameworks */,
+				454FFC0D1A142E15000C0200 /* EonilDispatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,11 +213,11 @@
 			path = BackstageWorks;
 			sourceTree = "<group>";
 		};
-		454FFBF11A13DE2F000C0200 /* Products */ = {
+		454FFBFD1A140B30000C0200 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				454FFBF61A13DE2F000C0200 /* EonilDispatch.framework */,
-				454FFBF81A13DE2F000C0200 /* EonilDispatchTests.xctest */,
+				454FFC021A140B30000C0200 /* EonilDispatch.framework */,
+				454FFC041A140B30000C0200 /* EonilDispatchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -219,6 +228,8 @@
 				454E42AE1A13D257007BEE79 /* (junkyard) */,
 				454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */,
 				454E42AA1A13D244007BEE79 /* FileNode4.swift */,
+				454FFC071A141461000C0200 /* FileSystemService.swift */,
+				454FFC0B1A142DF3000C0200 /* FileSystemMonitor.swift */,
 			);
 			path = FileNavigating;
 			sourceTree = "<group>";
@@ -249,10 +260,11 @@
 		45BBB0DB1A1022A10055232E = {
 			isa = PBXGroup;
 			children = (
-				454ECC351A11E1C600DFD460 /* LICENSE */,
 				454ECC391A11E1E700DFD460 /* README.md */,
+				454ECC351A11E1C600DFD460 /* LICENSE */,
+				454FFBFA1A13F40E000C0200 /* NOTE.md */,
 				454ECC371A11E1DE00DFD460 /* Preview.png */,
-				454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */,
+				454FFBFC1A140B30000C0200 /* EonilDispatch.xcodeproj */,
 				45BBB0E61A1022A10055232E /* Sources */,
 				45BBB0E51A1022A10055232E /* Products */,
 			);
@@ -261,7 +273,7 @@
 		45BBB0E51A1022A10055232E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				45BBB0E41A1022A10055232E /* RustCodeEditor.app */,
+				45BBB0E41A1022A10055232E /* Editor.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -272,12 +284,14 @@
 				45BBB0E91A1022A10055232E /* AppDelegate.swift */,
 				45BBB0EB1A1022A10055232E /* Images.xcassets */,
 				45BBB0ED1A1022A10055232E /* MainMenu.xib */,
+				454FFC051A140C45000C0200 /* Debug.swift */,
 				45700B6E1A11661000D84249 /* Extensions */,
 				4514A76B1A11C7CB00F25ED8 /* Documents */,
 				454ECC321A11D66100DFD460 /* BackstageWorks */,
 				451740D71A102F1900861ECC /* SpecificUIComponents */,
 				451740DC1A102FA300861ECC /* ProtoUIComponents */,
 				452B92BC1A12CA1300E66E87 /* Set.swift */,
+				454FFC091A14178D000C0200 /* Dilist.swift */,
 				452B92C01A12CC3B00E66E87 /* Deduplicate.swift */,
 				4597F81B1A113D100089FC66 /* MonolithCandidates */,
 				45BBB0E71A1022A10055232E /* Supporting Files */,
@@ -320,9 +334,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		45BBB0E31A1022A10055232E /* RustCodeEditor */ = {
+		45BBB0E31A1022A10055232E /* Editor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45BBB0FE1A1022A10055232E /* Build configuration list for PBXNativeTarget "RustCodeEditor" */;
+			buildConfigurationList = 45BBB0FE1A1022A10055232E /* Build configuration list for PBXNativeTarget "Editor" */;
 			buildPhases = (
 				45BBB0E01A1022A10055232E /* Sources */,
 				45BBB0E11A1022A10055232E /* Frameworks */,
@@ -332,9 +346,9 @@
 			);
 			dependencies = (
 			);
-			name = RustCodeEditor;
+			name = Editor;
 			productName = RustREPL;
-			productReference = 45BBB0E41A1022A10055232E /* RustCodeEditor.app */;
+			productReference = 45BBB0E41A1022A10055232E /* Editor.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -351,7 +365,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 45BBB0DF1A1022A10055232E /* Build configuration list for PBXProject "RustCodeEditor" */;
+			buildConfigurationList = 45BBB0DF1A1022A10055232E /* Build configuration list for PBXProject "Editor" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -364,30 +378,30 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 454FFBF11A13DE2F000C0200 /* Products */;
-					ProjectRef = 454FFBF01A13DE2F000C0200 /* EonilDispatch.xcodeproj */;
+					ProductGroup = 454FFBFD1A140B30000C0200 /* Products */;
+					ProjectRef = 454FFBFC1A140B30000C0200 /* EonilDispatch.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
-				45BBB0E31A1022A10055232E /* RustCodeEditor */,
+				45BBB0E31A1022A10055232E /* Editor */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		454FFBF61A13DE2F000C0200 /* EonilDispatch.framework */ = {
+		454FFC021A140B30000C0200 /* EonilDispatch.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = EonilDispatch.framework;
-			remoteRef = 454FFBF51A13DE2F000C0200 /* PBXContainerItemProxy */;
+			remoteRef = 454FFC011A140B30000C0200 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		454FFBF81A13DE2F000C0200 /* EonilDispatchTests.xctest */ = {
+		454FFC041A140B30000C0200 /* EonilDispatchTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = EonilDispatchTests.xctest;
-			remoteRef = 454FFBF71A13DE2F000C0200 /* PBXContainerItemProxy */;
+			remoteRef = 454FFC031A140B30000C0200 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -414,6 +428,7 @@
 				45700B731A11661000D84249 /* FoundationExtensions.swift in Sources */,
 				4597F8271A113D100089FC66 /* LinkList.swift in Sources */,
 				45700EE11A11F65100415EB2 /* FileNode.swift in Sources */,
+				454FFC0C1A142DF3000C0200 /* FileSystemMonitor.swift in Sources */,
 				454E42AD1A13D24F007BEE79 /* FileTreeViewController4.swift in Sources */,
 				45D158FA1A11401D00B25657 /* Palette.swift in Sources */,
 				45700B721A11661000D84249 /* AppKitExtensions.swift in Sources */,
@@ -430,10 +445,12 @@
 				451740E11A102FA300861ECC /* TextScrollViewController.swift in Sources */,
 				454ECC341A11D67800DFD460 /* RustProgramExecutionController.swift in Sources */,
 				455F5DE71A1289B900A17A31 /* FileNode3.swift in Sources */,
+				454FFC061A140C45000C0200 /* Debug.swift in Sources */,
 				4514A76D1A11C7D200F25ED8 /* RustProjectDocument.swift in Sources */,
 				451740E21A102FA300861ECC /* TextViewController.swift in Sources */,
 				452A12211A107FF000E38F35 /* TableViewController.swift in Sources */,
 				45D158F51A113FE900B25657 /* CodeEditingViewController.swift in Sources */,
+				454FFC0A1A14178D000C0200 /* Dilist.swift in Sources */,
 				454E42AB1A13D244007BEE79 /* FileNode4.swift in Sources */,
 				4597F8281A113D100089FC66 /* NotifierAndObserver.swift in Sources */,
 				4557D8981A11738E00D6C53B /* ViewController.swift in Sources */,
@@ -445,6 +462,7 @@
 				45700B761A11671800D84249 /* RustProjectWindowController.swift in Sources */,
 				4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */,
 				452A12231A1082B900E38F35 /* LayoutConstraint.swift in Sources */,
+				454FFC081A141461000C0200 /* FileSystemService.swift in Sources */,
 				452A121F1A107EC500E38F35 /* TableScrollViewController.swift in Sources */,
 				4597F8251A113D100089FC66 /* Box.swift in Sources */,
 				4529620F1A10A0D4004A0958 /* IssueReportParser.swift in Sources */,
@@ -552,7 +570,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = RustCodeEditor;
+				PRODUCT_NAME = Editor;
 			};
 			name = Debug;
 		};
@@ -563,14 +581,14 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = RustCodeEditor;
+				PRODUCT_NAME = Editor;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		45BBB0DF1A1022A10055232E /* Build configuration list for PBXProject "RustCodeEditor" */ = {
+		45BBB0DF1A1022A10055232E /* Build configuration list for PBXProject "Editor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45BBB0FC1A1022A10055232E /* Debug */,
@@ -579,7 +597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45BBB0FE1A1022A10055232E /* Build configuration list for PBXNativeTarget "RustCodeEditor" */ = {
+		45BBB0FE1A1022A10055232E /* Build configuration list for PBXNativeTarget "Editor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45BBB0FF1A1022A10055232E /* Debug */,

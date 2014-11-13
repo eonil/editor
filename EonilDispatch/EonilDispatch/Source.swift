@@ -87,7 +87,7 @@ public class Source : Object {
 //	func setCancelHandler(f:()->()) {
 //		dispatch_source_set_cancel_handler(raw, f)
 //	}
-	func cancel() {
+	public func cancel() {
 		dispatch_source_cancel(raw)
 	}
 	
@@ -132,7 +132,7 @@ public enum SourceType {
 //	#define DISPATCH_VNODE_REVOKE    0x40
 public struct VNodeFlags {
 	public static let Delete		=	VNodeFlags(rawValue: DISPATCH_VNODE_DELETE)
-	public static let Write		=	VNodeFlags(rawValue: DISPATCH_VNODE_WRITE)
+	public static let Write			=	VNodeFlags(rawValue: DISPATCH_VNODE_WRITE)
 	public static let Extend		=	VNodeFlags(rawValue: DISPATCH_VNODE_EXTEND)
 	public static let Attrib		=	VNodeFlags(rawValue: DISPATCH_VNODE_ATTRIB)
 	public static let Link			=	VNodeFlags(rawValue: DISPATCH_VNODE_LINK)
@@ -147,6 +147,22 @@ public struct VNodeFlags {
 }
 public func | (left:VNodeFlags, right:VNodeFlags) -> VNodeFlags {
 	return	VNodeFlags(rawValue: left.rawValue | right.rawValue)
+}
+extension VNodeFlags : Printable {
+	public var description:String {
+		get {
+			switch self.mapToObjC() {
+			case DISPATCH_VNODE_DELETE:		return	"DELETE"
+			case DISPATCH_VNODE_WRITE:		return	"WRITE"
+			case DISPATCH_VNODE_EXTEND:		return	"EXTEND"
+			case DISPATCH_VNODE_ATTRIB:		return	"ATTRIB"
+			case DISPATCH_VNODE_LINK:		return	"LINK"
+			case DISPATCH_VNODE_RENAME:		return	"RENAME"
+			case DISPATCH_VNODE_REVOKE:		return	"REVOKE"
+			default:						return	"????"
+			}
+		}
+	}
 }
 
 
