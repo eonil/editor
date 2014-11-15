@@ -11,6 +11,9 @@
       location = "group:LICENSE">
    </FileRef>
    <FileRef
+      location = "group:ATTRIBUTIONS.md">
+   </FileRef>
+   <FileRef
       location = "group:Preview.png">
    </FileRef>
    <FileRef

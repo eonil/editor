@@ -11,6 +11,8 @@
 			<array>
 				<string>rustproj</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>RustProject</string>
 			<key>CFBundleTypeName</key>
 			<string>RustProjectDocument</string>
 			<key>CFBundleTypeRole</key>
@@ -25,6 +27,8 @@
 			<array>
 				<string>rs</string>
 			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>RustSourceCodeFile</string>
 			<key>CFBundleTypeName</key>
 			<string>RustSourceCodeFileDocument</string>
 			<key>CFBundleTypeRole</key>
@@ -33,6 +37,22 @@
 			<integer>0</integer>
 			<key>NSDocumentClass</key>
 			<string>$(PRODUCT_MODULE_NAME).RustSourceCodeFileDocument</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>md</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>MarkdownFile</string>
+			<key>CFBundleTypeName</key>
+			<string>MarkdownFileDocument</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSTypeIsPackage</key>
+			<integer>0</integer>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).MarkdownFileDocument</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -48,7 +68,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>

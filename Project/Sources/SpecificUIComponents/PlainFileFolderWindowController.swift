@@ -1,5 +1,5 @@
 //
-//  RustProjectWindowController.swift
+//  PlainFileFolderWindowController.swift
 //  RustCodeEditor
 //
 //  Created by Hoon H. on 11/11/14.
@@ -7,11 +7,13 @@
 //
 
 import Foundation
-
-import Foundation
 import AppKit
 
-class RustProjectWindowController : NSWindowController {
+
+///	A window shows a plain folder with plain files.
+///	This does not do anything special on the file and folders.
+///	Everything is editable as a plain file.
+class PlainFileFolderWindowController : NSWindowController {
 	
 	let	mainViewController	=	MainViewController()
 	
@@ -55,7 +57,14 @@ class RustProjectWindowController : NSWindowController {
 
 
 
-extension RustProjectWindowController {
+
+
+
+
+
+
+
+extension PlainFileFolderWindowController {
 	
 	class MainViewController : NSSplitViewController {
 		private let	editingViewController		=	EditingViewController()
@@ -89,8 +98,8 @@ extension RustProjectWindowController {
 			_channels	=	[
 				channel(navigationViewController.issueListingViewController.userIsWantingToHighlightIssues, editingViewController.codeEditorViewController.highlightRangesOfIssues),
 				channel(navigationViewController.issueListingViewController.userIsWantingToNavigateToIssue, editingViewController.codeEditorViewController.navigateRangeOfIssue),
-				channel(navigationViewController.fileTreeViewController.userIsWantingToEditFileAtPath) { [unowned self] path in
-					self.editingViewController.codeEditorViewController.pathRepresentation	=	path
+				channel(navigationViewController.fileTreeViewController.userIsWantingToEditFileAtURL) { [unowned self] u in
+					self.editingViewController.codeEditorViewController.URLRepresentation	=	u
 				},
 			]
 		}

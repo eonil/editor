@@ -12,6 +12,7 @@
 		451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DD1A102FA300861ECC /* ScrollViewController.swift */; };
 		451740E11A102FA300861ECC /* TextScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DE1A102FA300861ECC /* TextScrollViewController.swift */; };
 		451740E21A102FA300861ECC /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DF1A102FA300861ECC /* TextViewController.swift */; };
+		452442581A18001200A03A51 /* DataSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452442571A18001200A03A51 /* DataSchema.swift */; };
 		4529620F1A10A0D4004A0958 /* IssueReportParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529620E1A10A0D4004A0958 /* IssueReportParser.swift */; };
 		452A121D1A107E4C00E38F35 /* IssueListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A121C1A107E4C00E38F35 /* IssueListingViewController.swift */; };
 		452A121F1A107EC500E38F35 /* TableScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A121E1A107EC500E38F35 /* TableScrollViewController.swift */; };
@@ -20,7 +21,13 @@
 		452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B92B81A12C6A100E66E87 /* FileTreeViewController3.swift */; };
 		452B92BD1A12CA1300E66E87 /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B92BC1A12CA1300E66E87 /* Set.swift */; };
 		452B92C11A12CC3B00E66E87 /* Deduplicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B92C01A12CC3B00E66E87 /* Deduplicate.swift */; };
+		45358A321A17FE4B00AF5F7C /* SchemaInferencerWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45358A311A17FE4B00AF5F7C /* SchemaInferencerWindowController.swift */; };
+		45358A341A17FE5700AF5F7C /* PassiveDataClassGeneratorWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45358A331A17FE5700AF5F7C /* PassiveDataClassGeneratorWindowController.swift */; };
+		45358A361A17FE8800AF5F7C /* HygienicWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45358A351A17FE8800AF5F7C /* HygienicWindowController.swift */; };
+		45393A1B1A16B26B00AA4716 /* TOMLFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45393A1A1A16B26B00AA4716 /* TOMLFileDocument.swift */; };
+		45393A1D1A16B27600AA4716 /* CargoProjectDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45393A1C1A16B27600AA4716 /* CargoProjectDocument.swift */; };
 		45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45402ABA1A153C4E00127E50 /* FileSystemMonitor2.swift */; };
+		454C65F11A15E4DE009A160D /* MarkdownFile.icns in Resources */ = {isa = PBXBuildFile; fileRef = 454C65F01A15E4DE009A160D /* MarkdownFile.icns */; };
 		454E42AB1A13D244007BEE79 /* FileNode4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E42AA1A13D244007BEE79 /* FileNode4.swift */; };
 		454E42AD1A13D24F007BEE79 /* FileTreeViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */; };
 		454ECC341A11D67800DFD460 /* RustProgramExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */; };
@@ -34,8 +41,10 @@
 		45700B721A11661000D84249 /* AppKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700B6F1A11661000D84249 /* AppKitExtensions.swift */; };
 		45700B731A11661000D84249 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700B701A11661000D84249 /* FoundationExtensions.swift */; };
 		45700B741A11661000D84249 /* SwiftLevelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700B711A11661000D84249 /* SwiftLevelExtensions.swift */; };
-		45700B761A11671800D84249 /* RustProjectWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700B751A11671800D84249 /* RustProjectWindowController.swift */; };
+		45700B761A11671800D84249 /* PlainFileFolderWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700B751A11671800D84249 /* PlainFileFolderWindowController.swift */; };
 		45700EE11A11F65100415EB2 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700EE01A11F65100415EB2 /* FileNode.swift */; };
+		457C05BA1A15D91900D062FE /* RustProject.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 457C05B81A15D91900D062FE /* RustProject.iconset */; };
+		457C05BB1A15D91900D062FE /* RustSourceCodeFile.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 457C05B91A15D91900D062FE /* RustSourceCodeFile.iconset */; };
 		457DD5D21A125C3D00324681 /* FileNode2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457DD5D11A125C3D00324681 /* FileNode2.swift */; };
 		4597F8161A1136810089FC66 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4597F8151A1136810089FC66 /* Issue.swift */; };
 		4597F8251A113D100089FC66 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4597F81D1A113D100089FC66 /* Box.swift */; };
@@ -44,6 +53,7 @@
 		4597F8291A113D100089FC66 /* XML.Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4597F8211A113D100089FC66 /* XML.Navigator.swift */; };
 		4597F82A1A113D100089FC66 /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4597F8221A113D100089FC66 /* XML.swift */; };
 		4597F82B1A113D100089FC66 /* XML.Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4597F8231A113D100089FC66 /* XML.Test.swift */; };
+		45B89C321A15E05100D03648 /* MarkdownFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B89C311A15E05100D03648 /* MarkdownFileDocument.swift */; };
 		45BBB0EA1A1022A10055232E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBB0E91A1022A10055232E /* AppDelegate.swift */; };
 		45BBB0EC1A1022A10055232E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BBB0EB1A1022A10055232E /* Images.xcassets */; };
 		45BBB0EF1A1022A10055232E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BBB0ED1A1022A10055232E /* MainMenu.xib */; };
@@ -55,6 +65,8 @@
 		45D970F61A15741E0037649F /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45D970E61A1573F50037649F /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45D970F91A15741E0037649F /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45402A8A1A153B4A00127E50 /* EonilDispatch.framework */; };
 		45D970FA1A15741E0037649F /* EonilDispatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45402A8A1A153B4A00127E50 /* EonilDispatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */; };
+		45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */; };
 		45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */; };
 		45F6C1151A119726005D8EEA /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */; };
 		45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE101C1A12994300834358 /* FileTreeViewController2.swift */; };
@@ -133,6 +145,7 @@
 		451740DD1A102FA300861ECC /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
 		451740DE1A102FA300861ECC /* TextScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextScrollViewController.swift; sourceTree = "<group>"; };
 		451740DF1A102FA300861ECC /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
+		452442571A18001200A03A51 /* DataSchema.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSchema.swift; sourceTree = "<group>"; };
 		4529620E1A10A0D4004A0958 /* IssueReportParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueReportParser.swift; sourceTree = "<group>"; };
 		452A121C1A107E4C00E38F35 /* IssueListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListingViewController.swift; sourceTree = "<group>"; };
 		452A121E1A107EC500E38F35 /* TableScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableScrollViewController.swift; sourceTree = "<group>"; };
@@ -141,8 +154,14 @@
 		452B92B81A12C6A100E66E87 /* FileTreeViewController3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController3.swift; sourceTree = "<group>"; };
 		452B92BC1A12CA1300E66E87 /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		452B92C01A12CC3B00E66E87 /* Deduplicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deduplicate.swift; sourceTree = "<group>"; };
+		45358A311A17FE4B00AF5F7C /* SchemaInferencerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchemaInferencerWindowController.swift; sourceTree = "<group>"; };
+		45358A331A17FE5700AF5F7C /* PassiveDataClassGeneratorWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassiveDataClassGeneratorWindowController.swift; sourceTree = "<group>"; };
+		45358A351A17FE8800AF5F7C /* HygienicWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HygienicWindowController.swift; sourceTree = "<group>"; };
+		45393A1A1A16B26B00AA4716 /* TOMLFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TOMLFileDocument.swift; sourceTree = "<group>"; };
+		45393A1C1A16B27600AA4716 /* CargoProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoProjectDocument.swift; sourceTree = "<group>"; };
 		45402A841A153B4A00127E50 /* EonilDispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilDispatch.xcodeproj; path = Subprojects/EonilDispatch/EonilDispatch.xcodeproj; sourceTree = "<group>"; };
 		45402ABA1A153C4E00127E50 /* FileSystemMonitor2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemMonitor2.swift; sourceTree = "<group>"; };
+		454C65F01A15E4DE009A160D /* MarkdownFile.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MarkdownFile.icns; sourceTree = "<group>"; };
 		454E42AA1A13D244007BEE79 /* FileNode4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode4.swift; sourceTree = "<group>"; };
 		454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController4.swift; sourceTree = "<group>"; };
 		454ECC331A11D67800DFD460 /* RustProgramExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProgramExecutionController.swift; sourceTree = "<group>"; };
@@ -156,8 +175,10 @@
 		45700B6F1A11661000D84249 /* AppKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtensions.swift; sourceTree = "<group>"; };
 		45700B701A11661000D84249 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		45700B711A11661000D84249 /* SwiftLevelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLevelExtensions.swift; sourceTree = "<group>"; };
-		45700B751A11671800D84249 /* RustProjectWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectWindowController.swift; sourceTree = "<group>"; };
+		45700B751A11671800D84249 /* PlainFileFolderWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlainFileFolderWindowController.swift; sourceTree = "<group>"; };
 		45700EE01A11F65100415EB2 /* FileNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
+		457C05B81A15D91900D062FE /* RustProject.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = RustProject.iconset; sourceTree = "<group>"; };
+		457C05B91A15D91900D062FE /* RustSourceCodeFile.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = RustSourceCodeFile.iconset; sourceTree = "<group>"; };
 		457DD5D11A125C3D00324681 /* FileNode2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode2.swift; sourceTree = "<group>"; };
 		4597F8151A1136810089FC66 /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		4597F81D1A113D100089FC66 /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
@@ -166,6 +187,7 @@
 		4597F8211A113D100089FC66 /* XML.Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.Navigator.swift; sourceTree = "<group>"; };
 		4597F8221A113D100089FC66 /* XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.swift; sourceTree = "<group>"; };
 		4597F8231A113D100089FC66 /* XML.Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.Test.swift; sourceTree = "<group>"; };
+		45B89C311A15E05100D03648 /* MarkdownFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownFileDocument.swift; sourceTree = "<group>"; };
 		45BBB0E41A1022A10055232E /* Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BBB0E81A1022A10055232E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45BBB0E91A1022A10055232E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -176,6 +198,8 @@
 		45D7F6DC1A114C3900E792D1 /* UserActionSignal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActionSignal.swift; sourceTree = "<group>"; };
 		45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayoutQuery.swift; sourceTree = "<group>"; };
 		45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = Subprojects/EonilFileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
+		45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCRuntime.swift; sourceTree = "<group>"; };
+		45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetActionFunctionBox.swift; sourceTree = "<group>"; };
 		45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandConsoleViewController.swift; sourceTree = "<group>"; };
 		45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectViewController.swift; sourceTree = "<group>"; };
 		45FE101C1A12994300834358 /* FileTreeViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController2.swift; sourceTree = "<group>"; };
@@ -199,6 +223,9 @@
 			children = (
 				4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */,
 				4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */,
+				45B89C311A15E05100D03648 /* MarkdownFileDocument.swift */,
+				45393A1A1A16B26B00AA4716 /* TOMLFileDocument.swift */,
+				45393A1C1A16B27600AA4716 /* CargoProjectDocument.swift */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -206,7 +233,7 @@
 		451740D71A102F1900861ECC /* SpecificUIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				45700B751A11671800D84249 /* RustProjectWindowController.swift */,
+				45700B751A11671800D84249 /* PlainFileFolderWindowController.swift */,
 				45D7F6DC1A114C3900E792D1 /* UserActionSignal.swift */,
 				4557D8941A116D5F00D6C53B /* FileNavigating */,
 				45D158F31A113FD900B25657 /* CodeEditing */,
@@ -220,6 +247,7 @@
 		451740DC1A102FA300861ECC /* ProtoUIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				45358A351A17FE8800AF5F7C /* HygienicWindowController.swift */,
 				452A121E1A107EC500E38F35 /* TableScrollViewController.swift */,
 				451740DE1A102FA300861ECC /* TextScrollViewController.swift */,
 				452A12201A107FF000E38F35 /* TableViewController.swift */,
@@ -241,6 +269,32 @@
 				4597F8151A1136810089FC66 /* Issue.swift */,
 			);
 			path = IssueListing;
+			sourceTree = "<group>";
+		};
+		45358A2B1A17FE1B00AF5F7C /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				45358A2F1A17FE3B00AF5F7C /* PassiveDataClassGeneration */,
+				45358A301A17FE3B00AF5F7C /* SchemaInferencing */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		45358A2F1A17FE3B00AF5F7C /* PassiveDataClassGeneration */ = {
+			isa = PBXGroup;
+			children = (
+				45358A331A17FE5700AF5F7C /* PassiveDataClassGeneratorWindowController.swift */,
+			);
+			path = PassiveDataClassGeneration;
+			sourceTree = "<group>";
+		};
+		45358A301A17FE3B00AF5F7C /* SchemaInferencing */ = {
+			isa = PBXGroup;
+			children = (
+				45358A311A17FE4B00AF5F7C /* SchemaInferencerWindowController.swift */,
+				452442571A18001200A03A51 /* DataSchema.swift */,
+			);
+			path = SchemaInferencing;
 			sourceTree = "<group>";
 		};
 		45402A851A153B4A00127E50 /* Products */ = {
@@ -305,15 +359,27 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		457C05B31A15D88200D062FE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				454C65F01A15E4DE009A160D /* MarkdownFile.icns */,
+				457C05B81A15D91900D062FE /* RustProject.iconset */,
+				457C05B91A15D91900D062FE /* RustSourceCodeFile.iconset */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		4597F81B1A113D100089FC66 /* MonolithCandidates */ = {
 			isa = PBXGroup;
 			children = (
 				4597F81D1A113D100089FC66 /* Box.swift */,
+				45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */,
 				4597F81F1A113D100089FC66 /* LinkList.swift */,
 				4597F8201A113D100089FC66 /* NotifierAndObserver.swift */,
 				4597F8211A113D100089FC66 /* XML.Navigator.swift */,
 				4597F8221A113D100089FC66 /* XML.swift */,
 				4597F8231A113D100089FC66 /* XML.Test.swift */,
+				45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */,
 			);
 			path = MonolithCandidates;
 			sourceTree = "<group>";
@@ -321,6 +387,7 @@
 		45BBB0DB1A1022A10055232E = {
 			isa = PBXGroup;
 			children = (
+				457C05B31A15D88200D062FE /* Resources */,
 				45402AAB1A153B5F00127E50 /* Subprojects */,
 				45BBB0E61A1022A10055232E /* Sources */,
 				45BBB0E51A1022A10055232E /* Products */,
@@ -345,6 +412,7 @@
 				45700B6E1A11661000D84249 /* Extensions */,
 				4514A76B1A11C7CB00F25ED8 /* Documents */,
 				454ECC321A11D66100DFD460 /* BackstageWorks */,
+				45358A2B1A17FE1B00AF5F7C /* Tools */,
 				451740D71A102F1900861ECC /* SpecificUIComponents */,
 				451740DC1A102FA300861ECC /* ProtoUIComponents */,
 				452B92BC1A12CA1300E66E87 /* Set.swift */,
@@ -506,8 +574,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				457C05BA1A15D91900D062FE /* RustProject.iconset in Resources */,
 				45BBB0EC1A1022A10055232E /* Images.xcassets in Resources */,
+				454C65F11A15E4DE009A160D /* MarkdownFile.icns in Resources */,
 				45BBB0EF1A1022A10055232E /* MainMenu.xib in Resources */,
+				457C05BB1A15D91900D062FE /* RustSourceCodeFile.iconset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +593,7 @@
 				4597F8271A113D100089FC66 /* LinkList.swift in Sources */,
 				45700EE11A11F65100415EB2 /* FileNode.swift in Sources */,
 				454FFC0C1A142DF3000C0200 /* FileSystemMonitor.swift in Sources */,
+				45358A361A17FE8800AF5F7C /* HygienicWindowController.swift in Sources */,
 				454E42AD1A13D24F007BEE79 /* FileTreeViewController4.swift in Sources */,
 				45D158FA1A11401D00B25657 /* Palette.swift in Sources */,
 				45700B721A11661000D84249 /* AppKitExtensions.swift in Sources */,
@@ -529,12 +601,15 @@
 				4514A7731A11C81200F25ED8 /* RustSourceCodeFileDocument.swift in Sources */,
 				4597F8291A113D100089FC66 /* XML.Navigator.swift in Sources */,
 				45BBB0EA1A1022A10055232E /* AppDelegate.swift in Sources */,
+				45358A321A17FE4B00AF5F7C /* SchemaInferencerWindowController.swift in Sources */,
 				4597F82B1A113D100089FC66 /* XML.Test.swift in Sources */,
 				452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */,
 				451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */,
+				45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */,
 				4597F82A1A113D100089FC66 /* XML.swift in Sources */,
 				45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */,
 				452B92BD1A12CA1300E66E87 /* Set.swift in Sources */,
+				452442581A18001200A03A51 /* DataSchema.swift in Sources */,
 				451740E11A102FA300861ECC /* TextScrollViewController.swift in Sources */,
 				454ECC341A11D67800DFD460 /* RustProgramExecutionController.swift in Sources */,
 				455F5DE71A1289B900A17A31 /* FileNode3.swift in Sources */,
@@ -548,13 +623,18 @@
 				4597F8281A113D100089FC66 /* NotifierAndObserver.swift in Sources */,
 				4557D8981A11738E00D6C53B /* ViewController.swift in Sources */,
 				45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */,
+				45358A341A17FE5700AF5F7C /* PassiveDataClassGeneratorWindowController.swift in Sources */,
+				45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */,
 				45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */,
 				452A121D1A107E4C00E38F35 /* IssueListingViewController.swift in Sources */,
 				457DD5D21A125C3D00324681 /* FileNode2.swift in Sources */,
 				45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */,
 				45700B741A11661000D84249 /* SwiftLevelExtensions.swift in Sources */,
-				45700B761A11671800D84249 /* RustProjectWindowController.swift in Sources */,
+				45393A1D1A16B27600AA4716 /* CargoProjectDocument.swift in Sources */,
+				45393A1B1A16B26B00AA4716 /* TOMLFileDocument.swift in Sources */,
+				45700B761A11671800D84249 /* PlainFileFolderWindowController.swift in Sources */,
 				4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */,
+				45B89C321A15E05100D03648 /* MarkdownFileDocument.swift in Sources */,
 				452A12231A1082B900E38F35 /* LayoutConstraint.swift in Sources */,
 				454FFC081A141461000C0200 /* FileSystemService.swift in Sources */,
 				452A121F1A107EC500E38F35 /* TableScrollViewController.swift in Sources */,

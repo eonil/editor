@@ -91,3 +91,35 @@ extension NSLayoutManager {
 
 
 
+
+extension NSMenuItem {
+	var	reaction:(()->())? {
+		get {
+			let	c1	=	ObjC.getStrongAssociationOf(self, key: Keys.MENU_REACTION) as TargetActionFunctionBox?
+			return	c1?.function
+		}
+		set(v) {
+			let	c1	=	v == nil ? nil as TargetActionFunctionBox? : TargetActionFunctionBox(v!)
+			self.target	=	c1
+			self.action	=	c1 == nil ? "" : c1!.action
+			ObjC.setStrongAssociationOf(self, key: Keys.MENU_REACTION, value: c1)
+		}
+	}
+
+	private struct Keys {
+		static let	MENU_REACTION	=	UnsafeMutablePointer<Void>.alloc(1)
+	}
+	
+	convenience init(title:String, reaction:()->()) {
+		self.init()
+		self.title		=	title
+		self.reaction	=	reaction
+	}
+}
+
+
+
+
+
+
+

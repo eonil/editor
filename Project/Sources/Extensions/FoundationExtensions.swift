@@ -9,6 +9,14 @@
 import Foundation
 
 extension NSIndexSet {
+	convenience
+	init(_ indexes:[Int]) {
+		let	s1	=	NSMutableIndexSet()
+		for idx1 in indexes {
+			s1.addIndex(idx1)
+		}
+		self.init(indexSet: s1)
+	}
 	var allIndexes:[Int] {
 		var	idxs	=	[] as [Int]
 		self.enumerateIndexesUsingBlock { (idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
@@ -73,7 +81,40 @@ extension NSURL {
 			return	NSFileManager.defaultManager().displayNameAtPath(path!)
 		}
 	}
+	var existingAsAnyFile:Bool {
+		get {
+			return	NSFileManager.defaultManager().fileExistsAtPath(self.path!)
+		}
+	}
+	var existingAsDataFile:Bool {
+		get {
+			return	NSFileManager.defaultManager().fileExistsAtPathAsDataFile(self.path!)
+		}
+	}
+	var existingAsDirectoryFile:Bool {
+		get {
+			return	NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(self.path!)
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

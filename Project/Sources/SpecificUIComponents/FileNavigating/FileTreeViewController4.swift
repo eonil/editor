@@ -10,9 +10,10 @@ import Foundation
 import AppKit
 import EonilDispatch
 
-class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate {
 	
-	let	userIsWantingToEditFileAtPath	=	Notifier<String>()
+	///	Directories are excluded.
+	let	userIsWantingToEditFileAtURL	=	Notifier<NSURL>()
 	
 	private	var	_fileTreeRepository		=	nil as FileTreeRepository4?
 	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor2?
@@ -27,7 +28,39 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 			self.representedObject	=	v
 		}
 	}
-
+	
+	///	Notifies invlidation of a node.
+	///	The UI will be updated to reflect the invalidation.
+	func invalidateNodeForURL(u:NSURL) {
+		assert(NSThread.currentThread() == NSThread.mainThread())
+		assert(_fileTreeRepository != nil)
+		
+		let	u2	=	u.URLByDeletingLastPathComponent!
+		
+		//	File-system notifications are sent asynchronously, then
+		//	a file-node always can not nil for the URL.
+		if let n1 = _fileTreeRepository![u2] {
+			//	Store currently selected URLs.
+			let	selus1	=	outlineView.selectedRowIndexes.allIndexes.map({self.outlineView.itemAtRow($0) as FileNode4}).map({$0.link}) as [NSURL]
+			
+			//	Perform reloading.
+			n1.reloadSubnodes()
+			outlineView.reloadItem(n1, reloadChildren: true)
+			
+			//	Restore oreviously selected URLs.
+			//	Just skip disappeared/missing URLs.
+			let	selns2	=	selus1.map({self._fileTreeRepository![$0]}).filter({$0 != nil})
+			let	selrs3	=	selns2.map({self.outlineView.rowForItem($0)}).filter({$0 != -1})
+			let	selrs4	=	NSIndexSet(selrs3)
+			outlineView.selectRowIndexes(selrs4, byExtendingSelection: false)
+			
+			Debug.log("Tree partially reloaded.")
+		}
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -45,10 +78,12 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 				_fileTreeRepository!.reload()
 				
 				_fileSystemMonitor	=	FileSystemMonitor2(rootLocationToMonitor: v3)
+				
+				_channelsHolding	=	[
+					channel(_fileSystemMonitor!.notifyEventForURL, invalidateNodeForURL),
+				]
 			}
 			self.outlineView.reloadData()
-			
-			_channelsHolding	=	connectMonitorToTree(_fileSystemMonitor!, _fileTreeRepository!, outlineView)
 		}
 	}
 	
@@ -78,6 +113,17 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		
 		outlineView.setDataSource(self)
 		outlineView.setDelegate(self)
+		
+		outlineView.menu			=	NSMenu()
+		outlineView.menu!.delegate	=	self
+		
+		outlineView.menu!.addItem(NSMenuItem(title: "Show in Finder", reaction: { [unowned self] () -> () in
+			let	r1	=	self.outlineView.clickedRow
+			if r1 >= 0 {
+				let	n1	=	self.outlineView.itemAtRow(r1) as FileNode4
+				NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs([n1.link])
+			}
+		}))
 	}
 	
 	
@@ -128,7 +174,7 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		cv1.addSubview(tv1)
 		cv1.addSubview(iv1)
 
-		///	Do no query on file-system here.
+		///	Do not query on file-system here.
 		///	The node is a local cache, and may not exist on 
 		///	underlying file-system. 
 		///	This is especially true for kqueue/GCD notification.
@@ -152,14 +198,21 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	
 	
 	func outlineViewSelectionDidChange(notification: NSNotification) {
-//		let	idx1	=	self.outlineView.selectedRow
-//		let	n1		=	self.outlineView.itemAtRow(idx1) as FileNode4
-//		userIsWantingToEditFileAtPath.signal(n1.absolutePath)
+		let	idx1	=	self.outlineView.selectedRow
+		if idx1 >= 0 {	
+			let	n1		=	self.outlineView.itemAtRow(idx1) as FileNode4
+			userIsWantingToEditFileAtURL.signal(n1.link)
+		}
 	}
 	func outlineViewItemDidCollapse(notification: NSNotification) {
 		assert(notification.name == NSOutlineViewItemDidCollapseNotification)
 		let	n1	=	notification.userInfo!["NSObject"]! as FileNode4
 		n1.resetSubnodes()
+	}
+	
+	func menuNeedsUpdate(menu: NSMenu) {
+		
+//		outlineView.selectedRowIndexes
 	}
 }
 
@@ -194,27 +247,12 @@ private let	NAME	=	"NAME"
 
 
 
-
-///	Keep the returned object to keep the connection.
-private func connectMonitorToTree(m:FileSystemMonitor2, t:FileTreeRepository4, v:NSOutlineView) -> Any {
-	unowned let	v2	=	v
-	func onFileEvent(u:NSURL) {
-		assert(NSThread.currentThread() == NSThread.mainThread())
-		
-		let	u2	=	u.URLByDeletingLastPathComponent!
-		
-		//	File-system notifications are sent asynchronously, then
-		//	a file-node always can not nil for the URL.
-		if let n1 = t[u2] {
-			n1.reloadSubnodes()
-			v2.reloadItem(n1, reloadChildren: true)
-		}
-	}
-	return	channel(m.notifyEventForURL, onFileEvent)
-}
-
-
-
+//private final class MenuManager : NSObject, NSMenuDelegate {
+//	
+//	func menuNeedsUpdate(menu: NSMenu) {
+//		
+//	}
+//}
 
 
 

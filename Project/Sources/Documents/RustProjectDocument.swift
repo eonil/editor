@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 class RustProjectDocument : NSDocument {
-	let	projectWindowController	=	RustProjectWindowController()
+	let	projectWindowController	=	PlainFileFolderWindowController()
 	let	programExecutionController	=	RustProgramExecutionController()
 	
 	override func makeWindowControllers() {
@@ -38,14 +38,21 @@ class RustProjectDocument : NSDocument {
 	
 	
 	
-	
+	override func saveDocument(sender: AnyObject?) {
+		//	Do not route save messages to current document.
+		//	Saving of a project will be done at somewhere else, and this makes annoying alerts.
+		///	This prevents the alerts.
+//		super.saveDocument(sender)
+		
+		projectWindowController.codeEditingViewController.trySavingInPlace()
+	}
 	
 	
 	
 	
 	
 	override class func autosavesInPlace() -> Bool {
-		return true
+		return false
 	}
 }
 

@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 class RustSourceCodeFileDocument : NSDocument {
-	let	projectWindowController	=	RustProjectWindowController()
+	let	projectWindowController	=	PlainFileFolderWindowController()
 	let	programExecutionController	=	RustProgramExecutionController()
 	
 	override func makeWindowControllers() {
