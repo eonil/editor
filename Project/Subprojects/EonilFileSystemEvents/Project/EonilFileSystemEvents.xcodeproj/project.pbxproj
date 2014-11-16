@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		457E2E351A18C268000CEC96 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E2E341A18C268000CEC96 /* Stream.swift */; };
+		457E2E361A18C268000CEC96 /* Stream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457E2E341A18C268000CEC96 /* Stream.swift */; };
 		45BF99CA1A131E3A004E4E2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BF99C91A131E3A004E4E2E /* AppDelegate.swift */; };
 		45BF99CC1A131E3A004E4E2E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BF99CB1A131E3A004E4E2E /* Images.xcassets */; };
 		45BF99CF1A131E3A004E4E2E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BF99CD1A131E3A004E4E2E /* MainMenu.xib */; };
@@ -57,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		45338DFC1A15370100252EE4 /* TestdriveApp-Briding-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestdriveApp-Briding-Header.h"; sourceTree = "<group>"; };
+		457E2E341A18C268000CEC96 /* Stream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stream.swift; sourceTree = "<group>"; };
 		45BF99B51A130CBD004E4E2E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		45BF99C51A131E3A004E4E2E /* TestdriveApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestdriveApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BF99C81A131E3A004E4E2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 				45D970C91A1569750037649F /* EonilFileSystemEventStream.m */,
 				45D970CA1A1569750037649F /* EonilJustFSEventStreamWrapper.h */,
 				45D970CB1A1569750037649F /* EonilJustFSEventStreamWrapper.m */,
+				457E2E341A18C268000CEC96 /* Stream.swift */,
 				45D970CC1A1569750037649F /* Info.plist */,
 			);
 			path = Sources;
@@ -315,6 +319,7 @@
 				45D970D71A1569D20037649F /* EonilJustFSEventStreamWrapper.m in Sources */,
 				45D970DA1A1569F60037649F /* main.m in Sources */,
 				45D970D61A1569D20037649F /* EonilFileSystemEventStream.m in Sources */,
+				457E2E361A18C268000CEC96 /* Stream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +329,7 @@
 			files = (
 				45D970D11A1569A80037649F /* EonilFileSystemEventStream.m in Sources */,
 				45D970D21A1569A80037649F /* EonilJustFSEventStreamWrapper.m in Sources */,
+				457E2E351A18C268000CEC96 /* Stream.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +393,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "TestdriveApp/TestdriveApp-Briding-Header.h";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -425,7 +430,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OBJC_BRIDGING_HEADER = "TestdriveApp/TestdriveApp-Briding-Header.h";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -444,6 +448,7 @@
 				INFOPLIST_FILE = TestdriveApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TestdriveApp/TestdriveApp-Briding-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -457,23 +462,29 @@
 				INFOPLIST_FILE = TestdriveApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "TestdriveApp/TestdriveApp-Briding-Header.h";
 			};
 			name = Release;
 		};
 		45D9709B1A155DD50037649F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		45D9709C1A155DD50037649F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -481,6 +492,7 @@
 		45D970C01A15690A0037649F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -504,6 +516,7 @@
 		45D970C11A15690A0037649F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
