@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>328B3B72-E328-4F9B-A535-FB1403B878D2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>JSONDataSchemaInferencer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>71A00DDED806E25423061F292531DC609604F42E</key>
+		<string>https://github.com/Eonil/Monolith.Swift.git</string>
+		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
+		<string>https://github.com/Eonil/Editor.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Project/Subprojects/JSONDataSchemaInferencer/JSONDataSchemaInferencer.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>71A00DDED806E25423061F292531DC609604F42E</key>
+		<string>../../../../..Project/Submodules/Monolith.Swift</string>
+		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Eonil/Editor.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FC8DBBA953E548D205F88EA925028C0D6DA341F0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FC8DBBA953E548D205F88EA925028C0D6DA341F0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>71A00DDED806E25423061F292531DC609604F42E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Monolith.Swift</string>
+		</dict>
+	</array>
+</dict>
+</plist>

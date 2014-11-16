@@ -1,0 +1,82 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		459232831A18938600DF2848 /* ExampleDataClass1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleDataClass1.swift; sourceTree = "<group>"; };
+		459232841A18938600DF2848 /* Schema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schema.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		4592327B1A18937000DF2848 = {
+			isa = PBXGroup;
+			children = (
+				459232821A18937A00DF2848 /* Sources */,
+			);
+			sourceTree = "<group>";
+		};
+		459232821A18937A00DF2848 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				459232831A18938600DF2848 /* ExampleDataClass1.swift */,
+				459232841A18938600DF2848 /* Schema.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		4592327C1A18937000DF2848 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+			};
+			buildConfigurationList = 4592327F1A18937000DF2848 /* Build configuration list for PBXProject "DataClassGenerator" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4592327B1A18937000DF2848;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		459232801A18937000DF2848 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		459232811A18937000DF2848 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4592327F1A18937000DF2848 /* Build configuration list for PBXProject "DataClassGenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				459232801A18937000DF2848 /* Debug */,
+				459232811A18937000DF2848 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4592327C1A18937000DF2848 /* Project object */;
+}
