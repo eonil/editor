@@ -14,6 +14,8 @@
 		<string>https://github.com/Eonil/Monolith.Swift.git</string>
 		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
 		<string>https://github.com/Eonil/Editor.git</string>
+		<key>FD55AFA91F3CC977FF03288DC234AB1C17693E11</key>
+		<string>https://github.com/Eonil/SQLite3</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>EditorOnly.xcworkspace</string>
@@ -23,6 +25,8 @@
 		<string>../Project/Submodules/Monolith.Swift</string>
 		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
 		<string>..</string>
+		<key>FD55AFA91F3CC977FF03288DC234AB1C17693E11</key>
+		<string>../Project/Submodules/SQLite3</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Eonil/Editor.git</string>
@@ -47,6 +51,14 @@
 			<string>71A00DDED806E25423061F292531DC609604F42E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Monolith.Swift</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FD55AFA91F3CC977FF03288DC234AB1C17693E11</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SQLite3</string>
 		</dict>
 	</array>
 </dict>

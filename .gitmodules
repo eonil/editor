@@ -1,3 +1,6 @@
 [submodule "Project/Submodules/Monolith.Swift"]
 	path = Project/Submodules/Monolith.Swift
 	url = https://github.com/Eonil/Monolith.Swift.git
+[submodule "Project/Submodules/SQLite3"]
+	path = Project/Submodules/SQLite3
+	url = https://github.com/Eonil/SQLite3

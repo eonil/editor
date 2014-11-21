@@ -34,6 +34,9 @@
 		457E2E131A18AA86000CEC96 /* example4.json in Resources */ = {isa = PBXBuildFile; fileRef = 457E2E121A18AA86000CEC96 /* example4.json */; };
 		457E2E191A18ACD8000CEC96 /* example5.json in Resources */ = {isa = PBXBuildFile; fileRef = 457E2E181A18ACD8000CEC96 /* example5.json */; };
 		457E2E7E1A18CDEF000CEC96 /* example6.json in Resources */ = {isa = PBXBuildFile; fileRef = 457E2E7D1A18CDEF000CEC96 /* example6.json */; };
+		45F95AD11A19B5C7002603B9 /* example7.json in Resources */ = {isa = PBXBuildFile; fileRef = 45F95AD01A19B5C7002603B9 /* example7.json */; };
+		45F95AD71A19B654002603B9 /* example8.json in Resources */ = {isa = PBXBuildFile; fileRef = 45F95AD61A19B654002603B9 /* example8.json */; };
+		45F95AD91A19B710002603B9 /* example9.json in Resources */ = {isa = PBXBuildFile; fileRef = 45F95AD81A19B710002603B9 /* example9.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +132,9 @@
 		457E2E121A18AA86000CEC96 /* example4.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example4.json; sourceTree = "<group>"; };
 		457E2E181A18ACD8000CEC96 /* example5.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example5.json; sourceTree = "<group>"; };
 		457E2E7D1A18CDEF000CEC96 /* example6.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example6.json; sourceTree = "<group>"; };
+		45F95AD01A19B5C7002603B9 /* example7.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example7.json; sourceTree = "<group>"; };
+		45F95AD61A19B654002603B9 /* example8.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example8.json; sourceTree = "<group>"; };
+		45F95AD81A19B710002603B9 /* example9.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = example9.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +244,9 @@
 				457E2E121A18AA86000CEC96 /* example4.json */,
 				457E2E181A18ACD8000CEC96 /* example5.json */,
 				457E2E7D1A18CDEF000CEC96 /* example6.json */,
+				45F95AD01A19B5C7002603B9 /* example7.json */,
+				45F95AD61A19B654002603B9 /* example8.json */,
+				45F95AD81A19B710002603B9 /* example9.json */,
 				456B04B41A1837D500887CF7 /* AppDelegate.swift */,
 				456B04B61A1837D500887CF7 /* Images.xcassets */,
 				456B04B81A1837D500887CF7 /* MainMenu.xib */,
@@ -447,12 +456,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F95AD11A19B5C7002603B9 /* example7.json in Resources */,
 				456BEB221A184C0C002957F2 /* events2.json in Resources */,
 				456B04B71A1837D500887CF7 /* Images.xcassets in Resources */,
 				457E2E191A18ACD8000CEC96 /* example5.json in Resources */,
 				456BEB201A1849B6002957F2 /* example3.json in Resources */,
 				457E2E131A18AA86000CEC96 /* example4.json in Resources */,
 				456B04BA1A1837D500887CF7 /* MainMenu.xib in Resources */,
+				45F95AD91A19B710002603B9 /* example9.json in Resources */,
+				45F95AD71A19B654002603B9 /* example8.json in Resources */,
 				456B04E81A1839D600887CF7 /* events.json in Resources */,
 				457E2E7E1A18CDEF000CEC96 /* example6.json in Resources */,
 			);

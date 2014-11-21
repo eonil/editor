@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //		let	u	=	NSURL(string: "file://\(p1)/events2.json")!
 //		let	u	=	NSURL(string: "file://\(p1)/example4.json")!
 //		let	u	=	NSURL(string: "file://\(p1)/example5.json")!
-		let	u	=	NSURL(string: "file://\(p1)/example6.json")!
+		let	u	=	NSURL(string: "file://\(p1)/example9.json")!
 		
 		let	d	=	NSData(contentsOfURL: u)
 		let	v	=	JSON.deserialise(d!)!

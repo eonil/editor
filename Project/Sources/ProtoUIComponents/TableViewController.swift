@@ -40,6 +40,10 @@ class TableViewController : NSViewController, NSTableViewDataSource, NSTableView
 	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 	}
+	
+	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+		return	0
+	}
 }
 
 
