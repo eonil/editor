@@ -71,8 +71,6 @@
 		45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */; };
 		45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */; };
 		45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */; };
-		45EF318D1A18DE4000DAF925 /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF318A1A18DE2E00DAF925 /* EonilDispatch.framework */; };
-		45EF318E1A18DE4000DAF925 /* EonilDispatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF318A1A18DE2E00DAF925 /* EonilDispatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45EF31991A18DE9900DAF925 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4524431E1A18059700A03A51 /* EonilFileSystemEvents.framework */; };
 		45EF319A1A18DE9900DAF925 /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4524431E1A18059700A03A51 /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */; };
@@ -81,6 +79,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		450A0DE71A275EBD0026102D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459A03F41A18D70000F946BD;
+			remoteInfo = iOS;
+		};
+		450A0DE91A275EBD0026102D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459A03FE1A18D70000F946BD;
+			remoteInfo = iOSTests;
+		};
+		450A0DEB1A275EBD0026102D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459A04191A18D74D00F946BD;
+			remoteInfo = OSX;
+		};
+		450A0DED1A275EBD0026102D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459A04231A18D74D00F946BD;
+			remoteInfo = OSXTests;
+		};
 		452442661A18019400A03A51 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4524425D1A18019400A03A51 /* Standards.xcodeproj */;
@@ -186,41 +212,6 @@
 			remoteGlobalIDString = 459727F11A0F29580097454C;
 			remoteInfo = ProfilingExampleOSX;
 		};
-		45EF31851A18DE2E00DAF925 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF317E1A18DE2E00DAF925 /* EonilDispatch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459A03F41A18D70000F946BD;
-			remoteInfo = iOS;
-		};
-		45EF31871A18DE2E00DAF925 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF317E1A18DE2E00DAF925 /* EonilDispatch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459A03FE1A18D70000F946BD;
-			remoteInfo = iOSTests;
-		};
-		45EF31891A18DE2E00DAF925 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF317E1A18DE2E00DAF925 /* EonilDispatch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459A04191A18D74D00F946BD;
-			remoteInfo = OSX;
-		};
-		45EF318B1A18DE2E00DAF925 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF317E1A18DE2E00DAF925 /* EonilDispatch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459A04231A18D74D00F946BD;
-			remoteInfo = OSXTests;
-		};
-		45EF318F1A18DE4000DAF925 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF317E1A18DE2E00DAF925 /* EonilDispatch.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 459A04181A18D74D00F946BD;
-			remoteInfo = OSX;
-		};
 		45EF319B1A18DE9A00DAF925 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
@@ -240,7 +231,6 @@
 				453F57511A19E5F30035400D /* EonilSQLite3.framework in Embed Frameworks */,
 				452442731A1801DC00A03A51 /* Standards.framework in Embed Frameworks */,
 				45EF319A1A18DE9900DAF925 /* EonilFileSystemEvents.framework in Embed Frameworks */,
-				45EF318E1A18DE4000DAF925 /* EonilDispatch.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,6 +238,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Dispatch.xcodeproj; path = Submodules/Monolith.Swift/Dispatch/Dispatch.xcodeproj; sourceTree = "<group>"; };
 		4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectDocument.swift; sourceTree = "<group>"; };
 		4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustSourceCodeFileDocument.swift; sourceTree = "<group>"; };
 		451740DD1A102FA300861ECC /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
@@ -313,7 +304,6 @@
 		45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = EonilFileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCRuntime.swift; sourceTree = "<group>"; };
 		45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetActionFunctionBox.swift; sourceTree = "<group>"; };
-		45EF317E1A18DE2E00DAF925 /* EonilDispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilDispatch.xcodeproj; path = Submodules/Monolith.Swift/Dispatch/EonilDispatch.xcodeproj; sourceTree = "<group>"; };
 		45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandConsoleViewController.swift; sourceTree = "<group>"; };
 		45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectViewController.swift; sourceTree = "<group>"; };
 		45FE101C1A12994300834358 /* FileTreeViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController2.swift; sourceTree = "<group>"; };
@@ -327,13 +317,23 @@
 				453F574E1A19E5EB0035400D /* EonilSQLite3.framework in Frameworks */,
 				452442711A1801D800A03A51 /* Standards.framework in Frameworks */,
 				45EF31991A18DE9900DAF925 /* EonilFileSystemEvents.framework in Frameworks */,
-				45EF318D1A18DE4000DAF925 /* EonilDispatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		450A0DE11A275EBD0026102D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				450A0DE81A275EBD0026102D /* EonilDispatch.framework */,
+				450A0DEA1A275EBD0026102D /* iOSTests.xctest */,
+				450A0DEC1A275EBD0026102D /* EonilDispatch.framework */,
+				450A0DEE1A275EBD0026102D /* OSXTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4514A76B1A11C7CB00F25ED8 /* Documents */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,7 +395,7 @@
 		452442761A1804ED00A03A51 /* Submodules */ = {
 			isa = PBXGroup;
 			children = (
-				45EF317E1A18DE2E00DAF925 /* EonilDispatch.xcodeproj */,
+				450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */,
 				4524425D1A18019400A03A51 /* Standards.xcodeproj */,
 				453F57391A19E5E10035400D /* EonilSQLite3.xcodeproj */,
 			);
@@ -566,10 +566,10 @@
 		45BBB0DB1A1022A10055232E = {
 			isa = PBXGroup;
 			children = (
+				45BBB0E61A1022A10055232E /* Sources */,
 				457C05B31A15D88200D062FE /* Resources */,
 				452442761A1804ED00A03A51 /* Submodules */,
 				452442781A1804FE00A03A51 /* Subprojects */,
-				45BBB0E61A1022A10055232E /* Sources */,
 				45BBB0E51A1022A10055232E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -628,17 +628,6 @@
 			path = Presets;
 			sourceTree = "<group>";
 		};
-		45EF317F1A18DE2E00DAF925 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45EF31861A18DE2E00DAF925 /* EonilDispatch.framework */,
-				45EF31881A18DE2E00DAF925 /* iOSTests.xctest */,
-				45EF318A1A18DE2E00DAF925 /* EonilDispatch.framework */,
-				45EF318C1A18DE2E00DAF925 /* OSXTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		45F6C1111A11959C005D8EEA /* CommandConsole */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,7 +652,6 @@
 			);
 			dependencies = (
 				452442751A1801DC00A03A51 /* PBXTargetDependency */,
-				45EF31901A18DE4000DAF925 /* PBXTargetDependency */,
 				45EF319C1A18DE9A00DAF925 /* PBXTargetDependency */,
 			);
 			name = Editor;
@@ -698,8 +686,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 45EF317F1A18DE2E00DAF925 /* Products */;
-					ProjectRef = 45EF317E1A18DE2E00DAF925 /* EonilDispatch.xcodeproj */;
+					ProductGroup = 450A0DE11A275EBD0026102D /* Products */;
+					ProjectRef = 450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */;
 				},
 				{
 					ProductGroup = 452443161A18059700A03A51 /* Products */;
@@ -722,6 +710,34 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		450A0DE81A275EBD0026102D /* EonilDispatch.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilDispatch.framework;
+			remoteRef = 450A0DE71A275EBD0026102D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		450A0DEA1A275EBD0026102D /* iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = iOSTests.xctest;
+			remoteRef = 450A0DE91A275EBD0026102D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		450A0DEC1A275EBD0026102D /* EonilDispatch.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilDispatch.framework;
+			remoteRef = 450A0DEB1A275EBD0026102D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		450A0DEE1A275EBD0026102D /* OSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OSXTests.xctest;
+			remoteRef = 450A0DED1A275EBD0026102D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		452442671A18019400A03A51 /* Standards.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -820,34 +836,6 @@
 			remoteRef = 453F574C1A19E5E10035400D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45EF31861A18DE2E00DAF925 /* EonilDispatch.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EonilDispatch.framework;
-			remoteRef = 45EF31851A18DE2E00DAF925 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45EF31881A18DE2E00DAF925 /* iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = iOSTests.xctest;
-			remoteRef = 45EF31871A18DE2E00DAF925 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45EF318A1A18DE2E00DAF925 /* EonilDispatch.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EonilDispatch.framework;
-			remoteRef = 45EF31891A18DE2E00DAF925 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45EF318C1A18DE2E00DAF925 /* OSXTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = OSXTests.xctest;
-			remoteRef = 45EF318B1A18DE2E00DAF925 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -938,11 +926,6 @@
 			isa = PBXTargetDependency;
 			name = OSX;
 			targetProxy = 452442741A1801DC00A03A51 /* PBXContainerItemProxy */;
-		};
-		45EF31901A18DE4000DAF925 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = OSX;
-			targetProxy = 45EF318F1A18DE4000DAF925 /* PBXContainerItemProxy */;
 		};
 		45EF319C1A18DE9A00DAF925 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
