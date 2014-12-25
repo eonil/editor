@@ -7,21 +7,33 @@
 //
 
 import Foundation
+import AppKit
 
-
-class TextScrollViewController : ScrollViewController {
-	let	textViewController	=	TextViewController()
+class TextScrollViewController : ScrollViewController2 {
+	var textViewController:TextViewController {
+		get {
+			return	super.documentViewController as TextViewController
+		}
+	}
+//	@availability(*,unavailable)
+//	override var documentViewController:NSViewController {
+//		get {
+//			return	super.documentViewController
+//		}
+//		set(v) {
+//			precondition(v is TextViewController, "Only `TextViewController` family objects are accepted.")
+//			super.documentViewController	=	v
+//		}
+//	}
 	
-	override init() {
-		super.init()
-		self.documentViewController		=	textViewController
-	}
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-		self.documentViewController		=	textViewController
-	}
-	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-		self.documentViewController		=	textViewController
+	
+	
+	
+	
+	override func instantiateDocumentViewController() -> NSViewController {
+		return	TextViewController()
 	}
 }
+
+//extension TextScrollViewController {
+//}

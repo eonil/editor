@@ -11,6 +11,7 @@ import AppKit
 
 
 ///	A window controller which fixes some insane behaviors.
+@availability(*,deprecated=0)
 class HygienicWindowController : NSWindowController {
 
 	override init() {

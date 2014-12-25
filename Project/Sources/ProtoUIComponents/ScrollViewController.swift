@@ -10,6 +10,7 @@ import Foundation
 import Cocoa
 
 ///	`translatesAutoresizingMaskIntoConstraints` set to `false` implicitly.
+@availability(*,deprecated=0)
 class ScrollViewController: NSViewController {
 	
 	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {

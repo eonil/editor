@@ -19,14 +19,14 @@ class RustSourceCodeFileDocument : NSDocument {
 	}
 	
 	override func dataOfType(typeName: String, error outError: NSErrorPointer) -> NSData? {
-		let	s1	=	projectWindowController.codeEditingViewController.textViewController.textView.string!
+		let	s1	=	projectWindowController.codeEditingViewController.codeTextViewController.codeTextView.string!
 		let	d1	=	s1.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
 		return	d1
 	}
 	
 	override func readFromData(data: NSData, ofType typeName: String, error outError: NSErrorPointer) -> Bool {
 		let	s1	=	NSString(data: data, encoding: NSUTF8StringEncoding)!
-		projectWindowController.codeEditingViewController.textViewController.textView.string	=	s1
+		projectWindowController.codeEditingViewController.codeTextViewController.codeTextView.string	=	s1
 //		let	p2	=	self.fileURL!.path!
 //		let	p3	=	p2.stringByDeletingLastPathComponent
 //		projectWindowController.mainViewController.navigationViewController.fileTreeViewController.pathRepresentation	=	p3

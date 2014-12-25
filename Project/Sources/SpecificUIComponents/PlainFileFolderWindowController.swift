@@ -13,34 +13,13 @@ import AppKit
 ///	A window shows a plain folder with plain files.
 ///	This does not do anything special on the file and folders.
 ///	Everything is editable as a plain file.
-class PlainFileFolderWindowController : NSWindowController {
+class PlainFileFolderWindowController : HygienicWindowController2 {
 	
-	let	mainViewController	=	MainViewController()
-	
-	override init() {
-		super.init()
-		self.loadWindow()
-		self.windowDidLoad()
+	var mainViewController:MainViewController {
+		get {
+			return	self.contentViewController as MainViewController
+		}
 	}
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-	}
-	override init(window: NSWindow?) {
-		super.init(window: window)
-	}
-
-	override func loadWindow() {
-		super.window			=	NSWindow()
-		self.window!.styleMask	|=	NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
-	}
-	override func windowDidLoad() {
-		super.windowDidLoad()
-		self.contentViewController	=	mainViewController		
-	}
-	
-	
-	
-	
 	var codeEditingViewController:CodeEditingViewController {
 		get {
 			return	mainViewController.editingViewController.codeEditorViewController
@@ -50,6 +29,40 @@ class PlainFileFolderWindowController : NSWindowController {
 		get {
 			return	mainViewController.editingViewController.commandConsoleViewController
 		}
+	}
+
+	
+	
+	
+	
+//	override init() {
+//		super.init()
+//		self.loadWindow()
+//		self.windowDidLoad()
+//	}
+//	required init?(coder: NSCoder) {
+//		super.init(coder: coder)
+//	}
+//	override init(window: NSWindow?) {
+//		super.init(window: window)
+//	}
+//
+//	override func loadWindow() {
+//		super.window			=	NSWindow()
+//		self.window!.styleMask	|=	NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
+//	}
+//	override func windowDidLoad() {
+//		super.windowDidLoad()
+//		self.contentViewController	=	mainViewController
+//	}
+	
+	override func instantiateContentViewController() -> NSViewController {
+		return	MainViewController()
+	}
+	override func instantiateWindow() -> NSWindow {
+		let	w1	=	NSWindow()
+		w1.styleMask	|=	NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
+		return	w1
 	}
 	
 }

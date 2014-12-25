@@ -80,3 +80,40 @@ Rust Resources
 
 
 
+
+
+
+
+
+
+
+
+
+
+Handling Cocoa
+---------------
+Whole AppKit is written in **fully** lazy-evaluation philosophy.
+When you're subclassing a Objective-C based Cocoa class always make everything
+to be lazy-evaluated. Make every field to be instantiated laily. Especially AppKit
+UI classes. Otherwise they usually break.
+
+Usually these are signs that something is going wrong.
+
+-	You need to override initialisers* of `NSView`/`NSViewController`/`NSWindowController` 
+	family classes. 
+
+-	You assign a instance variable field value directly at initialisers. (including `let` assignment)
+
+Swift is designed to be better with early evaluation, but Objective-C layer does not play well with
+early-evaluation design pattern. So make it to be instantiated lazily in most cases.
+
+
+
+-	`NSString` is simply contains UTF-16 code units. (http://www.objc.io/issue-9/unicode.html)
+
+
+
+
+
+
+

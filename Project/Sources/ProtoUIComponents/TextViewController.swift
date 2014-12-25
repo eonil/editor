@@ -9,8 +9,12 @@
 import Foundation
 import Cocoa
 
-class TextViewController: NSViewController, NSTextViewDelegate {
-	let	textView		=	NSTextView()
+class TextViewController: NSViewController {
+	var textView:NSTextView {
+		get {
+			return	view as NSTextView
+		}
+	}
 	
 	override var view:NSView {
 		willSet {
@@ -29,7 +33,7 @@ class TextViewController: NSViewController, NSTextViewDelegate {
 	}
 	
 	override func loadView() {
-		super.view	=	textView
+		super.view	=	instantiateTextView()
 	}
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -42,8 +46,11 @@ class TextViewController: NSViewController, NSTextViewDelegate {
 		
 		textView.textContainer!.widthTracksTextView	=	false
 		textView.textContainer!.containerSize		=	CGSize(width: CGFloat.max, height: CGFloat.max)
-		
-		textView.delegate				=	self
 	}
 }
-	
+extension TextViewController {
+	///	Provides text-view instance for current controller.
+	func instantiateTextView() -> NSTextView {
+		return	NSTextView()
+	}
+}

@@ -35,6 +35,8 @@ extension NSViewController {
 		return	nil
 	}
 	func removeChildViewController<T:NSViewController>(vc:T) {
+		precondition(vc.parentViewController === self, "The view-controller is not a child of this view-controller.")
+		
 		if let idx1 = self.indexOfChildViewController(vc) {
 			self.removeChildViewControllerAtIndex(idx1)
 		} else {
@@ -118,7 +120,11 @@ extension NSMenuItem {
 }
 
 
-
+extension NSColor {
+	class func withUInt8Components(red r:UInt8, green g:UInt8, blue b:UInt8, alpha a:UInt8) -> NSColor {
+		return	NSColor(SRGBRed: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(a) / 255.0)
+	}
+}
 
 
 

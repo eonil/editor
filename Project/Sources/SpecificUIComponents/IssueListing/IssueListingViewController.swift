@@ -49,7 +49,7 @@ class IssueListingViewController : TableViewController {
 		tableView.doubleAction		=	"userDidDoubleClick:"
 	}
 	
-	override func numberOfRowsInTableView(tableView: NSTableView) -> Int {
+	func numberOfRowsInTableView(tableView: NSTableView) -> Int {
 		return	issues.count
 	}
 //	func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {

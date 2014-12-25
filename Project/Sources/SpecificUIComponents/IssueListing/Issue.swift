@@ -27,6 +27,7 @@ struct Issue {
 		case Warning	=	"warning"
 		case Error		=	"error"
 		case Note		=	"note"
+		case Help		=	"help"
 	}
 }
 
