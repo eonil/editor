@@ -69,6 +69,8 @@
 		4597F8291A113D100089FC66 /* XML.Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4597F8211A113D100089FC66 /* XML.Navigator.swift */; };
 		4597F82A1A113D100089FC66 /* XML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4597F8221A113D100089FC66 /* XML.swift */; };
 		4597F82B1A113D100089FC66 /* XML.Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4597F8231A113D100089FC66 /* XML.Test.swift */; };
+		459B66121A4C78C3009700F2 /* CachingIndexConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B66111A4C78C3009700F2 /* CachingIndexConverter.swift */; };
+		459B66231A4C955A009700F2 /* VersioningText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B66221A4C955A009700F2 /* VersioningText.swift */; };
 		45B50FE41A3ADDC9008008A4 /* RemoteProcessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B50FE31A3ADDC9008008A4 /* RemoteProcessManager.swift */; };
 		45B89C321A15E05100D03648 /* MarkdownFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B89C311A15E05100D03648 /* MarkdownFileDocument.swift */; };
 		45BBB0EA1A1022A10055232E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBB0E91A1022A10055232E /* AppDelegate.swift */; };
@@ -317,6 +319,8 @@
 		4597F8211A113D100089FC66 /* XML.Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.Navigator.swift; sourceTree = "<group>"; };
 		4597F8221A113D100089FC66 /* XML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.swift; sourceTree = "<group>"; };
 		4597F8231A113D100089FC66 /* XML.Test.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XML.Test.swift; sourceTree = "<group>"; };
+		459B66111A4C78C3009700F2 /* CachingIndexConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingIndexConverter.swift; sourceTree = "<group>"; };
+		459B66221A4C955A009700F2 /* VersioningText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersioningText.swift; sourceTree = "<group>"; };
 		45B50FE31A3ADDC9008008A4 /* RemoteProcessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteProcessManager.swift; sourceTree = "<group>"; };
 		45B89C311A15E05100D03648 /* MarkdownFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownFileDocument.swift; sourceTree = "<group>"; };
 		45BBB0E41A1022A10055232E /* Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -670,6 +674,7 @@
 			isa = PBXGroup;
 			children = (
 				45CAD9341A4B145100EDF02D /* SyntaxHighlighting.swift */,
+				459B66111A4C78C3009700F2 /* CachingIndexConverter.swift */,
 			);
 			path = SyntaxHighlighting;
 			sourceTree = "<group>";
@@ -680,6 +685,7 @@
 				45D158F41A113FE900B25657 /* CodeEditingViewController.swift */,
 				459433981A45E2EA008B2CFF /* RustCodeEditing.swift */,
 				45646D5A1A45F9F9009697C1 /* RustAutocompletionWindowController.swift */,
+				459B66221A4C955A009700F2 /* VersioningText.swift */,
 				45CAD9311A4B144100EDF02D /* SyntaxHighlighting */,
 			);
 			path = CodeEditing;
@@ -940,6 +946,7 @@
 				45CAD9351A4B145100EDF02D /* SyntaxHighlighting.swift in Sources */,
 				45358A321A17FE4B00AF5F7C /* SchemaInferencerWindowController.swift in Sources */,
 				457E2E461A18C683000CEC96 /* TSVFileScanner.swift in Sources */,
+				459B66121A4C78C3009700F2 /* CachingIndexConverter.swift in Sources */,
 				4597F82B1A113D100089FC66 /* XML.Test.swift in Sources */,
 				457341021A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift in Sources */,
 				457341011A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift in Sources */,
@@ -980,6 +987,7 @@
 				45393A1B1A16B26B00AA4716 /* TOMLFileDocument.swift in Sources */,
 				45700B761A11671800D84249 /* PlainFileFolderWindowController.swift in Sources */,
 				4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */,
+				459B66231A4C955A009700F2 /* VersioningText.swift in Sources */,
 				45B89C321A15E05100D03648 /* MarkdownFileDocument.swift in Sources */,
 				45646D5B1A45F9F9009697C1 /* RustAutocompletionWindowController.swift in Sources */,
 				452A12231A1082B900E38F35 /* LayoutConstraint.swift in Sources */,

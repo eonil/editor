@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import EonilDispatch
 
 class CodeEditingViewController : TextScrollViewController {
 	
@@ -75,12 +76,24 @@ class CodeEditingViewController : TextScrollViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		self.codeTextViewController.codeTextView.font								=	Palette.current.codeFont
-		self.codeTextViewController.codeTextView.continuousSpellCheckingEnabled		=	false
-		self.codeTextViewController.codeTextView.automaticTextReplacementEnabled	=	false
-		self.codeTextViewController.codeTextView.automaticQuoteSubstitutionEnabled	=	false
-		self.codeTextViewController.codeTextView.allowsUndo							=	true
-		self.codeTextViewController.codeTextView.delegate							=	self
+		
+		let	tv	=	self.codeTextViewController.codeTextView
+		
+		tv.font			=	Palette.current.codeFont
+		tv.allowsUndo	=	true
+		tv.delegate		=	self
+		
+		tv.continuousSpellCheckingEnabled		=	false
+		tv.grammarCheckingEnabled				=	false
+		tv.automaticDashSubstitutionEnabled		=	false
+		tv.automaticDataDetectionEnabled		=	false
+		tv.automaticLinkDetectionEnabled		=	false
+		tv.automaticQuoteSubstitutionEnabled	=	false
+		tv.automaticSpellingCorrectionEnabled	=	false
+		tv.automaticTextReplacementEnabled		=	false
+		tv.incrementalSearchingEnabled			=	false
+		tv.turnOffKerning(self)
+		tv.turnOffLigatures(self)
 		
 		assert(self.codeTextViewController.codeTextView.textStorage!.delegate === nil)
 		self.codeTextViewController.codeTextView.textStorage!.delegate	=	self
@@ -111,6 +124,12 @@ class CodeEditingViewController : TextScrollViewController {
 	override func instantiateDocumentViewController() -> NSViewController {
 		return	CodeTextViewController()
 	}
+	
+	
+	
+	
+	
+	private var	synhigh:SyntaxHighlighting?
 }
 extension CodeEditingViewController {
 	var codeTextViewController:CodeTextViewController {
@@ -128,17 +147,45 @@ extension CodeEditingViewController {
 extension CodeEditingViewController: NSTextStorageDelegate {
 	func textStorageWillProcessEditing(notification: NSNotification) {
 		assert(notification.name == NSTextStorageWillProcessEditingNotification)
-		applySyntaxHighlight(self.codeTextViewController.codeTextView)
+
+//		if synhigh == nil {
+//			synhigh	=	SyntaxHighlighting(targetTextView: self.codeTextViewController.codeTextView)
+//		}
+		
+		if (UInt(self.codeTextViewController.codeTextView.textStorage!.editedMask) & NSTextStorageEditedOptions.Characters.rawValue) == NSTextStorageEditedOptions.Characters.rawValue {
+			synhigh	=	nil
+		}
 	}
 	func textStorageDidProcessEditing(notification: NSNotification) {
+		if (UInt(self.codeTextViewController.codeTextView.textStorage!.editedMask) & NSTextStorageEditedOptions.Characters.rawValue) == NSTextStorageEditedOptions.Characters.rawValue {
+			synhigh	=	SyntaxHighlighting(targetTextView: self.codeTextViewController.codeTextView)
+			stepSyntaxHighlighting()
+			
+			
+		}
+		
+//		synhigh!.reset()
+//		while synhigh!.available() {
+//			synhigh!.step()
+//		}
+	}
+	
+	private func stepSyntaxHighlighting() {
+		weak var	o1	=	self
+		async(Queue.main) {
+			if let o = o1 {
+				if let sh = o.synhigh {
+					if sh.available() {
+						sh.step()
+						o.stepSyntaxHighlighting()
+					}
+				}
+			}
+		}
 	}
 }
 
-private func applySyntaxHighlight(textView:NSTextView) {
-	let	s	=	textView.textStorage!
-	let	x	=	SyntaxHighlighting(targetTextView: textView)
-	x.applyAll()
-}
+
 
 
 

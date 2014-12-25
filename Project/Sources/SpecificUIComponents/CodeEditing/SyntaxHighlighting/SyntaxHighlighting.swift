@@ -8,40 +8,73 @@
 
 import Foundation
 import AppKit
+import EonilDispatch
 
 ///	Ad-hoc syntax highlighting.
-struct SyntaxHighlighting {
+class SyntaxHighlighting {
 	let	targetTextView:NSTextView
 	
 	init(targetTextView:NSTextView) {
-		self.targetTextView	=	targetTextView
+		self.targetTextView		=	targetTextView
+		reset()
 	}
 	
-	func applyAll() {
-		let	ks	=	keywords()
-		var	ss	=	SubstringIterator(targetString: targetTextView.textStorage!.string)
-		while ss.available() {
-			let r	=	ss.step()
-			let	s	=	ss.targetString.substringWithRange(r)
-			if contains(ks, s) {
-				setColorOnRange(keywordColor(), r)
-			}
-		}
-		
-		var	b1	=	BlockIterator(targetString: targetTextView.textStorage!.string, startMarkerString: "//", endMarkerString: "\n", location: 0)
-		while b1.available() {
-			let r	=	b1.step()
-			setColorOnRange(commentColor(), r)
-		}
-		
-		var	b2	=	BlockIterator(targetString: targetTextView.textStorage!.string, startMarkerString: "/*", endMarkerString: "*/", location: 0)
-		while b2.available() {
-			let r	=	b2.step()
-			setColorOnRange(commentColor(), r)
-		}
+	func available() -> Bool {
+//		return	multilineCommentIterator!.available()
+		return	singlelineCommentIterator!.available() || multilineCommentIterator!.available()
+//		return	keywordIterator!.available() || singlelineCommentIterator!.available() || multilineCommentIterator!.available()
 	}
-	private func setColorOnRange(c:NSColor, _ r:NSRange) {
-		targetTextView.textStorage!.addAttribute(NSForegroundColorAttributeName, value: c, range: r)
+	func reset() {
+		let	t	=	targetTextView.textStorage!
+		let	v	=	t.string.unicodeScalars
+		self.keywordIterator			=	MatchingBlockIterator(targetView: v, separators: punctuators())
+		self.singlelineCommentIterator	=	EnclosingBlockIterator(targetView: v, startMarkerString: "//", endMarkerString: "\n")
+		self.multilineCommentIterator	=	EnclosingBlockIterator(targetView: v, startMarkerString: "/*", endMarkerString: "*/")
+	}
+	func step() {
+		assert(keywordIterator != nil)
+		assert(singlelineCommentIterator != nil)
+		assert(multilineCommentIterator != nil)
+		assertMainThread()
+		
+		////
+		
+//		let	ks	=	keywords()
+//		if keywordIterator!.available() {
+//			let r		=	keywordIterator!.stepInPlace()
+//			let	v		=	keywordIterator!.targetString.subviewWithRange(r)
+//			let	s		=	String(v)
+//			if contains(ks, s) {
+//				setColorOnRange(keywordColor(), r)
+//			}
+//			return
+//		}
+
+		if singlelineCommentIterator!.available() {
+			let r	=	singlelineCommentIterator!.step()
+			setColorOnRange(commentColor(), r)
+			return
+		}
+		
+		if multilineCommentIterator!.available() {
+			let r	=	multilineCommentIterator!.step()
+			setColorOnRange(commentColor(), r)
+			return
+		}
+		
+//		Debug.log("syntax highlight stepped: \(distance(keywordIterator!.targetString.startIndex, keywordIterator!.location))")
+	}
+	
+	////
+	
+	private var keywordIterator:MatchingBlockIterator?
+	private var	singlelineCommentIterator:EnclosingBlockIterator?
+	private var	multilineCommentIterator:EnclosingBlockIterator?
+	
+	private func setColorOnRange(c:NSColor, _ r:URange) {
+		let	s	=	targetTextView.textStorage!.string
+		let	r1	=	s.convertRangeToNSRange(r)
+		targetTextView.textStorage!.addAttribute(NSForegroundColorAttributeName, value: c, range: r1)
 	}
 }
 
@@ -71,55 +104,56 @@ private func keywordColor() -> NSColor {
 
 
 
+typealias	UScalar	=	UnicodeScalar
+typealias	UView	=	String.UnicodeScalarView
+typealias	UIndex	=	String.UnicodeScalarView.Index
+typealias	URange	=	Range<String.UnicodeScalarView.Index>
 
 
 
-
-
-
-
-
-
-
-
-private struct SubstringIterator {
-	let	targetString:NSString
-	let	separators:[unichar]		=	punctuators()
+private struct MatchingBlockIterator {
+	let	targetView:UView
+	let	separators:[UScalar]
 	
-	var	location:NSInteger			=	0
-	var	selectionStart:NSInteger?	=	nil
+	var	location:UIndex
+	var	selectionStart:UIndex?
 	
-	init(targetString:NSString) {
-		self.targetString	=	targetString
+	init(targetView:UView, separators:[UScalar]) {
+		self.targetView	=	targetView
+		self.separators	=	separators
+		self.location	=	targetView.startIndex
 	}
 	
 	func available() -> Bool {
-		return	location < targetString.length
+		return	location < targetView.endIndex
 	}
-	mutating func step() -> NSRange {
+	
+	///	Returns zero-length range at EOF.
+	private mutating func stepInPlace() -> URange {
 		assert(available())
 		
 		///	Location will be set to next of last separator character.
 		func skipSeparators() {
-			while available() && contains(separators, targetString.characterAtIndex(location)) {
+			while available() && contains(separators, targetView[location]) {
 				location++
 			}
 		}
 		///	Location will be set to next of last non-separator character.
 		func skipNonSeparators() {
-			while available() && contains(separators, targetString.characterAtIndex(location)) == false {
+			while available() && contains(separators, targetView[location]) == false {
 				location++
 			}
 		}
 		
 		skipSeparators()
 		if available() {
-			let	s	=	location
+			let	b	=	location
 			skipNonSeparators()
-			let	end	=	location
-			return	NSRange(location: s, length: end - s)
+			let	e	=	location
+			
+			return	URange(start: b, end: e)
 		}
-		return	NSRange(location: location, length: 0)
+		return	URange(start: location, end: location)
 	}
 }
 
@@ -129,30 +163,36 @@ private struct SubstringIterator {
 
 
 
-private struct BlockIterator {
-	let	targetString:NSString
-	let	startMarkerString:NSString
-	let	endMarkerString:NSString
+private struct EnclosingBlockIterator {
+	let	targetView:UView
+	let	startMarkerString:String
+	let	endMarkerString:String
 	
-	var	location:NSInteger	=	0
+	var	location:UIndex
 	
+	init(targetView:UView, startMarkerString:String, endMarkerString:String) {
+		self.targetView			=	targetView
+		self.startMarkerString	=	startMarkerString
+		self.endMarkerString	=	endMarkerString
+		self.location			=	targetView.startIndex
+	}
 	func available() -> Bool {
-		return	location < targetString.length
+		return	location < targetView.endIndex
 	}
 	
-	mutating func step() -> NSRange {
+	mutating func step() -> URange {
 		assert(available())
 		
 		///	Current location becomes EOF or begin of starting marker.
 		func skipNonStartCharacters() {
-			while available() && targetString.substringFromIndex(location).hasPrefix(startMarkerString) == false {
+			while available() && targetView.subviewFromIndex(location).hasPrefix(startMarkerString) == false {
 				location++
 			}
 		}
 		
 		///	Current location becomes EOF or begin of ending marker.
 		func skipNonEndCharacters() {
-			while available() && targetString.substringFromIndex(location).hasPrefix(endMarkerString) == false {
+			while available() && targetView.subviewFromIndex(location).hasPrefix(endMarkerString) == false {
 				location++
 			}
 		}
@@ -160,62 +200,33 @@ private struct BlockIterator {
 		///	Current location becomes EOF or next of end of ending marker.
 		func skipByEndMarker() {
 			if available() {
-				assert(targetString.substringFromIndex(location).hasPrefix(endMarkerString))
-				location	+=	endMarkerString.length
+				assert(targetView.subviewFromIndex(location).hasPrefix(endMarkerString))
+				advance(location, countElements(endMarkerString.unicodeScalars))
 			}
 		}
 		
 		skipNonStartCharacters()
-		let	loc		=	location
+		let	b	=	location
 		skipNonEndCharacters()
 		skipByEndMarker()
-		let	end		=	location
+		let	e	=	location
 		
-		return	NSRange(location: loc, length: end - loc)
+		return	URange(start: b, end: e)
 	}
 }
 
 
-//
-//private struct BlockDetector {
-//	let	targetString:NSString
-//	let	startMarkerString:NSString
-//	let	endMarkerString:NSString
-//	
-//	var	location:NSInteger	=	0
-//	
-//	func available() -> Bool {
-//		return	location < targetString.length
-//	}
-//	
-//	///	Returns a range if `targetString` has a comment at current location.
-//	///	Returns `nil` otherwise.
-//	///	EOF also treated as an end-marker.
-//	mutating func test() -> NSRange? {
-//		if targetString.substringFromIndex(location).hasPrefix(startMarkerString) {
-//			let	loc	=	location
-//			while available() && targetString.substringFromIndex(location).hasPrefix(endMarkerString) == false {
-//				location++
-//			}
-//			let	len	=	location - loc
-//			return	NSRange(location: loc, length: len)
-//		}
-//		return	nil
-//	}
-//	
-//	static func test(string:NSString, location:NSInteger) -> NSRange? {
-//		var	d1	=	BlockDetector(targetString: string, startMarkerString: "//", endMarkerString: "\n", location: location)
-//		var	d2	=	BlockDetector(targetString: string, startMarkerString: "/*", endMarkerString: "*/", location: location)
-//		
-//		if let r = d1.test() {
-//			return	r
-//		}
-//		if let r = d2.test() {
-//			return	r
-//		}
-//		return	nil
-//	}
-//}
+private enum Block {
+	case None
+	case Token(URange)
+	
+	func range() -> URange? {
+		switch self {
+			case .Token(let r):	return	r
+			default:			return	nil
+		}
+	}
+}
 
 
 
@@ -234,8 +245,7 @@ private struct BlockIterator {
 
 
 
-
-private func keywords() -> [NSString] {
+private func keywords() -> [String] {
 	return	[
 		"abstract",
 		"alignof",
@@ -290,8 +300,8 @@ private func keywords() -> [NSString] {
 	]
 }
 
-private func punctuators() -> [unichar] {
-	return	["\n", "\t", " ", ".", ",", ":", ";", "{", "}", "(", ")", "\"", "'", "*", "!", "=", "<", ">", "/", "+", "-", "&", "[", "]", "#", "`"] as [unichar]
+private func punctuators() -> [UScalar] {
+	return	["\n", "\t", " ", ".", ",", ":", ";", "{", "}", "(", ")", "\"", "'", "*", "!", "=", "<", ">", "/", "+", "-", "&", "[", "]", "#", "`"]
 }
 
 extension unichar: StringLiteralConvertible {
@@ -308,7 +318,21 @@ extension unichar: StringLiteralConvertible {
 	}
 }
 
-
+extension String.UnicodeScalarView {
+	func subviewFromIndex(index:UIndex) -> String.UnicodeScalarView {
+		return	self[index..<self.endIndex]
+	}
+	func subviewToIndex(index:UIndex) -> String.UnicodeScalarView {
+		return	self[self.startIndex..<index]
+	}
+	func subviewWithRange(range:URange) -> String.UnicodeScalarView {
+		return	self[range]
+	}
+	
+	func hasPrefix(s:String) -> Bool {
+		return	String(self).hasPrefix(s)
+	}
+}
 
 
 

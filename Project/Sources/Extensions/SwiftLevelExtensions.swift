@@ -33,6 +33,38 @@ extension String {
 		return	resultingSubstringRange
 	}
 }
+extension String {
+	public func convertRangeToNSRange(r:Range<String.Index>) -> NSRange {
+		let a   =   substringToIndex(r.startIndex)
+		let b   =   substringWithRange(r)
+		
+		return  NSRange(location: a.utf16Count, length: b.utf16Count)
+	}
+	
+	
+	///	O(1) if `self` is optimised to use UTF-16.
+	///	O(n) otherwise.
+	public func convertRangeToNSRange(r:Range<String.UnicodeScalarView.Index>) -> NSRange {
+		let	a	=	convertIndexToNSStringLocationIndex(r.startIndex)
+		let	b	=	convertIndexToNSStringLocationIndex(r.endIndex)
+		
+		return	NSRange(location: a, length: b-a)
+	}
+	
+	///	O(1) if `self` is optimised to use UTF-16.
+	///	O(n) otherwise.
+	public func convertIndexToNSStringLocationIndex(i:String.UnicodeScalarView.Index) -> NSInteger {
+		return	convertIndexToUTF16CodeUnitIndex(i)
+	}
+	
+	///	O(1) if `self` is optimised to use UTF-16.
+	///	O(n) otherwise.
+	public func convertIndexToUTF16CodeUnitIndex(i:String.UnicodeScalarView.Index) -> Int {
+		let	v	=	unicodeScalars
+		//	`String` is `NSString` and `NSString` is likely to make subrange view instead of copying the content.
+		return	String(v[v.startIndex..<i]).utf16Count
+	}
+}
 
 //extension Array {
 //	mutating func removeAllValueEqualsToValue(value:Element) {

@@ -83,6 +83,14 @@ Rust Resources
 
 
 
+Unicode
+-------
+
+-	Unicode scalar values = Unicode code point - surrogate code
+
+
+
+
 
 
 
@@ -110,7 +118,33 @@ early-evaluation design pattern. So make it to be instantiated lazily in most ca
 
 
 -	`NSString` is simply contains UTF-16 code units. (http://www.objc.io/issue-9/unicode.html)
+-	There's no O(1) way to convert between `NSRange` and `Range<String.Index`. You have to iterate
+	many the elements. Then the only reasonable solution is minimising amount of conversions.
+-	Incremental conversion will be the fastest way.
 
+Syntax highlighting and auto-completion will be fully moved into Rust side eventually. 
+The problem is `NSTextView` is based on `NSTextStorage` which uses UTF-16 based text manipulation.
+Rust and Swift is fully based on UTF-8, and that is right approach for modern string framework. 
+(UTF-16 is somewhat outdated) 
+
+
+
+
+
+
+
+
+
+
+
+
+Device Controlling
+------------------
+-	https://theiphonewiki.com/wiki/MobileDevice_Library#Mac_OS_X:_MobileDevice.framework
+
+Running on device using unit-test command.
+
+	xcodebuild test -scheme empty-app1 -destination 'platform=iOS,id=27275963caa71ef66e30165de3abeed5c164684a
 
 
 

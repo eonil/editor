@@ -19,3 +19,15 @@ struct Debug {
 		println(v())
 	}
 }
+
+
+
+
+
+
+
+
+
+func assertMainThread() {
+	assert(NSThread.currentThread() == NSThread.mainThread())
+}
