@@ -140,31 +140,23 @@ final class FileSubnodeList4 : SequenceType {
 			return	_sublinks
 		}
 		set(v) {
-//			var	m1	=	[:] as [NSURL:Int]		///	1 for old and disappear, 3 for old and new, 2 for newly appeared.
-//			for u1 in _sublinks {
-//				m1[u1]	=	1
-//			}
-//			for u2 in v {
-//				let	num1	=	m1[u2]
-//				m1[u2]		=	(num1 == nil ? 0 : num1!) + 2
-//			}
-//			
-//			_sublinks.removeAll(keepCapacity: false)
-//			for (k,v) in m1 {
-//				switch v {
-//				case 1:		_repository.deleteNodeForURL(k)
-//				case 2:		_repository.createNodeForURL(k); _sublinks.append(k)
-//				case 3:		_sublinks.append(k)
-//				default:	break
-//				}
-//			}
+			func simplest() {
+				_repository.deleteNodesForURLs(_sublinks)
+				_sublinks	=	v
+				_repository.createNodesForURLs(_sublinks)
+			}
+			///	Keeps existing nodes as much as possible for better UX.
+			func optimised() {
+				let	diffs	=	resolveDifferences(_sublinks, v)
+				
+				_repository.deleteNodesForURLs(diffs.outgoings)
+				_repository.createNodesForURLs(diffs.incomings)
+				
+				_sublinks	=	diffs.stays + diffs.incomings
+			}
 
-			
-			///	TODO:	Need to make it to keep existing node object
-			///			as many as possible because it will trigger bad UX.
-			_repository.deleteNodesForURLs(_sublinks)
-			_sublinks	=	v
-			_repository.createNodesForURLs(_sublinks)
+//			simplest()
+			optimised()
 		}
 	}
 	var count:Int {

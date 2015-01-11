@@ -20,6 +20,12 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	
 	private var	_channelsHolding:Any	=	()
 	
+	
+	
+	
+	
+	
+	
 	var URLRepresentation:NSURL? {
 		get {
 			return	self.representedObject as NSURL?
@@ -34,11 +40,12 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	func invalidateNodeForURL(u:NSURL) {
 		assert(NSThread.currentThread() == NSThread.mainThread())
 		assert(_fileTreeRepository != nil)
+		Debug.log("invalidateNodeForURL: \(u)")
 		
 		let	u2	=	u.URLByDeletingLastPathComponent!
 		
-		//	File-system notifications are sent asynchronously, then
-		//	a file-node always can not nil for the URL.
+		//	File-system notifications are sent asynchronously, 
+		//	then a file-node for the URL may not exist.
 		if let n1 = _fileTreeRepository![u2] {
 			//	Store currently selected URLs.
 			let	selus1	=	outlineView.selectedRowIndexes.allIndexes.map({self.outlineView.itemAtRow($0) as FileNode4}).map({$0.link}) as [NSURL]
@@ -47,7 +54,7 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 			n1.reloadSubnodes()
 			outlineView.reloadItem(n1, reloadChildren: true)
 			
-			//	Restore oreviously selected URLs.
+			//	Restore previously selected URLs.
 			//	Just skip disappeared/missing URLs.
 			let	selns2	=	selus1.map({self._fileTreeRepository![$0]}).filter({$0 != nil})
 			let	selrs3	=	selns2.map({self.outlineView.rowForItem($0)}).filter({$0 != -1})

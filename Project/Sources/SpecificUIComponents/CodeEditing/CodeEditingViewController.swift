@@ -77,25 +77,34 @@ class CodeEditingViewController : TextScrollViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let	tv	=	self.codeTextViewController.codeTextView
+		let	v	=	self.codeTextViewController.codeTextView
 		
-		tv.font			=	Palette.current.codeFont
-		tv.allowsUndo	=	true
-		tv.delegate		=	self
+		v.font			=	Palette.current.codeFont
+		v.typingAttributes	=	[
+			NSFontAttributeName	:	Palette.current.codeFont,
+		]
+		v.allowsUndo	=	true
+		v.delegate		=	self
 		
-		tv.layout
 		
-		tv.continuousSpellCheckingEnabled		=	false
-		tv.grammarCheckingEnabled				=	false
-		tv.automaticDashSubstitutionEnabled		=	false
-		tv.automaticDataDetectionEnabled		=	false
-		tv.automaticLinkDetectionEnabled		=	false
-		tv.automaticQuoteSubstitutionEnabled	=	false
-		tv.automaticSpellingCorrectionEnabled	=	false
-		tv.automaticTextReplacementEnabled		=	false
-		tv.incrementalSearchingEnabled			=	false
-		tv.turnOffKerning(self)
-		tv.turnOffLigatures(self)
+//		v.layoutManager!.usesScreenFonts			=	true		//	This makes text looks very ugly. Don't use it.
+		v.layoutManager!.usesFontLeading			=	true
+		v.layoutManager!.allowsNonContiguousLayout	=	true		//	Critical to load massive amount of text fast. This allows fixed-height line based layout.
+		v.layoutManager!.hyphenationFactor			=	0
+		
+		v.continuousSpellCheckingEnabled			=	false
+		v.grammarCheckingEnabled					=	false
+		v.automaticDashSubstitutionEnabled			=	false
+		v.automaticDataDetectionEnabled				=	false
+		v.automaticLinkDetectionEnabled				=	false
+		v.automaticQuoteSubstitutionEnabled			=	false
+		v.automaticSpellingCorrectionEnabled		=	false
+		v.automaticTextReplacementEnabled			=	false
+		v.incrementalSearchingEnabled				=	false
+		v.enabledTextCheckingTypes					=	NSTextCheckingTypes.allZeros
+
+		v.turnOffKerning(self)
+		v.turnOffLigatures(self)
 	}
 	
 	func highlightRangesOfIssues(ss:[Issue]) {
