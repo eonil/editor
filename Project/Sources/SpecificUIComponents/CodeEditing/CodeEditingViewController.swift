@@ -81,7 +81,8 @@ class CodeEditingViewController : TextScrollViewController {
 		
 		v.font			=	Palette.current.codeFont
 		v.typingAttributes	=	[
-			NSFontAttributeName	:	Palette.current.codeFont,
+			NSFontAttributeName				:	Palette.current.codeFont,
+			NSForegroundColorAttributeName	:	NSColor.textColor(),
 		]
 		v.allowsUndo	=	true
 		v.delegate		=	self
@@ -224,11 +225,13 @@ extension CodeTextViewController {
 	}
 	
 	override func instantiateTextView() -> NSTextView {
-		return	CodeTextView()
+		let	v				=	CodeTextView()
+		v.backgroundColor	=	NSColor.textBackgroundColor()
+		v.textColor			=	NSColor.textColor()
+		return	v
 	}
 }
 class CodeTextView: NSTextView {
-
 	func instantiateAutocompletionController() -> CodeTextViewAutocompletionController {
 		return	RustAutocompletion.WindowController()
 	}

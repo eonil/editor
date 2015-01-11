@@ -93,7 +93,12 @@ extension NSLayoutManager {
 
 
 
-
+extension NSMenu {
+	func addSeparatorItem() {
+		let	m	=	NSMenuItem.separatorItem()
+		self.addItem(m)
+	}
+}
 extension NSMenuItem {
 	var	reaction:(()->())? {
 		get {

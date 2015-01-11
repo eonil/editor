@@ -81,18 +81,20 @@ extension NSURL {
 			return	NSFileManager.defaultManager().displayNameAtPath(path!)
 		}
 	}
-	var existingAsAnyFile:Bool {
-		get {
-			return	NSFileManager.defaultManager().fileExistsAtPath(self.path!)
-		}
-	}
+//	var existingAsAnyFile:Bool {
+//		get {
+//			return	NSFileManager.defaultManager().fileExistsAtPath(self.path!)
+//		}
+//	}
 	var existingAsDataFile:Bool {
 		get {
+			assert(self.fileURL)
 			return	NSFileManager.defaultManager().fileExistsAtPathAsDataFile(self.path!)
 		}
 	}
 	var existingAsDirectoryFile:Bool {
 		get {
+			assert(self.fileURL)
 			return	NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(self.path!)
 		}
 	}

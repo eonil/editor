@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import EonilDispatch
+import Precompilation
 
 class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate {
 	
@@ -108,14 +109,17 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let	col1	=	NSTableColumn(identifier: NAME, title: "Name", width: 100)
+		let	col1		=	NSTableColumn(identifier: NAME, title: "Name", width: 100)
 
-		outlineView.focusRingType	=	NSFocusRingType.None
-		outlineView.headerView		=	nil
 		outlineView.addTableColumn <<< col1
 		outlineView.outlineTableColumn		=	col1
 		outlineView.rowSizeStyle			=	NSTableViewRowSizeStyle.Small
 		outlineView.selectionHighlightStyle	=	NSTableViewSelectionHighlightStyle.SourceList
+		outlineView.allowsMultipleSelection	=	true
+		outlineView.focusRingType			=	NSFocusRingType.None
+		outlineView.headerView				=	nil
+		outlineView.doubleAction			=	"dummyDoubleAction:"		//	This is required to make column editing to be started with small delay like renaming in Finder.
+		
 		outlineView.sizeLastColumnToFit()
 		
 		outlineView.setDataSource(self)
@@ -124,16 +128,136 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		outlineView.menu			=	NSMenu()
 		outlineView.menu!.delegate	=	self
 		
-		outlineView.menu!.addItem(NSMenuItem(title: "Show in Finder", reaction: { [unowned self] () -> () in
-			let	r1	=	self.outlineView.clickedRow
+		////
+		
+		func getURLFromRowAtIndex(v:NSOutlineView, index:Int) -> NSURL {
+			let	n	=	v.itemAtRow(index) as FileNode4
+			return	n.link
+		}
+		func getURLFromClickingPoint(v:NSOutlineView) -> NSURL? {
+			let	r1	=	v.clickedRow
 			if r1 >= 0 {
-				let	n1	=	self.outlineView.itemAtRow(r1) as FileNode4
-				NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs([n1.link])
+				return	getURLFromRowAtIndex(v, r1)
+			} else {
+				return	nil
+			}
+		}
+		func collectTargetFileURLs(v:NSOutlineView) -> [NSURL] {
+
+			func getURLsFromSelection(v:NSOutlineView) -> [NSURL] {
+				return
+					v.selectedRowIndexes.allIndexes.map { idx in
+						return	getURLFromRowAtIndex(v, idx)
+					}
+			}
+			
+			let	clickingURL		=	getURLFromClickingPoint(v)
+			let	selectingURLs	=	getURLsFromSelection(v)
+			if clickingURL == nil {
+				return	selectingURLs
+			}
+			
+			if contains(selectingURLs, clickingURL!) {
+				return	selectingURLs
+			} else {
+				return	[clickingURL!]
+			}
+		}
+		
+		outlineView.menu!.addItem(NSMenuItem(title: "Show in Finder", reaction: { [unowned self] () -> () in
+			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
+			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(targetURLs)
+		}))
+		
+		outlineView.menu!.addSeparatorItem()
+		
+		outlineView.menu!.addItem(NSMenuItem(title: "New File", reaction: { [unowned self] () -> () in
+			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
+		}))
+		
+		outlineView.menu!.addItem(NSMenuItem(title: "New Folder", reaction: { [unowned self] () -> () in
+			if let u2 = getURLFromClickingPoint(self.outlineView) {
+				let	u	=	u2.existingAsDirectoryFile ? u2 : u2.URLByDeletingLastPathComponent!
+				assert(u.existingAsDirectoryFile)
+				
+				if let nm = generateUniqueNameForNewFolderAtParentDirectoryAtURL(u) {
+					assert(u.URLByAppendingPathComponent("\(nm)").existingAsDataFile == false)
+					assert(u.URLByAppendingPathComponent("\(nm)/").existingAsDirectoryFile == false)
+
+					let	u1	=	u.URLByAppendingPathComponent("\(nm)/")	//	Ending `/` has significant meaning to represent directory, and shouldn't be omitted.
+					var	err	=	nil as NSError?
+					let	ok	=	NSFileManager.defaultManager().createDirectoryAtURL(u1, withIntermediateDirectories: true, attributes: nil, error: &err)
+					if !ok {
+						self.presentError(err!)
+					} else {
+						let	n	=	self._fileTreeRepository![u]!		//	Must be exists.
+						n.reloadSubnodes()
+						
+						let	n1	=	self._fileTreeRepository![u1]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
+						if let n2 = n1 {
+							self.outlineView.reloadItem(n, reloadChildren: true)	//	Refresh view.
+							let	idx		=	self.outlineView.rowForItem(n2)			//	Now it should have a node for the URL.
+							assert(idx >= 0)
+							if idx >= 0 {
+								self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
+								self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
+								self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
+							} else {
+								//	Shouldn't happen, but nobody knows...
+							}
+						}
+					}
+				} else {
+					//	No proper name could be made. Sigh...
+					let	inf	=	[NSLocalizedDescriptionKey: "There're too many folders named \"New Folder...\". Please erase some before proceeding."]
+					let	err	=	NSError(domain: "", code: 0, userInfo: inf)
+					self.presentError(err)
+				}
 			}
 		}))
+		
+		outlineView.menu!.addSeparatorItem()
+		
+		outlineView.menu!.addItem(NSMenuItem(title: "Delete", reaction: { [unowned self] () -> () in
+			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
+			if targetURLs.count > 0 {
+				UIDialogues.queryDeletingFilesUsingWindowSheet(self.outlineView.window!, files: targetURLs, handler: { (b:UIDialogueButton) -> () in
+					switch b {
+					case .OKButton:
+						for u in targetURLs {
+							var	err	=	nil as NSError?
+							let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
+							assert(ok || err != nil)
+							if !ok {
+								self.outlineView.presentError(err!)
+							}
+						}
+						
+					case .CancelButton:
+						break
+					}
+				})
+			}
+		}))
+
+
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@objc
+	func dummyDoubleAction(AnyObject?) {
+		println("AA")
+	}
 	
 	
 //	func outlineView(outlineView: NSOutlineView, heightOfRowByItem item: AnyObject) -> CGFloat {
@@ -168,10 +292,7 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		let	n1	=	item as FileNode4
 		return	n1.directory
 	}
-//	func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
-//		let	n1	=	item as FileNode4
-//		return	n1.relativePath
-//	}
+
 	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		let	tv1	=	NSTextField()
 		let	iv1	=	NSImageView()
@@ -197,8 +318,10 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		cv1.textField!.stringValue		=	n1.displayName
 		cv1.textField!.bordered			=	false
 		cv1.textField!.backgroundColor	=	NSColor.clearColor()
-		cv1.textField!.editable			=	false
-		(cv1.textField!.cell() as NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingHead
+		
+		(cv1.textField!.cell() as NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
+		cv1.objectValue					=	n1.link.lastPathComponent
+		cv1.textField!.objectValue		=	n1.link.lastPathComponent
 		return	cv1
 	}
 	
@@ -223,8 +346,31 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	}
 }
 
-
-
+//@objc
+//class FileTableRowView: NSTableRowView {
+//	@objc
+//	var objectValue:AnyObject? {
+//		get {
+//			return	"AAA"
+//		}
+//		set(v) {
+//			
+//		}
+//	}
+//}
+//@objc
+//class FileTableCellView: NSTableCellView {
+//	@objc
+//	override var acceptsFirstResponder:Bool {
+//		get {
+//			return	true
+//		}
+//	}
+//	@objc
+//	override func becomeFirstResponder() -> Bool {
+//		return	true
+//	}
+//}
 
 
 

@@ -51,6 +51,14 @@ class TextViewController: NSViewController {
 extension TextViewController {
 	///	Provides text-view instance for current controller.
 	func instantiateTextView() -> NSTextView {
-		return	NSTextView()
+		let	v				=	NSTextView()
+		v.backgroundColor	=	NSColor.textBackgroundColor()
+		v.textColor			=	NSColor.textColor()
+		return	v
 	}
 }
+
+
+
+
+

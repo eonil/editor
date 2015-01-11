@@ -34,6 +34,7 @@ extension FileNode4 {
 	///	Synchronise subnodes with the file system.
 	///	This will try to reuse existing subnodes as many as possible.
 	///	(keeps existing one unless it has been deleted)
+	///	This behavior is by design for NSOutlineView's UX.
 	func reloadSubnodes() {
 		subnodes.links	=	subnodeAbsoluteURLsOfURL(link)
 	}

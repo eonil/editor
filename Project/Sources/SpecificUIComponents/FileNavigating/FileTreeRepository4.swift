@@ -69,7 +69,7 @@ final class FileTreeRepository4 {
 		
 		Debug.log("FileNode4 count: \(_allNodes.count)")
 	}
-	///	Supplied URL must be unstored a child of a stored node.
+	///	Supplied URL must be an unstored child of a stored node.
 	func createNodeForURL(u:NSURL) {
 		assert(_allNodes[u] == nil)
 		let	n1	=	FileNode4(repository: self, link: u)
@@ -135,11 +135,22 @@ final class FileSubnodeList4 : SequenceType {
 		self._sublinks		=	[]
 	}
 	
+	///	Manages URLs of subnodes.
 	var	links:[NSURL] {
 		get {
 			return	_sublinks
 		}
 		set(v) {
+			func checkup(superlink:NSURL, sublinks:[NSURL]) -> Bool {
+				for u in sublinks {
+					return	u.URLByDeletingLastPathComponent == superlink
+				}
+				return	true
+			}
+			assert(checkup(_superlink, v))
+			
+			////
+			
 			func simplest() {
 				_repository.deleteNodesForURLs(_sublinks)
 				_sublinks	=	v
@@ -155,6 +166,8 @@ final class FileSubnodeList4 : SequenceType {
 				_sublinks	=	diffs.stays + diffs.incomings
 			}
 
+			////
+			
 //			simplest()
 			optimised()
 		}

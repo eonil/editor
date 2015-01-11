@@ -57,12 +57,35 @@ class PlainFileFolderWindowController : HygienicWindowController2 {
 //	}
 	
 	override func instantiateContentViewController() -> NSViewController {
+//		let	c1				=	NSVisualEffectView()
+//		c1.material			=	NSVisualEffectMaterial.AppearanceBased
+//		c1.blendingMode		=	NSVisualEffectBlendingMode.BehindWindow
+//		c1.state			=	NSVisualEffectState.FollowsWindowActiveState
+//		c1.needsDisplay		=	true
+//		
 		return	MainViewController()
 	}
 	override func instantiateWindow() -> NSWindow {
-		let	w1	=	NSWindow()
-		w1.styleMask	|=	NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
-		return	w1
+//		let	window	=	NSWindow()
+//		window.styleMask	|=	NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
+
+		let	window	=	NSWindow()
+		window.styleMask	=	NSResizableWindowMask | NSTitledWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
+
+		let	USE_DARK_MODE	=	true
+		if USE_DARK_MODE {
+//			window.titlebarAppearsTransparent	=	true
+			window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
+			window.invalidateShadow()
+			
+			func makeDark(b:NSButton) {
+				b.alphaValue	=	0.5
+			}
+			makeDark(window.standardWindowButton(NSWindowButton.CloseButton)!)
+			makeDark(window.standardWindowButton(NSWindowButton.MiniaturizeButton)!)
+			makeDark(window.standardWindowButton(NSWindowButton.ZoomButton)!)
+		}
+		return	window
 	}
 	
 }
