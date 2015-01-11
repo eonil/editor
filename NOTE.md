@@ -7,7 +7,14 @@ NOTE
 
 
 
+Goals
+-----
+-	Personal tasted editor.
+-	Semantic auto-completion.
 
+Non-Goal
+--------
+-	Satisfying everyone.
 
 
 

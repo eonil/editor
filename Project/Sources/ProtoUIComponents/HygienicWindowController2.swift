@@ -11,18 +11,81 @@ import AppKit
 
 
 ///	A window controller which fixes some insane behaviors.
+///
+///	-	This creates and binds `contentViewController` itself. You can override instantiation of it.
+///	-	This sends `windowDidLoad` message at proper timing.
+///
+///	Do not override any initialiser. Instead, override `windowDidLoad` to setup thigns.
+///	This is intentional design to prevent weird OBJC instance replacement behavior.
+///
+///	IB is unsupported.
 class HygienicWindowController2 : NSWindowController {
+
+	///	Designated initialiser.
+	@availability(*,deprecated=0)
+	required override init() {
+		super.init()
+		self.loadWindow()
+		self.windowDidLoad()
+	}
 	
+	///	No support for IB.
+	@availability(*,deprecated=0)
+	required init?(coder: NSCoder) {
+		super.init(coder: coder)
+	}
+	
+	///	This method is unsupported.
+	@availability(*,deprecated=0)
+	override init(window: NSWindow?) {
+		super.init(window: window)
+	}
+
+	
+	
+	
+	
+	///	Don't call this. Intended for internal use only.
+	final override func loadWindow() {
+		super.window	=	instantiateWindow()
+	}
+	
+	///	Designed to be overridable.
+	///	You must call super-implementation.
+	override func windowDidLoad() {
+		super.windowDidLoad()
+		super.window!.contentViewController	=	instantiateContentViewController()
+	}
+	
+	
+//	
+//	override var windowNibPath:String! {
+//		get {
+//			return	nil
+//		}
+//	}
+//	override var windowNibName:String! {
+//		get {
+//			return	nil
+//		}
+//	}
+	
+	
+	
+	
+	///	Designed to be overridable.
 	func instantiateWindow() -> NSWindow {
 		let	w1	=	NSWindow()
-		w1.styleMask	|=	NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
+		w1.styleMask	|=	NSResizableWindowMask | NSTitledWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
 		return	w1
 	}
+	
+	///	Designed to be overridable.
 	func instantiateContentViewController() -> NSViewController {
-		return	NSViewController()
+		return	EmptyViewController(nibName: nil, bundle: nil)!
 	}
 	
-	override var contentViewController:NSViewController? {
+	final override var contentViewController:NSViewController? {
 		get {
 			return	super.window!.contentViewController
 		}
@@ -32,28 +95,23 @@ class HygienicWindowController2 : NSWindowController {
 			super.contentViewController	=	v
 		}
 	}
+}
+
+
+
+
+
+
+
+
+private extension HygienicWindowController2 {
 	
-	override init() {
-		super.init()
-		self.loadWindow()
-		self.windowDidLoad()
+	///	A view controller to suppress NIB searching error.
+	@objc
+	private class EmptyViewController: NSViewController {
+		private override func loadView() {
+			super.view	=	NSView();
+		}
 	}
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-	}
-	override init(window: NSWindow?) {
-		super.init(window: window)
-	}
-	
-	override func loadWindow() {
-		super.window	=	instantiateWindow()
-	}
-	override func windowDidLoad() {
-		super.windowDidLoad()
-		super.window!.contentViewController	=	instantiateContentViewController()
-	}
-	
-	
-	
 }
 

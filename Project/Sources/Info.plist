@@ -7,6 +7,20 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
+			<key>LSTypeIsPackage</key>
+			<integer>0</integer>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>eews0</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>WorkspaceDocument</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).WorkspaceDocument</string>
+		</dict>
+		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>rustproj</string>

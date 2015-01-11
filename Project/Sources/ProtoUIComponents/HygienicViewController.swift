@@ -15,6 +15,7 @@ import AppKit
 ///	View is read-only. You cannot change it.
 ///	View will be created automatically at initialisation using `instantiate~` family methods.
 ///
+@availability(*,deprecated=0)
 class HygienicViewController: NSViewController {
 	
 	func instantiateView() -> NSView {

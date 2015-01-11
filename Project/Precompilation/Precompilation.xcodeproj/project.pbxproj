@@ -94,6 +94,7 @@
 			children = (
 				453857541A626FC200DC693D /* Precompilation.h */,
 				453857741A626FDC00DC693D /* Dialogues.swift */,
+				458E62F81A633BA5006465B3 /* BackstageWorkers */,
 				453857521A626FC200DC693D /* Supporting Files */,
 			);
 			path = Precompilation;
@@ -124,6 +125,13 @@
 				4538577D1A62700400DC693D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		458E62F81A633BA5006465B3 /* BackstageWorkers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BackstageWorkers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,6 +448,7 @@
 				453857671A626FC200DC693D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		453857911A62700400DC693D /* Build configuration list for PBXNativeTarget "PrecompilationInteractiveWorkbench" */ = {
 			isa = XCConfigurationList;
@@ -448,6 +457,7 @@
 				453857931A62700400DC693D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
