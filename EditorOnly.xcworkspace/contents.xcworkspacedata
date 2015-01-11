@@ -8,6 +8,9 @@
       location = "group:NOTE.md">
    </FileRef>
    <FileRef
+      location = "group:DEPENDENCIES">
+   </FileRef>
+   <FileRef
       location = "group:LICENSE">
    </FileRef>
    <FileRef

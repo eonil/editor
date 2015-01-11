@@ -83,6 +83,8 @@ class CodeEditingViewController : TextScrollViewController {
 		tv.allowsUndo	=	true
 		tv.delegate		=	self
 		
+		tv.layout
+		
 		tv.continuousSpellCheckingEnabled		=	false
 		tv.grammarCheckingEnabled				=	false
 		tv.automaticDashSubstitutionEnabled		=	false
@@ -94,9 +96,6 @@ class CodeEditingViewController : TextScrollViewController {
 		tv.incrementalSearchingEnabled			=	false
 		tv.turnOffKerning(self)
 		tv.turnOffLigatures(self)
-		
-		assert(self.codeTextViewController.codeTextView.textStorage!.delegate === nil)
-		self.codeTextViewController.codeTextView.textStorage!.delegate	=	self
 	}
 	
 	func highlightRangesOfIssues(ss:[Issue]) {
@@ -129,7 +128,8 @@ class CodeEditingViewController : TextScrollViewController {
 	
 	
 	
-	private var	synhigh:SyntaxHighlighting?
+//	private var	synhigh:SyntaxHighlighting?
+//	private var	suspendsynhigh:Bool	=	false
 }
 extension CodeEditingViewController {
 	var codeTextViewController:CodeTextViewController {
@@ -144,46 +144,43 @@ extension CodeEditingViewController {
 		}
 	}
 }
-extension CodeEditingViewController: NSTextStorageDelegate {
-	func textStorageWillProcessEditing(notification: NSNotification) {
-		assert(notification.name == NSTextStorageWillProcessEditingNotification)
-
+//extension CodeEditingViewController: NSTextStorageDelegate {
+//	func textStorageWillProcessEditing(notification: NSNotification) {
+//		Debug.log("textStorageWillProcessEditing")
+//		assert(notification.name == NSTextStorageWillProcessEditingNotification)
+//		
 //		if synhigh == nil {
 //			synhigh	=	SyntaxHighlighting(targetTextView: self.codeTextViewController.codeTextView)
 //		}
-		
-		if (UInt(self.codeTextViewController.codeTextView.textStorage!.editedMask) & NSTextStorageEditedOptions.Characters.rawValue) == NSTextStorageEditedOptions.Characters.rawValue {
-			synhigh	=	nil
-		}
-	}
-	func textStorageDidProcessEditing(notification: NSNotification) {
-		if (UInt(self.codeTextViewController.codeTextView.textStorage!.editedMask) & NSTextStorageEditedOptions.Characters.rawValue) == NSTextStorageEditedOptions.Characters.rawValue {
-			synhigh	=	SyntaxHighlighting(targetTextView: self.codeTextViewController.codeTextView)
-			stepSyntaxHighlighting()
-			
-			
-		}
-		
 //		synhigh!.reset()
-//		while synhigh!.available() {
-//			synhigh!.step()
+//		
+//		if (UInt(self.codeTextViewController.codeTextView.textStorage!.editedMask) & NSTextStorageEditedOptions.Characters.rawValue) == NSTextStorageEditedOptions.Characters.rawValue {
+//			suspendsynhigh	=	true
 //		}
-	}
-	
-	private func stepSyntaxHighlighting() {
-		weak var	o1	=	self
-		async(Queue.main) {
-			if let o = o1 {
-				if let sh = o.synhigh {
-					if sh.available() {
-						sh.step()
-						o.stepSyntaxHighlighting()
-					}
-				}
-			}
-		}
-	}
-}
+//	}
+//	func textStorageDidProcessEditing(notification: NSNotification) {
+//		Debug.log("textStorageDidProcessEditing")
+//		if (UInt(self.codeTextViewController.codeTextView.textStorage!.editedMask) & NSTextStorageEditedOptions.Characters.rawValue) == NSTextStorageEditedOptions.Characters.rawValue {
+//			suspendsynhigh	=	false
+//			synhigh	=	SyntaxHighlighting(targetTextView: self.codeTextViewController.codeTextView)
+//			queueSyntaxHighlightingStepping()
+//		}
+//	}
+//	
+//	private func queueSyntaxHighlightingStepping() {
+//		weak var	o1	=	self
+//		async(Queue.main) {
+//			if let o = o1 {
+//				if let sh = o.synhigh {
+//					if o.suspendsynhigh == false && sh.available() {
+//						sh.step()
+//						o.queueSyntaxHighlightingStepping()
+//					}
+//				}
+//			}
+//		}
+//	}
+//}
 
 
 
@@ -222,8 +219,7 @@ extension CodeTextViewController {
 	}
 }
 class CodeTextView: NSTextView {
-	private var	autocompletionC: CodeTextViewAutocompletionController?
-	
+
 	func instantiateAutocompletionController() -> CodeTextViewAutocompletionController {
 		return	RustAutocompletion.WindowController()
 	}
@@ -256,6 +252,10 @@ class CodeTextView: NSTextView {
 		}
 		super.keyDown(theEvent)
 	}
+	
+	////
+	
+	private var	autocompletionC: CodeTextViewAutocompletionController?
 }
 
 
