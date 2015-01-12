@@ -20,6 +20,48 @@
                ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45A6DAFE1A63A9D300DFB9CE"
+               BuildableName = "PrecompilationOfFileTreeViewControllerTests.xctest"
+               BlueprintName = "PrecompilationOfFileTreeViewControllerTests"
+               ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45A6DB221A63AA3E00DFB9CE"
+               BuildableName = "PrecompilationOfFileSystemNavigationTests.xctest"
+               BlueprintName = "PrecompilationOfFileSystemNavigationTests"
+               ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45A6DB491A63AAE600DFB9CE"
+               BuildableName = "PrecompilationOfExternalToolSupportTests.xctest"
+               BlueprintName = "PrecompilationOfExternalToolSupportTests"
+               ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,6 +70,36 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45A6DAFE1A63A9D300DFB9CE"
+               BuildableName = "PrecompilationOfFileTreeViewControllerTests.xctest"
+               BlueprintName = "PrecompilationOfFileTreeViewControllerTests"
+               ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45A6DB221A63AA3E00DFB9CE"
+               BuildableName = "PrecompilationOfFileSystemNavigationTests.xctest"
+               BlueprintName = "PrecompilationOfFileSystemNavigationTests"
+               ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "45A6DB491A63AAE600DFB9CE"
+               BuildableName = "PrecompilationOfExternalToolSupportTests.xctest"
+               BlueprintName = "PrecompilationOfExternalToolSupportTests"
+               ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

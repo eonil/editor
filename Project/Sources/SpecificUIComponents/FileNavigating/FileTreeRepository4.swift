@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import Precompilation
 
 ///	A passive data structure to store local in-memory cache to
 ///	file-system structures. A view controller is responsible to
@@ -19,7 +20,7 @@ import AppKit
 ///	deal with it is having a local cache. An explicit command
 ///	must be issued to be synchronised with source file-system.
 ///	Anyway remote file-system can be out-synced at anytime, then
-///	always be prepared to fail when you depending on this cache.
+///	always be prepared for cache out-sync.
 ///
 ///	Call `reload` explicitly to access root node.
 ///
@@ -47,7 +48,7 @@ final class FileTreeRepository4 {
 	}
 	
 	///	Reloads root node.
-	///	This effectively reload everything.
+	///	This effectively reload every nodes in the repository.
 	///	Root node object will be re-created, then any
 	///	reference to existing node must be invalidated.
 	///	If the root node does not exist anymore,
@@ -56,7 +57,7 @@ final class FileTreeRepository4 {
 		if root != nil {
 			deleteNodeForURL(_rootlink)
 		}
-		assert(_allNodes.count == 0, "All nodes must be also removed as an effect of killing root.")
+		assert(_allNodes.count == 0, "All nodes must also be removed as an effect of killing root.")
 		createNodeForURL(_rootlink)
 	}
 	
@@ -94,17 +95,37 @@ final class FileTreeRepository4 {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///	A data object for a `NSOutlineView`.
-///	This only exists because the view needs strongly alive class instances.
+///	`NSOutlineView` performas pointer based instance object comparison to decide whether to 
+///	reuse existing visual node or not. So you need to provide same node object to make it as expected.
+///	This is the only reason that we need this design.
+///
+///	Also the outline-view does not retain the node object. These node object will be retained by the 
+///	repository object.
 final class FileNode4 {
 	unowned let	repository:FileTreeRepository4
 	let			link:NSURL						///<	Always an absolute file URL.
-	let			subnodes:FileSubnodeList4		///<	Holds live strong references for `NSOutlineView`.
+	let			subnodes:FileSubnodeList4		///<	Holds live strong references to `FileNode4` instances for rendering in `NSOutlineView`.
 	let			icon:NSImage					///<	Local cached icon file. This is required because we can't rely on just-in-time file-system query.
 	
 	private init(repository:FileTreeRepository4, link:NSURL) {
 		precondition(link.fileURL)
 		precondition(link.absoluteURL == link)
+		assert(link.absoluteString == link.absoluteString)
 		
 		self.repository		=	repository
 		self.link			=	link
@@ -122,9 +143,19 @@ final class FileNode4 {
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
 ///	A list-type interface to access subnodes.
 ///	Fully controlled by it's owner node.
-///	Ordering is stable. Pops deleted index and inserts new nodes at last.
+///	Ordering is stable. Pops deleted nodes and inserts new nodes at last.
 final class FileSubnodeList4 : SequenceType {
 	private unowned let	_repository:FileTreeRepository4
 	private let			_superlink:NSURL
@@ -156,6 +187,7 @@ final class FileSubnodeList4 : SequenceType {
 				_sublinks	=	v
 				_repository.createNodesForURLs(_sublinks)
 			}
+			
 			///	Keeps existing nodes as much as possible for better UX.
 			func optimised() {
 				let	diffs	=	resolveDifferences(_sublinks, v)

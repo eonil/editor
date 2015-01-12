@@ -10,7 +10,7 @@ import Foundation
 
 ///	Inputs are unordered.
 ///	Outputs are ordered in order of `from` first, and `to next.
-func resolveDifferences<T:Hashable>(from:[T], to:[T]) -> (stays:[T], incomings:[T], outgoings:[T]) {
+public func resolveDifferences<T:Hashable>(from:[T], to:[T]) -> (stays:[T], incomings:[T], outgoings:[T]) {
 	var	ss	=	[] as [DiffState<T>]
 	var	m	=	[:] as [T:Int]
 	

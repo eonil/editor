@@ -9,14 +9,23 @@
 import Foundation
 
 
-class RustProgramExecutionController {
-	struct Configuration {
+public class RustProgramExecutionController {
+	public init() {
+		
+	}
+	public struct Configuration {
 		let	sourceFilePaths:[String]
 		let	outputFilePath:String
 		let	extraArguments:[String]
+		
+		public init(sourceFilePaths:[String], outputFilePath:String, extraArguments:[String]) {
+			self.sourceFilePaths	=	sourceFilePaths
+			self.outputFilePath		=	outputFilePath
+			self.extraArguments		=	extraArguments
+		}
 	}
 	
-	func execute(config:Configuration) -> String {
+	public func execute(config:Configuration) -> String {
 		let	s1	=	join(" ", config.sourceFilePaths.map({"\"" + $0 + "\""}))
 		let	s2	=	"-o \"\(config.outputFilePath)\""
 		let	ss2	=	join(" ", config.extraArguments)

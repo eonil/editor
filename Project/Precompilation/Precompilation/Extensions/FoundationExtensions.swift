@@ -8,16 +8,15 @@
 
 import Foundation
 
-extension NSIndexSet {
-	convenience
-	init(_ indexes:[Int]) {
+public extension NSIndexSet {
+	public convenience init(_ indexes:[Int]) {
 		let	s1	=	NSMutableIndexSet()
 		for idx1 in indexes {
 			s1.addIndex(idx1)
 		}
 		self.init(indexSet: s1)
 	}
-	var allIndexes:[Int] {
+	public var allIndexes:[Int] {
 		var	idxs	=	[] as [Int]
 		self.enumerateIndexesUsingBlock { (idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
 			idxs.append(idx)
@@ -26,8 +25,8 @@ extension NSIndexSet {
 	}
 }
 
-extension NSString {
-	func findNSRangeOfLineContentAtIndex(lineIndex:Int) -> NSRange? {
+public extension NSString {
+	public func findNSRangeOfLineContentAtIndex(lineIndex:Int) -> NSRange? {
 		var	counter					=	0
 		var	currentCapturingRange	=	NSRange(location: 0, length: self.length)
 		let	options					=	NSStringEnumerationOptions.ByLines | NSStringEnumerationOptions.SubstringNotRequired
@@ -44,55 +43,55 @@ extension NSString {
 }
 
 
-extension NSScanner {
-	func scanInt() -> Int? {
+public extension NSScanner {
+	public func scanInt() -> Int? {
 		var	v1:Int	=	0
 		let	ok1		=	self.scanInteger(&v1)
 		return	v1
 	}
-	func scanUpToString(s:String) -> String? {
+	public func scanUpToString(s:String) -> String? {
 		var	s1:NSString?
 		let	ok1		=	self.scanUpToString(s, intoString: &s1)
 		return	s1
 	}
 }
 
-extension NSFileManager {
-	func fileExistsAtPathAsDataFile(path:String) -> Bool {
+public extension NSFileManager {
+	public func fileExistsAtPathAsDataFile(path:String) -> Bool {
 		var	flag:ObjCBool	=	false
 		let	ok1	=	self.fileExistsAtPath(path, isDirectory: &flag)
 		return	ok1 && (flag.boolValue == false)
 	}
-	func fileExistsAtPathAsDirectoryFile(path:String) -> Bool {
+	public func fileExistsAtPathAsDirectoryFile(path:String) -> Bool {
 		var	flag:ObjCBool	=	false
 		let	ok1	=	self.fileExistsAtPath(path, isDirectory: &flag)
 		return	ok1 && (flag.boolValue == true)
 	}
-//	func fileExistsAtPathAsSymbolicLink(path:String) -> Bool {
+//	public func fileExistsAtPathAsSymbolicLink(path:String) -> Bool {
 //	}
 }
 
 
 
 
-extension NSURL {
-	var displayName:String {
+public extension NSURL {
+	public var displayName:String {
 		get {
 			return	NSFileManager.defaultManager().displayNameAtPath(path!)
 		}
 	}
-//	var existingAsAnyFile:Bool {
+//	public var existingAsAnyFile:Bool {
 //		get {
 //			return	NSFileManager.defaultManager().fileExistsAtPath(self.path!)
 //		}
 //	}
-	var existingAsDataFile:Bool {
+	public var existingAsDataFile:Bool {
 		get {
 			assert(self.fileURL)
 			return	NSFileManager.defaultManager().fileExistsAtPathAsDataFile(self.path!)
 		}
 	}
-	var existingAsDirectoryFile:Bool {
+	public var existingAsDirectoryFile:Bool {
 		get {
 			assert(self.fileURL)
 			return	NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(self.path!)

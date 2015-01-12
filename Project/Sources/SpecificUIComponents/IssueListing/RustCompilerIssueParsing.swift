@@ -1,26 +1,31 @@
 //
-//  IssueReportParser.swift
-//  RustCodeEditor
+//  RustCompilerIssueParser.swift
+//  Editor
 //
-//  Created by Hoon H. on 11/10/14.
-//  Copyright (c) 2014 Eonil. All rights reserved.
+//  Created by Hoon H. on 2015/01/12.
+//  Copyright (c) 2015 Eonil. All rights reserved.
 //
 
 import Foundation
 
-struct IssueReportParser {
-	func parse(reportOutput:String, filePath:String) -> [Issue] {
-		func makeIssue(ln1:String) -> Issue? {
-			if let ln2 = parseIssueLine(ln1, filePath) {
-				let	s1	=	Issue(path: filePath, range:ln2.range, type:ln2.type, text: ln2.description)
-				return	s1
-			}
-			return	nil
-		}
-		let	lns1	=	split(reportOutput, {$0 == "\n"}, maxSplit: Int.max, allowEmptySlices: false)
-		let	ss2		=	lns1.map(makeIssue).filter({$0 != nil }).map {$0!}
-		return	ss2
+
+struct RustCompilerIssueParsing {
+	static func process(compilerOutput:String, sourceFilePath:String) -> [Issue] {
+		return	parseAllLines(compilerOutput, sourceFilePath)
 	}
+}
+
+private func parseAllLines(reportOutput:String, filePath:String) -> [Issue] {
+	func makeIssue(ln1:String) -> Issue? {
+		if let ln2 = parseIssueLine(ln1, filePath) {
+			let	s1	=	Issue(path: filePath, range:ln2.range, type:ln2.type, text: ln2.description)
+			return	s1
+		}
+		return	nil
+	}
+	let	lns1	=	split(reportOutput, {$0 == "\n"}, maxSplit: Int.max, allowEmptySlices: false)
+	let	ss2		=	lns1.map(makeIssue).filter({$0 != nil }).map {$0!}
+	return	ss2
 }
 
 private func parseIssueLine(line:String, fileName:String) -> (range:Issue.Range, type:Issue.Class, description:String)? {
@@ -101,7 +106,7 @@ private func parseIssueLine(line:String, fileName:String) -> (range:Issue.Range,
 //	assert(blockLines.count > 0)
 //	let	firstln		=	blockLines[0]
 //	let	nonNamePart	=	firstln[filePath.endIndex..<firstln.endIndex]
-//	
+//
 //	var	block2		=	blockLines
 //	block2[0]		=	nonNamePart
 //	let	s			=	join("\n", block2)
@@ -110,13 +115,6 @@ private func parseIssueLine(line:String, fileName:String) -> (range:Issue.Range,
 //	return	Issue(filePath: filePath, lineNumber: linenum, columnNumber: colnum, description: s)
 //}
 //
-
-
-
-
-
-
-
 
 
 

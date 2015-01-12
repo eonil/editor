@@ -1,9 +1,9 @@
 //
 //  Issue.swift
-//  RustCodeEditor
+//  Editor
 //
-//  Created by Hoon H. on 11/11/14.
-//  Copyright (c) 2014 Eonil. All rights reserved.
+//  Created by Hoon H. on 2015/01/12.
+//  Copyright (c) 2015 Eonil. All rights reserved.
 //
 
 import Foundation

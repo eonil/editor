@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import PrecompilationOfExternalToolSupport
 
 class RustProjectDocument : NSDocument {
 	let	projectWindowController		=	PlainFileFolderWindowController()
@@ -70,7 +71,7 @@ extension RustProjectDocument {
 			let	r1	=	programExecutionController.execute(conf1)
 			projectWindowController.commandConsoleViewController.textView.string	=	r1
 			
-			let	ss1		=	IssueReportParser().parse(r1, filePath: srcFilePath1)
+			let	ss1		=	RustCompilerIssueParsing.process(r1, sourceFilePath: srcFilePath1)
 			projectWindowController.mainViewController.navigationViewController.issueListingViewController.issues	=	ss1
 			
 		} else {

@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import PrecompilationOfExternalToolSupport
 
 struct RustAutocompletion {
 	class WindowController: HygienicWindowController2, CodeTextViewAutocompletionController {

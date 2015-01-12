@@ -101,6 +101,17 @@ Unicode
 
 
 
+Data Reactive Style
+--------------------
+When you consider reactive style design, don't try to notify partial mutations. 
+Because it never works. In animated UI like AppKit, it is impossible to update display immediately,
+and handling frequent data mutation notification can go crazy hard.
+
+
+
+
+
+
 
 
 
@@ -152,6 +163,18 @@ Device Controlling
 Running on device using unit-test command.
 
 	xcodebuild test -scheme empty-app1 -destination 'platform=iOS,id=27275963caa71ef66e30165de3abeed5c164684a
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

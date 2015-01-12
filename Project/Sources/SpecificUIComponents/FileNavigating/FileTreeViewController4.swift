@@ -26,7 +26,7 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	
 	
 	
-	
+	///	Gets and sets URL for root node.
 	var URLRepresentation:NSURL? {
 		get {
 			return	self.representedObject as NSURL?
@@ -176,42 +176,36 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		}))
 		
 		outlineView.menu!.addItem(NSMenuItem(title: "New Folder", reaction: { [unowned self] () -> () in
-			if let u2 = getURLFromClickingPoint(self.outlineView) {
-				let	u	=	u2.existingAsDirectoryFile ? u2 : u2.URLByDeletingLastPathComponent!
-				assert(u.existingAsDirectoryFile)
+			func postprocessSuccessfulCreation(parentFolderURL:NSURL, newFolderURL:NSURL) {
+				let	parentNode	=	self._fileTreeRepository![parentFolderURL]!		//	Must be exists.
+				parentNode.reloadSubnodes()
 				
-				if let nm = generateUniqueNameForNewFolderAtParentDirectoryAtURL(u) {
-					assert(u.URLByAppendingPathComponent("\(nm)").existingAsDataFile == false)
-					assert(u.URLByAppendingPathComponent("\(nm)/").existingAsDirectoryFile == false)
-
-					let	u1	=	u.URLByAppendingPathComponent("\(nm)/")	//	Ending `/` has significant meaning to represent directory, and shouldn't be omitted.
-					var	err	=	nil as NSError?
-					let	ok	=	NSFileManager.defaultManager().createDirectoryAtURL(u1, withIntermediateDirectories: true, attributes: nil, error: &err)
-					if !ok {
-						self.presentError(err!)
+				let	n1	=	self._fileTreeRepository![newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
+				if let newFolderNode = n1 {
+					self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
+					self.outlineView.expandItem(parentNode)
+					
+					let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
+					assert(idx >= 0)
+					if idx >= 0 {
+						self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
+						self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
+						self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
 					} else {
-						let	n	=	self._fileTreeRepository![u]!		//	Must be exists.
-						n.reloadSubnodes()
-						
-						let	n1	=	self._fileTreeRepository![u1]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
-						if let n2 = n1 {
-							self.outlineView.reloadItem(n, reloadChildren: true)	//	Refresh view.
-							let	idx		=	self.outlineView.rowForItem(n2)			//	Now it should have a node for the URL.
-							assert(idx >= 0)
-							if idx >= 0 {
-								self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
-								self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
-								self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
-							} else {
-								//	Shouldn't happen, but nobody knows...
-							}
-						}
+						//	Shouldn't happen, but nobody knows...
 					}
+				}
+			}
+			
+			if let u2 = getURLFromClickingPoint(self.outlineView) {
+				let	parentFolderURL	=	u2.existingAsDirectoryFile ? u2 : u2.URLByDeletingLastPathComponent!
+				assert(parentFolderURL.existingAsDirectoryFile)
+				
+				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
+				if r.ok {
+					postprocessSuccessfulCreation(parentFolderURL, r.value!)
 				} else {
-					//	No proper name could be made. Sigh...
-					let	inf	=	[NSLocalizedDescriptionKey: "There're too many folders named \"New Folder...\". Please erase some before proceeding."]
-					let	err	=	NSError(domain: "", code: 0, userInfo: inf)
-					self.presentError(err)
+					self.presentError(r.error!)
 				}
 			}
 		}))
@@ -283,11 +277,13 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 			return	_fileTreeRepository!.root!
 		}
 	}
+	
 //	func outlineView(outlineView: NSOutlineView, isGroupItem item: AnyObject) -> Bool {
 //		let	n1	=	item as FileNode4
 //		let	ns2	=	n1.subnodes
 //		return	ns2 != nil
 //	}
+	
 	func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
 		let	n1	=	item as FileNode4
 		return	n1.directory
@@ -341,7 +337,6 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	}
 	
 	func menuNeedsUpdate(menu: NSMenu) {
-		
 //		outlineView.selectedRowIndexes
 	}
 }

@@ -16,7 +16,10 @@ import Foundation
 ///	If racer becomes better, I think I will integrate it in-process.
 ///	Otherwise I think I have to write a new autocompletion library...
 ///	In either case, this needs better syntax parser by Rust compiler team.
-class RacerExecutionController {
+public class RacerExecutionController {
+	
+	public init() {
+	}
 	
 	///	Executes Racer (Rust autocompletion program) in remote process synchronously.
 	///	Once started process cannot be stopped. (cannot be cancelled)
@@ -26,7 +29,7 @@ class RacerExecutionController {
 	///	to be an ad-hoc autocompletion. Also, Racer itself is not very matured.
 	///
 	///	Safe to be called from any thread simultaneously.
-	func resolve(fullyQualifiedName:String) -> [Match] {
+	public func resolve(fullyQualifiedName:String) -> [Match] {
 		return	runCompletionWithFullyQualifiedName(fullyQualifiedName)
 	}
 	
@@ -43,13 +46,22 @@ class RacerExecutionController {
 	///	`.../vec.rs`	->	`filePath`.
 	///	`Module`		->	`mtype`.
 	///	`.../vec.rs`	->	`constext`.
-	struct Match {
-		let	matchString:String
-		let	lineNumber:Int
-		let	characterNumber:Int
-		let	filePath:String
-		let	mtype:String
-		let	constext:String
+	public struct Match {
+		public let	matchString:String
+		public let	lineNumber:Int
+		public let	characterNumber:Int
+		public let	filePath:String
+		public let	mtype:String
+		public let	constext:String
+		
+//		public init(matchString:String, lineNumber:Int, characterNumber:Int, filePath:String, mtype:String, constext:String) {
+//			self.matchString		=	matchString
+//			self.lineNumber			=	lineNumber
+//			self.characterNumber	=	characterNumber
+//			self.filePath			=	filePath
+//			self.mtype				=	mtype
+//			self.constext			=	constext
+//		}
 	}
 }
 
