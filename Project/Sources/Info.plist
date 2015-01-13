@@ -23,22 +23,6 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>rustproj</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>RustProject</string>
-			<key>CFBundleTypeName</key>
-			<string>RustProjectDocument</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<integer>0</integer>
-			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).RustProjectDocument</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
 				<string>rs</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
@@ -46,7 +30,7 @@
 			<key>CFBundleTypeName</key>
 			<string>RustSourceCodeFileDocument</string>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>None</string>
 			<key>LSTypeIsPackage</key>
 			<integer>0</integer>
 			<key>NSDocumentClass</key>
@@ -62,7 +46,7 @@
 			<key>CFBundleTypeName</key>
 			<string>MarkdownFileDocument</string>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>None</string>
 			<key>LSTypeIsPackage</key>
 			<integer>0</integer>
 			<key>NSDocumentClass</key>

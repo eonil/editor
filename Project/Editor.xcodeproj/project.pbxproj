@@ -490,9 +490,7 @@
 			isa = PBXGroup;
 			children = (
 				457D5CE31A63287C008ECE6F /* Workspace */,
-				4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */,
-				4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */,
-				45B89C311A15E05100D03648 /* MarkdownFileDocument.swift */,
+				456655511A65280A008303E0 /* (junkyard) */,
 				457340FE1A19F22900C93C2E /* SQLite3 */,
 			);
 			path = Documents;
@@ -699,6 +697,16 @@
 				455FC56C1A637C2F00266BD5 /* IssueRepository.swift */,
 			);
 			path = IssueRepository;
+			sourceTree = "<group>";
+		};
+		456655511A65280A008303E0 /* (junkyard) */ = {
+			isa = PBXGroup;
+			children = (
+				4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */,
+				4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */,
+				45B89C311A15E05100D03648 /* MarkdownFileDocument.swift */,
+			);
+			name = "(junkyard)";
 			sourceTree = "<group>";
 		};
 		457340FE1A19F22900C93C2E /* SQLite3 */ = {
