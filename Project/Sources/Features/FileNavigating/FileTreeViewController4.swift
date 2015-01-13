@@ -164,6 +164,15 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 			}
 		}
 		
+		func getParentFolderURLOfClickingPoint(v:NSOutlineView) -> NSURL? {
+			if let u2 = getURLFromClickingPoint(v) {
+				let	parentFolderURL	=	u2.existingAsDirectoryFile ? u2 : u2.URLByDeletingLastPathComponent!
+				assert(parentFolderURL.existingAsDirectoryFile)
+				return	parentFolderURL
+			}
+			return	nil
+		}
+		
 		outlineView.menu!.addItem(NSMenuItem(title: "Show in Finder", reaction: { [unowned self] () -> () in
 			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
 			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(targetURLs)
@@ -172,41 +181,64 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		outlineView.menu!.addSeparatorItem()
 		
 		outlineView.menu!.addItem(NSMenuItem(title: "New File", reaction: { [unowned self] () -> () in
-			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
-		}))
-		
-		outlineView.menu!.addItem(NSMenuItem(title: "New Folder", reaction: { [unowned self] () -> () in
-			func postprocessSuccessfulCreation(parentFolderURL:NSURL, newFolderURL:NSURL) {
-				let	parentNode	=	self._fileTreeRepository![parentFolderURL]!		//	Must be exists.
-				parentNode.reloadSubnodes()
-				
-				let	n1	=	self._fileTreeRepository![newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
-				if let newFolderNode = n1 {
-					self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
-					self.outlineView.expandItem(parentNode)
-					
-					let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
-					assert(idx >= 0)
-					if idx >= 0 {
-						self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
-						self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
-						self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
-					} else {
-						//	Shouldn't happen, but nobody knows...
-					}
-				}
-			}
-			
-			if let u2 = getURLFromClickingPoint(self.outlineView) {
-				let	parentFolderURL	=	u2.existingAsDirectoryFile ? u2 : u2.URLByDeletingLastPathComponent!
-				assert(parentFolderURL.existingAsDirectoryFile)
-				
-				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
+			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
+				let	r	=	FileUtility.createNewFileInFolder(parentFolderURL)
 				if r.ok {
-					postprocessSuccessfulCreation(parentFolderURL, r.value!)
+					let	newFolderURL	=	r.value!
+					let	parentNode	=	self._fileTreeRepository![parentFolderURL]!		//	Must be exists.
+					parentNode.reloadSubnodes()
+					
+					let	n1	=	self._fileTreeRepository![newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
+					if let newFolderNode = n1 {
+						self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
+						self.outlineView.expandItem(parentNode)
+						
+						let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
+						assert(idx >= 0)
+						if idx >= 0 {
+							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
+							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
+							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
+						} else {
+							//	Shouldn't happen, but nobody knows...
+						}
+					}
 				} else {
 					self.presentError(r.error!)
 				}
+			} else {
+				//	Ignore. Happens by clicking empty space.
+			}
+		}))
+		
+		outlineView.menu!.addItem(NSMenuItem(title: "New Folder", reaction: { [unowned self] () -> () in
+			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
+				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
+				if r.ok {
+					let	newFolderURL	=	r.value!
+					let	parentNode	=	self._fileTreeRepository![parentFolderURL]!		//	Must be exists.
+					parentNode.reloadSubnodes()
+					
+					let	n1	=	self._fileTreeRepository![newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
+					if let newFolderNode = n1 {
+						self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
+						self.outlineView.expandItem(parentNode)
+						
+						let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
+						assert(idx >= 0)
+						if idx >= 0 {
+							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
+							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
+							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
+						} else {
+							//	Shouldn't happen, but nobody knows...
+						}
+					}
+				} else {
+					self.presentError(r.error!)
+				}
+			} else {
+				//	Ignore. Happens by clicking empty space.
 			}
 		}))
 		

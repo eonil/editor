@@ -12,17 +12,29 @@ import Precompilation
 
 
 
+/////	Generates a user-friendly *name* for a data file.
+/////	Returns `nil` if a proper name cannot be made in short time.
+//func generateUniqueUserFriendlyNameForNewFileAtParentDirectoryAtURL(u:NSURL) -> String? {
+//	return	generateUniqueUserFriendlyNameWithPrefixAtParentDirectoryAtURL(u, prefixString: "New File")
+//}
+//
+//
+/////	Generates a user-friendly *name* for a directory file.
+/////	Returns `nil` if a proper name cannot be made in short time.
+//func generateUniqueUserFriendlyNameForNewFolderAtParentDirectoryAtURL(u:NSURL) -> String? {
+//	return	generateUniqueUserFriendlyNameWithPrefixAtParentDirectoryAtURL(u, prefixString: "New Folder")
+//}
 
 
-///	Generates a *name* for a new folder.
+
+///	Generates a user-friendly *name* for a new file.
 ///	Returns `nil` if a proper name cannot be made in short time.
-func generateUniqueNameForNewFolderAtParentDirectoryAtURL(u:NSURL) -> String? {
+func generateUniqueUserFriendlyNameWithPrefixAtParentDirectoryAtURL(u:NSURL, prefixString n:String) -> String? {
 	func isNameExists(base:NSURL, n:String) -> Bool {
 		let	u	=	base.URLByAppendingPathComponent(n)		//	This will add ending slash if a directory at the path exists.
 		return	u.existingAsDataFile || u.existingAsDirectoryFile
 	}
 	
-	let	n	=	"New Folder"
 	if isNameExists(u, n) == false {
 		return	n
 	}
@@ -37,3 +49,12 @@ func generateUniqueNameForNewFolderAtParentDirectoryAtURL(u:NSURL) -> String? {
 	
 	return	nil
 }
+
+
+
+
+
+
+
+
+

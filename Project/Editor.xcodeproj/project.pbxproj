@@ -257,6 +257,20 @@
 			remoteGlobalIDString = 45641AC819F0D52200381269;
 			remoteInfo = "Text OSX";
 		};
+		452E4E731A652178007B490D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4538576B1A626FC200DC693D /* Precompilation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4538574E1A626FC200DC693D;
+			remoteInfo = Precompilation;
+		};
+		452E4E751A652178007B490D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4538576B1A626FC200DC693D /* Precompilation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45A6DB3F1A63AAE500DFB9CE;
+			remoteInfo = PrecompilationOfExternalToolSupport;
+		};
 		453F57421A19E5E10035400D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 453F57391A19E5E10035400D /* EonilSQLite3.xcodeproj */;
@@ -488,7 +502,6 @@
 			isa = PBXGroup;
 			children = (
 				45700B751A11671800D84249 /* PlainFileFolderWindowController.swift */,
-				4557D8941A116D5F00D6C53B /* FileNavigating */,
 				459433AD1A45EBB4008B2CFF /* TextEditing */,
 				45D158F31A113FD900B25657 /* CodeEditing */,
 				452A121B1A107E3A00E38F35 /* IssueListing */,
@@ -714,6 +727,7 @@
 				45A6DAB21A639AD500DFB9CE /* PassiveDataClassGeneration */,
 				45A6DAB41A639AD500DFB9CE /* SchemaInferencing */,
 				45A6DAB11A639AB400DFB9CE /* (junkyard) */,
+				4557D8941A116D5F00D6C53B /* FileNavigating */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -932,6 +946,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				452E4E741A652178007B490D /* PBXTargetDependency */,
+				452E4E761A652178007B490D /* PBXTargetDependency */,
 				450A0DF51A275F500026102D /* PBXTargetDependency */,
 				452442751A1801DC00A03A51 /* PBXTargetDependency */,
 				45EF319C1A18DE9A00DAF925 /* PBXTargetDependency */,
@@ -1322,6 +1338,16 @@
 			isa = PBXTargetDependency;
 			name = "Text OSX";
 			targetProxy = 452E4E711A650F25007B490D /* PBXContainerItemProxy */;
+		};
+		452E4E741A652178007B490D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Precompilation;
+			targetProxy = 452E4E731A652178007B490D /* PBXContainerItemProxy */;
+		};
+		452E4E761A652178007B490D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PrecompilationOfExternalToolSupport;
+			targetProxy = 452E4E751A652178007B490D /* PBXContainerItemProxy */;
 		};
 		45EF319C1A18DE9A00DAF925 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

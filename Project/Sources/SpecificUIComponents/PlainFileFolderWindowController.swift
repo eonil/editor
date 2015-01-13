@@ -15,6 +15,11 @@ import AppKit
 ///	Everything is editable as a plain file.
 class PlainFileFolderWindowController : HygienicWindowController2 {
 	
+	var	fileTreeViewController:FileTreeViewController4 {
+		get {
+			return	self.mainViewController.navigationViewController.fileTreeViewController
+		}
+	}
 	var mainViewController:MainViewController {
 		get {
 			return	self.contentViewController as MainViewController
