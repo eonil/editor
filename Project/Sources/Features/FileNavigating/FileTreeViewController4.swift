@@ -20,7 +20,12 @@ protocol FileTreeViewController4Delegate: class {
 }
 
 
-class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate {
+///
+///
+///	Take care that the file-system monitoring can be suspended by request,
+///	and this class is using it to suspend file-system monitoring events
+///	while column editing.
+class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate, NSTextFieldDelegate {
 	weak var delegate:FileTreeViewController4Delegate?
 	
 	///	Directories are excluded.
@@ -28,7 +33,6 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	
 	private	var	_fileTreeRepository		=	nil as FileTreeRepository4?
 	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor3?
-	
 	
 	
 	
@@ -65,8 +69,10 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		//	then a file-node for the URL may not exist.
 		if let n1 = _fileTreeRepository![u2] {
 			//	Store currently selected URLs.
+			//	Getting and setting selection can show unexpected behavior if it is being performed
+			//	while a column is in editing. So ensure this will not be called while editing.
 			let	selus1	=	outlineView.selectedRowIndexes.allIndexes.map({self.outlineView.itemAtRow($0) as FileNode4}).map({$0.link}) as [NSURL]
-			
+
 			//	Perform reloading.
 			n1.reloadSubnodes()
 			outlineView.reloadItem(n1, reloadChildren: true)
@@ -219,6 +225,8 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 						if idx >= 0 {
 							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
 							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
+
+							self._fileSystemMonitor!.suspendEventCallbackDispatch()
 							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
 						} else {
 							//	Shouldn't happen, but nobody knows...
@@ -367,6 +375,7 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		cv1.textField!.stringValue		=	n1.displayName
 		cv1.textField!.bordered			=	false
 		cv1.textField!.backgroundColor	=	NSColor.clearColor()
+		cv1.textField!.delegate			=	self
 		
 		(cv1.textField!.cell() as NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
 		cv1.objectValue					=	n1.link.lastPathComponent
@@ -391,6 +400,18 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	
 	func menuNeedsUpdate(menu: NSMenu) {
 //		outlineView.selectedRowIndexes
+	}
+	
+	func control(control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+		return	true
+	}
+	func control(control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+		return	true
+	}
+	override func controlTextDidEndEditing(obj: NSNotification) {
+		if _fileSystemMonitor!.isPending {
+			_fileSystemMonitor!.resumeEventCallbackDispatch()
+		}
 	}
 }
 
