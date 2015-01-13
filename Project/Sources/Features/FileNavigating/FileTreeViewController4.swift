@@ -110,6 +110,9 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 				_fileSystemMonitor	=	FileSystemMonitor3(monitoringRootURL: v3, callback: callback)
 			}
 			self.outlineView.reloadData()
+			if URLRepresentation != nil {
+				self.outlineView.expandItem(_fileTreeRepository!.root, expandChildren: false)
+			}
 		}
 	}
 	
