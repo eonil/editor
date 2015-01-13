@@ -11,15 +11,24 @@ import AppKit
 import EonilDispatch
 import Precompilation
 
+
+
+
+
+protocol FileTreeViewController4Delegate: class {
+	func fileTreeViewController4NotifyKillingRootURL()
+}
+
+
 class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate {
+	weak var delegate:FileTreeViewController4Delegate?
 	
 	///	Directories are excluded.
 	let	userIsWantingToEditFileAtURL	=	Notifier<NSURL>()
 	
 	private	var	_fileTreeRepository		=	nil as FileTreeRepository4?
-	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor2?
+	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor3?
 	
-	private var	_channelsHolding:Any	=	()
 	
 	
 	
@@ -42,6 +51,13 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		assert(NSThread.currentThread() == NSThread.mainThread())
 		assert(_fileTreeRepository != nil)
 		Debug.log("invalidateNodeForURL: \(u)")
+		
+		if u == URLRepresentation {
+			self.delegate?.fileTreeViewController4NotifyKillingRootURL()
+			self.URLRepresentation	=	nil		//	Self-destruction.
+			self.outlineView.reloadData()
+			return
+		}
 		
 		let	u2	=	u.URLByDeletingLastPathComponent!
 		
@@ -75,21 +91,23 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	
 	override var representedObject:AnyObject? {
 		willSet(v) {
-			precondition(v is NSURL)
-			_channelsHolding	=	()
+			precondition(v == nil || v is NSURL)
+			
 			_fileSystemMonitor	=	nil
 			_fileTreeRepository	=	nil
 		}
 		didSet {
+			assert(URLRepresentation == nil || URLRepresentation?.existingAsDirectoryFile == true)
+			
 			if let v3 = URLRepresentation {
 				_fileTreeRepository	=	FileTreeRepository4(rootlink: v3)
 				_fileTreeRepository!.reload()
 				
-				_fileSystemMonitor	=	FileSystemMonitor2(rootLocationToMonitor: v3)
-				
-				_channelsHolding	=	[
-					channel(_fileSystemMonitor!.notifyEventForURL, invalidateNodeForURL),
-				]
+				let	callback	=	{ [weak self] (u:NSURL)->() in
+					self?.invalidateNodeForURL(u)
+					return	()
+				}
+				_fileSystemMonitor	=	FileSystemMonitor3(monitoringRootURL: v3, callback: callback)
 			}
 			self.outlineView.reloadData()
 		}

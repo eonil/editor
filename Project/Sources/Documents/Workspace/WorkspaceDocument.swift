@@ -25,10 +25,12 @@ class WorkspaceDocument : NSDocument {
 		
 		super.makeWindowControllers()
 		self.addWindowController(mainWindowController)
+		
+		assert(mainWindowController.fileTreeViewController.delegate == nil)
+		mainWindowController.fileTreeViewController.delegate	=	self
 	}
 	
 
-	
 	
 	
 	
@@ -42,6 +44,25 @@ class WorkspaceDocument : NSDocument {
 		CargoExecutionController.build(rootURL)
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+extension WorkspaceDocument: FileTreeViewController4Delegate {
+	func fileTreeViewController4NotifyKillingRootURL() {
+		self.performClose(self)
+	}
+}
+
+
+
 
 
 

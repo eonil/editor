@@ -71,9 +71,6 @@ class PlainFileFolderWindowController : HygienicWindowController2 {
 		return	MainViewController()
 	}
 	override func instantiateWindow() -> NSWindow {
-//		let	window	=	NSWindow()
-//		window.styleMask	|=	NSResizableWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
-
 		let	window	=	NSWindow()
 		window.styleMask	=	NSResizableWindowMask | NSTitledWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
 
@@ -94,6 +91,18 @@ class PlainFileFolderWindowController : HygienicWindowController2 {
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -57,12 +57,13 @@
 		456655671A65342E008303E0 /* Precompilation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 452E4E541A650EED007B490D /* Precompilation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4566556A1A65342E008303E0 /* PrecompilationOfExternalToolSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452E4E561A650EED007B490D /* PrecompilationOfExternalToolSupport.framework */; };
 		4566556B1A65342E008303E0 /* PrecompilationOfExternalToolSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 452E4E561A650EED007B490D /* PrecompilationOfExternalToolSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45700B761A11671800D84249 /* PlainFileFolderWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700B751A11671800D84249 /* PlainFileFolderWindowController.swift */; };
 		45700EE11A11F65100415EB2 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700EE01A11F65100415EB2 /* FileNode.swift */; };
 		457341011A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457340FF1A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift */; };
 		457341021A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457341001A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift */; };
 		457341041A19F75100C93C2E /* EmptyOutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457341031A19F75100C93C2E /* EmptyOutlineViewController.swift */; };
 		45756F651A6537860017AA4B /* WorkspaceUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45756F641A6537860017AA4B /* WorkspaceUtility.swift */; };
+		45756F7B1A6540AA0017AA4B /* FileSystemMonitor3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45756F7A1A6540AA0017AA4B /* FileSystemMonitor3.swift */; };
+		45756F7D1A6548990017AA4B /* PlainFileFolderWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45756F7C1A6548990017AA4B /* PlainFileFolderWindowController.swift */; };
 		457C05BA1A15D91900D062FE /* RustProject.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 457C05B81A15D91900D062FE /* RustProject.iconset */; };
 		457C05BB1A15D91900D062FE /* RustSourceCodeFile.iconset in Resources */ = {isa = PBXBuildFile; fileRef = 457C05B91A15D91900D062FE /* RustSourceCodeFile.iconset */; };
 		457D5CE61A63287C008ECE6F /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457D5CE51A63287C008ECE6F /* WorkspaceDocument.swift */; };
@@ -428,12 +429,13 @@
 		455F5DE61A1289B900A17A31 /* FileNode3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode3.swift; sourceTree = "<group>"; };
 		455FC56C1A637C2F00266BD5 /* IssueRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueRepository.swift; sourceTree = "<group>"; };
 		45646D5A1A45F9F9009697C1 /* RustAutocompletionWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustAutocompletionWindowController.swift; sourceTree = "<group>"; };
-		45700B751A11671800D84249 /* PlainFileFolderWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlainFileFolderWindowController.swift; sourceTree = "<group>"; };
 		45700EE01A11F65100415EB2 /* FileNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
 		457340FF1A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLite3DatabaseEditingWindowController.swift; sourceTree = "<group>"; };
 		457341001A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLite3DatabaseFileDocument.swift; sourceTree = "<group>"; };
 		457341031A19F75100C93C2E /* EmptyOutlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyOutlineViewController.swift; sourceTree = "<group>"; };
 		45756F641A6537860017AA4B /* WorkspaceUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUtility.swift; sourceTree = "<group>"; };
+		45756F7A1A6540AA0017AA4B /* FileSystemMonitor3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemMonitor3.swift; sourceTree = "<group>"; };
+		45756F7C1A6548990017AA4B /* PlainFileFolderWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlainFileFolderWindowController.swift; sourceTree = "<group>"; };
 		457C05B81A15D91900D062FE /* RustProject.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = RustProject.iconset; sourceTree = "<group>"; };
 		457C05B91A15D91900D062FE /* RustSourceCodeFile.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = RustSourceCodeFile.iconset; sourceTree = "<group>"; };
 		457D5CE51A63287C008ECE6F /* WorkspaceDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocument.swift; sourceTree = "<group>"; };
@@ -523,7 +525,6 @@
 		451740D71A102F1900861ECC /* SpecificUIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				45700B751A11671800D84249 /* PlainFileFolderWindowController.swift */,
 				459433AD1A45EBB4008B2CFF /* TextEditing */,
 				45D158F31A113FD900B25657 /* CodeEditing */,
 				452A121B1A107E3A00E38F35 /* IssueListing */,
@@ -710,6 +711,7 @@
 				454E42AA1A13D244007BEE79 /* FileTreeRepository4.swift */,
 				454FFC071A141461000C0200 /* FileSystemService.swift */,
 				45402ABA1A153C4E00127E50 /* FileSystemMonitor2.swift */,
+				45756F7A1A6540AA0017AA4B /* FileSystemMonitor3.swift */,
 				454E42AE1A13D257007BEE79 /* (junkyard) */,
 			);
 			path = FileNavigating;
@@ -759,6 +761,7 @@
 				45A6DAB21A639AD500DFB9CE /* PassiveDataClassGeneration */,
 				45A6DAB41A639AD500DFB9CE /* SchemaInferencing */,
 				45A6DAB11A639AB400DFB9CE /* (junkyard) */,
+				45756F7C1A6548990017AA4B /* PlainFileFolderWindowController.swift */,
 				4557D8941A116D5F00D6C53B /* FileNavigating */,
 			);
 			path = Features;
@@ -1332,7 +1335,6 @@
 				452A121D1A107E4C00E38F35 /* IssueListingViewController.swift in Sources */,
 				457DD5D21A125C3D00324681 /* FileNode2.swift in Sources */,
 				45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */,
-				45700B761A11671800D84249 /* PlainFileFolderWindowController.swift in Sources */,
 				4557D8961A116D6800D6C53B /* FileTreeViewController.swift in Sources */,
 				45B89C321A15E05100D03648 /* MarkdownFileDocument.swift in Sources */,
 				45646D5B1A45F9F9009697C1 /* RustAutocompletionWindowController.swift in Sources */,
@@ -1340,12 +1342,14 @@
 				45A6DAB91A639AD500DFB9CE /* SchemaInferencerWindowController.swift in Sources */,
 				454FFC081A141461000C0200 /* FileSystemService.swift in Sources */,
 				452A121F1A107EC500E38F35 /* TableScrollViewController.swift in Sources */,
+				45756F7B1A6540AA0017AA4B /* FileSystemMonitor3.swift in Sources */,
 				45A6DAB71A639AD500DFB9CE /* PassiveDataClassGeneratorWindowController.swift in Sources */,
 				459433B11A45F01C008B2CFF /* ScrollViewController2.swift in Sources */,
 				4597F8251A113D100089FC66 /* Box.swift in Sources */,
 				454482161A6328E7005576CB /* WorkspaceEditingViewController.swift in Sources */,
 				452B92C11A12CC3B00E66E87 /* Deduplicate.swift in Sources */,
 				45A6DAB81A639AD500DFB9CE /* DataSchema.swift in Sources */,
+				45756F7D1A6548990017AA4B /* PlainFileFolderWindowController.swift in Sources */,
 				45F6C1151A119726005D8EEA /* VisualEffectViewController.swift in Sources */,
 				453857B61A6279D200DC693D /* SwiftLevelExtensions.swift in Sources */,
 				457341041A19F75100C93C2E /* EmptyOutlineViewController.swift in Sources */,
