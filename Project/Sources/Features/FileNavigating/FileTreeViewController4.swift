@@ -25,7 +25,7 @@ protocol FileTreeViewController4Delegate: class {
 ///	Take care that the file-system monitoring can be suspended by request,
 ///	and this class is using it to suspend file-system monitoring events
 ///	while column editing.
-class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate, NSTextFieldDelegate {
+class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate, NSTextFieldDelegate, FileTableCellTextFieldEditingDelegate {
 	weak var delegate:FileTreeViewController4Delegate?
 	
 	///	Directories are excluded.
@@ -71,7 +71,16 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 			//	Store currently selected URLs.
 			//	Getting and setting selection can show unexpected behavior if it is being performed
 			//	while a column is in editing. So ensure this will not be called while editing.
-			let	selus1	=	outlineView.selectedRowIndexes.allIndexes.map({self.outlineView.itemAtRow($0) as FileNode4}).map({$0.link}) as [NSURL]
+			let	selus0	=	outlineView.selectedRowIndexes
+			let	selus1	=	selus0.allIndexes.map { (idx:Int)->(NSURL?) in
+					let	node1	=	self.outlineView.itemAtRow(idx) as FileNode4?
+					let	url1	=	node1?.link as NSURL?
+					return	url1
+				}.filter { u in
+					return	u != nil
+				}.map { u in
+					return	u!
+				} as [NSURL]
 
 			//	Perform reloading.
 			n1.reloadSubnodes()
@@ -226,7 +235,9 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
 							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
 
-							self._fileSystemMonitor!.suspendEventCallbackDispatch()
+							if self._fileSystemMonitor!.isPending == false {
+								self._fileSystemMonitor!.suspendEventCallbackDispatch()
+							}
 							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
 						} else {
 							//	Shouldn't happen, but nobody knows...
@@ -258,6 +269,10 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 						if idx >= 0 {
 							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
 							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
+							
+							if self._fileSystemMonitor!.isPending == false {
+								self._fileSystemMonitor!.suspendEventCallbackDispatch()
+							}
 							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
 						} else {
 							//	Shouldn't happen, but nobody knows...
@@ -351,13 +366,15 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 	}
 
 	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-		let	tv1	=	NSTextField()
+		let	tv1	=	FileTableCellTextField()
 		let	iv1	=	NSImageView()
-		let	cv1	=	NSTableCellView()
+		let	cv1	=	FileTableCellView()
 		cv1.textField	=	tv1
 		cv1.imageView	=	iv1
 		cv1.addSubview(tv1)
 		cv1.addSubview(iv1)
+		
+		tv1.editingDelegate				=	self
 
 		///	Do not query on file-system here.
 		///	The node is a local cache, and may not exist on 
@@ -379,7 +396,7 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 		
 		(cv1.textField!.cell() as NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
 		cv1.objectValue					=	n1.link.lastPathComponent
-		cv1.textField!.objectValue		=	n1.link.lastPathComponent
+		cv1.textField!.stringValue		=	n1.link.lastPathComponent!
 		return	cv1
 	}
 	
@@ -402,45 +419,85 @@ class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOut
 //		outlineView.selectedRowIndexes
 	}
 	
+	private func fileTableCellTextFieldDidBecomeFirstResponder() {
+		if _fileSystemMonitor!.isPending == false {
+			_fileSystemMonitor!.suspendEventCallbackDispatch()
+		}
+	}
+	private func fileTableCellTextFieldDidResignFirstResponder() {
+		if _fileSystemMonitor!.isPending {
+			_fileSystemMonitor!.resumeEventCallbackDispatch()	//	This will trigger sending of pended events, and effectively reloading of some nodes.
+		}
+	}
 	func control(control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+		if _fileSystemMonitor!.isPending == false {
+			_fileSystemMonitor!.suspendEventCallbackDispatch()
+		}
 		return	true
 	}
 	func control(control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
 		return	true
 	}
 	override func controlTextDidEndEditing(obj: NSNotification) {
+		Debug.log("controlTextDidEndEditing")
+		
 		if _fileSystemMonitor!.isPending {
-			_fileSystemMonitor!.resumeEventCallbackDispatch()
+			_fileSystemMonitor!.resumeEventCallbackDispatch()	//	This will trigger sending of pended events, and effectively reloading of some nodes.
 		}
 	}
 }
 
-//@objc
-//class FileTableRowView: NSTableRowView {
-//	@objc
-//	var objectValue:AnyObject? {
-//		get {
-//			return	"AAA"
-//		}
-//		set(v) {
-//			
-//		}
-//	}
-//}
-//@objc
-//class FileTableCellView: NSTableCellView {
-//	@objc
-//	override var acceptsFirstResponder:Bool {
-//		get {
-//			return	true
-//		}
-//	}
-//	@objc
-//	override func becomeFirstResponder() -> Bool {
-//		return	true
-//	}
-//}
+@objc
+class FileTableRowView: NSTableRowView {
+	@objc
+	var objectValue:AnyObject? {
+		get {
+			return	"AAA"
+		}
+		set(v) {
+			
+		}
+	}
+}
+@objc
+class FileTableCellView: NSTableCellView {
+	@objc
+	override var acceptsFirstResponder:Bool {
+		get {
+			return	true
+		}
+	}
+	@objc
+	override func becomeFirstResponder() -> Bool {
+		return	true
+	}
+}
+@objc
+private class FileTableCellTextField: NSTextField {
+	weak var editingDelegate:FileTableCellTextFieldEditingDelegate?
+	
+	@objc
+	override var acceptsFirstResponder:Bool {
+		get {
+			return	true
+		}
+	}
+	@objc
+	override func becomeFirstResponder() -> Bool {
+		editingDelegate?.fileTableCellTextFieldDidBecomeFirstResponder()
+		return	true
+	}
+	@objc
+	override func resignFirstResponder() -> Bool {
+		editingDelegate?.fileTableCellTextFieldDidResignFirstResponder()
+		return	true
+	}
+}
 
+private protocol FileTableCellTextFieldEditingDelegate: class {
+	func fileTableCellTextFieldDidBecomeFirstResponder()
+	func fileTableCellTextFieldDidResignFirstResponder()
+}
 
 
 

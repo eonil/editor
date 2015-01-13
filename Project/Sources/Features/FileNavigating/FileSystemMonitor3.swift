@@ -102,11 +102,13 @@ private final class SuspensionManager {
 	///	Any events occured during suspension will be queued and dispatched at resume.
 	func suspendEventCallbackDispatch() {
 		precondition(is_pending == false)
+		Debug.log("FS monitoring suspended")
 		
 		is_pending	=	true
 	}
 	func resumeEventCallbackDispatch() {
 		precondition(is_pending == true)
+		Debug.log("FS monitoring resumed")
 		
 		pending_events.map { [unowned self] u in
 			self.callback!(u)
