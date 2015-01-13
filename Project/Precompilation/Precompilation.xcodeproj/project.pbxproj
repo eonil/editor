@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		453686581A63AE86000754F3 /* Precompilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4538574F1A626FC200DC693D /* Precompilation.framework */; };
 		453857551A626FC200DC693D /* Precompilation.h in Headers */ = {isa = PBXBuildFile; fileRef = 453857541A626FC200DC693D /* Precompilation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		453857751A626FDC00DC693D /* Dialogues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453857741A626FDC00DC693D /* Dialogues.swift */; };
 		4538577F1A62700400DC693D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4538577E1A62700400DC693D /* AppDelegate.swift */; };
@@ -80,6 +81,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		453686591A63AEBB000754F3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4538574F1A626FC200DC693D /* Precompilation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Precompilation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		453857531A626FC200DC693D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		453857541A626FC200DC693D /* Precompilation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Precompilation.h; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				453686581A63AE86000754F3 /* Precompilation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +146,7 @@
 		453857451A626FC200DC693D = {
 			isa = PBXGroup;
 			children = (
+				453686591A63AEBB000754F3 /* README.md */,
 				453857511A626FC200DC693D /* Precompilation */,
 				45A6DB411A63AAE600DFB9CE /* PrecompilationOfExternalToolSupport */,
 				4538577B1A62700400DC693D /* PrecompilationInteractiveWorkbench */,
@@ -398,9 +402,9 @@
 			projectRoot = "";
 			targets = (
 				4538574E1A626FC200DC693D /* Precompilation */,
-				453857791A62700400DC693D /* PrecompilationInteractiveWorkbench */,
-				45A6DADC1A63A29F00DFB9CE /* PrecompilationUnitTest */,
 				45A6DB3F1A63AAE500DFB9CE /* PrecompilationOfExternalToolSupport */,
+				45A6DADC1A63A29F00DFB9CE /* PrecompilationUnitTest */,
+				453857791A62700400DC693D /* PrecompilationInteractiveWorkbench */,
 			);
 		};
 /* End PBXProject section */
@@ -753,6 +757,7 @@
 				45A6DAE31A63A29F00DFB9CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45A6DB591A63AAE600DFB9CE /* Build configuration list for PBXNativeTarget "PrecompilationOfExternalToolSupport" */ = {
 			isa = XCConfigurationList;
@@ -761,6 +766,7 @@
 				45A6DB5B1A63AAE600DFB9CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

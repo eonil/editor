@@ -63,16 +63,27 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="bib-Uj-vzu">
                         <items>
-                            <menuItem title="New Workspace" keyEquivalent="N" id="Was-JA-tGl">
+                            <menuItem title="New" id="Was-JA-tGl">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" id="fvS-Q2-I6I">
+                                    <items>
+                                        <menuItem title="Project" keyEquivalent="N" id="olZ-vJ-Lhy">
+                                            <connections>
+                                                <action selector="newProjectMenuOnClick:" target="Voe-Tx-rLC" id="ijP-kJ-ory"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="File" keyEquivalent="n" id="3I9-dw-1vh">
+                                            <connections>
+                                                <action selector="newFileMenuOnClock:" target="Voe-Tx-rLC" id="Wtj-ww-GfP"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
                                 <connections>
                                     <action selector="newWorkspaceMenuOnClick:" target="Voe-Tx-rLC" id="N9j-lM-bua"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="New File" keyEquivalent="n" id="rU2-MG-5cp">
-                                <connections>
-                                    <action selector="newDocument:" target="-1" id="d8m-IJ-CcN"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="QNc-k0-hiB"/>
                             <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
                                     <action selector="openDocument:" target="-1" id="bVn-NM-KNZ"/>
@@ -634,7 +645,7 @@
                         <items>
                             <menuItem title="Run" keyEquivalent="r" id="fx6-It-gLS">
                                 <connections>
-                                    <action selector="menuProjectRun:" target="-1" id="0yz-n6-D1F"/>
+                                    <action selector="runCargoMenuOnClick:" target="Voe-Tx-rLC" id="aT1-FP-YTm"/>
                                 </connections>
                             </menuItem>
                         </items>

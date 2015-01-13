@@ -14,6 +14,7 @@ public struct UIDialogues {
 
 public extension UIDialogues {
 	
+	
 	///	Queries using NSWindow sheet with "OK" and "Cancel" button.
 	public static func queryDeletingFilesUsingWindowSheet(window:NSWindow, files:[NSURL], handler:(UIDialogueButton)->()) {
 		precondition(files.count > 0)
@@ -53,6 +54,15 @@ public extension UIDialogues {
 				fatalError("This shouldn't happen.")
 			}
 		})
+	}
+	
+	public static func alertModally(message:String, comment:String?, style:NSAlertStyle) {
+		let	a	=	NSAlert()
+		a.addButtonWithTitle("OK")
+		a.messageText		=	message
+		a.informativeText	=	comment
+		a.alertStyle		=	style
+		a.runModal()
 	}
 }
 

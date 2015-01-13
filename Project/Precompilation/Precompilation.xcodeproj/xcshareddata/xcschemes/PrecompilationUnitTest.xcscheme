@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4538574E1A626FC200DC693D"
-               BuildableName = "Precompilation.framework"
-               BlueprintName = "Precompilation"
-               ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
+               BlueprintIdentifier = "45A6DADC1A63A29F00DFB9CE"
+               BuildableName = "PrecompilationUnitTest"
+               BlueprintName = "PrecompilationUnitTest"
+               ReferencedContainer = "container:Precompilation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       buildConfiguration = "Debug">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "45A6DADC1A63A29F00DFB9CE"
+            BuildableName = "PrecompilationUnitTest"
+            BlueprintName = "PrecompilationUnitTest"
+            ReferencedContainer = "container:Precompilation.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -39,15 +48,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4538574E1A626FC200DC693D"
-            BuildableName = "Precompilation.framework"
-            BlueprintName = "Precompilation"
-            ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
+            BlueprintIdentifier = "45A6DADC1A63A29F00DFB9CE"
+            BuildableName = "PrecompilationUnitTest"
+            BlueprintName = "PrecompilationUnitTest"
+            ReferencedContainer = "container:Precompilation.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -57,15 +66,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4538574E1A626FC200DC693D"
-            BuildableName = "Precompilation.framework"
-            BlueprintName = "Precompilation"
-            ReferencedContainer = "container:Project/Precompilation/Precompilation.xcodeproj">
+            BlueprintIdentifier = "45A6DADC1A63A29F00DFB9CE"
+            BuildableName = "PrecompilationUnitTest"
+            BlueprintName = "PrecompilationUnitTest"
+            ReferencedContainer = "container:Precompilation.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

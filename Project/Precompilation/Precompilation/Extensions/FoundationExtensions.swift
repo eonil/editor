@@ -80,11 +80,11 @@ public extension NSURL {
 			return	NSFileManager.defaultManager().displayNameAtPath(path!)
 		}
 	}
-//	public var existingAsAnyFile:Bool {
-//		get {
-//			return	NSFileManager.defaultManager().fileExistsAtPath(self.path!)
-//		}
-//	}
+	public var existingAsAnyFile:Bool {
+		get {
+			return	NSFileManager.defaultManager().fileExistsAtPath(self.path!)
+		}
+	}
 	public var existingAsDataFile:Bool {
 		get {
 			assert(self.fileURL)
@@ -104,6 +104,20 @@ public extension NSURL {
 
 
 
+
+
+
+public extension NSFileHandle {
+	public func writeUTF8String(s:String) {
+		let	d1	=	s.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
+		self.writeData(d1)
+	}
+	public func readUTF8StringToEndOfFile() -> String {
+		let	d1	=	self.readDataToEndOfFile()
+		let	s1	=	NSString(data: d1, encoding: NSUTF8StringEncoding)!
+		return	s1
+	}
+}
 
 
 
