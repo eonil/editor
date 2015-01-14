@@ -1,5 +1,5 @@
 //
-//  FileTableCellView.swift
+//  FileTreeTableCellView.swift
 //  EditorFileTreeNavigationFeature
 //
 //  Created by Hoon H. on 2015/01/14.
@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import AppKit
+
 
 @objc
 class FileTableCellView: NSTableCellView {
@@ -16,9 +18,10 @@ class FileTableCellView: NSTableCellView {
 			return	true
 		}
 	}
-	@objc
 	override func becomeFirstResponder() -> Bool {
-		return	true
+		///	This must be designated manually if this object accepts first-responder.
+		self.window!.makeFirstResponder(self.textField!)
+		return	super.becomeFirstResponder()
 	}
 }
 
@@ -38,13 +41,13 @@ class FileTableCellTextField: NSTextField {
 	override func becomeFirstResponder() -> Bool {
 		self.backgroundColor	=	NSColor.textBackgroundColor()
 		editingDelegate?.fileTableCellTextFieldDidBecomeFirstResponder()
-		return	true
+		return	super.becomeFirstResponder()
 	}
 	@objc
 	override func resignFirstResponder() -> Bool {
 		self.backgroundColor	=	NSColor.clearColor()
 		editingDelegate?.fileTableCellTextFieldDidResignFirstResponder()
-		return	true
+		return	super.resignFirstResponder()
 	}
 	
 	@objc

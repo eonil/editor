@@ -42,9 +42,20 @@ final class FileTreeRepository4 {
 			return	_allNodes[_rootlink]
 		}
 	}
+	
+	///	Get a node for supplied URL.
 	subscript(u:NSURL) -> FileNode4? {
 		get {
 			return	_allNodes[u]
+		}
+	}
+	
+	///	Get nodes for supplied URLs. Nodes will be places at same index of its key URL.
+	///	This guarantees returning of exactly same number of nodes.
+	///	If node for a URL is missing, `nil` will be placed at the same index.
+	subscript(us:[NSURL]) -> [FileNode4?] {
+		get {
+			return	us.map({self[$0]})
 		}
 	}
 	

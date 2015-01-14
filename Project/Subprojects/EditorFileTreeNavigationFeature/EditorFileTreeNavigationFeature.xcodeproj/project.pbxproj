@@ -7,12 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		459E62621A65EE1100EDEEB9 /* FileTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E62611A65EE1100EDEEB9 /* FileTableCellView.swift */; };
 		45BD26BD1A65E9CA003F45D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD26BC1A65E9CA003F45D9 /* AppDelegate.swift */; };
 		45BD26BF1A65E9CA003F45D9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BD26BE1A65E9CA003F45D9 /* Images.xcassets */; };
 		45BD26C21A65E9CA003F45D9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BD26C01A65E9CA003F45D9 /* MainMenu.xib */; };
-		45BD26E01A65EA02003F45D9 /* EditorFileTreeNavigationFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F48F431A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.framework */; };
-		45BD26E11A65EA02003F45D9 /* EditorFileTreeNavigationFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45F48F431A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45ED599F1A6604740076D541 /* FileTreeViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F681A65E22500FF38FB /* FileTreeViewController4.swift */; };
+		45ED59A11A6604740076D541 /* FileTreeRepository4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F691A65E22500FF38FB /* FileTreeRepository4.swift */; };
+		45ED59A21A6604740076D541 /* FileSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F6A1A65E22500FF38FB /* FileSystemService.swift */; };
+		45ED59A31A6604740076D541 /* FileSystemMonitor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F6B1A65E22500FF38FB /* FileSystemMonitor2.swift */; };
+		45ED59A41A6604740076D541 /* FileSystemMonitor3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F6C1A65E22500FF38FB /* FileSystemMonitor3.swift */; };
+		45ED59AA1A660FB50076D541 /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FE1A7F1A65E282002B9D1B /* EonilDispatch.framework */; };
+		45ED59AB1A660FB50076D541 /* EonilDispatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45FE1A7F1A65E282002B9D1B /* EonilDispatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45ED59AF1A660FC40076D541 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FE1A8A1A65E29D002B9D1B /* EonilFileSystemEvents.framework */; };
+		45ED59B01A660FC40076D541 /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45FE1A8A1A65E29D002B9D1B /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45ED59B31A660FCD0076D541 /* Precompilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FE1AE41A65E334002B9D1B /* Precompilation.framework */; };
+		45ED59B41A660FCD0076D541 /* Precompilation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45FE1AE41A65E334002B9D1B /* Precompilation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45ED59B91A6613440076D541 /* FileTreeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ED59B81A6613440076D541 /* FileTreeTableRowView.swift */; };
+		45ED59BA1A6613470076D541 /* FileTreeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ED59B81A6613440076D541 /* FileTreeTableRowView.swift */; };
+		45ED59BE1A6613630076D541 /* FileTreeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ED59BD1A6613630076D541 /* FileTreeTableCellView.swift */; };
+		45ED59BF1A6613660076D541 /* FileTreeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ED59BD1A6613630076D541 /* FileTreeTableCellView.swift */; };
 		45F48F491A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 45F48F481A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45F48F4F1A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F48F431A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.framework */; };
 		45F48F561A65E1FE00FF38FB /* EditorFileTreeNavigationFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F551A65E1FE00FF38FB /* EditorFileTreeNavigationFeatureTests.swift */; };
@@ -34,12 +46,26 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		45BD26E21A65EA02003F45D9 /* PBXContainerItemProxy */ = {
+		45ED59AC1A660FB50076D541 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 45F48F3A1A65E1FE00FF38FB /* Project object */;
+			containerPortal = 45FE1A731A65E281002B9D1B /* Dispatch.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 45F48F421A65E1FE00FF38FB;
-			remoteInfo = EditorFileTreeNavigationFeature;
+			remoteGlobalIDString = 459A04181A18D74D00F946BD;
+			remoteInfo = OSX;
+		};
+		45ED59B11A660FC40076D541 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45FE1A831A65E29D002B9D1B /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45D970A51A1569090037649F;
+			remoteInfo = EonilFileSystemEvents;
+		};
+		45ED59B51A660FCD0076D541 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45FE1AD51A65E334002B9D1B /* Precompilation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4538574E1A626FC200DC693D;
+			remoteInfo = Precompilation;
 		};
 		45F48F501A65E1FE00FF38FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -128,13 +154,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		45BD26E41A65EA02003F45D9 /* Embed Frameworks */ = {
+		45ED59AE1A660FB50076D541 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				45BD26E11A65EA02003F45D9 /* EditorFileTreeNavigationFeature.framework in Embed Frameworks */,
+				45ED59B01A660FC40076D541 /* EonilFileSystemEvents.framework in Embed Frameworks */,
+				45ED59AB1A660FB50076D541 /* EonilDispatch.framework in Embed Frameworks */,
+				45ED59B41A660FCD0076D541 /* Precompilation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,12 +170,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		459E62611A65EE1100EDEEB9 /* FileTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableCellView.swift; sourceTree = "<group>"; };
 		45BD26B81A65E9CA003F45D9 /* EditorFileTreeNavigationFeatureInteractiveTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EditorFileTreeNavigationFeatureInteractiveTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BD26BB1A65E9CA003F45D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45BD26BC1A65E9CA003F45D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45BD26BE1A65E9CA003F45D9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		45BD26C11A65E9CA003F45D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		45ED59B81A6613440076D541 /* FileTreeTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeTableRowView.swift; sourceTree = "<group>"; };
+		45ED59BD1A6613630076D541 /* FileTreeTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeTableCellView.swift; sourceTree = "<group>"; };
 		45F48F431A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorFileTreeNavigationFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F48F471A65E1FE00FF38FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F48F481A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorFileTreeNavigationFeature.h; sourceTree = "<group>"; };
@@ -176,7 +205,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45BD26E01A65EA02003F45D9 /* EditorFileTreeNavigationFeature.framework in Frameworks */,
+				45ED59AF1A660FC40076D541 /* EonilFileSystemEvents.framework in Frameworks */,
+				45ED59AA1A660FB50076D541 /* EonilDispatch.framework in Frameworks */,
+				45ED59B31A660FCD0076D541 /* Precompilation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +327,8 @@
 			isa = PBXGroup;
 			children = (
 				45F48F681A65E22500FF38FB /* FileTreeViewController4.swift */,
-				459E62611A65EE1100EDEEB9 /* FileTableCellView.swift */,
+				45ED59B81A6613440076D541 /* FileTreeTableRowView.swift */,
+				45ED59BD1A6613630076D541 /* FileTreeTableCellView.swift */,
 				45F48F691A65E22500FF38FB /* FileTreeRepository4.swift */,
 				45F48F6A1A65E22500FF38FB /* FileSystemService.swift */,
 				45F48F6B1A65E22500FF38FB /* FileSystemMonitor2.swift */,
@@ -359,12 +391,14 @@
 				45BD26B41A65E9CA003F45D9 /* Sources */,
 				45BD26B51A65E9CA003F45D9 /* Frameworks */,
 				45BD26B61A65E9CA003F45D9 /* Resources */,
-				45BD26E41A65EA02003F45D9 /* Embed Frameworks */,
+				45ED59AE1A660FB50076D541 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				45BD26E31A65EA02003F45D9 /* PBXTargetDependency */,
+				45ED59AD1A660FB50076D541 /* PBXTargetDependency */,
+				45ED59B21A660FC40076D541 /* PBXTargetDependency */,
+				45ED59B61A660FCD0076D541 /* PBXTargetDependency */,
 			);
 			name = EditorFileTreeNavigationFeatureInteractiveTester;
 			productName = EditorFileTreeNavigationFeatureInteractiveTester;
@@ -572,7 +606,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45ED59BA1A6613470076D541 /* FileTreeTableRowView.swift in Sources */,
+				45ED59A41A6604740076D541 /* FileSystemMonitor3.swift in Sources */,
+				45ED59A31A6604740076D541 /* FileSystemMonitor2.swift in Sources */,
+				45ED59BF1A6613660076D541 /* FileTreeTableCellView.swift in Sources */,
+				45ED59A11A6604740076D541 /* FileTreeRepository4.swift in Sources */,
+				45ED59A21A6604740076D541 /* FileSystemService.swift in Sources */,
 				45BD26BD1A65E9CA003F45D9 /* AppDelegate.swift in Sources */,
+				45ED599F1A6604740076D541 /* FileTreeViewController4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,12 +623,13 @@
 			files = (
 				45F48F771A65E22500FF38FB /* FileTreeRepository4.swift in Sources */,
 				45F48F7A1A65E22500FF38FB /* FileSystemMonitor3.swift in Sources */,
+				45ED59B91A6613440076D541 /* FileTreeTableRowView.swift in Sources */,
 				45F48F801A65E22500FF38FB /* FileTreeViewController3.swift in Sources */,
 				45F48F7C1A65E22500FF38FB /* FileTreeViewController.swift in Sources */,
 				45F48F761A65E22500FF38FB /* FileTreeViewController4.swift in Sources */,
 				45F48F7F1A65E22500FF38FB /* FileNode2.swift in Sources */,
 				45F48F7E1A65E22500FF38FB /* FileTreeViewController2.swift in Sources */,
-				459E62621A65EE1100EDEEB9 /* FileTableCellView.swift in Sources */,
+				45ED59BE1A6613630076D541 /* FileTreeTableCellView.swift in Sources */,
 				45F48F811A65E22500FF38FB /* FileNode3.swift in Sources */,
 				45F48F791A65E22500FF38FB /* FileSystemMonitor2.swift in Sources */,
 				45F48F781A65E22500FF38FB /* FileSystemService.swift in Sources */,
@@ -607,10 +649,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		45BD26E31A65EA02003F45D9 /* PBXTargetDependency */ = {
+		45ED59AD1A660FB50076D541 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 45F48F421A65E1FE00FF38FB /* EditorFileTreeNavigationFeature */;
-			targetProxy = 45BD26E21A65EA02003F45D9 /* PBXContainerItemProxy */;
+			name = OSX;
+			targetProxy = 45ED59AC1A660FB50076D541 /* PBXContainerItemProxy */;
+		};
+		45ED59B21A660FC40076D541 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EonilFileSystemEvents;
+			targetProxy = 45ED59B11A660FC40076D541 /* PBXContainerItemProxy */;
+		};
+		45ED59B61A660FCD0076D541 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Precompilation;
+			targetProxy = 45ED59B51A660FCD0076D541 /* PBXContainerItemProxy */;
 		};
 		45F48F511A65E1FE00FF38FB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -698,6 +750,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";

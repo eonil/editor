@@ -51,6 +51,7 @@ public func resolveDifferences<T:Hashable>(from:[T], to:[T]) -> (stays:[T], inco
 	return	(nochanges, comes, gones)
 }
 
+
 private struct DiffState<T> {
 	var	value:T
 	var	from:Bool

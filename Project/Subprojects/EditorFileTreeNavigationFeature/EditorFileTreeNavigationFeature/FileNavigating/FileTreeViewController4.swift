@@ -35,7 +35,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor3?
 	
 	private let	_menu_manager			=	MenuManager()
-	
+
 	
 	
 	
@@ -52,7 +52,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	///	Notifies invlidation of a node.
 	///	The UI will be updated to reflect the invalidation.
 	public func invalidateNodeForURL(u:NSURL) {
-		assert(NSThread.currentThread() == NSThread.mainThread())
+		Debug.assertMainThread()
 		assert(_fileTreeRepository != nil)
 		Debug.log("invalidateNodeForURL: \(u)")
 		
@@ -68,35 +68,69 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		//	File-system notifications are sent asynchronously, 
 		//	then a file-node for the URL may not exist.
 		if let n1 = _fileTreeRepository![u2] {
-			//	Store currently selected URLs.
-			//	Getting and setting selection can show unexpected behavior if it is being performed
-			//	while a column is in editing. So ensure this will not be called while editing.
-			let	selus1	=	outlineView.selectedRowIndexes.allIndexes.map { idx in
-				return	self.outlineView.itemAtRow(idx) as? FileNode4
-			}.filter { (n:FileNode4?)->(Bool) in
-				return	n !== nil
-			}.map { n in
-				return	n!.link
-			} as [NSURL]
-			
-			
-			
-			n1.reloadSubnodes()
-			outlineView.reloadItem(n1, reloadChildren: true)
-			
-			
-			
-			//	Restore previously selected URLs.
-			//	Just skip disappeared/missing URLs.
-			let	selns2	=	selus1.map({self._fileTreeRepository![$0]}).filter({$0 != nil})
-			let	selrs3	=	selns2.map({self.outlineView.rowForItem($0!)}).filter({$0 != -1})
-			let	selrs4	=	NSIndexSet(selrs3)
-			outlineView.selectRowIndexes(selrs4, byExtendingSelection: false)
-			
-			Debug.log("Tree partially reloaded.")
+			reloadNode(n1)
 		}
 	}
 	
+	///	Designed to minimise actual refreshing of UI element.
+	private func reloadNode(invalidationRootNode:FileNode4) {
+		Debug.assertMainThread()
+		
+		outlineView.beginUpdates()
+		
+		let	oldURLs		=	invalidationRootNode.subnodes.links
+		let	newURLs		=	subnodeAbsoluteURLsOfURL(invalidationRootNode.link)
+		let	deltaset	=	resolveDifferences(oldURLs, newURLs)
+		
+		let	outgoingRows	=	deltaset.outgoings.map { [unowned self] (u:NSURL)->Int in
+			let	n	=	self._fileTreeRepository![u]
+			let	row	=	find(oldURLs, u)
+			assert(n != nil)
+			assert(row != nil)
+			return	row!
+		}
+		if outgoingRows.count > 0 {
+			outlineView.removeItemsAtIndexes(NSIndexSet(outgoingRows), inParent: invalidationRootNode, withAnimation: NSTableViewAnimationOptions.allZeros)
+//			Debug.log("reloadNode/removeItemsAtIndexes: \(outgoingRows), parent: \(invalidationRootNode)")
+		}
+		
+		////	BEFORE reloading database.
+		
+		//	Here we update underlying database. And UI refresh will be affected by this.
+		//	So you shouldn mix code before this and after this. They must be separated in order.
+		let	newsubnodeURLs	=	deltaset.stays + deltaset.incomings
+		invalidationRootNode.subnodes.links	=	newsubnodeURLs
+		
+		////	AFTER reloading database.
+		
+		let	incomingRows	=	deltaset.incomings.map { [unowned self] (u:NSURL)->Int in
+			let	n	=	self._fileTreeRepository![u]
+			let	row	=	find(newsubnodeURLs, u)
+			assert(n != nil)
+			assert(row != nil)
+			return	row!
+		}
+		if incomingRows.count > 0 {
+			outlineView.insertItemsAtIndexes(NSIndexSet(incomingRows), inParent: invalidationRootNode, withAnimation: NSTableViewAnimationOptions.allZeros)
+//			Debug.log("reloadNode/insertItemsAtIndexes: \(incomingRows), parent: \(invalidationRootNode)")
+		}
+		
+		outlineView.endUpdates()
+	}
+	
+	///	No-op if a node for the supplied URL does not exists.
+	func editNodeForURL(targetNodeURL:NSURL) {
+		let	n1	=	_fileTreeRepository![targetNodeURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
+		if let targetNode = n1 {
+			let	idx		=	self.outlineView.rowForItem(targetNode)			//	Now it should have a node for the URL.
+			assert(idx >= 0)
+			if idx >= 0 {
+				self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
+			} else {
+				//	Shouldn't happen, but nobody knows...
+			}
+		}
+	}
 	
 	
 	
@@ -145,7 +179,8 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	public override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let	col1	=	NSTableColumn(identifier: NAME)
+		let	NAME_ID	=	"NAME"
+		let	col1	=	NSTableColumn(identifier: NAME_ID)
 		col1.title	=	"Name"
 		col1.width	=	100
 
@@ -220,6 +255,9 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		return	n1.directory
 	}
 
+//	public func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView? {
+//		return	FileTreeTableRowView()
+//	}
 	public func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		let	tv1	=	FileTableCellTextField()
 		let	iv1	=	NSImageView()
@@ -254,8 +292,6 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		cv1.textField!.stringValue		=	n1.link.lastPathComponent!
 		return	cv1
 	}
-	
-	
 	
 	
 	
@@ -343,7 +379,30 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 
 
 
-private let	NAME	=	"NAME"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -425,29 +484,12 @@ private final class MenuManager : NSObject, NSMenuDelegate {
 			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
 				let	r	=	FileUtility.createNewFileInFolder(parentFolderURL)
 				if r.ok {
-					let	newFolderURL	=	r.value!
-					let	parentNode	=	self.fileTreeRepository[parentFolderURL]!		//	Must be exists.
-					parentNode.reloadSubnodes()
+					let	newFileURL	=	r.value!
+					self.owner.invalidateNodeForURL(newFileURL)
 					
-					let	n1	=	self.fileTreeRepository[newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
-					if let newFolderNode = n1 {
-						self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
-						self.outlineView.expandItem(parentNode)
-						
-						let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
-						assert(idx >= 0)
-						if idx >= 0 {
-							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
-							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
-
-//							if self._fileSystemMonitor!.isPending == false {
-//								self._fileSystemMonitor!.suspendEventCallbackDispatch()
-//							}
-							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
-						} else {
-							//	Shouldn't happen, but nobody knows...
-						}
-					}
+					let	parentNode	=	self.fileTreeRepository[parentFolderURL]!		//	Must be exists.
+					self.outlineView.expandItem(parentNode)
+					self.owner.editNodeForURL(newFileURL)
 				} else {
 					self.presentError(r.error!)
 				}
@@ -457,32 +499,17 @@ private final class MenuManager : NSObject, NSMenuDelegate {
 		}))
 		
 		menu.addItem(NSMenuItem(title: "New Folder", reaction: { [unowned self] () -> () in
+			Debug.assertMainThread()
+			
 			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
 				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
 				if r.ok {
 					let	newFolderURL	=	r.value!
-					let	parentNode	=	self.fileTreeRepository[parentFolderURL]!		//	Must be exists.
-					parentNode.reloadSubnodes()
+					self.owner.invalidateNodeForURL(newFolderURL)
 					
-					let	n1	=	self.fileTreeRepository[newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
-					if let newFolderNode = n1 {
-						self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
-						self.outlineView.expandItem(parentNode)
-						
-						let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
-						assert(idx >= 0)
-						if idx >= 0 {
-							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
-							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
-							
-//							if self._fileSystemMonitor!.isPending == false {
-//								self._fileSystemMonitor!.suspendEventCallbackDispatch()
-//							}
-							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
-						} else {
-							//	Shouldn't happen, but nobody knows...
-						}
-					}
+					let	parentNode	=	self.fileTreeRepository[parentFolderURL]!		//	Must be exists.
+					self.outlineView.expandItem(parentNode)
+					self.owner.editNodeForURL(newFolderURL)
 				} else {
 					self.presentError(r.error!)
 				}
