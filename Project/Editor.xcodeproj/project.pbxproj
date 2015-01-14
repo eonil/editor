@@ -91,6 +91,7 @@
 		45D8D9021A48ED3600AE42C8 /* HygienicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D9011A48ED3600AE42C8 /* HygienicViewController.swift */; };
 		45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */; };
 		45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */; };
+		45E988081A6668BB000138FD /* CodeFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E988071A6668BB000138FD /* CodeFile.swift */; };
 		45EF31991A18DE9900DAF925 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4524431E1A18059700A03A51 /* EonilFileSystemEvents.framework */; };
 		45EF319A1A18DE9900DAF925 /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4524431E1A18059700A03A51 /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */; };
@@ -485,6 +486,7 @@
 		45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = EonilFileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCRuntime.swift; sourceTree = "<group>"; };
 		45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetActionFunctionBox.swift; sourceTree = "<group>"; };
+		45E988071A6668BB000138FD /* CodeFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeFile.swift; sourceTree = "<group>"; };
 		45F48F1D1A65E1D100FF38FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F48F1E1A65E1D100FF38FB /* EditorFileTreeNavigationFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorFileTreeNavigationFeature.h; sourceTree = "<group>"; };
 		45F48F2C1A65E1D100FF38FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -931,6 +933,7 @@
 			isa = PBXGroup;
 			children = (
 				45D158F41A113FE900B25657 /* CodeEditingViewController.swift */,
+				45E988071A6668BB000138FD /* CodeFile.swift */,
 				45646D5A1A45F9F9009697C1 /* RustAutocompletionWindowController.swift */,
 				45CAD9311A4B144100EDF02D /* SyntaxHighlighting */,
 			);
@@ -1386,6 +1389,7 @@
 				4544821C1A632937005576CB /* WorkspaceMenuController.swift in Sources */,
 				457341021A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift in Sources */,
 				45204C801A63300900929A17 /* ApplicationController.swift in Sources */,
+				45E988081A6668BB000138FD /* CodeFile.swift in Sources */,
 				457341011A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift in Sources */,
 				452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */,
 				451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */,

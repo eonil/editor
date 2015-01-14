@@ -15,6 +15,10 @@ import Precompilation
 
 
 public protocol FileTreeViewController4Delegate: class {
+//	func fileTreeViewController4IsNotifyingAddingNodeAtURL(NSURL)
+//	func fileTreeViewController4IsNotifyingRemovingNodeAtURL(NSURL)
+//	func fileTreeViewController4IsNotifyingRelocatingNodeAtURL(NSURL)
+	
 	func fileTreeViewController4IsNotifyingUserWantsToEditFileAtURL(NSURL)
 	func fileTreeViewController4IsNotifyingKillingRootURL()
 }
@@ -213,7 +217,6 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	func dummyDoubleAction(AnyObject?) {
 		println("AA")
 	}
-	
 	
 //	func outlineView(outlineView: NSOutlineView, heightOfRowByItem item: AnyObject) -> CGFloat {
 //		return	16
