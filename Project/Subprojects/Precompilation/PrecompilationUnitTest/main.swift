@@ -11,6 +11,7 @@ import Foundation
 struct UnitTest {
 	func runAll() {
 		testDiff()
+		XML.Test.run()
 	}
 }
 

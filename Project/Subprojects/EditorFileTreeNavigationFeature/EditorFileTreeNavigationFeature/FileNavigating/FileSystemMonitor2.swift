@@ -9,6 +9,7 @@
 //import Foundation
 //import EonilDispatch
 //import EonilFileSystemEvents
+//import Precompilation
 //
 //@availability(*,deprecated=0)
 //final class FileSystemMonitor2 {

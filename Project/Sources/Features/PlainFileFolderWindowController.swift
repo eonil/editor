@@ -8,11 +8,18 @@
 
 import Foundation
 import AppKit
+import EditorFileTreeNavigationFeature
 
 
 ///	A window shows a plain folder with plain files.
 ///	This does not do anything special on the file and folders.
 ///	Everything is editable as a plain file.
+///
+///	This provides UI, but does not wire up event delegates.
+///	So you need to handle them yourself.
+///
+///	-	Use `fileTreeViewController.delegate` to get notified for file tree UI.
+///
 class PlainFileFolderWindowController : HygienicWindowController2 {
 	
 	var	fileTreeViewController:FileTreeViewController4 {
@@ -148,9 +155,6 @@ extension PlainFileFolderWindowController {
 			_channels	=	[
 				channel(navigationViewController.issueListingViewController.userIsWantingToHighlightIssues, editingViewController.codeEditorViewController.highlightRangesOfIssues),
 				channel(navigationViewController.issueListingViewController.userIsWantingToNavigateToIssue, editingViewController.codeEditorViewController.navigateRangeOfIssue),
-				channel(navigationViewController.fileTreeViewController.userIsWantingToEditFileAtURL) { [unowned self] u in
-					self.editingViewController.codeEditorViewController.URLRepresentation	=	u
-				},
 			]
 		}
 		override func viewDidAppear() {

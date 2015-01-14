@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import EonilSQLite3
+import Precompilation
 
 class SQLite3DatabaseEditingWindowController : HygienicWindowController, NSWindowDelegate {
 	

@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import PrecompilationOfExternalToolSupport
+import EditorFileTreeNavigationFeature
 
 ///	A document to edit Eonil Editor Workspace. (`.eewsN` file, `N` is single integer version number)
 ///	The root controller of a workspace.
@@ -56,8 +57,11 @@ class WorkspaceDocument : NSDocument {
 
 
 extension WorkspaceDocument: FileTreeViewController4Delegate {
-	func fileTreeViewController4NotifyKillingRootURL() {
+	func fileTreeViewController4IsNotifyingKillingRootURL() {
 		self.performClose(self)
+	}
+	func fileTreeViewController4IsNotifyingUserWantsToEditFileAtURL(u: NSURL) {
+		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
 	}
 }
 
