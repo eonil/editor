@@ -103,6 +103,60 @@ final class FileTreeRepository4 {
 			createNodeForURL(u)
 		}
 	}
+	
+	////
+	
+	///	Keeps node instance and replaces its link.
+	///
+	///	TODO:
+	///	This function doesn't seem to be a good design. Though
+	///	I cannot figure out where, but I smell some bad stuff...
+	///	Please review this eventually.
+	func relocateNodeToURL(from:NSURL, to:NSURL) {
+		println(to.absoluteString)
+		precondition(from != to, "You cannot relocate to same location.")
+		precondition(self[to] === nil, "You cannot move this node to an existing URL in repository.")
+		precondition(self.root !== nil, "You cannot move into a root-less repository.")
+		precondition(to.absoluteString!.hasPrefix(self.root!.link.absoluteString!), "You cannot move out of this repository.")
+		assert(_allNodes[from] !== nil, "Supplied `from` URL cannot be found in this repository.")
+		
+		let	targetNode		=	_allNodes[from]!
+		
+		////
+		
+		func relocateSubnodesOfTargetNode() {
+			let	subtargetURLs	=	targetNode.subnodes.links
+			for u in subtargetURLs {
+				let	s	=	u.absoluteString!
+				let	s1	=	s.substringFromIndex(from.absoluteString!.endIndex)
+				let	s2	=	to.absoluteString!.stringByAppendingString(s1)
+				let	u1	=	NSURL(string: s2)!		//	I am not sure on this.
+				relocateNodeToURL(u, to: u1)
+			}
+		}
+		relocateSubnodesOfTargetNode()
+		
+		////
+		
+		func relocateTargetNode() {
+			_allNodes.removeValueForKey(from)
+			_allNodes[to]					=	targetNode
+			targetNode._link				=	to
+			targetNode.subnodes._superlink	=	to
+		
+			////
+			
+			let	parentFromURL	=	from.URLByDeletingLastPathComponent!
+			let	parentNode		=	_allNodes[parentFromURL]
+			
+			var	siblingsURLs	=	parentNode!.subnodes._sublinks
+			let	siblingsURLs2	=	siblingsURLs.map { (u:NSURL)->NSURL in
+				return	u == from ? to : u
+			}
+			parentNode!.subnodes._sublinks	=	siblingsURLs2
+		}
+		relocateTargetNode()
+	}
 }
 
 
@@ -130,19 +184,16 @@ final class FileTreeRepository4 {
 ///	repository object.
 final class FileNode4 {
 	unowned let	repository:FileTreeRepository4
-	let			link:NSURL						///<	Always an absolute file URL.
 	let			subnodes:FileSubnodeList4		///<	Holds live strong references to `FileNode4` instances for rendering in `NSOutlineView`.
 	let			icon:NSImage					///<	Local cached icon file. This is required because we can't rely on just-in-time file-system query.
 	
-	private init(repository:FileTreeRepository4, link:NSURL) {
-		precondition(link.fileURL)
-		precondition(link.absoluteURL == link)
-		assert(link.absoluteString == link.absoluteString)
-		
-		self.repository		=	repository
-		self.link			=	link
-		self.subnodes		=	FileSubnodeList4(repository: repository, superlink: link)
-		self.icon			=	NSWorkspace.sharedWorkspace().iconForFile(link.path!)
+	var link:NSURL {
+		get {
+			return	_link
+		}
+		set(v) {
+			repository.relocateNodeToURL(_link, to: v)
+		}
 	}
 	var supernode:FileNode4? {
 		get {
@@ -153,6 +204,21 @@ final class FileNode4 {
 			}
 		}
 	}
+	
+	////
+	
+	private init(repository:FileTreeRepository4, link:NSURL) {
+		precondition(link.fileURL)
+		precondition(link.absoluteURL == link)
+		assert(link.absoluteString == link.absoluteString)
+		
+		self.repository		=	repository
+		self._link			=	link
+		self.subnodes		=	FileSubnodeList4(repository: repository, superlink: link)
+		self.icon			=	NSWorkspace.sharedWorkspace().iconForFile(link.path!)
+	}
+	
+	private var	_link:NSURL				///<	Always an absolute file URL.
 }
 
 
@@ -170,7 +236,7 @@ final class FileNode4 {
 ///	Ordering is stable. Pops deleted nodes and inserts new nodes at last.
 final class FileSubnodeList4 : SequenceType {
 	private unowned let	_repository:FileTreeRepository4
-	private let			_superlink:NSURL
+	private var			_superlink:NSURL
 	private var			_sublinks:[NSURL]
 	private init(repository:FileTreeRepository4, superlink:NSURL) {
 		self._repository	=	repository
@@ -186,6 +252,7 @@ final class FileSubnodeList4 : SequenceType {
 		set(v) {
 			func checkup(superlink:NSURL, sublinks:[NSURL]) -> Bool {
 				for u in sublinks {
+					assert(u.URLByDeletingLastPathComponent == superlink)
 					return	u.URLByDeletingLastPathComponent == superlink
 				}
 				return	true

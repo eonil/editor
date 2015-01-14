@@ -10,6 +10,8 @@
 		45BD26BD1A65E9CA003F45D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD26BC1A65E9CA003F45D9 /* AppDelegate.swift */; };
 		45BD26BF1A65E9CA003F45D9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BD26BE1A65E9CA003F45D9 /* Images.xcassets */; };
 		45BD26C21A65E9CA003F45D9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BD26C01A65E9CA003F45D9 /* MainMenu.xib */; };
+		45E987F01A665BE2000138FD /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E987EF1A665BE2000138FD /* Utility.swift */; };
+		45E987F11A665BE2000138FD /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E987EF1A665BE2000138FD /* Utility.swift */; };
 		45ED599F1A6604740076D541 /* FileTreeViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F681A65E22500FF38FB /* FileTreeViewController4.swift */; };
 		45ED59A11A6604740076D541 /* FileTreeRepository4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F691A65E22500FF38FB /* FileTreeRepository4.swift */; };
 		45ED59A21A6604740076D541 /* FileSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F6A1A65E22500FF38FB /* FileSystemService.swift */; };
@@ -175,6 +177,7 @@
 		45BD26BC1A65E9CA003F45D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45BD26BE1A65E9CA003F45D9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		45BD26C11A65E9CA003F45D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		45E987EF1A665BE2000138FD /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		45ED59B81A6613440076D541 /* FileTreeTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeTableRowView.swift; sourceTree = "<group>"; };
 		45ED59BD1A6613630076D541 /* FileTreeTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeTableCellView.swift; sourceTree = "<group>"; };
 		45F48F431A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorFileTreeNavigationFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -333,6 +336,7 @@
 				45F48F6A1A65E22500FF38FB /* FileSystemService.swift */,
 				45F48F6B1A65E22500FF38FB /* FileSystemMonitor2.swift */,
 				45F48F6C1A65E22500FF38FB /* FileSystemMonitor3.swift */,
+				45E987EF1A665BE2000138FD /* Utility.swift */,
 				45F48F741A65E22500FF38FB /* (junkyard) */,
 			);
 			path = FileNavigating;
@@ -608,6 +612,7 @@
 			files = (
 				45ED59BA1A6613470076D541 /* FileTreeTableRowView.swift in Sources */,
 				45ED59A41A6604740076D541 /* FileSystemMonitor3.swift in Sources */,
+				45E987F11A665BE2000138FD /* Utility.swift in Sources */,
 				45ED59A31A6604740076D541 /* FileSystemMonitor2.swift in Sources */,
 				45ED59BF1A6613660076D541 /* FileTreeTableCellView.swift in Sources */,
 				45ED59A11A6604740076D541 /* FileTreeRepository4.swift in Sources */,
@@ -626,6 +631,7 @@
 				45ED59B91A6613440076D541 /* FileTreeTableRowView.swift in Sources */,
 				45F48F801A65E22500FF38FB /* FileTreeViewController3.swift in Sources */,
 				45F48F7C1A65E22500FF38FB /* FileTreeViewController.swift in Sources */,
+				45E987F01A665BE2000138FD /* Utility.swift in Sources */,
 				45F48F761A65E22500FF38FB /* FileTreeViewController4.swift in Sources */,
 				45F48F7F1A65E22500FF38FB /* FileNode2.swift in Sources */,
 				45F48F7E1A65E22500FF38FB /* FileTreeViewController2.swift in Sources */,

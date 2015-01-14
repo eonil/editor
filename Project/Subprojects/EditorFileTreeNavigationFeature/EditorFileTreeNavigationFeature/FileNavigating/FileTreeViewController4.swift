@@ -25,7 +25,7 @@ public protocol FileTreeViewController4Delegate: class {
 ///	Take care that the file-system monitoring can be suspended by request,
 ///	and this class is using it to suspend file-system monitoring events
 ///	while column editing.
-public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate, FileTableCellTextFieldEditingDelegate {
+public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate, FileTableCellEditingDelegate {
 	public weak var delegate:FileTreeViewController4Delegate?
 	
 //	/	Directories are excluded.
@@ -249,20 +249,17 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		let	n1	=	item as FileNode4
 		return	n1.directory
 	}
+	
+//	public func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
+//		return
+//	}
 
 //	public func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView? {
 //		return	FileTreeTableRowView()
 //	}
 	public func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-		let	tv1	=	FileTableCellTextField()
-		let	iv1	=	NSImageView()
 		let	cv1	=	FileTableCellView()
-		cv1.textField	=	tv1
-		cv1.imageView	=	iv1
-		cv1.addSubview(tv1)
-		cv1.addSubview(iv1)
-		
-		tv1.editingDelegate				=	self
+		cv1.editingDelegate				=	self
 
 		///	Do not query on file-system here.
 		///	The node is a local cache, and may not exist on 
@@ -276,15 +273,14 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		///	use cached data on the node.
 		
 		let	n1	=	item as FileNode4
-		iv1.image						=	n1.icon
+		cv1.imageView!.image			=	n1.icon
 		cv1.textField!.stringValue		=	n1.displayName
 		cv1.textField!.bordered			=	false
 		cv1.textField!.backgroundColor	=	NSColor.clearColor()
 		cv1.textField!.delegate			=	self
 		
 		(cv1.textField!.cell() as NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
-		cv1.objectValue					=	n1.link.lastPathComponent
-		cv1.textField!.stringValue		=	n1.link.lastPathComponent!
+		cv1.objectValue					=	n1
 		return	cv1
 	}
 	
@@ -307,14 +303,43 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	}
 	
 	
-	internal func fileTableCellTextFieldDidBecomeFirstResponder() {
+	internal func fileTableCellDidBecomeFirstResponder() {
+		println(outlineView.editedRow)
 	}
-	internal func fileTableCellTextFieldDidResignFirstResponder() {
+	internal func fileTableCellDidResignFirstResponder() {
+		println(outlineView.editedRow)
+		
 	}
-	internal func fileTableCellTextFieldDidCancelEditing() {
-		//	Nothing to be done.
+	internal func fileTableCellDidCancelEditing() {
+		outlineView.window!.makeFirstResponder(outlineView)
 	}
 	
+	public func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
+		println(obj)
+		return	true
+	}
+	public override func controlTextDidEndEditing(obj: NSNotification) {
+		let	tf	=	obj.object as FileTableCellTextField!
+		let	c	=	tf.superview as FileTableCellView!
+		let	n	=	c.objectValue as FileNode4!
+		
+		let	u	=	n.link
+		let	u1	=	n.link.URLByDeletingLastPathComponent!
+		let	u2	=	u1.URLByAppendingPathComponent(tf.stringValue, isDirectory: u.existingAsDirectoryFile)
+		
+		if u != u2 {
+			//	Relocate the node instance to avoid recreation when reloading by file-monitoring.
+			n.link	=	u2
+			
+			var	e	=	nil as NSError?
+			let	ok	=	NSFileManager.defaultManager().moveItemAtURL(u, toURL: u2, error: &e)
+			if !ok {
+				presentError(e!)
+			}
+		} else {
+			//	Name unchanged.
+		}
+	}
 //	func control(control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
 //		if _fileSystemMonitor!.isPending == false {
 //			_fileSystemMonitor!.suspendEventCallbackDispatch()
