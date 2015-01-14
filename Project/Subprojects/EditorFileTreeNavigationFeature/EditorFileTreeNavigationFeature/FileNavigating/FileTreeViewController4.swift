@@ -25,7 +25,7 @@ public protocol FileTreeViewController4Delegate: class {
 ///	Take care that the file-system monitoring can be suspended by request,
 ///	and this class is using it to suspend file-system monitoring events
 ///	while column editing.
-public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate, NSTextFieldDelegate, FileTableCellTextFieldEditingDelegate {
+public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate, FileTableCellTextFieldEditingDelegate {
 	public weak var delegate:FileTreeViewController4Delegate?
 	
 //	/	Directories are excluded.
@@ -34,7 +34,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	private	var	_fileTreeRepository		=	nil as FileTreeRepository4?
 	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor3?
 	
-	private let	_menu_manager			=	MenuManager()
+	private let	_contextMenuManager		=	ContextMenuManager()
 
 	
 	
@@ -198,13 +198,8 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		outlineView.setDataSource(self)
 		outlineView.setDelegate(self)
 		
-		outlineView.menu			=	NSMenu()
-		outlineView.menu!.delegate	=	self
-		
-		////
-		
-		_menu_manager.owner	=	self
-		_menu_manager.menuNeedsUpdate(outlineView.menu!)
+		_contextMenuManager.owner	=	self
+		outlineView.menu			=	_contextMenuManager.menu
 	}
 	
 	
@@ -311,19 +306,10 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		n1.resetSubnodes()
 	}
 	
-	public func menuNeedsUpdate(menu: NSMenu) {
-//		outlineView.selectedRowIndexes
-	}
 	
 	internal func fileTableCellTextFieldDidBecomeFirstResponder() {
-//		if _fileSystemMonitor!.isPending == false {
-//			_fileSystemMonitor!.suspendEventCallbackDispatch()
-//		}
 	}
 	internal func fileTableCellTextFieldDidResignFirstResponder() {
-//		if _fileSystemMonitor!.isPending {
-//			_fileSystemMonitor!.resumeEventCallbackDispatch()	//	This will trigger sending of pended events, and effectively reloading of some nodes.
-//		}
 	}
 	internal func fileTableCellTextFieldDidCancelEditing() {
 		//	Nothing to be done.
@@ -408,8 +394,15 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 
 
 @objc
-private final class MenuManager : NSObject, NSMenuDelegate {
+private final class ContextMenuManager : NSObject, NSMenuDelegate {
 	weak var owner:FileTreeViewController4!
+	
+	let	menu	=	NSMenu()
+	
+	override init() {
+		super.init()
+		menu.delegate	=	self
+	}
 	
 	var fileTreeRepository:FileTreeRepository4 {
 		get {
@@ -426,6 +419,10 @@ private final class MenuManager : NSObject, NSMenuDelegate {
 	}
 	
 	func menuNeedsUpdate(menu: NSMenu) {
+		menu.removeAllItems()
+		
+		////
+		
 		func getURLFromRowAtIndex(v:NSOutlineView, index:Int) -> NSURL {
 			let	n	=	v.itemAtRow(index) as FileNode4
 			return	n.link
