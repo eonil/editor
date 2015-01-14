@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import EditorFileTreeNavigationFeature
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

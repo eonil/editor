@@ -465,8 +465,6 @@ private final class ContextMenuManager : NSObject, NSMenuDelegate {
 			}
 			return	nil
 		}
-		
-	
 	
 		////
 	
@@ -524,6 +522,16 @@ private final class ContextMenuManager : NSObject, NSMenuDelegate {
 					switch b {
 					case .OKButton:
 						for u in targetURLs {
+							//	TODO:	Find better way to do this.
+							let	dupc	=	targetURLs.reduce(0) { sum, u1 in
+								return	sum + (u.absoluteString!.hasPrefix(u1.absoluteString!) ? 1 : 0)
+							}
+							if dupc > 1 {
+								continue
+							}
+							
+							////
+							
 							var	err	=	nil as NSError?
 							let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
 							assert(ok || err != nil)
