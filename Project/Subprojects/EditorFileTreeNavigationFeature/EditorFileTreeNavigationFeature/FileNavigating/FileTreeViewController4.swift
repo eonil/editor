@@ -34,7 +34,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	private	var	_fileTreeRepository		=	nil as FileTreeRepository4?
 	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor3?
 	
-	
+	private let	_menu_manager			=	MenuManager()
 	
 	
 	
@@ -78,50 +78,20 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 			}.map { n in
 				return	n!.link
 			} as [NSURL]
-
-//			let	selus0	=	outlineView.selectedRowIndexes
-//			let	selus1	=	selus0.allIndexes.map { (idx:Int)->(NSURL?) in
-//					let	node1	=	self.outlineView.itemAtRow(idx) as FileNode4?
-//					let	url1	=	node1?.link as NSURL?
-//					return	url1
-//				}.filter { u in
-//					return	u != nil
-//				}.map { u in
-//					return	u!
-//				} as [NSURL]
 			
-
-			func reloadingOnlyChangedPortions() {
-				func collectAllCurrentlyDisplayingNodes() -> [FileNode4] {
-					var	dns1	=	[] as [FileNode4]
-					for i in 0..<self.outlineView.numberOfRows {
-						let	dn1	=	self.outlineView.itemAtRow(i)! as FileNode4
-						dns1.append(dn1)
-					}
-					return	dns1
-				}
-				
-//				let	oldlnks	=	n1.subnodes.links
-				
-				//	Perform reloading.
-				n1.reloadSubnodes()
-				outlineView.reloadItem(n1, reloadChildren: true)
-
-//
-//				let	n2	=	n1.subnodes[0]
-//				println(n2.link)
-//				outlineView.reloadItem(n2, reloadChildren: false)
-			}
 			
-			reloadingOnlyChangedPortions()
+			
+			n1.reloadSubnodes()
+			outlineView.reloadItem(n1, reloadChildren: true)
+			
 			
 			
 			//	Restore previously selected URLs.
 			//	Just skip disappeared/missing URLs.
-//			let	selns2	=	selus1.map({self._fileTreeRepository![$0]}).filter({$0 != nil})
-//			let	selrs3	=	selns2.map({self.outlineView.rowForItem($0!)}).filter({$0 != -1})
-//			let	selrs4	=	NSIndexSet(selrs3)
-//			outlineView.selectRowIndexes(selrs4, byExtendingSelection: false)
+			let	selns2	=	selus1.map({self._fileTreeRepository![$0]}).filter({$0 != nil})
+			let	selrs3	=	selns2.map({self.outlineView.rowForItem($0!)}).filter({$0 != -1})
+			let	selrs4	=	NSIndexSet(selrs3)
+			outlineView.selectRowIndexes(selrs4, byExtendingSelection: false)
 			
 			Debug.log("Tree partially reloaded.")
 		}
@@ -198,156 +168,9 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		
 		////
 		
-		func getURLFromRowAtIndex(v:NSOutlineView, index:Int) -> NSURL {
-			let	n	=	v.itemAtRow(index) as FileNode4
-			return	n.link
-		}
-		func getURLFromClickingPoint(v:NSOutlineView) -> NSURL? {
-			let	r1	=	v.clickedRow
-			if r1 >= 0 {
-				return	getURLFromRowAtIndex(v, r1)
-			} else {
-				return	nil
-			}
-		}
-		func collectTargetFileURLs(v:NSOutlineView) -> [NSURL] {
-
-			func getURLsFromSelection(v:NSOutlineView) -> [NSURL] {
-				return
-					v.selectedRowIndexes.allIndexes.map { idx in
-						return	getURLFromRowAtIndex(v, idx)
-					}
-			}
-			
-			let	clickingURL		=	getURLFromClickingPoint(v)
-			let	selectingURLs	=	getURLsFromSelection(v)
-			if clickingURL == nil {
-				return	selectingURLs
-			}
-			
-			if contains(selectingURLs, clickingURL!) {
-				return	selectingURLs
-			} else {
-				return	[clickingURL!]
-			}
-		}
-		
-		func getParentFolderURLOfClickingPoint(v:NSOutlineView) -> NSURL? {
-			if let u2 = getURLFromClickingPoint(v) {
-				let	parentFolderURL	=	u2.existingAsDirectoryFile ? u2 : u2.URLByDeletingLastPathComponent!
-				assert(parentFolderURL.existingAsDirectoryFile)
-				return	parentFolderURL
-			}
-			return	nil
-		}
-		
-		outlineView.menu!.addItem(NSMenuItem(title: "Show in Finder", reaction: { [unowned self] () -> () in
-			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
-			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(targetURLs)
-		}))
-		
-		outlineView.menu!.addSeparatorItem()
-		
-		outlineView.menu!.addItem(NSMenuItem(title: "New File", reaction: { [unowned self] () -> () in
-			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
-				let	r	=	FileUtility.createNewFileInFolder(parentFolderURL)
-				if r.ok {
-					let	newFolderURL	=	r.value!
-					let	parentNode	=	self._fileTreeRepository![parentFolderURL]!		//	Must be exists.
-					parentNode.reloadSubnodes()
-					
-					let	n1	=	self._fileTreeRepository![newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
-					if let newFolderNode = n1 {
-						self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
-						self.outlineView.expandItem(parentNode)
-						
-						let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
-						assert(idx >= 0)
-						if idx >= 0 {
-							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
-							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
-
-//							if self._fileSystemMonitor!.isPending == false {
-//								self._fileSystemMonitor!.suspendEventCallbackDispatch()
-//							}
-							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
-						} else {
-							//	Shouldn't happen, but nobody knows...
-						}
-					}
-				} else {
-					self.presentError(r.error!)
-				}
-			} else {
-				//	Ignore. Happens by clicking empty space.
-			}
-		}))
-		
-		outlineView.menu!.addItem(NSMenuItem(title: "New Folder", reaction: { [unowned self] () -> () in
-			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
-				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
-				if r.ok {
-					let	newFolderURL	=	r.value!
-					let	parentNode	=	self._fileTreeRepository![parentFolderURL]!		//	Must be exists.
-					parentNode.reloadSubnodes()
-					
-					let	n1	=	self._fileTreeRepository![newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
-					if let newFolderNode = n1 {
-						self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
-						self.outlineView.expandItem(parentNode)
-						
-						let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
-						assert(idx >= 0)
-						if idx >= 0 {
-							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
-							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
-							
-//							if self._fileSystemMonitor!.isPending == false {
-//								self._fileSystemMonitor!.suspendEventCallbackDispatch()
-//							}
-							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
-						} else {
-							//	Shouldn't happen, but nobody knows...
-						}
-					}
-				} else {
-					self.presentError(r.error!)
-				}
-			} else {
-				//	Ignore. Happens by clicking empty space.
-			}
-		}))
-		
-		outlineView.menu!.addSeparatorItem()
-		
-		outlineView.menu!.addItem(NSMenuItem(title: "Delete", reaction: { [unowned self] () -> () in
-			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
-			if targetURLs.count > 0 {
-				UIDialogues.queryDeletingFilesUsingWindowSheet(self.outlineView.window!, files: targetURLs, handler: { (b:UIDialogueButton) -> () in
-					switch b {
-					case .OKButton:
-						for u in targetURLs {
-							var	err	=	nil as NSError?
-							let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
-							assert(ok || err != nil)
-							if !ok {
-								self.outlineView.presentError(err!)
-							}
-						}
-						
-					case .CancelButton:
-						break
-					}
-				})
-			}
-		}))
-
-
+		_menu_manager.owner	=	self
+		_menu_manager.menuNeedsUpdate(outlineView.menu!)
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -434,6 +257,11 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	
 	
 	
+	
+	
+	
+	
+	
 	public func outlineViewSelectionDidChange(notification: NSNotification) {
 		let	idx1	=	self.outlineView.selectedRow
 		if idx1 >= 0 {	
@@ -451,16 +279,20 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 //		outlineView.selectedRowIndexes
 	}
 	
-	private func fileTableCellTextFieldDidBecomeFirstResponder() {
+	internal func fileTableCellTextFieldDidBecomeFirstResponder() {
 //		if _fileSystemMonitor!.isPending == false {
-			_fileSystemMonitor!.suspendEventCallbackDispatch()
+//			_fileSystemMonitor!.suspendEventCallbackDispatch()
 //		}
 	}
-	private func fileTableCellTextFieldDidResignFirstResponder() {
+	internal func fileTableCellTextFieldDidResignFirstResponder() {
 //		if _fileSystemMonitor!.isPending {
-			_fileSystemMonitor!.resumeEventCallbackDispatch()	//	This will trigger sending of pended events, and effectively reloading of some nodes.
+//			_fileSystemMonitor!.resumeEventCallbackDispatch()	//	This will trigger sending of pended events, and effectively reloading of some nodes.
 //		}
 	}
+	internal func fileTableCellTextFieldDidCancelEditing() {
+		//	Nothing to be done.
+	}
+	
 //	func control(control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
 //		if _fileSystemMonitor!.isPending == false {
 //			_fileSystemMonitor!.suspendEventCallbackDispatch()
@@ -479,59 +311,18 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 //	}
 }
 
-@objc
-class FileTableRowView: NSTableRowView {
-	@objc
-	var objectValue:AnyObject? {
-		get {
-			return	"AAA"
-		}
-		set(v) {
-			
-		}
-	}
-}
-@objc
-class FileTableCellView: NSTableCellView {
-	@objc
-	override var acceptsFirstResponder:Bool {
-		get {
-			return	true
-		}
-	}
-	@objc
-	override func becomeFirstResponder() -> Bool {
-		return	true
-	}
-}
-@objc
-private class FileTableCellTextField: NSTextField {
-	weak var editingDelegate:FileTableCellTextFieldEditingDelegate?
-	
-	@objc
-	override var acceptsFirstResponder:Bool {
-		get {
-			return	true
-		}
-	}
-	@objc
-	override func becomeFirstResponder() -> Bool {
-		editingDelegate?.fileTableCellTextFieldDidBecomeFirstResponder()
-		return	true
-	}
-	@objc
-	override func resignFirstResponder() -> Bool {
-		editingDelegate?.fileTableCellTextFieldDidResignFirstResponder()
-		return	true
-	}
-}
-
-private protocol FileTableCellTextFieldEditingDelegate: class {
-	func fileTableCellTextFieldDidBecomeFirstResponder()
-	func fileTableCellTextFieldDidResignFirstResponder()
-}
-
-
+//@objc
+//class FileTableRowView: NSTableRowView {
+//	@objc
+//	var objectValue:AnyObject? {
+//		get {
+//			return	"AAA"
+//		}
+//		set(v) {
+//			
+//		}
+//	}
+//}
 
 
 
@@ -557,13 +348,176 @@ private let	NAME	=	"NAME"
 
 
 
+@objc
+private final class MenuManager : NSObject, NSMenuDelegate {
+	weak var owner:FileTreeViewController4!
+	
+	var fileTreeRepository:FileTreeRepository4 {
+		get {
+			return	owner._fileTreeRepository!
+		}
+	}
+	var outlineView:NSOutlineView {
+		get {
+			return	owner.outlineView
+		}
+	}
+	func presentError(e:NSError) {
+		owner.presentError(e)
+	}
+	
+	func menuNeedsUpdate(menu: NSMenu) {
+		func getURLFromRowAtIndex(v:NSOutlineView, index:Int) -> NSURL {
+			let	n	=	v.itemAtRow(index) as FileNode4
+			return	n.link
+		}
+		func getURLFromClickingPoint(v:NSOutlineView) -> NSURL? {
+			let	r1	=	v.clickedRow
+			if r1 >= 0 {
+				return	getURLFromRowAtIndex(v, r1)
+			} else {
+				return	nil
+			}
+		}
+		func collectTargetFileURLs(v:NSOutlineView) -> [NSURL] {
+			
+			func getURLsFromSelection(v:NSOutlineView) -> [NSURL] {
+				return
+					v.selectedRowIndexes.allIndexes.map { idx in
+						return	getURLFromRowAtIndex(v, idx)
+				}
+			}
+			
+			let	clickingURL		=	getURLFromClickingPoint(v)
+			let	selectingURLs	=	getURLsFromSelection(v)
+			if clickingURL == nil {
+				return	selectingURLs
+			}
+			
+			if contains(selectingURLs, clickingURL!) {
+				return	selectingURLs
+			} else {
+				return	[clickingURL!]
+			}
+		}
+		
+		func getParentFolderURLOfClickingPoint(v:NSOutlineView) -> NSURL? {
+			if let u2 = getURLFromClickingPoint(v) {
+				let	parentFolderURL	=	u2.existingAsDirectoryFile ? u2 : u2.URLByDeletingLastPathComponent!
+				assert(parentFolderURL.existingAsDirectoryFile)
+				return	parentFolderURL
+			}
+			return	nil
+		}
+		
+	
+	
+		////
+	
+		menu.addItem(NSMenuItem(title: "Show in Finder", reaction: { [unowned self] () -> () in
+			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
+			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(targetURLs)
+		}))
+		
+		menu.addSeparatorItem()
+		
+		menu.addItem(NSMenuItem(title: "New File", reaction: { [unowned self] () -> () in
+			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
+				let	r	=	FileUtility.createNewFileInFolder(parentFolderURL)
+				if r.ok {
+					let	newFolderURL	=	r.value!
+					let	parentNode	=	self.fileTreeRepository[parentFolderURL]!		//	Must be exists.
+					parentNode.reloadSubnodes()
+					
+					let	n1	=	self.fileTreeRepository[newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
+					if let newFolderNode = n1 {
+						self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
+						self.outlineView.expandItem(parentNode)
+						
+						let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
+						assert(idx >= 0)
+						if idx >= 0 {
+							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
+							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
 
-//private final class MenuManager : NSObject, NSMenuDelegate {
-//	
-//	func menuNeedsUpdate(menu: NSMenu) {
-//		
-//	}
-//}
+//							if self._fileSystemMonitor!.isPending == false {
+//								self._fileSystemMonitor!.suspendEventCallbackDispatch()
+//							}
+							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
+						} else {
+							//	Shouldn't happen, but nobody knows...
+						}
+					}
+				} else {
+					self.presentError(r.error!)
+				}
+			} else {
+				//	Ignore. Happens by clicking empty space.
+			}
+		}))
+		
+		menu.addItem(NSMenuItem(title: "New Folder", reaction: { [unowned self] () -> () in
+			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
+				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
+				if r.ok {
+					let	newFolderURL	=	r.value!
+					let	parentNode	=	self.fileTreeRepository[parentFolderURL]!		//	Must be exists.
+					parentNode.reloadSubnodes()
+					
+					let	n1	=	self.fileTreeRepository[newFolderURL]		//	Can be `nil` if the newly created directory has been deleted immediately. This is very unlikely to happen, but possible in theory.
+					if let newFolderNode = n1 {
+						self.outlineView.reloadItem(parentNode, reloadChildren: true)	//	Refresh view.
+						self.outlineView.expandItem(parentNode)
+						
+						let	idx		=	self.outlineView.rowForItem(newFolderNode)			//	Now it should have a node for the URL.
+						assert(idx >= 0)
+						if idx >= 0 {
+							self.outlineView.selectRowIndexes(NSIndexSet(), byExtendingSelection: false)
+							self.outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
+							
+//							if self._fileSystemMonitor!.isPending == false {
+//								self._fileSystemMonitor!.suspendEventCallbackDispatch()
+//							}
+							self.outlineView.editColumn(0, row: idx, withEvent: nil, select: true)
+						} else {
+							//	Shouldn't happen, but nobody knows...
+						}
+					}
+				} else {
+					self.presentError(r.error!)
+				}
+			} else {
+				//	Ignore. Happens by clicking empty space.
+			}
+		}))
+		
+		menu.addSeparatorItem()
+		
+		menu.addItem(NSMenuItem(title: "Delete", reaction: { [unowned self] () -> () in
+			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
+			if targetURLs.count > 0 {
+				UIDialogues.queryDeletingFilesUsingWindowSheet(self.outlineView.window!, files: targetURLs, handler: { (b:UIDialogueButton) -> () in
+					switch b {
+					case .OKButton:
+						for u in targetURLs {
+							var	err	=	nil as NSError?
+							let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
+							assert(ok || err != nil)
+							if !ok {
+								self.outlineView.presentError(err!)
+							}
+						}
+						
+					case .CancelButton:
+						break
+					}
+				})
+			}
+		}))
+
+	
+	}
+}
 
 
 

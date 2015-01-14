@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		459E62621A65EE1100EDEEB9 /* FileTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E62611A65EE1100EDEEB9 /* FileTableCellView.swift */; };
 		45BD26BD1A65E9CA003F45D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BD26BC1A65E9CA003F45D9 /* AppDelegate.swift */; };
 		45BD26BF1A65E9CA003F45D9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BD26BE1A65E9CA003F45D9 /* Images.xcassets */; };
 		45BD26C21A65E9CA003F45D9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BD26C01A65E9CA003F45D9 /* MainMenu.xib */; };
@@ -141,6 +142,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		459E62611A65EE1100EDEEB9 /* FileTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTableCellView.swift; sourceTree = "<group>"; };
 		45BD26B81A65E9CA003F45D9 /* EditorFileTreeNavigationFeatureInteractiveTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EditorFileTreeNavigationFeatureInteractiveTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BD26BB1A65E9CA003F45D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45BD26BC1A65E9CA003F45D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				45F48F681A65E22500FF38FB /* FileTreeViewController4.swift */,
+				459E62611A65EE1100EDEEB9 /* FileTableCellView.swift */,
 				45F48F691A65E22500FF38FB /* FileTreeRepository4.swift */,
 				45F48F6A1A65E22500FF38FB /* FileSystemService.swift */,
 				45F48F6B1A65E22500FF38FB /* FileSystemMonitor2.swift */,
@@ -584,6 +587,7 @@
 				45F48F761A65E22500FF38FB /* FileTreeViewController4.swift in Sources */,
 				45F48F7F1A65E22500FF38FB /* FileNode2.swift in Sources */,
 				45F48F7E1A65E22500FF38FB /* FileTreeViewController2.swift in Sources */,
+				459E62621A65EE1100EDEEB9 /* FileTableCellView.swift in Sources */,
 				45F48F811A65E22500FF38FB /* FileNode3.swift in Sources */,
 				45F48F791A65E22500FF38FB /* FileSystemMonitor2.swift in Sources */,
 				45F48F781A65E22500FF38FB /* FileSystemService.swift in Sources */,
