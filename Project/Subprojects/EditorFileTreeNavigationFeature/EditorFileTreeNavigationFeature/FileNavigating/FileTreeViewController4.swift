@@ -13,13 +13,15 @@ import Precompilation
 
 
 
-
+///	Anything that causes UI changes will be notified for did-delete and did-move events.
 public protocol FileTreeViewController4Delegate: class {
-//	func fileTreeViewController4IsNotifyingAddingNodeAtURL(NSURL)
-//	func fileTreeViewController4IsNotifyingRemovingNodeAtURL(NSURL)
-//	func fileTreeViewController4IsNotifyingRelocatingNodeAtURL(NSURL)
+	func fileTreeViewController4IsNotifyingThatUserWantsToEditFileAtURL(NSURL)
+	func fileTreeViewController4IsNotifyingThatUserDidDeleteFile(at:NSURL)
+	///	Within repository root, including rename. 
+	///	If file moved out from the repository root, 
+	///	`fileTreeViewController4IsNotifyingThatUserDidDeleteFile` will be happen instead of.
+	func fileTreeViewController4IsNotifyingThatUserDidMoveFile(from:NSURL, to:NSURL)
 	
-	func fileTreeViewController4IsNotifyingUserWantsToEditFileAtURL(NSURL)
 	func fileTreeViewController4IsNotifyingKillingRootURL()
 }
 
@@ -40,6 +42,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	
 	private let	_contextMenuManager		=	ContextMenuManager()
 
+	
 	
 	
 	
@@ -79,7 +82,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	///	Designed to minimise actual refreshing of UI element.
 	private func reloadNode(invalidationRootNode:FileNode4) {
 		Debug.assertMainThread()
-		
+
 		outlineView.beginUpdates()
 		
 		let	oldURLs		=	invalidationRootNode.subnodes.links
@@ -296,7 +299,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		let	idx1	=	self.outlineView.selectedRow
 		if idx1 >= 0 {	
 			let	n1		=	self.outlineView.itemAtRow(idx1) as FileNode4
-			delegate?.fileTreeViewController4IsNotifyingUserWantsToEditFileAtURL(n1.link)
+			delegate?.fileTreeViewController4IsNotifyingThatUserWantsToEditFileAtURL(n1.link)
 		}
 	}
 	public func outlineViewItemDidCollapse(notification: NSNotification) {
@@ -336,7 +339,9 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 			
 			var	e	=	nil as NSError?
 			let	ok	=	NSFileManager.defaultManager().moveItemAtURL(u, toURL: u2, error: &e)
-			if !ok {
+			if ok {
+				self.delegate?.fileTreeViewController4IsNotifyingThatUserDidMoveFile(u, to: u2)
+			} else {
 				presentError(e!)
 			}
 		} else {

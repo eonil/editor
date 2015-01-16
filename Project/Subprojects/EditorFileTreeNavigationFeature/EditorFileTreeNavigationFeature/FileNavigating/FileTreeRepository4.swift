@@ -28,6 +28,12 @@ import Precompilation
 ///	Do not retain `FileNode4` from anywhere else. This tree uses
 ///	unique ownership semantics, and if you retain it anywhere else
 ///	it will leak memory or crash the app.
+///
+///	DESIGN CONSIDERATIONS
+///	---------------------
+///	This is central point of underlying storage. This class abstracts
+///	all details of breakable storage management. Do not put any mutator
+///	code out of this class.
 final class FileTreeRepository4 {
 	private var	_allNodes				=	[:] as [NSURL:FileNode4]
 	
@@ -158,6 +164,18 @@ final class FileTreeRepository4 {
 		relocateTargetNode()
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

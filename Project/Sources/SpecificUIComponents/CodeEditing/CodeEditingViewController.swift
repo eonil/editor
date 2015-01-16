@@ -26,42 +26,47 @@ class CodeEditingViewController : TextScrollViewController {
 			return	super.representedObject
 		}
 		set(v) {
-			precondition(v == nil || v! is NSURL)
+			precondition(v == nil || v is NSURL)
+			if let u1 = v as? NSURL {
+				precondition(u1.existingAsAnyFile)
+				precondition(u1.isFileReferenceURL() == false)
+			}
 			
 			//	Skip duplicated assignment.
 			if v as NSURL? == super.representedObject as NSURL? {
 				return
 			}
 			
-			if let u1 = URLRepresentation {
-				if _trySavingContentInPlace() {
+			let	from	=	super.representedObject as NSURL?
+			let	to		=	v as NSURL?
+
+			if to?.fileReferenceURL() == _fileRefURL {
+				//	File has been moved to `to` location.
+				//	Same URL. Nothing to be done except updating URL.
+				_fileRefURL				=	to?.fileReferenceURL()!
+				super.representedObject	=	to		//	Need to be updated because this must be non-ref URL.
+			} else {
+				//	File is unrelated new one.
+				//	Reload everything.
+				if let u1 = from {
+					if _trySavingContentInPlace() {
+					}
+					_clearContent()
 				}
-				_clearContent()
-			}
-			
-			if let u1 = v as NSURL? {
-				super.representedObject	=	v
-				if _tryLoadingContentOfFileAtURL(u1) {
-				} else {
-					super.representedObject	=	nil
-					return	//	Clear errorneous value.
+				
+				if let u1 = to {
+					super.representedObject	=	u1
+					self._fileRefURL		=	u1.fileReferenceURL()!
+					if _tryLoadingContentOfFileAtURL(u1) {
+					} else {
+						super.representedObject	=	nil
+						return	//	Clear errorneous value.
+					}
 				}
 			}
 		}
-//		willSet(v) {
-//			precondition(v == nil || v! is NSURL)
-//			if let u1 = URLRepresentation {
-//				precondition(u1.existingAsDataFile)	//	Do not set non-data-file to this editor.
-//				_saveContentInPlace()
-//				_clearContent()
-//			}
-//		}
-//		didSet {
-//			if let u1 = URLRepresentation {
-//				_loadContentOfFileAtURL(u1)
-//			}
-//		}
 	}
+	
 	
 	
 	
@@ -136,7 +141,9 @@ class CodeEditingViewController : TextScrollViewController {
 	
 	
 	
+	////
 	
+	private var	_fileRefURL:NSURL?		///	A file-ref URL that tracks movement of target file. Used to determine need for reloading.
 	
 //	private var	synhigh:SyntaxHighlighting?
 //	private var	suspendsynhigh:Bool	=	false
@@ -329,7 +336,7 @@ extension CodeEditingViewController {
 	private func _trySavingContentInPlace() -> Bool {
 		Debug.log(URLRepresentation)
 		assert(URLRepresentation != nil)
-		assert(NSFileManager.defaultManager().fileExistsAtPath(URLRepresentation!.path!))
+		assert(URLRepresentation!.existingAsAnyFile)
 		
 		let	s1	=	self.codeTextViewController.codeTextView.string!
 		var	e1	=	nil as NSError?

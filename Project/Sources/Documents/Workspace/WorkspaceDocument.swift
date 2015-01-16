@@ -60,8 +60,20 @@ extension WorkspaceDocument: FileTreeViewController4Delegate {
 	func fileTreeViewController4IsNotifyingKillingRootURL() {
 		self.performClose(self)
 	}
-	func fileTreeViewController4IsNotifyingUserWantsToEditFileAtURL(u: NSURL) {
+	func fileTreeViewController4IsNotifyingThatUserWantsToEditFileAtURL(u: NSURL) {
 		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
+	}
+	func fileTreeViewController4IsNotifyingThatUserDidMoveFile(from: NSURL, to: NSURL) {
+		self.mainWindowController.codeEditingViewController.URLRepresentation	=	to
+//		let	f	=	mainWindowController.codeEditingViewController.URLRepresentation?
+//		if let f1 = f {
+//			if f1 == from {
+//				f1.relocateToURL(to)
+//			}
+//		}
+	}
+	func fileTreeViewController4IsNotifyingThatUserDidDeleteFile(at: NSURL) {
+		self.mainWindowController.codeEditingViewController.URLRepresentation	=	nil
 	}
 }
 

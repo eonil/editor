@@ -91,7 +91,6 @@
 		45D8D9021A48ED3600AE42C8 /* HygienicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D9011A48ED3600AE42C8 /* HygienicViewController.swift */; };
 		45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */; };
 		45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */; };
-		45E988081A6668BB000138FD /* CodeFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E988071A6668BB000138FD /* CodeFile.swift */; };
 		45EF31991A18DE9900DAF925 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4524431E1A18059700A03A51 /* EonilFileSystemEvents.framework */; };
 		45EF319A1A18DE9900DAF925 /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4524431E1A18059700A03A51 /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */; };
@@ -307,6 +306,20 @@
 			remoteGlobalIDString = 45F48F421A65E1FE00FF38FB;
 			remoteInfo = EditorFileTreeNavigationFeature;
 		};
+		45D1B2371A66856200B48431 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45D1B22E1A66856100B48431 /* EditorFileContentEditingFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D1B2121A66856100B48431;
+			remoteInfo = EditorFileContentEditingFeature;
+		};
+		45D1B2391A66856200B48431 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45D1B22E1A66856100B48431 /* EditorFileContentEditingFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D1B21D1A66856100B48431;
+			remoteInfo = EditorFileContentEditingFeatureTests;
+		};
 		45EF319B1A18DE9A00DAF925 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
@@ -480,13 +493,13 @@
 		45CAD9341A4B145100EDF02D /* SyntaxHighlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxHighlighting.swift; sourceTree = "<group>"; };
 		45D158F41A113FE900B25657 /* CodeEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditingViewController.swift; sourceTree = "<group>"; };
 		45D158F91A11401D00B25657 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		45D1B22E1A66856100B48431 /* EditorFileContentEditingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorFileContentEditingFeature.xcodeproj; path = EditorFileContentEditingFeature/EditorFileContentEditingFeature.xcodeproj; sourceTree = "<group>"; };
 		45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayoutQuery.swift; sourceTree = "<group>"; };
 		45D8D8F01A48E99200AE42C8 /* HygienicWindowController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HygienicWindowController2.swift; sourceTree = "<group>"; };
 		45D8D9011A48ED3600AE42C8 /* HygienicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HygienicViewController.swift; sourceTree = "<group>"; };
 		45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = EonilFileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCRuntime.swift; sourceTree = "<group>"; };
 		45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetActionFunctionBox.swift; sourceTree = "<group>"; };
-		45E988071A6668BB000138FD /* CodeFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeFile.swift; sourceTree = "<group>"; };
 		45F48F1D1A65E1D100FF38FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F48F1E1A65E1D100FF38FB /* EditorFileTreeNavigationFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorFileTreeNavigationFeature.h; sourceTree = "<group>"; };
 		45F48F2C1A65E1D100FF38FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -608,6 +621,7 @@
 			children = (
 				4538576B1A626FC200DC693D /* Precompilation.xcodeproj */,
 				45F48F5F1A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.xcodeproj */,
+				45D1B22E1A66856100B48431 /* EditorFileContentEditingFeature.xcodeproj */,
 				45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */,
 			);
 			path = Subprojects;
@@ -933,7 +947,6 @@
 			isa = PBXGroup;
 			children = (
 				45D158F41A113FE900B25657 /* CodeEditingViewController.swift */,
-				45E988071A6668BB000138FD /* CodeFile.swift */,
 				45646D5A1A45F9F9009697C1 /* RustAutocompletionWindowController.swift */,
 				45CAD9311A4B144100EDF02D /* SyntaxHighlighting */,
 			);
@@ -946,6 +959,15 @@
 				45D158F91A11401D00B25657 /* Palette.swift */,
 			);
 			path = Presets;
+			sourceTree = "<group>";
+		};
+		45D1B22F1A66856100B48431 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45D1B2381A66856200B48431 /* EditorFileContentEditingFeature.framework */,
+				45D1B23A1A66856200B48431 /* EditorFileContentEditingFeatureTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		45F48F1B1A65E1D100FF38FB /* EditorFileTreeNavigationFeature */ = {
@@ -1093,6 +1115,10 @@
 				{
 					ProductGroup = 450A0DE11A275EBD0026102D /* Products */;
 					ProjectRef = 450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */;
+				},
+				{
+					ProductGroup = 45D1B22F1A66856100B48431 /* Products */;
+					ProjectRef = 45D1B22E1A66856100B48431 /* EditorFileContentEditingFeature.xcodeproj */;
 				},
 				{
 					ProductGroup = 45F48F601A65E1FE00FF38FB /* Products */;
@@ -1296,6 +1322,20 @@
 			remoteRef = 459E621A1A65EC1100EDEEB9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45D1B2381A66856200B48431 /* EditorFileContentEditingFeature.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorFileContentEditingFeature.framework;
+			remoteRef = 45D1B2371A66856200B48431 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D1B23A1A66856200B48431 /* EditorFileContentEditingFeatureTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorFileContentEditingFeatureTests.xctest;
+			remoteRef = 45D1B2391A66856200B48431 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45F48F651A65E1FF00FF38FB /* EditorFileTreeNavigationFeature.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1389,7 +1429,6 @@
 				4544821C1A632937005576CB /* WorkspaceMenuController.swift in Sources */,
 				457341021A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift in Sources */,
 				45204C801A63300900929A17 /* ApplicationController.swift in Sources */,
-				45E988081A6668BB000138FD /* CodeFile.swift in Sources */,
 				457341011A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift in Sources */,
 				452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */,
 				451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */,
