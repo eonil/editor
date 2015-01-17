@@ -9,28 +9,31 @@
 import Foundation
 import AppKit
 import Precompilation
+import PrecompilationOfExternalToolSupport
 
 
 
 
+typealias	Issue	=	RustCompilerIssue
 
-
-
+protocol IssueListingViewControllerDelegate: class {
+	func issueListingViewControllerUserWantsToHighlightIssue(Issue)
+	func issueListingViewControllerUserWantsToNavigateToIssue(Issue)
+}
 class IssueListingViewController : TableViewController {
+	weak var delegate: IssueListingViewControllerDelegate?
+	
 	var	issues:[Issue] = [] {
 		didSet {
 			self.tableView.reloadData()
 		}
 	}
 	
-	let	userIsWantingToHighlightIssues	=	Notifier<[Issue]>()
-	let	userIsWantingToNavigateToIssue	=	Notifier<Issue>()
-	
 	func userDidDoubleClick(sender:AnyObject?) {
 		let	idx1	=	tableView.clickedRow
 		let	s1		=	issues[idx1]
 		
-		userIsWantingToNavigateToIssue.signal(s1)
+		delegate!.issueListingViewControllerUserWantsToNavigateToIssue(s1)
 	}
 	
 	override func viewDidLoad() {
@@ -41,7 +44,7 @@ class IssueListingViewController : TableViewController {
 		
 		tableView.addTableColumn <<< NSTableColumn(identifier: NAME, title: "Name", width: 40)
 //		tableView.addTableColumn <<< NSTableColumn(identifier: RANGE, title: "Range")
-		tableView.addTableColumn <<< NSTableColumn(identifier: CLASS, title: "Class", width: 60)
+		tableView.addTableColumn <<< NSTableColumn(identifier: SEVERITY, title: "Severity", width: 60)
 		tableView.addTableColumn <<< NSTableColumn(identifier: DESC, title: "Description")
 		
 		tableView.target			=	self
@@ -84,8 +87,11 @@ class IssueListingViewController : TableViewController {
 	}
 
 	func tableViewSelectionDidChange(notification: NSNotification) {
-		let	ss1		=	tableView.selectedRowIndexes.allIndexes.map({self.issues[$0]})
-		userIsWantingToHighlightIssues.signal(ss1)
+		let	r	=	tableView.selectedRow
+		if r != -1 {
+			let	s	=	self.issues[r]
+			delegate!.issueListingViewControllerUserWantsToHighlightIssue(s)
+		}
 	}
 }
 
@@ -97,10 +103,10 @@ class IssueListingViewController : TableViewController {
 private extension NSTableColumn {
 	func stringValueFrom(s:Issue) -> String {
 		switch self.identifier {
-		case NAME:		return	s.path
+		case NAME:		return	s.location
 		case RANGE:		return	s.range.description
-		case CLASS:		return	s.type.rawValue
-		case DESC:		return	s.text
+		case SEVERITY:	return	s.severity.rawValue
+		case DESC:		return	s.message
 		default:		unreachableCodeError()
 		}
 	}
@@ -108,8 +114,8 @@ private extension NSTableColumn {
 
 
 
-private let	NAME	=	"NAME"
-private let	RANGE	=	"RANGE"
-private let	CLASS	=	"CLASS"
-private let	DESC	=	"DESC"
+private let	NAME		=	"NAME"
+private let	RANGE		=	"RANGE"
+private let	SEVERITY	=	"SEVERITY"
+private let	DESC		=	"DESC"
 

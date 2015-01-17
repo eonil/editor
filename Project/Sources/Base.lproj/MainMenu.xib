@@ -654,9 +654,19 @@ CA
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Project" id="qyF-e2-LzS">
                         <items>
-                            <menuItem title="Run" keyEquivalent="r" id="fx6-It-gLS">
+                            <menuItem title="Build" keyEquivalent="b" id="fx6-It-gLS">
                                 <connections>
-                                    <action selector="run:" target="-1" id="Rzu-y7-YBy"/>
+                                    <action selector="buildWorkspace:" target="-1" id="Alt-13-vY4"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Run" keyEquivalent="r" id="CX0-us-yto">
+                                <connections>
+                                    <action selector="runWorkspace:" target="-1" id="msk-aM-RbW"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Clean" keyEquivalent="K" id="Lsg-7A-Mry">
+                                <connections>
+                                    <action selector="cleanWorkspace:" target="-1" id="Tac-UF-3FI"/>
                                 </connections>
                             </menuItem>
                         </items>

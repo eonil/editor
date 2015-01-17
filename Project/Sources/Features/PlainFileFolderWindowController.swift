@@ -42,6 +42,11 @@ class PlainFileFolderWindowController : HygienicWindowController2 {
 			return	mainViewController.editingViewController.commandConsoleViewController
 		}
 	}
+	var issueListingViewController: IssueListingViewController {
+		get {
+			return	mainViewController.navigationViewController.issueListingViewController
+		}
+	}
 
 	
 	
@@ -128,7 +133,7 @@ extension PlainFileFolderWindowController {
 		let	navigationViewController			=	NavigationViewController()
 //		let	utilityViewController				=	UtilityViewController()
 		
-		private var	_channels	=	[] as [AnyObject]
+//		private var	_channels	=	[] as [AnyObject]
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
@@ -152,10 +157,10 @@ extension PlainFileFolderWindowController {
 //				utilityViewController..width >= NSScreen.mainScreen()!.frame.width ~~ 1,
 			]
 			
-			_channels	=	[
-				channel(navigationViewController.issueListingViewController.userIsWantingToHighlightIssues, editingViewController.codeEditorViewController.highlightRangesOfIssues),
-				channel(navigationViewController.issueListingViewController.userIsWantingToNavigateToIssue, editingViewController.codeEditorViewController.navigateRangeOfIssue),
-			]
+//			_channels	=	[
+//				channel(navigationViewController.issueListingViewController.userIsWantingToHighlightIssues, editingViewController.codeEditorViewController.highlightRangesOfIssues),
+//				channel(navigationViewController.issueListingViewController.userIsWantingToNavigateToIssue, editingViewController.codeEditorViewController.navigateRangeOfIssue),
+//			]
 		}
 		override func viewDidAppear() {
 			super.viewDidAppear()

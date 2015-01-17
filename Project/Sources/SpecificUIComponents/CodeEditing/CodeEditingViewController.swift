@@ -33,6 +33,7 @@ class CodeEditingViewController : TextScrollViewController {
 			return	super.representedObject
 		}
 		set(v) {
+			Debug.log("Setting `CodeEditingViewController.representedObject` to \(v)...")
 			precondition(self.isWaitingForUserResponse == false)
 			precondition(v == nil || v is NSURL)
 			if let u1 = v as? NSURL {
@@ -47,6 +48,7 @@ class CodeEditingViewController : TextScrollViewController {
 			
 			//	Skip fully duplicated assignment.
 			if from == to {
+				Debug.log("from == to, exits early")
 				return	//	EXITS EARLY.
 			}
 			
@@ -56,6 +58,8 @@ class CodeEditingViewController : TextScrollViewController {
 				//	Same URL. Nothing to be done except updating URL.
 				_fileRefURL				=	to?.fileReferenceURL()!
 				super.representedObject	=	to		//	Need to be updated because this must be non-ref URL.
+				
+				Debug.log("to?.fileReferenceURL == _fileRefURL, exits early")
 				return	//	EXITS EARLY.
 			}
 		
@@ -79,11 +83,13 @@ class CodeEditingViewController : TextScrollViewController {
 							self?._trySavingAsFileAtURL(u1, allowRecreation: true)
 							self?._setSuperRepresentedObject(u1)
 							self?._isWaitingForUserResponse	=	false
+							self?._fileRefURL				=	u1.fileReferenceURL()
 							
 						case .CancelButton:
 							self?._clearContent()
 							self?._setSuperRepresentedObject(nil)
 							self?._isWaitingForUserResponse	=	false
+							self?._fileRefURL				=	nil
 						}
 					})
 					return	//	EXITS EARLY.
@@ -104,6 +110,7 @@ class CodeEditingViewController : TextScrollViewController {
 			if let u1 = to {
 				self._fileRefURL		=	u1.fileReferenceURL()!
 				if _tryLoadingContentOfFileAtURL(u1) {
+					
 				} else {
 					super.representedObject	=	nil
 					return	//	Clear errorneous value.
@@ -170,28 +177,7 @@ class CodeEditingViewController : TextScrollViewController {
 		v.turnOffKerning(self)
 		v.turnOffLigatures(self)
 	}
-	
-	func highlightRangesOfIssues(ss:[Issue]) {
-		var	rs1	=	[] as [NSRange]
-		for s in ss {
-			for i in s.range.start.line...s.range.end.line {
-				let	r1	=	(codeTextViewController.codeTextView.string! as NSString).findNSRangeOfLineContentAtIndex(i)
-				rs1.append(r1!)
-			}
-		}
-		codeTextViewController.codeTextView.selectedRanges	=	rs1
-		codeTextViewController.codeTextView.scrollRangeToVisible(rs1[0])
-	}
-	func navigateRangeOfIssue(s:Issue) {
-		let	r1	=	codeTextViewController.codeTextView.string!.findNSRangeOfLineContentAtIndex(s.range.start.line)
-		if let r2 = r1 {
-			codeTextViewController.codeTextView.window!.makeFirstResponder(codeTextViewController.codeTextView)
-			codeTextViewController.codeTextView.selectedRanges	=	[r1!]
-			codeTextViewController.codeTextView.scrollRangeToVisible(r1!)
-		} else {
-		}
-	}
-	
+		
 	
 	override func instantiateDocumentViewController() -> NSViewController {
 		return	CodeTextViewController()
@@ -401,11 +387,14 @@ extension CodeEditingViewController {
 	private func _trySavingAsFileAtURL(u:NSURL, allowRecreation:Bool) -> Bool {
 		Debug.log("_trySavingAsFileAtURL: \(u)")
 		precondition(allowRecreation || u.existingAsDataFile)
-		precondition(codeTextViewController.codeTextView.editable)
 
+		if codeTextViewController.codeTextView.editable == false {
+			return	false
+		}
+		
 		let	s1	=	_snapshotOfCurrentEditingState()
 		var	e1	=	nil as NSError?
-		let	ok1	=	s1.writeToURL(u, atomically: true, encoding: NSUTF8StringEncoding, error: &e1)
+		let	ok1	=	s1.writeToURL(u, atomically: false, encoding: NSUTF8StringEncoding, error: &e1)
 		Debug.log("Code document saved.")
 		
 		if !ok1 {

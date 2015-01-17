@@ -17,6 +17,7 @@
 		45204C801A63300900929A17 /* ApplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45204C7F1A63300900929A17 /* ApplicationController.swift */; };
 		452442711A1801D800A03A51 /* Standards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452442671A18019400A03A51 /* Standards.framework */; };
 		452442731A1801DC00A03A51 /* Standards.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 452442671A18019400A03A51 /* Standards.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4527E4F81A6A717A00115139 /* NSTextView+Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527E4F71A6A717A00115139 /* NSTextView+Issue.swift */; };
 		452A121D1A107E4C00E38F35 /* IssueListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A121C1A107E4C00E38F35 /* IssueListingViewController.swift */; };
 		452A121F1A107EC500E38F35 /* TableScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A121E1A107EC500E38F35 /* TableScrollViewController.swift */; };
 		452A12211A107FF000E38F35 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452A12201A107FF000E38F35 /* TableViewController.swift */; };
@@ -433,6 +434,7 @@
 		451740DF1A102FA300861ECC /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		45204C7F1A63300900929A17 /* ApplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationController.swift; sourceTree = "<group>"; };
 		4524425D1A18019400A03A51 /* Standards.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Standards.xcodeproj; path = Submodules/Monolith.Swift/Standards/Standards.xcodeproj; sourceTree = "<group>"; };
+		4527E4F71A6A717A00115139 /* NSTextView+Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextView+Issue.swift"; sourceTree = "<group>"; };
 		452A121C1A107E4C00E38F35 /* IssueListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListingViewController.swift; sourceTree = "<group>"; };
 		452A121E1A107EC500E38F35 /* TableScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableScrollViewController.swift; sourceTree = "<group>"; };
 		452A12201A107FF000E38F35 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 				452A121C1A107E4C00E38F35 /* IssueListingViewController.swift */,
 				45A6DAAC1A639A2C00DFB9CE /* Issue.swift */,
 				45A6DAAD1A639A2C00DFB9CE /* RustCompilerIssueParsing.swift */,
+				4527E4F71A6A717A00115139 /* NSTextView+Issue.swift */,
 			);
 			path = IssueListing;
 			sourceTree = "<group>";
@@ -1472,6 +1475,7 @@
 				45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */,
 				45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */,
 				45A6DAAF1A639A2C00DFB9CE /* RustCompilerIssueParsing.swift in Sources */,
+				4527E4F81A6A717A00115139 /* NSTextView+Issue.swift in Sources */,
 				454482021A6328BE005576CB /* WorkspaceNavigationViewController.swift in Sources */,
 				45D8D8F11A48E99200AE42C8 /* HygienicWindowController2.swift in Sources */,
 				45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */,

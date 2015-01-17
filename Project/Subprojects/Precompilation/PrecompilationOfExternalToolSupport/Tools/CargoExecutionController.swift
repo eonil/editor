@@ -9,18 +9,33 @@
 import Foundation
 import Precompilation
 
+
+public struct CargoExecutionResult {
+	public var	output:String
+	public var	error:String
+	
+	public func issues() -> [RustCompilerIssue] {
+		return	RustCompilerOutputParsing.parseErrorOutput(error)
+	}
+}
 public struct CargoExecutionController {
 	
 	///	`workingDirectoryURL` must be parent directory of new project directory.
-	public static func create(workingDirectoryURL:NSURL, name:String) -> String {
-		return	execute(workingDirectoryURL, ["new", name])
+	public static func create(workingDirectoryURL:NSURL, name:String) -> CargoExecutionResult {
+		return	execute(workingDirectoryURL, ["new", "-v", name])
 	}
-	public static func build(workingDirectoryURL:NSURL) -> String {
-		return	execute(workingDirectoryURL, ["build"])
+	public static func build(workingDirectoryURL:NSURL) -> CargoExecutionResult {
+		return	execute(workingDirectoryURL, ["build", "-v"])
+	}
+	public static func run(workingDirectoryURL:NSURL) -> CargoExecutionResult {
+		return	execute(workingDirectoryURL, ["run", "-v"])
+	}
+	public static func clean(workingDirectoryURL:NSURL) -> CargoExecutionResult {
+		return	execute(workingDirectoryURL, ["clean", "-v"])
 	}
 	
 	///	Returns output string.
-	public static func execute(workingDirectoryURL:NSURL, _ arguments:[String]) -> String {
+	public static func execute(workingDirectoryURL:NSURL, _ arguments:[String]) -> CargoExecutionResult {
 		assert(workingDirectoryURL.existingAsDirectoryFile)
 		
 		let	p1	=	workingDirectoryURL.path!
@@ -45,15 +60,15 @@ public struct CargoExecutionController {
 		
 		assert(t1.running == false)
 		println(t1)
-		println(t1.terminationStatus)
-		println(t1.terminationReason)
+		println("exit code = \(t1.terminationStatus)")
+		println("exit reason = \(t1.terminationReason)")
 		assert(t1.terminationStatus == 0)
 		
 		let	out3	=	out1.fileHandleForReading.readUTF8StringToEndOfFile()
 		let	err3	=	err1.fileHandleForReading.readUTF8StringToEndOfFile()
-		let	all		=	out3 + "\n" + err3
-		println(all)
-		return	all
+
+		Debug.log(out3 + "\n" + err3)
+		return	CargoExecutionResult(output: out3, error: err3)
 	}
 	
 	

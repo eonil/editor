@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Precompilation
 
 public extension NSIndexSet {
 	public convenience init(_ indexes:[Int]) {
@@ -154,10 +155,31 @@ public extension NSFileHandle {
 
 
 
+extension NSTaskTerminationReason: Printable {
+	public var description:String {
+		get {
+			switch self {
+			case .Exit:				return	"Exit"
+			case .UncaughtSignal:	return	"UncaughtSignal"
+			}
+		}
+	}
+}
 
 
-
-
+extension NSQualityOfService: Printable {
+	public var description:String {
+		get {
+			switch self {
+			case UserInteractive:		return	"UserInteractive"
+			case UserInitiated:			return	"UserInitiated"
+			case Utility:				return	"Utility"
+			case Background:			return	"Background"
+			case Default:				return	"Default"
+			}
+		}
+	}
+}
 
 
 

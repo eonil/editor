@@ -23,7 +23,8 @@ class WorkspaceDocument : NSDocument {
 		super.init()
 		
 		assert(mainWindowController.fileTreeViewController.delegate == nil)
-		mainWindowController.fileTreeViewController.delegate	=	self
+		mainWindowController.fileTreeViewController.delegate		=	self
+		mainWindowController.issueListingViewController.delegate	=	self
 	}
 	
 	override func makeWindowControllers() {
@@ -54,9 +55,6 @@ class WorkspaceDocument : NSDocument {
 		}
 	}
 	
-	private func runWorkspace() {
-		CargoExecutionController.build(rootLocation.stringExpression)
-	}
 }
 
 
@@ -154,6 +152,28 @@ private func subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
 
 
 
+extension WorkspaceDocument: IssueListingViewControllerDelegate {
+	func issueListingViewControllerUserWantsToHighlightIssue(s: Issue) {
+		let	u	=	NSURL(fileURLWithPath: s.location, isDirectory: false)!
+		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
+		self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.highlightRangeOfIssue(s)
+	}
+	func issueListingViewControllerUserWantsToNavigateToIssue(s: Issue) {
+		let	u	=	NSURL(fileURLWithPath: s.location, isDirectory: false)!
+		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
+		self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.navigateRangeOfIssue(s)
+	}
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -229,10 +249,10 @@ extension WorkspaceDocument {
 					return
 				}
 				
-				fatalError("Unknown file system event flag.")
-//				self	=	None
+//				fatalError("Unknown file system event flag.")
+				self	=	None
 			}
-//			case None
+			case None
 			case Create
 			case Move
 			case Modify
@@ -240,6 +260,9 @@ extension WorkspaceDocument {
 		}
 
 		switch Operation(flag: event.flag) {
+		case .None:
+			Debug.log("NONE: \(u1)")
+			
 		case .Create:
 			Debug.log("CREATE: \(u1)")
 			
@@ -321,14 +344,27 @@ extension WorkspaceDocument {
 	}
 	
 	
+	@objc @IBAction
+	func buildWorkspace(AnyObject?) {
+		let	r	=	CargoExecutionController.build(rootLocation.stringExpression)
+		mainWindowController.issueListingViewController.issues	=	r.issues()
+	}
 
 	///	Build and run default project current workspace. 
 	///	By default, this runs `cargo` on workspace root.
 	///	Customisation will be provided later.
 	@objc @IBAction
-	func run(AnyObject?) {
-		self.runWorkspace()
+	func runWorkspace(AnyObject?) {
+		let	r	=	CargoExecutionController.run(rootLocation.stringExpression)
+		mainWindowController.issueListingViewController.issues	=	r.issues()
 	}
+	
+	@objc @IBAction
+	func cleanWorkspace(AnyObject?) {
+		let	r	=	CargoExecutionController.clean(rootLocation.stringExpression)
+		mainWindowController.issueListingViewController.issues	=	r.issues()
+	}
+	
 }
 
 

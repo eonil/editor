@@ -53,7 +53,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 //	let	userIsWantingToEditFileAtURL	=	Notifier<NSURL>()
 	
 	private	var	_fileTreeRepository		=	nil as FileTreeRepository4?
-	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor3?
+//	private	var	_fileSystemMonitor		=	nil as FileSystemMonitor3?
 	
 	private let	_contextMenuManager		=	ContextMenuManager()
 
@@ -163,7 +163,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		willSet(v) {
 			precondition(v == nil || v is NSURL)
 			
-			_fileSystemMonitor	=	nil
+//			_fileSystemMonitor	=	nil
 			_fileTreeRepository	=	nil
 		}
 		didSet {
@@ -177,7 +177,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 					self?.invalidateNodeForURL(u)
 					return	()
 				}
-				_fileSystemMonitor	=	FileSystemMonitor3(monitoringRootURL: v3, callback: callback)
+//				_fileSystemMonitor	=	FileSystemMonitor3(monitoringRootURL: v3, callback: callback)
 			}
 			self.outlineView.reloadData()
 			if URLRepresentation != nil {
@@ -534,10 +534,20 @@ private final class ContextMenuManager : NSObject, NSMenuDelegate {
 		}
 	
 		////
-	
+		
 		menu.addItem(NSMenuItem(title: "Show in Finder", reaction: { [unowned self] () -> () in
 			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
 			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(targetURLs)
+		}))
+		
+		menu.addItem(NSMenuItem(title: "Show in Terminal", reaction: { [unowned self] () -> () in
+			let	targetURLs	=	collectTargetFileURLs(self.outlineView)
+			for u in targetURLs {
+				let	p	=	u.path!
+				let	p1	=	p.stringByDeletingLastPathComponent
+				let	s	=	NSAppleScript(source: "tell application \"Terminal\" to do script \"cd \(p1)\"")!
+				s.executeAndReturnError(nil)
+			}
 		}))
 		
 		menu.addSeparatorItem()

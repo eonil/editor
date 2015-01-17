@@ -1,0 +1,7 @@
+/Users/Eonil/Documents/test-bin1/src/main.rs:5:1: 5:3 error: expected ident, found `<eof>`
+/Users/Eonil/Documents/test-bin1/src/main.rs:5 fn
+                                               ^~
+Could not compile `test-bin1`.
+
+Caused by:
+  Process didn't exit successfully: `rustc /Users/Eonil/Documents/test-bin1/src/main.rs --crate-name test-bin1 --crate-type bin -g --out-dir /Users/Eonil/Documents/test-bin1/target --emit=dep-info,link -L dependency=/Users/Eonil/Documents/test-bin1/target -L dependency=/Users/Eonil/Documents/test-bin1/target/deps` (status=101)

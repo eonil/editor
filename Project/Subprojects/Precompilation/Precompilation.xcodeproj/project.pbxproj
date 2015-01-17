@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4527E4841A6A646A00115139 /* RustCompilerIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527E4831A6A646A00115139 /* RustCompilerIssue.swift */; };
+		4527E4911A6A65AD00115139 /* CargoOutputParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527E48A1A6A658200115139 /* CargoOutputParsing.swift */; };
+		4527E4931A6A671100115139 /* RustCompilerOutputParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527E4921A6A671100115139 /* RustCompilerOutputParsing.swift */; };
 		453686581A63AE86000754F3 /* Precompilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4538574F1A626FC200DC693D /* Precompilation.framework */; };
 		453857551A626FC200DC693D /* Precompilation.h in Headers */ = {isa = PBXBuildFile; fileRef = 453857541A626FC200DC693D /* Precompilation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		453857751A626FDC00DC693D /* Dialogues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453857741A626FDC00DC693D /* Dialogues.swift */; };
@@ -17,9 +20,8 @@
 		453857991A62702900DC693D /* Precompilation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4538574F1A626FC200DC693D /* Precompilation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		456670591A65E81E003EEC14 /* AppKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456670571A65E81E003EEC14 /* AppKitExtensions.swift */; };
 		4566705A1A65E81E003EEC14 /* SwiftLevelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456670581A65E81E003EEC14 /* SwiftLevelExtensions.swift */; };
+		45A5F8171A6A5A1600CC5FC8 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A5F8161A6A5A1600CC5FC8 /* FoundationExtensions.swift */; };
 		45A6DACA1A63A10C00DFB9CE /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DAC91A63A10C00DFB9CE /* FileUtility.swift */; };
-		45A6DACF1A63A1DC00DFB9CE /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DACE1A63A1DC00DFB9CE /* FoundationExtensions.swift */; };
-		45A6DAD01A63A1DC00DFB9CE /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DACE1A63A1DC00DFB9CE /* FoundationExtensions.swift */; };
 		45A6DAD11A63A22B00DFB9CE /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DAC91A63A10C00DFB9CE /* FileUtility.swift */; };
 		45A6DAD51A63A27A00DFB9CE /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DAD31A63A27A00DFB9CE /* Diff.swift */; };
 		45A6DAD61A63A27A00DFB9CE /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DAD31A63A27A00DFB9CE /* Diff.swift */; };
@@ -129,6 +131,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4527E4831A6A646A00115139 /* RustCompilerIssue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerIssue.swift; sourceTree = "<group>"; };
+		4527E48A1A6A658200115139 /* CargoOutputParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoOutputParsing.swift; sourceTree = "<group>"; };
+		4527E4901A6A65A300115139 /* example1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example1.txt; sourceTree = "<group>"; };
+		4527E4921A6A671100115139 /* RustCompilerOutputParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerOutputParsing.swift; sourceTree = "<group>"; };
 		453686591A63AEBB000754F3 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4538574F1A626FC200DC693D /* Precompilation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Precompilation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		453857531A626FC200DC693D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -141,8 +147,8 @@
 		453857831A62700400DC693D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		456670571A65E81E003EEC14 /* AppKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtensions.swift; sourceTree = "<group>"; };
 		456670581A65E81E003EEC14 /* SwiftLevelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLevelExtensions.swift; sourceTree = "<group>"; };
+		45A5F8161A6A5A1600CC5FC8 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		45A6DAC91A63A10C00DFB9CE /* FileUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
-		45A6DACE1A63A1DC00DFB9CE /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		45A6DAD31A63A27A00DFB9CE /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		45A6DAD41A63A27A00DFB9CE /* FilePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePath.swift; sourceTree = "<group>"; };
 		45A6DADD1A63A29F00DFB9CE /* PrecompilationUnitTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PrecompilationUnitTest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				456670571A65E81E003EEC14 /* AppKitExtensions.swift */,
+				45A5F8161A6A5A1600CC5FC8 /* FoundationExtensions.swift */,
 				456670581A65E81E003EEC14 /* SwiftLevelExtensions.swift */,
 			);
 			path = TypeExtensions;
@@ -293,7 +300,6 @@
 		45A6DACD1A63A1DC00DFB9CE /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				45A6DACE1A63A1DC00DFB9CE /* FoundationExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -311,6 +317,8 @@
 			isa = PBXGroup;
 			children = (
 				45A6DADF1A63A29F00DFB9CE /* main.swift */,
+				4527E48A1A6A658200115139 /* CargoOutputParsing.swift */,
+				4527E4901A6A65A300115139 /* example1.txt */,
 			);
 			path = PrecompilationUnitTest;
 			sourceTree = "<group>";
@@ -337,6 +345,8 @@
 			isa = PBXGroup;
 			children = (
 				45A6DB601A63AB1D00DFB9CE /* CargoExecutionController.swift */,
+				4527E4921A6A671100115139 /* RustCompilerOutputParsing.swift */,
+				4527E4831A6A646A00115139 /* RustCompilerIssue.swift */,
 				45A6DB611A63AB1D00DFB9CE /* RacerExecutionController.swift */,
 				45A6DB621A63AB1D00DFB9CE /* RustProgramExecutionController.swift */,
 				45A6DB631A63AB1D00DFB9CE /* TSVFileScanner.swift */,
@@ -578,7 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45FE1B2A1A65E563002B9D1B /* Box.swift in Sources */,
-				45A6DACF1A63A1DC00DFB9CE /* FoundationExtensions.swift in Sources */,
+				45A5F8171A6A5A1600CC5FC8 /* FoundationExtensions.swift in Sources */,
 				45FE1B2F1A65E563002B9D1B /* XML.Navigator.swift in Sources */,
 				45A6DAD51A63A27A00DFB9CE /* Diff.swift in Sources */,
 				4566705A1A65E81E003EEC14 /* SwiftLevelExtensions.swift in Sources */,
@@ -604,7 +614,6 @@
 			files = (
 				45A6DAD11A63A22B00DFB9CE /* FileUtility.swift in Sources */,
 				45A6DAD81A63A27A00DFB9CE /* FilePath.swift in Sources */,
-				45A6DAD01A63A1DC00DFB9CE /* FoundationExtensions.swift in Sources */,
 				45A6DAE61A63A2C300DFB9CE /* UnitTest.swift in Sources */,
 				45A6DAD61A63A27A00DFB9CE /* Diff.swift in Sources */,
 				4538577F1A62700400DC693D /* AppDelegate.swift in Sources */,
@@ -624,6 +633,7 @@
 				45FE1B4A1A65E651002B9D1B /* TargetActionFunctionBox.swift in Sources */,
 				45FE1B4D1A65E651002B9D1B /* XML.swift in Sources */,
 				45A6DAE91A63A2E800DFB9CE /* FilePath.swift in Sources */,
+				4527E4911A6A65AD00115139 /* CargoOutputParsing.swift in Sources */,
 				45FE1B4C1A65E651002B9D1B /* NotifierAndObserver.swift in Sources */,
 				45FE1B4F1A65E651002B9D1B /* XML.Test.swift in Sources */,
 				45FE1B4E1A65E651002B9D1B /* XML.Navigator.swift in Sources */,
@@ -636,7 +646,9 @@
 			files = (
 				45A6DB661A63AB1D00DFB9CE /* RustProgramExecutionController.swift in Sources */,
 				45A6DB651A63AB1D00DFB9CE /* RacerExecutionController.swift in Sources */,
+				4527E4931A6A671100115139 /* RustCompilerOutputParsing.swift in Sources */,
 				45A6DB671A63AB1D00DFB9CE /* TSVFileScanner.swift in Sources */,
+				4527E4841A6A646A00115139 /* RustCompilerIssue.swift in Sources */,
 				45A6DB641A63AB1D00DFB9CE /* CargoExecutionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
