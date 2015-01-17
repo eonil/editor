@@ -82,19 +82,42 @@ public extension NSURL {
 	}
 	public var existingAsAnyFile:Bool {
 		get {
-			return	NSFileManager.defaultManager().fileExistsAtPath(self.path!)
+			var	err	=	nil as NSError?
+			let	ok	=	self.checkResourceIsReachableAndReturnError(&err)
+			assert(ok == true || err != nil)
+			if !ok {
+				Debug.log("existingAsAnyFile: \(err)")
+			}
+			return	ok
 		}
 	}
 	public var existingAsDataFile:Bool {
 		get {
-			assert(self.fileURL)
-			return	NSFileManager.defaultManager().fileExistsAtPathAsDataFile(self.path!)
+			if existingAsAnyFile {
+				var	dir: AnyObject?	=	false as AnyObject?
+				var	err				=	nil as NSError?
+				let	ok				=	self.getResourceValue(&dir, forKey: NSURLIsDirectoryKey, error: &err)
+				if !ok {
+					Debug.log("existingAsDataFile: \(err)")
+				}
+				return	dir as Bool == false
+			}
+			return	false
 		}
 	}
 	public var existingAsDirectoryFile:Bool {
 		get {
-			assert(self.fileURL)
-			return	NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(self.path!)
+			
+			if existingAsAnyFile {
+				var	dir: AnyObject?	=	false as AnyObject?
+				var	err				=	nil as NSError?
+				let	ok				=	self.getResourceValue(&dir, forKey: NSURLIsDirectoryKey, error: &err)
+				if !ok {
+					Debug.log("existingAsDataFile: \(err)")
+				}
+				return	dir as Bool == true
+			}
+			return	false
 		}
 	}
 }

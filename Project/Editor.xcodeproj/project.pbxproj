@@ -89,6 +89,7 @@
 		45D8D8F11A48E99200AE42C8 /* HygienicWindowController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D8F01A48E99200AE42C8 /* HygienicWindowController2.swift */; };
 		45D8D9021A48ED3600AE42C8 /* HygienicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D9011A48ED3600AE42C8 /* HygienicViewController.swift */; };
 		45DA95601A69DAE70091410B /* CodeEditingFileMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA955F1A69DAE70091410B /* CodeEditingFileMonitor.swift */; };
+		45DA95AD1A6A15E30091410B /* FileLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA95AC1A6A15E30091410B /* FileLocation.swift */; };
 		45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */; };
 		45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */; };
 		45EF31991A18DE9900DAF925 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4524431E1A18059700A03A51 /* EonilFileSystemEvents.framework */; };
@@ -320,6 +321,13 @@
 			remoteGlobalIDString = 45D1B21D1A66856100B48431;
 			remoteInfo = EditorFileContentEditingFeatureTests;
 		};
+		45DA95AA1A6A10E50091410B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45DA95801A69F1610091410B;
+			remoteInfo = InternalTester4;
+		};
 		45EF319B1A18DE9A00DAF925 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
@@ -498,6 +506,7 @@
 		45D8D9011A48ED3600AE42C8 /* HygienicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HygienicViewController.swift; sourceTree = "<group>"; };
 		45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = EonilFileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		45DA955F1A69DAE70091410B /* CodeEditingFileMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditingFileMonitor.swift; sourceTree = "<group>"; };
+		45DA95AC1A6A15E30091410B /* FileLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLocation.swift; sourceTree = "<group>"; };
 		45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCRuntime.swift; sourceTree = "<group>"; };
 		45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetActionFunctionBox.swift; sourceTree = "<group>"; };
 		45F48F1D1A65E1D100FF38FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -632,6 +641,7 @@
 			children = (
 				4524431E1A18059700A03A51 /* EonilFileSystemEvents.framework */,
 				452443201A18059700A03A51 /* InternalTester */,
+				45DA95AB1A6A10E50091410B /* InternalTester4.app */,
 				452443221A18059700A03A51 /* TestdriveApp.app */,
 			);
 			name = Products;
@@ -789,6 +799,7 @@
 			isa = PBXGroup;
 			children = (
 				457D5CE51A63287C008ECE6F /* WorkspaceDocument.swift */,
+				45DA95AC1A6A15E30091410B /* FileLocation.swift */,
 				45756F641A6537860017AA4B /* WorkspaceUtility.swift */,
 				459E62451A65ED3300EDEEB9 /* WorkspaceWindowController.swift */,
 				457D5CE41A63287C008ECE6F /* UI */,
@@ -1336,6 +1347,13 @@
 			remoteRef = 45D1B2391A66856200B48431 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45DA95AB1A6A10E50091410B /* InternalTester4.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = InternalTester4.app;
+			remoteRef = 45DA95AA1A6A10E50091410B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45F48F651A65E1FF00FF38FB /* EditorFileTreeNavigationFeature.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1446,6 +1464,7 @@
 				45A6DAAB1A6388FD00DFB9CE /* ArrayReportingController.swift in Sources */,
 				459433AF1A45EBBE008B2CFF /* TextEditingViewController.swift in Sources */,
 				45D158F51A113FE900B25657 /* CodeEditingViewController.swift in Sources */,
+				45DA95AD1A6A15E30091410B /* FileLocation.swift in Sources */,
 				454E42AB1A13D244007BEE79 /* FileTreeRepository4.swift in Sources */,
 				45DA95601A69DAE70091410B /* CodeEditingFileMonitor.swift in Sources */,
 				4597F8281A113D100089FC66 /* NotifierAndObserver.swift in Sources */,

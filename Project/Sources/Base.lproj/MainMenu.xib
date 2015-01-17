@@ -121,6 +121,15 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="QC4-Sx-Nd2"/>
+                            <menuItem title="Delete" id="igL-jf-PYa">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                <connections>
+                                    <action selector="deleteFileWithoutConfirmation:" target="-1" id="Jn8-8q-Gu1"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="oXC-wQ-tMJ"/>
                             <menuItem title="Page Setup…" keyEquivalent="P" id="hec-aX-wgP">
                                 <connections>
                                     <action selector="runPageLayout:" target="-1" id="PfR-N1-dgu"/>

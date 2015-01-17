@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 import EonilDispatch
 import EonilFileSystemEvents
-
+import Precompilation
 
 protocol CodeEditingViewControllerDelegate: class {
 	func codeEditingViewControllerWillSetURL(NSURL)
@@ -33,44 +33,96 @@ class CodeEditingViewController : TextScrollViewController {
 			return	super.representedObject
 		}
 		set(v) {
+			precondition(self.isWaitingForUserResponse == false)
 			precondition(v == nil || v is NSURL)
 			if let u1 = v as? NSURL {
 				precondition(u1.existingAsAnyFile)
 				precondition(u1.isFileReferenceURL() == false)
 			}
 			
-			//	Skip duplicated assignment.
-			if v as NSURL? == super.representedObject as NSURL? {
-				return
-			}
+			////
 			
 			let	from	=	super.representedObject as NSURL?
 			let	to		=	v as NSURL?
-
+			
+			//	Skip fully duplicated assignment.
+			if from == to {
+				return	//	EXITS EARLY.
+			}
+			
+			//	Skip duplicated assignment to a URL to a moved file.
 			if to?.fileReferenceURL() == _fileRefURL {
 				//	File has been moved to `to` location.
 				//	Same URL. Nothing to be done except updating URL.
 				_fileRefURL				=	to?.fileReferenceURL()!
 				super.representedObject	=	to		//	Need to be updated because this must be non-ref URL.
-			} else {
-				//	File is unrelated new one.
-				//	Reload everything.
-				if let u1 = from {
-					if _trySavingContentInPlace() {
+				return	//	EXITS EARLY.
+			}
+		
+			//	Now file is unrelated new one.
+			//	Reload everything.
+			
+			//	Skip if old URL does not exists.
+			//	And query user for what to do.
+			//	And setting URL will be prevented until user responds.
+			if let u1 = from {
+				if u1.existingAsDataFile == false {
+					_isWaitingForUserResponse	=	true
+					func recreateQueryMessage(filepath:String) -> String {
+						return	"The file for the document that was at \(filepath) has disappeared. The document has previously unsaved changes. Do you want to re-save the document or close it?"
 					}
-					_clearContent()
-				}
-				
-				if let u1 = to {
-					super.representedObject	=	u1
-					self._fileRefURL		=	u1.fileReferenceURL()!
-					if _tryLoadingContentOfFileAtURL(u1) {
-					} else {
-						super.representedObject	=	nil
-						return	//	Clear errorneous value.
-					}
+					
+					let	m	=	recreateQueryMessage(u1.path!)
+					UIDialogues.queryUsingWindowSheetModally(self.view.window!, message: "Warning", comment: m, style: NSAlertStyle.WarningAlertStyle, okButtonTitle: "Re-save", cancelButtonTitle: "Close", handler: { [weak self](selection) -> () in
+						switch selection {
+						case .OKButton:
+							self?._trySavingAsFileAtURL(u1, allowRecreation: true)
+							self?._setSuperRepresentedObject(u1)
+							self?._isWaitingForUserResponse	=	false
+							
+						case .CancelButton:
+							self?._clearContent()
+							self?._setSuperRepresentedObject(nil)
+							self?._isWaitingForUserResponse	=	false
+						}
+					})
+					return	//	EXITS EARLY.
 				}
 			}
+		
+			////
+			
+			//	OK. Proceed normal process.
+			if let u1 = from {
+				if _trySavingAsFileAtURL(u1, allowRecreation: false) {
+				}
+				_clearContent()
+			}
+			
+			super.representedObject	=	to
+
+			if let u1 = to {
+				self._fileRefURL		=	u1.fileReferenceURL()!
+				if _tryLoadingContentOfFileAtURL(u1) {
+				} else {
+					super.representedObject	=	nil
+					return	//	Clear errorneous value.
+				}
+			}
+		}
+	}
+	
+	private func _setSuperRepresentedObject(o:AnyObject?) {
+		super.representedObject	=	o
+	}
+	
+	
+	
+	
+	
+	var isWaitingForUserResponse:Bool {
+		get {
+			return	_isWaitingForUserResponse
 		}
 	}
 	
@@ -78,9 +130,8 @@ class CodeEditingViewController : TextScrollViewController {
 	
 	
 	
-	
 	func trySavingInPlace() -> Bool {
-		return	_trySavingContentInPlace()
+		return	_trySavingAsFileAtURL(URLRepresentation!, allowRecreation: false)
 	}
 	
 	
@@ -150,8 +201,8 @@ class CodeEditingViewController : TextScrollViewController {
 	
 	////
 	
-	private var	_fileRefURL:NSURL?		///	A file-ref URL that tracks movement of target file. Used to determine need for reloading.
-	
+	private var	_fileRefURL:NSURL?									///	A file-ref URL that tracks movement of target file. Used to determine need for reloading.
+	private var	_isWaitingForUserResponse:Bool		=	false		///	Currently this object is querying something from user with window sheet. Some operations will become no-op in this situation.
 //	private var	synhigh:SyntaxHighlighting?
 //	private var	suspendsynhigh:Bool	=	false
 }
@@ -322,6 +373,14 @@ protocol CodeTextViewAutocompletionController {
 
 extension CodeEditingViewController {
 	
+	private func _snapshotOfCurrentEditingState() -> String {
+		return	self.codeTextViewController.codeTextView.string!
+	}
+	private func _setCurrentEditingStateBySnapshot(s:String, editable:Bool) {
+		self.codeTextViewController.codeTextView.editable	=	editable
+		self.codeTextViewController.codeTextView.string		=	s
+	}
+	
 	///	I/O can fail at anytime.
 	private func _tryLoadingContentOfFileAtURL(u:NSURL) -> Bool {
 		assert(NSFileManager.defaultManager().fileExistsAtPath(u.path!))
@@ -329,25 +388,24 @@ extension CodeEditingViewController {
 		var	e1	=	nil as NSError?
 		let	s1	=	NSString(contentsOfURL: u, encoding: NSUTF8StringEncoding, error: &e1)
 		if let s2 = s1 {
-			self.codeTextViewController.codeTextView.editable	=	true
-			self.codeTextViewController.codeTextView.string		=	s2
+			_setCurrentEditingStateBySnapshot(s2, editable: true)
 			return	true
 		} else {
-			self.codeTextViewController.codeTextView.editable	=	false
-			self.codeTextViewController.codeTextView.string		=	e1!.localizedDescription
+			_setCurrentEditingStateBySnapshot(e1!.localizedDescription, editable: false)
 			return	false
 		}
 	}
 	
 	///	I/O can fail at anytime.
-	private func _trySavingContentInPlace() -> Bool {
-		Debug.log(URLRepresentation)
-		assert(URLRepresentation != nil)
-		assert(URLRepresentation!.existingAsAnyFile)
-		
-		let	s1	=	self.codeTextViewController.codeTextView.string!
+	///	You shouldn't call this with read-only content.
+	private func _trySavingAsFileAtURL(u:NSURL, allowRecreation:Bool) -> Bool {
+		Debug.log("_trySavingAsFileAtURL: \(u)")
+		precondition(allowRecreation || u.existingAsDataFile)
+		precondition(codeTextViewController.codeTextView.editable)
+
+		let	s1	=	_snapshotOfCurrentEditingState()
 		var	e1	=	nil as NSError?
-		let	ok1	=	s1.writeToURL(URLRepresentation!, atomically: true, encoding: NSUTF8StringEncoding, error: &e1)
+		let	ok1	=	s1.writeToURL(u, atomically: true, encoding: NSUTF8StringEncoding, error: &e1)
 		Debug.log("Code document saved.")
 		
 		if !ok1 {
@@ -361,7 +419,6 @@ extension CodeEditingViewController {
 		self.codeTextViewController.codeTextView.editable	=	false
 	}
 }
-
 
 
 

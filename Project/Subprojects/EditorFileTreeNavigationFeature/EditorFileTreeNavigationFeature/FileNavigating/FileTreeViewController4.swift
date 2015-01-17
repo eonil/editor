@@ -12,41 +12,40 @@ import EonilDispatch
 import Precompilation
 
 
-
 ///	Anything that causes UI changes will be notified for did-delete and did-move events.
 public protocol FileTreeViewController4Delegate: class {
-//	///	Return `true` if the editing can be committed.
-//	func fileTreeViewController4UserWantsToEditFileAtURL(NSURL) -> Bool
-//
-//	///	Return `true` if the rename can be committed.
-//	func fileTreeViewController4UserWantsToRenameFileAtURL(from:NSURL, to:NSURL) -> Bool
-//	
-//	///	Return `true` if the movement can be committed.
-//	func fileTreeViewController4UserWantsToMoveFileAtURL(from:NSURL, to:NSURL)
+	///	Passing-in URL is always an absolute URL.
+	///	Passing-out URL also always be absolute URLs.
+	func fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(NSURL) -> [NSURL]
 	
-	func fileTreeViewController4IsNotifyingThatUserWantsToEditFileAtURL(NSURL)
-
-	///	Within repository root, including rename. 
-	///	If file moved out from the repository root, 
-	///	`fileTreeViewController4IsNotifyingThatUserDidDeleteFile` will be happen instead of.
-	///	If the file is moved by external process, it is impossible to track the movemnet
-	///	precisely, so it will be treated as a deletion, and delete event will be notified.
-	func fileTreeViewController4IsNotifyingThatUserDidMoveFile(from:NSURL, to:NSURL)
-	func fileTreeViewController4IsNotifyingThatUserDidDeleteFile(at:NSURL)
+	///	Return `true` if the editing can be committed.
+	func fileTreeViewController4UserWantsToEditFileAtURL(NSURL) -> Bool
 	
-	func fileTreeViewController4IsNotifyingKillingRootURL()
+	///	Return a URL to newly created folder if the creation can be committed.
+	func fileTreeViewController4UserWantsToCreateFolderInURL(parent:NSURL) -> Resolution<NSURL>
+	
+	///	Return a URL to newly created file if the creation can be committed.
+	func fileTreeViewController4UserWantsToCreateFileInURL(parent:NSURL) -> Resolution<NSURL>
+	
+	///	Return `true` if the rename can be committed.
+	func fileTreeViewController4UserWantsToRenameFileAtURL(from:NSURL, to:NSURL) -> Resolution<()>
+	
+	///	Return `true` if the movement can be committed.
+	func fileTreeViewController4UserWantsToMoveFileAtURL(from:NSURL, to:NSURL) -> Resolution<()>
+	
+	///	Return `true` if the deletion can be committed.
+	///	OS X file system does not support transaction, so partial failure will be reported as an error.
+	///	In any error cases, deleted files will not be recovered.
+	func fileTreeViewController4UserWantsToDeleteFilesAtURLs([NSURL]) -> Resolution<()>
 }
 
 
+///	This class is UI only, and does not performa any file-system I/O.
+///	You need to set delegate to provide a proper file-system tree informations whenever required.
+///	You also need to manually notify updates by calling `invalidateNodeForURL` method.
 ///
-///
-///	Take care that the file-system monitoring can be suspended by request,
-///	and this class is using it to suspend file-system monitoring events
-///	while column editing.
-///
-///	This notifies node moving and deleting by user interactions via delegate.
-///	This also monitors file-system, and triggers UI modification and fires delegate events. 
-///	Anyway movement cannobe be tracked and will be treated as a deletion in this case.
+///	Node modifications by user interactions will be notified to delegate.
+///	Node modifications triggered by `invalidateNodeForURL` method will not be notified to delegate.
 public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate, FileTableCellEditingDelegate {
 	public weak var delegate:FileTreeViewController4Delegate?
 	
@@ -80,7 +79,6 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		Debug.log("invalidateNodeForURL: \(u)")
 		
 		if u == URLRepresentation {
-			self.delegate?.fileTreeViewController4IsNotifyingKillingRootURL()
 			self.URLRepresentation	=	nil		//	Self-destruction.
 			self.outlineView.reloadData()
 			return
@@ -102,7 +100,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		outlineView.beginUpdates()
 		
 		let	oldURLs		=	invalidationRootNode.subnodes.links
-		let	newURLs		=	subnodeAbsoluteURLsOfURL(invalidationRootNode.link)
+		let	newURLs		=	self.delegate!.fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(invalidationRootNode.link)
 		let	deltaset	=	resolveDifferences(oldURLs, newURLs)
 		
 		let	outgoingRows	=	deltaset.outgoings.map { [unowned self] (u:NSURL)->Int in
@@ -139,12 +137,6 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		}
 		
 		outlineView.endUpdates()
-		
-		////
-		
-		for u in deltaset.outgoings {
-			self.delegate?.fileTreeViewController4IsNotifyingThatUserDidDeleteFile(u)
-		}
 	}
 	
 	///	No-op if a node for the supplied URL does not exists.
@@ -203,7 +195,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		}
 	}
 	public override func loadView() {
-		super.view	=	NSOutlineView()
+		super.view	=	FileTreeOutlineView()
 	}
 	public override func viewDidLoad() {
 		super.viewDidLoad()
@@ -251,7 +243,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		let	n1	=	item as FileNode4?
 		if let n2 = n1 {
 			if n2.subnodes.count == 0 {
-				n2.reloadSubnodes()
+				n2.subnodes.links	=	self.delegate!.fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(n2.link)
 			}
 			return	n2.subnodes.count
 		} else {
@@ -321,7 +313,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		let	idx1	=	self.outlineView.selectedRow
 		if idx1 >= 0 {	
 			let	n1		=	self.outlineView.itemAtRow(idx1) as FileNode4
-			delegate?.fileTreeViewController4IsNotifyingThatUserWantsToEditFileAtURL(n1.link)
+			delegate?.fileTreeViewController4UserWantsToEditFileAtURL(n1.link)
 		}
 	}
 	public func outlineViewItemDidCollapse(notification: NSNotification) {
@@ -356,15 +348,12 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		let	u2	=	u1.URLByAppendingPathComponent(tf.stringValue, isDirectory: u.existingAsDirectoryFile)
 		
 		if u != u2 {
-			//	Relocate the node instance to avoid recreation when reloading by file-monitoring.
-			n.link	=	u2
-			
-			var	e	=	nil as NSError?
-			let	ok	=	NSFileManager.defaultManager().moveItemAtURL(u, toURL: u2, error: &e)
-			if ok {
-				self.delegate?.fileTreeViewController4IsNotifyingThatUserDidMoveFile(u, to: u2)
+			let	r	=	self.delegate!.fileTreeViewController4UserWantsToRenameFileAtURL(u, to: u2)
+			if let err = r.error {
+				presentError(err)
 			} else {
-				presentError(e!)
+				//	Relocate the node instance to avoid recreation when reloading by file-monitoring.
+				n.link	=	u2
 			}
 		} else {
 			//	Name unchanged.
@@ -386,6 +375,29 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 //			_fileSystemMonitor!.resumeEventCallbackDispatch()	//	This will trigger sending of pended events, and effectively reloading of some nodes.
 //		}
 //	}
+	
+	
+	@objc
+	@IBAction
+	public func deleteFileWithoutConfirmation(sender: AnyObject?) {
+		let	selections	=	outlineView.selectedRowIndexes.allIndexes
+		let	urls		=	selections.map { (idx:Int) -> NSURL in
+			let	node	=	self.outlineView.itemAtRow(idx) as FileNode4
+			let	url		=	node.link
+			return	url
+		}
+		let	urls2		=	filterTopmostURLsOnlyForDeleting(urls)
+		
+		let	r	=	self.delegate!.fileTreeViewController4UserWantsToDeleteFilesAtURLs(urls2)
+		if let err = r.error {
+			presentError(err)
+		} else {
+		}
+		
+		for u in urls2 {
+			self.invalidateNodeForURL(u)
+		}
+	}
 }
 
 //@objc
@@ -531,6 +543,8 @@ private final class ContextMenuManager : NSObject, NSMenuDelegate {
 		menu.addSeparatorItem()
 		
 		menu.addItem(NSMenuItem(title: "New File", reaction: { [unowned self] () -> () in
+			Debug.assertMainThread()
+			
 			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
 				let	r	=	FileUtility.createNewFileInFolder(parentFolderURL)
 				if r.ok {
@@ -552,7 +566,7 @@ private final class ContextMenuManager : NSObject, NSMenuDelegate {
 			Debug.assertMainThread()
 			
 			if let parentFolderURL = getParentFolderURLOfClickingPoint(self.outlineView) {
-				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
+				let	r	=	self.owner.delegate!.fileTreeViewController4UserWantsToCreateFolderInURL(parentFolderURL)
 				if r.ok {
 					let	newFolderURL	=	r.value!
 					self.owner.invalidateNodeForURL(newFolderURL)
@@ -576,22 +590,13 @@ private final class ContextMenuManager : NSObject, NSMenuDelegate {
 				UIDialogues.queryDeletingFilesUsingWindowSheet(self.outlineView.window!, files: targetURLs, handler: { (b:UIDialogueButton) -> () in
 					switch b {
 					case .OKButton:
-						for u in targetURLs {
-							//	TODO:	Find better way to do this.
-							let	dupc	=	targetURLs.reduce(0) { sum, u1 in
-								return	sum + (u.absoluteString!.hasPrefix(u1.absoluteString!) ? 1 : 0)
-							}
-							if dupc > 1 {
-								continue
-							}
-							
-							////
-							
-							var	err	=	nil as NSError?
-							let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
-							assert(ok || err != nil)
-							if !ok {
-								self.outlineView.presentError(err!)
+						let	us	=	filterTopmostURLsOnlyForDeleting(targetURLs)
+						for u in us {
+							let	r	=	self.owner.delegate!.fileTreeViewController4UserWantsToDeleteFilesAtURLs([u])
+							if let err = r.error {
+								self.presentError(err)
+							} else {
+								self.owner.invalidateNodeForURL(u)
 							}
 						}
 						
@@ -611,6 +616,49 @@ private final class ContextMenuManager : NSObject, NSMenuDelegate {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///	MARK:
+///	MARK:	Utility Functions
+
+private func filterTopmostURLsOnlyForDeleting(urls:[NSURL]) -> [NSURL] {
+	var	us1	=	[] as [NSURL]
+	for u in urls {
+		//	TODO:	Currenyl O(n^2). There seems to be a better way...
+		let	dupc	=	urls.reduce(0) { sum, u1 in
+			return	sum + (u.absoluteString!.hasPrefix(u1.absoluteString!) ? 1 : 0)
+		}
+		
+		if dupc > 1 {
+			continue
+		} else {
+			us1.append(u)
+		}
+	}
+	return	us1
+}
 
 
 
