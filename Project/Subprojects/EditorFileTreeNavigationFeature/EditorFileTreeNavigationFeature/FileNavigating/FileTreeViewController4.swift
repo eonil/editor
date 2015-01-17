@@ -15,12 +15,24 @@ import Precompilation
 
 ///	Anything that causes UI changes will be notified for did-delete and did-move events.
 public protocol FileTreeViewController4Delegate: class {
+//	///	Return `true` if the editing can be committed.
+//	func fileTreeViewController4UserWantsToEditFileAtURL(NSURL) -> Bool
+//
+//	///	Return `true` if the rename can be committed.
+//	func fileTreeViewController4UserWantsToRenameFileAtURL(from:NSURL, to:NSURL) -> Bool
+//	
+//	///	Return `true` if the movement can be committed.
+//	func fileTreeViewController4UserWantsToMoveFileAtURL(from:NSURL, to:NSURL)
+	
 	func fileTreeViewController4IsNotifyingThatUserWantsToEditFileAtURL(NSURL)
-	func fileTreeViewController4IsNotifyingThatUserDidDeleteFile(at:NSURL)
+
 	///	Within repository root, including rename. 
 	///	If file moved out from the repository root, 
 	///	`fileTreeViewController4IsNotifyingThatUserDidDeleteFile` will be happen instead of.
+	///	If the file is moved by external process, it is impossible to track the movemnet
+	///	precisely, so it will be treated as a deletion, and delete event will be notified.
 	func fileTreeViewController4IsNotifyingThatUserDidMoveFile(from:NSURL, to:NSURL)
+	func fileTreeViewController4IsNotifyingThatUserDidDeleteFile(at:NSURL)
 	
 	func fileTreeViewController4IsNotifyingKillingRootURL()
 }
@@ -31,6 +43,10 @@ public protocol FileTreeViewController4Delegate: class {
 ///	Take care that the file-system monitoring can be suspended by request,
 ///	and this class is using it to suspend file-system monitoring events
 ///	while column editing.
+///
+///	This notifies node moving and deleting by user interactions via delegate.
+///	This also monitors file-system, and triggers UI modification and fires delegate events. 
+///	Anyway movement cannobe be tracked and will be treated as a deletion in this case.
 public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTextFieldDelegate, FileTableCellEditingDelegate {
 	public weak var delegate:FileTreeViewController4Delegate?
 	
@@ -123,6 +139,12 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		}
 		
 		outlineView.endUpdates()
+		
+		////
+		
+		for u in deltaset.outgoings {
+			self.delegate?.fileTreeViewController4IsNotifyingThatUserDidDeleteFile(u)
+		}
 	}
 	
 	///	No-op if a node for the supplied URL does not exists.

@@ -14,7 +14,6 @@ public struct UIDialogues {
 
 public extension UIDialogues {
 	
-	
 	///	Queries using NSWindow sheet with "OK" and "Cancel" button.
 	public static func queryDeletingFilesUsingWindowSheet(window:NSWindow, files:[NSURL], handler:(UIDialogueButton)->()) {
 		precondition(files.count > 0)
@@ -28,14 +27,19 @@ public extension UIDialogues {
 			}
 		}
 		let	cmt	=	"This operation is not undoable."
-		queryUsingWindowSheet(window, message: msg(), comment: cmt, style: NSAlertStyle.WarningAlertStyle, handler: handler)
+		queryWithOKCancelUsingWindowSheetModally(window, message: msg(), comment: cmt, style: NSAlertStyle.WarningAlertStyle, handler: handler)
 	}
 	
 	///	Queries using NSWindow sheet with "OK" and "Cancel" button.
-	public static func queryUsingWindowSheet(window:NSWindow, message:String, comment:String, style:NSAlertStyle, handler:(UIDialogueButton)->()) {
+	public static func queryWithOKCancelUsingWindowSheetModally(window:NSWindow, message:String, comment:String, style:NSAlertStyle, handler:(UIDialogueButton)->()) {
+		queryUsingWindowSheetModally(window, message: message, comment: comment, style: style, okButtonTitle: "OK", cancelButtonTitle: "Cancel", handler: handler)
+	}
+	
+	///	Queries using NSWindow sheet with "OK" and "Cancel" button.
+	public static func queryUsingWindowSheetModally(window:NSWindow, message:String, comment:String, style:NSAlertStyle, okButtonTitle:String, cancelButtonTitle:String, handler:(selection:UIDialogueButton)->()) {
 		let	a	=	NSAlert()
-		a.addButtonWithTitle("OK")
-		a.addButtonWithTitle("Cancel")
+		a.addButtonWithTitle(okButtonTitle)
+		a.addButtonWithTitle(cancelButtonTitle)
 		a.messageText		=	message
 		a.informativeText	=	comment
 		a.alertStyle		=	style
@@ -43,10 +47,10 @@ public extension UIDialogues {
 		a.beginSheetModalForWindow(window, completionHandler: { (r:NSModalResponse) -> Void in
 			switch r {
 			case NSAlertFirstButtonReturn:
-				handler(UIDialogueButton.OKButton)
+				handler(selection: UIDialogueButton.OKButton)
 				
 			case NSAlertSecondButtonReturn:
-				handler(UIDialogueButton.CancelButton)
+				handler(selection: UIDialogueButton.CancelButton)
 				
 			case NSAlertThirdButtonReturn:
 				fallthrough

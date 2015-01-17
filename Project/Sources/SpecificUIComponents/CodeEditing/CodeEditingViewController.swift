@@ -9,9 +9,16 @@
 import Foundation
 import AppKit
 import EonilDispatch
+import EonilFileSystemEvents
+
+
+protocol CodeEditingViewControllerDelegate: class {
+	func codeEditingViewControllerWillSetURL(NSURL)
+	func codeEditingViewControllerDidSetURL(NSURL)
+}
 
 class CodeEditingViewController : TextScrollViewController {
-	
+	weak var delegate:CodeEditingViewControllerDelegate?
 	
 	var	URLRepresentation:NSURL? {
 		get {

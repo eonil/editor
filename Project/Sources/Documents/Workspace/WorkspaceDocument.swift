@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import PrecompilationOfExternalToolSupport
 import EditorFileTreeNavigationFeature
+import EonilFileSystemEvents
 
 ///	A document to edit Eonil Editor Workspace. (`.eewsN` file, `N` is single integer version number)
 ///	The root controller of a workspace.
@@ -31,9 +32,12 @@ class WorkspaceDocument : NSDocument {
 		mainWindowController.fileTreeViewController.delegate	=	self
 	}
 	
-
 	
 	
+	
+	////
+	
+	private var	_fileSystemMonitor		=	nil as FileSystemEventMonitor?
 	
 	private var rootURL:NSURL {
 		get {
@@ -73,7 +77,10 @@ extension WorkspaceDocument: FileTreeViewController4Delegate {
 //		}
 	}
 	func fileTreeViewController4IsNotifyingThatUserDidDeleteFile(at: NSURL) {
-		self.mainWindowController.codeEditingViewController.URLRepresentation	=	nil
+		if self.mainWindowController.codeEditingViewController.URLRepresentation == at {
+			//	The code editor 
+			self.mainWindowController.codeEditingViewController.URLRepresentation	=	nil
+		}
 	}
 }
 
@@ -102,9 +109,60 @@ extension WorkspaceDocument {
 	override func readFromData(data: NSData, ofType typeName: String, error outError: NSErrorPointer) -> Bool {		
 		let	u2	=	self.fileURL!.URLByDeletingLastPathComponent
 		mainWindowController.mainViewController.navigationViewController.fileTreeViewController.URLRepresentation	=	u2
+		
+		let	p1	=	u2!.path!
+		_fileSystemMonitor	=	FileSystemEventMonitor(pathsToWatch: [p1]) { [weak self] events in
+			for ev in events {
+				self?.postprocessFileSystemEventAtURL(ev)
+			}
+			//					sm.routeEvent(u1)
+		}
 		return	true
 	}
 	
+	private func postprocessFileSystemEventAtURL(event:FileSystemEvent) {
+		let	isDir		=	(event.flag & EonilFileSystemEventFlag.ItemIsDir) == EonilFileSystemEventFlag.ItemIsDir
+		let	u1			=	NSURL(fileURLWithPath: event.path, isDirectory: isDir)!
+		
+		enum Operation {
+			init(flag:FileSystemEventFlag) {
+				let	isDelete	=	(flag & EonilFileSystemEventFlag.ItemRemoved) == EonilFileSystemEventFlag.ItemRemoved
+				if isDelete {
+					self	=	Delete
+					return
+				}
+				let	isCreate	=	(flag & EonilFileSystemEventFlag.ItemRemoved) == EonilFileSystemEventFlag.ItemRemoved
+				if isCreate {
+					self	=	Create
+					return
+				}
+				let	isMove	=	(flag & EonilFileSystemEventFlag.ItemRenamed) == EonilFileSystemEventFlag.ItemRenamed
+				if isMove {
+					self	=	Move
+					return
+				}
+				
+				fatalError("Unknown file system event flag.")
+			}
+			case Create
+			case Move
+			case Delete
+		}
+
+		switch Operation(flag: event.flag) {
+		case .Create:
+			Debug.log("CREATE: \(u1)")
+			
+		case .Move:
+			Debug.log("MOVE: \(u1)")
+			
+		case .Delete:
+			Debug.log("DELETE: \(u1)")
+			
+		}
+		
+		mainWindowController.mainViewController.navigationViewController.fileTreeViewController.invalidateNodeForURL(u1)
+	}
 }
 
 

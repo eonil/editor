@@ -119,7 +119,7 @@ final class FileTreeRepository4 {
 	///	I cannot figure out where, but I smell some bad stuff...
 	///	Please review this eventually.
 	func relocateNodeToURL(from:NSURL, to:NSURL) {
-		println(to.absoluteString)
+		Debug.log(to.absoluteString)
 		precondition(from != to, "You cannot relocate to same location.")
 		precondition(self[to] === nil, "You cannot move this node to an existing URL in repository.")
 		precondition(self.root !== nil, "You cannot move into a root-less repository.")

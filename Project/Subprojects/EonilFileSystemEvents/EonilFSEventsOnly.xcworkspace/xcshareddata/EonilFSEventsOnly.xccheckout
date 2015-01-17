@@ -10,31 +10,31 @@
 	<string>EonilFSEventsOnly</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
-		<string>https://github.com/Eonil/Editor.git</string>
+		<key>36160D83BA5F0FBBF1E4D427FCD25A45E887B855</key>
+		<string>https://github.com/Eonil/FileSystemEvents</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Project/Subprojects/EonilFileSystemEvents/EonilFSEventsOnly.xcworkspace</string>
+	<string>EonilFSEventsOnly.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
-		<string>../../../..</string>
+		<key>36160D83BA5F0FBBF1E4D427FCD25A45E887B855</key>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Eonil/Editor.git</string>
+	<string>https://github.com/Eonil/FileSystemEvents</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>FC8DBBA953E548D205F88EA925028C0D6DA341F0</string>
+	<string>36160D83BA5F0FBBF1E4D427FCD25A45E887B855</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FC8DBBA953E548D205F88EA925028C0D6DA341F0</string>
+			<string>36160D83BA5F0FBBF1E4D427FCD25A45E887B855</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Editor</string>
+			<string>FileSystemEvents</string>
 		</dict>
 	</array>
 </dict>
