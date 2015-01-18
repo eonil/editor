@@ -669,6 +669,12 @@ CA
                                     <action selector="cleanWorkspace:" target="-1" id="Tac-UF-3FI"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Svr-Q9-ccq"/>
+                            <menuItem title="Stop" keyEquivalent="." id="QAW-iu-ay1">
+                                <connections>
+                                    <action selector="stopWorkspace:" target="-1" id="rTK-Kd-e3t"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>

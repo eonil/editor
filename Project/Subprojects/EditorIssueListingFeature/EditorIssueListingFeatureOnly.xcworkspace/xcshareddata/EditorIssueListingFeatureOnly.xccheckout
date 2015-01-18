@@ -20,7 +20,7 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>71A00DDED806E25423061F292531DC609604F42E</key>
-		<string>../../../..Project/Submodules/Monolith.Swift/</string>
+		<string>../../../..Project/Submodules/Monolith.Swift</string>
 		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
 		<string>../../../..</string>
 	</dict>

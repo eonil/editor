@@ -416,9 +416,9 @@ extension WorkspaceDocument {
 	
 	@objc @IBAction
 	func buildWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.reset()
-		
 		toolExecutionController.cancelAll()
+		
+		mainWindowController.issueListingViewController.reset()
 		toolExecutionController.executeCargoBuild()
 	}
 
@@ -427,20 +427,24 @@ extension WorkspaceDocument {
 	///	Customisation will be provided later.
 	@objc @IBAction
 	func runWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.reset()
-		
 		toolExecutionController.cancelAll()
+		
+		mainWindowController.issueListingViewController.reset()
 		toolExecutionController.executeCargoRun()
 	}
 	
 	@objc @IBAction
 	func cleanWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.reset()
-		
 		toolExecutionController.cancelAll()
+		
+		mainWindowController.issueListingViewController.reset()
 		toolExecutionController.executeCargoClean()
 	}
-	
+
+	@objc @IBAction
+	func stopWorkspace(AnyObject?) {
+		toolExecutionController.cancelAll()
+	}
 }
 
 
