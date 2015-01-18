@@ -12,6 +12,7 @@ import Precompilation
 import PrecompilationOfExternalToolSupport
 import EditorFileTreeNavigationFeature
 import EonilFileSystemEvents
+import EditorIssueListingFeature
 
 ///	A document to edit Eonil Editor Workspace. (`.eewsN` file, `N` is single integer version number)
 ///	The root controller of a workspace.
@@ -170,21 +171,17 @@ private func subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
 ///	MARK:	IssueListingViewControllerDelegate
 
 extension WorkspaceDocument: IssueListingViewControllerDelegate {
-	func issueListingViewControllerUserWantsToHighlightIssue(s: Issue) {
+	func issueListingViewControllerUserWantsToHighlightURL(file: NSURL?) {
 		Debug.assertMainThread()
 		
-		let	u	=	rootLocation.stringExpression.URLByAppendingPathComponent(s.location)
-
-		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
-		self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.highlightCodeRange(s.range)
 	}
-	func issueListingViewControllerUserWantsToNavigateToIssue(s: Issue) {
+	func issueListingViewControllerUserWantsToHighlightIssue(issue: Issue) {
 		Debug.assertMainThread()
 		
-		let	u	=	rootLocation.stringExpression.URLByAppendingPathComponent(s.location)
-		
-		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
-		self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.navigateToCodeRange(s.range)
+		if let o = issue.origin {
+			self.mainWindowController.codeEditingViewController.URLRepresentation	=	o.URL
+			self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.navigateToCodeRange(o.range)
+		}
 	}
 }
 
@@ -218,7 +215,8 @@ extension WorkspaceDocument: WorkspaceToolExecutionControllerDelegate {
 	func workspaceToolExecutionControllerDidDiscoverRustCompilerIssue(issue: RustCompilerIssue) {
 		Debug.assertMainThread()
 		
-		mainWindowController.issueListingViewController.appendIssues([issue])
+		let	s	=	Issue(workspaceRootURL: self.rootLocation.stringExpression, rust: issue)
+		mainWindowController.issueListingViewController.push([s])
 	}
 	func workspaceToolExecutionControllerDidDiscoverRustCompilerMessage(message: String) {
 		Debug.assertMainThread()
@@ -398,7 +396,7 @@ extension WorkspaceDocument {
 		//	Saving of a project will be done at somewhere else, and this makes annoying alerts.
 		//	This prevents the alerts.
 		//		super.saveDocument(sender)
-		
+
 		mainWindowController.codeEditingViewController.trySavingInPlace()
 	}
 	
@@ -418,7 +416,7 @@ extension WorkspaceDocument {
 	
 	@objc @IBAction
 	func buildWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.removeAllIssues()
+		mainWindowController.issueListingViewController.reset()
 		
 		toolExecutionController.cancelAll()
 		toolExecutionController.executeCargoBuild()
@@ -429,7 +427,7 @@ extension WorkspaceDocument {
 	///	Customisation will be provided later.
 	@objc @IBAction
 	func runWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.removeAllIssues()
+		mainWindowController.issueListingViewController.reset()
 		
 		toolExecutionController.cancelAll()
 		toolExecutionController.executeCargoRun()
@@ -437,7 +435,7 @@ extension WorkspaceDocument {
 	
 	@objc @IBAction
 	func cleanWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.removeAllIssues()
+		mainWindowController.issueListingViewController.reset()
 		
 		toolExecutionController.cancelAll()
 		toolExecutionController.executeCargoClean()

@@ -24,6 +24,7 @@
 		456670591A65E81E003EEC14 /* AppKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456670571A65E81E003EEC14 /* AppKitExtensions.swift */; };
 		4566705A1A65E81E003EEC14 /* SwiftLevelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456670581A65E81E003EEC14 /* SwiftLevelExtensions.swift */; };
 		4575D9321A6A9597009D6E5A /* ShellTaskExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4575D9311A6A9597009D6E5A /* ShellTaskExecutionController.swift */; };
+		459D739D1A6BF02600AD6F0C /* CodeRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D739C1A6BF02600AD6F0C /* CodeRange.swift */; };
 		45A5F8171A6A5A1600CC5FC8 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A5F8161A6A5A1600CC5FC8 /* FoundationExtensions.swift */; };
 		45A6DACA1A63A10C00DFB9CE /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DAC91A63A10C00DFB9CE /* FileUtility.swift */; };
 		45A6DAD11A63A22B00DFB9CE /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DAC91A63A10C00DFB9CE /* FileUtility.swift */; };
@@ -155,6 +156,7 @@
 		456670571A65E81E003EEC14 /* AppKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtensions.swift; sourceTree = "<group>"; };
 		456670581A65E81E003EEC14 /* SwiftLevelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLevelExtensions.swift; sourceTree = "<group>"; };
 		4575D9311A6A9597009D6E5A /* ShellTaskExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellTaskExecutionController.swift; sourceTree = "<group>"; };
+		459D739C1A6BF02600AD6F0C /* CodeRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeRange.swift; sourceTree = "<group>"; };
 		45A5F8161A6A5A1600CC5FC8 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		45A6DAC91A63A10C00DFB9CE /* FileUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
 		45A6DAD31A63A27A00DFB9CE /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				45C34B9E1A6B2E8D004B8C38 /* ShellTaskQueueController.swift */,
 				45A6DB631A63AB1D00DFB9CE /* TSVFileScanner.swift */,
 				45C34B9C1A6B2D28004B8C38 /* StringStreamProcessing.swift */,
+				459D739C1A6BF02600AD6F0C /* CodeRange.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459D739D1A6BF02600AD6F0C /* CodeRange.swift in Sources */,
 				45C34B9D1A6B2D28004B8C38 /* StringStreamProcessing.swift in Sources */,
 				45A6DB661A63AB1D00DFB9CE /* RustProgramExecutionController.swift in Sources */,
 				4526BFF31A6B5EDD00F5BDC1 /* UnitTest.swift in Sources */,

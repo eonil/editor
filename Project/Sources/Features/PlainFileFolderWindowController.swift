@@ -9,7 +9,7 @@
 import Foundation
 import AppKit
 import EditorFileTreeNavigationFeature
-
+import EditorIssueListingFeature
 
 ///	A window shows a plain folder with plain files.
 ///	This does not do anything special on the file and folders.

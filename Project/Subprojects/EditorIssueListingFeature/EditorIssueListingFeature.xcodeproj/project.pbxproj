@@ -15,6 +15,19 @@
 		4526C07B1A6B822200F5BDC1 /* EditorIssueListingFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4526C0351A6B81D300F5BDC1 /* EditorIssueListingFeature.framework */; };
 		4526C07C1A6B822200F5BDC1 /* EditorIssueListingFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4526C0351A6B81D300F5BDC1 /* EditorIssueListingFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4526C0811A6B823D00F5BDC1 /* IssueListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526C0801A6B823D00F5BDC1 /* IssueListingViewController.swift */; };
+		459D72FA1A6BC90200AD6F0C /* IssueListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526C0801A6B823D00F5BDC1 /* IssueListingViewController.swift */; };
+		459D72FE1A6BCA1900AD6F0C /* IssueRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D72FD1A6BCA1900AD6F0C /* IssueRepository.swift */; };
+		459D72FF1A6BCA1C00AD6F0C /* IssueRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D72FD1A6BCA1900AD6F0C /* IssueRepository.swift */; };
+		459D73021A6BCA5B00AD6F0C /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D73011A6BCA5B00AD6F0C /* Issue.swift */; };
+		459D73031A6BCA5B00AD6F0C /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D73011A6BCA5B00AD6F0C /* Issue.swift */; };
+		459D730B1A6BDC0200AD6F0C /* IconUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D730A1A6BDC0200AD6F0C /* IconUtility.swift */; };
+		459D730C1A6BDC0200AD6F0C /* IconUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459D730A1A6BDC0200AD6F0C /* IconUtility.swift */; };
+		459D73B21A6BF0C800AD6F0C /* Precompilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459D73AB1A6BF0C100AD6F0C /* Precompilation.framework */; };
+		459D73B31A6BF0C800AD6F0C /* Precompilation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459D73AB1A6BF0C100AD6F0C /* Precompilation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		459D73B61A6BF0C800AD6F0C /* PrecompilationOfExternalToolSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459D73AD1A6BF0C100AD6F0C /* PrecompilationOfExternalToolSupport.framework */; };
+		459D73B71A6BF0C800AD6F0C /* PrecompilationOfExternalToolSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459D73AD1A6BF0C100AD6F0C /* PrecompilationOfExternalToolSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45C1EDAA1A6BF2DA007B6F83 /* Precompilation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459D73AB1A6BF0C100AD6F0C /* Precompilation.framework */; };
+		45C1EDAB1A6BF2DA007B6F83 /* PrecompilationOfExternalToolSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459D73AD1A6BF0C100AD6F0C /* PrecompilationOfExternalToolSupport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +45,48 @@
 			remoteGlobalIDString = 4526C0341A6B81D300F5BDC1;
 			remoteInfo = EditorIssueListingFeature;
 		};
+		459D73AA1A6BF0C100AD6F0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459D73A21A6BF0C100AD6F0C /* Precompilation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4538574F1A626FC200DC693D;
+			remoteInfo = Precompilation;
+		};
+		459D73AC1A6BF0C100AD6F0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459D73A21A6BF0C100AD6F0C /* Precompilation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45A6DB401A63AAE600DFB9CE;
+			remoteInfo = PrecompilationOfExternalToolSupport;
+		};
+		459D73AE1A6BF0C100AD6F0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459D73A21A6BF0C100AD6F0C /* Precompilation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45A6DADD1A63A29F00DFB9CE;
+			remoteInfo = PrecompilationUnitTest;
+		};
+		459D73B01A6BF0C100AD6F0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459D73A21A6BF0C100AD6F0C /* Precompilation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4538577A1A62700400DC693D;
+			remoteInfo = PrecompilationInteractiveWorkbench;
+		};
+		459D73B41A6BF0C800AD6F0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459D73A21A6BF0C100AD6F0C /* Precompilation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4538574E1A626FC200DC693D;
+			remoteInfo = Precompilation;
+		};
+		459D73B81A6BF0C800AD6F0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459D73A21A6BF0C100AD6F0C /* Precompilation.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45A6DB3F1A63AAE500DFB9CE;
+			remoteInfo = PrecompilationOfExternalToolSupport;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,7 +96,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				459D73B31A6BF0C800AD6F0C /* Precompilation.framework in Embed Frameworks */,
 				4526C07C1A6B822200F5BDC1 /* EditorIssueListingFeature.framework in Embed Frameworks */,
+				459D73B71A6BF0C800AD6F0C /* PrecompilationOfExternalToolSupport.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,6 +117,10 @@
 		4526C0641A6B821700F5BDC1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4526C0671A6B821700F5BDC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4526C0801A6B823D00F5BDC1 /* IssueListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListingViewController.swift; sourceTree = "<group>"; };
+		459D72FD1A6BCA1900AD6F0C /* IssueRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueRepository.swift; sourceTree = "<group>"; };
+		459D73011A6BCA5B00AD6F0C /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
+		459D730A1A6BDC0200AD6F0C /* IconUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconUtility.swift; sourceTree = "<group>"; };
+		459D73A21A6BF0C100AD6F0C /* Precompilation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Precompilation.xcodeproj; path = ../Precompilation/Precompilation.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +128,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45C1EDAA1A6BF2DA007B6F83 /* Precompilation.framework in Frameworks */,
+				45C1EDAB1A6BF2DA007B6F83 /* PrecompilationOfExternalToolSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +145,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459D73B21A6BF0C800AD6F0C /* Precompilation.framework in Frameworks */,
 				4526C07B1A6B822200F5BDC1 /* EditorIssueListingFeature.framework in Frameworks */,
+				459D73B61A6BF0C800AD6F0C /* PrecompilationOfExternalToolSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +157,7 @@
 		4526C02B1A6B81D300F5BDC1 = {
 			isa = PBXGroup;
 			children = (
+				459D73A21A6BF0C100AD6F0C /* Precompilation.xcodeproj */,
 				4526C0371A6B81D300F5BDC1 /* EditorIssueListingFeature */,
 				4526C0441A6B81D300F5BDC1 /* EditorIssueListingFeatureTests */,
 				4526C05F1A6B821700F5BDC1 /* WorkbenchApp */,
@@ -114,6 +180,9 @@
 			children = (
 				4526C0381A6B81D300F5BDC1 /* Supporting Files */,
 				4526C0801A6B823D00F5BDC1 /* IssueListingViewController.swift */,
+				459D73011A6BCA5B00AD6F0C /* Issue.swift */,
+				459D72FD1A6BCA1900AD6F0C /* IssueRepository.swift */,
+				459D730A1A6BDC0200AD6F0C /* IconUtility.swift */,
 			);
 			path = EditorIssueListingFeature;
 			sourceTree = "<group>";
@@ -160,6 +229,17 @@
 				4526C0611A6B821700F5BDC1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		459D73A31A6BF0C100AD6F0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				459D73AB1A6BF0C100AD6F0C /* Precompilation.framework */,
+				459D73AD1A6BF0C100AD6F0C /* PrecompilationOfExternalToolSupport.framework */,
+				459D73AF1A6BF0C100AD6F0C /* PrecompilationUnitTest */,
+				459D73B11A6BF0C100AD6F0C /* PrecompilationInteractiveWorkbench.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +304,8 @@
 			);
 			dependencies = (
 				4526C07E1A6B822200F5BDC1 /* PBXTargetDependency */,
+				459D73B51A6BF0C800AD6F0C /* PBXTargetDependency */,
+				459D73B91A6BF0C800AD6F0C /* PBXTargetDependency */,
 			);
 			name = WorkbenchApp;
 			productName = WorkbenchApp;
@@ -261,6 +343,12 @@
 			mainGroup = 4526C02B1A6B81D300F5BDC1;
 			productRefGroup = 4526C0361A6B81D300F5BDC1 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 459D73A31A6BF0C100AD6F0C /* Products */;
+					ProjectRef = 459D73A21A6BF0C100AD6F0C /* Precompilation.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				4526C0341A6B81D300F5BDC1 /* EditorIssueListingFeature */,
@@ -269,6 +357,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		459D73AB1A6BF0C100AD6F0C /* Precompilation.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Precompilation.framework;
+			remoteRef = 459D73AA1A6BF0C100AD6F0C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459D73AD1A6BF0C100AD6F0C /* PrecompilationOfExternalToolSupport.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PrecompilationOfExternalToolSupport.framework;
+			remoteRef = 459D73AC1A6BF0C100AD6F0C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459D73AF1A6BF0C100AD6F0C /* PrecompilationUnitTest */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = PrecompilationUnitTest;
+			remoteRef = 459D73AE1A6BF0C100AD6F0C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459D73B11A6BF0C100AD6F0C /* PrecompilationInteractiveWorkbench.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = PrecompilationInteractiveWorkbench.app;
+			remoteRef = 459D73B01A6BF0C100AD6F0C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4526C0331A6B81D300F5BDC1 /* Resources */ = {
@@ -301,7 +420,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459D72FE1A6BCA1900AD6F0C /* IssueRepository.swift in Sources */,
+				459D730B1A6BDC0200AD6F0C /* IconUtility.swift in Sources */,
 				4526C0811A6B823D00F5BDC1 /* IssueListingViewController.swift in Sources */,
+				459D73021A6BCA5B00AD6F0C /* Issue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +439,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459D73031A6BCA5B00AD6F0C /* Issue.swift in Sources */,
+				459D72FF1A6BCA1C00AD6F0C /* IssueRepository.swift in Sources */,
+				459D72FA1A6BC90200AD6F0C /* IssueListingViewController.swift in Sources */,
 				4526C0631A6B821700F5BDC1 /* AppDelegate.swift in Sources */,
+				459D730C1A6BDC0200AD6F0C /* IconUtility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +459,16 @@
 			isa = PBXTargetDependency;
 			target = 4526C0341A6B81D300F5BDC1 /* EditorIssueListingFeature */;
 			targetProxy = 4526C07D1A6B822200F5BDC1 /* PBXContainerItemProxy */;
+		};
+		459D73B51A6BF0C800AD6F0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Precompilation;
+			targetProxy = 459D73B41A6BF0C800AD6F0C /* PBXContainerItemProxy */;
+		};
+		459D73B91A6BF0C800AD6F0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = PrecompilationOfExternalToolSupport;
+			targetProxy = 459D73B81A6BF0C800AD6F0C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -506,6 +642,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -522,6 +659,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = WorkbenchApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -565,6 +703,7 @@
 				4526C0761A6B821700F5BDC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

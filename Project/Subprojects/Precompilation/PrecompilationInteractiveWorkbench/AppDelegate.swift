@@ -27,6 +27,9 @@ class CargoTest: CargoExecutionControllerDelegate {
 	func cargoExecutionControllerDidDiscoverRustCompilationIssue(issue: RustCompilerIssue) {
 		println("ISSUE: \(issue)")
 	}
+	func cargoExecutionControllerRemoteProcessDidTerminate() {
+		println("TERM")
+	}
 }
 
 @NSApplicationMain

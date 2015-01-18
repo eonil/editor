@@ -14,16 +14,6 @@ public struct RustCompilerIssue {
 	public var	severity:Severity
 	public var	message:String
 	
-	public struct CodePoint {
-		public var	lineNumber:Int		///	1-based.
-		public var	columnNumber:Int	///	1-based.
-	}
-	
-	public struct CodeRange {
-		public var	startPoint:CodePoint
-		public var	endPoint:CodePoint
-	}
-	
 	public enum Severity: String {
 		case Error		=	"error"
 		case Warning	=	"warning"
@@ -36,31 +26,6 @@ extension RustCompilerIssue: Printable {
 	public var description:String {
 		get {
 			return	"(\(range) [\(severity.rawValue)] \(location): \(message.debugDescription))"
-		}
-	}
-}
-
-extension RustCompilerIssue.CodePoint: Printable {
-	public var description:String {
-		get {
-			return	"\(lineNumber):\(columnNumber)"
-		}
-	}
-	public var lineIndex:Int {
-		get {
-			return	lineNumber - 1
-		}
-	}
-	public var columnIndex:Int {
-		get {
-			return	columnNumber - 1
-		}
-	}
-}
-extension RustCompilerIssue.CodeRange: Printable {
-	public var description:String {
-		get {
-			return	"\(startPoint) ~ \(endPoint)"
 		}
 	}
 }

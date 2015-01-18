@@ -368,9 +368,9 @@ private struct RangeParser: ParserType {
 			return		end.accepts(ch) || (end.sufficient() == false && ch == " ")
 		}
 	}
-	func produce() -> RustCompilerIssue.CodeRange {
+	func produce() -> CodeRange {
 		assert(sufficient())
-		return	RustCompilerIssue.CodeRange(startPoint: start.produce(), endPoint: end.produce())
+		return	CodeRange(startPoint: start.produce(), endPoint: end.produce())
 	}
 	mutating func push(ch:Character) {
 		assert(accepts(ch))
@@ -416,9 +416,9 @@ private struct PointParser: ParserType {
 			return	col.accepts(ch)
 		}
 	}
-	func produce() -> RustCompilerIssue.CodePoint {
+	func produce() -> CodePoint {
 		assert(sufficient())
-		return	RustCompilerIssue.CodePoint(lineNumber: line.produce(), columnNumber: col.produce())
+		return	CodePoint(lineNumber: line.produce(), columnNumber: col.produce())
 	}
 	mutating func push(ch:Character) {
 		assert(accepts(ch))
