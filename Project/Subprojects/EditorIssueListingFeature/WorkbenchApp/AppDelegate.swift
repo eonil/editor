@@ -47,9 +47,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 
-
-
-
 func makeTestDataset() -> [Issue] {
 	var	ss	=	[] as [Issue]
 	for i in 0..<2 {

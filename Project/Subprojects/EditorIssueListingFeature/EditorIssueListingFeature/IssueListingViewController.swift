@@ -10,7 +10,8 @@ import Foundation
 import AppKit
 
 
-
+let	ROW_ADD_ANIMATION_EFFECT	=	NSTableViewAnimationOptions.allZeros
+//let	ROW_ADD_ANIMATION_EFFECT	=	NSTableViewAnimationOptions.SlideDown		///	Really bad when issues are being added very frequently.
 
 
 public protocol IssueListingViewControllerDelegate: class {
@@ -37,13 +38,13 @@ public final class IssueListingViewController: NSViewController {
 		self.outlineView.beginUpdates()
 		for r in rs.groups {
 			let	idxs	=	NSIndexSet(index: r.index)
-			self.outlineView.insertItemsAtIndexes(idxs, inParent: nil, withAnimation: NSTableViewAnimationOptions.SlideDown)
+			self.outlineView.insertItemsAtIndexes(idxs, inParent: nil, withAnimation: ROW_ADD_ANIMATION_EFFECT)
 			self.outlineView.expandItem(r.node)
 		}
 		for r in rs.items {
 			let	idxs	=	NSIndexSet(index: r.index)
 			let	p		=	r.node.groupNode
-			self.outlineView.insertItemsAtIndexes(idxs, inParent: p, withAnimation: NSTableViewAnimationOptions.SlideDown)
+			self.outlineView.insertItemsAtIndexes(idxs, inParent: p, withAnimation: ROW_ADD_ANIMATION_EFFECT)
 		}
 		self.outlineView.endUpdates()
 		
@@ -192,6 +193,7 @@ extension IssueListingViewController: NSOutlineViewDelegate {
 		v2.bordered			=	false
 		v2.textColor		=	NSColor.textColor()
 		v2.backgroundColor	=	NSColor.clearColor()
+		v2.lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
 		
 		v.addSubview(v1)
 		v.addSubview(v2)
@@ -203,10 +205,12 @@ extension IssueListingViewController: NSOutlineViewDelegate {
 		if let g = item as? IssueGroupNode {
 			v1.image		=	g.iconForUI
 			v2.stringValue	=	g.textForUI
+			v2.toolTip		=	g.textForUI
 		}
 		if let m = item as? IssueItemNode {
 			v1.image		=	m.iconForUI
 			v2.stringValue	=	m.textForUI
+			v2.toolTip		=	m.textForUI
 		}
 		
 		return	v
@@ -222,6 +226,17 @@ extension IssueListingViewController: NSOutlineViewDelegate {
 				self.delegate?.issueListingViewControllerUserWantsToHighlightIssue(n.data)
 			}
 		}
+	}
+	///	I don't know why this doesn't work...
+	///	http://stackoverflow.com/questions/15023589/different-tooltip-for-each-image-in-nstableview
+	public func outlineView(outlineView: NSOutlineView, toolTipForCell cell: NSCell, rect: NSRectPointer, tableColumn: NSTableColumn?, item: AnyObject, mouseLocation: NSPoint) -> String {
+		if let n = item as? IssueGroupNode {
+			return	n.textForUI
+		}
+		if let n = item as? IssueItemNode {
+			return	n.textForUI
+		}
+		return	""
 	}
 }
 
