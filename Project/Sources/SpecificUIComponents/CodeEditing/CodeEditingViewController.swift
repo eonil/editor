@@ -17,6 +17,7 @@ protocol CodeEditingViewControllerDelegate: class {
 	func codeEditingViewControllerDidSetURL(NSURL)
 }
 
+///	This handles file I/O. And file I/O can fail at any time.
 class CodeEditingViewController : TextScrollViewController {
 	weak var delegate:CodeEditingViewControllerDelegate?
 	

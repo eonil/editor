@@ -10,6 +10,10 @@ import Foundation
 import Precompilation
 
 public extension NSIndexSet {
+	public convenience init(_ range:Range<Int>) {
+		let	r1	=	NSRange(location: range.startIndex, length: range.endIndex - range.startIndex)
+		self.init(indexesInRange: r1)
+	}
 	public convenience init(_ indexes:[Int]) {
 		let	s1	=	NSMutableIndexSet()
 		for idx1 in indexes {
@@ -147,7 +151,13 @@ public extension NSFileHandle {
 
 
 
-
+public extension NSTask {
+	///	Sends `SIGKILL` to forces remote process to quit immediately.
+	///	Remote process will be killed by kernel and cannot perform any cleanup.
+	public func kill() {
+		Darwin.kill(self.processIdentifier, SIGKILL)
+	}
+}
 
 
 

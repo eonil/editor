@@ -17,7 +17,7 @@ import EonilFileSystemEvents
 ///	The root controller of a workspace.
 class WorkspaceDocument : NSDocument {
 	let	mainWindowController		=	PlainFileFolderWindowController()
-	
+	let	toolExecutionController		=	WorkspaceToolExecutionController()
 	
 	override init() {
 		super.init()
@@ -25,6 +25,8 @@ class WorkspaceDocument : NSDocument {
 		assert(mainWindowController.fileTreeViewController.delegate == nil)
 		mainWindowController.fileTreeViewController.delegate		=	self
 		mainWindowController.issueListingViewController.delegate	=	self
+		
+		toolExecutionController.delegate	=	self
 	}
 	
 	override func makeWindowControllers() {
@@ -68,19 +70,29 @@ class WorkspaceDocument : NSDocument {
 
 extension WorkspaceDocument: FileTreeViewController4Delegate {
 	func fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(u: NSURL) -> [NSURL] {
+		Debug.assertMainThread()
+		
 		return	subnodeAbsoluteURLsOfURL(u)
 	}
 	
 	func fileTreeViewController4UserWantsToCreateFolderInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
+		Debug.assertMainThread()
+		
 		return	FileUtility.createNewFolderInFolder(parentFolderURL)
 	}
 	func fileTreeViewController4UserWantsToCreateFileInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
+		Debug.assertMainThread()
+		
 		return	FileUtility.createNewFileInFolder(parentFolderURL)
 	}
 	func fileTreeViewController4UserWantsToRenameFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
+		Debug.assertMainThread()
+		
 		return	fileTreeViewController4UserWantsToMoveFileAtURL(from, to: to)
 	}
 	func fileTreeViewController4UserWantsToMoveFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
+		Debug.assertMainThread()
+		
 		var	err	=	nil as NSError?
 		let	ok	=	NSFileManager.defaultManager().moveItemAtURL(from, toURL: to, error: &err)
 		assert(ok || err != nil)
@@ -90,6 +102,8 @@ extension WorkspaceDocument: FileTreeViewController4Delegate {
 		return	ok ? Resolution.success() : Resolution.failure(err!)
 	}
 	func fileTreeViewController4UserWantsToDeleteFilesAtURLs(us: [NSURL]) -> Resolution<()> {
+		Debug.assertMainThread()
+		
 		//	Just always close the currently editing file.
 		//	Deletion may fail, and then user may see closed document without deletion,
 		//	but it doesn't seem to be bad. So this is an intended design.
@@ -107,6 +121,8 @@ extension WorkspaceDocument: FileTreeViewController4Delegate {
 	}
 	
 	func fileTreeViewController4UserWantsToEditFileAtURL(u: NSURL) -> Bool {
+		Debug.assertMainThread()
+		
 		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
 		return	true
 	}
@@ -150,20 +166,76 @@ private func subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
 
 
 
-
+///	MARK:
+///	MARK:	IssueListingViewControllerDelegate
 
 extension WorkspaceDocument: IssueListingViewControllerDelegate {
 	func issueListingViewControllerUserWantsToHighlightIssue(s: Issue) {
-		let	u	=	NSURL(fileURLWithPath: s.location, isDirectory: false)!
+		Debug.assertMainThread()
+		
+		let	u	=	rootLocation.stringExpression.URLByAppendingPathComponent(s.location)
+
 		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
-		self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.highlightRangeOfIssue(s)
+		self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.highlightCodeRange(s.range)
 	}
 	func issueListingViewControllerUserWantsToNavigateToIssue(s: Issue) {
-		let	u	=	NSURL(fileURLWithPath: s.location, isDirectory: false)!
+		Debug.assertMainThread()
+		
+		let	u	=	rootLocation.stringExpression.URLByAppendingPathComponent(s.location)
+		
 		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
-		self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.navigateRangeOfIssue(s)
+		self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.navigateToCodeRange(s.range)
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///	MARK:
+///	MARK:	WorkspaceToolExecutionControllerDelegate
+
+extension WorkspaceDocument: WorkspaceToolExecutionControllerDelegate {
+	func workspaceToolExecutionControllerDidDiscoverRustCompilerIssue(issue: RustCompilerIssue) {
+		Debug.assertMainThread()
+		
+		mainWindowController.issueListingViewController.appendIssues([issue])
+	}
+	func workspaceToolExecutionControllerDidDiscoverRustCompilerMessage(message: String) {
+		Debug.assertMainThread()
+		
+		println(message)
+	}
+	func workspaceToolExecutionControllerQueryWorkingDirectoryURL() -> NSURL {
+		Debug.assertMainThread()
+		
+		return	rootLocation.stringExpression
+	}
+}
+
+
+
+
+
 
 
 
@@ -346,8 +418,10 @@ extension WorkspaceDocument {
 	
 	@objc @IBAction
 	func buildWorkspace(AnyObject?) {
-		let	r	=	CargoExecutionController.build(rootLocation.stringExpression)
-		mainWindowController.issueListingViewController.issues	=	r.issues()
+		mainWindowController.issueListingViewController.removeAllIssues()
+		
+		toolExecutionController.cancelAll()
+		toolExecutionController.executeCargoBuild()
 	}
 
 	///	Build and run default project current workspace. 
@@ -355,14 +429,18 @@ extension WorkspaceDocument {
 	///	Customisation will be provided later.
 	@objc @IBAction
 	func runWorkspace(AnyObject?) {
-		let	r	=	CargoExecutionController.run(rootLocation.stringExpression)
-		mainWindowController.issueListingViewController.issues	=	r.issues()
+		mainWindowController.issueListingViewController.removeAllIssues()
+		
+		toolExecutionController.cancelAll()
+		toolExecutionController.executeCargoRun()
 	}
 	
 	@objc @IBAction
 	func cleanWorkspace(AnyObject?) {
-		let	r	=	CargoExecutionController.clean(rootLocation.stringExpression)
-		mainWindowController.issueListingViewController.issues	=	r.issues()
+		mainWindowController.issueListingViewController.removeAllIssues()
+		
+		toolExecutionController.cancelAll()
+		toolExecutionController.executeCargoClean()
 	}
 	
 }

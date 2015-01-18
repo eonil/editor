@@ -14,9 +14,22 @@ import Foundation
 public protocol ShellTaskExecutionControllerDelegate: class {
 	func shellTaskExecutableControllerDidReadFromStandardOutput(String)
 	func shellTaskExecutableControllerDidReadFromStandardError(String)
-	func shellTaskExecutableControllerDidTerminateRemoteTask(#exitCode:Int32, reason:NSTaskTerminationReason)
+	func shellTaskExecutableControllerRemoteProcessDidTerminate(#exitCode:Int32, reason:NSTaskTerminationReason)
 }
 
+
+///	Runs a non-interactive shell.
+///	Non-interactive shell (so non-`pty`) can provide seaprated error output.
+///
+///	Collection of utility functions to run `sh` in remote child process.
+///	This spawns a new background thread to manage the remote process.
+///	The background thread will not finish until the remote process finishes.
+///
+///	Any execution request will return an `Shell.ExecutionController` to control the
+///	background thread. You can control the execution using this object. You have to
+///	keep this even you don't want to control it, because killing this object will
+///	send `SIGNKILL` to the remote process if the process is not finished yet.
+///
 ///	This internally uses `sh` to execute the command. 
 ///	On OS X, it is likely to be `bash`.
 public class ShellTaskExecutionController {
@@ -46,7 +59,7 @@ public class ShellTaskExecutionController {
 		}
 		
 		_remoteTask.terminationHandler	=	{ [weak self] t in
-			self?.delegate?.shellTaskExecutableControllerDidTerminateRemoteTask(exitCode: t.terminationStatus, reason: t.terminationReason)
+			self?.delegate?.shellTaskExecutableControllerRemoteProcessDidTerminate(exitCode: t.terminationStatus, reason: t.terminationReason)
 			()
 		}
 	}

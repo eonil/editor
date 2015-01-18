@@ -10,26 +10,33 @@ import Cocoa
 import Precompilation
 import PrecompilationOfExternalToolSupport
 
+
+class CargoTest: CargoExecutionControllerDelegate {
+	let	exe	=	CargoExecutionController()
+	init() {
+		exe.delegate	=	self
+		
+		let	w	=	NSURL(string: "file:///Users/Eonil/Temp/racer")!
+		
+		exe.launchRun(workingDirectoryURL: w)
+	}
+	
+	func cargoExecutionControllerDidPrintMessage(s: String) {
+		println("MSG: \(s)")
+	}
+	func cargoExecutionControllerDidDiscoverRustCompilationIssue(issue: RustCompilerIssue) {
+		println("ISSUE: \(issue)")
+	}
+}
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBOutlet weak var window: NSWindow!
 
-	
-	let	exe	=	CargoExecutionController(workingDirectoryURL: NSURL(string: "file:///Users/Eonil/Temp/racer")!)
+	let	t1	=	CargoTest()
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		
-//		exe.launch(CargoExecutionController.Command.Clean, parameters: ["--verbose"])
-		exe.launch(CargoExecutionController.Command.Build, parameters: ["--verbose"])
-		
-		
-		
-		
-		
-		
-		
-		
 		
 //		UIDialogues.queryDeletingFilesUsingWindowSheet(window, files: [NSURL(string: "AA")!]) { (b:UIDialogueButton) -> () in
 //			switch b {
@@ -43,12 +50,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //		}
 
 		
-//		let	s	=	CargoExecutionController.run(NSURL(string: "file:///Users/Eonil/Temp/racer")!)
-//		println(s)
 		
-
 //		let	s	=	String(contentsOfFile: "/Users/Eonil/Workshop/Incubation/Editor/Project/Subprojects/Precompilation/PrecompilationUnitTest/example1.txt", encoding: NSUTF8StringEncoding, error: nil)!
-//		let	ss	=	CargoOutputParser.parseErrorOutput(s)
+//		let	ss	=	RustCompilerOutputParsing.parseErrorOutput(s)
 //
 //		for s in ss {
 //			println(s)

@@ -9,12 +9,11 @@
 import Foundation
 
 struct UnitTest {
-	func runAll() {
+	static func runAll() {
 		testDiff()
 		XML.Test.run()
+		testRustCompilerIssueParsing()
 	}
 }
 
-
-let	ut	=	UnitTest()
-ut.runAll()
+UnitTest.runAll()

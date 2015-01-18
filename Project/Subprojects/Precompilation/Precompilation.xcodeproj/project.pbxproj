@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4526BFE61A6B58B400F5BDC1 /* RustCompilerOutputParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527E4921A6A671100115139 /* RustCompilerOutputParsing.swift */; };
+		4526BFE71A6B58B400F5BDC1 /* RustCompilerIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527E4831A6A646A00115139 /* RustCompilerIssue.swift */; };
+		4526BFF31A6B5EDD00F5BDC1 /* UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526BFF21A6B5EDD00F5BDC1 /* UnitTest.swift */; };
 		4527E4841A6A646A00115139 /* RustCompilerIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527E4831A6A646A00115139 /* RustCompilerIssue.swift */; };
 		4527E4911A6A65AD00115139 /* CargoOutputParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527E48A1A6A658200115139 /* CargoOutputParsing.swift */; };
 		4527E4931A6A671100115139 /* RustCompilerOutputParsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527E4921A6A671100115139 /* RustCompilerOutputParsing.swift */; };
@@ -134,6 +137,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4526BFF21A6B5EDD00F5BDC1 /* UnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTest.swift; sourceTree = "<group>"; };
 		4527E4831A6A646A00115139 /* RustCompilerIssue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerIssue.swift; sourceTree = "<group>"; };
 		4527E48A1A6A658200115139 /* CargoOutputParsing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoOutputParsing.swift; sourceTree = "<group>"; };
 		4527E4901A6A65A300115139 /* example1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = example1.txt; sourceTree = "<group>"; };
@@ -250,7 +254,6 @@
 				45A6DAED1A63A52900DFB9CE /* Resolution.swift */,
 				456670561A65E81E003EEC14 /* TypeExtensions */,
 				45A6DAD21A63A27200DFB9CE /* UtilityAlgorithms */,
-				45A6DACD1A63A1DC00DFB9CE /* Extensions */,
 				458E62F81A633BA5006465B3 /* BackstageWorkers */,
 				45FE1B211A65E563002B9D1B /* MonolithCandidates */,
 				453857521A626FC200DC693D /* Supporting Files */,
@@ -303,13 +306,6 @@
 			path = BackstageWorkers;
 			sourceTree = "<group>";
 		};
-		45A6DACD1A63A1DC00DFB9CE /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		45A6DAD21A63A27200DFB9CE /* UtilityAlgorithms */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				45A6DB441A63AAE600DFB9CE /* PrecompilationOfExternalToolSupport.h */,
+				4526BFF21A6B5EDD00F5BDC1 /* UnitTest.swift */,
 				45A6DB5F1A63AB1D00DFB9CE /* Tools */,
 				45A6DB421A63AAE600DFB9CE /* Supporting Files */,
 			);
@@ -638,6 +635,7 @@
 				45FE1B4B1A65E651002B9D1B /* LinkList.swift in Sources */,
 				45FE1B491A65E651002B9D1B /* Box.swift in Sources */,
 				45FE1B501A65E651002B9D1B /* ObjCRuntime.swift in Sources */,
+				4526BFE71A6B58B400F5BDC1 /* RustCompilerIssue.swift in Sources */,
 				45A6DAE01A63A29F00DFB9CE /* main.swift in Sources */,
 				45FE1B4A1A65E651002B9D1B /* TargetActionFunctionBox.swift in Sources */,
 				45FE1B4D1A65E651002B9D1B /* XML.swift in Sources */,
@@ -646,6 +644,7 @@
 				45FE1B4C1A65E651002B9D1B /* NotifierAndObserver.swift in Sources */,
 				45FE1B4F1A65E651002B9D1B /* XML.Test.swift in Sources */,
 				45FE1B4E1A65E651002B9D1B /* XML.Navigator.swift in Sources */,
+				4526BFE61A6B58B400F5BDC1 /* RustCompilerOutputParsing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +654,7 @@
 			files = (
 				45C34B9D1A6B2D28004B8C38 /* StringStreamProcessing.swift in Sources */,
 				45A6DB661A63AB1D00DFB9CE /* RustProgramExecutionController.swift in Sources */,
+				4526BFF31A6B5EDD00F5BDC1 /* UnitTest.swift in Sources */,
 				45A6DB651A63AB1D00DFB9CE /* RacerExecutionController.swift in Sources */,
 				4527E4931A6A671100115139 /* RustCompilerOutputParsing.swift in Sources */,
 				45A6DB671A63AB1D00DFB9CE /* TSVFileScanner.swift in Sources */,

@@ -35,7 +35,7 @@ public struct RustCompilerIssue {
 extension RustCompilerIssue: Printable {
 	public var description:String {
 		get {
-			return	"(\(range): \(severity.rawValue): \(location): \(message))"
+			return	"(\(range) [\(severity.rawValue)] \(location): \(message.debugDescription))"
 		}
 	}
 }

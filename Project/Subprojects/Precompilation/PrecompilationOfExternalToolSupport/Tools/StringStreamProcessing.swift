@@ -34,25 +34,31 @@ import Foundation
 struct LineDispatcher {
 	var	onLine			=	{ _ in () } as (line:String)->()
 	
-	///	Line content currently on progress but not yet finished.
-	var incompleteLineContent:String {
-		get {
-			return	_buffer
-		}
-	}
-	
 	mutating func push(s:String) {
 		let	NEWLINE	=	"\n" as Character
 		let	ps		=	split(s, { (ch:Character)->Bool in return ch == NEWLINE }, maxSplit: 1, allowEmptySlices: true)
 		
 		_buffer.extend(ps[0])
 		if ps.count == 2 {
-			onLine(line: _buffer)
+			onLine(line: _buffer + "\n")
 			_buffer	=	ps[1]
 		}
 	}
 	
 	private var	_buffer:String	=	""
+}
+
+extension LineDispatcher {
+	///	Line content currently on progress but not yet finished.
+	var incompleteLineContent:String {
+		get {
+			return	_buffer
+		}
+	}
+	mutating func dispatchIncompleteLine() {
+		onLine(line: _buffer)
+		_buffer	=	""
+	}
 }
 
 
@@ -77,7 +83,7 @@ final class UTF8StringDispatcher {
 	var	onString	=	{ s in return () } as (String)->()
 	
 	deinit {
-		assert(g.u8s.count == 0)
+//		assert(g.u8s.count == 0, "If you cannot ")
 	}
 	
 	var incompleteCodeUnits:Slice<UTF8.CodeUnit> {
@@ -86,6 +92,9 @@ final class UTF8StringDispatcher {
 		}
 	}
 	
+//	func reset() {
+//		g	=	InfinitePagingUTF8CodeUnitGenerator()
+//	}
 	func push(d:NSData) {
 		let	p	=	UnsafeBufferPointer<UTF8.CodeUnit>(start: UnsafePointer<UTF8.CodeUnit>(d.bytes), count: d.length)
 		g.u8s.splice(p, atIndex: g.u8s.count)

@@ -22,7 +22,9 @@ struct WorkspaceUtility {
 		let	parentDirURL			=	desiredWorkspaceRootURL.URLByDeletingLastPathComponent!
 		
 		//	`cargo` will create a directory for the URL.
-		CargoExecutionController.create(parentDirURL, name: desiredWorkspaceName)
+		let	c	=	CargoExecutionController()
+		c.launchNew(workingDirectoryURL: parentDirURL, desiredWorkspaceName: desiredWorkspaceName)
+		c.waitUntilExit()
 		
 		if desiredWorkspaceRootURL.existingAsDirectoryFile {
 			let	ok2	=	NSData().writeToURL(configDataFileURL, atomically: true)

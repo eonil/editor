@@ -98,10 +98,10 @@ private struct DiffState<T> {
 ///	MARK:	Unit Tests
 
 extension UnitTest {
-	private func run(f:()->()) {
+	private static func run(f:()->()) {
 		f()
 	}
-	func testDiff() {
+	static func testDiff() {
 		run {
 			let	from	=	[1,2,3,4,5]
 			let	to		=	[3,4,5,6,7]

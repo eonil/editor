@@ -25,8 +25,34 @@ class IssueListingViewController : TableViewController {
 	
 	var	issues:[Issue] = [] {
 		didSet {
+			Debug.assertMainThread()
+			
 			self.tableView.reloadData()
 		}
+	}
+	
+	func appendIssues(additions:[Issue]) {
+		let	s		=	self.issues.endIndex
+		self.issues.extend(additions)
+		let	e		=	self.issues.endIndex
+		
+		let	idxs	=	NSIndexSet(s..<e)
+		idxs.enumerateIndexesUsingBlock { (idx:Int, _:UnsafeMutablePointer<ObjCBool>) -> Void in
+			println(idx)
+		}
+		println(idxs)
+		
+		self.tableView.beginUpdates()
+//		self.tableView.insertRowsAtIndexes(idxs, withAnimation: NSTableViewAnimationOptions.allZeros)
+		self.tableView.reloadData()
+		self.tableView.endUpdates()
+	}
+	func removeAllIssues() {
+		let	idxs	=	NSIndexSet(0..<issues.count)
+		
+		self.tableView.beginUpdates()
+		self.tableView.removeRowsAtIndexes(idxs, withAnimation: NSTableViewAnimationOptions.allZeros)
+		self.tableView.endUpdates()
 	}
 	
 	func userDidDoubleClick(sender:AnyObject?) {

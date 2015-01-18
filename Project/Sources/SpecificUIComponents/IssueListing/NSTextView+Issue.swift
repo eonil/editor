@@ -10,17 +10,17 @@ import Foundation
 import AppKit
 
 extension NSTextView {
-	func highlightRangeOfIssue(s:Issue) {
+	func highlightCodeRange(range:Issue.CodeRange) {
 		var	rs1	=	[] as [NSRange]
-		for i in s.range.startPoint.lineIndex...s.range.endPoint.lineIndex {
+		for i in range.startPoint.lineIndex...range.endPoint.lineIndex {
 			let	r1	=	(self.string! as NSString).findNSRangeOfLineContentAtIndex(i)
 			rs1.append(r1!)
 		}
 		self.selectedRanges	=	rs1
 		self.scrollRangeToVisible(rs1[0])
 	}
-	func navigateRangeOfIssue(s:Issue) {
-		let	r1	=	self.string!.findNSRangeOfLineContentAtIndex(s.range.startPoint.lineIndex)
+	func navigateToCodeRange(range:Issue.CodeRange) {
+		let	r1	=	self.string!.findNSRangeOfLineContentAtIndex(range.startPoint.lineIndex)
 		if let r2 = r1 {
 			self.window!.makeFirstResponder(self)
 			self.selectedRanges	=	[r1!]
