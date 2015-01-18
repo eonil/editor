@@ -203,6 +203,34 @@
 			remoteGlobalIDString = 45BF99C51A131E3A004E4E2E;
 			remoteInfo = TestdriveApp;
 		};
+		4527E4FF1A6A7E1700115139 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45CBA4021A63FD21007A377E;
+			remoteInfo = PseudoTeletypewriter;
+		};
+		4527E5011A6A7E1700115139 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45CBA42D1A63FD77007A377E;
+			remoteInfo = Test2;
+		};
+		4527E52E1A6A7E4B00115139 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4527E5291A6A7E4A00115139 /* EditorInteractiveCommandConsoleFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4527E50D1A6A7E4A00115139;
+			remoteInfo = EditorInteractiveCommandConsoleFeature;
+		};
+		4527E5301A6A7E4B00115139 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4527E5291A6A7E4A00115139 /* EditorInteractiveCommandConsoleFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4527E5181A6A7E4A00115139;
+			remoteInfo = EditorInteractiveCommandConsoleFeatureTests;
+		};
 		452E4E611A650F09007B490D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 452E4E5B1A650F09007B490D /* Text.xcodeproj */;
@@ -435,6 +463,8 @@
 		45204C7F1A63300900929A17 /* ApplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationController.swift; sourceTree = "<group>"; };
 		4524425D1A18019400A03A51 /* Standards.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Standards.xcodeproj; path = Submodules/Monolith.Swift/Standards/Standards.xcodeproj; sourceTree = "<group>"; };
 		4527E4F71A6A717A00115139 /* NSTextView+Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextView+Issue.swift"; sourceTree = "<group>"; };
+		4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PseudoTeletypewriter.xcodeproj; path = PseudoTeletypewriter.Swift/PseudoTeletypewriter.xcodeproj; sourceTree = "<group>"; };
+		4527E5291A6A7E4A00115139 /* EditorInteractiveCommandConsoleFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorInteractiveCommandConsoleFeature.xcodeproj; path = EditorInteractiveCommandConsoleFeature/EditorInteractiveCommandConsoleFeature.xcodeproj; sourceTree = "<group>"; };
 		452A121C1A107E4C00E38F35 /* IssueListingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueListingViewController.swift; sourceTree = "<group>"; };
 		452A121E1A107EC500E38F35 /* TableScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableScrollViewController.swift; sourceTree = "<group>"; };
 		452A12201A107FF000E38F35 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -630,10 +660,12 @@
 		452442781A1804FE00A03A51 /* Subprojects */ = {
 			isa = PBXGroup;
 			children = (
-				4538576B1A626FC200DC693D /* Precompilation.xcodeproj */,
+				4527E5291A6A7E4A00115139 /* EditorInteractiveCommandConsoleFeature.xcodeproj */,
 				45F48F5F1A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.xcodeproj */,
 				45D1B22E1A66856100B48431 /* EditorFileContentEditingFeature.xcodeproj */,
+				4538576B1A626FC200DC693D /* Precompilation.xcodeproj */,
 				45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */,
+				4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */,
 			);
 			path = Subprojects;
 			sourceTree = "<group>";
@@ -645,6 +677,24 @@
 				452443201A18059700A03A51 /* InternalTester */,
 				45DA95AB1A6A10E50091410B /* InternalTester4.app */,
 				452443221A18059700A03A51 /* TestdriveApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4527E4FA1A6A7E1700115139 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4527E5001A6A7E1700115139 /* PseudoTeletypewriter.framework */,
+				4527E5021A6A7E1700115139 /* Test2.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4527E52A1A6A7E4A00115139 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4527E52F1A6A7E4B00115139 /* EditorInteractiveCommandConsoleFeature.framework */,
+				4527E5311A6A7E4B00115139 /* EditorInteractiveCommandConsoleFeatureTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1139,6 +1189,10 @@
 					ProjectRef = 45F48F5F1A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.xcodeproj */;
 				},
 				{
+					ProductGroup = 4527E52A1A6A7E4A00115139 /* Products */;
+					ProjectRef = 4527E5291A6A7E4A00115139 /* EditorInteractiveCommandConsoleFeature.xcodeproj */;
+				},
+				{
 					ProductGroup = 452443161A18059700A03A51 /* Products */;
 					ProjectRef = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
 				},
@@ -1149,6 +1203,10 @@
 				{
 					ProductGroup = 45FE1ABD1A65E303002B9D1B /* Products */;
 					ProjectRef = 4538576B1A626FC200DC693D /* Precompilation.xcodeproj */;
+				},
+				{
+					ProductGroup = 4527E4FA1A6A7E1700115139 /* Products */;
+					ProjectRef = 4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */;
 				},
 				{
 					ProductGroup = 4524425E1A18019400A03A51 /* Products */;
@@ -1250,6 +1308,34 @@
 			fileType = wrapper.application;
 			path = TestdriveApp.app;
 			remoteRef = 452443211A18059700A03A51 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4527E5001A6A7E1700115139 /* PseudoTeletypewriter.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PseudoTeletypewriter.framework;
+			remoteRef = 4527E4FF1A6A7E1700115139 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4527E5021A6A7E1700115139 /* Test2.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Test2.app;
+			remoteRef = 4527E5011A6A7E1700115139 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4527E52F1A6A7E4B00115139 /* EditorInteractiveCommandConsoleFeature.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorInteractiveCommandConsoleFeature.framework;
+			remoteRef = 4527E52E1A6A7E4B00115139 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4527E5311A6A7E4B00115139 /* EditorInteractiveCommandConsoleFeatureTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorInteractiveCommandConsoleFeatureTests.xctest;
+			remoteRef = 4527E5301A6A7E4B00115139 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		452E4E621A650F09007B490D /* EonilText.framework */ = {

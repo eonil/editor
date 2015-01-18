@@ -20,6 +20,7 @@
 		453857991A62702900DC693D /* Precompilation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4538574F1A626FC200DC693D /* Precompilation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		456670591A65E81E003EEC14 /* AppKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456670571A65E81E003EEC14 /* AppKitExtensions.swift */; };
 		4566705A1A65E81E003EEC14 /* SwiftLevelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456670581A65E81E003EEC14 /* SwiftLevelExtensions.swift */; };
+		4575D9321A6A9597009D6E5A /* ShellTaskExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4575D9311A6A9597009D6E5A /* ShellTaskExecutionController.swift */; };
 		45A5F8171A6A5A1600CC5FC8 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A5F8161A6A5A1600CC5FC8 /* FoundationExtensions.swift */; };
 		45A6DACA1A63A10C00DFB9CE /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DAC91A63A10C00DFB9CE /* FileUtility.swift */; };
 		45A6DAD11A63A22B00DFB9CE /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DAC91A63A10C00DFB9CE /* FileUtility.swift */; };
@@ -41,6 +42,8 @@
 		45A6DB651A63AB1D00DFB9CE /* RacerExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DB611A63AB1D00DFB9CE /* RacerExecutionController.swift */; };
 		45A6DB661A63AB1D00DFB9CE /* RustProgramExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DB621A63AB1D00DFB9CE /* RustProgramExecutionController.swift */; };
 		45A6DB671A63AB1D00DFB9CE /* TSVFileScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6DB631A63AB1D00DFB9CE /* TSVFileScanner.swift */; };
+		45C34B9D1A6B2D28004B8C38 /* StringStreamProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C34B9C1A6B2D28004B8C38 /* StringStreamProcessing.swift */; };
+		45C34B9F1A6B2E8D004B8C38 /* ShellTaskQueueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C34B9E1A6B2E8D004B8C38 /* ShellTaskQueueController.swift */; };
 		45FE1AF91A65E399002B9D1B /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE1AF81A65E399002B9D1B /* Debug.swift */; };
 		45FE1B2A1A65E563002B9D1B /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE1B221A65E563002B9D1B /* Box.swift */; };
 		45FE1B2B1A65E563002B9D1B /* LinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE1B231A65E563002B9D1B /* LinkList.swift */; };
@@ -147,6 +150,7 @@
 		453857831A62700400DC693D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		456670571A65E81E003EEC14 /* AppKitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppKitExtensions.swift; sourceTree = "<group>"; };
 		456670581A65E81E003EEC14 /* SwiftLevelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLevelExtensions.swift; sourceTree = "<group>"; };
+		4575D9311A6A9597009D6E5A /* ShellTaskExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellTaskExecutionController.swift; sourceTree = "<group>"; };
 		45A5F8161A6A5A1600CC5FC8 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		45A6DAC91A63A10C00DFB9CE /* FileUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtility.swift; sourceTree = "<group>"; };
 		45A6DAD31A63A27A00DFB9CE /* Diff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
@@ -162,6 +166,8 @@
 		45A6DB611A63AB1D00DFB9CE /* RacerExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacerExecutionController.swift; sourceTree = "<group>"; };
 		45A6DB621A63AB1D00DFB9CE /* RustProgramExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProgramExecutionController.swift; sourceTree = "<group>"; };
 		45A6DB631A63AB1D00DFB9CE /* TSVFileScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSVFileScanner.swift; sourceTree = "<group>"; };
+		45C34B9C1A6B2D28004B8C38 /* StringStreamProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringStreamProcessing.swift; sourceTree = "<group>"; };
+		45C34B9E1A6B2E8D004B8C38 /* ShellTaskQueueController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellTaskQueueController.swift; sourceTree = "<group>"; };
 		45FE1AF81A65E399002B9D1B /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		45FE1B221A65E563002B9D1B /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
 		45FE1B231A65E563002B9D1B /* LinkList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkList.swift; sourceTree = "<group>"; };
@@ -349,7 +355,10 @@
 				4527E4831A6A646A00115139 /* RustCompilerIssue.swift */,
 				45A6DB611A63AB1D00DFB9CE /* RacerExecutionController.swift */,
 				45A6DB621A63AB1D00DFB9CE /* RustProgramExecutionController.swift */,
+				4575D9311A6A9597009D6E5A /* ShellTaskExecutionController.swift */,
+				45C34B9E1A6B2E8D004B8C38 /* ShellTaskQueueController.swift */,
 				45A6DB631A63AB1D00DFB9CE /* TSVFileScanner.swift */,
+				45C34B9C1A6B2D28004B8C38 /* StringStreamProcessing.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -644,12 +653,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45C34B9D1A6B2D28004B8C38 /* StringStreamProcessing.swift in Sources */,
 				45A6DB661A63AB1D00DFB9CE /* RustProgramExecutionController.swift in Sources */,
 				45A6DB651A63AB1D00DFB9CE /* RacerExecutionController.swift in Sources */,
 				4527E4931A6A671100115139 /* RustCompilerOutputParsing.swift in Sources */,
 				45A6DB671A63AB1D00DFB9CE /* TSVFileScanner.swift in Sources */,
 				4527E4841A6A646A00115139 /* RustCompilerIssue.swift in Sources */,
 				45A6DB641A63AB1D00DFB9CE /* CargoExecutionController.swift in Sources */,
+				4575D9321A6A9597009D6E5A /* ShellTaskExecutionController.swift in Sources */,
+				45C34B9F1A6B2E8D004B8C38 /* ShellTaskQueueController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

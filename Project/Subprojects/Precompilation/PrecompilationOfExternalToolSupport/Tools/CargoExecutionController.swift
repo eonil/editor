@@ -18,24 +18,30 @@ public struct CargoExecutionResult {
 		return	RustCompilerOutputParsing.parseErrorOutput(error)
 	}
 }
-public struct CargoExecutionController {
+
+public protocol CargoExecutionControllerDelegate: class {
+	func cargoExecutionControllerDidDiscoverRustCompilationIssue(issue:RustCompilerIssue)
+}
+
+public class CargoExecutionController {
+	weak var delegate:CargoExecutionControllerDelegate?
 	
 	///	`workingDirectoryURL` must be parent directory of new project directory.
-	public static func create(workingDirectoryURL:NSURL, name:String) -> CargoExecutionResult {
+	public class func create(workingDirectoryURL:NSURL, name:String) -> CargoExecutionResult {
 		return	execute(workingDirectoryURL, ["new", "-v", name])
 	}
-	public static func build(workingDirectoryURL:NSURL) -> CargoExecutionResult {
+	public class func build(workingDirectoryURL:NSURL) -> CargoExecutionResult {
 		return	execute(workingDirectoryURL, ["build", "-v"])
 	}
-	public static func run(workingDirectoryURL:NSURL) -> CargoExecutionResult {
+	public class func run(workingDirectoryURL:NSURL) -> CargoExecutionResult {
 		return	execute(workingDirectoryURL, ["run", "-v"])
 	}
-	public static func clean(workingDirectoryURL:NSURL) -> CargoExecutionResult {
+	public class func clean(workingDirectoryURL:NSURL) -> CargoExecutionResult {
 		return	execute(workingDirectoryURL, ["clean", "-v"])
 	}
 	
 	///	Returns output string.
-	public static func execute(workingDirectoryURL:NSURL, _ arguments:[String]) -> CargoExecutionResult {
+	public class func execute(workingDirectoryURL:NSURL, _ arguments:[String]) -> CargoExecutionResult {
 		assert(workingDirectoryURL.existingAsDirectoryFile)
 		
 		let	p1	=	workingDirectoryURL.path!
@@ -66,12 +72,62 @@ public struct CargoExecutionController {
 		
 		let	out3	=	out1.fileHandleForReading.readUTF8StringToEndOfFile()
 		let	err3	=	err1.fileHandleForReading.readUTF8StringToEndOfFile()
-
+		
 		Debug.log(out3 + "\n" + err3)
 		return	CargoExecutionResult(output: out3, error: err3)
 	}
 	
 	
-
+	
+	public enum Command: String {
+		case Build	=	"build"
+		case New	=	"new"
+		case Clean	=	"clean"
+		case Run	=	"run"
+	}
+	
+	public init(workingDirectoryURL:NSURL) {
+		_linegen	=	LineDispatcher()
+		_taskexec	=	ShellTaskExecutionController()
+		
+		_linegen.onLine	=	{ [weak self] (line:String)->() in
+			println(line)
+		}
+		
+		_taskexec.delegate	=	self
+		_taskexec.launch(workingDirectoryURL: workingDirectoryURL)
+	}
+	
+	public func launch(command:Command, parameters:[String]) {
+		let	as1	=	join(" ", parameters)
+		
+		_taskexec.writeToStandardInput("cargo \(command.rawValue) \(as1)\n")
+		_taskexec.writeToStandardInput("exit $?;\n")
+	}
+	public func kill() {
+		_taskexec.kill()
+	}
+	
+	////
+	
+	private var	_linegen	:	LineDispatcher
+	private let	_taskexec	:	ShellTaskExecutionController
 }
+
+extension CargoExecutionController: ShellTaskExecutionControllerDelegate {
+	public func shellTaskExecutableControllerDidReadFromStandardOutput(s: String) {
+		_linegen.push(s)
+	}
+	public func shellTaskExecutableControllerDidReadFromStandardError(s: String) {
+		_linegen.push(s)
+	}
+	public func shellTaskExecutableControllerDidTerminateRemoteTask(#exitCode: Int32, reason: NSTaskTerminationReason) {
+//		_linegen.push("\n")
+	}
+}
+
+
+
+
+
 

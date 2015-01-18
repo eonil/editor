@@ -15,8 +15,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBOutlet weak var window: NSWindow!
 
-
+	
+	let	exe	=	CargoExecutionController(workingDirectoryURL: NSURL(string: "file:///Users/Eonil/Temp/racer")!)
+	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
+		
+//		exe.launch(CargoExecutionController.Command.Clean, parameters: ["--verbose"])
+		exe.launch(CargoExecutionController.Command.Build, parameters: ["--verbose"])
+		
+		
+		
+		
+		
+		
+		
+		
+		
 //		UIDialogues.queryDeletingFilesUsingWindowSheet(window, files: [NSURL(string: "AA")!]) { (b:UIDialogueButton) -> () in
 //			switch b {
 //			case .OKButton:
@@ -29,11 +43,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //		}
 
 		
-//		let	s	=	CargoExecutionController.build(NSURL(string: "file:///Users/Eonil/Documents/test1")!)
+//		let	s	=	CargoExecutionController.run(NSURL(string: "file:///Users/Eonil/Temp/racer")!)
+//		println(s)
+		
 
 //		let	s	=	String(contentsOfFile: "/Users/Eonil/Workshop/Incubation/Editor/Project/Subprojects/Precompilation/PrecompilationUnitTest/example1.txt", encoding: NSUTF8StringEncoding, error: nil)!
 //		let	ss	=	CargoOutputParser.parseErrorOutput(s)
-//		
+//
 //		for s in ss {
 //			println(s)
 //		}
