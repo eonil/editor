@@ -394,6 +394,20 @@
 			remoteGlobalIDString = 45DA95801A69F1610091410B;
 			remoteInfo = InternalTester4;
 		};
+		45EF0BAE1A6C942700215F12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45EF0BA51A6C942600215F12 /* EditorDebuggingFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45EF0B891A6C942600215F12;
+			remoteInfo = EditorDebuggingFeature;
+		};
+		45EF0BB01A6C942700215F12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45EF0BA51A6C942600215F12 /* EditorDebuggingFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45EF0B941A6C942600215F12;
+			remoteInfo = EditorDebuggingFeatureTests;
+		};
 		45EF319B1A18DE9A00DAF925 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
@@ -580,6 +594,7 @@
 		45DA95AC1A6A15E30091410B /* FileLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLocation.swift; sourceTree = "<group>"; };
 		45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCRuntime.swift; sourceTree = "<group>"; };
 		45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetActionFunctionBox.swift; sourceTree = "<group>"; };
+		45EF0BA51A6C942600215F12 /* EditorDebuggingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebuggingFeature.xcodeproj; path = EditorDebuggingFeature/EditorDebuggingFeature.xcodeproj; sourceTree = "<group>"; };
 		45F48F1D1A65E1D100FF38FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F48F1E1A65E1D100FF38FB /* EditorFileTreeNavigationFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorFileTreeNavigationFeature.h; sourceTree = "<group>"; };
 		45F48F2C1A65E1D100FF38FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -700,6 +715,7 @@
 		452442781A1804FE00A03A51 /* Subprojects */ = {
 			isa = PBXGroup;
 			children = (
+				45EF0BA51A6C942600215F12 /* EditorDebuggingFeature.xcodeproj */,
 				4526C0511A6B81D300F5BDC1 /* EditorIssueListingFeature.xcodeproj */,
 				4527E5291A6A7E4A00115139 /* EditorInteractiveCommandConsoleFeature.xcodeproj */,
 				45F48F5F1A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.xcodeproj */,
@@ -1094,6 +1110,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		45EF0BA61A6C942600215F12 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45EF0BAF1A6C942700215F12 /* EditorDebuggingFeature.framework */,
+				45EF0BB11A6C942700215F12 /* EditorDebuggingFeatureTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45F48F1B1A65E1D100FF38FB /* EditorFileTreeNavigationFeature */ = {
 			isa = PBXGroup;
 			children = (
@@ -1240,6 +1265,10 @@
 				{
 					ProductGroup = 450A0DE11A275EBD0026102D /* Products */;
 					ProjectRef = 450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */;
+				},
+				{
+					ProductGroup = 45EF0BA61A6C942600215F12 /* Products */;
+					ProjectRef = 45EF0BA51A6C942600215F12 /* EditorDebuggingFeature.xcodeproj */;
 				},
 				{
 					ProductGroup = 45D1B22F1A66856100B48431 /* Products */;
@@ -1534,6 +1563,20 @@
 			fileType = wrapper.application;
 			path = InternalTester4.app;
 			remoteRef = 45DA95AA1A6A10E50091410B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45EF0BAF1A6C942700215F12 /* EditorDebuggingFeature.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorDebuggingFeature.framework;
+			remoteRef = 45EF0BAE1A6C942700215F12 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45EF0BB11A6C942700215F12 /* EditorDebuggingFeatureTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorDebuggingFeatureTests.xctest;
+			remoteRef = 45EF0BB01A6C942700215F12 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45F48F651A65E1FF00FF38FB /* EditorFileTreeNavigationFeature.framework */ = {

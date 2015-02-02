@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>CC3ED81A-A135-4489-ACE0-EC34D9D1ACDF</string>
+	<key>IDESourceControlProjectName</key>
+	<string>InteractiveDebugger</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>120EA977BD48968EAB2368B0255C2CBB634BF08E</key>
+		<string>https://github.com/Eonil/Monolith.git</string>
+		<key>8BD82A05ACFAF1B466F6CEF6751425E73E275F81</key>
+		<string>https://github.com/Eonil/Common.git</string>
+		<key>D78A996EA09CB32CC6B2DD1B0E22C26382BA455A</key>
+		<string>https://bitbucket.org/eonil/interactivedebugger.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>InteractiveDebugger.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>120EA977BD48968EAB2368B0255C2CBB634BF08E</key>
+		<string>../..Components/Monolith</string>
+		<key>8BD82A05ACFAF1B466F6CEF6751425E73E275F81</key>
+		<string>../..Components/Monolith/Components/Common</string>
+		<key>D78A996EA09CB32CC6B2DD1B0E22C26382BA455A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/eonil/interactivedebugger.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D78A996EA09CB32CC6B2DD1B0E22C26382BA455A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8BD82A05ACFAF1B466F6CEF6751425E73E275F81</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Common</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D78A996EA09CB32CC6B2DD1B0E22C26382BA455A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>InteractiveDebugger</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>120EA977BD48968EAB2368B0255C2CBB634BF08E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Monolith</string>
+		</dict>
+	</array>
+</dict>
+</plist>

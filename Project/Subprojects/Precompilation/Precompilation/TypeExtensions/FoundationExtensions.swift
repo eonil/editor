@@ -145,6 +145,27 @@ public extension NSFileHandle {
 		let	s1	=	NSString(data: d1, encoding: NSUTF8StringEncoding)!
 		return	s1
 	}
+	///	The new-line character will not be included to result string just like EOF character wouldn't be included.
+	public func readUTF8StringToNewLineCharacter() -> String {
+		let	NL	=	UTF8.CodeUnit(0x0A)
+		var	buf	=	[] as [UTF8.CodeUnit]
+		
+		var	con	=	true
+		while con {
+			let	d	=	self.readDataOfLength(1)
+			let	b	=	UnsafePointer<UInt8>(d.bytes).memory
+			buf.append(b)
+			if b == NL {
+				con	=	false
+			}
+		}
+		
+		return
+			buf.withUnsafeBufferPointer { (bp:UnsafeBufferPointer<UTF8.CodeUnit>) -> String in
+				let	p1	=	UnsafePointer<CChar>(bp.baseAddress)
+				return	String(UTF8String: p1)!
+			}
+	}
 }
 
 

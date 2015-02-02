@@ -32,10 +32,14 @@ public protocol ShellTaskExecutionControllerDelegate: class {
 ///
 ///	This internally uses `sh` to execute the command. 
 ///	On OS X, it is likely to be `bash`.
+///
+///	You can use a shell command `exec` to run a desired command to be executed by
+///	replacing the shell process itself.
+///
 public class ShellTaskExecutionController {
-	weak var delegate:ShellTaskExecutionControllerDelegate?
+	public weak var delegate:ShellTaskExecutionControllerDelegate?
 	
-	init() {
+	public init() {
 		_remoteTask.standardInput		=	_stdinPipe
 		_remoteTask.standardOutput		=	_stdoutPipe
 		_remoteTask.standardError		=	_stderrPipe
@@ -67,19 +71,19 @@ public class ShellTaskExecutionController {
 		precondition(_remoteTask.running == false, "You must quit the remote process before this object deinitialises.")
 	}
 	
-	var	exitCode:Int32 {
+	public var	exitCode:Int32 {
 		get {
 			return	_remoteTask.terminationStatus
 		}
 	}
-	var exitReason:NSTaskTerminationReason {
+	public var exitReason:NSTaskTerminationReason {
 		get {
 			return	_remoteTask.terminationReason
 		}
 	}
 	
 	
-	func launch(#workingDirectoryURL:NSURL) {
+	public func launch(#workingDirectoryURL:NSURL) {
 		assert(workingDirectoryURL.existingAsDirectoryFile)
 		
 		let	p1	=	workingDirectoryURL.path!
@@ -90,23 +94,23 @@ public class ShellTaskExecutionController {
 		
 		_remoteTask.launch()
 	}
-	func writeToStandardInput(s:String) {
+	public func writeToStandardInput(s:String) {
 		_stdinPipe.fileHandleForWriting.writeUTF8String(s)
 	}
-	func waitUntilExit() -> Int32 {
+	public func waitUntilExit() -> Int32 {
 		_remoteTask.waitUntilExit()
 		assert(_remoteTask.running == false)
 		return	_remoteTask.terminationStatus
 	}
 	
 	///	Sends `SIGTERM` to notify remote process to quit as soon as possible.
-	func terminate() {
+	public func terminate() {
 		_remoteTask.terminate()
 	}
 	
 	///	Sends `SIGKILL` to forces remote process to quit immediately.
 	///	Remote process will be killed by kernel and cannot perform any cleanup.
-	func kill() {
+	public func kill() {
 		Darwin.kill(_remoteTask.processIdentifier, SIGKILL)
 	}
 	

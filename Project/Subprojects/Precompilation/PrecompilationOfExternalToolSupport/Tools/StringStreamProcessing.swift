@@ -13,6 +13,28 @@ import Foundation
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
 //	These types cannot follow `GeneratorType` because the concept is "on-demand"
 //	rather than being notified.
@@ -31,10 +53,11 @@ import Foundation
 ///
 ///	Set `onLine` function to get notified.
 ///
-struct LineDispatcher {
-	var	onLine			=	{ _ in () } as (line:String)->()
-	
-	mutating func push(s:String) {
+public struct LineDispatcher {
+	public var	onLine			=	{ _ in () } as (line:String)->()
+	public init() {
+	}
+	public mutating func push(s:String) {
 		let	NEWLINE	=	"\n" as Character
 		let	ps		=	split(s, { (ch:Character)->Bool in return ch == NEWLINE }, maxSplit: 1, allowEmptySlices: true)
 		
@@ -50,12 +73,12 @@ struct LineDispatcher {
 
 extension LineDispatcher {
 	///	Line content currently on progress but not yet finished.
-	var incompleteLineContent:String {
+	public var incompleteLineContent:String {
 		get {
 			return	_buffer
 		}
 	}
-	mutating func dispatchIncompleteLine() {
+	public mutating func dispatchIncompleteLine() {
 		onLine(line: _buffer)
 		_buffer	=	""
 	}
@@ -79,23 +102,24 @@ extension LineDispatcher {
 ///
 ///	Set `onString` function to get notified.
 ///
-final class UTF8StringDispatcher {
-	var	onString	=	{ s in return () } as (String)->()
-	
+public final class UTF8StringDispatcher {
+	public var	onString	=	{ s in return () } as (String)->()
+	public init() {
+	}
 	deinit {
 //		assert(g.u8s.count == 0, "If you cannot ")
 	}
 	
-	var incompleteCodeUnits:Slice<UTF8.CodeUnit> {
+	public var incompleteCodeUnits:Slice<UTF8.CodeUnit> {
 		get {
 			return	g.u8s[g.idx..<g.u8s.endIndex]
 		}
 	}
 	
-//	func reset() {
+//	public func reset() {
 //		g	=	InfinitePagingUTF8CodeUnitGenerator()
 //	}
-	func push(d:NSData) {
+	public func push(d:NSData) {
 		let	p	=	UnsafeBufferPointer<UTF8.CodeUnit>(start: UnsafePointer<UTF8.CodeUnit>(d.bytes), count: d.length)
 		g.u8s.splice(p, atIndex: g.u8s.count)
 		
