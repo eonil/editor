@@ -158,6 +158,23 @@ LLDBOBJECT_INIT_IMPL(lldb::SBDebugger);
 	_raw.SetAsync(async ? true : false);
 }
 
+
+
+
+
+
+- (LLDBListener *)listener
+{
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+	
+	return	[[LLDBListener alloc] initWithCPPObject:_raw.GetListener()];
+}
+
+
+
+
+
+
 - (NSString *)stringOfState:(LLDBStateType)state
 {
 	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());

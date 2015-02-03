@@ -33,51 +33,51 @@
 
 
 typedef NS_ENUM(NSUInteger,LLDBStateType) {
-    LLDBStateTypeStateInvalid = 0,
+    LLDBStateTypeInvalid = 0,
     /*!
     Process is object is valid, but not currently loaded
     */
-    LLDBStateTypeStateUnloaded = 1,
+    LLDBStateTypeUnloaded = 1,
     /*!
     Process is connected to remote debug services, but not launched or attached to anything yet
     */
-    LLDBStateTypeStateConnected = 2,
+    LLDBStateTypeConnected = 2,
     /*!
     Process is currently trying to attach
     */
-    LLDBStateTypeStateAttaching = 3,
+    LLDBStateTypeAttaching = 3,
     /*!
     Process is in the process of launching
     */
-    LLDBStateTypeStateLaunching = 4,
+    LLDBStateTypeLaunching = 4,
     /*!
     Process or thread is stopped and can be examined.
     */
-    LLDBStateTypeStateStopped = 5,
+    LLDBStateTypeStopped = 5,
     /*!
     Process or thread is running and can't be examined.
     */
-    LLDBStateTypeStateRunning = 6,
+    LLDBStateTypeRunning = 6,
     /*!
     Process or thread is in the process of stepping and can not be examined.
     */
-    LLDBStateTypeStateStepping = 7,
+    LLDBStateTypeStepping = 7,
     /*!
     Process or thread has crashed and can be examined.
     */
-    LLDBStateTypeStateCrashed = 8,
+    LLDBStateTypeCrashed = 8,
     /*!
     Process has been detached and can't be examined.
     */
-    LLDBStateTypeStateDetached = 9,
+    LLDBStateTypeDetached = 9,
     /*!
     Process has exited and can't be examined.
     */
-    LLDBStateTypeStateExited = 10,
+    LLDBStateTypeExited = 10,
     /*!
     Process or thread is in a suspended state as far as the debugger is concerned while other processes or threads get the chance to run.
     */
-    LLDBStateTypeStateSuspended = 11,
+    LLDBStateTypeSuspended = 11,
 };
 
 typedef NS_OPTIONS(NSUInteger,LLDBLaunchFlags) {

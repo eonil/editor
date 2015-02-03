@@ -27,20 +27,55 @@ LLDBOBJECT_INIT_IMPL(lldb::SBListener)
 
 
 
+
+
+
+
+
+
 - (void)addEvent:(LLDBEvent *)event
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	UNIVERSE_DEBUG_ASSERT_OBJECT_TYPE(event, LLDBEvent);
 	
 	_raw.AddEvent(event->_raw);
 }
+
+
+
+
+
+
+
+
+
+- (BOOL)waitForEvent:(uint32_t)numSeconds event:(LLDBEvent *__autoreleasing *)event
+{
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+
+	lldb::SBEvent	e{};
+	auto const		r	=	_raw.WaitForEvent(numSeconds, e);
+	*event				=	[[LLDBEvent alloc] initWithCPPObject:e];
+	return	r;
+}
+
+
+
+
+
+
+
+
 - (BOOL)peekAtNextEvent:(LLDBEvent *)event
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	UNIVERSE_DEBUG_ASSERT_OBJECT_TYPE(event, LLDBEvent);
 	
 	return	_raw.PeekAtNextEvent(event->_raw) == true;
 }
 - (BOOL)peekAtNextEventForBroadcaster:(LLDBBroadcaster *)broadcaster event:(LLDBEvent *)event
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	UNIVERSE_DEBUG_ASSERT_OBJECT_TYPE(broadcaster, LLDBBroadcaster);
 	UNIVERSE_DEBUG_ASSERT_OBJECT_TYPE(event, LLDBEvent);
 	
@@ -48,6 +83,7 @@ LLDBOBJECT_INIT_IMPL(lldb::SBListener)
 }
 - (BOOL)peekAtNextEventForBroadcasterWithType:(LLDBBroadcaster *)broadcaster eventTypeMask:(uint32_t)eventTypeMask event:(LLDBEvent *)event
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	UNIVERSE_DEBUG_ASSERT_OBJECT_TYPE(broadcaster, LLDBBroadcaster);
 	UNIVERSE_DEBUG_ASSERT_OBJECT_TYPE(event, LLDBEvent);
 	
@@ -56,6 +92,7 @@ LLDBOBJECT_INIT_IMPL(lldb::SBListener)
 
 - (uint32_t)startListeningForEventClass:(LLDBDebugger *)debugger broadcasterClass:(NSString *)broadcasterClass eventMask:(uint32_t)eventMask
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	UNIVERSE_DEBUG_ASSERT_OBJECT_TYPE(debugger, LLDBDebugger);
 	UNIVERSE_DEBUG_ASSERT_OBJECT_TYPE(broadcasterClass, NSString);
 	

@@ -280,19 +280,6 @@ LLDBOBJECT_INIT_IMPL(lldb::SBProcess)
 
 
 
-- (LLDBBroadcaster *)broadcaster
-{
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
-	
-	return	[[LLDBBroadcaster alloc] initWithCPPObject:_raw.GetBroadcaster()];
-}
-+ (NSString *)broadcasterClass
-{
-	return	[[NSString alloc] initWithUTF8String:lldb::SBProcess::GetBroadcasterClass()];
-}
-
-
-
 - (uint32_t)numberOfSupportedHardwareWatchpoints:(LLDBError *__autoreleasing *)error
 {
 	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
@@ -346,6 +333,28 @@ LLDBOBJECT_INIT_IMPL(lldb::SBProcess)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- (LLDBBroadcaster *)broadcaster
+{
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+	
+	return	[[LLDBBroadcaster alloc] initWithCPPObject:_raw.GetBroadcaster()];
+}
 
 
 

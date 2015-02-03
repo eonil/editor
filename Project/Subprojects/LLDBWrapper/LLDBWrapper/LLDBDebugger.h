@@ -28,6 +28,18 @@ extern NSString* const		LLDBArchDefault64Bit;
 @interface	LLDBDebugger : LLDBObject
 - (instancetype)init;
 @property	(readwrite,nonatomic,assign)	BOOL		async;
+
+
+
+
+
+@property	(readonly,nonatomic,copy)		LLDBListener*			listener;
+
+
+
+
+
+
 - (NSString*)stringOfState:(LLDBStateType)state;													///<	Use @c LLDBState~ constants.
 - (LLDBTarget*)createTargetWithFilename:(NSString*)filename;
 - (LLDBTarget*)createTargetWithFilename:(NSString*)filename andArchname:(NSString*)archname;		///<	You can use one of @c LLDBArchDefault~ constants.

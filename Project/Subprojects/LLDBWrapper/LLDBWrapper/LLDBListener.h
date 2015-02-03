@@ -22,7 +22,7 @@
 //- (uint32_t)startListeningForEvents:(LLDBDebugger*)debugger broadcasterClass:(NSString*)broadcasterClass eventMask:(uint32_t)eventMask;
 //- (BOOL)	stopListeningForEvents:(LLDBDebugger*)debugger broadcasterClass:(NSString*)broadcasterClass eventMask:(uint32_t)eventMask;
 //
-//- (BOOL)	waitForEvent:(uint32_t)numSeconds event:(LLDBEvent*)event;
+- (BOOL)	waitForEvent:(uint32_t)numSeconds event:(LLDBEvent**)event;
 //- (BOOL)	waitForEventForBroadcasterWithType:(uint32_t)numSeconds broadcaster:(LLDBBroadcaster*)broadcaster eventTypeMask:(uint32_t)eventTypeMask event:(LLDBEvent*)event;
 //
 //- (BOOL)	peekAtNextEvent:(LLDBEvent*)event;

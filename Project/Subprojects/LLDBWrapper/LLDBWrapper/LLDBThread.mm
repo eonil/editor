@@ -80,7 +80,7 @@ LLDBOBJECT_INIT_IMPL(lldb::SBThread);
 	char		buf[len];
 	auto const	len1	=	_raw.GetStopDescription(buf, len);
 	assert(buf[len-1] == 0);
-	assert(len1 == len);
+	assert(len1 == 0 || len1 + 1 == len);
 	
 	return	fromC(buf);
 }
@@ -228,6 +228,18 @@ LLDBOBJECT_INIT_IMPL(lldb::SBThread);
 {
 	return	[[LLDBProcess alloc] initWithCPPObject:_raw.GetProcess()];
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

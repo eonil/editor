@@ -145,6 +145,33 @@ LLDBOBJECT_INIT_IMPL(lldb::SBTarget);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+- (LLDBBroadcaster *)broadcaster
+{
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+	
+	return	[[LLDBBroadcaster alloc] initWithCPPObject:_raw.GetBroadcaster()];
+}
+
+
+
+
+
+
+
+
 - (BOOL)isEqualToTarget:(LLDBTarget *)object
 {
 	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());

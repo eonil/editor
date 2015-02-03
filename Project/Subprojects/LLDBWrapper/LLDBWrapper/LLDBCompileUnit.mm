@@ -22,24 +22,32 @@ LLDBOBJECT_INIT_IMPL(lldb::SBCompileUnit);
 
 - (LLDBFileSpec *)fileSpec
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+	
 	return	[[LLDBFileSpec alloc] initWithCPPObject:_raw.GetFileSpec()];
 }
 - (uint32_t)numberOfLineEntries
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+	
 	return	_raw.GetNumLineEntries();
 }
 - (LLDBLineEntry *)lineEntryAtIndex:(uint32_t)index
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	UNIVERSE_DEBUG_ASSERT(index < _raw.GetNumLineEntries());
 	
 	return	[[LLDBLineEntry alloc] initWithCPPObject:_raw.GetLineEntryAtIndex(index)];
 }
 - (uint32_t)numberOfSupportFiles
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+	
 	return	_raw.GetNumSupportFiles();
 }
 - (LLDBFileSpec *)supportFileAtIndex:(uint32_t)index
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	UNIVERSE_DEBUG_ASSERT(index < _raw.GetNumSupportFiles());
 	
 	return	[[LLDBFileSpec alloc] initWithCPPObject:_raw.GetSupportFileAtIndex(index)];
@@ -50,6 +58,7 @@ LLDBOBJECT_INIT_IMPL(lldb::SBCompileUnit);
 
 - (BOOL)isEqualToCompileUnit:(LLDBCompileUnit *)compileUnit
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	UNIVERSE_DEBUG_ASSERT_OBJECT_TYPE(compileUnit, LLDBCompileUnit);
 	
 	return	_raw.operator==(compileUnit->_raw) == true;
@@ -78,6 +87,8 @@ LLDBOBJECT_INIT_IMPL(lldb::SBCompileUnit);
 
 - (NSString *)description
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+	
 	return	get_description_of(_raw);
 }
 @end

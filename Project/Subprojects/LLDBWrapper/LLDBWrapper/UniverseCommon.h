@@ -29,9 +29,9 @@ extern "C"
  */
 #ifndef	EONIL_DEBUG_MODE
 #ifdef	DEBUG
-#if		DEBUG
-#define EONIL_DEBUG_MODE		1
-#endif
+#define EONIL_DEBUG_MODE		DEBUG
+#else
+#define EONIL_DEBUG_MODE		0
 #endif
 #endif
 	

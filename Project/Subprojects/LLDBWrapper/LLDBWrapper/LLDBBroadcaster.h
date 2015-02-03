@@ -21,12 +21,16 @@
 //- (void)	broadcastEvent:(LLDBEvent*)event unique:(BOOL)unique;
 //
 //- (void)	addInitialEventsToListener:(LLDBListener*)listener requestedEvents:(uint32_t)requestedEvents;
-//- (uint32_t)addListener:(LLDBListener*)listener eventMask:(uint32_t)eventMask;
+
+/*!
+ Return the event bits that were granted to the listener
+ */
+- (uint32_t)addListener:(LLDBListener*)listener eventMask:(uint32_t)eventMask;
 //
-//@property	(readonly,nonatomic,copy)	NSString*	name;
+@property	(readonly,nonatomic,copy)	NSString*	name;
 //
 //- (BOOL)	eventTypeHasListeners:(uint32_t)eventType;
-//- (BOOL)	removeListener:(LLDBListener*)listener eventMask:(uint32_t)eventMask;
+- (BOOL)	removeListener:(LLDBListener*)listener eventMask:(uint32_t)eventMask;
 //
 //
 //

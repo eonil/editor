@@ -7,6 +7,7 @@
 //
 
 #include <stdio.h>
+#include <unistd.h>
 
 int main(int argc, const char * argv[]) {
 	
@@ -20,6 +21,7 @@ int main(int argc, const char * argv[]) {
 	b	=	"GJD";
 	
 	printf("Print2\n");
+	sleep(1);
 	printf("Print3\n");
     return 0;
 }

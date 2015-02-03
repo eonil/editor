@@ -105,6 +105,12 @@
 
 
 
+
+
+
+
+
+
 - (BOOL)	isEqualToThread:(LLDBThread*)object;
 - (BOOL)	isEqual:(id)object;
 @end

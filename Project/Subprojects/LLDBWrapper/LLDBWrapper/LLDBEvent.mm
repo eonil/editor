@@ -29,6 +29,8 @@ LLDBOBJECT_INIT_IMPL(lldb::SBEvent);
 
 - (NSString *)description
 {
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+	
 	return	get_description_of(_raw);
 }
 @end

@@ -171,6 +171,29 @@ public extension LLDBProcess {
 //	}
 }
 
+public extension LLDBProcess {
+	typealias	BroadcastBit	=	LLDbProcessBroadcastBit
+}
+//	Values are explicitly assigned at C++ level, so it seems safe to copy them here.
+public struct LLDbProcessBroadcastBit: RawOptionSetType {
+	public typealias RawValue			=	UInt32
+	
+	public static let allZeros			=	LLDbProcessBroadcastBit(rawValue: 0)
+	public static let StateChanged		=	LLDbProcessBroadcastBit(rawValue: 1 << 0)
+	public static let Interrupt			=	LLDbProcessBroadcastBit(rawValue: 1 << 1)
+	public static let STDOUT			=	LLDbProcessBroadcastBit(rawValue: 1 << 2)
+	public static let STDERR			=	LLDbProcessBroadcastBit(rawValue: 1 << 3)
+	public static let ProfileData		=	LLDbProcessBroadcastBit(rawValue: 1 << 4)
+	
+	public let	rawValue:RawValue
+	
+	public init(rawValue:RawValue) {
+		self.rawValue	=	rawValue
+	}
+	public init(nilLiteral:()) {
+		self.rawValue	=	0
+	}
+}
 
 
 
@@ -198,6 +221,41 @@ public extension LLDBThread {
 		return	(v!,e)
 	}
 }
+
+//public extension LLDBThread {
+//	typealias	BroadcastBit	=	LLDbThreadBroadcastBit
+//}
+////	Values are explicitly assigned at C++ level, so it seems safe to copy them here.
+//public struct LLDbThreadBroadcastBit: RawOptionSetType {
+//	public typealias RawValue	=	UInt32
+//	
+//	public static let allZeros					=	LLDbThreadBroadcastBit(rawValue: 0)
+//	public static let StackChanged				=	LLDbThreadBroadcastBit(rawValue: 1 << 0)
+//	public static let ThreadSuspended			=	LLDbThreadBroadcastBit(rawValue: 1 << 1)
+//	public static let ThreadResumed				=	LLDbThreadBroadcastBit(rawValue: 1 << 2)
+//	public static let SelectedFrameChanged		=	LLDbThreadBroadcastBit(rawValue: 1 << 3)
+//	public static let ThreadSelected			=	LLDbThreadBroadcastBit(rawValue: 1 << 4)
+//	
+//	public let	rawValue:RawValue
+//	
+//	public init(rawValue:RawValue) {
+//		self.rawValue	=	rawValue
+//	}
+//	public init(nilLiteral:()) {
+//		self.rawValue	=	0
+//	}
+//}
+
+
+
+
+
+
+
+
+
+
+
 
 
 extension LLDBValueList: CollectionType {
@@ -423,6 +481,40 @@ public extension LLDBBroadcaster {
 //	func broadcastEventByType2(eventType:UInt32) {
 //		self.broadcastEventByType(eventType, unique: false);
 //	}
+	
+//	func addListener<T:RawOptionSetType where T.RawValue == UInt32>(listener: LLDBListener, eventMask: T) {
+//		self.addListener(listener, eventMask: eventMask.rawValue)
+//	}
+}
+public extension LLDBProcess {
+	/// Return the event bits that were granted to the listener
+	func addListener(listener: LLDBListener, eventMask: LLDBProcess.BroadcastBit) -> LLDBProcess.BroadcastBit {
+		return	LLDBProcess.BroadcastBit(rawValue: self.broadcaster.addListener(listener, eventMask: eventMask.rawValue))
+	}
+	func removeListener(listener: LLDBListener, eventMask: LLDBProcess.BroadcastBit) -> Bool {
+		return	self.broadcaster.removeListener(listener, eventMask: eventMask.rawValue)
+	}
+}
+//public extension LLDBThread {
+//	func addListener(listener: LLDBListener, eventMask: LLDBThread.BroadcastBit) {
+//		self.broadcaster.addListener(listener, eventMask: eventMask.rawValue)
+//	}
+//	func removeListener(listener: LLDBListener, eventMask: LLDBThread.BroadcastBit) {
+//		self.broadcaster.removeListener(listener, eventMask: eventMask.rawValue)
+//	}
+//}
+
+public extension LLDBListener {
+	func waitForEvent(seconds:Int) -> LLDBEvent? {
+		let	s	=	UInt32(seconds)
+		var	e	=	nil as LLDBEvent?
+		let	ok	=	self.waitForEvent(s, event: &e)
+		if ok {
+			return	e
+		} else {
+			return	nil
+		}
+	}
 }
 
 

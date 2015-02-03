@@ -88,8 +88,6 @@
 + (size_t)	numberOfRestartedReasonsFromEvent:(LLDBEvent*)event;
 + (NSString*)restartedReasonAtIndexFromEvent:(LLDBEvent*)event index:(size_t)index;
 
-//@property	(readonly,nonatomic,copy)	LLDBBroadcaster*	broadcaster;
-//+ (NSString*)broadcasterClass;
 
 - (uint32_t)numberOfSupportedHardwareWatchpoints:(LLDBError**)error;			///<	`error` parameter cannot be `nil`.
 
@@ -126,6 +124,20 @@
 ////------------------------------------------------------------------
 //- (NSString*)extendedBacktraceTypeAtIndex:(uint32_t)index;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+@property	(readonly,nonatomic,copy)	LLDBBroadcaster*	broadcaster;
 
 
 

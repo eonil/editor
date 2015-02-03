@@ -613,9 +613,29 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="View" id="HyV-fh-RgO">
                         <items>
-                            <menuItem title="Step Over" keyEquivalent="r" id="snW-S8-Cw5">
+                            <menuItem title="Continue" keyEquivalent="1" id="snW-S8-Cw5">
                                 <connections>
-                                    <action selector="performStepOver:" target="Voe-Tx-rLC" id="2tB-KN-vck"/>
+                                    <action selector="performContinue:" target="Voe-Tx-rLC" id="2IH-In-4gO"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Stop" keyEquivalent="2" id="wVb-gL-HsT">
+                                <connections>
+                                    <action selector="performStop:" target="Voe-Tx-rLC" id="SBs-qK-iag"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Step Into" keyEquivalent="3" id="Rfk-oe-5ex">
+                                <connections>
+                                    <action selector="performStepInto:" target="Voe-Tx-rLC" id="1JW-lN-fRP"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Step Over" keyEquivalent="4" id="Qyu-xb-lXq">
+                                <connections>
+                                    <action selector="performStepOver:" target="Voe-Tx-rLC" id="DRI-ky-SWH"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Step Out" keyEquivalent="5" id="2B8-Q8-LHd">
+                                <connections>
+                                    <action selector="performStepOut:" target="Voe-Tx-rLC" id="nUc-kw-lxt"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ujb-Or-hw6"/>

@@ -19,9 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBOutlet weak var window: NSWindow!
 	
 	let	sv	=	NSScrollView()
-	let	tv	=	DebuggerTreeViewController()
+	let	tv	=	ExecutionStateTreeViewController()
 	
 	let	dbg	=	LLDBDebugger()
+	let	l	=	LLDBListener(name: "My Listener 1")
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		sv.documentView		=	tv.view
@@ -43,8 +44,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		println(p.allThreads[0].allFrames[0]?.lineEntry)
 		println(p.allThreads[0].allFrames[0]?.functionName)
 		
-//		t.process.`continue`()
+//		let	r	=	p.addListener(l, eventMask: LLDBProcess.BroadcastBit.StateChanged | LLDBProcess.BroadcastBit.Interrupt | LLDBProcess.BroadcastBit.STDOUT)
+//		assert(r == LLDBProcess.BroadcastBit.StateChanged | LLDBProcess.BroadcastBit.Interrupt | LLDBProcess.BroadcastBit.STDOUT)
+//		dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0)) {
+//			let	e	=	self.l.waitForEvent(10)
+//			let	s	=	e?.description
+//			dispatch_async(dispatch_get_main_queue()) {
+//				println(s)
+//				println(p.description)
+//				self.tv.debugger	=	nil
+//				self.tv.debugger	=	self.dbg
+////
+////				let	d	=	self.dbg.allTargets[0].process.readFromStandardOutput()
+////				let	s1	=	NSString(data: d, encoding: NSUTF8StringEncoding)
+////				println("A: \(s1)")
+//			}
+//		}
+		
+		
+		t.process.`continue`()
 		tv.debugger	=	dbg
+
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
@@ -53,20 +73,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	
 	@IBAction @objc
 	func performStepOver(AnyObject?) {
-		tv.debugger	=	nil
-		dbg.allTargets[0].process.allThreads[0].stepOver()
-		tv.debugger	=	dbg
-		
-		let	d	=	dbg.allTargets[0].process.readFromStandardOutput()
-		let	s	=	NSString(data: d, encoding: NSUTF8StringEncoding)
-		println(s)
+//		tv.debugger	=	nil
+//		dbg.allTargets[0].process.allThreads[0].stepOver()
+//		tv.debugger	=	dbg
+//		
+//		let	d	=	dbg.allTargets[0].process.readFromStandardOutput()
+//		let	s	=	NSString(data: d, encoding: NSUTF8StringEncoding)
+//		println(s)
 	}
 
 }
 
 
 
-class DebuggerTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+class ExecutionStateTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
 	var	outlineView:NSOutlineView {
 		get {
 			return	view as NSOutlineView
@@ -167,7 +187,7 @@ class DebuggerNode: NodeBase {
 		self.data		=	data
 		
 		super.init()
-		self.label		=	"<Debugger>"
+		self.label		=	data.description
 		self.subnodes	=	data.allTargets.map({ v in TargetNode(v) })
 	}
 }
@@ -178,7 +198,7 @@ class TargetNode: NodeBase {
 		self.data		=	data
 		
 		super.init()
-		self.label		=	data.triple()
+		self.label		=	data.description
 		self.subnodes	=	data.process == nil ? [] : [ProcessNode(data.process)]
 	}
 }
@@ -189,7 +209,7 @@ class ProcessNode: NodeBase {
 		self.data		=	data
 		
 		super.init()
-		self.label		=	data.processID.description
+		self.label		=	data.description
 		self.subnodes	=	data.allThreads.map({ v in ThreadNode(v) })
 	}
 }
@@ -200,7 +220,7 @@ class ThreadNode: NodeBase {
 		self.data		=	data
 		
 		super.init()
-		self.label		=	data.threadID.description
+		self.label		=	data.description
 		self.subnodes	=	data.allFrames.filter({ v in v != nil }).map({ v in FrameNode(v!) })
 	}
 }
