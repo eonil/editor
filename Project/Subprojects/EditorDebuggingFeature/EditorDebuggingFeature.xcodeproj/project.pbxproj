@@ -14,11 +14,10 @@
 		450272301A7F5865008795CC /* EditorDebuggingFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF0B891A6C942600215F12 /* EditorDebuggingFeature.framework */; };
 		450272311A7F5865008795CC /* EditorDebuggingFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF0B891A6C942600215F12 /* EditorDebuggingFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		450272371A7F58A8008795CC /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E5EF101A7E5E27009967D2 /* LLDBWrapper.framework */; };
-		450272391A7F5911008795CC /* ExecutionStateTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450272381A7F5911008795CC /* ExecutionStateTreeViewController.swift */; };
-		456B31F21A8091BC009BD040 /* AttributedStringTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B31F11A8091BC009BD040 /* AttributedStringTableCellView.swift */; };
-		456B31FC1A80968B009BD040 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B31FB1A80968B009BD040 /* Palette.swift */; };
-		457F8BCF1A6CC206006B0592 /* kernel2.py in Resources */ = {isa = PBXBuildFile; fileRef = 457F8BCE1A6CC206006B0592 /* kernel2.py */; };
-		459B60451A81542500ED50E0 /* ListenerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B60441A81542500ED50E0 /* ListenerController.swift */; };
+		455075B01A8D07E1003FCD76 /* ExecutionStateTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455075AD1A8D07E1003FCD76 /* ExecutionStateTreeViewController.swift */; };
+		455075B11A8D07E1003FCD76 /* ListenerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455075AE1A8D07E1003FCD76 /* ListenerController.swift */; };
+		455075B21A8D07E1003FCD76 /* VariableTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455075AF1A8D07E1003FCD76 /* VariableTreeViewController.swift */; };
+		455075BB1A8D0806003FCD76 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455075BA1A8D0806003FCD76 /* Operators.swift */; };
 		459E5D391A6CF42E00D4F391 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D321A6CF42E00D4F391 /* Client.swift */; };
 		459E5D3A1A6CF42E00D4F391 /* GDBRSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D331A6CF42E00D4F391 /* GDBRSP.swift */; };
 		459E5D3B1A6CF42E00D4F391 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D341A6CF42E00D4F391 /* Packet.swift */; };
@@ -28,10 +27,11 @@
 		459E5D401A6CF78900D4F391 /* Packet.UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D3F1A6CF78900D4F391 /* Packet.UnitTest.swift */; };
 		459E5D421A6CF79300D4F391 /* UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D411A6CF79300D4F391 /* UnitTest.swift */; };
 		459E5D461A6CF95200D4F391 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D451A6CF95200D4F391 /* StringExtensions.swift */; };
+		45AFEDB41A8D0820009F0010 /* AttributedStringTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFEDB11A8D0820009F0010 /* AttributedStringTableCellView.swift */; };
+		45AFEDB51A8D0820009F0010 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFEDB21A8D0820009F0010 /* Palette.swift */; };
+		45AFEDB61A8D0820009F0010 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFEDB31A8D0820009F0010 /* Text.swift */; };
 		45BEE1F21A8C870E0078E500 /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEE1E71A8C86F70078E500 /* EditorCommon.framework */; };
 		45BEE1F31A8C870E0078E500 /* EditorCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEE1E71A8C86F70078E500 /* EditorCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45E920F51A7FAA6E001B06F0 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E920F41A7FAA6E001B06F0 /* Operators.swift */; };
-		45E9210B1A7FD207001B06F0 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E9210A1A7FD207001B06F0 /* Text.swift */; };
 		45EF0B8F1A6C942600215F12 /* EditorDebuggingFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 45EF0B8E1A6C942600215F12 /* EditorDebuggingFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45EF0BE51A6C95DE00215F12 /* LLDBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BE41A6C95DE00215F12 /* LLDBController.swift */; };
 		45EF0BF11A6C961C00215F12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BF01A6C961C00215F12 /* AppDelegate.swift */; };
@@ -39,12 +39,9 @@
 		45EF0BF61A6C961C00215F12 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45EF0BF41A6C961C00215F12 /* MainMenu.xib */; };
 		45EF0C141A6C965600215F12 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0C131A6C965600215F12 /* main.c */; };
 		45EF0C1A1A6C967000215F12 /* Sample1 in Resources */ = {isa = PBXBuildFile; fileRef = 45EF0C111A6C965600215F12 /* Sample1 */; };
-		45EF0C301A6CA40100215F12 /* kernel.py in Resources */ = {isa = PBXBuildFile; fileRef = 45EF0C2F1A6CA40100215F12 /* kernel.py */; };
 		45EF0C361A6CA51B00215F12 /* MarkerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0C351A6CA51B00215F12 /* MarkerClass.swift */; };
 		45EF0C381A6CA61600215F12 /* LLDBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BE41A6C95DE00215F12 /* LLDBController.swift */; };
 		45EF0C391A6CA61600215F12 /* MarkerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0C351A6CA51B00215F12 /* MarkerClass.swift */; };
-		45EF0C3A1A6CA61600215F12 /* kernel.py in Resources */ = {isa = PBXBuildFile; fileRef = 45EF0C2F1A6CA40100215F12 /* kernel.py */; };
-		45F58B711A7F6E1D00EE7AAF /* VariableTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F58B701A7F6E1D00EE7AAF /* VariableTreeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -176,11 +173,11 @@
 		450272101A7F577D008795CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		4502721B1A7F577E008795CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4502721C1A7F577E008795CC /* WorkbenchApp2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbenchApp2Tests.swift; sourceTree = "<group>"; };
-		450272381A7F5911008795CC /* ExecutionStateTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionStateTreeViewController.swift; sourceTree = "<group>"; };
-		456B31F11A8091BC009BD040 /* AttributedStringTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringTableCellView.swift; sourceTree = "<group>"; };
-		456B31FB1A80968B009BD040 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		455075AD1A8D07E1003FCD76 /* ExecutionStateTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionStateTreeViewController.swift; sourceTree = "<group>"; };
+		455075AE1A8D07E1003FCD76 /* ListenerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenerController.swift; sourceTree = "<group>"; };
+		455075AF1A8D07E1003FCD76 /* VariableTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTreeViewController.swift; sourceTree = "<group>"; };
+		455075BA1A8D0806003FCD76 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		457F8BCE1A6CC206006B0592 /* kernel2.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = kernel2.py; sourceTree = "<group>"; };
-		459B60441A81542500ED50E0 /* ListenerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenerController.swift; sourceTree = "<group>"; };
 		459E5D321A6CF42E00D4F391 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		459E5D331A6CF42E00D4F391 /* GDBRSP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDBRSP.swift; sourceTree = "<group>"; };
 		459E5D341A6CF42E00D4F391 /* Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.swift; sourceTree = "<group>"; };
@@ -190,10 +187,11 @@
 		459E5D3F1A6CF78900D4F391 /* Packet.UnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.UnitTest.swift; sourceTree = "<group>"; };
 		459E5D411A6CF79300D4F391 /* UnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTest.swift; sourceTree = "<group>"; };
 		459E5D451A6CF95200D4F391 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		45AFEDB11A8D0820009F0010 /* AttributedStringTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringTableCellView.swift; sourceTree = "<group>"; };
+		45AFEDB21A8D0820009F0010 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		45AFEDB31A8D0820009F0010 /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		45BEE1E11A8C86F70078E500 /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		45E5EF061A7E5E27009967D2 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
-		45E920F41A7FAA6E001B06F0 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
-		45E9210A1A7FD207001B06F0 /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		45EF0B891A6C942600215F12 /* EditorDebuggingFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorDebuggingFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45EF0B8D1A6C942600215F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45EF0B8E1A6C942600215F12 /* EditorDebuggingFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorDebuggingFeature.h; sourceTree = "<group>"; };
@@ -212,7 +210,6 @@
 		45EF0C131A6C965600215F12 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		45EF0C2F1A6CA40100215F12 /* kernel.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = kernel.py; sourceTree = "<group>"; };
 		45EF0C351A6CA51B00215F12 /* MarkerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerClass.swift; sourceTree = "<group>"; };
-		45F58B701A7F6E1D00EE7AAF /* VariableTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTreeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,13 +252,6 @@
 			isa = PBXGroup;
 			children = (
 				4502720B1A7F577D008795CC /* AppDelegate.swift */,
-				459B60441A81542500ED50E0 /* ListenerController.swift */,
-				450272381A7F5911008795CC /* ExecutionStateTreeViewController.swift */,
-				45F58B701A7F6E1D00EE7AAF /* VariableTreeViewController.swift */,
-				456B31F11A8091BC009BD040 /* AttributedStringTableCellView.swift */,
-				45E920F41A7FAA6E001B06F0 /* Operators.swift */,
-				45E9210A1A7FD207001B06F0 /* Text.swift */,
-				456B31FB1A80968B009BD040 /* Palette.swift */,
 				4502720D1A7F577D008795CC /* Images.xcassets */,
 				4502720F1A7F577D008795CC /* MainMenu.xib */,
 				450272091A7F577D008795CC /* Supporting Files */,
@@ -308,6 +298,15 @@
 				459E5D411A6CF79300D4F391 /* UnitTest.swift */,
 			);
 			path = GDBRSP;
+			sourceTree = "<group>";
+		};
+		45AFEDBE1A8D0883009F0010 /* (junkyard) */ = {
+			isa = PBXGroup;
+			children = (
+				45EF0C2F1A6CA40100215F12 /* kernel.py */,
+				457F8BCE1A6CC206006B0592 /* kernel2.py */,
+			);
+			name = "(junkyard)";
 			sourceTree = "<group>";
 		};
 		45BEE1E21A8C86F70078E500 /* Products */ = {
@@ -367,8 +366,14 @@
 				45EF0B8C1A6C942600215F12 /* Supporting Files */,
 				45EF0BE41A6C95DE00215F12 /* LLDBController.swift */,
 				45EF0C351A6CA51B00215F12 /* MarkerClass.swift */,
-				45EF0C2F1A6CA40100215F12 /* kernel.py */,
-				457F8BCE1A6CC206006B0592 /* kernel2.py */,
+				455075AD1A8D07E1003FCD76 /* ExecutionStateTreeViewController.swift */,
+				455075AE1A8D07E1003FCD76 /* ListenerController.swift */,
+				455075AF1A8D07E1003FCD76 /* VariableTreeViewController.swift */,
+				455075BA1A8D0806003FCD76 /* Operators.swift */,
+				45AFEDB11A8D0820009F0010 /* AttributedStringTableCellView.swift */,
+				45AFEDB21A8D0820009F0010 /* Palette.swift */,
+				45AFEDB31A8D0820009F0010 /* Text.swift */,
+				45AFEDBE1A8D0883009F0010 /* (junkyard) */,
 			);
 			path = EditorDebuggingFeature;
 			sourceTree = "<group>";
@@ -659,8 +664,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				457F8BCF1A6CC206006B0592 /* kernel2.py in Resources */,
-				45EF0C301A6CA40100215F12 /* kernel.py in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,7 +673,6 @@
 			files = (
 				45EF0BF31A6C961C00215F12 /* Images.xcassets in Resources */,
 				45EF0C1A1A6C967000215F12 /* Sample1 in Resources */,
-				45EF0C3A1A6CA61600215F12 /* kernel.py in Resources */,
 				45EF0BF61A6C961C00215F12 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -682,14 +684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				456B31F21A8091BC009BD040 /* AttributedStringTableCellView.swift in Sources */,
-				45F58B711A7F6E1D00EE7AAF /* VariableTreeViewController.swift in Sources */,
-				45E920F51A7FAA6E001B06F0 /* Operators.swift in Sources */,
 				4502720C1A7F577D008795CC /* AppDelegate.swift in Sources */,
-				45E9210B1A7FD207001B06F0 /* Text.swift in Sources */,
-				459B60451A81542500ED50E0 /* ListenerController.swift in Sources */,
-				450272391A7F5911008795CC /* ExecutionStateTreeViewController.swift in Sources */,
-				456B31FC1A80968B009BD040 /* Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,8 +692,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455075B21A8D07E1003FCD76 /* VariableTreeViewController.swift in Sources */,
+				455075B01A8D07E1003FCD76 /* ExecutionStateTreeViewController.swift in Sources */,
+				45AFEDB41A8D0820009F0010 /* AttributedStringTableCellView.swift in Sources */,
+				455075B11A8D07E1003FCD76 /* ListenerController.swift in Sources */,
+				45AFEDB61A8D0820009F0010 /* Text.swift in Sources */,
 				45EF0C361A6CA51B00215F12 /* MarkerClass.swift in Sources */,
 				45EF0BE51A6C95DE00215F12 /* LLDBController.swift in Sources */,
+				455075BB1A8D0806003FCD76 /* Operators.swift in Sources */,
+				45AFEDB51A8D0820009F0010 /* Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "452CFD091A8C7C370050BE72"
-               BuildableName = "AutomaticTester.app"
-               BlueprintName = "AutomaticTester"
+               BlueprintIdentifier = "459ACDCE1A8CE1EE008798F4"
+               BuildableName = "Workbench.app"
+               BlueprintName = "Workbench"
                ReferencedContainer = "container:EditorUIComponents.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "452CFD181A8C7C370050BE72"
-               BuildableName = "AutomaticTesterTests.xctest"
-               BlueprintName = "AutomaticTesterTests"
+               BlueprintIdentifier = "459ACDDD1A8CE1EE008798F4"
+               BuildableName = "WorkbenchTests.xctest"
+               BlueprintName = "WorkbenchTests"
                ReferencedContainer = "container:EditorUIComponents.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "452CFD181A8C7C370050BE72"
-               BuildableName = "AutomaticTesterTests.xctest"
-               BlueprintName = "AutomaticTesterTests"
+               BlueprintIdentifier = "459ACDDD1A8CE1EE008798F4"
+               BuildableName = "WorkbenchTests.xctest"
+               BlueprintName = "WorkbenchTests"
                ReferencedContainer = "container:EditorUIComponents.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "452CFD091A8C7C370050BE72"
-            BuildableName = "AutomaticTester.app"
-            BlueprintName = "AutomaticTester"
+            BlueprintIdentifier = "459ACDCE1A8CE1EE008798F4"
+            BuildableName = "Workbench.app"
+            BlueprintName = "Workbench"
             ReferencedContainer = "container:EditorUIComponents.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -76,9 +76,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "452CFD091A8C7C370050BE72"
-            BuildableName = "AutomaticTester.app"
-            BlueprintName = "AutomaticTester"
+            BlueprintIdentifier = "459ACDCE1A8CE1EE008798F4"
+            BuildableName = "Workbench.app"
+            BlueprintName = "Workbench"
             ReferencedContainer = "container:EditorUIComponents.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -95,9 +95,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "452CFD091A8C7C370050BE72"
-            BuildableName = "AutomaticTester.app"
-            BlueprintName = "AutomaticTester"
+            BlueprintIdentifier = "459ACDCE1A8CE1EE008798F4"
+            BuildableName = "Workbench.app"
+            BlueprintName = "Workbench"
             ReferencedContainer = "container:EditorUIComponents.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

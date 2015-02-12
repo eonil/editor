@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import EditorUIComponents
 import XCTest
 
 class EditorUIComponentsTests: XCTestCase {
@@ -32,5 +33,7 @@ class EditorUIComponentsTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
+	
+	
+	
 }

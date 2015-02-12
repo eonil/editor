@@ -12,18 +12,23 @@ import AppKit
 
 
 
+
+///	DEPRECATED. USE `NSStackView` instead of.
+///	
+///
+///
 ///	Aligns subviews horizontally in order of them.
-///	Size of each items will be retrieved by calling `sizeThatFits(CGSize.zeroSize)`.
-///	This does not support auto-layout and an autolayout barrier.
+///	This does not support auto-layout and behaves as an autolayout barrier.
 ///
-///	Requirements
-///	------------
-///	-	All subviews must be `NSControl`.
-///	-	This control must be equal or larger than sum of all subviews. (that can be resolved using `minimumSize`).
-///		You are responsible to guarantee this size requirement. Do not resize smaller than minimum size.
+///	-	All subviews must valid intrinsic content size.
+///	-	Layout does not change bounds/frame of this view. Just reposition subviews.
+///	-	Call `sizeToFit` to resize this view by content. Resize will be performed 
+///		around at zero-point.
 ///
-final class ShelfView: NSControl {
-	var minimumSize:CGSize {
+
+@availability(*,deprecated=0)
+public final class ShelfView: NSControl {
+	public var minimumSize:CGSize {
 		get {
 			var	szs	=	[] as [CGSize]
 			for v in (subviews as! [NSControl]) {
@@ -38,9 +43,8 @@ final class ShelfView: NSControl {
 		}
 	}
 	
-	override func resizeSubviewsWithOldSize(oldSize: NSSize) {
+	public override func resizeSubviewsWithOldSize(oldSize: NSSize) {
 		super.resizeSubviewsWithOldSize(oldSize)
-		precondition(self.bounds.size.width > self.minimumSize.width && self.bounds.size.height > self.minimumSize.height, "Size of this control must be equal to or larger than `minimumSize`.")
 		
 		let	tsz	=	minimumSize
 		
@@ -49,20 +53,32 @@ final class ShelfView: NSControl {
 		let	p	=	c - (tsz.toPoint()/2)
 		
 		for v in (subviews as! [NSControl]) {
+			let	sz	=	v.intrinsicContentSize
+			assert(sz.width != NSViewNoInstrinsicMetric)
+			assert(sz.height != NSViewNoInstrinsicMetric)
+			
 			let	f	=	v.sizeThatFits(CGSize.zeroSize)
 			let	f1	=	CGRect(origin: p, size: f)
 			v.frame	=	f1
 		}
+		
+//		assert(self.bounds.size.width > self.minimumSize.width && self.bounds.size.height > self.minimumSize.height, "Size of this control must be equal to or larger than `minimumSize`.")
 	}
 	
-	override func sizeThatFits(size: NSSize) -> NSSize {
+	public override func sizeThatFits(size: NSSize) -> NSSize {
 		let	msz	=	minimumSize
 		return	CGSize(width: max(size.width, msz.width), height: max(size.height, msz.height))
 	}
+	public override func sizeToFit() {
+		let	sz		=	minimumSize
+		let	f		=	self.frame
+		let	f1		=	CGRect(x: f.origin.x, y: f.origin.y, width: sz.width, height: sz.height)
+		self.frame	=	f1
+	}
 	
-	override var intrinsicContentSize:CGSize {
+	public override var intrinsicContentSize:CGSize {
 		get {
-			return	sizeThatFits(CGSize.zeroSize)
+			return	minimumSize
 		}
 	}
 }

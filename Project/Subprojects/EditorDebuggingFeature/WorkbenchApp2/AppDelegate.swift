@@ -8,7 +8,7 @@
 
 import Cocoa
 import LLDBWrapper
-
+import EditorDebuggingFeature
 
 
 

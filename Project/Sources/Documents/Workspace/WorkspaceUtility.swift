@@ -23,6 +23,8 @@ struct WorkspaceUtility {
 		
 		//	`cargo` will create a directory for the URL.
 		let	c	=	CargoExecutionController()
+		let	d	=	SubcomponentDelegate()
+		c.delegate	=	d
 		c.launchNew(workingDirectoryURL: parentDirURL, desiredWorkspaceName: desiredWorkspaceName)
 		c.waitUntilExit()
 		
@@ -58,3 +60,31 @@ struct WorkspaceUtility {
 	private init() {
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+private class SubcomponentDelegate: CargoExecutionControllerDelegate {
+	private func cargoExecutionControllerDidDiscoverRustCompilationIssue(issue: RustCompilerIssue) {
+		
+	}
+	private func cargoExecutionControllerDidPrintMessage(s: String) {
+		
+	}
+	private func cargoExecutionControllerRemoteProcessDidTerminate() {
+		
+	}
+}
+
+
+
+
+

@@ -72,7 +72,7 @@ extension ApplicationController {
 ///	MARK:
 ///	MARK:	Global Menu Handlers
 
-///	"Open" opens an existing workspace. There's no concept of opening a data file.
+///	"Open" always opens an existing workspace. There's no concept of opening a data file.
 ///	"Save" family menus save currently editing data file.
 ///
 extension ApplicationController {

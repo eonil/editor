@@ -10,13 +10,13 @@ import Foundation
 import LLDBWrapper
 
 public final class ExecutionStateTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
-	public var	outlineView:NSOutlineView {
+	public var outlineView:NSOutlineView {
 		get {
-			return	view as! NSOutlineView
+			return	super.view as! NSOutlineView
 		}
 	}
 	
-	public var	debugger:LLDBDebugger? {
+	public var debugger:LLDBDebugger? {
 		get {
 			return	self.representedObject as! LLDBDebugger?
 		}
@@ -42,6 +42,12 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 		}
 	}
 	
+//	@availability(*,unavailable)
+	public final override var view:NSView {
+		willSet {
+			fatalError("You cannot replace view of this view-controller. It is prohibited by design.")
+		}
+	}
 	public override func loadView() {
 		super.view	=	NSOutlineView()
 	}

@@ -413,7 +413,6 @@ extension WorkspaceDocument {
 		self.close()
 	}
 	
-	
 	@objc @IBAction
 	func buildWorkspace(AnyObject?) {
 		toolExecutionController.cancelAll()

@@ -45,7 +45,7 @@ public protocol CargoExecutionControllerDelegate: class {
 ///	-------
 ///	Delegate methods can be called from non-main thread.
 public class CargoExecutionController {
-	public weak var delegate:CargoExecutionControllerDelegate! {
+	public weak var delegate:CargoExecutionControllerDelegate? {
 		willSet {
 			assert(delegate == nil)		//	Once bound delegate cannot be changed.
 		}
@@ -57,7 +57,9 @@ public class CargoExecutionController {
 		_stderr_linedisp	=	LineDispatcher()
 		
 		_stdout_linedisp.onLine	=	{ [weak self] (line:String)->() in
-			self?.delegate.cargoExecutionControllerDidPrintMessage(line)
+			assert(self != nil)
+			assert(self?.delegate != nil)
+			self?.delegate!.cargoExecutionControllerDidPrintMessage(line)
 			()
 		}
 		
@@ -65,7 +67,9 @@ public class CargoExecutionController {
 			let	ss	=	RustCompilerOutputParsing.parseErrorOutput(line)
 			if ss.count > 0 {
 				for s in ss {
-					self?.delegate.cargoExecutionControllerDidDiscoverRustCompilationIssue(s)
+					assert(self != nil)
+					assert(self?.delegate != nil)
+					self?.delegate!.cargoExecutionControllerDidDiscoverRustCompilationIssue(s)
 				}
 			}
 		}
@@ -102,7 +106,7 @@ extension CargoExecutionController: ShellTaskExecutionControllerDelegate {
 	public func shellTaskExecutableControllerRemoteProcessDidTerminate(#exitCode: Int32, reason: NSTaskTerminationReason) {
 		_stdout_linedisp.dispatchIncompleteLine()
 		_stderr_linedisp.dispatchIncompleteLine()
-		self.delegate.cargoExecutionControllerRemoteProcessDidTerminate()
+		self.delegate!.cargoExecutionControllerRemoteProcessDidTerminate()
 	}
 }
 

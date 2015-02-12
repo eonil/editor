@@ -8,8 +8,10 @@
 
 import Foundation
 import AppKit
+import EditorUIComponents
 import EditorFileTreeNavigationFeature
 import EditorIssueListingFeature
+import EditorDebuggingFeature
 
 ///	A window shows a plain folder with plain files.
 ///	This does not do anything special on the file and folders.
@@ -47,7 +49,11 @@ class PlainFileFolderWindowController : HygienicWindowController2 {
 			return	mainViewController.navigationViewController.issueListingViewController
 		}
 	}
-
+	var executionStateTreeViewController: ExecutionStateTreeViewController {
+		get {
+			return	mainViewController.navigationViewController.executionTreeViewController
+		}
+	}
 	
 	
 	
@@ -198,29 +204,44 @@ extension PlainFileFolderWindowController {
 	}
 	
 	class NavigationViewController : NSSplitViewController {
-		let	fileTreeScrollViewController	=	ScrollViewController()
-		let	issueScrollingViewController	=	ScrollViewController()
+		let	multipaneViewController				=	MultipaneViewController()
+		
+		let	fileTreeScrollViewController		=	ScrollViewController()
+		let	issueListScrollViewController		=	ScrollViewController()
+		let	executionTreeScrollViewController	=	ScrollViewController()
 		
 		let	fileTreeViewController			=	FileTreeViewController4()
 		let	issueListingViewController		=	IssueListingViewController()
+		let	executionTreeViewController		=	ExecutionStateTreeViewController()
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
 			
-			fileTreeScrollViewController.documentViewController		=	fileTreeViewController
-			issueScrollingViewController.documentViewController		=	issueListingViewController
+			fileTreeScrollViewController.documentViewController			=	fileTreeViewController
+			issueListScrollViewController.documentViewController		=	issueListingViewController
+			executionTreeScrollViewController.documentViewController	=	executionTreeViewController
+			
+			fileTreeScrollViewController.view.translatesAutoresizingMaskIntoConstraints			=	false
+			issueListScrollViewController.view.translatesAutoresizingMaskIntoConstraints		=	false
+			executionTreeScrollViewController.view.translatesAutoresizingMaskIntoConstraints	=	false
+			multipaneViewController.pages	=	[
+				MultipaneViewController.Page(labelText: "Files", viewController: fileTreeScrollViewController),
+				MultipaneViewController.Page(labelText: "Issues", viewController: issueListScrollViewController),
+				MultipaneViewController.Page(labelText: "Debug", viewController: executionTreeScrollViewController),
+			]
 			
 			self.splitView.vertical	=	false
-			self.addChildViewControllerAsASplitViewItem(fileTreeScrollViewController)
-			self.addChildViewControllerAsASplitViewItem(issueScrollingViewController)
+			self.addChildViewControllerAsASplitViewItem(multipaneViewController)
+//			self.addChildViewControllerAsASplitViewItem(fileTreeScrollViewController)
+//			self.addChildViewControllerAsASplitViewItem(issueScrollingViewController)
 			
 			//	The priority constant doesn't work in Xcode 6.1. I am not sure that is a bug or feature.
-			self.view.layoutConstraints	=	[
-				fileTreeScrollViewController..height >= 100,
-				issueScrollingViewController..height >= 100,
-				fileTreeScrollViewController..height >= 400 ~~ 3,
-				issueScrollingViewController..height >= 200 ~~ 2,
-			]
+//			self.view.layoutConstraints	=	[
+//				multipaneViewController..height >= 100,
+//				multipaneViewController..height >= 400 ~~ 3,
+//				issueScrollingViewController..height >= 100,
+//				issueScrollingViewController..height >= 200 ~~ 2,
+//			]
 		}
 	}
 	
