@@ -11,6 +11,7 @@ Goals
 -----
 -	Personal tasted editor.
 -	Semantic auto-completion.
+-	Integrated debugging.
 
 Non-Goal
 --------

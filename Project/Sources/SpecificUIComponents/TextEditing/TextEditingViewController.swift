@@ -111,7 +111,7 @@ extension TextEditingViewController {
 		let	s1	=	NSString(contentsOfURL: u, encoding: NSUTF8StringEncoding, error: &e1)
 		if let s2 = s1 {
 			self.textViewController.textView.editable	=	true
-			self.textViewController.textView.string		=	s2 as! String
+			self.textViewController.textView.string		=	s2 as String
 			return	true
 		} else {
 			self.textViewController.textView.editable	=	false
