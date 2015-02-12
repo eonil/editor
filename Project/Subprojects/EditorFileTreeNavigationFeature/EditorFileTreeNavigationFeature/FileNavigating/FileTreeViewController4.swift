@@ -9,7 +9,8 @@
 import Foundation
 import AppKit
 import EonilDispatch
-import Precompilation
+import EditorCommon
+
 
 
 ///	Anything that causes UI changes will be notified for did-delete and did-move events.
@@ -64,7 +65,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	///	Gets and sets URL for root node.
 	public var URLRepresentation:NSURL? {
 		get {
-			return	self.representedObject as NSURL?
+			return	self.representedObject as! NSURL?
 		}
 		set(v) {
 			self.representedObject	=	v
@@ -188,7 +189,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	
 	public var outlineView:NSOutlineView {
 		get {
-			return	self.view as NSOutlineView
+			return	self.view as! NSOutlineView
 		}
 		set(v) {
 			self.view	=	v
@@ -240,9 +241,10 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 //	}
 	
 	public func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
-		let	n1	=	item as FileNode4?
+		let	n1	=	item as! FileNode4?
 		if let n2 = n1 {
 			if n2.subnodes.count == 0 {
+				assert(self.delegate != nil)
 				n2.subnodes.links	=	self.delegate!.fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(n2.link)
 			}
 			return	n2.subnodes.count
@@ -251,7 +253,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		}
 	}
 	public func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
-		let	n1	=	item as FileNode4?
+		let	n1	=	item as! FileNode4?
 		if let n2 = n1 {
 			return	n2.subnodes[index]
 		} else {
@@ -266,7 +268,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 //	}
 	
 	public func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-		let	n1	=	item as FileNode4
+		let	n1	=	item as! FileNode4
 		return	n1.directory
 	}
 	
@@ -292,14 +294,14 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		///	So do not query on file-system at this point, and just
 		///	use cached data on the node.
 		
-		let	n1	=	item as FileNode4
+		let	n1	=	item as! FileNode4
 		cv1.imageView!.image			=	n1.icon
 		cv1.textField!.stringValue		=	n1.displayName
 		cv1.textField!.bordered			=	false
 		cv1.textField!.backgroundColor	=	NSColor.clearColor()
 		cv1.textField!.delegate			=	self
 		
-		(cv1.textField!.cell() as NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
+		(cv1.textField!.cell() as! NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
 		cv1.objectValue					=	n1
 		return	cv1
 	}
@@ -312,13 +314,13 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	public func outlineViewSelectionDidChange(notification: NSNotification) {
 		let	idx1	=	self.outlineView.selectedRow
 		if idx1 >= 0 {	
-			let	n1		=	self.outlineView.itemAtRow(idx1) as FileNode4
+			let	n1		=	self.outlineView.itemAtRow(idx1) as! FileNode4
 			delegate?.fileTreeViewController4UserWantsToEditFileAtURL(n1.link)
 		}
 	}
 	public func outlineViewItemDidCollapse(notification: NSNotification) {
 		assert(notification.name == NSOutlineViewItemDidCollapseNotification)
-		let	n1	=	notification.userInfo!["NSObject"]! as FileNode4
+		let	n1	=	notification.userInfo!["NSObject"]! as! FileNode4
 		n1.resetSubnodes()
 	}
 	
@@ -339,9 +341,9 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 		return	true
 	}
 	public override func controlTextDidEndEditing(obj: NSNotification) {
-		let	tf	=	obj.object as FileTableCellTextField!
-		let	c	=	tf.superview as FileTableCellView!
-		let	n	=	c.objectValue as FileNode4!
+		let	tf	=	obj.object as! FileTableCellTextField!
+		let	c	=	tf.superview as! FileTableCellView!
+		let	n	=	c.objectValue as! FileNode4!
 		
 		let	u	=	n.link
 		let	u1	=	n.link.URLByDeletingLastPathComponent!
@@ -382,7 +384,7 @@ public class FileTreeViewController4 : NSViewController, NSOutlineViewDataSource
 	public func deleteFileWithoutConfirmation(sender: AnyObject?) {
 		let	selections	=	outlineView.selectedRowIndexes.allIndexes
 		let	urls		=	selections.map { (idx:Int) -> NSURL in
-			let	node	=	self.outlineView.itemAtRow(idx) as FileNode4
+			let	node	=	self.outlineView.itemAtRow(idx) as! FileNode4
 			let	url		=	node.link
 			return	url
 		}
@@ -491,7 +493,7 @@ private final class ContextMenuManager : NSObject, NSMenuDelegate {
 		////
 		
 		func getURLFromRowAtIndex(v:NSOutlineView, index:Int) -> NSURL {
-			let	n	=	v.itemAtRow(index) as FileNode4
+			let	n	=	v.itemAtRow(index) as! FileNode4
 			return	n.link
 		}
 		func getURLFromClickingPoint(v:NSOutlineView) -> NSURL? {

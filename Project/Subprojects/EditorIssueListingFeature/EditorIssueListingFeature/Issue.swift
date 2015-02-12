@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import PrecompilationOfExternalToolSupport
+import EditorToolComponents
 
 
 

@@ -9,7 +9,7 @@
 import Cocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, FileTreeViewController4Delegate {
 
 	@IBOutlet weak var window: NSWindow!
 

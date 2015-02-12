@@ -106,12 +106,12 @@ private func withCPointerToNullTerminatingCArrayOfCStrings(strings:[String], blo
 	let	a	=	strings.map { (s:String) -> NSMutableData in
 		let	b	=	s.cStringUsingEncoding(NSUTF8StringEncoding)!
 		assert(b[b.endIndex-1] == 0)
-		return	NSData.fromCCharArray(b).mutableCopy() as NSMutableData
+		return	NSData.fromCCharArray(b).mutableCopy() as! NSMutableData
 	}
 	
 	let	a1	=	a.map { (d:NSMutableData) -> UnsafeMutablePointer<Int8> in
 		return	UnsafeMutablePointer<Int8>(d.mutableBytes)
-		} + [UnsafeMutablePointer<Int8>.null()]
+		} + [nil as UnsafeMutablePointer<Int8>]
 	debugLog(a1)
 	
 	a1.withUnsafeBufferPointer { (p:UnsafeBufferPointer<UnsafeMutablePointer<Int8>>) -> () in

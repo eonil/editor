@@ -58,7 +58,7 @@ final class FileTableCellView: NSTableCellView, NSTextFieldDelegate {
 
 	var fileNodeValue:FileNode4? {
 		get {
-			return	self.objectValue as FileNode4!
+			return	self.objectValue as! FileNode4!
 		}
 		set(v) {
 			self.objectValue	=	v

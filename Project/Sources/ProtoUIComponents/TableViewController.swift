@@ -12,7 +12,7 @@ import AppKit
 class TableViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 	var tableView:NSTableView {
 		get {
-			return	super.view as NSTableView
+			return	super.view as! NSTableView
 		}
 		set(v) {
 			super.view	=	v

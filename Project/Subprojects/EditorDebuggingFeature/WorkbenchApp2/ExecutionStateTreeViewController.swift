@@ -12,13 +12,13 @@ import LLDBWrapper
 public final class ExecutionStateTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
 	public var	outlineView:NSOutlineView {
 		get {
-			return	view as NSOutlineView
+			return	view as! NSOutlineView
 		}
 	}
 	
 	public var	debugger:LLDBDebugger? {
 		get {
-			return	self.representedObject as LLDBDebugger?
+			return	self.representedObject as! LLDBDebugger?
 		}
 		set(v) {
 			self.representedObject	=	v
@@ -33,7 +33,7 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 			precondition(v == nil || v is LLDBDebugger)
 			super.representedObject	=	v
 			
-			_rootNode	=	v == nil ? nil : DebuggerNode(v as LLDBDebugger)
+			_rootNode	=	v == nil ? nil : DebuggerNode(v as! LLDBDebugger)
 			
 			self.outlineView.reloadData()
 			for n in _rootNode?.subnodes ||| [] {
@@ -61,14 +61,14 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 		if item == nil {
 			return	_rootNode?.subnodes.count ||| 0
 		}
-		let	n	=	item as NodeBase
+		let	n	=	item as! NodeBase
 		return	n.subnodes.count
 	}
 	public func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
 		if item == nil {
 			return	_rootNode!.subnodes[index]
 		}
-		let	n	=	item as NodeBase
+		let	n	=	item as! NodeBase
 		return	n.subnodes[index]
 	}
 //	public func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
@@ -78,8 +78,9 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 	public func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
 		return	self.outlineView(outlineView, numberOfChildrenOfItem: item) > 0
 	}
-	public func outlineView(outlineView: NSOutlineView!, viewForTableColumn tableColumn: NSTableColumn!, item: AnyObject!) -> NSView! {
-		let	n	=	item as NodeBase
+
+	public func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
+		let	n	=	item as! NodeBase
 		let	v	=	AttributedStringTableCellView()
 		v.attributedString	=	Text(n.label).setFont(Palette.defaultFont()).attributedString
 		return	v

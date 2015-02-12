@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Precompilation
+import EditorCommon
 
 typealias	UScalar	=	UnicodeScalar
 typealias	UView	=	String.UnicodeScalarView
@@ -15,4 +15,4 @@ typealias	UIndex	=	String.UnicodeScalarView.Index
 typealias	URange	=	Range<String.UnicodeScalarView.Index>
 
 
-typealias	Debug	=	Precompilation.Debug
+typealias	Debug	=	EditorCommon.Debug

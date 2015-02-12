@@ -12,13 +12,13 @@ import LLDBWrapper
 public final class VariableTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
 	public var	outlineView:NSOutlineView {
 		get {
-			return	view as NSOutlineView
+			return	view as! NSOutlineView
 		}
 	}
 	
 	public var	data:LLDBFrame? {
 		get {
-			return	self.representedObject as LLDBFrame?
+			return	self.representedObject as! LLDBFrame?
 		}
 		set(v) {
 			self.representedObject	=	v
@@ -33,7 +33,7 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 			precondition(v == nil || v is LLDBFrame)
 			super.representedObject	=	v
 			
-			_rootNode	=	v == nil ? nil : FrameNode(v as LLDBFrame)
+			_rootNode	=	v == nil ? nil : FrameNode(v as! LLDBFrame)
 			
 			self.outlineView.reloadData()
 			if _rootNode != nil {
@@ -72,14 +72,14 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 		if item == nil {
 			return	_rootNode?.subnodes.count ||| 0;
 		}
-		let	n	=	item as NodeBase
+		let	n	=	item as! NodeBase
 		return	n.subnodes.count
 	}
 	public func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
 		if item == nil {
 			return	_rootNode!.subnodes[index]
 		}
-		let	n	=	item as NodeBase
+		let	n	=	item as! NodeBase
 		return	n.subnodes[index]
 	}
 //	public func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
@@ -224,7 +224,7 @@ private class VariableNode: NodeBase {
 		self.source				=	source
 		super.init()
 		
-		let	od	=	source.valueExpression?
+		let	od	=	source.valueExpression
 		let	od1	=	od == nil ? "" : od!
 		
 		self.presentations		=	[

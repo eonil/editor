@@ -50,7 +50,7 @@ class VisualEffectViewController : NSViewController {
 	
 	var	visualEffectView:NSVisualEffectView {
 		get {
-			return	self.view as NSVisualEffectView
+			return	self.view as! NSVisualEffectView
 		}
 		set(v) {
 			self.view	=	v

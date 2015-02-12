@@ -53,7 +53,7 @@ public final class IssueListingViewController: NSViewController {
 		
 	public var outlineView:NSOutlineView {
 		get {
-			return	view as NSOutlineView
+			return	view as! NSOutlineView
 		}
 	}
 	

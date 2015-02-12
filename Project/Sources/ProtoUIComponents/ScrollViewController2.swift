@@ -36,7 +36,7 @@ class ScrollViewController2: HygienicViewController {
 	final var scrollView:NSScrollView {
 		get {
 			assert(self.viewLoaded == true)
-			return	super.view as NSScrollView
+			return	super.view as! NSScrollView
 		}
 	}
 	

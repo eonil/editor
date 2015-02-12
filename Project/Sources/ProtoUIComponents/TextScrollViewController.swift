@@ -12,7 +12,7 @@ import AppKit
 class TextScrollViewController : ScrollViewController2 {
 	var textViewController:TextViewController {
 		get {
-			return	super.documentViewController as TextViewController
+			return	super.documentViewController as! TextViewController
 		}
 	}
 //	@availability(*,unavailable)

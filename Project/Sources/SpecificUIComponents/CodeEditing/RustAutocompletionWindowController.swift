@@ -8,7 +8,7 @@
 
 import Foundation
 import AppKit
-import PrecompilationOfExternalToolSupport
+import EditorToolComponents
 
 struct RustAutocompletion {
 	class WindowController: HygienicWindowController2, CodeTextViewAutocompletionController {
@@ -60,7 +60,7 @@ struct RustAutocompletion {
 		
 		var candidateScrollViewController:CandidateScrollViewController {
 			get {
-				return	contentViewController as CandidateScrollViewController
+				return	contentViewController as! CandidateScrollViewController
 			}
 		}
 		
@@ -111,7 +111,7 @@ struct RustAutocompletion {
 	class CandidateScrollViewController: ScrollViewController2 {
 		var candidateTableDocumentViewController:CandidateTableViewController {
 			get {
-				return	super.documentViewController as CandidateTableViewController
+				return	super.documentViewController as! CandidateTableViewController
 			}
 		}
 		override func instantiateDocumentViewController() -> NSViewController {

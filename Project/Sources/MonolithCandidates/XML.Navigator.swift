@@ -89,7 +89,7 @@ extension XML {
 					}
 				}
 				
-				let	subelementsForName	=	element.subnodes.filter({($0 is XML.Element) && ($0 as XML.Element).name == name}).map({$0 as XML.Element})	//	Faster path.
+				let	subelementsForName	=	element.subnodes.filter({($0 is XML.Element) && ($0 as! XML.Element).name == name}).map({$0 as! XML.Element})	//	Faster path.
 //				let	subelementsForName	=	element.subnodes.map {$0 as? XML.Element}.filter {$0 != nil && $0!.name == name}.map {$0!}	//	Slower path.
 				
 				if subelementsForName.first == nil {
@@ -119,14 +119,14 @@ extension XML {
 					}
 				}
 				
-				let	subelementsForName	=	element.subnodes.filter({($0 is XML.Element) && ($0 as XML.Element).name == name}).map({$0 as XML.Element})	//	Faster path.
+				let	subelementsForName	=	element.subnodes.filter({($0 is XML.Element) && ($0 as! XML.Element).name == name}).map({$0 as! XML.Element})	//	Faster path.
 //				let	subelementsForName	=	element.subnodes.map {$0 as? XML.Element}.filter {$0 != nil && $0!.name == name}.map {$0!}	//	Slower path.
 				return	subelementsForName.map {Navigator($0)}
 			}
 		}
 		
 		private func subelementsForName(name:String) -> [XML.Element] {
-			return	element.subnodes.filter({($0 is XML.Element) && ($0 as XML.Element).name == name}).map({$0 as XML.Element})
+			return	element.subnodes.filter({($0 is XML.Element) && ($0 as! XML.Element).name == name}).map({$0 as! XML.Element})
 		}
 	}
 	

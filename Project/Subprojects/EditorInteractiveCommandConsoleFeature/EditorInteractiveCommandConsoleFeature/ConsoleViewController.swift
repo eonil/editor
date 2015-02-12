@@ -15,7 +15,7 @@ public class ConsoleViewController: NSViewController {
 	
 	public var textView:NSTextView {
 		get {
-			return	view as NSTextView
+			return	view as! NSTextView
 		}
 	}
 	

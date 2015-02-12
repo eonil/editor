@@ -73,7 +73,7 @@ extension NSData {
 		return	bs
 	}
 	func toString() -> String {
-		return	NSString(data: self, encoding: NSUTF8StringEncoding)!
+		return	NSString(data: self, encoding: NSUTF8StringEncoding)! as! String
 	}
 	class func fromUInt8Array(bs:[UInt8]) -> NSData {
 		var	r	=	nil as NSData?

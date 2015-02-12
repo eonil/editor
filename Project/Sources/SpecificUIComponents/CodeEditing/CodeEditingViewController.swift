@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 import EonilDispatch
 import EonilFileSystemEvents
-import Precompilation
+import EditorCommon
 
 protocol CodeEditingViewControllerDelegate: class {
 	func codeEditingViewControllerWillSetURL(NSURL)
@@ -23,7 +23,7 @@ class CodeEditingViewController : TextScrollViewController {
 	
 	var	URLRepresentation:NSURL? {
 		get {
-			return	self.representedObject as NSURL?
+			return	self.representedObject as! NSURL?
 		}
 		set(v) {
 			self.representedObject	=	v
@@ -44,8 +44,8 @@ class CodeEditingViewController : TextScrollViewController {
 			
 			////
 			
-			let	from	=	super.representedObject as NSURL?
-			let	to		=	v as NSURL?
+			let	from	=	super.representedObject as! NSURL?
+			let	to		=	v as! NSURL?
 			
 			//	Skip fully duplicated assignment.
 			if from == to {
@@ -184,7 +184,12 @@ class CodeEditingViewController : TextScrollViewController {
 		return	CodeTextViewController()
 	}
 	
-	
+	@availability(*,unavailable)
+	override var textViewController:TextViewController {
+		get {
+			return	super.textViewController
+		}
+	}	
 	
 	////
 	
@@ -196,13 +201,7 @@ class CodeEditingViewController : TextScrollViewController {
 extension CodeEditingViewController {
 	var codeTextViewController:CodeTextViewController {
 		get {
-			return	super.textViewController as CodeTextViewController
-		}
-	}
-	@availability(*,unavailable)
-	override var textViewController:TextViewController {
-		get {
-			return	super.textViewController
+			return	super.textViewController as! CodeTextViewController
 		}
 	}
 }
@@ -262,20 +261,19 @@ extension CodeEditingViewController {
 
 
 class CodeTextViewController: TextViewController {
-}
-extension CodeTextViewController {
-	var codeTextView:CodeTextView {
-		get {
-			return	super.textView as CodeTextView
-		}
-	}
 	@availability(*,unavailable)
 	override var textView:NSTextView {
 		get {
 			return	super.textView
 		}
 	}
-	
+}
+extension CodeTextViewController {
+	var codeTextView:CodeTextView {
+		get {
+			return	super.textView as! CodeTextView
+		}
+	}
 	override func instantiateTextView() -> NSTextView {
 		let	v				=	CodeTextView()
 		v.backgroundColor	=	NSColor.textBackgroundColor()
@@ -375,7 +373,7 @@ extension CodeEditingViewController {
 		var	e1	=	nil as NSError?
 		let	s1	=	NSString(contentsOfURL: u, encoding: NSUTF8StringEncoding, error: &e1)
 		if let s2 = s1 {
-			_setCurrentEditingStateBySnapshot(s2, editable: true)
+			_setCurrentEditingStateBySnapshot(s2 as! String, editable: true)
 			return	true
 		} else {
 			_setCurrentEditingStateBySnapshot(e1!.localizedDescription, editable: false)

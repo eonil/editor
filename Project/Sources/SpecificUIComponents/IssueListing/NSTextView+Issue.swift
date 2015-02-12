@@ -8,7 +8,7 @@
 
 import Foundation
 import AppKit
-import PrecompilationOfExternalToolSupport
+import EditorToolComponents
 
 
 

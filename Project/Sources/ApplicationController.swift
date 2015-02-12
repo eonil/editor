@@ -7,7 +7,7 @@
 //
 
 import Cocoa
-import Precompilation
+import EditorCommon
 
 @NSApplicationMain
 class ApplicationController: NSObject, NSApplicationDelegate {

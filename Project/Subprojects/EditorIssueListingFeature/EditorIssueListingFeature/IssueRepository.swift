@@ -166,8 +166,8 @@ final class IssueGroupNode {
 	
 	////
 	
-	private let	_origin	=	nil as NSURL?
-	private var _items	=	[] as [IssueItemNode]
+	private let	_origin	:	NSURL?
+	private var _items	:	[IssueItemNode]
 }
 
 

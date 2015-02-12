@@ -110,7 +110,7 @@ public class PseudoTeletypewriter {
 
 
 
-private func debugLog<T>(v:@autoclosure()->T) {
+private func debugLog<T>(@autoclosure v:()->T) {
 	#if DEBUG
 		println("\(v)")
 	#endif

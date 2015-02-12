@@ -22,7 +22,7 @@ class EmptyOutlineViewController : NSViewController, NSOutlineViewDataSource, NS
 	
 	var	outlineView:NSOutlineView {
 		get {
-			return	view as NSOutlineView
+			return	view as! NSOutlineView
 		}
 		set(v) {
 			view	=	v

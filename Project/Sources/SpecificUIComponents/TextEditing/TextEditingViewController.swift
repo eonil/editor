@@ -14,7 +14,7 @@ class TextEditingViewController : TextScrollViewController {
 	
 	var	URLRepresentation:NSURL? {
 		get {
-			return	self.representedObject as NSURL?
+			return	self.representedObject as! NSURL?
 		}
 		set(v) {
 			self.representedObject	=	v
@@ -28,7 +28,7 @@ class TextEditingViewController : TextScrollViewController {
 			precondition(v == nil || v! is NSURL)
 			
 			//	Skip duplicated assignment.
-			if v as NSURL? == super.representedObject as NSURL? {
+			if v as! NSURL? == super.representedObject as! NSURL? {
 				return
 			}
 			
@@ -38,7 +38,7 @@ class TextEditingViewController : TextScrollViewController {
 				_clearContent()
 			}
 			
-			if let u1 = v as NSURL? {
+			if let u1 = v as! NSURL? {
 				super.representedObject	=	v
 				if _tryLoadingContentOfFileAtURL(u1) {
 				} else {
@@ -111,7 +111,7 @@ extension TextEditingViewController {
 		let	s1	=	NSString(contentsOfURL: u, encoding: NSUTF8StringEncoding, error: &e1)
 		if let s2 = s1 {
 			self.textViewController.textView.editable	=	true
-			self.textViewController.textView.string		=	s2
+			self.textViewController.textView.string		=	s2 as! String
 			return	true
 		} else {
 			self.textViewController.textView.editable	=	false

@@ -29,7 +29,7 @@ class PlainFileFolderWindowController : HygienicWindowController2 {
 	}
 	var mainViewController:MainViewController {
 		get {
-			return	self.contentViewController as MainViewController
+			return	self.contentViewController as! MainViewController
 		}
 	}
 	var codeEditingViewController:CodeEditingViewController {

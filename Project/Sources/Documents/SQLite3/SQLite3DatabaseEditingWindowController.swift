@@ -9,7 +9,7 @@
 import Foundation
 import AppKit
 import EonilSQLite3
-import Precompilation
+import EditorCommon
 
 class SQLite3DatabaseEditingWindowController : HygienicWindowController, NSWindowDelegate {
 	
@@ -95,7 +95,7 @@ class SQLite3ObjectTreeViewController : EmptyOutlineViewController {
 		return	false
 	}
 	func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
-		let	tname	=	item as Box<String>
+		let	tname	=	item as! Box<String>
 		return	tname.value
 	}
 }

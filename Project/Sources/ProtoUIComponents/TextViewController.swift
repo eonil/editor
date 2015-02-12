@@ -12,7 +12,7 @@ import Cocoa
 class TextViewController: NSViewController {
 	var textView:NSTextView {
 		get {
-			return	view as NSTextView
+			return	view as! NSTextView
 		}
 	}
 	

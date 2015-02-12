@@ -8,10 +8,10 @@
 
 import Foundation
 import AppKit
-import Precompilation
-import PrecompilationOfExternalToolSupport
-import EditorFileTreeNavigationFeature
 import EonilFileSystemEvents
+import EditorCommon
+import EditorToolComponents
+import EditorFileTreeNavigationFeature
 import EditorIssueListingFeature
 
 ///	A document to edit Eonil Editor Workspace. (`.eewsN` file, `N` is single integer version number)

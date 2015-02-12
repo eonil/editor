@@ -7,8 +7,8 @@
 //
 
 import Cocoa
+import EditorToolComponents
 import EditorIssueListingFeature
-import PrecompilationOfExternalToolSupport
 
 
 

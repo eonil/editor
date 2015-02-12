@@ -34,7 +34,7 @@ class ScrollViewController: NSViewController {
 	
 	final var scrollView:NSScrollView {
 		get {
-			return	super.view as NSScrollView
+			return	super.view as! NSScrollView
 		}
 		set(v) {
 			super.view	=	v

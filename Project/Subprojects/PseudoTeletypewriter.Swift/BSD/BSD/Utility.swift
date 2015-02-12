@@ -21,7 +21,7 @@ extension NSData {
 		return	bs
 	}
 	func toString() -> String {
-		return	NSString(data: self, encoding: NSUTF8StringEncoding)!
+		return	NSString(data: self, encoding: NSUTF8StringEncoding)! as String
 	}
 	class func fromUInt8Array(bs:[UInt8]) -> NSData {
 		var	r	=	nil as NSData?
@@ -46,7 +46,7 @@ extension NSData {
 
 
 
-func debugLog<T>(v:@autoclosure()->T) {
+func debugLog<T>(@autoclosure v:()->T) {
 	#if DEBUG
 		println("\(v)")
 	#endif

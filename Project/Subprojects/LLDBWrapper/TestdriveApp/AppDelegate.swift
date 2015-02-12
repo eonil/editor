@@ -89,13 +89,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 class ExecutionStateTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
 	var	outlineView:NSOutlineView {
 		get {
-			return	view as NSOutlineView
+			return	view as! NSOutlineView
 		}
 	}
 	
 	var	debugger:LLDBDebugger? {
 		get {
-			return	self.representedObject as LLDBDebugger?
+			return	self.representedObject as! LLDBDebugger?
 		}
 		set(v) {
 			self.representedObject	=	v
@@ -110,7 +110,7 @@ class ExecutionStateTreeViewController: NSViewController, NSOutlineViewDataSourc
 			precondition(v == nil || v is LLDBDebugger)
 			super.representedObject	=	v
 			
-			_rootNode	=	v == nil ? nil : DebuggerNode(v as LLDBDebugger)
+			_rootNode	=	v == nil ? nil : DebuggerNode(v as! LLDBDebugger)
 			
 			self.outlineView.reloadData()
 			if _rootNode != nil {
@@ -136,18 +136,18 @@ class ExecutionStateTreeViewController: NSViewController, NSOutlineViewDataSourc
 		if item == nil {
 			return	debugger == nil ? 0 : 1
 		}
-		let	n	=	item as NodeBase
+		let	n	=	item as! NodeBase
 		return	n.subnodes.count
 	}
 	func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
 		if item == nil {
 			return	_rootNode!
 		}
-		let	n	=	item as NodeBase
+		let	n	=	item as! NodeBase
 		return	n.subnodes[index]
 	}
 	func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
-		let	n	=	item as NodeBase
+		let	n	=	item as! NodeBase
 		return	n.label
 	}
 	func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {

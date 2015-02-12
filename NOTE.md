@@ -156,8 +156,14 @@ Rust and Swift is fully based on UTF-8, and that is right approach for modern st
 
 
 
+
+
+
 Device Controlling
 ------------------
+There's yet no formal way to control physical iOS devices. But here I list some possible hacks.
+Always take care that these methods can't be reliable at all.
+
 -	https://theiphonewiki.com/wiki/MobileDevice_Library#Mac_OS_X:_MobileDevice.framework
 
 Running on device using unit-test command.

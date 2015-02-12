@@ -45,7 +45,7 @@ struct Text {
 		let	a1	=	[attribute: value]
 		let	s2	=	NSMutableAttributedString(attributedString: s)
 		let	r1	=	NSRange(location: 0, length: (s2.string as NSString).length)
-		s2.addAttribute(attribute, value: value, range: r1)
+		s2.addAttribute(attribute as! String, value: value, range: r1)
 		
 		return	Text(s2)
 	}

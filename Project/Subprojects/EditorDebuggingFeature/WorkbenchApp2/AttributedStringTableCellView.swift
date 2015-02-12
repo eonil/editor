@@ -45,7 +45,7 @@ class AttributedStringTableCellView: NSTableCellView {
 	
 	var	attributedString:NSAttributedString? {
 		get {
-			return	self.objectValue as NSAttributedString?
+			return	self.objectValue as! NSAttributedString?
 		}
 		set(v) {
 			self.objectValue	=	v

@@ -34,6 +34,8 @@
 #import "LLDBListener.h"
 #import "LLDBEvent.h"
 
+#import "LLDBAddress.h"
+
 #import	"LLDBData.h"
 #import "LLDBError.h"
 #import	"LLDBObject.h"

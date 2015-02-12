@@ -8,7 +8,7 @@
 
 import Foundation
 import AppKit
-import PrecompilationOfExternalToolSupport
+import EditorToolComponents
 
 struct WorkspaceUtility {
 	///	Returns URL to newly created config data file if everything is OK.

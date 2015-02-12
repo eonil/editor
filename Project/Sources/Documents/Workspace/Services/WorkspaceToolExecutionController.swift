@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import PrecompilationOfExternalToolSupport
 import EonilDispatch
+import EditorToolComponents
 
 
 protocol WorkspaceToolExecutionControllerDelegate: class {

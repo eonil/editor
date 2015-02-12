@@ -8,7 +8,7 @@
 
 import Foundation
 import AppKit
-import Precompilation
+import EditorCommon
 
 
 ///	A passive data structure to store local in-memory cache to

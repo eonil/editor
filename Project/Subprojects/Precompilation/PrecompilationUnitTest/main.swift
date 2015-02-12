@@ -10,8 +10,6 @@ import Foundation
 
 struct UnitTest {
 	static func runAll() {
-		testDiff()
-		XML.Test.run()
 		testRustCompilerIssueParsing()
 	}
 }
