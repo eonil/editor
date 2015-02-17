@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 ///	`translatesAutoresizingMaskIntoConstraints` set to `false` implicitly.
-class ScrollViewController2: HygienicViewController {
+class ScrollViewController2: EditorCommonViewController {
 	private var	_documentViewController:NSViewController?
 	
 	func instantiateDocumentViewController() -> NSViewController {

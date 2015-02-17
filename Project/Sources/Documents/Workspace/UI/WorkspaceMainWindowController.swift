@@ -10,7 +10,7 @@
 //import AppKit
 //import AppKitExtras
 //
-//class WorkspaceMainWindowController: HygienicWindowController2 {
+//class WorkspaceMainWindowController: EditorCommonWindowController2 {
 //	override func instantiateContentViewController() -> NSViewController {
 //		return	SplitVC()
 //	}

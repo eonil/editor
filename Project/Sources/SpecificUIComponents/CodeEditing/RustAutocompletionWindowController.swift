@@ -11,7 +11,7 @@ import AppKit
 import EditorToolComponents
 
 struct RustAutocompletion {
-	class WindowController: HygienicWindowController2, CodeTextViewAutocompletionController {
+	class WindowController: EditorCommonWindowController2, CodeTextViewAutocompletionController {
 		func presentForSelectionOfTextView(textView:NSTextView) {
 			assert(textView.window !== nil)
 			assert(self.window !== nil)

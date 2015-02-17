@@ -11,7 +11,7 @@ import AppKit
 import EonilSQLite3
 import EditorCommon
 
-class SQLite3DatabaseEditingWindowController : HygienicWindowController, NSWindowDelegate {
+class SQLite3DatabaseEditingWindowController : EditorCommonWindowController, NSWindowDelegate {
 	
 	private var	database:Database?
 	

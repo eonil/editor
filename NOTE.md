@@ -36,9 +36,8 @@ Object Tree Structure
 
 -	ApplicationController
 	-	WorkspaceDocument (multiple)
-		-	WorkspaceController
-			-	WorkspaceWindowController
-			-	(or) PlainFileFolderWindowController
+		-	WorkspaceWindowController
+		-	(or) PlainFileFolderWindowController
 
 
 

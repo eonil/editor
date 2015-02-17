@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SchemaInferencerWindowController : HygienicWindowController {
+class SchemaInferencerWindowController : EditorCommonWindowController {
 	
 	
 	

@@ -1,5 +1,5 @@
 //
-//  HygienicWindowController.swift
+//  EditorCommonWindowController.swift
 //  Editor
 //
 //  Created by Hoon H. on 11/16/14.
@@ -12,7 +12,7 @@ import AppKit
 
 ///	A window controller which fixes some insane behaviors.
 @availability(*,deprecated=0)
-class HygienicWindowController : NSWindowController {
+class EditorCommonWindowController : NSWindowController {
 
 	override init() {
 		super.init()

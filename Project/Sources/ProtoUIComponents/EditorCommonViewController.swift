@@ -1,5 +1,5 @@
 //
-//  HygienicViewController.swift
+//  EditorCommonViewController.swift
 //  Editor
 //
 //  Created by Hoon H. on 12/23/14.
@@ -16,7 +16,7 @@ import AppKit
 ///	View will be created automatically at initialisation using `instantiate~` family methods.
 ///
 @availability(*,deprecated=0)
-class HygienicViewController: NSViewController {
+class EditorCommonViewController: NSViewController {
 	
 	func instantiateView() -> NSView {
 		return	NSView()

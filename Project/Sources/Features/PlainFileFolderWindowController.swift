@@ -22,7 +22,7 @@ import EditorDebuggingFeature
 ///
 ///	-	Use `fileTreeViewController.delegate` to get notified for file tree UI.
 ///
-class PlainFileFolderWindowController : HygienicWindowController2 {
+class PlainFileFolderWindowController : EditorCommonWindowController2 {
 	
 	var	fileTreeViewController:FileTreeViewController4 {
 		get {

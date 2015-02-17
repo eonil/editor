@@ -1,5 +1,5 @@
 //
-//  HygienicWindowController2.swift
+//  EditorCommonWindowController2.swift
 //  Editor
 //
 //  Created by Hoon H. on 12/23/14.
@@ -19,7 +19,7 @@ import AppKit
 ///	This is intentional design to prevent weird OBJC instance replacement behavior.
 ///
 ///	IB is unsupported.
-class HygienicWindowController2 : NSWindowController {
+class EditorCommonWindowController2 : NSWindowController {
 
 	///	Designated initialiser.
 	@availability(*,deprecated=0)
@@ -104,7 +104,7 @@ class HygienicWindowController2 : NSWindowController {
 
 
 
-private extension HygienicWindowController2 {
+private extension EditorCommonWindowController2 {
 	
 	///	A view controller to suppress NIB searching error.
 	@objc

@@ -29,7 +29,7 @@
 		452E4E681A650F15007B490D /* AppKitExtras.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 458E635E1A634CDF006465B3 /* AppKitExtras.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		452E4E6F1A650F24007B490D /* EonilText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452E4E621A650F09007B490D /* EonilText.framework */; };
 		452E4E701A650F24007B490D /* EonilText.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 452E4E621A650F09007B490D /* EonilText.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45358A361A17FE8800AF5F7C /* HygienicWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45358A351A17FE8800AF5F7C /* HygienicWindowController.swift */; };
+		45358A361A17FE8800AF5F7C /* EditorCommonWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45358A351A17FE8800AF5F7C /* EditorCommonWindowController.swift */; };
 		45361CAB1A8C90BA0035385C /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452CFC8C1A8C7A6B0050BE72 /* EditorCommon.framework */; };
 		45361CAC1A8C90BA0035385C /* EditorCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 452CFC8C1A8C7A6B0050BE72 /* EditorCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45361CAF1A8C90CD0035385C /* EditorToolComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C9133C1A8C811300B15F9F /* EditorToolComponents.framework */; };
@@ -97,11 +97,10 @@
 		45D158F51A113FE900B25657 /* CodeEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D158F41A113FE900B25657 /* CodeEditingViewController.swift */; };
 		45D158FA1A11401D00B25657 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D158F91A11401D00B25657 /* Palette.swift */; };
 		45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */; };
-		45D8D8F11A48E99200AE42C8 /* HygienicWindowController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D8F01A48E99200AE42C8 /* HygienicWindowController2.swift */; };
-		45D8D9021A48ED3600AE42C8 /* HygienicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D9011A48ED3600AE42C8 /* HygienicViewController.swift */; };
+		45D8D8F11A48E99200AE42C8 /* EditorCommonWindowController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D8F01A48E99200AE42C8 /* EditorCommonWindowController2.swift */; };
+		45D8D9021A48ED3600AE42C8 /* EditorCommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D9011A48ED3600AE42C8 /* EditorCommonViewController.swift */; };
 		45DA95601A69DAE70091410B /* CodeEditingFileMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA955F1A69DAE70091410B /* CodeEditingFileMonitor.swift */; };
 		45DA95AD1A6A15E30091410B /* FileLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA95AC1A6A15E30091410B /* FileLocation.swift */; };
-		45DB631C1A8DDD0700A1DCDD /* WorkspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DB631B1A8DDD0700A1DCDD /* WorkspaceController.swift */; };
 		45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */; };
 		45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */; };
 		45EF31991A18DE9900DAF925 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4524431E1A18059700A03A51 /* EonilFileSystemEvents.framework */; };
@@ -650,7 +649,7 @@
 		452CFC821A8C7A6A0050BE72 /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		452CFCD91A8C7B7F0050BE72 /* EditorUIComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUIComponents.xcodeproj; path = EditorUIComponents/EditorUIComponents.xcodeproj; sourceTree = "<group>"; };
 		452E4E5B1A650F09007B490D /* Text.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Text.xcodeproj; path = Submodules/Monolith.Swift/Text/Text.xcodeproj; sourceTree = "<group>"; };
-		45358A351A17FE8800AF5F7C /* HygienicWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HygienicWindowController.swift; sourceTree = "<group>"; };
+		45358A351A17FE8800AF5F7C /* EditorCommonWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorCommonWindowController.swift; sourceTree = "<group>"; };
 		4538571C1A622D0000DC693D /* UnitTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UnitTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		4538571E1A622D0000DC693D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		4538573B1A62321E00DC693D /* UnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTest.swift; sourceTree = "<group>"; };
@@ -711,12 +710,11 @@
 		45D158F91A11401D00B25657 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		45D1B22E1A66856100B48431 /* EditorFileContentEditingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorFileContentEditingFeature.xcodeproj; path = EditorFileContentEditingFeature/EditorFileContentEditingFeature.xcodeproj; sourceTree = "<group>"; };
 		45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLayoutQuery.swift; sourceTree = "<group>"; };
-		45D8D8F01A48E99200AE42C8 /* HygienicWindowController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HygienicWindowController2.swift; sourceTree = "<group>"; };
-		45D8D9011A48ED3600AE42C8 /* HygienicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HygienicViewController.swift; sourceTree = "<group>"; };
+		45D8D8F01A48E99200AE42C8 /* EditorCommonWindowController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorCommonWindowController2.swift; sourceTree = "<group>"; };
+		45D8D9011A48ED3600AE42C8 /* EditorCommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorCommonViewController.swift; sourceTree = "<group>"; };
 		45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = EonilFileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		45DA955F1A69DAE70091410B /* CodeEditingFileMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditingFileMonitor.swift; sourceTree = "<group>"; };
 		45DA95AC1A6A15E30091410B /* FileLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLocation.swift; sourceTree = "<group>"; };
-		45DB631B1A8DDD0700A1DCDD /* WorkspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceController.swift; sourceTree = "<group>"; };
 		45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCRuntime.swift; sourceTree = "<group>"; };
 		45DFBDA11A15CE9B007EBB02 /* TargetActionFunctionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetActionFunctionBox.swift; sourceTree = "<group>"; };
 		45EF0BA51A6C942600215F12 /* EditorDebuggingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebuggingFeature.xcodeproj; path = EditorDebuggingFeature/EditorDebuggingFeature.xcodeproj; sourceTree = "<group>"; };
@@ -800,9 +798,9 @@
 		451740DC1A102FA300861ECC /* ProtoUIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				45D8D8F01A48E99200AE42C8 /* HygienicWindowController2.swift */,
-				45358A351A17FE8800AF5F7C /* HygienicWindowController.swift */,
-				45D8D9011A48ED3600AE42C8 /* HygienicViewController.swift */,
+				45D8D8F01A48E99200AE42C8 /* EditorCommonWindowController2.swift */,
+				45358A351A17FE8800AF5F7C /* EditorCommonWindowController.swift */,
+				45D8D9011A48ED3600AE42C8 /* EditorCommonViewController.swift */,
 				451740DE1A102FA300861ECC /* TextScrollViewController.swift */,
 				452A12201A107FF000E38F35 /* TableViewController.swift */,
 				451740DD1A102FA300861ECC /* ScrollViewController.swift */,
@@ -1077,7 +1075,6 @@
 			isa = PBXGroup;
 			children = (
 				457D5CE51A63287C008ECE6F /* WorkspaceDocument.swift */,
-				45DB631B1A8DDD0700A1DCDD /* WorkspaceController.swift */,
 				45DA95AC1A6A15E30091410B /* FileLocation.swift */,
 				45756F641A6537860017AA4B /* WorkspaceUtility.swift */,
 				459E62451A65ED3300EDEEB9 /* WorkspaceWindowController.swift */,
@@ -1930,7 +1927,7 @@
 				4597F8271A113D100089FC66 /* LinkList.swift in Sources */,
 				45700EE11A11F65100415EB2 /* FileNode.swift in Sources */,
 				454FFC0C1A142DF3000C0200 /* FileSystemMonitor.swift in Sources */,
-				45358A361A17FE8800AF5F7C /* HygienicWindowController.swift in Sources */,
+				45358A361A17FE8800AF5F7C /* EditorCommonWindowController.swift in Sources */,
 				4544821A1A632917005576CB /* WorkspaceReportingViewController.swift in Sources */,
 				454E42AD1A13D24F007BEE79 /* FileTreeViewController4.swift in Sources */,
 				45D158FA1A11401D00B25657 /* Palette.swift in Sources */,
@@ -1948,9 +1945,8 @@
 				452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */,
 				451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */,
 				45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */,
-				45DB631C1A8DDD0700A1DCDD /* WorkspaceController.swift in Sources */,
 				4597F82A1A113D100089FC66 /* XML.swift in Sources */,
-				45D8D9021A48ED3600AE42C8 /* HygienicViewController.swift in Sources */,
+				45D8D9021A48ED3600AE42C8 /* EditorCommonViewController.swift in Sources */,
 				45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */,
 				451740E11A102FA300861ECC /* TextScrollViewController.swift in Sources */,
 				455F5DE71A1289B900A17A31 /* FileNode3.swift in Sources */,
@@ -1971,7 +1967,7 @@
 				45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */,
 				4527E4F81A6A717A00115139 /* NSTextView+Issue.swift in Sources */,
 				454482021A6328BE005576CB /* WorkspaceNavigationViewController.swift in Sources */,
-				45D8D8F11A48E99200AE42C8 /* HygienicWindowController2.swift in Sources */,
+				45D8D8F11A48E99200AE42C8 /* EditorCommonWindowController2.swift in Sources */,
 				45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */,
 				454482181A6328FC005576CB /* WorkspaceUtilityViewController.swift in Sources */,
 				452A121D1A107E4C00E38F35 /* IssueListingViewController.swift in Sources */,

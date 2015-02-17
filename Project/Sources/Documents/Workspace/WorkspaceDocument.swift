@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import LLDBWrapper
 import EonilFileSystemEvents
 import EditorCommon
 import EditorToolComponents
@@ -17,20 +18,23 @@ import EditorIssueListingFeature
 ///	A document to edit Eonil Editor Workspace. (`.eewsN` file, `N` is single integer version number)
 ///
 ///	Manages interaction with Cocoa document system.
-class WorkspaceDocument : NSDocument {
+final class WorkspaceDocument : NSDocument {
 	let	mainWindowController		=	PlainFileFolderWindowController()
 	let	toolExecutionController		=	WorkspaceToolExecutionController()
 	
 	override init() {
 		super.init()
-		
 		assert(mainWindowController.fileTreeViewController.delegate == nil)
-		mainWindowController.fileTreeViewController.delegate		=	self
-		mainWindowController.issueListingViewController.delegate	=	self
-		
-		toolExecutionController.delegate	=	self
+		mainWindowController.fileTreeViewController.delegate		=	_subcomponentController
+		mainWindowController.issueListingViewController.delegate	=	_subcomponentController
+		toolExecutionController.delegate							=	_subcomponentController
 	}
 	
+	var	debugger:LLDBDebugger {
+		get {
+			return	_debugger
+		}
+	}
 	override func makeWindowControllers() {
 		//	Turning off the undo will effectively make autosave to be disabled.
 		//	See "Not Supporting Undo" chapter.
@@ -49,6 +53,8 @@ class WorkspaceDocument : NSDocument {
 	
 	private var	_rootLocation			=	nil as FileLocation?
 	private var	_fileSystemMonitor		=	nil as FileSystemEventMonitor?
+	private let	_subcomponentController	=	SubcomponentController()
+	private let	_debugger				=	LLDBDebugger()
 	
 	private var rootLocation:FileLocation {
 		get {
@@ -66,167 +72,6 @@ class WorkspaceDocument : NSDocument {
 
 
 
-
-extension WorkspaceDocument: FileTreeViewController4Delegate {
-	func fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(u: NSURL) -> [NSURL] {
-		Debug.assertMainThread()
-		
-		return	subnodeAbsoluteURLsOfURL(u)
-	}
-	
-	func fileTreeViewController4UserWantsToCreateFolderInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
-		Debug.assertMainThread()
-		
-		return	FileUtility.createNewFolderInFolder(parentFolderURL)
-	}
-	func fileTreeViewController4UserWantsToCreateFileInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
-		Debug.assertMainThread()
-		
-		return	FileUtility.createNewFileInFolder(parentFolderURL)
-	}
-	func fileTreeViewController4UserWantsToRenameFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
-		Debug.assertMainThread()
-		
-		return	fileTreeViewController4UserWantsToMoveFileAtURL(from, to: to)
-	}
-	func fileTreeViewController4UserWantsToMoveFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
-		Debug.assertMainThread()
-		
-		var	err	=	nil as NSError?
-		let	ok	=	NSFileManager.defaultManager().moveItemAtURL(from, toURL: to, error: &err)
-		assert(ok || err != nil)
-		if ok {
-			self.mainWindowController.codeEditingViewController.URLRepresentation	=	to
-		}
-		return	ok ? Resolution.success() : Resolution.failure(err!)
-	}
-	func fileTreeViewController4UserWantsToDeleteFilesAtURLs(us: [NSURL]) -> Resolution<()> {
-		Debug.assertMainThread()
-		
-		//	Just always close the currently editing file.
-		//	Deletion may fail, and then user may see closed document without deletion,
-		//	but it doesn't seem to be bad. So this is an intended design.
-		self.mainWindowController.codeEditingViewController.URLRepresentation	=	nil
-		
-		var	err	=	nil as NSError?
-		for u in us {
-			let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
-			assert(ok || err != nil)
-			if !ok {
-				return	Resolution.failure(err!)
-			}
-		}
-		return	Resolution.success()
-	}
-	
-	func fileTreeViewController4UserWantsToEditFileAtURL(u: NSURL) -> Bool {
-		Debug.assertMainThread()
-		
-		self.mainWindowController.codeEditingViewController.URLRepresentation	=	u
-		return	true
-	}
-}
-
-private func subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
-	var	us1	=	[] as [NSURL]
-	if NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(absoluteURL.path!) {
-		let	u1	=	absoluteURL
-		let	it1	=	NSFileManager.defaultManager().enumeratorAtURL(u1, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles | NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants, errorHandler: { (url:NSURL!, error:NSError!) -> Bool in
-			fatalError("Unhandled file I/O error!")	//	TODO:
-			return	false
-		})
-		let	it2	=	it1!
-		while let o1 = it2.nextObject() as? NSURL {
-			us1.append(o1)
-		}
-	}
-	return	us1
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///	MARK:
-///	MARK:	IssueListingViewControllerDelegate
-
-extension WorkspaceDocument: IssueListingViewControllerDelegate {
-	func issueListingViewControllerUserWantsToHighlightURL(file: NSURL?) {
-		Debug.assertMainThread()
-		
-	}
-	func issueListingViewControllerUserWantsToHighlightIssue(issue: Issue) {
-		Debug.assertMainThread()
-		
-		if let o = issue.origin {
-			self.mainWindowController.codeEditingViewController.URLRepresentation	=	o.URL
-			self.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.navigateToCodeRange(o.range)
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///	MARK:
-///	MARK:	WorkspaceToolExecutionControllerDelegate
-
-extension WorkspaceDocument: WorkspaceToolExecutionControllerDelegate {
-	func workspaceToolExecutionControllerDidDiscoverRustCompilerIssue(issue: RustCompilerIssue) {
-		Debug.assertMainThread()
-		
-		let	s	=	Issue(workspaceRootURL: self.rootLocation.stringExpression, rust: issue)
-		mainWindowController.issueListingViewController.push([s])
-	}
-	func workspaceToolExecutionControllerDidDiscoverRustCompilerMessage(message: String) {
-		Debug.assertMainThread()
-		
-		println(message)
-	}
-	func workspaceToolExecutionControllerQueryWorkingDirectoryURL() -> NSURL {
-		Debug.assertMainThread()
-		
-		return	rootLocation.stringExpression
-	}
-}
 
 
 
@@ -443,5 +288,254 @@ extension WorkspaceDocument {
 		toolExecutionController.cancelAll()
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///	MARK:
+///	MARK:	SubcomponentController
+
+///	Hard-coupled internal subcomponent controller.
+private final class SubcomponentController {
+	weak var owner:WorkspaceDocument! {
+		willSet {
+			assert(self.owner == nil, "`owner` can be set only once.")
+		}
+	}
+}
+
+extension SubcomponentController: FileTreeViewController4Delegate {
+	func fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(u: NSURL) -> [NSURL] {
+		Debug.assertMainThread()
+		
+		return	subnodeAbsoluteURLsOfURL(u)
+	}
+	
+	func fileTreeViewController4UserWantsToCreateFolderInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
+		Debug.assertMainThread()
+		
+		return	FileUtility.createNewFolderInFolder(parentFolderURL)
+	}
+	func fileTreeViewController4UserWantsToCreateFileInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
+		Debug.assertMainThread()
+		
+		return	FileUtility.createNewFileInFolder(parentFolderURL)
+	}
+	func fileTreeViewController4UserWantsToRenameFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
+		Debug.assertMainThread()
+		
+		return	fileTreeViewController4UserWantsToMoveFileAtURL(from, to: to)
+	}
+	func fileTreeViewController4UserWantsToMoveFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
+		Debug.assertMainThread()
+		
+		var	err	=	nil as NSError?
+		let	ok	=	NSFileManager.defaultManager().moveItemAtURL(from, toURL: to, error: &err)
+		assert(ok || err != nil)
+		if ok {
+			owner.mainWindowController.codeEditingViewController.URLRepresentation	=	to
+		}
+		return	ok ? Resolution.success() : Resolution.failure(err!)
+	}
+	func fileTreeViewController4UserWantsToDeleteFilesAtURLs(us: [NSURL]) -> Resolution<()> {
+		Debug.assertMainThread()
+		
+		//	Just always close the currently editing file.
+		//	Deletion may fail, and then user may see closed document without deletion,
+		//	but it doesn't seem to be bad. So this is an intended design.
+		owner.mainWindowController.codeEditingViewController.URLRepresentation	=	nil
+		
+		var	err	=	nil as NSError?
+		for u in us {
+			let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
+			assert(ok || err != nil)
+			if !ok {
+				return	Resolution.failure(err!)
+			}
+		}
+		return	Resolution.success()
+	}
+	
+	func fileTreeViewController4UserWantsToEditFileAtURL(u: NSURL) -> Bool {
+		Debug.assertMainThread()
+		
+		owner.mainWindowController.codeEditingViewController.URLRepresentation	=	u
+		return	true
+	}
+}
+
+private func subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
+	var	us1	=	[] as [NSURL]
+	if NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(absoluteURL.path!) {
+		let	u1	=	absoluteURL
+		let	it1	=	NSFileManager.defaultManager().enumeratorAtURL(u1, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles | NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants, errorHandler: { (url:NSURL!, error:NSError!) -> Bool in
+			fatalError("Unhandled file I/O error!")	//	TODO:
+			return	false
+		})
+		let	it2	=	it1!
+		while let o1 = it2.nextObject() as? NSURL {
+			us1.append(o1)
+		}
+	}
+	return	us1
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///	MARK:
+///	MARK:	IssueListingViewControllerDelegate
+
+extension SubcomponentController: IssueListingViewControllerDelegate {
+	func issueListingViewControllerUserWantsToHighlightURL(file: NSURL?) {
+		Debug.assertMainThread()
+		
+	}
+	func issueListingViewControllerUserWantsToHighlightIssue(issue: Issue) {
+		Debug.assertMainThread()
+		
+		if let o = issue.origin {
+			owner.mainWindowController.codeEditingViewController.URLRepresentation	=	o.URL
+			owner.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.navigateToCodeRange(o.range)
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///	MARK:
+///	MARK:	WorkspaceToolExecutionControllerDelegate
+
+extension SubcomponentController: WorkspaceToolExecutionControllerDelegate {
+	func workspaceToolExecutionControllerDidDiscoverRustCompilerIssue(issue: RustCompilerIssue) {
+		Debug.assertMainThread()
+		
+		let	s	=	Issue(workspaceRootURL: owner.rootLocation.stringExpression, rust: issue)
+		owner.mainWindowController.issueListingViewController.push([s])
+	}
+	func workspaceToolExecutionControllerDidDiscoverRustCompilerMessage(message: String) {
+		Debug.assertMainThread()
+		
+		println(message)
+	}
+	func workspaceToolExecutionControllerQueryWorkingDirectoryURL() -> NSURL {
+		Debug.assertMainThread()
+		
+		return	owner.rootLocation.stringExpression
+	}
+}
+
+
+
+
 
 
