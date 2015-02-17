@@ -92,12 +92,15 @@ finally abandoned the approach --- failure)
 
 Wrapping Design Choices
 -----------------------
--	Only valid API object will become an Objective-C object. (`IsValid() == true`) Calling `init...`
-	method with invalid object will return `nil`.
+-	Invalid objects will also be wrapped and returned. No `nil` will be returned regardless of
+	`IsValid` state. Anyway, it doesn't mean you can use them freely. Calling methods on invalid
+	objects are usually not invalid and causes crash. (asserted)
 
--	`SB~` classes are also proxies, and can become invalid state (`IsValid() == true`) at any time.
-	Objective-C wrapper will perform debug mode assertions for invalid state on all method call.
-
+	This is because;
+	
+	-	LLDB seems treating invalid state as a part of regular state.
+	-	any existing valid object can become invalid anytime.
+	
 -	Equality and comparison operators will be provided if original C++ classes provides corresponding 
 	operators.
 
@@ -106,16 +109,19 @@ Wrapping Design Choices
 
 -	Use C numeric types as is as much as possible. Convert them in Swift-side extensions where needed.
 	If the numeric type is `typedef`ed inside of C++ namespaces/classes, then make a new C `typedef`
-	manually, and `static_assert` for equality.
+	manually, and `static_assert` for type matching.
 
 -	Strings will always be passed by copying into a new `NSString` by default. Raw C-string pointers
 	will not be exposed unless required.
 
 -	Enums should be redefined in C side, and mapped to corresponding C++ constants.
 
--	No exception. (1) To be used with Swift. (2) I don't think exceptions are truly good one.
+	-	Current implementation is not following this rule. It is because I couldn't decide yet what to 
+		do for bit-field values.
+
+-	No exception. (1) Swift has no exception facility. (2) I don't think exceptions are great good.
 	Wrapper method must return a proper error or crash reliably.
-	
+
 
 
 
@@ -130,7 +136,7 @@ contains files from LLVM/LLDB projects that are licensed under
 "University of Illinois/NCSA Open Source License". Product of this project will be dynamically
 linked to some components of Xcode if there is one exists at runtime. I DO NOT redistribute
 those components. So I don't think this linkage would cause any license issue, but anyway, 
-I am not a laywer. If you think something is wrong, please let me know.
+I am not a laywer. If you think something is wrong, please let me know. Thanks.
 
 
 

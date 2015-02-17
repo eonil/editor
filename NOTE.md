@@ -31,6 +31,35 @@ Non-Goal
 
 
 
+Object Tree Structure
+----------------------
+
+-	ApplicationController
+	-	WorkspaceDocument (multiple)
+		-	WorkspaceController
+			-	WorkspaceWindowController
+			-	(or) PlainFileFolderWindowController
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 File System Watching
 --------------------
 `NSFilePresenter` simply does not work as advertised, and Apple has no

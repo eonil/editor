@@ -15,7 +15,8 @@ import EditorFileTreeNavigationFeature
 import EditorIssueListingFeature
 
 ///	A document to edit Eonil Editor Workspace. (`.eewsN` file, `N` is single integer version number)
-///	The root controller of a workspace.
+///
+///	Manages interaction with Cocoa document system.
 class WorkspaceDocument : NSDocument {
 	let	mainWindowController		=	PlainFileFolderWindowController()
 	let	toolExecutionController		=	WorkspaceToolExecutionController()
@@ -43,10 +44,7 @@ class WorkspaceDocument : NSDocument {
 		
 		assert(mainWindowController.fileTreeViewController.delegate != nil)
 	}
-	
-	
 
-	
 	////
 	
 	private var	_rootLocation			=	nil as FileLocation?
