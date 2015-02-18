@@ -16,24 +16,10 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 		}
 	}
 	
-	public var	data:LLDBFrame? {
-		get {
-			return	self.representedObject as! LLDBFrame?
-		}
-		set(v) {
-			self.representedObject	=	v
-		}
-	}
 	
-	public override var representedObject:AnyObject? {
-		get {
-			return	super.representedObject
-		}
-		set(v) {
-			precondition(v == nil || v is LLDBFrame)
-			super.representedObject	=	v
-			
-			_rootNode	=	v == nil ? nil : FrameNode(v as! LLDBFrame)
+	public var snapshot:Snapshot? {
+		didSet {
+			_rootNode	=	snapshot?._frameNode
 			
 			self.outlineView.reloadData()
 			if _rootNode != nil {
@@ -41,6 +27,18 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 					self.outlineView.expandItem(m, expandChildren: true)
 				}
 			}
+		}
+	}
+	
+	
+	
+	@availability(*,unavailable)
+	public final override var representedObject:AnyObject? {
+		get {
+			deletedPropertyFatalError()
+		}
+		set(v) {
+			deletedPropertyFatalError()			
 		}
 	}
 	
@@ -106,6 +104,21 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 	
 	private var	_rootNode:FrameNode?
 }
+
+public extension VariableTreeViewController {
+	public struct Snapshot {
+		public init(_ frame:LLDBFrame) {
+			self._frameNode	=	FrameNode(frame)
+		}
+		
+		private let _frameNode:FrameNode
+	}
+}
+
+
+
+
+
 
 
 private func makePresentationText(n:VariableNode) -> NSAttributedString {

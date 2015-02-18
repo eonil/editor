@@ -14,6 +14,7 @@ import EditorCommon
 import EditorToolComponents
 import EditorFileTreeNavigationFeature
 import EditorIssueListingFeature
+import EditorDebuggingFeature
 
 ///	A document to edit Eonil Editor Workspace. (`.eewsN` file, `N` is single integer version number)
 ///
@@ -24,17 +25,20 @@ final class WorkspaceDocument : NSDocument {
 	
 	override init() {
 		super.init()
+		
+		_subcomponentController.owner	=	self
+		
 		assert(mainWindowController.fileTreeViewController.delegate == nil)
 		mainWindowController.fileTreeViewController.delegate		=	_subcomponentController
 		mainWindowController.issueListingViewController.delegate	=	_subcomponentController
 		toolExecutionController.delegate							=	_subcomponentController
 	}
 	
-	var	debugger:LLDBDebugger {
-		get {
-			return	_debugger
-		}
-	}
+//	var	debugger:LLDBDebugger {
+//		get {
+//			return	_debugger
+//		}
+//	}
 	override func makeWindowControllers() {
 		//	Turning off the undo will effectively make autosave to be disabled.
 		//	See "Not Supporting Undo" chapter.
@@ -273,6 +277,8 @@ extension WorkspaceDocument {
 		
 		mainWindowController.issueListingViewController.reset()
 		toolExecutionController.executeCargoRun()
+		
+		mainWindowController.executionStateTreeViewController.debugger	=	_debugger
 	}
 	
 	@objc @IBAction
@@ -364,7 +370,7 @@ extension WorkspaceDocument {
 ///	MARK:
 ///	MARK:	SubcomponentController
 
-///	Hard-coupled internal subcomponent controller.
+///	Hardly-coupled internal subcomponent controller.
 private final class SubcomponentController {
 	weak var owner:WorkspaceDocument! {
 		willSet {

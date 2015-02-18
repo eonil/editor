@@ -14,7 +14,7 @@ import EditorDebuggingFeature
 
 
 @NSApplicationMain
-class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegate {
+class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegate, ExecutionStateTreeViewControllerDelegate {
 	
 	@IBOutlet weak var mainWindow: NSWindow!
 	@IBOutlet weak var localVariableWindow: NSWindow!
@@ -29,6 +29,8 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegat
 	let	lcon	=	ListenerController()
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
+		tv1.delegate	=	self
+		
 		sv1.documentView		=	tv1.view
 		mainWindow.contentView	=	sv1
 		
@@ -109,18 +111,22 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegat
 		
 		switch p.state {
 		case .Running:
-			tv1.debugger	=	nil
-			tv2.data		=	nil
+			tv1.snapshot	=	nil
+			tv2.snapshot	=	nil
 			
 		default:
-			tv1.debugger	=	dbg
-			if let f = dbg.allTargets[0].process.allThreads[0].allFrames.first {
-				tv2.data	=	f
+			tv1.snapshot	=	ExecutionStateTreeViewController.Snapshot(dbg)
+			if let f = dbg?.allTargets[0].process.allThreads[0].allFrames.first, f1 = f {
+				tv2.snapshot	=	VariableTreeViewController.Snapshot(f1)
 			} else {
-				tv2.data		=	nil
+				tv2.snapshot	=	nil
 			}
 		}
 		
+	}
+	
+	func executionStateTreeViewControllerDidSelectFrame(frame: LLDBFrame) {
+		tv2.snapshot	=	VariableTreeViewController.Snapshot(frame)
 	}
 }
 

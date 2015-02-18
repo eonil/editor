@@ -20,8 +20,16 @@ public protocol ListenerControllerDelegate: class {
 }
 
 ///	Manages event handling in separated thread and route them back to main thread.
+///	Set delegate to get notified for events.
+///
+///	YOU MUST SET A DELEGATE!
+///	This object will crash if you have no delegate set when an event fires.
 public final class ListenerController {
-	public weak var delegate:ListenerControllerDelegate?
+	public weak var delegate:ListenerControllerDelegate? {
+		willSet {
+			precondition(delegate == nil, "Set `nil` to `delegate` first before setting a new delegate to express your intention clearly.")
+		}
+	}
 	
 	public init() {
 		_lis	=	LLDBListener(name: "Eonil/Editor LLDB Main Listener")
@@ -45,7 +53,7 @@ public final class ListenerController {
 					///	Wait for main thread processing done.
 					dispatch_sync(dispatch_get_main_queue()) { [unowned self] in
 						println(e)
-						self.delegate?.listenerController(self, IsProcessingEvent: e)
+						self.delegate!.listenerController(self, IsProcessingEvent: e)
 						cont	=	self._done == false
 						()
 					}

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		450146FB1A948B66003C99EE /* WorkspaceDebuggingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450146FA1A948B66003C99EE /* WorkspaceDebuggingMode.swift */; };
+		450147291A948B73003C99EE /* WorkspaceEditingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450147281A948B73003C99EE /* WorkspaceEditingMode.swift */; };
+		4501472B1A948B95003C99EE /* WorkspaceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501472A1A948B95003C99EE /* WorkspaceMode.swift */; };
 		450A0E061A275F550026102D /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450A0DE81A275EBD0026102D /* EonilDispatch.framework */; };
 		450A0E081A275F600026102D /* EonilDispatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 450A0DEC1A275EBD0026102D /* EonilDispatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4514A76D1A11C7D200F25ED8 /* RustProjectDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */; };
@@ -627,6 +630,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		450146FA1A948B66003C99EE /* WorkspaceDebuggingMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDebuggingMode.swift; sourceTree = "<group>"; };
+		450147281A948B73003C99EE /* WorkspaceEditingMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceEditingMode.swift; sourceTree = "<group>"; };
+		4501472A1A948B95003C99EE /* WorkspaceMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceMode.swift; sourceTree = "<group>"; };
 		450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Dispatch.xcodeproj; path = Submodules/Monolith.Swift/Dispatch/Dispatch.xcodeproj; sourceTree = "<group>"; };
 		4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectDocument.swift; sourceTree = "<group>"; };
 		4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustSourceCodeFileDocument.swift; sourceTree = "<group>"; };
@@ -1075,6 +1081,9 @@
 			isa = PBXGroup;
 			children = (
 				457D5CE51A63287C008ECE6F /* WorkspaceDocument.swift */,
+				4501472A1A948B95003C99EE /* WorkspaceMode.swift */,
+				450147281A948B73003C99EE /* WorkspaceEditingMode.swift */,
+				450146FA1A948B66003C99EE /* WorkspaceDebuggingMode.swift */,
 				45DA95AC1A6A15E30091410B /* FileLocation.swift */,
 				45756F641A6537860017AA4B /* WorkspaceUtility.swift */,
 				459E62451A65ED3300EDEEB9 /* WorkspaceWindowController.swift */,
@@ -1933,6 +1942,7 @@
 				45D158FA1A11401D00B25657 /* Palette.swift in Sources */,
 				455795271A4CD4CD0011C34E /* TypeAliases.swift in Sources */,
 				4514A7731A11C81200F25ED8 /* RustSourceCodeFileDocument.swift in Sources */,
+				450146FB1A948B66003C99EE /* WorkspaceDebuggingMode.swift in Sources */,
 				4597F8291A113D100089FC66 /* XML.Navigator.swift in Sources */,
 				4538573C1A62321E00DC693D /* UnitTest.swift in Sources */,
 				45CAD9351A4B145100EDF02D /* SyntaxHighlighting.swift in Sources */,
@@ -1942,6 +1952,7 @@
 				457341021A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift in Sources */,
 				45204C801A63300900929A17 /* ApplicationController.swift in Sources */,
 				457341011A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift in Sources */,
+				450147291A948B73003C99EE /* WorkspaceEditingMode.swift in Sources */,
 				452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */,
 				451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */,
 				45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */,
@@ -1958,6 +1969,7 @@
 				45A6DAAB1A6388FD00DFB9CE /* ArrayReportingController.swift in Sources */,
 				459433AF1A45EBBE008B2CFF /* TextEditingViewController.swift in Sources */,
 				45D158F51A113FE900B25657 /* CodeEditingViewController.swift in Sources */,
+				4501472B1A948B95003C99EE /* WorkspaceMode.swift in Sources */,
 				45DA95AD1A6A15E30091410B /* FileLocation.swift in Sources */,
 				454E42AB1A13D244007BEE79 /* FileTreeRepository4.swift in Sources */,
 				45DA95601A69DAE70091410B /* CodeEditingFileMonitor.swift in Sources */,

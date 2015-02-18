@@ -18,6 +18,7 @@
 		455075B11A8D07E1003FCD76 /* ListenerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455075AE1A8D07E1003FCD76 /* ListenerController.swift */; };
 		455075B21A8D07E1003FCD76 /* VariableTreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455075AF1A8D07E1003FCD76 /* VariableTreeViewController.swift */; };
 		455075BB1A8D0806003FCD76 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455075BA1A8D0806003FCD76 /* Operators.swift */; };
+		457B29541A950EA600F7A3F9 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457B29531A950EA600F7A3F9 /* Errors.swift */; };
 		459E5D391A6CF42E00D4F391 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D321A6CF42E00D4F391 /* Client.swift */; };
 		459E5D3A1A6CF42E00D4F391 /* GDBRSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D331A6CF42E00D4F391 /* GDBRSP.swift */; };
 		459E5D3B1A6CF42E00D4F391 /* Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D341A6CF42E00D4F391 /* Packet.swift */; };
@@ -32,16 +33,13 @@
 		45AFEDB61A8D0820009F0010 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFEDB31A8D0820009F0010 /* Text.swift */; };
 		45BEE1F21A8C870E0078E500 /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEE1E71A8C86F70078E500 /* EditorCommon.framework */; };
 		45BEE1F31A8C870E0078E500 /* EditorCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEE1E71A8C86F70078E500 /* EditorCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45EF0B8F1A6C942600215F12 /* EditorDebuggingFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 45EF0B8E1A6C942600215F12 /* EditorDebuggingFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45EF0BE51A6C95DE00215F12 /* LLDBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BE41A6C95DE00215F12 /* LLDBController.swift */; };
 		45EF0BF11A6C961C00215F12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BF01A6C961C00215F12 /* AppDelegate.swift */; };
 		45EF0BF31A6C961C00215F12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45EF0BF21A6C961C00215F12 /* Images.xcassets */; };
 		45EF0BF61A6C961C00215F12 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45EF0BF41A6C961C00215F12 /* MainMenu.xib */; };
 		45EF0C141A6C965600215F12 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0C131A6C965600215F12 /* main.c */; };
 		45EF0C1A1A6C967000215F12 /* Sample1 in Resources */ = {isa = PBXBuildFile; fileRef = 45EF0C111A6C965600215F12 /* Sample1 */; };
-		45EF0C361A6CA51B00215F12 /* MarkerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0C351A6CA51B00215F12 /* MarkerClass.swift */; };
 		45EF0C381A6CA61600215F12 /* LLDBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BE41A6C95DE00215F12 /* LLDBController.swift */; };
-		45EF0C391A6CA61600215F12 /* MarkerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0C351A6CA51B00215F12 /* MarkerClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +175,7 @@
 		455075AE1A8D07E1003FCD76 /* ListenerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenerController.swift; sourceTree = "<group>"; };
 		455075AF1A8D07E1003FCD76 /* VariableTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTreeViewController.swift; sourceTree = "<group>"; };
 		455075BA1A8D0806003FCD76 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
+		457B29531A950EA600F7A3F9 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		457F8BCE1A6CC206006B0592 /* kernel2.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = kernel2.py; sourceTree = "<group>"; };
 		459E5D321A6CF42E00D4F391 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 		459E5D331A6CF42E00D4F391 /* GDBRSP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GDBRSP.swift; sourceTree = "<group>"; };
@@ -194,7 +193,6 @@
 		45E5EF061A7E5E27009967D2 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		45EF0B891A6C942600215F12 /* EditorDebuggingFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorDebuggingFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45EF0B8D1A6C942600215F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45EF0B8E1A6C942600215F12 /* EditorDebuggingFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorDebuggingFeature.h; sourceTree = "<group>"; };
 		45EF0B9A1A6C942600215F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45EF0B9B1A6C942600215F12 /* EditorDebuggingFeatureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorDebuggingFeatureTests.swift; sourceTree = "<group>"; };
 		45EF0BCE1A6C943D00215F12 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -209,7 +207,6 @@
 		45EF0C111A6C965600215F12 /* Sample1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Sample1; sourceTree = BUILT_PRODUCTS_DIR; };
 		45EF0C131A6C965600215F12 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		45EF0C2F1A6CA40100215F12 /* kernel.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = kernel.py; sourceTree = "<group>"; };
-		45EF0C351A6CA51B00215F12 /* MarkerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkerClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +300,7 @@
 		45AFEDBE1A8D0883009F0010 /* (junkyard) */ = {
 			isa = PBXGroup;
 			children = (
+				45EF0BE41A6C95DE00215F12 /* LLDBController.swift */,
 				45EF0C2F1A6CA40100215F12 /* kernel.py */,
 				457F8BCE1A6CC206006B0592 /* kernel2.py */,
 			);
@@ -362,10 +360,6 @@
 		45EF0B8B1A6C942600215F12 /* EditorDebuggingFeature */ = {
 			isa = PBXGroup;
 			children = (
-				45EF0B8E1A6C942600215F12 /* EditorDebuggingFeature.h */,
-				45EF0B8C1A6C942600215F12 /* Supporting Files */,
-				45EF0BE41A6C95DE00215F12 /* LLDBController.swift */,
-				45EF0C351A6CA51B00215F12 /* MarkerClass.swift */,
 				455075AD1A8D07E1003FCD76 /* ExecutionStateTreeViewController.swift */,
 				455075AE1A8D07E1003FCD76 /* ListenerController.swift */,
 				455075AF1A8D07E1003FCD76 /* VariableTreeViewController.swift */,
@@ -373,6 +367,8 @@
 				45AFEDB11A8D0820009F0010 /* AttributedStringTableCellView.swift */,
 				45AFEDB21A8D0820009F0010 /* Palette.swift */,
 				45AFEDB31A8D0820009F0010 /* Text.swift */,
+				457B29531A950EA600F7A3F9 /* Errors.swift */,
+				45EF0B8C1A6C942600215F12 /* Supporting Files */,
 				45AFEDBE1A8D0883009F0010 /* (junkyard) */,
 			);
 			path = EditorDebuggingFeature;
@@ -455,7 +451,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45EF0B8F1A6C942600215F12 /* EditorDebuggingFeature.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,9 +692,9 @@
 				45AFEDB41A8D0820009F0010 /* AttributedStringTableCellView.swift in Sources */,
 				455075B11A8D07E1003FCD76 /* ListenerController.swift in Sources */,
 				45AFEDB61A8D0820009F0010 /* Text.swift in Sources */,
-				45EF0C361A6CA51B00215F12 /* MarkerClass.swift in Sources */,
 				45EF0BE51A6C95DE00215F12 /* LLDBController.swift in Sources */,
 				455075BB1A8D0806003FCD76 /* Operators.swift in Sources */,
+				457B29541A950EA600F7A3F9 /* Errors.swift in Sources */,
 				45AFEDB51A8D0820009F0010 /* Palette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,7 +708,6 @@
 				459E5D391A6CF42E00D4F391 /* Client.swift in Sources */,
 				459E5D421A6CF79300D4F391 /* UnitTest.swift in Sources */,
 				45EF0BF11A6C961C00215F12 /* AppDelegate.swift in Sources */,
-				45EF0C391A6CA61600215F12 /* MarkerClass.swift in Sources */,
 				459E5D3C1A6CF42E00D4F391 /* RunLengthEncoding.swift in Sources */,
 				45EF0C381A6CA61600215F12 /* LLDBController.swift in Sources */,
 				459E5D401A6CF78900D4F391 /* Packet.UnitTest.swift in Sources */,

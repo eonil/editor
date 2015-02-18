@@ -9,31 +9,31 @@
 import Foundation
 import LLDBWrapper
 
+
+
+
+
+
+
+public protocol ExecutionStateTreeViewControllerDelegate: class {
+	func executionStateTreeViewControllerDidSelectFrame(frame:LLDBFrame)
+}
+
+///	This is a snapshot display. You need to set a new snapshot to display updated state.
+///	This object REQUIRES delegate for every events. You must set a valid `delegate` object.
 public final class ExecutionStateTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+	public weak var delegate:ExecutionStateTreeViewControllerDelegate?
+	
 	public var outlineView:NSOutlineView {
 		get {
 			return	super.view as! NSOutlineView
 		}
 	}
 	
-	public var debugger:LLDBDebugger? {
-		get {
-			return	self.representedObject as! LLDBDebugger?
-		}
-		set(v) {
-			self.representedObject	=	v
-		}
-	}
-	
-	public override var representedObject:AnyObject? {
-		get {
-			return	super.representedObject
-		}
-		set(v) {
-			precondition(v == nil || v is LLDBDebugger)
-			super.representedObject	=	v
-			
-			_rootNode	=	v == nil ? nil : DebuggerNode(v as! LLDBDebugger)
+	public var snapshot:Snapshot? {
+		didSet {
+			super.representedObject	=	self.snapshot?.rootNode
+			self._rootNode			=	self.snapshot?.rootNode
 			
 			self.outlineView.reloadData()
 			for n in _rootNode?.subnodes ||| [] {
@@ -42,7 +42,21 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 		}
 	}
 	
-//	@availability(*,unavailable)
+	
+	
+	
+	
+	@availability(*,unavailable)
+	public final override var representedObject:AnyObject? {
+		get {
+			deletedPropertyFatalError()
+		}
+		set(v) {
+			deletedPropertyFatalError()
+		}
+	}
+	
+	
 	public final override var view:NSView {
 		willSet {
 			fatalError("You cannot replace view of this view-controller. It is prohibited by design.")
@@ -91,6 +105,12 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 		v.attributedString	=	Text(n.label).setFont(Palette.defaultFont()).attributedString
 		return	v
 	}
+	public func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool {
+		if let fn = item as? FrameNode {
+			self.delegate!.executionStateTreeViewControllerDidSelectFrame(fn.data)
+		}
+		return	true
+	}
 	
 	////
 	
@@ -100,6 +120,18 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 
 
 
+
+
+
+public extension ExecutionStateTreeViewController {
+	public struct Snapshot {
+		public init(_ debugger:LLDBDebugger) {
+			self.rootNode	=	DebuggerNode(debugger)
+		}
+		
+		private let	rootNode:DebuggerNode
+	}
+}
 
 
 

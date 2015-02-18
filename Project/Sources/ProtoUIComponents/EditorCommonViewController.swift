@@ -33,6 +33,7 @@ class EditorCommonViewController: NSViewController {
 	}
 	
 	///	You cannot call this methid directly.
+	///	Override `instantiateView` method instead of.
 	@availability(*,unavailable)
 	override func loadView() {
 		fatalError()
