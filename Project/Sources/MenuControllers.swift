@@ -26,7 +26,7 @@ import AppKit
 
 
 
-final class ProjectMenuController: MenuController {
+class ProjectMenuController: MenuController {
 	let	build	=	NSMenuItem(title: "Build", shortcut: Command+"B")
 	let	run		=	NSMenuItem(title: "Run", shortcut: Command+"R")
 	let	clean	=	NSMenuItem(title: "Clean", shortcut: Command+Shift+"K")

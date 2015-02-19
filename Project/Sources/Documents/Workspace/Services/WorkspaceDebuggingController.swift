@@ -16,10 +16,15 @@ import EditorDebuggingFeature
 
 
 
-
-
+///	Take care that there can be multiple sessions.
+///	You can check currently running sessions using `WorkspaceDebuggingController.numberOfSessions`.
+protocol WorkspaceDebuggingControllerDelegate: class {
+	func workspaceDebuggingControllerDidLaunchSession()
+	func workspaceDebuggingControllerDidTerminateSession()
+}
 
 final class WorkspaceDebuggingController {
+	weak var delegate:WorkspaceDebuggingControllerDelegate?
 	weak var executionTreeViewController:ExecutionStateTreeViewController?
 	weak var variableTreeViewController:VariableTreeViewController?
 	
@@ -42,32 +47,33 @@ final class WorkspaceDebuggingController {
 			return	_menu
 		}
 	}
+	
+	var numberOfSessions:Int {
+		get {
+			return	_sessions.count
+		}
+	}
+	
 	func launchSessionWithExecutableURL(u:NSURL)  {
-		println(_dbg.allTargets)
 		let	t	=	_dbg.createTargetWithFilename(u.path!)
 		let	s	=	Session(owner: self, target: t)
 		let	b	=	s._target.createBreakpointByName("main")
 		b.enabled	=	true
 		_sessions.append(s)
+		
+		self.delegate?.workspaceDebuggingControllerDidLaunchSession()
+		_menu.reconfigureAvailabilitiesForDebugger(_dbg)
 	}
 	
-//	///	Release session object immediately if you're retaining it.
-//	///	It will be invalidated after calling this.
-//	func terminateSession(sessionID:SessionID) {
-//		session._dispose()
-//		_dbg.deleteTarget(session._target)
-//		_sessions	=	_sessions.filter { s in s !== session }
-//	}
 	func terminateAllSessions() {
 		for s in _sessions {
 			s._dispose()
 			_dbg.deleteTarget(s._target)
 		}
 		_sessions	=	[]
-//		let	ss1	=	_sessions
-//		for s in ss1 {
-//			terminateSession(s)
-//		}
+		
+		self.delegate?.workspaceDebuggingControllerDidTerminateSession()
+		_menu.reconfigureAvailabilitiesForDebugger(_dbg)
 	}
 	
 	////
@@ -131,7 +137,7 @@ extension WorkspaceDebuggingController.Session: ListenerControllerDelegate {
 			}
 		}
 		
-		owner._menu.reconfigureInteractivityForDebugger(owner._dbg)
+		owner._menu.reconfigureAvailabilitiesForDebugger(owner._dbg)
 	}
 }
 
@@ -159,17 +165,17 @@ extension WorkspaceDebuggingController.Session: ListenerControllerDelegate {
 
 
 private extension DebugMenuController {
-	func reconfigureInteractivityForDebugger(debugger:LLDBDebugger) {
+	func reconfigureAvailabilitiesForDebugger(debugger:LLDBDebugger) {
 		stepOver.enabled	=	false
 		stepInto.enabled	=	false
 		stepOut.enabled		=	false
 		
 		for t in debugger.allTargets {
 			switch t.process.state {
-			case LLDBStateType.Attaching:	NOOP()
-			case LLDBStateType.Launching:	NOOP()
-			case LLDBStateType.Stepping:	NOOP()
-			case LLDBStateType.Running:		NOOP()
+			case LLDBStateType.Attaching:	break
+			case LLDBStateType.Launching:	break
+			case LLDBStateType.Stepping:	break
+			case LLDBStateType.Running:		break
 				
 			default:
 				stepOver.enabled	=	true
@@ -205,7 +211,7 @@ private extension DebugMenuController {
 	}
 }
 
-private let NOOP = {} as ()->()
+
 
 
 

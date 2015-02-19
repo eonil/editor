@@ -51,11 +51,12 @@ extension MenuController {
 }
 
 extension NSMenuItem {
-	convenience init(title:String, shortcut:MenuShortcutKeyCombination) {
+	convenience init(title:String, shortcut:MenuShortcutKeyCombination, availability:Bool = false) {
 		self.init()
 		self.title						=	title
 		self.keyEquivalent				=	shortcut.plainTextKeys
 		self.keyEquivalentModifierMask	=	shortcut.modifierMask
+		self.enabled					=	availability
 	}
 }
 

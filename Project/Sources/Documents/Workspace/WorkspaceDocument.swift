@@ -20,7 +20,7 @@ import EditorDebuggingFeature
 ///
 ///	Manages interaction with Cocoa document system.
 final class WorkspaceDocument: NSDocument {
-	let	mainWindowController		=	PlainFileFolderWindowController()
+	let	mainWindowController	=	PlainFileFolderWindowController()
 	
 	override init() {
 		super.init()
@@ -33,6 +33,7 @@ final class WorkspaceDocument: NSDocument {
 		
 		_debuggingController.executionTreeViewController			=	mainWindowController.executionStateTreeViewController
 //		_debuggingController.variableTreeViewController				=	mainWindowController.var
+		_debuggingController.delegate								=	_subcomponentController
 		
 		_projectMenuController.reconfigureForWorkspaceDocument(self)
 	}
@@ -70,7 +71,6 @@ final class WorkspaceDocument: NSDocument {
 	private let	_subcomponentController	=	SubcomponentController()
 	private let	_debuggingController	=	WorkspaceDebuggingController()
 	private let	_commandQueue			=	WorkspaceCommandExecutionController()
-	
 	private let _projectMenuController	=	ProjectMenuController()
 	
 	private var rootLocation:FileLocation {
@@ -252,18 +252,26 @@ extension WorkspaceDocument {
 
 private extension ProjectMenuController {
 	func reconfigureForWorkspaceDocument(owner:WorkspaceDocument) {
-		build.reaction	=	{ [unowned owner] in
+		build.reaction	=	{ [unowned self, unowned owner] in
 			owner.buildWorkspace()
 		}
-		run.reaction	=	{ [unowned owner] in
+		run.reaction	=	{ [unowned self, unowned owner] in
 			owner.runWorkspace()
 		}
-		clean.reaction	=	{ [unowned owner] in
+		clean.reaction	=	{ [unowned self, unowned owner] in
 			owner.cleanWorkspace()
 		}
-		stop.reaction	=	{ [unowned owner] in
+		stop.reaction	=	{ [unowned self, unowned owner] in
 			owner.stopWorkspace()
 		}
+
+		reconfigureAvailabilitiesForOwner(owner)
+	}
+	func reconfigureAvailabilitiesForOwner(owner:WorkspaceDocument) {
+		build.enabled	=	owner._debuggingController.numberOfSessions == 0
+		run.enabled		=	owner._debuggingController.numberOfSessions == 0
+		clean.enabled	=	owner._debuggingController.numberOfSessions == 0
+		stop.enabled	=	owner._debuggingController.numberOfSessions > 0
 	}
 }
 
@@ -542,6 +550,26 @@ extension SubcomponentController: IssueListingViewControllerDelegate {
 	}
 }
 
+
+
+///	MARK:
+///	MARK:	WorkspaceDebuggingControllerDelegate
+
+extension SubcomponentController: WorkspaceDebuggingControllerDelegate {
+	func workspaceDebuggingControllerDidLaunchSession() {
+//		func aa(a:()->()) {
+//			
+//		}
+//		aa()
+//		{
+//			
+//		}
+		owner._projectMenuController.reconfigureAvailabilitiesForOwner(owner)
+	}
+	func workspaceDebuggingControllerDidTerminateSession() {
+		owner._projectMenuController.reconfigureAvailabilitiesForOwner(owner)
+	}
+}
 
 
 
