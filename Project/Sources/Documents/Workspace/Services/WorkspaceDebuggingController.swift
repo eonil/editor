@@ -1,8 +1,8 @@
 //
-//  DebuggingController.swift
+//  WorkspaceWorkspaceDebuggingController.swift
 //  Editor
 //
-//  Created by Hoon H. on 2015/02/19.
+//  Created by Hoon H. on 2015/02/20.
 //  Copyright (c) 2015 Eonil. All rights reserved.
 //
 
@@ -19,7 +19,7 @@ import EditorDebuggingFeature
 
 
 
-final class DebuggingController {
+final class WorkspaceDebuggingController {
 	weak var executionTreeViewController:ExecutionStateTreeViewController?
 	weak var variableTreeViewController:VariableTreeViewController?
 	
@@ -93,7 +93,7 @@ final class DebuggingController {
 	private let	_menu		=	DebugMenuController()
 }
 
-extension DebuggingController {
+extension WorkspaceDebuggingController {
 	///	Provides a menu that can be used when no document is opened and selected.
 	static var documentlessMenuController:MenuController {
 		get {
@@ -102,10 +102,10 @@ extension DebuggingController {
 	}
 }
 
-extension DebuggingController {
+extension WorkspaceDebuggingController {
 	final class Session {
-		unowned var owner:DebuggingController
-		init(owner:DebuggingController, target:LLDBTarget) {
+		unowned var owner:WorkspaceDebuggingController
+		init(owner:WorkspaceDebuggingController, target:LLDBTarget) {
 			self.owner	=	owner
 			_target		=	target
 			_listenerController				=	ListenerController()
@@ -124,7 +124,7 @@ extension DebuggingController {
 	}
 }
 
-extension DebuggingController.Session: ListenerControllerDelegate {
+extension WorkspaceDebuggingController.Session: ListenerControllerDelegate {
 	func listenerController(_: ListenerController, IsProcessingEvent e: LLDBEvent) {
 		let	p	=	_target.process
 		
@@ -170,7 +170,7 @@ extension DebuggingController.Session: ListenerControllerDelegate {
 
 
 private final class DebugMenuController: MenuController {
-	weak var owner:DebuggingController? {
+	weak var owner:WorkspaceDebuggingController? {
 		didSet {
 			self.refreshStates()
 		}

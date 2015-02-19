@@ -12,7 +12,7 @@ import EditorCommon
 @NSApplicationMain
 class ApplicationController: NSObject, NSApplicationDelegate {
 	
-	let	documentlessDebugMenuController	=	DebuggingController.documentlessMenuController
+	let	documentlessDebugMenuController	=	WorkspaceDebuggingController.documentlessMenuController
 	
 	@IBOutlet
 	var debugMenu:NSMenuItem?

@@ -17,7 +17,7 @@ import AppKit
 ///
 ///		Command+"A"
 ///
-///	See `DebuggingController.swift` file for full usage.
+///	See `WorkspaceDebuggingController.swift` file for full usage.
 struct MenuShortcutKeyCombination {
 	var	plainTextKeys:String
 	var	commandModifier:Bool
