@@ -14,6 +14,7 @@
         <customObject id="Voe-Tx-rLC" customClass="ApplicationController" customModule="Editor" customModuleProvider="target">
             <connections>
                 <outlet property="debugMenu" destination="aUF-d1-5bR" id="CVr-PZ-hDb"/>
+                <outlet property="projectMenu" destination="qf2-8g-9sa" id="du3-3H-MpN"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -656,31 +657,7 @@ CA
                 </menuItem>
                 <menuItem title="Project" id="qf2-8g-9sa">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="Project" id="qyF-e2-LzS">
-                        <items>
-                            <menuItem title="Build" keyEquivalent="b" id="fx6-It-gLS">
-                                <connections>
-                                    <action selector="buildWorkspace:" target="-1" id="Alt-13-vY4"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Run" keyEquivalent="r" id="CX0-us-yto">
-                                <connections>
-                                    <action selector="runWorkspace:" target="-1" id="msk-aM-RbW"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Clean" keyEquivalent="K" id="Lsg-7A-Mry">
-                                <connections>
-                                    <action selector="cleanWorkspace:" target="-1" id="Tac-UF-3FI"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="Svr-Q9-ccq"/>
-                            <menuItem title="Stop" keyEquivalent="." id="QAW-iu-ay1">
-                                <connections>
-                                    <action selector="stopWorkspace:" target="-1" id="rTK-Kd-e3t"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
+                    <menu key="submenu" title="Project" id="qyF-e2-LzS"/>
                 </menuItem>
                 <menuItem title="Debug" id="aUF-d1-5bR">
                     <modifierMask key="keyEquivalentModifierMask"/>

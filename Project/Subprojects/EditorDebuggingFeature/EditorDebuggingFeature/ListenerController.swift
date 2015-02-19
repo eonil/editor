@@ -16,7 +16,7 @@ public protocol ListenerControllerDelegate: class {
 	///	explicitly.
 	///
 	///	This will be called in main thread.
-	func listenerController(ListenerController, IsProcessingEvent:LLDBEvent)
+	func listenerControllerIsProcessingEvent(e:LLDBEvent)
 }
 
 ///	Manages event handling in separated thread and route them back to main thread.
@@ -26,37 +26,39 @@ public protocol ListenerControllerDelegate: class {
 ///	This object will crash if you have no delegate set when an event fires.
 public final class ListenerController {
 	public weak var delegate:ListenerControllerDelegate? {
-		willSet {
-			precondition(delegate == nil, "Set `nil` to `delegate` first before setting a new delegate to express your intention clearly.")
+		get {
+			return	_core.delegate
+		}
+		set(v) {
+			_core.delegate	=	v
 		}
 	}
 	
 	public init() {
-		_lis	=	LLDBListener(name: "Eonil/Editor LLDB Main Listener")
-		_done	=	false
+		_core	=	Core()
 	}
 	deinit {
-		assert(_done == true, "This `ListenerController`'s listening thread has not been marked as finished. Call `stopListening` first.")
 	}
 	
 	public var listener:LLDBListener {
 		get {
-			return	_lis
+			return	_core.listener
 		}
 	}
 	public func startListening() {
 		assert(self.delegate != nil)
 		
+		let	core	=	_core
 		dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) { [unowned self] in
 			var	cont	=	true
 			while cont {
 				let	WAIT_SECONDS	=	1
-				if let e = self._lis.waitForEvent(WAIT_SECONDS) {
+				if let e = core.listener.waitForEvent(WAIT_SECONDS) {
 					///	Wait for main thread processing done.
 					dispatch_sync(dispatch_get_main_queue()) { [unowned self] in
 						println(e)
-						self.delegate!.listenerController(self, IsProcessingEvent: e)
-						cont	=	self._done == false
+						core.delegate!.listenerControllerIsProcessingEvent(e)
+						cont	=	core.done == false
 						()
 					}
 				}
@@ -67,12 +69,29 @@ public final class ListenerController {
 		}
 	}
 	public func stopListening() {
-		_done	=	true
+		_core.done	=	true
 	}
 	
 	////
 	
-	private let _lis:LLDBListener
-	private var	_done:Bool
+	private let	_core:Core
+//	private var	_done:Bool
+}
+
+private final class Core {
+	weak var delegate:ListenerControllerDelegate? {
+		willSet {
+			precondition(delegate == nil, "Set `nil` to `delegate` first before setting a new delegate to express your intention clearly.")
+		}
+	}
+	
+	let listener	=	LLDBListener(name: "Eonil/Editor LLDB Main Listener")
+	var	done		=	false
+	
+	init() {
+	}
+	deinit {
+		assert(done == true, "This `ListenerController`'s listening thread has not been marked as finished. Call `stopListening` first.")
+	}
 }
 

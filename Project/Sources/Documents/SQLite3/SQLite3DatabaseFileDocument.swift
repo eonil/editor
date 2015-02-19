@@ -16,7 +16,7 @@ import AppKit
 ///	of SQLite3.
 class SQLite3DatabaseFileDocument : NSDocument {
 	let	editingWindowController	=	SQLite3DatabaseEditingWindowController()
-	
+
 	override func makeWindowControllers() {
 		super.makeWindowControllers()
 		editingWindowController.hostingDocument	=	self

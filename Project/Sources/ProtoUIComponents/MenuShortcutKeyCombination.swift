@@ -50,3 +50,18 @@ extension MenuController {
 	static let Shift		=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, alternateModifier: false, shiftModifier: true)
 }
 
+extension NSMenuItem {
+	convenience init(title:String, shortcut:MenuShortcutKeyCombination) {
+		self.init()
+		self.title						=	title
+		self.keyEquivalent				=	shortcut.plainTextKeys
+		self.keyEquivalentModifierMask	=	shortcut.modifierMask
+	}
+}
+
+
+
+
+
+
+

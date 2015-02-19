@@ -63,13 +63,10 @@ LLDBOBJECT_INIT_IMPL(lldb::SBProcess)
 
 - (NSUInteger)numberOfThreads
 {
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
-	
 	return	_raw.GetNumThreads();
 }
 - (LLDBThread *)threadAtIndex:(NSUInteger)index
 {
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	UNIVERSE_DEBUG_ASSERT(index < [self numberOfThreads]);
 	
 	////
@@ -104,19 +101,19 @@ LLDBOBJECT_INIT_IMPL(lldb::SBProcess)
 
 - (LLDBStateType)state
 {
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+//	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	
 	return	fromCPP(_raw.GetState());
 }
 - (int)exitStatus
 {
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+//	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	
 	return	_raw.GetExitStatus();
 }
 - (NSString *)exitDescription
 {
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+//	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	
 	return	fromC(_raw.GetExitDescription());
 }
@@ -128,7 +125,7 @@ LLDBOBJECT_INIT_IMPL(lldb::SBProcess)
 
 - (LLDBProcessIDType)processID
 {
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+//	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
 	
 	return	_raw.GetProcessID();
 }
@@ -165,20 +162,14 @@ LLDBOBJECT_INIT_IMPL(lldb::SBProcess)
 }
 - (LLDBError *)continue
 {
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
-	
 	return	[[LLDBError alloc] initWithCPPObject:_raw.Continue()];
 }
 - (LLDBError *)stop
 {
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
-	
 	return	[[LLDBError alloc] initWithCPPObject:_raw.Stop()];
 }
 - (LLDBError *)kill
 {
-	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
-	
 	return	[[LLDBError alloc] initWithCPPObject:_raw.Kill()];
 }
 - (LLDBError *)detach

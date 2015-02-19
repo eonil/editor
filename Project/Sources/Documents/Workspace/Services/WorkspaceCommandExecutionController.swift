@@ -146,11 +146,12 @@ final class CargoCommand: WorkspaceCommand, CargoExecutionControllerDelegate {
 
 
 
-final class InitiateDebuggingSessionCommand: WorkspaceCommand {
+final class LaunchDebuggingSessionCommand: WorkspaceCommand {
 	weak var delegate:WorkspaceCommandDelegate?
 	
-	let	debuggingController:WorkspaceDebuggingController
+	unowned let	debuggingController:WorkspaceDebuggingController
 	let	workspaceRootURL:NSURL
+	
 	init(debuggingController:WorkspaceDebuggingController, workspaceRootURL:NSURL) {
 		self.debuggingController	=	debuggingController
 		self.workspaceRootURL		=	workspaceRootURL
@@ -159,7 +160,7 @@ final class InitiateDebuggingSessionCommand: WorkspaceCommand {
 	}
 	func launch() {
 		let	f	=	workspaceRootURL.URLByAppendingPathComponent("target").URLByAppendingPathComponent("rp7")
-		debuggingController.initiateSessionWithExecutableURL(f)
+		debuggingController.launchSessionWithExecutableURL(f)
 		
 		self.delegate!.CommandWillStart(self)
 		self.delegate!.CommandDidFinish(self)

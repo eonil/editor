@@ -34,13 +34,20 @@ final class WorkspaceDocument: NSDocument {
 		_debuggingController.executionTreeViewController			=	mainWindowController.executionStateTreeViewController
 //		_debuggingController.variableTreeViewController				=	mainWindowController.var
 		
+		_projectMenuController.reconfigureForWorkspaceDocument(self)
 	}
 	
+	var projectMenuController:MenuController {
+		get {
+			return	_projectMenuController
+		}
+	}
 	var debugMenuController:MenuController {
 		get {
 			return	_debuggingController.menuController
 		}
 	}
+	
 	
 	override func makeWindowControllers() {
 		//	Turning off the undo will effectively make autosave to be disabled.
@@ -64,6 +71,8 @@ final class WorkspaceDocument: NSDocument {
 	private let	_debuggingController	=	WorkspaceDebuggingController()
 	private let	_commandQueue			=	WorkspaceCommandExecutionController()
 	
+	private let _projectMenuController	=	ProjectMenuController()
+	
 	private var rootLocation:FileLocation {
 		get {
 			return	_rootLocation!			//	This cannot be `nil` if this document has been configured properly.
@@ -71,6 +80,13 @@ final class WorkspaceDocument: NSDocument {
 	}
 	
 }
+
+
+
+
+
+
+
 
 
 
@@ -232,7 +248,71 @@ extension WorkspaceDocument {
 
 
 ///	MARK:
-///	MARK:	Menu handling via First Responder chain
+///	MARK:	Dynamic Menu
+
+private extension ProjectMenuController {
+	func reconfigureForWorkspaceDocument(owner:WorkspaceDocument) {
+		build.reaction	=	{ [unowned owner] in
+			owner.buildWorkspace()
+		}
+		run.reaction	=	{ [unowned owner] in
+			owner.runWorkspace()
+		}
+		clean.reaction	=	{ [unowned owner] in
+			owner.cleanWorkspace()
+		}
+		stop.reaction	=	{ [unowned owner] in
+			owner.stopWorkspace()
+		}
+	}
+}
+
+private extension WorkspaceDocument {
+	func buildWorkspace() {
+		mainWindowController.issueListingViewController.reset()
+		
+		_commandQueue.cancelAllCommandExecution()
+		_commandQueue.queue(CargoCommand(
+			workspaceRootURL: rootLocation.stringExpression,
+			subcommand: CargoCommand.Subcommand.Build))
+		_commandQueue.runAllCommandExecution()
+	}
+	
+	///	Build and run default project current workspace.
+	///	By default, this runs `cargo` on workspace root.
+	///	Customisation will be provided later.
+	func runWorkspace() {
+		mainWindowController.issueListingViewController.reset()
+		
+		_commandQueue.cancelAllCommandExecution()
+		_commandQueue.queue(CargoCommand(
+			workspaceRootURL: rootLocation.stringExpression,
+			subcommand: CargoCommand.Subcommand.Build))
+		_commandQueue.queue(LaunchDebuggingSessionCommand(
+			debuggingController: _debuggingController,
+			workspaceRootURL: rootLocation.stringExpression))
+		_commandQueue.runAllCommandExecution()
+	}
+	func cleanWorkspace() {
+		
+		mainWindowController.issueListingViewController.reset()
+		
+		_commandQueue.cancelAllCommandExecution()
+		_commandQueue.queue(CargoCommand(
+			workspaceRootURL: rootLocation.stringExpression,
+			subcommand: CargoCommand.Subcommand.Clean))
+		_commandQueue.runAllCommandExecution()
+	}
+	func stopWorkspace() {
+		_debuggingController.terminateAllSessions()
+		_commandQueue.cancelAllCommandExecution()
+		
+		mainWindowController.executionStateTreeViewController.snapshot	=	nil
+	}
+}
+
+///	MARK:
+///	MARK:	Static menu handling via First Responder chain
 
 extension WorkspaceDocument {
 	
@@ -259,52 +339,7 @@ extension WorkspaceDocument {
 	func performClose(AnyObject?) {
 		self.close()
 	}
-	
-	@objc @IBAction
-	func buildWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.reset()
-		
-		_commandQueue.cancelAllCommandExecution()
-		_commandQueue.queue(CargoCommand(
-			workspaceRootURL: rootLocation.stringExpression,
-			subcommand: CargoCommand.Subcommand.Build))
-		_commandQueue.runAllCommandExecution()
-	}
 
-	///	Build and run default project current workspace. 
-	///	By default, this runs `cargo` on workspace root.
-	///	Customisation will be provided later.
-	@objc @IBAction
-	func runWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.reset()
-
-		_commandQueue.cancelAllCommandExecution()
-		_commandQueue.queue(CargoCommand(
-			workspaceRootURL: rootLocation.stringExpression,
-			subcommand: CargoCommand.Subcommand.Build))
-		_commandQueue.queue(InitiateDebuggingSessionCommand(
-			debuggingController: _debuggingController,
-			workspaceRootURL: rootLocation.stringExpression))
-		_commandQueue.runAllCommandExecution()
-	}
-	
-	@objc @IBAction
-	func cleanWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.reset()
-		
-		_commandQueue.cancelAllCommandExecution()
-		_commandQueue.queue(CargoCommand(
-			workspaceRootURL: rootLocation.stringExpression,
-			subcommand: CargoCommand.Subcommand.Clean))
-		_commandQueue.runAllCommandExecution()
-	}
-
-	@objc @IBAction
-	func stopWorkspace(AnyObject?) {
-		mainWindowController.issueListingViewController.reset()
-		
-		_commandQueue.cancelAllCommandExecution()
-	}
 }
 
 

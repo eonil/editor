@@ -78,7 +78,7 @@ can be added later if I feel need for it.
 
 Lessons from Trials
 ---------------------------
-I have tried to generate SWIG-like C API from C++ source code, but I realised it requires 
+I have tried SWIG-like C API generation from C++ source code, but I realised it requires 
 too much work and Swift compiler is not stable enough yet. I don't have such time. DO NOT 
 TRY THIS AT HOME EVER AGAIN unless you have enough idle time. (I wasted about 3 weeks and
 finally abandoned the approach --- failure)
@@ -94,22 +94,23 @@ Wrapping Design Choices
 -----------------------
 -	Invalid objects will also be wrapped and returned. No `nil` will be returned regardless of
 	`IsValid` state. Anyway, it doesn't mean you can use them freely. Calling methods on invalid
-	objects are usually not invalid and causes crash. (asserted)
+	objects care not expected to work properly.
 
 	This is because;
 	
 	-	LLDB seems treating invalid state as a part of regular state.
+	-	many objects in invalid state (where `IsValid == false`) still provides useful informations.
 	-	any existing valid object can become invalid anytime.
-	
--	Equality and comparison operators will be provided if original C++ classes provides corresponding 
+
+-	Equality and comparison operators can be provided if original C++ classes provide corresponding 
 	operators.
 
 -	Identity of Objective-C object has no meaning. Do not rely on it. Generally, there's no generic 
 	identity check. Anyway some equality check provides identity check case by case.
 
--	Use C numeric types as is as much as possible. Convert them in Swift-side extensions where needed.
-	If the numeric type is `typedef`ed inside of C++ namespaces/classes, then make a new C `typedef`
-	manually, and `static_assert` for type matching.
+-	Use C numeric types as is as much as possible in core API. Convert them in Swift-side extensions 
+	where needed. If the numeric type is `typedef`ed inside of C++ namespaces/classes, then make a 
+	new C `typedef` manually, and `static_assert` for type matching.
 
 -	Strings will always be passed by copying into a new `NSString` by default. Raw C-string pointers
 	will not be exposed unless required.

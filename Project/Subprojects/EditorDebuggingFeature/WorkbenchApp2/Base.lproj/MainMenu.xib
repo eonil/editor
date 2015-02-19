@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7515.2" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7515.2"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -618,11 +618,6 @@
                                     <action selector="performContinue:" target="Voe-Tx-rLC" id="2IH-In-4gO"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Stop" keyEquivalent="2" id="wVb-gL-HsT">
-                                <connections>
-                                    <action selector="performStop:" target="Voe-Tx-rLC" id="SBs-qK-iag"/>
-                                </connections>
-                            </menuItem>
                             <menuItem title="Step Into" keyEquivalent="3" id="Rfk-oe-5ex">
                                 <connections>
                                     <action selector="performStepInto:" target="Voe-Tx-rLC" id="1JW-lN-fRP"/>
@@ -639,6 +634,32 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="ujb-Or-hw6"/>
+                            <menuItem title="Launch Target" id="fyC-8Q-tC4">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="performMenuLaunchTarget:" target="Voe-Tx-rLC" id="fA1-Pz-Pr8"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Stop Process" id="eGJ-0V-asw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="performMenuStopProcess:" target="Voe-Tx-rLC" id="b2d-n5-uBy"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Kill Process" keyEquivalent="." id="nir-aK-LH0">
+                                <connections>
+                                    <action selector="performMenuKillProcess:" target="Voe-Tx-rLC" id="mC3-HV-QGw"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete Target" id="07B-EH-6zY">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                <connections>
+                                    <action selector="performMenuDeleteTarget:" target="Voe-Tx-rLC" id="CLh-aO-wSk"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="4p0-qX-bym"/>
                             <menuItem title="Show Toolbar" keyEquivalent="t" id="ZH9-FV-3K0">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
@@ -715,5 +736,10 @@
             </view>
             <point key="canvasLocation" x="202.5" y="557"/>
         </window>
+        <menuItem title="Delete Target" keyEquivalent="6" id="NGI-nE-V3N">
+            <connections>
+                <action selector="performMenuDeleteTarget:" target="Voe-Tx-rLC" id="s5N-LM-UTD"/>
+            </connections>
+        </menuItem>
     </objects>
 </document>

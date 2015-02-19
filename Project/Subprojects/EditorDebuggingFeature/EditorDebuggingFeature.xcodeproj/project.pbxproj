@@ -169,8 +169,6 @@
 		4502720B1A7F577D008795CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4502720D1A7F577D008795CC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		450272101A7F577D008795CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		4502721B1A7F577E008795CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4502721C1A7F577E008795CC /* WorkbenchApp2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkbenchApp2Tests.swift; sourceTree = "<group>"; };
 		455075AD1A8D07E1003FCD76 /* ExecutionStateTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionStateTreeViewController.swift; sourceTree = "<group>"; };
 		455075AE1A8D07E1003FCD76 /* ListenerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListenerController.swift; sourceTree = "<group>"; };
 		455075AF1A8D07E1003FCD76 /* VariableTreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTreeViewController.swift; sourceTree = "<group>"; };
@@ -264,23 +262,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		450272191A7F577E008795CC /* WorkbenchApp2Tests */ = {
-			isa = PBXGroup;
-			children = (
-				4502721C1A7F577E008795CC /* WorkbenchApp2Tests.swift */,
-				4502721A1A7F577E008795CC /* Supporting Files */,
-			);
-			path = WorkbenchApp2Tests;
-			sourceTree = "<group>";
-		};
-		4502721A1A7F577E008795CC /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				4502721B1A7F577E008795CC /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		459E5D301A6CF42E00D4F391 /* GDBRSP */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,7 +322,6 @@
 				45EF0BFE1A6C961C00215F12 /* WorkbenchAppTests */,
 				45EF0C121A6C965600215F12 /* Sample1 */,
 				450272081A7F577D008795CC /* WorkbenchApp2 */,
-				450272191A7F577E008795CC /* WorkbenchApp2Tests */,
 				45EF0B8A1A6C942600215F12 /* Products */,
 			);
 			sourceTree = "<group>";

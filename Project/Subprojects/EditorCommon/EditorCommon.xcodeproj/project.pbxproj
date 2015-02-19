@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4522533B1A96832A00735794 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522533A1A96832A00735794 /* Operators.swift */; };
 		452CFD311A8C7CC70050BE72 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD2D1A8C7CC70050BE72 /* Debug.swift */; };
 		452CFD321A8C7CC70050BE72 /* Dialogues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD2E1A8C7CC70050BE72 /* Dialogues.swift */; };
 		452CFD331A8C7CC70050BE72 /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD2F1A8C7CC70050BE72 /* FileUtility.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4522533A1A96832A00735794 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		452CFC661A8C7A6A0050BE72 /* EditorCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		452CFC6A1A8C7A6A0050BE72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		452CFD2D1A8C7CC70050BE72 /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				452CFD2E1A8C7CC70050BE72 /* Dialogues.swift */,
 				452CFD2F1A8C7CC70050BE72 /* FileUtility.swift */,
 				452CFD301A8C7CC70050BE72 /* Resolution.swift */,
+				4522533A1A96832A00735794 /* Operators.swift */,
 				452CFD421A8C7CDA0050BE72 /* UtilityAlgorithms */,
 				452CFD351A8C7CDA0050BE72 /* MonolithCandidates */,
 				452CFD3E1A8C7CDA0050BE72 /* TypeExtensions */,
@@ -288,6 +291,7 @@
 				452CFD461A8C7CDA0050BE72 /* LinkList.swift in Sources */,
 				452CFD4F1A8C7CDA0050BE72 /* SwiftLevelExtensions.swift in Sources */,
 				452CFD491A8C7CDA0050BE72 /* TargetActionFunctionBox.swift in Sources */,
+				4522533B1A96832A00735794 /* Operators.swift in Sources */,
 				452CFD311A8C7CC70050BE72 /* Debug.swift in Sources */,
 				452CFD4C1A8C7CDA0050BE72 /* XML.Test.swift in Sources */,
 				452CFD4A1A8C7CDA0050BE72 /* XML.Navigator.swift in Sources */,

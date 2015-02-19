@@ -46,8 +46,11 @@ Object Tree Structure
 
 
 
+Menu Handling
+-------------
 
-
+-	By default, use Menu NIB and first-responder chain for static items.
+-	If you need dynamic menu, use `MenuController` pattern. See `WorkspaceDebuggingController`'s internal menu implementation for example.
 
 
 

@@ -112,6 +112,7 @@
 		45F611301A963B4D0018D5A3 /* WorkspaceBuildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6112F1A963B4D0018D5A3 /* WorkspaceBuildController.swift */; };
 		45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */; };
 		45F6C1151A119726005D8EEA /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */; };
+		45FD53681A967D0000BE2A2D /* MenuControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FD53671A967D0000BE2A2D /* MenuControllers.swift */; };
 		45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE101C1A12994300834358 /* FileTreeViewController2.swift */; };
 /* End PBXBuildFile section */
 
@@ -732,6 +733,7 @@
 		45F6112F1A963B4D0018D5A3 /* WorkspaceBuildController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceBuildController.swift; sourceTree = "<group>"; };
 		45F6C1121A1195A5005D8EEA /* CommandConsoleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandConsoleViewController.swift; sourceTree = "<group>"; };
 		45F6C1141A119726005D8EEA /* VisualEffectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectViewController.swift; sourceTree = "<group>"; };
+		45FD53671A967D0000BE2A2D /* MenuControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuControllers.swift; sourceTree = "<group>"; };
 		45FE101C1A12994300834358 /* FileTreeViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1207,6 +1209,7 @@
 			isa = PBXGroup;
 			children = (
 				45204C7F1A63300900929A17 /* ApplicationController.swift */,
+				45FD53671A967D0000BE2A2D /* MenuControllers.swift */,
 				45BBB0EB1A1022A10055232E /* Images.xcassets */,
 				45BBB0ED1A1022A10055232E /* MainMenu.xib */,
 				4514A76B1A11C7CB00F25ED8 /* Documents */,
@@ -1952,6 +1955,7 @@
 				45F6112C1A96390B0018D5A3 /* WorkspaceCommandExecutionController.swift in Sources */,
 				45204C801A63300900929A17 /* ApplicationController.swift in Sources */,
 				457341011A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift in Sources */,
+				45FD53681A967D0000BE2A2D /* MenuControllers.swift in Sources */,
 				452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */,
 				451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */,
 				45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */,

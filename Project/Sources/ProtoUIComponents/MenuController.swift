@@ -15,6 +15,7 @@ class MenuController {
 	}
 	
 	init(_ menu:NSMenu) {
+		assert(menu.autoenablesItems == false, "You must set `autoenablesItems` to `false`.")
 		_menu	=	menu
 		
 //		NSNotificationCenter.defaultCenter().addObserverForName(NSMenuDidSendActionNotification, object: nil, queue: nil) { [unowned self] (n:NSNotification!) -> Void in

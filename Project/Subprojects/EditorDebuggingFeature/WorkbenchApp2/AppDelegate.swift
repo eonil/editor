@@ -38,35 +38,12 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegat
 		localVariableWindow.contentView	=	sv2
 		
 		
-		dbg.async	=	true
-		
-		let	f	=	NSBundle.mainBundle().bundlePath.stringByDeletingLastPathComponent.stringByAppendingPathComponent("Sample1")
-		assert(NSFileManager.defaultManager().fileExistsAtPath(f))
-	
-		let	t	=	dbg.createTargetWithFilename(f, andArchname: LLDBArchDefault)
-		let	b	=	t.createBreakpointByName("main")
-		b.enabled	=	true
-		
-		let	p	=	t.launchProcessSimplyWithWorkingDirectory(f.stringByDeletingLastPathComponent)
-		precondition(p.state == LLDBStateType.Stopped)
-		
-//		println(t.triple())
-//		println(p.state.rawValue)
-//		println(p.allThreads[0].allFrames[0]?.lineEntry)
-//		println(p.allThreads[0].allFrames[0]?.functionName)
-//		
-////		tv1.debugger	=	dbg
-////		if let f = dbg.allTargets.first?.process.allThreads.first?.allFrames.first {
-////			tv2.data	=	f
-////		}
-		
+		dbg.async		=	true
 		lcon.delegate	=	self
-		lcon.startListening()
-		p.addListener(lcon.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
 		
-		//	Do not call `continue` on asynchronous debugger.
-		//	It will stop at first if you call on it. Unexpected behavior.
-//		p.`continue`()
+		////
+		
+		self.performMenuLaunchTarget(self)
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
@@ -104,25 +81,81 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegat
 		let	t	=	dbg.allTargets.first!
 		t.process.allThreads.first!.stepOut()
 	}
+	
+	@IBAction
+	func performMenuLaunchTarget(AnyObject?) {
+		let	f	=	NSBundle.mainBundle().bundlePath.stringByDeletingLastPathComponent.stringByAppendingPathComponent("Sample1")
+		assert(NSFileManager.defaultManager().fileExistsAtPath(f))
+		
+//		let	t	=	dbg.createTargetWithFilename(f, andArchname: LLDBArchDefault)
+		let	t	=	dbg.createTargetWithFilename(f)
+		let	b	=	t.createBreakpointByName("main")
+		b.enabled	=	true
+		
+		let	p	=	t.launchProcessSimplyWithWorkingDirectory(f.stringByDeletingLastPathComponent)
+		precondition(p.state == LLDBStateType.Stopped)
+		
+//		println(t.triple())
+//		println(p.state.rawValue)
+//		println(p.allThreads[0].allFrames[0]?.lineEntry)
+//		println(p.allThreads[0].allFrames[0]?.functionName)
+//		
+////		tv1.debugger	=	dbg
+////		if let f = dbg.allTargets.first?.process.allThreads.first?.allFrames.first {
+////			tv2.data	=	f
+////		}
+		
+		lcon.startListening()
+		p.addListener(lcon.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
+		
+		//	Do not call `continue` on asynchronous debugger.
+		//	It will stop at first if you call on it. Unexpected behavior.
+//		p.`continue`()
+	}
+	
+	@IBAction
+	func performMenuStopProcess(AnyObject?) {
+		let	t	=	dbg.allTargets.first!
+		t.process.stop()
+	}
+	@IBAction
+	func performMenuKillProcess(AnyObject?) {
+		let	t	=	dbg.allTargets.first!
+		t.process.kill()
+	}
+	@IBAction
+	func performMenuDeleteTarget(AnyObject?) {
+		let	t	=	dbg.allTargets.first!
+		dbg.deleteTarget(t)
+		tv1.snapshot	=	nil
+		tv2.snapshot	=	nil
+	}
 
 	
-	func listenerController(c: ListenerController, IsProcessingEvent e: LLDBEvent) {
-		let	p	=	dbg.allTargets[0].process
-		
-		switch p.state {
-		case .Running:
-			tv1.snapshot	=	nil
+	func listenerControllerIsProcessingEvent(e: LLDBEvent) {
+		tv1.snapshot	=	ExecutionStateTreeViewController.Snapshot(dbg)
+		if let f = dbg?.allTargets.first?.process.allThreads.first?.allFrames.first, f1 = f {
+			tv2.snapshot	=	VariableTreeViewController.Snapshot(f1)
+		} else {
 			tv2.snapshot	=	nil
-			
-		default:
-			tv1.snapshot	=	ExecutionStateTreeViewController.Snapshot(dbg)
-			if let f = dbg?.allTargets[0].process.allThreads[0].allFrames.first, f1 = f {
-				tv2.snapshot	=	VariableTreeViewController.Snapshot(f1)
-			} else {
-				tv2.snapshot	=	nil
-			}
 		}
 		
+//		if let t = dbg.allTargets.first {
+//			let	p	=	t.process
+//			switch p.state {
+//			case .Running:
+//				tv1.snapshot	=	nil
+//				tv2.snapshot	=	nil
+//				
+//			default:
+//				tv1.snapshot	=	ExecutionStateTreeViewController.Snapshot(dbg)
+//				if let f = dbg?.allTargets[0].process.allThreads[0].allFrames.first, f1 = f {
+//					tv2.snapshot	=	VariableTreeViewController.Snapshot(f1)
+//				} else {
+//					tv2.snapshot	=	nil
+//				}
+//			}
+//		}
 	}
 	
 	func executionStateTreeViewControllerDidSelectFrame(frame: LLDBFrame) {

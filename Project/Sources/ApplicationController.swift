@@ -9,17 +9,50 @@
 import Cocoa
 import EditorCommon
 
+
+
+
+
+
+
+///
+///	Menu Management
+///	---------------
+///	Currently, menus are not well designed. I just use NIB and static binding for static menus.
+///	Dynamic menus will be managed by `MenuController` subclasses. See `MenuControllers.swift` for
+///	all available dynamic menus. Here're basic rules.
+///
+///	1.	Instantiate and use each dynamic menus with default state. Menu items usually no-op.
+///	2.	Swaps menu items by context. Queries current context when opening a menu.
+///	3.	Swap back to default state menu if there's no special context.
+
 @NSApplicationMain
 class ApplicationController: NSObject, NSApplicationDelegate {
 	
-	let	documentlessDebugMenuController	=	WorkspaceDebuggingController.documentlessMenuController
+	
+	@IBOutlet
+	var projectMenu:NSMenuItem?
 	
 	@IBOutlet
 	var debugMenu:NSMenuItem?
+	
+	var currentWorkspaceDocument:WorkspaceDocument? {
+		get {
+			if let w = NSApplication.sharedApplication().mainWindow {
+				if let d = (NSDocumentController.sharedDocumentController() as! NSDocumentController).documentForWindow(w) as! WorkspaceDocument? {
+					return	d
+				}
+			}
+			return	nil
+		}
+	}
 }
 
 
-
+private final class DefaultMenuControllerPalette {
+	static let	project	=	ProjectMenuController()
+	static let	debug	=	DebugMenuController()
+}
 
 
 
@@ -36,19 +69,19 @@ extension ApplicationController {
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 //		debugMenu!.submenu	=	MenuController.menuOfController(documentlessDebugMenuController)
 		
+		func rebind(slot:NSMenuItem, content:MenuController) {
+			slot.submenu	=	MenuController.menuOfController(content)
+		}
+		
 		NSNotificationCenter.defaultCenter().addObserverForName(
 			NSMenuDidBeginTrackingNotification,
 			object: NSApplication.sharedApplication().mainMenu!,
 			queue: nil) { (n:NSNotification!) -> Void in
 				let	docc	=	NSDocumentController.sharedDocumentController() as! NSDocumentController
-				let	menuc	=	{
-					if let ws = docc.currentDocument as? WorkspaceDocument {
-						return	ws.debugMenuController
-					} else {
-						return	self.documentlessDebugMenuController
-					}
-					}() as MenuController
-				self.debugMenu!.submenu	=	MenuController.menuOfController(menuc)
+				let	ws		=	docc.currentDocument as? WorkspaceDocument
+				
+				rebind(self.projectMenu!, ws?.projectMenuController ||| DefaultMenuControllerPalette.project)
+				rebind(self.debugMenu!, ws?.debugMenuController ||| DefaultMenuControllerPalette.debug)		
 		}
 	}
 	
@@ -152,7 +185,6 @@ extension ApplicationController {
 	func newDataFile(AnyObject?) {
 		
 	}
-	
 }
 
 
