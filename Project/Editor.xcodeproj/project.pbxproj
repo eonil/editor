@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4501472B1A948B95003C99EE /* WorkspaceMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4501472A1A948B95003C99EE /* WorkspaceMode.swift */; };
 		450A0E061A275F550026102D /* EonilDispatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450A0DE81A275EBD0026102D /* EonilDispatch.framework */; };
 		450A0E081A275F600026102D /* EonilDispatch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 450A0DEC1A275EBD0026102D /* EonilDispatch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4514A76D1A11C7D200F25ED8 /* RustProjectDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */; };
@@ -103,6 +102,8 @@
 		45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */; };
 		45D8D8F11A48E99200AE42C8 /* EditorCommonWindowController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D8F01A48E99200AE42C8 /* EditorCommonWindowController2.swift */; };
 		45D8D9021A48ED3600AE42C8 /* EditorCommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D9011A48ED3600AE42C8 /* EditorCommonViewController.swift */; };
+		45DA7EEF1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA7EEE1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift */; };
+		45DA7EF11A962F2B00C478F7 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA7EF01A962F2B00C478F7 /* MenuController.swift */; };
 		45DA95601A69DAE70091410B /* CodeEditingFileMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA955F1A69DAE70091410B /* CodeEditingFileMonitor.swift */; };
 		45DA95AD1A6A15E30091410B /* FileLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA95AC1A6A15E30091410B /* FileLocation.swift */; };
 		45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */; };
@@ -631,7 +632,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4501472A1A948B95003C99EE /* WorkspaceMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceMode.swift; sourceTree = "<group>"; };
 		450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Dispatch.xcodeproj; path = Submodules/Monolith.Swift/Dispatch/Dispatch.xcodeproj; sourceTree = "<group>"; };
 		4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectDocument.swift; sourceTree = "<group>"; };
 		4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustSourceCodeFileDocument.swift; sourceTree = "<group>"; };
@@ -721,6 +721,8 @@
 		45D8D8F01A48E99200AE42C8 /* EditorCommonWindowController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorCommonWindowController2.swift; sourceTree = "<group>"; };
 		45D8D9011A48ED3600AE42C8 /* EditorCommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorCommonViewController.swift; sourceTree = "<group>"; };
 		45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = EonilFileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
+		45DA7EEE1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuShortcutKeyCombination.swift; sourceTree = "<group>"; };
+		45DA7EF01A962F2B00C478F7 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		45DA955F1A69DAE70091410B /* CodeEditingFileMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditingFileMonitor.swift; sourceTree = "<group>"; };
 		45DA95AC1A6A15E30091410B /* FileLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLocation.swift; sourceTree = "<group>"; };
 		45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCRuntime.swift; sourceTree = "<group>"; };
@@ -806,6 +808,8 @@
 		451740DC1A102FA300861ECC /* ProtoUIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				45DA7EF01A962F2B00C478F7 /* MenuController.swift */,
+				45DA7EEE1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift */,
 				45D8D8F01A48E99200AE42C8 /* EditorCommonWindowController2.swift */,
 				45358A351A17FE8800AF5F7C /* EditorCommonWindowController.swift */,
 				45D8D9011A48ED3600AE42C8 /* EditorCommonViewController.swift */,
@@ -1084,7 +1088,6 @@
 			isa = PBXGroup;
 			children = (
 				457D5CE51A63287C008ECE6F /* WorkspaceDocument.swift */,
-				4501472A1A948B95003C99EE /* WorkspaceMode.swift */,
 				451A75E21A95B8270015AA42 /* MenuController.swift */,
 				4522AA901A95BB1400368518 /* MenuShortcutKeyCombination.swift */,
 				45DA95AC1A6A15E30091410B /* FileLocation.swift */,
@@ -1936,6 +1939,7 @@
 			files = (
 				457D5CE61A63287C008ECE6F /* WorkspaceDocument.swift in Sources */,
 				459E62461A65ED3300EDEEB9 /* WorkspaceWindowController.swift in Sources */,
+				45DA7EEF1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift in Sources */,
 				4522AA911A95BB1400368518 /* MenuShortcutKeyCombination.swift in Sources */,
 				4597F8271A113D100089FC66 /* LinkList.swift in Sources */,
 				45700EE11A11F65100415EB2 /* FileNode.swift in Sources */,
@@ -1958,6 +1962,7 @@
 				452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */,
 				451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */,
 				45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */,
+				45DA7EF11A962F2B00C478F7 /* MenuController.swift in Sources */,
 				4597F82A1A113D100089FC66 /* XML.swift in Sources */,
 				45D8D9021A48ED3600AE42C8 /* EditorCommonViewController.swift in Sources */,
 				45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */,
@@ -1971,7 +1976,6 @@
 				45A6DAAB1A6388FD00DFB9CE /* ArrayReportingController.swift in Sources */,
 				459433AF1A45EBBE008B2CFF /* TextEditingViewController.swift in Sources */,
 				45D158F51A113FE900B25657 /* CodeEditingViewController.swift in Sources */,
-				4501472B1A948B95003C99EE /* WorkspaceMode.swift in Sources */,
 				45DA95AD1A6A15E30091410B /* FileLocation.swift in Sources */,
 				454E42AB1A13D244007BEE79 /* FileTreeRepository4.swift in Sources */,
 				45DA95601A69DAE70091410B /* CodeEditingFileMonitor.swift in Sources */,
