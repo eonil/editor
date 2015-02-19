@@ -18,7 +18,12 @@ LLDBOBJECT_INIT_IMPL(lldb::SBTarget);
 
 
 
-
+- (LLDBDebugger *)debugger
+{
+	UNIVERSE_DEBUG_ASSERT(_raw.IsValid());
+	
+	return	[[LLDBDebugger alloc] initWithCPPObject:_raw.GetDebugger()];
+}
 
 - (LLDBProcess *)process
 {

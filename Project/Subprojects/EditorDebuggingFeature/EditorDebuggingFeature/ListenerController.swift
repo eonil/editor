@@ -45,6 +45,8 @@ public final class ListenerController {
 		}
 	}
 	public func startListening() {
+		assert(self.delegate != nil)
+		
 		dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)) { [unowned self] in
 			var	cont	=	true
 			while cont {

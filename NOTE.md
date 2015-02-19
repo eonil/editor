@@ -211,7 +211,12 @@ Running on device using unit-test command.
 
 
 
+Terms
+-----
 
+-	State: A data at a timepoint.
+-	Identity: Referenceable and reference equality comaprable.
+-	Controller: "state" + "identity".
 
 
 

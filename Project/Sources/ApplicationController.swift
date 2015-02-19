@@ -11,6 +11,11 @@ import EditorCommon
 
 @NSApplicationMain
 class ApplicationController: NSObject, NSApplicationDelegate {
+	
+	let	documentlessDebugMenuController	=	DebuggingController.documentlessMenuController
+	
+	@IBOutlet
+	var debugMenu:NSMenuItem?
 }
 
 
@@ -29,6 +34,22 @@ class ApplicationController: NSObject, NSApplicationDelegate {
 ///	MARK:	Application Lifecycle Management
 extension ApplicationController {
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
+//		debugMenu!.submenu	=	MenuController.menuOfController(documentlessDebugMenuController)
+		
+		NSNotificationCenter.defaultCenter().addObserverForName(
+			NSMenuDidBeginTrackingNotification,
+			object: NSApplication.sharedApplication().mainMenu!,
+			queue: nil) { (n:NSNotification!) -> Void in
+				let	docc	=	NSDocumentController.sharedDocumentController() as! NSDocumentController
+				let	menuc	=	{
+					if let ws = docc.currentDocument as? WorkspaceDocument {
+						return	ws.debugMenuController
+					} else {
+						return	self.documentlessDebugMenuController
+					}
+					}() as MenuController
+				self.debugMenu!.submenu	=	MenuController.menuOfController(menuc)
+		}
 	}
 	
 	func applicationWillTerminate(aNotification: NSNotification) {

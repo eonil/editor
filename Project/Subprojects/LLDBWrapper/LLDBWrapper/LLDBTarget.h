@@ -17,6 +17,7 @@
 @interface	LLDBTarget : LLDBObject
 - (instancetype)init UNIVERSE_UNAVAILABLE_METHOD;
 
+@property	(readonly,nonatomic,copy)	LLDBDebugger*		debugger;
 @property	(readonly,nonatomic,copy)	LLDBProcess*		process;
 
 - (LLDBFileSpec*)executableFileSpec;

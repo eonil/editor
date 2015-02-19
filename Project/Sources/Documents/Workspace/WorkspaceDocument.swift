@@ -19,7 +19,7 @@ import EditorDebuggingFeature
 ///	A document to edit Eonil Editor Workspace. (`.eewsN` file, `N` is single integer version number)
 ///
 ///	Manages interaction with Cocoa document system.
-final class WorkspaceDocument : NSDocument {
+final class WorkspaceDocument: NSDocument {
 	let	mainWindowController		=	PlainFileFolderWindowController()
 	let	toolExecutionController		=	WorkspaceToolExecutionController()
 	
@@ -32,13 +32,18 @@ final class WorkspaceDocument : NSDocument {
 		mainWindowController.fileTreeViewController.delegate		=	_subcomponentController
 		mainWindowController.issueListingViewController.delegate	=	_subcomponentController
 		toolExecutionController.delegate							=	_subcomponentController
+		
+		_debuggingController.executionTreeViewController			=	mainWindowController.executionStateTreeViewController
+//		_debuggingController.variableTreeViewController				=	mainWindowController.var
+		
 	}
 	
-//	var	debugger:LLDBDebugger {
-//		get {
-//			return	_debugger
-//		}
-//	}
+	var debugMenuController:MenuController {
+		get {
+			return	_debuggingController.menuController
+		}
+	}
+	
 	override func makeWindowControllers() {
 		//	Turning off the undo will effectively make autosave to be disabled.
 		//	See "Not Supporting Undo" chapter.
@@ -58,7 +63,8 @@ final class WorkspaceDocument : NSDocument {
 	private var	_rootLocation			=	nil as FileLocation?
 	private var	_fileSystemMonitor		=	nil as FileSystemEventMonitor?
 	private let	_subcomponentController	=	SubcomponentController()
-	private let	_debugger				=	LLDBDebugger()
+	private let	_commandQueue			=	CommandQueue()
+	private let	_debuggingController	=	DebuggingController()
 	
 	private var rootLocation:FileLocation {
 		get {
@@ -96,15 +102,11 @@ final class WorkspaceDocument : NSDocument {
 
 
 
-
-
-
-
-
 ///	MARK:
 ///	MARK:	Overriding default behaviors.
 
-extension WorkspaceDocument {
+extension WorkspaceDocument {	
+	
 	override func dataOfType(typeName: String, error outError: NSErrorPointer) -> NSData? {
 		fatalError("Saving features all should be overridden to save current data file instead of workspace document. This method shouldn't be called.")
 	}
@@ -273,12 +275,17 @@ extension WorkspaceDocument {
 	///	Customisation will be provided later.
 	@objc @IBAction
 	func runWorkspace(AnyObject?) {
-		toolExecutionController.cancelAll()
-		
 		mainWindowController.issueListingViewController.reset()
-		toolExecutionController.executeCargoRun()
+
+		_commandQueue.cancelAllCommandExecution()
+		_commandQueue.queue(CargoCommand(
+			workspaceRootURL: rootLocation.stringExpression,
+			subcommand: CargoCommand.Subcommand.Build))
 		
-		mainWindowController.executionStateTreeViewController.debugger	=	_debugger
+		_commandQueue.queue(InitiateDebuggingSessionCommand(
+			debuggingController: _debuggingController,
+			workspaceRootURL: rootLocation.stringExpression))
+		_commandQueue.runAllCommandExecution()
 	}
 	
 	@objc @IBAction
@@ -538,7 +545,230 @@ extension SubcomponentController: WorkspaceToolExecutionControllerDelegate {
 		
 		return	owner.rootLocation.stringExpression
 	}
+	private func workspaceToolExecutionControllerDidFinish() {
+		Debug.assertMainThread()
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///	MARK:
+///	MARK:	CommandQueue
+
+///	A serial execution command queue.
+private class CommandQueue: CommandDelegate {
+	deinit {
+		_commands	=	[]
+	}
+	
+	func queue(command:Command) {
+		_commands.append(command)
+	}
+	func runAllCommandExecution() {
+		stepCommandExecution()
+	}
+	func cancelAllCommandExecution() {
+		_current?.cancel()
+		_current?.delegate	=	nil
+		_current	=	nil
+	}
+	
+	private func stepCommandExecution() {
+		precondition(_commands.count > 0)
+		
+		_current			=	_commands.removeAtIndex(0)
+		_current!.delegate	=	self
+		_current!.launch()
+	}
+	private func CommandWillStart(command: Command) {
+//		assert(_current! === command)
+	}
+	private func CommandDidFinish(command: Command) {
+//		assert(_current! === command)
+		
+		if _commands.count > 0 {
+			stepCommandExecution()
+		}
+	}
+	
+	private var	_commands	=	[] as [Command]
+	private var _current	=	nil as Command?
+}
+
+
+
+
+private protocol CommandDelegate: class {
+	func CommandWillStart(command:Command)
+	func CommandDidFinish(command:Command)
+	
+//	optional func CommandWillCancel(command:Command)
+//	optional func CommandDidCancel(command:Command)
+}
+
+///	A cancellable asynchronous command.
+private protocol Command {
+	weak var delegate:CommandDelegate? { get set }
+	func launch()
+	func cancel()
+}
+
+
+
+
+
+
+
+
+
+
+private final class CargoCommand: Command, CargoExecutionControllerDelegate {
+	weak var delegate:CommandDelegate?
+	
+	enum Subcommand {
+		case Clean
+		case Build
+	}
+//	struct Configuration {
+//		let	workspaceRootPath:String
+//		let	subcommand:Subcommand
+//	}
+	
+	let	workspaceRootURL:NSURL
+	let	subcommand:Subcommand
+	init(workspaceRootURL:NSURL, subcommand:Subcommand) {
+		self.workspaceRootURL	=	workspaceRootURL
+		self.subcommand			=	subcommand
+		
+		_cargo			=	CargoExecutionController()
+		_cargo.delegate	=	self
+	}
+	
+	func launch() {
+		switch self.subcommand {
+		case .Clean:
+			_cargo.launchClean(workingDirectoryURL: workspaceRootURL)
+		case .Build:
+			_cargo.launchBuild(workingDirectoryURL: workspaceRootURL)
+		}
+	}
+	func cancel() {
+		_cargo.kill()
+		self.delegate!.CommandDidFinish(self)
+	}
+	func cargoExecutionControllerDidDiscoverRustCompilationIssue(issue: RustCompilerIssue) {
+		println(issue)
+	}
+	func cargoExecutionControllerDidPrintMessage(s: String) {
+		println(s)
+	}
+	func cargoExecutionControllerRemoteProcessDidTerminate() {
+		self.delegate!.CommandDidFinish(self)
+	}
+	
+	////
+	
+	private let	_cargo:CargoExecutionController
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private final class InitiateDebuggingSessionCommand: Command {
+	weak var delegate:CommandDelegate?
+	
+	let	debuggingController:DebuggingController
+	let	workspaceRootURL:NSURL
+	init(debuggingController:DebuggingController, workspaceRootURL:NSURL) {
+		self.debuggingController	=	debuggingController
+		self.workspaceRootURL		=	workspaceRootURL
+	}
+	deinit {
+	}
+	func launch() {
+		let	f	=	workspaceRootURL.URLByAppendingPathComponent("target").URLByAppendingPathComponent("rp7")
+		debuggingController.initiateSessionWithExecutableURL(f)
+		
+		self.delegate!.CommandWillStart(self)
+		self.delegate!.CommandDidFinish(self)
+//		_session	=	s
+	}
+	func cancel() {
+//		debuggingController.terminateSession(_session!)
+	}
+//	
+//	func listenerController(_: ListenerController, IsProcessingEvent e: LLDBEvent) {
+//		let	p	=	_target!.process
+//		
+//		switch p.state {
+//		case .Running:
+//			configuration.executionTree.snapshot	=	nil
+////			configuration.variableTree.snapshot		=	nil
+//			
+//		default:
+//			let	dbg	=	configuration.debugger
+//			configuration.executionTree.snapshot	=	ExecutionStateTreeViewController.Snapshot(dbg)
+////			if let f = p.allThreads[0].allFrames.first, f1 = f {
+////				configuration.variableTree.snapshot	=	VariableTreeViewController.Snapshot(f1)
+////			} else {
+////				configuration.variableTree.snapshot	=	nil
+////			}
+//		}
+//		
+//
+//	}
+	
+//	private var _session:DebuggingController.Session?
+}
+
+
+
+
+
+
+
+
+
 
 
 

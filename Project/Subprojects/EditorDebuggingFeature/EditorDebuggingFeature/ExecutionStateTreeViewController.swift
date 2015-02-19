@@ -106,6 +106,8 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 		return	v
 	}
 	public func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool {
+		assert(self.delegate != nil)
+		
 		if let fn = item as? FrameNode {
 			self.delegate!.executionStateTreeViewControllerDidSelectFrame(fn.data)
 		}

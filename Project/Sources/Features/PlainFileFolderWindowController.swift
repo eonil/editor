@@ -107,10 +107,16 @@ class PlainFileFolderWindowController : EditorCommonWindowController2 {
 		}
 		return	window
 	}
-	
 }
 
-
+//extension PlainFileFolderWindowController: NSWindowDelegate {
+//	func windowDidBecomeMain(notification: NSNotification) {
+//		
+//	}
+//	func windowDidResignMain(notification: NSNotification) {
+//		
+//	}
+//}
 
 
 

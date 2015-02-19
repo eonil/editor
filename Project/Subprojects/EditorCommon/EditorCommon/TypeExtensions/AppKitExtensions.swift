@@ -98,6 +98,15 @@ public extension NSMenu {
 		let	m	=	NSMenuItem.separatorItem()
 		self.addItem(m)
 	}
+	var allMenuItems:[NSMenuItem] {
+		get {
+			return	self.itemArray.map({ a in a as! NSMenuItem })
+		}
+		set(v) {
+			self.removeAllItems()
+			v.map(self.addItem)
+		}
+	}
 }
 public extension NSMenuItem {
 	var	reaction:(()->())? {

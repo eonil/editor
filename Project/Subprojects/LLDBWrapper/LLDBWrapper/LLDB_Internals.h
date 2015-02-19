@@ -733,15 +733,30 @@ get_description_of(T _raw, lldb::DescriptionLevel level)
 
 
 
+//#define LLDBOBJECT_INIT_IMPL(typename)					\
+//	- (instancetype)initWithCPPObject:(typename)raw		\
+//	{													\
+//		if (raw.IsValid() == false)						\
+//		{												\
+//			return	nil;								\
+//		}												\
+//														\
+//		UNIVERSE_DEBUG_ASSERT(raw.IsValid() == true);	\
+//		if (self = [super init]) {						\
+//			_raw	=	raw;							\
+//		}												\
+//		else											\
+//		{												\
+//			UNIVERSE_DEBUG_ASSERT_WITH_MESSAGE(NO, @"`[super init]` returned `nil`. This situation is not supported.");		\
+//		}												\
+//		return	self;									\
+//	}
+//
+//
+
 #define LLDBOBJECT_INIT_IMPL(typename)					\
 	- (instancetype)initWithCPPObject:(typename)raw		\
 	{													\
-		if (raw.IsValid() == false)						\
-		{												\
-			return	nil;								\
-		}												\
-														\
-		UNIVERSE_DEBUG_ASSERT(raw.IsValid() == true);	\
 		if (self = [super init]) {						\
 			_raw	=	raw;							\
 		}												\

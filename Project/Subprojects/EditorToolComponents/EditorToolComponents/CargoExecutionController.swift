@@ -121,6 +121,8 @@ extension CargoExecutionController {
 	public func launchClean(#workingDirectoryURL:NSURL) {
 		self.launch(workingDirectoryURL: workingDirectoryURL, arguments: "clean --verbose")
 	}
+	
+	///	Performs `cargo run`. Take care that this runs the target without debugger.
 	public func launchRun(#workingDirectoryURL:NSURL) {
 		self.launch(workingDirectoryURL: workingDirectoryURL, arguments: "run --verbose")
 	}
