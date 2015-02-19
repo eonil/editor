@@ -14,9 +14,7 @@
 		451740E01A102FA300861ECC /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DD1A102FA300861ECC /* ScrollViewController.swift */; };
 		451740E11A102FA300861ECC /* TextScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DE1A102FA300861ECC /* TextScrollViewController.swift */; };
 		451740E21A102FA300861ECC /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DF1A102FA300861ECC /* TextViewController.swift */; };
-		451A75E31A95B8270015AA42 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451A75E21A95B8270015AA42 /* MenuController.swift */; };
 		45204C801A63300900929A17 /* ApplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45204C7F1A63300900929A17 /* ApplicationController.swift */; };
-		4522AA911A95BB1400368518 /* MenuShortcutKeyCombination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522AA901A95BB1400368518 /* MenuShortcutKeyCombination.swift */; };
 		452442711A1801D800A03A51 /* Standards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452442671A18019400A03A51 /* Standards.framework */; };
 		452442731A1801DC00A03A51 /* Standards.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 452442671A18019400A03A51 /* Standards.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4526C02A1A6B616B00F5BDC1 /* WorkspaceToolExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526C0291A6B616B00F5BDC1 /* WorkspaceToolExecutionController.swift */; };
@@ -638,9 +636,7 @@
 		451740DD1A102FA300861ECC /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
 		451740DE1A102FA300861ECC /* TextScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextScrollViewController.swift; sourceTree = "<group>"; };
 		451740DF1A102FA300861ECC /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
-		451A75E21A95B8270015AA42 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		45204C7F1A63300900929A17 /* ApplicationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationController.swift; sourceTree = "<group>"; };
-		4522AA901A95BB1400368518 /* MenuShortcutKeyCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuShortcutKeyCombination.swift; sourceTree = "<group>"; };
 		4524425D1A18019400A03A51 /* Standards.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Standards.xcodeproj; path = Submodules/Monolith.Swift/Standards/Standards.xcodeproj; sourceTree = "<group>"; };
 		4526C0291A6B616B00F5BDC1 /* WorkspaceToolExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceToolExecutionController.swift; sourceTree = "<group>"; };
 		4526C0511A6B81D300F5BDC1 /* EditorIssueListingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorIssueListingFeature.xcodeproj; path = EditorIssueListingFeature/EditorIssueListingFeature.xcodeproj; sourceTree = "<group>"; };
@@ -1088,8 +1084,6 @@
 			isa = PBXGroup;
 			children = (
 				457D5CE51A63287C008ECE6F /* WorkspaceDocument.swift */,
-				451A75E21A95B8270015AA42 /* MenuController.swift */,
-				4522AA901A95BB1400368518 /* MenuShortcutKeyCombination.swift */,
 				45DA95AC1A6A15E30091410B /* FileLocation.swift */,
 				45756F641A6537860017AA4B /* WorkspaceUtility.swift */,
 				459E62451A65ED3300EDEEB9 /* WorkspaceWindowController.swift */,
@@ -1940,7 +1934,6 @@
 				457D5CE61A63287C008ECE6F /* WorkspaceDocument.swift in Sources */,
 				459E62461A65ED3300EDEEB9 /* WorkspaceWindowController.swift in Sources */,
 				45DA7EEF1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift in Sources */,
-				4522AA911A95BB1400368518 /* MenuShortcutKeyCombination.swift in Sources */,
 				4597F8271A113D100089FC66 /* LinkList.swift in Sources */,
 				45700EE11A11F65100415EB2 /* FileNode.swift in Sources */,
 				454FFC0C1A142DF3000C0200 /* FileSystemMonitor.swift in Sources */,
@@ -1985,7 +1978,6 @@
 				45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */,
 				4527E4F81A6A717A00115139 /* NSTextView+Issue.swift in Sources */,
 				454482021A6328BE005576CB /* WorkspaceNavigationViewController.swift in Sources */,
-				451A75E31A95B8270015AA42 /* MenuController.swift in Sources */,
 				45D8D8F11A48E99200AE42C8 /* EditorCommonWindowController2.swift in Sources */,
 				45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */,
 				454482181A6328FC005576CB /* WorkspaceUtilityViewController.swift in Sources */,
