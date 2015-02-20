@@ -16,7 +16,10 @@ import LLDBWrapper
 
 
 public protocol ExecutionStateTreeViewControllerDelegate: class {
-	func executionStateTreeViewControllerDidSelectFrame(frame:LLDBFrame)
+	///	Called user selected a new node.
+	///
+	///	:param:	frame	Can be `nil` .
+	func executionStateTreeViewControllerDidSelectFrame(frame:LLDBFrame?)
 }
 
 ///	This is a snapshot display. You need to set a new snapshot to display updated state.
@@ -120,6 +123,8 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 		
 		if let fn = item as? FrameNode {
 			self.delegate!.executionStateTreeViewControllerDidSelectFrame(fn.data)
+		} else {
+			self.delegate!.executionStateTreeViewControllerDidSelectFrame(nil)
 		}
 		return	true
 	}

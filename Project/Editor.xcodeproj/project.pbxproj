@@ -1083,8 +1083,8 @@
 				45DA95AC1A6A15E30091410B /* FileLocation.swift */,
 				45756F641A6537860017AA4B /* WorkspaceUtility.swift */,
 				45C1EDC21A6BF322007B6F83 /* Issue+RustCompilerIssue.swift */,
-				457D5CE41A63287C008ECE6F /* UI */,
 				4526C0081A6B615E00F5BDC1 /* Services */,
+				457D5CE41A63287C008ECE6F /* UI */,
 			);
 			path = Workspace;
 			sourceTree = "<group>";
@@ -2187,6 +2187,7 @@
 				);
 				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_NAME = Editor;
 			};
 			name = Debug;

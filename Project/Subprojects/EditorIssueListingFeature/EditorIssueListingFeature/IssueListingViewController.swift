@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import EditorCommon
 
 
 let	ROW_ADD_ANIMATION_EFFECT	=	NSTableViewAnimationOptions.allZeros
@@ -28,10 +29,15 @@ public final class IssueListingViewController: NSViewController {
 	public weak var delegate:IssueListingViewControllerDelegate?
 	
 	public func reset() {
+		Debug.assertMainThread()
+		
 		_repository.reset()
 		self.outlineView.reloadData()
 	}
 	public func push(issues:[Issue]) {
+		Debug.assertMainThread()
+		assert(issues.filter({ s in s.origin != nil }).map({ s in s.origin!.URL.existingAsDataFile == true }).reduce(true, combine: { a,b in a && b }), "Some issues have invalid origin. (missing file path)")
+		
 		let	rs	=	_repository.push(issues)
 //		self.outlineView.reloadData()
 		

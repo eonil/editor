@@ -110,15 +110,33 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 	private var	_rootNode:FrameNode?
 }
 
+
+
 public extension VariableTreeViewController {
 	public struct Snapshot {
 		public init(_ frame:LLDBFrame) {
 			self._frameNode	=	FrameNode(frame)
 		}
+		public init?(_ frame:LLDBFrame?) {
+			if let f = frame {
+				self.init(f)
+				return
+			} else {
+				return	nil
+			}
+		}
 		
 		private let _frameNode:FrameNode
 	}
 }
+
+
+
+
+
+
+
+
 
 
 

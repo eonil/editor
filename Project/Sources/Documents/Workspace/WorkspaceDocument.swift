@@ -283,7 +283,8 @@ private extension WorkspaceDocument {
 		_commandQueue.cancelAllCommandExecution()
 		_commandQueue.queue(CargoCommand(
 			workspaceRootURL: rootLocation.stringExpression,
-			subcommand: CargoCommand.Subcommand.Build))
+			subcommand: CargoCommand.Subcommand.Build,
+			cargoDelegate: _subcomponentController))
 		_commandQueue.runAllCommandExecution()
 	}
 	
@@ -296,20 +297,21 @@ private extension WorkspaceDocument {
 		_commandQueue.cancelAllCommandExecution()
 		_commandQueue.queue(CargoCommand(
 			workspaceRootURL: rootLocation.stringExpression,
-			subcommand: CargoCommand.Subcommand.Build))
+			subcommand: CargoCommand.Subcommand.Build,
+			cargoDelegate: _subcomponentController))
 		_commandQueue.queue(LaunchDebuggingSessionCommand(
 			debuggingController: _debuggingController,
 			workspaceRootURL: rootLocation.stringExpression))
 		_commandQueue.runAllCommandExecution()
 	}
 	func cleanWorkspace() {
-		
 		mainWindowController.issueListingViewController.reset()
 		
 		_commandQueue.cancelAllCommandExecution()
 		_commandQueue.queue(CargoCommand(
 			workspaceRootURL: rootLocation.stringExpression,
-			subcommand: CargoCommand.Subcommand.Clean))
+			subcommand: CargoCommand.Subcommand.Clean,
+			cargoDelegate: _subcomponentController))
 		_commandQueue.runAllCommandExecution()
 	}
 	func stopWorkspace() {
@@ -317,6 +319,7 @@ private extension WorkspaceDocument {
 		_commandQueue.cancelAllCommandExecution()
 		
 		mainWindowController.executionStateTreeViewController.snapshot	=	nil
+		mainWindowController.variableTreeViewController.snapshot		=	nil
 	}
 }
 
@@ -536,7 +539,7 @@ private func subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
 ///	MARK:	ExecutionStateTreeViewControllerDelegate
 
 extension SubcomponentController: ExecutionStateTreeViewControllerDelegate {
-	private func executionStateTreeViewControllerDidSelectFrame(frame: LLDBFrame) {
+	private func executionStateTreeViewControllerDidSelectFrame(frame: LLDBFrame?) {
 		owner!.mainWindowController.variableTreeViewController.snapshot	=	VariableTreeViewController.Snapshot(frame)
 	}
 }
@@ -585,50 +588,45 @@ extension SubcomponentController: WorkspaceDebuggingControllerDelegate {
 
 
 
+///	MARK:
+///	MARK:	CargoExecutionControllerDelegate
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////	MARK:
-/////	MARK:	WorkspaceToolExecutionControllerDelegate
-//
-//extension SubcomponentController: WorkspaceToolExecutionControllerDelegate {
-//	func workspaceToolExecutionControllerDidDiscoverRustCompilerIssue(issue: RustCompilerIssue) {
-//		Debug.assertMainThread()
-//		
+extension SubcomponentController: CargoExecutionControllerDelegate {
+	func cargoExecutionControllerDidDiscoverRustCompilationIssue(issue: RustCompilerIssue) {
+		Debug.assertMainThread()
+		
 //		let	s	=	Issue(workspaceRootURL: owner.rootLocation.stringExpression, rust: issue)
-//		owner.mainWindowController.issueListingViewController.push([s])
-//	}
-//	func workspaceToolExecutionControllerDidDiscoverRustCompilerMessage(message: String) {
-//		Debug.assertMainThread()
-//		
-//		println(message)
-//	}
-//	func workspaceToolExecutionControllerQueryWorkingDirectoryURL() -> NSURL {
-//		Debug.assertMainThread()
-//		
-//		return	owner.rootLocation.stringExpression
-//	}
-//	private func workspaceToolExecutionControllerDidFinish() {
-//		Debug.assertMainThread()
-//		
-//	}
-//}
+		let	s	=	Issue(rust: issue)
+		owner.mainWindowController.issueListingViewController.push([s])
+	}
+	func cargoExecutionControllerDidPrintMessage(s: String) {
+		Debug.assertMainThread()
+
+		println(s)
+	}
+	func cargoExecutionControllerRemoteProcessDidTerminate() {
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

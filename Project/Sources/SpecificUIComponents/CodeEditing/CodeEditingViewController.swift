@@ -38,6 +38,7 @@ class CodeEditingViewController : TextScrollViewController {
 			precondition(self.isWaitingForUserResponse == false)
 			precondition(v == nil || v is NSURL)
 			if let u1 = v as? NSURL {
+				Debug.log(u1)
 				precondition(u1.existingAsAnyFile)
 				precondition(u1.isFileReferenceURL() == false)
 			}

@@ -9,7 +9,7 @@
 import Foundation
 import EditorToolComponents
 import EditorDebuggingFeature
-
+import EonilDispatch
 
 
 ///	MARK:
@@ -40,10 +40,10 @@ final class WorkspaceCommandExecutionController: WorkspaceCommandDelegate {
 		_current!.delegate	=	self
 		_current!.launch()
 	}
-	final func CommandWillStart(command: WorkspaceCommand) {
+	final func workspaceCommandWillStart(command: WorkspaceCommand) {
 //		assert(_current! === command)
 	}
-	final func CommandDidFinish(command: WorkspaceCommand) {
+	final func workspaceCommandDidFinish(command: WorkspaceCommand) {
 //		assert(_current! === command)
 		
 		if _commands.count > 0 {
@@ -59,8 +59,8 @@ final class WorkspaceCommandExecutionController: WorkspaceCommandDelegate {
 
 
 protocol WorkspaceCommandDelegate: class {
-	func CommandWillStart(command:WorkspaceCommand)
-	func CommandDidFinish(command:WorkspaceCommand)
+	func workspaceCommandWillStart(command:WorkspaceCommand)
+	func workspaceCommandDidFinish(command:WorkspaceCommand)
 	
 //	optional func CommandWillCancel(command:Command)
 //	optional func CommandDidCancel(command:Command)
@@ -72,7 +72,6 @@ protocol WorkspaceCommand {
 	func launch()
 	func cancel()
 }
-
 
 
 
@@ -96,9 +95,11 @@ final class CargoCommand: WorkspaceCommand, CargoExecutionControllerDelegate {
 	
 	let	workspaceRootURL:NSURL
 	let	subcommand:Subcommand
-	init(workspaceRootURL:NSURL, subcommand:Subcommand) {
+	unowned let cargoDelegate:CargoExecutionControllerDelegate
+	init(workspaceRootURL:NSURL, subcommand:Subcommand, cargoDelegate:CargoExecutionControllerDelegate) {
 		self.workspaceRootURL	=	workspaceRootURL
 		self.subcommand			=	subcommand
+		self.cargoDelegate		=	cargoDelegate
 		
 		_cargo			=	CargoExecutionController()
 		_cargo.delegate	=	self
@@ -114,16 +115,23 @@ final class CargoCommand: WorkspaceCommand, CargoExecutionControllerDelegate {
 	}
 	func cancel() {
 		_cargo.kill()
-		self.delegate!.CommandDidFinish(self)
+		self.delegate!.workspaceCommandDidFinish(self)
 	}
 	func cargoExecutionControllerDidDiscoverRustCompilationIssue(issue: RustCompilerIssue) {
-		println(issue)
+		sync(Queue.main) {
+			self.cargoDelegate.cargoExecutionControllerDidDiscoverRustCompilationIssue(issue)
+		}
 	}
 	func cargoExecutionControllerDidPrintMessage(s: String) {
-		println(s)
+		sync(Queue.main) {
+			self.cargoDelegate.cargoExecutionControllerDidPrintMessage(s)
+		}
 	}
 	func cargoExecutionControllerRemoteProcessDidTerminate() {
-		self.delegate!.CommandDidFinish(self)
+		sync(Queue.main) {
+			self.cargoDelegate.cargoExecutionControllerRemoteProcessDidTerminate()
+			self.delegate!.workspaceCommandDidFinish(self)
+		}
 	}
 	
 	////
@@ -160,10 +168,15 @@ final class LaunchDebuggingSessionCommand: WorkspaceCommand {
 	}
 	func launch() {
 		let	f	=	workspaceRootURL.URLByAppendingPathComponent("target").URLByAppendingPathComponent("rp7")
-		debuggingController.launchSessionWithExecutableURL(f)
+		if f.existingAsDataFile {
+			debuggingController.launchSessionWithExecutableURL(f)
+			
+		} else {
+			//	TODO:	Launch failure. Route to GUI.
+		}
 		
-		self.delegate!.CommandWillStart(self)
-		self.delegate!.CommandDidFinish(self)
+		self.delegate!.workspaceCommandWillStart(self)
+		self.delegate!.workspaceCommandDidFinish(self)
 	}
 	func cancel() {
 		//	This just initiate debuging session, and does not wait for finish.

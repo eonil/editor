@@ -20,6 +20,8 @@ public struct Issue {
 	public var	message:String
 	
 	public init(origination:IssueOrigin?, severity:Severity, message:String) {
+		assert(origination == nil || origination!.URL.existingAsDataFile == true, "`origination` must be `nil` or a proper URL (path to an existing file)")
+		
 		self.origin			=	origination
 		self.severity		=	severity
 		self.message		=	message

@@ -15,6 +15,12 @@ import EditorCommon
 
 
 
+
+
+
+
+
+
 ///
 ///	Menu Management
 ///	---------------
@@ -28,7 +34,6 @@ import EditorCommon
 
 @NSApplicationMain
 class ApplicationController: NSObject, NSApplicationDelegate {
-	
 	
 	@IBOutlet
 	var projectMenu:NSMenuItem?
