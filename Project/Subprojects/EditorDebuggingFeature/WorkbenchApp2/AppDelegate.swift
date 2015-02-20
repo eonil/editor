@@ -29,6 +29,13 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegat
 	let	lcon	=	ListenerController()
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
+		mainWindow!.appearance			=	NSAppearance(named: NSAppearanceNameVibrantDark)
+		localVariableWindow!.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
+//		tv1.view.appearance				=	NSAppearance(named: NSAppearanceNameVibrantDark)
+//		tv2.view.appearance				=	NSAppearance(named: NSAppearanceNameVibrantDark)
+		
+		////
+		
 		tv1.delegate	=	self
 		
 		sv1.documentView		=	tv1.view

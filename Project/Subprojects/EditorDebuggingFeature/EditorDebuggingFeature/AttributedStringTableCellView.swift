@@ -63,7 +63,8 @@ class AttributedStringTableCellView: NSTableCellView {
 			
 			if let n = v as? NSAttributedString {
 				_originText			=	n
-				_highlightText		=	Text(n).setTextColor(NSColor.selectedTextColor()).attributedString
+//				_highlightText		=	Text(n).setTextColor(NSColor.selectedTextColor()).attributedString
+				_highlightText		=	Text(n).setTextColor(NSColor.labelColor()).attributedString
 			} else {
 				_originText			=	NSAttributedString()
 				_highlightText		=	NSAttributedString()
@@ -104,6 +105,7 @@ class AttributedStringTableCellView: NSTableCellView {
 		
 		////
 		
+		tv.editable					=	false
 		tv.bordered					=	false
 		tv.backgroundColor			=	NSColor.clearColor()
 		tv.translatesAutoresizingMaskIntoConstraints	=	false

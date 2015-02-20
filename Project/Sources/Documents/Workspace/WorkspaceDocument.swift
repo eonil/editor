@@ -28,12 +28,13 @@ final class WorkspaceDocument: NSDocument {
 		_subcomponentController.owner	=	self
 		
 		assert(mainWindowController.fileTreeViewController.delegate == nil)
-		mainWindowController.fileTreeViewController.delegate		=	_subcomponentController
-		mainWindowController.issueListingViewController.delegate	=	_subcomponentController
+		mainWindowController.fileTreeViewController.delegate			=	_subcomponentController
+		mainWindowController.issueListingViewController.delegate		=	_subcomponentController
+		mainWindowController.executionStateTreeViewController.delegate	=	_subcomponentController
 		
-		_debuggingController.executionTreeViewController			=	mainWindowController.executionStateTreeViewController
-//		_debuggingController.variableTreeViewController				=	mainWindowController.var
-		_debuggingController.delegate								=	_subcomponentController
+		_debuggingController.executionTreeViewController		=	mainWindowController.executionStateTreeViewController
+		_debuggingController.variableTreeViewController			=	mainWindowController.variableTreeViewController
+		_debuggingController.delegate							=	_subcomponentController
 		
 		_projectMenuController.reconfigureForWorkspaceDocument(self)
 	}
@@ -529,6 +530,16 @@ private func subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
 
 
 
+
+
+///	MARK:
+///	MARK:	ExecutionStateTreeViewControllerDelegate
+
+extension SubcomponentController: ExecutionStateTreeViewControllerDelegate {
+	private func executionStateTreeViewControllerDidSelectFrame(frame: LLDBFrame) {
+		owner!.mainWindowController.variableTreeViewController.snapshot	=	VariableTreeViewController.Snapshot(frame)
+	}
+}
 
 
 

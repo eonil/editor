@@ -14,9 +14,9 @@ DEPENDENCIES
 
 -	LLDB
 
-	-	Use system LLDB via public API.
-	-	Link to Xcode's one using system path at runtime.
-	-	That means this requires a proper Xcode installation.
+	-	Use system (Xcode) LLDB via public API.
+	-	Link to system binary using hard-coded system path at runtime.
+	-	That means this requires a proper Xcode installation at expected location.
 
 
 

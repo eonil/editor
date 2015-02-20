@@ -50,6 +50,7 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 		self.outlineView.setDataSource(self)
 		self.outlineView.setDelegate(self)
 		
+		self.outlineView.headerView		=	nil
 //		self.outlineView.rowSizeStyle	=	NSTableViewRowSizeStyle.Large
 		self.outlineView.rowHeight		=	14
 		
@@ -90,6 +91,10 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 //	public func outlineView(outlineView: NSOutlineView, heightOfRowByItem item: AnyObject) -> CGFloat {
 //		return	NSFont.smallSystemFontSize() * 1.2
 //	}
+	public func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView? {
+		let	v	=	DarkVibrancyAwareTableRowView()
+		return	v
+	}
 	public func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		if let n = item as? VariableNode {
 			let	v				=	AttributedStringTableCellView()
@@ -129,9 +134,9 @@ private func makePresentationText(n:VariableNode) -> NSAttributedString {
 	let	f	=	Palette.defaultFont()
 	let	f1	=	Palette.defaultBoldFont()
 	
-	let	a1	=	Text("\(a)").setFont(f1).setTextColor(NSColor.textColor())
-	let	b1	=	Text(" = (\(b))").setFont(f).setTextColor(NSColor.textColor().colorWithAlphaComponent(0.5))
-	let	c1	=	Text(" \(c)").setFont(f).setTextColor(NSColor.textColor())
+	let	a1	=	Text("\(a)").setFont(f1).setTextColor(NSColor.labelColor())
+	let	b1	=	Text(" = (\(b))").setFont(f).setTextColor(NSColor.secondaryLabelColor())
+	let	c1	=	Text(" \(c)").setFont(f).setTextColor(NSColor.labelColor())
 	
 	let	d	=	a1 + b1 + c1
 

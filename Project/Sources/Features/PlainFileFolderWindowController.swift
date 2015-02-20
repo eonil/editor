@@ -54,6 +54,11 @@ class PlainFileFolderWindowController : EditorCommonWindowController2 {
 			return	mainViewController.navigationViewController.executionTreeViewController
 		}
 	}
+	var	variableTreeViewController: VariableTreeViewController {
+		get {
+			return	mainViewController.editingViewController.variableTreeViewController
+		}
+	}
 	
 	
 	
@@ -169,10 +174,7 @@ extension PlainFileFolderWindowController {
 //				utilityViewController..width >= NSScreen.mainScreen()!.frame.width ~~ 1,
 			]
 			
-//			_channels	=	[
-//				channel(navigationViewController.issueListingViewController.userIsWantingToHighlightIssues, editingViewController.codeEditorViewController.highlightRangesOfIssues),
-//				channel(navigationViewController.issueListingViewController.userIsWantingToNavigateToIssue, editingViewController.codeEditorViewController.navigateRangeOfIssue),
-//			]
+			
 		}
 		override func viewDidAppear() {
 			super.viewDidAppear()
@@ -185,27 +187,41 @@ extension PlainFileFolderWindowController {
 	
 	
 	class EditingViewController : NSSplitViewController {
-		let	commandScrollViewController		=	ScrollViewController()
 		
 		let	codeEditorViewController		=	CodeEditingViewController()
+		
+		let	commandScrollViewController		=	ScrollViewController()
 		let	commandConsoleViewController	=	CommandConsoleViewController()
+		
+		let	variableScrollViewController	=	ScrollViewController()
+		let	variableTreeViewController		=	VariableTreeViewController()
 		
 		override func viewDidLoad() {
 			super.viewDidLoad()
 			
 			commandScrollViewController.documentViewController	=	commandConsoleViewController
+			variableScrollViewController.documentViewController	=	variableTreeViewController
 			
 			self.splitView.vertical	=	false
 			self.addChildViewControllerAsASplitViewItem(codeEditorViewController)
-			self.addChildViewControllerAsASplitViewItem(commandScrollViewController)
+//			self.addChildViewControllerAsASplitViewItem(commandScrollViewController)
+			self.addChildViewControllerAsASplitViewItem(variableScrollViewController)
 			
 			//	The priority constant doesn't work in Xcode 6.1. I am not sure that is a bug or feature.
 			self.view.layoutConstraints	=	[
 				codeEditorViewController..height >= 300,
-				commandScrollViewController..height >= 100,
 				codeEditorViewController..height >= 800 ~~ 3,
-				commandScrollViewController..height >= 200 ~~ 2
+				
+//				commandScrollViewController..height >= 100,
+//				commandScrollViewController..height >= 200 ~~ 2
+
+				variableScrollViewController..height >= 100,
+				variableScrollViewController..height >= 200 ~~ 2
 			]
+			
+//			self.view.addConstraintsWithLayoutAnchoring([
+//				variableScrollViewController.view.heightAnchor	==	CGSize(width: 0, height: 0),
+//				])
 		}
 	}
 	

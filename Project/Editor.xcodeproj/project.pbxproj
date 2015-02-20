@@ -1013,13 +1013,6 @@
 			name = "(junkyard)";
 			sourceTree = "<group>";
 		};
-		454ECC321A11D66100DFD460 /* BackstageWorks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = BackstageWorks;
-			sourceTree = "<group>";
-		};
 		4557D8941A116D5F00D6C53B /* FileNavigating */ = {
 			isa = PBXGroup;
 			children = (
@@ -1209,11 +1202,10 @@
 			isa = PBXGroup;
 			children = (
 				45204C7F1A63300900929A17 /* ApplicationController.swift */,
-				45FD53671A967D0000BE2A2D /* MenuControllers.swift */,
 				45BBB0EB1A1022A10055232E /* Images.xcassets */,
 				45BBB0ED1A1022A10055232E /* MainMenu.xib */,
 				4514A76B1A11C7CB00F25ED8 /* Documents */,
-				454ECC321A11D66100DFD460 /* BackstageWorks */,
+				45FD53671A967D0000BE2A2D /* MenuControllers.swift */,
 				457D5CE21A63287C008ECE6F /* Features */,
 				451740D71A102F1900861ECC /* SpecificUIComponents */,
 				451740DC1A102FA300861ECC /* ProtoUIComponents */,

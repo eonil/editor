@@ -27,8 +27,8 @@ struct MenuShortcutKeyCombination {
 	var modifierMask: Int {
 		get {
 			return
-				(commandModifier ? Int(bitPattern: NSEventModifierFlags.CommandKeyMask.rawValue) : 0) +
-				(alternateModifier ? Int(bitPattern: NSEventModifierFlags.AlternateKeyMask.rawValue) : 0) +
+				(commandModifier ? Int(bitPattern: NSEventModifierFlags.CommandKeyMask.rawValue) : 0) |
+				(alternateModifier ? Int(bitPattern: NSEventModifierFlags.AlternateKeyMask.rawValue) : 0) |
 				(shiftModifier ? Int(bitPattern: NSEventModifierFlags.ShiftKeyMask.rawValue) : 0)
 		}
 	}
@@ -48,6 +48,7 @@ extension MenuController {
 	static let Command		=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: true, alternateModifier: false, shiftModifier: false)
 	static let Alternate	=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, alternateModifier: true, shiftModifier: false)
 	static let Shift		=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, alternateModifier: false, shiftModifier: true)
+	static let None			=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, alternateModifier: false, shiftModifier: false)
 }
 
 extension NSMenuItem {

@@ -22,7 +22,11 @@ public protocol ExecutionStateTreeViewControllerDelegate: class {
 ///	This is a snapshot display. You need to set a new snapshot to display updated state.
 ///	This object REQUIRES delegate for every events. You must set a valid `delegate` object.
 public final class ExecutionStateTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
-	public weak var delegate:ExecutionStateTreeViewControllerDelegate?
+	public weak var delegate:ExecutionStateTreeViewControllerDelegate? {
+		willSet {
+			assert(delegate == nil)
+		}
+	}
 	
 	public var outlineView:NSOutlineView {
 		get {
@@ -70,7 +74,8 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 		self.outlineView.setDataSource(self)
 		self.outlineView.setDelegate(self)
 		
-		self.outlineView.rowHeight	=	Palette.defaultLineHeight
+		self.outlineView.headerView		=	nil
+		self.outlineView.rowHeight		=	Palette.defaultLineHeight
 		
 		let	tc1	=	NSTableColumn()
 		self.outlineView.addTableColumn(tc1)
@@ -98,13 +103,18 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 	public func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
 		return	self.outlineView(outlineView, numberOfChildrenOfItem: item) > 0
 	}
-
+	
+	public func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView? {
+		let	v	=	DarkVibrancyAwareTableRowView()
+		return	v
+	}
 	public func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		let	n	=	item as! NodeBase
 		let	v	=	AttributedStringTableCellView()
-		v.attributedString	=	Text(n.label).setFont(Palette.defaultFont()).attributedString
+		v.attributedString	=	Text(n.label).setFont(Palette.defaultFont()).setTextColor(NSColor.labelColor()).attributedString
 		return	v
 	}
+	
 	public func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool {
 		assert(self.delegate != nil)
 		

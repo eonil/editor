@@ -33,6 +33,7 @@
 		45AFEDB61A8D0820009F0010 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFEDB31A8D0820009F0010 /* Text.swift */; };
 		45BEE1F21A8C870E0078E500 /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEE1E71A8C86F70078E500 /* EditorCommon.framework */; };
 		45BEE1F31A8C870E0078E500 /* EditorCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEE1E71A8C86F70078E500 /* EditorCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45E020381A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E020371A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift */; };
 		45EF0BE51A6C95DE00215F12 /* LLDBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BE41A6C95DE00215F12 /* LLDBController.swift */; };
 		45EF0BF11A6C961C00215F12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BF01A6C961C00215F12 /* AppDelegate.swift */; };
 		45EF0BF31A6C961C00215F12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45EF0BF21A6C961C00215F12 /* Images.xcassets */; };
@@ -188,6 +189,7 @@
 		45AFEDB21A8D0820009F0010 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		45AFEDB31A8D0820009F0010 /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		45BEE1E11A8C86F70078E500 /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
+		45E020371A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkVibrancyAwareTableRowView.swift; sourceTree = "<group>"; };
 		45E5EF061A7E5E27009967D2 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		45EF0B891A6C942600215F12 /* EditorDebuggingFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorDebuggingFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45EF0B8D1A6C942600215F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -344,6 +346,7 @@
 				455075AE1A8D07E1003FCD76 /* ListenerController.swift */,
 				455075AF1A8D07E1003FCD76 /* VariableTreeViewController.swift */,
 				455075BA1A8D0806003FCD76 /* Operators.swift */,
+				45E020371A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift */,
 				45AFEDB11A8D0820009F0010 /* AttributedStringTableCellView.swift */,
 				45AFEDB21A8D0820009F0010 /* Palette.swift */,
 				45AFEDB31A8D0820009F0010 /* Text.swift */,
@@ -672,6 +675,7 @@
 				45AFEDB41A8D0820009F0010 /* AttributedStringTableCellView.swift in Sources */,
 				455075B11A8D07E1003FCD76 /* ListenerController.swift in Sources */,
 				45AFEDB61A8D0820009F0010 /* Text.swift in Sources */,
+				45E020381A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift in Sources */,
 				45EF0BE51A6C95DE00215F12 /* LLDBController.swift in Sources */,
 				455075BB1A8D0806003FCD76 /* Operators.swift in Sources */,
 				457B29541A950EA600F7A3F9 /* Errors.swift in Sources */,

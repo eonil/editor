@@ -27,20 +27,27 @@ import AppKit
 
 
 class ProjectMenuController: MenuController {
-	let	build	=	NSMenuItem(title: "Build", shortcut: Command+"B")
-	let	run		=	NSMenuItem(title: "Run", shortcut: Command+"R")
-	let	clean	=	NSMenuItem(title: "Clean", shortcut: Command+Shift+"K")
-	let	stop	=	NSMenuItem(title: "Stop", shortcut: Command+".")
+	let	run			=	NSMenuItem(title: "Run", shortcut: Command+"r")
+	let	test		=	NSMenuItem(title: "Test", shortcut: Command+"u")
+	let	documentate	=	NSMenuItem(title: "Documentate", shortcut: None)
+	let	benchmark	=	NSMenuItem(title: "Benchmark", shortcut: None)
+	
+	let	build		=	NSMenuItem(title: "Build", shortcut: Command+"b")
+	let	clean		=	NSMenuItem(title: "Clean", shortcut: Command+Shift+"k")
+	let	stop		=	NSMenuItem(title: "Stop", shortcut: Command+".")
 	
 	init() {
 		let	m	=	NSMenu()
 		m.autoenablesItems	=	false
 		m.title				=	"Project"
 		m.allMenuItems	=	[
-			build,
 			run,
-			clean,
+			test,
+			documentate,
+			benchmark,
 			NSMenuItem.separatorItem(),
+			build,
+			clean,
 			stop,
 		]
 		super.init(m)
