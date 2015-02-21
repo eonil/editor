@@ -132,215 +132,32 @@ private extension WorkspaceNavigationViewController {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///	MARK:
-///	MARK:	InternalController
-
-private struct Selection<T> {
-	///	Selection that temporaily focused by mouse.
-	let	hot:T?
-	
-	///	Selection that explicitly selected by mouse.
-	let	cool:[T]
-	
-	///	`hot` + `cool`.
-	var all:[T] {
-		get {
-			return	(hot == nil ? [] : [hot!]) + cool
-		}
-	}
-}
-private struct SelectionQuery {
-	let	node:Selection<WorkspaceNode>
-	let	URL:Selection<NSURL>
-	
-	let	rootHotSelection:Bool
-	let	rootCoolSelection:Bool
-//	let	rootAnySelection:Bool
-	
-	init(controller:WorkspaceNavigationViewController) {
-		let	fn	=	controller.outlineView.clickedNode
-		let	sns	=	controller.outlineView.selectedNodes
-		
-		let	fu	=	controller.clickedURL
-		let	sus	=	controller.selectedURLs
-		
-		node	=	Selection(hot: fn, cool: sns)
-		URL		=	Selection(hot: fu, cool: sus)
-		
-		let	r	=	controller._internalController.repository?.root
-		
-		rootHotSelection	=	node.hot === r
-		rootCoolSelection	=	node.cool.filter({ n in n === r }).count > 0
-//		rootAnySelection	=	rootHotSelection || rootCoolSelection
-	}
-}
-
-private final class InternalController: NSObject {
-	let menu			=	WorkspaceNavigationContextMenuController()
-	var repository		=	nil as WorkspaceRepository?
-	
-	override init() {
-		super.init()
-		
-		let querySelection	=	{ [unowned self] ()->SelectionQuery in
-			return	SelectionQuery(controller: self.owner)
-		}
-		menu.showInFinder.reaction	=	{ [unowned self] in
-			let	q	=	querySelection()
-			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(q.URL.all)
-		}
-		
-		menu.newFile.reaction		=	{ [unowned self] in
-			let	q	=	querySelection()
-			q.node.hot!.createChildNodeForName("New File 1", kind: WorkspaceNodeKind.File)
-			
-//			let	i1	=	self.owner.outlineView.rowForItem(q.node.hot!)
-//			let	i2	=	q.node.hot!.children.count
-			self.owner.outlineView.reloadItem(q.node.hot!, reloadChildren: true)
-//			self.owner.outlineView.insertItemsAtIndexes(NSIndexSet(index: idx), inParent: q.node.hot!, withAnimation: NSTableViewAnimationOptions.SlideDown)
-//			self.owner.outlineView.reloadData()
-		}
-		menu.newFolder.reaction		=	{ [unowned self] in
-			let	q	=	querySelection()
-			q.node.hot!.createChildNodeForName("New Folder 1", kind: WorkspaceNodeKind.Folder)
-		}
-		menu.newFolderWithSelection.reaction	=	{ [unowned self] in
-			let	q	=	querySelection()
-
-			//	TODO:	Implement this...
-		}
-		menu.delete.reaction	=	{ [unowned self] in
-			let	q	=	querySelection()
-			
-			//	TODO:	Implement this...
-		}
-		menu.addAllUnregistredFiles.reaction	=	{ [unowned self] in
-			let	q	=	querySelection()
-
-			//	TODO:	Implement this...
-		}
-		menu.removeAllMissingFiles.reaction	=	{ [unowned self] in
-			let	q	=	querySelection()
-
-			//	TODO:	Implement this...
-		}
-		menu.note.reaction	=	{ [unowned self] in
-			let	q	=	querySelection()
-
-			//	TODO:	Implement this...
-		}
-		
-		NSNotificationCenter.defaultCenter().addObserverForName(
-			NSMenuDidBeginTrackingNotification,
-			object: MenuController.menuOfController(menu),
-			queue: nil) { [unowned self](n:NSNotification!) -> Void in
-				let	fn	=	self.owner.outlineView.clickedNode
-				let	sns	=	self.owner.outlineView.selectedNodes
-				
-				let	hasFocus		=	fn != nil
-				let	hasSelection	=	sns.count > 0
-				let	rootFocused		=	fn === self.repository!.root
-				let	rootSelected	=	sns.filter({ n in n === self.repository!.root }).count > 0
-				
-				self.menu.showInFinder.enabled				=	hasFocus || hasSelection
-				self.menu.newFile.enabled					=	hasFocus || hasSelection
-				self.menu.newFolder.enabled					=	hasFocus || hasSelection
-				self.menu.newFolderWithSelection.enabled	=	(hasFocus || hasSelection) && (rootFocused == false && rootSelected == false)
-				self.menu.delete.enabled					=	(hasFocus || hasSelection) && (rootFocused == false && rootSelected == false)
-				self.menu.addAllUnregistredFiles.enabled	=	hasFocus || hasSelection
-				self.menu.removeAllMissingFiles.enabled		=	hasFocus || hasSelection
-				self.menu.note.enabled						=	hasFocus || hasSelection
-		}
-	}
-	weak var owner:WorkspaceNavigationViewController! {
-		willSet {
-			assert(owner == nil)
-		}
-	}
-}
-
-private extension WorkspaceNavigationViewController {
-	var	clickedURL:NSURL? {
-		get {
-			if let u = URLRepresentation, let n = outlineView.clickedNode {
-				let	u1	=	u.URLByDeletingLastPathComponent!
-				return	u1.URLByAppendingPath(n.path)
-			}
-			return	nil
-		}
-	}
-	var	selectedURLs:[NSURL] {
-		get {
-			if let u = URLRepresentation {
-				let	u1	=	u.URLByDeletingLastPathComponent!
-				return	outlineView.selectedNodes.map({ n in u1.URLByAppendingPath(n.path) })
-			}
-			return	[]
-		}
-	}
-}
-private extension NSOutlineView {
-	var clickedNode:WorkspaceNode? {
-		get {
-			return	clickedRow == -1 ? nil : self.itemAtRow(clickedRow) as! WorkspaceNode?
-		}
-	}
-	var selectedNodes:[WorkspaceNode] {
-		get {
-			return	selectedRowIndexes.allIndexes.map({ idx in self.itemAtRow(idx) as! WorkspaceNode })
-		}
-	}
-}
-
-private extension NSURL {
-	func URLByAppendingPath(path:WorkspacePath) -> NSURL {
-		if path.components.count == 0 {
-			return	self
-		}
-		let	u	=	self.URLByAppendingPath(path.parentPath)
-		let	u1	=	u.URLByAppendingPathComponent(path.components.last!)
-		return	u1
-	}
-}
-
-extension InternalController: NSOutlineViewDataSource {
-	@objc
-	func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-		let n	=	item as! WorkspaceNode
-		return	n.children.count > 0
-	}
-	@objc
-	func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
-		if item == nil {
-			return	repository == nil ? 0 : 1
-		}
-		let n	=	item as! WorkspaceNode
-		return	n.children.count
-	}
-	@objc
-	func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
-		if item == nil {
-			return	repository!.root
-		}
-		let	n	=	item as! WorkspaceNode
-		return	n.children[index]
-	}
-	@objc
-	func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
-		return	item as! WorkspaceNode
-	}
-	@objc
-	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-		let	v	=	CellView(tableColumn!.identifier)
-		v.nodeRepresentation	=	item as! WorkspaceNode
-		return	v
-	}
-}
+///	MARK:	CellView
 
 
-extension InternalController: NSOutlineViewDelegate {
-	
-}
+
+
 
 
 
@@ -374,6 +191,7 @@ private final class CellView: NSTableCellView {
 			v2.editable			=	false
 			v2.bordered			=	false
 			v2.backgroundColor	=	NSColor.clearColor()
+			v2.textColor		=	NSColor.labelColor()
 			self.textField		=	v2
 			
 		default:
@@ -515,8 +333,304 @@ private let	COLUMN_COMMENT	=	"COMMENT"
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///	MARK:
+///	MARK:	InternalController
+
+
+
+
+
+
+
+private struct Selection<T> {
+	///	Selection that temporaily focused by mouse.
+	let	hot:T?
+	
+	///	Selection that explicitly selected by mouse.
+	let	cool:[T]
+	
+	///	`hot` + `cool`.
+	var all:[T] {
+		get {
+			return	(hot == nil ? [] : [hot!]) + cool
+		}
+	}
+}
+private struct SelectionQuery {
+	let	node:Selection<WorkspaceNode>
+	let	URL:Selection<NSURL>
+	
+	let	rootHotSelection:Bool
+	let	rootCoolSelection:Bool
+//	let	rootAnySelection:Bool
+	
+	init(controller:WorkspaceNavigationViewController) {
+		let	fn	=	controller.outlineView.clickedNode
+		let	sns	=	controller.outlineView.selectedNodes
+		
+		let	fu	=	controller.clickedURL
+		let	sus	=	controller.selectedURLs
+		
+		node	=	Selection(hot: fn, cool: sns)
+		URL		=	Selection(hot: fu, cool: sus)
+		
+		let	r	=	controller._internalController.repository?.root
+		
+		rootHotSelection	=	node.hot === r
+		rootCoolSelection	=	node.cool.filter({ n in n === r }).count > 0
+//		rootAnySelection	=	rootHotSelection || rootCoolSelection
+	}
+}
+
+private final class InternalController: NSObject {
+	let menu			=	WorkspaceNavigationContextMenuController()
+	var repository		=	nil as WorkspaceRepository?
+	
+	override init() {
+		super.init()
+		
+		let querySelection	=	{ [unowned self] ()->SelectionQuery in
+			return	SelectionQuery(controller: self.owner)
+		}
+		menu.showInFinder.reaction	=	{ [unowned self] in
+			let	q	=	querySelection()
+			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(q.URL.all)
+		}
+		
+		menu.newFile.reaction		=	{ [unowned self] in
+			let	q	=	querySelection()
+			q.node.hot!.createChildNodeForName("New File 1", kind: WorkspaceNodeKind.File)
+			
+//			let	i1	=	self.owner.outlineView.rowForItem(q.node.hot!)
+//			let	i2	=	q.node.hot!.children.count
+			self.owner.outlineView.reloadItem(q.node.hot!, reloadChildren: true)
+//			self.owner.outlineView.insertItemsAtIndexes(NSIndexSet(index: idx), inParent: q.node.hot!, withAnimation: NSTableViewAnimationOptions.SlideDown)
+//			self.owner.outlineView.reloadData()
+		}
+		menu.newFolder.reaction		=	{ [unowned self] in
+			let	q	=	querySelection()
+			q.node.hot!.createChildNodeForName("New Folder 1", kind: WorkspaceNodeKind.Folder)
+			
+			self.owner.outlineView.reloadItem(q.node.hot!, reloadChildren: true)
+		}
+		menu.newFolderWithSelection.reaction	=	{ [unowned self] in
+			let	q	=	querySelection()
+
+			//	TODO:	Implement this...
+		}
+		menu.delete.reaction	=	{ [unowned self] in
+			let	q	=	querySelection()
+			
+			//	TODO:	Implement this...
+		}
+		menu.addAllUnregistredFiles.reaction	=	{ [unowned self] in
+			let	q	=	querySelection()
+
+			//	TODO:	Implement this...
+		}
+		menu.removeAllMissingFiles.reaction	=	{ [unowned self] in
+			let	q	=	querySelection()
+
+			//	TODO:	Implement this...
+		}
+		menu.note.reaction	=	{ [unowned self] in
+			let	q	=	querySelection()
+
+			//	TODO:	Implement this...
+		}
+		
+		NSNotificationCenter.defaultCenter().addObserverForName(
+			NSMenuDidBeginTrackingNotification,
+			object: MenuController.menuOfController(menu),
+			queue: nil) { [unowned self](n:NSNotification!) -> Void in
+				let	fn	=	self.owner.outlineView.clickedNode
+				let	sns	=	self.owner.outlineView.selectedNodes
+				
+				let	hasFocus		=	fn != nil
+				let	hasSelection	=	sns.count > 0
+				let	rootFocused		=	fn === self.repository!.root
+				let	rootSelected	=	sns.filter({ n in n === self.repository!.root }).count > 0
+				
+				self.menu.showInFinder.enabled				=	hasFocus || hasSelection
+				self.menu.newFile.enabled					=	hasFocus || hasSelection
+				self.menu.newFolder.enabled					=	hasFocus || hasSelection
+				self.menu.newFolderWithSelection.enabled	=	(hasFocus || hasSelection) && (rootFocused == false && rootSelected == false)
+				self.menu.delete.enabled					=	(hasFocus || hasSelection) && (rootFocused == false && rootSelected == false)
+				self.menu.addAllUnregistredFiles.enabled	=	hasFocus || hasSelection
+				self.menu.removeAllMissingFiles.enabled		=	hasFocus || hasSelection
+				self.menu.note.enabled						=	hasFocus || hasSelection
+		}
+	}
+	weak var owner:WorkspaceNavigationViewController! {
+		willSet {
+			assert(owner == nil)
+		}
+	}
+}
+
+private extension WorkspaceNavigationViewController {
+	var	clickedURL:NSURL? {
+		get {
+			if let u = URLRepresentation, let n = outlineView.clickedNode {
+				let	u1	=	u.URLByDeletingLastPathComponent!
+				return	u1.URLByAppendingPath(n.path)
+			}
+			return	nil
+		}
+	}
+	var	selectedURLs:[NSURL] {
+		get {
+			if let u = URLRepresentation {
+				let	u1	=	u.URLByDeletingLastPathComponent!
+				return	outlineView.selectedNodes.map({ n in u1.URLByAppendingPath(n.path) })
+			}
+			return	[]
+		}
+	}
+}
+private extension NSOutlineView {
+	var clickedNode:WorkspaceNode? {
+		get {
+			return	clickedRow == -1 ? nil : self.itemAtRow(clickedRow) as! WorkspaceNode?
+		}
+	}
+	var selectedNodes:[WorkspaceNode] {
+		get {
+			return	selectedRowIndexes.allIndexes.map({ idx in self.itemAtRow(idx) as! WorkspaceNode })
+		}
+	}
+}
+
+private extension NSURL {
+	func URLByAppendingPath(path:WorkspacePath) -> NSURL {
+		if path.components.count == 0 {
+			return	self
+		}
+		let	u	=	self.URLByAppendingPath(path.parentPath)
+		let	u1	=	u.URLByAppendingPathComponent(path.components.last!)
+		return	u1
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///	MARK:
+///	MARK:	InternalController (NSOutlineViewDataSource)
+
+
+
+extension InternalController: NSOutlineViewDataSource {
+	@objc
+	func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
+		let n	=	item as! WorkspaceNode
+		return	n.children.count > 0
+	}
+	@objc
+	func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
+		if item == nil {
+			return	repository == nil ? 0 : 1
+		}
+		let n	=	item as! WorkspaceNode
+		return	n.children.count
+	}
+	@objc
+	func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
+		if item == nil {
+			return	repository!.root
+		}
+		let	n	=	item as! WorkspaceNode
+		return	n.children[index]
+	}
+	@objc
+	func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
+		return	item as! WorkspaceNode
+	}
+	@objc
+	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
+		let	v	=	CellView(tableColumn!.identifier)
+		v.nodeRepresentation	=	item as! WorkspaceNode
+		return	v
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///	MARK:	InternalController (NSOutlineViewDelegate)
+
+
+
+extension InternalController: NSOutlineViewDelegate {
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///	MARK:	InternalController (WorkspaceRepositoryDelegate)
 
 extension InternalController: WorkspaceRepositoryDelegate {
 	func workspaceRepositoryDidCreateNode(node: WorkspaceNode) {

@@ -93,10 +93,16 @@ public protocol WorkspaceRepositoryDelegate: class {
 ///	-	Small number of child nodes.
 ///
 ///
+///	Lifecycle
+///	---------
+///	You cannot re-use once deleted node object. Prohibited by design.
+///	Once you deleted (detached) a node from repository tree, just destroy it ASAP.
+///	Performing any operation on detached node will cause program crash.
+///
+///
 ///
 ///	Subworkspaces
 ///	-------------
-///
 ///	If a workspace-node is representing a subworkspace, then it can load the subworkspace into memory.
 ///	Anyway moving nodes 
 ///
@@ -156,7 +162,8 @@ public extension WorkspaceNode {
 public extension WorkspaceNode {
 	public func createChildNodeForName(name:String, kind:WorkspaceNodeKind) -> WorkspaceNode {
 		precondition(self.kind == WorkspaceNodeKind.Folder, "You can create subnode only in a `Folder` kind node.")
-		precondition(parent == nil || parent!.nodeForName(name) == nil, "The name already been take by a sibling. Bad name.")
+		precondition(self.nodeForName(name) == nil, "The name already been take by one of child node.")
+		assertAttached()
 		
 		let	n	=	WorkspaceNode(repository: self.repository, name: name, kind: kind)
 		n.parent	=	self
@@ -166,6 +173,8 @@ public extension WorkspaceNode {
 		return	n
 	}
 	public func deleteChildNodeAtIndex(index:Int) {
+		assertAttached()
+		
 		let	n		=	children[index]
 		repository.delegate?.workspaceRepositoryWillDeleteNode(n)
 		
@@ -173,6 +182,8 @@ public extension WorkspaceNode {
 		children.removeAtIndex(index)
 	}
 	public func deleteChildNodeForName(name:String) {
+		assertAttached()
+		
 		if let idx = indexOfNodeForName(name) {
 			deleteChildNodeAtIndex(idx)
 		}
@@ -181,6 +192,7 @@ public extension WorkspaceNode {
 	
 	public func rename(name:String) {
 		precondition(parent == nil || parent!.nodeForName(name) == nil, "The name already been take by a sibling. Bad name.")
+		assertAttached()
 		
 		self.name	=	name
 	}
@@ -188,7 +200,8 @@ public extension WorkspaceNode {
 	///	Moves a node into a new location.
 	///	Node object will be moved without recreating a new instance.
 	public func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int, asNewName:String) {
-		precondition(toNewParentNode.nodeForName(asNewName) == nil, "The name already been take by a sibling in the parent node. Bad name.")
+		precondition(toNewParentNode.nodeForName(asNewName) == nil, "The name already been take by a sibling in the parent node.")
+		assertAttached()
 		
 		////
 		
@@ -208,6 +221,8 @@ public extension WorkspaceNode {
 		repository.delegate?.workspaceRepositoryDidMoveNode(n)
 	}
 	public func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int) {
+		assertAttached()
+		
 		let	n	=	self.children[atOldIndex]
 		self.moveChildNode(atOldIndex, toNewParentNode: toNewParentNode, atNewIndex: atNewIndex, asNewName: n.name)
 	}
@@ -215,7 +230,8 @@ public extension WorkspaceNode {
 
 public extension WorkspaceNode {
 	public func delete() {
-		precondition(parent != nil, "Root node cannot be moved.")
+		precondition(isRoot == false, "Root node cannot be moved.")
+		assertAttached()
 	
 		if let idx = parent!.indexOfNode(self) {
 			parent!.deleteChildNodeAtIndex(idx)
@@ -224,7 +240,8 @@ public extension WorkspaceNode {
 		fatalError("This node cannot be found from parent's children list. This is a serious logic bug, and must be patched.")
 	}
 	public func move(#toParentNode:WorkspaceNode, atIndex:Int, asName:String) {
-		precondition(parent != nil, "Root node cannot be moved.")
+		precondition(isRoot == false, "Root node cannot be moved.")
+		assertAttached()
 		
 		if let idx = parent!.indexOfNode(self) {
 			parent!.moveChildNode(idx, toNewParentNode: toParentNode, atNewIndex: atIndex, asNewName: asName)
@@ -275,6 +292,51 @@ public struct WorkspaceNodeFlags {
 //	///	A root node SHOULD NOT set this to `true`.
 //	var	subworkspace:Bool
 }
+
+
+
+
+
+
+
+extension WorkspaceNode {
+	var isRoot:Bool {
+		get {
+			return	repository.root === self
+		}
+	}
+	var isAttached:Bool {
+		get {
+			if parent == nil {
+				return	isRoot
+			} else {
+				return	parent!.isAttached
+			}
+		}
+	}
+	func assertNonRoot(@autoclosure message:()->String = "This node must be a root node of a repository to perform the operation.") {
+		assert(isRoot, message())
+	}
+	func assertAttached(@autoclosure message:()->String = "This node must be attached to a root node of a repository to perform the operation.") {
+		assert(isAttached, message())
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

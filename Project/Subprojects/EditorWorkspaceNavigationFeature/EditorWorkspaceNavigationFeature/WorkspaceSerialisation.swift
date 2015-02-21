@@ -29,6 +29,8 @@ class WorkspaceSerialisation {
 	}
 	///	This will creates a new repository if there's no existing configuration.
 	static func readRepositoryConfiguration(fromWorkspaceAtURL u:NSURL) -> WorkspaceRepository {
+		precondition(u.existingAsDataFile, "No file at the URL `\(u)`.")
+		
 		let	confFileURL	=	configurationFileURLForWorkspaceAtURL(u)
 		let	data		=	NSData(contentsOfURL: confFileURL)!
 		let	rep			=	deserialise(data)

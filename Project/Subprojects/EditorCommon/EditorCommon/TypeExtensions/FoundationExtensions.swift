@@ -91,9 +91,9 @@ public extension NSURL {
 			var	err	=	nil as NSError?
 			let	ok	=	self.checkResourceIsReachableAndReturnError(&err)
 			assert(ok == true || err != nil)
-			if !ok {
-				Debug.log("existingAsAnyFile: \(err)")
-			}
+//			if !ok {
+//				Debug.log("existingAsAnyFile: \(err)")
+//			}
 			return	ok
 		}
 	}
@@ -103,9 +103,9 @@ public extension NSURL {
 				var	dir: AnyObject?	=	false as AnyObject?
 				var	err				=	nil as NSError?
 				let	ok				=	self.getResourceValue(&dir, forKey: NSURLIsDirectoryKey, error: &err)
-				if !ok {
-					Debug.log("existingAsDataFile: \(err)")
-				}
+//				if !ok {
+//					Debug.log("existingAsDataFile: \(err)")
+//				}
 				return	dir as! Bool == false
 			}
 			return	false
@@ -118,9 +118,9 @@ public extension NSURL {
 				var	dir: AnyObject?	=	false as AnyObject?
 				var	err				=	nil as NSError?
 				let	ok				=	self.getResourceValue(&dir, forKey: NSURLIsDirectoryKey, error: &err)
-				if !ok {
-					Debug.log("existingAsDataFile: \(err)")
-				}
+//				if !ok {
+//					Debug.log("existingAsDataFile: \(err)")
+//				}
 				return	dir as! Bool == true
 			}
 			return	false

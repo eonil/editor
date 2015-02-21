@@ -28,7 +28,7 @@
 		45166B801A98FC7F0046213D /* EditorUIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B721A98FC6A0046213D /* EditorUIComponents.framework */; };
 		45166B8A1A98FE930046213D /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B871A98FE860046213D /* EditorCommon.framework */; };
 		45166B8B1A98FE960046213D /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B871A98FE860046213D /* EditorCommon.framework */; };
-		457ADE561A991B6900C04EEE /* FileSystemWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457ADE551A991B6900C04EEE /* FileSystemWorkspace.swift */; };
+		45F58C691A9941E600CA9F69 /* WorkspaceRepository.Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F58C681A9941E600CA9F69 /* WorkspaceRepository.Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,7 +175,7 @@
 		45166B011A98F9960046213D /* WorkspaceNavigationContextMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceNavigationContextMenuController.swift; sourceTree = "<group>"; };
 		45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUIComponents.xcodeproj; path = ../EditorUIComponents/EditorUIComponents.xcodeproj; sourceTree = "<group>"; };
 		45166B811A98FE860046213D /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
-		457ADE551A991B6900C04EEE /* FileSystemWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemWorkspace.swift; sourceTree = "<group>"; };
+		45F58C681A9941E600CA9F69 /* WorkspaceRepository.Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceRepository.Utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,9 +239,9 @@
 			children = (
 				45166AB51A98C4190046213D /* WorkspaceNavigationViewController.swift */,
 				45166B011A98F9960046213D /* WorkspaceNavigationContextMenuController.swift */,
-				457ADE551A991B6900C04EEE /* FileSystemWorkspace.swift */,
 				45166AB71A98C5D60046213D /* WorkspaceRepository.swift */,
 				45166AD11A98E4A90046213D /* WorkspaceRepository.Printable.swift */,
+				45F58C681A9941E600CA9F69 /* WorkspaceRepository.Utility.swift */,
 				45166AB91A98C66A0046213D /* WorkspaceSerialisation.swift */,
 				45166ACF1A98C8C40046213D /* Aliases.swift */,
 				45166A611A98C3EC0046213D /* Supporting Files */,
@@ -575,7 +575,7 @@
 				45166ABA1A98C66A0046213D /* WorkspaceSerialisation.swift in Sources */,
 				45166AD01A98C8C40046213D /* Aliases.swift in Sources */,
 				45166AB81A98C5D60046213D /* WorkspaceRepository.swift in Sources */,
-				457ADE561A991B6900C04EEE /* FileSystemWorkspace.swift in Sources */,
+				45F58C691A9941E600CA9F69 /* WorkspaceRepository.Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,6 +719,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Eonil/Workshop/Temp/Xcode/Derivations/EditorWorkspaceNavigationFeatureOnly-frrbtfuqqbtzjdfbjujsomjoffzv/Build/Products/Debug",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = EditorWorkspaceNavigationFeature/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -740,6 +744,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Eonil/Workshop/Temp/Xcode/Derivations/EditorWorkspaceNavigationFeatureOnly-frrbtfuqqbtzjdfbjujsomjoffzv/Build/Products/Debug",
+				);
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = EditorWorkspaceNavigationFeature/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -788,6 +796,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Eonil/Workshop/Temp/Xcode/Derivations/EditorWorkspaceNavigationFeatureOnly-frrbtfuqqbtzjdfbjujsomjoffzv/Build/Products/Debug",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -805,6 +817,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/Eonil/Workshop/Temp/Xcode/Derivations/EditorWorkspaceNavigationFeatureOnly-frrbtfuqqbtzjdfbjujsomjoffzv/Build/Products/Debug",
+				);
 				INFOPLIST_FILE = Workbench1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
