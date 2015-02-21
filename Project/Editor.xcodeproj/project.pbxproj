@@ -152,6 +152,34 @@
 			remoteGlobalIDString = 459A04181A18D74D00F946BD;
 			remoteInfo = OSX;
 		};
+		45166A951A98C3ED0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452CFCD91A8C7B7F0050BE72 /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E2E0141A98530200380762;
+			remoteInfo = WorkbenchForCommonWindowController;
+		};
+		45166A971A98C3ED0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452CFCD91A8C7B7F0050BE72 /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F17BA01A986572001CD6BF;
+			remoteInfo = WorkbenchForIconPreview;
+		};
+		45166A9B1A98C3ED0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166A7A1A98C3EC0046213D /* EditorWorkspaceNavigationFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45166A5E1A98C3EC0046213D;
+			remoteInfo = EditorWorkspaceNavigationFeature;
+		};
+		45166A9D1A98C3ED0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166A7A1A98C3EC0046213D /* EditorWorkspaceNavigationFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45166A691A98C3EC0046213D;
+			remoteInfo = EditorWorkspaceNavigationFeatureTests;
+		};
 		452442661A18019400A03A51 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4524425D1A18019400A03A51 /* Standards.xcodeproj */;
@@ -634,6 +662,7 @@
 		450A0DE01A275EBD0026102D /* Dispatch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Dispatch.xcodeproj; path = Submodules/Monolith.Swift/Dispatch/Dispatch.xcodeproj; sourceTree = "<group>"; };
 		4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectDocument.swift; sourceTree = "<group>"; };
 		4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustSourceCodeFileDocument.swift; sourceTree = "<group>"; };
+		45166A7A1A98C3EC0046213D /* EditorWorkspaceNavigationFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorWorkspaceNavigationFeature.xcodeproj; path = EditorWorkspaceNavigationFeature/EditorWorkspaceNavigationFeature.xcodeproj; sourceTree = "<group>"; };
 		451740DD1A102FA300861ECC /* ScrollViewController1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController1.swift; sourceTree = "<group>"; };
 		451740DE1A102FA300861ECC /* TextScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextScrollViewController.swift; sourceTree = "<group>"; };
 		451740DF1A102FA300861ECC /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
@@ -789,6 +818,15 @@
 			path = Documents;
 			sourceTree = "<group>";
 		};
+		45166A7B1A98C3EC0046213D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45166A9C1A98C3ED0046213D /* EditorWorkspaceNavigationFeature.framework */,
+				45166A9E1A98C3ED0046213D /* EditorWorkspaceNavigationFeatureTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		451740D71A102F1900861ECC /* SpecificUIComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -852,6 +890,7 @@
 		452442781A1804FE00A03A51 /* Subprojects */ = {
 			isa = PBXGroup;
 			children = (
+				45166A7A1A98C3EC0046213D /* EditorWorkspaceNavigationFeature.xcodeproj */,
 				45EF0BA51A6C942600215F12 /* EditorDebuggingFeature.xcodeproj */,
 				4526C0511A6B81D300F5BDC1 /* EditorIssueListingFeature.xcodeproj */,
 				4527E5291A6A7E4A00115139 /* EditorInteractiveCommandConsoleFeature.xcodeproj */,
@@ -941,6 +980,8 @@
 				452CFCDF1A8C7B7F0050BE72 /* EditorUIComponents.framework */,
 				452CFCE11A8C7B7F0050BE72 /* EditorUIComponentsTests.xctest */,
 				4550753B1A8D04C4003FCD76 /* Workbench.app */,
+				45166A961A98C3ED0046213D /* WorkbenchForCommonWindowController.app */,
+				45166A981A98C3ED0046213D /* WorkbenchForIconPreview.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1470,6 +1511,10 @@
 					ProjectRef = 452CFCD91A8C7B7F0050BE72 /* EditorUIComponents.xcodeproj */;
 				},
 				{
+					ProductGroup = 45166A7B1A98C3EC0046213D /* Products */;
+					ProjectRef = 45166A7A1A98C3EC0046213D /* EditorWorkspaceNavigationFeature.xcodeproj */;
+				},
+				{
 					ProductGroup = 452443161A18059700A03A51 /* Products */;
 					ProjectRef = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
 				},
@@ -1529,6 +1574,34 @@
 			fileType = wrapper.cfbundle;
 			path = OSXTests.xctest;
 			remoteRef = 450A0DED1A275EBD0026102D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166A961A98C3ED0046213D /* WorkbenchForCommonWindowController.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForCommonWindowController.app;
+			remoteRef = 45166A951A98C3ED0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166A981A98C3ED0046213D /* WorkbenchForIconPreview.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForIconPreview.app;
+			remoteRef = 45166A971A98C3ED0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166A9C1A98C3ED0046213D /* EditorWorkspaceNavigationFeature.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorWorkspaceNavigationFeature.framework;
+			remoteRef = 45166A9B1A98C3ED0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166A9E1A98C3ED0046213D /* EditorWorkspaceNavigationFeatureTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorWorkspaceNavigationFeatureTests.xctest;
+			remoteRef = 45166A9D1A98C3ED0046213D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		452442671A18019400A03A51 /* Standards.framework */ = {

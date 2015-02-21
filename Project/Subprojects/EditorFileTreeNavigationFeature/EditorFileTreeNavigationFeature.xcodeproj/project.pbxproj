@@ -262,9 +262,9 @@
 		45F48F391A65E1FE00FF38FB = {
 			isa = PBXGroup;
 			children = (
-				45BD26B91A65E9CA003F45D9 /* EditorFileTreeNavigationFeatureInteractiveTester */,
-				45F48F521A65E1FE00FF38FB /* EditorFileTreeNavigationFeatureTests */,
 				45F48F451A65E1FE00FF38FB /* EditorFileTreeNavigationFeature */,
+				45F48F521A65E1FE00FF38FB /* EditorFileTreeNavigationFeatureTests */,
+				45BD26B91A65E9CA003F45D9 /* EditorFileTreeNavigationFeatureInteractiveTester */,
 				453728C71A8C84B900BE5C1B /* EditorCommon.xcodeproj */,
 				45FE1A731A65E281002B9D1B /* Dispatch.xcodeproj */,
 				45FE1A831A65E29D002B9D1B /* EonilFileSystemEvents.xcodeproj */,
