@@ -24,6 +24,11 @@
 		45166AF91A98F55A0046213D /* EditorWorkspaceNavigationFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45166A5E1A98C3EC0046213D /* EditorWorkspaceNavigationFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45166B001A98F6720046213D /* TestData in Resources */ = {isa = PBXBuildFile; fileRef = 45166AFF1A98F6720046213D /* TestData */; };
 		45166B021A98F9960046213D /* WorkspaceNavigationContextMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166B011A98F9960046213D /* WorkspaceNavigationContextMenuController.swift */; };
+		45166B7F1A98FC730046213D /* EditorUIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B721A98FC6A0046213D /* EditorUIComponents.framework */; };
+		45166B801A98FC7F0046213D /* EditorUIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B721A98FC6A0046213D /* EditorUIComponents.framework */; };
+		45166B8A1A98FE930046213D /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B871A98FE860046213D /* EditorCommon.framework */; };
+		45166B8B1A98FE960046213D /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B871A98FE860046213D /* EditorCommon.framework */; };
+		457ADE561A991B6900C04EEE /* FileSystemWorkspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457ADE551A991B6900C04EEE /* FileSystemWorkspace.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +88,55 @@
 			remoteGlobalIDString = 45166A5D1A98C3EC0046213D;
 			remoteInfo = EditorWorkspaceNavigationFeature;
 		};
+		45166B711A98FC6A0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFCBD1A8C7B7F0050BE72;
+			remoteInfo = EditorUIComponents;
+		};
+		45166B731A98FC6A0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFCC81A8C7B7F0050BE72;
+			remoteInfo = EditorUIComponentsTests;
+		};
+		45166B751A98FC6A0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459ACDCF1A8CE1EE008798F4;
+			remoteInfo = Workbench;
+		};
+		45166B771A98FC6A0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E2E0141A98530200380762;
+			remoteInfo = WorkbenchForCommonWindowController;
+		};
+		45166B791A98FC6A0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F17BA01A986572001CD6BF;
+			remoteInfo = WorkbenchForIconPreview;
+		};
+		45166B861A98FE860046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166B811A98FE860046213D /* EditorCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFC661A8C7A6A0050BE72;
+			remoteInfo = EditorCommon;
+		};
+		45166B881A98FE860046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166B811A98FE860046213D /* EditorCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFD5C1A8C7D2D0050BE72;
+			remoteInfo = UnitTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -119,6 +173,9 @@
 		45166AE01A98F53A0046213D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		45166AFF1A98F6720046213D /* TestData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestData; sourceTree = "<group>"; };
 		45166B011A98F9960046213D /* WorkspaceNavigationContextMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceNavigationContextMenuController.swift; sourceTree = "<group>"; };
+		45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUIComponents.xcodeproj; path = ../EditorUIComponents/EditorUIComponents.xcodeproj; sourceTree = "<group>"; };
+		45166B811A98FE860046213D /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
+		457ADE551A991B6900C04EEE /* FileSystemWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemWorkspace.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +183,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45166B8B1A98FE960046213D /* EditorCommon.framework in Frameworks */,
+				45166B7F1A98FC730046213D /* EditorUIComponents.framework in Frameworks */,
 				45166ACE1A98C8620046213D /* Standards.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +201,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45166B8A1A98FE930046213D /* EditorCommon.framework in Frameworks */,
+				45166B801A98FC7F0046213D /* EditorUIComponents.framework in Frameworks */,
 				45166AF81A98F55A0046213D /* EditorWorkspaceNavigationFeature.framework in Frameworks */,
 				45166AF41A98F55A0046213D /* Standards.framework in Frameworks */,
 			);
@@ -153,6 +214,8 @@
 		45166A541A98C3EC0046213D = {
 			isa = PBXGroup;
 			children = (
+				45166B811A98FE860046213D /* EditorCommon.xcodeproj */,
+				45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */,
 				45166ABB1A98C85C0046213D /* Standards.xcodeproj */,
 				45166A601A98C3EC0046213D /* EditorWorkspaceNavigationFeature */,
 				45166A6D1A98C3EC0046213D /* EditorWorkspaceNavigationFeatureTests */,
@@ -176,6 +239,7 @@
 			children = (
 				45166AB51A98C4190046213D /* WorkspaceNavigationViewController.swift */,
 				45166B011A98F9960046213D /* WorkspaceNavigationContextMenuController.swift */,
+				457ADE551A991B6900C04EEE /* FileSystemWorkspace.swift */,
 				45166AB71A98C5D60046213D /* WorkspaceRepository.swift */,
 				45166AD11A98E4A90046213D /* WorkspaceRepository.Printable.swift */,
 				45166AB91A98C66A0046213D /* WorkspaceSerialisation.swift */,
@@ -240,6 +304,27 @@
 				45166ADA1A98F53A0046213D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		45166B691A98FC6A0046213D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45166B721A98FC6A0046213D /* EditorUIComponents.framework */,
+				45166B741A98FC6A0046213D /* EditorUIComponentsTests.xctest */,
+				45166B761A98FC6A0046213D /* Workbench.app */,
+				45166B781A98FC6A0046213D /* WorkbenchForCommonWindowController.app */,
+				45166B7A1A98FC6A0046213D /* WorkbenchForIconPreview.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45166B821A98FE860046213D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45166B871A98FE860046213D /* EditorCommon.framework */,
+				45166B891A98FE860046213D /* UnitTests */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +429,14 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 45166B821A98FE860046213D /* Products */;
+					ProjectRef = 45166B811A98FE860046213D /* EditorCommon.xcodeproj */;
+				},
+				{
+					ProductGroup = 45166B691A98FC6A0046213D /* Products */;
+					ProjectRef = 45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */;
+				},
+				{
 					ProductGroup = 45166ABC1A98C85C0046213D /* Products */;
 					ProjectRef = 45166ABB1A98C85C0046213D /* Standards.xcodeproj */;
 				},
@@ -393,6 +486,55 @@
 			remoteRef = 45166ACC1A98C85C0046213D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45166B721A98FC6A0046213D /* EditorUIComponents.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorUIComponents.framework;
+			remoteRef = 45166B711A98FC6A0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166B741A98FC6A0046213D /* EditorUIComponentsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorUIComponentsTests.xctest;
+			remoteRef = 45166B731A98FC6A0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166B761A98FC6A0046213D /* Workbench.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench.app;
+			remoteRef = 45166B751A98FC6A0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166B781A98FC6A0046213D /* WorkbenchForCommonWindowController.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForCommonWindowController.app;
+			remoteRef = 45166B771A98FC6A0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166B7A1A98FC6A0046213D /* WorkbenchForIconPreview.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForIconPreview.app;
+			remoteRef = 45166B791A98FC6A0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166B871A98FE860046213D /* EditorCommon.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorCommon.framework;
+			remoteRef = 45166B861A98FE860046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45166B891A98FE860046213D /* UnitTests */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = UnitTests;
+			remoteRef = 45166B881A98FE860046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -433,6 +575,7 @@
 				45166ABA1A98C66A0046213D /* WorkspaceSerialisation.swift in Sources */,
 				45166AD01A98C8C40046213D /* Aliases.swift in Sources */,
 				45166AB81A98C5D60046213D /* WorkspaceRepository.swift in Sources */,
+				457ADE561A991B6900C04EEE /* FileSystemWorkspace.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

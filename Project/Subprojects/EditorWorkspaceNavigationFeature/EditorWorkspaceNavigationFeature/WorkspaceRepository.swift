@@ -28,11 +28,11 @@ import Foundation
 ///
 ///	This object does not handle any file-related operations. You need to handle them
 ///	yourself at another layer.
-public final class WorkspaceRepository {
+public class WorkspaceRepository {
 	public weak var					delegate:WorkspaceRepositoryDelegate?		=	nil
 	
-	public private(set) lazy var	root:	WorkspaceNode						=	WorkspaceNode(repository: self, name: "" , kind: WorkspaceNodeKind.Folder)
-//	public private(set) var			index:	[WorkspacePath:WorkspaceNode]		=	[:]
+	public private(set) lazy var	root:			WorkspaceNode						=	WorkspaceNode(repository: self, name: "" , kind: WorkspaceNodeKind.Folder)
+//	public private(set) var			index:			[WorkspacePath:WorkspaceNode]		=	[:]
 	
 	///	:param:	name		Name of repository. Name of root node will also be set to this.
 	public init(name:String) {
@@ -43,7 +43,7 @@ public final class WorkspaceRepository {
 ///	`WillMove` and `DidMovw` will always be sent in pair and sequently and immediately.
 ///	If the events are not paired, it's a logic bug.
 ///	You can access proper old and new location at each events.
-public protocol WorkspaceRepositoryDelegate: class {
+public protocol WorkspaceRepositoryDelegate: class {	
 	func workspaceRepositoryDidCreateNode(node:WorkspaceNode)
 	func workspaceRepositoryWillMoveNode(node:WorkspaceNode)
 	func workspaceRepositoryDidMoveNode(node:WorkspaceNode)
@@ -106,6 +106,8 @@ public final class WorkspaceNode {
 	public private(set) var			children:		[WorkspaceNode]
 	
 	public private(set) var			name:			String
+	public var						comment:		String?
+	
 	public private(set) var			kind:			WorkspaceNodeKind
 	public private(set) var			flags:			WorkspaceNodeFlags
 	
@@ -120,8 +122,9 @@ public final class WorkspaceNode {
 		self.children	=	[]
 
 		self.name		=	name
+		self.comment	=	nil
 		self.kind		=	kind
-		self.flags		=	WorkspaceNodeFlags(lazySubtree: false, subworkspace: false)
+		self.flags		=	WorkspaceNodeFlags(lazySubtree: false)
 	}
 }
 
@@ -232,15 +235,21 @@ public extension WorkspaceNode {
 }
 
 public extension WorkspaceNode {
+	public var isSubworkspace:Bool {
+		get {
+			//	TODO:	Implement this...
+			return	false
+		}
+	}
 	public func openSubworkspace() {
-		precondition(self.flags.subworkspace, "This node must be marked as a `subworkspace`.")
+		precondition(self.isSubworkspace, "This node must be marked as a `subworkspace`.")
 		
 		subworkspace	=	WorkspaceRepository(name: self.name)
 		
 		repository.delegate?.workspaceRepositoryDidOpenSubworkspaceAtNode(self)
 	}
 	public func closeSubworkspace() {
-		precondition(self.flags.subworkspace, "This node must be marked as a `subworkspace`.")
+		precondition(self.isSubworkspace, "This node must be marked as a `subworkspace`.")
 		
 		repository.delegate?.workspaceRepositoryWillCloseSubworkspaceAtNode(self)
 		
@@ -261,10 +270,10 @@ public struct WorkspaceNodeFlags {
 	///	should erase any child node.
 	var	lazySubtree:Bool
 	
-	///	This node is a `Folder` node that represents a subproject.
-	///	Subworkspace also mube be `lazySubtree`.
-	///	A root node SHOULD NOT set this to `true`.
-	var	subworkspace:Bool
+//	///	This node is a `Folder` node that represents a subproject.
+//	///	Subworkspace also mube be `lazySubtree`.
+//	///	A root node SHOULD NOT set this to `true`.
+//	var	subworkspace:Bool
 }
 
 

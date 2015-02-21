@@ -8,14 +8,45 @@
 
 import Foundation
 import AppKit
+import EditorCommon
+import EditorUIComponents
 
 
 
-
-class WorkspaceNavigationContextMenuController {
-	let	menu	=	NSMenu()
+final class WorkspaceNavigationContextMenuController: MenuController {
+	let	showInFinder			=	NSMenuItem(title: "Show in Finder")
+	let	newFile					=	NSMenuItem(title: "New File...")
+	let	newFolder				=	NSMenuItem(title: "New Folder")
+	let	newFolderWithSelection	=	NSMenuItem(title: "New Folder with Selection")
+	let	delete					=	NSMenuItem(title: "Delete")
+	let	addAllUnregistredFiles	=	NSMenuItem(title: "Add All Unregistered Files")
+	let	removeAllMissingFiles	=	NSMenuItem(title: "Remove All Missing Files")
+	let	note					=	NSMenuItem(title: "Note...")
 	
 	init() {
-		menu.addItemWithTitle("AAA", action: nil, keyEquivalent: "")
+		let	m	=	NSMenu()
+		m.autoenablesItems	=	false
+		
+		m.addItem(showInFinder)
+		m.addItem(NSMenuItem.separatorItem())
+		m.addItem(newFile)
+		m.addItem(newFolder)
+		m.addItem(newFolderWithSelection)
+		m.addItem(NSMenuItem.separatorItem())
+		m.addItem(delete)
+		m.addItem(NSMenuItem.separatorItem())
+		m.addItem(addAllUnregistredFiles)
+		m.addItem(removeAllMissingFiles)
+		m.addItem(NSMenuItem.separatorItem())
+		m.addItem(note)
+		
+		super.init(m)
+	}
+}
+
+private extension NSMenuItem {
+	convenience init(title:String) {
+		self.init()
+		self.title	=	title
 	}
 }

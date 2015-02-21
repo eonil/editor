@@ -87,7 +87,7 @@ extension ApplicationController {
 				let	ws		=	docc.currentDocument as? WorkspaceDocument
 				
 				rebind(self.projectMenu!, ws?.projectMenuController ||| DefaultMenuControllerPalette.project)
-				rebind(self.debugMenu!, ws?.debugMenuController ||| DefaultMenuControllerPalette.debug)		
+				rebind(self.debugMenu!, ws?.debugMenuController ||| DefaultMenuControllerPalette.debug)
 		}
 	}
 	

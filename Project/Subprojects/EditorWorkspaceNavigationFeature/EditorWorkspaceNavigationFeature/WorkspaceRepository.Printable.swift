@@ -51,9 +51,9 @@ extension WorkspaceNodeFlags: Printable {
 			if lazySubtree {
 				a.append("lazy-subtree")
 			}
-			if subworkspace {
-				a.append("subproject")
-			}
+//			if subworkspace {
+//				a.append("subproject")
+//			}
 			let	s	=	join(", ", a)
 			let	s1	=	"[\(s)]"
 			

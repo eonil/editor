@@ -21,18 +21,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	let	nv	=	WorkspaceNavigationViewController()
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-
+		window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
+		
 		sv.documentView		=	nv.view
 		window.contentView	=	sv
 		
 		let	u	=	NSBundle.mainBundle().URLForResource("TestData/Test1", withExtension: "eews")
+//		let	u	=	NSURL(fileURLWithPath: "/Users/Eonil/Documents/eewstest/Test1.eews")!
 		nv.URLRepresentation	=	u
+		
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
 		// Insert code here to tear down your application
 	}
-
+	
+	
+	
+	@IBAction
+	func saveWorkspaceRepositoryConfiguration(AnyObject?) {
+		nv.synchroniseToFileSystem()
+	}
 
 }
 
