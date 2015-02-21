@@ -15,6 +15,7 @@ public extension IconPalette {
 			public static let	radioactive			=	icon(0x2622)
 			
 			public static let	whiteDiamonSuit		=	icon(0x2662)
+			
 			public static let	recyclingSymbolForGenericMaterials		=	icon(0x267A)
 		}
 	}

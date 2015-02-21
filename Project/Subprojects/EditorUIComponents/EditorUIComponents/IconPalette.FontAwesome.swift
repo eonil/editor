@@ -42,6 +42,12 @@ public extension IconPalette {
 			public static let	exclamationCircle		=	icon(0xf06a)
 			public static let	exclamationTriangle		=	icon(0xf071)
 			
+			public static let	file					=	icon(0xf15b)
+			public static let	fileO					=	icon(0xf016)
+			public static let	filesO					=	icon(0xf0c5)
+			public static let	fileText				=	icon(0xf15c)
+			public static let	fileTextO				=	icon(0xf0f6)
+			
 			public static let	folder					=	icon(0xf07b)
 			public static let	folderO					=	icon(0xf114)
 			public static let	folderOpen				=	icon(0xf07c)
@@ -64,10 +70,16 @@ public extension IconPalette {
 			public static let	question				=	icon(0xf128)
 			public static let	questionCircle			=	icon(0xf059)
 			
+			public static let	repeat					=	icon(0xf01e)
+			public static let	rotateLeft				=	undo
+			public static let	rotateRight				=	repeat
+			
 			public static let	search					=	icon(0xf002)
 			
 			public static let	star					=	icon(0xf005)
 			public static let	starO					=	icon(0xf006)
+			
+			public static let	undo					=	icon(0xf0e2)
 			
 			public static let	warning					=	exclamationTriangle
 		}
