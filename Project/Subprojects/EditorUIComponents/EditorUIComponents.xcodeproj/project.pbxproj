@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		451669D41A98BD120046213D /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 451669D21A98BC6B0046213D /* FontAwesome.otf */; };
+		45166B311A98FB850046213D /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166B2F1A98FB850046213D /* MenuController.swift */; };
+		45166B321A98FB850046213D /* MenuShortcutKeyCombination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45166B301A98FB850046213D /* MenuShortcutKeyCombination.swift */; };
 		452CFCC91A8C7B7F0050BE72 /* EditorUIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452CFCBD1A8C7B7F0050BE72 /* EditorUIComponents.framework */; };
 		452CFCD01A8C7B7F0050BE72 /* EditorUIComponentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFCCF1A8C7B7F0050BE72 /* EditorUIComponentsTests.swift */; };
 		452CFD041A8C7BFE0050BE72 /* MultipaneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD021A8C7BFE0050BE72 /* MultipaneViewController.swift */; };
@@ -107,6 +109,8 @@
 
 /* Begin PBXFileReference section */
 		451669D21A98BC6B0046213D /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		45166B2F1A98FB850046213D /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		45166B301A98FB850046213D /* MenuShortcutKeyCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuShortcutKeyCombination.swift; sourceTree = "<group>"; };
 		452CFCBD1A8C7B7F0050BE72 /* EditorUIComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorUIComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		452CFCC11A8C7B7F0050BE72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		452CFCC81A8C7B7F0050BE72 /* EditorUIComponentsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorUIComponentsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,6 +189,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45166B2E1A98FB7F0046213D /* Protocomponents */ = {
+			isa = PBXGroup;
+			children = (
+				45166B2F1A98FB850046213D /* MenuController.swift */,
+				45166B301A98FB850046213D /* MenuShortcutKeyCombination.swift */,
+			);
+			path = Protocomponents;
+			sourceTree = "<group>";
+		};
 		452CFCB31A8C7B7E0050BE72 = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +236,7 @@
 				45F17BCB1A989E0B001CD6BF /* IconUtility.swift */,
 				45F17BC41A989DE1001CD6BF /* CGPath.swift */,
 				45F17BC51A989DE1001CD6BF /* CTFont.swift */,
+				45166B2E1A98FB7F0046213D /* Protocomponents */,
 				452CFCC01A8C7B7F0050BE72 /* Supporting Files */,
 			);
 			path = EditorUIComponents;
@@ -548,12 +562,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45166B311A98FB850046213D /* MenuController.swift in Sources */,
 				45F17BCE1A989F6E001CD6BF /* IconPalette.swift in Sources */,
 				452CFD041A8C7BFE0050BE72 /* MultipaneViewController.swift in Sources */,
 				45F17BCC1A989E0B001CD6BF /* IconUtility.swift in Sources */,
 				45F17BC71A989DE1001CD6BF /* CGPath.swift in Sources */,
 				452CFD051A8C7BFE0050BE72 /* ShelfView.swift in Sources */,
 				45E2DFC41A9851CF00380762 /* EditorCommonWindowController3.swift in Sources */,
+				45166B321A98FB850046213D /* MenuShortcutKeyCombination.swift in Sources */,
 				45F17BD01A98A6CA001CD6BF /* IconPalette.FontAwesome.swift in Sources */,
 				45F17BC81A989DE1001CD6BF /* CTFont.swift in Sources */,
 				45F17BD21A98ABBF001CD6BF /* IconPalette.Unicode.swift in Sources */,

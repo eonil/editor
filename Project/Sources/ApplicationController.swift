@@ -8,6 +8,7 @@
 
 import Cocoa
 import EditorCommon
+import EditorUIComponents
 
 
 

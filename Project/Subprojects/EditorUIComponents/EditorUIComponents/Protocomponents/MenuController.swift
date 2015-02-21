@@ -9,12 +9,12 @@
 import Foundation
 import AppKit
 
-class MenuController {
-	static func menuOfController(c:MenuController) -> NSMenu {
+public class MenuController {
+	public static func menuOfController(c:MenuController) -> NSMenu {
 		return	c._menu
 	}
 	
-	init(_ menu:NSMenu) {
+	public init(_ menu:NSMenu) {
 		assert(menu.autoenablesItems == false, "You must set `autoenablesItems` to `false`.")
 		_menu	=	menu
 		

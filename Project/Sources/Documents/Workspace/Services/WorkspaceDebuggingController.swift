@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import LLDBWrapper
 import EditorCommon
+import EditorUIComponents
 import EditorDebuggingFeature
 
 

@@ -705,6 +705,7 @@
 				45166AF01A98F53A0046213D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

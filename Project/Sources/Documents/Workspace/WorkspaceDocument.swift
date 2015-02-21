@@ -11,6 +11,7 @@ import AppKit
 import LLDBWrapper
 import EonilFileSystemEvents
 import EditorCommon
+import EditorUIComponents
 import EditorToolComponents
 import EditorFileTreeNavigationFeature
 import EditorIssueListingFeature

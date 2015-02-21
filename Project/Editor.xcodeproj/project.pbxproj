@@ -97,8 +97,6 @@
 		45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D7F6DE1A11540D00E792D1 /* TextLayoutQuery.swift */; };
 		45D8D8F11A48E99200AE42C8 /* EditorCommonWindowController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D8F01A48E99200AE42C8 /* EditorCommonWindowController2.swift */; };
 		45D8D9021A48ED3600AE42C8 /* EditorCommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8D9011A48ED3600AE42C8 /* EditorCommonViewController.swift */; };
-		45DA7EEF1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA7EEE1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift */; };
-		45DA7EF11A962F2B00C478F7 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA7EF01A962F2B00C478F7 /* MenuController.swift */; };
 		45DA95601A69DAE70091410B /* CodeEditingFileMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA955F1A69DAE70091410B /* CodeEditingFileMonitor.swift */; };
 		45DA95AD1A6A15E30091410B /* FileLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DA95AC1A6A15E30091410B /* FileLocation.swift */; };
 		45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */; };
@@ -179,6 +177,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 45166A691A98C3EC0046213D;
 			remoteInfo = EditorWorkspaceNavigationFeatureTests;
+		};
+		45166B4E1A98FBBB0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45166A7A1A98C3EC0046213D /* EditorWorkspaceNavigationFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45166AD71A98F53A0046213D;
+			remoteInfo = Workbench1;
 		};
 		452442661A18019400A03A51 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -744,8 +749,6 @@
 		45D8D8F01A48E99200AE42C8 /* EditorCommonWindowController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorCommonWindowController2.swift; sourceTree = "<group>"; };
 		45D8D9011A48ED3600AE42C8 /* EditorCommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditorCommonViewController.swift; sourceTree = "<group>"; };
 		45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = EonilFileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
-		45DA7EEE1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuShortcutKeyCombination.swift; sourceTree = "<group>"; };
-		45DA7EF01A962F2B00C478F7 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		45DA955F1A69DAE70091410B /* CodeEditingFileMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeEditingFileMonitor.swift; sourceTree = "<group>"; };
 		45DA95AC1A6A15E30091410B /* FileLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileLocation.swift; sourceTree = "<group>"; };
 		45DFBD9C1A15C7A3007EBB02 /* ObjCRuntime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjCRuntime.swift; sourceTree = "<group>"; };
@@ -823,6 +826,7 @@
 			children = (
 				45166A9C1A98C3ED0046213D /* EditorWorkspaceNavigationFeature.framework */,
 				45166A9E1A98C3ED0046213D /* EditorWorkspaceNavigationFeatureTests.xctest */,
+				45166B4F1A98FBBB0046213D /* Workbench1.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -844,8 +848,6 @@
 		451740DC1A102FA300861ECC /* ProtoUIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				45DA7EF01A962F2B00C478F7 /* MenuController.swift */,
-				45DA7EEE1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift */,
 				45D8D8F01A48E99200AE42C8 /* EditorCommonWindowController2.swift */,
 				45358A351A17FE8800AF5F7C /* EditorCommonWindowController.swift */,
 				45D8D9011A48ED3600AE42C8 /* EditorCommonViewController.swift */,
@@ -1604,6 +1606,13 @@
 			remoteRef = 45166A9D1A98C3ED0046213D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45166B4F1A98FBBB0046213D /* Workbench1.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench1.app;
+			remoteRef = 45166B4E1A98FBBB0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		452442671A18019400A03A51 /* Standards.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -2000,7 +2009,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				457D5CE61A63287C008ECE6F /* WorkspaceDocument.swift in Sources */,
-				45DA7EEF1A962F0F00C478F7 /* MenuShortcutKeyCombination.swift in Sources */,
 				4597F8271A113D100089FC66 /* LinkList.swift in Sources */,
 				45700EE11A11F65100415EB2 /* FileNode.swift in Sources */,
 				454FFC0C1A142DF3000C0200 /* FileSystemMonitor.swift in Sources */,
@@ -2024,7 +2032,6 @@
 				452B92B91A12C6A100E66E87 /* FileTreeViewController3.swift in Sources */,
 				451740E01A102FA300861ECC /* ScrollViewController1.swift in Sources */,
 				45DFBD9D1A15C7A3007EBB02 /* ObjCRuntime.swift in Sources */,
-				45DA7EF11A962F2B00C478F7 /* MenuController.swift in Sources */,
 				4597F82A1A113D100089FC66 /* XML.swift in Sources */,
 				45D8D9021A48ED3600AE42C8 /* EditorCommonViewController.swift in Sources */,
 				45D7F6DF1A11540D00E792D1 /* TextLayoutQuery.swift in Sources */,

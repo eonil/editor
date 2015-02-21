@@ -8,7 +8,7 @@
 
 import Foundation
 import AppKit
-
+import EditorUIComponents
 
 //
 //	Dynamic Menus
