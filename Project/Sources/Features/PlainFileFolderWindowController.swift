@@ -190,10 +190,10 @@ extension PlainFileFolderWindowController {
 		
 		let	codeEditorViewController		=	CodeEditingViewController()
 		
-		let	commandScrollViewController		=	ScrollViewController()
+		let	commandScrollViewController		=	ScrollViewController1()
 		let	commandConsoleViewController	=	CommandConsoleViewController()
 		
-		let	variableScrollViewController	=	ScrollViewController()
+		let	variableScrollViewController	=	ScrollViewController1()
 		let	variableTreeViewController		=	VariableTreeViewController()
 		
 		override func viewDidLoad() {
@@ -228,9 +228,9 @@ extension PlainFileFolderWindowController {
 	class NavigationViewController : NSSplitViewController {
 		let	multipaneViewController				=	MultipaneViewController()
 		
-		let	fileTreeScrollViewController		=	ScrollViewController()
-		let	issueListScrollViewController		=	ScrollViewController()
-		let	executionTreeScrollViewController	=	ScrollViewController()
+		let	fileTreeScrollViewController		=	ScrollViewController1()
+		let	issueListScrollViewController		=	ScrollViewController1()
+		let	executionTreeScrollViewController	=	ScrollViewController1()
 		
 		let	fileTreeViewController			=	FileTreeViewController4()
 		let	issueListingViewController		=	IssueListingViewController()

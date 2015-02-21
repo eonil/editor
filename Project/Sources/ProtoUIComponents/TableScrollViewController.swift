@@ -8,7 +8,7 @@
 //
 //import Foundation
 //import AppKit
-//class TableScrollViewController : ScrollViewController {
+//class TableScrollViewController : ScrollViewController1 {
 //	var tableView:NSTableView {
 //		get {
 //			return	super.view as NSTableView

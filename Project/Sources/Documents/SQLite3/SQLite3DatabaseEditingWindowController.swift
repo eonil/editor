@@ -47,8 +47,8 @@ private class SplitViewController : NSSplitViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		let	treeScroll	=	ScrollViewController()
-		let	tableScroll	=	ScrollViewController()
+		let	treeScroll	=	ScrollViewController1()
+		let	tableScroll	=	ScrollViewController1()
 
 		treeScroll.documentViewController	=	databaseObjectTreeViewController
 		tableScroll.documentViewController	=	tableRowListingViewController

@@ -46,6 +46,7 @@ class EditorCommonWindowController2 : NSWindowController {
 	
 	
 	///	Don't call this. Intended for internal use only.
+//	@availability(*,unavailable)
 	final override func loadWindow() {
 		super.window	=	instantiateWindow()
 	}

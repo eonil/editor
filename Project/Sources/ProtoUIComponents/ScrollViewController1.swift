@@ -1,5 +1,5 @@
 //
-//  ScrollViewController.swift
+//  ScrollViewController1.swift
 //  RFC Formaliser
 //
 //  Created by Hoon H. on 10/27/14.
@@ -11,7 +11,7 @@ import Cocoa
 
 ///	`translatesAutoresizingMaskIntoConstraints` set to `false` implicitly.
 @availability(*,deprecated=0)
-class ScrollViewController: NSViewController {
+class ScrollViewController1: NSViewController {
 	
 	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

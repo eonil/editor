@@ -21,9 +21,9 @@ import EditorCommon
 
 
 
+
+///	**Menu Management**
 ///
-///	Menu Management
-///	---------------
 ///	Currently, menus are not well designed. I just use NIB and static binding for static menus.
 ///	Dynamic menus will be managed by `MenuController` subclasses. See `MenuControllers.swift` for
 ///	all available dynamic menus. Here're basic rules.

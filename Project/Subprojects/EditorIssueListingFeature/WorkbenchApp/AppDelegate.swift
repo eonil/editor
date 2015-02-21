@@ -23,6 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	var	t	=	nil as NSTimer?
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
+		self.window!.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
 		
 		sv.hasHorizontalScroller	=	true
 		sv.hasVerticalScroller		=	true
@@ -55,9 +56,21 @@ func makeTestDataset() -> [Issue] {
 		let	o	=	IssueOrigin(URL: u, range: CodeRange(startPoint: CodePoint(lineNumber: 1, columnNumber: 2), endPoint: CodePoint(lineNumber: 3, columnNumber: 4)))
 		for j in 0..<2 {
 			let	m	=	"\(i) x \(j)"
-			let	s	=	Issue(origination: o, severity: Issue.Severity.Error, message: t)
+			let	s	=	Issue(origination: o, severity: randomServerity(), message: t)
 			ss.append(s)
 		}
 	}
 	return	ss
 }
+
+private func randomServerity() -> Issue.Severity {
+	switch rand() % 3 {
+	case 0:		return	Issue.Severity.Error
+	case 1:		return	Issue.Severity.Information
+	case 2:		return	Issue.Severity.Warning
+	default:	fatalError()
+	}
+}
+
+
+

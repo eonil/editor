@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		451669C11A98B5530046213D /* EditorUIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451669B81A98B54C0046213D /* EditorUIComponents.framework */; };
+		451669C21A98B5530046213D /* EditorUIComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 451669B81A98B54C0046213D /* EditorUIComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		451669C51A98B55C0046213D /* EditorUIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451669B81A98B54C0046213D /* EditorUIComponents.framework */; };
 		4526C0411A6B81D300F5BDC1 /* EditorIssueListingFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4526C0351A6B81D300F5BDC1 /* EditorIssueListingFeature.framework */; };
 		4526C0481A6B81D300F5BDC1 /* EditorIssueListingFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526C0471A6B81D300F5BDC1 /* EditorIssueListingFeatureTests.swift */; };
 		4526C0631A6B821700F5BDC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526C0621A6B821700F5BDC1 /* AppDelegate.swift */; };
@@ -31,6 +34,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		451669B71A98B54C0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFCBD1A8C7B7F0050BE72;
+			remoteInfo = EditorUIComponents;
+		};
+		451669B91A98B54C0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFCC81A8C7B7F0050BE72;
+			remoteInfo = EditorUIComponentsTests;
+		};
+		451669BB1A98B54C0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459ACDCF1A8CE1EE008798F4;
+			remoteInfo = Workbench;
+		};
+		451669BD1A98B54C0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E2E0141A98530200380762;
+			remoteInfo = WorkbenchForCommonWindowController;
+		};
+		451669BF1A98B54C0046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F17BA01A986572001CD6BF;
+			remoteInfo = WorkbenchForIconPreview;
+		};
+		451669C31A98B5530046213D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 452CFCBC1A8C7B7F0050BE72;
+			remoteInfo = EditorUIComponents;
+		};
 		4526C0421A6B81D300F5BDC1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4526C02C1A6B81D300F5BDC1 /* Project object */;
@@ -120,6 +165,7 @@
 				45DF42211A8C8920008E90EC /* EditorCommon.framework in Embed Frameworks */,
 				4526C07C1A6B822200F5BDC1 /* EditorIssueListingFeature.framework in Embed Frameworks */,
 				45361C5B1A8C90140035385C /* EditorToolComponents.framework in Embed Frameworks */,
+				451669C21A98B5530046213D /* EditorUIComponents.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +173,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUIComponents.xcodeproj; path = ../EditorUIComponents/EditorUIComponents.xcodeproj; sourceTree = "<group>"; };
 		4526C0351A6B81D300F5BDC1 /* EditorIssueListingFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorIssueListingFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4526C0391A6B81D300F5BDC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4526C0401A6B81D300F5BDC1 /* EditorIssueListingFeatureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorIssueListingFeatureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +197,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451669C51A98B55C0046213D /* EditorUIComponents.framework in Frameworks */,
 				45361C551A8C8FC10035385C /* EditorToolComponents.framework in Frameworks */,
 				45361C421A8C8F7A0035385C /* EditorCommon.framework in Frameworks */,
 			);
@@ -170,15 +218,29 @@
 				45DF42201A8C8920008E90EC /* EditorCommon.framework in Frameworks */,
 				4526C07B1A6B822200F5BDC1 /* EditorIssueListingFeature.framework in Frameworks */,
 				45361C5A1A8C90140035385C /* EditorToolComponents.framework in Frameworks */,
+				451669C11A98B5530046213D /* EditorUIComponents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		451669AB1A98B54C0046213D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				451669B81A98B54C0046213D /* EditorUIComponents.framework */,
+				451669BA1A98B54C0046213D /* EditorUIComponentsTests.xctest */,
+				451669BC1A98B54C0046213D /* Workbench.app */,
+				451669BE1A98B54C0046213D /* WorkbenchForCommonWindowController.app */,
+				451669C01A98B54C0046213D /* WorkbenchForIconPreview.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4526C02B1A6B81D300F5BDC1 = {
 			isa = PBXGroup;
 			children = (
+				451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */,
 				45361C451A8C8FBE0035385C /* EditorToolComponents.xcodeproj */,
 				45DF42151A8C8911008E90EC /* EditorCommon.xcodeproj */,
 				4526C0371A6B81D300F5BDC1 /* EditorIssueListingFeature */,
@@ -339,6 +401,7 @@
 				4526C07E1A6B822200F5BDC1 /* PBXTargetDependency */,
 				45DF42231A8C8921008E90EC /* PBXTargetDependency */,
 				45361C5D1A8C90140035385C /* PBXTargetDependency */,
+				451669C41A98B5530046213D /* PBXTargetDependency */,
 			);
 			name = WorkbenchApp;
 			productName = WorkbenchApp;
@@ -385,6 +448,10 @@
 					ProductGroup = 45361C461A8C8FBE0035385C /* Products */;
 					ProjectRef = 45361C451A8C8FBE0035385C /* EditorToolComponents.xcodeproj */;
 				},
+				{
+					ProductGroup = 451669AB1A98B54C0046213D /* Products */;
+					ProjectRef = 451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -396,6 +463,41 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		451669B81A98B54C0046213D /* EditorUIComponents.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorUIComponents.framework;
+			remoteRef = 451669B71A98B54C0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		451669BA1A98B54C0046213D /* EditorUIComponentsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorUIComponentsTests.xctest;
+			remoteRef = 451669B91A98B54C0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		451669BC1A98B54C0046213D /* Workbench.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench.app;
+			remoteRef = 451669BB1A98B54C0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		451669BE1A98B54C0046213D /* WorkbenchForCommonWindowController.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForCommonWindowController.app;
+			remoteRef = 451669BD1A98B54C0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		451669C01A98B54C0046213D /* WorkbenchForIconPreview.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForIconPreview.app;
+			remoteRef = 451669BF1A98B54C0046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45361C4E1A8C8FBE0035385C /* EditorToolComponents.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -501,6 +603,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		451669C41A98B5530046213D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EditorUIComponents;
+			targetProxy = 451669C31A98B5530046213D /* PBXContainerItemProxy */;
+		};
 		4526C0431A6B81D300F5BDC1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4526C0341A6B81D300F5BDC1 /* EditorIssueListingFeature */;

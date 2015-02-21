@@ -7,8 +7,8 @@
 //
 
 import Cocoa
-import EditorUIComponents
 import XCTest
+import EditorUIComponents
 
 class EditorUIComponentsTests: XCTestCase {
     

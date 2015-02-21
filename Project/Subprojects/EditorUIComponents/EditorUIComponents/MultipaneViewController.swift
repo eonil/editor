@@ -69,10 +69,12 @@ public final class MultipaneViewController: NSViewController {
 		_selectorSegmentView.segmentStyle	=	NSSegmentStyle.Automatic
 		_selectorSegmentView.font			=	NSFont.systemFontOfSize(NSFont.smallSystemFontSize())
 		_selectorSegmentView.sizeToFit()
+		let	h	=	_selectorSegmentView.frame.size.height
 		
 		_selectorStackView.edgeInsets		=	NSEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 		_selectorStackView.setViews([_selectorSegmentView], inGravity: NSStackViewGravity.Center)
 		
+		_selectorSegmentView.translatesAutoresizingMaskIntoConstraints	=	false
 		_selectorStackView.translatesAutoresizingMaskIntoConstraints	=	false
 		_contentHostingView.translatesAutoresizingMaskIntoConstraints	=	false
 		
@@ -80,18 +82,21 @@ public final class MultipaneViewController: NSViewController {
 		self.view.addSubview(_selectorStackView)
 		self.view.needsLayout	=	true
 		
-		let	h	=	_selectorSegmentView.frame.size.height
 		self.view.addConstraintsWithLayoutAnchoring([
 			_selectorStackView.centerXAnchor == self.view.centerXAnchor,
 			_selectorStackView.topAnchor == self.view.topAnchor,
+			
 			_contentHostingView.leftAnchor == self.view.leftAnchor,
 			_contentHostingView.rightAnchor == self.view.rightAnchor,
 			_contentHostingView.topAnchor == _selectorStackView.bottomAnchor,
 			_contentHostingView.bottomAnchor == self.view.bottomAnchor,
 			])
-		
+		self.view.addConstraints([
+			NSLayoutConstraint(item: _selectorSegmentView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: h)
+			])
 		////
 		
+		_selectorSegmentView.sizeToFit()
 		_subcomponentDelegate		=	SubcomponentDelegate(owner: self)
 		_selectorSegmentView.target	=	_subcomponentDelegate
 		_selectorSegmentView.action	=	"onPageSelectorValueChanged:"

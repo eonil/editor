@@ -36,7 +36,7 @@ public final class IssueListingViewController: NSViewController {
 	}
 	public func push(issues:[Issue]) {
 		Debug.assertMainThread()
-		assert(issues.filter({ s in s.origin != nil }).map({ s in s.origin!.URL.existingAsDataFile == true }).reduce(true, combine: { a,b in a && b }), "Some issues have invalid origin. (missing file path)")
+//		assert(issues.filter({ s in s.origin != nil }).map({ s in s.origin!.URL.existingAsDataFile == true }).reduce(true, combine: { a,b in a && b }), "Some issues have invalid origin. (missing file path)")
 		
 		let	rs	=	_repository.push(issues)
 //		self.outlineView.reloadData()

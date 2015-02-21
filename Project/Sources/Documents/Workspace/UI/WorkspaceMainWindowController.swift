@@ -94,7 +94,7 @@
 //
 //@objc
 //private class EditingVC: NSSplitViewController {
-//	let	commandScrollViewController		=	ScrollViewController()
+//	let	commandScrollViewController		=	ScrollViewController1()
 //	
 //	let	codeEditorViewController		=	CodeEditingViewController()
 //	let	commandConsoleViewController	=	CommandConsoleViewController()
@@ -120,8 +120,8 @@
 //
 //@objc
 //private class NavVC: NSSplitViewController {
-//	let	fileTreeScrollViewController	=	ScrollViewController()
-//	let	issueScrollingViewController	=	ScrollViewController()
+//	let	fileTreeScrollViewController	=	ScrollViewController1()
+//	let	issueScrollingViewController	=	ScrollViewController1()
 //	
 //	let	fileTreeViewController			=	FileTreeViewController4()
 //	let	issueListingViewController		=	IssueListingViewController()

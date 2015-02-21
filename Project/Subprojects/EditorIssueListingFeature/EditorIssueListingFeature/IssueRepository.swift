@@ -8,7 +8,7 @@
 
 import Foundation
 import AppKit
-
+import EditorUIComponents
 
 
 typealias	GroupAddingRecord	=	(node:IssueGroupNode, index:Int)
@@ -189,13 +189,16 @@ final class IssueItemNode {
 		get {
 			switch data.severity {
 			case .Information:
-				return	IconUtility.iconForCodeUsingIconServices(kAlertNoteIcon)
+				return	IssueIconPalette.info
+//				return	IconUtility.iconForCodeUsingIconServices(kAlertNoteIcon)
 				
 			case .Warning:
-				return	IconUtility.iconForCodeUsingIconServices(kAlertCautionIcon)
+				return	IssueIconPalette.warning
+//				return	IconUtility.iconForCodeUsingIconServices(kAlertCautionIcon)
 				
 			case .Error:
-				return	IconUtility.iconForCodeUsingIconServices(kAlertStopIcon)
+				return	IssueIconPalette.error
+//				return	IconUtility.iconForCodeUsingIconServices(kAlertStopIcon)
 			}
 		}
 	}
@@ -207,6 +210,54 @@ final class IssueItemNode {
 }
 
 
+
+
+private let	SCALE	=	0.9 as CGFloat
+
+private struct IssueIconPalette {
+	static let	info	=	IconPalette.FontAwesome.WebApplicationIcons.infoCircle.image.imageWithScale(SCALE).imageWithAlpha(0.25).templatize()
+	static let	warning	=	IconPalette.FontAwesome.WebApplicationIcons.exclamationTriangle.image.imageWithScale(SCALE).imageWithAlpha(0.25).templatize()
+	static let	error	=	IconPalette.FontAwesome.WebApplicationIcons.exclamationCircle.image.imageWithScale(SCALE).templatize()
+	
+//	static let	info	=	IconUtility.iconForCodeUsingIconServices(kAlertNoteIcon).templatize()
+//	static let	warning	=	IconUtility.iconForCodeUsingIconServices(kAlertCautionIcon).templatize()
+//	static let	error	=	IconUtility.iconForCodeUsingIconServices(kAlertStopIcon).templatize()
+}
+
+
+private extension NSImage {
+	func templatize() -> NSImage {
+		let	m	=	self.copy() as! NSImage
+		m.setTemplate(true)
+		return	m
+	}
+	func imageWithAlpha(a:CGFloat) -> NSImage {
+		let	m	=	NSImage(size: self.size, flipped: false) { (frame:NSRect) -> Bool in
+			let	ctx	=	unsafeBitCast(NSGraphicsContext.currentContext()!.graphicsPort, CGContext.self)
+			CGContextSetAlpha(ctx, a)
+			CGContextBeginTransparencyLayer(ctx, nil)
+			self.drawInRect(frame)
+			CGContextEndTransparencyLayer(ctx)
+			return	true
+		}
+		return	m
+	}
+	func imageWithScale(s:CGFloat) -> NSImage {
+		let	x	=	(self.size.width - self.size.width * SCALE) * CGFloat(0.5)
+		let	y	=	(self.size.height - self.size.height * SCALE) * CGFloat(0.5)
+		
+		let	m	=	NSImage(size: self.size, flipped: false) { (frame:NSRect) -> Bool in
+			let	ctx	=	unsafeBitCast(NSGraphicsContext.currentContext()!.graphicsPort, CGContext.self)
+			CGContextSaveGState(ctx)
+			CGContextScaleCTM(ctx, s, s)
+			CGContextTranslateCTM(ctx, x, y)
+			self.drawInRect(frame)
+			CGContextRestoreGState(ctx)
+			return	true
+		}
+		return	m
+	}
+}
 
 
 
