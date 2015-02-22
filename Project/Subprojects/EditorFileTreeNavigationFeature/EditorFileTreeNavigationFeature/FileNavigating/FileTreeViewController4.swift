@@ -36,7 +36,7 @@ public protocol FileTreeViewController4Delegate: class {
 	
 	///	Return `true` if the deletion can be committed.
 	///	OS X file system does not support transaction, so partial failure will be reported as an error.
-	///	In any error cases, deleted files will not be recovered.
+	///	In any error cases, deleted files will not be recovered automatically.
 	func fileTreeViewController4UserWantsToDeleteFilesAtURLs([NSURL]) -> Resolution<()>
 }
 

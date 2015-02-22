@@ -18,9 +18,24 @@ import Foundation
 
 
 
-///	Registered entries.
+///	**Registered entries.**
+///
+///
+///	DESIGN NOTES
+///	------------
+///	Workspace represents abstracted tree of nodes. These node stores minimal states that
+///	are always valid regardless of environments. (such as file location)
+///
+///	For example, workspace node stores only relative meta "name", and does not store any 
+///	full-path or URL. Even workspace root does not contain its location. Users are 
+///	responsible to resolve actualy location of each node.
 ///	
-///	A project will always have a root node.
+///	"name" of a node is metadata. That means the name is a relative path to find the node
+///	from the parent node.
+///
+///	USER GUIDE
+///	----------
+///	A workspace will always have a root node.
 ///	Root node cannot be removed. If file inode for the root node invalidated,
 ///	the project should be disappeared ASAP before performing any further operation.
 ///
@@ -93,8 +108,8 @@ public protocol WorkspaceRepositoryDelegate: class {
 ///	-	Small number of child nodes.
 ///
 ///
-///	Lifecycle
-///	---------
+///	Lifecycle Consideration
+///	-----------------------
 ///	You cannot re-use once deleted node object. Prohibited by design.
 ///	Once you deleted (detached) a node from repository tree, just destroy it ASAP.
 ///	Performing any operation on detached node will cause program crash.

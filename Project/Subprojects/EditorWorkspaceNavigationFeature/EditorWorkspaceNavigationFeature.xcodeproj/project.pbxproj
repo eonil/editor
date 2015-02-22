@@ -29,6 +29,7 @@
 		45857FE01A994DF8007DF9AF /* Standards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166AC51A98C85C0046213D /* Standards.framework */; };
 		45857FE11A994DF8007DF9AF /* Standards.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45166AC51A98C85C0046213D /* Standards.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45857FED1A99501A007DF9AF /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45857FEC1A99501A007DF9AF /* CellView.swift */; };
+		45F3BDAA1A99AC7500A89B90 /* SelectionQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3BDA91A99AC7500A89B90 /* SelectionQuery.swift */; };
 		45F58C691A9941E600CA9F69 /* WorkspaceRepository.Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F58C681A9941E600CA9F69 /* WorkspaceRepository.Utility.swift */; };
 /* End PBXBuildFile section */
 
@@ -191,6 +192,7 @@
 		45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUIComponents.xcodeproj; path = ../EditorUIComponents/EditorUIComponents.xcodeproj; sourceTree = "<group>"; };
 		45166B811A98FE860046213D /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		45857FEC1A99501A007DF9AF /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
+		45F3BDA91A99AC7500A89B90 /* SelectionQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionQuery.swift; sourceTree = "<group>"; };
 		45F58C681A9941E600CA9F69 /* WorkspaceRepository.Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceRepository.Utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -255,6 +257,7 @@
 			children = (
 				45166AB51A98C4190046213D /* WorkspaceNavigationViewController.swift */,
 				45166B011A98F9960046213D /* WorkspaceNavigationContextMenuController.swift */,
+				45F3BDA91A99AC7500A89B90 /* SelectionQuery.swift */,
 				45857FEC1A99501A007DF9AF /* CellView.swift */,
 				45166AB71A98C5D60046213D /* WorkspaceRepository.swift */,
 				45166AD11A98E4A90046213D /* WorkspaceRepository.Printable.swift */,
@@ -588,6 +591,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F3BDAA1A99AC7500A89B90 /* SelectionQuery.swift in Sources */,
 				45166AD21A98E4A90046213D /* WorkspaceRepository.Printable.swift in Sources */,
 				45166AB61A98C4190046213D /* WorkspaceNavigationViewController.swift in Sources */,
 				45166B021A98F9960046213D /* WorkspaceNavigationContextMenuController.swift in Sources */,

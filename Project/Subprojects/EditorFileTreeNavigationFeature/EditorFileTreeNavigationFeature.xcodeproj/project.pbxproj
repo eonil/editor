@@ -30,6 +30,7 @@
 		45ED59BA1A6613470076D541 /* FileTreeTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ED59B81A6613440076D541 /* FileTreeTableRowView.swift */; };
 		45ED59BE1A6613630076D541 /* FileTreeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ED59BD1A6613630076D541 /* FileTreeTableCellView.swift */; };
 		45ED59BF1A6613660076D541 /* FileTreeTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ED59BD1A6613630076D541 /* FileTreeTableCellView.swift */; };
+		45F3BDA11A99A9CC00A89B90 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 45F3BDA01A99A9CC00A89B90 /* README.md */; };
 		45F48F491A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.h in Headers */ = {isa = PBXBuildFile; fileRef = 45F48F481A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45F48F4F1A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F48F431A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.framework */; };
 		45F48F561A65E1FE00FF38FB /* EditorFileTreeNavigationFeatureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F48F551A65E1FE00FF38FB /* EditorFileTreeNavigationFeatureTests.swift */; };
@@ -177,6 +178,7 @@
 		45E987EF1A665BE2000138FD /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		45ED59B81A6613440076D541 /* FileTreeTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeTableRowView.swift; sourceTree = "<group>"; };
 		45ED59BD1A6613630076D541 /* FileTreeTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeTableCellView.swift; sourceTree = "<group>"; };
+		45F3BDA01A99A9CC00A89B90 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45F48F431A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorFileTreeNavigationFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F48F471A65E1FE00FF38FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F48F481A65E1FE00FF38FB /* EditorFileTreeNavigationFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditorFileTreeNavigationFeature.h; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 		45F48F391A65E1FE00FF38FB = {
 			isa = PBXGroup;
 			children = (
+				45F3BDA01A99A9CC00A89B90 /* README.md */,
 				45F48F451A65E1FE00FF38FB /* EditorFileTreeNavigationFeature */,
 				45F48F521A65E1FE00FF38FB /* EditorFileTreeNavigationFeatureTests */,
 				45BD26B91A65E9CA003F45D9 /* EditorFileTreeNavigationFeatureInteractiveTester */,
@@ -627,6 +630,7 @@
 				45F48F7E1A65E22500FF38FB /* FileTreeViewController2.swift in Sources */,
 				45ED59BE1A6613630076D541 /* FileTreeTableCellView.swift in Sources */,
 				45F48F811A65E22500FF38FB /* FileNode3.swift in Sources */,
+				45F3BDA11A99A9CC00A89B90 /* README.md in Sources */,
 				45F48F791A65E22500FF38FB /* FileSystemMonitor2.swift in Sources */,
 				45F48F781A65E22500FF38FB /* FileSystemService.swift in Sources */,
 				45F48F7B1A65E22500FF38FB /* FileSystemMonitor.swift in Sources */,

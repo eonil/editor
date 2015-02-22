@@ -74,19 +74,22 @@ public final class WorkspaceNavigationViewController: NSViewController {
 		c1.title		=	"Name"
 		c1.identifier	=	WorkspaceNavigationTreeColumnIdentifier.Name.rawValue
 		
-		let	c2			=	NSTableColumn()
-		c2.title		=	"Comment"
-		c2.identifier	=	WorkspaceNavigationTreeColumnIdentifier.Comment.rawValue
+//		let	c2			=	NSTableColumn()
+//		c2.title		=	"Comment"
+//		c2.identifier	=	WorkspaceNavigationTreeColumnIdentifier.Comment.rawValue
 		
 		outlineView.addTableColumn(c1)
-		outlineView.addTableColumn(c2)
+//		outlineView.addTableColumn(c2)
 		outlineView.outlineTableColumn	=	c1
 		
 		outlineView.allowsMultipleSelection	=	true
 		outlineView.allowsEmptySelection	=	true
+		outlineView.headerView				=	nil
+		outlineView.focusRingType			=	NSFocusRingType.None
 		outlineView.selectionHighlightStyle	=	NSTableViewSelectionHighlightStyle.SourceList
 		outlineView.rowSizeStyle			=	NSTableViewRowSizeStyle.Small
 		outlineView.menu					=	MenuController.menuOfController(_internalController.menu)
+		outlineView.doubleAction			=	"dummyDoubleActionHandler:"
 		
 		outlineView.setDataSource(_internalController)
 		outlineView.setDelegate(_internalController)
@@ -97,9 +100,15 @@ public final class WorkspaceNavigationViewController: NSViewController {
 	////
 	
 	private let	_internalController		=	InternalController()
+	
+	@objc
+	private func dummyDoubleActionHandler(AnyObject?) {
+		
+	}
 }
 
-private extension WorkspaceNavigationViewController {
+
+internal extension WorkspaceNavigationViewController {
 	var outlineView:NSOutlineView {
 		get {
 			return	self.view as! NSOutlineView
@@ -221,46 +230,6 @@ private extension WorkspaceNavigationViewController {
 
 
 
-private struct Selection<T> {
-	///	Selection that temporaily focused by mouse.
-	let	hot:T?
-	
-	///	Selection that explicitly selected by mouse.
-	let	cool:[T]
-	
-	///	`hot` + `cool`.
-	var all:[T] {
-		get {
-			return	(hot == nil ? [] : [hot!]) + cool
-		}
-	}
-}
-private struct SelectionQuery {
-	let	node:Selection<WorkspaceNode>
-	let	URL:Selection<NSURL>
-	
-	let	rootHotSelection:Bool
-	let	rootCoolSelection:Bool
-//	let	rootAnySelection:Bool
-	
-	init(controller:WorkspaceNavigationViewController) {
-		let	fn	=	controller.outlineView.clickedNode
-		let	sns	=	controller.outlineView.selectedNodes
-		
-		let	fu	=	controller.clickedURL
-		let	sus	=	controller.selectedURLs
-		
-		node	=	Selection(hot: fn, cool: sns)
-		URL		=	Selection(hot: fu, cool: sus)
-		
-		let	r	=	controller._internalController.repository?.root
-		
-		rootHotSelection	=	node.hot === r
-		rootCoolSelection	=	node.cool.filter({ n in n === r }).count > 0
-//		rootAnySelection	=	rootHotSelection || rootCoolSelection
-	}
-}
-
 private final class InternalController: NSObject {
 	let menu			=	WorkspaceNavigationContextMenuController()
 	var repository		=	nil as WorkspaceRepository?
@@ -269,7 +238,7 @@ private final class InternalController: NSObject {
 		super.init()
 		
 		let querySelection	=	{ [unowned self] ()->SelectionQuery in
-			return	SelectionQuery(controller: self.owner)
+			return	SelectionQuery(controller: self.owner, repository: self.repository)
 		}
 		menu.showInFinder.reaction	=	{ [unowned self] in
 			let	q	=	querySelection()
@@ -418,49 +387,6 @@ private final class InternalController: NSObject {
 	}
 }
 
-private extension WorkspaceNavigationViewController {
-	var	clickedURL:NSURL? {
-		get {
-			if let u = URLRepresentation, let n = outlineView.clickedNode {
-				let	u1	=	u.URLByDeletingLastPathComponent!
-				return	u1.URLByAppendingPath(n.path)
-			}
-			return	nil
-		}
-	}
-	var	selectedURLs:[NSURL] {
-		get {
-			if let u = URLRepresentation {
-				let	u1	=	u.URLByDeletingLastPathComponent!
-				return	outlineView.selectedNodes.map({ n in u1.URLByAppendingPath(n.path) })
-			}
-			return	[]
-		}
-	}
-}
-private extension NSOutlineView {
-	var clickedNode:WorkspaceNode? {
-		get {
-			return	clickedRow == -1 ? nil : self.itemAtRow(clickedRow) as! WorkspaceNode?
-		}
-	}
-	var selectedNodes:[WorkspaceNode] {
-		get {
-			return	selectedRowIndexes.allIndexes.map({ idx in self.itemAtRow(idx) as! WorkspaceNode })
-		}
-	}
-}
-
-private extension NSURL {
-	func URLByAppendingPath(path:WorkspacePath) -> NSURL {
-		if path.components.count == 0 {
-			return	self
-		}
-		let	u	=	self.URLByAppendingPath(path.parentPath)
-		let	u1	=	u.URLByAppendingPathComponent(path.components.last!)
-		return	u1
-	}
-}
 
 
 ///	MARK:
@@ -556,17 +482,11 @@ extension InternalController: NSOutlineViewDataSource {
 	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		let	cid	=	WorkspaceNavigationTreeColumnIdentifier(rawValue: tableColumn!.identifier)!
 		let	v	=	CellView(cid)
-		v.nodeRepresentation	=	item as! WorkspaceNode
+		let	n	=	item as! WorkspaceNode
+		v.nodeRepresentation	=	n
 		return	v
 	}
 }
-
-
-
-
-
-
-
 
 
 
@@ -584,6 +504,28 @@ extension InternalController: NSOutlineViewDataSource {
 extension InternalController: NSOutlineViewDelegate {
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
