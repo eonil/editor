@@ -120,8 +120,8 @@ extension WorkspaceNode {
 			if name == nil		{ errorTrap("A JSON object for `\(self.dynamicType)`'s child has no `name` string field."); return nil }
 			if kind == nil		{ errorTrap("A JSON object for `\(self.dynamicType)`'s child has no proper `kind` value."); return nil }
 			if flags == nil		{ errorTrap("A JSON object for `\(self.dynamicType)`'s child has no proper `flags` value."); return nil }
-			
-			self.createChildNodeForName(name!, kind: kind!)
+
+			self.createChildNodeAtLastAsKind(kind!, withName: name!)
 		}
 		
 		return	nil

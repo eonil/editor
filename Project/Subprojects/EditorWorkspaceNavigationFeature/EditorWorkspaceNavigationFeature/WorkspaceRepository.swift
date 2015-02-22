@@ -33,6 +33,8 @@ import Foundation
 ///	"name" of a node is metadata. That means the name is a relative path to find the node
 ///	from the parent node.
 ///
+///
+///
 ///	USER GUIDE
 ///	----------
 ///	A workspace will always have a root node.
@@ -92,6 +94,22 @@ public protocol WorkspaceRepositoryDelegate: class {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///	MARK:
 ///	MARK:	WorkspaceNode
 
@@ -108,6 +126,15 @@ public protocol WorkspaceRepositoryDelegate: class {
 ///	-	Small number of child nodes.
 ///
 ///
+///	Design Note
+///	-----------
+///	`name` of a node is not a part of node state. It is a metadata that represents
+///	relation from parent node.
+///	I tried to detach this metadata from node itself, but it only brings extra complexity
+///	with no significant benefit. Just take care on this concept when coding.
+///
+///
+///
 ///	Lifecycle Consideration
 ///	-----------------------
 ///	You cannot re-use once deleted node object. Prohibited by design.
@@ -122,15 +149,15 @@ public protocol WorkspaceRepositoryDelegate: class {
 ///	Anyway moving nodes 
 ///
 public final class WorkspaceNode {
-	public private(set) unowned var repository:		WorkspaceRepository			///<	Set to `weak` to avoid cycle.
-	public private(set) weak var	parent:			WorkspaceNode?				///<	Set to `weak` to avoid cycle.
-	public private(set) var			children:		[WorkspaceNode]
+	public private(set) unowned var repository	:	WorkspaceRepository			///<	Set to `weak` to avoid cycle.
+	public private(set) weak var	parent		:	WorkspaceNode?				///<	Set to `weak` to avoid cycle.
+	public private(set) var			children	:	[WorkspaceNode]
 	
-	public private(set) var			name:			String
-	public var						comment:		String?
+	public private(set) var			name		:	String						///<	Metadata.
+	public var						comment		:	String?
 	
-	public private(set) var			kind:			WorkspaceNodeKind
-	public private(set) var			flags:			WorkspaceNodeFlags
+	public private(set) var			kind		:	WorkspaceNodeKind
+	public private(set) var			flags		:	WorkspaceNodeFlags
 	
 	///	If a subworkspace for this node is loaded, it will be retained by this property.
 	public private(set) var			subworkspace:	WorkspaceRepository?
@@ -169,20 +196,22 @@ public extension WorkspaceNode {
 		return	nil
 	}
 	public func nodeForName(name:String) -> WorkspaceNode? {
-		let	idx	=	indexOfNodeForName(name)
-		return	idx == nil ? nil : children[idx!]
+		if let idx = indexOfNodeForName(name) {
+			return	children[idx]
+		}
+		return	nil
 	}
 }
 
 public extension WorkspaceNode {
-	public func createChildNodeForName(name:String, kind:WorkspaceNodeKind) -> WorkspaceNode {
+	public func createChildNodeAtIndex(index:Int, asKind:WorkspaceNodeKind, withName:String) -> WorkspaceNode {
 		precondition(self.kind == WorkspaceNodeKind.Folder, "You can create subnode only in a `Folder` kind node.")
 		precondition(self.nodeForName(name) == nil, "The name already been take by one of child node.")
 		assertAttached()
 		
 		let	n	=	WorkspaceNode(repository: self.repository, name: name, kind: kind)
 		n.parent	=	self
-		children.append(n)
+		children.insert(n, atIndex: index)
 		
 		repository.delegate?.workspaceRepositoryDidCreateNode(n)
 		return	n
@@ -214,8 +243,8 @@ public extension WorkspaceNode {
 
 	///	Moves a node into a new location.
 	///	Node object will be moved without recreating a new instance.
-	public func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int, asNewName:String) {
-		precondition(toNewParentNode.nodeForName(asNewName) == nil, "The name already been take by a sibling in the parent node.")
+	public func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int, withNewName:String) {
+		precondition(toNewParentNode.nodeForName(withNewName) == nil, "The name already been take by a sibling in the parent node.")
 		assertAttached()
 		
 		////
@@ -228,7 +257,7 @@ public extension WorkspaceNode {
 		
 		////
 		
-		n.name		=	asNewName
+		n.name		=	withNewName
 		n.parent	=	toNewParentNode
 		toNewParentNode.children.insert(n, atIndex: atNewIndex)
 		let	newPath	=	n.path
@@ -239,11 +268,14 @@ public extension WorkspaceNode {
 		assertAttached()
 		
 		let	n	=	self.children[atOldIndex]
-		self.moveChildNode(atOldIndex, toNewParentNode: toNewParentNode, atNewIndex: atNewIndex, asNewName: n.name)
+		self.moveChildNode(atOldIndex, toNewParentNode: toNewParentNode, atNewIndex: atNewIndex, withNewName: n.name)
 	}
 }
 
 public extension WorkspaceNode {
+	public func createChildNodeAtLastAsKind(kind:WorkspaceNodeKind, withName:String) -> WorkspaceNode {
+		return	createChildNodeAtIndex(children.count, asKind: kind, withName: withName)
+	}
 	public func delete() {
 		precondition(isRoot == false, "Root node cannot be moved.")
 		assertAttached()
@@ -259,7 +291,7 @@ public extension WorkspaceNode {
 		assertAttached()
 		
 		if let idx = parent!.indexOfNode(self) {
-			parent!.moveChildNode(idx, toNewParentNode: toParentNode, atNewIndex: atIndex, asNewName: asName)
+			parent!.moveChildNode(idx, toNewParentNode: toParentNode, atNewIndex: atIndex, withNewName: asName)
 			return
 		}
 		fatalError("This node cannot be found from parent's children list. This is a serious logic bug, and must be patched.")
@@ -533,6 +565,148 @@ private let PATH_URL_SCHEME	=	"eonil.editor.workspace.path"
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//public struct WorkspaceNodeLink {
+//	var	relation:WorkspaceNodeRelation
+//	var	node:WorkspaceNode
+//}
+//
+//public enum WorkspaceNodeRelation {
+//	case Parent
+//	case Child(name:String)
+//}
+//
+//public extension WorkspaceNodeRelation {
+//	var isParent:Bool {
+//		get {
+//			switch self {
+//			case .Parent:			return	true
+//			default:				return	false
+//			}
+//		}
+//	}
+//	var isChild:Bool {
+//		get {
+//			switch self {
+//			case .Child(let _):		return	true
+//			default:				return	false
+//			}
+//		}
+//	}
+//	var childName:String? {
+//		get {
+//			switch self {
+//			case .Child(let n):		return	n
+//			default:				return	nil
+//			}
+//		}
+//	}
+//}
+//
+/////	Represents mapping of child nodes using indexes and names.
+/////	This is read-only collection.
+/////
+/////	Design Note
+/////	-----------
+/////	You need to call methods of private `links` directly to perform any mutations.
+//public struct WorkspaceNodeList: CollectionType {
+//	public var count:Int {
+//		get {
+//			return	links.count
+//		}
+//	}
+//	public subscript(index:Int) -> WorkspaceNode {
+//		get {
+//			return	links[index].node
+//		}
+//	}
+//	public func generate() -> GeneratorOf<WorkspaceNode> {
+//		var	g	=	links.generate()
+//		return	GeneratorOf {
+//			if let n = g.next() {
+//				return	n.node
+//			}
+//			return	nil
+//		}
+//	}
+//	public var startIndex:Int {
+//		get {
+//			return	links.startIndex
+//		}
+//	}
+//	public var endIndex:Int {
+//		get {
+//			return	links.endIndex
+//		}
+//	}
+//	
+//	////
+//	
+//	private var	links	=	[] as [WorkspaceNodeLink]
+//}
+//
 
 
 

@@ -262,7 +262,7 @@ private final class InternalController: NSObject {
 				let	r	=	FileUtility.createNewFileInFolder(parentFolderURL)
 				if r.ok {
 					let	newFileURL	=	r.value!
-					let	newFileNode	=	q.node.hot!.createChildNodeForName(newFileURL.lastPathComponent!, kind: WorkspaceNodeKind.File)
+					let	newFileNode	=	q.node.hot!.createChildNodeAtLastAsKind(WorkspaceNodeKind.File, withName: newFileURL.lastPathComponent!)
 					
 					self.owner.outlineView.reloadData()
 					self.owner.outlineView.expandItem(q.node.hot!)
@@ -283,7 +283,7 @@ private final class InternalController: NSObject {
 				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
 				if r.ok {
 					let	newFolderURL	=	r.value!
-					let	newFolderNode	=	q.node.hot!.createChildNodeForName(newFolderURL.lastPathComponent!, kind: WorkspaceNodeKind.Folder)
+					let	newFolderNode	=	q.node.hot!.createChildNodeAtLastAsKind(WorkspaceNodeKind.Folder, withName: newFolderURL.lastPathComponent!)
 					
 					self.owner.outlineView.reloadData()
 					self.owner.outlineView.expandItem(q.node.hot!)
