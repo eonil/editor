@@ -29,5 +29,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, FileTreeViewController4Deleg
 	}
 
 
+	func fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(_: NSURL) -> [NSURL] {
+		
+	}
+	func fileTreeViewController4UserWantsToCreateFileInURL(parent: NSURL) -> Resolution<NSURL> {
+		return	Resolution
+	}
+	func fileTreeViewController4UserWantsToCreateFolderInURL(parent: NSURL) -> Resolution<NSURL> {
+		
+	}
+	func fileTreeViewController4UserWantsToDeleteFilesAtURLs(_: [NSURL]) -> Resolution<()> {
+		
+	}
+	func fileTreeViewController4UserWantsToEditFileAtURL(_: NSURL) -> Bool {
+		
+	}
+	func fileTreeViewController4UserWantsToMoveFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
+		
+	}
+	func fileTreeViewController4UserWantsToRenameFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
+		
+	}
 }
 

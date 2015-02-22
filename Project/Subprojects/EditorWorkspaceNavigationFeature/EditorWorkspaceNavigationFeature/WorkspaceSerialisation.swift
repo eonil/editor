@@ -8,6 +8,7 @@
 
 import Foundation
 import Standards
+import EditorCommon
 
 //extension WorkspaceRepository {
 //	init(workspaceAtURL u:NSURL) {
@@ -29,11 +30,15 @@ class WorkspaceSerialisation {
 	}
 	///	This will creates a new repository if there's no existing configuration.
 	static func readRepositoryConfiguration(fromWorkspaceAtURL u:NSURL) -> WorkspaceRepository {
-		precondition(u.existingAsDataFile, "No file at the URL `\(u)`.")
+		precondition(u.existingAsDirectoryFile, "No directory at the URL `\(u)`.")
 		
 		let	confFileURL	=	configurationFileURLForWorkspaceAtURL(u)
+		precondition(confFileURL.existingAsDataFile, "No file at the URL `\(confFileURL)`.")
+		
 		let	data		=	NSData(contentsOfURL: confFileURL)!
 		let	rep			=	deserialise(data)
+		
+		Debug.log("Workspace configuration read from `\(u)`.")
 		return	rep
 	}
 	static func writeRepositoryConfiguration(repository:WorkspaceRepository, toWorkspaceAtURL u:NSURL) {
@@ -41,6 +46,8 @@ class WorkspaceSerialisation {
 		let	data		=	serialise(repository)
 		let	ok			=	data.writeToURL(confFileURL, atomically: true)
 		precondition(ok)
+		
+		Debug.log("Workspace configuration written to `\(u)`.")
 	}
 	
 	
@@ -72,7 +79,6 @@ extension WorkspaceRepository {
 		if json!.object == nil	{ errorTrap("JSON value for `\(self.dynamicType)` is not an JSON object."); return nil }
 		
 		let o		=	json!.object!
-//		let	name	=	o["name"]?.string
 		let	root	=	o["root"]?.object
 		
 		if root == nil			{ errorTrap("JSON object for `\(self.dynamicType)` has no proper `root` value."); return nil }
@@ -82,58 +88,73 @@ extension WorkspaceRepository {
 		if name == nil			{ errorTrap("JSON object for `root` field of `\(self.dynamicType)` has no proper `name` value."); return nil }
 		
 		let	o1		=	self.init(name: name!)
+		o1.root.reconfigure(o["root"]!, errorTrap: errorTrap)
 		return	o1
 	}
 	var json:JSON.Value {
 		get {
 			let	o	=	[
-				"root"	:	self.root.json,
+				"version"	:	JSON.Value.String("0.0.0"),
+				"root"		:	self.root.json,
 			] as JSON.Object
 			return	JSON.Value.Object(o)
 		}
 	}
 }
 extension WorkspaceNode {
-	private func reconfigure(json: JSON.Value?, @noescape errorTrap:(String)->()) -> ()? {
-		if json == nil			{ errorTrap("JSON value for `\(self.dynamicType)` is `nil`."); return nil }
-		if json!.object == nil	{ errorTrap("JSON value for `\(self.dynamicType)` is not an JSON string."); return nil }
-		
-		let	o			=	json!.object!
-		let	name		=	o["name"]?.string
-		let	comment		=	o["comment"]?.string
-		let	subnodes	=	o["subnodes"]?.array
-		
-		if name == nil			{ errorTrap("JSON object for `\(self.dynamicType)` is not have `name` string field."); return nil }
-		// `comment` can be `nil`.
-		if subnodes == nil		{ errorTrap("JSON object for `\(self.dynamicType)` is not have `subnodes` array field."); return nil }
-		
-		self.rename(name!)
-		self.comment	=	comment!
-		
-		for j in subnodes! {
-			if j.object == nil		{ errorTrap("One of more item is not JSON object value in array of JSON object for `\(self.dynamicType)`."); return nil }
-			let	o1		=	j.object!
-			let	name	=	o1["name"]?.string
-			let	kind	=	WorkspaceNodeKind(json: o1["kind"], errorTrap: errorTrap)
-			let	flags	=	WorkspaceNodeFlags(json: o1["flags"], errorTrap: errorTrap)
+	///	Erases all existing state and reset to data restored from supplied JSON data.
+	private func reconfigure(json: JSON.Value?, @noescape errorTrap:(String)->()) {
+		func inner(@noescape errorTrap:(String)->()) -> ()? {
+			if json == nil			{ errorTrap("JSON value for `\(self.dynamicType)` is `nil`."); return nil }
+			if json!.object == nil	{ errorTrap("JSON value for `\(self.dynamicType)` is not an JSON string."); return nil }
 			
-			if name == nil		{ errorTrap("A JSON object for `\(self.dynamicType)`'s child has no `name` string field."); return nil }
-			if kind == nil		{ errorTrap("A JSON object for `\(self.dynamicType)`'s child has no proper `kind` value."); return nil }
+			let	o			=	json!.object!
+//			let	name		=	o["name"]?.string
+			let	comment		=	o["comment"]?.string
+			let	flags		=	WorkspaceNodeFlags(json: o["flags"], errorTrap: errorTrap)
+			let	subnodes	=	o["subnodes"]?.array
+			
+//			if name == nil			{ errorTrap("JSON object for `\(self.dynamicType)` is not have `name` string field."); return nil }
+			
 			if flags == nil		{ errorTrap("A JSON object for `\(self.dynamicType)`'s child has no proper `flags` value."); return nil }
+			if subnodes == nil		{ errorTrap("JSON object for `\(self.dynamicType)` is not have `subnodes` array field."); return nil }
+			
+//			self.rename(name!)
+			self.comment	=	comment		// `comment` can be `nil`.
+			if flags!.isOpenFolder {
+				self.setExpanded()
+			}
+			
+			self.deleteAllChildNodes()
+			for j in subnodes! {
+				if j.object == nil		{ errorTrap("One of more item is not JSON object value in array of JSON object for `\(self.dynamicType)`."); return nil }
+				let	o1		=	j.object!
+				let	name	=	o1["name"]?.string
+				let	kind	=	WorkspaceNodeKind(json: o1["kind"], errorTrap: errorTrap)
+				
+				if name == nil		{ errorTrap("A JSON object for `\(self.dynamicType)`'s child has no `name` string field."); return nil }
+				if kind == nil		{ errorTrap("A JSON object for `\(self.dynamicType)`'s child has no proper `kind` value."); return nil }
 
-			self.createChildNodeAtLastAsKind(kind!, withName: name!)
+				let	sn		=	self.createChildNodeAtLastAsKind(kind!, withName: name!)
+				sn.reconfigure(j, errorTrap: errorTrap)
+			}
+			
+			return	nil
 		}
-		
-		return	nil
+		inner(errorTrap)
 	}
 	var json:JSON.Value {
 		get {
+			let	ns	=	children.map({ n in n.json })
+			let	ns1	=	JSON.Value.Array(ns)
+			
 			let	o	=	[
 				"name"		:	JSON.Value.String(name),
 				"comment"	:	comment == nil ? JSON.Value.Null : JSON.Value.String(comment!),
 				"kind"		:	kind.json,
 				"flags"		:	flags.json,
-				] as JSON.Object
+				"subnodes"	:	ns1,
+			] as JSON.Object
 			return	JSON.Value.Object(o)
 		}
 	}
@@ -166,19 +187,22 @@ extension WorkspaceNodeFlags {
 		if json == nil			{ errorTrap("JSON value for `\(self.dynamicType)` is `nil`."); return nil }
 		if json!.object == nil	{ errorTrap("JSON value for `\(self.dynamicType)` is not an JSON object."); return nil }
 		
-		let	_lazy	=	json!.object!["lazySubtree"]?.boolean
+//		let	_lazy	=	json!.object!["lazySubtree"]?.boolean
 //		let	_subws	=	json!.object!["subworkspace"]?.boolean
+		let	_open	=	json!.object!["isOpenFolder"]?.boolean
 		
-		if _lazy == nil			{ errorTrap("JSON object for `WorkspaceNodeFlags` has no proper `lazySubtree` value."); return nil }
+//		if _lazy == nil			{ errorTrap("JSON object for `WorkspaceNodeFlags` has no proper `lazySubtree` value."); return nil }
 //		if _subws == nil		{ errorTrap("JSON object for `WorkspaceNodeFlags` has no proper `subworkspace` value."); return nil }
+		if _open == nil			{ errorTrap("JSON object for `WorkspaceNodeFlags` has no proper `isOpenFolder` value."); return nil }
 		
-		self.lazySubtree	=	_lazy!
+		self.isOpenFolder	=	_open!
 //		self.subworkspace	=	_subws!
 	}
 	var	json:JSON.Value {
 		get {
 			let	o	=	[
-				"lazySubtree"	:	JSON.Value.Boolean(lazySubtree),
+//				"lazySubtree"	:	JSON.Value.Boolean(lazySubtree),
+				"isOpenFolder"	:	JSON.Value.Boolean(isOpenFolder),
 //				"subworkspace"	:	JSON.Value.Boolean(subworkspace),
 				] as JSON.Object
 			return	JSON.Value.Object(o)

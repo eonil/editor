@@ -73,16 +73,6 @@ struct Selection<T> {
 
 
 
-private extension NSURL {
-	func URLByAppendingPath(path:WorkspacePath) -> NSURL {
-		if path.components.count == 0 {
-			return	self
-		}
-		let	u	=	self.URLByAppendingPath(path.parentPath)
-		let	u1	=	u.URLByAppendingPathComponent(path.components.last!)
-		return	u1
-	}
-}
 
 
 

@@ -11,20 +11,38 @@ import AppKit
 import EditorCommon
 import EditorUIComponents
 
+
+
+
+
+
+
+public protocol WorkspaceNavigationViewControllerDelegate: class {
+	func workpaceNavigationViewControllerWantsToOpenFileAtURL(NSURL)
+}
+
+
+
 public final class WorkspaceNavigationViewController: NSViewController {
+	public weak var delegate:WorkspaceNavigationViewControllerDelegate?
 	
 	///	This must be a file URL to a directory with extension `eews` that contains workspace content.
 	///	The directory should contain `.eonil.editor.workspace.configuration` file that contains workspace configurations.
 	///	If there's no such file, this will crash program.
 	public var URLRepresentation:NSURL? {
 		get {
+			Debug.assertMainThread()
+			
 			return	super.representedObject as! NSURL?
 		}
 		set(v) {
+			Debug.assertMainThread()
+			
 			if v != (super.representedObject as! NSURL?) {
 				if let u = URLRepresentation {
 					WorkspaceSerialisation.writeRepositoryConfiguration(_internalController.repository!, toWorkspaceAtURL: u)
-					_internalController.repository	=	nil
+					_internalController.repository!.delegate	=	nil
+					_internalController.repository				=	nil
 				}
 				
 				super.representedObject	=	v
@@ -32,14 +50,30 @@ public final class WorkspaceNavigationViewController: NSViewController {
 				if let u = URLRepresentation {
 					let	u1	=	WorkspaceSerialisation.configurationFileURLForWorkspaceAtURL(u)
 					if u1.existingAsAnyFile {
-						_internalController.repository	=	WorkspaceSerialisation.readRepositoryConfiguration(fromWorkspaceAtURL: u)
+						_internalController.repository				=	WorkspaceSerialisation.readRepositoryConfiguration(fromWorkspaceAtURL: u)
 					} else {
-						_internalController.repository	=	WorkspaceRepository(name: u.lastPathComponent!)
+						_internalController.repository				=	WorkspaceRepository(name: u.lastPathComponent!)
 					}
+					_internalController.repository!.delegate	=	_internalController
 				}
 				
 				self.outlineView.reloadData()
+				if let n = _internalController.repository?.root {
+					self._expandOpenFolderNodes(n)
+				}
 			}
+		}
+	}
+	
+	private func _expandOpenFolderNodes(n:WorkspaceNode) {
+		Debug.assertMainThread()
+		
+		if n.flags.isOpenFolder {
+			self.outlineView.expandItem(n, expandChildren: false)
+//			self.outlineView.expandItem(self.outlineView.itemAtRow(0), expandChildren: false)
+		}
+		for n1 in n.children {
+			_expandOpenFolderNodes(n1)
 		}
 	}
 	
@@ -86,7 +120,7 @@ public final class WorkspaceNavigationViewController: NSViewController {
 		outlineView.allowsEmptySelection	=	true
 		outlineView.headerView				=	nil
 		outlineView.focusRingType			=	NSFocusRingType.None
-		outlineView.selectionHighlightStyle	=	NSTableViewSelectionHighlightStyle.SourceList
+//		outlineView.selectionHighlightStyle	=	NSTableViewSelectionHighlightStyle.SourceList
 		outlineView.rowSizeStyle			=	NSTableViewRowSizeStyle.Small
 		outlineView.menu					=	MenuController.menuOfController(_internalController.menu)
 		outlineView.doubleAction			=	"dummyDoubleActionHandler:"
@@ -257,9 +291,9 @@ private final class InternalController: NSObject {
 			Debug.assertMainThread()
 			
 			let	q	=	querySelection()
-			
-			if let parentFolderURL = q.URL.hot {
-				let	r	=	FileUtility.createNewFileInFolder(parentFolderURL)
+			if let u = q.URL.hot {
+				let	parentFolderURL	=	u
+				let	r				=	FileUtility.createNewFileInFolder(parentFolderURL)
 				if r.ok {
 					let	newFileURL	=	r.value!
 					let	newFileNode	=	q.node.hot!.createChildNodeAtLastAsKind(WorkspaceNodeKind.File, withName: newFileURL.lastPathComponent!)
@@ -278,13 +312,14 @@ private final class InternalController: NSObject {
 			Debug.assertMainThread()
 			
 			let	q	=	querySelection()
-			
-			if let parentFolderURL = q.URL.hot {
-				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
+			if let u = q.URL.hot {
+				let	parentFolderURL	=	u
+				let	r				=	FileUtility.createNewFolderInFolder(parentFolderURL)
 				if r.ok {
 					let	newFolderURL	=	r.value!
 					let	newFolderNode	=	q.node.hot!.createChildNodeAtLastAsKind(WorkspaceNodeKind.Folder, withName: newFolderURL.lastPathComponent!)
 					
+					println(newFolderURL)
 					self.owner.outlineView.reloadData()
 					self.owner.outlineView.expandItem(q.node.hot!)
 					self.owner.outlineView.editColumn(0, row: self.owner.outlineView.rowForItem(newFolderNode), withEvent: nil, select: true)
@@ -332,17 +367,20 @@ private final class InternalController: NSObject {
 		}
 		menu.addAllUnregistredFiles.reaction	=	{ [unowned self] in
 			let	q	=	querySelection()
-
+			
+			fatalError("Unimplemented yet...")
 			//	TODO:	Implement this...
 		}
 		menu.removeAllMissingFiles.reaction	=	{ [unowned self] in
 			let	q	=	querySelection()
-
+			
+			fatalError("Unimplemented yet...")
 			//	TODO:	Implement this...
 		}
 		menu.note.reaction	=	{ [unowned self] in
 			let	q	=	querySelection()
 
+			fatalError("Unimplemented yet...")
 			//	TODO:	Implement this...
 		}
 		
@@ -373,11 +411,14 @@ private final class InternalController: NSObject {
 				self.menu.showInTerminal.enabled			=	hasFlatSelection
 				self.menu.newFile.enabled					=	hasFocusSelection && q.node.hot!.kind == WorkspaceNodeKind.Folder
 				self.menu.newFolder.enabled					=	hasFocusSelection && q.node.hot!.kind == WorkspaceNodeKind.Folder
-				self.menu.newFolderWithSelection.enabled	=	hasFlatSelection && q.node.hot!.kind == WorkspaceNodeKind.Folder && hasAnyRootSelection == false
-				self.menu.delete.enabled					=	hasFlatSelection && q.node.hot!.kind == WorkspaceNodeKind.Folder && hasAnyRootSelection == false
-				self.menu.addAllUnregistredFiles.enabled	=	hasAnySelection
-				self.menu.removeAllMissingFiles.enabled		=	hasAnySelection
-				self.menu.note.enabled						=	hasFocusSelection
+				self.menu.newFolderWithSelection.enabled	=	hasFlatSelection && hasAnyRootSelection == false
+				self.menu.delete.enabled					=	hasFlatSelection && hasAnyRootSelection == false
+//				self.menu.addAllUnregistredFiles.enabled	=	hasAnySelection
+//				self.menu.removeAllMissingFiles.enabled		=	hasAnySelection
+//				self.menu.note.enabled						=	hasFocusSelection
+				self.menu.addAllUnregistredFiles.enabled	=	false
+				self.menu.removeAllMissingFiles.enabled		=	false
+				self.menu.note.enabled						=	false
 		}
 	}
 	weak var owner:WorkspaceNavigationViewController! {
@@ -456,7 +497,7 @@ extension InternalController: NSOutlineViewDataSource {
 	@objc
 	func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
 		let n	=	item as! WorkspaceNode
-		return	n.children.count > 0
+		return	n.kind == WorkspaceNodeKind.Folder
 	}
 	@objc
 	func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
@@ -484,6 +525,7 @@ extension InternalController: NSOutlineViewDataSource {
 		let	v	=	CellView(cid)
 		let	n	=	item as! WorkspaceNode
 		v.nodeRepresentation	=	n
+		v.textField!.delegate	=	self
 		return	v
 	}
 }
@@ -502,7 +544,30 @@ extension InternalController: NSOutlineViewDataSource {
 
 
 extension InternalController: NSOutlineViewDelegate {
-	
+	@objc
+	private func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool {
+		let	n	=	item as! WorkspaceNode
+		if n.kind == WorkspaceNodeKind.File {
+			let	u	=	owner.URLRepresentation!
+			let	u1	=	u.URLByAppendingPath(n.path)
+			owner.delegate?.workpaceNavigationViewControllerWantsToOpenFileAtURL(u1)
+		}
+		return	true
+	}
+	@objc
+	func outlineView(outlineView: NSOutlineView, shouldExpandItem item: AnyObject) -> Bool {
+		let	n	=	item as! WorkspaceNode
+		n.setExpanded()
+		owner.synchroniseToFileSystem()
+		return	true
+	}
+	@objc
+	func outlineView(outlineView: NSOutlineView, shouldCollapseItem item: AnyObject) -> Bool {
+		let	n	=	item as! WorkspaceNode
+		n.setCollapsed()
+		owner.synchroniseToFileSystem()
+		return	true
+	}
 }
 
 
@@ -546,17 +611,27 @@ extension InternalController: NSOutlineViewDelegate {
 ///	MARK:	InternalController (WorkspaceRepositoryDelegate)
 
 extension InternalController: WorkspaceRepositoryDelegate {
-	func workspaceRepositoryDidCreateNode(node: WorkspaceNode) {
+	func workspaceRepositoryWillCreateNode() {
 		
+	}
+	func workspaceRepositoryDidCreateNode(node: WorkspaceNode) {
+		owner.synchroniseToFileSystem()
+	}
+	func workspaceRepositoryWillRenameNode(node: WorkspaceNode) {
+		
+	}
+	func workspaceRepositoryDidRenameNode(node: WorkspaceNode) {
+		owner.synchroniseToFileSystem()
 	}
 	func workspaceRepositoryWillMoveNode(node: WorkspaceNode) {
-		
 	}
 	func workspaceRepositoryDidMoveNode(node: WorkspaceNode) {
-		
+		owner.synchroniseToFileSystem()
 	}
 	func workspaceRepositoryWillDeleteNode(node: WorkspaceNode) {
-		
+	}
+	func workspaceRepositoryDidDeleteNode() {
+		owner.synchroniseToFileSystem()		
 	}
 	
 	
@@ -574,6 +649,52 @@ extension InternalController: WorkspaceRepositoryDelegate {
 
 
 
+
+
+
+
+
+
+///	MARK:	InternalController (NSTextFieldDelegate)
+
+//	Commented methods are not being called. I don't know why.
+extension InternalController: NSTextFieldDelegate {
+//	private func control(control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+//		return	true
+//	}
+//	private func control(control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+//		return	true
+//	}
+	private override func controlTextDidBeginEditing(obj: NSNotification) {
+		
+	}
+	private override func controlTextDidChange(obj: NSNotification) {
+		
+	}
+	
+	///	Called only when user committed editing. 
+	///	No call if user cancanlled editing by pressing ESC key.
+	private override func controlTextDidEndEditing(obj: NSNotification) {
+		//	A bit hacky...
+		let	tf	=	obj.object as! NSTextField
+		let	c	=	tf.superview as! CellView
+		let	n	=	c.nodeRepresentation!
+		
+		let	pc	=	tf.stringValue
+		let	u1	=	owner.URLRepresentation!.URLByAppendingPath(n.path)
+		let	u2	=	u1.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(pc)
+		var	e	=	nil as NSError?
+		let	ok	=	NSFileManager.defaultManager().moveItemAtURL(u1, toURL: u2, error: &e)
+		if ok {
+			n.rename(pc)
+		} else {
+			Debug.log(u1)
+			Debug.log(u2)
+			tf.stringValue	=	n.name
+			self.owner.presentError(e!)
+		}
+	}
+}
 
 
 

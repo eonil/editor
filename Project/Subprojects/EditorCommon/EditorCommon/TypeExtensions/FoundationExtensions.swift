@@ -113,7 +113,6 @@ public extension NSURL {
 	}
 	public var existingAsDirectoryFile:Bool {
 		get {
-			
 			if existingAsAnyFile {
 				var	dir: AnyObject?	=	false as AnyObject?
 				var	err				=	nil as NSError?

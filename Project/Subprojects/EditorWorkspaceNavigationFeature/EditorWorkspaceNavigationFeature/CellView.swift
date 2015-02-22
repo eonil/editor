@@ -13,7 +13,7 @@ import EditorUIComponents
 
 
 
-enum WorkspaceNavigationTreeColumnIdentifier: String {
+internal enum WorkspaceNavigationTreeColumnIdentifier: String {
 	case	Name		=	"NAME"
 	case	Comment		=	"COMMENT"
 }
@@ -21,7 +21,7 @@ enum WorkspaceNavigationTreeColumnIdentifier: String {
 
 
 
-final class CellView: NSTableCellView {
+internal final class CellView: NSTableCellView {
 	var	columnIdentifier:WorkspaceNavigationTreeColumnIdentifier	=	WorkspaceNavigationTreeColumnIdentifier.Name
 	
 	init(_ columnIdentifier:WorkspaceNavigationTreeColumnIdentifier) {
@@ -38,6 +38,7 @@ final class CellView: NSTableCellView {
 			v2.editable			=	true
 			v2.bordered			=	false
 			v2.backgroundColor	=	NSColor.clearColor()
+			(v2.cell() as! NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
 			
 			self.imageView		=	v1
 			self.textField		=	v2
@@ -50,6 +51,8 @@ final class CellView: NSTableCellView {
 			v2.bordered			=	false
 			v2.backgroundColor	=	NSColor.clearColor()
 			v2.textColor		=	NSColor.labelColor()
+			(v2.cell() as! NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
+			
 			self.textField		=	v2
 			
 		default:
@@ -91,10 +94,10 @@ final class CellView: NSTableCellView {
 				let	m	=	v!.kind == WorkspaceNodeKind.Folder ? Icons.folder : Icons.file
 				
 				imageView!.image		=	m
-				textField!.stringValue	=	t
+				textField!.objectValue	=	t
 				
 			case WorkspaceNavigationTreeColumnIdentifier.Comment:
-				textField!.stringValue	=	v!.comment ||| ""
+				textField!.objectValue	=	v!.comment ||| ""
 				
 			default:
 				fatalError("Unknown column identifier `\(self.columnIdentifier)` detected.")
@@ -115,6 +118,43 @@ final class CellView: NSTableCellView {
 		//		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private class CellTextField: NSTextField {
+	@objc
+	override var acceptsFirstResponder:Bool {
+		get {
+			return	true
+		}
+	}
+	
+//	///	Called when user pressed ESC key.
+//	@objc
+//	override func cancelOperation(sender: AnyObject?) {
+//		super.cancelOperation(sender)
+//	}
+}
+
+
+
+
+
+
+
+
+
 
 
 

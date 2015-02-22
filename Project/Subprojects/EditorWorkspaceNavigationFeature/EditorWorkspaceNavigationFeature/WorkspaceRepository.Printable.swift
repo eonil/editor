@@ -48,9 +48,9 @@ extension WorkspaceNodeFlags: Printable {
 	public var description:String {
 		get {
 			var	a	=	[] as [String]
-			if lazySubtree {
-				a.append("lazy-subtree")
-			}
+//			if lazySubtree {
+//				a.append("lazy-subtree")
+//			}
 //			if subworkspace {
 //				a.append("subproject")
 //			}

@@ -13,7 +13,7 @@ import EditorWorkspaceNavigationFeature
 
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, WorkspaceNavigationViewControllerDelegate {
 
 	@IBOutlet weak var window: NSWindow!
 
@@ -22,6 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 //		window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
+		
+		nv.delegate			=	self
 		
 		sv.documentView		=	nv.view
 		window.contentView	=	sv
@@ -43,5 +45,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		nv.synchroniseToFileSystem()
 	}
 
+	func workpaceNavigationViewControllerWantsToOpenFileAtURL(u: NSURL) {
+		println("workpaceNavigationViewControllerWantsToOpenFileAtURL")
+		println(u)
+	}
 }
 
