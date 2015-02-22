@@ -400,21 +400,12 @@ private final class InternalController: NSObject {
 				}()
 				let	hasAnyRootSelection	=	q.rootCoolSelection || q.rootHotSelection
 				
-				let	fn	=	self.owner.outlineView.clickedNode
-				let	sns	=	self.owner.outlineView.selectedNodes
-				
-				
-				let	hasFocus		=	fn != nil
-				let	hasSelection	=	sns.count > 0
-				let	rootFocused		=	fn === self.repository!.root
-				let	rootSelected	=	sns.filter({ n in n === self.repository!.root }).count > 0
-				
 				self.menu.showInFinder.enabled				=	hasAnySelection
 				self.menu.showInTerminal.enabled			=	hasFlatSelection
-				self.menu.newFile.enabled					=	hasFocusSelection
-				self.menu.newFolder.enabled					=	hasFocusSelection
-				self.menu.newFolderWithSelection.enabled	=	hasFlatSelection && hasAnyRootSelection == false
-				self.menu.delete.enabled					=	hasFlatSelection && hasAnyRootSelection == false
+				self.menu.newFile.enabled					=	hasFocusSelection && q.node.hot!.kind == WorkspaceNodeKind.Folder
+				self.menu.newFolder.enabled					=	hasFocusSelection && q.node.hot!.kind == WorkspaceNodeKind.Folder
+				self.menu.newFolderWithSelection.enabled	=	hasFlatSelection && q.node.hot!.kind == WorkspaceNodeKind.Folder && hasAnyRootSelection == false
+				self.menu.delete.enabled					=	hasFlatSelection && q.node.hot!.kind == WorkspaceNodeKind.Folder && hasAnyRootSelection == false
 				self.menu.addAllUnregistredFiles.enabled	=	hasAnySelection
 				self.menu.removeAllMissingFiles.enabled		=	hasAnySelection
 				self.menu.note.enabled						=	hasFocusSelection
