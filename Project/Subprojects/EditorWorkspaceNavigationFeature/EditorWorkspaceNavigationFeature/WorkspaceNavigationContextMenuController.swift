@@ -15,6 +15,7 @@ import EditorUIComponents
 
 final class WorkspaceNavigationContextMenuController: MenuController {
 	let	showInFinder			=	NSMenuItem(title: "Show in Finder")
+	let	showInTerminal			=	NSMenuItem(title: "Show in Terminal")
 	let	newFile					=	NSMenuItem(title: "New File...")
 	let	newFolder				=	NSMenuItem(title: "New Folder")
 	let	newFolderWithSelection	=	NSMenuItem(title: "New Folder with Selection")
@@ -28,6 +29,7 @@ final class WorkspaceNavigationContextMenuController: MenuController {
 		m.autoenablesItems	=	false
 		
 		m.addItem(showInFinder)
+		m.addItem(showInTerminal)
 		m.addItem(NSMenuItem.separatorItem())
 		m.addItem(newFile)
 		m.addItem(newFolder)

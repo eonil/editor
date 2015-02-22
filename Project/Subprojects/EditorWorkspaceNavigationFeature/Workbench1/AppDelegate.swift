@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	let	nv	=	WorkspaceNavigationViewController()
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
+//		window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
 		
 		sv.documentView		=	nv.view
 		window.contentView	=	sv

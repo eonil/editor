@@ -72,11 +72,11 @@ public final class WorkspaceNavigationViewController: NSViewController {
 		
 		let	c1			=	NSTableColumn()
 		c1.title		=	"Name"
-		c1.identifier	=	COLUMN_NAME
+		c1.identifier	=	WorkspaceNavigationTreeColumnIdentifier.Name.rawValue
 		
 		let	c2			=	NSTableColumn()
 		c2.title		=	"Comment"
-		c2.identifier	=	COLUMN_COMMENT
+		c2.identifier	=	WorkspaceNavigationTreeColumnIdentifier.Comment.rawValue
 		
 		outlineView.addTableColumn(c1)
 		outlineView.addTableColumn(c2)
@@ -145,141 +145,6 @@ private extension WorkspaceNavigationViewController {
 
 
 
-
-
-
-
-
-
-
-///	MARK:
-///	MARK:	CellView
-
-
-
-
-
-
-
-
-
-private final class CellView: NSTableCellView {
-	var	columnIdentifier:String	=	""
-	
-	init(_ columnIdentifier:String) {
-		super.init()
-		self.columnIdentifier	=	columnIdentifier
-		
-		switch self.columnIdentifier {
-		case COLUMN_NAME:
-			let	v1	=	NSImageView()
-			let	v2	=	NSTextField()
-			self.addSubview(v1)
-			self.addSubview(v2)
-			
-			v2.editable			=	false
-			v2.bordered			=	false
-			v2.backgroundColor	=	NSColor.clearColor()
-			
-			self.imageView		=	v1
-			self.textField		=	v2
-			
-		case COLUMN_COMMENT:
-			let	v2	=	NSTextField()
-			self.addSubview(v2)
-			
-			v2.editable			=	false
-			v2.bordered			=	false
-			v2.backgroundColor	=	NSColor.clearColor()
-			v2.textColor		=	NSColor.labelColor()
-			self.textField		=	v2
-			
-		default:
-			fatalError("Unknown column identifier `\(self.columnIdentifier)` detected.")
-		}
-	}
-	
-	@availability(*,unavailable)
-	override init() {
-		super.init()
-	}
-	
-	@availability(*,unavailable)
-	required init?(coder: NSCoder) {
-		fatalError("Unsupported initializer.")
-	}
-	
-	@availability(*,unavailable)
-	override init(frame frameRect: NSRect) {
-		super.init(frame: frameRect)
-		
-	}
-	
-	
-	
-	var nodeRepresentation:WorkspaceNode? {
-		get {
-			return	super.objectValue as! WorkspaceNode?
-		}
-		set(v) {
-			super.objectValue	=	v
-			
-			switch self.columnIdentifier {
-			case COLUMN_NAME:
-				let	n	=	v!.name
-				let	c	=	v!.comment ||| ""
-				let	t	=	c == "" ? n : "\(n) (\(c))"
-				
-				let	m	=	v!.kind == WorkspaceNodeKind.Folder ? Icons.folder : Icons.file
-				
-				imageView!.image		=	m
-				textField!.stringValue	=	t
-				
-			case COLUMN_COMMENT:
-				textField!.stringValue	=	v!.comment ||| ""
-
-			default:
-				fatalError("Unknown column identifier `\(self.columnIdentifier)` detected.")
-			}
-		}
-	}
-	
-	@availability(*,unavailable)
-	override var objectValue:AnyObject? {
-		willSet(v) {
-			precondition(v == nil || v is WorkspaceNode, "Only `WorkspaceNode` type is acceptable.")
-		}
-//		get {
-//			
-//		}
-//		set(v) {
-//			
-//		}
-	}
-}
-
-
-
-
-private extension NSImage {
-	var templateImage:NSImage {
-		get {
-			let	m	=	self.copy() as! NSImage
-			m.setTemplate(true)
-			return	m
-		}
-	}
-}
-
-
-
-private struct Icons {
-	static let	folder	=	IconPalette.FontAwesome.WebApplicationIcons.folderO.image.templateImage
-	static let	file	=	IconPalette.FontAwesome.WebApplicationIcons.fileO.image.templateImage
-}
-
-private let	COLUMN_NAME		=	"NAME"
-private let	COLUMN_COMMENT	=	"COMMENT"
 
 
 
@@ -410,22 +275,56 @@ private final class InternalController: NSObject {
 			let	q	=	querySelection()
 			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(q.URL.all)
 		}
+		menu.showInTerminal.reaction	=	{ [unowned self] in
+			let	q	=	querySelection()
+			let	u	=	q.URL.hot!
+			let	p	=	u.path!
+			let	p1	=	p.stringByDeletingLastPathComponent
+			let	s	=	NSAppleScript(source: "tell application \"Terminal\" to do script \"cd \(p1)\"")!
+			s.executeAndReturnError(nil)
+		}
 		
 		menu.newFile.reaction		=	{ [unowned self] in
-			let	q	=	querySelection()
-			q.node.hot!.createChildNodeForName("New File 1", kind: WorkspaceNodeKind.File)
+			Debug.assertMainThread()
 			
-//			let	i1	=	self.owner.outlineView.rowForItem(q.node.hot!)
-//			let	i2	=	q.node.hot!.children.count
-			self.owner.outlineView.reloadItem(q.node.hot!, reloadChildren: true)
-//			self.owner.outlineView.insertItemsAtIndexes(NSIndexSet(index: idx), inParent: q.node.hot!, withAnimation: NSTableViewAnimationOptions.SlideDown)
-//			self.owner.outlineView.reloadData()
+			let	q	=	querySelection()
+			
+			if let parentFolderURL = q.URL.hot {
+				let	r	=	FileUtility.createNewFileInFolder(parentFolderURL)
+				if r.ok {
+					let	newFileURL	=	r.value!
+					let	newFileNode	=	q.node.hot!.createChildNodeForName(newFileURL.lastPathComponent!, kind: WorkspaceNodeKind.File)
+					
+					self.owner.outlineView.reloadData()
+					self.owner.outlineView.expandItem(q.node.hot!)
+					self.owner.outlineView.editColumn(0, row: self.owner.outlineView.rowForItem(newFileNode), withEvent: nil, select: true)
+				} else {
+					self.owner.presentError(r.error!)
+				}
+			} else {
+				//	Ignore. Happens by clicking empty space.
+			}
 		}
 		menu.newFolder.reaction		=	{ [unowned self] in
-			let	q	=	querySelection()
-			q.node.hot!.createChildNodeForName("New Folder 1", kind: WorkspaceNodeKind.Folder)
+			Debug.assertMainThread()
 			
-			self.owner.outlineView.reloadItem(q.node.hot!, reloadChildren: true)
+			let	q	=	querySelection()
+			
+			if let parentFolderURL = q.URL.hot {
+				let	r	=	FileUtility.createNewFolderInFolder(parentFolderURL)
+				if r.ok {
+					let	newFolderURL	=	r.value!
+					let	newFolderNode	=	q.node.hot!.createChildNodeForName(newFolderURL.lastPathComponent!, kind: WorkspaceNodeKind.Folder)
+					
+					self.owner.outlineView.reloadData()
+					self.owner.outlineView.expandItem(q.node.hot!)
+					self.owner.outlineView.editColumn(0, row: self.owner.outlineView.rowForItem(newFolderNode), withEvent: nil, select: true)
+				} else {
+					self.owner.presentError(r.error!)
+				}
+			} else {
+				//	Ignore. Happens by clicking empty space.
+			}
 		}
 		menu.newFolderWithSelection.reaction	=	{ [unowned self] in
 			let	q	=	querySelection()
@@ -435,7 +334,32 @@ private final class InternalController: NSObject {
 		menu.delete.reaction	=	{ [unowned self] in
 			let	q	=	querySelection()
 			
-			//	TODO:	Implement this...
+			let	targetURLs	=	q.URL.all
+			if targetURLs.count > 0 {
+				UIDialogues.queryDeletingFilesUsingWindowSheet(self.owner.outlineView.window!, files: targetURLs, handler: { (b:UIDialogueButton) -> () in
+					switch b {
+					case .OKButton:
+						self.repository!.deleteNodes(q.node.all)
+						self.owner.outlineView.reloadData()
+						
+						//	TODO:	filtering broken. Doesn't work correctly. Rewrite it.
+						println(targetURLs)
+						let	us	=	filterTopmostURLsOnlyForDeleting(targetURLs)
+						println(us)
+						for u in us {
+							let	r	=	deleteFilesAtURLs([u])
+							if let err = r.error {
+								self.owner.presentError(err)
+							} else {
+//								self.owner.invalidateNodeForURL(u)
+							}
+						}
+						
+					case .CancelButton:
+						break
+					}
+				})
+			}
 		}
 		menu.addAllUnregistredFiles.reaction	=	{ [unowned self] in
 			let	q	=	querySelection()
@@ -457,22 +381,43 @@ private final class InternalController: NSObject {
 			NSMenuDidBeginTrackingNotification,
 			object: MenuController.menuOfController(menu),
 			queue: nil) { [unowned self](n:NSNotification!) -> Void in
+				let	q	=	querySelection()
+				
+				let	hasFocusSelection	=	q.node.hot != nil
+				let	hasAnySelection		=	q.node.all.count > 0
+				let	hasFlatSelection	=	{ ()->Bool in
+					if hasAnySelection == false {
+						return	false
+					}
+					let	a	=	q.node.all
+					let	f	=	a.first!.parent
+					for n in a {
+						if n.parent !== f {
+							return	false
+						}
+					}
+					return	true
+				}()
+				let	hasAnyRootSelection	=	q.rootCoolSelection || q.rootHotSelection
+				
 				let	fn	=	self.owner.outlineView.clickedNode
 				let	sns	=	self.owner.outlineView.selectedNodes
+				
 				
 				let	hasFocus		=	fn != nil
 				let	hasSelection	=	sns.count > 0
 				let	rootFocused		=	fn === self.repository!.root
 				let	rootSelected	=	sns.filter({ n in n === self.repository!.root }).count > 0
 				
-				self.menu.showInFinder.enabled				=	hasFocus || hasSelection
-				self.menu.newFile.enabled					=	hasFocus || hasSelection
-				self.menu.newFolder.enabled					=	hasFocus || hasSelection
-				self.menu.newFolderWithSelection.enabled	=	(hasFocus || hasSelection) && (rootFocused == false && rootSelected == false)
-				self.menu.delete.enabled					=	(hasFocus || hasSelection) && (rootFocused == false && rootSelected == false)
-				self.menu.addAllUnregistredFiles.enabled	=	hasFocus || hasSelection
-				self.menu.removeAllMissingFiles.enabled		=	hasFocus || hasSelection
-				self.menu.note.enabled						=	hasFocus || hasSelection
+				self.menu.showInFinder.enabled				=	hasAnySelection
+				self.menu.showInTerminal.enabled			=	hasFlatSelection
+				self.menu.newFile.enabled					=	hasFocusSelection
+				self.menu.newFolder.enabled					=	hasFocusSelection
+				self.menu.newFolderWithSelection.enabled	=	hasFlatSelection && hasAnyRootSelection == false
+				self.menu.delete.enabled					=	hasFlatSelection && hasAnyRootSelection == false
+				self.menu.addAllUnregistredFiles.enabled	=	hasAnySelection
+				self.menu.removeAllMissingFiles.enabled		=	hasAnySelection
+				self.menu.note.enabled						=	hasFocusSelection
 		}
 	}
 	weak var owner:WorkspaceNavigationViewController! {
@@ -524,6 +469,40 @@ private extension NSURL {
 		let	u1	=	u.URLByAppendingPathComponent(path.components.last!)
 		return	u1
 	}
+}
+
+
+///	MARK:
+///	MARK:	Utility Functions
+
+private func deleteFilesAtURLs(us: [NSURL]) -> Resolution<()> {
+	Debug.assertMainThread()
+	
+	var	err	=	nil as NSError?
+	for u in us {
+		let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
+		assert(ok || err != nil)
+		if !ok {
+			return	Resolution.failure(err!)
+		}
+	}
+	return	Resolution.success()
+}
+private func filterTopmostURLsOnlyForDeleting(urls:[NSURL]) -> [NSURL] {
+	var	us1	=	[] as [NSURL]
+	for u in urls {
+		//	TODO:	Currenyl O(n^2). There seems to be a better way...
+		let	dupc	=	urls.reduce(0) { sum, u1 in
+			return	sum + (u.absoluteString!.hasPrefix(u1.absoluteString!) ? 1 : 0)
+		}
+		
+		if dupc > 1 {
+			continue
+		} else {
+			us1.append(u)
+		}
+	}
+	return	us1
 }
 
 
@@ -584,7 +563,8 @@ extension InternalController: NSOutlineViewDataSource {
 	}
 	@objc
 	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-		let	v	=	CellView(tableColumn!.identifier)
+		let	cid	=	WorkspaceNavigationTreeColumnIdentifier(rawValue: tableColumn!.identifier)!
+		let	v	=	CellView(cid)
 		v.nodeRepresentation	=	item as! WorkspaceNode
 		return	v
 	}
