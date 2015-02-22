@@ -113,16 +113,18 @@ public final class WorkspaceNavigationViewController: NSViewController {
 		
 		outlineView.addTableColumn(c1)
 //		outlineView.addTableColumn(c2)
-		outlineView.outlineTableColumn	=	c1
+		outlineView.outlineTableColumn		=	c1
 		
 		outlineView.allowsMultipleSelection	=	true
 		outlineView.allowsEmptySelection	=	true
 		outlineView.headerView				=	nil
 		outlineView.focusRingType			=	NSFocusRingType.None
-		outlineView.selectionHighlightStyle	=	NSTableViewSelectionHighlightStyle.SourceList
 		outlineView.rowSizeStyle			=	NSTableViewRowSizeStyle.Small
 		outlineView.menu					=	MenuController.menuOfController(_internalController.menu)
 		outlineView.doubleAction			=	"dummyDoubleActionHandler:"
+		
+		outlineView.selectionHighlightStyle				=	NSTableViewSelectionHighlightStyle.Regular
+//		outlineView.draggingDestinationFeedbackStyle	=	NSTableViewDraggingDestinationFeedbackStyle.SourceList
 		
 		outlineView.registerForDraggedTypes([NSFilenamesPboardType])
 		

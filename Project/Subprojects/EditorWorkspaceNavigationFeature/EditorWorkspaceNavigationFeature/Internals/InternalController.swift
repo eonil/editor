@@ -36,8 +36,12 @@ internal final class InternalController: NSObject {
 	let menu			=	ContextMenuController()
 	var repository		=	nil as WorkspaceRepository?
 	
+//	let	dragging		=	DraggingController()
+	
 	override init() {
 		super.init()
+		
+//		dragging.owner	=	self
 		
 		let querySelection	=	{ [unowned self] ()->SelectionQuery in
 			return	SelectionQuery(controller: self.owner, repository: self.repository)
@@ -260,6 +264,10 @@ private func filterTopmostURLsOnlyForDeleting(urls:[NSURL]) -> [NSURL] {
 
 extension InternalController: NSOutlineViewDataSource {
 	@objc
+	func outlineView(outlineView: NSOutlineView, isGroupItem item: AnyObject) -> Bool {
+		return	false
+	}
+	@objc
 	func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
 		let n	=	item as! WorkspaceNode
 		return	n.kind == WorkspaceNodeKind.Folder
@@ -284,6 +292,11 @@ extension InternalController: NSOutlineViewDataSource {
 	func outlineView(outlineView: NSOutlineView, objectValueForTableColumn tableColumn: NSTableColumn?, byItem item: AnyObject?) -> AnyObject? {
 		return	item as! WorkspaceNode
 	}
+//	@objc
+//	func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView? {
+//		let	v	=	NSTableRowView()
+//		return	v
+//	}
 	@objc
 	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		let	cid	=	WorkspaceNavigationTreeColumnIdentifier(rawValue: tableColumn!.identifier)!
@@ -291,10 +304,33 @@ extension InternalController: NSOutlineViewDataSource {
 		let	n	=	item as! WorkspaceNode
 		v.nodeRepresentation	=	n
 		v.textField!.delegate	=	self
+		v.appearance			=	outlineView.appearance
 		return	v
 	}
 	
 	
+	
+	//	Drag source support.
+	
+	@objc
+	func outlineView(outlineView: NSOutlineView, pasteboardWriterForItem item: AnyObject?) -> NSPasteboardWriting! {
+		let	n	=	item as! WorkspaceNode
+		let	u	=	owner!.URLRepresentation!.URLByAppendingPath(n.path)
+		return	u
+	}
+	@objc
+	func outlineView(outlineView: NSOutlineView, draggingSession session: NSDraggingSession, willBeginAtPoint screenPoint: NSPoint, forItems draggedItems: [AnyObject]) {
+		
+	}
+	@objc
+	func outlineView(outlineView: NSOutlineView, draggingSession session: NSDraggingSession, endedAtPoint screenPoint: NSPoint, operation: NSDragOperation) {
+		
+	}
+	
+	
+	
+	
+	//	Drag destination support.
 	
 	@objc
 	func outlineView(outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: AnyObject?, proposedChildIndex index: Int) -> NSDragOperation {
@@ -472,6 +508,42 @@ extension InternalController: NSTextFieldDelegate {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

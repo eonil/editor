@@ -20,7 +20,6 @@ internal enum WorkspaceNavigationTreeColumnIdentifier: String {
 
 
 
-
 internal final class CellView: NSTableCellView {
 	var	columnIdentifier:WorkspaceNavigationTreeColumnIdentifier	=	WorkspaceNavigationTreeColumnIdentifier.Name
 	
@@ -37,7 +36,8 @@ internal final class CellView: NSTableCellView {
 			
 			v2.editable			=	true
 			v2.bordered			=	false
-			v2.backgroundColor	=	NSColor.clearColor()
+			v2.bezeled			=	false				//	This property is essential to provide clear look in dark vibrancy mode.
+			v2.drawsBackground	=	false				//	This property is essential to provide clear look in dark vibrancy mode.
 			(v2.cell() as! NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
 			
 			self.imageView		=	v1
@@ -49,8 +49,8 @@ internal final class CellView: NSTableCellView {
 			
 			v2.editable			=	false
 			v2.bordered			=	false
-			v2.backgroundColor	=	NSColor.clearColor()
-			v2.textColor		=	NSColor.labelColor()
+			v2.bezeled			=	false				//	This property is essential to provide clear look in dark vibrancy mode.
+			v2.drawsBackground	=	false				//	This property is essential to provide clear look in dark vibrancy mode.
 			(v2.cell() as! NSCell).lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
 			
 			self.textField		=	v2

@@ -78,6 +78,13 @@ struct Selection<T> {
 
 
 
+
+
+
+
+
+
+
 private extension WorkspaceNavigationViewController {
 	var	clickedURL:NSURL? {
 		get {
