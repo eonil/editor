@@ -82,8 +82,7 @@ private extension WorkspaceNavigationViewController {
 	var	clickedURL:NSURL? {
 		get {
 			if let u = URLRepresentation, let n = outlineView.clickedNode {
-				let	u1	=	u.URLByDeletingLastPathComponent!
-				return	u1.URLByAppendingPath(n.path)
+				return	u.URLByAppendingPath(n.path)
 			}
 			return	nil
 		}
@@ -91,8 +90,7 @@ private extension WorkspaceNavigationViewController {
 	var	selectedURLs:[NSURL] {
 		get {
 			if let u = URLRepresentation {
-				let	u1	=	u.URLByDeletingLastPathComponent!
-				return	outlineView.selectedNodes.map({ n in u1.URLByAppendingPath(n.path) })
+				return	outlineView.selectedNodes.map({ n in u.URLByAppendingPath(n.path) })
 			}
 			return	[]
 		}

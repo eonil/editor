@@ -62,3 +62,6 @@ extension EditorWorkspaceNavigationFeatureTests {
 		XCTAssert(r1.root.children.count == 0)
 	}
 }
+
+
+

@@ -1,5 +1,5 @@
 //
-//  WorkspaceNavigationContextMenuController.swift
+//  ContextMenuController.swift
 //  EditorWorkspaceNavigationFeature
 //
 //  Created by Hoon H. on 2015/02/22.
@@ -13,7 +13,7 @@ import EditorUIComponents
 
 
 
-final class WorkspaceNavigationContextMenuController: MenuController {
+final class ContextMenuController: MenuController {
 	let	showInFinder			=	NSMenuItem(title: "Show in Finder")
 	let	showInTerminal			=	NSMenuItem(title: "Show in Terminal")
 	let	newFile					=	NSMenuItem(title: "New File...")
@@ -28,19 +28,21 @@ final class WorkspaceNavigationContextMenuController: MenuController {
 		let	m	=	NSMenu()
 		m.autoenablesItems	=	false
 		
-		m.addItem(showInFinder)
-		m.addItem(showInTerminal)
-		m.addItem(NSMenuItem.separatorItem())
-		m.addItem(newFile)
-		m.addItem(newFolder)
-		m.addItem(newFolderWithSelection)
-		m.addItem(NSMenuItem.separatorItem())
-		m.addItem(delete)
-		m.addItem(NSMenuItem.separatorItem())
-		m.addItem(addAllUnregistredFiles)
-		m.addItem(removeAllMissingFiles)
-		m.addItem(NSMenuItem.separatorItem())
-		m.addItem(note)
+		[
+			showInFinder,
+//			showInTerminal,
+			NSMenuItem.separatorItem(),
+			newFile,
+			newFolder,
+//			newFolderWithSelection,
+			NSMenuItem.separatorItem(),
+			delete,
+//			NSMenuItem.separatorItem(),
+//			addAllUnregistredFiles,
+//			removeAllMissingFiles,
+//			NSMenuItem.separatorItem(),
+//			note,
+		].map(m.addItem)
 		
 		super.init(m)
 	}
