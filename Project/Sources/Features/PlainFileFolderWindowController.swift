@@ -103,12 +103,21 @@ class PlainFileFolderWindowController : EditorCommonWindowController2 {
 			window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
 			window.invalidateShadow()
 			
-			func makeDark(b:NSButton) {
-				b.alphaValue	=	0.5
+			func makeDark(b:NSButton, alpha:CGFloat) {
+				let	f	=	CIFilter(name: "CIColorMonochrome")
+				f.setDefaults()
+				f.setValue(CIColor(red: 0.5, green: 0.3, blue: 0.5, alpha: alpha), forKey: "inputColor")		//	I got this number accidentally, and now I love this tone.
+//				f.setValue(CIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: alpha), forKey: "inputColor")
+				
+//				let	f1	=	CIFilter(name: "CIGammaAdjust")
+//				f1.setDefaults()
+//				f1.setValue(0.3, forKey: "inputPower")
+				
+				b.contentFilters	=	[f]
 			}
-			makeDark(window.standardWindowButton(NSWindowButton.CloseButton)!)
-			makeDark(window.standardWindowButton(NSWindowButton.MiniaturizeButton)!)
-			makeDark(window.standardWindowButton(NSWindowButton.ZoomButton)!)
+			makeDark(window.standardWindowButton(NSWindowButton.CloseButton)!, 1.0)
+			makeDark(window.standardWindowButton(NSWindowButton.MiniaturizeButton)!, 1.0)
+			makeDark(window.standardWindowButton(NSWindowButton.ZoomButton)!, 1.0)
 		}
 		return	window
 	}

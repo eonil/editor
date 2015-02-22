@@ -107,6 +107,8 @@ class AttributedStringTableCellView: NSTableCellView {
 		
 		tv.editable					=	false
 		tv.bordered					=	false
+		tv.bezeled					=	false
+		tv.drawsBackground			=	false
 		tv.backgroundColor			=	NSColor.clearColor()
 		tv.translatesAutoresizingMaskIntoConstraints	=	false
 		

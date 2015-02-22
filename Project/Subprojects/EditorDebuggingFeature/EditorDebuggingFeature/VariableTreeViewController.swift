@@ -93,12 +93,14 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 //	}
 	public func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView? {
 		let	v	=	DarkVibrancyAwareTableRowView()
+		v.appearance	=	outlineView.appearance
 		return	v
 	}
 	public func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		if let n = item as? VariableNode {
 			let	v				=	AttributedStringTableCellView()
 			v.attributedString	=	makePresentationText(n)
+			v.appearance		=	outlineView.appearance
 			return	v
 		} else {
 			fatalError("Unsupported item `\(item)`.")

@@ -28,11 +28,13 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegat
 	let	dbg		=	LLDBDebugger()
 	let	lcon	=	ListenerController()
 
+	func executionStateTreeViewControllerDidSelectFrame(frame: LLDBFrame?) {
+		tv2.snapshot	=	VariableTreeViewController.Snapshot(frame)
+	}
+	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		mainWindow!.appearance			=	NSAppearance(named: NSAppearanceNameVibrantDark)
 		localVariableWindow!.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
-//		tv1.view.appearance				=	NSAppearance(named: NSAppearanceNameVibrantDark)
-//		tv2.view.appearance				=	NSAppearance(named: NSAppearanceNameVibrantDark)
 		
 		////
 		
@@ -165,9 +167,7 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegat
 //		}
 	}
 	
-	func executionStateTreeViewControllerDidSelectFrame(frame: LLDBFrame) {
-		tv2.snapshot	=	VariableTreeViewController.Snapshot(frame)
-	}
+	
 }
 
 

@@ -9,7 +9,7 @@
 import Foundation
 import AppKit
 
-class DarkVibrancyAwareTableRowView: NSTableRowView {
+final class DarkVibrancyAwareTableRowView: NSTableRowView {
 //	@objc
 //	override var selected:Bool {
 //		didSet {
