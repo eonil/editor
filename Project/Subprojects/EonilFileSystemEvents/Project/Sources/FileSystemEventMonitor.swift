@@ -32,7 +32,7 @@ public final class FileSystemEventMonitor {
 		let	fs1	=	kFSEventStreamCreateFlagUseCFTypes | kFSEventStreamCreateFlagFileEvents | kFSEventStreamCreateFlagNoDefer
 		let	fs2	=	fs1 | (watchRoot ? kFSEventStreamCreateFlagWatchRoot : 0)
 		
-		_lowlevel	=	EonilJustFSEventStreamWrapper(allocator: nil, callback: { (stream:ConstFSEventStreamRef, numEvents:UInt, eventPaths:UnsafeMutablePointer<Void>, eventFlags:UnsafePointer<FSEventStreamEventFlags>, eventIds:UnsafePointer<FSEventStreamEventId>) -> Void in
+		_lowlevel	=	EonilJustFSEventStreamWrapper(allocator: nil, callback: { (stream:ConstFSEventStreamRef, numEvents:Int, eventPaths:UnsafeMutablePointer<Void>, eventFlags:UnsafePointer<FSEventStreamEventFlags>, eventIds:UnsafePointer<FSEventStreamEventId>) -> Void in
 			let	ps	=	unsafeBitCast(eventPaths, NSArray.self)
 			var	a1	=	[] as [FileSystemEvent]
 			a1.reserveCapacity(Int(numEvents))
