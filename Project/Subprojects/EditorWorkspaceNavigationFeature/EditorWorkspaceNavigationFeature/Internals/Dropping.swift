@@ -31,6 +31,10 @@ struct Dropping {
 		let	ps	=	pb.propertyListForType(NSFilenamesPboardType) as! [String]
 		let	us	=	ps.map({ p in NSURL(fileURLWithPath: p)! })
 		
+		//	TODO:
+		//	Check for duplication in all of source files and files in destination folder.
+		//	And refuse dropping if there's any duplication.
+		
 		switch op {
 		case Op.Copy:	processCopyDropping(sourceURLs: us, destinationNode: n, destinationChildIndex: index)
 		case Op.Move:	processMoveDropping(sourceURLs: us, destinationNode: n, destinationChildIndex: index)

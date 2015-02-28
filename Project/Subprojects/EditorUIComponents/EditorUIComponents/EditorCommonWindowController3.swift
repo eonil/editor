@@ -69,10 +69,7 @@ public class EditorCommonWindowController3 : NSWindowController {
 	
 	public override var window:NSWindow! {
 		get {
-			//	TODO:	
-			//	Currently uncommenting this line causes compiler crash in Swift 1.2. (Xcode 6.3 6D520o)
-			//	Uncomment it if compiler does not crash anymore.
-//			assert(super.window !== nil, "Current `window` is set to `nil` which means logic bug.")
+			assert(super.window !== nil, "Current `window` is set to `nil` which means logic bug.")
 			return	super.window
 		}
 		set(v) {
