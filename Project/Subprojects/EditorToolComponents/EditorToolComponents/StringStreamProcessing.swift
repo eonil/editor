@@ -59,7 +59,7 @@ public struct LineDispatcher {
 	}
 	public mutating func push(s:String) {
 		let	NEWLINE	=	"\n" as Character
-		let	ps		=	split(s, { (ch:Character)->Bool in return ch == NEWLINE }, maxSplit: 1, allowEmptySlices: true)
+		let	ps		=	split(s, maxSplit: 1, allowEmptySlices: true, isSeparator: { c in c == NEWLINE })
 		
 		_buffer.extend(ps[0])
 		if ps.count == 2 {

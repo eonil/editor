@@ -137,7 +137,7 @@ final class FileTreeRepository4 {
 				let	s1	=	s.substringFromIndex(from.absoluteString!.endIndex)
 				let	s2	=	to.absoluteString!.stringByAppendingString(s1)
 				let	u1	=	NSURL(string: s2)!		//	I am not sure on this.
-				relocateNodeToURL(u, to: u1)
+				self.relocateNodeToURL(u, to: u1)
 			}
 		}
 		relocateSubnodesOfTargetNode()
@@ -145,15 +145,15 @@ final class FileTreeRepository4 {
 		////
 		
 		func relocateTargetNode() {
-			_allNodes.removeValueForKey(from)
-			_allNodes[to]					=	targetNode
+			self._allNodes.removeValueForKey(from)
+			self._allNodes[to]					=	targetNode
 			targetNode._link				=	to
 			targetNode.subnodes._superlink	=	to
 		
 			////
 			
 			let	parentFromURL	=	from.URLByDeletingLastPathComponent!
-			let	parentNode		=	_allNodes[parentFromURL]
+			let	parentNode		=	self._allNodes[parentFromURL]
 			
 			var	siblingsURLs	=	parentNode!.subnodes._sublinks
 			let	siblingsURLs2	=	siblingsURLs.map { (u:NSURL)->NSURL in
@@ -280,19 +280,19 @@ final class FileSubnodeList4 : SequenceType {
 			////
 			
 			func simplest() {
-				_repository.deleteNodesForURLs(_sublinks)
-				_sublinks	=	v
-				_repository.createNodesForURLs(_sublinks)
+				self._repository.deleteNodesForURLs(self._sublinks)
+				self._sublinks	=	v
+				self._repository.createNodesForURLs(self._sublinks)
 			}
 			
 			///	Keeps existing nodes as much as possible for better UX.
 			func optimised() {
-				let	diffs	=	resolveDifferences(_sublinks, v)
+				let	diffs	=	resolveDifferences(self._sublinks, v)
 				
-				_repository.deleteNodesForURLs(diffs.outgoings)
-				_repository.createNodesForURLs(diffs.incomings)
+				self._repository.deleteNodesForURLs(diffs.outgoings)
+				self._repository.createNodesForURLs(diffs.incomings)
 				
-				_sublinks	=	diffs.stays + diffs.incomings
+				self._sublinks	=	diffs.stays + diffs.incomings
 			}
 
 			////

@@ -20,10 +20,7 @@ public struct RustCompilerOutputParsing {
 	}
 	
 	private static func run1(s:String) -> [RustCompilerIssue] {
-		let	lns	=	split(s, { (ch:Character)->Bool in return ch == "\n" }, maxSplit: Int.max, allowEmptySlices: true).map { (ln:String)->String in
-			return	ln + "\n"
-		}
-		
+		let	lns	=	split(s, maxSplit: Int.max, allowEmptySlices: true, isSeparator: { c in c == "\n" }).map({ ln in ln + "\n" })
 		var	isss	=	[] as [RustCompilerIssue]
 		
 		LINELOOP:
