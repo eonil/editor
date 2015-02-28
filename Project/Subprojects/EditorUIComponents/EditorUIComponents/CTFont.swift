@@ -62,7 +62,7 @@ extension CTFont {
 		}
 		
 		return	a1.withUnsafeBufferPointer { (p:UnsafeBufferPointer<unichar>) -> [CGGlyph] in
-			let	num	=	characters.utf16Count
+			let	num	=	count(characters.utf16)
 			let	p1	=	UnsafeMutablePointer<CGGlyph>.alloc(num)	//	Glyph must be smaller than UTF-16 code-unit count.
 			let	ok	=	CTFontGetGlyphsForCharacters(self, p.baseAddress, p1, CFIndex(a1.count))
 			
@@ -124,8 +124,10 @@ extension CTFont {
 	func drawGlyphs(glyphs:[CGGlyph], positions:[CGPoint], count:Int, context:CGContextRef) {
 		glyphs.withUnsafeBufferPointer { (pgs:UnsafeBufferPointer<CGGlyph>) -> () in
 			positions.withUnsafeBufferPointer({ (pps:UnsafeBufferPointer<CGPoint>) -> () in
-				CTFontDrawGlyphs(self, pgs.baseAddress, pps.baseAddress, UInt(count), context)
+				CTFontDrawGlyphs(self, pgs.baseAddress, pps.baseAddress, count, context)
+				()
 			})
+			()
 		}
 	}
 	

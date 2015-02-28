@@ -21,9 +21,14 @@
 		45166B801A98FC7F0046213D /* EditorUIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B721A98FC6A0046213D /* EditorUIComponents.framework */; };
 		45166B8A1A98FE930046213D /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B871A98FE860046213D /* EditorCommon.framework */; };
 		45166B8B1A98FE960046213D /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166B871A98FE860046213D /* EditorCommon.framework */; };
+		451C3AA81AA1EE9E002ECA80 /* WorkspacePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C3AA71AA1EE9E002ECA80 /* WorkspacePath.swift */; };
+		451C3AB51AA1EF9F002ECA80 /* WorkspaceRepository.Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C3AB41AA1EF9F002ECA80 /* WorkspaceRepository.Path.swift */; };
+		451C3AB71AA208D1002ECA80 /* Dropping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451C3AB61AA208D1002ECA80 /* Dropping.swift */; };
 		4527AF8B1A9A344100FDE847 /* OutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4527AF8A1A9A344100FDE847 /* OutlineView.swift */; };
 		45857FE01A994DF8007DF9AF /* Standards.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45166AC51A98C85C0046213D /* Standards.framework */; };
 		45857FE11A994DF8007DF9AF /* Standards.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45166AC51A98C85C0046213D /* Standards.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45AFF0E11AA1E7F5004C68D0 /* WorkspaceNavigationViewController.Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFF0E01AA1E7F5004C68D0 /* WorkspaceNavigationViewController.Extensions.swift */; };
+		45AFF0EE1AA1E95A004C68D0 /* WorkspaceRepository.NodeSearching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFF0ED1AA1E95A004C68D0 /* WorkspaceRepository.NodeSearching.swift */; };
 		45BDC5F51A9A1FE800A8045A /* Aliases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BDC5EC1A9A1FE800A8045A /* Aliases.swift */; };
 		45BDC5F61A9A1FE800A8045A /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BDC5ED1A9A1FE800A8045A /* CellView.swift */; };
 		45BDC5F71A9A1FE800A8045A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BDC5EE1A9A1FE800A8045A /* Extensions.swift */; };
@@ -189,7 +194,12 @@
 		45166AFF1A98F6720046213D /* TestData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestData; sourceTree = "<group>"; };
 		45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUIComponents.xcodeproj; path = ../EditorUIComponents/EditorUIComponents.xcodeproj; sourceTree = "<group>"; };
 		45166B811A98FE860046213D /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
+		451C3AA71AA1EE9E002ECA80 /* WorkspacePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspacePath.swift; sourceTree = "<group>"; };
+		451C3AB41AA1EF9F002ECA80 /* WorkspaceRepository.Path.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceRepository.Path.swift; sourceTree = "<group>"; };
+		451C3AB61AA208D1002ECA80 /* Dropping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dropping.swift; sourceTree = "<group>"; };
 		4527AF8A1A9A344100FDE847 /* OutlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineView.swift; sourceTree = "<group>"; };
+		45AFF0E01AA1E7F5004C68D0 /* WorkspaceNavigationViewController.Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceNavigationViewController.Extensions.swift; sourceTree = "<group>"; };
+		45AFF0ED1AA1E95A004C68D0 /* WorkspaceRepository.NodeSearching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceRepository.NodeSearching.swift; sourceTree = "<group>"; };
 		45BDC5EC1A9A1FE800A8045A /* Aliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
 		45BDC5ED1A9A1FE800A8045A /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		45BDC5EE1A9A1FE800A8045A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -352,12 +362,17 @@
 			isa = PBXGroup;
 			children = (
 				45BDC5FE1A9A25F300A8045A /* InternalController.swift */,
+				45AFF0E01AA1E7F5004C68D0 /* WorkspaceNavigationViewController.Extensions.swift */,
 				45BDC5F01A9A1FE800A8045A /* ContextMenuController.swift */,
 				45BDC5EF1A9A1FE800A8045A /* SelectionQuery.swift */,
 				45BDC5ED1A9A1FE800A8045A /* CellView.swift */,
+				451C3AB61AA208D1002ECA80 /* Dropping.swift */,
 				45BDC5F21A9A1FE800A8045A /* WorkspaceRepository.swift */,
 				45BDC5F11A9A1FE800A8045A /* WorkspaceRepository.Printable.swift */,
+				45AFF0ED1AA1E95A004C68D0 /* WorkspaceRepository.NodeSearching.swift */,
+				451C3AB41AA1EF9F002ECA80 /* WorkspaceRepository.Path.swift */,
 				45BDC5F31A9A1FE800A8045A /* WorkspaceRepository.Utility.swift */,
+				451C3AA71AA1EE9E002ECA80 /* WorkspacePath.swift */,
 				45BDC5F41A9A1FE800A8045A /* WorkspaceSerialisation.swift */,
 				45BDC5EE1A9A1FE800A8045A /* Extensions.swift */,
 				45BDC5EC1A9A1FE800A8045A /* Aliases.swift */,
@@ -613,14 +628,19 @@
 				45BDC5FD1A9A1FE800A8045A /* WorkspaceSerialisation.swift in Sources */,
 				45BDC5FF1A9A25F400A8045A /* InternalController.swift in Sources */,
 				45166AB61A98C4190046213D /* WorkspaceNavigationViewController.swift in Sources */,
+				451C3AB71AA208D1002ECA80 /* Dropping.swift in Sources */,
+				451C3AB51AA1EF9F002ECA80 /* WorkspaceRepository.Path.swift in Sources */,
 				4527AF8B1A9A344100FDE847 /* OutlineView.swift in Sources */,
 				45BDC5FB1A9A1FE800A8045A /* WorkspaceRepository.swift in Sources */,
 				45BDC5F51A9A1FE800A8045A /* Aliases.swift in Sources */,
 				45BDC5F71A9A1FE800A8045A /* Extensions.swift in Sources */,
 				45BDC5F61A9A1FE800A8045A /* CellView.swift in Sources */,
 				45BDC5FC1A9A1FE800A8045A /* WorkspaceRepository.Utility.swift in Sources */,
+				451C3AA81AA1EE9E002ECA80 /* WorkspacePath.swift in Sources */,
 				45BDC5F91A9A1FE800A8045A /* ContextMenuController.swift in Sources */,
 				45BDC5FA1A9A1FE800A8045A /* WorkspaceRepository.Printable.swift in Sources */,
+				45AFF0EE1AA1E95A004C68D0 /* WorkspaceRepository.NodeSearching.swift in Sources */,
+				45AFF0E11AA1E7F5004C68D0 /* WorkspaceNavigationViewController.Extensions.swift in Sources */,
 				45BDC5F81A9A1FE800A8045A /* SelectionQuery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

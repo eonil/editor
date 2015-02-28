@@ -9,6 +9,17 @@
 import Foundation
 import AppKit
 
+
+
+
+
+
+
+
+
+///	This is half-baked bread. Designed to be complemented in subclass.
+///
+///
 public class MenuController {
 	public static func menuOfController(c:MenuController) -> NSMenu {
 		return	c._menu

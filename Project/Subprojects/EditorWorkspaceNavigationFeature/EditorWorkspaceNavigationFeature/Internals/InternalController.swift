@@ -16,6 +16,13 @@ import EditorUIComponents
 
 
 
+//	Errors on File-System Handling
+//	------------------------------
+//	File-system is not transactional.
+//	That means user must handle failure situation MANUALLY.
+//	To make user do it easily, no extra abstraction should be made.
+//	This method just suspend operation, where it fails.
+
 
 
 
@@ -334,19 +341,56 @@ extension InternalController: NSOutlineViewDataSource {
 	
 	@objc
 	func outlineView(outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: AnyObject?, proposedChildIndex index: Int) -> NSDragOperation {
-		return	NSDragOperation.Every
+		if item == nil {
+			return	NSDragOperation.None
+		}
+		
+		let	n	=	item as! WorkspaceNode
+		switch n.kind {
+		case .Folder:
+			return	NSDragOperation.Every
+			
+		case .File:
+			return	NSDragOperation.None
+			
+		}
 	}
 	@objc
 	func outlineView(outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: AnyObject?, childIndex index: Int) -> Bool {
-		let	p	=	info.draggingPasteboard()
-		let	a	=	p.propertyListForType(NSFilenamesPboardType) as! [String]
+		assert(repository != nil)
+		assert(item !== nil)
+		assert(item is WorkspaceNode)
+		assert((item as! WorkspaceNode).kind == WorkspaceNodeKind.Folder)
 		
-		Debug.log(a)
+		//	Copies by default.
+		//	Moves if user dragged workspace-nodes within same workspace. This does not include
+		//	dragging files from Finder or any other apps even they're files in same workspace.
+		//
+		//	Stop on any errors. User is responsible to handle the error.
+		
+		//	Though it's not been documented, `index` can be `-1`. 
+		//	`-1` state is undefined, so just ignore it.
+
+		let	op	=	Dropping.Op.determinateOp(info, currentOutlineView: outlineView)
+		let	n	=	item as! WorkspaceNode
+		Dropping(internals: self).processDropping(info, destinationNode: n, destinationChildIndex: index, operation: op)
+		
+//		Debug.log(item)
+//		Debug.log(a)
 		return	true
 	}
 }
 
 
+
+
+private extension InternalController {
+	///	This just generate a proper URL expression object, and does not check for existence.
+	func absoluteURLForNode(n:WorkspaceNode) -> NSURL {
+		assert(owner!.URLRepresentation!.absoluteURL!.absoluteString == owner!.URLRepresentation!.absoluteString!)
+		return	owner!.URLRepresentation!.URLByAppendingPath(n.path)
+	}
+}
 
 
 

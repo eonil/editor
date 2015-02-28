@@ -19,3 +19,9 @@ Design Note
 		contained in the location.
 	-	Editor does not differentiate symlinks. So you can use external files 
 		using symlink. Anyway keeping the symlink validity is your responsibility.
+
+
+
+
+
+

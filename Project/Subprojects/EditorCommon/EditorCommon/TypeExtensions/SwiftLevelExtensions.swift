@@ -23,7 +23,7 @@ public extension String {
 		var	currentCapturingRange	=	self.startIndex..<self.endIndex
 		let	options					=	NSStringEnumerationOptions.ByLines | NSStringEnumerationOptions.SubstringNotRequired
 		var	resultingSubstringRange	=	nil as Range<String.Index>?
-		self.enumerateSubstringsInRange(currentCapturingRange, options: options) { (substring:String!, substringRange, enclosingRange, inout stop:Bool) -> () in
+		self.enumerateSubstringsInRange(currentCapturingRange, options: options) { (substring:String, substringRange, enclosingRange, inout stop:Bool) -> () in
 			if counter == lineIndex {
 				resultingSubstringRange	=	substringRange
 				stop	=	true
@@ -38,7 +38,8 @@ public extension String {
 		let a   =   substringToIndex(r.startIndex)
 		let b   =   substringWithRange(r)
 		
-		return  NSRange(location: a.utf16Count, length: b.utf16Count)
+		
+		return  NSRange(location: count(a.utf16), length: count(b.utf16))
 	}
 	
 	
@@ -62,7 +63,7 @@ public extension String {
 	func convertIndexToUTF16CodeUnitIndex(i:String.UnicodeScalarView.Index) -> Int {
 		let	v	=	unicodeScalars
 		//	`String` is `NSString` and `NSString` is likely to make subrange view instead of copying the content.
-		return	String(v[v.startIndex..<i]).utf16Count
+		return	count(String(v[v.startIndex..<i]).utf16)
 	}
 }
 

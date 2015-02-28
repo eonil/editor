@@ -40,9 +40,9 @@ public final class WorkspaceNavigationViewController: NSViewController {
 			
 			if v != (super.representedObject as! NSURL?) {
 				if let u = URLRepresentation {
-					WorkspaceSerialisation.writeRepositoryConfiguration(_internalController.repository!, toWorkspaceAtURL: u)
-					_internalController.repository!.delegate	=	nil
-					_internalController.repository				=	nil
+					WorkspaceSerialisation.writeRepositoryConfiguration(internalController.repository!, toWorkspaceAtURL: u)
+					internalController.repository!.delegate	=	nil
+					internalController.repository				=	nil
 				}
 				
 				super.representedObject	=	v
@@ -50,15 +50,15 @@ public final class WorkspaceNavigationViewController: NSViewController {
 				if let u = URLRepresentation {
 					let	u1	=	WorkspaceSerialisation.configurationFileURLForWorkspaceAtURL(u)
 					if u1.existingAsAnyFile {
-						_internalController.repository				=	WorkspaceSerialisation.readRepositoryConfiguration(fromWorkspaceAtURL: u)
+						internalController.repository				=	WorkspaceSerialisation.readRepositoryConfiguration(fromWorkspaceAtURL: u)
 					} else {
-						_internalController.repository				=	WorkspaceRepository(name: u.lastPathComponent!)
+						internalController.repository				=	WorkspaceRepository(name: u.lastPathComponent!)
 					}
-					_internalController.repository!.delegate	=	_internalController
+					internalController.repository!.delegate	=	internalController
 				}
 				
 				self.outlineView.reloadData()
-				if let n = _internalController.repository?.root {
+				if let n = internalController.repository?.root {
 					self._expandOpenFolderNodes(n)
 				}
 			}
@@ -77,7 +77,7 @@ public final class WorkspaceNavigationViewController: NSViewController {
 	}
 	
 	public func synchroniseToFileSystem() {
-		WorkspaceSerialisation.writeRepositoryConfiguration(_internalController.repository!, toWorkspaceAtURL: URLRepresentation!)
+		WorkspaceSerialisation.writeRepositoryConfiguration(internalController.repository!, toWorkspaceAtURL: URLRepresentation!)
 	}
 	
 	@availability(*,unavailable)
@@ -120,7 +120,9 @@ public final class WorkspaceNavigationViewController: NSViewController {
 		outlineView.headerView				=	nil
 		outlineView.focusRingType			=	NSFocusRingType.None
 		outlineView.rowSizeStyle			=	NSTableViewRowSizeStyle.Small
-		outlineView.menu					=	MenuController.menuOfController(_internalController.menu)
+		outlineView.menu					=	MenuController.menuOfController(internalController.menu)
+		
+		//	This is required to intoroduce small delay when starting editing of a node label.
 		outlineView.doubleAction			=	"dummyDoubleActionHandler:"
 		
 		outlineView.selectionHighlightStyle				=	NSTableViewSelectionHighlightStyle.Regular
@@ -128,16 +130,19 @@ public final class WorkspaceNavigationViewController: NSViewController {
 		
 		outlineView.registerForDraggedTypes([NSFilenamesPboardType])
 		
-		outlineView.setDataSource(_internalController)
-		outlineView.setDelegate(_internalController)
+		outlineView.setDataSource(internalController)
+		outlineView.setDelegate(internalController)
 		
-		_internalController.owner			=	self
+		internalController.owner			=	self
 	}
 	
 	////
 	
-	private let	_internalController		=	InternalController()
+	internal let internalController		=	InternalController()
 	
+	////
+	
+	//
 	@objc
 	private func dummyDoubleActionHandler(AnyObject?) {
 		
