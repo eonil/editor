@@ -400,6 +400,8 @@ private final class InternalController {
 		
 		projectMenuController.reconfigureForWorkspaceInternals(self)
 	}
+	deinit {
+	}
 }
 
 extension InternalController {

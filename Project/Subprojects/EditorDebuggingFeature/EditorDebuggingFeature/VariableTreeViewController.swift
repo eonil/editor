@@ -8,6 +8,10 @@
 
 import Foundation
 import LLDBWrapper
+import EditorUIComponents
+
+
+
 
 
 ///	Provides debugger variable tree display. That means dynamic inspection of an execution state of a thread frame.

@@ -16,21 +16,26 @@ import AppKit
 
 ///	This class creates text-field and image-view itself.
 ///	You should not add or set them.
-class AttributedStringTableCellView: NSTableCellView {
-	override init() {
+///
+///	This view is tuned to look properly in dark-vibrancy mode in Yosemite.
+///	This kind of manual patch applied because Yosemite does not provide
+///	proper coloring, and may look somewhat weired in later OS X versions.
+///	Patch at the time if you have some such troubles.
+public final class AttributedStringTableCellView: NSTableCellView {
+	public override init() {
 		super.init()
 	}
-	override init(frame frameRect: NSRect) {
+	public override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
 		_configureSubviews()
 	}
-	required init?(coder: NSCoder) {
+	public required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		_configureSubviews()
 	}
 	
 	@availability(*,unavailable)
-	final override var textField:NSTextField? {
+	public final override var textField:NSTextField? {
 		get {
 			return	super.textField
 		}
@@ -43,7 +48,7 @@ class AttributedStringTableCellView: NSTableCellView {
 		}
 	}
 	
-	var	attributedString:NSAttributedString? {
+	public var	attributedString:NSAttributedString? {
 		get {
 			return	self.objectValue as! NSAttributedString?
 		}
@@ -53,7 +58,7 @@ class AttributedStringTableCellView: NSTableCellView {
 	}
 	
 	@objc
-	override var objectValue:AnyObject? {
+	public override var objectValue:AnyObject? {
 		get {
 			return	super.objectValue
 		}
@@ -73,7 +78,7 @@ class AttributedStringTableCellView: NSTableCellView {
 	}
 	
 	@objc
-	override var backgroundStyle:NSBackgroundStyle {
+	public override var backgroundStyle:NSBackgroundStyle {
 		didSet {
 			switch backgroundStyle {
 			case .Dark:

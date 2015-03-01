@@ -28,12 +28,11 @@
 		459E5D401A6CF78900D4F391 /* Packet.UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D3F1A6CF78900D4F391 /* Packet.UnitTest.swift */; };
 		459E5D421A6CF79300D4F391 /* UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D411A6CF79300D4F391 /* UnitTest.swift */; };
 		459E5D461A6CF95200D4F391 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459E5D451A6CF95200D4F391 /* StringExtensions.swift */; };
-		45AFEDB41A8D0820009F0010 /* AttributedStringTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFEDB11A8D0820009F0010 /* AttributedStringTableCellView.swift */; };
 		45AFEDB51A8D0820009F0010 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFEDB21A8D0820009F0010 /* Palette.swift */; };
 		45AFEDB61A8D0820009F0010 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFEDB31A8D0820009F0010 /* Text.swift */; };
 		45BEE1F21A8C870E0078E500 /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEE1E71A8C86F70078E500 /* EditorCommon.framework */; };
 		45BEE1F31A8C870E0078E500 /* EditorCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45BEE1E71A8C86F70078E500 /* EditorCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45E020381A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E020371A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift */; };
+		45EBB5D01AA34F7500E42FE6 /* EditorUIComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EBB5B71AA34E2F00E42FE6 /* EditorUIComponents.framework */; };
 		45EF0BE51A6C95DE00215F12 /* LLDBController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BE41A6C95DE00215F12 /* LLDBController.swift */; };
 		45EF0BF11A6C961C00215F12 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF0BF01A6C961C00215F12 /* AppDelegate.swift */; };
 		45EF0BF31A6C961C00215F12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45EF0BF21A6C961C00215F12 /* Images.xcassets */; };
@@ -121,6 +120,41 @@
 			remoteGlobalIDString = 45C511511A7954F20055DC1D;
 			remoteInfo = Workbench2;
 		};
+		45EBB5B61AA34E2F00E42FE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45EBB5AC1AA34E2F00E42FE6 /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFCBD1A8C7B7F0050BE72;
+			remoteInfo = EditorUIComponents;
+		};
+		45EBB5B81AA34E2F00E42FE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45EBB5AC1AA34E2F00E42FE6 /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFCC81A8C7B7F0050BE72;
+			remoteInfo = EditorUIComponentsTests;
+		};
+		45EBB5BA1AA34E2F00E42FE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45EBB5AC1AA34E2F00E42FE6 /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459ACDCF1A8CE1EE008798F4;
+			remoteInfo = Workbench;
+		};
+		45EBB5BC1AA34E2F00E42FE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45EBB5AC1AA34E2F00E42FE6 /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E2E0141A98530200380762;
+			remoteInfo = WorkbenchForCommonWindowController;
+		};
+		45EBB5BE1AA34E2F00E42FE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45EBB5AC1AA34E2F00E42FE6 /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F17BA01A986572001CD6BF;
+			remoteInfo = WorkbenchForIconPreview;
+		};
 		45EF0C181A6C966900215F12 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45EF0B801A6C942600215F12 /* Project object */;
@@ -185,12 +219,11 @@
 		459E5D3F1A6CF78900D4F391 /* Packet.UnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Packet.UnitTest.swift; sourceTree = "<group>"; };
 		459E5D411A6CF79300D4F391 /* UnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTest.swift; sourceTree = "<group>"; };
 		459E5D451A6CF95200D4F391 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		45AFEDB11A8D0820009F0010 /* AttributedStringTableCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedStringTableCellView.swift; sourceTree = "<group>"; };
 		45AFEDB21A8D0820009F0010 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		45AFEDB31A8D0820009F0010 /* Text.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		45BEE1E11A8C86F70078E500 /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
-		45E020371A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarkVibrancyAwareTableRowView.swift; sourceTree = "<group>"; };
 		45E5EF061A7E5E27009967D2 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
+		45EBB5AC1AA34E2F00E42FE6 /* EditorUIComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUIComponents.xcodeproj; path = ../EditorUIComponents/EditorUIComponents.xcodeproj; sourceTree = "<group>"; };
 		45EF0B891A6C942600215F12 /* EditorDebuggingFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorDebuggingFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45EF0B8D1A6C942600215F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45EF0B9A1A6C942600215F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -224,6 +257,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45EBB5D01AA34F7500E42FE6 /* EditorUIComponents.framework in Frameworks */,
 				450271FD1A7F4F25008795CC /* LLDBWrapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,11 +346,21 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		45EBB5AD1AA34E2F00E42FE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45EBB5B71AA34E2F00E42FE6 /* EditorUIComponents.framework */,
+				45EBB5B91AA34E2F00E42FE6 /* EditorUIComponentsTests.xctest */,
+				45EBB5BB1AA34E2F00E42FE6 /* Workbench.app */,
+				45EBB5BD1AA34E2F00E42FE6 /* WorkbenchForCommonWindowController.app */,
+				45EBB5BF1AA34E2F00E42FE6 /* WorkbenchForIconPreview.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45EF0B7F1A6C942600215F12 = {
 			isa = PBXGroup;
 			children = (
-				45BEE1E11A8C86F70078E500 /* EditorCommon.xcodeproj */,
-				45E5EF061A7E5E27009967D2 /* LLDBWrapper.xcodeproj */,
 				45EF0BCE1A6C943D00215F12 /* README.md */,
 				45EF0B8B1A6C942600215F12 /* EditorDebuggingFeature */,
 				45EF0B981A6C942600215F12 /* EditorDebuggingFeatureTests */,
@@ -324,6 +368,9 @@
 				45EF0BFE1A6C961C00215F12 /* WorkbenchAppTests */,
 				45EF0C121A6C965600215F12 /* Sample1 */,
 				450272081A7F577D008795CC /* WorkbenchApp2 */,
+				45BEE1E11A8C86F70078E500 /* EditorCommon.xcodeproj */,
+				45EBB5AC1AA34E2F00E42FE6 /* EditorUIComponents.xcodeproj */,
+				45E5EF061A7E5E27009967D2 /* LLDBWrapper.xcodeproj */,
 				45EF0B8A1A6C942600215F12 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -346,8 +393,6 @@
 				455075AE1A8D07E1003FCD76 /* ListenerController.swift */,
 				455075AF1A8D07E1003FCD76 /* VariableTreeViewController.swift */,
 				455075BA1A8D0806003FCD76 /* Operators.swift */,
-				45E020371A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift */,
-				45AFEDB11A8D0820009F0010 /* AttributedStringTableCellView.swift */,
 				45AFEDB21A8D0820009F0010 /* Palette.swift */,
 				45AFEDB31A8D0820009F0010 /* Text.swift */,
 				457B29531A950EA600F7A3F9 /* Errors.swift */,
@@ -555,6 +600,10 @@
 					ProjectRef = 45BEE1E11A8C86F70078E500 /* EditorCommon.xcodeproj */;
 				},
 				{
+					ProductGroup = 45EBB5AD1AA34E2F00E42FE6 /* Products */;
+					ProjectRef = 45EBB5AC1AA34E2F00E42FE6 /* EditorUIComponents.xcodeproj */;
+				},
+				{
 					ProductGroup = 45E5EF071A7E5E27009967D2 /* Products */;
 					ProjectRef = 45E5EF061A7E5E27009967D2 /* LLDBWrapper.xcodeproj */;
 				},
@@ -626,6 +675,41 @@
 			remoteRef = 45E5EF191A7E5E27009967D2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45EBB5B71AA34E2F00E42FE6 /* EditorUIComponents.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorUIComponents.framework;
+			remoteRef = 45EBB5B61AA34E2F00E42FE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45EBB5B91AA34E2F00E42FE6 /* EditorUIComponentsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorUIComponentsTests.xctest;
+			remoteRef = 45EBB5B81AA34E2F00E42FE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45EBB5BB1AA34E2F00E42FE6 /* Workbench.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench.app;
+			remoteRef = 45EBB5BA1AA34E2F00E42FE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45EBB5BD1AA34E2F00E42FE6 /* WorkbenchForCommonWindowController.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForCommonWindowController.app;
+			remoteRef = 45EBB5BC1AA34E2F00E42FE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45EBB5BF1AA34E2F00E42FE6 /* WorkbenchForIconPreview.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForIconPreview.app;
+			remoteRef = 45EBB5BE1AA34E2F00E42FE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -672,10 +756,8 @@
 			files = (
 				455075B21A8D07E1003FCD76 /* VariableTreeViewController.swift in Sources */,
 				455075B01A8D07E1003FCD76 /* ExecutionStateTreeViewController.swift in Sources */,
-				45AFEDB41A8D0820009F0010 /* AttributedStringTableCellView.swift in Sources */,
 				455075B11A8D07E1003FCD76 /* ListenerController.swift in Sources */,
 				45AFEDB61A8D0820009F0010 /* Text.swift in Sources */,
-				45E020381A976073004C1B44 /* DarkVibrancyAwareTableRowView.swift in Sources */,
 				45EF0BE51A6C95DE00215F12 /* LLDBController.swift in Sources */,
 				455075BB1A8D0806003FCD76 /* Operators.swift in Sources */,
 				457B29541A950EA600F7A3F9 /* Errors.swift in Sources */,

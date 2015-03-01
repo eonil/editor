@@ -9,14 +9,15 @@
 import Foundation
 import AppKit
 
-final class DarkVibrancyAwareTableRowView: NSTableRowView {
-//	@objc
-//	override var selected:Bool {
-//		didSet {
-//		}
-//	}
+
+
+///	This view is tuned to look properly in dark-vibrancy mode in Yosemite.
+///	This kind of manual patch applied because Yosemite does not provide
+///	proper coloring, and may look somewhat weired in later OS X versions.
+///	Patch at the time if you have some such troubles.
+public final class DarkVibrancyAwareTableRowView: NSTableRowView {
 	
-	override func drawSelectionInRect(dirtyRect: NSRect) {
+	public override func drawSelectionInRect(dirtyRect: NSRect) {
 		if self.window!.keyWindow {
 			if let v = self.window!.firstResponder as? NSView {
 				if isSuperview(superview: v, ofSubview: self) {
