@@ -15,6 +15,7 @@ public struct UIDialogues {
 public extension UIDialogues {
 	
 	///	Queries using NSWindow sheet with "OK" and "Cancel" button.
+	///	This just performs GUI interaction, and does not perform actual deletion.
 	public static func queryDeletingFilesUsingWindowSheet(window:NSWindow, files:[NSURL], handler:(UIDialogueButton)->()) {
 		precondition(files.count > 0)
 		func msg() -> String {

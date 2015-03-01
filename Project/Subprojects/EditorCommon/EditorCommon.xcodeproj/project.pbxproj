@@ -27,6 +27,7 @@
 		452CFD511A8C7CDA0050BE72 /* FilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD441A8C7CDA0050BE72 /* FilePath.swift */; };
 		452CFD531A8C7CF80050BE72 /* UnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD521A8C7CF80050BE72 /* UnitTest.swift */; };
 		452CFD5F1A8C7D2D0050BE72 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD5E1A8C7D2D0050BE72 /* main.swift */; };
+		454E25581AA2E6D400F8D708 /* Deduplicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E25571AA2E6D400F8D708 /* Deduplicate.swift */; };
 		45C912791A8C7E5400B15F9F /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD2D1A8C7CC70050BE72 /* Debug.swift */; };
 		45C9127A1A8C7E5400B15F9F /* Dialogues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD2E1A8C7CC70050BE72 /* Dialogues.swift */; };
 		45C9127B1A8C7E5400B15F9F /* FileUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452CFD2F1A8C7CC70050BE72 /* FileUtility.swift */; };
@@ -82,6 +83,7 @@
 		452CFD521A8C7CF80050BE72 /* UnitTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitTest.swift; sourceTree = "<group>"; };
 		452CFD5C1A8C7D2D0050BE72 /* UnitTests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UnitTests; sourceTree = BUILT_PRODUCTS_DIR; };
 		452CFD5E1A8C7D2D0050BE72 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		454E25571AA2E6D400F8D708 /* Deduplicate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deduplicate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 			children = (
 				452CFD431A8C7CDA0050BE72 /* Diff.swift */,
 				452CFD441A8C7CDA0050BE72 /* FilePath.swift */,
+				454E25571AA2E6D400F8D708 /* Deduplicate.swift */,
 			);
 			path = UtilityAlgorithms;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				452CFD491A8C7CDA0050BE72 /* TargetActionFunctionBox.swift in Sources */,
 				4522533B1A96832A00735794 /* Operators.swift in Sources */,
 				452CFD311A8C7CC70050BE72 /* Debug.swift in Sources */,
+				454E25581AA2E6D400F8D708 /* Deduplicate.swift in Sources */,
 				452CFD4C1A8C7CDA0050BE72 /* XML.Test.swift in Sources */,
 				452CFD4A1A8C7CDA0050BE72 /* XML.Navigator.swift in Sources */,
 				452CFD321A8C7CC70050BE72 /* Dialogues.swift in Sources */,

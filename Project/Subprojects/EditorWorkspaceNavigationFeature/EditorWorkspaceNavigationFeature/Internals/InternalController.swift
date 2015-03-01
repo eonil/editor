@@ -122,19 +122,20 @@ internal final class InternalController: NSObject {
 				UIDialogues.queryDeletingFilesUsingWindowSheet(self.owner.outlineView.window!, files: targetURLs, handler: { (b:UIDialogueButton) -> () in
 					switch b {
 					case .OKButton:
-						self.repository!.deleteNodes(q.node.all)
-						self.owner.outlineView.reloadData()
-						
-						//	TODO:	filtering broken. Doesn't work correctly. Rewrite it.
-						println(targetURLs)
-						let	us	=	filterTopmostURLsOnlyForDeleting(targetURLs)
-						println(us)
+						let	us	=	FileOperations.filterTopmostURLsOnlyForTrashing(targetURLs)
 						for u in us {
-							let	r	=	deleteFilesAtURLs([u])
-							if let err = r.error {
-								self.owner.presentError(err)
-							} else {
-//								self.owner.invalidateNodeForURL(u)
+							let	n	=	self.owner!.nodeForAbsoluteFileURL(u)!
+							let	pn	=	n.parent!
+							let	idx	=	pn.indexOfNode(n)!
+							
+							switch FileOperations.trashFilesAtURLs([u]) {
+							case Resolution.Success(let _):
+								pn.deleteChildNodeAtIndex(idx)
+								self.owner!.outlineView.removeItemsAtIndexes(NSIndexSet(index: idx), inParent: pn, withAnimation: NSTableViewAnimationOptions.SlideUp)
+								
+							case Resolution.Failure(let e):
+								self.owner!.presentError(e)
+								break
 							}
 						}
 						
@@ -208,36 +209,6 @@ internal final class InternalController: NSObject {
 
 ///	MARK:
 ///	MARK:	Utility Functions
-
-private func deleteFilesAtURLs(us: [NSURL]) -> Resolution<()> {
-	Debug.assertMainThread()
-	
-	var	err	=	nil as NSError?
-	for u in us {
-		let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
-		assert(ok || err != nil)
-		if !ok {
-			return	Resolution.failure(err!)
-		}
-	}
-	return	Resolution.success()
-}
-private func filterTopmostURLsOnlyForDeleting(urls:[NSURL]) -> [NSURL] {
-	var	us1	=	[] as [NSURL]
-	for u in urls {
-		//	TODO:	Currenyl O(n^2). There seems to be a better way...
-		let	dupc	=	urls.reduce(0) { sum, u1 in
-			return	sum + (u.absoluteString!.hasPrefix(u1.absoluteString!) ? 1 : 0)
-		}
-		
-		if dupc > 1 {
-			continue
-		} else {
-			us1.append(u)
-		}
-	}
-	return	us1
-}
 
 
 

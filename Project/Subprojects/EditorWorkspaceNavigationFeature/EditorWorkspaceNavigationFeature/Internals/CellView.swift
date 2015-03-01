@@ -88,7 +88,7 @@ internal final class CellView: NSTableCellView {
 			switch self.columnIdentifier {
 			case WorkspaceNavigationTreeColumnIdentifier.Name:
 				let	n	=	v!.name
-				let	c	=	v!.comment ||| ""
+				let	c	=	v!.comment ?? ""
 				let	t	=	c == "" ? n : "\(n) (\(c))"
 				
 				let	m	=	v!.kind == WorkspaceNodeKind.Folder ? Icons.folder : Icons.file
@@ -97,7 +97,7 @@ internal final class CellView: NSTableCellView {
 				textField!.objectValue	=	t
 				
 			case WorkspaceNavigationTreeColumnIdentifier.Comment:
-				textField!.objectValue	=	v!.comment ||| ""
+				textField!.objectValue	=	v!.comment ?? ""
 				
 			default:
 				fatalError("Unknown column identifier `\(self.columnIdentifier)` detected.")

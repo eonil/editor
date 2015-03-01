@@ -8,17 +8,20 @@
 
 import Foundation
 
-public struct Resolution<T> {
+public enum Resolution<T> {
+	case Success(()->T)
+	case Failure(NSError)
+	
 	public static func success(v:T) -> Resolution {
-		return	Resolution(state: State<T>.Success({v}))
+		return	Success({v})
 	}
 	public static func failure(e:NSError) -> Resolution {
-		return	Resolution(state: State<T>.Failure(e))
+		return	Failure(e)
 	}
 	
 	public var ok:Bool {
 		get {
-			switch state {
+			switch self {
 			case .Success(_):	return	true
 			case .Failure(_):	return	false
 			}
@@ -27,7 +30,7 @@ public struct Resolution<T> {
 	
 	public var value:T? {
 		get {
-			switch state {
+			switch self {
 			case .Success(let s):	return	s()
 			default:				return	nil
 			}
@@ -35,7 +38,7 @@ public struct Resolution<T> {
 	}
 	public var error:NSError? {
 		get {
-			switch state {
+			switch self {
 			case .Failure(let s):	return	s
 			default:				return	nil
 			}
@@ -44,11 +47,11 @@ public struct Resolution<T> {
 	
 	////
 	
-	private let	state:State<T>
-	
-	private init(state:State<T>) {
-		self.state	=	state
-	}
+//	private let	state:State<T>
+//	
+//	private init(state:State<T>) {
+//		self.state	=	state
+//	}
 }
 
 
@@ -56,8 +59,9 @@ public struct Resolution<T> {
 
 
 
+//
+//private enum State<T> {
+//	case Success(()->T)
+//	case Failure(NSError)
+//}
 
-private enum State<T> {
-	case Success(()->T)
-	case Failure(NSError)
-}

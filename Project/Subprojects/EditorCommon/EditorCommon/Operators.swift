@@ -11,8 +11,15 @@ import Foundation
 infix operator ||| {
 }
 
+///	**DEPRECATED**
+///	Will be removed from library very soon.
+///
+///	Use `??` that shipped with Swift standard library.
+///
 ///	Returns `a` if it is non-nil value.
 ///	Otherwise returns `b`.
+@availability(*,deprecated=0)
+
 public func ||| <T> (a:T?, @autoclosure b:()->T) -> T {
 	if let a1 = a {
 		return a1
