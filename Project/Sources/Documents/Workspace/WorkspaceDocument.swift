@@ -21,33 +21,22 @@ import EditorDebuggingFeature
 ///
 ///	Manages interaction with Cocoa document system.
 final class WorkspaceDocument: NSDocument {
-	let	mainWindowController	=	WorkspaceMainWindowController()
 	
 	override init() {
 		super.init()
 		
-		_subcomponentController	=	SubcomponentController(owner: self)
+		internals	=	InternalController(owner: self)
 		
-		assert(mainWindowController.fileNavigationViewController.delegate == nil)
-		mainWindowController.fileNavigationViewController.delegate			=	_subcomponentController
-		mainWindowController.issueReportingViewController.delegate			=	_subcomponentController
-		mainWindowController.executionNavigationViewController.delegate		=	_subcomponentController
-		
-		_debuggingController.executionTreeViewController					=	mainWindowController.executionNavigationViewController
-		_debuggingController.variableTreeViewController						=	mainWindowController.variableInspectingViewController
-		_debuggingController.delegate										=	_subcomponentController
-		
-		_projectMenuController.reconfigureForWorkspaceDocument(self)
 	}
 	
 	var projectMenuController:MenuController {
 		get {
-			return	_projectMenuController
+			return	internals!.projectMenuController
 		}
 	}
 	var debugMenuController:MenuController {
 		get {
-			return	_debuggingController.menuController
+			return	internals!.debuggingController.menuController
 		}
 	}
 	
@@ -62,24 +51,20 @@ final class WorkspaceDocument: NSDocument {
 		hasUndoManager	=	false
 		
 		super.makeWindowControllers()
-		self.addWindowController(mainWindowController)
+		self.addWindowController(internals!.mainWindowController)
 		
-		assert(mainWindowController.fileNavigationViewController.delegate != nil)
+		assert(internals!.mainWindowController.fileNavigationViewController.delegate != nil)
 	}
 
 	////
 	
-	private var	_subcomponentController	=	nil as SubcomponentController? {
+	private var	internals	=	nil as InternalController? {
 		willSet {
-			assert(_subcomponentController == nil, "You can set this only once.")
+			assert(internals == nil, "You can set this only once.")
 		}
 	}
 	
 	private var	_rootLocation			=	nil as FileLocation?
-	private var	_fileSystemMonitor		=	nil as FileSystemEventMonitor?
-	private let	_debuggingController	=	WorkspaceDebuggingController()
-	private let	_commandQueue			=	WorkspaceCommandExecutionController()
-	private let _projectMenuController	=	ProjectMenuController()
 	
 	private var rootLocation:FileLocation {
 		get {
@@ -135,15 +120,15 @@ extension WorkspaceDocument {
 	
 	
 	override func readFromData(data: NSData, ofType typeName: String, error outError: NSErrorPointer) -> Bool {
-		assert(mainWindowController.fileNavigationViewController.delegate != nil)
+		assert(internals!.mainWindowController.fileNavigationViewController.delegate != nil)
 		
 		let	u2	=	self.fileURL!.URLByDeletingLastPathComponent!
 		
 		_rootLocation	=	FileLocation(u2)
-		mainWindowController.fileNavigationViewController.URLRepresentation	=	u2
+		internals!.mainWindowController.fileNavigationViewController.URLRepresentation	=	u2
 		
 		let	p1	=	u2.path!
-//		_fileSystemMonitor	=	FileSystemEventMonitor(pathsToWatch: [p1]) { [weak self] events in
+//		fileSystemMonitor	=	FileSystemEventMonitor(pathsToWatch: [p1]) { [weak self] events in
 //			for ev in events {
 //				self?.postprocessFileSystemEventAtURL(ev)
 //			}
@@ -259,76 +244,30 @@ extension WorkspaceDocument {
 ///	MARK:	Dynamic Menu
 
 private extension ProjectMenuController {
-	func reconfigureForWorkspaceDocument(owner:WorkspaceDocument) {
-		build.reaction	=	{ [unowned self, unowned owner] in
-			owner.buildWorkspace()
+	func reconfigureForWorkspaceInternals(internals:InternalController) {
+		build.reaction	=	{ [unowned self, unowned internals] in
+			internals.buildWorkspace()
 		}
-		run.reaction	=	{ [unowned self, unowned owner] in
-			owner.runWorkspace()
+		run.reaction	=	{ [unowned self, unowned internals] in
+			internals.runWorkspace()
 		}
-		clean.reaction	=	{ [unowned self, unowned owner] in
-			owner.cleanWorkspace()
+		clean.reaction	=	{ [unowned self, unowned internals] in
+			internals.cleanWorkspace()
 		}
-		stop.reaction	=	{ [unowned self, unowned owner] in
-			owner.stopWorkspace()
+		stop.reaction	=	{ [unowned self, unowned internals] in
+			internals.stopWorkspace()
 		}
 
-		reconfigureAvailabilitiesForOwner(owner)
+		reconfigureAvailabilitiesForWorkspaceInternals(internals)
 	}
-	func reconfigureAvailabilitiesForOwner(owner:WorkspaceDocument) {
-		build.enabled	=	owner._debuggingController.numberOfSessions == 0
-		run.enabled		=	owner._debuggingController.numberOfSessions == 0
-		clean.enabled	=	owner._debuggingController.numberOfSessions == 0
-		stop.enabled	=	owner._debuggingController.numberOfSessions > 0
+	func reconfigureAvailabilitiesForWorkspaceInternals(internals:InternalController) {
+		build.enabled	=	internals.debuggingController.numberOfSessions == 0
+		run.enabled		=	internals.debuggingController.numberOfSessions == 0
+		clean.enabled	=	internals.debuggingController.numberOfSessions == 0
+		stop.enabled	=	internals.debuggingController.numberOfSessions > 0
 	}
 }
 
-private extension WorkspaceDocument {
-	func buildWorkspace() {
-		mainWindowController.issueReportingViewController.reset()
-		
-		_commandQueue.cancelAllCommandExecution()
-		_commandQueue.queue(CargoCommand(
-			workspaceRootURL: rootLocation.stringExpression,
-			subcommand: CargoCommand.Subcommand.Build,
-			cargoDelegate: _subcomponentController!))
-		_commandQueue.runAllCommandExecution()
-	}
-	
-	///	Build and run default project current workspace.
-	///	By default, this runs `cargo` on workspace root.
-	///	Customisation will be provided later.
-	func runWorkspace() {
-		mainWindowController.issueReportingViewController.reset()
-		
-		_commandQueue.cancelAllCommandExecution()
-		_commandQueue.queue(CargoCommand(
-			workspaceRootURL: rootLocation.stringExpression,
-			subcommand: CargoCommand.Subcommand.Build,
-			cargoDelegate: _subcomponentController!))
-		_commandQueue.queue(LaunchDebuggingSessionCommand(
-			debuggingController: _debuggingController,
-			workspaceRootURL: rootLocation.stringExpression))
-		_commandQueue.runAllCommandExecution()
-	}
-	func cleanWorkspace() {
-		mainWindowController.issueReportingViewController.reset()
-		
-		_commandQueue.cancelAllCommandExecution()
-		_commandQueue.queue(CargoCommand(
-			workspaceRootURL: rootLocation.stringExpression,
-			subcommand: CargoCommand.Subcommand.Clean,
-			cargoDelegate: _subcomponentController!))
-		_commandQueue.runAllCommandExecution()
-	}
-	func stopWorkspace() {
-		_debuggingController.terminateAllSessions()
-		_commandQueue.cancelAllCommandExecution()
-		
-		mainWindowController.executionNavigationViewController.snapshot		=	nil
-		mainWindowController.variableInspectingViewController.snapshot		=	nil
-	}
-}
 
 ///	MARK:
 ///	MARK:	Static menu handling via First Responder chain
@@ -343,7 +282,7 @@ extension WorkspaceDocument {
 		//	This prevents the alerts.
 		//		super.saveDocument(sender)
 
-		mainWindowController.codeEditingViewController.trySavingInPlace()
+		internals!.mainWindowController.codeEditingViewController.trySavingInPlace()
 	}
 	
 	@objc @IBAction
@@ -434,22 +373,94 @@ extension WorkspaceDocument {
 
 
 ///	MARK:
-///	MARK:	SubcomponentController
+///	MARK:	InternalController
 
 ///	Hardly-coupled internal subcomponent controller.
-private final class SubcomponentController {
-	unowned let		owner:	WorkspaceDocument
+private final class InternalController {
+	unowned let		owner					:	WorkspaceDocument
+	
+	let				mainWindowController	=	WorkspaceMainWindowController()
+	let				debuggingController		=	WorkspaceDebuggingController()
+	let				commandQueue			=	WorkspaceCommandExecutionController()
+	let				projectMenuController	=	ProjectMenuController()
+	
+	private var		fileSystemMonitor		=	nil as FileSystemEventMonitor?
 	
 	init(owner: WorkspaceDocument) {
 		self.owner	=	owner
+		
+		assert(mainWindowController.fileNavigationViewController.delegate == nil)
+		mainWindowController.fileNavigationViewController.delegate			=	self
+		mainWindowController.issueReportingViewController.delegate			=	self
+		mainWindowController.executionNavigationViewController.delegate		=	self
+		
+		debuggingController.executionTreeViewController					=	self.mainWindowController.executionNavigationViewController
+		debuggingController.variableTreeViewController						=	self.mainWindowController.variableInspectingViewController
+		debuggingController.delegate										=	self
+		
+		projectMenuController.reconfigureForWorkspaceInternals(self)
 	}
 }
 
+extension InternalController {
+	func buildWorkspace() {
+		mainWindowController.issueReportingViewController.reset()
+		
+		commandQueue.cancelAllCommandExecution()
+		commandQueue.queue(CargoCommand(
+			workspaceRootURL: owner.rootLocation.stringExpression,
+			subcommand: CargoCommand.Subcommand.Build,
+			cargoDelegate: self))
+		commandQueue.runAllCommandExecution()
+	}
+	
+	///	Build and run default project current workspace.
+	///	By default, this runs `cargo` on workspace root.
+	///	Customisation will be provided later.
+	func runWorkspace() {
+		mainWindowController.issueReportingViewController.reset()
+		
+		commandQueue.cancelAllCommandExecution()
+		commandQueue.queue(CargoCommand(
+			workspaceRootURL: owner.rootLocation.stringExpression,
+			subcommand: CargoCommand.Subcommand.Build,
+			cargoDelegate: self))
+		commandQueue.queue(LaunchDebuggingSessionCommand(
+			debuggingController: debuggingController,
+			workspaceRootURL: owner.rootLocation.stringExpression))
+		commandQueue.runAllCommandExecution()
+	}
+	func cleanWorkspace() {
+		mainWindowController.issueReportingViewController.reset()
+		
+		commandQueue.cancelAllCommandExecution()
+		commandQueue.queue(CargoCommand(
+			workspaceRootURL: owner.rootLocation.stringExpression,
+			subcommand: CargoCommand.Subcommand.Clean,
+			cargoDelegate: self))
+		commandQueue.runAllCommandExecution()
+	}
+	func stopWorkspace() {
+		debuggingController.terminateAllSessions()
+		commandQueue.cancelAllCommandExecution()
+		
+		mainWindowController.executionNavigationViewController.snapshot		=	nil
+		mainWindowController.variableInspectingViewController.snapshot		=	nil
+	}
+}
+
+
+
+
+
+
+
+
 ///	MARK:
 ///	MARK:	WorkspaceNavigationViewControllerDelegate
-extension SubcomponentController: WorkspaceNavigationViewControllerDelegate {
+extension InternalController: WorkspaceNavigationViewControllerDelegate {
 	func workpaceNavigationViewControllerWantsToOpenFileAtURL(u: NSURL) {
-		owner.mainWindowController.codeEditingViewController.URLRepresentation	=	u
+		mainWindowController.codeEditingViewController.URLRepresentation	=	u
 	}
 }
 
@@ -478,9 +489,9 @@ extension SubcomponentController: WorkspaceNavigationViewControllerDelegate {
 ///	MARK:
 ///	MARK:	ExecutionStateTreeViewControllerDelegate
 
-extension SubcomponentController: ExecutionStateTreeViewControllerDelegate {
+extension InternalController: ExecutionStateTreeViewControllerDelegate {
 	private func executionStateTreeViewControllerDidSelectFrame(frame: LLDBFrame?) {
-		owner.mainWindowController.variableInspectingViewController.snapshot	=	VariableTreeViewController.Snapshot(frame)
+		mainWindowController.variableInspectingViewController.snapshot	=	VariableTreeViewController.Snapshot(frame)
 	}
 }
 
@@ -489,7 +500,7 @@ extension SubcomponentController: ExecutionStateTreeViewControllerDelegate {
 ///	MARK:
 ///	MARK:	IssueListingViewControllerDelegate
 
-extension SubcomponentController: IssueListingViewControllerDelegate {
+extension InternalController: IssueListingViewControllerDelegate {
 	func issueListingViewControllerUserWantsToHighlightURL(file: NSURL?) {
 		Debug.assertMainThread()
 		
@@ -498,8 +509,8 @@ extension SubcomponentController: IssueListingViewControllerDelegate {
 		Debug.assertMainThread()
 		
 		if let o = issue.origin {
-			owner.mainWindowController.codeEditingViewController.URLRepresentation	=	o.URL
-			owner.mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.navigateToCodeRange(o.range)
+			mainWindowController.codeEditingViewController.URLRepresentation	=	o.URL
+			mainWindowController.codeEditingViewController.codeTextViewController.codeTextView.navigateToCodeRange(o.range)
 		}
 	}
 }
@@ -509,19 +520,12 @@ extension SubcomponentController: IssueListingViewControllerDelegate {
 ///	MARK:
 ///	MARK:	WorkspaceDebuggingControllerDelegate
 
-extension SubcomponentController: WorkspaceDebuggingControllerDelegate {
+extension InternalController: WorkspaceDebuggingControllerDelegate {
 	func workspaceDebuggingControllerDidLaunchSession() {
-//		func aa(a:()->()) {
-//			
-//		}
-//		aa()
-//		{
-//			
-//		}
-		owner._projectMenuController.reconfigureAvailabilitiesForOwner(owner)
+		projectMenuController.reconfigureAvailabilitiesForWorkspaceInternals(self)
 	}
 	func workspaceDebuggingControllerDidTerminateSession() {
-		owner._projectMenuController.reconfigureAvailabilitiesForOwner(owner)
+		projectMenuController.reconfigureAvailabilitiesForWorkspaceInternals(self)
 	}
 }
 
@@ -531,13 +535,13 @@ extension SubcomponentController: WorkspaceDebuggingControllerDelegate {
 ///	MARK:
 ///	MARK:	CargoExecutionControllerDelegate
 
-extension SubcomponentController: CargoExecutionControllerDelegate {
+extension InternalController: CargoExecutionControllerDelegate {
 	func cargoExecutionControllerDidDiscoverRustCompilationIssue(issue: RustCompilerIssue) {
 		Debug.assertMainThread()
 		
 //		let	s	=	Issue(workspaceRootURL: owner.rootLocation.stringExpression, rust: issue)
 		let	s	=	Issue(rust: issue)
-		owner.mainWindowController.issueReportingViewController.push([s])
+		mainWindowController.issueReportingViewController.push([s])
 	}
 	func cargoExecutionControllerDidPrintMessage(s: String) {
 		Debug.assertMainThread()
@@ -623,7 +627,7 @@ extension SubcomponentController: CargoExecutionControllerDelegate {
 
 
 
-//extension SubcomponentController: FileTreeViewController4Delegate {
+//extension InternalController: FileTreeViewController4Delegate {
 //	func fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(u: NSURL) -> [NSURL] {
 //		Debug.assertMainThread()
 //

@@ -94,7 +94,7 @@ class EditorCommonWindowController2 : NSWindowController {
 		@availability(*,unavailable)
 		set(v) {
 			fatalError("You cannot set `contentViewController`. Instead, override `instantiateContentViewController` method to customise its class.")
-			super.contentViewController	=	v
+//			super.contentViewController	=	v
 		}
 	}
 }
