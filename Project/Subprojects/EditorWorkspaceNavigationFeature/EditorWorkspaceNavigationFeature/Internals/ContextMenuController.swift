@@ -20,6 +20,7 @@ final class ContextMenuController: MenuController {
 	let	newFolder				=	NSMenuItem(title: "New Folder")
 	let	newFolderWithSelection	=	NSMenuItem(title: "New Folder with Selection")
 	let	delete					=	NSMenuItem(title: "Delete")
+	let	deleteReferenceOnly		=	NSMenuItem(title: "Delete Reference Only")
 	let	addAllUnregistredFiles	=	NSMenuItem(title: "Add All Unregistered Files")
 	let	removeAllMissingFiles	=	NSMenuItem(title: "Remove All Missing Files")
 	let	note					=	NSMenuItem(title: "Note...")
@@ -37,6 +38,7 @@ final class ContextMenuController: MenuController {
 //			newFolderWithSelection,
 			NSMenuItem.separatorItem(),
 			delete,
+			deleteReferenceOnly,
 //			NSMenuItem.separatorItem(),
 //			addAllUnregistredFiles,
 //			removeAllMissingFiles,

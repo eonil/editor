@@ -24,7 +24,8 @@ struct SelectionQuery {
 	
 	///	Specified workspace can be empty (no URL set).
 	///
-	///	:param:	repository		Pass `nil` if the repository currently does not exist.
+	///	:param:		repository	
+	///				Pass `nil` if the repository currently does not exist.
 	///
 	init(controller:WorkspaceNavigationViewController, repository:WorkspaceRepository?) {
 		let	fn	=	controller.outlineView.clickedNode

@@ -35,43 +35,44 @@ struct Dropping {
 		////
 		
 		switch op {
-		case Op.Copy:	processCopyDropping(sourceURLs: draggingFiles, destinationNode: n, destinationChildIndex: index)
+		case Op.Copy:	processCopyDropping(sourceURLs: draggingFiles, destinationNode: n, destinationChildIndex: index, skipCopyingIntoSamePlace: true)
 		case Op.Move:	processMoveDropping(sourceURLs: draggingFiles, destinationNode: n, destinationChildIndex: index)
 		}
 	}
 
-	//	This just copies the file sequentially as many as possible.
-	//	Operation will be halted on any error.
-	func processCopyDropping(sourceURLs us:[NSURL], destinationNode n:WorkspaceNode, destinationChildIndex index:Int) {
-//		//	Copy cannot process name duplication.
-		
-//		let	destinationDirectory	=	self.internals.owner!.URLRepresentation!.URLByAppendingPath(n.path)
-//		let	us1	=	n.children.map({ n in self.internals.owner!.URLRepresentation!.URLByAppendingPath(n.path) })
-//		let	dup	=	findNameDuplications(us + us1)
-//		if dup.URLs.count > 0 {
-//			alertNameDuplicationError(dup.names)
-//			return
-//		}
-		
+	///	This just copies the file sequentially as many as possible.
+	///	Operation will be halted on any error.
+	///
+	///	:param:		skipCopyingIntoSamePlace
+	///				If this is set to `true`, this will skip URLs that are same from source and destination locations.
+	///				Otherwise, same location is incopyable, and will cause an error that will be displayed to user.
+	func processCopyDropping(sourceURLs us:[NSURL], destinationNode n:WorkspaceNode, destinationChildIndex index:Int, skipCopyingIntoSamePlace:Bool)  {
 		for u in us {
 			let	c	=	u.lastPathComponent!
 			let	nu	=	internals.owner!.URLRepresentation!.URLByAppendingPath(n.path)
 			let	u1	=	nu.URLByAppendingPathComponent(c)
+			let	k	=	u.existingAsDirectoryFile ? WorkspaceNodeKind.Folder : WorkspaceNodeKind.File
 			
 			var	e	=	nil as NSError?
-			let	ok	=	NSFileManager.defaultManager().copyItemAtURL(u, toURL: u1, error: &e)
+			let	ok	=	(skipCopyingIntoSamePlace && wouldBeSame(u, u1)) || NSFileManager.defaultManager().copyItemAtURL(u, toURL: u1, error: &e)
 			if ok {
-				n.createChildNodeAtIndex(index, asKind: WorkspaceNodeKind.File, withName: c)
+				let	cn	=	n.createChildNodeAtIndex(index, asKind: k, withName: c)
 				internals.owner!.outlineView.insertItemsAtIndexes(NSIndexSet(index: index), inParent: n, withAnimation: NSTableViewAnimationOptions.SlideDown)
+				cn.fillAllDescendantsFromFileSystemWithWorkspaceURL(internals.owner!.URLRepresentation!)
 			} else {
 				internals.owner!.presentError(e!)
-				break
+				return
 			}
 		}
 	}
 	
-	//	This just moves the file sequentially as many as possible.
-	//	Operation will be halted on any error.
+	
+	
+	
+	
+	
+	///	This just moves the file sequentially as many as possible.
+	///	Operation will be halted on any error.
 	func processMoveDropping(sourceURLs us:[NSURL], destinationNode n:WorkspaceNode, destinationChildIndex index:Int) {
 		for u in us {
 			let	c	=	u.lastPathComponent!
@@ -88,7 +89,7 @@ struct Dropping {
 				internals.owner!.outlineView.moveItemAtIndex(idx, inParent: n2, toIndex: index, inParent: n)
 			} else {
 				internals.owner!.presentError(e!)
-				break
+				return
 			}
 		}
 	}
@@ -101,6 +102,73 @@ struct Dropping {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private extension WorkspaceNode {
+	///	Current node must be empty.
+	///	If current node is not a directory node, this is no-op.
+	///
+	///	:param:		workspaceURL
+	///				URL of workspace root node. A connection point to file-system.
+	///
+	///	:result:	If any error occured and operation unexpectedily quit,
+	///				this will return an `NSError` that caused it.
+	///				`nil` for otherwise.
+	func fillAllDescendantsFromFileSystemWithWorkspaceURL(workspaceURL:NSURL) -> NSError? {
+		assert(self.children.count == 0)
+		
+		let	u	=	workspaceURL.URLByAppendingPath(self.path)
+		if u.existingAsDirectoryFile {
+			var	err	=	nil as NSError?
+			let	opt	=	NSDirectoryEnumerationOptions.SkipsHiddenFiles | NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants
+			let	cus	=	NSFileManager.defaultManager().enumeratorAtURL(u, includingPropertiesForKeys: nil, options: opt, errorHandler: { (issueURL:NSURL!, issueError:NSError!) -> Bool in
+				err	=	issueError
+				return	false
+			})!
+			
+			for co in cus {
+				if err != nil {
+					return	err
+				}
+				
+				let	cu		=	co as! NSURL
+				let	kind	=	cu.existingAsDirectoryFile ? WorkspaceNodeKind.Folder : WorkspaceNodeKind.File
+				let	name	=	cu.lastPathComponent!
+				let	cn		=	self.createChildNodeAtLastAsKind(kind, withName: name)
+				let	cerr	=	cn.fillAllDescendantsFromFileSystemWithWorkspaceURL(workspaceURL)
+				
+				if cerr != nil {
+					return	cerr
+				}
+			}
+			
+			if err != nil {
+				return	err
+			}
+		}
+
+		return	nil
+	}
+}
 
 
 
@@ -199,8 +267,21 @@ struct Dropping {
 
 
 
-
-
+///	When you comparing two file URLS, two URLs a=may be different by path, but
+///	can be equal in file reference level. (inode hard-link) This considers such
+///	duplication.
+private func wouldBeSame(a:NSURL, b:NSURL) -> Bool {
+	let	u1	=	a.URLByDeletingLastPathComponent!
+	let	u2	=	b.URLByDeletingLastPathComponent!
+	
+	precondition(u1.existingAsDirectoryFile)
+	precondition(u2.existingAsDirectoryFile)
+	
+	let	eq1	=	u1.fileReferenceURL() == u2.fileReferenceURL()
+	let	eq2	=	a.lastPathComponent! == b.lastPathComponent!
+	
+	return	eq1 && eq2
+}
 
 
 private func getDraggingURLs(info:NSDraggingInfo) -> [NSURL] {

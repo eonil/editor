@@ -115,8 +115,7 @@ internal final class InternalController: NSObject {
 			//	TODO:	Implement this...
 		}
 		menu.delete.reaction	=	{ [unowned self] in
-			let	q	=	querySelection()
-			
+			let	q			=	querySelection()
 			let	targetURLs	=	q.URL.all
 			if targetURLs.count > 0 {
 				UIDialogues.queryDeletingFilesUsingWindowSheet(self.owner.outlineView.window!, files: targetURLs, handler: { (b:UIDialogueButton) -> () in
@@ -143,6 +142,21 @@ internal final class InternalController: NSObject {
 						break
 					}
 				})
+			}
+		}
+		menu.deleteReferenceOnly.reaction	=	{ [unowned self] in
+			let	q			=	querySelection()
+			let	targetURLs	=	q.URL.all
+			if targetURLs.count > 0 {
+				let	us	=	FileOperations.filterTopmostURLsOnlyForTrashing(targetURLs)
+				for u in us {
+					let	n	=	self.owner!.nodeForAbsoluteFileURL(u)!
+					let	pn	=	n.parent!
+					let	idx	=	pn.indexOfNode(n)!
+					
+					pn.deleteChildNodeAtIndex(idx)
+					self.owner!.outlineView.removeItemsAtIndexes(NSIndexSet(index: idx), inParent: pn, withAnimation: NSTableViewAnimationOptions.SlideUp)
+				}
 			}
 		}
 		menu.addAllUnregistredFiles.reaction	=	{ [unowned self] in
