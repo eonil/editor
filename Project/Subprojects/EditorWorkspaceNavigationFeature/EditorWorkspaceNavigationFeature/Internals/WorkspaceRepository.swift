@@ -45,14 +45,13 @@ import Foundation
 ///
 ///	This object does not handle any file-related operations. You need to handle them
 ///	yourself at another layer.
-public class WorkspaceRepository {
-	public weak var					delegate:WorkspaceRepositoryDelegate?		=	nil
+class WorkspaceRepository {
+	weak var					delegate:WorkspaceRepositoryDelegate?		=	nil
 	
-	public private(set) lazy var	root:			WorkspaceNode						=	WorkspaceNode(repository: self, name: "" , kind: WorkspaceNodeKind.Folder)
-//	public private(set) var			index:			[WorkspacePath:WorkspaceNode]		=	[:]
+	internal private(set) lazy var	root:			WorkspaceNode						=	WorkspaceNode(repository: self, name: "" , kind: WorkspaceNodeKind.Folder)
 	
 	///	:param:	name		Name of repository. Name of root node will also be set to this.
-	public init(name:String) {
+	init(name:String) {
 		root.name	=	name
 	}
 }
@@ -63,7 +62,7 @@ public class WorkspaceRepository {
 ///
 ///	Rename and move are fundamentally same operation, but needs different handling of UI.
 ///	It has been split for convenience of UI handling.
-public protocol WorkspaceRepositoryDelegate: class {
+protocol WorkspaceRepositoryDelegate: class {
 	func workspaceRepositoryWillCreateNode()
 	func workspaceRepositoryDidCreateNode(node:WorkspaceNode)
 	func workspaceRepositoryWillRenameNode(node:WorkspaceNode)
@@ -155,19 +154,19 @@ public protocol WorkspaceRepositoryDelegate: class {
 ///	If a workspace-node is representing a subworkspace, then it can load the subworkspace into memory.
 ///	Anyway moving nodes 
 ///
-public final class WorkspaceNode {
-	public private(set) unowned var repository	:	WorkspaceRepository			///<	Set to `weak` to avoid cycle.
-	public private(set) weak var	parent		:	WorkspaceNode?				///<	Set to `weak` to avoid cycle.
-	public private(set) var			children	:	[WorkspaceNode]
+final class WorkspaceNode {
+	internal private(set) unowned var	repository	:	WorkspaceRepository			///<	Set to `weak` to avoid cycle.
+	internal private(set) weak var		parent		:	WorkspaceNode?				///<	Set to `weak` to avoid cycle.
+	internal private(set) var			children	:	[WorkspaceNode]
 	
-	public private(set) var			name		:	String						///<	Metadata.
-	public var						comment		:	String?
+	internal private(set) var			name		:	String						///<	Metadata.
+	internal var						comment		:	String?
 	
-	public private(set) var			kind		:	WorkspaceNodeKind
-	public private(set) var			flags		:	WorkspaceNodeFlags
+	internal private(set) var			kind		:	WorkspaceNodeKind
+	internal private(set) var			flags		:	WorkspaceNodeFlags
 	
 	///	If a subworkspace for this node is loaded, it will be retained by this property.
-	public private(set) var			subworkspace:	WorkspaceRepository?
+	internal private(set) var			subworkspace:	WorkspaceRepository?
 	
 	////
 	
@@ -183,8 +182,8 @@ public final class WorkspaceNode {
 	}
 }
 
-public extension WorkspaceNode {
-	public func indexOfNodeForName(name:String) -> Int? {
+extension WorkspaceNode {
+	func indexOfNodeForName(name:String) -> Int? {
 		for i in 0..<children.count {
 			let	n	=	children[i]
 			if n.name == name {
@@ -193,7 +192,7 @@ public extension WorkspaceNode {
 		}
 		return	nil
 	}
-	public func indexOfNode(node:WorkspaceNode) -> Int? {
+	func indexOfNode(node:WorkspaceNode) -> Int? {
 		for i in 0..<children.count {
 			let	n	=	children[i]
 			if n === node {
@@ -202,7 +201,7 @@ public extension WorkspaceNode {
 		}
 		return	nil
 	}
-	public func nodeForName(name:String) -> WorkspaceNode? {
+	func nodeForName(name:String) -> WorkspaceNode? {
 		if let idx = indexOfNodeForName(name) {
 			return	children[idx]
 		}
@@ -211,8 +210,8 @@ public extension WorkspaceNode {
 }
 
 ///	Fundamental Mutators.
-public extension WorkspaceNode {
-	public func createChildNodeAtIndex(index:Int, asKind:WorkspaceNodeKind, withName:String) -> WorkspaceNode {
+extension WorkspaceNode {
+	func createChildNodeAtIndex(index:Int, asKind:WorkspaceNodeKind, withName:String) -> WorkspaceNode {
 		precondition(self.kind == WorkspaceNodeKind.Folder, "You can create subnode only in a `Folder` kind node.")
 		precondition(self.nodeForName(withName) == nil, "The name already been taken by one of child node.")
 		assert(index >= 0)
@@ -228,7 +227,7 @@ public extension WorkspaceNode {
 		repository.delegate?.workspaceRepositoryDidCreateNode(n)
 		return	n
 	}
-	public func deleteChildNodeAtIndex(index:Int) {
+	func deleteChildNodeAtIndex(index:Int) {
 		assertAttached()
 		
 		let	n		=	children[index]
@@ -239,7 +238,7 @@ public extension WorkspaceNode {
 		
 		repository.delegate?.workspaceRepositoryDidDeleteNode()
 	}
-	public func rename(name:String) {
+	func rename(name:String) {
 		precondition(parent == nil || parent!.nodeForName(name) === self || parent!.nodeForName(name) === nil, "The name already been taken by a sibling. Bad name.")
 		assertAttached()
 		
@@ -262,7 +261,7 @@ public extension WorkspaceNode {
 	///	If you're moving a child node within same parent node, using of same name
 	///	is allowed because it will be removed first and to perform index 
 	///	moving.
-	public func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int, withNewName:String) {
+	func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int, withNewName:String) {
 		precondition(self === toNewParentNode || toNewParentNode.nodeForName(withNewName) == nil, "The name already been take by a sibling in destination parent node.")
 		assert(atNewIndex >= 0)
 		assert(atNewIndex <= toNewParentNode.children.count)
@@ -288,11 +287,11 @@ public extension WorkspaceNode {
 }
 
 ///	Extension Mutators
-public extension WorkspaceNode {
-	public func createChildNodeAtLastAsKind(kind:WorkspaceNodeKind, withName:String) -> WorkspaceNode {
+extension WorkspaceNode {
+	func createChildNodeAtLastAsKind(kind:WorkspaceNodeKind, withName:String) -> WorkspaceNode {
 		return	createChildNodeAtIndex(children.count, asKind: kind, withName: withName)
 	}
-	public func deleteChildNodeForName(name:String) {
+	func deleteChildNodeForName(name:String) {
 		assertAttached()
 		
 		if let idx = indexOfNodeForName(name) {
@@ -300,12 +299,12 @@ public extension WorkspaceNode {
 		}
 		fatalError("Cannot find a child node for the name.")
 	}
-	public func deleteAllChildNodes() {
+	func deleteAllChildNodes() {
 		while children.count > 0 {
 			self.deleteChildNodeAtIndex(children.count-1)
 		}
 	}
-	public func delete() {
+	func delete() {
 		precondition(isRoot == false, "Root node cannot be moved.")
 		assertAttached()
 	
@@ -315,13 +314,13 @@ public extension WorkspaceNode {
 		}
 		fatalError("This node cannot be found from parent's children list. This is a serious logic bug, and must be patched.")
 	}
-	public func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int) {
+	func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int) {
 		assertAttached()
 		
 		let	n	=	self.children[atOldIndex]
 		self.moveChildNode(atOldIndex, toNewParentNode: toNewParentNode, atNewIndex: atNewIndex, withNewName: n.name)
 	}
-	public func move(#toParentNode:WorkspaceNode, atIndex:Int, asName:String) {
+	func move(#toParentNode:WorkspaceNode, atIndex:Int, asName:String) {
 		precondition(isRoot == false, "Root node cannot be moved.")
 		assertAttached()
 		
@@ -333,21 +332,21 @@ public extension WorkspaceNode {
 	}
 }
 
-public extension WorkspaceNode {
-	public var isSubworkspace:Bool {
+extension WorkspaceNode {
+	var isSubworkspace:Bool {
 		get {
 			//	TODO:	Implement this...
 			return	false
 		}
 	}
-	public func openSubworkspace() {
+	func openSubworkspace() {
 		precondition(self.isSubworkspace, "This node must be marked as a `subworkspace`.")
 		
 		subworkspace	=	WorkspaceRepository(name: self.name)
 		
 		repository.delegate?.workspaceRepositoryDidOpenSubworkspaceAtNode(self)
 	}
-	public func closeSubworkspace() {
+	func closeSubworkspace() {
 		precondition(self.isSubworkspace, "This node must be marked as a `subworkspace`.")
 		
 		repository.delegate?.workspaceRepositoryWillCloseSubworkspaceAtNode(self)
@@ -379,7 +378,7 @@ extension WorkspaceNode {
 	}
 }
 
-public extension WorkspaceNode {
+extension WorkspaceNode {
 	func setExpanded() {
 		assert(self.kind == WorkspaceNodeKind.Folder)
 		self.flags.isOpenFolder	=	true
@@ -500,11 +499,11 @@ public struct WorkspaceNodeFlags {
 
 
 
-public extension WorkspaceNode {
+extension WorkspaceNode {
 	///	Produces a (full) path to this node from repository root.
 	///	A path is always full relative path from repository root.
 	///	Name of root node will not be added.
-	public var path:WorkspacePath {
+	var path:WorkspacePath {
 		get {
 			if isRoot {
 				return	WorkspacePath(components: [])

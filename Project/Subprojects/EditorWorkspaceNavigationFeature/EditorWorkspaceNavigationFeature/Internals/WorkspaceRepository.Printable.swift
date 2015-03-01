@@ -16,7 +16,7 @@ import Foundation
 
 
 extension WorkspaceNode: Printable {
-	public var description:String {
+	var description:String {
 		get {
 			return	"(node: path = \(path), kind = \(kind), flags = \(flags))"
 		}

@@ -404,14 +404,14 @@ extension InternalController: NSOutlineViewDelegate {
 	func outlineView(outlineView: NSOutlineView, shouldExpandItem item: AnyObject) -> Bool {
 		let	n	=	item as! WorkspaceNode
 		n.setExpanded()
-		owner.synchroniseToFileSystem()
+		owner.persistToFileSystem()
 		return	true
 	}
 	@objc
 	func outlineView(outlineView: NSOutlineView, shouldCollapseItem item: AnyObject) -> Bool {
 		let	n	=	item as! WorkspaceNode
 		n.setCollapsed()
-		owner.synchroniseToFileSystem()
+		owner.persistToFileSystem()
 		return	true
 	}
 }
@@ -461,23 +461,23 @@ extension InternalController: WorkspaceRepositoryDelegate {
 		
 	}
 	func workspaceRepositoryDidCreateNode(node: WorkspaceNode) {
-		owner.synchroniseToFileSystem()
+		owner.persistToFileSystem()
 	}
 	func workspaceRepositoryWillRenameNode(node: WorkspaceNode) {
 		
 	}
 	func workspaceRepositoryDidRenameNode(node: WorkspaceNode) {
-		owner.synchroniseToFileSystem()
+		owner.persistToFileSystem()
 	}
 	func workspaceRepositoryWillMoveNode(node: WorkspaceNode) {
 	}
 	func workspaceRepositoryDidMoveNode(node: WorkspaceNode) {
-		owner.synchroniseToFileSystem()
+		owner.persistToFileSystem()
 	}
 	func workspaceRepositoryWillDeleteNode(node: WorkspaceNode) {
 	}
 	func workspaceRepositoryDidDeleteNode() {
-		owner.synchroniseToFileSystem()		
+		owner.persistToFileSystem()		
 	}
 	
 	

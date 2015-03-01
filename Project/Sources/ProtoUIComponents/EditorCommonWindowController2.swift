@@ -19,6 +19,7 @@ import AppKit
 ///	This is intentional design to prevent weird OBJC instance replacement behavior.
 ///
 ///	IB is unsupported.
+@availability(*,deprecated=0)
 class EditorCommonWindowController2 : NSWindowController {
 
 	///	Designated initialiser.

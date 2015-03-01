@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, WorkspaceNavigationViewContr
 
 	@IBOutlet weak var window: NSWindow!
 
-	let	sv	=	NSScrollView()
+//	let	sv	=	NSScrollView()
 	let	nv	=	WorkspaceNavigationViewController()
 
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
@@ -25,8 +25,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, WorkspaceNavigationViewContr
 		
 		nv.delegate			=	self
 		
-		sv.documentView		=	nv.view
-		window.contentView	=	sv
+//		sv.documentView		=	nv.view
+		window.contentView	=	nv.view
 		
 		let	u	=	NSBundle.mainBundle().URLForResource("TestData/Test1", withExtension: "eews")
 //		let	u	=	NSURL(fileURLWithPath: "/Users/Eonil/Documents/eewstest/Test1.eews")!
@@ -42,7 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, WorkspaceNavigationViewContr
 	
 	@IBAction
 	func saveWorkspaceRepositoryConfiguration(AnyObject?) {
-		nv.synchroniseToFileSystem()
+		nv.persistToFileSystem()
 	}
 
 	func workpaceNavigationViewControllerWantsToOpenFileAtURL(u: NSURL) {

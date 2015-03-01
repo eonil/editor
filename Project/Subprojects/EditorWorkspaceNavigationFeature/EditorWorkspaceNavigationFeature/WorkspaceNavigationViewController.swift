@@ -22,7 +22,13 @@ public protocol WorkspaceNavigationViewControllerDelegate: class {
 }
 
 
-
+///	Provides file-tree navigation.
+///	The file-tree will be stored in a file in the specified workspace.
+///
+///	**Workspace spec is not yet well defined, and can be changed later.**
+///
+///	This object equips internal scroll-view, so you should not make your own scroll view
+///	to wrap this up.
 public final class WorkspaceNavigationViewController: NSViewController {
 	public weak var delegate:WorkspaceNavigationViewControllerDelegate?
 	
@@ -76,7 +82,7 @@ public final class WorkspaceNavigationViewController: NSViewController {
 		}
 	}
 	
-	public func synchroniseToFileSystem() {
+	public func persistToFileSystem() {
 		WorkspaceSerialisation.writeRepositoryConfiguration(internalController.repository!, toWorkspaceAtURL: URLRepresentation!)
 	}
 	
@@ -97,11 +103,19 @@ public final class WorkspaceNavigationViewController: NSViewController {
 		}
 	}
 	public override func loadView() {
-		super.view	=	NSOutlineView()
+		super.view	=	NSScrollView()
 	}
 	public override func viewDidLoad() {
 		super.viewDidLoad()
-		assert(self.view is NSOutlineView)
+		assert(self.view is NSScrollView)
+		
+		////
+		
+		scrollView.documentView				=	outlineView
+		scrollView.hasHorizontalScroller	=	false
+		scrollView.hasVerticalScroller		=	true
+		
+		////
 		
 		let	c1			=	NSTableColumn()
 		c1.title		=	"Name"
@@ -142,6 +156,8 @@ public final class WorkspaceNavigationViewController: NSViewController {
 	
 	////
 	
+	private let _outlineView			=	NSOutlineView()
+	
 	//
 	@objc
 	private func dummyDoubleActionHandler(AnyObject?) {
@@ -153,7 +169,12 @@ public final class WorkspaceNavigationViewController: NSViewController {
 internal extension WorkspaceNavigationViewController {
 	var outlineView:NSOutlineView {
 		get {
-			return	self.view as! NSOutlineView
+			return	_outlineView
+		}
+	}
+	var scrollView:NSScrollView {
+		get {
+			return	view as! NSScrollView
 		}
 	}
 }
