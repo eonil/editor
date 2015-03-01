@@ -42,25 +42,25 @@ struct FileOperations {
 	///	This function filters list of file URLs and returns only top-most
 	///	file nodes that are appropriate to deletion.
 	///
+	///	This also performs deduplication.
+	///
 	///	This is currently about O(n^2).
 	///
 	///	:param:	us	
-	///			Array of URL to filter. This should not contain any duplicated
-	///			value.
+	///			Array of URL to filter.
 	static func filterTopmostURLsOnlyForTrashing(us:[NSURL]) -> [NSURL] {
-		assert(deduplicateSequence(us) == us)
-		
-		var	us1	=	[] as [NSURL]
-		for u in us {
-			for u1 in us1 {
-				if u1.isFileContainerOf(u) {
+		let	us1	=	deduplicateSequence(us)
+		var	us2	=	[] as [NSURL]
+		for u1 in us1 {
+			for u2 in us2 {
+				if u2.isFileContainerOf(u1) {
 					//	Skip it.
 					continue
 				}
 			}
-			us1.append(u)
+			us2.append(u1)
 		}
-		return	us1
+		return	us2
 	}
 }
 
