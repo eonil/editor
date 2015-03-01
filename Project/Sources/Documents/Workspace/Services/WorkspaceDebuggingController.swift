@@ -24,6 +24,10 @@ protocol WorkspaceDebuggingControllerDelegate: class {
 	func workspaceDebuggingControllerDidTerminateSession()
 }
 
+
+
+
+
 final class WorkspaceDebuggingController {
 	weak var delegate:WorkspaceDebuggingControllerDelegate?
 	weak var executionTreeViewController:ExecutionStateTreeViewController?

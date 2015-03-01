@@ -22,18 +22,19 @@ public protocol ExecutionStateTreeViewControllerDelegate: class {
 	func executionStateTreeViewControllerDidSelectFrame(frame:LLDBFrame?)
 }
 
+
+
+
+
 ///	This is a snapshot display. You need to set a new snapshot to display updated state.
 ///	This object REQUIRES delegate for every events. You must set a valid `delegate` object.
+///
+///	This view-controller incorporates a scrolling support, so you should not wrap this in a
+///	scroll-view.
 public final class ExecutionStateTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
 	public weak var delegate:ExecutionStateTreeViewControllerDelegate? {
 		willSet {
 			assert(delegate == nil)
-		}
-	}
-	
-	public var outlineView:NSOutlineView {
-		get {
-			return	super.view as! NSOutlineView
 		}
 	}
 	
@@ -70,10 +71,18 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 		}
 	}
 	public override func loadView() {
-		super.view	=	NSOutlineView()
+		super.view	=	NSScrollView()
 	}
 	public override func viewDidLoad() {
 		super.viewDidLoad()
+		assert(super.view is NSScrollView)
+		
+		scrollView.hasVerticalScroller	=	true
+		scrollView.hasHorizontalRuler	=	false
+		scrollView.documentView			=	outlineView
+		
+		////
+		
 		self.outlineView.setDataSource(self)
 		self.outlineView.setDelegate(self)
 		
@@ -129,6 +138,16 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 			self.delegate!.executionStateTreeViewControllerDidSelectFrame(nil)
 		}
 		return	true
+	}
+	
+	////
+	
+	internal let outlineView		=	NSOutlineView()
+	
+	internal var scrollView:NSScrollView {
+		get {
+			return	view as! NSScrollView
+		}
 	}
 	
 	////

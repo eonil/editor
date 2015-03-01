@@ -9,14 +9,13 @@
 import Foundation
 import LLDBWrapper
 
+
+///	Provides debugger variable tree display. That means dynamic inspection of an execution state of a thread frame.
+///
+///	This view-controller incorporates a scrolling support, so you should not wrap this in a
+///	scroll-view.
 public final class VariableTreeViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
-	public var	outlineView:NSOutlineView {
-		get {
-			return	view as! NSOutlineView
-		}
-	}
-	
-	
+
 	public var snapshot:Snapshot? {
 		didSet {
 			_rootNode	=	snapshot?._frameNode
@@ -43,16 +42,26 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 	}
 	
 	public override func loadView() {
-		super.view	=	NSOutlineView()
+		super.view	=	NSScrollView()
 	}
 	public override func viewDidLoad() {
 		super.viewDidLoad()
-		self.outlineView.setDataSource(self)
-		self.outlineView.setDelegate(self)
+		assert(super.view is NSScrollView)
 		
-		self.outlineView.headerView		=	nil
-//		self.outlineView.rowSizeStyle	=	NSTableViewRowSizeStyle.Large
-		self.outlineView.rowHeight		=	14
+		////
+		
+		scrollView.hasVerticalScroller		=	true
+		scrollView.hasHorizontalScroller	=	false
+		scrollView.documentView				=	outlineView
+		
+		////
+		
+		outlineView.setDataSource(self)
+		outlineView.setDelegate(self)
+		
+		outlineView.headerView		=	nil
+//		outlineView.rowSizeStyle	=	NSTableViewRowSizeStyle.Large
+		outlineView.rowHeight		=	14
 		
 		func makeColumn(c:Column) -> NSTableColumn {
 			let	c1			=	NSTableColumn()
@@ -104,6 +113,16 @@ public final class VariableTreeViewController: NSViewController, NSOutlineViewDa
 			return	v
 		} else {
 			fatalError("Unsupported item `\(item)`.")
+		}
+	}
+	
+	////
+	
+	internal let	outlineView	=	NSOutlineView()
+	
+	internal var scrollView:NSScrollView {
+		get {
+			return	super.view as! NSScrollView
 		}
 	}
 	

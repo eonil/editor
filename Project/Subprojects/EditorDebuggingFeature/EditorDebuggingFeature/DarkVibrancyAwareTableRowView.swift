@@ -19,7 +19,6 @@ final class DarkVibrancyAwareTableRowView: NSTableRowView {
 	override func drawSelectionInRect(dirtyRect: NSRect) {
 		if self.window!.keyWindow {
 			if let v = self.window!.firstResponder as? NSView {
-				println(v)
 				if isSuperview(superview: v, ofSubview: self) {
 					super.drawSelectionInRect(dirtyRect)
 					return
@@ -43,3 +42,5 @@ private func isSuperview(#superview:NSView?, ofSubview subview:NSView) -> Bool {
 		return	isSuperview(superview: superview, ofSubview: subview.superview!)
 	}
 }
+
+

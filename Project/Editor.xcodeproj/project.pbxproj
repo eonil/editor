@@ -38,11 +38,6 @@
 		453F574E1A19E5EB0035400D /* EonilSQLite3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 453F57431A19E5E10035400D /* EonilSQLite3.framework */; };
 		453F57511A19E5F30035400D /* EonilSQLite3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 453F57431A19E5E10035400D /* EonilSQLite3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45402ABA1A153C4E00127E50 /* FileSystemMonitor2.swift */; };
-		454482021A6328BE005576CB /* WorkspaceNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454482011A6328BE005576CB /* WorkspaceNavigationViewController.swift */; };
-		454482161A6328E7005576CB /* WorkspaceEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454482151A6328E7005576CB /* WorkspaceEditingViewController.swift */; };
-		454482181A6328FC005576CB /* WorkspaceUtilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454482171A6328FC005576CB /* WorkspaceUtilityViewController.swift */; };
-		4544821A1A632917005576CB /* WorkspaceReportingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454482191A632917005576CB /* WorkspaceReportingViewController.swift */; };
-		4544821C1A632937005576CB /* WorkspaceMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4544821B1A632937005576CB /* WorkspaceMenuController.swift */; };
 		454C65F11A15E4DE009A160D /* MarkdownFile.icns in Resources */ = {isa = PBXBuildFile; fileRef = 454C65F01A15E4DE009A160D /* MarkdownFile.icns */; };
 		454E42AB1A13D244007BEE79 /* FileTreeRepository4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E42AA1A13D244007BEE79 /* FileTreeRepository4.swift */; };
 		454E42AD1A13D24F007BEE79 /* FileTreeViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */; };
@@ -704,11 +699,6 @@
 		453DE8061A34B763001BEF29 /* Tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tools; sourceTree = "<group>"; };
 		453F57391A19E5E10035400D /* EonilSQLite3.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilSQLite3.xcodeproj; path = Submodules/SQLite3/EonilSQLite3.xcodeproj; sourceTree = "<group>"; };
 		45402ABA1A153C4E00127E50 /* FileSystemMonitor2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileSystemMonitor2.swift; sourceTree = "<group>"; };
-		454482011A6328BE005576CB /* WorkspaceNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceNavigationViewController.swift; sourceTree = "<group>"; };
-		454482151A6328E7005576CB /* WorkspaceEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceEditingViewController.swift; sourceTree = "<group>"; };
-		454482171A6328FC005576CB /* WorkspaceUtilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUtilityViewController.swift; sourceTree = "<group>"; };
-		454482191A632917005576CB /* WorkspaceReportingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceReportingViewController.swift; sourceTree = "<group>"; };
-		4544821B1A632937005576CB /* WorkspaceMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceMenuController.swift; sourceTree = "<group>"; };
 		454C65F01A15E4DE009A160D /* MarkdownFile.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MarkdownFile.icns; sourceTree = "<group>"; };
 		454E42AA1A13D244007BEE79 /* FileTreeRepository4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeRepository4.swift; sourceTree = "<group>"; };
 		454E42AC1A13D24F007BEE79 /* FileTreeViewController4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeViewController4.swift; sourceTree = "<group>"; };
@@ -1162,11 +1152,6 @@
 			isa = PBXGroup;
 			children = (
 				457D5CE71A63288B008ECE6F /* WorkspaceMainWindowController.swift */,
-				454482011A6328BE005576CB /* WorkspaceNavigationViewController.swift */,
-				454482151A6328E7005576CB /* WorkspaceEditingViewController.swift */,
-				454482171A6328FC005576CB /* WorkspaceUtilityViewController.swift */,
-				454482191A632917005576CB /* WorkspaceReportingViewController.swift */,
-				4544821B1A632937005576CB /* WorkspaceMenuController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -2116,7 +2101,6 @@
 				45700EE11A11F65100415EB2 /* FileNode.swift in Sources */,
 				454FFC0C1A142DF3000C0200 /* FileSystemMonitor.swift in Sources */,
 				45358A361A17FE8800AF5F7C /* EditorCommonWindowController.swift in Sources */,
-				4544821A1A632917005576CB /* WorkspaceReportingViewController.swift in Sources */,
 				454E42AD1A13D24F007BEE79 /* FileTreeViewController4.swift in Sources */,
 				45D158FA1A11401D00B25657 /* Palette.swift in Sources */,
 				455795271A4CD4CD0011C34E /* TypeAliases.swift in Sources */,
@@ -2126,7 +2110,6 @@
 				45CAD9351A4B145100EDF02D /* SyntaxHighlighting.swift in Sources */,
 				457D5CE81A63288B008ECE6F /* WorkspaceMainWindowController.swift in Sources */,
 				4597F82B1A113D100089FC66 /* XML.Test.swift in Sources */,
-				4544821C1A632937005576CB /* WorkspaceMenuController.swift in Sources */,
 				457341021A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift in Sources */,
 				45F6112C1A96390B0018D5A3 /* WorkspaceCommandExecutionController.swift in Sources */,
 				45204C801A63300900929A17 /* ApplicationController.swift in Sources */,
@@ -2156,10 +2139,8 @@
 				45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */,
 				45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */,
 				4527E4F81A6A717A00115139 /* NSTextView+Issue.swift in Sources */,
-				454482021A6328BE005576CB /* WorkspaceNavigationViewController.swift in Sources */,
 				45D8D8F11A48E99200AE42C8 /* EditorCommonWindowController2.swift in Sources */,
 				45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */,
-				454482181A6328FC005576CB /* WorkspaceUtilityViewController.swift in Sources */,
 				452A121D1A107E4C00E38F35 /* IssueListingViewController.swift in Sources */,
 				457DD5D21A125C3D00324681 /* FileNode2.swift in Sources */,
 				45F6C1131A1195A5005D8EEA /* CommandConsoleViewController.swift in Sources */,
@@ -2177,7 +2158,6 @@
 				459433B11A45F01C008B2CFF /* ScrollViewController2.swift in Sources */,
 				45F6112E1A963B410018D5A3 /* WorkspaceDebuggingController.swift in Sources */,
 				4597F8251A113D100089FC66 /* Box.swift in Sources */,
-				454482161A6328E7005576CB /* WorkspaceEditingViewController.swift in Sources */,
 				45A6DAB81A639AD500DFB9CE /* DataSchema.swift in Sources */,
 				45756F7D1A6548990017AA4B /* PlainFileFolderWindowController.swift in Sources */,
 				45F6C1151A119726005D8EEA /* VisualEffectViewController.swift in Sources */,

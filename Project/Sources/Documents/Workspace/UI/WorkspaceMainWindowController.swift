@@ -15,36 +15,38 @@ import EditorWorkspaceNavigationFeature
 import EditorIssueListingFeature
 import EditorDebuggingFeature
 
-class WorkspaceMainWindowController: EditorCommonWindowController3 {
+final class WorkspaceMainWindowController: EditorCommonWindowController3 {
 	var fileNavigationViewController: WorkspaceNavigationViewController {
 		get {
+			assert(internals != nil)
 			return	internals!.fileNavigationViewController
 		}
 	}
 	var codeEditingViewController: CodeEditingViewController {
 		get {
+			assert(internals != nil)
 			return	internals!.codeEditingViewController
 		}
 	}
 	var issueReportingViewController: IssueListingViewController {
 		get {
+			assert(internals != nil)
 			return	internals!.issueReportingViewController
 		}
 	}
 	var executionNavigationViewController: ExecutionStateTreeViewController {
 		get {
+			assert(internals != nil)
 			return	internals!.executionNavigationViewController
 		}
 	}
 	var variableInspectingViewController: VariableTreeViewController {
 		get {
+			assert(internals != nil)
 			return	internals!.variableInspectingViewController
 		}
 	}
 	
-//	override func instantiateContentViewController() -> NSViewController {
-//		return	SplitVC()
-//	}
 	override func instantiateWindow() -> NSWindow {
 		return	makeMainWindow()
 	}
@@ -147,14 +149,14 @@ private final class InternalController {
 //		window.setFrame(CGRect(x: 0, y: 0, width: 100, height: 100), display: true)
 		
 		mainSplitViewController.view.addConstraints([
-			NSLayoutConstraint(item: centerSplitViewController.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: CONTENT_PANE_MIN_WIDTH).always,
-			NSLayoutConstraint(item: centerSplitViewController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: CONTENT_PANE_MIN_HEIGHT).always,
+			NSLayoutConstraint(item: centerSplitViewController.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: CONTENT_PANE_MIN_WIDTH).always,
+			NSLayoutConstraint(item: centerSplitViewController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: CONTENT_PANE_MIN_HEIGHT).always,
 			
-			NSLayoutConstraint(item: leftPaneViewController.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: NAVIGATION_PANE_MIN_WIDTH).always,
-			NSLayoutConstraint(item: variableInspectingViewController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: VARIABLE_INSPECTOR_MIN_HEIGHT).always,
+			NSLayoutConstraint(item: leftPaneViewController.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: NAVIGATION_PANE_MIN_WIDTH).always,
+			NSLayoutConstraint(item: variableInspectingViewController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: VARIABLE_INSPECTOR_MIN_HEIGHT).always,
 			
-			NSLayoutConstraint(item: leftPaneViewController.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: NAVIGATION_PANE_MIN_WIDTH).weak,
-			NSLayoutConstraint(item: variableInspectingViewController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: VARIABLE_INSPECTOR_MIN_HEIGHT).weak,
+			NSLayoutConstraint(item: leftPaneViewController.view, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: NAVIGATION_PANE_MIN_WIDTH).weak,
+			NSLayoutConstraint(item: variableInspectingViewController.view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: VARIABLE_INSPECTOR_MIN_HEIGHT).weak,
 			])
 	}
 }

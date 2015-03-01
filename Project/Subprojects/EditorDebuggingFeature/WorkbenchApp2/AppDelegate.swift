@@ -19,10 +19,7 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegat
 	@IBOutlet weak var mainWindow: NSWindow!
 	@IBOutlet weak var localVariableWindow: NSWindow!
 	
-	let	sv1		=	NSScrollView()
 	let	tv1		=	ExecutionStateTreeViewController()
-	
-	let	sv2		=	NSScrollView()
 	let	tv2		=	VariableTreeViewController()
 	
 	let	dbg		=	LLDBDebugger()
@@ -40,11 +37,8 @@ class AppDelegate: NSResponder, NSApplicationDelegate, ListenerControllerDelegat
 		
 		tv1.delegate	=	self
 		
-		sv1.documentView		=	tv1.view
-		mainWindow.contentView	=	sv1
-		
-		sv2.documentView		=	tv2.view
-		localVariableWindow.contentView	=	sv2
+		mainWindow.contentView			=	tv1.view
+		localVariableWindow.contentView	=	tv2.view
 		
 		
 		dbg.async		=	true

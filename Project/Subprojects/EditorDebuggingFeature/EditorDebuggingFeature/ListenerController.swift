@@ -8,7 +8,7 @@
 
 import Foundation
 import LLDBWrapper
-
+import EditorCommon
 
 public protocol ListenerControllerDelegate: class {
 	///	Called when the debugger has stopped for a event.
@@ -56,7 +56,7 @@ public final class ListenerController {
 				if let e = core.listener.waitForEvent(WAIT_SECONDS) {
 					///	Wait for main thread processing done.
 					dispatch_sync(dispatch_get_main_queue()) { [unowned self] in
-						println(e)
+						Debug.log(e)
 						core.delegate!.listenerControllerIsProcessingEvent(e)
 						cont	=	core.done == false
 						()
@@ -64,7 +64,7 @@ public final class ListenerController {
 				}
 			}
 			dispatch_sync(dispatch_get_main_queue()) { [unowned self] in
-				println("ListenerController exited.")
+				Debug.log("ListenerController exited.")
 			}
 		}
 	}
