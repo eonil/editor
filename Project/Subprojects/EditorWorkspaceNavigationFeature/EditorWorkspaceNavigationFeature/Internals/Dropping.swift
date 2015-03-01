@@ -62,6 +62,7 @@ struct Dropping {
 			let	ok	=	NSFileManager.defaultManager().copyItemAtURL(u, toURL: u1, error: &e)
 			if ok {
 				n.createChildNodeAtIndex(index, asKind: WorkspaceNodeKind.File, withName: c)
+				internals.owner!.outlineView.insertItemsAtIndexes(NSIndexSet(index: index), inParent: n, withAnimation: NSTableViewAnimationOptions.SlideDown)
 			} else {
 				internals.owner!.presentError(e!)
 				break
