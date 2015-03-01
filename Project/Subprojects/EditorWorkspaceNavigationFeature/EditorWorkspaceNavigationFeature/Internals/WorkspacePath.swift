@@ -114,7 +114,11 @@ internal extension WorkspacePath {
 		precondition(URL.path != nil)
 		precondition(URL.path!.hasPrefix("/"))
 		
-		components	=	URL.path!.pathComponents
+		let	cs	=	URL.path!.pathComponents
+		assert(cs.count >= 1)
+		assert(cs[0] == "/")
+		
+		components	=	Array(cs[1..<cs.endIndex])
 	}
 }
 

@@ -64,7 +64,7 @@ public extension UIDialogues {
 		let	a	=	NSAlert()
 		a.addButtonWithTitle("OK")
 		a.messageText		=	message
-		a.informativeText	=	comment
+		a.informativeText	=	comment ?? ""
 		a.alertStyle		=	style
 		a.runModal()
 	}

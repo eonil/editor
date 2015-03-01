@@ -368,12 +368,13 @@ extension InternalController: NSOutlineViewDataSource {
 		//
 		//	Stop on any errors. User is responsible to handle the error.
 		
-		//	Though it's not been documented, `index` can be `-1`. 
-		//	`-1` state is undefined, so just ignore it.
+		//	Though it's not been documented, `index` can be `-1` if user dropped file into the 
+		//	container node itself.
 
 		let	op	=	Dropping.Op.determinateOp(info, currentOutlineView: outlineView)
 		let	n	=	item as! WorkspaceNode
-		Dropping(internals: self).processDropping(info, destinationNode: n, destinationChildIndex: index, operation: op)
+		let	i1	=	index == -1 ? n.children.count : index
+		Dropping(internals: self).processDropping(info, destinationNode: n, destinationChildIndex: i1, operation: op)
 		
 //		Debug.log(item)
 //		Debug.log(a)

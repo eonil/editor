@@ -10,6 +10,12 @@ import Cocoa
 import XCTest
 import EditorWorkspaceNavigationFeature
 
+
+
+
+
+
+
 class EditorWorkspaceNavigationFeatureTests: XCTestCase {
     
     override func setUp() {
@@ -60,6 +66,11 @@ extension EditorWorkspaceNavigationFeatureTests {
 		
 		r1.root.deleteChildNodeAtIndex(0)
 		XCTAssert(r1.root.children.count == 0)
+	}
+	
+	func testPath1() {
+		let	p	=	"/a/b"
+		let	p1	=	WorkspacePath()
 	}
 }
 

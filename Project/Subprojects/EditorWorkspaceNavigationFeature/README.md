@@ -25,3 +25,13 @@ Design Note
 
 
 
+Dialogue Styling
+----------------
+-	Use *error* for issues that REQUIRES manual user handling.
+	program failed to perform atomic operation in atomic manner.
+	Integrity of user's mental data-set should be inconsistent with actual 
+	program state, and user need to handle the failure manually to recover 
+	integerity.
+
+-	Use *warning* for issues that needs user attention, but does not break user's
+	mental data-set. Mental data-set is synchronised with program state.

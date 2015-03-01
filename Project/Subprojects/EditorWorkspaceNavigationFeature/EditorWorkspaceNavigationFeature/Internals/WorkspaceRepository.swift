@@ -257,8 +257,15 @@ public extension WorkspaceNode {
 
 	///	Moves a node into a new location.
 	///	Node object will be moved without recreating a new instance.
+	///	If you're moving a child node into another parent node, it must specify
+	///	non-existing name in the children of the parent node.
+	///	If you're moving a child node within same parent node, using of same name
+	///	is allowed because it will be removed first and to perform index 
+	///	moving.
 	public func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int, withNewName:String) {
-		precondition(toNewParentNode.nodeForName(withNewName) == nil, "The name already been take by a sibling in the parent node.")
+		precondition(self === toNewParentNode || toNewParentNode.nodeForName(withNewName) == nil, "The name already been take by a sibling in destination parent node.")
+		assert(atNewIndex >= 0)
+		assert(atNewIndex <= toNewParentNode.children.count)
 		assertAttached()
 		
 		////
