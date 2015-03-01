@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import EditorCommon
+import EditorUIComponents
 
 
 
@@ -100,7 +101,8 @@ public final class IssueListingViewController: NSViewController {
 		
 		outlineView.addTableColumn(makeTextColumn())
 		outlineView.outlineTableColumn			=	(self.outlineView.tableColumns[0] as? NSTableColumn)!
-		outlineView.selectionHighlightStyle		=	NSTableViewSelectionHighlightStyle.SourceList
+//		outlineView.selectionHighlightStyle		=	NSTableViewSelectionHighlightStyle.SourceList				//	Currently I don't know how to make inactive cell's background color appropriately.
+		outlineView.selectionHighlightStyle		=	NSTableViewSelectionHighlightStyle.Regular					//	I wish this to be fixed in future OS X releases, and then, patch this code.
 		outlineView.rowSizeStyle				=	NSTableViewRowSizeStyle.Small
 		outlineView.headerView					=	nil
 		outlineView.setDataSource(self)
@@ -207,6 +209,12 @@ extension IssueListingViewController: NSOutlineViewDataSource {
 ///	MARK:	NSOutlineViewDelegate
 
 extension IssueListingViewController: NSOutlineViewDelegate {
+	@objc
+	public func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView? {
+		return	DarkVibrancyAwareTableRowView()
+	}
+	
+	@objc
 	public func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		let	v1	=	NSImageView()
 		let	v2	=	NSTextField()
@@ -214,8 +222,9 @@ extension IssueListingViewController: NSOutlineViewDelegate {
 		
 		v2.editable			=	false
 		v2.bordered			=	false
+		v2.bezeled			=	false
+		v2.drawsBackground	=	false
 		v2.textColor		=	NSColor.textColor()
-		v2.backgroundColor	=	NSColor.clearColor()
 		v2.lineBreakMode	=	NSLineBreakMode.ByTruncatingTail
 		
 		v.addSubview(v1)

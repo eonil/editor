@@ -289,6 +289,12 @@ extension InternalController: NSOutlineViewDataSource {
 //		let	v	=	NSTableRowView()
 //		return	v
 //	}
+	
+	@objc
+	func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView? {
+		let	v	=	DarkVibrancyAwareTableRowView()
+		return	v
+	}
 	@objc
 	func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		let	cid	=	WorkspaceNavigationTreeColumnIdentifier(rawValue: tableColumn!.identifier)!

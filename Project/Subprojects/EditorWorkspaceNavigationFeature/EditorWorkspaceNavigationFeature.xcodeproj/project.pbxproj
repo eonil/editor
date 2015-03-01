@@ -252,12 +252,12 @@
 			isa = PBXGroup;
 			children = (
 				45E65E951A9A090F00CA5143 /* README.md */,
-				45166B811A98FE860046213D /* EditorCommon.xcodeproj */,
-				45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */,
-				45166ABB1A98C85C0046213D /* Standards.xcodeproj */,
 				45166A601A98C3EC0046213D /* EditorWorkspaceNavigationFeature */,
 				45166A6D1A98C3EC0046213D /* EditorWorkspaceNavigationFeatureTests */,
 				45166AD81A98F53A0046213D /* Workbench1 */,
+				45166B811A98FE860046213D /* EditorCommon.xcodeproj */,
+				45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */,
+				45166ABB1A98C85C0046213D /* Standards.xcodeproj */,
 				45166A5F1A98C3EC0046213D /* Products */,
 			);
 			sourceTree = "<group>";

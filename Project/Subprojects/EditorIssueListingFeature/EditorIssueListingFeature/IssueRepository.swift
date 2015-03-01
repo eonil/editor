@@ -134,7 +134,8 @@ final class IssueGroupNode {
 	}
 	var iconForUI:NSImage {
 		get {
-			return	_origin == nil ? IconUtility.iconForCodeUsingIconServices(kUnknownFSObjectIcon) : IconUtility.iconForURL(_origin!)
+			return	IconPalette.FontAwesome.WebApplicationIcons.fileO.image.templatize()
+//			return	_origin == nil ? IconUtility.iconForCodeUsingIconServices(kUnknownFSObjectIcon) : IconUtility.iconForURL(_origin!)
 		}
 	}
 	var textForUI:String {
@@ -215,8 +216,8 @@ final class IssueItemNode {
 private let	SCALE	=	0.9 as CGFloat
 
 private struct IssueIconPalette {
-	static let	info	=	IconPalette.FontAwesome.WebApplicationIcons.infoCircle.image.imageWithScale(SCALE).imageWithAlpha(0.25).templatize()
-	static let	warning	=	IconPalette.FontAwesome.WebApplicationIcons.exclamationTriangle.image.imageWithScale(SCALE).imageWithAlpha(0.25).templatize()
+	static let	info	=	IconPalette.FontAwesome.WebApplicationIcons.infoCircle.image.imageWithScale(SCALE).imageWithAlpha(0.4).templatize()
+	static let	warning	=	IconPalette.FontAwesome.WebApplicationIcons.exclamationTriangle.image.imageWithScale(SCALE).imageWithAlpha(0.4).templatize()
 	static let	error	=	IconPalette.FontAwesome.WebApplicationIcons.exclamationCircle.image.imageWithScale(SCALE).templatize()
 	
 //	static let	info	=	IconUtility.iconForCodeUsingIconServices(kAlertNoteIcon).templatize()

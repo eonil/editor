@@ -240,12 +240,12 @@
 		4526C02B1A6B81D300F5BDC1 = {
 			isa = PBXGroup;
 			children = (
-				451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */,
-				45361C451A8C8FBE0035385C /* EditorToolComponents.xcodeproj */,
-				45DF42151A8C8911008E90EC /* EditorCommon.xcodeproj */,
 				4526C0371A6B81D300F5BDC1 /* EditorIssueListingFeature */,
 				4526C0441A6B81D300F5BDC1 /* EditorIssueListingFeatureTests */,
 				4526C05F1A6B821700F5BDC1 /* WorkbenchApp */,
+				451669AA1A98B54C0046213D /* EditorUIComponents.xcodeproj */,
+				45361C451A8C8FBE0035385C /* EditorToolComponents.xcodeproj */,
+				45DF42151A8C8911008E90EC /* EditorCommon.xcodeproj */,
 				4526C0361A6B81D300F5BDC1 /* Products */,
 			);
 			sourceTree = "<group>";

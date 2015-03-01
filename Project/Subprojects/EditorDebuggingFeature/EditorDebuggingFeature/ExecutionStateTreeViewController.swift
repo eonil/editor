@@ -118,14 +118,14 @@ public final class ExecutionStateTreeViewController: NSViewController, NSOutline
 	
 	public func outlineView(outlineView: NSOutlineView, rowViewForItem item: AnyObject) -> NSTableRowView? {
 		let	v	=	DarkVibrancyAwareTableRowView()
-		v.appearance	=	outlineView.appearance
+//		v.appearance	=	outlineView.appearance
 		return	v
 	}
 	public func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		let	n	=	item as! NodeBase
 		let	v	=	AttributedStringTableCellView()
 		v.attributedString	=	Text(n.label).setFont(Palette.defaultFont()).setTextColor(NSColor.labelColor()).attributedString
-		v.appearance		=	outlineView.appearance
+//		v.appearance		=	outlineView.appearance
 		return	v
 	}
 	
