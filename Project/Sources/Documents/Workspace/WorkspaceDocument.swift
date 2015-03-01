@@ -26,7 +26,7 @@ final class WorkspaceDocument: NSDocument {
 	override init() {
 		super.init()
 		
-		_subcomponentController.owner	=	self
+		_subcomponentController	=	SubcomponentController(owner: self)
 		
 		assert(mainWindowController.fileNavigationViewController.delegate == nil)
 		mainWindowController.fileNavigationViewController.delegate			=	_subcomponentController
@@ -69,9 +69,14 @@ final class WorkspaceDocument: NSDocument {
 
 	////
 	
+	private var	_subcomponentController	=	nil as SubcomponentController? {
+		willSet {
+			assert(_subcomponentController == nil, "You can set this only once.")
+		}
+	}
+	
 	private var	_rootLocation			=	nil as FileLocation?
 	private var	_fileSystemMonitor		=	nil as FileSystemEventMonitor?
-	private let	_subcomponentController	=	SubcomponentController()
 	private let	_debuggingController	=	WorkspaceDebuggingController()
 	private let	_commandQueue			=	WorkspaceCommandExecutionController()
 	private let _projectMenuController	=	ProjectMenuController()
@@ -286,7 +291,7 @@ private extension WorkspaceDocument {
 		_commandQueue.queue(CargoCommand(
 			workspaceRootURL: rootLocation.stringExpression,
 			subcommand: CargoCommand.Subcommand.Build,
-			cargoDelegate: _subcomponentController))
+			cargoDelegate: _subcomponentController!))
 		_commandQueue.runAllCommandExecution()
 	}
 	
@@ -300,7 +305,7 @@ private extension WorkspaceDocument {
 		_commandQueue.queue(CargoCommand(
 			workspaceRootURL: rootLocation.stringExpression,
 			subcommand: CargoCommand.Subcommand.Build,
-			cargoDelegate: _subcomponentController))
+			cargoDelegate: _subcomponentController!))
 		_commandQueue.queue(LaunchDebuggingSessionCommand(
 			debuggingController: _debuggingController,
 			workspaceRootURL: rootLocation.stringExpression))
@@ -313,7 +318,7 @@ private extension WorkspaceDocument {
 		_commandQueue.queue(CargoCommand(
 			workspaceRootURL: rootLocation.stringExpression,
 			subcommand: CargoCommand.Subcommand.Clean,
-			cargoDelegate: _subcomponentController))
+			cargoDelegate: _subcomponentController!))
 		_commandQueue.runAllCommandExecution()
 	}
 	func stopWorkspace() {
@@ -433,96 +438,21 @@ extension WorkspaceDocument {
 
 ///	Hardly-coupled internal subcomponent controller.
 private final class SubcomponentController {
-	weak var owner:WorkspaceDocument! {
-		willSet {
-			assert(self.owner == nil, "`owner` can be set only once.")
-		}
+	unowned let		owner:	WorkspaceDocument
+	
+	init(owner: WorkspaceDocument) {
+		self.owner	=	owner
 	}
 }
 
 ///	MARK:
 ///	MARK:	WorkspaceNavigationViewControllerDelegate
 extension SubcomponentController: WorkspaceNavigationViewControllerDelegate {
-	func workpaceNavigationViewControllerWantsToOpenFileAtURL(_: NSURL) {
-		
+	func workpaceNavigationViewControllerWantsToOpenFileAtURL(u: NSURL) {
+		owner.mainWindowController.codeEditingViewController.URLRepresentation	=	u
 	}
 }
 
-//extension SubcomponentController: FileTreeViewController4Delegate {
-//	func fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(u: NSURL) -> [NSURL] {
-//		Debug.assertMainThread()
-//		
-//		return	subnodeAbsoluteURLsOfURL(u)
-//	}
-//	
-//	func fileTreeViewController4UserWantsToCreateFolderInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
-//		Debug.assertMainThread()
-//		
-//		return	FileUtility.createNewFolderInFolder(parentFolderURL)
-//	}
-//	func fileTreeViewController4UserWantsToCreateFileInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
-//		Debug.assertMainThread()
-//		
-//		return	FileUtility.createNewFileInFolder(parentFolderURL)
-//	}
-//	func fileTreeViewController4UserWantsToRenameFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
-//		Debug.assertMainThread()
-//		
-//		return	fileTreeViewController4UserWantsToMoveFileAtURL(from, to: to)
-//	}
-//	func fileTreeViewController4UserWantsToMoveFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
-//		Debug.assertMainThread()
-//		
-//		var	err	=	nil as NSError?
-//		let	ok	=	NSFileManager.defaultManager().moveItemAtURL(from, toURL: to, error: &err)
-//		assert(ok || err != nil)
-//		if ok {
-//			owner.mainWindowController.codeEditingViewController.URLRepresentation	=	to
-//		}
-//		return	ok ? Resolution.success() : Resolution.failure(err!)
-//	}
-//	func fileTreeViewController4UserWantsToDeleteFilesAtURLs(us: [NSURL]) -> Resolution<()> {
-//		Debug.assertMainThread()
-//		
-//		//	Just always close the currently editing file.
-//		//	Deletion may fail, and then user may see closed document without deletion,
-//		//	but it doesn't seem to be bad. So this is an intended design.
-//		owner.mainWindowController.codeEditingViewController.URLRepresentation	=	nil
-//		
-//		var	err	=	nil as NSError?
-//		for u in us {
-//			let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
-//			assert(ok || err != nil)
-//			if !ok {
-//				return	Resolution.failure(err!)
-//			}
-//		}
-//		return	Resolution.success()
-//	}
-//	
-//	func fileTreeViewController4UserWantsToEditFileAtURL(u: NSURL) -> Bool {
-//		Debug.assertMainThread()
-//		
-//		owner.mainWindowController.codeEditingViewController.URLRepresentation	=	u
-//		return	true
-//	}
-//}
-//
-//private func subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
-//	var	us1	=	[] as [NSURL]
-//	if NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(absoluteURL.path!) {
-//		let	u1	=	absoluteURL
-//		let	it1	=	NSFileManager.defaultManager().enumeratorAtURL(u1, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles | NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants, errorHandler: { (url:NSURL!, error:NSError!) -> Bool in
-//			fatalError("Unhandled file I/O error!")	//	TODO:
-//			return	false
-//		})
-//		let	it2	=	it1!
-//		while let o1 = it2.nextObject() as? NSURL {
-//			us1.append(o1)
-//		}
-//	}
-//	return	us1
-//}
 
 
 
@@ -550,7 +480,7 @@ extension SubcomponentController: WorkspaceNavigationViewControllerDelegate {
 
 extension SubcomponentController: ExecutionStateTreeViewControllerDelegate {
 	private func executionStateTreeViewControllerDidSelectFrame(frame: LLDBFrame?) {
-		owner!.mainWindowController.variableInspectingViewController.snapshot	=	VariableTreeViewController.Snapshot(frame)
+		owner.mainWindowController.variableInspectingViewController.snapshot	=	VariableTreeViewController.Snapshot(frame)
 	}
 }
 
@@ -672,5 +602,101 @@ extension SubcomponentController: CargoExecutionControllerDelegate {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//extension SubcomponentController: FileTreeViewController4Delegate {
+//	func fileTreeViewController4QueryFileSystemSubnodeURLsOfURL(u: NSURL) -> [NSURL] {
+//		Debug.assertMainThread()
+//
+//		return	subnodeAbsoluteURLsOfURL(u)
+//	}
+//
+//	func fileTreeViewController4UserWantsToCreateFolderInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
+//		Debug.assertMainThread()
+//
+//		return	FileUtility.createNewFolderInFolder(parentFolderURL)
+//	}
+//	func fileTreeViewController4UserWantsToCreateFileInURL(parentFolderURL: NSURL) -> Resolution<NSURL> {
+//		Debug.assertMainThread()
+//
+//		return	FileUtility.createNewFileInFolder(parentFolderURL)
+//	}
+//	func fileTreeViewController4UserWantsToRenameFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
+//		Debug.assertMainThread()
+//
+//		return	fileTreeViewController4UserWantsToMoveFileAtURL(from, to: to)
+//	}
+//	func fileTreeViewController4UserWantsToMoveFileAtURL(from: NSURL, to: NSURL) -> Resolution<()> {
+//		Debug.assertMainThread()
+//
+//		var	err	=	nil as NSError?
+//		let	ok	=	NSFileManager.defaultManager().moveItemAtURL(from, toURL: to, error: &err)
+//		assert(ok || err != nil)
+//		if ok {
+//			owner.mainWindowController.codeEditingViewController.URLRepresentation	=	to
+//		}
+//		return	ok ? Resolution.success() : Resolution.failure(err!)
+//	}
+//	func fileTreeViewController4UserWantsToDeleteFilesAtURLs(us: [NSURL]) -> Resolution<()> {
+//		Debug.assertMainThread()
+//
+//		//	Just always close the currently editing file.
+//		//	Deletion may fail, and then user may see closed document without deletion,
+//		//	but it doesn't seem to be bad. So this is an intended design.
+//		owner.mainWindowController.codeEditingViewController.URLRepresentation	=	nil
+//
+//		var	err	=	nil as NSError?
+//		for u in us {
+//			let	ok	=	NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil, error: &err)
+//			assert(ok || err != nil)
+//			if !ok {
+//				return	Resolution.failure(err!)
+//			}
+//		}
+//		return	Resolution.success()
+//	}
+//
+//	func fileTreeViewController4UserWantsToEditFileAtURL(u: NSURL) -> Bool {
+//		Debug.assertMainThread()
+//
+//		owner.mainWindowController.codeEditingViewController.URLRepresentation	=	u
+//		return	true
+//	}
+//}
+//
+//private func subnodeAbsoluteURLsOfURL(absoluteURL:NSURL) -> [NSURL] {
+//	var	us1	=	[] as [NSURL]
+//	if NSFileManager.defaultManager().fileExistsAtPathAsDirectoryFile(absoluteURL.path!) {
+//		let	u1	=	absoluteURL
+//		let	it1	=	NSFileManager.defaultManager().enumeratorAtURL(u1, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles | NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants, errorHandler: { (url:NSURL!, error:NSError!) -> Bool in
+//			fatalError("Unhandled file I/O error!")	//	TODO:
+//			return	false
+//		})
+//		let	it2	=	it1!
+//		while let o1 = it2.nextObject() as? NSURL {
+//			us1.append(o1)
+//		}
+//	}
+//	return	us1
+//}
 
 

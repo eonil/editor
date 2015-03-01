@@ -11,8 +11,6 @@ import AppKit
 import EditorCommon
 
 
-let	ROW_ADD_ANIMATION_EFFECT	=	NSTableViewAnimationOptions.allZeros
-//let	ROW_ADD_ANIMATION_EFFECT	=	NSTableViewAnimationOptions.SlideDown		///	Really bad when issues are being added very frequently.
 
 
 public protocol IssueListingViewControllerDelegate: class {
@@ -25,6 +23,13 @@ public protocol IssueListingViewControllerDelegate: class {
 
 
 
+
+
+///	Provides issue list reporting UI.
+///	This view controller incorporates scrolling feature, so you SHOULD NOT wrap this in a scroll view.
+///
+///
+///
 public final class IssueListingViewController: NSViewController {
 	public weak var delegate:IssueListingViewControllerDelegate?
 	
@@ -53,14 +58,7 @@ public final class IssueListingViewController: NSViewController {
 			self.outlineView.insertItemsAtIndexes(idxs, inParent: p, withAnimation: ROW_ADD_ANIMATION_EFFECT)
 		}
 		self.outlineView.endUpdates()
-		
 		self.outlineView.sizeLastColumnToFit()		//	This have to be here to work properly. Seems doesn't work if there's no row.
-	}
-		
-	public var outlineView:NSOutlineView {
-		get {
-			return	view as! NSOutlineView
-		}
 	}
 	
 	public override var view:NSView {
@@ -70,22 +68,24 @@ public final class IssueListingViewController: NSViewController {
 		//	You shouldn't set a new view.
 		@availability(*,unavailable)
 		set(v) {
-			fatalError()
-			precondition(v is NSOutlineView)
-			super.view	=	v
+			fatalError("You cannot replace view of this class.")
 		}
 	}
 	
-	//	You shouldn't call this directly.
+	///	You shouldn't call this method directly.
 	@availability(*,unavailable)
 	public override func loadView() {
-		super.view	=	NSOutlineView()
+		super.view	=	NSScrollView()
 	}
 	
-	//	You shouldn't call this directly.
+	///	You shouldn't call this method directly.
 	@availability(*,unavailable)
 	public override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		scrollView.hasVerticalScroller		=	true
+		scrollView.hasHorizontalScroller	=	true
+		scrollView.documentView				=	outlineView
 		
 		func makeTextColumn() -> NSTableColumn {
 			let	TEXT		=	"TEXT"
@@ -98,19 +98,36 @@ public final class IssueListingViewController: NSViewController {
 			return	c
 		}
 		
-		self.outlineView.addTableColumn(makeTextColumn())
-		self.outlineView.outlineTableColumn			=	(self.outlineView.tableColumns[0] as? NSTableColumn)!
-		self.outlineView.selectionHighlightStyle	=	NSTableViewSelectionHighlightStyle.SourceList
-		self.outlineView.rowSizeStyle				=	NSTableViewRowSizeStyle.Small
-		self.outlineView.headerView					=	nil
-		self.outlineView.setDataSource(self)
-		self.outlineView.setDelegate(self)
+		outlineView.addTableColumn(makeTextColumn())
+		outlineView.outlineTableColumn			=	(self.outlineView.tableColumns[0] as? NSTableColumn)!
+		outlineView.selectionHighlightStyle		=	NSTableViewSelectionHighlightStyle.SourceList
+		outlineView.rowSizeStyle				=	NSTableViewRowSizeStyle.Small
+		outlineView.headerView					=	nil
+		outlineView.setDataSource(self)
+		outlineView.setDelegate(self)
 	}
 	
 	////
 	
 	private let _repository		=	IssueRepository()
+	private let	outlineView		=	NSOutlineView()
 }
+
+internal extension IssueListingViewController {
+	var scrollView:NSScrollView {
+		get {
+			return	view as! NSScrollView
+		}
+	}
+}
+
+let	ROW_ADD_ANIMATION_EFFECT	=	NSTableViewAnimationOptions.allZeros
+//let	ROW_ADD_ANIMATION_EFFECT	=	NSTableViewAnimationOptions.SlideDown		///	Really bad when issues are being added very frequently.
+
+
+
+
+
 
 
 

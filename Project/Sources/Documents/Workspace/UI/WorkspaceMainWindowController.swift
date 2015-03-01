@@ -15,6 +15,18 @@ import EditorWorkspaceNavigationFeature
 import EditorIssueListingFeature
 import EditorDebuggingFeature
 
+
+
+
+
+
+
+
+
+///	Manages main window for workspace management.
+///
+///	This manages only window and views and does not perform any back-end operations.
+///	
 final class WorkspaceMainWindowController: EditorCommonWindowController3 {
 	var fileNavigationViewController: WorkspaceNavigationViewController {
 		get {
@@ -63,6 +75,37 @@ final class WorkspaceMainWindowController: EditorCommonWindowController3 {
 }
 
 
+private func makeMainWindow() -> NSWindow {
+	let	window	=	NSWindow()
+	window.styleMask	=	NSResizableWindowMask | NSTitledWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
+	
+	let	USE_DARK_MODE	=	true
+	if USE_DARK_MODE {
+		//			window.titlebarAppearsTransparent	=	true
+		window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
+		window.invalidateShadow()
+		
+		func makeDark(b:NSButton, alpha:CGFloat) {
+			let	f	=	CIFilter(name: "CIColorMonochrome")
+			f.setDefaults()
+			//			f.setValue(CIColor(red: 0.5, green: 0.3, blue: 0.5, alpha: alpha), forKey: "inputColor")		//	I got this number accidentally, and I like this tone.
+			f.setValue(CIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: alpha), forKey: "inputColor")
+			//
+			//			let	f1	=	CIFilter(name: "CIGammaAdjust")
+			//			f1.setDefaults()
+			//			f1.setValue(0.3, forKey: "inputPower")
+			//
+			//			let	f2	=	CIFilter(name: "CIColorInvert")
+			//			f2.setDefaults()
+			
+			b.contentFilters	=	[f]
+		}
+		makeDark(window.standardWindowButton(NSWindowButton.CloseButton)!, 1.0)
+		makeDark(window.standardWindowButton(NSWindowButton.MiniaturizeButton)!, 1.0)
+		makeDark(window.standardWindowButton(NSWindowButton.ZoomButton)!, 1.0)
+	}
+	return	window
+}
 
 
 
@@ -94,6 +137,42 @@ final class WorkspaceMainWindowController: EditorCommonWindowController3 {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///	MARK:
+///	MARK:	InternalController
 
 private final class InternalController {
 	unowned var owner						:	WorkspaceMainWindowController
@@ -238,37 +317,43 @@ private let	VARIABLE_INSPECTOR_MIN_HEIGHT	:	CGFloat		=	100
 
 
 
-private func makeMainWindow() -> NSWindow {
-	let	window	=	NSWindow()
-	window.styleMask	=	NSResizableWindowMask | NSTitledWindowMask | NSMiniaturizableWindowMask | NSClosableWindowMask
-	
-	let	USE_DARK_MODE	=	true
-	if USE_DARK_MODE {
-		//			window.titlebarAppearsTransparent	=	true
-		window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
-		window.invalidateShadow()
-		
-		func makeDark(b:NSButton, alpha:CGFloat) {
-			let	f	=	CIFilter(name: "CIColorMonochrome")
-			f.setDefaults()
-//			f.setValue(CIColor(red: 0.5, green: 0.3, blue: 0.5, alpha: alpha), forKey: "inputColor")		//	I got this number accidentally, and I like this tone.
-			f.setValue(CIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: alpha), forKey: "inputColor")
 //
-//			let	f1	=	CIFilter(name: "CIGammaAdjust")
-//			f1.setDefaults()
-//			f1.setValue(0.3, forKey: "inputPower")
 //
-//			let	f2	=	CIFilter(name: "CIColorInvert")
-//			f2.setDefaults()
+/////	MARK:
+/////	MARK:	InternalController (IssueListingViewControllerDelegate)
+//
+//extension InternalController: WorkspaceBuildController {
+//	
+//}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/////	MARK:
+/////	MARK:	InternalController (IssueListingViewControllerDelegate)
+//
+//extension InternalController: IssueListingViewControllerDelegate {
+//	
+//}
+//
 
-			b.contentFilters	=	[f]
-		}
-		makeDark(window.standardWindowButton(NSWindowButton.CloseButton)!, 1.0)
-		makeDark(window.standardWindowButton(NSWindowButton.MiniaturizeButton)!, 1.0)
-		makeDark(window.standardWindowButton(NSWindowButton.ZoomButton)!, 1.0)
-	}
-	return	window
-}
+
+
+
+
 
 
 

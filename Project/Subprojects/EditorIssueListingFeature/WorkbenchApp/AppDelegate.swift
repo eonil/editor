@@ -17,7 +17,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBOutlet weak var window: NSWindow!
 	
-	let	sv	=	NSScrollView()
 	let	vc	=	IssueListingViewController()
 	
 	var	t	=	nil as NSTimer?
@@ -25,11 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		self.window!.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
 		
-		sv.hasHorizontalScroller	=	true
-		sv.hasVerticalScroller		=	true
-		
-		window.contentView	=	sv
-		sv.documentView		=	vc.view
+		window.contentView	=	vc.view
 		
 		vc.push(makeTestDataset())
 		
