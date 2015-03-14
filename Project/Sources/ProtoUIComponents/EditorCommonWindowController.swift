@@ -14,14 +14,16 @@ import AppKit
 @availability(*,deprecated=0)
 class EditorCommonWindowController : NSWindowController {
 
-	override init() {
-		super.init()
+	convenience init() {
+		self.init(window: nil)
 		self.loadWindow()
 		self.windowDidLoad()
 	}
+	
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 	}
+	
 	override init(window: NSWindow?) {
 		super.init(window: window)
 	}

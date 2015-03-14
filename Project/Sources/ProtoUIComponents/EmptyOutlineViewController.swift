@@ -10,14 +10,12 @@ import Foundation
 import AppKit
 
 class EmptyOutlineViewController : NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
-	override init() {
-		super.init()
+
+	required convenience init?(coder: NSCoder) {
+		fatalError("No support for IB.")
 	}
-	required init?(coder: NSCoder) {
-		fatalError("init(coder:) has not been implemented")
-	}
-	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+	override convenience init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+		self.init()
 	}
 	
 	var	outlineView:NSOutlineView {

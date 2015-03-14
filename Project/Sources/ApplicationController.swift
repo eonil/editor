@@ -72,6 +72,11 @@ private final class DefaultMenuControllerPalette {
 ///	MARK:
 ///	MARK:	Application Lifecycle Management
 extension ApplicationController {
+	
+	func applicationWillFinishLaunching(notification: NSNotification) {
+		NSUserDefaults.standardUserDefaults().setBool(true, forKey: "NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints")
+	}
+	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 //		debugMenu!.submenu	=	MenuController.menuOfController(documentlessDebugMenuController)
 		
@@ -86,14 +91,15 @@ extension ApplicationController {
 				let	docc	=	NSDocumentController.sharedDocumentController() as! NSDocumentController
 				let	ws		=	docc.currentDocument as? WorkspaceDocument
 				
-				rebind(self.projectMenu!, ws?.projectMenuController ||| DefaultMenuControllerPalette.project)
-				rebind(self.debugMenu!, ws?.debugMenuController ||| DefaultMenuControllerPalette.debug)
+				rebind(self.projectMenu!, ws?.projectMenuController ?? DefaultMenuControllerPalette.project)
+				rebind(self.debugMenu!, ws?.debugMenuController ?? DefaultMenuControllerPalette.debug)
 		}
 	}
 	
 	func applicationWillTerminate(aNotification: NSNotification) {
 		// Insert code here to tear down your application
 	}
+	
 }
 
 

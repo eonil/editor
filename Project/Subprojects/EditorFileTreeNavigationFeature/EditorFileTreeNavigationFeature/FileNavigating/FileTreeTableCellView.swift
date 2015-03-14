@@ -14,7 +14,7 @@ import AppKit
 final class FileTableCellView: NSTableCellView, NSTextFieldDelegate {
 	weak var editingDelegate:FileTableCellEditingDelegate?
 	
-	convenience override init() {
+	convenience init() {
 		self.init(frame: CGRect.zeroRect)
 	}
 	

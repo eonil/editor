@@ -17,6 +17,12 @@ class ScrollViewController1: NSViewController {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 	}
 	
+	required init?(coder: NSCoder) {
+		super.init(coder: coder)
+	}
+	
+
+	
 	final var documentViewController:NSViewController? = nil {
 		willSet {
 			if let dc1 = documentViewController {
@@ -47,13 +53,6 @@ class ScrollViewController1: NSViewController {
 		}
 	}
 	
-	override init() {
-		super.init()
-	}
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-	}
-	
 	override func loadView() {
 //		super.loadView()
 		super.view							=	NSScrollView()
@@ -64,3 +63,6 @@ class ScrollViewController1: NSViewController {
 		scrollView.translatesAutoresizingMaskIntoConstraints	=	false		///	This shall benefit everyone in the universe...
 	}
 }
+
+
+

@@ -46,7 +46,7 @@ class EditorCommonViewController: NSViewController {
 	
 	private func ensureViewReadiness() {
 		if viewLoaded == false {
-			super.view	=	instantiateView()
+			super.view				=	instantiateView()
 			self.view.needsLayout	=	true
 			self.view.layoutSubtreeIfNeeded()
 			self.viewDidLoad()	//	Does not being called automatically. Need to call manually.
@@ -56,10 +56,7 @@ class EditorCommonViewController: NSViewController {
 	
 	
 	
-	override init() {
-		super.init()
-		ensureViewReadiness()
-	}
+
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		ensureViewReadiness()

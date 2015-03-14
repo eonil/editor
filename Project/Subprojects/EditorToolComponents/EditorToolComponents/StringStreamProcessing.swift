@@ -110,7 +110,7 @@ public final class UTF8StringDispatcher {
 //		assert(g.u8s.count == 0, "If you cannot ")
 	}
 	
-	public var incompleteCodeUnits:Slice<UTF8.CodeUnit> {
+	public var incompleteCodeUnits:ArraySlice<UTF8.CodeUnit> {
 		get {
 			return	g.u8s[g.idx..<g.u8s.endIndex]
 		}

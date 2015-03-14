@@ -22,8 +22,8 @@ import AppKit
 ///	proper coloring, and may look somewhat weired in later OS X versions.
 ///	Patch at the time if you have some such troubles.
 public final class AttributedStringTableCellView: NSTableCellView {
-	public override init() {
-		super.init()
+	public convenience init() {
+		self.init(frame: CGRect.zeroRect)
 	}
 	public override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)

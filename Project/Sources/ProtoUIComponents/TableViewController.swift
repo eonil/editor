@@ -10,6 +10,19 @@ import Foundation
 import AppKit
 
 class TableViewController : NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+	
+	@availability(*,unavailable)
+	required init?(coder: NSCoder) {
+//		super.init(coder: coder)
+		fatalError("IB in sunsupported.")
+	}
+	
+	@availability(*,unavailable)
+	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+		fatalError("IB in sunsupported.")
+//		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+	}
+
 	var tableView:NSTableView {
 		get {
 			return	super.view as! NSTableView
@@ -31,15 +44,6 @@ class TableViewController : NSViewController, NSTableViewDataSource, NSTableView
 		tableView.setDelegate(self)
 	}
 	
-	override init() {
-		super.init()
-	}
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-	}
-	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-	}
 }
 
 

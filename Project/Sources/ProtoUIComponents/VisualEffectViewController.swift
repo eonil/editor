@@ -13,18 +13,6 @@ class VisualEffectViewController : NSViewController {
 	
 //	private	var	_localLayoutConstraints	=	[] as [NSLayoutConstraint]
 	
-	override init() {
-		
-		NSUserDefaults.standardUserDefaults().setBool(true, forKey: "NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints")
-		super.init()
-	}
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-	}
-	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-	}
-	
 	var	documentViewController:NSViewController? {
 		willSet(v) {
 			if let dc1 = documentViewController {

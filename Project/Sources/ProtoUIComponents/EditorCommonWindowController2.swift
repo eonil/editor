@@ -21,25 +21,21 @@ import AppKit
 ///	IB is unsupported.
 @availability(*,deprecated=0)
 class EditorCommonWindowController2 : NSWindowController {
-
-	///	Designated initialiser.
-	@availability(*,deprecated=0)
-	required override init() {
-		super.init()
-		self.loadWindow()
-		self.windowDidLoad()
-	}
 	
 	///	No support for IB.
+	@availability(*,unavailable)
 	@availability(*,deprecated=0)
 	required init?(coder: NSCoder) {
-		super.init(coder: coder)
+		fatalError()
 	}
 	
-	///	This method is unsupported.
+	@availability(*,unavailable)
 	@availability(*,deprecated=0)
 	override init(window: NSWindow?) {
 		super.init(window: window)
+		
+		self.loadWindow()
+		self.windowDidLoad()
 	}
 
 	

@@ -24,7 +24,7 @@ internal final class CellView: NSTableCellView {
 	var	columnIdentifier:WorkspaceNavigationTreeColumnIdentifier	=	WorkspaceNavigationTreeColumnIdentifier.Name
 	
 	init(_ columnIdentifier:WorkspaceNavigationTreeColumnIdentifier) {
-		super.init()
+		super.init(frame: CGRect.zeroRect)
 		self.columnIdentifier	=	columnIdentifier
 		
 		switch self.columnIdentifier {
@@ -61,8 +61,8 @@ internal final class CellView: NSTableCellView {
 	}
 	
 	@availability(*,unavailable)
-	override init() {
-		super.init()
+	required init() {
+		super.init(frame: CGRect.zeroRect)
 	}
 	
 	@availability(*,unavailable)

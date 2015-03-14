@@ -22,15 +22,15 @@ class TextViewController: NSViewController {
 		}
 	}
 	
-	override init() {
-		super.init()
-	}
-	required init?(coder: NSCoder) {
-		super.init(coder: coder)
-	}
-	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-	}
+//	required init() {
+//		super.init()
+//	}
+//	required init?(coder: NSCoder) {
+//		super.init(coder: coder)
+//	}
+//	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+//		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//	}
 	
 	override func loadView() {
 		super.view	=	instantiateTextView()

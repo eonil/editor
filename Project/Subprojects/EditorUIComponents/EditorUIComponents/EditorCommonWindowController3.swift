@@ -20,56 +20,47 @@ import AppKit
 ///	Do not override any initialiser. Instead, override `windowDidLoad` to setup thigns.
 ///	This is intentional design to prevent weird OBJC instance replacement behavior.
 ///
-///	IB is unsupported.
+///	**Notice**
+///
+///	This class does not support use in Interface Builder
 public class EditorCommonWindowController3 : NSWindowController {
-
-	private var	_init_pass_flag	=	false
 	
 	///	Designated initialiser.
-	public required override init() {
-		self._init_pass_flag	=	true
-		super.init()
-		self._init_pass_flag	=	false
+	public required init() {
+		super.init(window: nil)
 		
 		loadWindow()		//	This doesn't being called automatically. Need to be called manually.
 		windowDidLoad()		//	This doesn't being called automatically. Need to be called manually.
 	}
 	
-	///	Don't use this initializer.
-	///	I do not support IB.
+	@availability(*,unavailable)
 	public required init?(coder: NSCoder) {
 		fatalError("This class `\(EditorCommonWindowController3.self)` does not support IB.")
 	}
-	
-	///	This method is unsupported.
 	@availability(*,unavailable)
-	override init(window: NSWindow?) {
-		if _init_pass_flag {
-			precondition(window == nil, "You cannot supply a window at `init`.")
-			fatalError("This init method is not supported `\(EditorCommonWindowController3.self)`.")
-		}
-		super.init(window: window)
+	override convenience init(window: NSWindow?) {
+		fatalError("This class `\(EditorCommonWindowController3.self)` does not support setting window object.")
 	}
-	
 	@availability(*,unavailable)
 	public convenience init(windowNibName:String) {
-		fatalError("This init is not supported.")
+		fatalError("This initializer is not supported.")
 	}
 	@availability(*,unavailable)
 	public convenience init(windowNibName:String, owner:AnyObject) {
-		fatalError("This init is not supported.")
+		fatalError("This initializer is not supported.")
 	}
 	@availability(*,unavailable)
 	public convenience init(windowNibPath:String, owner:AnyObject) {
-		fatalError("This init is not supported.")
+		fatalError("This initializer is not supported.")
 	}
 
 	
 	
 	
+	
 	public override var window:NSWindow! {
 		get {
-			assert(super.window !== nil, "Current `window` is set to `nil` which means logic bug.")
+			assert(super.window !== nil, "Current `window` is `nil` which means logic bug.")
 			return	super.window
 		}
 		set(v) {
