@@ -16,6 +16,7 @@ extension Issue {
 //	init(workspaceRootURL:NSURL, rust:RustCompilerIssue) {
 	init(rust:RustCompilerIssue) {
 		assert(NSFileManager.defaultManager().fileExistsAtPathAsDataFile(rust.location), "`location` must be a path to an existing file.")
+//		assert(rust.location == "<std macros>" || NSFileManager.defaultManager().fileExistsAtPathAsDataFile(rust.location), "`location` must be a path to an existing file.")
 		
 		let	u	=	NSURL(fileURLWithPath: rust.location)!
 		let	o	=	IssueOrigin(URL: u, range: rust.range)

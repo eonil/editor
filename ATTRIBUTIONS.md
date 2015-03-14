@@ -20,3 +20,7 @@ Markdown Logo
 -	Copyright holder:	(n/a)
 -	Licensed under:		Public Domain
 
+
+
+Some modules may contain extra external sources/resources, and they are attributed
+in thier own `README.md` files.

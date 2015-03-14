@@ -394,7 +394,7 @@ private final class InternalController {
 		mainWindowController.issueReportingViewController.delegate			=	self
 		mainWindowController.executionNavigationViewController.delegate		=	self
 		
-		debuggingController.executionTreeViewController					=	self.mainWindowController.executionNavigationViewController
+		debuggingController.executionTreeViewController						=	self.mainWindowController.executionNavigationViewController
 		debuggingController.variableTreeViewController						=	self.mainWindowController.variableInspectingViewController
 		debuggingController.delegate										=	self
 		
