@@ -10,9 +10,13 @@ import Foundation
 import AppKit
 
 
-///	A window controller which fixes some insane behaviors.
+///	**DEPRECATED, DO NOT USE THIS**
 ///
-///	-	This creates and binds `contentViewController` itself. You can override instantiation of it.
+///	A window controller which provides saner behaviors.
+///
+///	-	This creates and binds `contentViewController` itself using `instantiateWindow` method.
+///		You can override instantiation of it. 
+///
 ///	-	This sends `windowDidLoad` message at proper timing.
 ///
 ///	Do not override any initialiser. Instead, override `windowDidLoad` to setup thigns.

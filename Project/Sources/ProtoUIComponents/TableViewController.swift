@@ -14,12 +14,12 @@ class TableViewController : NSViewController, NSTableViewDataSource, NSTableView
 	@availability(*,unavailable)
 	required init?(coder: NSCoder) {
 //		super.init(coder: coder)
-		fatalError("IB in sunsupported.")
+		fatalError("IB is unsupported.")
 	}
 	
 	@availability(*,unavailable)
 	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-		fatalError("IB in sunsupported.")
+		fatalError("IB is unsupported.")
 //		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 	}
 

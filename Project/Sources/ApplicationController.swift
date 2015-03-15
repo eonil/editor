@@ -20,9 +20,10 @@ import EditorUIComponents
 
 
 
-
-
-
+///	Central control of the app.
+///
+///
+///
 ///	**Menu Management**
 ///
 ///	Currently, menus are not well designed. I just use NIB and static binding for static menus.
@@ -32,7 +33,12 @@ import EditorUIComponents
 ///	1.	Instantiate and use each dynamic menus with default state. Menu items usually no-op.
 ///	2.	Swaps menu items by context. Queries current context when opening a menu.
 ///	3.	Swap back to default state menu if there's no special context.
-
+///
+///	Conceptually, each document has their own menu instances. All those menus are mostly same
+///	except some states. This object just manages swapping between menu instances for current state.
+///
+///	NIBs are just temporal form, and will be replaced by code-driven implementation as soon as I
+///	finish more important features. Currently it's low on priority.
 @NSApplicationMain
 class ApplicationController: NSObject, NSApplicationDelegate {
 	
@@ -52,7 +58,9 @@ class ApplicationController: NSObject, NSApplicationDelegate {
 			return	nil
 		}
 	}
+	
 }
+
 
 
 private final class DefaultMenuControllerPalette {
