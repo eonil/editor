@@ -261,8 +261,15 @@ extension WorkspaceNode {
 	///	If you're moving a child node within same parent node, using of same name
 	///	is allowed because it will be removed first and to perform index 
 	///	moving.
+	///
+	///	**Note**
+	///
+	///	When you're moving a node within a parent node (moving to same parent)
+	///	take care that new index must be index when the movement finished.
+	///	For example, if you have 3 child nodes, and moving first node to last,
+	///	the new index must be `2` instead of `3`.
 	func moveChildNode(atOldIndex:Int, toNewParentNode:WorkspaceNode, atNewIndex:Int, withNewName:String) {
-		precondition(self === toNewParentNode || toNewParentNode.nodeForName(withNewName) == nil, "The name already been take by a sibling in destination parent node.")
+		precondition(self === toNewParentNode || toNewParentNode.nodeForName(withNewName) == nil, "The name already been taken by a sibling in destination parent node.")
 		assert(atNewIndex >= 0)
 		assert(atNewIndex <= toNewParentNode.children.count)
 		assertAttached()
@@ -280,7 +287,7 @@ extension WorkspaceNode {
 		n.name		=	withNewName
 		n.parent	=	toNewParentNode
 		toNewParentNode.children.insert(n, atIndex: atNewIndex)
-		let	newPath	=	n.path
+//		let	newPath	=	n.path
 		
 		repository.delegate?.workspaceRepositoryDidMoveNode(n)
 	}

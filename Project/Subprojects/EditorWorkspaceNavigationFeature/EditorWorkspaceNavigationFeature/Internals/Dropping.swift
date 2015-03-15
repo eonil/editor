@@ -84,9 +84,10 @@ struct Dropping {
 			if ok {
 				let	n1	=	internals.owner.nodeForAbsoluteFileURL(u)!
 				let	n2	=	n1.parent!
-				let	idx	=	n2.indexOfNode(n1)!
-				n2.moveChildNode(idx, toNewParentNode: n, atNewIndex: index)
-				internals.owner!.outlineView.moveItemAtIndex(idx, inParent: n2, toIndex: index, inParent: n)
+				let	i1	=	n2.indexOfNode(n1)!
+				let	i2	=	(n2 === n && index > i1) ? index - 1 : index
+				n2.moveChildNode(i1, toNewParentNode: n, atNewIndex: i2)
+				internals.owner!.outlineView.moveItemAtIndex(i1, inParent: n2, toIndex: i2, inParent: n)
 			} else {
 				internals.owner!.presentError(e!)
 				return
