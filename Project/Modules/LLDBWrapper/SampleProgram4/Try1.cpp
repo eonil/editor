@@ -17,7 +17,7 @@
 
 #include <LLDB/SBFileSpec.h>
 #include <LLDB/SBStream.h>
-#include <LLDB/SBTypeEnumMember.h>
+//#include <LLDB/SBTypeEnumMember.h>
 #include <LLDB/SBTypeFormat.h>
 #include <LLDB/SBTypeSummary.h>
 #include <LLDB/SBTypeFilter.h>
@@ -32,9 +32,9 @@
 #include <LLDB/SBCommandInterpreter.h>
 #include <LLDB/SBCommandReturnObject.h>
 #include <LLDB/SBEvent.h>
-#include <LLDB/SBThreadCollection.h>
-#include <LLDB/SBThreadPlan.h>
-#include <LLDB/SBUnixSignals.h>
+//#include <LLDB/SBThreadCollection.h>
+//#include <LLDB/SBThreadPlan.h>
+//#include <LLDB/SBUnixSignals.h>
 #include <LLDB/SBCommunication.h>
 
 
