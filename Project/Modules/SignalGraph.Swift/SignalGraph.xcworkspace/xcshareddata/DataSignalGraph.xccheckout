@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3062C301-7B16-4440-BA58-4920B5ECD5E8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DataSignalGraph</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>FBB6F2B2029C41EB36C6216F39D46AC69FF785A0</key>
+		<string>https://github.com/Eonil/DataSignalGraph.Swift</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DataSignalGraph.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>FBB6F2B2029C41EB36C6216F39D46AC69FF785A0</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Eonil/DataSignalGraph.Swift</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>FBB6F2B2029C41EB36C6216F39D46AC69FF785A0</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FBB6F2B2029C41EB36C6216F39D46AC69FF785A0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Channel3</string>
+		</dict>
+	</array>
+</dict>
+</plist>

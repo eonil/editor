@@ -1,0 +1,517 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		45AFACED19F3DD3000EC17DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFACEC19F3DD3000EC17DC /* AppDelegate.swift */; };
+		45AFACEF19F3DD3000EC17DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFACEE19F3DD3000EC17DC /* ViewController.swift */; };
+		45AFACF219F3DD3000EC17DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45AFACF019F3DD3000EC17DC /* Main.storyboard */; };
+		45AFACF419F3DD3000EC17DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45AFACF319F3DD3000EC17DC /* Images.xcassets */; };
+		45AFACF719F3DD3000EC17DC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45AFACF519F3DD3000EC17DC /* LaunchScreen.xib */; };
+		45AFAD0319F3DD3100EC17DC /* MonolithTestExampleApplicationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFAD0219F3DD3100EC17DC /* MonolithTestExampleApplicationTests.swift */; };
+		45AFAD5319F3DE7600EC17DC /* Monolith.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AFAD1619F3DD9B00EC17DC /* Monolith.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		45AFACFD19F3DD3100EC17DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45AFACDF19F3DD3000EC17DC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45AFACE619F3DD3000EC17DC;
+			remoteInfo = MonolithTestExampleApplication;
+		};
+		45AFAD1519F3DD9B00EC17DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45AFAD0E19F3DD9B00EC17DC /* Monolith.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4586159419F17C4B007408AF;
+			remoteInfo = "Monolith OSX";
+		};
+		45AFAD1719F3DD9B00EC17DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45AFAD0E19F3DD9B00EC17DC /* Monolith.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4568300A19F3012A0085CBC5;
+			remoteInfo = "Monolith OSX Test";
+		};
+		45AFAD1919F3DD9B00EC17DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45AFAD0E19F3DD9B00EC17DC /* Monolith.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 458615B319F17CB8007408AF;
+			remoteInfo = "Monolith iOS";
+		};
+		45AFAD1B19F3DD9B00EC17DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45AFAD0E19F3DD9B00EC17DC /* Monolith.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4568306D19F302DF0085CBC5;
+			remoteInfo = "Monolith iOS Test";
+		};
+		45AFAD5419F3DE7C00EC17DC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45AFAD0E19F3DD9B00EC17DC /* Monolith.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45AFAD2919F3DE2300EC17DC;
+			remoteInfo = "Monolith iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		45AFACE719F3DD3000EC17DC /* MonolithTestExampleApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonolithTestExampleApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45AFACEB19F3DD3000EC17DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45AFACEC19F3DD3000EC17DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		45AFACEE19F3DD3000EC17DC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		45AFACF119F3DD3000EC17DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		45AFACF319F3DD3000EC17DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		45AFACF619F3DD3000EC17DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		45AFACFC19F3DD3100EC17DC /* MonolithTestExampleApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonolithTestExampleApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		45AFAD0119F3DD3100EC17DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45AFAD0219F3DD3100EC17DC /* MonolithTestExampleApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonolithTestExampleApplicationTests.swift; sourceTree = "<group>"; };
+		45AFAD0E19F3DD9B00EC17DC /* Monolith.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Monolith.xcodeproj; path = ../Monolith/Monolith.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		45AFACE419F3DD3000EC17DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45AFAD5319F3DE7600EC17DC /* Monolith.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45AFACF919F3DD3100EC17DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		45AFACDE19F3DD3000EC17DC = {
+			isa = PBXGroup;
+			children = (
+				45AFAD0E19F3DD9B00EC17DC /* Monolith.xcodeproj */,
+				45AFACE919F3DD3000EC17DC /* MonolithTestExampleApplication */,
+				45AFACFF19F3DD3100EC17DC /* MonolithTestExampleApplicationTests */,
+				45AFACE819F3DD3000EC17DC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		45AFACE819F3DD3000EC17DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45AFACE719F3DD3000EC17DC /* MonolithTestExampleApplication.app */,
+				45AFACFC19F3DD3100EC17DC /* MonolithTestExampleApplicationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45AFACE919F3DD3000EC17DC /* MonolithTestExampleApplication */ = {
+			isa = PBXGroup;
+			children = (
+				45AFACEC19F3DD3000EC17DC /* AppDelegate.swift */,
+				45AFACEE19F3DD3000EC17DC /* ViewController.swift */,
+				45AFACF019F3DD3000EC17DC /* Main.storyboard */,
+				45AFACF319F3DD3000EC17DC /* Images.xcassets */,
+				45AFACF519F3DD3000EC17DC /* LaunchScreen.xib */,
+				45AFACEA19F3DD3000EC17DC /* Supporting Files */,
+			);
+			path = MonolithTestExampleApplication;
+			sourceTree = "<group>";
+		};
+		45AFACEA19F3DD3000EC17DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				45AFACEB19F3DD3000EC17DC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		45AFACFF19F3DD3100EC17DC /* MonolithTestExampleApplicationTests */ = {
+			isa = PBXGroup;
+			children = (
+				45AFAD0219F3DD3100EC17DC /* MonolithTestExampleApplicationTests.swift */,
+				45AFAD0019F3DD3100EC17DC /* Supporting Files */,
+			);
+			path = MonolithTestExampleApplicationTests;
+			sourceTree = "<group>";
+		};
+		45AFAD0019F3DD3100EC17DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				45AFAD0119F3DD3100EC17DC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		45AFAD0F19F3DD9B00EC17DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45AFAD1619F3DD9B00EC17DC /* Monolith.framework */,
+				45AFAD1819F3DD9B00EC17DC /* Monolith OSX Test */,
+				45AFAD1A19F3DD9B00EC17DC /* Monolith.framework */,
+				45AFAD1C19F3DD9B00EC17DC /* Monolith iOS Test.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		45AFACE619F3DD3000EC17DC /* MonolithTestExampleApplication */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45AFAD0619F3DD3100EC17DC /* Build configuration list for PBXNativeTarget "MonolithTestExampleApplication" */;
+			buildPhases = (
+				45AFACE319F3DD3000EC17DC /* Sources */,
+				45AFACE419F3DD3000EC17DC /* Frameworks */,
+				45AFACE519F3DD3000EC17DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45AFAD5519F3DE7C00EC17DC /* PBXTargetDependency */,
+			);
+			name = MonolithTestExampleApplication;
+			productName = MonolithTestExampleApplication;
+			productReference = 45AFACE719F3DD3000EC17DC /* MonolithTestExampleApplication.app */;
+			productType = "com.apple.product-type.application";
+		};
+		45AFACFB19F3DD3100EC17DC /* MonolithTestExampleApplicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45AFAD0919F3DD3100EC17DC /* Build configuration list for PBXNativeTarget "MonolithTestExampleApplicationTests" */;
+			buildPhases = (
+				45AFACF819F3DD3100EC17DC /* Sources */,
+				45AFACF919F3DD3100EC17DC /* Frameworks */,
+				45AFACFA19F3DD3100EC17DC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45AFACFE19F3DD3100EC17DC /* PBXTargetDependency */,
+			);
+			name = MonolithTestExampleApplicationTests;
+			productName = MonolithTestExampleApplicationTests;
+			productReference = 45AFACFC19F3DD3100EC17DC /* MonolithTestExampleApplicationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		45AFACDF19F3DD3000EC17DC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Eonil;
+				TargetAttributes = {
+					45AFACE619F3DD3000EC17DC = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					45AFACFB19F3DD3100EC17DC = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 45AFACE619F3DD3000EC17DC;
+					};
+				};
+			};
+			buildConfigurationList = 45AFACE219F3DD3000EC17DC /* Build configuration list for PBXProject "MonolithTestExampleApplication" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 45AFACDE19F3DD3000EC17DC;
+			productRefGroup = 45AFACE819F3DD3000EC17DC /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 45AFAD0F19F3DD9B00EC17DC /* Products */;
+					ProjectRef = 45AFAD0E19F3DD9B00EC17DC /* Monolith.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				45AFACE619F3DD3000EC17DC /* MonolithTestExampleApplication */,
+				45AFACFB19F3DD3100EC17DC /* MonolithTestExampleApplicationTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		45AFAD1619F3DD9B00EC17DC /* Monolith.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Monolith.framework;
+			remoteRef = 45AFAD1519F3DD9B00EC17DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45AFAD1819F3DD9B00EC17DC /* Monolith OSX Test */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "Monolith OSX Test";
+			remoteRef = 45AFAD1719F3DD9B00EC17DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45AFAD1A19F3DD9B00EC17DC /* Monolith.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Monolith.framework;
+			remoteRef = 45AFAD1919F3DD9B00EC17DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45AFAD1C19F3DD9B00EC17DC /* Monolith iOS Test.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Monolith iOS Test.app";
+			remoteRef = 45AFAD1B19F3DD9B00EC17DC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		45AFACE519F3DD3000EC17DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45AFACF219F3DD3000EC17DC /* Main.storyboard in Resources */,
+				45AFACF719F3DD3000EC17DC /* LaunchScreen.xib in Resources */,
+				45AFACF419F3DD3000EC17DC /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45AFACFA19F3DD3100EC17DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		45AFACE319F3DD3000EC17DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45AFACEF19F3DD3000EC17DC /* ViewController.swift in Sources */,
+				45AFACED19F3DD3000EC17DC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45AFACF819F3DD3100EC17DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45AFAD0319F3DD3100EC17DC /* MonolithTestExampleApplicationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		45AFACFE19F3DD3100EC17DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45AFACE619F3DD3000EC17DC /* MonolithTestExampleApplication */;
+			targetProxy = 45AFACFD19F3DD3100EC17DC /* PBXContainerItemProxy */;
+		};
+		45AFAD5519F3DE7C00EC17DC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Monolith iOS";
+			targetProxy = 45AFAD5419F3DE7C00EC17DC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		45AFACF019F3DD3000EC17DC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45AFACF119F3DD3000EC17DC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		45AFACF519F3DD3000EC17DC /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45AFACF619F3DD3000EC17DC /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		45AFAD0419F3DD3100EC17DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		45AFAD0519F3DD3100EC17DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		45AFAD0719F3DD3100EC17DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MonolithTestExampleApplication/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		45AFAD0819F3DD3100EC17DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MonolithTestExampleApplication/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		45AFAD0A19F3DD3100EC17DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MonolithTestExampleApplicationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MonolithTestExampleApplication.app/MonolithTestExampleApplication";
+			};
+			name = Debug;
+		};
+		45AFAD0B19F3DD3100EC17DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MonolithTestExampleApplicationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MonolithTestExampleApplication.app/MonolithTestExampleApplication";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		45AFACE219F3DD3000EC17DC /* Build configuration list for PBXProject "MonolithTestExampleApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45AFAD0419F3DD3100EC17DC /* Debug */,
+				45AFAD0519F3DD3100EC17DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45AFAD0619F3DD3100EC17DC /* Build configuration list for PBXNativeTarget "MonolithTestExampleApplication" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45AFAD0719F3DD3100EC17DC /* Debug */,
+				45AFAD0819F3DD3100EC17DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45AFAD0919F3DD3100EC17DC /* Build configuration list for PBXNativeTarget "MonolithTestExampleApplicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45AFAD0A19F3DD3100EC17DC /* Debug */,
+				45AFAD0B19F3DD3100EC17DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 45AFACDF19F3DD3000EC17DC /* Project object */;
+}

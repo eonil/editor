@@ -29,15 +29,21 @@ Non-Goal
 
 
 
+Architecture
+------------
+
+Each component exposes its feature publicly with minimum dependency.
+Caller can use them as is. 
+
+There's a component called "Model". That provides a central organised
+storage, and orchestrates inter-component mutation dependencies. So,
+final application just uses model.
+
+A newrly added component can be used as is basis until I feel it to be
+integrated into central model.
 
 
-Object Tree Structure
-----------------------
 
--	ApplicationController
-	-	WorkspaceDocument (multiple)
-		-	WorkspaceWindowController
-		-	(or) PlainFileFolderWindowController
 
 
 
