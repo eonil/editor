@@ -82,8 +82,10 @@ public class EditableSetStorage<T: Hashable>: ReplicatingSetStorage<T> {
 		}
 	}
 }
-extension EditableSetStorage: SequenceType {
+
+extension EditableSetStorage {
 	public typealias	Index	=	SetIndex<T>
+	
 	public func insert(member: T) {
 		super.sensor.signal(SetSignal.Transition(transaction: CollectionTransaction.insert((member,()))))
 	}
@@ -94,10 +96,6 @@ extension EditableSetStorage: SequenceType {
 		return	v
 	}
 	
-	public func generate() -> SetGenerator<T> {
-		return	super.state.generate()
-	}
-	
 	public subscript (position: Index) -> T {
 		get {
 			return	super.state[position]
@@ -105,6 +103,27 @@ extension EditableSetStorage: SequenceType {
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//extension SetStorage: SequenceType {
+//	public typealias	Index	=	SetIndex<T>
+//
+//	///	This is callable only while storage is ready.
+//	public func generate() -> SetGenerator<T> {
+//		return	values!.generate()
+//	}
+//}
 
 
 

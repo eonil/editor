@@ -33,9 +33,17 @@ public class Model {
 			}
 		}
 		
+		public var cargoIsRunning: ValueStorage<Bool> {
+			get {
+				return	_cargoIsRunning;
+			}
+		}
+		
 		///	MARK:	-
 		
 		private let	candidatesStorage	=	EditableArrayStorage<Candidate>()
+		private let	_cargoIsRunning		=	EditableValueStorage<Bool>(false);
+		
 		private let	racerController		=	RacerExecutionController()
 	}
 }

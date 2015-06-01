@@ -54,17 +54,17 @@ import Foundation
 ///	Set `onLine` function to get notified.
 ///
 public struct LineDispatcher {
-	public var	onLine			=	{ _ in () } as (line:String)->()
+	public var	onLine		=	{ _ in () } as (line:String)->()
 	public init() {
 	}
 	public mutating func push(s:String) {
-		let	NEWLINE	=	"\n" as Character
+		let	NEWLINE		=	"\n" as Character
 		let	ps		=	split(s, maxSplit: 1, allowEmptySlices: true, isSeparator: { c in c == NEWLINE })
 		
 		_buffer.extend(ps[0])
 		if ps.count == 2 {
 			onLine(line: _buffer + "\n")
-			_buffer	=	ps[1]
+			_buffer		=	ps[1]
 		}
 	}
 	

@@ -17,9 +17,9 @@ struct WorkspaceUtility {
 		assert(desiredWorkspaceRootURL.existingAsAnyFile == false)
 		
 		let	desiredWorkspaceName	=	desiredWorkspaceRootURL.lastPathComponent!
-		let	configDataFileName		=	desiredWorkspaceName.stringByAppendingPathExtension(".eew")!
-		let	configDataFileURL		=	desiredWorkspaceRootURL.URLByAppendingPathComponent(configDataFileName, isDirectory: false)
-		let	parentDirURL			=	desiredWorkspaceRootURL.URLByDeletingLastPathComponent!
+		let	configDataFileName	=	desiredWorkspaceName.stringByAppendingPathExtension("eew")!
+		let	configDataFileURL	=	desiredWorkspaceRootURL.URLByAppendingPathComponent(configDataFileName, isDirectory: false)
+		let	parentDirURL		=	desiredWorkspaceRootURL.URLByDeletingLastPathComponent!
 		
 		//	`cargo` will create a directory for the URL.
 		let	c	=	CargoExecutionController()

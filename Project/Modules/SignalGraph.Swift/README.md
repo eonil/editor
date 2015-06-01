@@ -13,6 +13,72 @@ a declarative manner.
 
 
 
+
+Getting Started by Examples
+---------------------------
+This is a typical usage of this framework.
+
+	public class Car {
+		public var wheels: ArrayStorage<Wheel> {
+			get {
+				return	_wheels
+			}
+		}
+		
+		public func shouldReplaceWheels() -> Bool {
+			for w in _wheels.state {
+				if w.durability == 0 {
+					return	true
+				}
+			}
+			return	false
+		}
+		public func replaceFourWheels(wheels: [Wheel]) {
+			assert(wheels.count == 4)
+			_wheels.removeAll()
+			_wheels.extend(wheels)
+		}
+		
+		///	MARK:	-
+		
+		private let	_wheels	=	EditableArrayStorage<Wheel>([]);
+	}
+
+	public class Wheel {
+		
+		public var	durability	=	100
+	}
+
+Please note that `EditableArrayStorage` is a private storage and exposed publicly as
+`ArrayStorage`. As a result, code users can observe the wheels, but cannot mutate it
+directly. And they only can call mutator methods to perform proper operations. This
+provides a degree of safety. Now the class `Car` is guaranteed to have 0 or 4 wheels,
+and never will be with any other number of wheels.
+
+If you're familiar with C/C++, you'll notice this is classical `const&` pattern.
+If you're familiar with Objective-C, this is an analogue to `NSArray/NSMutableArray` 
+class pairs pattern. The only difference is, the `wheels` is observeable via its
+`emitter` property.
+
+Though this is essentially observation framework, I don't recommend you to observe
+data model to modify other data model. Recommended use is observing for view update.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Deisng Goals
 ------------
 -	Data-consumers care only registration/deregistration, and will automatically 
@@ -81,12 +147,6 @@ Now let's see how to use these actually.
 
 
 
-
-
-
-Getting Started
----------------
-(to be filled)
 
 
 

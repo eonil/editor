@@ -27,6 +27,7 @@ public class EditableArrayStorage<T>: ReplicatingArrayStorage<T> {
 		}
 	}
 }
+
 extension EditableArrayStorage {
 //	public var startIndex: Int { get }
 //	public var endIndex: Int { get }

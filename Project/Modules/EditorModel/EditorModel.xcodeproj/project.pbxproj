@@ -11,6 +11,10 @@
 		4510E85D1B121304005824AB /* SignalGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510E8541B1212F6005824AB /* SignalGraph.framework */; };
 		4510E9DA1B12BE8C005824AB /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510E9D91B12BE8C005824AB /* Command.swift */; };
 		4510E9F61B12C870005824AB /* EditorToolComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510E9E91B12BF78005824AB /* EditorToolComponents.framework */; };
+		451B56141B1B436B006C4879 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B56131B1B436B006C4879 /* Target.swift */; };
+		451B561E1B1B4374006C4879 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561D1B1B4374006C4879 /* Project.swift */; };
+		451B56201B1B437A006C4879 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561F1B1B437A006C4879 /* Workspace.swift */; };
+		4571A74B1B1B761100A7911B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A74A1B1B761100A7911B /* Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +83,10 @@
 		4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../SignalGraph.Swift/SignalGraph/SignalGraph.xcodeproj; sourceTree = "<group>"; };
 		4510E9D91B12BE8C005824AB /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		4510E9E21B12BF77005824AB /* EditorToolComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorToolComponents.xcodeproj; path = ../EditorToolComponents/EditorToolComponents.xcodeproj; sourceTree = "<group>"; };
+		451B56131B1B436B006C4879 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		451B561D1B1B4374006C4879 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		451B561F1B1B437A006C4879 /* Workspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
+		4571A74A1B1B761100A7911B /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +126,10 @@
 				4510E8161B12107C005824AB /* Info.plist */,
 				4510E8371B12124C005824AB /* Repository.swift */,
 				4510E9D91B12BE8C005824AB /* Command.swift */,
+				451B561F1B1B437A006C4879 /* Workspace.swift */,
+				451B561D1B1B4374006C4879 /* Project.swift */,
+				451B56131B1B436B006C4879 /* Target.swift */,
+				4571A74A1B1B761100A7911B /* Utility.swift */,
 			);
 			path = EditorModel;
 			sourceTree = "<group>";
@@ -290,8 +302,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451B56141B1B436B006C4879 /* Target.swift in Sources */,
 				4510E8381B12124C005824AB /* Repository.swift in Sources */,
+				4571A74B1B1B761100A7911B /* Utility.swift in Sources */,
+				451B56201B1B437A006C4879 /* Workspace.swift in Sources */,
 				4510E9DA1B12BE8C005824AB /* Command.swift in Sources */,
+				451B561E1B1B4374006C4879 /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
