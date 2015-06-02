@@ -52,7 +52,7 @@ public class CargoExecutionController {
 	}
 	
 	public init() {
-		_taskexec			=	ShellTaskExecutionController()
+		_taskexec		=	ShellTaskExecutionController()
 		_stdout_linedisp	=	LineDispatcher()
 		_stderr_linedisp	=	LineDispatcher()
 		

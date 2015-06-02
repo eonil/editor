@@ -10,6 +10,36 @@ import Foundation
 import SignalGraph
 
 public class Workspace {
+	
+	public init(rootDirectoryURL: NSURL) {
+		_rootdir	=	EditableValueStorage(rootDirectoryURL)
+	}
+	public var repository: Repository {
+		get {
+			return	owner!
+		}
+	}
+	public var rootDirectoryURL: ValueStorage<NSURL> {
+		get {
+			return	_rootdir
+		}
+	}
+	public var report: Console {
+		get {
+			return	_report
+		}
+	}
+	
+	///
+	
+	internal typealias	Owner	=	Repository
+	internal weak var	owner	:	Owner?
+	
+	///
+	
+	private let	_rootdir	:	EditableValueStorage<NSURL>
+	private let	_report		=	Console()
+	
 //	public init(rootURL: NSURL) {
 //		func TEMP_ADHOC_getTargetName() -> String? {
 //			let	p1	=	rootPath.stringByAppendingPathComponent("Cargo.toml")
