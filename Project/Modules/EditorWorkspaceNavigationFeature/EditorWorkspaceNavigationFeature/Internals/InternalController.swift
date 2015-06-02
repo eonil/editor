@@ -53,11 +53,11 @@ internal final class InternalController: NSObject {
 		let querySelection	=	{ [unowned self] ()->SelectionQuery in
 			return	SelectionQuery(controller: self.owner, repository: self.repository)
 		}
-		menu.showInFinder.reaction	=	{ [unowned self] in
+		menu.showInFinder.onAction	=	{ [unowned self] in
 			let	q	=	querySelection()
 			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(q.URL.all)
 		}
-		menu.showInTerminal.reaction	=	{ [unowned self] in
+		menu.showInTerminal.onAction	=	{ [unowned self] in
 			let	q	=	querySelection()
 			let	u	=	q.URL.hot!
 			let	p	=	u.path!
@@ -66,7 +66,7 @@ internal final class InternalController: NSObject {
 			s.executeAndReturnError(nil)
 		}
 		
-		menu.newFile.reaction		=	{ [unowned self] in
+		menu.newFile.onAction		=	{ [unowned self] in
 			Debug.assertMainThread()
 			
 			let	q	=	querySelection()
@@ -87,7 +87,7 @@ internal final class InternalController: NSObject {
 				//	Ignore. Happens by clicking empty space.
 			}
 		}
-		menu.newFolder.reaction		=	{ [unowned self] in
+		menu.newFolder.onAction		=	{ [unowned self] in
 			Debug.assertMainThread()
 			
 			let	q	=	querySelection()
@@ -109,12 +109,12 @@ internal final class InternalController: NSObject {
 				//	Ignore. Happens by clicking empty space.
 			}
 		}
-		menu.newFolderWithSelection.reaction	=	{ [unowned self] in
+		menu.newFolderWithSelection.onAction	=	{ [unowned self] in
 			let	q	=	querySelection()
 
 			//	TODO:	Implement this...
 		}
-		menu.delete.reaction	=	{ [unowned self] in
+		menu.delete.onAction	=	{ [unowned self] in
 			let	q			=	querySelection()
 			let	targetURLs	=	q.URL.all
 			if targetURLs.count > 0 {
@@ -144,7 +144,7 @@ internal final class InternalController: NSObject {
 				})
 			}
 		}
-		menu.deleteReferenceOnly.reaction	=	{ [unowned self] in
+		menu.deleteReferenceOnly.onAction	=	{ [unowned self] in
 			let	q			=	querySelection()
 			let	targetURLs	=	q.URL.all
 			if targetURLs.count > 0 {
@@ -159,19 +159,19 @@ internal final class InternalController: NSObject {
 				}
 			}
 		}
-		menu.addAllUnregistredFiles.reaction	=	{ [unowned self] in
+		menu.addAllUnregistredFiles.onAction	=	{ [unowned self] in
 			let	q	=	querySelection()
 			
 			fatalError("Unimplemented yet...")
 			//	TODO:	Implement this...
 		}
-		menu.removeAllMissingFiles.reaction	=	{ [unowned self] in
+		menu.removeAllMissingFiles.onAction	=	{ [unowned self] in
 			let	q	=	querySelection()
 			
 			fatalError("Unimplemented yet...")
 			//	TODO:	Implement this...
 		}
-		menu.note.reaction	=	{ [unowned self] in
+		menu.note.onAction	=	{ [unowned self] in
 			let	q	=	querySelection()
 
 			fatalError("Unimplemented yet...")

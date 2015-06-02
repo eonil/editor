@@ -109,7 +109,7 @@ public extension NSMenu {
 	}
 }
 public extension NSMenuItem {
-	var	reaction:(()->())? {
+	var	onAction:(()->())? {
 		get {
 			let	c1	=	ObjC.getStrongAssociationOf(self, key: Keys.MENU_REACTION) as! TargetActionFunctionBox?
 			return	c1?.function
@@ -129,7 +129,7 @@ public extension NSMenuItem {
 	convenience init(title:String, reaction:()->()) {
 		self.init()
 		self.title		=	title
-		self.reaction	=	reaction
+		self.onAction		=	reaction
 	}
 }
 

@@ -11,14 +11,17 @@
 		4510E85D1B121304005824AB /* SignalGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510E8541B1212F6005824AB /* SignalGraph.framework */; };
 		4510E9DA1B12BE8C005824AB /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510E9D91B12BE8C005824AB /* Command.swift */; };
 		4510E9F61B12C870005824AB /* EditorToolComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510E9E91B12BF78005824AB /* EditorToolComponents.framework */; };
-		451B56141B1B436B006C4879 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B56131B1B436B006C4879 /* Target.swift */; };
 		451B561E1B1B4374006C4879 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561D1B1B4374006C4879 /* Project.swift */; };
 		451B56201B1B437A006C4879 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561F1B1B437A006C4879 /* Workspace.swift */; };
 		4571A74B1B1B761100A7911B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A74A1B1B761100A7911B /* Utility.swift */; };
 		4571A77E1B1CB4AB00A7911B /* Toolbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A77D1B1CB4AB00A7911B /* Toolbox.swift */; };
 		4571A7881B1CB4D500A7911B /* Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A7871B1CB4D500A7911B /* Editing.swift */; };
-		4571A78A1B1CB4EE00A7911B /* Reporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A7891B1CB4EE00A7911B /* Reporting.swift */; };
+		4571A78A1B1CB4EE00A7911B /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A7891B1CB4EE00A7911B /* Console.swift */; };
 		4571A78C1B1CB71900A7911B /* Ownee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A78B1B1CB71900A7911B /* Ownee.swift */; };
+		45DD92A91B1DF8CD00A0BE6A /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD92A81B1DF8CD00A0BE6A /* Debugger.swift */; };
+		45DD92AB1B1DF9E900A0BE6A /* WorkspaceDebuggingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD92AA1B1DF9E900A0BE6A /* WorkspaceDebuggingController.swift */; };
+		45DD92C11B1DFC1600A0BE6A /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD92B61B1DFC1300A0BE6A /* LLDBWrapper.framework */; };
+		45DD930E1B1E08FA00A0BE6A /* EditorDebuggingFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD93071B1E08F200A0BE6A /* EditorDebuggingFeature.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +81,76 @@
 			remoteGlobalIDString = 45C913A51A8C81C700B15F9F;
 			remoteInfo = UnitTests;
 		};
+		45DD92B51B1DFC1300A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45A0FB76199FBA9C0020D59D;
+			remoteInfo = LLDBWrapper;
+		};
+		45DD92B71B1DFC1300A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C993271A6E5D4A00BA2BC4;
+			remoteInfo = Workbench1;
+		};
+		45DD92B91B1DFC1300A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C9934E1A6E5DF700BA2BC4;
+			remoteInfo = SampleProgram3;
+		};
+		45DD92BB1B1DFC1300A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45AED2C51A751B35002F83AB;
+			remoteInfo = SampleProgram4;
+		};
+		45DD92BD1B1DFC1300A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C511511A7954F20055DC1D;
+			remoteInfo = Workbench2;
+		};
+		45DD92BF1B1DFC1300A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E5EF211A7E6817009967D2;
+			remoteInfo = TestdriveApp;
+		};
+		45DD93061B1E08F200A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45EF0B891A6C942600215F12;
+			remoteInfo = EditorDebuggingFeature;
+		};
+		45DD93081B1E08F200A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45EF0BEC1A6C961C00215F12;
+			remoteInfo = WorkbenchApp;
+		};
+		45DD930A1B1E08F200A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45EF0C111A6C965600215F12;
+			remoteInfo = Sample1;
+		};
+		45DD930C1B1E08F200A0BE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 450272071A7F577D008795CC;
+			remoteInfo = WorkbenchApp2;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -87,14 +160,17 @@
 		4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../SignalGraph.Swift/SignalGraph/SignalGraph.xcodeproj; sourceTree = "<group>"; };
 		4510E9D91B12BE8C005824AB /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		4510E9E21B12BF77005824AB /* EditorToolComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorToolComponents.xcodeproj; path = ../EditorToolComponents/EditorToolComponents.xcodeproj; sourceTree = "<group>"; };
-		451B56131B1B436B006C4879 /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		451B561D1B1B4374006C4879 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		451B561F1B1B437A006C4879 /* Workspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		4571A74A1B1B761100A7911B /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		4571A77D1B1CB4AB00A7911B /* Toolbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolbox.swift; sourceTree = "<group>"; };
 		4571A7871B1CB4D500A7911B /* Editing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editing.swift; sourceTree = "<group>"; };
-		4571A7891B1CB4EE00A7911B /* Reporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reporting.swift; sourceTree = "<group>"; };
+		4571A7891B1CB4EE00A7911B /* Console.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
 		4571A78B1B1CB71900A7911B /* Ownee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ownee.swift; sourceTree = "<group>"; };
+		45DD92A81B1DF8CD00A0BE6A /* Debugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
+		45DD92AA1B1DF9E900A0BE6A /* WorkspaceDebuggingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDebuggingController.swift; sourceTree = "<group>"; };
+		45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
+		45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebuggingFeature.xcodeproj; path = ../EditorDebuggingFeature/EditorDebuggingFeature.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +178,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45DD930E1B1E08FA00A0BE6A /* EditorDebuggingFeature.framework in Frameworks */,
+				45DD92C11B1DFC1600A0BE6A /* LLDBWrapper.framework in Frameworks */,
 				4510E9F61B12C870005824AB /* EditorToolComponents.framework in Frameworks */,
 				4510E85D1B121304005824AB /* SignalGraph.framework in Frameworks */,
 			);
@@ -116,6 +194,8 @@
 				4510E8141B12107C005824AB /* EditorModel */,
 				4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */,
 				4510E9E21B12BF77005824AB /* EditorToolComponents.xcodeproj */,
+				45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */,
+				45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */,
 				4510E8131B12107C005824AB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -138,9 +218,10 @@
 				451B561F1B1B437A006C4879 /* Workspace.swift */,
 				4571A7871B1CB4D500A7911B /* Editing.swift */,
 				4571A77D1B1CB4AB00A7911B /* Toolbox.swift */,
-				4571A7891B1CB4EE00A7911B /* Reporting.swift */,
+				45DD92A81B1DF8CD00A0BE6A /* Debugger.swift */,
+				45DD92AA1B1DF9E900A0BE6A /* WorkspaceDebuggingController.swift */,
+				4571A7891B1CB4EE00A7911B /* Console.swift */,
 				451B561D1B1B4374006C4879 /* Project.swift */,
-				451B56131B1B436B006C4879 /* Target.swift */,
 				4571A74A1B1B761100A7911B /* Utility.swift */,
 			);
 			path = EditorModel;
@@ -164,6 +245,30 @@
 				4510E9E91B12BF78005824AB /* EditorToolComponents.framework */,
 				4510E9EB1B12BF78005824AB /* Workbench.app */,
 				4510E9ED1B12BF78005824AB /* UnitTests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45DD92AD1B1DFC1200A0BE6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45DD92B61B1DFC1300A0BE6A /* LLDBWrapper.framework */,
+				45DD92B81B1DFC1300A0BE6A /* Workbench1.app */,
+				45DD92BA1B1DFC1300A0BE6A /* SampleProgram3 */,
+				45DD92BC1B1DFC1300A0BE6A /* SampleProgram4.app */,
+				45DD92BE1B1DFC1300A0BE6A /* Workbench2.app */,
+				45DD92C01B1DFC1300A0BE6A /* TestdriveApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45DD93001B1E08F200A0BE6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45DD93071B1E08F200A0BE6A /* EditorDebuggingFeature.framework */,
+				45DD93091B1E08F200A0BE6A /* WorkbenchApp.app */,
+				45DD930B1B1E08F200A0BE6A /* Sample1 */,
+				45DD930D1B1E08F200A0BE6A /* WorkbenchApp2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -225,8 +330,16 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 45DD93001B1E08F200A0BE6A /* Products */;
+					ProjectRef = 45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */;
+				},
+				{
 					ProductGroup = 4510E9E31B12BF77005824AB /* Products */;
 					ProjectRef = 4510E9E21B12BF77005824AB /* EditorToolComponents.xcodeproj */;
+				},
+				{
+					ProductGroup = 45DD92AD1B1DFC1200A0BE6A /* Products */;
+					ProjectRef = 45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */;
 				},
 				{
 					ProductGroup = 4510E84C1B1212F6005824AB /* Products */;
@@ -297,6 +410,76 @@
 			remoteRef = 4510E9EC1B12BF78005824AB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45DD92B61B1DFC1300A0BE6A /* LLDBWrapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LLDBWrapper.framework;
+			remoteRef = 45DD92B51B1DFC1300A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DD92B81B1DFC1300A0BE6A /* Workbench1.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench1.app;
+			remoteRef = 45DD92B71B1DFC1300A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DD92BA1B1DFC1300A0BE6A /* SampleProgram3 */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SampleProgram3;
+			remoteRef = 45DD92B91B1DFC1300A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DD92BC1B1DFC1300A0BE6A /* SampleProgram4.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SampleProgram4.app;
+			remoteRef = 45DD92BB1B1DFC1300A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DD92BE1B1DFC1300A0BE6A /* Workbench2.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench2.app;
+			remoteRef = 45DD92BD1B1DFC1300A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DD92C01B1DFC1300A0BE6A /* TestdriveApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestdriveApp.app;
+			remoteRef = 45DD92BF1B1DFC1300A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DD93071B1E08F200A0BE6A /* EditorDebuggingFeature.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorDebuggingFeature.framework;
+			remoteRef = 45DD93061B1E08F200A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DD93091B1E08F200A0BE6A /* WorkbenchApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchApp.app;
+			remoteRef = 45DD93081B1E08F200A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DD930B1B1E08F200A0BE6A /* Sample1 */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = Sample1;
+			remoteRef = 45DD930A1B1E08F200A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45DD930D1B1E08F200A0BE6A /* WorkbenchApp2.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchApp2.app;
+			remoteRef = 45DD930C1B1E08F200A0BE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -315,15 +498,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				4571A78C1B1CB71900A7911B /* Ownee.swift in Sources */,
-				451B56141B1B436B006C4879 /* Target.swift in Sources */,
+				45DD92A91B1DF8CD00A0BE6A /* Debugger.swift in Sources */,
 				4510E8381B12124C005824AB /* Repository.swift in Sources */,
 				4571A74B1B1B761100A7911B /* Utility.swift in Sources */,
 				451B56201B1B437A006C4879 /* Workspace.swift in Sources */,
 				4571A7881B1CB4D500A7911B /* Editing.swift in Sources */,
 				4571A77E1B1CB4AB00A7911B /* Toolbox.swift in Sources */,
+				45DD92AB1B1DF9E900A0BE6A /* WorkspaceDebuggingController.swift in Sources */,
 				4510E9DA1B12BE8C005824AB /* Command.swift in Sources */,
 				451B561E1B1B4374006C4879 /* Project.swift in Sources */,
-				4571A78A1B1CB4EE00A7911B /* Reporting.swift in Sources */,
+				4571A78A1B1CB4EE00A7911B /* Console.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  ApplicationController.swift
+//  ApplicationAgent.swift
 //  Editor
 //
 //  Created by Hoon H. on 2015/01/12.
@@ -9,7 +9,7 @@
 import Cocoa
 import EditorCommon
 import EditorUIComponents
-
+import EditorModel
 
 
 
@@ -40,7 +40,8 @@ import EditorUIComponents
 ///	NIBs are just temporal form, and will be replaced by code-driven implementation as soon as I
 ///	finish more important features. Currently it's low on priority.
 @NSApplicationMain
-class ApplicationController: NSObject, NSApplicationDelegate {
+class ApplicationAgent: NSObject, NSApplicationDelegate {
+	
 	
 	@IBOutlet
 	var projectMenu:NSMenuItem?
@@ -63,7 +64,7 @@ class ApplicationController: NSObject, NSApplicationDelegate {
 
 
 
-private final class DefaultMenuControllerPalette {
+final class DefaultMenuControllerPalette {
 	static let	project	=	ProjectMenuController()
 	static let	debug	=	DebugMenuController()
 }
@@ -79,7 +80,7 @@ private final class DefaultMenuControllerPalette {
 
 ///	MARK:
 ///	MARK:	Application Lifecycle Management
-extension ApplicationController {
+extension ApplicationAgent {
 	
 	func applicationWillFinishLaunching(notification: NSNotification) {
 		NSUserDefaults.standardUserDefaults().setBool(true, forKey: "NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints")
@@ -97,7 +98,7 @@ extension ApplicationController {
 			object: NSApplication.sharedApplication().mainMenu!,
 			queue: nil) { (n:NSNotification!) -> Void in
 				let	docc	=	NSDocumentController.sharedDocumentController() as! NSDocumentController
-				let	ws		=	docc.currentDocument as? WorkspaceDocument
+				let	ws	=	docc.currentDocument as? WorkspaceDocument
 				
 				rebind(self.projectMenu!, ws?.projectMenuController ?? DefaultMenuControllerPalette.project)
 				rebind(self.debugMenu!, ws?.debugMenuController ?? DefaultMenuControllerPalette.debug)
@@ -124,7 +125,7 @@ extension ApplicationController {
 
 ///	MARK:
 ///	MARK:	Document Handling
-extension ApplicationController {
+extension ApplicationAgent {
 	func applicationShouldOpenUntitledFile(sender: NSApplication) -> Bool {
 		return	false
 	}
@@ -149,7 +150,7 @@ extension ApplicationController {
 ///	"Open" always opens an existing workspace. There's no concept of opening a data file.
 ///	"Save" family menus save currently editing data file.
 ///
-extension ApplicationController {
+extension ApplicationAgent {
 	
 	///	Creates a new workspace.
 	///	User will be asked to select a directory to store new workspace.

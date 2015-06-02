@@ -13,32 +13,22 @@ public class Workspace {
 	
 	public init(rootDirectoryURL: NSURL) {
 		_rootdir	=	EditableValueStorage(rootDirectoryURL)
-	}
-	public var repository: Repository {
-		get {
-			return	owner!
-		}
+		
+		debugger.owner	=	self
+		console.owner	=	self
 	}
 	public var rootDirectoryURL: ValueStorage<NSURL> {
 		get {
 			return	_rootdir
 		}
 	}
-	public var report: Console {
-		get {
-			return	_report
-		}
-	}
+	
+	public let	debugger	=	Debugger()
+	public let	console		=	Console()
 	
 	///
 	
-	internal typealias	Owner	=	Repository
-	internal weak var	owner	:	Owner?
-	
-	///
-	
-	private let	_rootdir	:	EditableValueStorage<NSURL>
-	private let	_report		=	Console()
+	private let		_rootdir	:	EditableValueStorage<NSURL>
 	
 //	public init(rootURL: NSURL) {
 //		func TEMP_ADHOC_getTargetName() -> String? {

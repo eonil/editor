@@ -230,7 +230,7 @@ private struct IssueIconPalette {
 
 private extension NSImage {
 	func templatize() -> NSImage {
-		let	m	=	self.copy() as! NSImage
+		let	m	=	self.mutableCopy() as! NSImage
 		m.setTemplate(true)
 		return	m
 	}

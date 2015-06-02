@@ -19,6 +19,7 @@ import EditorDebuggingFeature
 
 ///	Take care that there can be multiple sessions.
 ///	You can check currently running sessions using `WorkspaceDebuggingController.numberOfSessions`.
+@availability(*,deprecated=0)
 protocol WorkspaceDebuggingControllerDelegate: class {
 	func workspaceDebuggingControllerDidLaunchSession()
 	func workspaceDebuggingControllerDidTerminateSession()
@@ -28,6 +29,7 @@ protocol WorkspaceDebuggingControllerDelegate: class {
 
 
 
+@availability(*,deprecated=0)
 final class WorkspaceDebuggingController {
 	weak var delegate:WorkspaceDebuggingControllerDelegate?
 	weak var executionTreeViewController:ExecutionStateTreeViewController?
@@ -168,7 +170,6 @@ extension WorkspaceDebuggingController.Session: ListenerControllerDelegate {
 
 
 
-
 private extension DebugMenuController {
 	func reconfigureAvailabilitiesForDebugger(debugger:LLDBDebugger) {
 		stepOver.enabled	=	false
@@ -204,13 +205,13 @@ private extension DebugMenuController {
 			return	nil
 		}
 		
-		stepOver.reaction	=	{
+		stepOver.onAction	=	{
 			findFirstBreakpointStopThread(owner._dbg)?.stepOver()
 		}
-		stepInto.reaction	=	{
+		stepInto.onAction	=	{
 			findFirstBreakpointStopThread(owner._dbg)?.stepInto()
 		}
-		stepOut.reaction	=	{
+		stepOut.onAction		=	{
 			findFirstBreakpointStopThread(owner._dbg)?.stepOut()
 		}
 	}

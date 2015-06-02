@@ -9,12 +9,13 @@
 import Foundation
 import AppKit
 import EditorUIComponents
+import EditorModel
 
 //
 //	Dynamic Menus
 //	-------------
 //
-//	`ApplicationController` is responsible to manage dynamic state of all menus.
+//	`ApplicationAgent` is responsible to manage dynamic state of all menus.
 //	See implementation of the class for details.
 //
 
@@ -27,7 +28,7 @@ import EditorUIComponents
 
 
 class ProjectMenuController: MenuController {
-	let	run			=	NSMenuItem(title: "Run", shortcut: Command+"r")
+	let	run		=	NSMenuItem(title: "Run", shortcut: Command+"r")
 	let	test		=	NSMenuItem(title: "Test", shortcut: Command+"u")
 	let	documentate	=	NSMenuItem(title: "Documentate", shortcut: None)
 	let	benchmark	=	NSMenuItem(title: "Benchmark", shortcut: None)
@@ -70,4 +71,27 @@ final class DebugMenuController: MenuController {
 		]
 		super.init(m)
 	}
+	
+	func reconfigureWithModelState(s: Set<Debugger.Command>) {
+		MenuController.menuOfController(self).allMenuItems.map({ $0.enabled = false })
+		for c in s {
+			switch c {
+			case .StepOver:
+				stepOver.enabled	=	true
+			case .StepInto:
+				stepInto.enabled	=	true
+			case .StepOut:
+				stepOut.enabled		=	true
+			}
+		}
+	}
 }
+
+
+
+
+
+
+
+
+

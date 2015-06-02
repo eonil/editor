@@ -1,5 +1,5 @@
 //
-//  Reporting.swift
+//  Console.swift
 //  EditorModel
 //
 //  Created by Hoon H. on 2015/06/02.
@@ -12,6 +12,11 @@ import EditorToolComponents
 
 public class Console {
 	
+	public var workspace: Workspace {
+		get {
+			return	owner!
+		}
+	}
 	public var issues: ArrayStorage<Issue> {
 		get {
 			return	_issues
@@ -19,10 +24,10 @@ public class Console {
 	}
 	
 	///	History of input command and result output.
-	///	This is byte-stream and mostly UTF-8 encoded string
-	///	but not guaranteed to be.
+	///	This is a collection of lines. New-line
+	///	character are stripped away.
 	///
-	public var history: ArrayStorage<UInt8> {
+	public var history: ArrayStorage<String> {
 		get {
 			return	_history
 		}
@@ -37,15 +42,19 @@ public class Console {
 	
 	///
 	
-	internal weak var	_ownerRepository	:	Repository?
+	internal weak var	owner		:	Workspace?
 	
 	internal init() {	
+	}
+	
+	internal func extendHistory(lines: [String]) {
+		_history.extend(lines)
 	}
 	
 	///
 	
 	private let		_issues			=	EditableArrayStorage<Issue>([])
-	private let		_history		=	EditableArrayStorage<UInt8>([])
+	private let		_history		=	EditableArrayStorage<String>([])
 }
 
 

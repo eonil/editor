@@ -23,6 +23,8 @@ import EditorDebuggingFeature
 ///	Manages interaction with Cocoa document system.
 final class WorkspaceDocument: NSDocument {
 	
+	private var	_model		:	Workspace?
+	
 	override init() {
 		super.init()
 		
@@ -124,6 +126,8 @@ extension WorkspaceDocument {
 		assert(internals!.mainWindowController.fileNavigationViewController.delegate != nil)
 		
 		let	u2	=	self.fileURL!.URLByDeletingLastPathComponent!
+		
+		_model		=	Workspace(rootDirectoryURL: u2)
 		
 		_rootLocation	=	FileLocation(u2)
 		internals!.mainWindowController.fileNavigationViewController.URLRepresentation	=	u2
@@ -246,16 +250,16 @@ extension WorkspaceDocument {
 
 private extension ProjectMenuController {
 	func reconfigureForWorkspaceInternals(internals:InternalController) {
-		build.reaction	=	{ [unowned self, unowned internals] in
+		build.onAction	=	{ [unowned self, unowned internals] in
 			internals.buildWorkspace()
 		}
-		run.reaction	=	{ [unowned self, unowned internals] in
+		run.onAction	=	{ [unowned self, unowned internals] in
 			internals.runWorkspace()
 		}
-		clean.reaction	=	{ [unowned self, unowned internals] in
+		clean.onAction	=	{ [unowned self, unowned internals] in
 			internals.cleanWorkspace()
 		}
-		stop.reaction	=	{ [unowned self, unowned internals] in
+		stop.onAction	=	{ [unowned self, unowned internals] in
 			internals.stopWorkspace()
 		}
 
@@ -378,11 +382,11 @@ extension WorkspaceDocument {
 
 ///	Hardly-coupled internal subcomponent controller.
 private final class InternalController {
-	unowned let		owner					:	WorkspaceDocument
+	unowned let		owner				:	WorkspaceDocument
 	
 	let				mainWindowController	=	WorkspaceMainWindowController()
-	let				debuggingController		=	WorkspaceDebuggingController()
-	let				commandQueue			=	WorkspaceCommandExecutionController()
+	let				debuggingController	=	WorkspaceDebuggingController()
+	let				commandQueue		=	WorkspaceCommandExecutionController()
 	let				projectMenuController	=	ProjectMenuController()
 	
 	private var		fileSystemMonitor		=	nil as FileSystemEventMonitor?

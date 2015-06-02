@@ -133,13 +133,14 @@ public class Cargo {
 	private class CargoAgent: CargoExecutionControllerDelegate {
 		weak var owner	:	Cargo?
 		func cargoExecutionControllerDidPrintMessage(s:String) {
-			owner!.tools.workspace
+			let	lines	=	split(s, maxSplit: Int.max, allowEmptySlices: true, isSeparator: { $0 == "\n" })
+			owner!.tools.workspace.console.extendHistory(lines)
 		}
 		func cargoExecutionControllerDidDiscoverRustCompilationIssue(issue:RustCompilerIssue) {
-			owner!.tools
+			owner!.tools.workspace.console.extendHistory([issue.description])
 		}
 		func cargoExecutionControllerRemoteProcessDidTerminate() {
-			
+			owner!.tools.workspace.console.extendHistory([""])
 		}
 	}
 }
