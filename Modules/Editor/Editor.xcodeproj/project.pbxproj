@@ -125,6 +125,125 @@
 			remoteGlobalIDString = 459727F11A0F29580097454C;
 			remoteInfo = ProfilingExampleOSX;
 		};
+		45D4B9981B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D970A61A1569090037649F;
+			remoteInfo = EonilFileSystemEvents;
+		};
+		45D4B99A1B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D970961A155DD50037649F;
+			remoteInfo = InternalTester;
+		};
+		45D4B99C1B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45DA95801A69F1610091410B;
+			remoteInfo = InternalTester4;
+		};
+		45D4B99E1B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45BF99C51A131E3A004E4E2E;
+			remoteInfo = TestdriveApp;
+		};
+		45D4B9AC1B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45F25A321A81E20500D1D9F8 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45A0FB76199FBA9C0020D59D;
+			remoteInfo = LLDBWrapper;
+		};
+		45D4B9AE1B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45F25A321A81E20500D1D9F8 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C993271A6E5D4A00BA2BC4;
+			remoteInfo = Workbench1;
+		};
+		45D4B9B01B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45F25A321A81E20500D1D9F8 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C9934E1A6E5DF700BA2BC4;
+			remoteInfo = SampleProgram3;
+		};
+		45D4B9B21B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45F25A321A81E20500D1D9F8 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45AED2C51A751B35002F83AB;
+			remoteInfo = SampleProgram4;
+		};
+		45D4B9B41B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45F25A321A81E20500D1D9F8 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C511511A7954F20055DC1D;
+			remoteInfo = Workbench2;
+		};
+		45D4B9B61B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45F25A321A81E20500D1D9F8 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E5EF211A7E6817009967D2;
+			remoteInfo = TestdriveApp;
+		};
+		45D4B9BA1B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45CBA4021A63FD21007A377E;
+			remoteInfo = PseudoTeletypewriter;
+		};
+		45D4B9BC1B1F35600083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45CBA42D1A63FD77007A377E;
+			remoteInfo = Test2;
+		};
+		45D4B9DC1B1F357F0083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D934E41AFE4228000EE661;
+			remoteInfo = SignalGraph;
+		};
+		45D4B9DE1B1F357F0083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4563E0651AF8FCA800AA9EA6;
+			remoteInfo = SignalGraphMobile;
+		};
+		45D4B9E01B1F357F0083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4503AE2B1AFDB3D0006AB1F0;
+			remoteInfo = SignalGraphMobileTest;
+		};
+		45D4B9E21B1F357F0083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459D96AE1AFE52D3006AF2C0;
+			remoteInfo = SignalGraphAppKitAddon;
+		};
+		45D4B9E41B1F357F0083FE6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45BE34121B0CC02D0029B752;
+			remoteInfo = OSXTestdriveApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -637,6 +756,51 @@
 			path = Presets;
 			sourceTree = "<group>";
 		};
+		45D4B98E1B1F35600083FE6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45D4B9991B1F35600083FE6A /* EonilFileSystemEvents.framework */,
+				45D4B99B1B1F35600083FE6A /* InternalTester */,
+				45D4B99D1B1F35600083FE6A /* InternalTester4.app */,
+				45D4B99F1B1F35600083FE6A /* TestdriveApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45D4B9901B1F35600083FE6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45D4B9AD1B1F35600083FE6A /* LLDBWrapper.framework */,
+				45D4B9AF1B1F35600083FE6A /* Workbench1.app */,
+				45D4B9B11B1F35600083FE6A /* SampleProgram3 */,
+				45D4B9B31B1F35600083FE6A /* SampleProgram4.app */,
+				45D4B9B51B1F35600083FE6A /* Workbench2.app */,
+				45D4B9B71B1F35600083FE6A /* TestdriveApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45D4B9921B1F35600083FE6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45D4B9BB1B1F35600083FE6A /* PseudoTeletypewriter.framework */,
+				45D4B9BD1B1F35600083FE6A /* Test2.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45D4B9C31B1F357F0083FE6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45D4B9DD1B1F357F0083FE6A /* SignalGraph.framework */,
+				45D4B9DF1B1F357F0083FE6A /* SignalGraphMobile.framework */,
+				45D4B9E11B1F357F0083FE6A /* SignalGraphMobileTest.xctest */,
+				45D4B9E31B1F357F0083FE6A /* SignalGraphAppKitAddon.framework */,
+				45D4B9E51B1F357F0083FE6A /* OSXTestdriveApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45F6C1111A11959C005D8EEA /* CommandConsole */ = {
 			isa = PBXGroup;
 			children = (
@@ -713,8 +877,24 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 45D4B98E1B1F35600083FE6A /* Products */;
+					ProjectRef = 45D970DD1A1573F50037649F /* EonilFileSystemEvents.xcodeproj */;
+				},
+				{
 					ProductGroup = 4513F7181B1F33B800960EF5 /* Products */;
 					ProjectRef = 4509EF0B1B1B151200C3E71C /* EonilSQLite3.xcodeproj */;
+				},
+				{
+					ProductGroup = 45D4B9901B1F35600083FE6A /* Products */;
+					ProjectRef = 45F25A321A81E20500D1D9F8 /* LLDBWrapper.xcodeproj */;
+				},
+				{
+					ProductGroup = 45D4B9921B1F35600083FE6A /* Products */;
+					ProjectRef = 4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */;
+				},
+				{
+					ProductGroup = 45D4B9C31B1F357F0083FE6A /* Products */;
+					ProjectRef = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -766,6 +946,125 @@
 			fileType = wrapper.application;
 			path = ProfilingExampleOSX.app;
 			remoteRef = 4513F72A1B1F33B900960EF5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9991B1F35600083FE6A /* EonilFileSystemEvents.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilFileSystemEvents.framework;
+			remoteRef = 45D4B9981B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B99B1B1F35600083FE6A /* InternalTester */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = InternalTester;
+			remoteRef = 45D4B99A1B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B99D1B1F35600083FE6A /* InternalTester4.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = InternalTester4.app;
+			remoteRef = 45D4B99C1B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B99F1B1F35600083FE6A /* TestdriveApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestdriveApp.app;
+			remoteRef = 45D4B99E1B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9AD1B1F35600083FE6A /* LLDBWrapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LLDBWrapper.framework;
+			remoteRef = 45D4B9AC1B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9AF1B1F35600083FE6A /* Workbench1.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench1.app;
+			remoteRef = 45D4B9AE1B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9B11B1F35600083FE6A /* SampleProgram3 */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SampleProgram3;
+			remoteRef = 45D4B9B01B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9B31B1F35600083FE6A /* SampleProgram4.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SampleProgram4.app;
+			remoteRef = 45D4B9B21B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9B51B1F35600083FE6A /* Workbench2.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench2.app;
+			remoteRef = 45D4B9B41B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9B71B1F35600083FE6A /* TestdriveApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestdriveApp.app;
+			remoteRef = 45D4B9B61B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9BB1B1F35600083FE6A /* PseudoTeletypewriter.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PseudoTeletypewriter.framework;
+			remoteRef = 45D4B9BA1B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9BD1B1F35600083FE6A /* Test2.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Test2.app;
+			remoteRef = 45D4B9BC1B1F35600083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9DD1B1F357F0083FE6A /* SignalGraph.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignalGraph.framework;
+			remoteRef = 45D4B9DC1B1F357F0083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9DF1B1F357F0083FE6A /* SignalGraphMobile.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignalGraphMobile.framework;
+			remoteRef = 45D4B9DE1B1F357F0083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9E11B1F357F0083FE6A /* SignalGraphMobileTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphMobileTest.xctest;
+			remoteRef = 45D4B9E01B1F357F0083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9E31B1F357F0083FE6A /* SignalGraphAppKitAddon.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignalGraphAppKitAddon.framework;
+			remoteRef = 45D4B9E21B1F357F0083FE6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45D4B9E51B1F357F0083FE6A /* OSXTestdriveApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = OSXTestdriveApp.app;
+			remoteRef = 45D4B9E41B1F357F0083FE6A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

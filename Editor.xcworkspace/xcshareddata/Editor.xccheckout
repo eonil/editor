@@ -10,6 +10,8 @@
 	<string>Editor</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>FBB6F2B2029C41EB36C6216F39D46AC69FF785A0</key>
+		<string>https://github.com/Eonil/SignalGraph.Swift</string>
 		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
 		<string>https://github.com/Eonil/Editor</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>Editor.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>FBB6F2B2029C41EB36C6216F39D46AC69FF785A0</key>
+		<string>../Submodules/SignalGraph.Swift/</string>
 		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
 		<string>..</string>
 	</dict>
@@ -35,6 +39,14 @@
 			<string>FC8DBBA953E548D205F88EA925028C0D6DA341F0</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Editor</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>FBB6F2B2029C41EB36C6216F39D46AC69FF785A0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SignalGraph.Swift</string>
 		</dict>
 	</array>
 </dict>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0610"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -17,21 +17,7 @@
                BlueprintIdentifier = "45BBB0E31A1022A10055232E"
                BuildableName = "Editor.app"
                BlueprintName = "Editor"
-               ReferencedContainer = "container:Project/Editor.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45F48F231A65E1D100FF38FB"
-               BuildableName = "EditorFileTreeNavigationFeatureTests.xctest"
-               BlueprintName = "EditorFileTreeNavigationFeatureTests"
-               ReferencedContainer = "container:Project/Editor.xcodeproj">
+               ReferencedContainer = "container:Modules/Editor/Editor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45F48F231A65E1D100FF38FB"
-               BuildableName = "EditorFileTreeNavigationFeatureTests.xctest"
-               BlueprintName = "EditorFileTreeNavigationFeatureTests"
-               ReferencedContainer = "container:Project/Editor.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -59,7 +35,7 @@
             BlueprintIdentifier = "45BBB0E31A1022A10055232E"
             BuildableName = "Editor.app"
             BlueprintName = "Editor"
-            ReferencedContainer = "container:Project/Editor.xcodeproj">
+            ReferencedContainer = "container:Modules/Editor/Editor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -72,13 +48,14 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45BBB0E31A1022A10055232E"
             BuildableName = "Editor.app"
             BlueprintName = "Editor"
-            ReferencedContainer = "container:Project/Editor.xcodeproj">
+            ReferencedContainer = "container:Modules/Editor/Editor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -90,13 +67,14 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45BBB0E31A1022A10055232E"
             BuildableName = "Editor.app"
             BlueprintName = "Editor"
-            ReferencedContainer = "container:Project/Editor.xcodeproj">
+            ReferencedContainer = "container:Modules/Editor/Editor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
