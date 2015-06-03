@@ -24,6 +24,7 @@ import EditorDebuggingFeature
 final class WorkspaceDocument: NSDocument {
 	
 	private var	_model		:	Workspace?
+	private var	_menureconf	:	WorkspaceMenuReconfigurator?
 	
 	override init() {
 		super.init()
@@ -128,6 +129,7 @@ extension WorkspaceDocument {
 		let	u2	=	self.fileURL!.URLByDeletingLastPathComponent!
 		
 		_model		=	Workspace(rootDirectoryURL: u2)
+		_menureconf	=	WorkspaceMenuReconfigurator(workspace: _model!)
 		
 		_rootLocation	=	FileLocation(u2)
 		internals!.mainWindowController.fileNavigationViewController.URLRepresentation	=	u2

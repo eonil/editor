@@ -11,17 +11,17 @@
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
-		<string>https://github.com/Eonil/Editor.git</string>
+		<string>https://github.com/Eonil/Editor</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Project/Editor.xcodeproj</string>
+	<string>Editor.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
-		<string>../../..</string>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/Eonil/Editor.git</string>
+	<string>https://github.com/Eonil/Editor</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>

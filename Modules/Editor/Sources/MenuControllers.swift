@@ -53,6 +53,26 @@ class ProjectMenuController: MenuController {
 		]
 		super.init(m)
 	}
+	
+	func reconfigureWithModelState(s: Set<Cargo.Command>) {
+		MenuController.menuOfController(self).allMenuItems.map({ $0.enabled = false })
+		for c in s {
+			switch c {
+			case .Clean:
+				clean.enabled		=	true;
+			case .Build:
+				build.enabled		=	true;
+			case .Launch:
+				run.enabled		=	true;
+			case .Documentate:
+				documentate.enabled	=	true;
+			case .Test:
+				test.enabled		=	true;
+			case .Benchmark:
+				benchmark.enabled	=	true;
+			}
+		}
+	}
 }
 
 final class DebugMenuController: MenuController {

@@ -10,7 +10,6 @@ COMMIT="HEAD"
 
 
 
-cd Project
 cd Modules
 
 # Delete.

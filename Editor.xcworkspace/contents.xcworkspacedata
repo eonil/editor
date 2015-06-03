@@ -20,6 +20,6 @@
       location = "group:Preview.png">
    </FileRef>
    <FileRef
-      location = "container:Project/Editor.xcodeproj">
+      location = "group:/Users/Eonil/Workshop/Incubation/Editor/Sources/Modules/EditorApplication/Editor.xcodeproj">
    </FileRef>
 </Workspace>

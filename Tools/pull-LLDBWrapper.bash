@@ -7,7 +7,6 @@ COMMIT="9e8770dd675c1b17f1dbce87612e2e93f7d695f9"
 
 
 
-cd Project
 cd Modules
 
 # Delete.

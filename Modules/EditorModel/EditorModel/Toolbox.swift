@@ -71,11 +71,20 @@ public class Cargo {
 		case Clean
 		case Build
 		case Launch
+		case Documentate
+		case Test
+		case Benchmark
 	}
 	
 	public var tools: Tools {
 		get {
 			return	owner!
+		}
+	}
+	
+	public var availableCommands: ValueStorage<Set<Command>> {
+		get {
+			return	_availableCommands
 		}
 	}
 	public var running: ValueStorage<Command?> {
@@ -104,11 +113,12 @@ public class Cargo {
 	
 	///
 	
-	private let	_running	=	EditableValueStorage<Command?>(nil)
-	private let	_waitings	=	EditableArrayStorage<Command>([])
+	private let	_availableCommands	=	EditableValueStorage<Set<Command>>([])
+	private let	_running		=	EditableValueStorage<Command?>(nil)
+	private let	_waitings		=	EditableArrayStorage<Command>([])
 	
-	private var	_cargoExecution	:	CargoExecutionController?
-	private let	_cargoAgent	=	CargoAgent()
+	private var	_cargoExecution		:	CargoExecutionController?
+	private let	_cargoAgent		=	CargoAgent()
 	
 	private func _execute(cmd: Command) {
 		assert(_cargoExecution == nil)
@@ -116,6 +126,8 @@ public class Cargo {
 		let	exe	=	CargoExecutionController()
 		let	u	=	tools.workspace.rootDirectoryURL.state
 		exe.delegate	=	_cargoAgent
+		
+		_running.state	=	cmd
 		
 		switch cmd {
 		case .Clean:
@@ -126,8 +138,23 @@ public class Cargo {
 			
 		case .Launch:
 			exe.launchRun(workingDirectoryURL: u)
+		
+		case .Documentate:
+			assert(false, "Unimplemented yet.")
+			break
 			
+		case .Test:
+			assert(false, "Unimplemented yet.")
+			break
+			
+		case .Benchmark:
+			assert(false, "Unimplemented yet.")
+			break
 		}
+	}
+	
+	private func resetAvailableCommands() {
+		_availableCommands.state	=	[.Clean, .Build, .Launch]
 	}
 	
 	private class CargoAgent: CargoExecutionControllerDelegate {
@@ -141,6 +168,8 @@ public class Cargo {
 		}
 		func cargoExecutionControllerRemoteProcessDidTerminate() {
 			owner!.tools.workspace.console.extendHistory([""])
+			owner!._running.state	=	nil
+			owner!.resetAvailableCommands()
 		}
 	}
 }
