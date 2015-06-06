@@ -15,14 +15,14 @@ import EditorDebuggingFeature
 public class Debugger {
 	
 	public enum Command {
-//		case Launch
-//		case Halt
+		case Launch
+		case Halt
 		case StepOver
 		case StepInto
 		case StepOut
 	}
 	
-	public var targets: ArrayStorage<Target> {
+	public var targets: DictionaryStorage<NSURL, Target> {
 		get {
 			return	_targets
 		}
@@ -34,36 +34,94 @@ public class Debugger {
 		}
 	}
 	
-	public func addTargetWithURL(u: NSURL) {
-		let	t1	=	_lldbdebugger.createTargetWithFilename(u.path!)!
-		let	wdir	=	u.URLByDeletingLastPathComponent!
-		let	t	=	Target(workingDirectoryURL: wdir, LLDBTarget: t1)
-		_targets.append(t)
+	public func execute(command: Command) {
+		_executeImpl(command)
 	}
-//	public func removeTargetWithURL(u: NSURL) {
-//		
-//	}
 	
 	///	MARK:	-	
 	
-	internal weak var	owner		:	Workspace?
+	internal weak var owner: Workspace? {
+		willSet {
+			if let _ = owner {
+				_teardown()
+			}
+		}
+		didSet {
+			if let _ = owner {
+				_setup()
+			}
+		}
+	}
 	
 	internal init() {
-		
+		_resetAvailableCommands()
 	}
 	
 	///	MARK:	-	
 	
 	private let	_lldbdebugger		=	LLDBDebugger()
-	private let	_targets		=	EditableArrayStorage<Target>([])
+	private let	_targets		=	EditableDictionaryStorage<NSURL, Target>([:])
+	private let	_selectedTarget		=	EditableValueStorage<Target?>(nil)
 	private let	_availableCommands	=	EditableValueStorage<Set<Command>>(Set())
 	
-	private func execute(c: Command) {
-		assert(_availableCommands.state.contains(c))
-		
-		
+	private func _resetAvailableCommands() {
+		_availableCommands.state	=	[.Launch]
+	}
+	private func _executeImpl(c: Command) {
+		assert(availableCommands.state.contains(c))
+		assert(_selectedTarget.state != nil)
+		if let t = _selectedTarget.state {
+			switch c {
+			case .Launch:		t.launch()
+			case .Halt:		t.halt()
+			case .StepOver:		t.stepOver()
+			case .StepInto:		t.stepInto()
+			case .StepOut:		t.stepOut()
+			}
+		}
 	}
 	
+	private func _setup() {
+		if let u = _defaultTargetExecutableURL() {
+			_installTargetWithURL(u)
+		}
+	}
+	
+	private func _teardown() {
+		//	So, default-target-executable-URL shouldn't be changed
+		//	while a referencing target is alive.
+		//	If you have to change it, you must recreate the target.
+		if let u = _defaultTargetExecutableURL() {
+			_deinstallTargetWithURL(u)
+		}
+	}
+	
+	private func _defaultTargetExecutableURL() -> NSURL? {
+		assert(owner != nil)
+		let	u	=	owner!.rootDirectoryURL.state
+		let	n	=	queryCargoAtDirectoryURL(u, "package.name")!
+		let	u1	=	u.URLByAppendingPathComponent("target")
+		let	u2	=	u1.URLByAppendingPathComponent("debug")
+		let	u3	=	u2.URLByAppendingPathComponent(n)
+		return	u3
+	}
+	
+	private func _installTargetWithURL(u: NSURL) {
+		let	t1	=	_lldbdebugger.createTargetWithFilename(u.path!)!
+		let	wdir	=	u.URLByDeletingLastPathComponent!
+		let	t	=	Target(workingDirectoryURL: wdir, LLDBTarget: t1)
+		_targets[u]	=	t
+		t.owner		=	self
+	}
+	
+	private func _deinstallTargetWithURL(u: NSURL) {
+		assert(_targets[u] != nil)
+		if let t = _targets[u] {
+			t.halt()
+			_targets.removeValueForKey(u)
+			t.owner	=	nil
+		}
+	}
 }
 
 public class Target {
@@ -116,6 +174,8 @@ public class Target {
 		
 		_lldbprocess			=	_lldbtarget.launchProcessSimplyWithWorkingDirectory(_workingDir.path!)
 		_lldbprocess!.addListener(_listenControl.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
+		
+		resetAvailableCommands()
 	}
 	deinit {
 		_lldbprocess!.removeListener(_listenControl.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
@@ -126,6 +186,12 @@ public class Target {
 		_listenControl.stopListening()
 		_listenControl.delegate		=	nil
 		_listenAgent.owner		=	nil
+	}
+	
+	internal var availableCommands: ValueStorage<Set<Debugger.Command>> {
+		get {
+			return	_available_cmds
+		}
 	}
 	
 	///	MARK:	-
@@ -140,6 +206,8 @@ public class Target {
 	private let		_stackFrames	=	EditableValueStorage<ExecutionStateTreeViewController.Snapshot?>(nil)
 	private let		_localVariables	=	EditableValueStorage<VariableTreeViewController.Snapshot?>(nil)
 	
+	private let		_available_cmds	=	EditableValueStorage<Set<Debugger.Command>>([])
+	
 	private func findFirstBreakpointStopThread() -> LLDBThread? {
 		assert(_lldbprocess != nil)
 		for t2 in _lldbprocess!.allThreads {
@@ -151,6 +219,10 @@ public class Target {
 			}
 		}
 		return	nil
+	}
+	
+	private func resetAvailableCommands() {
+		_available_cmds.state		=	resolveAvailableCommandsForProcessState(_lldbprocess!)
 	}
 	
 	private func onEvent(e: LLDBEvent) {
@@ -169,7 +241,7 @@ public class Target {
 			}
 		}
 		
-		debugger._availableCommands.state	=	resolveAvailableCommandsForProcessState(_lldbprocess!)
+		resetAvailableCommands()
 	}
 }
 
@@ -200,7 +272,7 @@ private func resolveAvailableCommandsForProcessState(p: LLDBProcess) -> Set<Debu
 	case LLDBStateType.Launching:	return	[]
 	case LLDBStateType.Stepping:	return	[]
 	case LLDBStateType.Running:	return	[]
-	default:			return	[.StepOver, .StepInto, .StepOut]
+	default:			return	[.Launch, .Halt, .StepOver, .StepInto, .StepOut]
 	}
 }
 

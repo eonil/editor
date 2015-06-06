@@ -11,6 +11,8 @@
 		4510E9D81B12BD47005824AB /* CandidateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510E9D61B12BD47005824AB /* CandidateViewController.swift */; };
 		4510EA821B12CE0A005824AB /* RustAutocompletionWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510EA811B12CE0A005824AB /* RustAutocompletionWindowController.swift */; };
 		4510EA841B130FC9005824AB /* AutocompletionUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510EA831B130FC9005824AB /* AutocompletionUI.swift */; };
+		4567DB9C1B1F3A58003E26CD /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510EA8A1B131002005824AB /* EditorModel.framework */; };
+		459C6F971B1F399E00B9AA6D /* EditorToolComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510EA921B131008005824AB /* EditorToolComponents.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4567DB9C1B1F3A58003E26CD /* EditorModel.framework in Frameworks */,
+				459C6F971B1F399E00B9AA6D /* EditorToolComponents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,8 @@ public class Workspace {
 	public init(rootDirectoryURL: NSURL) {
 		_rootdir	=	EditableValueStorage(rootDirectoryURL)
 		
-		tools.owner	=	self
+		editing.owner	=	self
+		toolbox.owner	=	self
 		debugger.owner	=	self
 		console.owner	=	self
 	}
@@ -24,7 +25,8 @@ public class Workspace {
 		}
 	}
 	
-	public let	tools		=	Tools()
+	public let	editing		=	Editing()
+	public let	toolbox		=	Toolbox()
 	public let	debugger	=	Debugger()
 	public let	console		=	Console()
 	

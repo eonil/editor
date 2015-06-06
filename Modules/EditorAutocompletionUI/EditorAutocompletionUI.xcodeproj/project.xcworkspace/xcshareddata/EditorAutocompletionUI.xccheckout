@@ -5,9 +5,9 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>D2043735-8F7E-46B3-9E7B-6996FD386251</string>
+	<string>9A9FFF8B-CF22-450B-B448-A9ECD23546E5</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Editor</string>
+	<string>EditorAutocompletionUI</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>FBB6F2B2029C41EB36C6216F39D46AC69FF785A0</key>
@@ -16,13 +16,13 @@
 		<string>https://github.com/Eonil/Editor</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Editor.xcworkspace</string>
+	<string>Modules/EditorAutocompletionUI/EditorAutocompletionUI.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>FBB6F2B2029C41EB36C6216F39D46AC69FF785A0</key>
-		<string>../Submodules/SignalGraph.Swift</string>
+		<string>../../../..Submodules/SignalGraph.Swift/</string>
 		<key>FC8DBBA953E548D205F88EA925028C0D6DA341F0</key>
-		<string>..</string>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Eonil/Editor</string>

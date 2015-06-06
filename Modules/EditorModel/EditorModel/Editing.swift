@@ -11,16 +11,10 @@ import SignalGraph
 
 public class Editing {
 	public let		currentFileURL	=	EditableValueStorage<NSURL?>(nil)
-	public let		selection	=	Selection()
-}
-
-public class Selection {
-	public var editingFileURL: ValueStorage<NSURL?> {
-		get {
-			return	_editing
-		}
-	}
 	
-	private let	_editing	=	EditableValueStorage<NSURL?>(nil)
+	///	MARK:	-
+	
+	internal weak var owner	:	Workspace?
+	internal init() {
+	}
 }
-

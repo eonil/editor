@@ -23,8 +23,14 @@ import EditorDebuggingFeature
 ///	Manages interaction with Cocoa document system.
 final class WorkspaceDocument: NSDocument {
 	
+	var model: Workspace {
+		get {
+			return	_model!
+		}
+	}
+	
 	private var	_model		:	Workspace?
-	private var	_menureconf	:	WorkspaceMenuReconfigurator?
+//	private var	_menureconf	:	WorkspaceMenuReconfigurator?
 	
 	override init() {
 		super.init()
@@ -33,16 +39,16 @@ final class WorkspaceDocument: NSDocument {
 		
 	}
 	
-	var projectMenuController:MenuController {
-		get {
-			return	internals!.projectMenuController
-		}
-	}
-	var debugMenuController:MenuController {
-		get {
-			return	internals!.debuggingController.menuController
-		}
-	}
+//	var projectMenuController:MenuController {
+//		get {
+//			return	internals!.projectMenuController
+//		}
+//	}
+//	var debugMenuController:MenuController {
+//		get {
+//			return	internals!.debuggingController.menuController
+//		}
+//	}
 	
 	
 	
@@ -129,7 +135,7 @@ extension WorkspaceDocument {
 		let	u2	=	self.fileURL!.URLByDeletingLastPathComponent!
 		
 		_model		=	Workspace(rootDirectoryURL: u2)
-		_menureconf	=	WorkspaceMenuReconfigurator(workspace: _model!)
+//		_menureconf	=	WorkspaceMenuReconfigurator(workspace: _model!)
 		
 		_rootLocation	=	FileLocation(u2)
 		internals!.mainWindowController.fileNavigationViewController.URLRepresentation	=	u2
@@ -246,34 +252,34 @@ extension WorkspaceDocument {
 
 
 
-
-///	MARK:
-///	MARK:	Dynamic Menu
-
-private extension ProjectMenuController {
-	func reconfigureForWorkspaceInternals(internals:InternalController) {
-		build.onAction	=	{ [unowned self, unowned internals] in
-			internals.buildWorkspace()
-		}
-		run.onAction	=	{ [unowned self, unowned internals] in
-			internals.runWorkspace()
-		}
-		clean.onAction	=	{ [unowned self, unowned internals] in
-			internals.cleanWorkspace()
-		}
-		stop.onAction	=	{ [unowned self, unowned internals] in
-			internals.stopWorkspace()
-		}
-
-		reconfigureAvailabilitiesForWorkspaceInternals(internals)
-	}
-	func reconfigureAvailabilitiesForWorkspaceInternals(internals:InternalController) {
-		build.enabled	=	internals.debuggingController.numberOfSessions == 0
-		run.enabled		=	internals.debuggingController.numberOfSessions == 0
-		clean.enabled	=	internals.debuggingController.numberOfSessions == 0
-		stop.enabled	=	internals.debuggingController.numberOfSessions > 0
-	}
-}
+//
+/////	MARK:
+/////	MARK:	Dynamic Menu
+//
+//private extension ProjectMenuController {
+//	func reconfigureForWorkspaceInternals(internals:InternalController) {
+//		build.onAction	=	{ [unowned self, unowned internals] in
+//			internals.buildWorkspace()
+//		}
+//		run.onAction	=	{ [unowned self, unowned internals] in
+//			internals.runWorkspace()
+//		}
+//		clean.onAction	=	{ [unowned self, unowned internals] in
+//			internals.cleanWorkspace()
+//		}
+//		stop.onAction	=	{ [unowned self, unowned internals] in
+//			internals.stopWorkspace()
+//		}
+//
+//		reconfigureAvailabilitiesForWorkspaceInternals(internals)
+//	}
+//	func reconfigureAvailabilitiesForWorkspaceInternals(internals:InternalController) {
+//		build.enabled	=	internals.debuggingController.numberOfSessions == 0
+//		run.enabled		=	internals.debuggingController.numberOfSessions == 0
+//		clean.enabled	=	internals.debuggingController.numberOfSessions == 0
+//		stop.enabled	=	internals.debuggingController.numberOfSessions > 0
+//	}
+//}
 
 
 ///	MARK:
@@ -389,7 +395,7 @@ private final class InternalController {
 	let				mainWindowController	=	WorkspaceMainWindowController()
 	let				debuggingController	=	WorkspaceDebuggingController()
 	let				commandQueue		=	WorkspaceCommandExecutionController()
-	let				projectMenuController	=	ProjectMenuController()
+//	let				projectMenuController	=	ProjectMenuController()
 	
 	private var		fileSystemMonitor		=	nil as FileSystemEventMonitor?
 	
@@ -403,9 +409,9 @@ private final class InternalController {
 		
 		debuggingController.executionTreeViewController						=	self.mainWindowController.executionNavigationViewController
 		debuggingController.variableTreeViewController						=	self.mainWindowController.variableInspectingViewController
-		debuggingController.delegate										=	self
+//		debuggingController.delegate										=	self
 		
-		projectMenuController.reconfigureForWorkspaceInternals(self)
+//		projectMenuController.reconfigureForWorkspaceInternals(self)
 	}
 	deinit {
 	}
@@ -529,14 +535,14 @@ extension InternalController: IssueListingViewControllerDelegate {
 ///	MARK:
 ///	MARK:	WorkspaceDebuggingControllerDelegate
 
-extension InternalController: WorkspaceDebuggingControllerDelegate {
-	func workspaceDebuggingControllerDidLaunchSession() {
-		projectMenuController.reconfigureAvailabilitiesForWorkspaceInternals(self)
-	}
-	func workspaceDebuggingControllerDidTerminateSession() {
-		projectMenuController.reconfigureAvailabilitiesForWorkspaceInternals(self)
-	}
-}
+//extension InternalController: WorkspaceDebuggingControllerDelegate {
+//	func workspaceDebuggingControllerDidLaunchSession() {
+//		projectMenuController.reconfigureAvailabilitiesForWorkspaceInternals(self)
+//	}
+//	func workspaceDebuggingControllerDidTerminateSession() {
+//		projectMenuController.reconfigureAvailabilitiesForWorkspaceInternals(self)
+//	}
+//}
 
 
 

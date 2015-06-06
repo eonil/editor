@@ -41,19 +41,19 @@ final class WorkspaceDebuggingController {
 		////
 		
 		unowned let	dbg	=	_dbg
-		_menu.reconfigureReactionsForWorkspaceDebuggingController(self)
+//		_menu.reconfigureReactionsForWorkspaceDebuggingController(self)
 	}
 	deinit {
 		terminateAllSessions()
 	}
 
-	///	Provides a debug menu that controls and responds appropriately.
-	///	Replace "Debug" menu for current document.
-	var menuController:MenuController {
-		get {
-			return	_menu
-		}
-	}
+//	///	Provides a debug menu that controls and responds appropriately.
+//	///	Replace "Debug" menu for current document.
+//	var menuController:MenuController {
+//		get {
+//			return	_menu
+//		}
+//	}
 	
 	var numberOfSessions:Int {
 		get {
@@ -69,7 +69,7 @@ final class WorkspaceDebuggingController {
 		_sessions.append(s)
 		
 		self.delegate?.workspaceDebuggingControllerDidLaunchSession()
-		_menu.reconfigureAvailabilitiesForDebugger(_dbg)
+//		_menu.reconfigureAvailabilitiesForDebugger(_dbg)
 	}
 	
 	func terminateAllSessions() {
@@ -80,7 +80,7 @@ final class WorkspaceDebuggingController {
 		_sessions	=	[]
 		
 		self.delegate?.workspaceDebuggingControllerDidTerminateSession()
-		_menu.reconfigureAvailabilitiesForDebugger(_dbg)
+//		_menu.reconfigureAvailabilitiesForDebugger(_dbg)
 	}
 	
 	////
@@ -88,17 +88,17 @@ final class WorkspaceDebuggingController {
 	private var _sessions	=	[] as [Session]
 	
 	private let	_dbg		=	LLDBDebugger()!
-	private let	_menu		=	DebugMenuController()
+//	private let	_menu		=	DebugMenuController()
 	
 }
 
 extension WorkspaceDebuggingController {
-	///	Provides a menu that can be used when no document is opened and selected.
-	static var documentlessMenuController:MenuController {
-		get {
-			return	DebugMenuController()
-		}
-	}
+//	///	Provides a menu that can be used when no document is opened and selected.
+//	static var documentlessMenuController:MenuController {
+//		get {
+//			return	DebugMenuController()
+//		}
+//	}
 }
 
 extension WorkspaceDebuggingController {
@@ -144,7 +144,7 @@ extension WorkspaceDebuggingController.Session: ListenerControllerDelegate {
 			}
 		}
 		
-		owner._menu.reconfigureAvailabilitiesForDebugger(owner._dbg)
+//		owner._menu.reconfigureAvailabilitiesForDebugger(owner._dbg)
 	}
 }
 
@@ -169,53 +169,53 @@ extension WorkspaceDebuggingController.Session: ListenerControllerDelegate {
 
 
 
-
-private extension DebugMenuController {
-	func reconfigureAvailabilitiesForDebugger(debugger:LLDBDebugger) {
-		stepOver.enabled	=	false
-		stepInto.enabled	=	false
-		stepOut.enabled		=	false
-		
-		for t in debugger.allTargets {
-			switch t.process.state {
-			case LLDBStateType.Attaching:	break
-			case LLDBStateType.Launching:	break
-			case LLDBStateType.Stepping:	break
-			case LLDBStateType.Running:		break
-				
-			default:
-				stepOver.enabled	=	true
-				stepInto.enabled	=	true
-				stepOut.enabled		=	true
-			}
-		}
-	}
-	func reconfigureReactionsForWorkspaceDebuggingController(owner:WorkspaceDebuggingController) {
-		func findFirstBreakpointStopThread(debugger:LLDBDebugger) -> LLDBThread? {
-			for t1 in debugger.allTargets {
-				for t2 in t1.process.allThreads {
-					println(t2.stopDescription())
-					switch t2.stopReason {
-					case .Breakpoint:	return	t2
-					case .PlanComplete:	return	t2
-					default:			break
-					}
-				}
-			}
-			return	nil
-		}
-		
-		stepOver.onAction	=	{
-			findFirstBreakpointStopThread(owner._dbg)?.stepOver()
-		}
-		stepInto.onAction	=	{
-			findFirstBreakpointStopThread(owner._dbg)?.stepInto()
-		}
-		stepOut.onAction		=	{
-			findFirstBreakpointStopThread(owner._dbg)?.stepOut()
-		}
-	}
-}
+//
+//private extension DebugMenuController {
+//	func reconfigureAvailabilitiesForDebugger(debugger:LLDBDebugger) {
+//		stepOver.enabled	=	false
+//		stepInto.enabled	=	false
+//		stepOut.enabled		=	false
+//		
+//		for t in debugger.allTargets {
+//			switch t.process.state {
+//			case LLDBStateType.Attaching:	break
+//			case LLDBStateType.Launching:	break
+//			case LLDBStateType.Stepping:	break
+//			case LLDBStateType.Running:		break
+//				
+//			default:
+//				stepOver.enabled	=	true
+//				stepInto.enabled	=	true
+//				stepOut.enabled		=	true
+//			}
+//		}
+//	}
+//	func reconfigureReactionsForWorkspaceDebuggingController(owner:WorkspaceDebuggingController) {
+//		func findFirstBreakpointStopThread(debugger:LLDBDebugger) -> LLDBThread? {
+//			for t1 in debugger.allTargets {
+//				for t2 in t1.process.allThreads {
+//					println(t2.stopDescription())
+//					switch t2.stopReason {
+//					case .Breakpoint:	return	t2
+//					case .PlanComplete:	return	t2
+//					default:			break
+//					}
+//				}
+//			}
+//			return	nil
+//		}
+//		
+//		stepOver.onAction	=	{
+//			findFirstBreakpointStopThread(owner._dbg)?.stepOver()
+//		}
+//		stepInto.onAction	=	{
+//			findFirstBreakpointStopThread(owner._dbg)?.stepInto()
+//		}
+//		stepOut.onAction		=	{
+//			findFirstBreakpointStopThread(owner._dbg)?.stepOut()
+//		}
+//	}
+//}
 
 
 

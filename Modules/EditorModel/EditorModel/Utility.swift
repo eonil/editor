@@ -12,11 +12,9 @@ import EditorToolComponents
 
 
 
-func queryCargoAtDirectoryURL(directoryURL: NSURL, keyPath: String) -> String? {
-	@objc class Marker {
-	}
-	let	p	=	NSBundle(forClass: Marker.self).pathForResource("bin/CargoQueryServer", ofType: "")
-	let	s	=	runShellCommand(directoryURL, "\(p) \(keyPath)")
+public func queryCargoAtDirectoryURL(directoryURL: NSURL, keyPath: String) -> String? {
+	let	p	=	NSBundle(forClass: CargoExecutionController.self).pathForResource("bin/CargoQueryServer", ofType: "")!
+	let	s	=	runShellCommand(directoryURL, "\(p) \(keyPath)")?.stringByTrimmingCharactersInSet(NSCharacterSet.newlineCharacterSet())
 	return	s
 }
 
@@ -33,7 +31,11 @@ func runShellCommand(workingDirectoryURL: NSURL, command: String) -> String? {
 	sh.delegate	=	a
 	sh.launch(workingDirectoryURL: workingDirectoryURL)
 	sh.writeToStandardInput(command)
+	sh.writeToStandardInput("\n")
+	sh.writeToStandardInput("exit")
+	sh.writeToStandardInput("\n")
 	sh.waitUntilExit()
+	assert(sh.exitCode == 0)
 	if sh.exitCode == 0 {
 		return	a.allOutput
 	}
