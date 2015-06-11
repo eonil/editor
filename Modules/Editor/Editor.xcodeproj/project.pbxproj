@@ -108,6 +108,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4500EE6D1B272D5900E83F57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F82C571B2585BF00A78AF5;
+			remoteInfo = UnitTest;
+		};
 		4513F7201B1F33B900960EF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4509EF0B1B1B151200C3E71C /* EonilSQLite3.xcodeproj */;
@@ -534,13 +541,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 4563E0651AF8FCA800AA9EA6;
 			remoteInfo = SignalGraphMobile;
-		};
-		45D4B9E01B1F357F0083FE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4503AE2B1AFDB3D0006AB1F0;
-			remoteInfo = SignalGraphMobileTest;
 		};
 		45D4B9E21B1F357F0083FE6A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1238,9 +1238,9 @@
 			children = (
 				45D4B9DD1B1F357F0083FE6A /* SignalGraph.framework */,
 				45D4B9DF1B1F357F0083FE6A /* SignalGraphMobile.framework */,
-				45D4B9E11B1F357F0083FE6A /* SignalGraphMobileTest.xctest */,
 				45D4B9E31B1F357F0083FE6A /* SignalGraphAppKitAddon.framework */,
 				45D4B9E51B1F357F0083FE6A /* OSXTestdriveApp.app */,
+				4500EE6E1B272D5900E83F57 /* UnitTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1309,6 +1309,7 @@
 		45BBB0DC1A1022A10055232E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Eonil;
 				TargetAttributes = {
@@ -1406,6 +1407,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4500EE6E1B272D5900E83F57 /* UnitTest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = UnitTest.app;
+			remoteRef = 4500EE6D1B272D5900E83F57 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4513F7211B1F33B900960EF5 /* EonilSQLite3.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1747,13 +1755,6 @@
 			fileType = wrapper.framework;
 			path = SignalGraphMobile.framework;
 			remoteRef = 45D4B9DE1B1F357F0083FE6A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45D4B9E11B1F357F0083FE6A /* SignalGraphMobileTest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SignalGraphMobileTest.xctest;
-			remoteRef = 45D4B9E01B1F357F0083FE6A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45D4B9E31B1F357F0083FE6A /* SignalGraphAppKitAddon.framework */ = {

@@ -20,32 +20,23 @@ public class Cargo {
 		case Benchmark
 	}
 	
+	///
+	
 	public var tools: Toolbox {
 		get {
 			return	owner!
 		}
 	}
 	
-	public var availableCommands: ValueStorage<Set<Command>> {
-		get {
-			return	_availableCommands
-		}
-	}
-	public var running: ValueStorage<Command?> {
-		get {
-			return	_running
-		}
-	}
-	public var waitings: ArrayStorage<Command> {
-		get {
-			return	_waitings
-		}
-	}
+	public let	availableCommands	=	ValueChannel<Set<Command>>([])
+	public let	runningCommand		=	ValueChannel<Command?>(nil)
+	public let	waitingCommands		=	ArrayChannel<Command>([])
+
 	public func queue(command: Command) {
-		_waitings.append(command)
+		waitingCommands.editing.append(command)
 	}
 	public func cancelAll() {
-		_waitings.removeAll()
+		waitingCommands.editing.removeAll()
 	}
 	
 	///
@@ -58,10 +49,6 @@ public class Cargo {
 	
 	///
 	
-	private let	_availableCommands	=	EditableValueStorage<Set<Command>>([])
-	private let	_running		=	EditableValueStorage<Command?>(nil)
-	private let	_waitings		=	EditableArrayStorage<Command>([])
-	
 	private var	_cargoExecution		:	CargoExecutionController?
 	private let	_cargoAgent		=	CargoAgent()
 	
@@ -69,10 +56,10 @@ public class Cargo {
 		assert(_cargoExecution == nil)
 		
 		let	exe	=	CargoExecutionController()
-		let	u	=	tools.workspace.rootDirectoryURL.state
+		let	u	=	tools.workspace.rootDirectoryURL.storage.state
 		exe.delegate	=	_cargoAgent
 		
-		_running.state	=	cmd
+		runningCommand.editing.state	=	cmd
 		
 		switch cmd {
 		case .Clean:
@@ -99,7 +86,7 @@ public class Cargo {
 	}
 	
 	private func resetAvailableCommands() {
-		_availableCommands.state	=	[.Clean, .Build]
+		availableCommands.editing.state			=	[.Clean, .Build]
 	}
 	
 	private class CargoAgent: CargoExecutionControllerDelegate {
@@ -113,7 +100,7 @@ public class Cargo {
 		}
 		func cargoExecutionControllerRemoteProcessDidTerminate() {
 			owner!.tools.workspace.console.extendHistory([""])
-			owner!._running.state	=	nil
+			owner!.runningCommand.editing.state	=	nil
 			owner!.resetAvailableCommands()
 		}
 	}

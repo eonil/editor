@@ -22,17 +22,8 @@ public class Debugger {
 		case StepOut
 	}
 	
-	public var targets: DictionaryStorage<NSURL, Target> {
-		get {
-			return	_targets
-		}
-	}
-	
-	public var availableCommands: ValueStorage<Set<Command>> {
-		get {
-			return	_availableCommands
-		}
-	}
+	public let	targets			=	DictionaryChannel<NSURL, Target>([:])
+	public let	availableCommands	=	ValueChannel<Set<Command>>([])
 	
 	public func execute(command: Command) {
 		_executeImpl(command)
@@ -60,16 +51,14 @@ public class Debugger {
 	///	MARK:	-	
 	
 	private let	_lldbdebugger		=	LLDBDebugger()
-	private let	_targets		=	EditableDictionaryStorage<NSURL, Target>([:])
 	private let	_selectedTarget		=	EditableValueStorage<Target?>(nil)
-	private let	_availableCommands	=	EditableValueStorage<Set<Command>>(Set())
 	
 	private func _resetAvailableCommands() {
-		_availableCommands.state	=	[.Launch]
+		availableCommands.editing.state	=	[.Launch]
 	}
 	private func _executeImpl(c: Command) {
-		assert(availableCommands.state.contains(c))
-		assert(_selectedTarget.state != nil)
+		assert(availableCommands.storage.state.contains(c))
+		assert(_selectedTarget.state != nil)	
 		if let t = _selectedTarget.state {
 			switch c {
 			case .Launch:		t.launch()
@@ -98,7 +87,7 @@ public class Debugger {
 	
 	private func _defaultTargetExecutableURL() -> NSURL? {
 		assert(owner != nil)
-		let	u	=	owner!.rootDirectoryURL.state
+		let	u	=	owner!.rootDirectoryURL.storage.state
 		let	n	=	queryCargoAtDirectoryURL(u, "package.name")!
 		let	u1	=	u.URLByAppendingPathComponent("target")
 		let	u2	=	u1.URLByAppendingPathComponent("debug")
@@ -110,15 +99,15 @@ public class Debugger {
 		let	t1	=	_lldbdebugger.createTargetWithFilename(u.path!)!
 		let	wdir	=	u.URLByDeletingLastPathComponent!
 		let	t	=	Target(workingDirectoryURL: wdir, LLDBTarget: t1)
-		_targets[u]	=	t
+		targets.editing[u]	=	t
 		t.owner		=	self
 	}
 	
 	private func _deinstallTargetWithURL(u: NSURL) {
-		assert(_targets[u] != nil)
-		if let t = _targets[u] {
+		assert(targets.editing[u] != nil)
+		if let t = targets.editing[u] {
 			t.halt()
-			_targets.removeValueForKey(u)
+			targets.editing.removeValueForKey(u)
 			t.owner	=	nil
 		}
 	}

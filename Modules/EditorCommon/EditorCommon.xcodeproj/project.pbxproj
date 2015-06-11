@@ -247,6 +247,7 @@
 		452CFC5D1A8C7A6A0050BE72 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = Eonil;
 				TargetAttributes = {

@@ -161,6 +161,7 @@
 		45D1B2091A66856100B48431 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Eonil;
 				TargetAttributes = {
@@ -404,6 +405,7 @@
 				45D1B22A1A66856100B48431 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45D1B22B1A66856100B48431 /* Build configuration list for PBXNativeTarget "EditorFileContentEditingFeatureTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +414,7 @@
 				45D1B22D1A66856100B48431 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

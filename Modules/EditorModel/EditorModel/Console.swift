@@ -17,27 +17,20 @@ public class Console {
 			return	owner!
 		}
 	}
-	public var issues: ArrayStorage<Issue> {
-		get {
-			return	_issues
-		}
-	}
+	
+	public let	issues	=	ArrayChannel<Issue>([])
 	
 	///	History of input command and result output.
 	///	This is a collection of lines. New-line
 	///	character are stripped away.
 	///
-	public var history: ArrayStorage<String> {
-		get {
-			return	_history
-		}
-	}
+	public let	history	=	ArrayChannel<String>([])
 	
 	public func clearIssues() {
-		_issues.removeAll()
+		issues.editing.removeAll()
 	}
 	public func clearHistory() {
-		_history.removeAll()
+		history.editing.removeAll()
 	}
 	
 	///
@@ -48,13 +41,8 @@ public class Console {
 	}
 	
 	internal func extendHistory(lines: [String]) {
-		_history.extend(lines)
+		history.editing.extend(lines)
 	}
-	
-	///
-	
-	private let		_issues			=	EditableArrayStorage<Issue>([])
-	private let		_history		=	EditableArrayStorage<String>([])
 }
 
 

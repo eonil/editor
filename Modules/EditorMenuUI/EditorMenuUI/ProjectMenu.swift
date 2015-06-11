@@ -29,16 +29,22 @@ public class ProjectMenuController {
 			stop,
 		]
 	}
+	deinit {
+		assert(workspace == nil)
+		assert(_has_workspace == false)
+	}
 	
 	public weak var workspace: Workspace? {
 		willSet {
 			if let _ = workspace {
-				teardown()
+				_teardown()
+				_has_workspace	=	false
 			}
 		}
 		didSet {
 			if let _ = workspace {
-				setup()
+				_has_workspace	=	true
+				_setup()
 			}
 		}
 	}
@@ -56,19 +62,17 @@ public class ProjectMenuController {
 
 	///
 	
-	private let	_cargoAvailableCommands			=	ReplicatingValueStorage<Set<Cargo.Command>>()
-	private let	_debuggerAvailableCommands		=	ReplicatingValueStorage<Set<Debugger.Command>>()
+	private var	_has_workspace	=	false		//	This flag is required due to early nil-lization.
+	private var	_channelings	=	[] as [Channeling]
 	
-	private let	_cargoAvailableCommandsMonitor		=	SignalMonitor<ValueSignal<Set<Cargo.Command>>>()
-	private let	_debuggerAvailableCommandsMonitor	=	SignalMonitor<ValueSignal<Set<Debugger.Command>>>()
-	
-	private func setup() {
+	private func _setup() {
 		func queueCargoCommand(cmd: Cargo.Command) -> ()->() {
 			return	{ [weak self] in self?.workspace!.toolbox.cargo.queue(cmd) }
 		}
 		func executeDebuggerCommand(cmd: Debugger.Command) -> ()->() {
 			return	{ [weak self] in self?.workspace!.debugger.execute(cmd) }
 		}
+		
 		run.onAction		=	executeDebuggerCommand(.Launch)
 		test.onAction		=	queueCargoCommand(.Test)
 		documentate.onAction	=	queueCargoCommand(.Documentate)
@@ -77,26 +81,19 @@ public class ProjectMenuController {
 		clean.onAction		=	queueCargoCommand(.Clean)
 		stop.onAction		=	executeDebuggerCommand(.Halt)
 		
-		_cargoAvailableCommandsMonitor.handler		=	{ [weak self] s in self?.reconfigureForCargoCommands(s) }
-		_debuggerAvailableCommandsMonitor.handler	=	{ [weak self] s in self?.reconfigureForDebuggerCommands(s) }
-		_cargoAvailableCommands.emitter.register(_cargoAvailableCommandsMonitor)
-		_debuggerAvailableCommands.emitter.register(_debuggerAvailableCommandsMonitor)
-		workspace!.toolbox.cargo.availableCommands.emitter.register(_cargoAvailableCommands.sensor)
-		workspace!.debugger.availableCommands.emitter.register(_debuggerAvailableCommands.sensor)
+		_channelings	=	[
+			Channeling(workspace!.toolbox.cargo.availableCommands)	{ [weak self] s in self?._reconfigureForCargoCommands(s) },
+			Channeling(workspace!.debugger.availableCommands) 	{ [weak self] s in self?._reconfigureForDebuggerCommands(s) },
+		]
 	}
-	private func teardown() {
-		workspace!.debugger.availableCommands.emitter.deregister(_debuggerAvailableCommands.sensor)
-		workspace!.toolbox.cargo.availableCommands.emitter.deregister(_cargoAvailableCommands.sensor)
-		_debuggerAvailableCommands.emitter.deregister(_debuggerAvailableCommandsMonitor)
-		_cargoAvailableCommands.emitter.deregister(_cargoAvailableCommandsMonitor)
-		_debuggerAvailableCommandsMonitor.handler	=	{ _ in }
-		_cargoAvailableCommandsMonitor.handler		=	{ _ in }
+	private func _teardown() {
+		_channelings	=	[]
 		
 		for m in menu.allMenuItems {
 			m.onAction	=	nil
 		}
 	}
-	private func reconfigureForCargoCommands(s: ValueSignal<Set<Cargo.Command>>) {
+	private func _reconfigureForCargoCommands(s: ValueSignal<Set<Cargo.Command>>) {
 		clean.enabled		=	s.state?.contains(.Clean) ?? false
 		build.enabled		=	s.state?.contains(.Build) ?? false
 		run.enabled		=	s.state?.contains(.Run) ?? false
@@ -104,8 +101,9 @@ public class ProjectMenuController {
 		test.enabled		=	s.state?.contains(.Test) ?? false
 		benchmark.enabled	=	s.state?.contains(.Benchmark) ?? false
 	}
-	private func reconfigureForDebuggerCommands(s: ValueSignal<Set<Debugger.Command>>) {
+	private func _reconfigureForDebuggerCommands(s: ValueSignal<Set<Debugger.Command>>) {
 		run.enabled		=	s.state?.contains(.Launch) ?? false
 		stop.enabled		=	s.state?.contains(.Halt) ?? false
 	}
 }
+

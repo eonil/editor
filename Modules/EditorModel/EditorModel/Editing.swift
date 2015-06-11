@@ -10,7 +10,7 @@ import Foundation
 import SignalGraph
 
 public class Editing {
-	public let		currentFileURL	=	EditableValueStorage<NSURL?>(nil)
+	public let	currentFileURL		=	ValueChannel<NSURL?>(nil)
 	
 	///	MARK:	-
 	

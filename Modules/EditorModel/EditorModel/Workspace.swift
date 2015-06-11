@@ -12,27 +12,20 @@ import SignalGraph
 public class Workspace {
 	
 	public init(rootDirectoryURL: NSURL) {
-		_rootdir	=	EditableValueStorage(rootDirectoryURL)
+		self.rootDirectoryURL	=	ValueChannel<NSURL>(rootDirectoryURL)
 		
 		editing.owner	=	self
 		toolbox.owner	=	self
 		debugger.owner	=	self
 		console.owner	=	self
 	}
-	public var rootDirectoryURL: ValueStorage<NSURL> {
-		get {
-			return	_rootdir
-		}
-	}
+	
+	public let	rootDirectoryURL	:	ValueChannel<NSURL>
 	
 	public let	editing		=	Editing()
 	public let	toolbox		=	Toolbox()
 	public let	debugger	=	Debugger()
 	public let	console		=	Console()
-	
-	///
-	
-	private let		_rootdir	:	EditableValueStorage<NSURL>
 	
 //	public init(rootURL: NSURL) {
 //		func TEMP_ADHOC_getTargetName() -> String? {

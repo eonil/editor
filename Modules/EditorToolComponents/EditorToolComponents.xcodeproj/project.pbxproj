@@ -44,6 +44,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4500EE971B272D5900E83F57 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F82C571B2585BF00A78AF5;
+			remoteInfo = UnitTest;
+		};
 		4537285E1A8C827800BE5C1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 453728591A8C827800BE5C1B /* EditorCommon.xcodeproj */;
@@ -99,13 +106,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 4563E0651AF8FCA800AA9EA6;
 			remoteInfo = SignalGraphMobile;
-		};
-		45DD92F81B1E08B100A0BE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4503AE2B1AFDB3D0006AB1F0;
-			remoteInfo = SignalGraphMobileTest;
 		};
 		45DD92FA1B1E08B100A0BE6A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -298,9 +298,9 @@
 			children = (
 				45DD92F51B1E08B100A0BE6A /* SignalGraph.framework */,
 				45DD92F71B1E08B100A0BE6A /* SignalGraphMobile.framework */,
-				45DD92F91B1E08B100A0BE6A /* SignalGraphMobileTest.xctest */,
 				45DD92FB1B1E08B100A0BE6A /* SignalGraphAppKitAddon.framework */,
 				45DD92FD1B1E08B100A0BE6A /* OSXTestdriveApp.app */,
+				4500EE981B272D5900E83F57 /* UnitTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,6 +382,7 @@
 		45C912FD1A8C811200B15F9F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = Eonil;
 				TargetAttributes = {
@@ -427,6 +428,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4500EE981B272D5900E83F57 /* UnitTest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = UnitTest.app;
+			remoteRef = 4500EE971B272D5900E83F57 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4537285F1A8C827800BE5C1B /* EditorCommon.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -453,13 +461,6 @@
 			fileType = wrapper.framework;
 			path = SignalGraphMobile.framework;
 			remoteRef = 45DD92F61B1E08B100A0BE6A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45DD92F91B1E08B100A0BE6A /* SignalGraphMobileTest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SignalGraphMobileTest.xctest;
-			remoteRef = 45DD92F81B1E08B100A0BE6A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45DD92FB1B1E08B100A0BE6A /* SignalGraphAppKitAddon.framework */ = {

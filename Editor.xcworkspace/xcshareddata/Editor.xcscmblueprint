@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "FC8DBBA953E548D205F88EA925028C0D6DA341F0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "FC8DBBA953E548D205F88EA925028C0D6DA341F0" : 0,
+    "FBB6F2B2029C41EB36C6216F39D46AC69FF785A0" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D2043735-8F7E-46B3-9E7B-6996FD386251",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "FC8DBBA953E548D205F88EA925028C0D6DA341F0" : "Editor",
+    "FBB6F2B2029C41EB36C6216F39D46AC69FF785A0" : "Editor\/Submodules\/SignalGraph.Swift"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Editor",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Editor.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Eonil\/SignalGraph.Swift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FBB6F2B2029C41EB36C6216F39D46AC69FF785A0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Eonil\/Editor",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "FC8DBBA953E548D205F88EA925028C0D6DA341F0"
+    }
+  ]
+}

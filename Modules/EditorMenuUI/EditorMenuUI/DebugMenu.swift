@@ -45,8 +45,7 @@ public class DebugMenuController {
 	let	stepOut		=	NSMenuItem(title: "Step Out", shortcut: Command+"3")
 
 	///
-	
-	
+
 	private let	_debuggerAvailableCommands		=	ReplicatingValueStorage<Set<Debugger.Command>>()
 	
 	private let	_debuggerAvailableCommandsMonitor	=	SignalMonitor<ValueSignal<Set<Debugger.Command>>>()
@@ -54,10 +53,10 @@ public class DebugMenuController {
 	private func setup() {
 		_debuggerAvailableCommandsMonitor.handler	=	{ [weak self] s in self?.reconfigureForDebuggerCommands(s) }
 		_debuggerAvailableCommands.emitter.register(_debuggerAvailableCommandsMonitor)
-		workspace!.debugger.availableCommands.emitter.register(_debuggerAvailableCommands.sensor)
+		workspace!.debugger.availableCommands.storage.emitter.register(_debuggerAvailableCommands.sensor)
 	}
 	private func teardown() {
-		workspace!.debugger.availableCommands.emitter.deregister(_debuggerAvailableCommands.sensor)
+		workspace!.debugger.availableCommands.storage.emitter.deregister(_debuggerAvailableCommands.sensor)
 		_debuggerAvailableCommands.emitter.deregister(_debuggerAvailableCommandsMonitor)
 		_debuggerAvailableCommandsMonitor.handler	=	{ _ in }
 	}

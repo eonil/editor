@@ -13,7 +13,6 @@
 		451B56201B1B437A006C4879 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561F1B1B437A006C4879 /* Workspace.swift */; };
 		4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DBE51B1F3EA4003E26CD /* Racer.swift */; };
 		4567DBE91B1F3EBF003E26CD /* Cargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DBE81B1F3EBF003E26CD /* Cargo.swift */; };
-		4567DC471B203F06003E26CD /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 4567DC461B203F06003E26CD /* README.md */; };
 		4571A74B1B1B761100A7911B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A74A1B1B761100A7911B /* Utility.swift */; };
 		4571A77E1B1CB4AB00A7911B /* Toolbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A77D1B1CB4AB00A7911B /* Toolbox.swift */; };
 		4571A7881B1CB4D500A7911B /* Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A7871B1CB4D500A7911B /* Editing.swift */; };
@@ -22,6 +21,7 @@
 		45DD92AB1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD92AA1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift */; };
 		45DD92C11B1DFC1600A0BE6A /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD92B61B1DFC1300A0BE6A /* LLDBWrapper.framework */; };
 		45DD930E1B1E08FA00A0BE6A /* EditorDebuggingFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD93071B1E08F200A0BE6A /* EditorDebuggingFeature.framework */; };
+		45F82CA41B25D8E300A78AF5 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F82CA31B25D8E300A78AF5 /* Channels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,13 +38,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 4563E0651AF8FCA800AA9EA6;
 			remoteInfo = SignalGraphMobile;
-		};
-		4510E8571B1212F6005824AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4503AE2B1AFDB3D0006AB1F0;
-			remoteInfo = SignalGraphMobileTest;
 		};
 		4510E8591B1212F6005824AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -151,6 +144,13 @@
 			remoteGlobalIDString = 450272071A7F577D008795CC;
 			remoteInfo = WorkbenchApp2;
 		};
+		45F82CB71B25D8E300A78AF5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F82C571B2585BF00A78AF5;
+			remoteInfo = UnitTest;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -171,6 +171,7 @@
 		45DD92AA1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _WorkspaceDebuggingController.swift; sourceTree = "<group>"; };
 		45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebuggingFeature.xcodeproj; path = ../EditorDebuggingFeature/EditorDebuggingFeature.xcodeproj; sourceTree = "<group>"; };
+		45F82CA31B25D8E300A78AF5 /* Channels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				4510E8161B12107C005824AB /* Info.plist */,
+				45F82CA31B25D8E300A78AF5 /* Channels.swift */,
 				451B561F1B1B437A006C4879 /* Workspace.swift */,
 				4567DBE21B1F3DE4003E26CD /* (children of workspace) */,
 				4571A74A1B1B761100A7911B /* Utility.swift */,
@@ -226,9 +228,9 @@
 			children = (
 				4510E8541B1212F6005824AB /* SignalGraph.framework */,
 				4510E8561B1212F6005824AB /* SignalGraphMobile.framework */,
-				4510E8581B1212F6005824AB /* SignalGraphMobileTest.xctest */,
 				4510E85A1B1212F6005824AB /* SignalGraphAppKitAddon.framework */,
 				4510E85C1B1212F6005824AB /* OSXTestdriveApp.app */,
+				45F82CB81B25D8E300A78AF5 /* UnitTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -334,6 +336,7 @@
 		4510E8091B12107C005824AB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = Eonil;
 				TargetAttributes = {
@@ -390,13 +393,6 @@
 			fileType = wrapper.framework;
 			path = SignalGraphMobile.framework;
 			remoteRef = 4510E8551B1212F6005824AB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4510E8581B1212F6005824AB /* SignalGraphMobileTest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SignalGraphMobileTest.xctest;
-			remoteRef = 4510E8571B1212F6005824AB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4510E85A1B1212F6005824AB /* SignalGraphAppKitAddon.framework */ = {
@@ -504,6 +500,13 @@
 			remoteRef = 45DD930C1B1E08F200A0BE6A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45F82CB81B25D8E300A78AF5 /* UnitTest.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = UnitTest.app;
+			remoteRef = 45F82CB71B25D8E300A78AF5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -522,6 +525,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4567DBE91B1F3EBF003E26CD /* Cargo.swift in Sources */,
+				45F82CA41B25D8E300A78AF5 /* Channels.swift in Sources */,
 				45DD92A91B1DF8CD00A0BE6A /* Debugger.swift in Sources */,
 				4571A74B1B1B761100A7911B /* Utility.swift in Sources */,
 				4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */,
@@ -530,7 +534,6 @@
 				4571A77E1B1CB4AB00A7911B /* Toolbox.swift in Sources */,
 				45DD92AB1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift in Sources */,
 				451B561E1B1B4374006C4879 /* _Project.swift in Sources */,
-				4567DC471B203F06003E26CD /* README.md in Sources */,
 				4571A78A1B1CB4EE00A7911B /* Console.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
