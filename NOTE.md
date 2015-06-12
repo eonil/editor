@@ -44,6 +44,23 @@ integrated into central model.
 
 
 
+Resource Management
+-------------------
+OBJC/Swift is RC based. That means RAII does work, but only for memory 
+management. For any other kind of resources, you must manage them all 
+just MANUALLY.
+
+This is mainly due to early nil-lization of weak references. You must
+initialization/termination of all non-memory resources yourself 
+manually. Here're the rules.
+
+-	If a resource is acquired in `init`, it must be reliquished
+	in `deinit`.
+
+-	If a resource is acquired after `init`, it must be reliquished
+	BEFORE `deinit`. Object should not `deinit` while it holds 
+	those resource.
+
 
 
 
@@ -55,8 +72,9 @@ integrated into central model.
 Menu Handling
 -------------
 
--	By default, use Menu NIB and first-responder chain for static items.
--	If you need dynamic menu, use `MenuController` pattern. See `WorkspaceDebuggingController`'s internal menu implementation for example.
+-	Uses custom menu controller pattern. See `ProjectMenuController.swift` for how it works.
+-	This is applied only to dynamic menus. Static menus are currently implemented using an NIB.
+	This will be removed later.
 
 
 
@@ -71,7 +89,7 @@ Menu Handling
 File System Watching
 --------------------
 `NSFilePresenter` simply does not work as advertised, and Apple has no
-interest on fixing it. It's be abandoned at least last 4 years, and 
+interest on fixing it. It's been abandoned at least last 4 years, and 
 relying on it seems to be very dangerous. Also it has some hidden and
 complex threading behavior, and it's almost impossible to deal with it.
 
@@ -168,12 +186,12 @@ Usually these are signs that something is going wrong.
 
 -	You assign a instance variable field value directly at initialisers. (including `let` assignment)
 
-Swift is designed to be better with early evaluation, but Objective-C layer does not play well with
-early-evaluation design pattern. So make it to be instantiated lazily in most cases.
+Swift is designed to be better with eager evaluation, but Objective-C layer does not play well with
+eager-evaluation design pattern. So make it to be instantiated lazily in most cases.
 
 
 
--	`NSString` is simply contains UTF-16 code units. (http://www.objc.io/issue-9/unicode.html)
+-	`NSString` simply contains UTF-16 code units. (http://www.objc.io/issue-9/unicode.html)
 -	There's no O(1) way to convert between `NSRange` and `Range<String.Index`. You have to iterate
 	many the elements. Then the only reasonable solution is minimising amount of conversions.
 -	Incremental conversion will be the fastest way.
@@ -223,7 +241,7 @@ Running on device using unit-test command.
 Terms
 -----
 
--	State: A data at a timepoint.
+-	State: A value at a timepoint.
 -	Identity: Referenceable and reference equality comaprable.
 -	Controller: "state" + "identity".
 

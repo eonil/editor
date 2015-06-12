@@ -80,12 +80,12 @@ public final class ListenerController {
 
 private final class Core {
 	weak var delegate:ListenerControllerDelegate? {
-		willSet {
-			precondition(delegate == nil, "Set `nil` to `delegate` first before setting a new delegate to express your intention clearly.")
+		willSet(v) {
+			precondition((v == nil) != (delegate == nil), "Set `nil` first before setting a new delegate to express your intention clearly.")
 		}
 	}
 	
-	let listener	=	LLDBListener(name: "Eonil/Editor LLDB Main Listener")
+	let	listener	=	LLDBListener(name: "Eonil/Editor LLDB Main Listener")
 	var	done		=	false
 	
 	init() {

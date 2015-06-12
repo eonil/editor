@@ -12,16 +12,29 @@ import EditorMenuUI
 
 class HOTFIX_MenuUpdateAgent {
 	init() {
-		let	name	=	NSWindowDidBecomeKeyNotification
-		let	q	=	NSOperationQueue.mainQueue()
-		NSNotificationCenter.defaultCenter().addObserverForName(name, object: nil, queue: q) { [weak self] (n: NSNotification!) -> Void in
-			assert(n.object is NSWindow)
-			let	window	=	n.object as! NSWindow
-			let	doccon	=	NSDocumentController.sharedDocumentController() as! NSDocumentController
-			if let wsdoc = doccon.documentForWindow(window) as? WorkspaceDocument {
-				self?.project.workspace		=	wsdoc.model
-				self?.debug.workspace		=	wsdoc.model
-			}
+		NSNotificationCenter.defaultCenter().addObserverForName(NSWindowDidBecomeKeyNotification,
+			object:	nil,
+			queue: 	NSOperationQueue.mainQueue()) { [weak self] (n: NSNotification!) -> Void in
+				assert(n.object is NSWindow)
+				let	window	=	n.object as! NSWindow
+				let	doccon	=	NSDocumentController.sharedDocumentController() as! NSDocumentController
+				if let wsdoc = doccon.documentForWindow(window) as? WorkspaceDocument {
+					self?.project.workspace		=	wsdoc.model
+					self?.debug.workspace		=	wsdoc.model
+				}
+		}
+		NSNotificationCenter.defaultCenter().addObserverForName(NSWindowDidResignKeyNotification,
+			object:	nil,
+			queue: 	NSOperationQueue.mainQueue()) { [weak self] (n: NSNotification!) -> Void in
+				assert(n.object is NSWindow)
+				let	window	=	n.object as! NSWindow
+				let	doccon	=	NSDocumentController.sharedDocumentController() as! NSDocumentController
+				if let wsdoc = doccon.documentForWindow(window) as? WorkspaceDocument {
+					assert(self?.project.workspace === wsdoc.model)
+					assert(self?.debug.workspace === wsdoc.model)
+					self?.project.workspace		=	nil
+					self?.debug.workspace		=	nil
+				}
 		}
 	}
 	

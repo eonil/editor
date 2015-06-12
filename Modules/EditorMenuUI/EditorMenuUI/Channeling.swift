@@ -38,3 +38,35 @@ class Channeling {
 	}
 }
 
+func + (left: Channeling, right: Channeling) -> [Channeling] {
+	return	[left, right]
+}
+
+func + (left: [Channeling], right: Channeling) -> [Channeling] {
+	return	left + [right]
+}
+
+//infix operator >>> {
+//	associativity	left
+//}
+//
+//func >>> <T> (left: ValueChannel<T>, right: ValueSignal<T> -> ()) -> Channeling {
+//	return	Channeling(left, right)
+//}
+//func >>> <T> (left: ArrayChannel<T>, right: ArraySignal<T> -> ()) -> Channeling {
+//	return	Channeling(left, right)
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

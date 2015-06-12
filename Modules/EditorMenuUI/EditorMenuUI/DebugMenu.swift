@@ -28,12 +28,12 @@ public class DebugMenuController {
 	public weak var workspace: Workspace? {
 		willSet {
 			if let _ = workspace {
-				teardown()
+				_teardown()
 			}
 		}
 		didSet {
 			if let _ = workspace {
-				setup()
+				_setup()
 			}
 		}
 	}
@@ -46,21 +46,15 @@ public class DebugMenuController {
 
 	///
 
-	private let	_debuggerAvailableCommands		=	ReplicatingValueStorage<Set<Debugger.Command>>()
+	private var	_channelings	:	AnyObject?
 	
-	private let	_debuggerAvailableCommandsMonitor	=	SignalMonitor<ValueSignal<Set<Debugger.Command>>>()
-	
-	private func setup() {
-		_debuggerAvailableCommandsMonitor.handler	=	{ [weak self] s in self?.reconfigureForDebuggerCommands(s) }
-		_debuggerAvailableCommands.emitter.register(_debuggerAvailableCommandsMonitor)
-		workspace!.debugger.availableCommands.storage.emitter.register(_debuggerAvailableCommands.sensor)
+	private func _setup() {
+		_channelings	=	Channeling(workspace!.debugger.availableCommands,	{ [weak self] s in self?._reconfigureForDebuggerCommands(s) })
 	}
-	private func teardown() {
-		workspace!.debugger.availableCommands.storage.emitter.deregister(_debuggerAvailableCommands.sensor)
-		_debuggerAvailableCommands.emitter.deregister(_debuggerAvailableCommandsMonitor)
-		_debuggerAvailableCommandsMonitor.handler	=	{ _ in }
+	private func _teardown() {
+		_channelings	=	nil
 	}
-	private func reconfigureForDebuggerCommands(s: ValueSignal<Set<Debugger.Command>>) {
+	private func _reconfigureForDebuggerCommands(s: ValueSignal<Set<Debugger.Command>>) {
 		stepOver.enabled	=	s.state?.contains(.StepOver) ?? false
 		stepInto.enabled	=	s.state?.contains(.StepInto) ?? false
 		stepOut.enabled		=	s.state?.contains(.StepOut) ?? false

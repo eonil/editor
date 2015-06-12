@@ -63,9 +63,11 @@ public class ProjectMenuController {
 	///
 	
 	private var	_has_workspace	=	false		//	This flag is required due to early nil-lization.
-	private var	_channelings	=	[] as [Channeling]
+	private var	_channelings	:	AnyObject?
 	
 	private func _setup() {
+		assert(_channelings == nil)
+		
 		func queueCargoCommand(cmd: Cargo.Command) -> ()->() {
 			return	{ [weak self] in self?.workspace!.toolbox.cargo.queue(cmd) }
 		}
@@ -81,13 +83,15 @@ public class ProjectMenuController {
 		clean.onAction		=	queueCargoCommand(.Clean)
 		stop.onAction		=	executeDebuggerCommand(.Halt)
 		
-		_channelings	=	[
-			Channeling(workspace!.toolbox.cargo.availableCommands)	{ [weak self] s in self?._reconfigureForCargoCommands(s) },
-			Channeling(workspace!.debugger.availableCommands) 	{ [weak self] s in self?._reconfigureForDebuggerCommands(s) },
+		_channelings		=	[
+			Channeling(workspace!.toolbox.cargo.availableCommands) 	{ [weak self] in self?._reconfigureForCargoCommands($0) },
+			Channeling(workspace!.debugger.availableCommands) 	{ [weak self] in self?._reconfigureForDebuggerCommands($0) },
 		]
 	}
 	private func _teardown() {
-		_channelings	=	[]
+		assert(_channelings != nil)
+		
+		_channelings		=	nil
 		
 		for m in menu.allMenuItems {
 			m.onAction	=	nil
@@ -106,4 +110,18 @@ public class ProjectMenuController {
 		stop.enabled		=	s.state?.contains(.Halt) ?? false
 	}
 }
+
+func weakly<T: AnyObject,U>(object: T, method: T->U->()) -> (U->()) {
+	return	{ [weak object] parameters in
+		if let object = object {
+			return	method(object)(parameters)
+		}
+		//	No-op if `object` dead.
+	}
+}
+
+
+
+
+
 
