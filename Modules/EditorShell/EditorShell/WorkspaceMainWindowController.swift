@@ -58,6 +58,7 @@ class WorkspaceMainWindowController: NSWindowController {
 	///
 
 	private let 	_windowAgent	=	_OBJCWindowAgent()
+	private let	_paneDispOpts	=	PaneDisplayOptions()
 	
 	private var	_installed	=	false
 	private var	_toolbarCon	:	ToolbarController?
@@ -66,22 +67,14 @@ class WorkspaceMainWindowController: NSWindowController {
 	private var	_channelings	:	[Channeling]?
 	
 	private func _install() {
-		func test1() -> NSView {
-			let	v	=	SegmentOptionView()
-			v.configuration	=	SegmentOptionView.Configuration(selectionMode: SegmentOptionView.SelectionMode.Any, options: [
-				SegmentOptionView.Option(displayText: "Navigation", onSelect: {}, onDeselect: {}),
-				SegmentOptionView.Option(displayText: "Editor", onSelect: {}, onDeselect: {}),
-				SegmentOptionView.Option(displayText: "Inspector", onSelect: {}, onDeselect: {}),
-				])
-			v.sizeToFit()
-			return	v
-		}
 		typealias	ToolItem	=	ToolbarController.ToolItem
 		assert(_installed == false)
+		_paneDispOpts.install()
+		_paneDispOpts.segmentstrip.sizeToFit()
 		_toolbarCon				=	ToolbarController(identifier: "MainWindowToolbar")
 		_toolbarCon!.configuration		=	[
 			ToolbarController.ToolItem.flexibleSpace(),
-			_customViewToolItem("Panes", test1()),
+			_customViewToolItem("Panes", _paneDispOpts.segmentstrip),
 		]
 		_toolbarCon!.toolbar.displayMode	=	NSToolbarDisplayMode.IconAndLabel
 		_mainView		=	MainView()
@@ -89,8 +82,6 @@ class WorkspaceMainWindowController: NSWindowController {
 		window!.contentView	=	_mainView!
 		window!.titleVisibility	=	NSWindowTitleVisibility.Hidden
 		_installed		=	true
-		
-		_mainView!.addSubview(test1())
 	}
 	private func _deinstall() {
 		assert(_installed == true)
@@ -99,6 +90,7 @@ class WorkspaceMainWindowController: NSWindowController {
 		_mainView		=	nil
 		_toolbarCon!.configuration	=	nil
 		_toolbarCon		=	nil
+		_paneDispOpts.deinstall()
 		_installed		=	false
 	}
 	
@@ -166,6 +158,37 @@ private func _makeMainWindow() -> NSWindow {
 	return	window
 }
 
+class PaneDisplayOptions {
+	
+	let	segmentstrip	=	OptionSegmentstripView()
+	
+	let	navigator	=	OptionSegment()
+	let	editor		=	OptionSegment()
+	let	inspector	=	OptionSegment()
+	
+	init() {
+	}
+	deinit {
+	}
+	
+	func install() {
+		navigator.resetText("Navigator")
+		editor.resetText("Editor")
+		inspector.resetText("Inspector")
+		
+		segmentstrip.configuration	=
+			OptionSegmentstripView.Configuration(
+				selectionMode	:	OptionSegmentstripView.SelectionMode.Any,
+				optionSegments	:	[
+					navigator,
+					editor,
+					inspector,
+				])
+	}
+	func deinstall() {
+		segmentstrip.configuration	=	nil
+	}
+}
 
 
 

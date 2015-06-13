@@ -8,7 +8,6 @@
 
 import Foundation
 import SignalGraph
-import EditorModel
 
 public class Channeling {
 	private let	_setup		:	()->()

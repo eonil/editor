@@ -231,6 +231,14 @@ Running on device using unit-test command.
 
 
 
+Boilerplate Conventions
+-----------------------
+-	Most view classes are consist of these boilerplate functions.
+
+		_install()	//	Establishes forward links.
+		_deinstall()		
+		_connect()	//	Establishes backward links.
+		_disconnect()
 
 
 

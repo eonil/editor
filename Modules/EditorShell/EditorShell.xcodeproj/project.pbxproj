@@ -21,7 +21,8 @@
 		4596D16D1B2C42E900B77907 /* UIPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D16C1B2C42E900B77907 /* UIPalette.swift */; };
 		4596D16F1B2C458900B77907 /* TrinityDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D16E1B2C458900B77907 /* TrinityDeckView.swift */; };
 		4596D1711B2C45AC00B77907 /* SignalingTrinityDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D1701B2C45AC00B77907 /* SignalingTrinityDeckView.swift */; };
-		4596D1901B2C55EE00B77907 /* SegmentOptionViewForMainWidnowPaneDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D18F1B2C55EE00B77907 /* SegmentOptionViewForMainWidnowPaneDisplay.swift */; };
+		4596D1901B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D18F1B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift */; };
+		4596D1921B2C5E9B00B77907 /* OptionSegmentstripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D1911B2C5E9B00B77907 /* OptionSegmentstripView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -258,7 +259,8 @@
 		4596D16C1B2C42E900B77907 /* UIPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPalette.swift; sourceTree = "<group>"; };
 		4596D16E1B2C458900B77907 /* TrinityDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrinityDeckView.swift; sourceTree = "<group>"; };
 		4596D1701B2C45AC00B77907 /* SignalingTrinityDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalingTrinityDeckView.swift; sourceTree = "<group>"; };
-		4596D18F1B2C55EE00B77907 /* SegmentOptionViewForMainWidnowPaneDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentOptionViewForMainWidnowPaneDisplay.swift; sourceTree = "<group>"; };
+		4596D18F1B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindow.Toolbar.PaneDisplayOptionstrip.swift; sourceTree = "<group>"; };
+		4596D1911B2C5E9B00B77907 /* OptionSegmentstripView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSegmentstripView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,13 +320,14 @@
 			children = (
 				45012FE51B2B252B007578BD /* WorkspaceDocument2.swift */,
 				45012FEB1B2B26F9007578BD /* WorkspaceMainWindowController.swift */,
-				4596D18F1B2C55EE00B77907 /* SegmentOptionViewForMainWidnowPaneDisplay.swift */,
+				4596D18F1B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift */,
 				4596CFF91B2B998F00B77907 /* MainView.swift */,
 				4596CFFB1B2BB3BB00B77907 /* NSViewExtensions.swift */,
 				4596D10D1B2C11A800B77907 /* SegmentOptionView.swift */,
 				4596D16A1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift */,
 				4596D10B1B2C0CDA00B77907 /* ToolbarController.swift */,
 				4596D16E1B2C458900B77907 /* TrinityDeckView.swift */,
+				4596D1911B2C5E9B00B77907 /* OptionSegmentstripView.swift */,
 				4596D1701B2C45AC00B77907 /* SignalingTrinityDeckView.swift */,
 				4596D16C1B2C42E900B77907 /* UIPalette.swift */,
 			);
@@ -809,12 +812,13 @@
 				4596D16B1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift in Sources */,
 				4596D10C1B2C0CDA00B77907 /* ToolbarController.swift in Sources */,
 				4596D10E1B2C11A800B77907 /* SegmentOptionView.swift in Sources */,
-				4596D1901B2C55EE00B77907 /* SegmentOptionViewForMainWidnowPaneDisplay.swift in Sources */,
+				4596D1901B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift in Sources */,
 				4596D16F1B2C458900B77907 /* TrinityDeckView.swift in Sources */,
 				4596D1711B2C45AC00B77907 /* SignalingTrinityDeckView.swift in Sources */,
 				4596CFFA1B2B998F00B77907 /* MainView.swift in Sources */,
 				45012FE61B2B252B007578BD /* WorkspaceDocument2.swift in Sources */,
 				4596D16D1B2C42E900B77907 /* UIPalette.swift in Sources */,
+				4596D1921B2C5E9B00B77907 /* OptionSegmentstripView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
