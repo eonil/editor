@@ -57,7 +57,6 @@ class OptionSegmentstripView: NSView {
 	}
 	func sizeToFit() {
 		_segmentV.sizeToFit()
-		println(_segmentV.frame)
 		setFrameSize(_segmentV.frame.size)
 	}
 	
@@ -125,9 +124,6 @@ class OptionSegmentstripView: NSView {
 			optseg._index	=	i
 			optseg._connect()
 		}
-		
-		sizeToFit()
-		println(_segmentV.frame)
 	}
 	private func _disconnect() {
 		assert(_installed == true)
@@ -232,7 +228,6 @@ class OptionSegment {
 			case .Termination(let s):	return	s() ?? ""
 			}
 		}
-		println(resolve())
 		_owner!._segmentV.setLabel(resolve(), forSegment: _index!)
 	}
 	private func _onSelectionSignal(s: ValueSignal<Bool>) {
