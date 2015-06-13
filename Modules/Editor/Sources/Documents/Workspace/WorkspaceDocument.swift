@@ -250,38 +250,6 @@ extension WorkspaceDocument {
 
 
 
-
-
-//
-/////	MARK:
-/////	MARK:	Dynamic Menu
-//
-//private extension ProjectMenuController {
-//	func reconfigureForWorkspaceInternals(internals:InternalController) {
-//		build.onAction	=	{ [unowned self, unowned internals] in
-//			internals.buildWorkspace()
-//		}
-//		run.onAction	=	{ [unowned self, unowned internals] in
-//			internals.runWorkspace()
-//		}
-//		clean.onAction	=	{ [unowned self, unowned internals] in
-//			internals.cleanWorkspace()
-//		}
-//		stop.onAction	=	{ [unowned self, unowned internals] in
-//			internals.stopWorkspace()
-//		}
-//
-//		reconfigureAvailabilitiesForWorkspaceInternals(internals)
-//	}
-//	func reconfigureAvailabilitiesForWorkspaceInternals(internals:InternalController) {
-//		build.enabled	=	internals.debuggingController.numberOfSessions == 0
-//		run.enabled		=	internals.debuggingController.numberOfSessions == 0
-//		clean.enabled	=	internals.debuggingController.numberOfSessions == 0
-//		stop.enabled	=	internals.debuggingController.numberOfSessions > 0
-//	}
-//}
-
-
 ///	MARK:
 ///	MARK:	Static menu handling via First Responder chain
 

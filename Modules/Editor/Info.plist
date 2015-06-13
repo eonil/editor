@@ -9,6 +9,21 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
+				<string>workspace</string>
+				<string>eeworkspace</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>WorkspaceDocument2</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSTypeIsPackage</key>
+			<integer>1</integer>
+			<key>NSDocumentClass</key>
+			<string>EditorShell.WorkspaceDocument2</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
 				<string>eew</string>
 			</array>
 			<key>CFBundleTypeName</key>

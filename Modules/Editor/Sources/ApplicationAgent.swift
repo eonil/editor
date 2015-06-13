@@ -60,15 +60,15 @@ class ApplicationAgent: NSObject, NSApplicationDelegate {
 		}
 	}
 	
-	private let	_HOTFIX_menuUpdateAgetn	=	HOTFIX_MenuUpdateAgent()
+	private let	_dynamicMenuAgent	=	ADHOC_DynamicMenuAgent()
 	
 	private func _attachMenus() {
-		projectMenu!.submenu	=	_HOTFIX_menuUpdateAgetn.projectMenu
-		debugMenu!.submenu	=	_HOTFIX_menuUpdateAgetn.debugMenu
+		projectMenu!.submenu		=	_dynamicMenuAgent.projectMenu
+		debugMenu!.submenu		=	_dynamicMenuAgent.debugMenu
 	}
 	private func _detachMenus() {
-		debugMenu!.submenu	=	nil
-		projectMenu!.submenu	=	nil
+		debugMenu!.submenu		=	nil
+		projectMenu!.submenu		=	nil
 	}
 }
 
@@ -98,30 +98,11 @@ extension ApplicationAgent {
 	
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		_attachMenus()
-
-//		debugMenu!.submenu	=	MenuController.menuOfController(documentlessDebugMenuController)
-//		
-//		func rebind(slot:NSMenuItem, content:MenuController) {
-//			slot.submenu	=	MenuController.menuOfController(content)
-//		}
-//		
-//		NSNotificationCenter.defaultCenter().addObserverForName(
-//			NSMenuDidBeginTrackingNotification,
-//			object: NSApplication.sharedApplication().mainMenu!,
-//			queue: nil) { (n:NSNotification!) -> Void in
-//				let	docc	=	NSDocumentController.sharedDocumentController() as! NSDocumentController
-//				let	ws	=	docc.currentDocument as? WorkspaceDocument
-//				
-//				rebind(self.projectMenu!, ws?.projectMenuController ?? DefaultMenuControllerPalette.project)
-//				rebind(self.debugMenu!, ws?.debugMenuController ?? DefaultMenuControllerPalette.debug)
-//		}
 	}
 	
 	func applicationWillTerminate(aNotification: NSNotification) {
-		// Insert code here to tear down your application
 		_detachMenus()
 	}
-	
 }
 
 

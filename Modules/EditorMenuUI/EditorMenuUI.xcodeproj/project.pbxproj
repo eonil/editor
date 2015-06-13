@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		450A969E1B2913A6003AD0A3 /* Channeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450A969D1B2913A6003AD0A3 /* Channeling.swift */; };
 		4567DC011B1F42F8003E26CD /* EditorMenuUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4567DBF51B1F42F8003E26CD /* EditorMenuUI.framework */; };
 		4567DC081B1F42F8003E26CD /* EditorMenuUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DC071B1F42F8003E26CD /* EditorMenuUITests.swift */; };
 		4567DC211B1F4323003E26CD /* ProjectMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DC201B1F4323003E26CD /* ProjectMenu.swift */; };
@@ -72,7 +71,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		450A969D1B2913A6003AD0A3 /* Channeling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channeling.swift; sourceTree = "<group>"; };
 		4567DBF51B1F42F8003E26CD /* EditorMenuUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorMenuUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4567DBF91B1F42F8003E26CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4567DC001B1F42F8003E26CD /* EditorMenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorMenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,7 +136,6 @@
 				4567DC2D1B1F47E0003E26CD /* DebugMenu.swift */,
 				4567DC221B1F438E003E26CD /* MenuShortcutKeyCombination.swift */,
 				4567DC421B1F496B003E26CD /* SignalGraphExtensions.swift */,
-				450A969D1B2913A6003AD0A3 /* Channeling.swift */,
 			);
 			path = EditorMenuUI;
 			sourceTree = "<group>";
@@ -354,7 +351,6 @@
 				4567DC211B1F4323003E26CD /* ProjectMenu.swift in Sources */,
 				4567DC431B1F496B003E26CD /* SignalGraphExtensions.swift in Sources */,
 				4567DC2E1B1F47E0003E26CD /* DebugMenu.swift in Sources */,
-				450A969E1B2913A6003AD0A3 /* Channeling.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

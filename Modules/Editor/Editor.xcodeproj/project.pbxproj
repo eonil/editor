@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45012FE71B2B2551007578BD /* EditorShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45012FE01B2B24FF007578BD /* EditorShell.framework */; };
+		45012FE81B2B2551007578BD /* EditorShell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45012FE01B2B24FF007578BD /* EditorShell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4514A76D1A11C7D200F25ED8 /* RustProjectDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */; };
 		4514A7731A11C81200F25ED8 /* RustSourceCodeFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */; };
 		451740E01A102FA300861ECC /* ScrollViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451740DD1A102FA300861ECC /* ScrollViewController1.swift */; };
@@ -38,7 +40,7 @@
 		4567DBCD1B1F3C5F003E26CD /* EonilSQLite3.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4513F7211B1F33B900960EF5 /* EonilSQLite3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4567DC291B1F44C2003E26CD /* EditorMenuUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4567DC171B1F42F9003E26CD /* EditorMenuUI.framework */; };
 		4567DC2A1B1F44C2003E26CD /* EditorMenuUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4567DC171B1F42F9003E26CD /* EditorMenuUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4567DC451B1F4BA3003E26CD /* HOTFIX_MenuUpdateAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DC441B1F4BA3003E26CD /* HOTFIX_MenuUpdateAgent.swift */; };
+		4567DC451B1F4BA3003E26CD /* ADHOC_DynamicMenuAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DC441B1F4BA3003E26CD /* ADHOC_DynamicMenuAgent.swift */; };
 		45700EE11A11F65100415EB2 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45700EE01A11F65100415EB2 /* FileNode.swift */; };
 		457341011A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457340FF1A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift */; };
 		457341021A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457341001A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift */; };
@@ -114,6 +116,27 @@
 			proxyType = 2;
 			remoteGlobalIDString = 45F82C571B2585BF00A78AF5;
 			remoteInfo = UnitTest;
+		};
+		45012FDF1B2B24FF007578BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45012FDA1B2B24FD007578BD /* EditorShell.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45012FBE1B2B24FD007578BD;
+			remoteInfo = EditorShell;
+		};
+		45012FE11B2B24FF007578BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45012FDA1B2B24FD007578BD /* EditorShell.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45012FC91B2B24FD007578BD;
+			remoteInfo = EditorShellTests;
+		};
+		45012FE91B2B2551007578BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45012FDA1B2B24FD007578BD /* EditorShell.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45012FBD1B2B24FD007578BD;
+			remoteInfo = EditorShell;
 		};
 		4513F7201B1F33B900960EF5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -585,6 +608,7 @@
 				459C6F511B1F37FB00B9AA6D /* EditorUIComponents.framework in Embed Frameworks */,
 				459C6F691B1F388000B9AA6D /* EditorFileTreeNavigationFeature.framework in Embed Frameworks */,
 				459C6F5D1B1F37FB00B9AA6D /* EditorModel.framework in Embed Frameworks */,
+				45012FE81B2B2551007578BD /* EditorShell.framework in Embed Frameworks */,
 				459C6F6D1B1F38A600B9AA6D /* EditorIssueListingFeature.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -593,6 +617,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		45012FB21B2B2373007578BD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45012FDA1B2B24FD007578BD /* EditorShell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorShell.xcodeproj; path = ../EditorShell/EditorShell.xcodeproj; sourceTree = "<group>"; };
 		4509EF0B1B1B151200C3E71C /* EonilSQLite3.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilSQLite3.xcodeproj; path = ../SQLite3/EonilSQLite3.xcodeproj; sourceTree = "<group>"; };
 		4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../SignalGraph.Swift/SignalGraph/SignalGraph.xcodeproj; sourceTree = "<group>"; };
 		4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectDocument.swift; sourceTree = "<group>"; };
@@ -626,7 +652,7 @@
 		455FC56C1A637C2F00266BD5 /* IssueRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueRepository.swift; sourceTree = "<group>"; };
 		45646D5A1A45F9F9009697C1 /* RustAutocompletionWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustAutocompletionWindowController.swift; sourceTree = "<group>"; };
 		4567DC111B1F42F8003E26CD /* EditorMenuUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorMenuUI.xcodeproj; path = ../EditorMenuUI/EditorMenuUI.xcodeproj; sourceTree = "<group>"; };
-		4567DC441B1F4BA3003E26CD /* HOTFIX_MenuUpdateAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HOTFIX_MenuUpdateAgent.swift; sourceTree = "<group>"; };
+		4567DC441B1F4BA3003E26CD /* ADHOC_DynamicMenuAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADHOC_DynamicMenuAgent.swift; sourceTree = "<group>"; };
 		45700EE01A11F65100415EB2 /* FileNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
 		457340FF1A19F22900C93C2E /* SQLite3DatabaseEditingWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLite3DatabaseEditingWindowController.swift; sourceTree = "<group>"; };
 		457341001A19F22900C93C2E /* SQLite3DatabaseFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLite3DatabaseFileDocument.swift; sourceTree = "<group>"; };
@@ -662,7 +688,6 @@
 		45A6DAB61A639AD500DFB9CE /* SchemaInferencerWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SchemaInferencerWindowController.swift; sourceTree = "<group>"; };
 		45B89C311A15E05100D03648 /* MarkdownFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkdownFileDocument.swift; sourceTree = "<group>"; };
 		45BBB0E41A1022A10055232E /* Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		45BBB0E81A1022A10055232E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45BBB0EB1A1022A10055232E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		45BBB0EE1A1022A10055232E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		45C1EDC21A6BF322007B6F83 /* Issue+RustCompilerIssue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Issue+RustCompilerIssue.swift"; sourceTree = "<group>"; };
@@ -711,6 +736,7 @@
 				459C6F501B1F37FB00B9AA6D /* EditorUIComponents.framework in Frameworks */,
 				459C6F681B1F388000B9AA6D /* EditorFileTreeNavigationFeature.framework in Frameworks */,
 				459C6F5C1B1F37FB00B9AA6D /* EditorModel.framework in Frameworks */,
+				45012FE71B2B2551007578BD /* EditorShell.framework in Frameworks */,
 				459C6F6C1B1F38A600B9AA6D /* EditorIssueListingFeature.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -718,9 +744,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45012FDB1B2B24FD007578BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45012FE01B2B24FF007578BD /* EditorShell.framework */,
+				45012FE21B2B24FF007578BD /* EditorShellTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4513F7161B1F337C00960EF5 /* (domestic modules) */ = {
 			isa = PBXGroup;
 			children = (
+				45012FDA1B2B24FD007578BD /* EditorShell.xcodeproj */,
 				4567DC111B1F42F8003E26CD /* EditorMenuUI.xcodeproj */,
 				459C6F701B1F38E700B9AA6D /* EditorAutocompletionUI.xcodeproj */,
 				459C6F781B1F38EE00B9AA6D /* EditorWorkspaceNavigationFeature.xcodeproj */,
@@ -1126,6 +1162,7 @@
 		45BBB0DB1A1022A10055232E = {
 			isa = PBXGroup;
 			children = (
+				45012FB21B2B2373007578BD /* Info.plist */,
 				45BBB0E61A1022A10055232E /* Sources */,
 				457C05B31A15D88200D062FE /* Resources */,
 				4538571D1A622D0000DC693D /* Tests */,
@@ -1148,7 +1185,7 @@
 			isa = PBXGroup;
 			children = (
 				45204C7F1A63300900929A17 /* ApplicationAgent.swift */,
-				4567DC441B1F4BA3003E26CD /* HOTFIX_MenuUpdateAgent.swift */,
+				4567DC441B1F4BA3003E26CD /* ADHOC_DynamicMenuAgent.swift */,
 				45BBB0EB1A1022A10055232E /* Images.xcassets */,
 				45BBB0ED1A1022A10055232E /* MainMenu.xib */,
 				4514A76B1A11C7CB00F25ED8 /* Documents */,
@@ -1159,18 +1196,9 @@
 				4538573B1A62321E00DC693D /* UnitTest.swift */,
 				455795261A4CD4CD0011C34E /* TypeAliases.swift */,
 				4597F81B1A113D100089FC66 /* MonolithCandidates */,
-				45BBB0E71A1022A10055232E /* Supporting Files */,
 				45A6DAB01A639A4400DFB9CE /* (junkyard) */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		45BBB0E71A1022A10055232E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				45BBB0E81A1022A10055232E /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		45CAD9311A4B144100EDF02D /* SyntaxHighlighting */ = {
@@ -1297,6 +1325,7 @@
 				459C6F931B1F397C00B9AA6D /* PBXTargetDependency */,
 				4567DBCF1B1F3C5F003E26CD /* PBXTargetDependency */,
 				4567DC2C1B1F44C2003E26CD /* PBXTargetDependency */,
+				45012FEA1B2B2551007578BD /* PBXTargetDependency */,
 			);
 			name = Editor;
 			productName = RustREPL;
@@ -1366,6 +1395,10 @@
 					ProjectRef = 459C6F221B1F37B300B9AA6D /* EditorModel.xcodeproj */;
 				},
 				{
+					ProductGroup = 45012FDB1B2B24FD007578BD /* Products */;
+					ProjectRef = 45012FDA1B2B24FD007578BD /* EditorShell.xcodeproj */;
+				},
+				{
 					ProductGroup = 459C6F381B1F37C400B9AA6D /* Products */;
 					ProjectRef = 459C6F371B1F37C400B9AA6D /* EditorToolComponents.xcodeproj */;
 				},
@@ -1412,6 +1445,20 @@
 			fileType = wrapper.application;
 			path = UnitTest.app;
 			remoteRef = 4500EE6D1B272D5900E83F57 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45012FE01B2B24FF007578BD /* EditorShell.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorShell.framework;
+			remoteRef = 45012FDF1B2B24FF007578BD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45012FE21B2B24FF007578BD /* EditorShellTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorShellTests.xctest;
+			remoteRef = 45012FE11B2B24FF007578BD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4513F7211B1F33B900960EF5 /* EonilSQLite3.framework */ = {
@@ -1844,7 +1891,7 @@
 				4557D8981A11738E00D6C53B /* ViewController.swift in Sources */,
 				45FE101D1A12994300834358 /* FileTreeViewController2.swift in Sources */,
 				45DFBDA21A15CE9B007EBB02 /* TargetActionFunctionBox.swift in Sources */,
-				4567DC451B1F4BA3003E26CD /* HOTFIX_MenuUpdateAgent.swift in Sources */,
+				4567DC451B1F4BA3003E26CD /* ADHOC_DynamicMenuAgent.swift in Sources */,
 				4527E4F81A6A717A00115139 /* NSTextView+Issue.swift in Sources */,
 				45D8D8F11A48E99200AE42C8 /* EditorCommonWindowController2.swift in Sources */,
 				45402ABB1A153C4E00127E50 /* FileSystemMonitor2.swift in Sources */,
@@ -1875,6 +1922,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		45012FEA1B2B2551007578BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EditorShell;
+			targetProxy = 45012FE91B2B2551007578BD /* PBXContainerItemProxy */;
+		};
 		4567DBCF1B1F3C5F003E26CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "EonilSQLite3 - OSX";
@@ -2049,7 +2101,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks";
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_NAME = Editor;
@@ -2061,7 +2113,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks";
 				PRODUCT_NAME = Editor;
 			};

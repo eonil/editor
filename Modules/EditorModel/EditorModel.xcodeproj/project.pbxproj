@@ -17,6 +17,7 @@
 		4571A77E1B1CB4AB00A7911B /* Toolbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A77D1B1CB4AB00A7911B /* Toolbox.swift */; };
 		4571A7881B1CB4D500A7911B /* Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A7871B1CB4D500A7911B /* Editing.swift */; };
 		4571A78A1B1CB4EE00A7911B /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A7891B1CB4EE00A7911B /* Console.swift */; };
+		4596D1731B2C52B600B77907 /* Channeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D1721B2C52B500B77907 /* Channeling.swift */; };
 		45DD92A91B1DF8CD00A0BE6A /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD92A81B1DF8CD00A0BE6A /* Debugger.swift */; };
 		45DD92AB1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD92AA1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift */; };
 		45DD92C11B1DFC1600A0BE6A /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD92B61B1DFC1300A0BE6A /* LLDBWrapper.framework */; };
@@ -167,6 +168,7 @@
 		4571A77D1B1CB4AB00A7911B /* Toolbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolbox.swift; sourceTree = "<group>"; };
 		4571A7871B1CB4D500A7911B /* Editing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editing.swift; sourceTree = "<group>"; };
 		4571A7891B1CB4EE00A7911B /* Console.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Console.swift; sourceTree = "<group>"; };
+		4596D1721B2C52B500B77907 /* Channeling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channeling.swift; sourceTree = "<group>"; };
 		45DD92A81B1DF8CD00A0BE6A /* Debugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
 		45DD92AA1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _WorkspaceDebuggingController.swift; sourceTree = "<group>"; };
 		45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				4510E8161B12107C005824AB /* Info.plist */,
 				45F82CA31B25D8E300A78AF5 /* Channels.swift */,
 				451B561F1B1B437A006C4879 /* Workspace.swift */,
+				4596D1861B2C52B800B77907 /* (ad-hoc placement) */,
 				4567DBE21B1F3DE4003E26CD /* (children of workspace) */,
 				4571A74A1B1B761100A7911B /* Utility.swift */,
 				4567DBEA1B1F3F5C003E26CD /* (junkyard) */,
@@ -273,6 +276,14 @@
 				451B561D1B1B4374006C4879 /* _Project.swift */,
 			);
 			name = "(junkyard)";
+			sourceTree = "<group>";
+		};
+		4596D1861B2C52B800B77907 /* (ad-hoc placement) */ = {
+			isa = PBXGroup;
+			children = (
+				4596D1721B2C52B500B77907 /* Channeling.swift */,
+			);
+			name = "(ad-hoc placement)";
 			sourceTree = "<group>";
 		};
 		45DD92AD1B1DFC1200A0BE6A /* Products */ = {
@@ -530,6 +541,7 @@
 				4571A74B1B1B761100A7911B /* Utility.swift in Sources */,
 				4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */,
 				451B56201B1B437A006C4879 /* Workspace.swift in Sources */,
+				4596D1731B2C52B600B77907 /* Channeling.swift in Sources */,
 				4571A7881B1CB4D500A7911B /* Editing.swift in Sources */,
 				4571A77E1B1CB4AB00A7911B /* Toolbox.swift in Sources */,
 				45DD92AB1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  HOTFIX_MenuUpdateAgent.swift
+//  ADHOC_DynamicMenuAgent.swift
 //  Editor
 //
 //  Created by Hoon H. on 2015/06/03.
@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 import EditorMenuUI
 
-class HOTFIX_MenuUpdateAgent {
+class ADHOC_DynamicMenuAgent {
 	init() {
 		NSNotificationCenter.defaultCenter().addObserverForName(NSWindowDidBecomeKeyNotification,
 			object:	nil,

@@ -10,15 +10,21 @@ import Foundation
 import SignalGraph
 import EditorModel
 
-class Channeling {
+public class Channeling {
 	private let	_setup		:	()->()
 	private	let	_teardown	:	()->()
 	
-	convenience init<T>(_ channel: ValueChannel<T>, _ handler: ValueSignal<T>->()) {
+	public convenience init<T>(_ channel: ValueChannel<T>, _ handler: ValueSignal<T>->()) {
 		self.init(emitter: channel.storage.emitter, handler: handler)
 	}
-	convenience init<T>(_ channel: ArrayChannel<T>, _ handler: ArraySignal<T>->()) {
+	public convenience init<T>(_ channel: ArrayChannel<T>, _ handler: ArraySignal<T>->()) {
 		self.init(emitter: channel.storage.emitter, handler: handler)
+	}
+	public convenience init<T>(_ storage: ValueStorage<T>, _ handler: ValueSignal<T>->()) {
+		self.init(emitter: storage.emitter, handler: handler)
+	}
+	public convenience init<T>(_ storage: ArrayStorage<T>, _ handler: ArraySignal<T>->()) {
+		self.init(emitter: storage.emitter, handler: handler)
 	}
 	private init<T>(emitter: SignalEmitter<T>, handler: T->()) {
 		let	monitor		=	SignalMonitor<T>()
@@ -38,13 +44,13 @@ class Channeling {
 	}
 }
 
-func + (left: Channeling, right: Channeling) -> [Channeling] {
-	return	[left, right]
-}
-
-func + (left: [Channeling], right: Channeling) -> [Channeling] {
-	return	left + [right]
-}
+//func + (left: Channeling, right: Channeling) -> [Channeling] {
+//	return	[left, right]
+//}
+//
+//func + (left: [Channeling], right: Channeling) -> [Channeling] {
+//	return	left + [right]
+//}
 
 //infix operator >>> {
 //	associativity	left
