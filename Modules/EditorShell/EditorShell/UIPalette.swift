@@ -10,13 +10,9 @@ import Foundation
 import SignalGraph
 
 class UIPalette {
-	var inspectorPaneDisplay: ValueStorage<Bool> {
-		get {
-			return	_inspectorPaneDisplay
-		}
-	}
 	
-	///
+	var	navigatorPaneDisplay	=	EditableValueStorage<Bool>(false)
+	var	consolePaneDisplay	=	EditableValueStorage<Bool>(false)
+	var	inspectorPaneDisplay	=	EditableValueStorage<Bool>(false)
 	
-	private let	_inspectorPaneDisplay	=	EditableValueStorage<Bool>(false)
 }

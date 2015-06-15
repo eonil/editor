@@ -58,6 +58,7 @@ class WorkspaceMainWindowController: NSWindowController {
 	///
 
 	private let 	_windowAgent	=	_OBJCWindowAgent()
+	private let	_firstPaneOpts	=	FirstPaneDisplayOptions()
 	private let	_paneDispOpts	=	PaneDisplayOptions()
 	
 	private var	_installed	=	false
@@ -69,10 +70,16 @@ class WorkspaceMainWindowController: NSWindowController {
 	private func _install() {
 		typealias	ToolItem	=	ToolbarController.ToolItem
 		assert(_installed == false)
+		
+		_firstPaneOpts.install()
+		_firstPaneOpts.segmentstrip.sizeToFit()
+		
 		_paneDispOpts.install()
 		_paneDispOpts.segmentstrip.sizeToFit()
+		
 		_toolbarCon				=	ToolbarController(identifier: "MainWindowToolbar")
 		_toolbarCon!.configuration		=	[
+			_customViewToolItem("Panes", _firstPaneOpts.segmentstrip),
 			ToolbarController.ToolItem.flexibleSpace(),
 			_customViewToolItem("Panes", _paneDispOpts.segmentstrip),
 		]
@@ -91,6 +98,7 @@ class WorkspaceMainWindowController: NSWindowController {
 		_toolbarCon!.configuration	=	nil
 		_toolbarCon		=	nil
 		_paneDispOpts.deinstall()
+		_firstPaneOpts.deinstall()
 		_installed		=	false
 	}
 	
@@ -158,9 +166,43 @@ private func _makeMainWindow() -> NSWindow {
 	return	window
 }
 
-class PaneDisplayOptions {
+
+
+
+
+
+class FirstPaneDisplayOptions {
+	let	segmentstrip	=	OptionSegmentstripPiece()
 	
-	let	segmentstrip	=	OptionSegmentstripView()
+	let	files		=	OptionSegment()
+	let	callstack	=	OptionSegment()
+	let	variables	=	OptionSegment()
+	
+	init() {
+	}
+	deinit {
+	}
+	
+	func install() {
+		files.resetText("Files")
+		callstack.resetText("Calls")
+		variables.resetText("Vars")
+		
+		segmentstrip.configuration	=
+			OptionSegmentstripPiece.Configuration(
+				selectionMode	:	OptionSegmentstripPiece.SelectionMode.One,
+				optionSegments	:	[
+					files,
+					callstack,
+					variables,
+				])
+	}
+	func deinstall() {
+		segmentstrip.configuration	=	nil
+	}
+}
+class PaneDisplayOptions {
+	let	segmentstrip	=	OptionSegmentstripPiece()
 	
 	let	navigator	=	OptionSegment()
 	let	editor		=	OptionSegment()
@@ -177,8 +219,8 @@ class PaneDisplayOptions {
 		inspector.resetText("Inspector")
 		
 		segmentstrip.configuration	=
-			OptionSegmentstripView.Configuration(
-				selectionMode	:	OptionSegmentstripView.SelectionMode.Any,
+			OptionSegmentstripPiece.Configuration(
+				selectionMode	:	OptionSegmentstripPiece.SelectionMode.Any,
 				optionSegments	:	[
 					navigator,
 					editor,

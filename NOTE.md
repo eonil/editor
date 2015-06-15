@@ -237,8 +237,43 @@ Boilerplate Conventions
 
 		_install()	//	Establishes forward links.
 		_deinstall()		
-		_connect()	//	Establishes backward links.
+		_connect()	//	Establishes backward (so weak) links.
 		_disconnect()
+
+
+`~View`, `~Piece` and `~UI`
+---------------------------
+
+"View" means just plain AppKit view class that follows AppKit's method/delegate convention
+for signal in/out. It's independent component, and is not tied to any other part of the
+application.
+
+"Piece" is just a kind of view that uses `SignalGraph` facilities for signal in/out.
+Usually this is wrapper of a view to provide unified signaling method.
+
+"UI" is a specialized view (or view controller) that is tied to global application state 
+tree. So it is globally coupled with application state completely. Accepts application 
+global state tree, and handles all signal in/out by itself.
+
+Usually, I make a view or piece that handles a proper interaction, and use them as 
+components of a `~UI` to connect them to application state. Consequently, "View" or "Piece" are 
+usually generic component, and "UI" is always a fully specialized concerete classe.
+
+Sometimes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -10,7 +10,7 @@
 //import AppKit
 //import SignalGraph
 //
-//class PaneDisplayOptionSegmentstripView {
+//class PaneDisplayOptionSegmentstripPiece {
 //	
 //}
 //

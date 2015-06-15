@@ -1,5 +1,5 @@
 //
-//  OptionSegmentstripView.swift
+//  OptionSegmentstripPiece.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/06/13.
@@ -10,7 +10,10 @@ import Foundation
 import AppKit
 import SignalGraph
 
-class OptionSegmentstripView: NSView {
+
+///	Selection of each options are controlled by each `OptionSegment`
+///	object.
+class OptionSegmentstripPiece: NSView {
 
 	struct Configuration {
 		var	selectionMode	:	SelectionMode
@@ -18,7 +21,7 @@ class OptionSegmentstripView: NSView {
 	}
 	
 	enum SelectionMode {
-		case None
+//		case None
 		case One
 		case Any
 	}
@@ -81,9 +84,13 @@ class OptionSegmentstripView: NSView {
 	
 	///
 	
+//	private let	_selch		=	EditableArrayStorage<OptionSegment>([])
+//	private let	_selmon		=	SignalMonitor<ArraySignal<OptionSegment>>()
+	
 	private let	_segmentV	=	CustomizableTextSegmentedControl()
 	private let	_segmantAgent	=	OBJCAgent()
 	private var	_installed	=	false
+	private var	_pastSelIdx	:	Int?
 
 	private func _install() {
 		assert(_installed == false)
@@ -92,12 +99,13 @@ class OptionSegmentstripView: NSView {
 			switch f {
 			case .Any:	return	NSSegmentSwitchTracking.SelectAny
 			case .One:	return	NSSegmentSwitchTracking.SelectOne
-			case .None:	return	NSSegmentSwitchTracking.Momentary
+//			case .None:	return	NSSegmentSwitchTracking.Momentary
 			}
 		}
 		let	c		=	configuration!.optionSegments.count
 		_segmentV.segmentCount	=	c
 		_segmentV.trackingMode	=	resolveTrackingMode(configuration!.selectionMode)
+		_segmentV.colors	=	configuration!.selectionMode == .Any ? (NSColor.blackColor(), NSColor.controlTextColor()) : nil
 		_segmentV.colors	=	(NSColor.blackColor(), NSColor.controlTextColor())
 		addSubview(_segmentV)
 		_installed		=	true
@@ -124,9 +132,13 @@ class OptionSegmentstripView: NSView {
 			optseg._index	=	i
 			optseg._connect()
 		}
+//		_selmon.handler		=	{ [weak self] in self!._onSelectionSignal($0) }
+//		_selch.emitter.register(_selmon)
 	}
 	private func _disconnect() {
 		assert(_installed == true)
+//		_selch.emitter.deregister(_selmon)
+//		_selmon.handler		=	{ _ in }
 		let	c		=	configuration!.optionSegments.count
 		for i in 0..<c {
 			let	optseg	=	configuration!.optionSegments[i]
@@ -145,17 +157,48 @@ class OptionSegmentstripView: NSView {
 		_segmentV.frame		=	bounds
 	}
 	
+//	private func _onSelectionSignal(s: ArraySignal<OptionSegment>) {
+////		for i in 0..<_segmentV.segmentCount {
+////			_segmentV.setSelected(false, forSegment: i)
+////		}
+////		for opt in configuration!.optionSegments {
+////			
+////		}
+////		for _selch.state
+//	}
 	private func _notifyUserSegmentClicking() {
-		let	lastSelIdx	=	_segmentV.selectedSegment
-		if lastSelIdx == -1 {
-			return
+		func getNewSelIdx() -> Int? {
+			let	i	=	_segmentV.selectedSegment
+			return	i == -1 ? nil : i
 		}
-		let	selState	=	_segmentV.isSelectedForSegment(lastSelIdx)
-		if selState {
-			configuration!.optionSegments[lastSelIdx].select()
-		} else {
-			configuration!.optionSegments[lastSelIdx].deselect()
+		let	newSelIdx	=	getNewSelIdx()
+		
+		switch configuration!.selectionMode {
+		case .Any:
+			if let newSelIdx = newSelIdx {
+				let	selState	=	_segmentV.isSelectedForSegment(newSelIdx)
+				if selState {
+					configuration!.optionSegments[newSelIdx].select()
+				} else {
+					configuration!.optionSegments[newSelIdx].deselect()
+				}
+			}
+			
+		case .One:
+			if newSelIdx != _pastSelIdx {
+				if let idx = _pastSelIdx {
+					configuration!.optionSegments[idx].deselect()
+				}
+				if let idx = newSelIdx {
+					configuration!.optionSegments[idx].select()
+				}
+			}
+			
+		default:
+			fatalError("Unsupported yet...")
 		}
+		
+		_pastSelIdx	=	newSelIdx
 	}
 }
 
@@ -193,7 +236,7 @@ class OptionSegment {
 	
 	///
 	
-	private weak var	_owner		:	OptionSegmentstripView?
+	private weak var	_owner		:	OptionSegmentstripPiece?
 	private var		_index		:	Int?
 	
 	private let		_txtch		=	EditableValueStorage<String?>(nil)
@@ -240,6 +283,7 @@ class OptionSegment {
 			case .Termination(let s):	return	false
 			}
 		}
+		println("\(self) \(ObjectIdentifier(self).uintValue) \(resolve())")
 		_owner!._segmentV.setSelected(resolve(), forSegment: _index!)
 	}
 }
@@ -250,7 +294,7 @@ class OptionSegment {
 
 @objc
 class OBJCAgent: NSObject {
-	weak var owner: OptionSegmentstripView?
+	weak var owner: OptionSegmentstripPiece?
 	
 	@objc
 	func Editor_onUserDidClickSegment(AnyObject?) {

@@ -16,7 +16,7 @@ class MainView: NSView {
 	///	and should not change until this view to be removed from the window.
 	weak var palette: UIPalette? {
 		willSet {
-			assert(_installed == false)
+			assert(_connected == false)
 		}
 		didSet {
 			
@@ -46,50 +46,47 @@ class MainView: NSView {
 	
 	private let	_paneSwMon	=	SignalMonitor<ValueSignal<Bool>>()
 	private var	_installed	=	false
+	private var	_connected	=	false
 	
 	private func _install() {
 		assert(_installed == false)
-		_deckView.configuration	=	TrinityDeckView.Configuration(
+		_deck.configuration	=	TrinityDeckView.Configuration(
 			dividerOrientation: 	TrinityDeckView.DividerOrientation.Vertical,
 			firstPane: 		TrinityDeckView.Configuration.Pane(minimumLength: 30, onOpen: {}, onClose: {}),
 			middlePane: 		TrinityDeckView.Configuration.Pane(minimumLength: 30, onOpen: {}, onClose: {}),
 			lastPane: 		TrinityDeckView.Configuration.Pane(minimumLength: 30, onOpen: {}, onClose: {}))
-
-		addSubview(_deckView)
+		addSubview(_deck)
+		
 		_layout()
 		_installed	=	true
 	}
 	private func _deinstall() {
 		assert(_installed == true)
-		_deckView.removeFromSuperview()
+		_deck.removeFromSuperview()
 		_installed	=	false
 	}
 	
 	private func _connect() {
-//		assert(palette != nil)
-//		_paneSwMon.handler	=	{ [weak self] s in
-//			
-//		}
+		assert(_connected == false)
+		assert(palette != nil)
+		_deck.firstPaneDisplay		=	palette!.navigatorPaneDisplay
+		_deck.lastPaneDisplay		=	palette!.inspectorPaneDisplay
+		_connected			=	true
 	}
 	private func _disconnect() {
-//		assert(palette != nil)
-//		_paneSwMon.handler	=	{ _ in }
+		assert(_connected == true)
+		assert(palette != nil)
+		_deck.firstPaneDisplay		=	nil
+		_deck.lastPaneDisplay		=	nil
+		_connected			=	false
 	}
 	
 	private func _layout() {
-		_deckView.frame		=	bounds
-	}
-	
-	private func _onPaneSwitchChange(s: ValueSignal<Bool>) {
-//		switch s {
-//		case .Initiation(let s):
-//		case .Transition(let s):
-//		case .Termination(let s):
-//		}
+		_deck.frame		=	bounds
 	}
 	
 	///
 	
-	private let	_deckView	=	TrinityDeckView()
+	private let	_deck		=	TrinityDeckPiece()
 }
 

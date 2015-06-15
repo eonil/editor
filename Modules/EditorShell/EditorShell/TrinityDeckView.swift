@@ -185,13 +185,13 @@ class TrinityDeckView: NSView {
 	}
 	
 	private func _notifyDividerMovementByUserInteraction() {
-		delegate?.trinityDeckViewOnUserDidDividerInteraction()
 		if _firstWasOpen && isFirstPaneOpen() == false {
 			_closeFirstPane()
 		}
 		if _lastWasOpen && isLastPaneOpen() == false {
 			_closeFirstPane()
 		}
+		delegate?.trinityDeckViewOnUserDidDividerInteraction()
 	}
 	
 	private func _openFirstPane() {
