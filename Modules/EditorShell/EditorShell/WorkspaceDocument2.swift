@@ -15,7 +15,7 @@ public class WorkspaceDocument2: NSDocument {
 		_mainWindowController.model	=	_palette
 	}
 	deinit {
-		assert(_mainWindowController.model == nil)
+		_mainWindowController.model	=	nil
 	}
 	
 	public override func makeWindowControllers() {

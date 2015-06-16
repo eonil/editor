@@ -31,6 +31,7 @@ class WorkspaceMainWindowController: NSWindowController {
 	    fatalError("init(coder:) has not been implemented")
 	}
 	deinit {
+		assert(_connected == false)
 		assert(_installed == false)
 	}
 	
@@ -38,7 +39,6 @@ class WorkspaceMainWindowController: NSWindowController {
 	///	and should not change until this view to be removed from the window.
 	weak var model: Palette? {
 		willSet {
-			assert(_installed == false)
 			if model != nil {
 				_disconnect()
 				_deinstall()
@@ -66,13 +66,15 @@ class WorkspaceMainWindowController: NSWindowController {
 	private let 	_windowAgent	=	_OBJCWindowAgent()
 	
 	private let	_firstPaneOpts	=	FirstPaneDisplayOptions()
+	
 	private let	_paneDispOpts	=	PaneDisplayOptions()
+	private let	_navDispSync	=	EditableValueStorageSynchronizer<Bool>()
+	private let	_inspDispSync	=	EditableValueStorageSynchronizer<Bool>()
 	
 	private var	_installed	=	false
+	private var	_connected	=	false
 	private var	_toolbarCon	:	ToolbarController?
 	private var	_mainView	:	MainView?
-	
-	private var	_channelings	:	[Channeling]?
 	
 	private func _connectWindowEvents() {
 		assert(window!.delegate === nil)
@@ -88,6 +90,7 @@ class WorkspaceMainWindowController: NSWindowController {
 	private func _install() {
 		typealias	ToolItem	=	ToolbarController.ToolItem
 		assert(_installed == false)
+		assert(_connected == false)
 		
 		_firstPaneOpts.install()
 		_firstPaneOpts.segmentstrip.sizeToFit()
@@ -97,7 +100,7 @@ class WorkspaceMainWindowController: NSWindowController {
 		
 		_toolbarCon				=	ToolbarController(identifier: "MainWindowToolbar")
 		_toolbarCon!.configuration		=	[
-			_customViewToolItem("Panes", _firstPaneOpts.segmentstrip),
+			_customViewToolItem("Navigation", _firstPaneOpts.segmentstrip),
 			ToolbarController.ToolItem.flexibleSpace(),
 			_customViewToolItem("Panes", _paneDispOpts.segmentstrip),
 		]
@@ -110,6 +113,7 @@ class WorkspaceMainWindowController: NSWindowController {
 	}
 	private func _deinstall() {
 		assert(_installed == true)
+		assert(_connected == false)
 		window!.contentView	=	NSView()
 		window!.toolbar		=	nil
 		_mainView		=	nil
@@ -121,16 +125,20 @@ class WorkspaceMainWindowController: NSWindowController {
 	}
 	
 	private func _connect() {
+		assert(_connected == false)
 		assert(model != nil)
-		_mainView!.palette	=	model!
-		_channelings		=	[
-//			Channeling(palette!.inspectorPaneDisplay, { [weak self] in self!._onInspectorPaneDisplaySignal($0) }),
-		]
+		_mainView!.model	=	model!
+//		_navDispSync.pair	=	(model!.navigatorPaneDisplay, _paneDispOpts.navigator.selection)
+//		_inspDispSync.pair	=	(model!.inspectorPaneDisplay, _paneDispOpts.inspector.selection)
+		_connected		=	true
 	}
 	private func _disconnect() {
+		assert(_connected == true)
 		assert(model != nil)
-		_channelings		=	nil
-		_mainView!.palette	=	nil
+//		_navDispSync.pair	=	nil
+//		_inspDispSync.pair	=	nil
+		_mainView!.model	=	nil
+		_connected		=	false
 	}
 	
 }
@@ -140,17 +148,17 @@ private class _OBJCWindowAgent: NSObject, NSWindowDelegate {
 	weak var owner: WorkspaceMainWindowController?
 	
 	private func windowDidChangeScreen(notification: NSNotification) {
-		assert(owner != nil)
-		assert(notification.object === owner!.window)
-		if let owner = owner {
-			if owner.window!.screen == nil {
-				owner._deinstall()
-				owner._disconnect()
-			} else {
-				owner._connect()
-				owner._install()
-			}
-		}
+//		assert(owner != nil)
+//		assert(notification.object === owner!.window)
+//		if let owner = owner {
+//			if owner.window!.screen == nil {
+//				owner._deinstall()
+//				owner._disconnect()
+//			} else {
+//				owner._connect()
+//				owner._install()
+//			}
+//		}
 	}
 	
 	@objc
@@ -285,10 +293,14 @@ class PaneDisplayOptions {
 					editor,
 					inspector,
 				])
+		
+		_installed	=	true
 	}
 	private func _deinstall() {
 		assert(_installed == true)
 		segmentstrip.configuration	=	nil
+		
+		_installed	=	false
 	}
 }
 

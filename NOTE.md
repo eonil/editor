@@ -235,9 +235,9 @@ Boilerplate Conventions
 -----------------------
 -	Most view classes are consist of these boilerplate functions.
 
-		_install()	//	Establishes forward links.
+		_install()	//	Configures view/data structures.
 		_deinstall()		
-		_connect()	//	Establishes backward (so weak) links.
+		_connect()	//	Configures event signaling systems.
 		_disconnect()
 
 
