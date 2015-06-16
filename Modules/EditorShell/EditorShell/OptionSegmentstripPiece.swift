@@ -176,25 +176,22 @@ class OptionSegmentstripPiece: NSView {
 		switch configuration!.selectionMode {
 		case .Any:
 			if let newSelIdx = newSelIdx {
-				let	selState	=	_segmentV.isSelectedForSegment(newSelIdx)
-				if selState {
-					configuration!.optionSegments[newSelIdx].selection.state	=	true
-//					configuration!.optionSegments[newSelIdx].select()
-				} else {
-					configuration!.optionSegments[newSelIdx].selection.state	=	false
-//					configuration!.optionSegments[newSelIdx].deselect()
+				let	segment		=	configuration!.optionSegments[newSelIdx]
+				let	oldSelState	=	segment.selection.state
+				let	curSelState	=	_segmentV.isSelectedForSegment(newSelIdx)
+				if curSelState != oldSelState {
+					segment.selection.state	=	curSelState
+					assert(segment.selection.state == curSelState)
 				}
 			}
 			
 		case .One:
 			if newSelIdx != _pastSelIdx {
 				if let idx = _pastSelIdx {
-					configuration!.optionSegments[idx].selection.state		=	false
-//					configuration!.optionSegments[idx].deselect()
+					configuration!.optionSegments[idx].selection.state	=	false
 				}
 				if let idx = newSelIdx {
-					configuration!.optionSegments[idx].selection.state		=	true
-//					configuration!.optionSegments[idx].select()
+					configuration!.optionSegments[idx].selection.state	=	true
 				}
 			}
 			
@@ -219,16 +216,6 @@ class OptionSegment {
 	
 	let	text		=	EditableValueStorage<String?>(nil)
 	let	selection	=	EditableValueStorage<Bool>(false)
-	
-//	func resetText(s: String?) {
-//		text.state	=	s
-//	}
-//	func select() {
-//		selection.state	=	true
-//	}
-//	func deselect() {
-//		selection.state	=	false
-//	}
 	
 	///
 	
@@ -276,8 +263,11 @@ class OptionSegment {
 			case .Termination(let s):	return	false
 			}
 		}
-		println("\(self) \(ObjectIdentifier(self).uintValue) \(resolve())")
-		_owner!._segmentV.setSelected(resolve(), forSegment: _index!)
+		let	sel	=	resolve()
+		if sel != _owner!._segmentV.isSelectedForSegment(_index!) {
+			println("\(self) \(ObjectIdentifier(self).uintValue) \(resolve())")
+			_owner!._segmentV.setSelected(sel, forSegment: _index!)
+		}
 	}
 }
 

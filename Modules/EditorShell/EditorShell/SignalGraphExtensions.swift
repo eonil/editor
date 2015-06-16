@@ -67,8 +67,8 @@ class EditableValueStorageSynchronizer<T: Equatable> {
 	private func _connect() {
 		assert(pair != nil)
 		assert(pair!.0.state == pair!.1.state)
-		_mons.0.didApplySignal	=	{ [weak self] _ in _sync(self!.pair!.1, self!.pair!.0) }
-		_mons.1.didApplySignal	=	{ [weak self] _ in _sync(self!.pair!.0, self!.pair!.1) }
+		_mons.0.didApplySignal	=	{ [weak self] _ in _sync(self!.pair!.0, self!.pair!.1) }
+		_mons.1.didApplySignal	=	{ [weak self] _ in _sync(self!.pair!.1, self!.pair!.0) }
 		pair!.0.emitter.register(_mons.0.sensor)
 		pair!.1.emitter.register(_mons.1.sensor)
 	}

@@ -128,15 +128,15 @@ class WorkspaceMainWindowController: NSWindowController {
 		assert(_connected == false)
 		assert(model != nil)
 		_mainView!.model	=	model!
-//		_navDispSync.pair	=	(model!.navigatorPaneDisplay, _paneDispOpts.navigator.selection)
-//		_inspDispSync.pair	=	(model!.inspectorPaneDisplay, _paneDispOpts.inspector.selection)
+		_navDispSync.pair	=	(model!.navigatorPaneDisplay, _paneDispOpts.navigator.selection)
+		_inspDispSync.pair	=	(model!.inspectorPaneDisplay, _paneDispOpts.inspector.selection)
 		_connected		=	true
 	}
 	private func _disconnect() {
 		assert(_connected == true)
 		assert(model != nil)
-//		_navDispSync.pair	=	nil
-//		_inspDispSync.pair	=	nil
+		_navDispSync.pair	=	nil
+		_inspDispSync.pair	=	nil
 		_mainView!.model	=	nil
 		_connected		=	false
 	}
