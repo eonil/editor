@@ -178,19 +178,23 @@ class OptionSegmentstripPiece: NSView {
 			if let newSelIdx = newSelIdx {
 				let	selState	=	_segmentV.isSelectedForSegment(newSelIdx)
 				if selState {
-					configuration!.optionSegments[newSelIdx].select()
+					configuration!.optionSegments[newSelIdx].selection.state	=	true
+//					configuration!.optionSegments[newSelIdx].select()
 				} else {
-					configuration!.optionSegments[newSelIdx].deselect()
+					configuration!.optionSegments[newSelIdx].selection.state	=	false
+//					configuration!.optionSegments[newSelIdx].deselect()
 				}
 			}
 			
 		case .One:
 			if newSelIdx != _pastSelIdx {
 				if let idx = _pastSelIdx {
-					configuration!.optionSegments[idx].deselect()
+					configuration!.optionSegments[idx].selection.state		=	false
+//					configuration!.optionSegments[idx].deselect()
 				}
 				if let idx = newSelIdx {
-					configuration!.optionSegments[idx].select()
+					configuration!.optionSegments[idx].selection.state		=	true
+//					configuration!.optionSegments[idx].select()
 				}
 			}
 			
@@ -213,53 +217,42 @@ class OptionSegment {
 		assert(_connected == false)
 	}
 	
-	var textState: ValueStorage<String?> {
-		get {
-			return	_txtch
-		}
-	}
-	var selectionState: ValueStorage<Bool> {
-		get {
-			return	_selch
-		}
-	}
+	let	text		=	EditableValueStorage<String?>(nil)
+	let	selection	=	EditableValueStorage<Bool>(false)
 	
-	func resetText(s: String?) {
-		_txtch.state	=	s
-	}
-	func select() {
-		_selch.state	=	true
-	}
-	func deselect() {
-		_selch.state	=	false
-	}
+//	func resetText(s: String?) {
+//		text.state	=	s
+//	}
+//	func select() {
+//		selection.state	=	true
+//	}
+//	func deselect() {
+//		selection.state	=	false
+//	}
 	
 	///
 	
 	private weak var	_owner		:	OptionSegmentstripPiece?
 	private var		_index		:	Int?
 	
-	private let		_txtch		=	EditableValueStorage<String?>(nil)
-	private let		_txtmon		=	SignalMonitor<ValueSignal<String?>>()
-	
-	private let		_selch		=	EditableValueStorage<Bool>(false)
-	private let		_selmon		=	SignalMonitor<ValueSignal<Bool>>()
+	private let		_txtmon		=	MonitoringValueStorage<String?>()
+	private let		_selmon		=	MonitoringValueStorage<Bool>()
 	
 	private var		_connected	=	false
 	
 	private func _connect() {
-		_txtmon.handler	=	{ [weak self] in self!._onTextSignal($0) }
-		_selmon.handler	=	{ [weak self] in self!._onSelectionSignal($0) }
-		_txtch.emitter.register(_txtmon)
-		_selch.emitter.register(_selmon)
-		_connected	=	true
+		_txtmon.didApplySignal		=	{ [weak self] in self!._onTextSignal($0) }
+		_selmon.didApplySignal		=	{ [weak self] in self!._onSelectionSignal($0) }
+		text.emitter.register(_txtmon.sensor)
+		selection.emitter.register(_selmon.sensor)
+		_connected			=	true
 	}
 	private func _disconnect() {
-		_txtch.emitter.deregister(_txtmon)
-		_selch.emitter.deregister(_selmon)
-		_txtmon.handler	=	{ _ in }
-		_selmon.handler	=	{ _ in }
-		_connected	=	false
+		text.emitter.deregister(_txtmon.sensor)
+		selection.emitter.deregister(_selmon.sensor)
+		_txtmon.didApplySignal		=	nil
+		_selmon.didApplySignal		=	nil
+		_connected			=	false
 	}
 	private func _onTextSignal(s: ValueSignal<String?>) {
 		assert(_owner != nil)

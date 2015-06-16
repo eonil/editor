@@ -21,7 +21,7 @@
 //		_deinstall()
 //	}
 //	
-//	weak var palette: UIPalette? {
+//	weak var palette: Palette? {
 //		willSet {
 //			
 //		}

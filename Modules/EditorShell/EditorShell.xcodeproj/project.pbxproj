@@ -19,11 +19,12 @@
 		4596D10C1B2C0CDA00B77907 /* ToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D10B1B2C0CDA00B77907 /* ToolbarController.swift */; };
 		4596D10E1B2C11A800B77907 /* SegmentOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D10D1B2C11A800B77907 /* SegmentOptionView.swift */; };
 		4596D16B1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D16A1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift */; };
-		4596D16D1B2C42E900B77907 /* UIPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D16C1B2C42E900B77907 /* UIPalette.swift */; };
+		4596D16D1B2C42E900B77907 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D16C1B2C42E900B77907 /* Palette.swift */; };
 		4596D16F1B2C458900B77907 /* TrinityDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D16E1B2C458900B77907 /* TrinityDeckView.swift */; };
 		4596D1711B2C45AC00B77907 /* TrinityDeckPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D1701B2C45AC00B77907 /* TrinityDeckPiece.swift */; };
 		4596D1901B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D18F1B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift */; };
 		4596D1921B2C5E9B00B77907 /* OptionSegmentstripPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D1911B2C5E9B00B77907 /* OptionSegmentstripPiece.swift */; };
+		45A6B6451B2F9DE90004213D /* SignalGraphExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6B6441B2F9DE90004213D /* SignalGraphExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = 45012FBD1B2B24FD007578BD;
 			remoteInfo = EditorShell;
+		};
+		4506AE6E1B2FB6DF00F0D4D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450130121B2B2746007578BD /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFCBD1A8C7B7F0050BE72;
+			remoteInfo = EditorUIComponents;
+		};
+		4506AE701B2FB6DF00F0D4D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450130121B2B2746007578BD /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452CFCC81A8C7B7F0050BE72;
+			remoteInfo = EditorUIComponentsTests;
+		};
+		4506AE721B2FB6DF00F0D4D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450130121B2B2746007578BD /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459ACDCF1A8CE1EE008798F4;
+			remoteInfo = Workbench;
+		};
+		4506AE741B2FB6DF00F0D4D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450130121B2B2746007578BD /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E2E0141A98530200380762;
+			remoteInfo = WorkbenchForCommonWindowController;
+		};
+		4506AE761B2FB6DF00F0D4D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 450130121B2B2746007578BD /* EditorUIComponents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45F17BA01A986572001CD6BF;
+			remoteInfo = WorkbenchForIconPreview;
 		};
 		4596CFAE1B2B90EC00B77907 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -258,11 +294,12 @@
 		4596D10B1B2C0CDA00B77907 /* ToolbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarController.swift; sourceTree = "<group>"; };
 		4596D10D1B2C11A800B77907 /* SegmentOptionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentOptionView.swift; sourceTree = "<group>"; };
 		4596D16A1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizableTextSegmentedControl.swift; sourceTree = "<group>"; };
-		4596D16C1B2C42E900B77907 /* UIPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIPalette.swift; sourceTree = "<group>"; };
+		4596D16C1B2C42E900B77907 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		4596D16E1B2C458900B77907 /* TrinityDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrinityDeckView.swift; sourceTree = "<group>"; };
 		4596D1701B2C45AC00B77907 /* TrinityDeckPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrinityDeckPiece.swift; sourceTree = "<group>"; };
 		4596D18F1B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindow.Toolbar.PaneDisplayOptionstrip.swift; sourceTree = "<group>"; };
 		4596D1911B2C5E9B00B77907 /* OptionSegmentstripPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSegmentstripPiece.swift; sourceTree = "<group>"; };
+		45A6B6441B2F9DE90004213D /* SignalGraphExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalGraphExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,7 +367,8 @@
 				4596D1701B2C45AC00B77907 /* TrinityDeckPiece.swift */,
 				456773A01B2D13B800537F37 /* TrinityDeckPiece2.swift */,
 				4596D16E1B2C458900B77907 /* TrinityDeckView.swift */,
-				4596D16C1B2C42E900B77907 /* UIPalette.swift */,
+				4596D16C1B2C42E900B77907 /* Palette.swift */,
+				45A6B6441B2F9DE90004213D /* SignalGraphExtensions.swift */,
 				4567739F1B2C854800537F37 /* (junkyard) */,
 			);
 			path = EditorShell;
@@ -351,6 +389,18 @@
 				45012FCF1B2B24FD007578BD /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4506AE521B2FB6DF00F0D4D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4506AE6F1B2FB6DF00F0D4D7 /* EditorUIComponents.framework */,
+				4506AE711B2FB6DF00F0D4D7 /* EditorUIComponentsTests.xctest */,
+				4506AE731B2FB6DF00F0D4D7 /* Workbench.app */,
+				4506AE751B2FB6DF00F0D4D7 /* WorkbenchForCommonWindowController.app */,
+				4506AE771B2FB6DF00F0D4D7 /* WorkbenchForIconPreview.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4567739F1B2C854800537F37 /* (junkyard) */ = {
@@ -581,6 +631,10 @@
 					ProjectRef = 450130211B2B2746007578BD /* EditorToolComponents.xcodeproj */;
 				},
 				{
+					ProductGroup = 4506AE521B2FB6DF00F0D4D7 /* Products */;
+					ProjectRef = 450130121B2B2746007578BD /* EditorUIComponents.xcodeproj */;
+				},
+				{
 					ProductGroup = 4596D0771B2BD04A00B77907 /* Products */;
 					ProjectRef = 450130091B2B2746007578BD /* EditorWorkspaceNavigationFeature.xcodeproj */;
 				},
@@ -598,6 +652,41 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4506AE6F1B2FB6DF00F0D4D7 /* EditorUIComponents.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorUIComponents.framework;
+			remoteRef = 4506AE6E1B2FB6DF00F0D4D7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4506AE711B2FB6DF00F0D4D7 /* EditorUIComponentsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorUIComponentsTests.xctest;
+			remoteRef = 4506AE701B2FB6DF00F0D4D7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4506AE731B2FB6DF00F0D4D7 /* Workbench.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench.app;
+			remoteRef = 4506AE721B2FB6DF00F0D4D7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4506AE751B2FB6DF00F0D4D7 /* WorkbenchForCommonWindowController.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForCommonWindowController.app;
+			remoteRef = 4506AE741B2FB6DF00F0D4D7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4506AE771B2FB6DF00F0D4D7 /* WorkbenchForIconPreview.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = WorkbenchForIconPreview.app;
+			remoteRef = 4506AE761B2FB6DF00F0D4D7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4596CFAF1B2B90EC00B77907 /* EditorMenuUI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -822,6 +911,7 @@
 				4596CFFC1B2BB3BB00B77907 /* NSViewExtensions.swift in Sources */,
 				4596D16B1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift in Sources */,
 				456773A11B2D13B800537F37 /* TrinityDeckPiece2.swift in Sources */,
+				45A6B6451B2F9DE90004213D /* SignalGraphExtensions.swift in Sources */,
 				4596D10C1B2C0CDA00B77907 /* ToolbarController.swift in Sources */,
 				4596D10E1B2C11A800B77907 /* SegmentOptionView.swift in Sources */,
 				4596D1901B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift in Sources */,
@@ -829,7 +919,7 @@
 				4596D1711B2C45AC00B77907 /* TrinityDeckPiece.swift in Sources */,
 				4596CFFA1B2B998F00B77907 /* MainView.swift in Sources */,
 				45012FE61B2B252B007578BD /* WorkspaceDocument2.swift in Sources */,
-				4596D16D1B2C42E900B77907 /* UIPalette.swift in Sources */,
+				4596D16D1B2C42E900B77907 /* Palette.swift in Sources */,
 				4596D1921B2C5E9B00B77907 /* OptionSegmentstripPiece.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

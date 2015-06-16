@@ -10,20 +10,11 @@ import Foundation
 import AppKit
 import SignalGraph
 
-////struct BidirectionalValueChannel<T> {
-////	unowned let	emitter		:	SignalEmitter<ValueSignal<T>>
-////	unowned let	sensor		:	SignalSensor<ValueSignal<T>>
-////}
-//class BidirectionalValueChannel<T> {
-//	unowned let	emitter		:	SignalEmitter<ValueSignal<T>>
-//	unowned let	sensor		:	SignalSensor<ValueSignal<T>>
-//	
-//	init(emitter: SignalEmitter<ValueSignal<T>>, sensor: SignalSensor<ValueSignal<T>>) {
-//		self.emitter	=	emitter
-//		self.sensor	=	sensor
-//	}
-//}
 
+
+///	**NOTE**	A piece must have a mutable state storage.
+///			So it couldn't be simply replicating storage.
+///
 class TrinityDeckPiece2: NSView {
 	typealias	Configuration	=	TrinityDeckView.Configuration
 	
@@ -31,6 +22,10 @@ class TrinityDeckPiece2: NSView {
 	let	lastPaneDisplay		=	EditableValueStorage<Bool>(false)
 	
 	var configuration: Configuration? {
+		willSet {
+			assert(_installed == false)
+			assert(_connected == false)
+		}
 		didSet {
 			_view.configuration	=	configuration
 		}
@@ -61,17 +56,23 @@ class TrinityDeckPiece2: NSView {
 	private let	_firstPDMon	=	MonitoringValueStorage<Bool>()
 	private let	_lastPDMon	=	MonitoringValueStorage<Bool>()
 	
+	private var	_installed	=	false
 	private var	_connected	=	false
 	
 	private func _install() {
+		assert(configuration != nil)
 		addSubview(_view)
 		_layout()
+		_installed	=	true
 	}
 	private func _deinstall() {
+		assert(configuration != nil)
 		_view.removeFromSuperview()
+		_installed	=	false
 	}
 	
 	private func _connect() {
+		assert(configuration != nil)
 		_firstPDMon.didApplySignal	=	{ [weak self] in self!._onFirstPaneDisplaySignal($0) }
 		firstPaneDisplay.emitter.register(_firstPDMon.sensor)
 		_lastPDMon.didApplySignal	=	{ [weak self] in self!._onLastPaneDisplaySignal($0) }
@@ -79,6 +80,7 @@ class TrinityDeckPiece2: NSView {
 		_connected			=	true
 	}
 	private func _disconnect() {
+		assert(configuration != nil)
 		firstPaneDisplay.emitter.deregister(_firstPDMon.sensor)
 		_firstPDMon.didApplySignal	=	{ _ in }
 		lastPaneDisplay.emitter.deregister(_lastPDMon.sensor)
@@ -139,14 +141,5 @@ private func _getSnapshotOfValueSignal(#postTerminationValue: Bool?)(_ s: ValueS
 	case .Termination(let s):	return	postTerminationValue ?? s()
 	}
 }
-//private extension ValueSignal {
-//	func snapshot() -> T {
-//		switch self {
-//		case .Initiation(let s):	return	s()
-//		case .Transition(let s):	return	s()
-//		case .Termination(let s):	return	s()
-//		}
-//	}
-//}
 
 

@@ -12,14 +12,17 @@ import SignalGraph
 
 class MainView: NSView {
 	
-	///	You MUST set this BEFORE adding this view to a window
-	///	and should not change until this view to be removed from the window.
-	weak var palette: UIPalette? {
+	weak var palette: Palette? {
 		willSet {
 			assert(_connected == false)
+			if palette != nil {
+				_disconnect()
+			}
 		}
 		didSet {
-			
+			if palette != nil {
+				_connect()
+			}
 		}
 	}
 	
@@ -27,13 +30,11 @@ class MainView: NSView {
 		super.viewDidMoveToWindow()
 		if window != nil {
 			_install()
-			_connect()
 		}
 	}
 	override func viewWillMoveToWindow(newWindow: NSWindow?) {
 		super.viewWillMoveToWindow(newWindow)
 		if window != nil {
-			_disconnect()
 			_deinstall()
 		}
 	}
@@ -44,7 +45,9 @@ class MainView: NSView {
 	
 	///
 	
-	private let	_paneSwMon	=	SignalMonitor<ValueSignal<Bool>>()
+	private let	_deck		=	TrinityDeckPiece2()
+	private let	_navPDSync	=	EditableValueStorageSynchronizer<Bool>()
+	private let	_inspPDSync	=	EditableValueStorageSynchronizer<Bool>()
 	private var	_installed	=	false
 	private var	_connected	=	false
 	
@@ -69,24 +72,20 @@ class MainView: NSView {
 	private func _connect() {
 		assert(_connected == false)
 		assert(palette != nil)
-		_deck.firstPaneDisplay		=	palette!.navigatorPaneDisplay
-		_deck.lastPaneDisplay		=	palette!.inspectorPaneDisplay
+		_navPDSync.pair			=	(palette!.navigatorPaneDisplay, _deck.firstPaneDisplay)
+		_inspPDSync.pair		=	(palette!.inspectorPaneDisplay, _deck.lastPaneDisplay)
 		_connected			=	true
 	}
 	private func _disconnect() {
 		assert(_connected == true)
 		assert(palette != nil)
-		_deck.firstPaneDisplay		=	nil
-		_deck.lastPaneDisplay		=	nil
+		_navPDSync.pair			=	nil
+		_inspPDSync.pair		=	nil
 		_connected			=	false
 	}
 	
 	private func _layout() {
 		_deck.frame		=	bounds
 	}
-	
-	///
-	
-	private let	_deck		=	TrinityDeckPiece()
 }
 

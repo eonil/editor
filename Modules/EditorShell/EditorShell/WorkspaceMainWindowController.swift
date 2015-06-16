@@ -24,8 +24,7 @@ import EditorModel
 class WorkspaceMainWindowController: NSWindowController {
 	init() {
 		super.init(window: _makeMainWindow())
-		_install()
-		_connect()
+		_connectWindowEvents()
 	}
 	@availability(*,unavailable)
 	required init?(coder: NSCoder) {
@@ -37,12 +36,19 @@ class WorkspaceMainWindowController: NSWindowController {
 	
 	///	You MUST set this BEFORE adding this view to a window
 	///	and should not change until this view to be removed from the window.
-	weak var palette: UIPalette? {
+	weak var model: Palette? {
 		willSet {
 			assert(_installed == false)
+			if model != nil {
+				_disconnect()
+				_deinstall()
+			}
 		}
 		didSet {
-			
+			if model != nil {
+				_install()
+				_connect()
+			}
 		}
 	}
 	
@@ -58,6 +64,7 @@ class WorkspaceMainWindowController: NSWindowController {
 	///
 
 	private let 	_windowAgent	=	_OBJCWindowAgent()
+	
 	private let	_firstPaneOpts	=	FirstPaneDisplayOptions()
 	private let	_paneDispOpts	=	PaneDisplayOptions()
 	
@@ -67,6 +74,17 @@ class WorkspaceMainWindowController: NSWindowController {
 	
 	private var	_channelings	:	[Channeling]?
 	
+	private func _connectWindowEvents() {
+		assert(window!.delegate === nil)
+		_windowAgent.owner	=	self
+		window!.delegate	=	_windowAgent
+	}
+	private func _disconnectWindowEvents() {
+		assert(window!.delegate === _windowAgent)
+		window!.delegate	=	nil
+		_windowAgent.owner	=	nil
+	}
+	
 	private func _install() {
 		typealias	ToolItem	=	ToolbarController.ToolItem
 		assert(_installed == false)
@@ -74,7 +92,7 @@ class WorkspaceMainWindowController: NSWindowController {
 		_firstPaneOpts.install()
 		_firstPaneOpts.segmentstrip.sizeToFit()
 		
-		_paneDispOpts.install()
+		_paneDispOpts.model	=	model
 		_paneDispOpts.segmentstrip.sizeToFit()
 		
 		_toolbarCon				=	ToolbarController(identifier: "MainWindowToolbar")
@@ -97,24 +115,22 @@ class WorkspaceMainWindowController: NSWindowController {
 		_mainView		=	nil
 		_toolbarCon!.configuration	=	nil
 		_toolbarCon		=	nil
-		_paneDispOpts.deinstall()
+		_paneDispOpts.model	=	nil
 		_firstPaneOpts.deinstall()
 		_installed		=	false
 	}
 	
 	private func _connect() {
-		assert(window!.delegate === nil)
-		_windowAgent.owner	=	self
-		window!.delegate	=	_windowAgent
+		assert(model != nil)
+		_mainView!.palette	=	model!
 		_channelings		=	[
 //			Channeling(palette!.inspectorPaneDisplay, { [weak self] in self!._onInspectorPaneDisplaySignal($0) }),
 		]
 	}
 	private func _disconnect() {
-		assert(window!.delegate === _windowAgent)
+		assert(model != nil)
 		_channelings		=	nil
-		window!.delegate	=	nil
-		_windowAgent.owner	=	nil
+		_mainView!.palette	=	nil
 	}
 	
 }
@@ -123,12 +139,26 @@ class WorkspaceMainWindowController: NSWindowController {
 private class _OBJCWindowAgent: NSObject, NSWindowDelegate {
 	weak var owner: WorkspaceMainWindowController?
 	
+	private func windowDidChangeScreen(notification: NSNotification) {
+		assert(owner != nil)
+		assert(notification.object === owner!.window)
+		if let owner = owner {
+			if owner.window!.screen == nil {
+				owner._deinstall()
+				owner._disconnect()
+			} else {
+				owner._connect()
+				owner._install()
+			}
+		}
+	}
+	
 	@objc
 	func windowWillClose(notification: NSNotification) {
 		assert(owner != nil)
+		assert(notification.object === owner!.window)
 		if let owner = owner {
-			owner._disconnect()
-			owner._deinstall()
+			owner._disconnectWindowEvents()
 		}
 	}
 }
@@ -183,10 +213,16 @@ class FirstPaneDisplayOptions {
 	deinit {
 	}
 	
+	weak var model: Palette? {
+		willSet {
+			assert(_installed == false)
+		}
+	}
+	
 	func install() {
-		files.resetText("Files")
-		callstack.resetText("Calls")
-		variables.resetText("Vars")
+		files.text.state		=	"Files"
+		callstack.text.state		=	"Calls"
+		variables.text.state		=	"Vars"
 		
 		segmentstrip.configuration	=
 			OptionSegmentstripPiece.Configuration(
@@ -196,10 +232,14 @@ class FirstPaneDisplayOptions {
 					callstack,
 					variables,
 				])
+		_installed			=	true
 	}
 	func deinstall() {
 		segmentstrip.configuration	=	nil
+		_installed			=	false
 	}
+	
+	private var	_installed		=	false
 }
 class PaneDisplayOptions {
 	let	segmentstrip	=	OptionSegmentstripPiece()
@@ -211,12 +251,31 @@ class PaneDisplayOptions {
 	init() {
 	}
 	deinit {
+		assert(_installed == false)
 	}
 	
-	func install() {
-		navigator.resetText("Navigator")
-		editor.resetText("Editor")
-		inspector.resetText("Inspector")
+	weak var model: Palette? {
+		willSet {
+			if model != nil {
+				_deinstall()
+			}
+		}
+		didSet {
+			if model != nil {
+				_install()
+			}
+		}
+	}
+	
+	///
+	
+	private var	_installed		=	false
+	
+	private func _install() {
+		assert(_installed == false)
+		navigator.text.state		=	"Navigator"
+		editor.text.state		=	"Editor"
+		inspector.text.state		=	"Inspector"
 		
 		segmentstrip.configuration	=
 			OptionSegmentstripPiece.Configuration(
@@ -227,7 +286,8 @@ class PaneDisplayOptions {
 					inspector,
 				])
 	}
-	func deinstall() {
+	private func _deinstall() {
+		assert(_installed == true)
 		segmentstrip.configuration	=	nil
 	}
 }

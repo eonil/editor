@@ -9,37 +9,6 @@
 import Foundation
 import AppKit
 
-extension ToolbarController.ToolItem {
-	private static func _systemToolItem(identifier: String) -> ToolbarController.ToolItem {
-		return	ToolbarController.ToolItem(
-			identifier: 	identifier,
-			label:		"",
-			size:		(CGSize.zeroSize, CGSize.zeroSize),
-			view:		nil,
-			handler:	{})
-	}
-	static func print() -> ToolbarController.ToolItem {
-		return	_systemToolItem(NSToolbarPrintItemIdentifier)
-	}
-	static func flexibleSpace() -> ToolbarController.ToolItem {
-		return	_systemToolItem(NSToolbarFlexibleSpaceItemIdentifier)
-	}
-	static func space() -> ToolbarController.ToolItem {
-		return	_systemToolItem(NSToolbarSpaceItemIdentifier)
-	}
-	static func separator() -> ToolbarController.ToolItem {
-		return	_systemToolItem(NSToolbarSeparatorItemIdentifier)
-	}
-	static func runColor() -> ToolbarController.ToolItem {
-		return	_systemToolItem(NSToolbarShowColorsItemIdentifier)
-	}
-	static func runFont() -> ToolbarController.ToolItem {
-		return	_systemToolItem(NSToolbarShowFontsItemIdentifier)
-	}
-	static func customize() -> ToolbarController.ToolItem {
-		return	_systemToolItem(NSToolbarCustomizeToolbarItemIdentifier)
-	}
-}
 class ToolbarController {
 	struct ToolItem {
 		var	identifier	:	String
@@ -165,6 +134,39 @@ class ToolbarController {
 	}
 }
 
+
+
+extension ToolbarController.ToolItem {
+	private static func _systemToolItem(identifier: String) -> ToolbarController.ToolItem {
+		return	ToolbarController.ToolItem(
+			identifier: 	identifier,
+			label:		"",
+			size:		(CGSize.zeroSize, CGSize.zeroSize),
+			view:		nil,
+			handler:	{})
+	}
+	static func print() -> ToolbarController.ToolItem {
+		return	_systemToolItem(NSToolbarPrintItemIdentifier)
+	}
+	static func flexibleSpace() -> ToolbarController.ToolItem {
+		return	_systemToolItem(NSToolbarFlexibleSpaceItemIdentifier)
+	}
+	static func space() -> ToolbarController.ToolItem {
+		return	_systemToolItem(NSToolbarSpaceItemIdentifier)
+	}
+	static func separator() -> ToolbarController.ToolItem {
+		return	_systemToolItem(NSToolbarSeparatorItemIdentifier)
+	}
+	static func runColor() -> ToolbarController.ToolItem {
+		return	_systemToolItem(NSToolbarShowColorsItemIdentifier)
+	}
+	static func runFont() -> ToolbarController.ToolItem {
+		return	_systemToolItem(NSToolbarShowFontsItemIdentifier)
+	}
+	static func customize() -> ToolbarController.ToolItem {
+		return	_systemToolItem(NSToolbarCustomizeToolbarItemIdentifier)
+	}
+}
 
 
 

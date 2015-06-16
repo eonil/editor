@@ -58,9 +58,9 @@ class TrinityDeckView: NSView {
 			assert(v?.firstPane.minimumLength > 0.0)
 			assert(v?.middlePane.minimumLength > 0.0)
 			assert(v?.lastPane.minimumLength > 0.0)
-			//			assert(v?.firstPane.minimumLength <= v?.firstPane.maximumLength)
-			//			assert(v?.middlePane.minimumLength <= v?.middlePane.maximumLength)
-			//			assert(v?.lastPane.minimumLength <= v?.lastPane.maximumLength)
+//			assert(v?.firstPane.minimumLength <= v?.firstPane.maximumLength)
+//			assert(v?.middlePane.minimumLength <= v?.middlePane.maximumLength)
+//			assert(v?.lastPane.minimumLength <= v?.lastPane.maximumLength)
 			if _installed {
 				_disconnect()
 				_deinstall()
