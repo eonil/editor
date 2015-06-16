@@ -35,8 +35,8 @@ class TrinityDeckView: NSView {
 //			var	minimumLength	:	CGFloat			//<	Must be larger than 0. Also must be equal or smaller than `maximumLength`.
 //			var	maximumLength	:	CGFloat			//<	Must be larger than 0. Also must be equal or large than `minimumLength`.
 			
-			var	onOpen		:	()->()
-			var	onClose		:	()->()
+//			var	onOpen		:	()->()
+//			var	onClose		:	()->()
 		}
 		
 		var	dividerOrientation	:	DividerOrientation
@@ -205,13 +205,13 @@ class TrinityDeckView: NSView {
 		assert(isFirstPaneOpen() == false)
 		let	p	=	_splitView.bounds.minForSplitAxis(_splitView) + _firstPaneLen!
 		_splitView.setPosition(p, ofDividerAtIndex: 0)
-		configuration!.firstPane.onOpen()
+//		configuration!.firstPane.onOpen()
 	}
 	private func _openLastPane() {
 		assert(isLastPaneOpen() == false)
 		let	p	=	_splitView.bounds.maxForSplitAxis(_splitView) - _lastPaneLen!
 		_splitView.setPosition(p, ofDividerAtIndex: 1)
-		configuration!.lastPane.onOpen()
+//		configuration!.lastPane.onOpen()
 	}
 	private func _closeFirstPane() {
 		assert(isFirstPaneOpen() == true)

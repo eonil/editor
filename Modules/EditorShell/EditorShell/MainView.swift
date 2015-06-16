@@ -54,9 +54,9 @@ class MainView: NSView {
 		assert(_installed == false)
 		_deck.configuration	=	TrinityDeckView.Configuration(
 			dividerOrientation: 	TrinityDeckView.DividerOrientation.Vertical,
-			firstPane: 		TrinityDeckView.Configuration.Pane(minimumLength: 30, onOpen: {}, onClose: {}),
-			middlePane: 		TrinityDeckView.Configuration.Pane(minimumLength: 30, onOpen: {}, onClose: {}),
-			lastPane: 		TrinityDeckView.Configuration.Pane(minimumLength: 30, onOpen: {}, onClose: {}))
+			firstPane: 		TrinityDeckView.Configuration.Pane(minimumLength: 30),
+			middlePane: 		TrinityDeckView.Configuration.Pane(minimumLength: 30),
+			lastPane: 		TrinityDeckView.Configuration.Pane(minimumLength: 30))
 		addSubview(_deck)
 		
 		_layout()
