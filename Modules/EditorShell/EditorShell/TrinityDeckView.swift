@@ -71,10 +71,10 @@ class TrinityDeckView: NSView {
 	}
 	
 	func isFirstPaneOpen() -> Bool {
-		return	_firstPaneView.frame.lengthForSplitAxis(_splitView) > 0
+		return	_splitView.isSubviewCollapsed(_firstPaneView) == false
 	}
 	func isLastPaneOpen() -> Bool {
-		return	_lastPaneView.frame.lengthForSplitAxis(_splitView) > 0
+		return	_splitView.isSubviewCollapsed(_lastPaneView) == false
 	}
 	
 	func openFirstPane() {
@@ -128,8 +128,8 @@ class TrinityDeckView: NSView {
 	private let	_lastPaneView	=	NSView()
 	
 	private var	_installed	=	false
-	private var	_firstWasOpen	=	false
-	private var	_lastWasOpen	=	false
+	private var	_firstPaneLen	:	CGFloat?
+	private var	_lastPaneLen	:	CGFloat?
 	
 	private func _install() {
 		_assertConfigurationExistence()
@@ -138,11 +138,14 @@ class TrinityDeckView: NSView {
 		_splitView.dividerStyle		=	NSSplitViewDividerStyle.Thin
 		for v in _allPaneViews() {
 			assert(v.superview === nil)
-			v.wantsLayer	=	true
+			v.wantsLayer			=	true
 			v.layer!.backgroundColor	=	NSColor(hue: (CGFloat(random()) / CGFloat(RAND_MAX)), saturation: 0.5, brightness: 0.5, alpha: 1).CGColor
 			_splitView.translatesAutoresizingMaskIntoConstraints	=	false
 			_splitView.addSubview(v)
 		}
+		
+		_firstPaneLen	=	configuration!.firstPane.minimumLength
+		_lastPaneLen	=	configuration!.lastPane.minimumLength
 		
 		_layout()
 		_installed	=	true
@@ -155,6 +158,10 @@ class TrinityDeckView: NSView {
 				v.removeFromSuperview()
 			}
 		}
+		
+		_firstPaneLen	=	nil
+		_lastPaneLen	=	nil
+		
 		_installed	=	false
 	}
 	
@@ -169,8 +176,8 @@ class TrinityDeckView: NSView {
 	
 	private func _layout() {
 		_splitView.frame	=	bounds
-		//		_splitView.setPosition(configuration!.firstPane.minimumLength, ofDividerAtIndex: 0)
-		//		_splitView.setPosition(configuration!.lastPane.minimumLength, ofDividerAtIndex: 1)
+//		_splitView.setPosition(configuration!.firstPane.minimumLength, ofDividerAtIndex: 0)
+//		_splitView.setPosition(configuration!.lastPane.minimumLength, ofDividerAtIndex: 1)
 	}
 	
 	private func _allPaneViews() -> [NSView] {
@@ -185,38 +192,36 @@ class TrinityDeckView: NSView {
 	}
 	
 	private func _notifyDividerMovementByUserInteraction() {
-		if _firstWasOpen && isFirstPaneOpen() == false {
-			_closeFirstPane()
+		if isFirstPaneOpen() && _firstPaneView.frame.lengthForSplitAxis(_splitView) > 0 {
+			_firstPaneLen	=	_firstPaneView.frame.lengthForSplitAxis(_splitView)
 		}
-		if _lastWasOpen && isLastPaneOpen() == false {
-			_closeFirstPane()
+		if isLastPaneOpen() && _lastPaneView.frame.lengthForSplitAxis(_splitView) > 0 {
+			_lastPaneLen	=	_lastPaneView.frame.lengthForSplitAxis(_splitView)
 		}
 		delegate?.trinityDeckViewOnUserDidDividerInteraction()
 	}
 	
 	private func _openFirstPane() {
 		assert(isFirstPaneOpen() == false)
-		_splitView.setPosition(configuration!.firstPane.minimumLength, ofDividerAtIndex: 0)
+		let	p	=	_splitView.bounds.minForSplitAxis(_splitView) + _firstPaneLen!
+		_splitView.setPosition(p, ofDividerAtIndex: 0)
 		configuration!.firstPane.onOpen()
-		_firstWasOpen	=	true
 	}
 	private func _openLastPane() {
 		assert(isLastPaneOpen() == false)
-		_splitView.setPosition(configuration!.lastPane.minimumLength, ofDividerAtIndex: 1)
+		let	p	=	_splitView.bounds.maxForSplitAxis(_splitView) - _lastPaneLen!
+		_splitView.setPosition(p, ofDividerAtIndex: 1)
 		configuration!.lastPane.onOpen()
-		_lastWasOpen	=	true
 	}
 	private func _closeFirstPane() {
-		assert(_firstWasOpen == true)
 		assert(isFirstPaneOpen() == true)
-		_splitView.setPosition(_splitView.bounds.minForSplitAxis(_splitView), ofDividerAtIndex: 0)
-		_firstWasOpen	=	false
+		let	p	=	_splitView.bounds.minForSplitAxis(_splitView)
+		_splitView.setPosition(p, ofDividerAtIndex: 0)
 	}
 	private func _closeLastPane() {
-		assert(_lastWasOpen == true)
 		assert(isLastPaneOpen() == true)
-		_splitView.setPosition(_splitView.bounds.maxForSplitAxis(_splitView), ofDividerAtIndex: 1)
-		_lastWasOpen	=	false
+		let	p	=	_splitView.bounds.maxForSplitAxis(_splitView)
+		_splitView.setPosition(p, ofDividerAtIndex: 1)
 	}
 }
 
@@ -231,8 +236,12 @@ private class _OBJCSplitViewAgent: NSObject, NSSplitViewDelegate {
 		let	pidx	=	dividerIndex
 		if pidx < owner!._allPaneViews().count {
 			let	view	=	owner!._allPaneViews()[pidx]
+			if splitView.isSubviewCollapsed(view) {
+				return	proposedMinimumPosition
+			}
 			let	len	=	owner!._allMinimumLengths()[pidx]
-			return	view.frame.minForSplitAxis(splitView) + len
+			let	pos	=	view.frame.minForSplitAxis(splitView) + len
+			return	pos
 		} else {
 			return	proposedMinimumPosition
 		}
@@ -247,10 +256,14 @@ private class _OBJCSplitViewAgent: NSObject, NSSplitViewDelegate {
 	@objc
 	private func splitView(splitView: NSSplitView, constrainMaxCoordinate proposedMaximumPosition: CGFloat, ofSubviewAt dividerIndex: Int) -> CGFloat {
 		let	pidx	=	dividerIndex + 1
-		if pidx < owner!._allPaneViews().count {
+		if   pidx < owner!._allPaneViews().count {
 			let	view	=	owner!._allPaneViews()[pidx]
+			if splitView.isSubviewCollapsed(view) {
+				return	proposedMaximumPosition
+			}
 			let	len	=	owner!._allMinimumLengths()[pidx]
-			return	view.frame.maxForSplitAxis(splitView) - len
+			let	pos	=	view.frame.maxForSplitAxis(splitView) - len
+			return	pos
 		} else {
 			return	proposedMaximumPosition
 		}
