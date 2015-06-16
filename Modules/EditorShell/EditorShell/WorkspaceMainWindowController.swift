@@ -37,15 +37,15 @@ class WorkspaceMainWindowController: NSWindowController {
 	
 	///	You MUST set this BEFORE adding this view to a window
 	///	and should not change until this view to be removed from the window.
-	weak var model: Palette? {
+	weak var shell: Shell? {
 		willSet {
-			if model != nil {
+			if shell != nil {
 				_disconnect()
 				_deinstall()
 			}
 		}
 		didSet {
-			if model != nil {
+			if shell != nil {
 				_install()
 				_connect()
 			}
@@ -95,7 +95,7 @@ class WorkspaceMainWindowController: NSWindowController {
 		_firstPaneOpts.install()
 		_firstPaneOpts.segmentstrip.sizeToFit()
 		
-		_paneDispOpts.model	=	model
+		_paneDispOpts.shell	=	shell
 		_paneDispOpts.segmentstrip.sizeToFit()
 		
 		_toolbarCon				=	ToolbarController(identifier: "MainWindowToolbar")
@@ -119,25 +119,25 @@ class WorkspaceMainWindowController: NSWindowController {
 		_mainView		=	nil
 		_toolbarCon!.configuration	=	nil
 		_toolbarCon		=	nil
-		_paneDispOpts.model	=	nil
+		_paneDispOpts.shell	=	nil
 		_firstPaneOpts.deinstall()
 		_installed		=	false
 	}
 	
 	private func _connect() {
 		assert(_connected == false)
-		assert(model != nil)
-		_mainView!.model	=	model!
-		_navDispSync.pair	=	(model!.navigatorPaneDisplay, _paneDispOpts.navigator.selection)
-		_inspDispSync.pair	=	(model!.inspectorPaneDisplay, _paneDispOpts.inspector.selection)
+		assert(shell != nil)
+		_mainView!.shell	=	shell!
+		_navDispSync.pair	=	(shell!.navigatorPaneDisplay, _paneDispOpts.navigator.selection)
+		_inspDispSync.pair	=	(shell!.inspectorPaneDisplay, _paneDispOpts.inspector.selection)
 		_connected		=	true
 	}
 	private func _disconnect() {
 		assert(_connected == true)
-		assert(model != nil)
+		assert(shell != nil)
 		_navDispSync.pair	=	nil
 		_inspDispSync.pair	=	nil
-		_mainView!.model	=	nil
+		_mainView!.shell	=	nil
 		_connected		=	false
 	}
 	
@@ -221,7 +221,7 @@ class FirstPaneDisplayOptions {
 	deinit {
 	}
 	
-	weak var model: Palette? {
+	weak var model: Shell? {
 		willSet {
 			assert(_installed == false)
 		}
@@ -262,14 +262,14 @@ class PaneDisplayOptions {
 		assert(_installed == false)
 	}
 	
-	weak var model: Palette? {
+	weak var shell: Shell? {
 		willSet {
-			if model != nil {
+			if shell != nil {
 				_deinstall()
 			}
 		}
 		didSet {
-			if model != nil {
+			if shell != nil {
 				_install()
 			}
 		}

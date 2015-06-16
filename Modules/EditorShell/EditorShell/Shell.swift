@@ -1,5 +1,5 @@
 //
-//  Palette.swift
+//  Shell.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/06/13.
@@ -10,7 +10,7 @@ import Foundation
 import SignalGraph
 
 ///	Modeling of UI states and behaviors.
-class Palette {
+class Shell {
 	
 	var	navigatorPaneDisplay	=	EditableValueStorage<Bool>(false)
 	var	consolePaneDisplay	=	EditableValueStorage<Bool>(false)

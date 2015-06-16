@@ -12,14 +12,14 @@ import SignalGraph
 
 class MainView: NSView {
 	
-	weak var model: Palette? {
+	weak var shell: Shell? {
 		willSet {
-			if model != nil {
+			if shell != nil {
 				_disconnect()
 			}
 		}
 		didSet {
-			if model != nil {
+			if shell != nil {
 				_connect()
 			}
 		}
@@ -70,14 +70,14 @@ class MainView: NSView {
 	
 	private func _connect() {
 		assert(_connected == false)
-		assert(model != nil)
-		_navPDSync.pair			=	(model!.navigatorPaneDisplay, _deck.firstPaneDisplay)
-		_inspPDSync.pair		=	(model!.inspectorPaneDisplay, _deck.lastPaneDisplay)
+		assert(shell != nil)
+		_navPDSync.pair			=	(shell!.navigatorPaneDisplay, _deck.firstPaneDisplay)
+		_inspPDSync.pair		=	(shell!.inspectorPaneDisplay, _deck.lastPaneDisplay)
 		_connected			=	true
 	}
 	private func _disconnect() {
 		assert(_connected == true)
-		assert(model != nil)
+		assert(shell != nil)
 		_navPDSync.pair			=	nil
 		_inspPDSync.pair		=	nil
 		_connected			=	false

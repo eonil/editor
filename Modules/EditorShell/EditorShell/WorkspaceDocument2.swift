@@ -12,10 +12,10 @@ import AppKit
 public class WorkspaceDocument2: NSDocument {
 	
 	override init() {
-		_mainWindowController.model	=	_palette
+		_mainWindowController.shell	=	_shell
 	}
 	deinit {
-		_mainWindowController.model	=	nil
+		_mainWindowController.shell	=	nil
 	}
 	
 	public override func makeWindowControllers() {
@@ -29,6 +29,6 @@ public class WorkspaceDocument2: NSDocument {
 	
 	///
 	
-	private let	_palette		=	Palette()
+	private let	_shell			=	Shell()
 	private let	_mainWindowController	=	WorkspaceMainWindowController()
 }

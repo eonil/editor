@@ -110,11 +110,11 @@
 		4567DBEB1B1F42F8003E26CD = {
 			isa = PBXGroup;
 			children = (
-				4567DC251B1F448D003E26CD /* AppKit.framework */,
 				4567DBF71B1F42F8003E26CD /* EditorMenuUI */,
 				4567DC041B1F42F8003E26CD /* EditorMenuUITests */,
 				4567DC1A1B1F430B003E26CD /* EditorModel.xcodeproj */,
 				4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */,
+				4567DC251B1F448D003E26CD /* AppKit.framework */,
 				4567DBF61B1F42F8003E26CD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,21 +131,13 @@
 		4567DBF71B1F42F8003E26CD /* EditorMenuUI */ = {
 			isa = PBXGroup;
 			children = (
-				4567DBF81B1F42F8003E26CD /* Supporting Files */,
 				4567DC201B1F4323003E26CD /* ProjectMenu.swift */,
 				4567DC2D1B1F47E0003E26CD /* DebugMenu.swift */,
 				4567DC221B1F438E003E26CD /* MenuShortcutKeyCombination.swift */,
 				4567DC421B1F496B003E26CD /* SignalGraphExtensions.swift */,
-			);
-			path = EditorMenuUI;
-			sourceTree = "<group>";
-		};
-		4567DBF81B1F42F8003E26CD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
 				4567DBF91B1F42F8003E26CD /* Info.plist */,
 			);
-			name = "Supporting Files";
+			path = EditorMenuUI;
 			sourceTree = "<group>";
 		};
 		4567DC041B1F42F8003E26CD /* EditorMenuUITests */ = {

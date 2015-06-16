@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4506AE801B30407800F0D4D7 /* Channeling2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4506AE7F1B30407800F0D4D7 /* Channeling2.swift */; };
 		4510E85D1B121304005824AB /* SignalGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510E8541B1212F6005824AB /* SignalGraph.framework */; };
 		4510E9F61B12C870005824AB /* EditorToolComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510E9E91B12BF78005824AB /* EditorToolComponents.framework */; };
 		451B561E1B1B4374006C4879 /* _Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561D1B1B4374006C4879 /* _Project.swift */; };
@@ -156,7 +155,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4506AE7F1B30407800F0D4D7 /* Channeling2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channeling2.swift; sourceTree = "<group>"; };
 		4510E8121B12107C005824AB /* EditorModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4510E8161B12107C005824AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../SignalGraph.Swift/SignalGraph/SignalGraph.xcodeproj; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 			isa = PBXGroup;
 			children = (
 				4596D1721B2C52B500B77907 /* Channeling.swift */,
-				4506AE7F1B30407800F0D4D7 /* Channeling2.swift */,
 			);
 			name = "(ad-hoc placement)";
 			sourceTree = "<group>";
@@ -540,7 +537,6 @@
 			files = (
 				4567DBE91B1F3EBF003E26CD /* Cargo.swift in Sources */,
 				45F82CA41B25D8E300A78AF5 /* Channels.swift in Sources */,
-				4506AE801B30407800F0D4D7 /* Channeling2.swift in Sources */,
 				45DD92A91B1DF8CD00A0BE6A /* Debugger.swift in Sources */,
 				4571A74B1B1B761100A7911B /* Utility.swift in Sources */,
 				4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */,
