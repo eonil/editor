@@ -44,9 +44,9 @@ class MainView: NSView {
 	
 	///
 	
-	private let	_deck		=	TrinityDeckPiece2()
-	private let	_navPDSync	=	EditableValueStorageSynchronizer<Bool>()
-	private let	_inspPDSync	=	EditableValueStorageSynchronizer<Bool>()
+	private let	_deck		=	TrinityDeckPiece()
+	private let	_navPDSync	=	EditableValueStorageEqualizer<Bool>()
+	private let	_inspPDSync	=	EditableValueStorageEqualizer<Bool>()
 	private var	_installed	=	false
 	private var	_connected	=	false
 	

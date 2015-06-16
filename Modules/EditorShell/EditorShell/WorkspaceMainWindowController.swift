@@ -68,8 +68,8 @@ class WorkspaceMainWindowController: NSWindowController {
 	private let	_firstPaneOpts	=	FirstPaneDisplayOptions()
 	
 	private let	_paneDispOpts	=	PaneDisplayOptions()
-	private let	_navDispSync	=	EditableValueStorageSynchronizer<Bool>()
-	private let	_inspDispSync	=	EditableValueStorageSynchronizer<Bool>()
+	private let	_navDispSync	=	EditableValueStorageEqualizer<Bool>()
+	private let	_inspDispSync	=	EditableValueStorageEqualizer<Bool>()
 	
 	private var	_installed	=	false
 	private var	_connected	=	false

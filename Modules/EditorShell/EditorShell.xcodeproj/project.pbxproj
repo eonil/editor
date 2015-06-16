@@ -11,7 +11,7 @@
 		45012FD11B2B24FD007578BD /* EditorShellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45012FD01B2B24FD007578BD /* EditorShellTests.swift */; };
 		45012FE61B2B252B007578BD /* WorkspaceDocument2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45012FE51B2B252B007578BD /* WorkspaceDocument2.swift */; };
 		45012FEC1B2B26F9007578BD /* WorkspaceMainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45012FEB1B2B26F9007578BD /* WorkspaceMainWindowController.swift */; };
-		456773A11B2D13B800537F37 /* TrinityDeckPiece2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456773A01B2D13B800537F37 /* TrinityDeckPiece2.swift */; };
+		456773A11B2D13B800537F37 /* TrinityDeckPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456773A01B2D13B800537F37 /* TrinityDeckPiece.swift */; };
 		4596CFB81B2B930E00B77907 /* EditorAutocompletionUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4596CFB61B2B90EC00B77907 /* EditorAutocompletionUI.framework */; };
 		4596CFB91B2B930E00B77907 /* EditorMenuUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4596CFAF1B2B90EC00B77907 /* EditorMenuUI.framework */; };
 		4596CFFA1B2B998F00B77907 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596CFF91B2B998F00B77907 /* MainView.swift */; };
@@ -21,7 +21,6 @@
 		4596D16B1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D16A1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift */; };
 		4596D16D1B2C42E900B77907 /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D16C1B2C42E900B77907 /* Palette.swift */; };
 		4596D16F1B2C458900B77907 /* TrinityDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D16E1B2C458900B77907 /* TrinityDeckView.swift */; };
-		4596D1711B2C45AC00B77907 /* TrinityDeckPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D1701B2C45AC00B77907 /* TrinityDeckPiece.swift */; };
 		4596D1901B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D18F1B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift */; };
 		4596D1921B2C5E9B00B77907 /* OptionSegmentstripPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D1911B2C5E9B00B77907 /* OptionSegmentstripPiece.swift */; };
 		45A6B6451B2F9DE90004213D /* SignalGraphExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A6B6441B2F9DE90004213D /* SignalGraphExtensions.swift */; };
@@ -288,7 +287,7 @@
 		4501301E1B2B2746007578BD /* EditorDebuggingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebuggingFeature.xcodeproj; path = ../EditorDebuggingFeature/EditorDebuggingFeature.xcodeproj; sourceTree = "<group>"; };
 		450130211B2B2746007578BD /* EditorToolComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorToolComponents.xcodeproj; path = ../EditorToolComponents/EditorToolComponents.xcodeproj; sourceTree = "<group>"; };
 		450130241B2B2746007578BD /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
-		456773A01B2D13B800537F37 /* TrinityDeckPiece2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrinityDeckPiece2.swift; sourceTree = "<group>"; };
+		456773A01B2D13B800537F37 /* TrinityDeckPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrinityDeckPiece.swift; sourceTree = "<group>"; };
 		4596CFF91B2B998F00B77907 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		4596CFFB1B2BB3BB00B77907 /* NSViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSViewExtensions.swift; sourceTree = "<group>"; };
 		4596D10B1B2C0CDA00B77907 /* ToolbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarController.swift; sourceTree = "<group>"; };
@@ -296,7 +295,6 @@
 		4596D16A1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizableTextSegmentedControl.swift; sourceTree = "<group>"; };
 		4596D16C1B2C42E900B77907 /* Palette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
 		4596D16E1B2C458900B77907 /* TrinityDeckView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrinityDeckView.swift; sourceTree = "<group>"; };
-		4596D1701B2C45AC00B77907 /* TrinityDeckPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrinityDeckPiece.swift; sourceTree = "<group>"; };
 		4596D18F1B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindow.Toolbar.PaneDisplayOptionstrip.swift; sourceTree = "<group>"; };
 		4596D1911B2C5E9B00B77907 /* OptionSegmentstripPiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionSegmentstripPiece.swift; sourceTree = "<group>"; };
 		45A6B6441B2F9DE90004213D /* SignalGraphExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalGraphExtensions.swift; sourceTree = "<group>"; };
@@ -364,8 +362,7 @@
 				4596D16A1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift */,
 				4596D10B1B2C0CDA00B77907 /* ToolbarController.swift */,
 				4596D1911B2C5E9B00B77907 /* OptionSegmentstripPiece.swift */,
-				4596D1701B2C45AC00B77907 /* TrinityDeckPiece.swift */,
-				456773A01B2D13B800537F37 /* TrinityDeckPiece2.swift */,
+				456773A01B2D13B800537F37 /* TrinityDeckPiece.swift */,
 				4596D16E1B2C458900B77907 /* TrinityDeckView.swift */,
 				4596D16C1B2C42E900B77907 /* Palette.swift */,
 				45A6B6441B2F9DE90004213D /* SignalGraphExtensions.swift */,
@@ -910,13 +907,12 @@
 				45012FEC1B2B26F9007578BD /* WorkspaceMainWindowController.swift in Sources */,
 				4596CFFC1B2BB3BB00B77907 /* NSViewExtensions.swift in Sources */,
 				4596D16B1B2C36F600B77907 /* CustomizableTextSegmentedControl.swift in Sources */,
-				456773A11B2D13B800537F37 /* TrinityDeckPiece2.swift in Sources */,
+				456773A11B2D13B800537F37 /* TrinityDeckPiece.swift in Sources */,
 				45A6B6451B2F9DE90004213D /* SignalGraphExtensions.swift in Sources */,
 				4596D10C1B2C0CDA00B77907 /* ToolbarController.swift in Sources */,
 				4596D10E1B2C11A800B77907 /* SegmentOptionView.swift in Sources */,
 				4596D1901B2C55EE00B77907 /* MainWindow.Toolbar.PaneDisplayOptionstrip.swift in Sources */,
 				4596D16F1B2C458900B77907 /* TrinityDeckView.swift in Sources */,
-				4596D1711B2C45AC00B77907 /* TrinityDeckPiece.swift in Sources */,
 				4596CFFA1B2B998F00B77907 /* MainView.swift in Sources */,
 				45012FE61B2B252B007578BD /* WorkspaceDocument2.swift in Sources */,
 				4596D16D1B2C42E900B77907 /* Palette.swift in Sources */,

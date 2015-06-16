@@ -11,35 +11,37 @@ import SignalGraph
 
 
 
-typealias	Synchronization		=	()->()
+typealias	Equalization		=	()->()
 
 ///	:return:	A function that breaks synchronization.
 ///			You must call this when you finish synchronization.
 ///
-func synchronize<T: Equatable>(pair: (EditableValueStorage<T>, EditableValueStorage<T>)) -> Synchronization {
-	let	sync	=	EditableValueStorageSynchronizer<T>()
+func equalize<T: Equatable>(pair: (EditableValueStorage<T>, EditableValueStorage<T>)) -> Equalization {
+	let	sync	=	EditableValueStorageEqualizer<T>()
 	sync.pair	=	pair
 	let	quit	=	{ [sync] ()->() in sync.pair == nil }
 	return	quit
 }
 
 
-///	Synchronizes state of two editable storages.
+
+///	Continuously equalizes states of two editable storages.
 ///
 ///	This couples two editable storages into one. Mutation on one will be 
-///	applied to another ASAP. Value type must be `Equatable` to prevent
-///	infinite propagation loop by ignoring duplicated values.
+///	propagated to another immediately as the signal arrives. Value type must be
+///	`Equatable` to prevent infinite propagation loop by ignoring duplicated values.
 ///
 ///
 ///
 ///	REQUIREMENTS
 ///	------------
+///
 ///	-	`state` of two storages must be equal when you assigning them to this
 ///		object.
 ///
 ///	-	You must deset `pair` before this object dies.
 ///
-class EditableValueStorageSynchronizer<T: Equatable> {
+class EditableValueStorageEqualizer<T: Equatable> {
 	init() {
 		
 	}
