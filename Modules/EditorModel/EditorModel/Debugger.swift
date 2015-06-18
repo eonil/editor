@@ -12,10 +12,13 @@ import LLDBWrapper
 import EditorDebuggingFeature
 
 
+///	Represents LLDB debugger.
 public class Debugger {
 	
 	public enum Command {
+		///	Adds and launches default target of owner workspace.
 		case Launch
+		///	Halts currently running target.
 		case Halt
 		case StepOver
 		case StepInto
@@ -51,15 +54,15 @@ public class Debugger {
 	///	MARK:	-	
 	
 	private let	_lldbdebugger		=	LLDBDebugger()
-	private let	_selectedTarget		=	EditableValueStorage<Target?>(nil)
+	private let	_currentTarget		=	EditableValueStorage<Target?>(nil)
 	
 	private func _resetAvailableCommands() {
-		availableCommands.editing.state	=	[.Launch]
+		availableCommands.editor.state	=	[.Launch]
 	}
 	private func _executeImpl(c: Command) {
 		assert(availableCommands.storage.state.contains(c))
-		assert(_selectedTarget.state != nil)	
-		if let t = _selectedTarget.state {
+		assert(_currentTarget.state != nil)
+		if let t = _currentTarget.state {
 			switch c {
 			case .Launch:		t.launch()
 			case .Halt:		t.halt()
@@ -71,18 +74,18 @@ public class Debugger {
 	}
 	
 	private func _setup() {
-		if let u = _defaultTargetExecutableURL() {
-			_installTargetWithURL(u)
-		}
+//		if let u = _defaultTargetExecutableURL() {
+//			_installTargetWithURL(u)
+//		}
 	}
 	
 	private func _teardown() {
-		//	So, default-target-executable-URL shouldn't be changed
-		//	while a referencing target is alive.
-		//	If you have to change it, you must recreate the target.
-		if let u = _defaultTargetExecutableURL() {
-			_deinstallTargetWithURL(u)
-		}
+//		//	So, default-target-executable-URL shouldn't be changed
+//		//	while a referencing target is alive.
+//		//	If you have to change it, you must recreate the target.
+//		if let u = _defaultTargetExecutableURL() {
+//			_deinstallTargetWithURL(u)
+//		}
 	}
 	
 	private func _defaultTargetExecutableURL() -> NSURL? {
@@ -96,18 +99,19 @@ public class Debugger {
 	}
 	
 	private func _installTargetWithURL(u: NSURL) {
+		assert(u.checkResourceIsReachableAndReturnError(nil) == true, "Target executable file must exists to be added as a target.")
 		let	t1	=	_lldbdebugger.createTargetWithFilename(u.path!)!
 		let	wdir	=	u.URLByDeletingLastPathComponent!
 		let	t	=	Target(workingDirectoryURL: wdir, LLDBTarget: t1)
-		targets.editing[u]	=	t
+		targets.editor[u]	=	t
 		t.owner		=	self
 	}
 	
 	private func _deinstallTargetWithURL(u: NSURL) {
-		assert(targets.editing[u] != nil)
-		if let t = targets.editing[u] {
+		assert(targets.editor[u] != nil)
+		if let t = targets.editor[u] {
 			t.halt()
-			targets.editing.removeValueForKey(u)
+			targets.editor.removeValueForKey(u)
 			t.owner	=	nil
 		}
 	}
@@ -233,6 +237,18 @@ public class Target {
 		resetAvailableCommands()
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

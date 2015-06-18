@@ -16,10 +16,10 @@ import SignalGraph
 ///			So it couldn't be simply replicating storage.
 ///
 class TrinityDeckPiece: NSView {
-	typealias	Configuration	=	TrinityDeckView.Configuration
+	typealias	Configuration		=	TrinityDeckView.Configuration
 	
-	let	firstPaneDisplay	=	EditableValueStorage<Bool>(false)
-	let	lastPaneDisplay		=	EditableValueStorage<Bool>(false)
+	let		firstPaneDisplay	=	EditableValueStorage<Bool>(false)
+	let		lastPaneDisplay		=	EditableValueStorage<Bool>(false)
 	
 	var configuration: Configuration? {
 		willSet {

@@ -27,10 +27,10 @@ public class Console {
 	public let	history	=	ArrayChannel<String>([])
 	
 	public func clearIssues() {
-		issues.editing.removeAll()
+		issues.editor.removeAll()
 	}
 	public func clearHistory() {
-		history.editing.removeAll()
+		history.editor.removeAll()
 	}
 	
 	///
@@ -41,7 +41,7 @@ public class Console {
 	}
 	
 	internal func extendHistory(lines: [String]) {
-		history.editing.extend(lines)
+		history.editor.extend(lines)
 	}
 }
 

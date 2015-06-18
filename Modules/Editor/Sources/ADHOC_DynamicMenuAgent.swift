@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import EditorMenuUI
+import EditorShell
 
 class ADHOC_DynamicMenuAgent {
 	init() {
@@ -22,6 +23,11 @@ class ADHOC_DynamicMenuAgent {
 					self?.project.workspace		=	wsdoc.model
 					self?.debug.workspace		=	wsdoc.model
 				}
+				if let wsdoc = doccon.documentForWindow(window) as? WorkspaceDocument2 {
+					self?.project.workspace		=	wsdoc.model
+					self?.debug.workspace		=	wsdoc.model
+				}
+
 		}
 		NSNotificationCenter.defaultCenter().addObserverForName(NSWindowDidResignKeyNotification,
 			object:	nil,
@@ -30,6 +36,12 @@ class ADHOC_DynamicMenuAgent {
 				let	window	=	n.object as! NSWindow
 				let	doccon	=	NSDocumentController.sharedDocumentController() as! NSDocumentController
 				if let wsdoc = doccon.documentForWindow(window) as? WorkspaceDocument {
+					assert(self?.project.workspace === wsdoc.model)
+					assert(self?.debug.workspace === wsdoc.model)
+					self?.project.workspace		=	nil
+					self?.debug.workspace		=	nil
+				}
+				if let wsdoc = doccon.documentForWindow(window) as? WorkspaceDocument2 {
 					assert(self?.project.workspace === wsdoc.model)
 					assert(self?.debug.workspace === wsdoc.model)
 					self?.project.workspace		=	nil

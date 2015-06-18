@@ -139,6 +139,13 @@
 			remoteGlobalIDString = 452CFD5C1A8C7D2D0050BE72;
 			remoteInfo = UnitTests;
 		};
+		456593C11B31CE2F007CC1F3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 456593BB1B31CE2F007CC1F3 /* EditorModel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4510E8121B12107C005824AB;
+			remoteInfo = EditorModel;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -176,6 +183,7 @@
 		451C3AB61AA208D1002ECA80 /* Dropping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dropping.swift; sourceTree = "<group>"; };
 		4527AF8A1A9A344100FDE847 /* OutlineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineView.swift; sourceTree = "<group>"; };
 		45400B201AA2D8280019EB5A /* FileOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileOperations.swift; sourceTree = "<group>"; };
+		456593BB1B31CE2F007CC1F3 /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
 		45AFF0E01AA1E7F5004C68D0 /* WorkspaceNavigationViewController.Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceNavigationViewController.Extensions.swift; sourceTree = "<group>"; };
 		45AFF0ED1AA1E95A004C68D0 /* WorkspaceRepository.NodeSearching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceRepository.NodeSearching.swift; sourceTree = "<group>"; };
 		45BDC5EC1A9A1FE800A8045A /* Aliases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Aliases.swift; sourceTree = "<group>"; };
@@ -242,8 +250,9 @@
 				45166A601A98C3EC0046213D /* EditorWorkspaceNavigationFeature */,
 				45166A6D1A98C3EC0046213D /* EditorWorkspaceNavigationFeatureTests */,
 				45166AD81A98F53A0046213D /* Workbench1 */,
-				45166B811A98FE860046213D /* EditorCommon.xcodeproj */,
 				45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */,
+				45166B811A98FE860046213D /* EditorCommon.xcodeproj */,
+				456593BB1B31CE2F007CC1F3 /* EditorModel.xcodeproj */,
 				4509EEE11B1B135700C3E71C /* Standards.xcodeproj */,
 				45166A5F1A98C3EC0046213D /* Products */,
 			);
@@ -323,6 +332,14 @@
 			children = (
 				45166B871A98FE860046213D /* EditorCommon.framework */,
 				45166B891A98FE860046213D /* UnitTests */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		456593BC1B31CE2F007CC1F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				456593C21B31CE2F007CC1F3 /* EditorModel.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -465,6 +482,10 @@
 					ProjectRef = 45166B811A98FE860046213D /* EditorCommon.xcodeproj */;
 				},
 				{
+					ProductGroup = 456593BC1B31CE2F007CC1F3 /* Products */;
+					ProjectRef = 456593BB1B31CE2F007CC1F3 /* EditorModel.xcodeproj */;
+				},
+				{
 					ProductGroup = 45166B691A98FC6A0046213D /* Products */;
 					ProjectRef = 45166B681A98FC6A0046213D /* EditorUIComponents.xcodeproj */;
 				},
@@ -565,6 +586,13 @@
 			fileType = "compiled.mach-o.executable";
 			path = UnitTests;
 			remoteRef = 45166B881A98FE860046213D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		456593C21B31CE2F007CC1F3 /* EditorModel.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorModel.framework;
+			remoteRef = 456593C11B31CE2F007CC1F3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

@@ -29,6 +29,7 @@ public protocol WorkspaceNavigationViewControllerDelegate: class {
 ///
 ///	This object equips internal scroll-view, so you should not make your own scroll view
 ///	to wrap this up.
+///
 public final class WorkspaceNavigationViewController: NSViewController {
 	public weak var delegate:WorkspaceNavigationViewControllerDelegate?
 	

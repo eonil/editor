@@ -34,6 +34,8 @@ public class ProjectMenuController {
 		assert(_has_workspace == false)
 	}
 	
+	///	Set currently selected workspace here to reflect menu availability
+	///	by the workspace.
 	public weak var workspace: Workspace? {
 		willSet {
 			if let _ = workspace {

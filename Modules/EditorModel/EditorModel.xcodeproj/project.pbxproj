@@ -11,6 +11,7 @@
 		4510E9F61B12C870005824AB /* EditorToolComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510E9E91B12BF78005824AB /* EditorToolComponents.framework */; };
 		451B561E1B1B4374006C4879 /* _Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561D1B1B4374006C4879 /* _Project.swift */; };
 		451B56201B1B437A006C4879 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561F1B1B437A006C4879 /* Workspace.swift */; };
+		456593CE1B3235A4007CC1F3 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456593CD1B3235A4007CC1F3 /* Package.swift */; };
 		4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DBE51B1F3EA4003E26CD /* Racer.swift */; };
 		4567DBE91B1F3EBF003E26CD /* Cargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DBE81B1F3EBF003E26CD /* Cargo.swift */; };
 		4571A74B1B1B761100A7911B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A74A1B1B761100A7911B /* Utility.swift */; };
@@ -161,6 +162,7 @@
 		4510E9E21B12BF77005824AB /* EditorToolComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorToolComponents.xcodeproj; path = ../EditorToolComponents/EditorToolComponents.xcodeproj; sourceTree = "<group>"; };
 		451B561D1B1B4374006C4879 /* _Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Project.swift; sourceTree = "<group>"; };
 		451B561F1B1B437A006C4879 /* Workspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
+		456593CD1B3235A4007CC1F3 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		4567DBE51B1F3EA4003E26CD /* Racer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Racer.swift; sourceTree = "<group>"; };
 		4567DBE81B1F3EBF003E26CD /* Cargo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo.swift; sourceTree = "<group>"; };
 		4567DC461B203F06003E26CD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -215,13 +217,13 @@
 		4510E8141B12107C005824AB /* EditorModel */ = {
 			isa = PBXGroup;
 			children = (
-				4510E8161B12107C005824AB /* Info.plist */,
 				45F82CA31B25D8E300A78AF5 /* Channels.swift */,
 				451B561F1B1B437A006C4879 /* Workspace.swift */,
-				4596D1861B2C52B800B77907 /* (ad-hoc placement) */,
 				4567DBE21B1F3DE4003E26CD /* (children of workspace) */,
 				4571A74A1B1B761100A7911B /* Utility.swift */,
+				4596D1861B2C52B800B77907 /* (ad-hoc placement) */,
 				4567DBEA1B1F3F5C003E26CD /* (junkyard) */,
+				4510E8161B12107C005824AB /* Info.plist */,
 			);
 			path = EditorModel;
 			sourceTree = "<group>";
@@ -251,6 +253,7 @@
 		4567DBE21B1F3DE4003E26CD /* (children of workspace) */ = {
 			isa = PBXGroup;
 			children = (
+				456593CD1B3235A4007CC1F3 /* Package.swift */,
 				4571A7871B1CB4D500A7911B /* Editing.swift */,
 				4571A77D1B1CB4AB00A7911B /* Toolbox.swift */,
 				4567DBE71B1F3EB0003E26CD /* (children of toolbox) */,
@@ -540,6 +543,7 @@
 				45DD92A91B1DF8CD00A0BE6A /* Debugger.swift in Sources */,
 				4571A74B1B1B761100A7911B /* Utility.swift in Sources */,
 				4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */,
+				456593CE1B3235A4007CC1F3 /* Package.swift in Sources */,
 				451B56201B1B437A006C4879 /* Workspace.swift in Sources */,
 				4596D1731B2C52B600B77907 /* Channeling.swift in Sources */,
 				4571A7881B1CB4D500A7911B /* Editing.swift in Sources */,

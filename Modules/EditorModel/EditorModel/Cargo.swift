@@ -33,10 +33,10 @@ public class Cargo {
 	public let	waitingCommands		=	ArrayChannel<Command>([])
 
 	public func queue(command: Command) {
-		waitingCommands.editing.append(command)
+		waitingCommands.editor.append(command)
 	}
 	public func cancelAll() {
-		waitingCommands.editing.removeAll()
+		waitingCommands.editor.removeAll()
 	}
 	
 	///
@@ -59,7 +59,7 @@ public class Cargo {
 		let	u	=	tools.workspace.rootDirectoryURL.storage.state
 		exe.delegate	=	_cargoAgent
 		
-		runningCommand.editing.state	=	cmd
+		runningCommand.editor.state	=	cmd
 		
 		switch cmd {
 		case .Clean:
@@ -86,7 +86,7 @@ public class Cargo {
 	}
 	
 	private func resetAvailableCommands() {
-		availableCommands.editing.state			=	[.Clean, .Build]
+		availableCommands.editor.state			=	[.Clean, .Build]
 	}
 	
 	private class CargoAgent: CargoExecutionControllerDelegate {
@@ -100,7 +100,7 @@ public class Cargo {
 		}
 		func cargoExecutionControllerRemoteProcessDidTerminate() {
 			owner!.tools.workspace.console.extendHistory([""])
-			owner!.runningCommand.editing.state	=	nil
+			owner!.runningCommand.editor.state	=	nil
 			owner!.resetAvailableCommands()
 		}
 	}

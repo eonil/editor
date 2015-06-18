@@ -249,11 +249,17 @@ class FirstPaneDisplayOptions {
 	
 	private var	_installed		=	false
 }
+
+
+
+
+
+
 class PaneDisplayOptions {
 	let	segmentstrip	=	OptionSegmentstripPiece()
 	
 	let	navigator	=	OptionSegment()
-	let	editor		=	OptionSegment()
+	let	console		=	OptionSegment()
 	let	inspector	=	OptionSegment()
 	
 	init() {
@@ -282,7 +288,7 @@ class PaneDisplayOptions {
 	private func _install() {
 		assert(_installed == false)
 		navigator.text.state		=	"Navigator"
-		editor.text.state		=	"Editor"
+		console.text.state		=	"Console"
 		inspector.text.state		=	"Inspector"
 		
 		segmentstrip.configuration	=
@@ -290,7 +296,7 @@ class PaneDisplayOptions {
 				selectionMode	:	OptionSegmentstripPiece.SelectionMode.Any,
 				optionSegments	:	[
 					navigator,
-					editor,
+					console,
 					inspector,
 				])
 		

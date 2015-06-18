@@ -8,14 +8,22 @@
 
 import Foundation
 import AppKit
+import EditorModel
 
 public class WorkspaceDocument2: NSDocument {
 	
-	override init() {
+	internal override init() {
 		_mainWindowController.shell	=	_shell
 	}
 	deinit {
 		_mainWindowController.shell	=	nil
+	}
+	
+	///	You should not read this before finish reading a data from a URL.
+	public var model: Workspace {
+		get {
+			return	_workspace!
+		}
 	}
 	
 	public override func makeWindowControllers() {
@@ -24,6 +32,8 @@ public class WorkspaceDocument2: NSDocument {
 		_mainWindowController.showWindow(self)
 	}
 	public override func readFromURL(url: NSURL, ofType typeName: String, error outError: NSErrorPointer) -> Bool {
+		assert(url.pathExtension == "eeworkspace" || url.pathExtension == "workspace")
+		_workspace	=	Workspace(rootDirectoryURL: url)
 		return	true
 	}
 	
@@ -31,4 +41,6 @@ public class WorkspaceDocument2: NSDocument {
 	
 	private let	_shell			=	Shell()
 	private let	_mainWindowController	=	WorkspaceMainWindowController()
+	
+	private var	_workspace		:	Workspace?
 }

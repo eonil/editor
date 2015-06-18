@@ -27,50 +27,50 @@ import SignalGraph
 //}
 
 public struct ValueChannel<T> {
-	public var storage: ValueStorage<T>	{ get { return editing } }
+	public var storage: ValueStorage<T>	{ get { return editor } }
 	
 	///
 	
-	internal let	editing		:	EditableValueStorage<T>
+	internal let	editor		:	EditableValueStorage<T>
 	
 	internal init(_ state: T) {
-		editing			=	EditableValueStorage(state)
+		editor			=	EditableValueStorage(state)
 	}
 }
 
 public struct ArrayChannel<T> {
-	public var storage: ArrayStorage<T>	{ get { return editing } }
+	public var storage: ArrayStorage<T>	{ get { return editor } }
 	
 	///
 	
-	internal let	editing		:	EditableArrayStorage<T>
+	internal let	editor		:	EditableArrayStorage<T>
 	
 	internal init(_ state: [T]) {
-		self.editing		=	EditableArrayStorage(state)
+		self.editor		=	EditableArrayStorage(state)
 	}
 }
 
 public struct SetChannel<T: Hashable> {
-	public var storage: SetStorage<T> 	{ get { return editing } }
+	public var storage: SetStorage<T> 	{ get { return editor } }
 	
 	///
 	
-	internal let	editing		:	EditableSetStorage<T>
+	internal let	editor		:	EditableSetStorage<T>
 	
 	internal init(_ state: Set<T>) {
-		self.editing		=	EditableSetStorage(state)
+		self.editor		=	EditableSetStorage(state)
 	}
 }
 
 public struct DictionaryChannel<K: Hashable, V> {
-	public var storage: DictionaryStorage<K,V>	{ get { return editing } }
+	public var storage: DictionaryStorage<K,V>	{ get { return editor } }
 	
 	///
 	
-	internal let	editing		:	EditableDictionaryStorage<K,V>
+	internal let	editor		:	EditableDictionaryStorage<K,V>
 
 	internal init(_ state: Dictionary<K,V>) {
-		self.editing		=	EditableDictionaryStorage<K,V>(state)
+		self.editor		=	EditableDictionaryStorage<K,V>(state)
 	}
 }
 

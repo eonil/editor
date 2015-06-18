@@ -16,5 +16,6 @@ public class Editing {
 	
 	internal weak var owner	:	Workspace?
 	internal init() {
+		
 	}
 }

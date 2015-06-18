@@ -22,6 +22,7 @@ public class Workspace {
 	
 	public let	rootDirectoryURL	:	ValueChannel<NSURL>
 	
+//	public let	package		=	
 	public let	editing		=	Editing()
 	public let	toolbox		=	Toolbox()
 	public let	debugger	=	Debugger()
