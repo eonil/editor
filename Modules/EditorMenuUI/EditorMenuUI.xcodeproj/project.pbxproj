@@ -14,17 +14,43 @@
 		4567DC241B1F4488003E26CD /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4567DC1F1B1F430B003E26CD /* EditorModel.framework */; };
 		4567DC261B1F448E003E26CD /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4567DC251B1F448D003E26CD /* AppKit.framework */; };
 		4567DC2E1B1F47E0003E26CD /* DebugMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DC2D1B1F47E0003E26CD /* DebugMenu.swift */; };
-		4567DC411B1F492F003E26CD /* SignalGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4567DC381B1F492B003E26CD /* SignalGraph.framework */; };
-		4567DC431B1F496B003E26CD /* SignalGraphExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DC421B1F496B003E26CD /* SignalGraphExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4500EE2A1B272D5900E83F57 /* PBXContainerItemProxy */ = {
+		45669F0C1B3E965000666D54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 45F82C571B2585BF00A78AF5;
-			remoteInfo = UnitTest;
+			remoteGlobalIDString = 457A3D761B3E29B400FFF5A1;
+			remoteInfo = SignalGraph;
+		};
+		45669F0E1B3E965000666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3D801B3E29B400FFF5A1;
+			remoteInfo = SignalGraphTest;
+		};
+		45669F101B3E965000666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 453718A91B3AD93500160463;
+			remoteInfo = SignalGraphTestRun;
+		};
+		45669F121B3E965000666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3DBF1B3E2B7800FFF5A1;
+			remoteInfo = SignalGraphMobile;
+		};
+		45669F141B3E965000666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3DC91B3E2B7900FFF5A1;
+			remoteInfo = SignalGraphTestMobile;
 		};
 		4567DC021B1F42F8003E26CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -40,34 +66,6 @@
 			remoteGlobalIDString = 4510E8121B12107C005824AB;
 			remoteInfo = EditorModel;
 		};
-		4567DC371B1F492B003E26CD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45D934E41AFE4228000EE661;
-			remoteInfo = SignalGraph;
-		};
-		4567DC391B1F492B003E26CD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4563E0651AF8FCA800AA9EA6;
-			remoteInfo = SignalGraphMobile;
-		};
-		4567DC3D1B1F492B003E26CD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459D96AE1AFE52D3006AF2C0;
-			remoteInfo = SignalGraphAppKitAddon;
-		};
-		4567DC3F1B1F492B003E26CD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45BE34121B0CC02D0029B752;
-			remoteInfo = OSXTestdriveApp;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -81,8 +79,7 @@
 		4567DC221B1F438E003E26CD /* MenuShortcutKeyCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuShortcutKeyCombination.swift; sourceTree = "<group>"; };
 		4567DC251B1F448D003E26CD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		4567DC2D1B1F47E0003E26CD /* DebugMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMenu.swift; sourceTree = "<group>"; };
-		4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = /Users/Eonil/Workshop/Incubation/Editor/Modules/Editor/../SignalGraph.Swift/SignalGraph/SignalGraph.xcodeproj; sourceTree = "<absolute>"; };
-		4567DC421B1F496B003E26CD /* SignalGraphExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalGraphExtensions.swift; sourceTree = "<group>"; };
+		4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../../Submodules/SignalGraph.Swift/SignalGraph.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4567DC411B1F492F003E26CD /* SignalGraph.framework in Frameworks */,
 				4567DC261B1F448E003E26CD /* AppKit.framework in Frameworks */,
 				4567DC241B1F4488003E26CD /* EditorModel.framework in Frameworks */,
 			);
@@ -107,6 +103,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45669F041B3E965000666D54 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45669F0D1B3E965000666D54 /* SignalGraph.framework */,
+				45669F0F1B3E965000666D54 /* SignalGraphTest.xctest */,
+				45669F111B3E965000666D54 /* SignalGraph */,
+				45669F131B3E965000666D54 /* SignalGraphMobile.framework */,
+				45669F151B3E965000666D54 /* SignalGraphTestMobile.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4567DBEB1B1F42F8003E26CD = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +142,6 @@
 				4567DC201B1F4323003E26CD /* ProjectMenu.swift */,
 				4567DC2D1B1F47E0003E26CD /* DebugMenu.swift */,
 				4567DC221B1F438E003E26CD /* MenuShortcutKeyCombination.swift */,
-				4567DC421B1F496B003E26CD /* SignalGraphExtensions.swift */,
 				4567DBF91B1F42F8003E26CD /* Info.plist */,
 			);
 			path = EditorMenuUI;
@@ -161,18 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				4567DC1F1B1F430B003E26CD /* EditorModel.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4567DC301B1F492B003E26CD /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4567DC381B1F492B003E26CD /* SignalGraph.framework */,
-				4567DC3A1B1F492B003E26CD /* SignalGraphMobile.framework */,
-				4567DC3E1B1F492B003E26CD /* SignalGraphAppKitAddon.framework */,
-				4567DC401B1F492B003E26CD /* OSXTestdriveApp.app */,
-				4500EE2B1B272D5900E83F57 /* UnitTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -260,7 +255,7 @@
 					ProjectRef = 4567DC1A1B1F430B003E26CD /* EditorModel.xcodeproj */;
 				},
 				{
-					ProductGroup = 4567DC301B1F492B003E26CD /* Products */;
+					ProductGroup = 45669F041B3E965000666D54 /* Products */;
 					ProjectRef = 4567DC2F1B1F492B003E26CD /* SignalGraph.xcodeproj */;
 				},
 			);
@@ -273,11 +268,39 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4500EE2B1B272D5900E83F57 /* UnitTest.app */ = {
+		45669F0D1B3E965000666D54 /* SignalGraph.framework */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = UnitTest.app;
-			remoteRef = 4500EE2A1B272D5900E83F57 /* PBXContainerItemProxy */;
+			fileType = wrapper.framework;
+			path = SignalGraph.framework;
+			remoteRef = 45669F0C1B3E965000666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669F0F1B3E965000666D54 /* SignalGraphTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphTest.xctest;
+			remoteRef = 45669F0E1B3E965000666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669F111B3E965000666D54 /* SignalGraph */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SignalGraph;
+			remoteRef = 45669F101B3E965000666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669F131B3E965000666D54 /* SignalGraphMobile.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignalGraphMobile.framework;
+			remoteRef = 45669F121B3E965000666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669F151B3E965000666D54 /* SignalGraphTestMobile.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphTestMobile.xctest;
+			remoteRef = 45669F141B3E965000666D54 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4567DC1F1B1F430B003E26CD /* EditorModel.framework */ = {
@@ -285,34 +308,6 @@
 			fileType = wrapper.framework;
 			path = EditorModel.framework;
 			remoteRef = 4567DC1E1B1F430B003E26CD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4567DC381B1F492B003E26CD /* SignalGraph.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraph.framework;
-			remoteRef = 4567DC371B1F492B003E26CD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4567DC3A1B1F492B003E26CD /* SignalGraphMobile.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraphMobile.framework;
-			remoteRef = 4567DC391B1F492B003E26CD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4567DC3E1B1F492B003E26CD /* SignalGraphAppKitAddon.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraphAppKitAddon.framework;
-			remoteRef = 4567DC3D1B1F492B003E26CD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4567DC401B1F492B003E26CD /* OSXTestdriveApp.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = OSXTestdriveApp.app;
-			remoteRef = 4567DC3F1B1F492B003E26CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -341,7 +336,6 @@
 			files = (
 				4567DC231B1F438E003E26CD /* MenuShortcutKeyCombination.swift in Sources */,
 				4567DC211B1F4323003E26CD /* ProjectMenu.swift in Sources */,
-				4567DC431B1F496B003E26CD /* SignalGraphExtensions.swift in Sources */,
 				4567DC2E1B1F47E0003E26CD /* DebugMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

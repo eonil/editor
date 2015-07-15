@@ -214,56 +214,56 @@ class OptionSegment {
 		assert(_connected == false)
 	}
 	
-	let	text		=	EditableValueStorage<String?>(nil)
-	let	selection	=	EditableValueStorage<Bool>(false)
+	let	text		=	ValueStorage<String?>(nil)
+	let	selection	=	ValueStorage<Bool>(false)
 	
 	///
 	
 	private weak var	_owner		:	OptionSegmentstripPiece?
 	private var		_index		:	Int?
 	
-	private let		_txtmon		=	MonitoringValueStorage<String?>()
-	private let		_selmon		=	MonitoringValueStorage<Bool>()
+	private let		_txtmon		=	ValueMonitor<String?>()
+	private let		_selmon		=	ValueMonitor<Bool>()
 	
 	private var		_connected	=	false
 	
 	private func _connect() {
-		_txtmon.didApplySignal		=	{ [weak self] in self!._onTextSignal($0) }
-		_selmon.didApplySignal		=	{ [weak self] in self!._onSelectionSignal($0) }
-		text.emitter.register(_txtmon.sensor)
-		selection.emitter.register(_selmon.sensor)
+		_txtmon.didBegin		=	{ [weak self] in self!._onBeginText($0) }
+		_txtmon.willEnd			=	{ [weak self] in self!._onEndText($0) }
+		_selmon.didBegin		=	{ [weak self] in self!._onBeginSelection($0) }
+		_selmon.willEnd			=	{ [weak self] in self!._onEndSelection($0) }
+		text.register(_txtmon)
+		selection.register(_selmon)
 		_connected			=	true
 	}
 	private func _disconnect() {
-		text.emitter.deregister(_txtmon.sensor)
-		selection.emitter.deregister(_selmon.sensor)
-		_txtmon.didApplySignal		=	nil
-		_selmon.didApplySignal		=	nil
+		text.deregister(_txtmon)
+		selection.deregister(_selmon)
+		_txtmon.willEnd			=	nil
+		_txtmon.didBegin		=	nil
+		_selmon.willEnd			=	nil
+		_selmon.didBegin		=	nil
 		_connected			=	false
 	}
-	private func _onTextSignal(s: ValueSignal<String?>) {
+	private func _onBeginText(s: String?) {
 		assert(_owner != nil)
 		assert(_index != nil)
-		func resolve() -> String {
-			switch s {
-			case .Initiation(let s):	return	s() ?? ""
-			case .Transition(let s):	return	s() ?? ""
-			case .Termination(let s):	return	s() ?? ""
-			}
-		}
-		_owner!._segmentV.setLabel(resolve(), forSegment: _index!)
+		_owner!._segmentV.setLabel(s ?? "", forSegment: _index!)
 	}
-	private func _onSelectionSignal(s: ValueSignal<Bool>) {
+	private func _onEndText(s: String?) {
+		_owner!._segmentV.setLabel("", forSegment: _index!)
+	}
+	private func _onBeginSelection(s: Bool) {
 		assert(_owner != nil)
 		assert(_index != nil)
-		func resolve() -> Bool {
-			switch s {
-			case .Initiation(let s):	return	s()
-			case .Transition(let s):	return	s()
-			case .Termination(let s):	return	false
-			}
+		let	sel	=	s
+		if sel != _owner!._segmentV.isSelectedForSegment(_index!) {
+			println("\(self) \(ObjectIdentifier(self).uintValue) \(resolve())")
+			_owner!._segmentV.setSelected(sel, forSegment: _index!)
 		}
-		let	sel	=	resolve()
+	}
+	private func _onEndSelection(s: Bool) {
+		let	sel	=	false
 		if sel != _owner!._segmentV.isSelectedForSegment(_index!) {
 			println("\(self) \(ObjectIdentifier(self).uintValue) \(resolve())")
 			_owner!._segmentV.setSelected(sel, forSegment: _index!)

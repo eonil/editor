@@ -28,12 +28,12 @@ public class DebugMenuController {
 	public weak var workspace: Workspace? {
 		willSet {
 			if let _ = workspace {
-				_teardown()
+				_disconnect()
 			}
 		}
 		didSet {
 			if let _ = workspace {
-				_setup()
+				_connect()
 			}
 		}
 	}
@@ -45,19 +45,17 @@ public class DebugMenuController {
 	let	stepOut		=	NSMenuItem(title: "Step Out", shortcut: Command+"3")
 
 	///
-
-	private var	_channelings	:	AnyObject?
 	
-	private func _setup() {
-		_channelings	=	Channeling(workspace!.debugger.availableCommands,	{ [weak self] s in self?._reconfigureForDebuggerCommands(s) })
+	private func _connect() {
+		workspace!.debugger.availableCommands.register(ObjectIdentifier(self)) { [weak self] in self!._handleAvailableDebuggerCommandSignal($0) }
 	}
-	private func _teardown() {
-		_channelings	=	nil
+	private func _disconnect() {
+		workspace!.debugger.availableCommands.deregister(ObjectIdentifier(self))
 	}
-	private func _reconfigureForDebuggerCommands(s: ValueSignal<Set<Debugger.Command>>) {
-		stepOver.enabled	=	s.state?.contains(.StepOver) ?? false
-		stepInto.enabled	=	s.state?.contains(.StepInto) ?? false
-		stepOut.enabled		=	s.state?.contains(.StepOut) ?? false
+	private func _handleAvailableDebuggerCommandSignal(s: SetStorage<Debugger.Command>.Signal) {
+		stepOver.enabled	=	s.timing == .DidBegin && s.state.contains(.StepOver) ?? false
+		stepInto.enabled	=	s.timing == .DidBegin && s.state.contains(.StepInto) ?? false
+		stepOut.enabled		=	s.timing == .DidBegin && s.state.contains(.StepOut) ?? false
 	}
 }
 

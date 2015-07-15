@@ -12,7 +12,7 @@ import SignalGraph
 public class Workspace {
 	
 	public init(rootDirectoryURL: NSURL) {
-		self.rootDirectoryURL	=	ValueChannel<NSURL>(rootDirectoryURL)
+		_rootDirectoryURL	=	ValueStorage<NSURL>(rootDirectoryURL)
 		
 		editing.owner	=	self
 		toolbox.owner	=	self
@@ -20,14 +20,17 @@ public class Workspace {
 		console.owner	=	self
 	}
 	
-	public let	rootDirectoryURL	:	ValueChannel<NSURL>
+	public var rootDirectoryURL: ValueStorage<NSURL>.Channel { get { return _rootDirectoryURL.channelize() } }
 	
 //	public let	package		=	
 	public let	editing		=	Editing()
 	public let	toolbox		=	Toolbox()
 	public let	debugger	=	Debugger()
 	public let	console		=	Console()
-	
+
+	///
+
+	private let	_rootDirectoryURL	:	ValueStorage<NSURL>
 //	public init(rootURL: NSURL) {
 //		func TEMP_ADHOC_getTargetName() -> String? {
 //			let	p1	=	rootPath.stringByAppendingPathComponent("Cargo.toml")

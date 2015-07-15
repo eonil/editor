@@ -110,13 +110,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4500EE6D1B272D5900E83F57 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45F82C571B2585BF00A78AF5;
-			remoteInfo = UnitTest;
-		};
 		45012FDF1B2B24FF007578BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45012FDA1B2B24FD007578BD /* EditorShell.xcodeproj */;
@@ -200,6 +193,41 @@
 			proxyType = 2;
 			remoteGlobalIDString = 45BD26B81A65E9CA003F45D9;
 			remoteInfo = EditorFileTreeNavigationFeatureInteractiveTester;
+		};
+		45669E0A1B3E952700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45669E021B3E952600666D54 /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3D761B3E29B400FFF5A1;
+			remoteInfo = SignalGraph;
+		};
+		45669E0C1B3E952700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45669E021B3E952600666D54 /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3D801B3E29B400FFF5A1;
+			remoteInfo = SignalGraphTest;
+		};
+		45669E0E1B3E952700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45669E021B3E952600666D54 /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 453718A91B3AD93500160463;
+			remoteInfo = SignalGraphTestRun;
+		};
+		45669E101B3E952700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45669E021B3E952600666D54 /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3DBF1B3E2B7800FFF5A1;
+			remoteInfo = SignalGraphMobile;
+		};
+		45669E121B3E952700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45669E021B3E952600666D54 /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3DC91B3E2B7900FFF5A1;
+			remoteInfo = SignalGraphTestMobile;
 		};
 		4567DBCE1B1F3C5F003E26CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -551,34 +579,6 @@
 			remoteGlobalIDString = 45CBA42D1A63FD77007A377E;
 			remoteInfo = Test2;
 		};
-		45D4B9DC1B1F357F0083FE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45D934E41AFE4228000EE661;
-			remoteInfo = SignalGraph;
-		};
-		45D4B9DE1B1F357F0083FE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4563E0651AF8FCA800AA9EA6;
-			remoteInfo = SignalGraphMobile;
-		};
-		45D4B9E21B1F357F0083FE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459D96AE1AFE52D3006AF2C0;
-			remoteInfo = SignalGraphAppKitAddon;
-		};
-		45D4B9E41B1F357F0083FE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45BE34121B0CC02D0029B752;
-			remoteInfo = OSXTestdriveApp;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -620,7 +620,6 @@
 		45012FB21B2B2373007578BD /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45012FDA1B2B24FD007578BD /* EditorShell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorShell.xcodeproj; path = ../EditorShell/EditorShell.xcodeproj; sourceTree = "<group>"; };
 		4509EF0B1B1B151200C3E71C /* EonilSQLite3.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilSQLite3.xcodeproj; path = ../SQLite3/EonilSQLite3.xcodeproj; sourceTree = "<group>"; };
-		4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../SignalGraph.Swift/SignalGraph/SignalGraph.xcodeproj; sourceTree = "<group>"; };
 		4514A76C1A11C7D200F25ED8 /* RustProjectDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustProjectDocument.swift; sourceTree = "<group>"; };
 		4514A7721A11C81200F25ED8 /* RustSourceCodeFileDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustSourceCodeFileDocument.swift; sourceTree = "<group>"; };
 		451740DD1A102FA300861ECC /* ScrollViewController1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController1.swift; sourceTree = "<group>"; };
@@ -651,6 +650,7 @@
 		455F5DE61A1289B900A17A31 /* FileNode3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode3.swift; sourceTree = "<group>"; };
 		455FC56C1A637C2F00266BD5 /* IssueRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueRepository.swift; sourceTree = "<group>"; };
 		45646D5A1A45F9F9009697C1 /* RustAutocompletionWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustAutocompletionWindowController.swift; sourceTree = "<group>"; };
+		45669E021B3E952600666D54 /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../../Submodules/SignalGraph.Swift/SignalGraph.xcodeproj; sourceTree = "<group>"; };
 		4567DC111B1F42F8003E26CD /* EditorMenuUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorMenuUI.xcodeproj; path = ../EditorMenuUI/EditorMenuUI.xcodeproj; sourceTree = "<group>"; };
 		4567DC441B1F4BA3003E26CD /* ADHOC_DynamicMenuAgent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADHOC_DynamicMenuAgent.swift; sourceTree = "<group>"; };
 		45700EE01A11F65100415EB2 /* FileNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
@@ -776,7 +776,7 @@
 		4513F7171B1F33B100960EF5 /* (alien modules) */ = {
 			isa = PBXGroup;
 			children = (
-				4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */,
+				45669E021B3E952600666D54 /* SignalGraph.xcodeproj */,
 				45F25A321A81E20500D1D9F8 /* LLDBWrapper.xcodeproj */,
 				4509EF0B1B1B151200C3E71C /* EonilSQLite3.xcodeproj */,
 				4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */,
@@ -944,6 +944,18 @@
 				45B89C311A15E05100D03648 /* MarkdownFileDocument.swift */,
 			);
 			name = "(junkyard)";
+			sourceTree = "<group>";
+		};
+		45669E031B3E952700666D54 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45669E0B1B3E952700666D54 /* SignalGraph.framework */,
+				45669E0D1B3E952700666D54 /* SignalGraphTest.xctest */,
+				45669E0F1B3E952700666D54 /* SignalGraph */,
+				45669E111B3E952700666D54 /* SignalGraphMobile.framework */,
+				45669E131B3E952700666D54 /* SignalGraphTestMobile.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4567DC121B1F42F8003E26CD /* Products */ = {
@@ -1261,18 +1273,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		45D4B9C31B1F357F0083FE6A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45D4B9DD1B1F357F0083FE6A /* SignalGraph.framework */,
-				45D4B9DF1B1F357F0083FE6A /* SignalGraphMobile.framework */,
-				45D4B9E31B1F357F0083FE6A /* SignalGraphAppKitAddon.framework */,
-				45D4B9E51B1F357F0083FE6A /* OSXTestdriveApp.app */,
-				4500EE6E1B272D5900E83F57 /* UnitTest.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		45F6C1111A11959C005D8EEA /* CommandConsole */ = {
 			isa = PBXGroup;
 			children = (
@@ -1427,8 +1427,8 @@
 					ProjectRef = 4527E4F91A6A7E1700115139 /* PseudoTeletypewriter.xcodeproj */;
 				},
 				{
-					ProductGroup = 45D4B9C31B1F357F0083FE6A /* Products */;
-					ProjectRef = 4510E8391B1212DF005824AB /* SignalGraph.xcodeproj */;
+					ProductGroup = 45669E031B3E952700666D54 /* Products */;
+					ProjectRef = 45669E021B3E952600666D54 /* SignalGraph.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1440,13 +1440,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4500EE6E1B272D5900E83F57 /* UnitTest.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = UnitTest.app;
-			remoteRef = 4500EE6D1B272D5900E83F57 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		45012FE01B2B24FF007578BD /* EditorShell.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1522,6 +1515,41 @@
 			fileType = wrapper.application;
 			path = EditorFileTreeNavigationFeatureInteractiveTester.app;
 			remoteRef = 453C74291B1F3773005B8B2F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669E0B1B3E952700666D54 /* SignalGraph.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignalGraph.framework;
+			remoteRef = 45669E0A1B3E952700666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669E0D1B3E952700666D54 /* SignalGraphTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphTest.xctest;
+			remoteRef = 45669E0C1B3E952700666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669E0F1B3E952700666D54 /* SignalGraph */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SignalGraph;
+			remoteRef = 45669E0E1B3E952700666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669E111B3E952700666D54 /* SignalGraphMobile.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignalGraphMobile.framework;
+			remoteRef = 45669E101B3E952700666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669E131B3E952700666D54 /* SignalGraphTestMobile.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphTestMobile.xctest;
+			remoteRef = 45669E121B3E952700666D54 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4567DC171B1F42F9003E26CD /* EditorMenuUI.framework */ = {
@@ -1788,34 +1816,6 @@
 			fileType = wrapper.application;
 			path = Test2.app;
 			remoteRef = 45D4B9BC1B1F35600083FE6A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45D4B9DD1B1F357F0083FE6A /* SignalGraph.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraph.framework;
-			remoteRef = 45D4B9DC1B1F357F0083FE6A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45D4B9DF1B1F357F0083FE6A /* SignalGraphMobile.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraphMobile.framework;
-			remoteRef = 45D4B9DE1B1F357F0083FE6A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45D4B9E31B1F357F0083FE6A /* SignalGraphAppKitAddon.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraphAppKitAddon.framework;
-			remoteRef = 45D4B9E21B1F357F0083FE6A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45D4B9E51B1F357F0083FE6A /* OSXTestdriveApp.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = OSXTestdriveApp.app;
-			remoteRef = 45D4B9E41B1F357F0083FE6A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

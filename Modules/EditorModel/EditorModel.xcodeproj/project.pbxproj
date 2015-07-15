@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4510E85D1B121304005824AB /* SignalGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510E8541B1212F6005824AB /* SignalGraph.framework */; };
 		4510E9F61B12C870005824AB /* EditorToolComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4510E9E91B12BF78005824AB /* EditorToolComponents.framework */; };
 		451B561E1B1B4374006C4879 /* _Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561D1B1B4374006C4879 /* _Project.swift */; };
 		451B56201B1B437A006C4879 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561F1B1B437A006C4879 /* Workspace.swift */; };
 		456593CE1B3235A4007CC1F3 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456593CD1B3235A4007CC1F3 /* Package.swift */; };
+		45669F811B3EA2DC00666D54 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45669F801B3EA2DC00666D54 /* Channels.swift */; };
 		4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DBE51B1F3EA4003E26CD /* Racer.swift */; };
 		4567DBE91B1F3EBF003E26CD /* Cargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DBE81B1F3EBF003E26CD /* Cargo.swift */; };
 		4571A74B1B1B761100A7911B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A74A1B1B761100A7911B /* Utility.swift */; };
@@ -19,42 +19,15 @@
 		4571A7881B1CB4D500A7911B /* Editing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A7871B1CB4D500A7911B /* Editing.swift */; };
 		4571A78A1B1CB4EE00A7911B /* Console.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A7891B1CB4EE00A7911B /* Console.swift */; };
 		4596D1731B2C52B600B77907 /* Channeling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4596D1721B2C52B500B77907 /* Channeling.swift */; };
+		4598BFAF1B3FD92E00D07B63 /* SignalGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45669F771B3E9C7700666D54 /* SignalGraph.framework */; };
 		45DD92A91B1DF8CD00A0BE6A /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD92A81B1DF8CD00A0BE6A /* Debugger.swift */; };
 		45DD92AB1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD92AA1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift */; };
 		45DD92C11B1DFC1600A0BE6A /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD92B61B1DFC1300A0BE6A /* LLDBWrapper.framework */; };
 		45DD930E1B1E08FA00A0BE6A /* EditorDebuggingFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD93071B1E08F200A0BE6A /* EditorDebuggingFeature.framework */; };
-		45F82CA41B25D8E300A78AF5 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F82CA31B25D8E300A78AF5 /* Channels.swift */; };
+		45F82CA41B25D8E300A78AF5 /* xChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F82CA31B25D8E300A78AF5 /* xChannels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4510E8531B1212F6005824AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45D934E41AFE4228000EE661;
-			remoteInfo = SignalGraph;
-		};
-		4510E8551B1212F6005824AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4563E0651AF8FCA800AA9EA6;
-			remoteInfo = SignalGraphMobile;
-		};
-		4510E8591B1212F6005824AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459D96AE1AFE52D3006AF2C0;
-			remoteInfo = SignalGraphAppKitAddon;
-		};
-		4510E85B1B1212F6005824AB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45BE34121B0CC02D0029B752;
-			remoteInfo = OSXTestdriveApp;
-		};
 		4510E9E81B12BF78005824AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4510E9E21B12BF77005824AB /* EditorToolComponents.xcodeproj */;
@@ -75,6 +48,41 @@
 			proxyType = 2;
 			remoteGlobalIDString = 45C913A51A8C81C700B15F9F;
 			remoteInfo = UnitTests;
+		};
+		45669F761B3E9C7700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3D761B3E29B400FFF5A1;
+			remoteInfo = SignalGraph;
+		};
+		45669F781B3E9C7700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3D801B3E29B400FFF5A1;
+			remoteInfo = SignalGraphTest;
+		};
+		45669F7A1B3E9C7700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 453718A91B3AD93500160463;
+			remoteInfo = SignalGraphTestRun;
+		};
+		45669F7C1B3E9C7700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3DBF1B3E2B7800FFF5A1;
+			remoteInfo = SignalGraphMobile;
+		};
+		45669F7E1B3E9C7700666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3DC91B3E2B7900FFF5A1;
+			remoteInfo = SignalGraphTestMobile;
 		};
 		45DD92B51B1DFC1300A0BE6A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -146,23 +154,17 @@
 			remoteGlobalIDString = 450272071A7F577D008795CC;
 			remoteInfo = WorkbenchApp2;
 		};
-		45F82CB71B25D8E300A78AF5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45F82C571B2585BF00A78AF5;
-			remoteInfo = UnitTest;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4510E8121B12107C005824AB /* EditorModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4510E8161B12107C005824AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../SignalGraph.Swift/SignalGraph/SignalGraph.xcodeproj; sourceTree = "<group>"; };
+		4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../../Submodules/SignalGraph.Swift/SignalGraph.xcodeproj; sourceTree = "<group>"; };
 		4510E9E21B12BF77005824AB /* EditorToolComponents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorToolComponents.xcodeproj; path = ../EditorToolComponents/EditorToolComponents.xcodeproj; sourceTree = "<group>"; };
 		451B561D1B1B4374006C4879 /* _Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Project.swift; sourceTree = "<group>"; };
 		451B561F1B1B437A006C4879 /* Workspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		456593CD1B3235A4007CC1F3 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		45669F801B3EA2DC00666D54 /* Channels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channels.swift; sourceTree = "<group>"; };
 		4567DBE51B1F3EA4003E26CD /* Racer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Racer.swift; sourceTree = "<group>"; };
 		4567DBE81B1F3EBF003E26CD /* Cargo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo.swift; sourceTree = "<group>"; };
 		4567DC461B203F06003E26CD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -175,7 +177,7 @@
 		45DD92AA1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _WorkspaceDebuggingController.swift; sourceTree = "<group>"; };
 		45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebuggingFeature.xcodeproj; path = ../EditorDebuggingFeature/EditorDebuggingFeature.xcodeproj; sourceTree = "<group>"; };
-		45F82CA31B25D8E300A78AF5 /* Channels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channels.swift; sourceTree = "<group>"; };
+		45F82CA31B25D8E300A78AF5 /* xChannels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = xChannels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,10 +185,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4598BFAF1B3FD92E00D07B63 /* SignalGraph.framework in Frameworks */,
 				45DD930E1B1E08FA00A0BE6A /* EditorDebuggingFeature.framework in Frameworks */,
 				45DD92C11B1DFC1600A0BE6A /* LLDBWrapper.framework in Frameworks */,
 				4510E9F61B12C870005824AB /* EditorToolComponents.framework in Frameworks */,
-				4510E85D1B121304005824AB /* SignalGraph.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +219,8 @@
 		4510E8141B12107C005824AB /* EditorModel */ = {
 			isa = PBXGroup;
 			children = (
-				45F82CA31B25D8E300A78AF5 /* Channels.swift */,
+				45669F801B3EA2DC00666D54 /* Channels.swift */,
+				45F82CA31B25D8E300A78AF5 /* xChannels.swift */,
 				451B561F1B1B437A006C4879 /* Workspace.swift */,
 				4567DBE21B1F3DE4003E26CD /* (children of workspace) */,
 				4571A74A1B1B761100A7911B /* Utility.swift */,
@@ -228,24 +231,24 @@
 			path = EditorModel;
 			sourceTree = "<group>";
 		};
-		4510E84C1B1212F6005824AB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4510E8541B1212F6005824AB /* SignalGraph.framework */,
-				4510E8561B1212F6005824AB /* SignalGraphMobile.framework */,
-				4510E85A1B1212F6005824AB /* SignalGraphAppKitAddon.framework */,
-				4510E85C1B1212F6005824AB /* OSXTestdriveApp.app */,
-				45F82CB81B25D8E300A78AF5 /* UnitTest.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4510E9E31B12BF77005824AB /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				4510E9E91B12BF78005824AB /* EditorToolComponents.framework */,
 				4510E9EB1B12BF78005824AB /* Workbench.app */,
 				4510E9ED1B12BF78005824AB /* UnitTests.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45669F621B3E9C7700666D54 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45669F771B3E9C7700666D54 /* SignalGraph.framework */,
+				45669F791B3E9C7700666D54 /* SignalGraphTest.xctest */,
+				45669F7B1B3E9C7700666D54 /* SignalGraph */,
+				45669F7D1B3E9C7700666D54 /* SignalGraphMobile.framework */,
+				45669F7F1B3E9C7700666D54 /* SignalGraphTestMobile.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -383,7 +386,7 @@
 					ProjectRef = 45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */;
 				},
 				{
-					ProductGroup = 4510E84C1B1212F6005824AB /* Products */;
+					ProductGroup = 45669F621B3E9C7700666D54 /* Products */;
 					ProjectRef = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
 				},
 			);
@@ -395,34 +398,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4510E8541B1212F6005824AB /* SignalGraph.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraph.framework;
-			remoteRef = 4510E8531B1212F6005824AB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4510E8561B1212F6005824AB /* SignalGraphMobile.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraphMobile.framework;
-			remoteRef = 4510E8551B1212F6005824AB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4510E85A1B1212F6005824AB /* SignalGraphAppKitAddon.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraphAppKitAddon.framework;
-			remoteRef = 4510E8591B1212F6005824AB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4510E85C1B1212F6005824AB /* OSXTestdriveApp.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = OSXTestdriveApp.app;
-			remoteRef = 4510E85B1B1212F6005824AB /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		4510E9E91B12BF78005824AB /* EditorToolComponents.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -442,6 +417,41 @@
 			fileType = wrapper.application;
 			path = UnitTests.app;
 			remoteRef = 4510E9EC1B12BF78005824AB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669F771B3E9C7700666D54 /* SignalGraph.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignalGraph.framework;
+			remoteRef = 45669F761B3E9C7700666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669F791B3E9C7700666D54 /* SignalGraphTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphTest.xctest;
+			remoteRef = 45669F781B3E9C7700666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669F7B1B3E9C7700666D54 /* SignalGraph */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SignalGraph;
+			remoteRef = 45669F7A1B3E9C7700666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669F7D1B3E9C7700666D54 /* SignalGraphMobile.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SignalGraphMobile.framework;
+			remoteRef = 45669F7C1B3E9C7700666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669F7F1B3E9C7700666D54 /* SignalGraphTestMobile.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphTestMobile.xctest;
+			remoteRef = 45669F7E1B3E9C7700666D54 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45DD92B61B1DFC1300A0BE6A /* LLDBWrapper.framework */ = {
@@ -514,13 +524,6 @@
 			remoteRef = 45DD930C1B1E08F200A0BE6A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45F82CB81B25D8E300A78AF5 /* UnitTest.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = UnitTest.app;
-			remoteRef = 45F82CB71B25D8E300A78AF5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -539,7 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4567DBE91B1F3EBF003E26CD /* Cargo.swift in Sources */,
-				45F82CA41B25D8E300A78AF5 /* Channels.swift in Sources */,
+				45F82CA41B25D8E300A78AF5 /* xChannels.swift in Sources */,
 				45DD92A91B1DF8CD00A0BE6A /* Debugger.swift in Sources */,
 				4571A74B1B1B761100A7911B /* Utility.swift in Sources */,
 				4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */,
@@ -551,6 +554,7 @@
 				45DD92AB1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift in Sources */,
 				451B561E1B1B4374006C4879 /* _Project.swift in Sources */,
 				4571A78A1B1CB4EE00A7911B /* Console.swift in Sources */,
+				45669F811B3EA2DC00666D54 /* Channels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,22 +31,20 @@ public class ProjectMenuController {
 	}
 	deinit {
 		assert(workspace == nil)
-		assert(_has_workspace == false)
+		assert(_isConnected == false)
 	}
 	
 	///	Set currently selected workspace here to reflect menu availability
 	///	by the workspace.
 	public weak var workspace: Workspace? {
 		willSet {
-			if let _ = workspace {
-				_teardown()
-				_has_workspace	=	false
+			if workspace != nil {
+				_disconnect()
 			}
 		}
 		didSet {
-			if let _ = workspace {
-				_has_workspace	=	true
-				_setup()
+			if workspace != nil {
+				_connect()
 			}
 		}
 	}
@@ -63,13 +61,13 @@ public class ProjectMenuController {
 	let	stop		=	NSMenuItem(title: "Stop", shortcut: Command+".")
 
 	///
+
+	private var	_isConnected	=	false
 	
-	private var	_has_workspace	=	false		//	This flag is required due to early nil-lization.
-	private var	_channelings	:	AnyObject?
-	
-	private func _setup() {
-		assert(_channelings == nil)
-		
+	private func _connect() {
+		assert(workspace != nil)
+		assert(_isConnected == false)
+
 		func queueCargoCommand(cmd: Cargo.Command) -> ()->() {
 			return	{ [weak self] in self?.workspace!.toolbox.cargo.queue(cmd) }
 		}
@@ -84,32 +82,37 @@ public class ProjectMenuController {
 		build.onAction		=	queueCargoCommand(.Build)
 		clean.onAction		=	queueCargoCommand(.Clean)
 		stop.onAction		=	executeDebuggerCommand(.Halt)
-		
-		_channelings		=	[
-			Channeling(workspace!.toolbox.cargo.availableCommands) 	{ [weak self] in self?._reconfigureForCargoCommands($0) },
-			Channeling(workspace!.debugger.availableCommands) 	{ [weak self] in self?._reconfigureForDebuggerCommands($0) },
-		]
+
+		workspace!.toolbox.cargo.availableCommands.register(ObjectIdentifier(self))	{ [weak self] in self!._handleCargoCommandSignal($0) }
+		workspace!.debugger.availableCommands.register(ObjectIdentifier(self))		{ [weak self] in self!._handleDebuggerCommandSignal($0) }
+
+		_isConnected	=	true
 	}
-	private func _teardown() {
-		assert(_channelings != nil)
-		
-		_channelings		=	nil
-		
+	private func _disconnect() {
+		assert(workspace != nil)
+		assert(_isConnected == false)
+
+		workspace!.debugger.availableCommands.deregister(ObjectIdentifier(self))
+		workspace!.toolbox.cargo.availableCommands.deregister(ObjectIdentifier(self))
+
 		for m in menu.allMenuItems {
 			m.onAction	=	nil
 		}
+
+		_isConnected	=	false
 	}
-	private func _reconfigureForCargoCommands(s: ValueSignal<Set<Cargo.Command>>) {
-		clean.enabled		=	s.state?.contains(.Clean) ?? false
-		build.enabled		=	s.state?.contains(.Build) ?? false
-		run.enabled		=	s.state?.contains(.Run) ?? false
-		documentate.enabled	=	s.state?.contains(.Documentate) ?? false
-		test.enabled		=	s.state?.contains(.Test) ?? false
-		benchmark.enabled	=	s.state?.contains(.Benchmark) ?? false
+
+	private func _handleCargoCommandSignal(s: SetStorage<Cargo.Command>.Signal) {
+		clean.enabled		=	s.timing == .DidBegin && s.state.contains(.Clean) ?? false
+		build.enabled		=	s.timing == .DidBegin && s.state.contains(.Build) ?? false
+		run.enabled		=	s.timing == .DidBegin && s.state.contains(.Run) ?? false
+		documentate.enabled	=	s.timing == .DidBegin && s.state.contains(.Documentate) ?? false
+		test.enabled		=	s.timing == .DidBegin && s.state.contains(.Test) ?? false
+		benchmark.enabled	=	s.timing == .DidBegin && s.state.contains(.Benchmark) ?? false
 	}
-	private func _reconfigureForDebuggerCommands(s: ValueSignal<Set<Debugger.Command>>) {
-		run.enabled		=	s.state?.contains(.Launch) ?? false
-		stop.enabled		=	s.state?.contains(.Halt) ?? false
+	private func _handleDebuggerCommandSignal(s: SetStorage<Debugger.Command>.Signal) {
+		run.enabled		=	s.timing == .DidBegin && s.state.contains(.Launch) ?? false
+		stop.enabled		=	s.timing == .DidBegin && s.state.contains(.Halt) ?? false
 	}
 }
 

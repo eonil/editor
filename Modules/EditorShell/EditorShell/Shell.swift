@@ -12,8 +12,8 @@ import SignalGraph
 ///	Modeling of UI states and behaviors.
 class Shell {
 	
-	var	navigatorPaneDisplay	=	EditableValueStorage<Bool>(false)
-	var	consolePaneDisplay	=	EditableValueStorage<Bool>(false)
-	var	inspectorPaneDisplay	=	EditableValueStorage<Bool>(false)
+	let	navigatorPaneDisplay	=	ValueStorage<Bool>(false)
+	let	consolePaneDisplay	=	ValueStorage<Bool>(false)
+	let	inspectorPaneDisplay	=	ValueStorage<Bool>(false)
 	
 }

@@ -18,8 +18,8 @@ import SignalGraph
 class TrinityDeckPiece: NSView {
 	typealias	Configuration		=	TrinityDeckView.Configuration
 	
-	let		firstPaneDisplay	=	EditableValueStorage<Bool>(false)
-	let		lastPaneDisplay		=	EditableValueStorage<Bool>(false)
+	let		firstPaneDisplay	=	ValueStorage<Bool>(false)
+	let		lastPaneDisplay		=	ValueStorage<Bool>(false)
 	
 	var configuration: Configuration? {
 		willSet {
@@ -53,8 +53,8 @@ class TrinityDeckPiece: NSView {
 	///
 	
 	private let	_view		=	TrinityDeckView()
-	private let	_firstPDMon	=	MonitoringValueStorage<Bool>()
-	private let	_lastPDMon	=	MonitoringValueStorage<Bool>()
+	private let	_firstPDMon	=	ValueMonitor<Bool>()
+	private let	_lastPDMon	=	ValueMonitor<Bool>()
 	
 	private var	_installed	=	false
 	private var	_connected	=	false
@@ -73,27 +73,37 @@ class TrinityDeckPiece: NSView {
 	
 	private func _connect() {
 		assert(configuration != nil)
-		_firstPDMon.didApplySignal	=	{ [weak self] in self!._onFirstPaneDisplaySignal($0) }
-		firstPaneDisplay.emitter.register(_firstPDMon.sensor)
-		_lastPDMon.didApplySignal	=	{ [weak self] in self!._onLastPaneDisplaySignal($0) }
-		lastPaneDisplay.emitter.register(_lastPDMon.sensor)
+
+		_firstPDMon.didBegin		=	{ [weak self] in self!._onBeginFirstPaneDisplayState($0) }
+		_firstPDMon.willEnd		=	{ [weak self] in self!._onEndFirstPaneDisplayState($0) }
+		firstPaneDisplay.register(_firstPDMon)
+
+		_lastPDMon.didBegin		=	{ [weak self] in self!._onBeginLastPaneDisplayState($0) }
+		_lastPDMon.willEnd		=	{ [weak self] in self!._onEndLastPaneDisplayState($0) }
+		lastPaneDisplay.register(_lastPDMon)
+
 		_connected			=	true
 	}
 	private func _disconnect() {
 		assert(configuration != nil)
-		firstPaneDisplay.emitter.deregister(_firstPDMon.sensor)
-		_firstPDMon.didApplySignal	=	{ _ in }
-		lastPaneDisplay.emitter.deregister(_lastPDMon.sensor)
-		_lastPDMon.didApplySignal	=	{ _ in }
+
+		lastPaneDisplay.deregister(_lastPDMon)
+		_lastPDMon.willEnd		=	nil
+		_lastPDMon.didBegin		=	nil
+
+		firstPaneDisplay.deregister(_firstPDMon)
+		_firstPDMon.willEnd		=	nil
+		_firstPDMon.didBegin		=	nil
+
 		_connected			=	false
 	}
 	
 	private func _layout() {
 		_view.frame		=	bounds
 	}
-	
-	private func _onFirstPaneDisplaySignal(s: ValueSignal<Bool>) {
-		if _getSnapshotOfValueSignal(postTerminationValue: false)(s) {
+
+	private func _onBeginFirstPaneDisplayState(s: Bool) {
+		if s {
 			if _view.isFirstPaneOpen() == false {
 				_view.openFirstPane()
 			}
@@ -103,8 +113,14 @@ class TrinityDeckPiece: NSView {
 			}
 		}
 	}
-	private func _onLastPaneDisplaySignal(s: ValueSignal<Bool>) {
-		if _getSnapshotOfValueSignal(postTerminationValue: false)(s) {
+	private func _onEndFirstPaneDisplayState(s: Bool) {
+		if _view.isFirstPaneOpen() == true {
+			_view.closeFirstPane()
+		}
+	}
+
+	private func _onBeginLastPaneDisplayState(s: Bool) {
+		if s {
 			if _view.isLastPaneOpen() == false {
 				_view.openLastPane()
 			}
@@ -114,7 +130,12 @@ class TrinityDeckPiece: NSView {
 			}
 		}
 	}
-	
+	private func _onEndLastPaneDisplayState(s: Bool) {
+		if _view.isLastPaneOpen() == true {
+			_view.closeLastPane()
+		}
+	}
+
 	private func _notifyUserDividerInteraction() {
 		if _view.isFirstPaneOpen() != firstPaneDisplay.state {
 			firstPaneDisplay.state	=	_view.isFirstPaneOpen()
@@ -134,12 +155,5 @@ class TrinityDeckPiece: NSView {
 	}
 }
 
-private func _getSnapshotOfValueSignal(#postTerminationValue: Bool?)(_ s: ValueSignal<Bool>) -> Bool {
-	switch s {
-	case .Initiation(let s):	return	s()
-	case .Transition(let s):	return	s()
-	case .Termination(let s):	return	postTerminationValue ?? s()
-	}
-}
 
 

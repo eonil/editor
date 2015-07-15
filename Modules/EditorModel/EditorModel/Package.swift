@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import SignalGraph
 
 ///	A pakcage means single product.
-public class Package
-{
-	public let	location	:	ValueChannel<NSURL>
-	
+public class Package {
 	public var workspace: Workspace {
 		get {
 			return	owner!
+		}
+	}
+	public var location: ValueStorage<NSURL>.Channel {
+		get {
+			return	_location.channelize()
 		}
 	}
 	
@@ -23,17 +26,16 @@ public class Package
 	
 	internal weak var owner: Workspace?
 	
-	internal init(location: NSURL)
-	{
-		self.location	=	ValueChannel(location)
+	internal init(location: NSURL) {
+		_location		=	ValueStorage(location)
 	}
+
+	private let	_location	:	ValueStorage<NSURL>
 	
 }
 
-extension Package
-{
-	public class Target
-	{
+extension Package {
+	public class Target {
 		public var project: Package {
 			get {
 				return	owner!

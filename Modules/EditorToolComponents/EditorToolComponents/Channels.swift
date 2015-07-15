@@ -47,12 +47,6 @@
 //	internal let	storage	:	S
 //}
 //
-//
-//
-//
-//
-//
-//
 //final class ValueStorage<T>: StateStorage<T>, StorageType {
 //	required override init(_ state: T) {
 //		super.init(state)
@@ -60,9 +54,6 @@
 //	var snapshot: T {
 //		get {
 //			return	state
-//		}
-//		set(v) {
-//			state	=	v
 //		}
 //	}
 //}
@@ -82,29 +73,24 @@
 //	}
 //}
 //
-//
-//
-//
-//
-//
 //public class ValueChannel<T>: StorageChannel<ValueStorage<T>> {
-//	public override init(_ snapshot: T) {
-//		super.init(snapshot)
+//	public override init(_ state: T) {
+//		super.init(state)
 //	}
 //}
 //public class SetChannel<T: Hashable>: StorageChannel<ChannelableSetStorage<T>> {
-//	public override init(_ snapshot: Set<T>) {
-//		super.init(snapshot)
+//	public init() {
+//		super.init([])
 //	}
 //}
 //public class ArrayChannel<T>: StorageChannel<ChannelableArrayStorage<T>> {
-//	public override init(_ snapshot: [T]) {
-//		super.init(snapshot)
+//	public init() {
+//		super.init([])
 //	}
 //}
-//public class DictionaryChannel<K: Hashable, V>: StorageChannel<ChannelableDictionaryStorage<K,V>> {
-//	public override init(_ snapshot: [K:V]) {
-//		super.init(snapshot)
+//public class DictionayChannel<K: Hashable, V>: StorageChannel<ChannelableDictionaryStorage<K,V>> {
+//	public init() {
+//		super.init([:])
 //	}
 //}
 //

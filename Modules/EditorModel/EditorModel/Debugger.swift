@@ -24,9 +24,10 @@ public class Debugger {
 		case StepInto
 		case StepOut
 	}
-	
-	public let	targets			=	DictionaryChannel<NSURL, Target>([:])
-	public let	availableCommands	=	ValueChannel<Set<Command>>([])
+
+	public var targets: DictionaryStorage<NSURL,Target>.Channel { get { return _targets.channelize() } }
+	public var availableCommands: SetStorage<Command>.Channel { get { return _availableCommands.channelize() } }
+	public var currentTarget: ValueStorage<Target?>.Channel { get { return _currentTarget.channelize() } }
 	
 	public func execute(command: Command) {
 		_executeImpl(command)
@@ -54,15 +55,18 @@ public class Debugger {
 	///	MARK:	-	
 	
 	private let	_lldbdebugger		=	LLDBDebugger()
-	private let	_currentTarget		=	EditableValueStorage<Target?>(nil)
+
+	private let	_targets		=	DictionaryStorage<NSURL,Target>([:])
+	private let	_availableCommands	=	SetStorage<Command>([])
+	private let	_currentTarget		=	ValueStorage<Target?>(nil)
 	
 	private func _resetAvailableCommands() {
-		availableCommands.editor.state	=	[.Launch]
+		_availableCommands.snapshot	=	[.Launch]
 	}
 	private func _executeImpl(c: Command) {
-		assert(availableCommands.storage.state.contains(c))
-		assert(_currentTarget.state != nil)
-		if let t = _currentTarget.state {
+		assert(_availableCommands.snapshot.contains(c))
+		assert(_currentTarget.snapshot != nil)
+		if let t = currentTarget.snapshot {
 			switch c {
 			case .Launch:		t.launch()
 			case .Halt:		t.halt()
@@ -88,9 +92,22 @@ public class Debugger {
 //		}
 	}
 	
+	private func _launch() {
+		func installTargetIfNotInstalled() {
+//			fatalError(<#message: String#>)
+		}
+		installTargetIfNotInstalled()
+	}
+	private func _halt() {
+		func deinstallCurrentTarget() {
+//			fatalError(<#message: String#>)
+		}
+		deinstallCurrentTarget()
+	}
+	
 	private func _defaultTargetExecutableURL() -> NSURL? {
 		assert(owner != nil)
-		let	u	=	owner!.rootDirectoryURL.storage.state
+		let	u	=	owner!.rootDirectoryURL.snapshot
 		let	n	=	queryCargoAtDirectoryURL(u, "package.name")!
 		let	u1	=	u.URLByAppendingPathComponent("target")
 		let	u2	=	u1.URLByAppendingPathComponent("debug")
@@ -103,19 +120,38 @@ public class Debugger {
 		let	t1	=	_lldbdebugger.createTargetWithFilename(u.path!)!
 		let	wdir	=	u.URLByDeletingLastPathComponent!
 		let	t	=	Target(workingDirectoryURL: wdir, LLDBTarget: t1)
-		targets.editor[u]	=	t
+		_targets[u]	=	t
 		t.owner		=	self
 	}
 	
 	private func _deinstallTargetWithURL(u: NSURL) {
-		assert(targets.editor[u] != nil)
-		if let t = targets.editor[u] {
+		assert(_targets[u] != nil)
+		if let t = _targets[u] {
 			t.halt()
-			targets.editor.removeValueForKey(u)
+			_targets.removeValueForKey(u)
 			t.owner	=	nil
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 public class Target {
 	
@@ -124,12 +160,12 @@ public class Target {
 			return	owner!
 		}
 	}
-	
-	public var isRunning: ValueStorage<Bool> {
-		get {
-			return	_isRunning
-		}
-	}
+
+	public var	availableCommands	:	SetStorage<Debugger.Command>.Channel	{ get { return _availableCommands.channelize() } }
+	public var	isRunning		:	ValueStorage<Bool>.Channel 		{ get { return _isRunning.channelize() } }
+	public var	stackFrames		:	ValueStorage<ExecutionStateTreeViewController.Snapshot?>.Channel { get { return _stackFrames.channelize() } }
+	public var	localVariables		:	ValueStorage<VariableTreeViewController.Snapshot?>.Channel { get { return _localVariables.channelize() } }
+
 	public func launch() {
 		_lldbprocess	=	_lldbtarget.launchProcessSimplyWithWorkingDirectory(_workingDir.path!)
 		let	b	=	_lldbtarget.createBreakpointByName("main")
@@ -180,26 +216,21 @@ public class Target {
 		_listenControl.delegate		=	nil
 		_listenAgent.owner		=	nil
 	}
-	
-	internal var availableCommands: ValueStorage<Set<Debugger.Command>> {
-		get {
-			return	_available_cmds
-		}
-	}
-	
+
 	///	MARK:	-
-	
-	private let		_workingDir	:	NSURL
-	private let		_lldbtarget	:	LLDBTarget
-	private let		_listenControl	:	ListenerController
-	private let		_listenAgent	:	ListenerAgent
-	private var		_lldbprocess	:	LLDBProcess?
-	
-	private let		_isRunning	=	EditableValueStorage<Bool>(false)
-	private let		_stackFrames	=	EditableValueStorage<ExecutionStateTreeViewController.Snapshot?>(nil)
-	private let		_localVariables	=	EditableValueStorage<VariableTreeViewController.Snapshot?>(nil)
-	
-	private let		_available_cmds	=	EditableValueStorage<Set<Debugger.Command>>([])
+
+	private let	_availableCommands	=	SetStorage<Debugger.Command>([])
+	private let	_isRunning		=	ValueStorage<Bool>(false)
+
+	private let	_stackFrames		=	ValueStorage<ExecutionStateTreeViewController.Snapshot?>(nil)
+	private let	_localVariables		=	ValueStorage<VariableTreeViewController.Snapshot?>(nil)
+
+	private let	_workingDir	:	NSURL
+	private let	_lldbtarget	:	LLDBTarget
+	private let	_listenControl	:	ListenerController
+	private let	_listenAgent	:	ListenerAgent
+	private var	_lldbprocess	:	LLDBProcess?
+
 	
 	private func findFirstBreakpointStopThread() -> LLDBThread? {
 		assert(_lldbprocess != nil)
@@ -215,22 +246,22 @@ public class Target {
 	}
 	
 	private func resetAvailableCommands() {
-		_available_cmds.state		=	resolveAvailableCommandsForProcessState(_lldbprocess!)
+		_availableCommands.snapshot	=	resolveAvailableCommandsForProcessState(_lldbprocess!)
 	}
 	
 	private func onEvent(e: LLDBEvent) {
 		switch _lldbprocess!.state {
 		case .Running:
-			_stackFrames.state	=	nil
-			_localVariables.state	=	nil
+			_stackFrames.snapshot		=	nil
+			_localVariables.snapshot	=	nil
 			
 		default:
-			_stackFrames.state	=	ExecutionStateTreeViewController.Snapshot(debugger._lldbdebugger)
+			_stackFrames.snapshot	=	ExecutionStateTreeViewController.Snapshot(debugger._lldbdebugger)
 			
 			if let f = _lldbprocess!.allThreads[0].allFrames.first, f1 = f {
-				_localVariables.state	=	VariableTreeViewController.Snapshot(f1)
+				_localVariables.snapshot	=	VariableTreeViewController.Snapshot(f1)
 			} else {
-				_localVariables.state	=	nil
+				_localVariables.snapshot	=	nil
 			}
 		}
 		

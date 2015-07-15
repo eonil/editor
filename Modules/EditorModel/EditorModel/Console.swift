@@ -17,31 +17,33 @@ public class Console {
 			return	owner!
 		}
 	}
-	
-	public let	issues	=	ArrayChannel<Issue>([])
-	
+
+	public var issues: ArrayStorage<Issue>.Channel { get { return _issues.channelize() } }
+
 	///	History of input command and result output.
 	///	This is a collection of lines. New-line
 	///	character are stripped away.
 	///
-	public let	history	=	ArrayChannel<String>([])
-	
+	public var history: ArrayStorage<String>.Channel { get { return _history.channelize() } }
+
 	public func clearIssues() {
-		issues.editor.removeAll()
+		_issues.removeAll()
 	}
 	public func clearHistory() {
-		history.editor.removeAll()
+		_history.removeAll()
 	}
 	
 	///
-	
+
+	internal let		_issues		=	ArrayStorage<Issue>([])
+	internal let		_history	=	ArrayStorage<String>([])
 	internal weak var	owner		:	Workspace?
 	
-	internal init() {	
+	internal init() {
 	}
 	
 	internal func extendHistory(lines: [String]) {
-		history.editor.extend(lines)
+		_history.extend(lines)
 	}
 }
 

@@ -23,7 +23,9 @@
 		453728761A8C83D700BE5C1B /* EditorToolComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45C913061A8C811200B15F9F /* EditorToolComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		453728791A8C83D700BE5C1B /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4537285F1A8C827800BE5C1B /* EditorCommon.framework */; };
 		4537287A1A8C83D700BE5C1B /* EditorCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4537285F1A8C827800BE5C1B /* EditorCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45669F241B3E97A000666D54 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45669F231B3E97A000666D54 /* Channels.swift */; };
 		4598BBD81A8C8C8A00121442 /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4537285F1A8C827800BE5C1B /* EditorCommon.framework */; };
+		4598BF711B3FD78F00D07B63 /* SignalGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45669EC41B3E95C600666D54 /* SignalGraph.framework */; };
 		45C913681A8C816A00B15F9F /* CargoExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C9135E1A8C816A00B15F9F /* CargoExecutionController.swift */; };
 		45C9136A1A8C816A00B15F9F /* RacerExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C913601A8C816A00B15F9F /* RacerExecutionController.swift */; };
 		45C9136B1A8C816A00B15F9F /* RustCompilerIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C913611A8C816A00B15F9F /* RustCompilerIssue.swift */; };
@@ -40,17 +42,9 @@
 		45C913AA1A8C81C700B15F9F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C913A91A8C81C700B15F9F /* main.swift */; };
 		45DAC0C81B120B78006E6A4A /* bin in Resources */ = {isa = PBXBuildFile; fileRef = 45DAC0C71B120B78006E6A4A /* bin */; };
 		45DAC0CA1B120B81006E6A4A /* RacerExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C913601A8C816A00B15F9F /* RacerExecutionController.swift */; };
-		45DD92FE1B1E08B500A0BE6A /* SignalGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD92F51B1E08B100A0BE6A /* SignalGraph.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4500EE971B272D5900E83F57 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45F82C571B2585BF00A78AF5;
-			remoteInfo = UnitTest;
-		};
 		4537285E1A8C827800BE5C1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 453728591A8C827800BE5C1B /* EditorCommon.xcodeproj */;
@@ -86,40 +80,47 @@
 			remoteGlobalIDString = 452CFC651A8C7A6A0050BE72;
 			remoteInfo = EditorCommon;
 		};
+		45669EC31B3E95C600666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3D761B3E29B400FFF5A1;
+			remoteInfo = SignalGraph;
+		};
+		45669EC51B3E95C600666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3D801B3E29B400FFF5A1;
+			remoteInfo = SignalGraphTest;
+		};
+		45669EC71B3E95C600666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 453718A91B3AD93500160463;
+			remoteInfo = SignalGraphTestRun;
+		};
+		45669EC91B3E95C600666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3DBF1B3E2B7800FFF5A1;
+			remoteInfo = SignalGraphMobile;
+		};
+		45669ECB1B3E95C600666D54 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 457A3DC91B3E2B7900FFF5A1;
+			remoteInfo = SignalGraphTestMobile;
+		};
 		4598BBD91A8C8C9400121442 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 453728591A8C827800BE5C1B /* EditorCommon.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 452CFC651A8C7A6A0050BE72;
 			remoteInfo = EditorCommon;
-		};
-		45DD92F41B1E08B100A0BE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45D934E41AFE4228000EE661;
-			remoteInfo = SignalGraph;
-		};
-		45DD92F61B1E08B100A0BE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4563E0651AF8FCA800AA9EA6;
-			remoteInfo = SignalGraphMobile;
-		};
-		45DD92FA1B1E08B100A0BE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 459D96AE1AFE52D3006AF2C0;
-			remoteInfo = SignalGraphAppKitAddon;
-		};
-		45DD92FC1B1E08B100A0BE6A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45BE34121B0CC02D0029B752;
-			remoteInfo = OSXTestdriveApp;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -153,6 +154,7 @@
 		4510EA4D1B12C91C005824AB /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		4510EA731B12CC67005824AB /* Issue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		453728591A8C827800BE5C1B /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
+		45669F231B3E97A000666D54 /* Channels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channels.swift; sourceTree = "<group>"; };
 		45C913061A8C811200B15F9F /* EditorToolComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorToolComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C9130A1A8C811200B15F9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45C9135E1A8C816A00B15F9F /* CargoExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoExecutionController.swift; sourceTree = "<group>"; };
@@ -173,7 +175,7 @@
 		45C913A51A8C81C700B15F9F /* UnitTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C913A91A8C81C700B15F9F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		45DAC0C71B120B78006E6A4A /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bin; sourceTree = "<group>"; };
-		45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../SignalGraph.Swift/SignalGraph/SignalGraph.xcodeproj; sourceTree = "<group>"; };
+		45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SignalGraph.xcodeproj; path = ../../Submodules/SignalGraph.Swift/SignalGraph.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +183,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45DD92FE1B1E08B500A0BE6A /* SignalGraph.framework in Frameworks */,
+				4598BF711B3FD78F00D07B63 /* SignalGraph.framework in Frameworks */,
 				4598BBD81A8C8C8A00121442 /* EditorCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +217,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		45669EBB1B3E95C600666D54 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45669EC41B3E95C600666D54 /* SignalGraph.framework */,
+				45669EC61B3E95C600666D54 /* SignalGraphTest.xctest */,
+				45669EC81B3E95C600666D54 /* SignalGraph */,
+				45669ECA1B3E95C600666D54 /* SignalGraphMobile.framework */,
+				45669ECC1B3E95C600666D54 /* SignalGraphTestMobile.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45C912FC1A8C811200B15F9F = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				4510EA4D1B12C91C005824AB /* Model.swift */,
+				45669F231B3E97A000666D54 /* Channels.swift */,
 				4510EA731B12CC67005824AB /* Issue.swift */,
 				45C9135E1A8C816A00B15F9F /* CargoExecutionController.swift */,
 				45C913601A8C816A00B15F9F /* RacerExecutionController.swift */,
@@ -291,18 +306,6 @@
 				45C913A91A8C81C700B15F9F /* main.swift */,
 			);
 			path = UnitTests;
-			sourceTree = "<group>";
-		};
-		45DD92EC1B1E08B100A0BE6A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45DD92F51B1E08B100A0BE6A /* SignalGraph.framework */,
-				45DD92F71B1E08B100A0BE6A /* SignalGraphMobile.framework */,
-				45DD92FB1B1E08B100A0BE6A /* SignalGraphAppKitAddon.framework */,
-				45DD92FD1B1E08B100A0BE6A /* OSXTestdriveApp.app */,
-				4500EE981B272D5900E83F57 /* UnitTest.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,7 +417,7 @@
 					ProjectRef = 453728591A8C827800BE5C1B /* EditorCommon.xcodeproj */;
 				},
 				{
-					ProductGroup = 45DD92EC1B1E08B100A0BE6A /* Products */;
+					ProductGroup = 45669EBB1B3E95C600666D54 /* Products */;
 					ProjectRef = 45DD92EB1B1E08B100A0BE6A /* SignalGraph.xcodeproj */;
 				},
 			);
@@ -428,13 +431,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4500EE981B272D5900E83F57 /* UnitTest.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = UnitTest.app;
-			remoteRef = 4500EE971B272D5900E83F57 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		4537285F1A8C827800BE5C1B /* EditorCommon.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -449,32 +445,39 @@
 			remoteRef = 453728601A8C827800BE5C1B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45DD92F51B1E08B100A0BE6A /* SignalGraph.framework */ = {
+		45669EC41B3E95C600666D54 /* SignalGraph.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SignalGraph.framework;
-			remoteRef = 45DD92F41B1E08B100A0BE6A /* PBXContainerItemProxy */;
+			remoteRef = 45669EC31B3E95C600666D54 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45DD92F71B1E08B100A0BE6A /* SignalGraphMobile.framework */ = {
+		45669EC61B3E95C600666D54 /* SignalGraphTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphTest.xctest;
+			remoteRef = 45669EC51B3E95C600666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669EC81B3E95C600666D54 /* SignalGraph */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SignalGraph;
+			remoteRef = 45669EC71B3E95C600666D54 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45669ECA1B3E95C600666D54 /* SignalGraphMobile.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = SignalGraphMobile.framework;
-			remoteRef = 45DD92F61B1E08B100A0BE6A /* PBXContainerItemProxy */;
+			remoteRef = 45669EC91B3E95C600666D54 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45DD92FB1B1E08B100A0BE6A /* SignalGraphAppKitAddon.framework */ = {
+		45669ECC1B3E95C600666D54 /* SignalGraphTestMobile.xctest */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SignalGraphAppKitAddon.framework;
-			remoteRef = 45DD92FA1B1E08B100A0BE6A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45DD92FD1B1E08B100A0BE6A /* OSXTestdriveApp.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = OSXTestdriveApp.app;
-			remoteRef = 45DD92FC1B1E08B100A0BE6A /* PBXContainerItemProxy */;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphTestMobile.xctest;
+			remoteRef = 45669ECB1B3E95C600666D54 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -518,6 +521,7 @@
 				45C9136C1A8C816A00B15F9F /* RustCompilerOutputParsing.swift in Sources */,
 				45C9136D1A8C816A00B15F9F /* RustProgramExecutionController.swift in Sources */,
 				45C913681A8C816A00B15F9F /* CargoExecutionController.swift in Sources */,
+				45669F241B3E97A000666D54 /* Channels.swift in Sources */,
 				45C9136A1A8C816A00B15F9F /* RacerExecutionController.swift in Sources */,
 				45C9136F1A8C816A00B15F9F /* StringStreamProcessing.swift in Sources */,
 				45C913711A8C816A00B15F9F /* TSVFileScanner.swift in Sources */,

@@ -18,7 +18,7 @@ public class Racer {
 			return	owner!
 		}
 	}
-	public var autocompletionCandidates: ArrayStorage<Match> {
+	public var autocompletionCandidates: ArrayStorage<EditorToolComponents.Model.Autocompletion.Candidate>.Channel {
 		get {
 			return	toolModel.autocompletion.candidates
 		}
