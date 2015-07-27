@@ -11,7 +11,6 @@
 		451B561E1B1B4374006C4879 /* _Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561D1B1B4374006C4879 /* _Project.swift */; };
 		451B56201B1B437A006C4879 /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451B561F1B1B437A006C4879 /* Workspace.swift */; };
 		456593CE1B3235A4007CC1F3 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456593CD1B3235A4007CC1F3 /* Package.swift */; };
-		45669F811B3EA2DC00666D54 /* Channels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45669F801B3EA2DC00666D54 /* Channels.swift */; };
 		4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DBE51B1F3EA4003E26CD /* Racer.swift */; };
 		4567DBE91B1F3EBF003E26CD /* Cargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4567DBE81B1F3EBF003E26CD /* Cargo.swift */; };
 		4571A74B1B1B761100A7911B /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4571A74A1B1B761100A7911B /* Utility.swift */; };
@@ -24,10 +23,16 @@
 		45DD92AB1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD92AA1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift */; };
 		45DD92C11B1DFC1600A0BE6A /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD92B61B1DFC1300A0BE6A /* LLDBWrapper.framework */; };
 		45DD930E1B1E08FA00A0BE6A /* EditorDebuggingFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD93071B1E08F200A0BE6A /* EditorDebuggingFeature.framework */; };
-		45F82CA41B25D8E300A78AF5 /* xChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F82CA31B25D8E300A78AF5 /* xChannels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		450CB4A01B5684FE000D8D7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4508168B1B533CA100009A30;
+			remoteInfo = SignalGraphMobileTest;
+		};
 		4510E9E81B12BF78005824AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4510E9E21B12BF77005824AB /* EditorToolComponents.xcodeproj */;
@@ -56,13 +61,6 @@
 			remoteGlobalIDString = 457A3D761B3E29B400FFF5A1;
 			remoteInfo = SignalGraph;
 		};
-		45669F781B3E9C7700666D54 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 457A3D801B3E29B400FFF5A1;
-			remoteInfo = SignalGraphTest;
-		};
 		45669F7A1B3E9C7700666D54 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
@@ -76,13 +74,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 457A3DBF1B3E2B7800FFF5A1;
 			remoteInfo = SignalGraphMobile;
-		};
-		45669F7E1B3E9C7700666D54 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4510E84B1B1212F6005824AB /* SignalGraph.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 457A3DC91B3E2B7900FFF5A1;
-			remoteInfo = SignalGraphTestMobile;
 		};
 		45DD92B51B1DFC1300A0BE6A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -164,7 +155,6 @@
 		451B561D1B1B4374006C4879 /* _Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Project.swift; sourceTree = "<group>"; };
 		451B561F1B1B437A006C4879 /* Workspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		456593CD1B3235A4007CC1F3 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		45669F801B3EA2DC00666D54 /* Channels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channels.swift; sourceTree = "<group>"; };
 		4567DBE51B1F3EA4003E26CD /* Racer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Racer.swift; sourceTree = "<group>"; };
 		4567DBE81B1F3EBF003E26CD /* Cargo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo.swift; sourceTree = "<group>"; };
 		4567DC461B203F06003E26CD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -177,7 +167,6 @@
 		45DD92AA1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _WorkspaceDebuggingController.swift; sourceTree = "<group>"; };
 		45DD92AC1B1DFC1200A0BE6A /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		45DD92FF1B1E08F200A0BE6A /* EditorDebuggingFeature.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebuggingFeature.xcodeproj; path = ../EditorDebuggingFeature/EditorDebuggingFeature.xcodeproj; sourceTree = "<group>"; };
-		45F82CA31B25D8E300A78AF5 /* xChannels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = xChannels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,8 +208,6 @@
 		4510E8141B12107C005824AB /* EditorModel */ = {
 			isa = PBXGroup;
 			children = (
-				45669F801B3EA2DC00666D54 /* Channels.swift */,
-				45F82CA31B25D8E300A78AF5 /* xChannels.swift */,
 				451B561F1B1B437A006C4879 /* Workspace.swift */,
 				4567DBE21B1F3DE4003E26CD /* (children of workspace) */,
 				4571A74A1B1B761100A7911B /* Utility.swift */,
@@ -245,10 +232,9 @@
 			isa = PBXGroup;
 			children = (
 				45669F771B3E9C7700666D54 /* SignalGraph.framework */,
-				45669F791B3E9C7700666D54 /* SignalGraphTest.xctest */,
 				45669F7B1B3E9C7700666D54 /* SignalGraph */,
 				45669F7D1B3E9C7700666D54 /* SignalGraphMobile.framework */,
-				45669F7F1B3E9C7700666D54 /* SignalGraphTestMobile.xctest */,
+				450CB4A11B5684FE000D8D7D /* SignalGraphMobileTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -398,6 +384,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		450CB4A11B5684FE000D8D7D /* SignalGraphMobileTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SignalGraphMobileTest.xctest;
+			remoteRef = 450CB4A01B5684FE000D8D7D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4510E9E91B12BF78005824AB /* EditorToolComponents.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -426,13 +419,6 @@
 			remoteRef = 45669F761B3E9C7700666D54 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45669F791B3E9C7700666D54 /* SignalGraphTest.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SignalGraphTest.xctest;
-			remoteRef = 45669F781B3E9C7700666D54 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		45669F7B1B3E9C7700666D54 /* SignalGraph */ = {
 			isa = PBXReferenceProxy;
 			fileType = "compiled.mach-o.executable";
@@ -445,13 +431,6 @@
 			fileType = wrapper.framework;
 			path = SignalGraphMobile.framework;
 			remoteRef = 45669F7C1B3E9C7700666D54 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45669F7F1B3E9C7700666D54 /* SignalGraphTestMobile.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SignalGraphTestMobile.xctest;
-			remoteRef = 45669F7E1B3E9C7700666D54 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45DD92B61B1DFC1300A0BE6A /* LLDBWrapper.framework */ = {
@@ -542,7 +521,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4567DBE91B1F3EBF003E26CD /* Cargo.swift in Sources */,
-				45F82CA41B25D8E300A78AF5 /* xChannels.swift in Sources */,
 				45DD92A91B1DF8CD00A0BE6A /* Debugger.swift in Sources */,
 				4571A74B1B1B761100A7911B /* Utility.swift in Sources */,
 				4567DBE61B1F3EA4003E26CD /* Racer.swift in Sources */,
@@ -554,7 +532,6 @@
 				45DD92AB1B1DF9E900A0BE6A /* _WorkspaceDebuggingController.swift in Sources */,
 				451B561E1B1B4374006C4879 /* _Project.swift in Sources */,
 				4571A78A1B1CB4EE00A7911B /* Console.swift in Sources */,
-				45669F811B3EA2DC00666D54 /* Channels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

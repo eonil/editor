@@ -14,19 +14,19 @@ public class Workspace {
 	public init(rootDirectoryURL: NSURL) {
 		_rootDirectoryURL	=	ValueStorage<NSURL>(rootDirectoryURL)
 		
-		editing.owner	=	self
-		toolbox.owner	=	self
-		debugger.owner	=	self
-		console.owner	=	self
+		editing.owner		=	self
+		toolbox.owner		=	self
+		debugger.owner		=	self
+		console.owner		=	self
 	}
 	
-	public var rootDirectoryURL: ValueStorage<NSURL>.Channel { get { return _rootDirectoryURL.channelize() } }
+	public var 	rootDirectoryURL	:	ValueStorage<NSURL>.Channel	{ get { return WeakChannel(_rootDirectoryURL) } }
 	
-//	public let	package		=	
-	public let	editing		=	Editing()
-	public let	toolbox		=	Toolbox()
-	public let	debugger	=	Debugger()
-	public let	console		=	Console()
+//	public let	package			=
+	public let	editing			=	Editing()
+	public let	toolbox			=	Toolbox()
+	public let	debugger		=	Debugger()
+	public let	console			=	Console()
 
 	///
 

@@ -45,8 +45,8 @@ class MainView: NSView {
 	///
 	
 	private let	_deck		=	TrinityDeckPiece()
-	private let	_navPDSync	=	EditableValueStorageEqualizer<Bool>()
-	private let	_inspPDSync	=	EditableValueStorageEqualizer<Bool>()
+	private let	_navPDSync	=	ValueStorageEqualizer<Bool>()
+	private let	_inspPDSync	=	ValueStorageEqualizer<Bool>()
 	private var	_installed	=	false
 	private var	_connected	=	false
 	
@@ -71,20 +71,20 @@ class MainView: NSView {
 	private func _connect() {
 		assert(_connected == false)
 		assert(shell != nil)
-		_navPDSync.pair			=	(shell!.navigatorPaneDisplay, _deck.firstPaneDisplay)
-		_inspPDSync.pair		=	(shell!.inspectorPaneDisplay, _deck.lastPaneDisplay)
+		_navPDSync.storages.snapshot	=	[shell!.navigatorPaneDisplay, _deck.firstPaneDisplay]
+		_inspPDSync.storages.snapshot	=	[shell!.inspectorPaneDisplay, _deck.lastPaneDisplay]
 		_connected			=	true
 	}
 	private func _disconnect() {
 		assert(_connected == true)
 		assert(shell != nil)
-		_navPDSync.pair			=	nil
-		_inspPDSync.pair		=	nil
+		_navPDSync.storages.snapshot	=	[]
+		_inspPDSync.storages.snapshot	=	[]
 		_connected			=	false
 	}
 	
 	private func _layout() {
-		_deck.frame		=	bounds
+		_deck.frame			=	bounds
 	}
 }
 

@@ -18,13 +18,13 @@ public class Console {
 		}
 	}
 
-	public var issues: ArrayStorage<Issue>.Channel { get { return _issues.channelize() } }
+	public var issues	:	ArrayStorage<Issue>.Channel	{ get { return WeakChannel(_issues) } }
 
 	///	History of input command and result output.
 	///	This is a collection of lines. New-line
 	///	character are stripped away.
 	///
-	public var history: ArrayStorage<String>.Channel { get { return _history.channelize() } }
+	public var history	:	ArrayStorage<String>.Channel	{ get { return WeakChannel(_history) } }
 
 	public func clearIssues() {
 		_issues.removeAll()

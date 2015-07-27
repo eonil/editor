@@ -18,7 +18,7 @@ public class Package {
 	}
 	public var location: ValueStorage<NSURL>.Channel {
 		get {
-			return	_location.channelize()
+			return	WeakChannel(_location)
 		}
 	}
 	

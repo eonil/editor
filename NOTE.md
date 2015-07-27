@@ -259,7 +259,7 @@ Usually, I make a view or piece that handles a proper interaction, and use them 
 components of a `~UI` to connect them to application state. Consequently, "View" or "Piece" are 
 usually generic component, and "UI" is always a fully specialized concerete classe.
 
-Sometimes
+
 
 
 

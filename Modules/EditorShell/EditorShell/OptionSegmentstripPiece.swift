@@ -258,14 +258,14 @@ class OptionSegment {
 		assert(_index != nil)
 		let	sel	=	s
 		if sel != _owner!._segmentV.isSelectedForSegment(_index!) {
-			println("\(self) \(ObjectIdentifier(self).uintValue) \(resolve())")
+//			println("\(self) \(ObjectIdentifier(self).uintValue) \(resolve())")
 			_owner!._segmentV.setSelected(sel, forSegment: _index!)
 		}
 	}
 	private func _onEndSelection(s: Bool) {
 		let	sel	=	false
 		if sel != _owner!._segmentV.isSelectedForSegment(_index!) {
-			println("\(self) \(ObjectIdentifier(self).uintValue) \(resolve())")
+//			println("\(self) \(ObjectIdentifier(self).uintValue) \(resolve())")
 			_owner!._segmentV.setSelected(sel, forSegment: _index!)
 		}
 	}

@@ -45,17 +45,28 @@ public class DebugMenuController {
 	let	stepOut		=	NSMenuItem(title: "Step Out", shortcut: Command+"3")
 
 	///
-	
+
+	private let	_availableDebuggerCommandMonitor	=	SetMonitor<Debugger.Command>()
+
 	private func _connect() {
-		workspace!.debugger.availableCommands.register(ObjectIdentifier(self)) { [weak self] in self!._handleAvailableDebuggerCommandSignal($0) }
+		_availableDebuggerCommandMonitor.didBegin	=	{ [weak self] in self!._beginDebuggerCommandState($0) }
+		_availableDebuggerCommandMonitor.willEnd	=	{ [weak self] in self!._endDebuggerCommandState($0) }
+		workspace!.debugger.availableCommands.register(_availableDebuggerCommandMonitor)
 	}
 	private func _disconnect() {
-		workspace!.debugger.availableCommands.deregister(ObjectIdentifier(self))
+		workspace!.debugger.availableCommands.deregister(_availableDebuggerCommandMonitor)
+		_availableDebuggerCommandMonitor.didBegin	=	nil
+		_availableDebuggerCommandMonitor.willEnd	=	nil
 	}
-	private func _handleAvailableDebuggerCommandSignal(s: SetStorage<Debugger.Command>.Signal) {
-		stepOver.enabled	=	s.timing == .DidBegin && s.state.contains(.StepOver) ?? false
-		stepInto.enabled	=	s.timing == .DidBegin && s.state.contains(.StepInto) ?? false
-		stepOut.enabled		=	s.timing == .DidBegin && s.state.contains(.StepOut) ?? false
+	private func _beginDebuggerCommandState(dcmds: Set<Debugger.Command>) {
+		stepOver.enabled	=	dcmds.contains(.StepOver) ?? false
+		stepInto.enabled	=	dcmds.contains(.StepInto) ?? false
+		stepOut.enabled		=	dcmds.contains(.StepOut) ?? false
+	}
+	private func _endDebuggerCommandState(dcmds: Set<Debugger.Command>) {
+		stepOver.enabled	=	false
+		stepInto.enabled	=	false
+		stepOut.enabled		=	false
 	}
 }
 

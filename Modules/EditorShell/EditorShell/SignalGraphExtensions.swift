@@ -9,45 +9,56 @@
 import SignalGraph
 
 ///	Propagates state of latest mutation from any storage in the list.
+///	State of newrly added storage will be treated like newrly arrived value.
+///	And states of all storages will be synced to it.
 class ValueStorageEqualizer<T> {
 	let	storages	=	ArrayStorage<ValueStorage<T>>([])
 
 	init() {
-		storages.register(ObjectIdentifier(self))	{ [weak self] in self!._handleListSignal($0) }
+		_connectArray()
 	}
 	deinit {
-		storages.deregister(ObjectIdentifier(self))
+		_disconnectArray()
 	}
 
-	private func _handleListSignal(s: ArrayStorage<ValueStorage<T>>.Signal) {
-		switch s.timing {
-		case .DidBegin:
-			switch s.by {
-			case nil:
-				s.state.map(_connectAtom)
-			case _:
-				for m in s.by!.mutations {
-					switch m {
-					case (_, nil, nil):	fatalError()
-					case (_, nil, _):	_connectAtom(m.future!)
-					case (_, _, nil):	_disconnectAtom(m.past!)
-					case (_, _, _):
-						_disconnectAtom(m.past!)
-						_connectAtom(m.future!)
-					}
-				}
-			}
+	///
 
-		case .WillEnd:
-			break
-		}
+	private let	_arrayMonitor	=	ArrayMonitor<ValueStorage<T>>()
+	private let	_allAtomMonitor	=	ValueMonitor<T>()
+
+	private func _connectArray() {
+		_arrayMonitor.didAdd		=	{ [weak self] in self!._onAddValueStorages($1) }
+		_arrayMonitor.willRemove	=	{ [weak self] in self!._onRemoveValueStorages($1) }
+		storages.register(_arrayMonitor)
 	}
-
+	private func _disconnectArray() {
+		storages.deregister(_arrayMonitor)
+	}
+	private func _onAddValueStorages(vss: [ValueStorage<T>]) {
+		vss.map(_connectAtom)
+	}
+	private func _onRemoveValueStorages(vss: [ValueStorage<T>]) {
+		vss.map(_disconnectAtom)
+	}
 	private func _connectAtom(atom: ValueStorage<T>) {
-
+		_allAtomMonitor.didBegin	=	{ [weak self] in self!._onAtomBeginState($0) }
+		_allAtomMonitor.willEnd		=	{ [weak self] in self!._onAtomEndState($0) }
+		atom.register(_allAtomMonitor)
 	}
 	private func _disconnectAtom(atom: ValueStorage<T>) {
-
+		atom.deregister(_allAtomMonitor)
+		_allAtomMonitor.willEnd		=	nil
+		_allAtomMonitor.didBegin	=	nil
+	}
+	private func _onAtomBeginState(state: T) {
+		_unicastAtomState(state)
+	}
+	private func _onAtomEndState(state: T) {
+	}
+	private func _unicastAtomState(state: T) {
+		for atom in storages {
+			atom.state	=	state
+		}
 	}
 }
 

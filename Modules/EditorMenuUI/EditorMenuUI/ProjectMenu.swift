@@ -62,7 +62,9 @@ public class ProjectMenuController {
 
 	///
 
-	private var	_isConnected	=	false
+	private let	_cargoCommandAvailabilityMonitor	=	SetMonitor<Cargo.Command>()
+	private let	_debuggerCommandAvailabiltiyMonitor	=	SetMonitor<Debugger.Command>()
+	private var	_isConnected				=	false
 	
 	private func _connect() {
 		assert(workspace != nil)
@@ -83,8 +85,13 @@ public class ProjectMenuController {
 		clean.onAction		=	queueCargoCommand(.Clean)
 		stop.onAction		=	executeDebuggerCommand(.Halt)
 
-		workspace!.toolbox.cargo.availableCommands.register(ObjectIdentifier(self))	{ [weak self] in self!._handleCargoCommandSignal($0) }
-		workspace!.debugger.availableCommands.register(ObjectIdentifier(self))		{ [weak self] in self!._handleDebuggerCommandSignal($0) }
+		_cargoCommandAvailabilityMonitor.didBegin	=	{ [weak self] in self!._onBeginCargoCommandState($0) }
+		_cargoCommandAvailabilityMonitor.willEnd	=	{ [weak self] in self!._onEndCargoCommandState($0) }
+		_debuggerCommandAvailabiltiyMonitor.didBegin	=	{ [weak self] in self!._onBeginDebuggerCommandState($0) }
+		_debuggerCommandAvailabiltiyMonitor.willEnd	=	{ [weak self] in self!._onEndDebuggerCommandState($0) }
+
+		workspace!.toolbox.cargo.availableCommands.register(_cargoCommandAvailabilityMonitor)
+		workspace!.debugger.availableCommands.register(_debuggerCommandAvailabiltiyMonitor)
 
 		_isConnected	=	true
 	}
@@ -92,8 +99,13 @@ public class ProjectMenuController {
 		assert(workspace != nil)
 		assert(_isConnected == false)
 
-		workspace!.debugger.availableCommands.deregister(ObjectIdentifier(self))
-		workspace!.toolbox.cargo.availableCommands.deregister(ObjectIdentifier(self))
+		workspace!.debugger.availableCommands.deregister(_debuggerCommandAvailabiltiyMonitor)
+		workspace!.toolbox.cargo.availableCommands.deregister(_cargoCommandAvailabilityMonitor)
+
+		_cargoCommandAvailabilityMonitor.didBegin	=	nil
+		_cargoCommandAvailabilityMonitor.willEnd	=	nil
+		_debuggerCommandAvailabiltiyMonitor.didBegin	=	nil
+		_debuggerCommandAvailabiltiyMonitor.willEnd	=	nil
 
 		for m in menu.allMenuItems {
 			m.onAction	=	nil
@@ -102,17 +114,29 @@ public class ProjectMenuController {
 		_isConnected	=	false
 	}
 
-	private func _handleCargoCommandSignal(s: SetStorage<Cargo.Command>.Signal) {
-		clean.enabled		=	s.timing == .DidBegin && s.state.contains(.Clean) ?? false
-		build.enabled		=	s.timing == .DidBegin && s.state.contains(.Build) ?? false
-		run.enabled		=	s.timing == .DidBegin && s.state.contains(.Run) ?? false
-		documentate.enabled	=	s.timing == .DidBegin && s.state.contains(.Documentate) ?? false
-		test.enabled		=	s.timing == .DidBegin && s.state.contains(.Test) ?? false
-		benchmark.enabled	=	s.timing == .DidBegin && s.state.contains(.Benchmark) ?? false
+	private func _onBeginCargoCommandState(state: Set<Cargo.Command>) {
+		clean.enabled		=	state.contains(.Clean) ?? false
+		build.enabled		=	state.contains(.Build) ?? false
+		run.enabled		=	state.contains(.Run) ?? false
+		documentate.enabled	=	state.contains(.Documentate) ?? false
+		test.enabled		=	state.contains(.Test) ?? false
+		benchmark.enabled	=	state.contains(.Benchmark) ?? false
 	}
-	private func _handleDebuggerCommandSignal(s: SetStorage<Debugger.Command>.Signal) {
-		run.enabled		=	s.timing == .DidBegin && s.state.contains(.Launch) ?? false
-		stop.enabled		=	s.timing == .DidBegin && s.state.contains(.Halt) ?? false
+	private func _onEndCargoCommandState(state: Set<Cargo.Command>) {
+		clean.enabled		=	false
+		build.enabled		=	false
+		run.enabled		=	false
+		documentate.enabled	=	false
+		test.enabled		=	false
+		benchmark.enabled	=	false
+	}
+	private func _onBeginDebuggerCommandState(state: Set<Debugger.Command>) {
+		run.enabled		=	state.contains(.Launch) ?? false
+		stop.enabled		=	state.contains(.Halt) ?? false
+	}
+	private func _onEndDebuggerCommandState(state: Set<Debugger.Command>) {
+		run.enabled		=	false
+		stop.enabled		=	false
 	}
 }
 

@@ -28,9 +28,9 @@ public class Cargo {
 		}
 	}
 
-	public var availableCommands: SetStorage<Command>.Channel { get { return _availableCommands.channelize() } }
-	public var runningCommands: ValueStorage<Command?>.Channel { get { return _runningCommand.channelize() } }
-	public var waitingCommands: ArrayStorage<Command>.Channel { get { return _waitingCommands.channelize() } }
+	public var availableCommands	:	SetStorage<Command>.Channel	{ get { return WeakChannel(_availableCommands) } }
+	public var runningCommands	:	ValueStorage<Command?>.Channel	{ get { return WeakChannel(_runningCommand) } }
+	public var waitingCommands	:	ArrayStorage<Command>.Channel	{ get { return WeakChannel(_waitingCommands) } }
 
 	public func queue(command: Command) {
 		_waitingCommands.append(command)
@@ -41,7 +41,8 @@ public class Cargo {
 	
 	///
 	
-	internal weak var owner	:	Toolbox?
+	internal weak var owner		:	Toolbox?
+	
 	internal init() {
 		_cargoAgent.owner	=	self;
 		resetAvailableCommands()

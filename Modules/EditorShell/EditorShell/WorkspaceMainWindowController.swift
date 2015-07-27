@@ -68,8 +68,8 @@ class WorkspaceMainWindowController: NSWindowController {
 	private let	_firstPaneOpts	=	FirstPaneDisplayOptions()
 	
 	private let	_paneDispOpts	=	PaneDisplayOptions()
-	private let	_navDispSync	=	EditableValueStorageEqualizer<Bool>()
-	private let	_inspDispSync	=	EditableValueStorageEqualizer<Bool>()
+	private let	_navDispSync	=	ValueStorageEqualizer<Bool>()
+	private let	_inspDispSync	=	ValueStorageEqualizer<Bool>()
 	
 	private var	_installed	=	false
 	private var	_connected	=	false
@@ -105,40 +105,40 @@ class WorkspaceMainWindowController: NSWindowController {
 			_customViewToolItem("Panes", _paneDispOpts.segmentstrip),
 		]
 		_toolbarCon!.toolbar.displayMode	=	NSToolbarDisplayMode.IconAndLabel
-		_mainView		=	MainView()
-		window!.toolbar		=	_toolbarCon!.toolbar
-		window!.contentView	=	_mainView!
-		window!.titleVisibility	=	NSWindowTitleVisibility.Hidden
-		_installed		=	true
+		_mainView			=	MainView()
+		window!.toolbar			=	_toolbarCon!.toolbar
+		window!.contentView		=	_mainView!
+		window!.titleVisibility		=	NSWindowTitleVisibility.Hidden
+		_installed			=	true
 	}
 	private func _deinstall() {
 		assert(_installed == true)
 		assert(_connected == false)
-		window!.contentView	=	NSView()
-		window!.toolbar		=	nil
-		_mainView		=	nil
+		window!.contentView		=	NSView()
+		window!.toolbar			=	nil
+		_mainView			=	nil
 		_toolbarCon!.configuration	=	nil
-		_toolbarCon		=	nil
-		_paneDispOpts.shell	=	nil
+		_toolbarCon			=	nil
+		_paneDispOpts.shell		=	nil
 		_firstPaneOpts.deinstall()
-		_installed		=	false
+		_installed			=	false
 	}
 	
 	private func _connect() {
 		assert(_connected == false)
 		assert(shell != nil)
-		_mainView!.shell	=	shell!
-		_navDispSync.pair	=	(shell!.navigatorPaneDisplay, _paneDispOpts.navigator.selection)
-		_inspDispSync.pair	=	(shell!.inspectorPaneDisplay, _paneDispOpts.inspector.selection)
-		_connected		=	true
+		_mainView!.shell		=	shell!
+		_navDispSync.storages.snapshot	=	[shell!.navigatorPaneDisplay, _paneDispOpts.navigator.selection]
+		_inspDispSync.storages.snapshot	=	[shell!.inspectorPaneDisplay, _paneDispOpts.inspector.selection]
+		_connected			=	true
 	}
 	private func _disconnect() {
 		assert(_connected == true)
 		assert(shell != nil)
-		_navDispSync.pair	=	nil
-		_inspDispSync.pair	=	nil
-		_mainView!.shell	=	nil
-		_connected		=	false
+		_inspDispSync.storages.snapshot	=	[]
+		_navDispSync.storages.snapshot	=	[]
+		_mainView!.shell		=	nil
+		_connected			=	false
 	}
 	
 }

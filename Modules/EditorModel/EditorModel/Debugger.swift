@@ -25,9 +25,9 @@ public class Debugger {
 		case StepOut
 	}
 
-	public var targets: DictionaryStorage<NSURL,Target>.Channel { get { return _targets.channelize() } }
-	public var availableCommands: SetStorage<Command>.Channel { get { return _availableCommands.channelize() } }
-	public var currentTarget: ValueStorage<Target?>.Channel { get { return _currentTarget.channelize() } }
+	public var targets		:	DictionaryStorage<NSURL,Target>.Channel	{ get { return WeakChannel(_targets) } }
+	public var availableCommands	:	SetStorage<Command>.Channel		{ get { return WeakChannel(_availableCommands) } }
+	public var currentTarget	:	ValueStorage<Target?>.Channel		{ get { return WeakChannel(_currentTarget) } }
 	
 	public func execute(command: Command) {
 		_executeImpl(command)
@@ -161,10 +161,10 @@ public class Target {
 		}
 	}
 
-	public var	availableCommands	:	SetStorage<Debugger.Command>.Channel	{ get { return _availableCommands.channelize() } }
-	public var	isRunning		:	ValueStorage<Bool>.Channel 		{ get { return _isRunning.channelize() } }
-	public var	stackFrames		:	ValueStorage<ExecutionStateTreeViewController.Snapshot?>.Channel { get { return _stackFrames.channelize() } }
-	public var	localVariables		:	ValueStorage<VariableTreeViewController.Snapshot?>.Channel { get { return _localVariables.channelize() } }
+	public var	availableCommands	:	SetStorage<Debugger.Command>.Channel					{ get { return WeakChannel(_availableCommands) } }
+	public var	isRunning		:	ValueStorage<Bool>.Channel						{ get { return WeakChannel(_isRunning) } }
+	public var	stackFrames		:	ValueStorage<ExecutionStateTreeViewController.Snapshot?>.Channel	{ get { return WeakChannel(_stackFrames) } }
+	public var	localVariables		:	ValueStorage<VariableTreeViewController.Snapshot?>.Channel		{ get { return WeakChannel(_localVariables) } }
 
 	public func launch() {
 		_lldbprocess	=	_lldbtarget.launchProcessSimplyWithWorkingDirectory(_workingDir.path!)
