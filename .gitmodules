@@ -1,0 +1,3 @@
+[submodule "submodules/MulticastingStorage"]
+	path = submodules/MulticastingStorage
+	url = https://github.com/Eonil/MulticastingStorage
