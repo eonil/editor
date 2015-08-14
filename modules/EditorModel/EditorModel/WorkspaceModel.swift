@@ -23,6 +23,15 @@ public class WorkspaceModel {
 		}
 	}
 
+	public func insertProjectWithRootURL(url: NSURL) {
+		let	p	=	ProjectModel()
+		p.owner		=	self
+		_projects
+	}
+	public func deleteProject(project: ProjectModel) {
+
+	}
+
 	///
 
 	private let	_projects	=	MutableArrayStorage<ProjectModel>([])
@@ -81,10 +90,8 @@ public class DebuggingModel {
 	///
 
 	public class StackFrame {
-		fatalErrorBecauseUnimplementedYet()
 	}
 	public class FrameVariable {
-		fatalErrorBecauseUnimplementedYet()
 	}
 }
 
