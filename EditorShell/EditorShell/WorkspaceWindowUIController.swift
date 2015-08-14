@@ -14,6 +14,8 @@ import EditorUICommon
 public final class WorkspaceWindowUIController: CommonUIWindowController, NSWindowDelegate {
 	
 	public func run() {
+		assert(model != nil)
+
 		_div.view.frame			=	CGRect(origin: CGPoint.zeroPoint, size: _getMinSize())
 		window!.contentViewController	=	_div
 
@@ -37,6 +39,8 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, NSWind
 		_installToolbar()
 	}
 	public func halt() {
+		assert(model != nil)
+		
 		_deinstallToolbar()
 
 		window!.delegate		=	nil

@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import EditorCommon
 
 ///	Asynchronous mutator for application model.
 ///
 public class CommandQueue {
 	public func queueCommand(command: ModelCommand) {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 }
 

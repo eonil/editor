@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EditorCommon
 
 ///	A unit for a product.
 ///	A workspace can contain multiple projects.
@@ -28,17 +29,7 @@ public class WorkspaceModel {
 	private let	_currentProject	=	MutableValueStorage<ProjectModel?>(nil)
 }
 
-
-///	A unit of build.
-public class ProjectModel {
-	public var	rootURL	:	NSURL?
-
-	public let	report	=	Report()
-	public let	console	=	Console()
-}
-
 public class SearchModel {
-
 }
 
 ///	A unit of build for specific environment.
@@ -60,26 +51,26 @@ public class DebuggingModel {
 	}
 
 	func launchCurrentTarget() {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 	func pause() {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 	func resume() {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 	func halt() {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 
 	func selectFrameAtIndex(index: Int) {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 	func deselectFrame() {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 	func reloadFrameAtIndex(index: Int) {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 
 	///
@@ -90,10 +81,10 @@ public class DebuggingModel {
 	///
 
 	public class StackFrame {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 	public class FrameVariable {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 }
 
@@ -104,10 +95,10 @@ public class Console {
 		}
 	}
 	public func appendLine(line: String) {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 	public func appendLines(lines: String) {
-
+		fatalErrorBecauseUnimplementedYet()
 	}
 
 	///

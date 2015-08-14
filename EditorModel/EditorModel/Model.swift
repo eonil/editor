@@ -7,14 +7,27 @@
 //
 
 import Foundation
+import EditorCommon
 
 ///	A model for application.
+///	This manages whole application, not only single document
+///	or something else.
 ///	This exists for application, and designed toward to GUI.
 ///
+///	**ALL** features of this object and subnodes must run in
+///	main thread. Any non-main thread operations should be
+///	performed with special care.
+///
 public class Model {
-	public var selection: Selection {
+
+	public init() {
+	}
+
+	///
+
+	public var preference: PreferenceModel {
 		get {
-			return	_selection
+			return	_preference
 		}
 	}
 	public var workspaces: ArrayStorage<WorkspaceModel> {
@@ -25,10 +38,13 @@ public class Model {
 
 	///
 	
-	private let	_selection	=	Selection()
-
+	private let	_preference	=	PreferenceModel()
 	private let	_workspaces	=	MutableArrayStorage<WorkspaceModel>([])
+	
 }
+
+
+
 
 
 

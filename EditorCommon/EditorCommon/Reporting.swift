@@ -11,3 +11,7 @@ import Foundation
 public func assertAndReportFailure(@autoclosure condition: ()->Bool, _ message: String) {
 	assert(condition(), message)
 }
+
+public func fatalErrorBecauseUnimplementedYet() {
+	fatalError("Unimplemented yet!")
+}

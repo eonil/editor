@@ -13,20 +13,22 @@ import EditorShell
 public class Driver {
 
 	public init() {
-
 	}
 
 	///
 
 	public func run() {
-		_root.run()
+		_ui.model	=	_model
+		_ui.run()
 	}
 
 	public func halt() {
-		_root.halt()
+		_ui.halt()
+		_ui.model	=	nil
 	}
 
 	///
 
-	private let	_root		=	WorkspaceWindowUIController()
+	private let	_ui		=	WorkspaceWindowUIController()
+	private let	_model		=	Model()
 }

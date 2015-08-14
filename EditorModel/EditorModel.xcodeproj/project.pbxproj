@@ -15,6 +15,8 @@
 		4554C9BF1B7DC106004987CC /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9BA1B7DC106004987CC /* Selection.swift */; };
 		4554C9C01B7DC106004987CC /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9BB1B7DC106004987CC /* WorkspaceModel.swift */; };
 		4554CA061B7DC33A004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA031B7DC308004987CC /* EditorCommon.framework */; };
+		4554CAB21B7DCD3A004987CC /* PreferenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554CAB11B7DCD3A004987CC /* PreferenceModel.swift */; };
+		4554CAB61B7DCE05004987CC /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554CAB51B7DCE05004987CC /* ProjectModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		4554C9BA1B7DC106004987CC /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		4554C9BB1B7DC106004987CC /* WorkspaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
 		4554C9FD1B7DC307004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
+		4554CAB11B7DCD3A004987CC /* PreferenceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceModel.swift; sourceTree = "<group>"; };
+		4554CAB51B7DCE05004987CC /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,8 @@
 				4554C9B91B7DC106004987CC /* ModelConsuming.swift */,
 				4554C9BA1B7DC106004987CC /* Selection.swift */,
 				4554C9BB1B7DC106004987CC /* WorkspaceModel.swift */,
+				4554CAB51B7DCE05004987CC /* ProjectModel.swift */,
+				4554CAB11B7DCD3A004987CC /* PreferenceModel.swift */,
 				4554C8631B7DBEF7004987CC /* Info.plist */,
 			);
 			path = EditorModel;
@@ -257,8 +263,10 @@
 			files = (
 				4554C9C01B7DC106004987CC /* WorkspaceModel.swift in Sources */,
 				4554C9BF1B7DC106004987CC /* Selection.swift in Sources */,
+				4554CAB61B7DCE05004987CC /* ProjectModel.swift in Sources */,
 				4554C9BE1B7DC106004987CC /* ModelConsuming.swift in Sources */,
 				4554C9BC1B7DC106004987CC /* Command.swift in Sources */,
+				4554CAB21B7DCD3A004987CC /* PreferenceModel.swift in Sources */,
 				4554C9BD1B7DC106004987CC /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
