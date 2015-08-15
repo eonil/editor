@@ -19,4 +19,11 @@
    <FileRef
       location = "group:EditorCommon/EditorCommon.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "submodules">
+      <FileRef
+         location = "group:../submodules/MulticastingStorage/MulticastingStorage.xcodeproj">
+      </FileRef>
+   </Group>
 </Workspace>

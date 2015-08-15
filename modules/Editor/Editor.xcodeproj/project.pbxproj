@@ -14,19 +14,23 @@
 		4554C8DB1B7DBF51004987CC /* EditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C8DA1B7DBF51004987CC /* EditorTests.swift */; };
 		4554C8E61B7DBF51004987CC /* EditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C8E51B7DBF51004987CC /* EditorUITests.swift */; };
 		4554C9CA1B7DC1E6004987CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9C91B7DC1E6004987CC /* AppDelegate.swift */; };
-		4554CA661B7DC3F7004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA481B7DC3D8004987CC /* EditorCommon.framework */; };
-		4554CA671B7DC3F7004987CC /* EditorCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA481B7DC3D8004987CC /* EditorCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4554CA6A1B7DC3F7004987CC /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA5A1B7DC3D8004987CC /* EditorUICommon.framework */; };
-		4554CA6B1B7DC3F7004987CC /* EditorUICommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA5A1B7DC3D8004987CC /* EditorUICommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4554CA6E1B7DC3F7004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA4E1B7DC3D8004987CC /* EditorModel.framework */; };
-		4554CA6F1B7DC3F7004987CC /* EditorModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA4E1B7DC3D8004987CC /* EditorModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4554CA721B7DC3F7004987CC /* EditorShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA541B7DC3D8004987CC /* EditorShell.framework */; };
-		4554CA731B7DC3F7004987CC /* EditorShell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA541B7DC3D8004987CC /* EditorShell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4554CA761B7DC3F7004987CC /* EditorDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA631B7DC3E0004987CC /* EditorDriver.framework */; };
-		4554CA771B7DC3F7004987CC /* EditorDriver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA631B7DC3E0004987CC /* EditorDriver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4513733B1B7ED87F00ED9829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451373361B7ED87F00ED9829 /* MulticastingStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451372511B7ED50D00ED9829;
+			remoteInfo = MulticastingStorage;
+		};
+		4513733D1B7ED87F00ED9829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451373361B7ED87F00ED9829 /* MulticastingStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4513725A1B7ED50D00ED9829;
+			remoteInfo = MulticastingStorageTests;
+		};
 		4554C8D71B7DBF51004987CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4554C8BA1B7DBF50004987CC /* Project object */;
@@ -41,111 +45,6 @@
 			remoteGlobalIDString = 4554C8C11B7DBF50004987CC;
 			remoteInfo = Editor;
 		};
-		4554CA471B7DC3D8004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C94E1B7DBF9B004987CC;
-			remoteInfo = EditorCommon;
-		};
-		4554CA491B7DC3D8004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C9581B7DBF9B004987CC;
-			remoteInfo = EditorCommonTests;
-		};
-		4554CA4D1B7DC3D8004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA3F1B7DC3D8004987CC /* EditorModel.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C85E1B7DBEF7004987CC;
-			remoteInfo = EditorModel;
-		};
-		4554CA4F1B7DC3D8004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA3F1B7DC3D8004987CC /* EditorModel.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C8681B7DBEF8004987CC;
-			remoteInfo = EditorModelTests;
-		};
-		4554CA531B7DC3D8004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA421B7DC3D8004987CC /* EditorShell.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C80D1B7DBED9004987CC;
-			remoteInfo = EditorShell;
-		};
-		4554CA551B7DC3D8004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA421B7DC3D8004987CC /* EditorShell.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C8171B7DBED9004987CC;
-			remoteInfo = EditorShellTests;
-		};
-		4554CA591B7DC3D8004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA3C1B7DC3D8004987CC /* EditorUICommon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C97A1B7DC068004987CC;
-			remoteInfo = EditorUICommon;
-		};
-		4554CA5B1B7DC3D8004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA3C1B7DC3D8004987CC /* EditorUICommon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C9841B7DC068004987CC;
-			remoteInfo = EditorUICommonTests;
-		};
-		4554CA621B7DC3E0004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C8FD1B7DBF6A004987CC;
-			remoteInfo = EditorDriver;
-		};
-		4554CA641B7DC3E0004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C9071B7DBF6B004987CC;
-			remoteInfo = EditorDriverTests;
-		};
-		4554CA681B7DC3F7004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4554C94D1B7DBF9B004987CC;
-			remoteInfo = EditorCommon;
-		};
-		4554CA6C1B7DC3F7004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA3C1B7DC3D8004987CC /* EditorUICommon.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4554C9791B7DC068004987CC;
-			remoteInfo = EditorUICommon;
-		};
-		4554CA701B7DC3F7004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA3F1B7DC3D8004987CC /* EditorModel.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4554C85D1B7DBEF7004987CC;
-			remoteInfo = EditorModel;
-		};
-		4554CA741B7DC3F7004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA421B7DC3D8004987CC /* EditorShell.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4554C80C1B7DBED9004987CC;
-			remoteInfo = EditorShell;
-		};
-		4554CA781B7DC3F7004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4554C8FC1B7DBF6A004987CC;
-			remoteInfo = EditorDriver;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -155,11 +54,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4554CA731B7DC3F7004987CC /* EditorShell.framework in Embed Frameworks */,
-				4554CA771B7DC3F7004987CC /* EditorDriver.framework in Embed Frameworks */,
-				4554CA6B1B7DC3F7004987CC /* EditorUICommon.framework in Embed Frameworks */,
-				4554CA671B7DC3F7004987CC /* EditorCommon.framework in Embed Frameworks */,
-				4554CA6F1B7DC3F7004987CC /* EditorModel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -167,6 +61,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		451372E51B7ED81200ED9829 /* EditorUICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUICommon.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/modules/EditorUICommon/EditorUICommon.xcodeproj; sourceTree = "<absolute>"; };
+		451372EE1B7ED81700ED9829 /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/modules/EditorModel/EditorModel.xcodeproj; sourceTree = "<absolute>"; };
+		451372F71B7ED81C00ED9829 /* EditorShell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorShell.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/modules/EditorShell/EditorShell.xcodeproj; sourceTree = "<absolute>"; };
+		451373361B7ED87F00ED9829 /* MulticastingStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MulticastingStorage.xcodeproj; path = ../../submodules/MulticastingStorage/MulticastingStorage.xcodeproj; sourceTree = "<group>"; };
 		4554C8C21B7DBF50004987CC /* Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8C71B7DBF50004987CC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		4554C8CA1B7DBF50004987CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
@@ -180,11 +78,8 @@
 		4554C8E51B7DBF51004987CC /* EditorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorUITests.swift; sourceTree = "<group>"; };
 		4554C8E71B7DBF51004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4554C9C91B7DC1E6004987CC /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/EditorDriver/../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<absolute>"; };
-		4554CA3C1B7DC3D8004987CC /* EditorUICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUICommon.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/EditorDriver/../EditorUICommon/EditorUICommon.xcodeproj; sourceTree = "<absolute>"; };
-		4554CA3F1B7DC3D8004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/EditorDriver/../EditorModel/EditorModel.xcodeproj; sourceTree = "<absolute>"; };
-		4554CA421B7DC3D8004987CC /* EditorShell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorShell.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/EditorDriver/../EditorShell/EditorShell.xcodeproj; sourceTree = "<absolute>"; };
-		4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDriver.xcodeproj; path = ../EditorDriver/EditorDriver.xcodeproj; sourceTree = "<group>"; };
+		4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/modules/EditorCommon/EditorCommon.xcodeproj; sourceTree = "<absolute>"; };
+		4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDriver.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/modules/EditorDriver/EditorDriver.xcodeproj; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,11 +87,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4554CA721B7DC3F7004987CC /* EditorShell.framework in Frameworks */,
-				4554CA761B7DC3F7004987CC /* EditorDriver.framework in Frameworks */,
-				4554CA6A1B7DC3F7004987CC /* EditorUICommon.framework in Frameworks */,
-				4554CA661B7DC3F7004987CC /* EditorCommon.framework in Frameworks */,
-				4554CA6E1B7DC3F7004987CC /* EditorModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,18 +107,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4554C8B91B7DBF50004987CC = {
+		451373351B7ED87300ED9829 /* (modules) */ = {
 			isa = PBXGroup;
 			children = (
 				4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */,
-				4554CA3C1B7DC3D8004987CC /* EditorUICommon.xcodeproj */,
-				4554CA3F1B7DC3D8004987CC /* EditorModel.xcodeproj */,
-				4554CA421B7DC3D8004987CC /* EditorShell.xcodeproj */,
+				451372E51B7ED81200ED9829 /* EditorUICommon.xcodeproj */,
+				451372EE1B7ED81700ED9829 /* EditorModel.xcodeproj */,
+				451372F71B7ED81C00ED9829 /* EditorShell.xcodeproj */,
 				4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */,
+			);
+			name = "(modules)";
+			sourceTree = "<group>";
+		};
+		451373371B7ED87F00ED9829 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4513733C1B7ED87F00ED9829 /* MulticastingStorage.framework */,
+				4513733E1B7ED87F00ED9829 /* MulticastingStorageTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4513733F1B7ED88100ED9829 /* (submodules) */ = {
+			isa = PBXGroup;
+			children = (
+				451373361B7ED87F00ED9829 /* MulticastingStorage.xcodeproj */,
+			);
+			name = "(submodules)";
+			sourceTree = "<group>";
+		};
+		4554C8B91B7DBF50004987CC = {
+			isa = PBXGroup;
+			children = (
 				4554C8C41B7DBF50004987CC /* Editor */,
 				4554C8D91B7DBF51004987CC /* EditorTests */,
 				4554C8E41B7DBF51004987CC /* EditorUITests */,
 				4554C8C31B7DBF50004987CC /* Products */,
+				451373351B7ED87300ED9829 /* (modules) */,
+				4513733F1B7ED88100ED9829 /* (submodules) */,
 			);
 			sourceTree = "<group>";
 		};
@@ -273,51 +189,6 @@
 			path = EditorUITests;
 			sourceTree = "<group>";
 		};
-		4554CA3A1B7DC3D8004987CC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4554CA481B7DC3D8004987CC /* EditorCommon.framework */,
-				4554CA4A1B7DC3D8004987CC /* EditorCommonTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4554CA3D1B7DC3D8004987CC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4554CA5A1B7DC3D8004987CC /* EditorUICommon.framework */,
-				4554CA5C1B7DC3D8004987CC /* EditorUICommonTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4554CA401B7DC3D8004987CC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4554CA4E1B7DC3D8004987CC /* EditorModel.framework */,
-				4554CA501B7DC3D8004987CC /* EditorModelTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4554CA431B7DC3D8004987CC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4554CA541B7DC3D8004987CC /* EditorShell.framework */,
-				4554CA561B7DC3D8004987CC /* EditorShellTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4554CA5E1B7DC3DF004987CC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4554CA631B7DC3E0004987CC /* EditorDriver.framework */,
-				4554CA651B7DC3E0004987CC /* EditorDriverTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -333,11 +204,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4554CA691B7DC3F7004987CC /* PBXTargetDependency */,
-				4554CA6D1B7DC3F7004987CC /* PBXTargetDependency */,
-				4554CA711B7DC3F7004987CC /* PBXTargetDependency */,
-				4554CA751B7DC3F7004987CC /* PBXTargetDependency */,
-				4554CA791B7DC3F7004987CC /* PBXTargetDependency */,
 			);
 			name = Editor;
 			productName = Editor;
@@ -415,24 +281,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 4554CA3A1B7DC3D8004987CC /* Products */;
-					ProjectRef = 4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */;
-				},
-				{
-					ProductGroup = 4554CA5E1B7DC3DF004987CC /* Products */;
-					ProjectRef = 4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */;
-				},
-				{
-					ProductGroup = 4554CA401B7DC3D8004987CC /* Products */;
-					ProjectRef = 4554CA3F1B7DC3D8004987CC /* EditorModel.xcodeproj */;
-				},
-				{
-					ProductGroup = 4554CA431B7DC3D8004987CC /* Products */;
-					ProjectRef = 4554CA421B7DC3D8004987CC /* EditorShell.xcodeproj */;
-				},
-				{
-					ProductGroup = 4554CA3D1B7DC3D8004987CC /* Products */;
-					ProjectRef = 4554CA3C1B7DC3D8004987CC /* EditorUICommon.xcodeproj */;
+					ProductGroup = 451373371B7ED87F00ED9829 /* Products */;
+					ProjectRef = 451373361B7ED87F00ED9829 /* MulticastingStorage.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -445,74 +295,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4554CA481B7DC3D8004987CC /* EditorCommon.framework */ = {
+		4513733C1B7ED87F00ED9829 /* MulticastingStorage.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = EditorCommon.framework;
-			remoteRef = 4554CA471B7DC3D8004987CC /* PBXContainerItemProxy */;
+			path = MulticastingStorage.framework;
+			remoteRef = 4513733B1B7ED87F00ED9829 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4554CA4A1B7DC3D8004987CC /* EditorCommonTests.xctest */ = {
+		4513733E1B7ED87F00ED9829 /* MulticastingStorageTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = EditorCommonTests.xctest;
-			remoteRef = 4554CA491B7DC3D8004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA4E1B7DC3D8004987CC /* EditorModel.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EditorModel.framework;
-			remoteRef = 4554CA4D1B7DC3D8004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA501B7DC3D8004987CC /* EditorModelTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = EditorModelTests.xctest;
-			remoteRef = 4554CA4F1B7DC3D8004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA541B7DC3D8004987CC /* EditorShell.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EditorShell.framework;
-			remoteRef = 4554CA531B7DC3D8004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA561B7DC3D8004987CC /* EditorShellTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = EditorShellTests.xctest;
-			remoteRef = 4554CA551B7DC3D8004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA5A1B7DC3D8004987CC /* EditorUICommon.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EditorUICommon.framework;
-			remoteRef = 4554CA591B7DC3D8004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA5C1B7DC3D8004987CC /* EditorUICommonTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = EditorUICommonTests.xctest;
-			remoteRef = 4554CA5B1B7DC3D8004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA631B7DC3E0004987CC /* EditorDriver.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EditorDriver.framework;
-			remoteRef = 4554CA621B7DC3E0004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA651B7DC3E0004987CC /* EditorDriverTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = EditorDriverTests.xctest;
-			remoteRef = 4554CA641B7DC3E0004987CC /* PBXContainerItemProxy */;
+			path = MulticastingStorageTests.xctest;
+			remoteRef = 4513733D1B7ED87F00ED9829 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -582,31 +376,6 @@
 			isa = PBXTargetDependency;
 			target = 4554C8C11B7DBF50004987CC /* Editor */;
 			targetProxy = 4554C8E21B7DBF51004987CC /* PBXContainerItemProxy */;
-		};
-		4554CA691B7DC3F7004987CC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = EditorCommon;
-			targetProxy = 4554CA681B7DC3F7004987CC /* PBXContainerItemProxy */;
-		};
-		4554CA6D1B7DC3F7004987CC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = EditorUICommon;
-			targetProxy = 4554CA6C1B7DC3F7004987CC /* PBXContainerItemProxy */;
-		};
-		4554CA711B7DC3F7004987CC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = EditorModel;
-			targetProxy = 4554CA701B7DC3F7004987CC /* PBXContainerItemProxy */;
-		};
-		4554CA751B7DC3F7004987CC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = EditorShell;
-			targetProxy = 4554CA741B7DC3F7004987CC /* PBXContainerItemProxy */;
-		};
-		4554CA791B7DC3F7004987CC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = EditorDriver;
-			targetProxy = 4554CA781B7DC3F7004987CC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

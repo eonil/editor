@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4513729B1B7ED72A00ED9829 /* MulticastingStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372971B7ED71700ED9829 /* MulticastingStorage.framework */; };
 		4554C8691B7DBEF8004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C85E1B7DBEF7004987CC /* EditorModel.framework */; };
 		4554C86E1B7DBEF8004987CC /* EditorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C86D1B7DBEF8004987CC /* EditorModelTests.swift */; };
 		4554C9BC1B7DC106004987CC /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9B71B7DC106004987CC /* Command.swift */; };
@@ -20,6 +21,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		451372961B7ED71700ED9829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451372511B7ED50D00ED9829;
+			remoteInfo = MulticastingStorage;
+		};
+		451372981B7ED71700ED9829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4513725A1B7ED50D00ED9829;
+			remoteInfo = MulticastingStorageTests;
+		};
 		4554C86A1B7DBEF8004987CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4554C8551B7DBEF7004987CC /* Project object */;
@@ -44,6 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MulticastingStorage.xcodeproj; path = ../../submodules/MulticastingStorage/MulticastingStorage.xcodeproj; sourceTree = "<group>"; };
 		4554C85E1B7DBEF7004987CC /* EditorModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8631B7DBEF7004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4554C8681B7DBEF8004987CC /* EditorModelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorModelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4513729B1B7ED72A00ED9829 /* MulticastingStorage.framework in Frameworks */,
 				4554CA061B7DC33A004987CC /* EditorCommon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,13 +96,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4554C8541B7DBEF7004987CC = {
+		451372901B7ED71700ED9829 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				451372971B7ED71700ED9829 /* MulticastingStorage.framework */,
+				451372991B7ED71700ED9829 /* MulticastingStorageTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4513729A1B7ED71C00ED9829 /* (submodules) */ = {
+			isa = PBXGroup;
+			children = (
+				4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */,
+			);
+			name = "(submodules)";
+			sourceTree = "<group>";
+		};
+		4513729C1B7ED73100ED9829 /* (modules) */ = {
 			isa = PBXGroup;
 			children = (
 				4554C9FD1B7DC307004987CC /* EditorCommon.xcodeproj */,
+			);
+			name = "(modules)";
+			sourceTree = "<group>";
+		};
+		4554C8541B7DBEF7004987CC = {
+			isa = PBXGroup;
+			children = (
 				4554C8601B7DBEF7004987CC /* EditorModel */,
 				4554C86C1B7DBEF8004987CC /* EditorModelTests */,
 				4554C85F1B7DBEF7004987CC /* Products */,
+				4513729C1B7ED73100ED9829 /* (modules) */,
+				4513729A1B7ED71C00ED9829 /* (submodules) */,
 			);
 			sourceTree = "<group>";
 		};
@@ -213,6 +256,10 @@
 					ProductGroup = 4554C9FE1B7DC307004987CC /* Products */;
 					ProjectRef = 4554C9FD1B7DC307004987CC /* EditorCommon.xcodeproj */;
 				},
+				{
+					ProductGroup = 451372901B7ED71700ED9829 /* Products */;
+					ProjectRef = 4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -223,6 +270,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		451372971B7ED71700ED9829 /* MulticastingStorage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MulticastingStorage.framework;
+			remoteRef = 451372961B7ED71700ED9829 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		451372991B7ED71700ED9829 /* MulticastingStorageTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MulticastingStorageTests.xctest;
+			remoteRef = 451372981B7ED71700ED9829 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4554CA031B7DC308004987CC /* EditorCommon.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

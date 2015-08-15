@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		451372A91B7ED75100ED9829 /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372A31B7ED74200ED9829 /* EditorCommon.framework */; };
+		451372BD1B7ED78500ED9829 /* MulticastingStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372B91B7ED76F00ED9829 /* MulticastingStorage.framework */; };
 		4554C9851B7DC068004987CC /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C97A1B7DC068004987CC /* EditorUICommon.framework */; };
 		4554C98A1B7DC068004987CC /* EditorUICommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9891B7DC068004987CC /* EditorUICommonTests.swift */; };
 		4554C99B1B7DC08E004987CC /* CommonUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9941B7DC08E004987CC /* CommonUIController.swift */; };
@@ -18,10 +20,37 @@
 		4554C9A51B7DC0B9004987CC /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A31B7DC0B9004987CC /* SplitViewController.swift */; };
 		4554C9A61B7DC0B9004987CC /* ToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A41B7DC0B9004987CC /* ToolbarController.swift */; };
 		4554CA841B7DC451004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA811B7DC44B004987CC /* EditorModel.framework */; };
-		4554CA901B7DC464004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA8D1B7DC461004987CC /* EditorCommon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		451372A21B7ED74200ED9829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4513729D1B7ED74100ED9829 /* EditorCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4554C94E1B7DBF9B004987CC;
+			remoteInfo = EditorCommon;
+		};
+		451372A41B7ED74200ED9829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4513729D1B7ED74100ED9829 /* EditorCommon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4554C9581B7DBF9B004987CC;
+			remoteInfo = EditorCommonTests;
+		};
+		451372B81B7ED76F00ED9829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451372B31B7ED76F00ED9829 /* MulticastingStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451372511B7ED50D00ED9829;
+			remoteInfo = MulticastingStorage;
+		};
+		451372BA1B7ED76F00ED9829 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451372B31B7ED76F00ED9829 /* MulticastingStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4513725A1B7ED50D00ED9829;
+			remoteInfo = MulticastingStorageTests;
+		};
 		4554C9861B7DC068004987CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4554C9711B7DC068004987CC /* Project object */;
@@ -43,23 +72,11 @@
 			remoteGlobalIDString = 4554C8681B7DBEF8004987CC;
 			remoteInfo = EditorModelTests;
 		};
-		4554CA8C1B7DC461004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA871B7DC460004987CC /* EditorCommon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C94E1B7DBF9B004987CC;
-			remoteInfo = EditorCommon;
-		};
-		4554CA8E1B7DC461004987CC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4554CA871B7DC460004987CC /* EditorCommon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4554C9581B7DBF9B004987CC;
-			remoteInfo = EditorCommonTests;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4513729D1B7ED74100ED9829 /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
+		451372B31B7ED76F00ED9829 /* MulticastingStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MulticastingStorage.xcodeproj; path = ../../submodules/MulticastingStorage/MulticastingStorage.xcodeproj; sourceTree = "<group>"; };
 		4554C97A1B7DC068004987CC /* EditorUICommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorUICommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C97F1B7DC068004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4554C9841B7DC068004987CC /* EditorUICommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorUICommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +91,6 @@
 		4554C9A31B7DC0B9004987CC /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		4554C9A41B7DC0B9004987CC /* ToolbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarController.swift; sourceTree = "<group>"; };
 		4554CA7B1B7DC44B004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
-		4554CA871B7DC460004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = /Users/Eonil/Workshop/Sandbox3/Editor2/EditorModel/../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +98,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4554CA901B7DC464004987CC /* EditorCommon.framework in Frameworks */,
+				451372BD1B7ED78500ED9829 /* MulticastingStorage.framework in Frameworks */,
+				451372A91B7ED75100ED9829 /* EditorCommon.framework in Frameworks */,
 				4554CA841B7DC451004987CC /* EditorModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,14 +115,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4513729E1B7ED74100ED9829 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				451372A31B7ED74200ED9829 /* EditorCommon.framework */,
+				451372A51B7ED74200ED9829 /* EditorCommonTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		451372A81B7ED74700ED9829 /* (modules) */ = {
+			isa = PBXGroup;
+			children = (
+				4554CA7B1B7DC44B004987CC /* EditorModel.xcodeproj */,
+				4513729D1B7ED74100ED9829 /* EditorCommon.xcodeproj */,
+			);
+			name = "(modules)";
+			sourceTree = "<group>";
+		};
+		451372B41B7ED76F00ED9829 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				451372B91B7ED76F00ED9829 /* MulticastingStorage.framework */,
+				451372BB1B7ED76F00ED9829 /* MulticastingStorageTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		451372BC1B7ED77300ED9829 /* (submodules) */ = {
+			isa = PBXGroup;
+			children = (
+				451372B31B7ED76F00ED9829 /* MulticastingStorage.xcodeproj */,
+			);
+			name = "(submodules)";
+			sourceTree = "<group>";
+		};
 		4554C9701B7DC068004987CC = {
 			isa = PBXGroup;
 			children = (
-				4554CA871B7DC460004987CC /* EditorCommon.xcodeproj */,
-				4554CA7B1B7DC44B004987CC /* EditorModel.xcodeproj */,
 				4554C97C1B7DC068004987CC /* EditorUICommon */,
 				4554C9881B7DC068004987CC /* EditorUICommonTests */,
 				4554C97B1B7DC068004987CC /* Products */,
+				451372A81B7ED74700ED9829 /* (modules) */,
+				451372BC1B7ED77300ED9829 /* (submodules) */,
 			);
 			sourceTree = "<group>";
 		};
@@ -156,15 +208,6 @@
 			children = (
 				4554CA811B7DC44B004987CC /* EditorModel.framework */,
 				4554CA831B7DC44B004987CC /* EditorModelTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4554CA881B7DC460004987CC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4554CA8D1B7DC461004987CC /* EditorCommon.framework */,
-				4554CA8F1B7DC461004987CC /* EditorCommonTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,12 +291,16 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 4554CA881B7DC460004987CC /* Products */;
-					ProjectRef = 4554CA871B7DC460004987CC /* EditorCommon.xcodeproj */;
+					ProductGroup = 4513729E1B7ED74100ED9829 /* Products */;
+					ProjectRef = 4513729D1B7ED74100ED9829 /* EditorCommon.xcodeproj */;
 				},
 				{
 					ProductGroup = 4554CA7C1B7DC44B004987CC /* Products */;
 					ProjectRef = 4554CA7B1B7DC44B004987CC /* EditorModel.xcodeproj */;
+				},
+				{
+					ProductGroup = 451372B41B7ED76F00ED9829 /* Products */;
+					ProjectRef = 451372B31B7ED76F00ED9829 /* MulticastingStorage.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -265,6 +312,34 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		451372A31B7ED74200ED9829 /* EditorCommon.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorCommon.framework;
+			remoteRef = 451372A21B7ED74200ED9829 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		451372A51B7ED74200ED9829 /* EditorCommonTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = EditorCommonTests.xctest;
+			remoteRef = 451372A41B7ED74200ED9829 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		451372B91B7ED76F00ED9829 /* MulticastingStorage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MulticastingStorage.framework;
+			remoteRef = 451372B81B7ED76F00ED9829 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		451372BB1B7ED76F00ED9829 /* MulticastingStorageTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MulticastingStorageTests.xctest;
+			remoteRef = 451372BA1B7ED76F00ED9829 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4554CA811B7DC44B004987CC /* EditorModel.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -277,20 +352,6 @@
 			fileType = wrapper.cfbundle;
 			path = EditorModelTests.xctest;
 			remoteRef = 4554CA821B7DC44B004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA8D1B7DC461004987CC /* EditorCommon.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EditorCommon.framework;
-			remoteRef = 4554CA8C1B7DC461004987CC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4554CA8F1B7DC461004987CC /* EditorCommonTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = EditorCommonTests.xctest;
-			remoteRef = 4554CA8E1B7DC461004987CC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
