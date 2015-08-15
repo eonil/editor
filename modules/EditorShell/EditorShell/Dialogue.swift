@@ -20,7 +20,7 @@ struct Dialogue {
 	*/
 
 
-	/// Runs a workspace opening sequence.
+	/// Runs a workspace selecting sequence.
 	///
 	/// - Parameters:
 	///
@@ -54,6 +54,33 @@ struct Dialogue {
 		completion(nil)
 		return
 	}
+
+
+	static func runSavingWorkspace(completion: NSURL?->()) {
+		let	saveP			=	NSSavePanel()
+		saveP.canCreateDirectories	=	true
+
+		let	result			=	saveP.runModal()
+
+		switch result {
+		case NSFileHandlingPanelOKButton:
+			if let u = saveP.directoryURL {
+				completion(u)
+				return
+			}
+
+		case NSFileHandlingPanelCancelButton:
+			fallthrough
+
+		default:
+			///	WTF?
+			break
+		}
+
+		completion(nil)
+		return
+	}
+
 }
 
 

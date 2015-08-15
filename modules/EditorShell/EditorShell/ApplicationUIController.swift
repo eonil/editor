@@ -20,7 +20,7 @@ public class ApplicationUIController: SessionProtocol {
 
 	///
 	
-	public weak var model: Model? {
+	public weak var model: ApplicationModel? {
 		willSet {
 			assert(_isRunning == false)
 		}
@@ -33,10 +33,12 @@ public class ApplicationUIController: SessionProtocol {
 
 
 		_installMenu()
+		_installAgents()
 	}
 	public func halt() {
 		assert(model != nil)
 
+		_deinstallAgents()
 		_deinstallMenu()
 	}
 
@@ -74,7 +76,40 @@ public class ApplicationUIController: SessionProtocol {
 			NSApplication.sharedApplication().mainMenu!.removeItem(item)
 		}
 	}
+
+	private func _installAgents() {
+		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+			if let ui = self!._findUIForModel(self!.model!.currentWorkspace.value!) {
+				ui.showWindow(self)
+			}
+		}
+	}
+	private func _deinstallAgents() {
+		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
+	}
+
+	private func _findUIForModel(workspace: WorkspaceModel) -> WorkspaceWindowUIController? {
+		for doc in NSDocumentController.sharedDocumentController().documents {
+			for wc in doc.windowControllers {
+				if let wc = wc as? WorkspaceWindowUIController {
+					if wc.model === workspace {
+						return	wc
+					}
+				}
+			}
+		}
+		return	nil
+	}
 }
+
+
+
+
+
+
+
+
+
 
 
 

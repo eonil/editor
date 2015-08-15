@@ -8,12 +8,13 @@
 
 import Foundation
 import AppKit
+import EditorCommon
 import EditorUICommon
 import EditorModel
 
 public class MainMenuController: SessionProtocol {
 
-	public weak var model: Model? {
+	public weak var model: ApplicationModel? {
 		willSet {
 			assert(_isRunning == false)
 		}
@@ -79,7 +80,7 @@ public class MainMenuController: SessionProtocol {
 
 class FileMenuController: SessionProtocol {
 
-	weak var model: Model?
+	weak var model: ApplicationModel?
 
 	///
 
@@ -99,11 +100,19 @@ class FileMenuController: SessionProtocol {
 
 	let	menu		:	TopLevelCommandMenu
 	let	newWorkspace	=	_menuItem("New Workspace")
-	let	openWorkspace	=	_menuItem("Open Workspace",	.Workspace(.Open))
+	let	openWorkspace	=	_menuItem("Open Workspace")
 	let	closeWorkspace	=	_menuItem("Close Workspace",	.Workspace(.Close))
 
 	func run() {
 		newWorkspace.clickHandler	=	{ [weak self] in
+			Dialogue.runSavingWorkspace({ (u: NSURL?) -> () in
+				if let u = u {
+					self?.model!.createWorkspaceAtURL(u)
+					self?.model!.openWorkspaceAtURL(u)
+				}
+			})
+		}
+		openWorkspace.clickHandler	=	{ [weak self] in
 			Dialogue.runOpeningWorkspace({ (u: NSURL?) -> () in
 				if let u = u {
 					self?.model!.openWorkspaceAtURL(u)
@@ -132,7 +141,7 @@ class FileMenuController: SessionProtocol {
 
 class ProductMenuController: SessionProtocol {
 
-	weak var model: Model?
+	weak var model: ApplicationModel?
 
 	///
 
@@ -158,7 +167,7 @@ class ProductMenuController: SessionProtocol {
 
 class DebugMenuController: SessionProtocol {
 
-	weak var model: Model?
+	weak var model: ApplicationModel?
 
 	///
 
@@ -228,10 +237,11 @@ class DebugMenuController: SessionProtocol {
 
 
 final class TopLevelCommandMenu: CommandMenu {
-	weak var commandQueue: CommandQueue?
+//	weak var commandQueue: CommandQueue?
 	override func routeCommand(command: ModelCommand) {
-		assert(commandQueue != nil)
-		commandQueue?.queueCommand(command)
+//		assert(commandQueue != nil)
+//		commandQueue?.queueCommand(command)
+		fatalErrorBecauseUnimplementedYet()
 	}
 }
 

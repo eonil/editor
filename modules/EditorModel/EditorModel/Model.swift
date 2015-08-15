@@ -20,15 +20,18 @@ import EditorCommon
 ///	performed with special care. Also, you must minimize performing
 ///	heavy load operations in main thread.
 ///
-public class Model {
+public class ApplicationModel {
 
 	public init() {
 	}
 
 	///
 
-	public let commandQueue = CommandQueue()
-	
+	///	Command-queue will be required eventually... but not right now.
+	///	Prefer direct synchronous call to models rather then sending
+	///	asynchronous command.
+//	public let commandQueue = CommandQueue()
+
 	public var preference: PreferenceModel {
 		get {
 			return	_preference
@@ -47,7 +50,26 @@ public class Model {
 
 	///
 
+	///	Just creates workspace file structure, and does not open it.
+	public func createWorkspaceAtURL(u: NSURL) {
+		markUnimplemented()
+	}
+
+	///	You can supply any URL, and a workspace will be open only if
+	///	the URL is valid. If there's already open workspace for the URL,
+	///	no new workspace will be created, and the workspace will be
+	///	selected.
 	public func openWorkspaceAtURL(u: NSURL) {
+		for ws in workspaces.array {
+			print(ws.location.value)
+			if ws.location.value == u {
+				selectCurrentWorkspace(ws)
+				return
+			}
+		}
+
+		///
+
 		let	ws	=	WorkspaceModel(rootLocationURL: u)
 		ws.owner	=	self
 		_workspaces.append(ws)

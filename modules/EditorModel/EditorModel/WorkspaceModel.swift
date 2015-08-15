@@ -14,7 +14,7 @@ import EditorCommon
 ///	A workspace can contain multiple projects.
 public class WorkspaceModel {
 
-	internal weak var owner: Model?
+	internal weak var owner: ApplicationModel?
 
 	internal init(rootLocationURL: NSURL) {
 		preference.owner	=	self
@@ -23,11 +23,13 @@ public class WorkspaceModel {
 		report.owner		=	self
 		console.owner		=	self
 		UI.owner		=	self
+
+		_location.value		=	rootLocationURL
 	}
 
 	///
 
-	public var model: Model {
+	public var model: ApplicationModel {
 		get {
 			assert(owner != nil)
 			return	owner!

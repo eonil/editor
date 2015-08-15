@@ -36,7 +36,7 @@ public class Driver {
 
 	///
 
-	public var model: Model {
+	public var model: ApplicationModel {
 		get {
 			return	_model
 		}
@@ -61,7 +61,7 @@ public class Driver {
 	///
 
 	private let	_ui			=	ApplicationUIController()
-	private let	_model			=	Model()
+	private let	_model			=	ApplicationModel()
 
 	private let	_workspaceArrayAgent	=	_WorkspaceArrayAgent()
 
