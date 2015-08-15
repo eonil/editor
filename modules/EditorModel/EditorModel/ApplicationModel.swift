@@ -86,17 +86,29 @@ public class ApplicationModel: ModelRootNode {
 		_workspaces.append(ws)
 	}
 	public func closeWorkspace(ws: WorkspaceModel) {
+		assert(_currentWorkspace.value !== ws, "You cannot close a workspace that is current workspace. Deselect first.")
 		_workspaces.removeFirstMatchingObject(ws)
 		ws.owner	=	nil
 	}
 	public func selectCurrentWorkspace(ws: WorkspaceModel) {
 		if _currentWorkspace.value !== ws {
 			_currentWorkspace.value		=	ws
+			print("selected a workspace at = \(ws.location.value!)")
 		}
 	}
+
+	///	Closes current workspace. A next workspace will be selected 
+	///	automatically if exists. 
+	///	This is no-op if there was no current workspace.
 	public func deselectCurrentWorkspace() {
-		if _currentWorkspace.value !== nil {
-			_currentWorkspace.value		=	nil
+		if let curWS = _currentWorkspace.value {
+			assert(_indexOfWorkspace(curWS) != nil, "The workspace must still be contained in workspace list.")
+			if let newWS = _priorWorkspaceOfWorkspace(curWS) ?? _nextWorkspaceOfWorkspace(curWS) {
+				_currentWorkspace.value		=	newWS
+			}
+			else {
+				_currentWorkspace.value		=	nil
+			}
 		}
 	}
 
@@ -105,6 +117,32 @@ public class ApplicationModel: ModelRootNode {
 	private let	_preference		=	PreferenceModel()
 	private let	_workspaces		=	MutableArrayStorage<WorkspaceModel>([])
 	private let	_currentWorkspace	=	MutableValueStorage<WorkspaceModel?>(nil)
+
+	private func _nextWorkspaceOfWorkspace(workspace: WorkspaceModel) -> WorkspaceModel? {
+		if let idx = _indexOfWorkspace(workspace) {
+			if idx < (_workspaces.array.count - 1) {
+				return	_workspaces.array[idx+1]
+			}
+		}
+		return	nil
+	}
+	private func _priorWorkspaceOfWorkspace(workspace: WorkspaceModel) -> WorkspaceModel? {
+		if let idx = _indexOfWorkspace(workspace) {
+			if idx > 0 {
+				return	_workspaces.array[idx-1]
+			}
+		}
+		return	nil
+	}
+	public func _indexOfWorkspace(workspace: WorkspaceModel) -> Int? {
+		for i in 0..<_workspaces.array.count {
+			let	ws	=	_workspaces.array[i]
+			if ws === workspace {
+				return	i
+			}
+		}
+		return	0
+	}
 }
 
 

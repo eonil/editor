@@ -79,8 +79,16 @@ public class ApplicationUIController: SessionProtocol {
 
 	private func _installAgents() {
 		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-			if let ui = self!._findUIForModel(self!.model!.currentWorkspace.value!) {
-				ui.showWindow(self)
+			if let curWS = self!.model!.currentWorkspace.value {
+				if let ui = self!._findUIForModel(curWS) {
+					ui.showWindow(self)
+				}
+				else {
+					fatalError("A UI for the workspace must be exists, but it was not.")
+				}
+			}
+			else {
+				//	No current workspace. Nothing to do.
 			}
 		}
 	}

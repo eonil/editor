@@ -20,6 +20,13 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 
 	internal init(rootLocationURL: NSURL) {
 		super.init()
+		_location.value		=	rootLocationURL
+	}
+
+	///
+
+	override func didJoinModelTree() {
+		super.didJoinModelTree()
 
 		search.owner		=	self
 		build.owner		=	self
@@ -27,11 +34,17 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 		report.owner		=	self
 		console.owner		=	self
 		UI.owner		=	self
-
-		_location.value		=	rootLocationURL
 	}
+	override func willLeaveModelTree() {
+		super.willLeaveModelTree()
 
-	///
+		UI.owner		=	nil
+		console.owner		=	nil
+		report.owner		=	nil
+		debug.owner		=	nil
+		build.owner		=	nil
+		search.owner		=	nil
+	}
 
 	///
 

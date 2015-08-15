@@ -51,6 +51,7 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, Sessio
 		assert(model != nil)
 
 		window!.delegate		=	nil
+		window!.contentViewController	=	nil
 		_deinstallToolbar()
 		_deinstallWindowAgent()
 

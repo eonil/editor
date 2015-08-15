@@ -156,7 +156,9 @@ private final class _WorkspaceArrayAgent: ArrayStorageDelegate {
 
 	}
 	private func willDeleteRange(range: Range<Int>) {
-
+		for ws in owner!._model.workspaces.array[range] {
+			owner!._deleteWorkspace(ws)
+		}
 	}
 	private func didDeleteRange(range: Range<Int>) {
 		

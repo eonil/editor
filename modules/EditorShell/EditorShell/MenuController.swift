@@ -101,7 +101,7 @@ class FileMenuController: SessionProtocol {
 	let	menu		:	TopLevelCommandMenu
 	let	newWorkspace	=	_menuItem("New Workspace")
 	let	openWorkspace	=	_menuItem("Open Workspace")
-	let	closeWorkspace	=	_menuItem("Close Workspace",	.Workspace(.Close))
+	let	closeWorkspace	=	_menuItem("Close Workspace")
 
 	func run() {
 		newWorkspace.clickHandler	=	{ [weak self] in
@@ -119,6 +119,9 @@ class FileMenuController: SessionProtocol {
 				}
 			})
 		}
+		closeWorkspace.clickHandler	=	{ [weak self] in
+			self?._handleClosingCurrentWorkspace()
+		}
 
 		let	apply	=	{ [weak self] in
 			assert(self != nil)
@@ -129,13 +132,27 @@ class FileMenuController: SessionProtocol {
 	func halt() {
 		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
 
+		closeWorkspace.clickHandler	=	nil
+		openWorkspace.clickHandler	=	nil
 		newWorkspace.clickHandler	=	nil
 	}
 
 	///
 
 	private func _applyEnabledStates() {
+		assert(model != nil)
 		closeWorkspace.enabled		=	model!.currentWorkspace.value != nil
+	}
+	private func _handleClosingCurrentWorkspace() {
+		assert(model != nil)
+		assert(model!.currentWorkspace.value != nil)
+		if let curWS = model!.currentWorkspace.value {
+			model!.deselectCurrentWorkspace()
+			model!.closeWorkspace(curWS)
+		}
+		else {
+			fatalError()
+		}
 	}
 }
 
