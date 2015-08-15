@@ -9,8 +9,6 @@
 import Cocoa
 import EditorDriver
 
-
-
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -20,6 +18,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	func applicationWillTerminate(aNotification: NSNotification) {
 		_driver.halt()
+	}
+
+	func applicationShouldOpenUntitledFile(sender: NSApplication) -> Bool {
+		return	false
 	}
 
 	///

@@ -11,7 +11,7 @@ import AppKit
 import EditorModel
 import EditorUICommon
 
-public final class WorkspaceWindowUIController: CommonUIWindowController, NSWindowDelegate {
+public final class WorkspaceWindowUIController: CommonUIWindowController, SessionProtocol {
 
 	///	Will be set by upper level node.
 	public weak var model: WorkspaceModel? {
@@ -41,17 +41,19 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, NSWind
 
 		///
 
+		_installWindowAgent()
+		_installToolbar()
+
 		window!.delegate		=	_agent
 		window!.makeKeyAndOrderFront(nil)
-
-		_installToolbar()
 	}
 	public func halt() {
 		assert(model != nil)
-		
-		_deinstallToolbar()
 
 		window!.delegate		=	nil
+		_deinstallToolbar()
+		_deinstallWindowAgent()
+
 	}
 
 	///
@@ -60,6 +62,12 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, NSWind
 	private let	_div		=	DivisionUIController()
 	private let	_tools		=	ToolUIController()
 
+	private func _installWindowAgent() {
+		_agent.owner		=	self
+	}
+	private func _deinstallWindowAgent() {
+		_agent.owner		=	nil
+	}
 	private func _installToolbar() {
 		assert(window!.toolbar === nil)
 		_tools.run()
@@ -70,6 +78,15 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, NSWind
 
 		window!.toolbar		=	nil
 		_tools.halt()
+	}
+
+	private func _becomeCurrentWorkspace() {
+		assert(model!.model.currentWorkspace.value !== self)
+		model!.model.selectCurrentWorkspace(model!)
+	}
+	private func _resignCurrentWorkspace() {
+		assert(model!.model.currentWorkspace.value === self)
+		model!.model.deselectCurrentWorkspace()
 	}
 }
 
@@ -82,6 +99,7 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, NSWind
 
 
 private final class _Agent: NSObject, NSWindowDelegate {
+	weak var owner: WorkspaceWindowUIController?
 	@objc
 	private func window(window: NSWindow, willUseFullScreenPresentationOptions proposedOptions: NSApplicationPresentationOptions) -> NSApplicationPresentationOptions {
 		//	http://stackoverflow.com/questions/9263573/nstoolbar-shown-when-entering-fullscreenmode
@@ -91,6 +109,11 @@ private final class _Agent: NSObject, NSWindowDelegate {
 			.AutoHideMenuBar,
 			.AutoHideDock,
 			])
+	}
+
+	@objc
+	private func windowDidBecomeKey(notification: NSNotification) {
+		owner!._becomeCurrentWorkspace()
 	}
 }
 

@@ -9,32 +9,6 @@
 import Foundation
 import EditorCommon
 
-///	Asynchronous mutator for application model.
-///
-public class CommandQueue {
-	public func queueCommand(command: ModelCommand) {
-		fatalErrorBecauseUnimplementedYet()
-	}
-}
-
-public enum CommandResult {
-	case Done
-	case Cancel(Reason)
-
-	public enum Reason {
-		///	Assumed condition alsmot satisfied, but some operation is
-		///	not finished yet, and the operation seems take too long
-		///	to finish. (over several seconds).
-		case TooLongWaiting
-		///	Assumed condition could not be satisfied in large at the
-		///	point of execution.
-		case BadExpectation
-		///	Executer tried to execute command, and there was an error
-		///	while executing it.
-		case Error(message: String)
-	}
-}
-
 public enum ModelCommand {
 	case Workspace(WorkspaceCommand)
 	case Navigation(NavigationCommand)
@@ -45,6 +19,11 @@ public enum ModelCommand {
 }
 
 public enum WorkspaceCommand {
+
+	case New
+	case Open
+	case Close
+
 	case Select(WorkspaceModel)
 	case Deselect
 

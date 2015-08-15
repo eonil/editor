@@ -23,6 +23,7 @@
 		4554CAB61B7DCE05004987CC /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554CAB51B7DCE05004987CC /* ProjectModel.swift */; };
 		455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EE2091B7EDBF800D5AA56 /* ConsoleModel.swift */; };
 		455EE2101B7EDC1E00D5AA56 /* ReportingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */; };
+		45C77AED1B7F1DD80064C363 /* CommandQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		4554CAB51B7DCE05004987CC /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		455EE2091B7EDBF800D5AA56 /* ConsoleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleModel.swift; sourceTree = "<group>"; };
 		455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportingModel.swift; sourceTree = "<group>"; };
+		45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				4554C9B71B7DC106004987CC /* Command.swift */,
+				45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */,
 				4554C9B81B7DC106004987CC /* Model.swift */,
 				4554C9B91B7DC106004987CC /* ModelConsuming.swift */,
 				4554C9BA1B7DC106004987CC /* Selection.swift */,
@@ -355,6 +358,7 @@
 				4554C9C01B7DC106004987CC /* WorkspaceModel.swift in Sources */,
 				4554C9BF1B7DC106004987CC /* Selection.swift in Sources */,
 				4554CAB61B7DCE05004987CC /* ProjectModel.swift in Sources */,
+				45C77AED1B7F1DD80064C363 /* CommandQueue.swift in Sources */,
 				451373411B7ED91000ED9829 /* SearchModel.swift in Sources */,
 				4554C9BE1B7DC106004987CC /* ModelConsuming.swift in Sources */,
 				455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */,

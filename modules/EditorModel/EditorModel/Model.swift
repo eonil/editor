@@ -27,6 +27,8 @@ public class Model {
 
 	///
 
+	public let commandQueue = CommandQueue()
+	
 	public var preference: PreferenceModel {
 		get {
 			return	_preference
@@ -37,6 +39,13 @@ public class Model {
 			return	_workspaces
 		}
 	}
+	public var currentWorkspace: ValueStorage<WorkspaceModel?> {
+		get {
+			return	_currentWorkspace
+		}
+	}
+
+	///
 
 	public func openWorkspaceAtURL(u: NSURL) {
 		let	ws	=	WorkspaceModel(rootLocationURL: u)
@@ -47,12 +56,18 @@ public class Model {
 		_workspaces.removeFirstMatchingObject(ws)
 		ws.owner	=	nil
 	}
+	public func selectCurrentWorkspace(ws: WorkspaceModel) {
+		_currentWorkspace.value		=	ws
+	}
+	public func deselectCurrentWorkspace() {
+		_currentWorkspace.value		=	nil
+	}
 
 	///
 	
-	private let	_preference	=	PreferenceModel()
-	private let	_workspaces	=	MutableArrayStorage<WorkspaceModel>([])
-	
+	private let	_preference		=	PreferenceModel()
+	private let	_workspaces		=	MutableArrayStorage<WorkspaceModel>([])
+	private let	_currentWorkspace	=	MutableValueStorage<WorkspaceModel?>(nil)
 }
 
 

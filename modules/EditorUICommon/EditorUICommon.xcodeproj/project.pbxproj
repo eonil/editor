@@ -20,6 +20,7 @@
 		4554C9A51B7DC0B9004987CC /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A31B7DC0B9004987CC /* SplitViewController.swift */; };
 		4554C9A61B7DC0B9004987CC /* ToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A41B7DC0B9004987CC /* ToolbarController.swift */; };
 		4554CA841B7DC451004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA811B7DC44B004987CC /* EditorModel.framework */; };
+		45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77AF51B7F2AA50064C363 /* Delay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,13 @@
 			remoteGlobalIDString = 4554C8681B7DBEF8004987CC;
 			remoteInfo = EditorModelTests;
 		};
+		45C77AFE1B7F2AA60064C363 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451372B31B7ED76F00ED9829 /* MulticastingStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 455EE22A1B7EEF9000D5AA56;
+			remoteInfo = MulticastingStorageWorkbench;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +99,7 @@
 		4554C9A31B7DC0B9004987CC /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		4554C9A41B7DC0B9004987CC /* ToolbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarController.swift; sourceTree = "<group>"; };
 		4554CA7B1B7DC44B004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
+		45C77AF51B7F2AA50064C363 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +147,7 @@
 			children = (
 				451372B91B7ED76F00ED9829 /* MulticastingStorage.framework */,
 				451372BB1B7ED76F00ED9829 /* MulticastingStorageTests.xctest */,
+				45C77AFF1B7F2AA60064C363 /* MulticastingStorageWorkbench */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -181,6 +191,7 @@
 				4554C9951B7DC08E004987CC /* CommonUIView.swift */,
 				4554C9971B7DC08E004987CC /* CommonView.swift */,
 				4554C9981B7DC08E004987CC /* CoreGraphicsExtensions.swift */,
+				45C77AF51B7F2AA50064C363 /* Delay.swift */,
 				4554C97F1B7DC068004987CC /* Info.plist */,
 			);
 			path = EditorUICommon;
@@ -354,6 +365,13 @@
 			remoteRef = 4554CA821B7DC44B004987CC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45C77AFF1B7F2AA60064C363 /* MulticastingStorageWorkbench */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = MulticastingStorageWorkbench;
+			remoteRef = 45C77AFE1B7F2AA60064C363 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -384,6 +402,7 @@
 				4554C99D1B7DC08E004987CC /* CommonUIWindowController.swift in Sources */,
 				4554C99F1B7DC08E004987CC /* CoreGraphicsExtensions.swift in Sources */,
 				4554C9A01B7DC08E004987CC /* DummyUIController.swift in Sources */,
+				45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */,
 				4554C99E1B7DC08E004987CC /* CommonView.swift in Sources */,
 				4554C9A51B7DC0B9004987CC /* SplitViewController.swift in Sources */,
 			);

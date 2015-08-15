@@ -15,13 +15,15 @@
 		4554C9B11B7DC0D7004987CC /* InspectionUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A91B7DC0D7004987CC /* InspectionUIController.swift */; };
 		4554C9B21B7DC0D7004987CC /* NavigationUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9AA1B7DC0D7004987CC /* NavigationUIController.swift */; };
 		4554C9B31B7DC0D7004987CC /* ReportUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9AB1B7DC0D7004987CC /* ReportUIController.swift */; };
-		4554C9B41B7DC0D7004987CC /* RootUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9AC1B7DC0D7004987CC /* RootUIController.swift */; };
 		4554C9B51B7DC0D7004987CC /* WorkspaceWindowUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9AD1B7DC0D7004987CC /* WorkspaceWindowUIController.swift */; };
 		4554C9B61B7DC0D7004987CC /* ToolUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9AE1B7DC0D7004987CC /* ToolUIController.swift */; };
 		4554C9C81B7DC16C004987CC /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9C71B7DC16C004987CC /* MenuController.swift */; };
 		4554CA261B7DC386004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA161B7DC34E004987CC /* EditorCommon.framework */; };
 		4554CA271B7DC386004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA231B7DC377004987CC /* EditorModel.framework */; };
 		4554CA281B7DC386004987CC /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA0D1B7DC34B004987CC /* EditorUICommon.framework */; };
+		45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */; };
+		45C77B0C1B7F2F0A0064C363 /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */; };
+		45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,13 +111,15 @@
 		4554C9A91B7DC0D7004987CC /* InspectionUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectionUIController.swift; sourceTree = "<group>"; };
 		4554C9AA1B7DC0D7004987CC /* NavigationUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationUIController.swift; sourceTree = "<group>"; };
 		4554C9AB1B7DC0D7004987CC /* ReportUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUIController.swift; sourceTree = "<group>"; };
-		4554C9AC1B7DC0D7004987CC /* RootUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootUIController.swift; sourceTree = "<group>"; };
 		4554C9AD1B7DC0D7004987CC /* WorkspaceWindowUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceWindowUIController.swift; sourceTree = "<group>"; };
 		4554C9AE1B7DC0D7004987CC /* ToolUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolUIController.swift; sourceTree = "<group>"; };
 		4554C9C71B7DC16C004987CC /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		4554CA071B7DC34A004987CC /* EditorUICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUICommon.xcodeproj; path = ../EditorUICommon/EditorUICommon.xcodeproj; sourceTree = "<group>"; };
 		4554CA101B7DC34D004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		4554CA1C1B7DC377004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
+		45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
+		45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
+		45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationUIController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,7 +197,8 @@
 			isa = PBXGroup;
 			children = (
 				4554C9C71B7DC16C004987CC /* MenuController.swift */,
-				4554C9AC1B7DC0D7004987CC /* RootUIController.swift */,
+				45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */,
+				45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */,
 				4554C9AD1B7DC0D7004987CC /* WorkspaceWindowUIController.swift */,
 				4554C9A71B7DC0D7004987CC /* DivisionUIController.swift */,
 				4554C9A81B7DC0D7004987CC /* EditUIController.swift */,
@@ -201,6 +206,7 @@
 				4554C9AA1B7DC0D7004987CC /* NavigationUIController.swift */,
 				4554C9AB1B7DC0D7004987CC /* ReportUIController.swift */,
 				4554C9AE1B7DC0D7004987CC /* ToolUIController.swift */,
+				45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */,
 				4554C8121B7DBED9004987CC /* Info.plist */,
 			);
 			path = EditorShell;
@@ -433,15 +439,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45C77B0C1B7F2F0A0064C363 /* Dialogue.swift in Sources */,
 				4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */,
 				4554C9C81B7DC16C004987CC /* MenuController.swift in Sources */,
 				4554C9B61B7DC0D7004987CC /* ToolUIController.swift in Sources */,
+				45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */,
 				4554C9B21B7DC0D7004987CC /* NavigationUIController.swift in Sources */,
 				4554C9B31B7DC0D7004987CC /* ReportUIController.swift in Sources */,
 				4554C9B51B7DC0D7004987CC /* WorkspaceWindowUIController.swift in Sources */,
+				45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */,
 				4554C9B01B7DC0D7004987CC /* EditUIController.swift in Sources */,
 				4554C9B11B7DC0D7004987CC /* InspectionUIController.swift in Sources */,
-				4554C9B41B7DC0D7004987CC /* RootUIController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
