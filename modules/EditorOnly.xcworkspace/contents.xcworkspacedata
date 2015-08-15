@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
-   <FileRef
-      location = "group:Editor/Editor.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:EditorDriver/EditorDriver.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:EditorShell/EditorShell.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:EditorUICommon/EditorUICommon.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:EditorModel/EditorModel.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:EditorCommon/EditorCommon.xcodeproj">
-   </FileRef>
    <Group
       location = "container:"
+      name = "modules">
+      <FileRef
+         location = "group:Editor/Editor.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:EditorDriver/EditorDriver.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:EditorShell/EditorShell.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:EditorUICommon/EditorUICommon.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:EditorModel/EditorModel.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:EditorCommon/EditorCommon.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:../submodules"
       name = "submodules">
       <FileRef
-         location = "group:../submodules/MulticastingStorage/MulticastingStorage.xcodeproj">
+         location = "group:MulticastingStorage/MulticastingStorage.xcodeproj">
       </FileRef>
    </Group>
 </Workspace>

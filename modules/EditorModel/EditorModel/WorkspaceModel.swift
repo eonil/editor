@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MulticastingStorage
 import EditorCommon
 
 ///	A unit for a product.
@@ -38,61 +39,10 @@ public class WorkspaceModel {
 	private let	_currentProject	=	MutableValueStorage<ProjectModel?>(nil)
 }
 
-public class SearchModel {
-}
 
 ///	A unit of build for specific environment.
 public class TargetModel {
 
-}
-
-public class DebuggingModel {
-
-	var stackFrames: ArrayStorage<StackFrame> {
-		get {
-			return	_stackFrames
-		}
-	}
-	var frameVariables: ArrayStorage<FrameVariable> {
-		get {
-			return	_frameVariables
-		}
-	}
-
-	func launchCurrentTarget() {
-		fatalErrorBecauseUnimplementedYet()
-	}
-	func pause() {
-		fatalErrorBecauseUnimplementedYet()
-	}
-	func resume() {
-		fatalErrorBecauseUnimplementedYet()
-	}
-	func halt() {
-		fatalErrorBecauseUnimplementedYet()
-	}
-
-	func selectFrameAtIndex(index: Int) {
-		fatalErrorBecauseUnimplementedYet()
-	}
-	func deselectFrame() {
-		fatalErrorBecauseUnimplementedYet()
-	}
-	func reloadFrameAtIndex(index: Int) {
-		fatalErrorBecauseUnimplementedYet()
-	}
-
-	///
-
-	private let	_stackFrames	=	MutableArrayStorage<StackFrame>([])
-	private let	_frameVariables	=	MutableArrayStorage<FrameVariable>([])
-
-	///
-
-	public class StackFrame {
-	}
-	public class FrameVariable {
-	}
 }
 
 public class Console {

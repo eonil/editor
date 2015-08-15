@@ -13,7 +13,6 @@
 		4554C96D1B7DC025004987CC /* Reporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9691B7DC025004987CC /* Reporting.swift */; };
 		4554C96E1B7DC025004987CC /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C96A1B7DC025004987CC /* Weak.swift */; };
 		4554C96F1B7DC025004987CC /* WeakArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C96B1B7DC025004987CC /* WeakArray.swift */; };
-		4554CAB81B7DCEA3004987CC /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554CAB71B7DCEA3004987CC /* Placeholder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +35,6 @@
 		4554C9691B7DC025004987CC /* Reporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reporting.swift; sourceTree = "<group>"; };
 		4554C96A1B7DC025004987CC /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		4554C96B1B7DC025004987CC /* WeakArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakArray.swift; sourceTree = "<group>"; };
-		4554CAB71B7DCEA3004987CC /* Placeholder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +82,6 @@
 				4554C96B1B7DC025004987CC /* WeakArray.swift */,
 				4554C9691B7DC025004987CC /* Reporting.swift */,
 				4554C9531B7DBF9B004987CC /* Info.plist */,
-				4554CAB71B7DCEA3004987CC /* Placeholder.swift */,
 			);
 			path = EditorCommon;
 			sourceTree = "<group>";
@@ -206,7 +203,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4554C96D1B7DC025004987CC /* Reporting.swift in Sources */,
-				4554CAB81B7DCEA3004987CC /* Placeholder.swift in Sources */,
 				4554C96F1B7DC025004987CC /* WeakArray.swift in Sources */,
 				4554C96C1B7DC025004987CC /* ObjectSet.swift in Sources */,
 				4554C96E1B7DC025004987CC /* Weak.swift in Sources */,
