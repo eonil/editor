@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SessionProtocol {
+internal protocol SessionProtocol {
 	func run()
 	func halt()
 }

@@ -27,14 +27,7 @@ public enum DebuggingCommand {
 	}
 }
 
-public class DebuggingModel {
-
-	internal weak var owner: WorkspaceModel?
-
-	internal init() {
-	}
-
-	///
+public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 
 	public var workspace: WorkspaceModel {
 		get {
@@ -42,6 +35,10 @@ public class DebuggingModel {
 			return	owner!
 		}
 	}
+
+	///
+
+
 
 	///
 

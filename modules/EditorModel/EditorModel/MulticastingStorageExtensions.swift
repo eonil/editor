@@ -13,6 +13,12 @@ extension MutableArrayStorage {
 	func append(value: T) {
 		insert([value], atIndex: array.count)
 	}
+	func extend(values: [T]) {
+		insert(values, atIndex: array.count)
+	}
+	func removeAll() {
+		delete(0..<array.count)
+	}
 }
 extension MutableArrayStorage where T: AnyObject {
 	func removeFirstMatchingObject(value: T) {

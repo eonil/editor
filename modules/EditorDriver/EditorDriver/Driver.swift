@@ -43,8 +43,11 @@ public class Driver {
 	}
 	
 	public func run() {
+
 		_ui.model	=	_model
 		_ui.run()
+		_model.run()
+
 		_installAgents()
 
 		//	TODO:	Remove this on release...
@@ -54,8 +57,11 @@ public class Driver {
 
 	public func halt() {
 		_deinstallAgents()
+
+		_model.halt()
 		_ui.halt()
 		_ui.model	=	nil
+
 	}
 
 	///

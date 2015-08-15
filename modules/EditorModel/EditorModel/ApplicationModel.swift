@@ -1,5 +1,5 @@
 //
-//  Model.swift
+//  ApplicationModel.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/14.
@@ -20,9 +20,20 @@ import EditorCommon
 ///	performed with special care. Also, you must minimize performing
 ///	heavy load operations in main thread.
 ///
-public class ApplicationModel {
+public class ApplicationModel: ModelRootNode {
 
-	public init() {
+	public override init() {
+	}
+
+	///
+
+	override func didJoinModelTree() {
+		super.didJoinModelTree()
+		_preference.owner	=	self
+	}
+	override func willLeaveModelTree() {
+		_preference.owner	=	nil
+		super.willLeaveModelTree()
 	}
 
 	///

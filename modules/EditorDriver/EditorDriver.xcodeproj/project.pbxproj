@@ -146,6 +146,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		450C0FB41B7F49BB0048E7A1 /* (external tools) */ = {
+			isa = PBXGroup;
+			children = (
+				4554C9C21B7DC143004987CC /* Tools.swift */,
+			);
+			name = "(external tools)";
+			sourceTree = "<group>";
+		};
 		451372D01B7ED7A600ED9829 /* (modules) */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,7 +208,7 @@
 			children = (
 				4554C9CB1B7DC212004987CC /* Driver.swift */,
 				450C0F951B7F382D0048E7A1 /* WorkspaceDocument.swift */,
-				4554C9C21B7DC143004987CC /* Tools.swift */,
+				450C0FB41B7F49BB0048E7A1 /* (external tools) */,
 				4554C9021B7DBF6A004987CC /* Info.plist */,
 			);
 			path = EditorDriver;

@@ -10,16 +10,18 @@ import Foundation
 
 ///	Manages app-global preference.
 ///
-public class PreferenceModel {
+public class PreferenceModel: ModelSubnode<ApplicationModel> {
 
-	internal weak var owner: WorkspaceModel?
-
-	internal init() {
+	override func didJoinModelTree() {
+		super.didJoinModelTree()
+	}
+	override func willLeaveModelTree() {
+		super.willLeaveModelTree()
 	}
 
 	///
 
-	public var workspace: WorkspaceModel {
+	public var application: ApplicationModel {
 		get {
 			assert(owner != nil)
 			return	owner!

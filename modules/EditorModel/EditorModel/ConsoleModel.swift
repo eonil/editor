@@ -10,14 +10,7 @@ import Foundation
 import MulticastingStorage
 import EditorCommon
 
-public class Console {
-
-	internal weak var owner: WorkspaceModel?
-
-	internal init() {
-	}
-
-	///
+public class ConsoleModel: ModelSubnode<WorkspaceModel> {
 
 	public var workspace: WorkspaceModel {
 		get {

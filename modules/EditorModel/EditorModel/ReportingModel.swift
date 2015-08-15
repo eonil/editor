@@ -12,14 +12,7 @@ import EditorCommon
 
 
 
-public class ReportingModel {
-
-	internal weak var owner: WorkspaceModel?
-
-	internal init() {
-	}
-
-	///
+public class ReportingModel: ModelSubnode<WorkspaceModel> {
 
 	public var workspace: WorkspaceModel {
 		get {

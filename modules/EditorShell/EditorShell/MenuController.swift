@@ -139,30 +139,6 @@ class FileMenuController: SessionProtocol {
 	}
 }
 
-class ProductMenuController: SessionProtocol {
-
-	weak var model: ApplicationModel?
-
-	///
-
-	init() {
-		menu	=	_topLevelMenu("Product", items: [
-			])
-	}
-
-	///
-
-	let	menu		:	TopLevelCommandMenu
-
-	func run() {
-
-	}
-	func halt() {
-
-	}
-}
-
-
 
 
 class DebugMenuController: SessionProtocol {
@@ -236,118 +212,10 @@ class DebugMenuController: SessionProtocol {
 
 
 
-final class TopLevelCommandMenu: CommandMenu {
-//	weak var commandQueue: CommandQueue?
-	override func routeCommand(command: ModelCommand) {
-//		assert(commandQueue != nil)
-//		commandQueue?.queueCommand(command)
-		fatalErrorBecauseUnimplementedYet()
-	}
-}
-
-class CommandMenu: NSMenu {
-	func routeCommand(command: ModelCommand) {
-		assert(supermenu != nil)
-		assert(supermenu is CommandMenu)
-		if let supermenu = supermenu as? CommandMenu {
-			supermenu.routeCommand(command)
-		}
-	}
-}
-
-class CommandMenuItem: NSMenuItem {
-
-	var command: ModelCommand?
-
-	override init() {
-		super.init()
-		_setup()
-	}
-	override init(title aString: String, action aSelector: Selector, keyEquivalent charCode: String) {
-		super.init(title: aString, action: aSelector, keyEquivalent: charCode)
-		_setup()
-	}
-	required init?(coder aDecoder: NSCoder) {
-		fatalError()
-	}
-
-	@objc
-	func EDITOR_onEvent(_: AnyObject?) {
-		assert(command != nil)
-		assert(menu != nil)
-		assert(menu is CommandMenu)
-		if let menu = menu as? CommandMenu, let command = command {
-			menu.routeCommand(command)
-		}
-	}
-
-	private func _setup() {
-		self.target	=	self
-		self.action	=	"EDITOR_onEvent:"
-	}
-}
 
 
 
 
-
-
-
-
-
-struct Shortcut {
-
-}
-
-
-private func _topLevelMenu(title: String, items: [NSMenuItem]) -> TopLevelCommandMenu {
-	let	m		=	TopLevelCommandMenu(title: title)
-	m.autoenablesItems	=	false
-	for item in items {
-		m.addItem(item)
-	}
-	return	m
-}
-private func _menuItem(label: String, submenu: NSMenu) -> CommandMenuItem {
-	let	m		=	CommandMenuItem(title: label, action: nil, keyEquivalent: "")
-	m.submenu		=	submenu
-	return	m
-}
-private func _menuItem(label: String, _ command: ModelCommand) -> CommandMenuItem {
-	let	m		=	CommandMenuItem(title: label, action: nil, keyEquivalent: "")
-	m.command		=	command
-	return	m
-}
-private func _menuItem(label: String) -> SelfHandlingMenuItem {
-	let	m		=	SelfHandlingMenuItem(title: label, action: nil, keyEquivalent: "")
-	return	m
-}
-
-private func _menuSeparatorItem() -> NSMenuItem {
-	return	NSMenuItem.separatorItem()
-}
-
-@objc
-final class SelfHandlingMenuItem: NSMenuItem {
-	var clickHandler: (()->())? {
-		willSet {
-			if clickHandler != nil {
-				target	=	nil
-				action	=	nil
-			}
-		}
-		didSet {
-			if clickHandler != nil {
-				target	=	self
-				action	=	"EDITOR_onEvent:"
-			}
-		}
-	}
-	@objc
-	func EDITOR_onEvent(_: AnyObject?) {
-		clickHandler?()
-	}
-}
 
 
 

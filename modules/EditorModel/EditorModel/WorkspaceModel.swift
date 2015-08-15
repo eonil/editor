@@ -10,15 +10,19 @@ import Foundation
 import MulticastingStorage
 import EditorCommon
 
+
+
+
+
 ///	A unit for a product.
 ///	A workspace can contain multiple projects.
-public class WorkspaceModel {
-
-	internal weak var owner: ApplicationModel?
+public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 
 	internal init(rootLocationURL: NSURL) {
-		preference.owner	=	self
+		super.init()
+
 		search.owner		=	self
+		build.owner		=	self
 		debug.owner		=	self
 		report.owner		=	self
 		console.owner		=	self
@@ -29,6 +33,8 @@ public class WorkspaceModel {
 
 	///
 
+	///
+
 	public var model: ApplicationModel {
 		get {
 			assert(owner != nil)
@@ -36,11 +42,11 @@ public class WorkspaceModel {
 		}
 	}
 
-	public let	preference	=	PreferenceModel()
 	public let	search		=	SearchModel()
+	public let	build		=	BuildModel()
 	public let	debug		=	DebuggingModel()
 	public let	report		=	ReportingModel()
-	public let	console		=	Console()
+	public let	console		=	ConsoleModel()
 
 	public let	UI		=	WorkspaceUIModel()
 
@@ -78,12 +84,16 @@ public class WorkspaceModel {
 	private let	_currentProject	=	MutableValueStorage<ProjectModel?>(nil)
 }
 
-public class WorkspaceUIModel {
-	weak var owner: WorkspaceModel?
+
+
+
+
+public class WorkspaceUIModel: ModelSubnode<WorkspaceModel> {
 
 	public let	navigationPane	=	MutableValueStorage<Bool>(false)
 	public let	inspectionPane	=	MutableValueStorage<Bool>(false)
 	public let	consolePane	=	MutableValueStorage<Bool>(false)
+
 }
 
 

@@ -8,13 +8,7 @@
 
 import Foundation
 
-public class SearchModel {
-	internal weak var owner: WorkspaceModel?
-
-	internal init() {
-	}
-
-	///
+public class SearchModel: ModelSubnode<WorkspaceModel> {
 
 	public var workspace: WorkspaceModel {
 		get {
@@ -22,4 +16,5 @@ public class SearchModel {
 			return	owner!
 		}
 	}
+
 }

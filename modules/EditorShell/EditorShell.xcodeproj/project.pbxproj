@@ -21,6 +21,8 @@
 		4554CA261B7DC386004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA161B7DC34E004987CC /* EditorCommon.framework */; };
 		4554CA271B7DC386004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA231B7DC377004987CC /* EditorModel.framework */; };
 		4554CA281B7DC386004987CC /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA0D1B7DC34B004987CC /* EditorUICommon.framework */; };
+		45B185391B7F866B004E3B28 /* ProductMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185381B7F866B004E3B28 /* ProductMenuController.swift */; };
+		45B1853B1B7F8688004E3B28 /* MenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1853A1B7F8688004E3B28 /* MenuUtility.swift */; };
 		45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */; };
 		45C77B0C1B7F2F0A0064C363 /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */; };
 		45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */; };
@@ -117,6 +119,8 @@
 		4554CA071B7DC34A004987CC /* EditorUICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUICommon.xcodeproj; path = ../EditorUICommon/EditorUICommon.xcodeproj; sourceTree = "<group>"; };
 		4554CA101B7DC34D004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		4554CA1C1B7DC377004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
+		45B185381B7F866B004E3B28 /* ProductMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMenuController.swift; sourceTree = "<group>"; };
+		45B1853A1B7F8688004E3B28 /* MenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuUtility.swift; sourceTree = "<group>"; };
 		45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
 		45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
 		45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationUIController.swift; sourceTree = "<group>"; };
@@ -196,7 +200,7 @@
 		4554C80F1B7DBED9004987CC /* EditorShell */ = {
 			isa = PBXGroup;
 			children = (
-				4554C9C71B7DC16C004987CC /* MenuController.swift */,
+				45B1852E1B7F865B004E3B28 /* (menu components) */,
 				45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */,
 				45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */,
 				4554C9AD1B7DC0D7004987CC /* WorkspaceWindowUIController.swift */,
@@ -246,6 +250,16 @@
 				4554CA251B7DC377004987CC /* EditorModelTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		45B1852E1B7F865B004E3B28 /* (menu components) */ = {
+			isa = PBXGroup;
+			children = (
+				4554C9C71B7DC16C004987CC /* MenuController.swift */,
+				45B185381B7F866B004E3B28 /* ProductMenuController.swift */,
+				45B1853A1B7F8688004E3B28 /* MenuUtility.swift */,
+			);
+			name = "(menu components)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -439,6 +453,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45B185391B7F866B004E3B28 /* ProductMenuController.swift in Sources */,
 				45C77B0C1B7F2F0A0064C363 /* Dialogue.swift in Sources */,
 				4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */,
 				4554C9C81B7DC16C004987CC /* MenuController.swift in Sources */,
@@ -446,6 +461,7 @@
 				45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */,
 				4554C9B21B7DC0D7004987CC /* NavigationUIController.swift in Sources */,
 				4554C9B31B7DC0D7004987CC /* ReportUIController.swift in Sources */,
+				45B1853B1B7F8688004E3B28 /* MenuUtility.swift in Sources */,
 				4554C9B51B7DC0D7004987CC /* WorkspaceWindowUIController.swift in Sources */,
 				45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */,
 				4554C9B01B7DC0D7004987CC /* EditUIController.swift in Sources */,
