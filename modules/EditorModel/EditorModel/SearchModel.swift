@@ -9,4 +9,8 @@
 import Foundation
 
 public class SearchModel {
+	internal weak var owner: WorkspaceModel?
+
+	internal init() {
+	}
 }

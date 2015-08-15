@@ -88,21 +88,6 @@ public enum SearchCommand {
 	}
 }
 
-public enum DebuggingCommand {
-	case Select(TargetInfo)
-	case Deselect
-
-	case Launch(TargetInfo)
-	case Pause
-	case Resume
-	case Halt
-	case StepOver
-	case StepIn
-	case StepOut
-
-	public struct TargetInfo {
-	}
-}
 
 public enum ReportingCommand {
 	case Log(String)

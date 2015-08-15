@@ -13,6 +13,28 @@ import EditorCommon
 ///	A unit for a product.
 ///	A workspace can contain multiple projects.
 public class WorkspaceModel {
+
+	internal init() {
+		preference.owner	=	self
+		search.owner		=	self
+		debug.owner		=	self
+		report.owner		=	self
+		console.owner		=	self
+		UI.owner		=	self
+	}
+
+	///
+
+	public let	preference	=	PreferenceModel()
+	public let	search		=	SearchModel()
+	public let	debug		=	DebuggingModel()
+	public let	report		=	ReportingModel()
+	public let	console		=	Console()
+
+	public let	UI		=	WorkspaceUIModel()
+
+	///
+
 	public var allProjects: ArrayStorage<ProjectModel> {
 		get {
 			return	_projects
@@ -39,28 +61,12 @@ public class WorkspaceModel {
 	private let	_currentProject	=	MutableValueStorage<ProjectModel?>(nil)
 }
 
+public class WorkspaceUIModel {
+	weak var owner: WorkspaceModel?
 
-///	A unit of build for specific environment.
-public class TargetModel {
-
-}
-
-public class Console {
-	public var outputLines: ArrayStorage<String> {
-		get {
-			return	_outputLines
-		}
-	}
-	public func appendLine(line: String) {
-		fatalErrorBecauseUnimplementedYet()
-	}
-	public func appendLines(lines: String) {
-		fatalErrorBecauseUnimplementedYet()
-	}
-
-	///
-
-	private let	_outputLines	=	MutableArrayStorage<String>([])
+	public let	navigationPane	=	MutableValueStorage<Bool>(false)
+	public let	inspectionPane	=	MutableValueStorage<Bool>(false)
+	public let	consolePane	=	MutableValueStorage<Bool>(false)
 }
 
 
@@ -69,48 +75,6 @@ public class Console {
 
 
 
-
-
-public class Report {
-	public var errors: ArrayStorage<Issue> {
-		get {
-			return	_errors
-		}
-	}
-	public var warnings: ArrayStorage<Issue> {
-		get {
-			return	_errors
-		}
-	}
-	public var informations: ArrayStorage<Issue> {
-		get {
-			return	_errors
-		}
-	}
-
-	private let	_errors		=	MutableArrayStorage<Issue>([])
-	private let	_warnings	=	MutableArrayStorage<Issue>([])
-	private let	_informations	=	MutableArrayStorage<Issue>([])
-}
-
-
-public struct Issue {
-	public var	severity	:	Severity
-	public var	toolID		:	ToolID
-	public var	fileURL		:	NSURL
-	public var	message		:	String
-
-	public enum Severity {
-		case Information
-		case Warning
-		case Error
-	}
-}
-
-public enum ToolID {
-	case Cargo
-	case Racer
-}
 
 
 

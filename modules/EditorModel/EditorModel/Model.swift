@@ -11,13 +11,14 @@ import MulticastingStorage
 import EditorCommon
 
 ///	A model for application.
-///	This manages whole application, not only single document
+///	This manages whole application state, not only single document
 ///	or something else.
 ///	This exists for application, and designed toward to GUI.
 ///
 ///	**ALL** features of this object and subnodes must run in
 ///	main thread. Any non-main thread operations should be
-///	performed with special care.
+///	performed with special care. Also, you must minimize performing
+///	heavy load operations in main thread.
 ///
 public class Model {
 

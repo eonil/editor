@@ -12,4 +12,9 @@ import Foundation
 ///
 public class PreferenceModel {
 
+	internal weak var owner: WorkspaceModel?
+
+	internal init() {
+	}
+
 }

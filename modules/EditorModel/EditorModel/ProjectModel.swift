@@ -13,17 +13,15 @@ import EditorCommon
 
 ///	A unit of build.
 public class ProjectModel {
-	weak var owner: WorkspaceModel?
+	internal weak var owner: WorkspaceModel?
 
-	public init() {
+	internal init() {
 		selection.owner		=	self
 	}
 
 	///
 
 	public let	selection	=	ProjectSelection()
-	public let	report		=	Report()
-	public let	console		=	Console()
 
 	public var rootURL: ValueStorage<NSURL?> {
 		get {
