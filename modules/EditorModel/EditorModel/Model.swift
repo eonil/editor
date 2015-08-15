@@ -79,10 +79,14 @@ public class ApplicationModel {
 		ws.owner	=	nil
 	}
 	public func selectCurrentWorkspace(ws: WorkspaceModel) {
-		_currentWorkspace.value		=	ws
+		if _currentWorkspace.value !== ws {
+			_currentWorkspace.value		=	ws
+		}
 	}
 	public func deselectCurrentWorkspace() {
-		_currentWorkspace.value		=	nil
+		if _currentWorkspace.value !== nil {
+			_currentWorkspace.value		=	nil
+		}
 	}
 
 	///
