@@ -18,7 +18,8 @@ public class Driver {
 	///
 
 	public func run() {
-		_ui.model	=	_model
+		_adhoc_boot()
+		_ui.model	=	_model.workspaces.array.first!
 		_ui.run()
 	}
 
@@ -31,4 +32,8 @@ public class Driver {
 
 	private let	_ui		=	WorkspaceWindowUIController()
 	private let	_model		=	Model()
+
+	private func _adhoc_boot() {
+		_model.openWorkspaceAtURL(NSURL(string: "file:///~/Temp/TestWorkspace1")!)
+	}
 }

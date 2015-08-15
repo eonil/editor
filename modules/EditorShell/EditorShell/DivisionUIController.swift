@@ -8,9 +8,16 @@
 
 import Foundation
 import AppKit
+import EditorModel
 import EditorUICommon
 
 class DivisionUIController: CommonUIController {
+
+	weak var model: WorkspaceModel? {
+		didSet {
+
+		}
+	}
 
 	override func installSubcomponents() {
 		super.installSubcomponents()
@@ -60,17 +67,35 @@ class DivisionUIController: CommonUIController {
 
 		///
 
-		model!.workspaces.
+		_installHandlers()
 	}
 	private func _deinstall() {
+		_deinstallHandlers()
+
 		_outerSplit.view.removeFromSuperview()
 		_outerSplit.removeFromParentViewController()
+
 	}
 	private func _layout() {
 		_outerSplit.view.frame			=	view.bounds
 
 	}
 
+
+	private func _installHandlers() {
+		model!.UI.navigationPane.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+			self?._applyNavigationPaneDisplayState()
+		}
+	}
+	private func _deinstallHandlers() {
+		model!.UI.navigationPane.deregisterDidSet(ObjectIdentifier(self))
+	}
+
+	private func _applyNavigationPaneDisplayState() {
+		_outerSplit.items[0].isCollapsed	=	model!.UI.navigationPane.value
+		_innerSplit.items[2].isCollapsed	=	model!.UI.consolePane.value
+		_outerSplit.items[2].isCollapsed	=	model!.UI.inspectionPane.value
+	}
 }
 
 /////	`NSSplitController` Seems to be a class cluster, because subclassing does not provide expected behavior.

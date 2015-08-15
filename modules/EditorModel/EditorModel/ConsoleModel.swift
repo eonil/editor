@@ -19,6 +19,15 @@ public class Console {
 
 	///
 
+	public var workspace: WorkspaceModel {
+		get {
+			assert(owner != nil)
+			return	owner!
+		}
+	}
+
+	///
+	
 	public var outputLines: ArrayStorage<String> {
 		get {
 			return	_outputLines

@@ -14,7 +14,9 @@ import EditorCommon
 ///	A workspace can contain multiple projects.
 public class WorkspaceModel {
 
-	internal init() {
+	internal weak var owner: Model?
+
+	internal init(rootLocationURL: NSURL) {
 		preference.owner	=	self
 		search.owner		=	self
 		debug.owner		=	self
@@ -24,6 +26,13 @@ public class WorkspaceModel {
 	}
 
 	///
+
+	public var model: Model {
+		get {
+			assert(owner != nil)
+			return	owner!
+		}
+	}
 
 	public let	preference	=	PreferenceModel()
 	public let	search		=	SearchModel()
@@ -35,6 +44,11 @@ public class WorkspaceModel {
 
 	///
 
+	public var location: ValueStorage<NSURL?> {
+		get {
+			return	_location
+		}
+	}
 	public var allProjects: ArrayStorage<ProjectModel> {
 		get {
 			return	_projects
@@ -57,6 +71,7 @@ public class WorkspaceModel {
 
 	///
 
+	private let	_location	=	MutableValueStorage<NSURL?>(nil)
 	private let	_projects	=	MutableArrayStorage<ProjectModel>([])
 	private let	_currentProject	=	MutableValueStorage<ProjectModel?>(nil)
 }

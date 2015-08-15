@@ -10,14 +10,17 @@ import Foundation
 import AppKit
 import EditorModel
 
-class ToolUIController: ModelConsumerNode {
+class ToolUIController {
 
-	override init() {
-		super.init()
+	init() {
 	}
 	deinit {
 	}
 
+	///
+
+	weak var model: WorkspaceModel?
+	
 	var toolbar: NSToolbar {
 		get {
 			return	_toolbar
@@ -49,12 +52,17 @@ class ToolUIController: ModelConsumerNode {
 
 	private var	_isRunning	=	false
 
+	///
+	
 	private func _installToolItems() {
+//		_divsel.trackingMode	=	.SelectAny
 		_divsel.segmentCount	=	3
 		_divsel.setLabel("Navigator", forSegment: 0)
 		_divsel.setLabel("Editor", forSegment: 1)
 		_divsel.setLabel("Inspector", forSegment: 2)
 		_divsel.sizeToFit()
+		_divsel.target		=	_agent
+		_divsel.action		=	"EDITOR_changeDivisionState"
 
 		_toolbar.displayMode	=	.IconOnly
 
@@ -64,8 +72,20 @@ class ToolUIController: ModelConsumerNode {
 	private func _deinstallToolItems() {
 		_toolbar.delegate	=	nil
 		_agent.owner		=	nil
+
+		_divsel.target		=	nil
+		_divsel.action		=	nil
+	}
+
+	private func _applyDivisionState() {
+		model!.UI.navigationPane.value	=	_divsel.isSelectedForSegment(0)
+		model!.UI.consolePane.value	=	_divsel.isSelectedForSegment(1)
+		model!.UI.inspectionPane.value	=	_divsel.isSelectedForSegment(2)
 	}
 }
+
+
+
 
 
 
@@ -120,6 +140,11 @@ private final class _ToolbarAgent: NSObject, NSToolbarDelegate {
 		assert(owner != nil)
 		assert(owner!.onTest2 != nil)
 		owner!.onTest2?()
+	}
+
+	@objc
+	func EDITOR_changeDivisionState() {
+		owner!._applyDivisionState()
 	}
 }
 

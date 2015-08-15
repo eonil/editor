@@ -13,4 +13,13 @@ public class SearchModel {
 
 	internal init() {
 	}
+
+	///
+
+	public var workspace: WorkspaceModel {
+		get {
+			assert(owner != nil)
+			return	owner!
+		}
+	}
 }

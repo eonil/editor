@@ -16,7 +16,7 @@ import EditorModel
 ///	`view`. Because the `view` is `CommonUIView`, it will propagate shell 
 ///	object to all of its subviews.
 ///
-public class CommonUIController: NSViewController, ModelConsumerNodeType {
+public class CommonUIController: NSViewController {
 
 	///	The designated initializer.
 	public init() {
@@ -33,43 +33,6 @@ public class CommonUIController: NSViewController, ModelConsumerNodeType {
 	@available(*,unavailable)
 	public required init?(coder: NSCoder) {
 		super.init(coder: coder)
-	}
-
-	///
-
-	public weak var model: Model? {
-		get {
-			return	_modelConsumerNode.model
-		}
-		set {
-			_modelConsumerNode.model	=	newValue
-		}
-//		willSet {
-//			if let _ = shell {
-//				for vc in childViewControllers {
-//					assertAndReportFailure(vc is CommonUIController, "Only `CommonUIController` type can be a child of `CommonUIController`.")
-//					if let vc = vc as? CommonUIController {
-//						vc.shell	=	nil
-//					}
-//				}
-//			}
-//		}
-//		didSet {
-//			if let shell = shell {
-//				for vc in childViewControllers {
-//					assertAndReportFailure(vc is CommonUIController, "Only `CommonUIController` type can be a child of `CommonUIController`.")
-//					if let vc = vc as? CommonUIController {
-//						vc.shell	=	shell
-//					}
-//				}
-//			}
-//		}
-	}
-	public func registerShellConsumer(consumer: ModelConsumerProtocol) {
-		_modelConsumerNode.registerShellConsumer(consumer)
-	}
-	public func deregisterShellConsumer(consumer: ModelConsumerProtocol) {
-		_modelConsumerNode.deregisterShellConsumer(consumer)
 	}
 
 	///
@@ -98,8 +61,6 @@ public class CommonUIController: NSViewController, ModelConsumerNodeType {
 
 
 	///
-
-	private let	_modelConsumerNode	=	ModelConsumerNode()
 
 	private func _install() {
 		installSubcomponents()

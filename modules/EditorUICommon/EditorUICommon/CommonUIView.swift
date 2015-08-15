@@ -20,7 +20,7 @@ import EditorModel
 ///	automatic propagation won't work for the subview. You still can route
 ///	shell object to the view yourself manually.
 ///
-public class CommonUIView: CommonView, ModelConsumerNodeType {
+public class CommonUIView: CommonView {
 
 	public override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
@@ -32,23 +32,6 @@ public class CommonUIView: CommonView, ModelConsumerNodeType {
 	}
 	deinit {
 		assert(_isInstalled == false)
-	}
-
-	///
-
-	public weak var model: Model? {
-		get {
-			return	_modelConsumerNode.model
-		}
-		set {
-			_modelConsumerNode.model	=	newValue
-		}
-	}
-	public func registerShellConsumer(consumer: ModelConsumerProtocol) {
-		_modelConsumerNode.registerShellConsumer(consumer)
-	}
-	public func deregisterShellConsumer(consumer: ModelConsumerProtocol) {
-		_modelConsumerNode.deregisterShellConsumer(consumer)
 	}
 
 	///
@@ -107,20 +90,13 @@ public class CommonUIView: CommonView, ModelConsumerNodeType {
 
 	public override func didAddSubview(subview: NSView) {
 		super.didAddSubview(subview)
-		if let node = subview as? CommonUIView {
-			_modelConsumerNode.registerShellConsumer(node)
-		}
 	}
 	public override func willRemoveSubview(subview: NSView) {
-		if let node = subview as? CommonUIView {
-			_modelConsumerNode.deregisterShellConsumer(node)
-		}
 		super.willRemoveSubview(subview)
 	}
 
 	///
 
-	private let	_modelConsumerNode	=	ModelConsumerNode()
 	private var	_isInstalled		=	false
 	private var	_supercallCheckFlag	=	false
 

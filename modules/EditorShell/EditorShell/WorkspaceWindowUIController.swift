@@ -14,7 +14,12 @@ import EditorUICommon
 public final class WorkspaceWindowUIController: CommonUIWindowController, NSWindowDelegate {
 
 	///	Will be set by upper level node.
-	weak var workspaceModel: WorkspaceModel?
+	public weak var model: WorkspaceModel? {
+		didSet {
+			_tools.model	=	model
+			_div.model	=	model
+		}
+	}
 	
 	public func run() {
 		assert(model != nil)
@@ -59,12 +64,10 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, NSWind
 		assert(window!.toolbar === nil)
 		_tools.run()
 		window!.toolbar		=	_tools.toolbar
-		registerShellConsumer(_tools)
 	}
 	private func _deinstallToolbar() {
 		assert(window!.toolbar === _tools.toolbar)
 
-		deregisterShellConsumer(_tools)
 		window!.toolbar		=	nil
 		_tools.halt()
 	}

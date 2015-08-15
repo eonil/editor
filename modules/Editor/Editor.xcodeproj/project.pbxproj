@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		453E400E1B7EFCDC00AFAB68 /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1B51B7EDA4300D5AA56 /* EditorCommon.framework */; };
+		453E400F1B7EFCDC00AFAB68 /* EditorCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1B51B7EDA4300D5AA56 /* EditorCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		453E40141B7EFCDC00AFAB68 /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1C51B7EDA4300D5AA56 /* EditorUICommon.framework */; };
+		453E40151B7EFCDC00AFAB68 /* EditorUICommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1C51B7EDA4300D5AA56 /* EditorUICommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		453E401A1B7EFCDC00AFAB68 /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1AB1B7EDA4300D5AA56 /* EditorModel.framework */; };
+		453E401B1B7EFCDC00AFAB68 /* EditorModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1AB1B7EDA4300D5AA56 /* EditorModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		453E40201B7EFCDC00AFAB68 /* EditorShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1BD1B7EDA4300D5AA56 /* EditorShell.framework */; };
+		453E40211B7EFCDC00AFAB68 /* EditorShell.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1BD1B7EDA4300D5AA56 /* EditorShell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		453E40261B7EFCDD00AFAB68 /* EditorDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1EA1B7EDB1100D5AA56 /* EditorDriver.framework */; };
+		453E40271B7EFCDD00AFAB68 /* EditorDriver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1EA1B7EDB1100D5AA56 /* EditorDriver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4554C8C81B7DBF50004987CC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C8C71B7DBF50004987CC /* Document.swift */; };
 		4554C8CB1B7DBF50004987CC /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4554C8C91B7DBF50004987CC /* Document.xib */; };
 		4554C8CD1B7DBF50004987CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4554C8CC1B7DBF50004987CC /* Assets.xcassets */; };
@@ -30,6 +40,48 @@
 			proxyType = 2;
 			remoteGlobalIDString = 4513725A1B7ED50D00ED9829;
 			remoteInfo = MulticastingStorageTests;
+		};
+		453E40101B7EFCDC00AFAB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4554C94D1B7DBF9B004987CC;
+			remoteInfo = EditorCommon;
+		};
+		453E40161B7EFCDC00AFAB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451372E51B7ED81200ED9829 /* EditorUICommon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4554C9791B7DC068004987CC;
+			remoteInfo = EditorUICommon;
+		};
+		453E401C1B7EFCDC00AFAB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451372EE1B7ED81700ED9829 /* EditorModel.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4554C85D1B7DBEF7004987CC;
+			remoteInfo = EditorModel;
+		};
+		453E40221B7EFCDD00AFAB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451372F71B7ED81C00ED9829 /* EditorShell.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4554C80C1B7DBED9004987CC;
+			remoteInfo = EditorShell;
+		};
+		453E40281B7EFCDD00AFAB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4554C8FC1B7DBF6A004987CC;
+			remoteInfo = EditorDriver;
+		};
+		453E402D1B7EFCDD00AFAB68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451373361B7ED87F00ED9829 /* MulticastingStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 455EE22A1B7EEF9000D5AA56;
+			remoteInfo = MulticastingStorageWorkbench;
 		};
 		4554C8D71B7DBF51004987CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -124,6 +176,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				453E40211B7EFCDC00AFAB68 /* EditorShell.framework in Embed Frameworks */,
+				453E40271B7EFCDD00AFAB68 /* EditorDriver.framework in Embed Frameworks */,
+				453E40151B7EFCDC00AFAB68 /* EditorUICommon.framework in Embed Frameworks */,
+				453E400F1B7EFCDC00AFAB68 /* EditorCommon.framework in Embed Frameworks */,
+				453E401B1B7EFCDC00AFAB68 /* EditorModel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +214,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				453E40201B7EFCDC00AFAB68 /* EditorShell.framework in Frameworks */,
+				453E40261B7EFCDD00AFAB68 /* EditorDriver.framework in Frameworks */,
+				453E40141B7EFCDC00AFAB68 /* EditorUICommon.framework in Frameworks */,
+				453E400E1B7EFCDC00AFAB68 /* EditorCommon.framework in Frameworks */,
+				453E401A1B7EFCDC00AFAB68 /* EditorModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +256,7 @@
 			children = (
 				4513733C1B7ED87F00ED9829 /* MulticastingStorage.framework */,
 				4513733E1B7ED87F00ED9829 /* MulticastingStorageTests.xctest */,
+				453E402E1B7EFCDD00AFAB68 /* MulticastingStorageWorkbench */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -319,6 +382,11 @@
 			buildRules = (
 			);
 			dependencies = (
+				453E40111B7EFCDC00AFAB68 /* PBXTargetDependency */,
+				453E40171B7EFCDC00AFAB68 /* PBXTargetDependency */,
+				453E401D1B7EFCDC00AFAB68 /* PBXTargetDependency */,
+				453E40231B7EFCDD00AFAB68 /* PBXTargetDependency */,
+				453E40291B7EFCDD00AFAB68 /* PBXTargetDependency */,
 			);
 			name = Editor;
 			productName = Editor;
@@ -442,6 +510,13 @@
 			fileType = wrapper.cfbundle;
 			path = MulticastingStorageTests.xctest;
 			remoteRef = 4513733D1B7ED87F00ED9829 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		453E402E1B7EFCDD00AFAB68 /* MulticastingStorageWorkbench */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = MulticastingStorageWorkbench;
+			remoteRef = 453E402D1B7EFCDD00AFAB68 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		455EE1AB1B7EDA4300D5AA56 /* EditorModel.framework */ = {
@@ -572,6 +647,31 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		453E40111B7EFCDC00AFAB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EditorCommon;
+			targetProxy = 453E40101B7EFCDC00AFAB68 /* PBXContainerItemProxy */;
+		};
+		453E40171B7EFCDC00AFAB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EditorUICommon;
+			targetProxy = 453E40161B7EFCDC00AFAB68 /* PBXContainerItemProxy */;
+		};
+		453E401D1B7EFCDC00AFAB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EditorModel;
+			targetProxy = 453E401C1B7EFCDC00AFAB68 /* PBXContainerItemProxy */;
+		};
+		453E40231B7EFCDD00AFAB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EditorShell;
+			targetProxy = 453E40221B7EFCDD00AFAB68 /* PBXContainerItemProxy */;
+		};
+		453E40291B7EFCDD00AFAB68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EditorDriver;
+			targetProxy = 453E40281B7EFCDD00AFAB68 /* PBXContainerItemProxy */;
+		};
 		4554C8D81B7DBF51004987CC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4554C8C11B7DBF50004987CC /* Editor */;

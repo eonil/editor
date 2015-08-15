@@ -36,18 +36,27 @@ public class DebuggingModel {
 
 	///
 
-	var runnableCommands: ArrayStorage<DebuggingCommand> {
+	public var workspace: WorkspaceModel {
+		get {
+			assert(owner != nil)
+			return	owner!
+		}
+	}
+
+	///
+
+	public var runnableCommands: ArrayStorage<DebuggingCommand> {
 		get {
 			return	_runnableCommands
 		}
 	}
 
-	var stackFrames: ArrayStorage<StackFrame> {
+	public var stackFrames: ArrayStorage<StackFrame> {
 		get {
 			return	_stackFrames
 		}
 	}
-	var frameVariables: ArrayStorage<FrameVariable> {
+	public var frameVariables: ArrayStorage<FrameVariable> {
 		get {
 			return	_frameVariables
 		}

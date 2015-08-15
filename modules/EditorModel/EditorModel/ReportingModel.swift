@@ -21,6 +21,15 @@ public class ReportingModel {
 
 	///
 
+	public var workspace: WorkspaceModel {
+		get {
+			assert(owner != nil)
+			return	owner!
+		}
+	}
+
+	///
+	
 	public var errors: ArrayStorage<Issue> {
 		get {
 			return	_errors

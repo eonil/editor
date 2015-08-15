@@ -13,7 +13,7 @@ import EditorModel
 ///	Fixes some bugs in AppKit.
 ///	Provides automatic shell propagations through view and view-controllers.
 ///
-public class CommonUIWindowController: NSWindowController, ModelConsumerNodeType {
+public class CommonUIWindowController: NSWindowController {
 
 	public init() {
 		_inInit	=	true
@@ -29,23 +29,6 @@ public class CommonUIWindowController: NSWindowController, ModelConsumerNodeType
 	public required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		assert(_inInit == true, "Do not call this initializer directly. Use `init()` that is a designated initializer.")
-	}
-
-	///
-
-	public weak var model: Model? {
-		get {
-			return	_modelConsumerNode.model
-		}
-		set {
-			_modelConsumerNode.model	=	newValue
-		}
-	}
-	public func registerShellConsumer(consumer: ModelConsumerProtocol) {
-		_modelConsumerNode.registerShellConsumer(consumer)
-	}
-	public func deregisterShellConsumer(consumer: ModelConsumerProtocol) {
-		_modelConsumerNode.deregisterShellConsumer(consumer)
 	}
 
 	///
@@ -77,7 +60,6 @@ public class CommonUIWindowController: NSWindowController, ModelConsumerNodeType
 
 	///
 
-	private let	_modelConsumerNode	=	ModelConsumerNode()
 	private var	_inInit	=	false
 }
 

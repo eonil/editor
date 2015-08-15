@@ -38,6 +38,16 @@ public class Model {
 		}
 	}
 
+	public func openWorkspaceAtURL(u: NSURL) {
+		let	ws	=	WorkspaceModel(rootLocationURL: u)
+		ws.owner	=	self
+		_workspaces.append(ws)
+	}
+	public func closeWorkspace(ws: WorkspaceModel) {
+		_workspaces.removeFirstMatchingObject(ws)
+		ws.owner	=	nil
+	}
+
 	///
 	
 	private let	_preference	=	PreferenceModel()

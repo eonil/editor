@@ -20,6 +20,11 @@ public final class SplitItem {
 
 		}
 	}
+	public var isCollapsed: Bool = false {
+		didSet {
+			_owner!._applyCollapsingStateOfItem(self)
+		}
+	}
 
 	///
 
@@ -95,6 +100,10 @@ public final class SplitViewController: CommonUIController, NSSplitViewDelegate 
 
 			item._owner	=	nil
 		}
+	}
+	private func _applyCollapsingStateOfItem(item: SplitItem) {
+		item.viewController.view.hidden	=	item.isCollapsed
+		_splitV.adjustSubviews()
 	}
 }
 
