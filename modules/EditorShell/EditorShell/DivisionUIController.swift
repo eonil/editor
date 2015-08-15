@@ -57,6 +57,10 @@ class DivisionUIController: CommonUIController {
 
 		addChildViewController(_outerSplit)
 		view.addSubview(_outerSplit.view)
+
+		///
+
+		model!.workspaces.
 	}
 	private func _deinstall() {
 		_outerSplit.view.removeFromSuperview()

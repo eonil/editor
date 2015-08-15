@@ -12,6 +12,9 @@ import EditorModel
 import EditorUICommon
 
 public final class WorkspaceWindowUIController: CommonUIWindowController, NSWindowDelegate {
+
+	///	Will be set by upper level node.
+	weak var workspaceModel: WorkspaceModel?
 	
 	public func run() {
 		assert(model != nil)

@@ -88,6 +88,13 @@
 			remoteGlobalIDString = 4554C8681B7DBEF8004987CC;
 			remoteInfo = EditorModelTests;
 		};
+		455EE2631B7EF3F400D5AA56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451372C51B7ED79300ED9829 /* MulticastingStorage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 455EE22A1B7EEF9000D5AA56;
+			remoteInfo = MulticastingStorageWorkbench;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +156,7 @@
 			children = (
 				451372CB1B7ED79300ED9829 /* MulticastingStorage.framework */,
 				451372CD1B7ED79300ED9829 /* MulticastingStorageTests.xctest */,
+				455EE2641B7EF3F400D5AA56 /* MulticastingStorageWorkbench */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -392,6 +400,13 @@
 			fileType = wrapper.cfbundle;
 			path = EditorModelTests.xctest;
 			remoteRef = 4554CA241B7DC377004987CC /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		455EE2641B7EF3F400D5AA56 /* MulticastingStorageWorkbench */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = MulticastingStorageWorkbench;
+			remoteRef = 455EE2631B7EF3F400D5AA56 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
