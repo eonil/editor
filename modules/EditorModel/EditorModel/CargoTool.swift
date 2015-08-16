@@ -28,10 +28,7 @@ class CargoTool {
 
 	///
 
-	init(rootDirectoryURL: NSURL) {
-		precondition(rootDirectoryURL.scheme == "file")
-		precondition(rootDirectoryURL.path != nil)
-		_rootDir			=	rootDirectoryURL
+	init() {
 		_task.terminationHandler	=	{ [weak self] task in
 			dispatchToMainQueueAsynchronously { [weak self] in
 				self?._handleTermination()
@@ -47,6 +44,7 @@ class CargoTool {
 
 	///
 
+	var onDidSetState: (()->())?
 
 	var state: ValueStorage<State> {
 		get {
@@ -72,40 +70,42 @@ class CargoTool {
 	///		a cargo project. This directory must not exists.
 	///
 	///
-	func runNew() {
-		if let p = _pathToParentDirectoryOfProjectRootDirectory() {
-			//	File system is always asynchronous, and no one can have truly exclusive access.
-			//	Then we cannot make any assume on file system. Just try and take the result.
-			_runCargoWithParameters(p, parameters: ["new"])
-		}
-		else {
-			_state.value	=	.Error
-			_errors.append("Cannot resolve the destination directory.")
-		}
+	func runNew(path path: String, newDirectoryName: String) {
+		//	File system is always asynchronous, and no one can have truly exclusive access.
+		//	Then we cannot make any assume on file system. Just try and take the result.
+		_runCargoWithParameters(path, parameters: ["new", newDirectoryName])
 	}
-	func runBuild() {
-		_runCargoWithParameters(_pathToProjectRootDirectory(), parameters: ["build"])
+	func runBuild(path path: String) {
+		_runCargoWithParameters(path, parameters: ["build"])
 	}
-	func runClean() {
-		_runCargoWithParameters(_pathToProjectRootDirectory(), parameters: ["clean"])
+	func runClean(path path: String) {
+		_runCargoWithParameters(path, parameters: ["clean"])
 	}
-	func runDoc() {
+	func runDoc(path path: String) {
 		markUnimplemented()
 	}
-	func runTest() {
+	func runTest(path path: String) {
 		markUnimplemented()
 	}
-	func runBench() {
+	func runBench(path path: String) {
 		markUnimplemented()
 	}
-	func runUpdate() {
+	func runUpdate(path path: String) {
 		markUnimplemented()
 	}
-	func runSearch() {
+	func runSearch(path path: String) {
 		markUnimplemented()
 	}
 
-	func stop() {
+	/// - Parameters:
+	///	- haltTimeout:
+	///		If this is non-nil value, this method will halt (sends `SIGNKILL`)
+	///		the `cargo` process after waiting for this. If this is `nil`, this
+	///		method will not try to halt and expects the program always quit 
+	///		gracefully.
+	func stop(haltTimeout: NSTimeInterval? = nil) {
+		markUnimplemented()
+		assert(haltTimeout == nil, "Non-nil case is not implemented yet...")
 		_task.terminate()
 	}
 //	func halt() {
@@ -114,7 +114,6 @@ class CargoTool {
 
 	///
 
-	private let	_rootDir	:	NSURL
 	private let	_task		=	NSTask()
 	private var	_isTerminated	=	false
 	private let	_state		=	MutableValueStorage<State>(.Idle)
@@ -123,20 +122,13 @@ class CargoTool {
 
 	private let	_outputPipe	=	NSPipe()
 
-	private func _pathToParentDirectoryOfProjectRootDirectory() -> String? {
-		if let u1 = _rootDir.URLByDeletingLastPathComponent {
-			return	u1.path!
-		}
-		else {
-			return	nil
-		}
-	}
-	private func _pathToProjectRootDirectory() -> String {
-		return	_rootDir.path!
-	}
+	///
+
 	private func _runCargoWithParameters(workingDirectoryPath: String, parameters: [String]) {
+		markUnimplemented()
 		_task.currentDirectoryPath	=	workingDirectoryPath
-		_task.launchPath		=	"cargo"
+//		_task.launchPath		=	ToolLocationResolver.cargoToolLocation()
+		_task.launchPath		=	"/Users/Eonil/Unix/homebrew/bin/cargo"
 		_task.arguments			=	parameters
 		_task.launch()
 	}
@@ -144,10 +136,16 @@ class CargoTool {
 		markUnimplemented()
 	}
 	private func _handleTermination() {
-		_state.value			=	.Done
+		_setState(.Done)
+	}
+
+	private func _setState(s: State) {
+		_state.value	=	s
+		onDidSetState?()
 	}
 
 }
+
 
 
 

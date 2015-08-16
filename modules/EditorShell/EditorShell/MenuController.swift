@@ -107,8 +107,7 @@ class FileMenuController: SessionProtocol {
 		newWorkspace.clickHandler	=	{ [weak self] in
 			Dialogue.runSavingWorkspace({ (u: NSURL?) -> () in
 				if let u = u {
-					self?.model!.createWorkspaceAtURL(u)
-					self?.model!.openWorkspaceAtURL(u)
+					self?.model!.createAndOpenWorkspaceAtURL(u)
 				}
 			})
 		}

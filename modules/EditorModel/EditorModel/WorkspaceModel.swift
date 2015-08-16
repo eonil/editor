@@ -16,14 +16,16 @@ import EditorCommon
 
 /// A unit for a product.
 /// A workspace can contain multiple projects.
+///
+/// You need to call `locate` to designate location of this
+/// workspace. Workspace will be in an empty state until you
+/// provide a location.
+///
+/// A workspace should work with an invalid path without crash.
+/// A workspace can work even with `nil` locaiton. Anyway most
+/// feature won't work with invalid paths.
+///
 public class WorkspaceModel: ModelSubnode<ApplicationModel> {
-
-	internal init(rootLocationURL: NSURL) {
-		super.init()
-		_location.value		=	rootLocationURL
-	}
-
-	///
 
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
@@ -37,6 +39,13 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 	}
 	override func willLeaveModelRoot() {
 		super.willLeaveModelRoot()
+
+		//	A cargo may still being excuted
+		//	at this point. Stop it.
+		if let cargoTool = _cargoTool {
+			cargoTool.stop()
+			_cargoTool	=	nil
+		}
 
 		UI.owner		=	nil
 		console.owner		=	nil
@@ -86,13 +95,39 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 		}
 	}
 
+	///
+
+	/// Specifies location of this workspace.
+	public func locate(u: NSURL) {
+		assert(_location.value == nil)
+		_location.value	=	u
+	}
+	public func delocate() {
+		assert(_location.value != nil)
+		_location.value	=	nil
+	}
+
+	/// Creates a new workspace file structure at current location
+	/// if there's none. This method does not guarantee proper creation,
+	/// and can fail for any reason.
+	public func tryCreating() {
+		assert(_location.value != nil)
+		assert(_cargoTool == nil)
+
+		let	u	=	_location.value!
+		_installCargoToolForURL(u)
+		_cargoTool!.runNew()
+	}
+
 	public func insertProjectWithRootURL(url: NSURL) {
+		assert(_location.value != nil, "You cannot manage projects on a workspace with no location.")
 		let	p	=	ProjectModel()
 		p.owner		=	self
 		_projects
 	}
 	public func deleteProject(project: ProjectModel) {
-
+		assert(_location.value != nil, "You cannot manage projects on a workspace with no location.")
+		markUnimplemented()
 	}
 
 	///
@@ -100,6 +135,33 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 	private let	_location	=	MutableValueStorage<NSURL?>(nil)
 	private let	_projects	=	MutableArrayStorage<ProjectModel>([])
 	private let	_currentProject	=	MutableValueStorage<ProjectModel?>(nil)
+
+	private var	_cargoTool	:	CargoTool?	//<	A cargo tool that is currently running.
+
+	private func _installCargoToolForURL(u: NSURL) {
+		_cargoTool	=	CargoTool(rootDirectoryURL: u)
+		_applyCargoState()
+		_cargoTool!.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in self!._applyCargoState() }
+	}
+	private func _applyCargoState() {
+		assert(_cargoTool != nil)
+		switch _cargoTool!.state.value {
+		case .Idle:
+			break
+		case .Running:
+			break
+		case .Done:
+			//	Start here... cargo need to be re-usable...
+			_deinstallCargoTool()
+		case .Error:
+			markUnimplemented()	//	Eating up errors.
+			_deinstallCargoTool()
+		}
+	}
+	private func _deinstallCargoTool() {
+		_cargoTool!.state.deregisterDidSet(ObjectIdentifier(self))
+		_cargoTool	=	nil
+	}
 }
 
 

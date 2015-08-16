@@ -23,6 +23,8 @@ import EditorCommon
 public class ApplicationModel: ModelRootNode {
 
 	public override init() {
+//		let	a	=	ToolLocationResolver.cargoToolLocation()
+//		assert(a == "/Users/Eonil/Unix/homebrew/bin/cargo")
 	}
 
 	///
@@ -61,9 +63,14 @@ public class ApplicationModel: ModelRootNode {
 
 	///
 
-	/// Just creates workspace file structure, and does not open it.
-	public func createWorkspaceAtURL(u: NSURL) {
-		markUnimplemented()
+	/// Just opens a workspace, and create it at the place.
+	public func createAndOpenWorkspaceAtURL(u: NSURL) {
+		let	ws	=	WorkspaceModel()
+		ws.owner	=	self
+		ws.locate(u)
+		ws.tryCreating()
+		_workspaces.append(ws)
+		Debug.log("did create and add a workspace \(ws), ws count = \(_workspaces.array.count)")
 	}
 
 	/// You can supply any URL, and a workspace will be open only if
@@ -83,8 +90,8 @@ public class ApplicationModel: ModelRootNode {
 
 		///
 
-
-		let	ws	=	WorkspaceModel(rootLocationURL: u)
+		let	ws	=	WorkspaceModel()
+		ws.locate(u)
 		ws.owner	=	self
 		_workspaces.append(ws)
 		Debug.log("did open by adding a workspace \(ws), ws count = \(_workspaces.array.count)")
