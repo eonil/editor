@@ -109,8 +109,6 @@ private final class _ToolbarAgent: NSObject, NSToolbarDelegate {
 				let	subcode	=	itemIdentifier["EDITOR_".endIndex..<itemIdentifier.endIndex]
 				if let id = _EditorToolItemID(rawValue: subcode) {
 					switch id {
-					case .Test1:		return	_instantiateTest1ToolbarItem(self)
-					case .Test2:		return	_instantiateTest2ToolbarItem(self)
 					case .DivisionSelector:	return	_instantiateCustomViewToolbarItem(.DivisionSelector, view: owner!._divsel, label: "Division")
 					}
 				}
@@ -127,19 +125,6 @@ private final class _ToolbarAgent: NSObject, NSToolbarDelegate {
 	private func toolbarDefaultItemIdentifiers(toolbar: NSToolbar) -> [String] {
 		assert(owner != nil)
 		return	_defaultItemIDs().map({ $0.toolbarItemIdentifier() })
-	}
-
-	@objc
-	func test1(_: AnyObject?) {
-		assert(owner != nil)
-		assert(owner!.onTest1 != nil)
-		owner!.onTest1?()
-	}
-	@objc
-	func test2(_: AnyObject?) {
-		assert(owner != nil)
-		assert(owner!.onTest2 != nil)
-		owner!.onTest2?()
 	}
 
 	@objc
@@ -161,24 +146,24 @@ private final class _ToolbarAgent: NSObject, NSToolbarDelegate {
 
 
 
-
-private func _instantiateTest1ToolbarItem(agent: _ToolbarAgent) -> NSToolbarItem {
-	let	m	=	NSToolbarItem(itemIdentifier: _EditorToolItemID.Test1.toolbarItemIdentifier())
-	m.label		=	"Test 1"
-	m.paletteLabel	=	"Test 1"
-	m.target	=	agent
-	m.action	=	"test1:"
-	return	m
-}
-private func _instantiateTest2ToolbarItem(agent: _ToolbarAgent) -> NSToolbarItem {
-
-	let	m	=	NSToolbarItem(itemIdentifier: _EditorToolItemID.Test2.toolbarItemIdentifier())
-	m.label		=	"Test 2"
-	m.paletteLabel	=	"Test 2"
-	m.target	=	agent
-	m.action	=	"test2:"
-	return	m
-}
+//
+//private func _instantiateTest1ToolbarItem(agent: _ToolbarAgent) -> NSToolbarItem {
+//	let	m	=	NSToolbarItem(itemIdentifier: _EditorToolItemID.Test1.toolbarItemIdentifier())
+//	m.label		=	"Test 1"
+//	m.paletteLabel	=	"Test 1"
+//	m.target	=	agent
+//	m.action	=	"test1:"
+//	return	m
+//}
+//private func _instantiateTest2ToolbarItem(agent: _ToolbarAgent) -> NSToolbarItem {
+//
+//	let	m	=	NSToolbarItem(itemIdentifier: _EditorToolItemID.Test2.toolbarItemIdentifier())
+//	m.label		=	"Test 2"
+//	m.paletteLabel	=	"Test 2"
+//	m.target	=	agent
+//	m.action	=	"test2:"
+//	return	m
+//}
 private func _instantiateCustomViewToolbarItem(id: _EditorToolItemID, view: NSView, label: String) -> NSToolbarItem {
 	let	m	=	NSToolbarItem(itemIdentifier: id.toolbarItemIdentifier())
 	m.label		=	label
@@ -207,8 +192,8 @@ private func _defaultItemIDs() -> [_ToolItemID] {
 }
 private func _allowedItemIDs() -> [_ToolItemID] {
 	return	[
-		.Editor(.Test1),
-		.Editor(.Test2),
+//		.Editor(.Test1),
+//		.Editor(.Test2),
 		.System(NSToolbarFlexibleSpaceItemIdentifier),
 		.Editor(.DivisionSelector),
 	]
@@ -229,9 +214,6 @@ private enum _ToolItemID {
 
 }
 private enum _EditorToolItemID: String {
-	case Test1
-	case Test2
-
 	case DivisionSelector
 
 	func toolbarItemIdentifier() -> String {

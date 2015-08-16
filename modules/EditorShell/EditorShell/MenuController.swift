@@ -127,10 +127,13 @@ class FileMenuController: SessionProtocol {
 			assert(self != nil)
 			self?._applyEnabledStates()
 		}
+
+		_applyEnabledStates()
 		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self), handler: apply)
 	}
 	func halt() {
 		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
+		_applyEnabledStates()
 
 		closeWorkspace.clickHandler	=	nil
 		openWorkspace.clickHandler	=	nil
@@ -147,8 +150,13 @@ class FileMenuController: SessionProtocol {
 		assert(model != nil)
 		assert(model!.currentWorkspace.value != nil)
 		if let curWS = model!.currentWorkspace.value {
+			assert(model!.currentWorkspace.value === curWS)
+			assert(model!.workspaces.contains(curWS) == true)
 			model!.deselectCurrentWorkspace()
+			assert(model!.currentWorkspace.value !== curWS)
+			assert(model!.workspaces.contains(curWS) == true)
 			model!.closeWorkspace(curWS)
+			assert(model!.workspaces.contains(curWS) == false)
 		}
 		else {
 			fatalError()

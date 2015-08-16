@@ -27,6 +27,7 @@
 		455EE2101B7EDC1E00D5AA56 /* ReportingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */; };
 		45B185241B7F7626004E3B28 /* BuildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185231B7F7626004E3B28 /* BuildModel.swift */; };
 		45B1852D1B7F7ADC004E3B28 /* ModelNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1852C1B7F7ADC004E3B28 /* ModelNodeProtocol.swift */; };
+		45B1855C1B802458004E3B28 /* WorkspaceModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */; };
 		45C77AED1B7F1DD80064C363 /* CommandQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +100,7 @@
 		455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportingModel.swift; sourceTree = "<group>"; };
 		45B185231B7F7626004E3B28 /* BuildModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildModel.swift; sourceTree = "<group>"; };
 		45B1852C1B7F7ADC004E3B28 /* ModelNodeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelNodeProtocol.swift; sourceTree = "<group>"; };
+		45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModelExtensions.swift; sourceTree = "<group>"; };
 		45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +189,7 @@
 				4554C9B91B7DC106004987CC /* ModelConsuming.swift */,
 				4554C9BA1B7DC106004987CC /* Selection.swift */,
 				4554C9BB1B7DC106004987CC /* WorkspaceModel.swift */,
+				45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */,
 				4554CAB51B7DCE05004987CC /* ProjectModel.swift */,
 				45B185231B7F7626004E3B28 /* BuildModel.swift */,
 				451373401B7ED91000ED9829 /* SearchModel.swift */,
@@ -378,6 +381,7 @@
 				45B1852D1B7F7ADC004E3B28 /* ModelNodeProtocol.swift in Sources */,
 				4554C9C01B7DC106004987CC /* WorkspaceModel.swift in Sources */,
 				450C0FBC1B7F69DD0048E7A1 /* CargoTool.swift in Sources */,
+				45B1855C1B802458004E3B28 /* WorkspaceModelExtensions.swift in Sources */,
 				4554C9BF1B7DC106004987CC /* Selection.swift in Sources */,
 				4554CAB61B7DCE05004987CC /* ProjectModel.swift in Sources */,
 				45C77AED1B7F1DD80064C363 /* CommandQueue.swift in Sources */,

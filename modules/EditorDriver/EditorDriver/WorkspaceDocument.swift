@@ -31,6 +31,6 @@ public class WorkspaceDocument: NSDocument {
 	}
 
 	public override func writeToURL(url: NSURL, ofType typeName: String) throws {
-
+		//	Nothing to do.
 	}
 }

@@ -27,13 +27,13 @@ public class ApplicationModel: ModelRootNode {
 
 	///
 
-	override func didJoinModelTree() {
-		super.didJoinModelTree()
+	override func didJoinModelRoot() {
+		super.didJoinModelRoot()
 		_preference.owner	=	self
 	}
-	override func willLeaveModelTree() {
+	override func willLeaveModelRoot() {
 		_preference.owner	=	nil
-		super.willLeaveModelTree()
+		super.willLeaveModelRoot()
 	}
 
 	///
@@ -71,9 +71,11 @@ public class ApplicationModel: ModelRootNode {
 	///	no new workspace will be created, and the workspace will be
 	///	selected.
 	public func openWorkspaceAtURL(u: NSURL) {
+		Debug.log("will open a workspace at \(u), ws count = \(_workspaces.array.count)")
+
 		for ws in workspaces.array {
-			print(ws.location.value)
 			if ws.location.value == u {
+				Debug.log("a workspace already exist for address \(u), adding cancelled, and will select it, ws count = \(_workspaces.array.count)")
 				selectCurrentWorkspace(ws)
 				return
 			}
@@ -81,34 +83,39 @@ public class ApplicationModel: ModelRootNode {
 
 		///
 
+
 		let	ws	=	WorkspaceModel(rootLocationURL: u)
 		ws.owner	=	self
 		_workspaces.append(ws)
+		Debug.log("did open by adding a workspace \(ws), ws count = \(_workspaces.array.count)")
 	}
 	public func closeWorkspace(ws: WorkspaceModel) {
 		assert(_currentWorkspace.value !== ws, "You cannot close a workspace that is current workspace. Deselect first.")
+		assert(_workspaces.contains(ws))
+		Debug.log("will remove a workspace \(ws), ws count = \(_workspaces.array.count)")
+
 		_workspaces.removeFirstMatchingObject(ws)
 		ws.owner	=	nil
-	}
-	public func selectCurrentWorkspace(ws: WorkspaceModel) {
-		if _currentWorkspace.value !== ws {
-			_currentWorkspace.value		=	ws
-			print("selected a workspace at = \(ws.location.value!)")
-		}
+
+		Debug.log("did remove a workspace \(ws), ws count = \(_workspaces.array.count)")
 	}
 
-	///	Closes current workspace. A next workspace will be selected 
-	///	automatically if exists. 
+	public func selectCurrentWorkspace(ws: WorkspaceModel) {
+		assert(_workspaces.contains(ws))
+		assert(_currentWorkspace.value == nil)
+		_currentWorkspace.value		=	ws
+		Debug.log("did select a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
+	}
+
+	///	Deselects current workspace. Current workspace will become `nil`.
 	///	This is no-op if there was no current workspace.
 	public func deselectCurrentWorkspace() {
-		if let curWS = _currentWorkspace.value {
-			assert(_indexOfWorkspace(curWS) != nil, "The workspace must still be contained in workspace list.")
-			if let newWS = _priorWorkspaceOfWorkspace(curWS) ?? _nextWorkspaceOfWorkspace(curWS) {
-				_currentWorkspace.value		=	newWS
-			}
-			else {
-				_currentWorkspace.value		=	nil
-			}
+		assert(_currentWorkspace.value != nil)
+		assert(_workspaces.contains(_currentWorkspace.value!))
+		Debug.log("will deselect a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
+
+		if let _ = _currentWorkspace.value {
+			_currentWorkspace.value		=	nil
 		}
 	}
 
@@ -144,6 +151,10 @@ public class ApplicationModel: ModelRootNode {
 		return	0
 	}
 }
+
+
+
+
 
 
 

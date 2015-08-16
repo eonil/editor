@@ -70,6 +70,8 @@ public class Driver {
 	private let	_model			=	ApplicationModel()
 
 	private let	_workspaceArrayAgent	=	_WorkspaceArrayAgent()
+	private var	_workspaceModelToUIMap	=	[ObjectIdentifier: WorkspaceWindowUIController]()		//<	ObjectIdentifier(WorkspaceModel) -> WorkspaceWindowUIController
+	private var	_workspaceModelToDocMap	=	[ObjectIdentifier: WorkspaceDocument]()				//<	ObjectIdentifier(WorkspaceModel) -> WorkspaceDocument
 
 	///
 
@@ -81,38 +83,39 @@ public class Driver {
 		_model.workspaces.deregister(_workspaceArrayAgent)
 		_workspaceArrayAgent.owner	=	nil
 	}
-	private func _insertWorkspace(workspace: WorkspaceModel) {
+	private func _insertWorkspaceUIForWorkspace(workspace: WorkspaceModel) {
 		let	doc	=	WorkspaceDocument()
 		NSDocumentController.sharedDocumentController().addDocument(doc)
 
 		let	wc	=	WorkspaceWindowUIController()
 		wc.model	=	workspace
 		doc.addWindowController(wc)
+
+		_workspaceModelToUIMap[ObjectIdentifier(workspace)]	=	wc
+
 		wc.run()
 	}
-	private func _deleteWorkspace(workspace: WorkspaceModel) {
-		let	result	=	_findUIForModel(workspace)
-		if let result = result {
-			result.windowController.halt()
-			NSDocumentController.sharedDocumentController().removeDocument(result.document)
-		}
-		else {
-			fatalError()
+	private func _deleteWorkspaceUIForWorkspace(workspace: WorkspaceModel) {
+		assert(_workspaceModelToUIMap[ObjectIdentifier(workspace)] != nil)
+		if let wsUI = _workspaceModelToUIMap[ObjectIdentifier(workspace)] {
+			wsUI.halt()
+			assert(wsUI.document is WorkspaceDocument)
+			NSDocumentController.sharedDocumentController().removeDocument(wsUI.document! as! WorkspaceDocument)
 		}
 	}
 
-	private func _findUIForModel(workspace: WorkspaceModel) -> (document: WorkspaceDocument, windowController: WorkspaceWindowUIController)? {
-		for doc in NSDocumentController.sharedDocumentController().documents {
-			if let doc = doc as? WorkspaceDocument {
-				for wc in doc.windowControllers {
-					if let wc = wc as? WorkspaceWindowUIController {
-						return	(doc, wc)
-					}
-				}
-			}
-		}
-		return	nil
-	}
+//	private func _findUIForModel(workspace: WorkspaceModel) -> (document: WorkspaceDocument, windowController: WorkspaceWindowUIController)? {
+//		for doc in NSDocumentController.sharedDocumentController().documents {
+//			if let doc = doc as? WorkspaceDocument {
+//				for wc in doc.windowControllers {
+//					if let wc = wc as? WorkspaceWindowUIController {
+//						return	(doc, wc)
+//					}
+//				}
+//			}
+//		}
+//		return	nil
+//	}
 }
 
 
@@ -146,7 +149,7 @@ private final class _WorkspaceArrayAgent: ArrayStorageDelegate {
 	}
 	private func didInsertRange(range: Range<Int>) {
 		for ws in owner!._model.workspaces.array[range] {
-			owner!._insertWorkspace(ws)
+			owner!._insertWorkspaceUIForWorkspace(ws)
 		}
 	}
 	private func willUpdateRange(range: Range<Int>) {
@@ -157,11 +160,19 @@ private final class _WorkspaceArrayAgent: ArrayStorageDelegate {
 	}
 	private func willDeleteRange(range: Range<Int>) {
 		for ws in owner!._model.workspaces.array[range] {
-			owner!._deleteWorkspace(ws)
+			owner!._deleteWorkspaceUIForWorkspace(ws)
 		}
 	}
 	private func didDeleteRange(range: Range<Int>) {
 		
 	}
 }
+
+
+
+
+
+
+
+
 

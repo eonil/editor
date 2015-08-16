@@ -14,6 +14,8 @@
 		4554C96E1B7DC025004987CC /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C96A1B7DC025004987CC /* Weak.swift */; };
 		4554C96F1B7DC025004987CC /* WeakArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C96B1B7DC025004987CC /* WeakArray.swift */; };
 		45B185221B7F74AD004E3B28 /* DispatchUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185211B7F74AD004E3B28 /* DispatchUtility.swift */; };
+		45B185581B801F4A004E3B28 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185571B801F4A004E3B28 /* SwiftExtensions.swift */; };
+		45B1855A1B802288004E3B28 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185591B802288004E3B28 /* Log.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 		4554C96A1B7DC025004987CC /* Weak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		4554C96B1B7DC025004987CC /* WeakArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakArray.swift; sourceTree = "<group>"; };
 		45B185211B7F74AD004E3B28 /* DispatchUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchUtility.swift; sourceTree = "<group>"; };
+		45B185571B801F4A004E3B28 /* SwiftExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtensions.swift; sourceTree = "<group>"; };
+		45B185591B802288004E3B28 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 				4554C96B1B7DC025004987CC /* WeakArray.swift */,
 				4554C9691B7DC025004987CC /* Reporting.swift */,
 				45B185211B7F74AD004E3B28 /* DispatchUtility.swift */,
+				45B185571B801F4A004E3B28 /* SwiftExtensions.swift */,
+				45B185591B802288004E3B28 /* Log.swift */,
 				4554C9531B7DBF9B004987CC /* Info.plist */,
 			);
 			path = EditorCommon;
@@ -206,10 +212,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B185221B7F74AD004E3B28 /* DispatchUtility.swift in Sources */,
+				45B1855A1B802288004E3B28 /* Log.swift in Sources */,
 				4554C96D1B7DC025004987CC /* Reporting.swift in Sources */,
 				4554C96F1B7DC025004987CC /* WeakArray.swift in Sources */,
 				4554C96C1B7DC025004987CC /* ObjectSet.swift in Sources */,
 				4554C96E1B7DC025004987CC /* Weak.swift in Sources */,
+				45B185581B801F4A004E3B28 /* SwiftExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

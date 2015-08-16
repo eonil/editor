@@ -9,6 +9,17 @@
 import Foundation
 import MulticastingStorage
 
+public extension ArrayStorage where T: AnyObject {
+	public func contains(value: T) -> Bool {
+		for atom in array {
+			if atom === value {
+				return	true
+			}
+		}
+		return	false
+	}
+}
+
 extension MutableArrayStorage {
 	func append(value: T) {
 		insert([value], atIndex: array.count)
@@ -29,6 +40,6 @@ extension MutableArrayStorage where T: AnyObject {
 				return
 			}
 		}
-		fatalError("Could not find the value from this storage.")
+		fatalError("Could not find the value from this storage. self.array = `\(self.array)`")
 	}
 }

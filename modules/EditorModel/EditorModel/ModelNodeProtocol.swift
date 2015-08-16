@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import EditorCommon
 
 
 public class ModelRootNode: ModelNode {
@@ -15,16 +15,26 @@ public class ModelRootNode: ModelNode {
 	internal override init() {
 		super.init()
 	}
+	deinit {
+		assert(_isRunning == false, "You must `halt` this object before this object dies for proper clean-up.")
+	}
 
 	///
 
 	public func run() {
+		assert(_isRunning == false)
 		_propagateJoining()
+		_isRunning	=	true
 	}
 	public func halt() {
+		assert(_isRunning == true)
 		_propagateLeaving()
+		_isRunning	=	false
 	}
-	
+
+	///
+
+	private var	_isRunning	=	false
 }
 
 
@@ -35,7 +45,7 @@ public class ModelSubnode<T: ModelNode>: ModelNode {
 		super.init()
 	}
 	deinit {
-		assert(_hasOwner == false, "You must unset (assigning `nil`) `owner` explicitly before this object dies.")
+		assert(_hasOwner == false, "You must unset (assigning `nil`) `owner` explicitly before this object dies for proper clean-up.")
 	}
 
 	///
@@ -67,74 +77,65 @@ public class ModelNode: ModelNodeSessionProtocol {
 	private init() {
 	}
 	deinit {
-		assert(_isJoined == false)
+		assert(_isRooted == false)
 	}
 
 	///
 
 	internal var isRooted: Bool {
 		get {
-			return	_isJoined
+			return	_isRooted
 		}
 	}
-	internal func didJoinModelTree() {
+	internal func didJoinModelRoot() {
 	}
-	internal func willLeaveModelTree() {
+	internal func willLeaveModelRoot() {
 	}
 
 	///
 
-	private var	_isJoined		=	false
+	private var	_isRooted		=	false
 	private var	_subnodes		=	[ModelNode]()
-	private var	_registrationLock	=	false
 
 	private func _registerSubnode(subnode: ModelNode) {
-//		assert(_registrationLock == false, "You cannot register/deregister while installation/deinstallation events are propagating.")
-		assert(subnode._isJoined == false)
+		assert(subnode._isRooted == false)
 		_subnodes.append(subnode)
-		if _isJoined {
+		if _isRooted {
 			subnode._propagateJoining()
 		}
 	}
 	private func _deregisterSubnode(subnode: ModelNode) {
-//		assert(_registrationLock == false, "You cannot register/deregister while installation/deinstallation events are propagating.")
-		assert(subnode._isJoined == _isJoined)
-		if _isJoined {
+		assert(subnode._isRooted == _isRooted)
+		if _isRooted {
 			subnode._propagateLeaving()
 		}
-		_subnodes	=	Array(_subnodes.filter({ $0 !== subnode }))
+		assert(_subnodes.containsValueByReferentialIdentity(subnode) == true)
+		_subnodes.removeAtIndex(_subnodes.indexOfValueByReferentialIdentity(subnode)!)
+		assert(_subnodes.containsValueByReferentialIdentity(subnode) == false)
 	}
 
 	private func _propagateJoining() {
-		_isJoined		=	true
-		_registrationLock	=	true
+		_isRooted		=	true
 		for subnode in _subnodes {
 			subnode._propagateJoining()
 		}
-		didJoinModelTree()
-		_registrationLock	=	false
+		didJoinModelRoot()
 	}
 	private func _propagateLeaving() {
-		_registrationLock	=	true
-		willLeaveModelTree()
+		willLeaveModelRoot()
 		for subnode in _subnodes {
 			subnode._propagateLeaving()
 		}
-		_isJoined		=	false
-		_registrationLock	=	false
+		_isRooted		=	false
 	}
 }
 
-//internal protocol ModelNodeProtocol {
-//	typealias	Owner: AnyObject
-//
-//	weak var owner: Owner? { get set }
-//
-//	func run()
-//	func halt()
-//}
 
 internal protocol ModelNodeSessionProtocol: class {
-	func didJoinModelTree()
-	func willLeaveModelTree()
+	func didJoinModelRoot()
+	func willLeaveModelRoot()
 }
+
+
+
+

@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 import EditorModel
+import EditorCommon
 import EditorUICommon
 
 public final class WorkspaceWindowUIController: CommonUIWindowController, SessionProtocol {
@@ -50,6 +51,8 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, Sessio
 	public func halt() {
 		assert(model != nil)
 
+		window!.orderOut(self)
+		
 		window!.delegate		=	nil
 		window!.contentViewController	=	nil
 		_deinstallToolbar()
@@ -82,12 +85,15 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, Sessio
 	}
 
 	private func _becomeCurrentWorkspace() {
-		assert(model!.model.currentWorkspace.value !== self)
-		model!.model.selectCurrentWorkspace(model!)
+		if model!.application.currentWorkspace.value !== self {
+			if model!.application.currentWorkspace.value != nil {
+				model!.application.deselectCurrentWorkspace()
+			}
+			model!.application.selectCurrentWorkspace(model!)
+		}
 	}
 	private func _resignCurrentWorkspace() {
-		assert(model!.model.currentWorkspace.value === self)
-		model!.model.deselectCurrentWorkspace()
+		markUnimplemented()
 	}
 }
 

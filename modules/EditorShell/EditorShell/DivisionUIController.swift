@@ -83,12 +83,22 @@ class DivisionUIController: CommonUIController {
 
 
 	private func _installHandlers() {
+		_applyNavigationPaneDisplayState()
 		model!.UI.navigationPane.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+			self?._applyNavigationPaneDisplayState()
+		}
+		model!.UI.consolePane.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+			self?._applyNavigationPaneDisplayState()
+		}
+		model!.UI.inspectionPane.registerDidSet(ObjectIdentifier(self)) { [weak self] in
 			self?._applyNavigationPaneDisplayState()
 		}
 	}
 	private func _deinstallHandlers() {
 		model!.UI.navigationPane.deregisterDidSet(ObjectIdentifier(self))
+		model!.UI.consolePane.deregisterDidSet(ObjectIdentifier(self))
+		model!.UI.inspectionPane.deregisterDidSet(ObjectIdentifier(self))
+		_applyNavigationPaneDisplayState()
 	}
 
 	private func _applyNavigationPaneDisplayState() {

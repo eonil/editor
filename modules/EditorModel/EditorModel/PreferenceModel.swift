@@ -12,11 +12,11 @@ import Foundation
 ///
 public class PreferenceModel: ModelSubnode<ApplicationModel> {
 
-	override func didJoinModelTree() {
-		super.didJoinModelTree()
+	override func didJoinModelRoot() {
+		super.didJoinModelRoot()
 	}
-	override func willLeaveModelTree() {
-		super.willLeaveModelTree()
+	override func willLeaveModelRoot() {
+		super.willLeaveModelRoot()
 	}
 
 	///

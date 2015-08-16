@@ -30,12 +30,12 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 		assert(_runningCargo == nil)
 	}
 
-	override func didJoinModelTree() {
+	override func didJoinModelRoot() {
 		_runnableCommands.value	=	[.Build, .Clean]
-		super.didJoinModelTree()
+		super.didJoinModelRoot()
 	}
-	override func willLeaveModelTree() {
-		super.willLeaveModelTree()
+	override func willLeaveModelRoot() {
+		super.willLeaveModelRoot()
 		_runnableCommands.value	=	[]
 	}
 
@@ -43,7 +43,7 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 
 	public var runnableCommands: ValueStorage<Set<BuildCommand>> {
 		get {
-			assert(isRooted)
+			assert(isRooted || _runnableCommands.value == [])
 			return	_runnableCommands
 		}
 	}
@@ -52,18 +52,18 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 
 	public func runBuild() {
 		assert(isRooted)
-		assert(workspace.curerntProject.value != nil)
-		assert(workspace.curerntProject.value!.rootURL.value != nil)
+		assert(workspace.currentProject.value != nil)
+		assert(workspace.currentProject.value!.rootURL.value != nil)
 		assert(_runningCargo == nil)
 		_runnableCommands.value	=	[.Stop]
-		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.curerntProject.value!.rootURL.value!)
+		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.currentProject.value!.rootURL.value!)
 		_runningCargo!.runBuild()
 	}
 	public func runClean() {
 		assert(isRooted)
 		assert(_runningCargo == nil)
 		_runnableCommands.value	=	[.Stop]
-		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.curerntProject.value!.rootURL.value!)
+		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.currentProject.value!.rootURL.value!)
 		_runningCargo!.runClean()
 	}
 	public func stop() {

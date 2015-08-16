@@ -25,8 +25,8 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 
 	///
 
-	override func didJoinModelTree() {
-		super.didJoinModelTree()
+	override func didJoinModelRoot() {
+		super.didJoinModelRoot()
 
 		search.owner		=	self
 		build.owner		=	self
@@ -35,8 +35,8 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 		console.owner		=	self
 		UI.owner		=	self
 	}
-	override func willLeaveModelTree() {
-		super.willLeaveModelTree()
+	override func willLeaveModelRoot() {
+		super.willLeaveModelRoot()
 
 		UI.owner		=	nil
 		console.owner		=	nil
@@ -48,7 +48,7 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 
 	///
 
-	public var model: ApplicationModel {
+	public var application: ApplicationModel {
 		get {
 			assert(owner != nil)
 			return	owner!
@@ -75,7 +75,7 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 			return	_projects
 		}
 	}
-	public var curerntProject: ValueStorage<ProjectModel?> {
+	public var currentProject: ValueStorage<ProjectModel?> {
 		get {
 			return	_currentProject
 		}
