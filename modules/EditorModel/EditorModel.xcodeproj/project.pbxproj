@@ -17,7 +17,6 @@
 		4554C86E1B7DBEF8004987CC /* EditorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C86D1B7DBEF8004987CC /* EditorModelTests.swift */; };
 		4554C9BC1B7DC106004987CC /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9B71B7DC106004987CC /* Command.swift */; };
 		4554C9BD1B7DC106004987CC /* ApplicationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9B81B7DC106004987CC /* ApplicationModel.swift */; };
-		4554C9BE1B7DC106004987CC /* ModelConsuming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9B91B7DC106004987CC /* ModelConsuming.swift */; };
 		4554C9BF1B7DC106004987CC /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9BA1B7DC106004987CC /* Selection.swift */; };
 		4554C9C01B7DC106004987CC /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9BB1B7DC106004987CC /* WorkspaceModel.swift */; };
 		4554CA061B7DC33A004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA031B7DC308004987CC /* EditorCommon.framework */; };
@@ -90,7 +89,6 @@
 		4554C86F1B7DBEF8004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4554C9B71B7DC106004987CC /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		4554C9B81B7DC106004987CC /* ApplicationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationModel.swift; sourceTree = "<group>"; };
-		4554C9B91B7DC106004987CC /* ModelConsuming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelConsuming.swift; sourceTree = "<group>"; };
 		4554C9BA1B7DC106004987CC /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		4554C9BB1B7DC106004987CC /* WorkspaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
 		4554C9FD1B7DC307004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 				4554C9B71B7DC106004987CC /* Command.swift */,
 				45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */,
 				4554C9B81B7DC106004987CC /* ApplicationModel.swift */,
-				4554C9B91B7DC106004987CC /* ModelConsuming.swift */,
 				4554C9BA1B7DC106004987CC /* Selection.swift */,
 				4554C9BB1B7DC106004987CC /* WorkspaceModel.swift */,
 				45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */,
@@ -387,7 +384,6 @@
 				45C77AED1B7F1DD80064C363 /* CommandQueue.swift in Sources */,
 				450C0FBE1B7F6AE50048E7A1 /* CommandLineTool.swift in Sources */,
 				451373411B7ED91000ED9829 /* SearchModel.swift in Sources */,
-				4554C9BE1B7DC106004987CC /* ModelConsuming.swift in Sources */,
 				455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */,
 				4554C9BC1B7DC106004987CC /* Command.swift in Sources */,
 				455EE2101B7EDC1E00D5AA56 /* ReportingModel.swift in Sources */,
