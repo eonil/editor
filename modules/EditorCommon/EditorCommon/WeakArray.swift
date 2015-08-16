@@ -8,11 +8,11 @@
 
 import Foundation
 
-///	An array that keeps weak reference to contained objects.
+/// An array that keeps weak reference to contained objects.
 ///
-///	This array assumes you will keep the object alive while they
-///	are contained in this array. If any object goes away, this will
-///	crash.
+/// This array assumes you will keep the object alive while they
+/// are contained in this array. If any object goes away, this will
+/// crash.
 ///
 public struct WeakArray<T: AnyObject> {
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-///	A set that uses reference equality to compare equality of two objects.
+/// A set that uses reference equality to compare equality of two objects.
 public struct ObjectSet<T: AnyObject>: SequenceType {
 
 	public init() {

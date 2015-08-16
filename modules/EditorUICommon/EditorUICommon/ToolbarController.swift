@@ -9,7 +9,7 @@
 import Foundation
 import AppKit
 
-///	Incomplete yet!
+/// Incomplete yet!
 class ToolbarItemTemplate {
 	init(label: String, paletteLabel: String) {
 		self.label		=	label

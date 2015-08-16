@@ -10,12 +10,12 @@ import Foundation
 import MulticastingStorage
 import EditorCommon
 
-///	Executes Cargo.
+/// Executes Cargo.
 ///
-///	This is disposable (one-time use only) tool that
-///	executes Cargo.
-///	This tool assumes you already have installed Rust and Cargo,
-///	and they are executable via command line.
+/// This is disposable (one-time use only) tool that
+/// executes Cargo.
+/// This tool assumes you already have installed Rust and Cargo,
+/// and they are executable via command line.
 ///
 class CargoTool {
 

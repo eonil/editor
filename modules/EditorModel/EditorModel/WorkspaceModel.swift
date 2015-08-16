@@ -14,8 +14,8 @@ import EditorCommon
 
 
 
-///	A unit for a product.
-///	A workspace can contain multiple projects.
+/// A unit for a product.
+/// A workspace can contain multiple projects.
 public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 
 	internal init(rootLocationURL: NSURL) {
@@ -65,6 +65,11 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 
 	///
 
+	/// A location for a project can be changed to provide smoother
+	/// user experience.
+	/// For instance, user can move workspace directory to another
+	/// location, and we can just replace location without re-creating
+	/// whole workspace UI.
 	public var location: ValueStorage<NSURL?> {
 		get {
 			return	_location

@@ -8,7 +8,7 @@
 
 import Foundation
 
-///	Manages app-global preference.
+/// Manages app-global preference.
 ///
 public class PreferenceModel: ModelSubnode<ApplicationModel> {
 

@@ -11,7 +11,7 @@ import MulticastingStorage
 import EditorCommon
 
 
-///	A unit of build.
+/// A unit of build.
 public class ProjectModel {
 	internal weak var owner: WorkspaceModel?
 

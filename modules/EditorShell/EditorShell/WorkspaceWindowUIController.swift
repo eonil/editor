@@ -14,7 +14,7 @@ import EditorUICommon
 
 public final class WorkspaceWindowUIController: CommonUIWindowController, SessionProtocol {
 
-	///	Will be set by upper level node.
+	/// Will be set by upper level node.
 	public weak var model: WorkspaceModel? {
 		didSet {
 			_tools.model	=	model

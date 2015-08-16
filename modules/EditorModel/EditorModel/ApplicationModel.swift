@@ -10,15 +10,15 @@ import Foundation
 import MulticastingStorage
 import EditorCommon
 
-///	A model for application.
-///	This manages whole application state, not only single document
-///	or something else.
-///	This exists for application, and designed toward to GUI.
+/// A model for application.
+/// This manages whole application state, not only single document
+/// or something else.
+/// This exists for application, and designed toward to GUI.
 ///
-///	**ALL** features of this object and subnodes must run in
-///	main thread. Any non-main thread operations should be
-///	performed with special care. Also, you must minimize performing
-///	heavy load operations in main thread.
+/// **ALL** features of this object and subnodes must run in
+/// main thread. Any non-main thread operations should be
+/// performed with special care. Also, you must minimize performing
+/// heavy load operations in main thread.
 ///
 public class ApplicationModel: ModelRootNode {
 
@@ -38,9 +38,9 @@ public class ApplicationModel: ModelRootNode {
 
 	///
 
-	///	Command-queue will be required eventually... but not right now.
-	///	Prefer direct synchronous call to models rather then sending
-	///	asynchronous command.
+	/// Command-queue will be required eventually... but not right now.
+	/// Prefer direct synchronous call to models rather then sending
+	/// asynchronous command.
 //	public let commandQueue = CommandQueue()
 
 	public var preference: PreferenceModel {
@@ -61,15 +61,15 @@ public class ApplicationModel: ModelRootNode {
 
 	///
 
-	///	Just creates workspace file structure, and does not open it.
+	/// Just creates workspace file structure, and does not open it.
 	public func createWorkspaceAtURL(u: NSURL) {
 		markUnimplemented()
 	}
 
-	///	You can supply any URL, and a workspace will be open only if
-	///	the URL is valid. If there's already open workspace for the URL,
-	///	no new workspace will be created, and the workspace will be
-	///	selected.
+	/// You can supply any URL, and a workspace will be open only if
+	/// the URL is valid. If there's already open workspace for the URL,
+	/// no new workspace will be created, and the workspace will be
+	/// selected.
 	public func openWorkspaceAtURL(u: NSURL) {
 		Debug.log("will open a workspace at \(u), ws count = \(_workspaces.array.count)")
 
@@ -107,8 +107,8 @@ public class ApplicationModel: ModelRootNode {
 		Debug.log("did select a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
 	}
 
-	///	Deselects current workspace. Current workspace will become `nil`.
-	///	This is no-op if there was no current workspace.
+	/// Deselects current workspace. Current workspace will become `nil`.
+	/// This is no-op if there was no current workspace.
 	public func deselectCurrentWorkspace() {
 		assert(_currentWorkspace.value != nil)
 		assert(_workspaces.contains(_currentWorkspace.value!))

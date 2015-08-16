@@ -10,15 +10,17 @@ import Foundation
 import AppKit
 import EditorModel
 
-///	Shell Propagation
-///	-----------------
-///	`shell` will automatically be propagated to child view controllers and
-///	`view`. Because the `view` is `CommonUIView`, it will propagate shell 
-///	object to all of its subviews.
+/// Provides a common feature set for a view-controller.
+///
+/// Shell Propagation
+/// -----------------
+/// `shell` will automatically be propagated to child view controllers and
+/// `view`. Because the `view` is `CommonUIView`, it will propagate shell
+/// object to all of its subviews.
 ///
 public class CommonUIController: NSViewController {
 
-	///	The designated initializer.
+	/// The designated initializer.
 	public init() {
 		super.init(nibName: nil, bundle: nil)!
 
