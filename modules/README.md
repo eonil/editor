@@ -31,6 +31,14 @@ Points:
 -	UI consumes model only while thier live sessions.
 -	UI manages models to be alive while live sessions of thier 
 	corresponding UI.
+-	Lifetime of a components are controller by its container.
+-	A component cannot kill itself in single synchronous step.
+-	To do that, the kill must be deferred by one step.
+	In other words, asynchronously. But this is practically
+	prohibited because anything can happen in that one step.
+-	A component can be killed only by alien signal.
+	Such as user-input or delayed (asynchronous) command.
 
+In other words, UI (session) lives shorter than models.
 
 	

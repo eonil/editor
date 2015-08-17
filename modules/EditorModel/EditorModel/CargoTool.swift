@@ -61,6 +61,11 @@ class CargoTool {
 			return	_log
 		}
 	}
+	var completion: CompletionChannel {
+		get {
+			return	_cmplq
+		}
+	}
 
 	///
 
@@ -119,6 +124,7 @@ class CargoTool {
 	private let	_state		=	MutableValueStorage<State>(.Idle)
 	private let	_errors		=	MutableArrayStorage<String>([])
 	private let	_log		=	MutableValueStorage<String>("")
+	private let	_cmplq		=	CompletionQueue()
 
 	private let	_outputPipe	=	NSPipe()
 
@@ -126,6 +132,7 @@ class CargoTool {
 
 	private func _runCargoWithParameters(workingDirectoryPath: String, parameters: [String]) {
 		markUnimplemented()
+		assert(_isTerminated == false)
 		_task.currentDirectoryPath	=	workingDirectoryPath
 //		_task.launchPath		=	ToolLocationResolver.cargoToolLocation()
 		_task.launchPath		=	"/Users/Eonil/Unix/homebrew/bin/cargo"
@@ -136,7 +143,9 @@ class CargoTool {
 		markUnimplemented()
 	}
 	private func _handleTermination() {
+		_isTerminated	=	true
 		_setState(.Done)
+		_cmplq.cast()
 	}
 
 	private func _setState(s: State) {

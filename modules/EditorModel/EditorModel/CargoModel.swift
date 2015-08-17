@@ -16,7 +16,7 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
-		_installCargoTool()
+		assert(_cargoTool == nil)
 	}
 	override func willLeaveModelRoot() {
 		if _cargoTool != nil {
@@ -25,7 +25,14 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 		super.willLeaveModelRoot()
 	}
 
+	var isRunning: Bool {
+		get {
+			return	_cargoTool != nil
+		}
+	}
+
 	func runNewAtURL(u: NSURL) {
+		assert(owner != nil)
 		precondition(u.scheme == "file")
 		precondition(u.path != nil)
 		assert(_cargoTool == nil)
@@ -33,24 +40,34 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 		_cargoTool!.runNew(path: u.URLByDeletingLastPathComponent!.path!, newDirectoryName: u.lastPathComponent!)
 	}
 	func stop() {
+		assert(owner != nil)
 		assert(_cargoTool != nil)
-		_cargoTool!.stop()
+		if _cargoTool!.state.value == .Running {
+			_cargoTool!.stop()
+		}
 		_deinstallCargoTool()
 	}
 
 	///
 
-	private let	_state		=	MutableValueStorage<CargoTool.State>(.Idle)
+	private let	_state		=	MutableValueStorage<CargoTool.State?>(nil)
 	private var	_cargoTool	:	CargoTool?
 
+	///
+
 	private func _installCargoTool() {
+		assert(_cargoTool == nil)
 		_cargoTool	=	CargoTool()
+		_cargoTool!.completion.queue() { [weak self] in self!._handleCargoCompletion() }
 		_cargoTool!.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in self!._applyCargoToolState() }
 	}
 	private func _deinstallCargoTool() {
+		assert(_cargoTool != nil)
 		_cargoTool!.state.deregisterDidSet(ObjectIdentifier(self))
 		_cargoTool	=	nil
 	}
+
+	///
 
 	private func _applyCargoToolState() {
 		assert(_cargoTool != nil)
@@ -64,20 +81,22 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 		case .Running:
 			break
 		case .Done:
-			dispatchToMainQueueAsynchronously { [weak self] in
-				assert(self != nil)
-				if self!._cargoTool != nil {
-					self!._deinstallCargoTool()
-				}
-			}
+			break
 		case .Error:
-			dispatchToMainQueueAsynchronously { [weak self] in
-				assert(self != nil)
-				if self!._cargoTool != nil {
-					self!._deinstallCargoTool()
-				}
-			}
+			break
 		}
 	}
+	private func _handleCargoCompletion() {
+		_state.value	=	nil
+		_deinstallCargoTool()
+	}
+
 }
+
+
+
+
+
+
+
 

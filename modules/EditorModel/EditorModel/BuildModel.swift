@@ -56,15 +56,15 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 		assert(workspace.currentProject.value!.rootURL.value != nil)
 		assert(_runningCargo == nil)
 		_runnableCommands.value	=	[.Stop]
-		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.currentProject.value!.rootURL.value!)
-		_runningCargo!.runBuild()
+//		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.currentProject.value!.rootURL.value!)
+//		_runningCargo!.runBuild()
 	}
 	public func runClean() {
 		assert(isRooted)
 		assert(_runningCargo == nil)
 		_runnableCommands.value	=	[.Stop]
-		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.currentProject.value!.rootURL.value!)
-		_runningCargo!.runClean()
+//		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.currentProject.value!.rootURL.value!)
+//		_runningCargo!.runClean()
 	}
 	public func stop() {
 		assert(isRooted)

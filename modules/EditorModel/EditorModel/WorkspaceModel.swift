@@ -35,19 +35,14 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 		debug.owner		=	self
 		report.owner		=	self
 		console.owner		=	self
+		cargo.owner		=	self
 		UI.owner		=	self
 	}
 	override func willLeaveModelRoot() {
 		super.willLeaveModelRoot()
 
-		//	A cargo may still being excuted
-		//	at this point. Stop it.
-		if let cargoTool = _cargoTool {
-			cargoTool.stop()
-			_cargoTool	=	nil
-		}
-
 		UI.owner		=	nil
+		cargo.owner		=	nil
 		console.owner		=	nil
 		report.owner		=	nil
 		debug.owner		=	nil
@@ -71,6 +66,8 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 	public let	console		=	ConsoleModel()
 
 	public let	UI		=	WorkspaceUIModel()
+
+	internal let	cargo		=	CargoModel()
 
 	///
 
@@ -112,11 +109,8 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 	/// and can fail for any reason.
 	public func tryCreating() {
 		assert(_location.value != nil)
-		assert(_cargoTool == nil)
-
 		let	u	=	_location.value!
-		_installCargoToolForURL(u)
-		_cargoTool!.runNew()
+		cargo.runNewAtURL(u)
 	}
 
 	public func insertProjectWithRootURL(url: NSURL) {
@@ -135,33 +129,6 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 	private let	_location	=	MutableValueStorage<NSURL?>(nil)
 	private let	_projects	=	MutableArrayStorage<ProjectModel>([])
 	private let	_currentProject	=	MutableValueStorage<ProjectModel?>(nil)
-
-	private var	_cargoTool	:	CargoTool?	//<	A cargo tool that is currently running.
-
-	private func _installCargoToolForURL(u: NSURL) {
-		_cargoTool	=	CargoTool(rootDirectoryURL: u)
-		_applyCargoState()
-		_cargoTool!.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in self!._applyCargoState() }
-	}
-	private func _applyCargoState() {
-		assert(_cargoTool != nil)
-		switch _cargoTool!.state.value {
-		case .Idle:
-			break
-		case .Running:
-			break
-		case .Done:
-			//	Start here... cargo need to be re-usable...
-			_deinstallCargoTool()
-		case .Error:
-			markUnimplemented()	//	Eating up errors.
-			_deinstallCargoTool()
-		}
-	}
-	private func _deinstallCargoTool() {
-		_cargoTool!.state.deregisterDidSet(ObjectIdentifier(self))
-		_cargoTool	=	nil
-	}
 }
 
 
