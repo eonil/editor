@@ -27,12 +27,11 @@
 		45B185241B7F7626004E3B28 /* BuildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185231B7F7626004E3B28 /* BuildModel.swift */; };
 		45B1852D1B7F7ADC004E3B28 /* ModelNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1852C1B7F7ADC004E3B28 /* ModelNodeProtocol.swift */; };
 		45B1855C1B802458004E3B28 /* WorkspaceModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */; };
-		45B185601B803CD2004E3B28 /* CargoToolExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1855F1B803CD2004E3B28 /* CargoToolExtensions.swift */; };
-		45B185621B8043AC004E3B28 /* ToolLocationResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185611B8043AC004E3B28 /* ToolLocationResolver.swift */; };
-		45B185641B804833004E3B28 /* ShellTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185631B804833004E3B28 /* ShellTool.swift */; };
+		45B185641B804833004E3B28 /* ShellTaskExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185631B804833004E3B28 /* ShellTaskExecutionController.swift */; };
 		45B185661B8048CA004E3B28 /* StringStreamProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185651B8048CA004E3B28 /* StringStreamProcessing.swift */; };
 		45B185681B804B2B004E3B28 /* CargoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185671B804B2B004E3B28 /* CargoModel.swift */; };
 		45C77AED1B7F1DD80064C363 /* CommandQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */; };
+		45DDABD81B82395300F85E06 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DDABD71B82395300F85E06 /* FoundationExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,12 +103,11 @@
 		45B185231B7F7626004E3B28 /* BuildModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildModel.swift; sourceTree = "<group>"; };
 		45B1852C1B7F7ADC004E3B28 /* ModelNodeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelNodeProtocol.swift; sourceTree = "<group>"; };
 		45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModelExtensions.swift; sourceTree = "<group>"; };
-		45B1855F1B803CD2004E3B28 /* CargoToolExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoToolExtensions.swift; sourceTree = "<group>"; };
-		45B185611B8043AC004E3B28 /* ToolLocationResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolLocationResolver.swift; sourceTree = "<group>"; };
-		45B185631B804833004E3B28 /* ShellTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellTool.swift; sourceTree = "<group>"; };
+		45B185631B804833004E3B28 /* ShellTaskExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellTaskExecutionController.swift; sourceTree = "<group>"; };
 		45B185651B8048CA004E3B28 /* StringStreamProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringStreamProcessing.swift; sourceTree = "<group>"; };
 		45B185671B804B2B004E3B28 /* CargoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoModel.swift; sourceTree = "<group>"; };
 		45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandQueue.swift; sourceTree = "<group>"; };
+		45DDABD71B82395300F85E06 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,10 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				450C0FBB1B7F69DD0048E7A1 /* CargoTool.swift */,
-				45B1855F1B803CD2004E3B28 /* CargoToolExtensions.swift */,
-				45B185611B8043AC004E3B28 /* ToolLocationResolver.swift */,
 				450C0FBD1B7F6AE50048E7A1 /* CommandLineTool.swift */,
-				45B185631B804833004E3B28 /* ShellTool.swift */,
+				45B185631B804833004E3B28 /* ShellTaskExecutionController.swift */,
 				45B185651B8048CA004E3B28 /* StringStreamProcessing.swift */,
 			);
 			name = "(external tools)";
@@ -212,6 +208,7 @@
 				45B185671B804B2B004E3B28 /* CargoModel.swift */,
 				450C0FB51B7F69C70048E7A1 /* (external tools) */,
 				453E402F1B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift */,
+				45DDABD71B82395300F85E06 /* FoundationExtensions.swift */,
 				4554C8631B7DBEF7004987CC /* Info.plist */,
 			);
 			path = EditorModel;
@@ -403,14 +400,13 @@
 				455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */,
 				4554C9BC1B7DC106004987CC /* Command.swift in Sources */,
 				455EE2101B7EDC1E00D5AA56 /* ReportingModel.swift in Sources */,
-				45B185601B803CD2004E3B28 /* CargoToolExtensions.swift in Sources */,
 				4554CAB21B7DCD3A004987CC /* PreferenceModel.swift in Sources */,
 				45B185241B7F7626004E3B28 /* BuildModel.swift in Sources */,
 				45B185661B8048CA004E3B28 /* StringStreamProcessing.swift in Sources */,
-				45B185621B8043AC004E3B28 /* ToolLocationResolver.swift in Sources */,
-				45B185641B804833004E3B28 /* ShellTool.swift in Sources */,
+				45B185641B804833004E3B28 /* ShellTaskExecutionController.swift in Sources */,
 				451373471B7ED93700ED9829 /* DebuggingModel.swift in Sources */,
 				4554C9BD1B7DC106004987CC /* ApplicationModel.swift in Sources */,
+				45DDABD81B82395300F85E06 /* FoundationExtensions.swift in Sources */,
 				453E40301B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -64,10 +64,16 @@ public class ApplicationModel: ModelRootNode {
 	///
 
 	/// Just opens a workspace, and create it at the place.
-	public func createAndOpenWorkspaceAtURL(u: NSURL) {
+	///
+	/// - Parameters:
+	///	- location:	
+	///		A URL to a file path that will become a workspace.
+	///		This location will be created by `cargo` and must
+	///		not exist at the point of calling.
+	public func createAndOpenWorkspaceAtURL(location: NSURL) {
 		let	ws	=	WorkspaceModel()
 		ws.owner	=	self
-		ws.locate(u)
+		ws.locate(location)
 		ws.tryCreating()
 		_workspaces.append(ws)
 		Debug.log("did create and add a workspace \(ws), ws count = \(_workspaces.array.count)")

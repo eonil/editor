@@ -56,6 +56,8 @@ struct Dialogue {
 	}
 
 
+	/// Runs a save-panel and returns a absolute file path URL
+	/// to a selected file including file name part.
 	static func runSavingWorkspace(completion: NSURL?->()) {
 		let	saveP			=	NSSavePanel()
 		saveP.canCreateDirectories	=	true
@@ -64,7 +66,7 @@ struct Dialogue {
 
 		switch result {
 		case NSFileHandlingPanelOKButton:
-			if let u = saveP.directoryURL {
+			if let u = saveP.URL {
 				completion(u)
 				return
 			}

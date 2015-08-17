@@ -29,14 +29,19 @@ class CargoTool {
 	///
 
 	init() {
-		_task.terminationHandler	=	{ [weak self] task in
+		_shell.terminationHandler	=	{ [weak self] task in
 			dispatchToMainQueueAsynchronously { [weak self] in
 				self?._handleTermination()
 			}
 		}
-		_outputPipe.fileHandleForReading.readabilityHandler	=	{ [weak self] handle in
-			self?._handleOutput(handle.availableData)
-		}
+
+		_shell.standardOutput.readabilityHandler	=	{ [weak self] in self?._handleError($0.availableData) }
+		_stdoutStrDisp.onString				=	{ [weak self] in self?._stdoutLineDisp.push($0) }
+		_stdoutLineDisp.onLine				=	{ [weak self] in print($0) }
+
+		_shell.standardError.readabilityHandler		=	{ [weak self] in self?._handleError($0.availableData) }
+		_stderrStrDisp.onString				=	{ [weak self] in self?._stderrLineDisp.push($0) }
+		_stderrLineDisp.onLine				=	{ [weak self] in print($0) }
 	}
 	deinit {
 		assert(_isTerminated == true)
@@ -78,13 +83,13 @@ class CargoTool {
 	func runNew(path path: String, newDirectoryName: String) {
 		//	File system is always asynchronous, and no one can have truly exclusive access.
 		//	Then we cannot make any assume on file system. Just try and take the result.
-		_runCargoWithParameters(path, parameters: ["new", newDirectoryName])
+		_runCargoWithParameters(path, command: "cargo new \(newDirectoryName)")
 	}
 	func runBuild(path path: String) {
-		_runCargoWithParameters(path, parameters: ["build"])
+		_runCargoWithParameters(path, command: "build")
 	}
 	func runClean(path path: String) {
-		_runCargoWithParameters(path, parameters: ["clean"])
+		_runCargoWithParameters(path, command: "clean")
 	}
 	func runDoc(path path: String) {
 		markUnimplemented()
@@ -111,7 +116,7 @@ class CargoTool {
 	func stop(haltTimeout: NSTimeInterval? = nil) {
 		markUnimplemented()
 		assert(haltTimeout == nil, "Non-nil case is not implemented yet...")
-		_task.terminate()
+		_shell.terminate()
 	}
 //	func halt() {
 //		_isTerminated	=	true
@@ -119,28 +124,35 @@ class CargoTool {
 
 	///
 
-	private let	_task		=	NSTask()
+	private let	_shell		=	ShellTaskExecutionController()
 	private var	_isTerminated	=	false
 	private let	_state		=	MutableValueStorage<State>(.Idle)
 	private let	_errors		=	MutableArrayStorage<String>([])
 	private let	_log		=	MutableValueStorage<String>("")
 	private let	_cmplq		=	CompletionQueue()
 
-	private let	_outputPipe	=	NSPipe()
+	private let	_stdoutStrDisp	=	UTF8StringDispatcher()
+	private var	_stdoutLineDisp	=	LineDispatcher()
+
+	private let	_stderrStrDisp	=	UTF8StringDispatcher()
+	private var	_stderrLineDisp	=	LineDispatcher()
 
 	///
 
-	private func _runCargoWithParameters(workingDirectoryPath: String, parameters: [String]) {
+	private func _runCargoWithParameters(workingDirectoryPath: String, command: String) {
 		markUnimplemented()
 		assert(_isTerminated == false)
-		_task.currentDirectoryPath	=	workingDirectoryPath
-//		_task.launchPath		=	ToolLocationResolver.cargoToolLocation()
-		_task.launchPath		=	"/Users/Eonil/Unix/homebrew/bin/cargo"
-		_task.arguments			=	parameters
-		_task.launch()
+		_shell.launch(workingDirectoryPath: workingDirectoryPath)
+		_shell.standardInput.writeUTF8String("\(command)\n")
+		_shell.standardInput.writeUTF8String("exit $?\n")
+//		_shell.waitUntilExit()
+//		assert(_shell.terminationStatus == 0)
 	}
 	private func _handleOutput(data: NSData) {
-		markUnimplemented()
+		_stdoutStrDisp.push(data)
+	}
+	private func _handleError(data: NSData) {
+		_stderrStrDisp.push(data)
 	}
 	private func _handleTermination() {
 		_isTerminated	=	true
