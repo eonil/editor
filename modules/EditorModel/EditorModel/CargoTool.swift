@@ -20,7 +20,7 @@ import EditorCommon
 class CargoTool {
 
 	enum State {
-		case Idle
+		case Ready
 		case Running
 		case Error
 		case Done
@@ -86,10 +86,10 @@ class CargoTool {
 		_runCargoWithParameters(path, command: "cargo new \(newDirectoryName)")
 	}
 	func runBuild(path path: String) {
-		_runCargoWithParameters(path, command: "build")
+		_runCargoWithParameters(path, command: "cargo build")
 	}
 	func runClean(path path: String) {
-		_runCargoWithParameters(path, command: "clean")
+		_runCargoWithParameters(path, command: "cargo clean")
 	}
 	func runDoc(path path: String) {
 		markUnimplemented()
@@ -126,7 +126,7 @@ class CargoTool {
 
 	private let	_shell		=	ShellTaskExecutionController()
 	private var	_isTerminated	=	false
-	private let	_state		=	MutableValueStorage<State>(.Idle)
+	private let	_state		=	MutableValueStorage<State>(.Ready)
 	private let	_errors		=	MutableArrayStorage<String>([])
 	private let	_log		=	MutableValueStorage<String>("")
 	private let	_cmplq		=	CompletionQueue()
@@ -140,8 +140,8 @@ class CargoTool {
 	///
 
 	private func _runCargoWithParameters(workingDirectoryPath: String, command: String) {
-		markUnimplemented()
 		assert(_isTerminated == false)
+		_setState(.Running)
 		_shell.launch(workingDirectoryPath: workingDirectoryPath)
 		_shell.standardInput.writeUTF8String("\(command)\n")
 		_shell.standardInput.writeUTF8String("exit $?\n")

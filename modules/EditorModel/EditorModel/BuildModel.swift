@@ -27,16 +27,17 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 	///
 
 	deinit {
-		assert(_runningCargo == nil)
 	}
 
 	override func didJoinModelRoot() {
-		_runnableCommands.value	=	[.Build, .Clean]
 		super.didJoinModelRoot()
+		_runnableCommands.value	=	[.Build, .Clean]
+		workspace.cargo.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in self?._applyCargoState() }
 	}
 	override func willLeaveModelRoot() {
-		super.willLeaveModelRoot()
+		workspace.cargo.state.deregisterDidSet(ObjectIdentifier(self))
 		_runnableCommands.value	=	[]
+		super.willLeaveModelRoot()
 	}
 
 	///
@@ -52,32 +53,53 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 
 	public func runBuild() {
 		assert(isRooted)
-		assert(workspace.currentProject.value != nil)
-		assert(workspace.currentProject.value!.rootURL.value != nil)
-		assert(_runningCargo == nil)
-		_runnableCommands.value	=	[.Stop]
-//		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.currentProject.value!.rootURL.value!)
-//		_runningCargo!.runBuild()
+//		assert(workspace.currentProject.value != nil)
+//		assert(workspace.currentProject.value!.rootURL.value != nil)
+
+		assert(workspace.location.value != nil)
+		if let u =  workspace.location.value {
+			workspace.cargo.runBuildAtURL(u)
+			assert(workspace.cargo.state.value == .Running)
+		}
 	}
 	public func runClean() {
 		assert(isRooted)
-		assert(_runningCargo == nil)
 		_runnableCommands.value	=	[.Stop]
-//		_runningCargo	=	CargoTool(rootDirectoryURL: workspace.currentProject.value!.rootURL.value!)
-//		_runningCargo!.runClean()
+		markUnimplemented()
 	}
 	public func stop() {
 		assert(isRooted)
-		assert(_runningCargo != nil)
-		_runningCargo!.stop()
-		_runningCargo	=	nil
-		_runnableCommands.value	=	[.Build, .Clean]
+		markUnimplemented()
 	}
 
 	///
 
-	private var	_runningCargo		:	CargoTool?
 	private let	_runnableCommands	=	MutableValueStorage<Set<BuildCommand>>([])
+
+	private func _applyCargoState() {
+		if let state = workspace.cargo.state.value {
+			switch state {
+			case .Ready:
+				_runnableCommands.value	=	[]
+			case .Running:
+				_runnableCommands.value	=	[.Stop]
+			case .Done:
+				//	Can do nothing at this state.
+				//	Wait for resetting...
+				_runnableCommands.value	=	[]
+				break
+
+			case .Error:
+				//	Can do nothing at this state.
+				//	Wait for resetting...
+				_runnableCommands.value	=	[]
+				break
+			}
+		}
+		else {
+			_runnableCommands.value	=	[.Build, .Clean]
+		}
+	}
 }
 
 

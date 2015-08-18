@@ -31,6 +31,12 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 		}
 	}
 
+	var state: ValueStorage<CargoTool.State?> {
+		get {
+			return	_state
+		}
+	}
+
 	func runNewAtURL(u: NSURL) {
 		assert(owner != nil)
 		precondition(u.scheme == "file")
@@ -38,6 +44,14 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 		assert(_cargoTool == nil)
 		_installCargoTool()
 		_cargoTool!.runNew(path: u.URLByDeletingLastPathComponent!.path!, newDirectoryName: u.lastPathComponent!)
+	}
+	func runBuildAtURL(u: NSURL) {
+		assert(owner != nil)
+		precondition(u.scheme == "file")
+		precondition(u.path != nil)
+		assert(_cargoTool == nil)
+		_installCargoTool()
+		_cargoTool!.runBuild(path: u.path!)
 	}
 	func stop() {
 		assert(owner != nil)
@@ -76,7 +90,7 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 		}
 
 		switch _cargoTool!.state.value {
-		case .Idle:
+		case .Ready:
 			break
 		case .Running:
 			break

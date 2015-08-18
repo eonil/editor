@@ -44,9 +44,19 @@ class ProductMenuController: SessionProtocol {
 			assert(self != nil)
 			self!._handleCurrentWorkspaceDidSet()
 		}
+
+		build.clickHandler	=	{ [weak self] in self?._runBuildOnCurrentWorkspace() }
+		clean.clickHandler	=	{ [weak self] in self?._runCleanOnCurrentWorkspace() }
+		stop.clickHandler	=	{ [weak self] in self?._stopAnyBuildOperationOnCurrentWorkspace() }
+
 	}
 	func halt() {
 		assert(model != nil)
+
+		stop.clickHandler	=	nil
+		clean.clickHandler	=	nil
+		build.clickHandler	=	nil
+
 		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
 		model!.currentWorkspace.deregisterWillSet(ObjectIdentifier(self))
 	}
@@ -81,6 +91,27 @@ class ProductMenuController: SessionProtocol {
 		build.enabled	=	cmds.contains(.Build)
 		clean.enabled	=	cmds.contains(.Clean)
 		stop.enabled	=	cmds.contains(.Stop)
+	}
+
+	///
+
+	private func _runBuildOnCurrentWorkspace() {
+		assert(model!.currentWorkspace.value != nil)
+		if let ws = model!.currentWorkspace.value {
+			ws.build.runBuild()
+		}
+	}
+	private func _runCleanOnCurrentWorkspace() {
+		assert(model!.currentWorkspace.value != nil)
+		if let ws = model!.currentWorkspace.value {
+			ws.build.runClean()
+		}
+	}
+	private func _stopAnyBuildOperationOnCurrentWorkspace() {
+		assert(model!.currentWorkspace.value != nil)
+		if let ws = model!.currentWorkspace.value {
+			ws.build.stop()
+		}
 	}
 }
 
