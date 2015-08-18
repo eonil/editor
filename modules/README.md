@@ -42,3 +42,41 @@ Points:
 In other words, UI (session) lives shorter than models.
 
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Issue History
+-------------
+
+-	`NSOpen/SavePanel` often trigger QuickLook C++ exception.
+	This is due to lack of App Sandbox configuration. Turning 
+	on sandboxing and give some read-write access to user-
+	selected files. Then this will disappear. 
+
+	But! Enabling Sandboxing disables shell command execution
+	that is currently very essential for current version of 
+	this application at least for a while.
+
+	So, I cannot enable sandboxing. And temporarily, I decided
+	just to disable C++ exceptions. This with this, I cannot
+	track LLDB exceptions...
+
+
+
+
+
+
+

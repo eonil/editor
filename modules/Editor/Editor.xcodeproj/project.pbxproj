@@ -216,6 +216,7 @@
 		4554C9C91B7DC1E6004987CC /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDriver.xcodeproj; path = ../EditorDriver/EditorDriver.xcodeproj; sourceTree = "<group>"; };
+		459796631B837B9B003B4501 /* Editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Editor.entitlements; sourceTree = "<group>"; };
 		45C77AE61B7F0E0B0064C363 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -305,6 +306,7 @@
 		4554C8C41B7DBF50004987CC /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				459796631B837B9B003B4501 /* Editor.entitlements */,
 				4554C9C91B7DC1E6004987CC /* AppDelegate.swift */,
 				4554C8C71B7DBF50004987CC /* Document.swift */,
 				4554C8C91B7DBF50004987CC /* xDocument.xib */,
@@ -452,6 +454,11 @@
 				TargetAttributes = {
 					4554C8C11B7DBF50004987CC = {
 						CreatedOnToolsVersion = 7.0;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					4554C8D51B7DBF51004987CC = {
 						CreatedOnToolsVersion = 7.0;

@@ -29,19 +29,7 @@ class CargoTool {
 	///
 
 	init() {
-		_shell.terminationHandler	=	{ [weak self] task in
-			dispatchToMainQueueAsynchronously { [weak self] in
-				self?._handleTermination()
-			}
-		}
-
-		_shell.standardOutput.readabilityHandler	=	{ [weak self] in self?._handleError($0.availableData) }
-		_stdoutStrDisp.onString				=	{ [weak self] in self?._stdoutLineDisp.push($0) }
-		_stdoutLineDisp.onLine				=	{ [weak self] in print($0) }
-
-		_shell.standardError.readabilityHandler		=	{ [weak self] in self?._handleError($0.availableData) }
-		_stderrStrDisp.onString				=	{ [weak self] in self?._stderrLineDisp.push($0) }
-		_stderrLineDisp.onLine				=	{ [weak self] in print($0) }
+		_installObservers()
 	}
 	deinit {
 		assert(_isTerminated == true)
@@ -83,13 +71,13 @@ class CargoTool {
 	func runNew(path path: String, newDirectoryName: String) {
 		//	File system is always asynchronous, and no one can have truly exclusive access.
 		//	Then we cannot make any assume on file system. Just try and take the result.
-		_runCargoWithParameters(path, command: "cargo new \(newDirectoryName)")
+		_runCargoWithParameters(path, command: "cargo new -v \(newDirectoryName)")
 	}
 	func runBuild(path path: String) {
-		_runCargoWithParameters(path, command: "cargo build")
+		_runCargoWithParameters(path, command: "cargo build -v")
 	}
 	func runClean(path path: String) {
-		_runCargoWithParameters(path, command: "cargo clean")
+		_runCargoWithParameters(path, command: "cargo clean -v")
 	}
 	func runDoc(path path: String) {
 		markUnimplemented()
@@ -126,6 +114,7 @@ class CargoTool {
 
 	private let	_shell		=	ShellTaskExecutionController()
 	private var	_isTerminated	=	false
+
 	private let	_state		=	MutableValueStorage<State>(.Ready)
 	private let	_errors		=	MutableArrayStorage<String>([])
 	private let	_log		=	MutableValueStorage<String>("")
@@ -141,6 +130,8 @@ class CargoTool {
 
 	private func _runCargoWithParameters(workingDirectoryPath: String, command: String) {
 		assert(_isTerminated == false)
+
+		_installObservers()
 		_setState(.Running)
 		_shell.launch(workingDirectoryPath: workingDirectoryPath)
 		_shell.standardInput.writeUTF8String("\(command)\n")
@@ -157,6 +148,7 @@ class CargoTool {
 	private func _handleTermination() {
 		_isTerminated	=	true
 		_setState(.Done)
+		_deinstallObservers()
 		_cmplq.cast()
 	}
 
@@ -165,6 +157,30 @@ class CargoTool {
 		onDidSetState?()
 	}
 
+	private func _installObservers() {
+		_shell.terminationHandler	=	{ [weak self] task in
+			dispatchToMainQueueAsynchronously { [weak self] in
+				self?._handleTermination()
+			}
+		}
+
+		_shell.standardOutput.readabilityHandler	=	{ [weak self] in self?._handleOutput($0.availableData) }
+		_stdoutStrDisp.onString				=	{ [weak self] in self?._stdoutLineDisp.push($0) }
+		_stdoutLineDisp.onLine				=	{ [weak self] in print($0) }
+
+		_shell.standardError.readabilityHandler		=	{ [weak self] in self?._handleError($0.availableData) }
+		_stderrStrDisp.onString				=	{ [weak self] in self?._stderrLineDisp.push($0) }
+		_stderrLineDisp.onLine				=	{ [weak self] in print($0) }
+	}
+	private func _deinstallObservers() {
+		_stderrLineDisp.onLine				=	nil
+		_stderrStrDisp.onString				=	{ _ in return }
+		_shell.standardError.readabilityHandler		=	nil
+
+		_stdoutLineDisp.onLine				=	nil
+		_stdoutStrDisp.onString				=	{ _ in return }
+		_shell.standardOutput.readabilityHandler	=	nil
+	}
 }
 
 
