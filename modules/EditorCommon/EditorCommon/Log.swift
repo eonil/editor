@@ -13,4 +13,13 @@ public struct Debug {
 		//	TODO:	Disable in debug build.
 		print("LOG: \(value)")
 	}
+
+	public static func assertNonMainThread() {
+		assert(NSThread.isMainThread() == false)
+	}
+
+	public static func assertMainThread() {
+		assert(NSThread.isMainThread() == true)
+	}
+
 }

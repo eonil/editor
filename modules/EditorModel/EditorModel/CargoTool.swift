@@ -44,14 +44,14 @@ class CargoTool {
 			return	_state
 		}
 	}
-	var errors: ArrayStorage<String> {
+	var outputLog: ArrayStorage<String> {
 		get {
-			return	_errors
+			return	_outputLog
 		}
 	}
-	var log: ValueStorage<String> {
+	var errorLog: ArrayStorage<String> {
 		get {
-			return	_log
+			return	_errorLog
 		}
 	}
 	var completion: CompletionChannel {
@@ -116,8 +116,8 @@ class CargoTool {
 	private var	_isTerminated	=	false
 
 	private let	_state		=	MutableValueStorage<State>(.Ready)
-	private let	_errors		=	MutableArrayStorage<String>([])
-	private let	_log		=	MutableValueStorage<String>("")
+	private let	_outputLog	=	MutableArrayStorage<String>([])
+	private let	_errorLog	=	MutableArrayStorage<String>([])
 	private let	_cmplq		=	CompletionQueue()
 
 	private let	_stdoutStrDisp	=	UTF8StringDispatcher()
@@ -139,10 +139,12 @@ class CargoTool {
 //		_shell.waitUntilExit()
 //		assert(_shell.terminationStatus == 0)
 	}
-	private func _handleOutput(data: NSData) {
+	private func _handleOutputInNonMainThread(data: NSData) {
+		Debug.assertNonMainThread()
 		_stdoutStrDisp.push(data)
 	}
-	private func _handleError(data: NSData) {
+	private func _handleErrorInNonMainThread(data: NSData) {
+		Debug.assertNonMainThread()
 		_stderrStrDisp.push(data)
 	}
 	private func _handleTermination() {
@@ -151,6 +153,30 @@ class CargoTool {
 		_deinstallObservers()
 		_cmplq.cast()
 	}
+	private func _handleOutputLineInNonMainThread(line: String) {
+		Debug.assertNonMainThread()
+		dispatchToMainQueueAsynchronously { [weak self] in
+			assert(self != nil)
+			self?._handleOutputLine(line)
+		}
+	}
+	private func _handleOutputLine(line: String) {
+		Debug.assertMainThread()
+		_outputLog.insert([line], atIndex: _outputLog.array.endIndex)
+	}
+
+	private func _handleErrorLineInNonMainThread(line: String) {
+		Debug.assertNonMainThread()
+		dispatchToMainQueueAsynchronously { [weak self] in
+			assert(self != nil)
+			self?._handleErrorLine(line)
+		}
+	}
+	private func _handleErrorLine(line: String) {
+		Debug.assertMainThread()
+		_errorLog.insert([line], atIndex: _errorLog.array.endIndex)
+	}
+
 
 	private func _setState(s: State) {
 		_state.value	=	s
@@ -164,13 +190,13 @@ class CargoTool {
 			}
 		}
 
-		_shell.standardOutput.readabilityHandler	=	{ [weak self] in self?._handleOutput($0.availableData) }
+		_shell.standardOutput.readabilityHandler	=	{ [weak self] in self?._handleOutputInNonMainThread($0.availableData) }
 		_stdoutStrDisp.onString				=	{ [weak self] in self?._stdoutLineDisp.push($0) }
-		_stdoutLineDisp.onLine				=	{ [weak self] in print($0) }
+		_stdoutLineDisp.onLine				=	{ [weak self] in self?._handleOutputLineInNonMainThread($0) }
 
-		_shell.standardError.readabilityHandler		=	{ [weak self] in self?._handleError($0.availableData) }
+		_shell.standardError.readabilityHandler		=	{ [weak self] in self?._handleErrorInNonMainThread($0.availableData) }
 		_stderrStrDisp.onString				=	{ [weak self] in self?._stderrLineDisp.push($0) }
-		_stderrLineDisp.onLine				=	{ [weak self] in print($0) }
+		_stderrLineDisp.onLine				=	{ [weak self] in self?._handleErrorLineInNonMainThread($0) }
 	}
 	private func _deinstallObservers() {
 		_stderrLineDisp.onLine				=	nil

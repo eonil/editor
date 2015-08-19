@@ -40,13 +40,17 @@ class DivisionUIController: CommonUIController {
 	private let	_sample1	=	DummyUIController()
 	private let	_sample2	=	DummyUIController()
 	private let	_sample3	=	DummyUIController()
-	private let	_sample4	=	DummyUIController()
+//	private let	_sample4	=	DummyUIController()
+
+	private let	_report		=	ReportingUIController()
 
 	private func _install() {
+		_report.model		=	model!
+
 		_sample1.view.layer!.backgroundColor	=	NSColor.redColor().CGColor
 		_sample2.view.layer!.backgroundColor	=	NSColor.blueColor().CGColor
 		_sample3.view.layer!.backgroundColor	=	NSColor.greenColor().CGColor
-		_sample4.view.layer!.backgroundColor	=	NSColor.purpleColor().CGColor
+//		_sample4.view.layer!.backgroundColor	=	NSColor.purpleColor().CGColor
 
 		_outerSplit.vertical		=	true
 		_outerSplit.items		=	[
@@ -59,7 +63,7 @@ class DivisionUIController: CommonUIController {
 		_innerSplit.items		=	[
 			SplitItem(viewController: _sample3),
 			SplitItem(viewController: _edit),
-			SplitItem(viewController: _sample4),
+			SplitItem(viewController: _report),
 		]
 
 		addChildViewController(_outerSplit)
@@ -74,6 +78,8 @@ class DivisionUIController: CommonUIController {
 
 		_outerSplit.view.removeFromSuperview()
 		_outerSplit.removeFromParentViewController()
+
+		_report.model		=	nil
 
 	}
 	private func _layout() {

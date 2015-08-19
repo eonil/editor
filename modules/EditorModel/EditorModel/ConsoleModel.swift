@@ -32,6 +32,9 @@ public class ConsoleModel: ModelSubnode<WorkspaceModel> {
 	public func appendLines(lines: String) {
 		fatalErrorBecauseUnimplementedYet()
 	}
+	public func appendLines<C: CollectionType where C.Generator.Element == String, C.Index == Int>(lines: C) {
+		_outputLines.insert(lines, atIndex: _outputLines.array.endIndex)
+	}
 
 	///
 

@@ -8,6 +8,14 @@
 
 import Foundation
 
+public extension Array {
+	/// Returns `startIndex..<endIndex`.
+	var wholeRange: Range<Index> {
+		get {
+			return	startIndex..<endIndex
+		}
+	}
+}
 public extension Array where Element: AnyObject {
 
 	public func containsValueByReferentialIdentity(object: Element) -> Bool {
