@@ -86,10 +86,11 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, Sessio
 
 	private func _becomeCurrentWorkspace() {
 		if model!.application.currentWorkspace.value !== self {
-			if model!.application.currentWorkspace.value != nil {
-				model!.application.deselectCurrentWorkspace()
-			}
-			model!.application.selectCurrentWorkspace(model!)
+//			if model!.application.currentWorkspace.value != nil {
+//				model!.application.deselectCurrentWorkspace()
+//			}
+//			model!.application.selectCurrentWorkspace(model!)
+			model!.application.reselectCurrentWorkspace(model!)
 		}
 	}
 	private func _resignCurrentWorkspace() {

@@ -67,13 +67,18 @@ class CommandMenuItem: NSMenuItem {
 
 
 
-struct Shortcut {
-
-}
 
 
 func _topLevelMenu(title: String, items: [NSMenuItem]) -> TopLevelCommandMenu {
 	let	m		=	TopLevelCommandMenu(title: title)
+	m.autoenablesItems	=	false
+	for item in items {
+		m.addItem(item)
+	}
+	return	m
+}
+func _menu(title: String, items: [NSMenuItem]) -> NSMenu {
+	let	m		=	NSMenu(title: title)
 	m.autoenablesItems	=	false
 	for item in items {
 		m.addItem(item)
@@ -90,8 +95,8 @@ func _menuItem(label: String, _ command: ModelCommand) -> CommandMenuItem {
 	m.command		=	command
 	return	m
 }
-func _menuItem(label: String) -> SelfHandlingMenuItem {
-	let	m		=	SelfHandlingMenuItem(title: label, action: nil, keyEquivalent: "")
+func _menuItem(label: String, shortcut: MenuShortcutKeyCombination = MenuShortcutKeyCombination.None) -> SelfHandlingMenuItem {
+	let	m		=	SelfHandlingMenuItem(title: label, shortcut: shortcut, availability: true)
 	return	m
 }
 

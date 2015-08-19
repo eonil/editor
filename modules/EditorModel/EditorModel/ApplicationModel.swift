@@ -89,7 +89,13 @@ public class ApplicationModel: ModelRootNode {
 		for ws in workspaces.array {
 			if ws.location.value == u {
 				Debug.log("a workspace already exist for address \(u), adding cancelled, and will select it, ws count = \(_workspaces.array.count)")
-				selectCurrentWorkspace(ws)
+				if let u1 = currentWorkspace.value?.location.value {
+					if u1 != u {
+						reselectCurrentWorkspace(ws)
+//						deselectCurrentWorkspace()
+//						selectCurrentWorkspace(ws)
+					}
+				}
 				return
 			}
 		}
@@ -102,8 +108,14 @@ public class ApplicationModel: ModelRootNode {
 		_workspaces.append(ws)
 		Debug.log("did open by adding a workspace \(ws), ws count = \(_workspaces.array.count)")
 	}
+
+	/// Closes a workspace.
+	///
+	/// - Parameters:
+	///	- ws:
+	///		Can be either of current or non-current workspace.
+	///
 	public func closeWorkspace(ws: WorkspaceModel) {
-		assert(_currentWorkspace.value !== ws, "You cannot close a workspace that is current workspace. Deselect first.")
 		assert(_workspaces.contains(ws))
 		Debug.log("will remove a workspace \(ws), ws count = \(_workspaces.array.count)")
 
@@ -113,22 +125,32 @@ public class ApplicationModel: ModelRootNode {
 		Debug.log("did remove a workspace \(ws), ws count = \(_workspaces.array.count)")
 	}
 
-	public func selectCurrentWorkspace(ws: WorkspaceModel) {
-		assert(_workspaces.contains(ws))
-		assert(_currentWorkspace.value == nil)
-		_currentWorkspace.value		=	ws
-		Debug.log("did select a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
-	}
-
-	/// Deselects current workspace. Current workspace will become `nil`.
-	/// This is no-op if there was no current workspace.
-	public func deselectCurrentWorkspace() {
-		assert(_currentWorkspace.value != nil)
-		assert(_workspaces.contains(_currentWorkspace.value!))
-		Debug.log("will deselect a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
-
-		if let _ = _currentWorkspace.value {
-			_currentWorkspace.value		=	nil
+//	public func selectCurrentWorkspace(ws: WorkspaceModel) {
+//		assert(_workspaces.contains(ws))
+//		assert(_currentWorkspace.value == nil)
+//		_currentWorkspace.value		=	ws
+//		Debug.log("did select a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
+//	}
+//
+//	/// Deselects current workspace. Current workspace will become `nil`.
+//	/// This is no-op if there was no current workspace.
+//	public func deselectCurrentWorkspace() {
+//		assert(_currentWorkspace.value != nil)
+//		assert(_workspaces.contains(_currentWorkspace.value!))
+//		Debug.log("will deselect a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
+//
+//		if let _ = _currentWorkspace.value {
+//			_currentWorkspace.value		=	nil
+//		}
+//	}
+	/// Selects another workspace.
+	/// 
+	/// Current workspace cannot be nil if there's any open workspace.
+	/// This limitation is set by Cocoa AppKit because any next window
+	/// will be selected automatically.
+	public func reselectCurrentWorkspace(ws: WorkspaceModel) {
+		if _currentWorkspace.value !== ws {
+			_currentWorkspace.value	=	ws
 		}
 	}
 

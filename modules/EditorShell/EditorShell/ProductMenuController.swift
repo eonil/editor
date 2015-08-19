@@ -29,9 +29,9 @@ class ProductMenuController: SessionProtocol {
 	///
 
 	let	menu		:	TopLevelCommandMenu
-	let	build		=	_menuItem("Build")
-	let	clean		=	_menuItem("Clean")
-	let	stop		=	_menuItem("Stop")
+	let	build		=	_menuItem("Build", shortcut: Command+"B")
+	let	clean		=	_menuItem("Clean", shortcut: Command+"K")
+	let	stop		=	_menuItem("Stop", shortcut: Command+".")
 
 	func run() {
 		assert(model != nil)

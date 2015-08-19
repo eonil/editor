@@ -131,6 +131,7 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 
 
 
+
 private final class _OutputLogAgent: ArrayStorageDelegate {
 	weak var owner: CargoModel?
 	private func willInsertRange(range: Range<Int>) {

@@ -86,6 +86,8 @@ public class Driver {
 	private func _insertWorkspaceUIForWorkspace(workspace: WorkspaceModel) {
 		let	doc	=	WorkspaceDocument()
 		NSDocumentController.sharedDocumentController().addDocument(doc)
+		NSDocumentController.sharedDocumentController().noteNewRecentDocument(doc)
+		NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(workspace.location.value!)
 
 		let	wc	=	WorkspaceWindowUIController()
 		wc.model	=	workspace
