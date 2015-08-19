@@ -12,6 +12,7 @@
 		4513729B1B7ED72A00ED9829 /* MulticastingStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372971B7ED71700ED9829 /* MulticastingStorage.framework */; };
 		451373411B7ED91000ED9829 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451373401B7ED91000ED9829 /* SearchModel.swift */; };
 		451373471B7ED93700ED9829 /* DebuggingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451373461B7ED93700ED9829 /* DebuggingModel.swift */; };
+		4526B11B1B8501EB0023C626 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4526B10D1B8501DF0023C626 /* LLDBWrapper.framework */; };
 		453E40301B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E402F1B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift */; };
 		4554C8691B7DBEF8004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C85E1B7DBEF7004987CC /* EditorModel.framework */; };
 		4554C86E1B7DBEF8004987CC /* EditorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C86D1B7DBEF8004987CC /* EditorModelTests.swift */; };
@@ -49,6 +50,48 @@
 			remoteGlobalIDString = 4513725A1B7ED50D00ED9829;
 			remoteInfo = MulticastingStorageTests;
 		};
+		4526B10C1B8501DF0023C626 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45A0FB76199FBA9C0020D59D;
+			remoteInfo = LLDBWrapper;
+		};
+		4526B10E1B8501DF0023C626 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C993271A6E5D4A00BA2BC4;
+			remoteInfo = Workbench1;
+		};
+		4526B1101B8501DF0023C626 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C9934E1A6E5DF700BA2BC4;
+			remoteInfo = SampleProgram3;
+		};
+		4526B1121B8501DF0023C626 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45AED2C51A751B35002F83AB;
+			remoteInfo = SampleProgram4;
+		};
+		4526B1141B8501DF0023C626 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C511511A7954F20055DC1D;
+			remoteInfo = Workbench2;
+		};
+		4526B1161B8501DF0023C626 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E5EF211A7E6817009967D2;
+			remoteInfo = TestdriveApp;
+		};
 		4554C86A1B7DBEF8004987CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4554C8551B7DBEF7004987CC /* Project object */;
@@ -85,6 +128,7 @@
 		4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MulticastingStorage.xcodeproj; path = ../../submodules/MulticastingStorage/MulticastingStorage.xcodeproj; sourceTree = "<group>"; };
 		451373401B7ED91000ED9829 /* SearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		451373461B7ED93700ED9829 /* DebuggingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingModel.swift; sourceTree = "<group>"; };
+		4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		453E402F1B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastingStorageExtensions.swift; sourceTree = "<group>"; };
 		4554C85E1B7DBEF7004987CC /* EditorModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8631B7DBEF7004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4526B11B1B8501EB0023C626 /* LLDBWrapper.framework in Frameworks */,
 				4513729B1B7ED72A00ED9829 /* MulticastingStorage.framework in Frameworks */,
 				4554CA061B7DC33A004987CC /* EditorCommon.framework in Frameworks */,
 			);
@@ -156,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */,
+				4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */,
 			);
 			name = "(submodules)";
 			sourceTree = "<group>";
@@ -166,6 +212,19 @@
 				4554C9FD1B7DC307004987CC /* EditorCommon.xcodeproj */,
 			);
 			name = "(modules)";
+			sourceTree = "<group>";
+		};
+		4526B1021B8501DE0023C626 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4526B10D1B8501DF0023C626 /* LLDBWrapper.framework */,
+				4526B10F1B8501DF0023C626 /* Workbench1.app */,
+				4526B1111B8501DF0023C626 /* SampleProgram3 */,
+				4526B1131B8501DF0023C626 /* SampleProgram4.app */,
+				4526B1151B8501DF0023C626 /* Workbench2.app */,
+				4526B1171B8501DF0023C626 /* TestdriveApp.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4554C8541B7DBEF7004987CC = {
@@ -315,6 +374,10 @@
 					ProjectRef = 4554C9FD1B7DC307004987CC /* EditorCommon.xcodeproj */;
 				},
 				{
+					ProductGroup = 4526B1021B8501DE0023C626 /* Products */;
+					ProjectRef = 4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */;
+				},
+				{
 					ProductGroup = 451372901B7ED71700ED9829 /* Products */;
 					ProjectRef = 4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */;
 				},
@@ -340,6 +403,48 @@
 			fileType = wrapper.cfbundle;
 			path = MulticastingStorageTests.xctest;
 			remoteRef = 451372981B7ED71700ED9829 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4526B10D1B8501DF0023C626 /* LLDBWrapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LLDBWrapper.framework;
+			remoteRef = 4526B10C1B8501DF0023C626 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4526B10F1B8501DF0023C626 /* Workbench1.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench1.app;
+			remoteRef = 4526B10E1B8501DF0023C626 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4526B1111B8501DF0023C626 /* SampleProgram3 */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SampleProgram3;
+			remoteRef = 4526B1101B8501DF0023C626 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4526B1131B8501DF0023C626 /* SampleProgram4.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SampleProgram4.app;
+			remoteRef = 4526B1121B8501DF0023C626 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4526B1151B8501DF0023C626 /* Workbench2.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench2.app;
+			remoteRef = 4526B1141B8501DF0023C626 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4526B1171B8501DF0023C626 /* TestdriveApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestdriveApp.app;
+			remoteRef = 4526B1161B8501DF0023C626 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		4554CA031B7DC308004987CC /* EditorCommon.framework */ = {
