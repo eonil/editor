@@ -10,6 +10,7 @@
 		451372CF1B7ED79E00ED9829 /* MulticastingStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372CB1B7ED79300ED9829 /* MulticastingStorage.framework */; };
 		4522B19A1B84E51F00E219F9 /* FileMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522B1991B84E51F00E219F9 /* FileMenuController.swift */; };
 		4522B1A51B84F71300E219F9 /* MenuShortcutKeyCombination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4522B1A41B84F71300E219F9 /* MenuShortcutKeyCombination.swift */; };
+		4526B1271B850F280023C626 /* DebugMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526B1261B850F280023C626 /* DebugMenuController.swift */; };
 		4554C8181B7DBED9004987CC /* EditorShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C80D1B7DBED9004987CC /* EditorShell.framework */; };
 		4554C81D1B7DBED9004987CC /* EditorShellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C81C1B7DBED9004987CC /* EditorShellTests.swift */; };
 		4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A71B7DC0D7004987CC /* DivisionUIController.swift */; };
@@ -107,6 +108,7 @@
 		451372C51B7ED79300ED9829 /* MulticastingStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MulticastingStorage.xcodeproj; path = ../../submodules/MulticastingStorage/MulticastingStorage.xcodeproj; sourceTree = "<group>"; };
 		4522B1991B84E51F00E219F9 /* FileMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileMenuController.swift; sourceTree = "<group>"; };
 		4522B1A41B84F71300E219F9 /* MenuShortcutKeyCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuShortcutKeyCombination.swift; sourceTree = "<group>"; };
+		4526B1261B850F280023C626 /* DebugMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMenuController.swift; sourceTree = "<group>"; };
 		4554C80D1B7DBED9004987CC /* EditorShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8121B7DBED9004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4554C8171B7DBED9004987CC /* EditorShellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorShellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,6 +264,7 @@
 				4554C9C71B7DC16C004987CC /* MenuController.swift */,
 				4522B1991B84E51F00E219F9 /* FileMenuController.swift */,
 				45B185381B7F866B004E3B28 /* ProductMenuController.swift */,
+				4526B1261B850F280023C626 /* DebugMenuController.swift */,
 				45B1853A1B7F8688004E3B28 /* MenuUtility.swift */,
 				4522B1A41B84F71300E219F9 /* MenuShortcutKeyCombination.swift */,
 			);
@@ -463,6 +466,7 @@
 				45C77B0C1B7F2F0A0064C363 /* Dialogue.swift in Sources */,
 				4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */,
 				4554C9C81B7DC16C004987CC /* MenuController.swift in Sources */,
+				4526B1271B850F280023C626 /* DebugMenuController.swift in Sources */,
 				4522B19A1B84E51F00E219F9 /* FileMenuController.swift in Sources */,
 				4554C9B61B7DC0D7004987CC /* ToolUIController.swift in Sources */,
 				45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */,

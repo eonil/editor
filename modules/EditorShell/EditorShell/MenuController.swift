@@ -79,48 +79,6 @@ public class MainMenuController: SessionProtocol {
 
 
 
-class DebugMenuController: SessionProtocol {
-
-	weak var model: ApplicationModel?
-
-	///
-
-	init() {
-		menu	=
-			_topLevelMenu("Debug", items: [
-				pause,
-				resume,
-				stop,
-				_menuSeparatorItem(),
-				stepInto,
-				stepOut,
-				stepOver,
-				])
-
-	}
-
-	///
-
-	let	menu		:	TopLevelCommandMenu
-	let	pause		=	_menuItem("Pause", 	.Debugging(.Pause))
-	let	resume		=	_menuItem("Resume",	.Debugging(.Resume))
-	let	stop		=	_menuItem("Halt",	.Debugging(.Halt))
-	let	stepInto	=	_menuItem("Step Into",	.Debugging(.StepInto))
-	let	stepOut		=	_menuItem("Step Out",	.Debugging(.StepOut))
-	let	stepOver	=	_menuItem("Step Over",	.Debugging(.StepOver))
-
-	func run() {
-
-	}
-	func halt() {
-
-	}
-}
-
-
-
-
-
 
 
 

@@ -20,6 +20,7 @@ class ProductMenuController: SessionProtocol {
 
 	init() {
 		menu	=	_topLevelMenu("Product", items: [
+			launch,
 			build,
 			clean,
 			stop,
@@ -29,6 +30,7 @@ class ProductMenuController: SessionProtocol {
 	///
 
 	let	menu		:	TopLevelCommandMenu
+	let	launch		=	_menuItem("Run", shortcut: Command+"R")
 	let	build		=	_menuItem("Build", shortcut: Command+"B")
 	let	clean		=	_menuItem("Clean", shortcut: Command+"K")
 	let	stop		=	_menuItem("Stop", shortcut: Command+".")
@@ -45,6 +47,7 @@ class ProductMenuController: SessionProtocol {
 			self!._handleCurrentWorkspaceDidSet()
 		}
 
+		launch.clickHandler	=	{ [weak self] in self?._runLaunchOnCurrentWorkspace() }
 		build.clickHandler	=	{ [weak self] in self?._runBuildOnCurrentWorkspace() }
 		clean.clickHandler	=	{ [weak self] in self?._runCleanOnCurrentWorkspace() }
 		stop.clickHandler	=	{ [weak self] in self?._stopAnyBuildOperationOnCurrentWorkspace() }
@@ -95,6 +98,22 @@ class ProductMenuController: SessionProtocol {
 
 	///
 
+	private func _runLaunchOnCurrentWorkspace() {
+		assert(model!.currentWorkspace.value != nil)
+		if let ws = model!.currentWorkspace.value {
+			if ws.debug.currentTarget.value == nil {
+				if ws.debug.targets.array.count == 0 {
+					markUnimplemented("We need to query `Cargo.toml` file to get proper executable location.")
+					if let u = ws.location.value {
+						let	u1	=	u.URLByAppendingPathComponent("target").URLByAppendingPathComponent("debug").URLByAppendingPathComponent("aaa")
+						ws.debug.createTargetForExecutableAtURL(u1)
+					}
+				}
+				ws.debug.selectTarget(ws.debug.targets.array.first!)
+			}
+			ws.debug.currentTarget.value!.launch()
+		}
+	}
 	private func _runBuildOnCurrentWorkspace() {
 		assert(model!.currentWorkspace.value != nil)
 		if let ws = model!.currentWorkspace.value {

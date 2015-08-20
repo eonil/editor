@@ -81,6 +81,7 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 			return	_location
 		}
 	}
+
 	public var allProjects: ArrayStorage<ProjectModel> {
 		get {
 			return	_projects
