@@ -85,24 +85,40 @@ func _menu(title: String, items: [NSMenuItem]) -> NSMenu {
 	}
 	return	m
 }
+
+
 func _menuItem(label: String, submenu: NSMenu) -> CommandMenuItem {
 	let	m		=	CommandMenuItem(title: label, action: nil, keyEquivalent: "")
 	m.submenu		=	submenu
+	m.enabled		=	false
 	return	m
 }
 func _menuItem(label: String, _ command: ModelCommand) -> CommandMenuItem {
 	let	m		=	CommandMenuItem(title: label, action: nil, keyEquivalent: "")
 	m.command		=	command
+	m.enabled		=	false
 	return	m
 }
 func _menuItem(label: String, shortcut: MenuShortcutKeyCombination = MenuShortcutKeyCombination.None) -> SelfHandlingMenuItem {
 	let	m		=	SelfHandlingMenuItem(title: label, shortcut: shortcut, availability: true)
+	m.enabled		=	false
 	return	m
 }
 
 func _menuSeparatorItem() -> NSMenuItem {
 	return	NSMenuItem.separatorItem()
 }
+
+
+
+
+
+
+
+
+
+
+
 
 @objc
 final class SelfHandlingMenuItem: NSMenuItem {

@@ -92,6 +92,13 @@ public class ModelNode: ModelNodeSessionProtocol {
 	internal func willLeaveModelRoot() {
 	}
 
+//	internal func registerSubnode(subnode: ModelNode) {
+//		_registerSubnode(subnode)
+//	}
+//	internal func deregisterSubnode(subnode: ModelNode) {
+//		_deregisterSubnode(subnode)
+//	}
+
 	///
 
 	private var	_isRooted		=	false

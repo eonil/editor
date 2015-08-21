@@ -91,6 +91,7 @@ class ProductMenuController: SessionProtocol {
 	private func _applyEnabledStates() {
 		assert(model != nil)
 		let	cmds	=	model!.currentWorkspace.value?.build.runnableCommands.value ?? []
+		launch.enabled	=	true
 		build.enabled	=	cmds.contains(.Build)
 		clean.enabled	=	cmds.contains(.Clean)
 		stop.enabled	=	cmds.contains(.Stop)
@@ -105,13 +106,14 @@ class ProductMenuController: SessionProtocol {
 				if ws.debug.targets.array.count == 0 {
 					markUnimplemented("We need to query `Cargo.toml` file to get proper executable location.")
 					if let u = ws.location.value {
-						let	u1	=	u.URLByAppendingPathComponent("target").URLByAppendingPathComponent("debug").URLByAppendingPathComponent("aaa")
+						let	n	=	u.lastPathComponent!
+						let	u1	=	u.URLByAppendingPathComponent("target").URLByAppendingPathComponent("debug").URLByAppendingPathComponent(n)
 						ws.debug.createTargetForExecutableAtURL(u1)
 					}
 				}
 				ws.debug.selectTarget(ws.debug.targets.array.first!)
 			}
-			ws.debug.currentTarget.value!.launch()
+			ws.debug.currentTarget.value!.launch(NSURL(fileURLWithPath: "."))
 		}
 	}
 	private func _runBuildOnCurrentWorkspace() {

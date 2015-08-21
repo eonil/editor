@@ -32,5 +32,11 @@
       <FileRef
          location = "group:MulticastingStorage/MulticastingStorage.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:LLDBWrapper/LLDBWrapper.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:FileSystemEvents/Project/EonilFileSystemEvents.xcodeproj">
+      </FileRef>
    </Group>
 </Workspace>

@@ -183,6 +183,14 @@
 			name = "(submodules)";
 			sourceTree = "<group>";
 		};
+		452B91851B855E1000EAB775 /* (toolbar components) */ = {
+			isa = PBXGroup;
+			children = (
+				4554C9AE1B7DC0D7004987CC /* ToolUIController.swift */,
+			);
+			name = "(toolbar components)";
+			sourceTree = "<group>";
+		};
 		4554C8031B7DBED9004987CC = {
 			isa = PBXGroup;
 			children = (
@@ -215,7 +223,7 @@
 				4554C9A91B7DC0D7004987CC /* InspectionUIController.swift */,
 				4554C9AA1B7DC0D7004987CC /* NavigationUIController.swift */,
 				4554C9AB1B7DC0D7004987CC /* ReportUIController.swift */,
-				4554C9AE1B7DC0D7004987CC /* ToolUIController.swift */,
+				452B91851B855E1000EAB775 /* (toolbar components) */,
 				45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */,
 				4554C8121B7DBED9004987CC /* Info.plist */,
 			);

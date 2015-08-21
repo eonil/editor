@@ -16,6 +16,7 @@
 		45B185221B7F74AD004E3B28 /* DispatchUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185211B7F74AD004E3B28 /* DispatchUtility.swift */; };
 		45B185581B801F4A004E3B28 /* SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185571B801F4A004E3B28 /* SwiftExtensions.swift */; };
 		45B1855A1B802288004E3B28 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185591B802288004E3B28 /* Log.swift */; };
+		45F5720A1B86242600E34CA2 /* Atomics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F572091B86242600E34CA2 /* Atomics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		45B185211B7F74AD004E3B28 /* DispatchUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DispatchUtility.swift; sourceTree = "<group>"; };
 		45B185571B801F4A004E3B28 /* SwiftExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftExtensions.swift; sourceTree = "<group>"; };
 		45B185591B802288004E3B28 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		45F572091B86242600E34CA2 /* Atomics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				4554C9691B7DC025004987CC /* Reporting.swift */,
 				45B185211B7F74AD004E3B28 /* DispatchUtility.swift */,
 				45B185571B801F4A004E3B28 /* SwiftExtensions.swift */,
+				45F572091B86242600E34CA2 /* Atomics.swift */,
 				45B185591B802288004E3B28 /* Log.swift */,
 				4554C9531B7DBF9B004987CC /* Info.plist */,
 			);
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F5720A1B86242600E34CA2 /* Atomics.swift in Sources */,
 				45B185221B7F74AD004E3B28 /* DispatchUtility.swift in Sources */,
 				45B1855A1B802288004E3B28 /* Log.swift in Sources */,
 				4554C96D1B7DC025004987CC /* Reporting.swift in Sources */,

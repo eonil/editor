@@ -31,7 +31,14 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
-
+	override func didJoinModelRoot() {
+		super.didJoinModelRoot()
+		_install()
+	}
+	override func willLeaveModelRoot() {
+		_deinstall()
+		super.willLeaveModelRoot()
+	}
 
 	///
 
@@ -67,13 +74,16 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 		precondition(u.scheme == "file")
 		let	t	=	_lldbDebugger.createTargetWithFilename(u.path!, andArchname: LLDBArchDefault64Bit)
 		assert(_lldbDebugger.allTargets.contains(t), "Could not create a target for URL `\(u)`.")
+
 		let	m	=	DebuggingTargetModel(LLDBTarget: t)
+		m.owner		=	self
 		_targets.insert([m], atIndex: _targets.array.startIndex)
 		return	m
 	}
 	public func deleteTarget(target: DebuggingTargetModel) {
+		target.owner	=	nil
 		if let idx = _targets.array.indexOfValueByReferentialIdentity(target) {
-			_lldbDebugger.deleteTarget(target._lldbTarget)
+			_lldbDebugger.deleteTarget(target.LLDBObject)
 			_targets.delete(idx...idx)
 		}
 	}
@@ -96,6 +106,13 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
+	private func _install() {
+
+	}
+	private func _deinstall() {
+
+	}
+
 //	public class StackFrame {
 //	}
 //	public class FrameVariable {
@@ -106,130 +123,28 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 
 
 
-public class DebuggingTargetModel: ModelSubnode<DebuggingModel> {
-
-	public var debugging: DebuggingModel {
-		get {
-			assert(owner != nil)
-			return	owner!
-		}
-	}
-
-	///
-
-	private init(LLDBTarget lldbTarget: LLDBTarget) {
-		_lldbTarget	=	lldbTarget
-	}
-
-	///
-
-	public var runnableCommands: ValueStorage<Set<DebuggingCommand>> {
-		get {
-			return	_runnableCommands
-		}
-	}
-
-	public func run(command: DebuggingCommand) {
-		switch command {
-		case .Halt:
-			halt()
-		case .Pause:
-			pause()
-		case .Resume:
-			resume()
-		case .StepInto:
-			stepInto()
-		case .StepOut:
-			stepOut()
-		case .StepOver:
-			stepOver()
-		}
-	}
-
-	public func launch(workingDirectoryURL: NSURL? = nil) {
-		_lldbTarget.launchProcessSimplyWithWorkingDirectory(workingDirectoryURL?.path ?? ".")
-	}
-
-	public func pause() {
-		_lldbTarget.process.stop()
-	}
-	public func resume() {
-		_lldbTarget.process.`continue`()
-	}
-	public func halt() {
-		_lldbTarget.process.kill()
-	}
-
-	public func stepInto() {
-		if let th = _findSuspendedThread() {
-			th.stepInto()
-		}
-		else {
-			assert(false)
-		}
-	}
-	public func stepOut() {
-		if let th = _findSuspendedThread() {
-			th.stepOut()
-		}
-		else {
-			assert(false)
-		}
-	}
-	public func stepOver() {
-		if let th = _findSuspendedThread() {
-			th.stepOver()
-		}
-		else {
-			assert(false)
-		}
-	}
-
-	func selectFrameAtIndex(index: Int) {
-		markUnimplemented()
-		fatalErrorBecauseUnimplementedYet()
-	}
-	func deselectFrame() {
-		markUnimplemented()
-		fatalErrorBecauseUnimplementedYet()
-	}
-	func reloadFrameAtIndex(index: Int) {
-		markUnimplemented()
-		fatalErrorBecauseUnimplementedYet()
-	}
-
-	///
-
-	private let	_lldbTarget		:	LLDBTarget
-	private let	_runnableCommands	=	MutableValueStorage<Set<DebuggingCommand>>([])
-
-	private func _findSuspendedThread() -> LLDBThread? {
-		for th in _lldbTarget.process!.allThreads {
-			if th.suspended {
-				return	th
-			}
-		}
-		return	nil
-	}
-}
 
 
 
 
 
-//public class DebuggingThreadModel: ModelSubnode<DebuggingTargetModel> {
-//
-//	public var target: DebuggingTargetModel {
-//		get {
-//			assert(owner != nil)
-//			return	owner!
-//		}
-//	}
-//
-//	///
-//
-//
-//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

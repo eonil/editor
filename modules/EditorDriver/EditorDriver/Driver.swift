@@ -52,7 +52,8 @@ public class Driver {
 
 		//	TODO:	Remove this on release...
 		//		ADHOC booting.
-		_model.openWorkspaceAtURL(NSURL(string: "file:///~/Temp/TestWorkspace1")!)
+
+		_model.openWorkspaceAtURL(NSURL(fileURLWithPath: "/Users/Eonil/Documents/Editor2Test/aaa"))
 	}
 
 	public func halt() {

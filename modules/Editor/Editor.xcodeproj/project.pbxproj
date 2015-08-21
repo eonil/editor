@@ -10,6 +10,8 @@
 		4526B0FD1B8501CB0023C626 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4526B0F01B8501AB0023C626 /* LLDBWrapper.framework */; };
 		4526B0FE1B8501CB0023C626 /* LLDBWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4526B0F01B8501AB0023C626 /* LLDBWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4526B1211B8502B20023C626 /* LLDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4526B11F1B8502970023C626 /* LLDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		452B913D1B8556C400EAB775 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452B912F1B8556B200EAB775 /* EonilFileSystemEvents.framework */; };
+		452B913E1B8556C400EAB775 /* EonilFileSystemEvents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 452B912F1B8556B200EAB775 /* EonilFileSystemEvents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		453E400E1B7EFCDC00AFAB68 /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1B51B7EDA4300D5AA56 /* EditorCommon.framework */; };
 		453E400F1B7EFCDC00AFAB68 /* EditorCommon.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1B51B7EDA4300D5AA56 /* EditorCommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		453E40141B7EFCDC00AFAB68 /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1C51B7EDA4300D5AA56 /* EditorUICommon.framework */; };
@@ -94,6 +96,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = 45A0FB75199FBA9C0020D59D;
 			remoteInfo = LLDBWrapper;
+		};
+		452B912E1B8556B200EAB775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452B91221B8556B200EAB775 /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D970A61A1569090037649F;
+			remoteInfo = EonilFileSystemEvents;
+		};
+		452B91301B8556B200EAB775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452B91221B8556B200EAB775 /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D970961A155DD50037649F;
+			remoteInfo = InternalTester;
+		};
+		452B91321B8556B200EAB775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452B91221B8556B200EAB775 /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45DA95801A69F1610091410B;
+			remoteInfo = InternalTester4;
+		};
+		452B91341B8556B200EAB775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452B91221B8556B200EAB775 /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45BF99C51A131E3A004E4E2E;
+			remoteInfo = TestdriveApp;
+		};
+		452B913F1B8556C400EAB775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452B91221B8556B200EAB775 /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45D970A51A1569090037649F;
+			remoteInfo = EonilFileSystemEvents;
 		};
 		453E40101B7EFCDC00AFAB68 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -241,6 +278,7 @@
 				45C77AE91B7F0EA90064C363 /* MulticastingStorage.framework in Embed Frameworks */,
 				453E40211B7EFCDC00AFAB68 /* EditorShell.framework in Embed Frameworks */,
 				453E40271B7EFCDD00AFAB68 /* EditorDriver.framework in Embed Frameworks */,
+				452B913E1B8556C400EAB775 /* EonilFileSystemEvents.framework in Embed Frameworks */,
 				453E40151B7EFCDC00AFAB68 /* EditorUICommon.framework in Embed Frameworks */,
 				453E400F1B7EFCDC00AFAB68 /* EditorCommon.framework in Embed Frameworks */,
 				4526B0FE1B8501CB0023C626 /* LLDBWrapper.framework in Embed Frameworks */,
@@ -258,6 +296,7 @@
 		451373361B7ED87F00ED9829 /* MulticastingStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MulticastingStorage.xcodeproj; path = ../../submodules/MulticastingStorage/MulticastingStorage.xcodeproj; sourceTree = "<group>"; };
 		4526B0E11B8501AA0023C626 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		4526B11F1B8502970023C626 /* LLDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LLDB.framework; path = ../../submodules/LLDBWrapper/LLDB.framework; sourceTree = "<group>"; };
+		452B91221B8556B200EAB775 /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = ../../submodules/FileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		4554C8C21B7DBF50004987CC /* Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8C71B7DBF50004987CC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		4554C8CA1B7DBF50004987CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/xDocument.xib; sourceTree = "<group>"; };
@@ -285,6 +324,7 @@
 				453E40201B7EFCDC00AFAB68 /* EditorShell.framework in Frameworks */,
 				453E40261B7EFCDD00AFAB68 /* EditorDriver.framework in Frameworks */,
 				453E40141B7EFCDC00AFAB68 /* EditorUICommon.framework in Frameworks */,
+				452B913D1B8556C400EAB775 /* EonilFileSystemEvents.framework in Frameworks */,
 				453E400E1B7EFCDC00AFAB68 /* EditorCommon.framework in Frameworks */,
 				4526B0FD1B8501CB0023C626 /* LLDBWrapper.framework in Frameworks */,
 				453E401A1B7EFCDC00AFAB68 /* EditorModel.framework in Frameworks */,
@@ -336,6 +376,7 @@
 				451373361B7ED87F00ED9829 /* MulticastingStorage.xcodeproj */,
 				4526B11F1B8502970023C626 /* LLDB.framework */,
 				4526B0E11B8501AA0023C626 /* LLDBWrapper.xcodeproj */,
+				452B91221B8556B200EAB775 /* EonilFileSystemEvents.xcodeproj */,
 			);
 			name = "(submodules)";
 			sourceTree = "<group>";
@@ -349,6 +390,17 @@
 				4526B0F61B8501AB0023C626 /* SampleProgram4.app */,
 				4526B0F81B8501AB0023C626 /* Workbench2.app */,
 				4526B0FA1B8501AB0023C626 /* TestdriveApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		452B91231B8556B200EAB775 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				452B912F1B8556B200EAB775 /* EonilFileSystemEvents.framework */,
+				452B91311B8556B200EAB775 /* InternalTester */,
+				452B91331B8556B200EAB775 /* InternalTester4.app */,
+				452B91351B8556B200EAB775 /* TestdriveApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -474,6 +526,7 @@
 				453E40291B7EFCDD00AFAB68 /* PBXTargetDependency */,
 				45C77AEB1B7F0EA90064C363 /* PBXTargetDependency */,
 				4526B1001B8501CB0023C626 /* PBXTargetDependency */,
+				452B91401B8556C400EAB775 /* PBXTargetDependency */,
 			);
 			name = Editor;
 			productName = Editor;
@@ -576,6 +629,10 @@
 					ProjectRef = 451372E51B7ED81200ED9829 /* EditorUICommon.xcodeproj */;
 				},
 				{
+					ProductGroup = 452B91231B8556B200EAB775 /* Products */;
+					ProjectRef = 452B91221B8556B200EAB775 /* EonilFileSystemEvents.xcodeproj */;
+				},
+				{
 					ProductGroup = 4526B0E21B8501AA0023C626 /* Products */;
 					ProjectRef = 4526B0E11B8501AA0023C626 /* LLDBWrapper.xcodeproj */;
 				},
@@ -648,6 +705,34 @@
 			fileType = wrapper.application;
 			path = TestdriveApp.app;
 			remoteRef = 4526B0F91B8501AB0023C626 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452B912F1B8556B200EAB775 /* EonilFileSystemEvents.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilFileSystemEvents.framework;
+			remoteRef = 452B912E1B8556B200EAB775 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452B91311B8556B200EAB775 /* InternalTester */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = InternalTester;
+			remoteRef = 452B91301B8556B200EAB775 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452B91331B8556B200EAB775 /* InternalTester4.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = InternalTester4.app;
+			remoteRef = 452B91321B8556B200EAB775 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452B91351B8556B200EAB775 /* TestdriveApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestdriveApp.app;
+			remoteRef = 452B91341B8556B200EAB775 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		453E402E1B7EFCDD00AFAB68 /* MulticastingStorageWorkbench */ = {
@@ -789,6 +874,11 @@
 			isa = PBXTargetDependency;
 			name = LLDBWrapper;
 			targetProxy = 4526B0FF1B8501CB0023C626 /* PBXContainerItemProxy */;
+		};
+		452B91401B8556C400EAB775 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EonilFileSystemEvents;
+			targetProxy = 452B913F1B8556C400EAB775 /* PBXContainerItemProxy */;
 		};
 		453E40111B7EFCDC00AFAB68 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -4,3 +4,6 @@
 [submodule "submodules/LLDBWrapper"]
 	path = submodules/LLDBWrapper
 	url = https://github.com/Eonil/LLDBWrapper
+[submodule "submodules/FileSystemEvents"]
+	path = submodules/FileSystemEvents
+	url = https://github.com/Eonil/FileSystemEvents

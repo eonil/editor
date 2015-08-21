@@ -14,6 +14,10 @@
 		451373471B7ED93700ED9829 /* DebuggingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451373461B7ED93700ED9829 /* DebuggingModel.swift */; };
 		4526B11B1B8501EB0023C626 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4526B10D1B8501DF0023C626 /* LLDBWrapper.framework */; };
 		4526B1251B8503370023C626 /* LLDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526B1241B8503370023C626 /* LLDBModel.swift */; };
+		452B915B1B8556E600EAB775 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452B914B1B8556E000EAB775 /* EonilFileSystemEvents.framework */; };
+		452B91751B855D5100EAB775 /* TOMLQueryTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B91741B855D5100EAB775 /* TOMLQueryTool.swift */; };
+		452B91C81B8611E500EAB775 /* LLDBSupports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B91C71B8611E500EAB775 /* LLDBSupports.swift */; };
+		452B91CA1B8611FC00EAB775 /* DebuggingSupports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B91C91B8611FC00EAB775 /* DebuggingSupports.swift */; };
 		453E40301B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E402F1B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift */; };
 		4554C8691B7DBEF8004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C85E1B7DBEF7004987CC /* EditorModel.framework */; };
 		4554C86E1B7DBEF8004987CC /* EditorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C86D1B7DBEF8004987CC /* EditorModelTests.swift */; };
@@ -24,8 +28,12 @@
 		4554CA061B7DC33A004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA031B7DC308004987CC /* EditorCommon.framework */; };
 		4554CAB21B7DCD3A004987CC /* PreferenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554CAB11B7DCD3A004987CC /* PreferenceModel.swift */; };
 		4554CAB61B7DCE05004987CC /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554CAB51B7DCE05004987CC /* ProjectModel.swift */; };
+		455978C71B86AE0300626F6B /* DebuggingTargetExecutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455978C61B86AE0300626F6B /* DebuggingTargetExecutionModel.swift */; };
 		455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EE2091B7EDBF800D5AA56 /* ConsoleModel.swift */; };
 		455EE2101B7EDC1E00D5AA56 /* ReportingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */; };
+		45692BD61B86991E002ADB2A /* DebuggingFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45692BD51B86991E002ADB2A /* DebuggingFrameModel.swift */; };
+		45692BE81B869955002ADB2A /* DebuggingValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45692BE71B869955002ADB2A /* DebuggingValueModel.swift */; };
+		45692BF01B869C2A002ADB2A /* DebuggingTargetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45692BEF1B869C2A002ADB2A /* DebuggingTargetModel.swift */; };
 		45B185241B7F7626004E3B28 /* BuildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185231B7F7626004E3B28 /* BuildModel.swift */; };
 		45B1852D1B7F7ADC004E3B28 /* ModelNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1852C1B7F7ADC004E3B28 /* ModelNodeProtocol.swift */; };
 		45B1855C1B802458004E3B28 /* WorkspaceModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */; };
@@ -93,6 +101,34 @@
 			remoteGlobalIDString = 45E5EF211A7E6817009967D2;
 			remoteInfo = TestdriveApp;
 		};
+		452B914A1B8556E000EAB775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D970A61A1569090037649F;
+			remoteInfo = EonilFileSystemEvents;
+		};
+		452B914C1B8556E000EAB775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D970961A155DD50037649F;
+			remoteInfo = InternalTester;
+		};
+		452B914E1B8556E000EAB775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45DA95801A69F1610091410B;
+			remoteInfo = InternalTester4;
+		};
+		452B91501B8556E000EAB775 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45BF99C51A131E3A004E4E2E;
+			remoteInfo = TestdriveApp;
+		};
 		4554C86A1B7DBEF8004987CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4554C8551B7DBEF7004987CC /* Project object */;
@@ -131,6 +167,10 @@
 		451373461B7ED93700ED9829 /* DebuggingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingModel.swift; sourceTree = "<group>"; };
 		4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		4526B1241B8503370023C626 /* LLDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBModel.swift; sourceTree = "<group>"; };
+		452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = ../../submodules/FileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
+		452B91741B855D5100EAB775 /* TOMLQueryTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TOMLQueryTool.swift; sourceTree = "<group>"; };
+		452B91C71B8611E500EAB775 /* LLDBSupports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBSupports.swift; sourceTree = "<group>"; };
+		452B91C91B8611FC00EAB775 /* DebuggingSupports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingSupports.swift; sourceTree = "<group>"; };
 		453E402F1B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastingStorageExtensions.swift; sourceTree = "<group>"; };
 		4554C85E1B7DBEF7004987CC /* EditorModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8631B7DBEF7004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -144,8 +184,12 @@
 		4554C9FD1B7DC307004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		4554CAB11B7DCD3A004987CC /* PreferenceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceModel.swift; sourceTree = "<group>"; };
 		4554CAB51B7DCE05004987CC /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
+		455978C61B86AE0300626F6B /* DebuggingTargetExecutionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingTargetExecutionModel.swift; sourceTree = "<group>"; };
 		455EE2091B7EDBF800D5AA56 /* ConsoleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleModel.swift; sourceTree = "<group>"; };
 		455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportingModel.swift; sourceTree = "<group>"; };
+		45692BD51B86991E002ADB2A /* DebuggingFrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingFrameModel.swift; sourceTree = "<group>"; };
+		45692BE71B869955002ADB2A /* DebuggingValueModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingValueModel.swift; sourceTree = "<group>"; };
+		45692BEF1B869C2A002ADB2A /* DebuggingTargetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingTargetModel.swift; sourceTree = "<group>"; };
 		45B185231B7F7626004E3B28 /* BuildModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildModel.swift; sourceTree = "<group>"; };
 		45B1852C1B7F7ADC004E3B28 /* ModelNodeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelNodeProtocol.swift; sourceTree = "<group>"; };
 		45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModelExtensions.swift; sourceTree = "<group>"; };
@@ -161,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				452B915B1B8556E600EAB775 /* EonilFileSystemEvents.framework in Frameworks */,
 				4526B11B1B8501EB0023C626 /* LLDBWrapper.framework in Frameworks */,
 				4513729B1B7ED72A00ED9829 /* MulticastingStorage.framework in Frameworks */,
 				4554CA061B7DC33A004987CC /* EditorCommon.framework in Frameworks */,
@@ -201,6 +246,7 @@
 			children = (
 				4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */,
 				4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */,
+				452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */,
 			);
 			name = "(submodules)";
 			sourceTree = "<group>";
@@ -233,6 +279,7 @@
 				450C0FBD1B7F6AE50048E7A1 /* CommandLineTool.swift */,
 				45B185631B804833004E3B28 /* ShellTaskExecutionController.swift */,
 				45B185651B8048CA004E3B28 /* StringStreamProcessing.swift */,
+				452B91741B855D5100EAB775 /* TOMLQueryTool.swift */,
 			);
 			name = "(command line tools)";
 			sourceTree = "<group>";
@@ -242,8 +289,20 @@
 			children = (
 				45B185671B804B2B004E3B28 /* CargoModel.swift */,
 				4526B1241B8503370023C626 /* LLDBModel.swift */,
+				452B91C71B8611E500EAB775 /* LLDBSupports.swift */,
 			);
 			name = "(specific tool models)";
+			sourceTree = "<group>";
+		};
+		452B91421B8556E000EAB775 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				452B914B1B8556E000EAB775 /* EonilFileSystemEvents.framework */,
+				452B914D1B8556E000EAB775 /* InternalTester */,
+				452B914F1B8556E000EAB775 /* InternalTester4.app */,
+				452B91511B8556E000EAB775 /* TestdriveApp.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		4554C8541B7DBEF7004987CC = {
@@ -278,7 +337,7 @@
 				4554CAB51B7DCE05004987CC /* ProjectModel.swift */,
 				45B185231B7F7626004E3B28 /* BuildModel.swift */,
 				451373401B7ED91000ED9829 /* SearchModel.swift */,
-				451373461B7ED93700ED9829 /* DebuggingModel.swift */,
+				45692BE61B86992B002ADB2A /* (debugging) */,
 				455EE2091B7EDBF800D5AA56 /* ConsoleModel.swift */,
 				455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */,
 				4554CAB11B7DCD3A004987CC /* PreferenceModel.swift */,
@@ -308,6 +367,19 @@
 				4554CA051B7DC308004987CC /* EditorCommonTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		45692BE61B86992B002ADB2A /* (debugging) */ = {
+			isa = PBXGroup;
+			children = (
+				451373461B7ED93700ED9829 /* DebuggingModel.swift */,
+				45692BEF1B869C2A002ADB2A /* DebuggingTargetModel.swift */,
+				455978C61B86AE0300626F6B /* DebuggingTargetExecutionModel.swift */,
+				45692BD51B86991E002ADB2A /* DebuggingFrameModel.swift */,
+				45692BE71B869955002ADB2A /* DebuggingValueModel.swift */,
+				452B91C91B8611FC00EAB775 /* DebuggingSupports.swift */,
+			);
+			name = "(debugging)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -393,6 +465,10 @@
 					ProjectRef = 4554C9FD1B7DC307004987CC /* EditorCommon.xcodeproj */;
 				},
 				{
+					ProductGroup = 452B91421B8556E000EAB775 /* Products */;
+					ProjectRef = 452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */;
+				},
+				{
 					ProductGroup = 4526B1021B8501DE0023C626 /* Products */;
 					ProjectRef = 4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */;
 				},
@@ -466,6 +542,34 @@
 			remoteRef = 4526B1161B8501DF0023C626 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		452B914B1B8556E000EAB775 /* EonilFileSystemEvents.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilFileSystemEvents.framework;
+			remoteRef = 452B914A1B8556E000EAB775 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452B914D1B8556E000EAB775 /* InternalTester */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = InternalTester;
+			remoteRef = 452B914C1B8556E000EAB775 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452B914F1B8556E000EAB775 /* InternalTester4.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = InternalTester4.app;
+			remoteRef = 452B914E1B8556E000EAB775 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452B91511B8556E000EAB775 /* TestdriveApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestdriveApp.app;
+			remoteRef = 452B91501B8556E000EAB775 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4554CA031B7DC308004987CC /* EditorCommon.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -521,8 +625,14 @@
 				450C0FBE1B7F6AE50048E7A1 /* CommandLineTool.swift in Sources */,
 				45B185681B804B2B004E3B28 /* CargoModel.swift in Sources */,
 				451373411B7ED91000ED9829 /* SearchModel.swift in Sources */,
+				45692BD61B86991E002ADB2A /* DebuggingFrameModel.swift in Sources */,
+				452B91CA1B8611FC00EAB775 /* DebuggingSupports.swift in Sources */,
 				455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */,
+				455978C71B86AE0300626F6B /* DebuggingTargetExecutionModel.swift in Sources */,
+				45692BF01B869C2A002ADB2A /* DebuggingTargetModel.swift in Sources */,
+				452B91C81B8611E500EAB775 /* LLDBSupports.swift in Sources */,
 				4526B1251B8503370023C626 /* LLDBModel.swift in Sources */,
+				452B91751B855D5100EAB775 /* TOMLQueryTool.swift in Sources */,
 				4554C9BC1B7DC106004987CC /* Command.swift in Sources */,
 				455EE2101B7EDC1E00D5AA56 /* ReportingModel.swift in Sources */,
 				4554CAB21B7DCD3A004987CC /* PreferenceModel.swift in Sources */,
@@ -532,6 +642,7 @@
 				451373471B7ED93700ED9829 /* DebuggingModel.swift in Sources */,
 				4554C9BD1B7DC106004987CC /* ApplicationModel.swift in Sources */,
 				45DDABD81B82395300F85E06 /* FoundationExtensions.swift in Sources */,
+				45692BE81B869955002ADB2A /* DebuggingValueModel.swift in Sources */,
 				453E40301B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

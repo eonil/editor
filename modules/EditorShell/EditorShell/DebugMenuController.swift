@@ -43,7 +43,34 @@ class DebugMenuController: SessionProtocol {
 	func run() {
 		assert(model != nil)
 
-		
+		func getExecution() -> DebuggingTargetExecutionModel? {
+			return	model!.currentWorkspace.value?.debug.currentTarget.value?.execution.value
+		}
+
+		pause.clickHandler	=	{ [weak self] in
+			assert(self?.model!.currentWorkspace.value?.debug.currentTarget.value !== nil)
+			getExecution()?.pause()
+		}
+		resume.clickHandler	=	{ [weak self] in
+			assert(self?.model!.currentWorkspace.value?.debug.currentTarget.value !== nil)
+			getExecution()?.resume()
+		}
+		stop.clickHandler	=	{ [weak self] in
+			assert(self?.model!.currentWorkspace.value?.debug.currentTarget.value !== nil)
+			getExecution()?.halt()
+		}
+		stepInto.clickHandler	=	{ [weak self] in
+			assert(self?.model!.currentWorkspace.value?.debug.currentTarget.value !== nil)
+			getExecution()?.stepInto()
+		}
+		stepOut.clickHandler	=	{ [weak self] in
+			assert(self?.model!.currentWorkspace.value?.debug.currentTarget.value !== nil)
+			getExecution()?.stepOut()
+		}
+		stepOver.clickHandler	=	{ [weak self] in
+			assert(self?.model!.currentWorkspace.value?.debug.currentTarget.value !== nil)
+			getExecution()?.stepOver()
+		}
 
 		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
 			if let ws = self?.model!.currentWorkspace.value {
@@ -66,13 +93,17 @@ class DebugMenuController: SessionProtocol {
 	///
 
 	private func _didInsertCurrentWorkspace(workspace: WorkspaceModel) {
-		workspace.debug.currentTarget.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-			if let t = workspace.debug.currentTarget.value {
+		workspace.debug.currentTarget.registerDidSet(ObjectIdentifier(self)) { [weak self, weak workspace] in
+			precondition(workspace != nil)
+			assert(self != nil)
+			if let t = workspace?.debug.currentTarget.value {
 				self?._didInsertCurrentDebuggingTarget(t)
 			}
 		}
-		workspace.debug.currentTarget.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-			if let t = workspace.debug.currentTarget.value {
+		workspace.debug.currentTarget.registerWillSet(ObjectIdentifier(self)) { [weak self, weak workspace] in
+			precondition(workspace != nil)
+			assert(self != nil)
+			if let t = workspace?.debug.currentTarget.value {
 				self?._willDeleteCurrentDebuggingTarget(t)
 			}
 		}
@@ -83,21 +114,44 @@ class DebugMenuController: SessionProtocol {
 	}
 
 	private func _didInsertCurrentDebuggingTarget(target: DebuggingTargetModel) {
-		target.runnableCommands.registerDidSet(ObjectIdentifier(self)) { [weak self] in self?._reapplyCurrentDebuggingTargetRunnableCommands() }
+		target.execution.registerDidSet(ObjectIdentifier(self)) { [weak self, weak target] in
+			precondition(target != nil)
+			assert(self != nil)
+			if let e = target?.execution.value {
+				self?._didInsertExecution(e)
+			}
+		}
+		target.execution.registerWillSet(ObjectIdentifier(self)) { [weak self, weak target] in
+			precondition(target != nil)
+			assert(self != nil)
+			if let e = target?.execution.value {
+				self?._willDeleteExecution(e)
+			}
+		}
 	}
 
 	private func _willDeleteCurrentDebuggingTarget(target: DebuggingTargetModel) {
-		target.runnableCommands.deregisterDidSet(ObjectIdentifier(self))
+		target.execution.deregisterWillSet(ObjectIdentifier(self))
+		target.execution.deregisterDidSet(ObjectIdentifier(self))
+	}
+
+	private func _didInsertExecution(execution: DebuggingTargetExecutionModel) {
+		_reapplyCurrentDebuggingTargetRunnableCommands()
+		execution.runnableCommands.registerDidSet(ObjectIdentifier(self)) { [weak self] in self?._reapplyCurrentDebuggingTargetRunnableCommands() }
+	}
+	private func _willDeleteExecution(execution: DebuggingTargetExecutionModel) {
+		execution.runnableCommands.deregisterDidSet(ObjectIdentifier(self))
+		_reapplyCurrentDebuggingTargetRunnableCommands()
 	}
 
 	private func _reapplyCurrentDebuggingTargetRunnableCommands() {
-		let	t		=	model!.currentWorkspace.value!.debug.currentTarget.value!
-		pause.enabled		=	t.runnableCommands.value.contains(DebuggingCommand.Pause)
-		resume.enabled		=	t.runnableCommands.value.contains(DebuggingCommand.Resume)
-		stop.enabled		=	t.runnableCommands.value.contains(DebuggingCommand.Halt)
-		stepInto.enabled	=	t.runnableCommands.value.contains(DebuggingCommand.StepInto)
-		stepOut.enabled		=	t.runnableCommands.value.contains(DebuggingCommand.StepOut)
-		stepOver.enabled	=	t.runnableCommands.value.contains(DebuggingCommand.StepOver)
+		let	commands	=	model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value!.runnableCommands.value
+		pause.enabled		=	commands.contains(DebuggingCommand.Pause)
+		resume.enabled		=	commands.contains(DebuggingCommand.Resume)
+		stop.enabled		=	commands.contains(DebuggingCommand.Halt)
+		stepInto.enabled	=	commands.contains(DebuggingCommand.StepInto)
+		stepOut.enabled		=	commands.contains(DebuggingCommand.StepOut)
+		stepOver.enabled	=	commands.contains(DebuggingCommand.StepOver)
 	}
 }
 
