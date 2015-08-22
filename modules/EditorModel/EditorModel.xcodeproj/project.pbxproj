@@ -29,6 +29,9 @@
 		4554CAB21B7DCD3A004987CC /* PreferenceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554CAB11B7DCD3A004987CC /* PreferenceModel.swift */; };
 		4554CAB61B7DCE05004987CC /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554CAB51B7DCE05004987CC /* ProjectModel.swift */; };
 		455978C71B86AE0300626F6B /* DebuggingTargetExecutionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455978C61B86AE0300626F6B /* DebuggingTargetExecutionModel.swift */; };
+		455978E31B87EA0400626F6B /* SelectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455978E21B87EA0400626F6B /* SelectionModel.swift */; };
+		455978E71B8813A100626F6B /* SwitchableValueStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455978E61B8813A100626F6B /* SwitchableValueStorage.swift */; };
+		455978E91B884E8200626F6B /* SelectionModel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455978E81B884E8200626F6B /* SelectionModel2.swift */; };
 		455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EE2091B7EDBF800D5AA56 /* ConsoleModel.swift */; };
 		455EE2101B7EDC1E00D5AA56 /* ReportingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */; };
 		45692BD61B86991E002ADB2A /* DebuggingFrameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45692BD51B86991E002ADB2A /* DebuggingFrameModel.swift */; };
@@ -185,6 +188,9 @@
 		4554CAB11B7DCD3A004987CC /* PreferenceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceModel.swift; sourceTree = "<group>"; };
 		4554CAB51B7DCE05004987CC /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		455978C61B86AE0300626F6B /* DebuggingTargetExecutionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingTargetExecutionModel.swift; sourceTree = "<group>"; };
+		455978E21B87EA0400626F6B /* SelectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionModel.swift; sourceTree = "<group>"; };
+		455978E61B8813A100626F6B /* SwitchableValueStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchableValueStorage.swift; sourceTree = "<group>"; };
+		455978E81B884E8200626F6B /* SelectionModel2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionModel2.swift; sourceTree = "<group>"; };
 		455EE2091B7EDBF800D5AA56 /* ConsoleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleModel.swift; sourceTree = "<group>"; };
 		455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportingModel.swift; sourceTree = "<group>"; };
 		45692BD51B86991E002ADB2A /* DebuggingFrameModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingFrameModel.swift; sourceTree = "<group>"; };
@@ -331,7 +337,9 @@
 				4554C9B71B7DC106004987CC /* Command.swift */,
 				45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */,
 				4554C9B81B7DC106004987CC /* ApplicationModel.swift */,
-				4554C9BA1B7DC106004987CC /* Selection.swift */,
+				455978EA1B885F6900626F6B /* (unused) */,
+				455978E81B884E8200626F6B /* SelectionModel2.swift */,
+				455978E61B8813A100626F6B /* SwitchableValueStorage.swift */,
 				4554C9BB1B7DC106004987CC /* WorkspaceModel.swift */,
 				45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */,
 				4554CAB51B7DCE05004987CC /* ProjectModel.swift */,
@@ -367,6 +375,15 @@
 				4554CA051B7DC308004987CC /* EditorCommonTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		455978EA1B885F6900626F6B /* (unused) */ = {
+			isa = PBXGroup;
+			children = (
+				4554C9BA1B7DC106004987CC /* Selection.swift */,
+				455978E21B87EA0400626F6B /* SelectionModel.swift */,
+			);
+			name = "(unused)";
 			sourceTree = "<group>";
 		};
 		45692BE61B86992B002ADB2A /* (debugging) */ = {
@@ -629,8 +646,10 @@
 				452B91CA1B8611FC00EAB775 /* DebuggingSupports.swift in Sources */,
 				455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */,
 				455978C71B86AE0300626F6B /* DebuggingTargetExecutionModel.swift in Sources */,
+				455978E71B8813A100626F6B /* SwitchableValueStorage.swift in Sources */,
 				45692BF01B869C2A002ADB2A /* DebuggingTargetModel.swift in Sources */,
 				452B91C81B8611E500EAB775 /* LLDBSupports.swift in Sources */,
+				455978E31B87EA0400626F6B /* SelectionModel.swift in Sources */,
 				4526B1251B8503370023C626 /* LLDBModel.swift in Sources */,
 				452B91751B855D5100EAB775 /* TOMLQueryTool.swift in Sources */,
 				4554C9BC1B7DC106004987CC /* Command.swift in Sources */,
@@ -638,6 +657,7 @@
 				4554CAB21B7DCD3A004987CC /* PreferenceModel.swift in Sources */,
 				45B185241B7F7626004E3B28 /* BuildModel.swift in Sources */,
 				45B185661B8048CA004E3B28 /* StringStreamProcessing.swift in Sources */,
+				455978E91B884E8200626F6B /* SelectionModel2.swift in Sources */,
 				45B185641B804833004E3B28 /* ShellTaskExecutionController.swift in Sources */,
 				451373471B7ED93700ED9829 /* DebuggingModel.swift in Sources */,
 				4554C9BD1B7DC106004987CC /* ApplicationModel.swift in Sources */,
