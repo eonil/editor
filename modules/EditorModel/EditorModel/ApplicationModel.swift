@@ -57,7 +57,13 @@ public class ApplicationModel: ModelRootNode {
 			return	_workspaces
 		}
 	}
+	@available(*,deprecated=0,renamed="defaultWorkspace")
 	public var currentWorkspace: ValueStorage<WorkspaceModel?> {
+		get {
+			return	_currentWorkspace
+		}
+	}
+	public var defaultWorkspace: ValueStorage<WorkspaceModel?> {
 		get {
 			return	_currentWorkspace
 		}

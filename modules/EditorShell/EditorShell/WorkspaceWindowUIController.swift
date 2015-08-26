@@ -25,7 +25,7 @@ public final class WorkspaceWindowUIController: CommonUIWindowController, Sessio
 	public func run() {
 		assert(model != nil)
 
-		_div.view.frame			=	CGRect(origin: CGPoint.zeroPoint, size: _getMinSize())
+		_div.view.frame			=	CGRect(origin: CGPoint.zero, size: _getMinSize())
 		window!.contentViewController	=	_div
 
 		///
@@ -132,7 +132,7 @@ private final class _Agent: NSObject, NSWindowDelegate {
 
 
 private func _getInitialFrameForScreen(screen: NSScreen, size: CGSize) -> CGRect {
-	let	f	=	CGRect(origin: screen.frame.midPoint, size: CGSize.zeroSize)
+	let	f	=	CGRect(origin: screen.frame.midPoint, size: CGSize.zero)
 	let	insets	=	NSEdgeInsets(top: -size.height/2, left: -size.width/2, bottom: -size.height/2, right: -size.width/2)
 	let	f2	=	insets.insetRect(f)
 	return	f2

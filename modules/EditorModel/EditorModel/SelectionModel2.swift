@@ -12,7 +12,7 @@ import Foundation
 /// over nodes in application model tree
 ///
 /// This is just a wrapped interface to model nodes. All selected
-/// nodes are all indirect access to preferable nodes of each nodes.
+/// nodes are all indirect access to "default node" of each nodes.
 ///
 public class SelectionModel2: ModelSubnode<ApplicationModel> {
 
@@ -31,8 +31,16 @@ public class SelectionModel2: ModelSubnode<ApplicationModel> {
 		workspace.registerWillSet(ObjectIdentifier(self)) { [weak self] in
 			self?.debuggingTarget.originStorage	=	nil
 		}
+		debuggingTarget.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+			print(self?.debuggingTarget.value)
+		}
+		debuggingTarget.registerWillSet(ObjectIdentifier(self)) { [weak self] in
+			print(self?.debuggingTarget.value)
+		}
 	}
 	public override func willLeaveModelRoot() {
+		debuggingTarget.deregisterWillSet(ObjectIdentifier(self))
+		debuggingTarget.deregisterDidSet(ObjectIdentifier(self))
 		workspace.deregisterWillSet(ObjectIdentifier(self))
 		workspace.deregisterDidSet(ObjectIdentifier(self))
 		workspace.originStorage		=	nil
@@ -49,4 +57,16 @@ extension SelectionModel2 {
 //	func switchToWorkspace(workspace: WorkspaceModel) {
 //	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

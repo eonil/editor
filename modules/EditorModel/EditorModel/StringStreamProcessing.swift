@@ -97,7 +97,7 @@ public final class UTF8StringDispatcher {
 //	}
 	public func push(d:NSData) {
 		let	p	=	UnsafeBufferPointer<UTF8.CodeUnit>(start: UnsafePointer<UTF8.CodeUnit>(d.bytes), count: d.length)
-		g.u8s.splice(p, atIndex: g.u8s.count)
+		g.u8s.insertContentsOf(p, at: g.u8s.count)
 		
 		var	ude	=	UTF8()
 		var	ok	=	true

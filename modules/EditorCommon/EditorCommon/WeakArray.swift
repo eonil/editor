@@ -28,10 +28,10 @@ public struct WeakArray<T: AnyObject> {
 		_array.append(Weak(o))
 	}
 	public mutating func extend<S: SequenceType where S.Generator.Element == T>(os: S) {
-		_array.extend(os.map({Weak($0)}))
+		_array.appendContentsOf(os.map({Weak($0)}))
 	}
 	public mutating func extend<C: CollectionType where C.Generator.Element == T>(os: C) {
-		_array.extend(os.map({Weak($0)}))
+		_array.appendContentsOf(os.map({Weak($0)}))
 	}
 	public mutating func insert(o: T, atIndex index: Int) {
 		_array.insert(Weak(o), atIndex: index)

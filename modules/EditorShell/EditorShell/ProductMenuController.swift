@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import MulticastingStorage
 import EditorCommon
 import EditorUICommon
 import EditorModel
@@ -38,19 +39,21 @@ class ProductMenuController: SessionProtocol {
 	func run() {
 		assert(model != nil)
 		_applyEnabledStates()
+
+		_didSetDefaultWorkspace()
 		model!.currentWorkspace.registerWillSet(ObjectIdentifier(self)) { [weak self] in
 			assert(self != nil)
-			self!._willSetCurrentWorkspace()
+			self!._didSetDefaultWorkspace()
 		}
 		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
 			assert(self != nil)
-			self!._didSetCurrentWorkspace()
+			self!._didSetDefaultWorkspace()
 		}
 
 		launch.clickHandler	=	{ [weak self] in self?._runLaunchOnCurrentWorkspace() }
 		build.clickHandler	=	{ [weak self] in self?._runBuildOnCurrentWorkspace() }
 		clean.clickHandler	=	{ [weak self] in self?._runCleanOnCurrentWorkspace() }
-		stop.clickHandler	=	{ [weak self] in self?._stopAnyBuildOperationOnCurrentWorkspace() }
+		stop.clickHandler	=	{ [weak self] in self?._stopAnyOnCurrentWorkspace() }
 
 	}
 	func halt() {
@@ -62,50 +65,87 @@ class ProductMenuController: SessionProtocol {
 
 		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
 		model!.currentWorkspace.deregisterWillSet(ObjectIdentifier(self))
+		_willSetDefaultWorkspace()
 	}
 
 	///
 
-//	private let	_workspaceToBuildCommandRouting	=	SelectionChain<WorkspaceModel,Set<BuildCommand>> { $0.build.runnableCommands }
-//	private let	_workspaceToTargetRouting	=	SelectionChain<WorkspaceModel,DebuggingTargetModel?> { $0.debug.currentTarget }
-
 	private func _install() {
-//		_workspaceToTargetRouting.storage			=	model!.currentWorkspace
-//		_workspaceToTargetRouting.didSetSubstorageValue		=	{ [weak self] in self!._didSetCurrentTarget($0) }
-//		_workspaceToTargetRouting.willSetSubstorageValue	=	{ [weak self] in self!._willSetCurrentTarget($0) }
 	}
 	private func _deinstall() {
-//		_workspaceToTargetRouting.didSetSubstorageValue		=	nil
-//		_workspaceToTargetRouting.willSetSubstorageValue	=	nil
-//		_workspaceToTargetRouting.storage			=	nil
-
 	}
-	private func _didSetCurrentWorkspace() {
+	private func _didSetDefaultWorkspace() {
 		assert(model != nil)
-
 		if let ws = model!.currentWorkspace.value {
 			_applyEnabledStates()
 			ws.build.runnableCommands.registerDidSet(ObjectIdentifier(self)) { [weak self] in
 				assert(self != nil)
 				self!._handleCurrentWorkspaceBuildCommandsDidSet()
 			}
+			ws.build.runnableCommands.registerWillSet(ObjectIdentifier(self)) { [weak self] in
+				assert(self != nil)
+			}
+			ws.debug.currentTarget.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+				if let target = self!.model!.currentWorkspace.value!.debug.currentTarget.value {
+					self!._didSetExecution()
+					target.execution.registerDidSet(ObjectIdentifier(self!)) { [weak self] in
+						self!._didSetExecution()
+					}
+					target.execution.registerWillSet(ObjectIdentifier(self!)) { [weak self] in
+						self!._willSetExecution()
+					}
+					self!._willSetExecution()
+				}
+			}
+			ws.debug.currentTarget.registerWillSet(ObjectIdentifier(self)) { [weak self] in
+				if let target = self!.model!.currentWorkspace.value!.debug.currentTarget.value {
+					target.execution.deregisterWillSet(ObjectIdentifier(self!))
+					target.execution.deregisterDidSet(ObjectIdentifier(self!))
+				}
+			}
 		}
 		else {
 
 		}
 	}
-	private func _willSetCurrentWorkspace() {
+	private func _willSetDefaultWorkspace() {
 		if let ws = model!.currentWorkspace.value {
+			ws.build.runnableCommands.deregisterWillSet(ObjectIdentifier(self))
 			ws.build.runnableCommands.deregisterDidSet(ObjectIdentifier(self))
 			_applyEnabledStates()
 		}
 	}
 
-	private func _didSetCurrentTarget(t: DebuggingTargetModel?) {
+	private func _didSetDefaultTarget(t: DebuggingTargetModel?) {
 		_applyEnabledStates()
 	}
-	private func _willSetCurrentTarget(t: DebuggingTargetModel?) {
-
+	private func _willSetDefaultTarget(t: DebuggingTargetModel?) {
+	}
+	private func _didSetExecution() {
+		if let execution = model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value {
+			_didSetExecutionState()
+			execution.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+				self!._didSetExecutionState()
+			}
+			execution.state.registerWillSet(ObjectIdentifier(self)) { [weak self] in
+				self!._willSetExecutionState()
+			}
+		}
+		_applyEnabledStates()
+	}
+	private func _willSetExecution() {
+		if let execution = model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value {
+			execution.state.deregisterDidSet(ObjectIdentifier(self))
+			execution.state.deregisterWillSet(ObjectIdentifier(self))
+			_willSetExecutionState()
+		}
+		_applyEnabledStates()
+	}
+	private func _didSetExecutionState() {
+		_applyEnabledStates()
+	}
+	private func _willSetExecutionState() {
+		_applyEnabledStates()
 	}
 
 	private func _handleCurrentWorkspaceBuildCommandsDidSet() {
@@ -152,13 +192,32 @@ class ProductMenuController: SessionProtocol {
 			ws.build.runClean()
 		}
 	}
-	private func _stopAnyBuildOperationOnCurrentWorkspace() {
+	private func _stopAnyOnCurrentWorkspace() {
 		assert(model!.currentWorkspace.value != nil)
 		if let ws = model!.currentWorkspace.value {
 			ws.build.stop()
+			ws.debug.currentTarget.value?.halt()
 		}
 	}
 }
+
+
+
+
+
+private final class _Agent: ValueStorageDelegate {
+	weak var owner: ProductMenuController?
+	private func didSet() {
+
+	}
+	private func willSet() {
+
+	}
+}
+
+
+
+
 
 
 

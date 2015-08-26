@@ -48,6 +48,11 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 			return	_runnableCommands
 		}
 	}
+	public var state: ValueStorage<LLDBStateType> {
+		get {
+			return	_state
+		}
+	}
 
 	public func runCommand(command: DebuggingCommand) {
 		switch command {
@@ -121,6 +126,7 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 	private let	_eventWaiter		=	DebuggingEventWaiter()
 
 	private let	_runnableCommands	=	MutableValueStorage<Set<DebuggingCommand>>([])
+	private let	_state			=	MutableValueStorage<LLDBStateType>(.Invalid)
 
 	///
 
@@ -145,18 +151,7 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 
 	private func _handleEvent(e: LLDBEvent) {
 		Debug.assertMainThread()
-
-		//		switch _lldbProcess!.state {
-		//		case .Exited:
-		//			fallthrough
-		//		case .Detached:
-		//			fallthrough
-		//		case .Crashed:
-		//			fallthrough
-		//		case .Invalid:
-		//			_lldbProcess.qui
-		//		}
-
+		_state.value	=	_lldbProcess.state
 		_reapplyRunnableCommandState()
 	}
 

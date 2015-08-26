@@ -1,8 +1,8 @@
 //
-//  SwitchableValueStorage.swift
+//  SwitchableValueStorage2.swift
 //  EditorModel
 //
-//  Created by Hoon H. on 2015/08/22.
+//  Created by Hoon H. on 2015/08/23.
 //  Copyright © 2015 Eonil. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ import MulticastingStorage
 /// Also this tracks the origin-storage, and routes `didSet/willSet`
 /// events to handlers.
 ///
-public class SwitchableValueStorage<T> {
+public class SwitchableValueStorage2<T> {
 
 	internal weak var originStorage: ValueStorage<T?>? {
 		didSet{
@@ -50,39 +50,41 @@ public class SwitchableValueStorage<T> {
 		}
 	}
 
-	public func registerDidSet(identifier: ObjectIdentifier, handler: ()->()) {
-		assert(_handlerMaps.didSet[identifier] == nil)
-		_handlerMaps.didSet[identifier]		=	handler
-	}
-	public func registerWillSet(identifier: ObjectIdentifier, handler: ()->()) {
-		assert(_handlerMaps.willSet[identifier] == nil)
-		_handlerMaps.willSet[identifier]	=	handler
-	}
-	public func deregisterDidSet(identifier: ObjectIdentifier) {
-		assert(_handlerMaps.didSet[identifier] != nil)
-		_handlerMaps.didSet[identifier]		=	nil
-	}
-	public func deregisterWillSet(identifier: ObjectIdentifier) {
-		assert(_handlerMaps.willSet[identifier] != nil)
-		_handlerMaps.willSet[identifier]	=	nil
+	///
+
+	public typealias	Handlers	=	(didSet: ()->(), willSet: ()->())
+	public subscript(identifier: ObjectIdentifier) -> Handlers? {
+		get {
+			return	_handlersMap[identifier]
+		}
+		set {
+			assert(newValue == nil && _handlersMap[identifier] != nil)
+			assert(newValue != nil && _handlersMap[identifier] == nil)
+			_handlersMap[identifier]		=	newValue
+		}
 	}
 
 	///
 
-	private typealias	_Handler	=	()->()
-	private var		_handlerMaps	=	(didSet: [ObjectIdentifier: _Handler](), willSet: [ObjectIdentifier: _Handler]())
+	private var		_handlersMap	=	[ObjectIdentifier: Handlers]()
 
 	///
 
 	private func _handleOriginDidSetValue() {
-		for handler in _handlerMaps.didSet.values {
-			handler()
+		for handlers in _handlersMap.values {
+			handlers.didSet()
 		}
 	}
 	private func _handleOriginWillSetValue() {
-		for handler in _handlerMaps.willSet.values {
-			handler()
+		for handlers in _handlersMap.values {
+			handlers.willSet()
 		}
 	}
 }
+
+
+
+
+
+
 
