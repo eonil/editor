@@ -343,9 +343,6 @@
 				45C87DC11B8BF7F600E75A5B /* ImmediateCommandModel.swift */,
 				4554C9B81B7DC106004987CC /* ApplicationModel.swift */,
 				455978EA1B885F6900626F6B /* (unused) */,
-				455978E81B884E8200626F6B /* SelectionModel2.swift */,
-				455978E61B8813A100626F6B /* SwitchableValueStorage.swift */,
-				455978EB1B897E0300626F6B /* SwitchableValueStorage2.swift */,
 				4554C9BB1B7DC106004987CC /* WorkspaceModel.swift */,
 				45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */,
 				4554CAB51B7DCE05004987CC /* ProjectModel.swift */,
@@ -386,6 +383,9 @@
 		455978EA1B885F6900626F6B /* (unused) */ = {
 			isa = PBXGroup;
 			children = (
+				455978E81B884E8200626F6B /* SelectionModel2.swift */,
+				455978E61B8813A100626F6B /* SwitchableValueStorage.swift */,
+				455978EB1B897E0300626F6B /* SwitchableValueStorage2.swift */,
 				4554C9BA1B7DC106004987CC /* Selection.swift */,
 				455978E21B87EA0400626F6B /* SelectionModel.swift */,
 			);

@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E197FC5339120FD6BBF1327A27ADC9BE16798D67",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "E197FC5339120FD6BBF1327A27ADC9BE16798D67" : 0,
+    "48B9C1DE76C8BEA5F768021CB65ADA820F587B93" : 0,
+    "DB99111A89C5E3C26C7640D6805A963455F22D50" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "E5BAE3EA-16A5-4BA1-AEA7-6ED0619E221E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "E197FC5339120FD6BBF1327A27ADC9BE16798D67" : "Editor2\/",
+    "48B9C1DE76C8BEA5F768021CB65ADA820F587B93" : "Editor2\/submodules\/LLDBWrapper\/",
+    "DB99111A89C5E3C26C7640D6805A963455F22D50" : "Editor2\/submodules\/MulticastingStorage\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "EditorDebugUIOnly",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "modules\/EditorDebugUI\/EditorDebugUIOnly.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Eonil\/LLDBWrapper",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "48B9C1DE76C8BEA5F768021CB65ADA820F587B93"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Eonil\/MulticastingStorage",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DB99111A89C5E3C26C7640D6805A963455F22D50"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Eonil\/Editor",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E197FC5339120FD6BBF1327A27ADC9BE16798D67"
+    }
+  ]
+}

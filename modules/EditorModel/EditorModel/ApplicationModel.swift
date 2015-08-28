@@ -32,10 +32,10 @@ public class ApplicationModel: ModelRootNode {
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
 		_preference.owner	=	self
-		_selection.owner	=	self
+//		_selection.owner	=	self
 	}
 	override func willLeaveModelRoot() {
-		_selection.owner	=	nil
+//		_selection.owner	=	nil
 		_preference.owner	=	nil
 		super.willLeaveModelRoot()
 	}
@@ -68,11 +68,11 @@ public class ApplicationModel: ModelRootNode {
 			return	_currentWorkspace
 		}
 	}
-	public var selection: SelectionModel2 {
-		get {
-			return	_selection
-		}
-	}
+//	public var selection: SelectionModel2 {
+//		get {
+//			return	_selection
+//		}
+//	}
 
 	///
 
@@ -172,7 +172,7 @@ public class ApplicationModel: ModelRootNode {
 	private let	_preference		=	PreferenceModel()
 	private let	_workspaces		=	MutableArrayStorage<WorkspaceModel>([])
 	private let	_currentWorkspace	=	MutableValueStorage<WorkspaceModel?>(nil)
-	private let	_selection		=	SelectionModel2()
+//	private let	_selection		=	SelectionModel2()
 
 	private func _nextWorkspaceOfWorkspace(workspace: WorkspaceModel) -> WorkspaceModel? {
 		if let idx = _indexOfWorkspace(workspace) {

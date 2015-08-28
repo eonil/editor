@@ -53,9 +53,10 @@ class ToolUIController {
 	private var	_isRunning	=	false
 
 	///
-	
+
 	private func _installToolItems() {
-//		_divsel.trackingMode	=	.SelectAny
+		(_divsel.cell as! NSSegmentedCell).trackingMode		=	NSSegmentSwitchTracking.SelectAny
+
 		_divsel.segmentCount	=	3
 		_divsel.setLabel("Navigator", forSegment: 0)
 		_divsel.setLabel("Editor", forSegment: 1)

@@ -108,9 +108,9 @@ class DivisionUIController: CommonUIController {
 	}
 
 	private func _applyNavigationPaneDisplayState() {
-		_outerSplit.items[0].isCollapsed	=	model!.UI.navigationPane.value
-		_innerSplit.items[2].isCollapsed	=	model!.UI.consolePane.value
-		_outerSplit.items[2].isCollapsed	=	model!.UI.inspectionPane.value
+		_outerSplit.items[0].isCollapsed	=	model!.UI.navigationPane.value == false
+		_innerSplit.items[2].isCollapsed	=	model!.UI.consolePane.value == false
+		_outerSplit.items[2].isCollapsed	=	model!.UI.inspectionPane.value == false
 	}
 }
 

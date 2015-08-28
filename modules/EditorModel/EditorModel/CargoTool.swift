@@ -190,7 +190,7 @@ class CargoTool {
 			}
 		}
 
-		_shell.standardOutput.readabilityHandler	=	{ [weak self] in self?._handleOutputInNonMainThread($0.availableData) }
+		_shell.standardOutput.readabilityHandler	=	{ [unowned self] in self._handleOutputInNonMainThread($0.availableData) }
 		_stdoutStrDisp.onString				=	{ [weak self] in self?._stdoutLineDisp.push($0) }
 		_stdoutLineDisp.onLine				=	{ [weak self] in self?._handleOutputLineInNonMainThread($0) }
 

@@ -74,6 +74,7 @@ class ProductMenuController: SessionProtocol {
 	}
 	private func _deinstall() {
 	}
+
 	private func _didSetDefaultWorkspace() {
 		assert(model != nil)
 		if let ws = model!.currentWorkspace.value {
@@ -121,6 +122,7 @@ class ProductMenuController: SessionProtocol {
 	}
 	private func _willSetDefaultTarget(t: DebuggingTargetModel?) {
 	}
+
 	private func _didSetExecution() {
 		if let execution = model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value {
 			_didSetExecutionState()
@@ -147,6 +149,8 @@ class ProductMenuController: SessionProtocol {
 	private func _willSetExecutionState() {
 		_applyEnabledStates()
 	}
+
+	///
 
 	private func _handleCurrentWorkspaceBuildCommandsDidSet() {
 		_applyEnabledStates()
