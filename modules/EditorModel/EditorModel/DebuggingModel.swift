@@ -42,6 +42,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
+	public let	event		=	DebuggingEventWaiter()
 	public let	selection	=	ExecutionStateSelectionModel()
 //	public let	inspection	=	ExecutionStateInspectionModel()
 
@@ -115,22 +116,27 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 	private let	_currentTarget		=	MutableValueStorage<DebuggingTargetModel?>(nil)
 
 	private let	_lldbDebugger		=	LLDBDebugger()
+	private let	_eventWaiter		=	DebuggingEventWaiter()
 
 	///
 
 	private func _install() {
+		event.owner			=	self
 		selection.owner			=	self
 //		inspection.owner		=	self
+
 	}
 	private func _deinstall() {
 //		inspection.owner		=	nil
 		selection.owner			=	nil
+		event.owner			=	nil
 	}
 
 //	public class StackFrame {
 //	}
 //	public class FrameVariable {
 //	}
+
 }
 
 

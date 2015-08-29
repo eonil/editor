@@ -26,7 +26,7 @@ class VariableNodeView: NSTableCellView {
 					return	""
 				}
 
-				return	"\(data!.name) = \(data!.type) \(data!.value)"
+				return	"\(data!.name) = (\(data!.type)) \(data!.value)"
 
 			}
 			_exprField.stringValue	=	getExpr()
@@ -35,16 +35,35 @@ class VariableNodeView: NSTableCellView {
 
 	///
 
+	override func viewDidMoveToWindow() {
+		super.viewDidMoveToWindow()
+		if window != nil {
+			_install()
+		}
+	}
+	override func viewWillMoveToWindow(newWindow: NSWindow?) {
+		if window != nil {
+			_deinstall()
+		}
+		super.viewWillMoveToWindow(newWindow)
+	}
+
+	///
+
 	private let	_iconView	=	NSImageView()
-	private let	_exprField	=	NSTextField()
+	private let	_exprField	=	CommonComponentFactory.instantiateNodeTextField()
 
 	private func _install() {
 		assert(self.imageView === nil)
 		assert(self.textField === nil)
 		self.imageView	=	_iconView
 		self.textField	=	_exprField
+		addSubview(_iconView)
+		addSubview(_exprField)
 	}
 	private func _deinstall() {
+		_exprField.removeFromSuperview()
+		_iconView.removeFromSuperview()
 		self.textField	=	nil
 		self.imageView	=	nil
 	}

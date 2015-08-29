@@ -34,33 +34,29 @@ class ContextTreeUIController: CommonUIController {
 	///
 
 	private let	_treeView	=	ContextTreeView()
-//	private let	_targetsAgent	=	_TargetArrayAgent()
-	private let	_waitingQueue	=	dispatch_queue_create("ContextTreeUIController/DebuggerEventWaiter", DISPATCH_QUEUE_SERIAL)
-	private var	_isRunning	=	false
 
 	private func _install() {
 		assert(model != nil)
+
 		_treeView.reconfigure(model!.debugger)
-		_treeView.onUserDidSelectFrame		=	{ [weak self] in
-			self?._didSelectFrame()
+		_treeView.onUserDidSetFrame		=	{ [weak self] in
+			self?._didSetFrame()
 		}
-		_treeView.onUserWillDeselectFrame	=	{ [weak self] in
-			self?._willDeselectFrame()
+		_treeView.onUserWillSetFrame	=	{ [weak self] in
+			self?._willSetFrame()
 		}
 		view.addSubview(_treeView)
 
-		_isRunning	=	true
-		_waitDebuggerEvents()
-//		model!.targets.register(_targetsAgent)
+		model!.event.register(ObjectIdentifier(self)) { [weak self] in self?._handleEvent($0) }
 	}
 	private func _deinstall() {
 		assert(model != nil)
 
-		_isRunning	=	false
+		model!.event.deregister(ObjectIdentifier(self))
 
 		_treeView.removeFromSuperview()
-		_treeView.onUserWillDeselectFrame	=	nil
-		_treeView.onUserDidSelectFrame		=	nil
+		_treeView.onUserWillSetFrame	=	nil
+		_treeView.onUserDidSetFrame		=	nil
 		_treeView.reconfigure(nil)
 	}
 	private func _layout() {
@@ -69,70 +65,16 @@ class ContextTreeUIController: CommonUIController {
 
 	///
 
-	private func _didSelectFrame() {
-		model!.selection.selectFrame(_treeView.currentFrame!)
+	private func _didSetFrame() {
+		model!.selection.setFrame(_treeView.currentFrame)
 	}
-	private func _willDeselectFrame() {
-		model!.selection.deselectFrame()
+	private func _willSetFrame() {
 	}
 
 	///
 
-	private func _waitDebuggerEvents() {
-		guard _isRunning == true else {
-			return
-		}
-
-		let	dbg	=	model!.debugger
-		dispatch_async(_waitingQueue) { [weak self] in
-			Debug.assertNonMainThread()
-			if let e = dbg.listener.waitForEvent(1) {
-				dispatchToMainQueueAsynchronously { [weak self] in
-					Debug.assertMainThread()
-					self?._processEvent(e)
-					self?._waitDebuggerEvents()
-				}
-			}
-			else {
-				dispatchToMainQueueAsynchronously { [weak self] in
-					Debug.assertMainThread()
-					self?._waitDebuggerEvents()
-				}
-			}
-		}
-	}
-
-	private func _processEvent(e: LLDBEvent) {
-		Debug.assertMainThread()
-		Debug.log(e)
+	private func _handleEvent(e: LLDBEvent) {
 		_treeView.reconfigure(model!.debugger)
-		_waitDebuggerEvents()
-	}
-//	private func _didSetProcessState() {
-//
-//	}
-}
-
-
-private final class _TargetArrayAgent: ArrayStorageDelegate {
-	weak var owner: ContextTreeUIController?
-	private func willInsertRange(range: Range<Int>) {
-
-	}
-	private func didInsertRange(range: Range<Int>) {
-
-	}
-	private func willUpdateRange(range: Range<Int>) {
-
-	}
-	private func didUpdateRange(range: Range<Int>) {
-
-	}
-	private func willDeleteRange(range: Range<Int>) {
-
-	}
-	private func didDeleteRange(range: Range<Int>) {
-
 	}
 }
 

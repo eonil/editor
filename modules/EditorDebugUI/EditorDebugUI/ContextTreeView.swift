@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import LLDBWrapper
 import MulticastingStorage
+import EditorCommon
 import EditorUICommon
 
 public class ContextTreeView: CommonUIView {
@@ -20,12 +21,29 @@ public class ContextTreeView: CommonUIView {
 //	public var onUserDidSelectThread	:	(()->())?
 //	public var onUserWillDeselectThread	:	(()->())?
 
-	public var onUserDidSelectFrame		:	(()->())?
-	public var onUserWillDeselectFrame	:	(()->())?
+	public var onUserDidSetFrame		:	(()->())?
+	public var onUserWillSetFrame		:	(()->())?
 
 	public func reconfigure(debugger: LLDBDebugger?) {
 		_dataTree.reconfigure(debugger)
 		_outlineV.reloadData()
+
+		// Select first frame of current thread.
+		if let f = currentFrame {
+			if let n = _dataTree.nodeForThread(f.thread) {
+				if let firstFrameNode = n.frames.first {
+					let	idx	=	_outlineV.rowForItem(firstFrameNode)
+					if idx != NSNotFound {
+						_outlineV.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: false)
+						_outlineV.selectedRow
+
+						if currentFrame?.frameID != firstFrameNode.data?.frameID {
+							currentFrame	=	firstFrameNode.data
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public override func installSubcomponents() {
@@ -67,14 +85,10 @@ public class ContextTreeView: CommonUIView {
 //	}
 	public private(set) var currentFrame: LLDBFrame? {
 		didSet {
-			if currentFrame != nil {
-				onUserDidSelectFrame?()
-			}
+			onUserDidSetFrame?()
 		}
 		willSet {
-			if currentFrame != nil {
-				onUserWillDeselectFrame?()
-			}
+			onUserWillSetFrame?()
 		}
 	}
 
@@ -243,6 +257,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 		
 		return	true
 	}
+
 }
 
 

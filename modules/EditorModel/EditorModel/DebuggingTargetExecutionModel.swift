@@ -132,14 +132,17 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 
 	private func _install() {
 		_reapplyRunnableCommandState()
-		_eventWaiter.onEvent	=	{ [weak self] in self?._handleEvent($0) }
-		_lldbProcess.addListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
-		_eventWaiter.run()
+
+		target.debugging.event.register(ObjectIdentifier(self)) { [weak self] in self?._handleEvent($0) }
+//		_eventWaiter.onEvent	=	{ [weak self] in self?._handleEvent($0) }
+//		_lldbProcess.addListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
+//		_eventWaiter.run()
 	}
 	private func _deinstall() {
-		_eventWaiter.halt()
-		_lldbProcess.removeListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
-		_eventWaiter.onEvent	=	nil
+//		_eventWaiter.halt()
+//		_lldbProcess.removeListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
+//		_eventWaiter.onEvent	=	nil
+		target.debugging.event.deregister(ObjectIdentifier(self))
 		_reapplyRunnableCommandState()
 	}
 

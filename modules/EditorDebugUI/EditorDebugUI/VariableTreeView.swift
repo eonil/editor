@@ -9,8 +9,10 @@
 import Foundation
 import AppKit
 import LLDBWrapper
+import EditorCommon
+import EditorUICommon
 
-public class VariableTreeView: NSView {
+public class VariableTreeView: CommonUIView {
 
 	public var onUserDidSelectVariable	:	(()->())?
 	public var onUserWillDeselectVariable	:	(()->())?
@@ -35,24 +37,44 @@ public class VariableTreeView: NSView {
 
 	///
 
-	private let	_outlineView	=	NSOutlineView()
+	public override func installSubcomponents() {
+		super.installSubcomponents()
+		_install()
+	}
+	public override func deinstallSubcomponents() {
+		_deinstall()
+		super.deinstallSubcomponents()
+	}
+	public override func layoutSubcomponents() {
+		super.layoutSubcomponents()
+		_layout()
+	}
+
+	///
+
+	private let	_scrollView	=	NSScrollView()
+	private let	_outlineView	=	_instantiateOutlineView()
 	private let	_outlineAgent	=	_VariableTreeAgent()
 	private let	_dataTree	=	VariableTree()
 
 	///
 
 	private func _install() {
+		_outlineAgent.owner		=	self
 		_outlineView.setDataSource(_outlineAgent)
 		_outlineView.setDelegate(_outlineAgent)
-		addSubview(_outlineView)
+		_scrollView.documentView	=	_outlineView
+		addSubview(_scrollView)
 	}
 	private func _deinstall() {
-		_outlineView.removeFromSuperview()
+		_scrollView.removeFromSuperview()
+		_scrollView.documentView	=	nil
 		_outlineView.setDataSource(nil)
 		_outlineView.setDelegate(nil)
+		_outlineAgent.owner		=	nil
 	}
 	private func _layout() {
-		_outlineView.frame	=	bounds
+		_scrollView.frame		=	bounds
 	}
 
 	///
@@ -81,6 +103,13 @@ private final class _VariableTreeAgent: NSObject, NSOutlineViewDataSource, NSOut
 			return	node.subvariables.count
 		}
 		fatalError("Unknown node type.")
+	}
+	@objc
+	private func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
+		if let node = item as? VariableNode {
+			return	node.subvariables.count > 0
+		}
+		return	false
 	}
 	@objc
 	private func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
@@ -120,7 +149,7 @@ private extension LLDBValue {
 		return	VariableNodeView.Data(
 			name	:	self.name,
 			type	:	self.typeName,
-			value	:	self.valueExpression
+			value	:	self.valueExpression ?? "(none)"
 		)
 	}
 }
@@ -133,6 +162,30 @@ private extension NSIndexSet {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private func _instantiateOutlineView() -> NSOutlineView {
+	let	c	=	NSTableColumn()
+	let	v	=	NSOutlineView()
+	v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
+	v.addTableColumn(c)
+	v.outlineTableColumn	=	c
+	return	v
+}
 
 
 

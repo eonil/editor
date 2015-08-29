@@ -40,10 +40,12 @@ class VariableTreeUIController: CommonUIController {
 		_didSetFrame()
 		model!.selection.frame.registerDidSet(ObjectIdentifier(self)) { [weak self] in self!._didSetFrame() }
 		model!.selection.frame.registerWillSet(ObjectIdentifier(self)) { [weak self] in self!._willSetFrame() }
+		model!.event.register(ObjectIdentifier(self)) { [weak self] in self?._handleEvent($0) }
 	}
 	private func _deinstall() {
 		assert(model != nil)
 
+		model!.event.deregister(ObjectIdentifier(self))
 		model!.selection.frame.deregisterDidSet(ObjectIdentifier(self))
 		model!.selection.frame.deregisterWillSet(ObjectIdentifier(self))
 		_willSetFrame()
@@ -65,6 +67,16 @@ class VariableTreeUIController: CommonUIController {
 		if let _ = model!.selection.frame.value {
 			_treeView.reconfigure(nil)
 		}
+	}
+
+	private func _handleEvent(event: LLDBEvent) {
+		if let frame = model!.selection.frame.value {
+			_treeView.reconfigure(frame)
+		}
+		else {
+			_treeView.reconfigure(nil)
+		}
+
 	}
 }
 

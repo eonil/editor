@@ -27,15 +27,9 @@ public class ExecutionStateSelectionModel: ModelSubnode<DebuggingModel> {
 			return	_frame
 		}
 	}
-	public func selectFrame(frame: LLDBFrame) {
+	public func setFrame(frame: LLDBFrame?) {
 		assert(owner != nil)
-		assert(_frame.value == nil)
 		_frame.value	=	frame
-	}
-	public func deselectFrame() {
-		assert(owner != nil)
-		assert(_frame.value != nil)
-		_frame.value	=	nil
 	}
 
 	///

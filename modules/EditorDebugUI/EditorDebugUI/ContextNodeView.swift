@@ -77,7 +77,7 @@ class ContextNodeView: NSTableCellView {
 	///
 
 	private let	_iconView	=	NSImageView()
-	private let	_exprField	=	_instantiateTextField()
+	private let	_exprField	=	CommonComponentFactory.instantiateNodeTextField()
 
 	private func _install() {
 		assert(self.imageView === nil)
@@ -102,14 +102,6 @@ class ContextNodeView: NSTableCellView {
 
 
 
-
-
-private func _instantiateTextField() -> NSTextField {
-	let	v		=	NSTextField()
-	v.bezeled		=	false
-	v.backgroundColor	=	NSColor.clearColor()
-	return	v
-}
 
 
 

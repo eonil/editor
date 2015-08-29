@@ -25,13 +25,15 @@ class VariableTree {
 
 class VariableNode: DataNode {
 
-	func loadSubvariables() {
-		_isLoaded	=	true
-		_reloadSubvariables()
-	}
-	func unloadSubvariables() {
-		subvariables	=	[]
-		_isLoaded	=	false
+	private(set) var	data		:	LLDBValue?
+
+	var subvariables: [VariableNode] {
+		get {
+			if _isLoaded == false {
+				_loadSubvariables()
+			}
+			return	_subvariables
+		}
 	}
 	func reconfigure(data: LLDBValue?) {
 		_reconfigure(data)
@@ -39,21 +41,22 @@ class VariableNode: DataNode {
 
 	///
 
-	private(set) var	data		:	LLDBValue?
-	private(set) var	subvariables	=	[VariableNode]()
-	private var		_isLoaded	=	false
+	private var	_subvariables	=	[VariableNode]()
+	private var	_isLoaded	=	false
 
 	///
 	
 	private func _reconfigure(data: LLDBValue?) {
 		self.data		=	data
 		if _isLoaded {
-			_reloadSubvariables()
+			_loadSubvariables()
 		}
 	}
 
-	private func _reloadSubvariables() {
-		self.subvariables	=	newListWithReusingNodeForSameDataID(subvariables, newDataList: data?.allAvailableChildren ?? [], instantiate: _instantiateVariableNode)
+	private func _loadSubvariables() {
+		assert(_isLoaded == false)
+		_subvariables		=	newListWithReusingNodeForSameDataID(_subvariables, newDataList: data?.allAvailableChildren ?? [], instantiate: _instantiateVariableNode)
+		_isLoaded		=	true
 	}
 }
 

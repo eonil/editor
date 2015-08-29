@@ -26,6 +26,37 @@ class ContextTree {
 		self.processes		=	newListWithReusingNodeForSameDataID(processes, newDataList: newDataList, instantiate: _instantiateProcessNode)
 	}
 
+	func nodeForProcess(process: LLDBProcess) -> ProcessNode? {
+		for p in processes {
+			if p.data?.processID == process.processID {
+				return	p
+			}
+		}
+		return	nil
+	}
+	func nodeForThread(thread: LLDBThread) -> ThreadNode? {
+		assert(thread.process != nil)
+		if let p = nodeForProcess(thread.process!) {
+			for t in p.threads {
+				if t.data!.threadID == thread.threadID {
+					return	t
+				}
+			}
+		}
+		return	nil
+	}
+	func nodeForFrame(frame: LLDBFrame) -> FrameNode? {
+		assert(frame.thread != nil)
+		if let t = nodeForThread(frame.thread) {
+			for f in t.frames {
+				if f.data!.frameID == frame.frameID {
+					return	f
+				}
+			}
+		}
+		return	nil
+	}
+
 	///
 	
 	private(set) var processes	=	[ProcessNode]()

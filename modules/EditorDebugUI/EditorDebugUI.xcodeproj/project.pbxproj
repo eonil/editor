@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		45B5EB041B9144A700C4247A /* VariableTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5EB031B9144A700C4247A /* VariableTree.swift */; settings = {ASSET_TAGS = (); }; };
 		45B5EB131B9144B300C4247A /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5EB121B9144B300C4247A /* Utility.swift */; settings = {ASSET_TAGS = (); }; };
+		45B5EBFB1B9178EB00C4247A /* CommonComponentFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5EBFA1B9178EB00C4247A /* CommonComponentFactory.swift */; settings = {ASSET_TAGS = (); }; };
 		45C378931B8FD96900F5B984 /* ContextTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C378921B8FD96900F5B984 /* ContextTreeView.swift */; settings = {ASSET_TAGS = (); }; };
 		45C378991B8FDA5100F5B984 /* VariableTreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C378981B8FDA5100F5B984 /* VariableTreeView.swift */; settings = {ASSET_TAGS = (); }; };
 		45C3789B1B8FDA6A00F5B984 /* VariableNodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3789A1B8FDA6A00F5B984 /* VariableNodeView.swift */; settings = {ASSET_TAGS = (); }; };
@@ -117,6 +118,7 @@
 /* Begin PBXFileReference section */
 		45B5EB031B9144A700C4247A /* VariableTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTree.swift; sourceTree = "<group>"; };
 		45B5EB121B9144B300C4247A /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		45B5EBFA1B9178EB00C4247A /* CommonComponentFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonComponentFactory.swift; sourceTree = "<group>"; };
 		45C3786B1B8FD8B500F5B984 /* EditorDebugUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorDebugUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C378701B8FD8B500F5B984 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45C378921B8FD96900F5B984 /* ContextTreeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextTreeView.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				45C378981B8FDA5100F5B984 /* VariableTreeView.swift */,
 				45B5EB031B9144A700C4247A /* VariableTree.swift */,
 				45C3789A1B8FDA6A00F5B984 /* VariableNodeView.swift */,
+				45B5EBFA1B9178EB00C4247A /* CommonComponentFactory.swift */,
 				45B5EB121B9144B300C4247A /* Utility.swift */,
 				45C378701B8FD8B500F5B984 /* Info.plist */,
 			);
@@ -414,6 +417,7 @@
 				45B5EB131B9144B300C4247A /* Utility.swift in Sources */,
 				45C378F91B90A06A00F5B984 /* ContextNodeView.swift in Sources */,
 				45B5EB041B9144A700C4247A /* VariableTree.swift in Sources */,
+				45B5EBFB1B9178EB00C4247A /* CommonComponentFactory.swift in Sources */,
 				45C379611B9135C300F5B984 /* ContextTree.swift in Sources */,
 				45C378991B8FDA5100F5B984 /* VariableTreeView.swift in Sources */,
 				45C3789B1B8FDA6A00F5B984 /* VariableNodeView.swift in Sources */,

@@ -44,6 +44,7 @@
 		45B185641B804833004E3B28 /* ShellTaskExecutionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185631B804833004E3B28 /* ShellTaskExecutionController.swift */; };
 		45B185661B8048CA004E3B28 /* StringStreamProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185651B8048CA004E3B28 /* StringStreamProcessing.swift */; };
 		45B185681B804B2B004E3B28 /* CargoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185671B804B2B004E3B28 /* CargoModel.swift */; };
+		45B5EC281B91897E00C4247A /* DebuggingEventWaiter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5EC271B91897E00C4247A /* DebuggingEventWaiter.swift */; settings = {ASSET_TAGS = (); }; };
 		45C3793D1B90B28A00F5B984 /* ExecutionStateInspectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3793B1B90B28A00F5B984 /* ExecutionStateInspectionModel.swift */; settings = {ASSET_TAGS = (); }; };
 		45C3793E1B90B28A00F5B984 /* ExecutionStateSelectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3793C1B90B28A00F5B984 /* ExecutionStateSelectionModel.swift */; settings = {ASSET_TAGS = (); }; };
 		45C77AED1B7F1DD80064C363 /* CommandQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */; };
@@ -207,6 +208,7 @@
 		45B185631B804833004E3B28 /* ShellTaskExecutionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellTaskExecutionController.swift; sourceTree = "<group>"; };
 		45B185651B8048CA004E3B28 /* StringStreamProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringStreamProcessing.swift; sourceTree = "<group>"; };
 		45B185671B804B2B004E3B28 /* CargoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoModel.swift; sourceTree = "<group>"; };
+		45B5EC271B91897E00C4247A /* DebuggingEventWaiter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingEventWaiter.swift; sourceTree = "<group>"; };
 		45C3793B1B90B28A00F5B984 /* ExecutionStateInspectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionStateInspectionModel.swift; sourceTree = "<group>"; };
 		45C3793C1B90B28A00F5B984 /* ExecutionStateSelectionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExecutionStateSelectionModel.swift; sourceTree = "<group>"; };
 		45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandQueue.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				455978C61B86AE0300626F6B /* DebuggingTargetExecutionModel.swift */,
 				45B5EB311B914B2F00C4247A /* (unused) */,
 				452B91C91B8611FC00EAB775 /* DebuggingSupports.swift */,
+				45B5EC271B91897E00C4247A /* DebuggingEventWaiter.swift */,
 				45C3793C1B90B28A00F5B984 /* ExecutionStateSelectionModel.swift */,
 			);
 			name = "(debugging)";
@@ -667,6 +670,7 @@
 				45692BD61B86991E002ADB2A /* DebuggingFrameModel.swift in Sources */,
 				452B91CA1B8611FC00EAB775 /* DebuggingSupports.swift in Sources */,
 				455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */,
+				45B5EC281B91897E00C4247A /* DebuggingEventWaiter.swift in Sources */,
 				455978C71B86AE0300626F6B /* DebuggingTargetExecutionModel.swift in Sources */,
 				455978E71B8813A100626F6B /* SwitchableValueStorage.swift in Sources */,
 				45692BF01B869C2A002ADB2A /* DebuggingTargetModel.swift in Sources */,
