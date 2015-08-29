@@ -49,6 +49,7 @@ class VariableNode: DataNode {
 	private func _reconfigure(data: LLDBValue?) {
 		self.data		=	data
 		if _isLoaded {
+			_isLoaded	=	false
 			_loadSubvariables()
 		}
 	}

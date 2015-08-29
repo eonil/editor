@@ -17,7 +17,7 @@
 		452B915B1B8556E600EAB775 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452B914B1B8556E000EAB775 /* EonilFileSystemEvents.framework */; };
 		452B91751B855D5100EAB775 /* TOMLQueryTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B91741B855D5100EAB775 /* TOMLQueryTool.swift */; };
 		452B91C81B8611E500EAB775 /* LLDBSupports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B91C71B8611E500EAB775 /* LLDBSupports.swift */; };
-		452B91CA1B8611FC00EAB775 /* DebuggingSupports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B91C91B8611FC00EAB775 /* DebuggingSupports.swift */; };
+		452B91CA1B8611FC00EAB775 /* DebuggingListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B91C91B8611FC00EAB775 /* DebuggingListener.swift */; };
 		453E40301B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E402F1B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift */; };
 		4554C8691B7DBEF8004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C85E1B7DBEF7004987CC /* EditorModel.framework */; };
 		4554C86E1B7DBEF8004987CC /* EditorModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C86D1B7DBEF8004987CC /* EditorModelTests.swift */; };
@@ -178,7 +178,7 @@
 		452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = ../../submodules/FileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		452B91741B855D5100EAB775 /* TOMLQueryTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TOMLQueryTool.swift; sourceTree = "<group>"; };
 		452B91C71B8611E500EAB775 /* LLDBSupports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBSupports.swift; sourceTree = "<group>"; };
-		452B91C91B8611FC00EAB775 /* DebuggingSupports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingSupports.swift; sourceTree = "<group>"; };
+		452B91C91B8611FC00EAB775 /* DebuggingListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingListener.swift; sourceTree = "<group>"; };
 		453E402F1B7EFD6C00AFAB68 /* MulticastingStorageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticastingStorageExtensions.swift; sourceTree = "<group>"; };
 		4554C85E1B7DBEF7004987CC /* EditorModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8631B7DBEF7004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -405,7 +405,6 @@
 				45692BEF1B869C2A002ADB2A /* DebuggingTargetModel.swift */,
 				455978C61B86AE0300626F6B /* DebuggingTargetExecutionModel.swift */,
 				45B5EB311B914B2F00C4247A /* (unused) */,
-				452B91C91B8611FC00EAB775 /* DebuggingSupports.swift */,
 				45B5EC271B91897E00C4247A /* DebuggingEventWaiter.swift */,
 				45C3793C1B90B28A00F5B984 /* ExecutionStateSelectionModel.swift */,
 			);
@@ -418,6 +417,7 @@
 				45692BD51B86991E002ADB2A /* DebuggingFrameModel.swift */,
 				45692BE71B869955002ADB2A /* DebuggingValueModel.swift */,
 				45C3793B1B90B28A00F5B984 /* ExecutionStateInspectionModel.swift */,
+				452B91C91B8611FC00EAB775 /* DebuggingListener.swift */,
 			);
 			name = "(unused)";
 			sourceTree = "<group>";
@@ -668,7 +668,7 @@
 				45B185681B804B2B004E3B28 /* CargoModel.swift in Sources */,
 				451373411B7ED91000ED9829 /* SearchModel.swift in Sources */,
 				45692BD61B86991E002ADB2A /* DebuggingFrameModel.swift in Sources */,
-				452B91CA1B8611FC00EAB775 /* DebuggingSupports.swift in Sources */,
+				452B91CA1B8611FC00EAB775 /* DebuggingListener.swift in Sources */,
 				455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */,
 				45B5EC281B91897E00C4247A /* DebuggingEventWaiter.swift in Sources */,
 				455978C71B86AE0300626F6B /* DebuggingTargetExecutionModel.swift in Sources */,

@@ -1,5 +1,5 @@
 ////
-////  DebuggingSupports.swift
+////  DebuggingListener.swift
 ////  EditorModel
 ////
 ////  Created by Hoon H. on 2015/08/20.
@@ -13,7 +13,7 @@
 ///// A wrapper around `LLDBListener` to provide simpler
 ///// event waiting and hide thread management.
 /////
-//class DebuggingEventWaiter {
+//class DebuggingListener {
 //
 //	var onEvent: (LLDBEvent->())?
 //
