@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import EditorModel
 import EditorUICommon
+import EditorFileUI
 import EditorDebugUI
 
 class DivisionUIController: CommonUIController {
@@ -43,11 +44,13 @@ class DivisionUIController: CommonUIController {
 	private let	_sample3	=	DummyUIController()
 //	private let	_sample4	=	DummyUIController()
 
+	private let	_files		=	FileTreeUIController()
 	private let	_contexts	=	ContextTreeUIController()
 	private let	_variables	=	VariableTreeUIController()
 	private let	_report		=	ReportingUIController()
 
 	private func _install() {
+		_files.model		=	model!.file
 		_report.model		=	model!
 		_contexts.model		=	model!.debug
 		_variables.model	=	model!.debug
@@ -59,7 +62,8 @@ class DivisionUIController: CommonUIController {
 
 		_outerSplit.vertical		=	true
 		_outerSplit.items		=	[
-			SplitItem(viewController: _contexts),
+//			SplitItem(viewController: _contexts),
+			SplitItem(viewController: _files),
 			SplitItem(viewController: _innerSplit),
 			SplitItem(viewController: _variables),
 		]
@@ -87,6 +91,7 @@ class DivisionUIController: CommonUIController {
 		_variables.model	=	nil
 		_contexts.model		=	nil
 		_report.model		=	nil
+		_files.model		=	nil
 
 	}
 	private func _layout() {

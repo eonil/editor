@@ -17,6 +17,9 @@
          location = "group:EditorShell/EditorShell.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:EditorFileUI/EditorFileUI.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:EditorDebugUI/EditorDebugUI.xcodeproj">
       </FileRef>
       <FileRef

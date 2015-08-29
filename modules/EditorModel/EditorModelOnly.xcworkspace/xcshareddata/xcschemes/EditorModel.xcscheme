@@ -17,7 +17,7 @@
                BlueprintIdentifier = "4554C85D1B7DBEF7004987CC"
                BuildableName = "EditorModel.framework"
                BlueprintName = "EditorModel"
-               ReferencedContainer = "container:EditorModel/EditorModel.xcodeproj">
+               ReferencedContainer = "container:EditorModel.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "4554C8671B7DBEF8004987CC"
                BuildableName = "EditorModelTests.xctest"
                BlueprintName = "EditorModelTests"
-               ReferencedContainer = "container:EditorModel/EditorModel.xcodeproj">
+               ReferencedContainer = "container:EditorModel.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -45,7 +45,7 @@
             BlueprintIdentifier = "4554C85D1B7DBEF7004987CC"
             BuildableName = "EditorModel.framework"
             BlueprintName = "EditorModel"
-            ReferencedContainer = "container:EditorModel/EditorModel.xcodeproj">
+            ReferencedContainer = "container:EditorModel.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -67,7 +67,7 @@
             BlueprintIdentifier = "4554C85D1B7DBEF7004987CC"
             BuildableName = "EditorModel.framework"
             BlueprintName = "EditorModel"
-            ReferencedContainer = "container:EditorModel/EditorModel.xcodeproj">
+            ReferencedContainer = "container:EditorModel.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -85,7 +85,7 @@
             BlueprintIdentifier = "4554C85D1B7DBEF7004987CC"
             BuildableName = "EditorModel.framework"
             BlueprintName = "EditorModel"
-            ReferencedContainer = "container:EditorModel/EditorModel.xcodeproj">
+            ReferencedContainer = "container:EditorModel.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

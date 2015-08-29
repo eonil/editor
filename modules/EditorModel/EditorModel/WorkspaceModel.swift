@@ -30,6 +30,7 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
 
+		file.owner		=	self
 		search.owner		=	self
 		build.owner		=	self
 		debug.owner		=	self
@@ -48,6 +49,7 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 		debug.owner		=	nil
 		build.owner		=	nil
 		search.owner		=	nil
+		file.owner		=	nil
 	}
 
 	///
@@ -59,6 +61,7 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 		}
 	}
 
+	public let	file		=	FileTreeModel()
 	public let	search		=	SearchModel()
 	public let	build		=	BuildModel()
 	public let	debug		=	DebuggingModel()

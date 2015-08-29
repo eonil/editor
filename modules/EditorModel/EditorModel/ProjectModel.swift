@@ -86,6 +86,19 @@ public class ProjectSelection {
 		fatalErrorBecauseUnimplementedYet()
 	}
 
+	public func runFolderCreation(containerFolderURL: NSURL) {
+
+	}
+	public func runFolderDeletion(folderURL: NSURL) {
+
+	}
+	public func runFileCreation(u: NSURL) {
+
+	}
+	public func runFileDeletion(u: NSURL) {
+
+	}
+
 	///
 
 	private let	_files			=	MutableArrayStorage<NSURL>([])
