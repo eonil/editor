@@ -120,14 +120,16 @@ extension WorkspaceItemTreeDatabase {
 		let	items	=	try WorkspaceItemSerialization.deserializeList(snapshot)
 		for item in items {
 			let	path	=	item.path
-			guard containsItemForPath(path) else {
-				throw Error(message: "There's a duplicated path entry `\(path)` in snapshot.")
-			}
-			insertItem(item)
 			if path == WorkspaceItemPath.root {
+				// Root entry should exists here.
 				// Nothing to do.
 			}
 			else {
+				guard containsItemForPath(path) == false else {
+					throw Error(message: "There's a duplicated path entry `\(path)` in snapshot.")
+				}
+				
+				insertItem(item)
 				let	containerPath	=	path.pathByDeletingLastComponent()
 				guard allSubitemsOfItemAtPath(path).indexOf(containerPath) == nil else {
 					throw Error(message: "There's a duplicated subitem path entry `\(path)` in container item at path `\(containerPath)`.")

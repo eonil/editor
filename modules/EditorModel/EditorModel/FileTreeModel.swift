@@ -14,6 +14,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 	public var workspace: WorkspaceModel {
 		get {
+			assert(owner != nil)
 			return	owner!
 		}
 	}
@@ -79,8 +80,10 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		_root.value			=	FileNodeModel()
 		_root.value!.owner		=	self
 		_root.value!._path.value	=	WorkspaceItemPath.root
+		_root.value!._comment.value	=	_db.commentOfItemAtPath(WorkspaceItemPath.root)
 	}
 	private func _deinstall() {
+		_root.value!._comment.value	=	nil
 		_root.value!._path.value	=	nil
 		_root.value!.owner		=	nil
 		_root.value			=	nil
@@ -91,23 +94,36 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 	private func _runRestoringSnapshot() {
 		precondition(_isBusy.value == false)
 		_isBusy.value	=	true
-		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { [weak self] in
-			let	s		=	""
-			let	db		=	try! WorkspaceItemTreeDatabase(snapshot: s, repairAutomatically: false)
-			let	node		=	_rebuildFileNodeModelTree(db)
-			self?._db		=	db
-			self?._root.value	=	node
+		let	u	=	_snapshotFileURL()
+//		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { [weak self] in
+			if let d = NSData(contentsOfURL: u) {
+				if let s = NSString(data: d, encoding: NSUTF8StringEncoding) as String? {
+					let	db		=	try! WorkspaceItemTreeDatabase(snapshot: s, repairAutomatically: false)
+					let	node		=	_rebuildFileNodeModelTree(db)
+					self._db		=	db
+					self._root.value	=	node
+				}
+				else {
+					assert(false, "Could not read a valid UTF-8 string from file `\(u)`.")
+					markUnimplemented()
+				}
+			}
+			else {
+				assert(false, "Could not find file `\(u)`.")
+				markUnimplemented()
+			}
+
 			dispatchToMainQueueAsynchronously { [weak self] in
 				self?._isBusy.value	=	false
 			}
-		}
+//		}
 	}
 	private func _runStoringSnapshot() {
 		precondition(_isBusy.value == false)
 		_isBusy.value	=	true
 		let	db1	=	_db.duplicate()
 		let	u	=	_snapshotFileURL()
-		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) {
+//		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) {
 			let	s	=	db1.snapshot()
 			let	d	=	s.dataUsingEncoding(NSUTF8StringEncoding)
 			let	ok	=	d!.writeToURL(u, atomically: true)
@@ -115,9 +131,10 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			dispatchToMainQueueAsynchronously { [weak self] in
 				self?._isBusy.value	=	false
 			}
-		}
+//		}
 	}
 	private func _snapshotFileURL() -> NSURL {
+		assert(workspace.location.value != nil)
 		return	workspace.location.value!.URLByAppendingPathComponent("Workspace.EditorFileList")
 	}
 
@@ -164,6 +181,11 @@ public class FileNodeModel: ModelSubnode<FileTreeModel> {
 			return	_path
 		}
 	}
+	public var comment: ValueStorage<String?> {
+		get {
+			return	_comment
+		}
+	}
 	public var subnodes: ArrayStorage<FileNodeModel> {
 		get {
 			precondition(_isLoaded == true)
@@ -178,6 +200,7 @@ public class FileNodeModel: ModelSubnode<FileTreeModel> {
 	///
 
 	private let	_path		=	MutableValueStorage<WorkspaceItemPath?>(nil)
+	private let	_comment	=	MutableValueStorage<String?>(nil)
 	private let	_subnodes	=	MutableArrayStorage<FileNodeModel>([])
 	private var	_isLoaded	=	true
 
@@ -252,6 +275,7 @@ private func _rebuildFileNodeModelTree(snapshotDatabase: WorkspaceItemTreeDataba
 private func _rebuildFileNodeModelSubtree(snapshotDatabase: WorkspaceItemTreeDatabase, `for` path: WorkspaceItemPath) -> FileNodeModel {
 	let	node		=	FileNodeModel()
 	node._path.value	=	path
+	node._comment.value	=	snapshotDatabase.commentOfItemAtPath(path)
 
 	let	subpaths	=	snapshotDatabase.allSubitemsOfItemAtPath(path)
 	var	subnodes	=	[FileNodeModel]()

@@ -116,8 +116,8 @@ public class ApplicationModel: ModelRootNode {
 		///
 
 		let	ws	=	WorkspaceModel()
-		ws.locate(u)
 		ws.owner	=	self
+		ws.locate(u)
 		_workspaces.append(ws)
 		Debug.log("did open by adding a workspace \(ws), ws count = \(_workspaces.array.count)")
 	}
@@ -133,6 +133,7 @@ public class ApplicationModel: ModelRootNode {
 		Debug.log("will remove a workspace \(ws), ws count = \(_workspaces.array.count)")
 
 		_workspaces.removeFirstMatchingObject(ws)
+		ws.delocate()
 		ws.owner	=	nil
 
 		Debug.log("did remove a workspace \(ws), ws count = \(_workspaces.array.count)")

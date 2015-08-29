@@ -15,6 +15,8 @@ public struct WorkspaceItemPath {
 	public static let	root	=	WorkspaceItemPath(parts: [])
 
 	public init(parts: [String]) {
+		assert(parts.filter({ $0 == "" }).count == 0, "Empty string cannot be a name part.")
+
 		_parts		=	parts
 	}
 

@@ -46,6 +46,9 @@ struct WorkspaceItemSerialization {
 			throw Error(message: "The expression URL `\(u)` path must starts with `/`.")
 		}
 		parts.removeFirst()
+		if parts.last == "" {
+			parts.removeLast()
+		}
 
 		for q in u.queryItems ?? [] {
 			if q.name == "comment" {
@@ -72,7 +75,7 @@ struct WorkspaceItemSerialization {
 
 extension WorkspaceItemSerialization {
 	static func deserializeList(snapshot: String) throws -> [PersistentItem] {
-		let	lines	=	snapshot.componentsSeparatedByString("\n")
+		let	lines	=	snapshot.componentsSeparatedByString("\n").filter({ $0 != "" })
 		let	items	=	try lines.map(deserialize)
 		return	items
 	}

@@ -13,11 +13,23 @@ import EditorModel
 
 class FileNodeView: NSTableCellView {
 
-	weak var model: FileNodeModel? {
-		willSet {
-			assert(window == nil)
+	struct Data {
+		var	icon	:	NSImage?
+		var	text	:	String?
+	}
+
+	var data: Data? {
+		didSet {
+			_iconView.image		=	data?.icon
+			_exprField.stringValue	=	data?.text ?? ""
 		}
 	}
+
+//	weak var model: FileNodeModel? {
+//		willSet {
+//			assert(window == nil)
+//		}
+//	}
 
 	///
 
@@ -47,16 +59,32 @@ class FileNodeView: NSTableCellView {
 		addSubview(_iconView)
 		addSubview(_exprField)
 
-		_exprField.stringValue	=	model!.path.value?.parts.last ?? "AA"
+
+
+//		_didSetPath()
+//		model!.path.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+//			self!._didSetPath()
+//		}
+//		model!.path.registerWillSet(ObjectIdentifier(self)) { [weak self] in
+//			self!._willSetPath()
+//		}
 	}
 	private func _deinstall() {
-		_exprField.stringValue	=	""
+//		model!.path.deregisterDidSet(ObjectIdentifier(self))
+//		model!.path.deregisterWillSet(ObjectIdentifier(self))
+//		_willSetPath()
 
 		_exprField.removeFromSuperview()
 		_iconView.removeFromSuperview()
 		self.textField	=	nil
 		self.imageView	=	nil
 	}
+
+//	private func _didSetPath() {
+//		_exprField.stringValue	=	model!.path.value?.parts.last ?? ""
+//	}
+//	private func _willSetPath() {
+//	}
 }
 
 

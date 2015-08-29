@@ -117,6 +117,7 @@ public class FileTreeView: CommonUIView {
 			assert(_subnodeArrayAgentMapping[ObjectIdentifier(subnode)] == nil)
 			_subnodeArrayAgentMapping[ObjectIdentifier(subnode)]	=	a
 		}
+		_outlineView.reloadData()
 	}
 	private func _willDeleteSubnodesInRange(range: Range<Int>, of node: FileNodeModel) {
 		for subnode in node.subnodes.array[range] {
@@ -127,6 +128,7 @@ public class FileTreeView: CommonUIView {
 			a.owner		=	nil
 			a.node		=	nil
 		}
+		_outlineView.reloadData()
 	}
 
 }
@@ -193,9 +195,17 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 	}
 	@objc
 	private func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
+
+		func toData(model: FileNodeModel) -> FileNodeView.Data {
+			let	name	=	model.path.value?.parts.last ?? ""
+			let	comment	=	model.comment.value == nil ? "" : " (\(model.comment.value!))"
+			let	text	=	"\(name)\(comment)"
+			return	FileNodeView.Data(icon: nil, text: text)
+		}
+
 		if let item = item as? FileNodeModel {
 			let	v	=	FileNodeView()
-			v.model		=	item
+			v.data		=	toData(item)
 			return	v
 		}
 		return	nil
