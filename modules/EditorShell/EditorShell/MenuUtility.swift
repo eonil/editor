@@ -104,6 +104,10 @@ func _menuItem(label: String, shortcut: MenuShortcutKeyCombination = MenuShortcu
 	m.enabled		=	false
 	return	m
 }
+func _menuItem(label: String, shortcutWithLegacyUTF16CodeUnit utf16CodeUnit: Int) -> SelfHandlingMenuItem {
+	return	_menuItem(label, shortcut: MenuShortcutKeyCombination(legacyUTF16CodeUnit: unichar(utf16CodeUnit)))
+}
+
 
 func _menuSeparatorItem() -> NSMenuItem {
 	return	NSMenuItem.separatorItem()

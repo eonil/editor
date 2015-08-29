@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import EditorModel
 import EditorUICommon
+import EditorDebugUI
 
 class DivisionUIController: CommonUIController {
 
@@ -38,25 +39,29 @@ class DivisionUIController: CommonUIController {
 	private let	_edit		=	EditUIController()
 
 	private let	_sample1	=	DummyUIController()
-	private let	_sample2	=	DummyUIController()
+//	private let	_sample2	=	DummyUIController()
 	private let	_sample3	=	DummyUIController()
 //	private let	_sample4	=	DummyUIController()
 
+	private let	_contexts	=	ContextTreeUIController()
+	private let	_variables	=	VariableTreeUIController()
 	private let	_report		=	ReportingUIController()
 
 	private func _install() {
 		_report.model		=	model!
+		_contexts.model		=	model!.debug
+		_variables.model	=	model!.debug
 
 		_sample1.view.layer!.backgroundColor	=	NSColor.redColor().CGColor
-		_sample2.view.layer!.backgroundColor	=	NSColor.blueColor().CGColor
+//		_sample2.view.layer!.backgroundColor	=	NSColor.blueColor().CGColor
 		_sample3.view.layer!.backgroundColor	=	NSColor.greenColor().CGColor
 //		_sample4.view.layer!.backgroundColor	=	NSColor.purpleColor().CGColor
 
 		_outerSplit.vertical		=	true
 		_outerSplit.items		=	[
-			SplitItem(viewController: _sample1),
+			SplitItem(viewController: _contexts),
 			SplitItem(viewController: _innerSplit),
-			SplitItem(viewController: _sample2),
+			SplitItem(viewController: _variables),
 		]
 
 		_innerSplit.vertical		=	false
@@ -79,6 +84,8 @@ class DivisionUIController: CommonUIController {
 		_outerSplit.view.removeFromSuperview()
 		_outerSplit.removeFromParentViewController()
 
+		_variables.model	=	nil
+		_contexts.model		=	nil
 		_report.model		=	nil
 
 	}

@@ -9,38 +9,6 @@
 import Foundation
 import AppKit
 
-class ContextNodeView: NSTableCellView {
-
-	override func viewDidMoveToWindow() {
-		super.viewDidMoveToWindow()
-		if window != nil {
-			_install()
-		}
-	}
-	override func viewWillMoveToWindow(newWindow: NSWindow?) {
-		if window != nil {
-			_deinstall()
-		}
-		super.viewWillMoveToWindow(newWindow)
-	}
-
-	///
-
-	private let	_iconView	=	NSImageView()
-	private let	_exprField	=	NSTextField()
-
-	private func _install() {
-		assert(self.imageView === nil)
-		assert(self.textField === nil)
-		self.imageView	=	_iconView
-		self.textField	=	_exprField
-	}
-	private func _deinstall() {
-		self.textField	=	nil
-		self.imageView	=	nil
-	}
-
-}
 
 final class ProcessNodeView: ContextNodeView {
 	weak var model: ProcessNode? {
@@ -82,6 +50,66 @@ final class FrameNodeView: ContextNodeView {
 
 
 
+
+
+
+
+
+
+
+
+
+class ContextNodeView: NSTableCellView {
+
+	override func viewDidMoveToWindow() {
+		super.viewDidMoveToWindow()
+		if window != nil {
+			_install()
+		}
+	}
+	override func viewWillMoveToWindow(newWindow: NSWindow?) {
+		if window != nil {
+			_deinstall()
+		}
+		super.viewWillMoveToWindow(newWindow)
+	}
+
+	///
+
+	private let	_iconView	=	NSImageView()
+	private let	_exprField	=	_instantiateTextField()
+
+	private func _install() {
+		assert(self.imageView === nil)
+		assert(self.textField === nil)
+		self.imageView	=	_iconView
+		self.textField	=	_exprField
+		addSubview(_iconView)
+		addSubview(_exprField)
+	}
+	private func _deinstall() {
+		_iconView.removeFromSuperview()
+		_exprField.removeFromSuperview()
+		self.textField	=	nil
+		self.imageView	=	nil
+	}
+
+}
+
+
+
+
+
+
+
+
+
+private func _instantiateTextField() -> NSTextField {
+	let	v		=	NSTextField()
+	v.bezeled		=	false
+	v.backgroundColor	=	NSColor.clearColor()
+	return	v
+}
 
 
 

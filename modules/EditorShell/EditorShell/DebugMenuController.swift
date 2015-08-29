@@ -33,12 +33,12 @@ class DebugMenuController: SessionProtocol {
 	///
 
 	let	menu		:	TopLevelCommandMenu
-	let	pause		=	_menuItem("Pause")
-	let	resume		=	_menuItem("Resume")
+	let	pause		=	_menuItem("Pause", shortcut: Command+Control+"Y")
+	let	resume		=	_menuItem("Resume", shortcut: Command+Control+"Y")
 	let	stop		=	_menuItem("Halt")
-	let	stepInto	=	_menuItem("Step Into")
-	let	stepOut		=	_menuItem("Step Out")
-	let	stepOver	=	_menuItem("Step Over")
+	let	stepInto	=	_menuItem("Step Into", shortcutWithLegacyUTF16CodeUnit: NSF6FunctionKey)
+	let	stepOut		=	_menuItem("Step Out", shortcutWithLegacyUTF16CodeUnit: NSF7FunctionKey)
+	let	stepOver	=	_menuItem("Step Over", shortcutWithLegacyUTF16CodeUnit: NSF8FunctionKey)
 
 	func run() {
 		assert(model != nil)

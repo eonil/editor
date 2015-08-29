@@ -42,6 +42,18 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
+	public let	selection	=	ExecutionStateSelectionModel()
+//	public let	inspection	=	ExecutionStateInspectionModel()
+
+	///
+
+	public var debugger: LLDBDebugger {
+		get {
+			return	_lldbDebugger
+		}
+	}
+
+	///
 
 //	public var stackFrames: ArrayStorage<StackFrame> {
 //		get {
@@ -107,10 +119,12 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 	///
 
 	private func _install() {
-
+		selection.owner			=	self
+//		inspection.owner		=	self
 	}
 	private func _deinstall() {
-
+//		inspection.owner		=	nil
+		selection.owner			=	nil
 	}
 
 //	public class StackFrame {

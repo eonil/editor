@@ -14,13 +14,6 @@ import EditorModel
 ///
 /// -	Always uses layer.
 ///
-/// Shell Propagation
-/// -----------------
-/// `shell` will automatically be propagated to subviews that are subclass of
-/// `CommonUIView`. If a subview is not a subclass of `CommonUIView` class,
-/// automatic propagation won't work for the subview. You still can route
-/// shell object to the view yourself manually.
-///
 public class CommonUIView: CommonView {
 
 	public override init(frame frameRect: NSRect) {

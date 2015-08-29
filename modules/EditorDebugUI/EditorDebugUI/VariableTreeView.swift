@@ -11,16 +11,25 @@ import AppKit
 import LLDBWrapper
 
 public class VariableTreeView: NSView {
-	public weak var model: FrameNode? {
+
+	public var onUserDidSelectVariable	:	(()->())?
+	public var onUserWillDeselectVariable	:	(()->())?
+
+	public func reconfigure(frame: LLDBFrame?) {
+		_dataTree.reconfigure(frame?.variablesWithArguments(true, locals: true, statics: true, inScopeOnly: true, useDynamic: LLDBDynamicValueType.DynamicCanRunTarget).allAvailableValues ?? [])
+		_outlineView.reloadData()
+	}
+
+	public private(set) var currentValue: LLDBValue? {
 		willSet {
-			_outlineView.reloadData()
-			_outlineView.setDataSource(nil)
-			_outlineView.setDelegate(nil)
+			if currentValue != nil {
+				onUserWillDeselectVariable?()
+			}
 		}
 		didSet {
-			_outlineView.setDataSource(_outlineAgent)
-			_outlineView.setDelegate(_outlineAgent)
-			_outlineView.reloadData()
+			if currentValue != nil {
+				onUserDidSelectVariable?()
+			}
 		}
 	}
 
@@ -28,12 +37,19 @@ public class VariableTreeView: NSView {
 
 	private let	_outlineView	=	NSOutlineView()
 	private let	_outlineAgent	=	_VariableTreeAgent()
+	private let	_dataTree	=	VariableTree()
+
+	///
 
 	private func _install() {
+		_outlineView.setDataSource(_outlineAgent)
+		_outlineView.setDelegate(_outlineAgent)
 		addSubview(_outlineView)
 	}
 	private func _deinstall() {
 		_outlineView.removeFromSuperview()
+		_outlineView.setDataSource(nil)
+		_outlineView.setDelegate(nil)
 	}
 	private func _layout() {
 		_outlineView.frame	=	bounds
@@ -59,20 +75,20 @@ private final class _VariableTreeAgent: NSObject, NSOutlineViewDataSource, NSOut
 	@objc
 	private func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
 		if item == nil {
-			return	owner!.model!.variables.array.count
+			return	owner!._dataTree.variables.count
 		}
 		if let node = item as? VariableNode {
-			return	node.subvariables.array.count
+			return	node.subvariables.count
 		}
 		fatalError("Unknown node type.")
 	}
 	@objc
 	private func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
 		if item == nil {
-			return	owner!.model!.variables.array[index]
+			return	owner!._dataTree.variables[index]
 		}
 		if let node = item as? VariableNode {
-			return	node.subvariables.array[index]
+			return	node.subvariables[index]
 		}
 		fatalError("Unknown node type.")
 	}
@@ -84,6 +100,17 @@ private final class _VariableTreeAgent: NSObject, NSOutlineViewDataSource, NSOut
 		let	view	=	VariableNodeView()
 		view.data	=	node.data?.toNodeViewData()
 		return	view
+	}
+	@objc private func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool {
+		if let node = item as? VariableNode {
+			assert(node.data != nil)
+			owner!.currentValue	=	node.data
+		}
+		else {
+			owner!.currentValue	=	nil
+
+		}
+		return	true
 	}
 }
 

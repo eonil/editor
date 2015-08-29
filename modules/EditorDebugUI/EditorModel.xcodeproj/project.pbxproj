@@ -402,21 +402,13 @@
 				451373461B7ED93700ED9829 /* DebuggingModel.swift */,
 				45692BEF1B869C2A002ADB2A /* DebuggingTargetModel.swift */,
 				455978C61B86AE0300626F6B /* DebuggingTargetExecutionModel.swift */,
-				45B5EB311B914B2F00C4247A /* (unused) */,
+				45692BD51B86991E002ADB2A /* DebuggingFrameModel.swift */,
+				45692BE71B869955002ADB2A /* DebuggingValueModel.swift */,
 				452B91C91B8611FC00EAB775 /* DebuggingSupports.swift */,
+				45C3793B1B90B28A00F5B984 /* ExecutionStateInspectionModel.swift */,
 				45C3793C1B90B28A00F5B984 /* ExecutionStateSelectionModel.swift */,
 			);
 			name = "(debugging)";
-			sourceTree = "<group>";
-		};
-		45B5EB311B914B2F00C4247A /* (unused) */ = {
-			isa = PBXGroup;
-			children = (
-				45692BD51B86991E002ADB2A /* DebuggingFrameModel.swift */,
-				45692BE71B869955002ADB2A /* DebuggingValueModel.swift */,
-				45C3793B1B90B28A00F5B984 /* ExecutionStateInspectionModel.swift */,
-			);
-			name = "(unused)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

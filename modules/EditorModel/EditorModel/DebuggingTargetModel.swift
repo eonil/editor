@@ -79,7 +79,8 @@ public class DebuggingTargetModel: ModelSubnode<DebuggingModel> {
 
 		let	p		=	_lldbTarget.launchProcessSimplyWithWorkingDirectory(workingDirectoryURL.path)
 		assert(p != nil)
-		assert(p!.state == .Stopped)
+		Debug.log(p!.state.rawValue)
+//		assert(p!.state == .Stopped)
 		let	m		=	DebuggingTargetExecutionModel(LLDBProcess: p)
 		m.owner			=	self
 		_execution.value	=	m

@@ -258,6 +258,13 @@
 			remoteGlobalIDString = 4554C9071B7DBF6B004987CC;
 			remoteInfo = EditorDriverTests;
 		};
+		45B5EBA31B915A0100C4247A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B5EB9E1B915A0000C4247A /* EditorDebugUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C3786B1B8FD8B500F5B984;
+			remoteInfo = EditorDebugUI;
+		};
 		45C77AEA1B7F0EA90064C363 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 451373361B7ED87F00ED9829 /* MulticastingStorage.xcodeproj */;
@@ -312,6 +319,7 @@
 		4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDriver.xcodeproj; path = ../EditorDriver/EditorDriver.xcodeproj; sourceTree = "<group>"; };
 		459796631B837B9B003B4501 /* Editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Editor.entitlements; sourceTree = "<group>"; };
+		45B5EB9E1B915A0000C4247A /* EditorDebugUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebugUI.xcodeproj; path = ../EditorDebugUI/EditorDebugUI.xcodeproj; sourceTree = "<group>"; };
 		45C77AE61B7F0E0B0064C363 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -351,11 +359,12 @@
 		451373351B7ED87300ED9829 /* (modules) */ = {
 			isa = PBXGroup;
 			children = (
-				4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */,
+				4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */,
+				451372F71B7ED81C00ED9829 /* EditorShell.xcodeproj */,
+				45B5EB9E1B915A0000C4247A /* EditorDebugUI.xcodeproj */,
 				451372E51B7ED81200ED9829 /* EditorUICommon.xcodeproj */,
 				451372EE1B7ED81700ED9829 /* EditorModel.xcodeproj */,
-				451372F71B7ED81C00ED9829 /* EditorShell.xcodeproj */,
-				4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */,
+				4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */,
 			);
 			name = "(modules)";
 			sourceTree = "<group>";
@@ -504,6 +513,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		45B5EB9F1B915A0000C4247A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45B5EBA41B915A0100C4247A /* EditorDebugUI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -611,6 +628,10 @@
 				{
 					ProductGroup = 455EE1B01B7EDA4300D5AA56 /* Products */;
 					ProjectRef = 4554CA391B7DC3D8004987CC /* EditorCommon.xcodeproj */;
+				},
+				{
+					ProductGroup = 45B5EB9F1B915A0000C4247A /* Products */;
+					ProjectRef = 45B5EB9E1B915A0000C4247A /* EditorDebugUI.xcodeproj */;
 				},
 				{
 					ProductGroup = 455EE1E31B7EDB1100D5AA56 /* Products */;
@@ -810,6 +831,13 @@
 			fileType = wrapper.cfbundle;
 			path = EditorDriverTests.xctest;
 			remoteRef = 455EE1EB1B7EDB1100D5AA56 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B5EBA41B915A0100C4247A /* EditorDebugUI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorDebugUI.framework;
+			remoteRef = 45B5EBA31B915A0100C4247A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

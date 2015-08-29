@@ -27,6 +27,9 @@
 		455978D81B87593400626F6B /* MonitorChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455978D71B87593400626F6B /* MonitorChain.swift */; };
 		45B185391B7F866B004E3B28 /* ProductMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185381B7F866B004E3B28 /* ProductMenuController.swift */; };
 		45B1853B1B7F8688004E3B28 /* MenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1853A1B7F8688004E3B28 /* MenuUtility.swift */; };
+		45C379291B90B06400F5B984 /* EditorDebugUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C379211B90B05700F5B984 /* EditorDebugUI.framework */; };
+		45C379381B90B0F900F5B984 /* VariableTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C379371B90B0F900F5B984 /* VariableTreeUIController.swift */; settings = {ASSET_TAGS = (); }; };
+		45C3793A1B90B1D600F5B984 /* ContextTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C379391B90B1D600F5B984 /* ContextTreeUIController.swift */; settings = {ASSET_TAGS = (); }; };
 		45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */; };
 		45C77B0C1B7F2F0A0064C363 /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */; };
 		45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */; };
@@ -103,6 +106,13 @@
 			remoteGlobalIDString = 455EE22A1B7EEF9000D5AA56;
 			remoteInfo = MulticastingStorageWorkbench;
 		};
+		45C379201B90B05700F5B984 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45C3791A1B90B05700F5B984 /* EditorDebugUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C3786B1B8FD8B500F5B984;
+			remoteInfo = EditorDebugUI;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +139,9 @@
 		455978D71B87593400626F6B /* MonitorChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitorChain.swift; sourceTree = "<group>"; };
 		45B185381B7F866B004E3B28 /* ProductMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMenuController.swift; sourceTree = "<group>"; };
 		45B1853A1B7F8688004E3B28 /* MenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuUtility.swift; sourceTree = "<group>"; };
+		45C3791A1B90B05700F5B984 /* EditorDebugUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebugUI.xcodeproj; path = ../EditorDebugUI/EditorDebugUI.xcodeproj; sourceTree = "<group>"; };
+		45C379371B90B0F900F5B984 /* VariableTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VariableTreeUIController.swift; sourceTree = "<group>"; };
+		45C379391B90B1D600F5B984 /* ContextTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextTreeUIController.swift; sourceTree = "<group>"; };
 		45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
 		45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
 		45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationUIController.swift; sourceTree = "<group>"; };
@@ -139,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45C379291B90B06400F5B984 /* EditorDebugUI.framework in Frameworks */,
 				451372CF1B7ED79E00ED9829 /* MulticastingStorage.framework in Frameworks */,
 				4554CA261B7DC386004987CC /* EditorCommon.framework in Frameworks */,
 				4554CA271B7DC386004987CC /* EditorModel.framework in Frameworks */,
@@ -160,6 +174,7 @@
 		451372BE1B7ED78B00ED9829 /* (modules) */ = {
 			isa = PBXGroup;
 			children = (
+				45C3791A1B90B05700F5B984 /* EditorDebugUI.xcodeproj */,
 				4554CA101B7DC34D004987CC /* EditorCommon.xcodeproj */,
 				4554CA071B7DC34A004987CC /* EditorUICommon.xcodeproj */,
 				4554CA1C1B7DC377004987CC /* EditorModel.xcodeproj */,
@@ -225,6 +240,8 @@
 				4554C9A91B7DC0D7004987CC /* InspectionUIController.swift */,
 				4554C9AA1B7DC0D7004987CC /* NavigationUIController.swift */,
 				4554C9AB1B7DC0D7004987CC /* ReportUIController.swift */,
+				45C379391B90B1D600F5B984 /* ContextTreeUIController.swift */,
+				45C379371B90B0F900F5B984 /* VariableTreeUIController.swift */,
 				452B91851B855E1000EAB775 /* (toolbar components) */,
 				45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */,
 				4554C8121B7DBED9004987CC /* Info.plist */,
@@ -280,6 +297,14 @@
 				455978D71B87593400626F6B /* MonitorChain.swift */,
 			);
 			name = "(menu components)";
+			sourceTree = "<group>";
+		};
+		45C3791B1B90B05700F5B984 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45C379211B90B05700F5B984 /* EditorDebugUI.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +388,10 @@
 				{
 					ProductGroup = 4554CA111B7DC34D004987CC /* Products */;
 					ProjectRef = 4554CA101B7DC34D004987CC /* EditorCommon.xcodeproj */;
+				},
+				{
+					ProductGroup = 45C3791B1B90B05700F5B984 /* Products */;
+					ProjectRef = 45C3791A1B90B05700F5B984 /* EditorDebugUI.xcodeproj */;
 				},
 				{
 					ProductGroup = 4554CA1D1B7DC377004987CC /* Products */;
@@ -449,6 +478,13 @@
 			remoteRef = 455EE2631B7EF3F400D5AA56 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45C379211B90B05700F5B984 /* EditorDebugUI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EditorDebugUI.framework;
+			remoteRef = 45C379201B90B05700F5B984 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -477,9 +513,11 @@
 				45C77B0C1B7F2F0A0064C363 /* Dialogue.swift in Sources */,
 				4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */,
 				4554C9C81B7DC16C004987CC /* MenuController.swift in Sources */,
+				45C3793A1B90B1D600F5B984 /* ContextTreeUIController.swift in Sources */,
 				4526B1271B850F280023C626 /* DebugMenuController.swift in Sources */,
 				4522B19A1B84E51F00E219F9 /* FileMenuController.swift in Sources */,
 				4554C9B61B7DC0D7004987CC /* ToolUIController.swift in Sources */,
+				45C379381B90B0F900F5B984 /* VariableTreeUIController.swift in Sources */,
 				45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */,
 				4554C9B21B7DC0D7004987CC /* NavigationUIController.swift in Sources */,
 				4522B1A51B84F71300E219F9 /* MenuShortcutKeyCombination.swift in Sources */,
