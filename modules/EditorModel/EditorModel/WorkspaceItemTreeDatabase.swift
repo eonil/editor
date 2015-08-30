@@ -44,12 +44,21 @@ final class WorkspaceItemTreeDatabase {
 		return	_mappings[path] != nil
 	}
 	func insertItemAtPath(path: WorkspaceItemPath) {
-		precondition(_mappings[path] == nil)
+		precondition(_mappings[path] == nil, "A item for path `path` already exists.")
 		_mappings[path]	=	(nil, [])
 	}
 	func deleteItemAtPath(path: WorkspaceItemPath) {
 		precondition(_mappings[path] != nil)
+		precondition(_mappings[path]!.subitems.count == 0)
 		_mappings[path]	=	nil
+	}
+	func deleteItemAndSubtreeRecursivelyAtPath(path: WorkspaceItemPath) {
+		precondition(_mappings[path] != nil)
+		let	subpaths	=	_mappings[path]!.subitems
+		for subpath in subpaths.reverse() {
+			deleteItemAndSubtreeRecursivelyAtPath(subpath)
+		}
+		deleteItemAtPath(path)
 	}
 
 	///
@@ -59,20 +68,27 @@ final class WorkspaceItemTreeDatabase {
 		return	_mappings[containerItemPath]!.subitems
 	}
 	func appendSubitemAtPath(subitemPath: WorkspaceItemPath, to containerAtPath: WorkspaceItemPath) {
+		assert(_mappings[containerAtPath] != nil)
+		assert(_mappings[subitemPath] != nil)
 		precondition(_mappings[containerAtPath] != nil)
 		_mappings[containerAtPath]!.subitems.append(subitemPath)
 	}
 	func insertSubitemAtPath(subitemPath: WorkspaceItemPath, at index: Int, to containerAtPath: WorkspaceItemPath) {
+		assert(_mappings[containerAtPath] != nil)
+		assert(_mappings[subitemPath] != nil)
 		precondition(_mappings[containerAtPath] != nil)
 		_mappings[containerAtPath]!.subitems.insert(subitemPath, atIndex: index)
 	}
 	func removeSubitemAtPath(subitemPath: WorkspaceItemPath, at index: Int, from containerAtPath: WorkspaceItemPath) {
+		assert(_mappings[containerAtPath] != nil)
+		assert(_mappings[subitemPath] != nil)
 		precondition(_mappings[containerAtPath] != nil)
 		let	index	=	_mappings[containerAtPath]!.subitems.indexOf(subitemPath)
 		assert(index != nil)
 		removeSubitemAtIndex(index!, from: containerAtPath)
 	}
 	func removeSubitemAtIndex(index: Int, from containerAtPath: WorkspaceItemPath) {
+		assert(_mappings[containerAtPath] != nil)
 		precondition(_mappings[containerAtPath] != nil)
 		_mappings[containerAtPath]!.subitems.removeAtIndex(index)
 	}
@@ -170,7 +186,10 @@ extension WorkspaceItemTreeDatabase {
 		return	_iterateDFSItemAtPath(rootPath, onNode: onNode)
 	}
 	private func _iterateDFSItemAtPath(path: WorkspaceItemPath, onNode: (path: WorkspaceItemPath, content: _InMemoryContent)->()) {
+		assert(_mappings[path] != nil)
 		let	content		=	_mappings[path]!
+		onNode(path: path, content: content)
+
 		for subpath in content.subitems {
 			_iterateDFSItemAtPath(subpath, onNode: onNode)
 		}

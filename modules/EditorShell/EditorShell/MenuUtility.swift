@@ -90,7 +90,7 @@ func _menu(title: String, items: [NSMenuItem]) -> NSMenu {
 func _menuItem(label: String, submenu: NSMenu) -> CommandMenuItem {
 	let	m		=	CommandMenuItem(title: label, action: nil, keyEquivalent: "")
 	m.submenu		=	submenu
-	m.enabled		=	false
+//	m.enabled		=	false
 	return	m
 }
 func _menuItem(label: String, _ command: ModelCommand) -> CommandMenuItem {

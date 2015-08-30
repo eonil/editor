@@ -68,7 +68,7 @@ struct WorkspaceItemSerialization {
 		u.scheme	=	"editor"
 		u.host		=	"workspace"
 		u.path		=	"/" + item.path.parts.joinWithSeparator("/")
-		u.queryItems	=	[NSURLQueryItem(name: "comment", value: item.comment)]
+		u.queryItems	=	item.comment == nil ? nil : [NSURLQueryItem(name: "comment", value: item.comment!)]
 		return	u
 	}
 }

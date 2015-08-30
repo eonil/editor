@@ -11,6 +11,10 @@ import AppKit
 import MulticastingStorage
 import EditorModel
 
+//class RootFileNodeView: FileNodeView {
+//
+//}
+
 class FileNodeView: NSTableCellView {
 
 	struct Data {

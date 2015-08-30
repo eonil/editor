@@ -195,9 +195,21 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 	}
 	@objc
 	private func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-
 		func toData(model: FileNodeModel) -> FileNodeView.Data {
-			let	name	=	model.path.value?.parts.last ?? ""
+			func getName() -> String {
+				if let path = model.path.value {
+					if path == WorkspaceItemPath.root {
+						return	model.tree.workspace.location.value?.lastPathComponent ?? "(????)"
+					}
+					else {
+						assert(path.parts.last != nil)
+						return	path.parts.last ?? ""
+					}
+				}
+				return	"(????)"
+			}
+
+			let	name	=	getName()
 			let	comment	=	model.comment.value == nil ? "" : " (\(model.comment.value!))"
 			let	text	=	"\(name)\(comment)"
 			return	FileNodeView.Data(icon: nil, text: text)

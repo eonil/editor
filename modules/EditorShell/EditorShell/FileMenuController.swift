@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import EditorCommon
 import EditorModel
 
 
@@ -20,7 +21,7 @@ class FileMenuController: SessionProtocol {
 	init() {
 		menu	=
 			_topLevelMenu("File", items: [
-				newWorkspace,
+				_menuItem("New", submenu: new.menu),
 				_menuItem("Open", submenu: open.menu),
 				closeWorkspace,
 				])
@@ -32,20 +33,13 @@ class FileMenuController: SessionProtocol {
 	///
 
 	let	menu		:	TopLevelCommandMenu
-	let	newWorkspace	=	_menuItem("New Workspace", shortcut: Command+"N")
+	let	new		=	FileNewMenuController()
 	let	open		=	FileOpenMenuController()
 	let	closeWorkspace	=	_menuItem("Close Workspace", shortcut: Command+"W")
 
 	func run() {
 		assert(model != nil)
 
-		newWorkspace.clickHandler	=	{ [weak self] in
-			Dialogue.runSavingWorkspace({ (u: NSURL?) -> () in
-				if let u = u {
-					self?.model!.createAndOpenWorkspaceAtURL(u)
-				}
-			})
-		}
 		closeWorkspace.clickHandler	=	{ [weak self] in
 			self?._handleClosingCurrentWorkspace()
 		}
@@ -58,6 +52,9 @@ class FileMenuController: SessionProtocol {
 		_applyEnabledStates()
 		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self), handler: apply)
 
+		new.model	=	model!
+		new.run()
+
 		open.model	=	model!
 		open.run()
 	}
@@ -67,11 +64,13 @@ class FileMenuController: SessionProtocol {
 		open.halt()
 		open.model	=	nil
 
+		new.halt()
+		new.model	=	nil
+
 		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
 		_applyEnabledStates()
 
 		closeWorkspace.clickHandler	=	nil
-		newWorkspace.clickHandler	=	nil
 	}
 
 	///
@@ -101,7 +100,72 @@ class FileMenuController: SessionProtocol {
 
 
 
+class FileNewMenuController: SessionProtocol {
+	weak var model: ApplicationModel?
 
+	let	menu		:	NSMenu
+	let	workspace	=	_menuItem("Workspace...", shortcut: Command+Control+"N")
+	let	file		=	_menuItem("File", shortcut: Command+"N")
+	let	folder		=	_menuItem("Folder", shortcut: Command+Alternate+"N")
+
+	init() {
+		menu		=	_menu("New...", items: [
+			workspace,
+			file,
+			folder,
+			])
+	}
+	func run() {
+		workspace.clickHandler	=	{ [weak self] in self!._clickWorkspace() }
+		file.clickHandler	=	{ [weak self] in self!._clickFile() }
+		folder.clickHandler	=	{ [weak self] in self!._clickFolder() }
+
+		_reapplyEnability()
+		model!.defaultWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+			self?._reapplyEnability()
+		}
+	}
+	func halt() {
+		model!.defaultWorkspace.deregisterDidSet(ObjectIdentifier(self))
+		_reapplyEnability()
+
+		folder.clickHandler	=	nil
+		file.clickHandler	=	nil
+		workspace.clickHandler	=	nil
+	}
+
+	///
+
+	private func _reapplyEnability() {
+		let	hasSelectedFile	=	model!.defaultWorkspace.value != nil && model!.defaultWorkspace.value!.location.value != nil // && model!.defaultWorkspace.value!.file.selection.
+		workspace.enabled	=	true
+		file.enabled		=	hasSelectedFile
+		folder.enabled		=	hasSelectedFile
+	}
+
+	private func _clickWorkspace() {
+		assert(model!.defaultWorkspace.value != nil)
+		Dialogue.runSavingWorkspace({ [weak self] (u: NSURL?) -> () in
+			if let u = u {
+				self?.model!.createAndOpenWorkspaceAtURL(u)
+			}
+		})
+	}
+	private func _clickFile() {
+		assert(model!.defaultWorkspace.value != nil)
+		if let ws = model!.defaultWorkspace.value {
+			markUnimplemented()
+			ws.file.runCreatingFileAtPath(WorkspaceItemPath(parts: ["ttt1"]))
+			ws.file.runCreatingFileAtPath(WorkspaceItemPath(parts: ["ttt1", "ttt2"]))
+		}
+	}
+	private func _clickFolder() {
+		assert(model!.defaultWorkspace.value != nil)
+		if let ws = model!.defaultWorkspace.value {
+			ws.file.runCreatingFolderAtPath(WorkspaceItemPath(parts: ["src", "testfolder1"]))
+		}
+	}
+}
 class FileOpenMenuController: SessionProtocol {
 	weak var model: ApplicationModel?
 

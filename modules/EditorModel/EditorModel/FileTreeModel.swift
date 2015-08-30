@@ -56,16 +56,24 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 //
 //	}
 	public func runCreatingFolderAtPath(path: WorkspaceItemPath) {
-
+		markUnimplemented()
 	}
 	public func runDeletingFolderAtPath(path: WorkspaceItemPath) {
+		markUnimplemented()
 
 	}
 	public func runCreatingFileAtPath(path: WorkspaceItemPath) {
-
+		let	fu	=	path.absoluteFileURL(`for`: workspace)
+		let 	ok	=	NSData().writeToURL(fu, atomically: true)
+		if ok {
+			_insertNodeAtPath(path)
+		}
+		else {
+			markUnimplemented()
+		}
 	}
 	public func runDeletingFileAtPath(path: WorkspaceItemPath) {
-		
+		_deleteNodeAtPath(path)
 	}
 
 	///
@@ -77,16 +85,20 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 	///
 
 	private func _install() {
-		_root.value			=	FileNodeModel()
-		_root.value!.owner		=	self
-		_root.value!._path.value	=	WorkspaceItemPath.root
-		_root.value!._comment.value	=	_db.commentOfItemAtPath(WorkspaceItemPath.root)
+		assert(_root.value == nil)
+		let	node		=	FileNodeModel()
+		node._path.value	=	WorkspaceItemPath.root
+		node._comment.value	=	_db.commentOfItemAtPath(WorkspaceItemPath.root)
+		node.owner		=	self
+		_root.value		=	node
 	}
 	private func _deinstall() {
-		_root.value!._comment.value	=	nil
-		_root.value!._path.value	=	nil
-		_root.value!.owner		=	nil
-		_root.value			=	nil
+		assert(_root.value != nil)
+		let	node		=	_root.value!
+		_root.value		=	nil
+		node.owner		=	nil
+		node._comment.value	=	nil
+		node._path.value	=	nil
 	}
 
 	///
@@ -95,48 +107,103 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		precondition(_isBusy.value == false)
 		_isBusy.value	=	true
 		let	u	=	_snapshotFileURL()
+		dispatchToMainQueueAsynchronously { [weak self] in
 //		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { [weak self] in
-			if let d = NSData(contentsOfURL: u) {
-				if let s = NSString(data: d, encoding: NSUTF8StringEncoding) as String? {
-					let	db		=	try! WorkspaceItemTreeDatabase(snapshot: s, repairAutomatically: false)
-					let	node		=	_rebuildFileNodeModelTree(db)
-					self._db		=	db
-					self._root.value	=	node
-				}
-				else {
-					assert(false, "Could not read a valid UTF-8 string from file `\(u)`.")
-					markUnimplemented()
-				}
-			}
-			else {
-				assert(false, "Could not find file `\(u)`.")
-				markUnimplemented()
-			}
-
+			self?._restoreSnapshotFromURL(u)
 			dispatchToMainQueueAsynchronously { [weak self] in
 				self?._isBusy.value	=	false
 			}
-//		}
+		}
+	}
+
+	private func _restoreSnapshotFromURL(u: NSURL) {
+		do {
+			let	data	=	try Platform.thePlatform.fileSystem.contentOfFileAtURLAtomically(u)
+			if let s = NSString(data: data, encoding: NSUTF8StringEncoding) as String? {
+				let	db		=	try! WorkspaceItemTreeDatabase(snapshot: s, repairAutomatically: false)
+				let	node		=	_rebuildFileNodeModelTree(self, db)
+				_db		=	db
+				_root.value	=	node
+			}
+			else {
+				assert(false, "Could not read a valid UTF-8 string from file `\(u)`.")
+				markUnimplemented()
+			}
+		}
+		catch let error as NSError {
+			assert(false, "Could not find file `\(u)`. An error `\(error)` occured.")
+			markUnimplemented()
+		}
+
 	}
 	private func _runStoringSnapshot() {
-		precondition(_isBusy.value == false)
 		_isBusy.value	=	true
 		let	db1	=	_db.duplicate()
 		let	u	=	_snapshotFileURL()
+		dispatchToMainQueueAsynchronously { [weak self] in
 //		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) {
-			let	s	=	db1.snapshot()
-			let	d	=	s.dataUsingEncoding(NSUTF8StringEncoding)
-			let	ok	=	d!.writeToURL(u, atomically: true)
-			assert(ok)
+			precondition(self!._isBusy.value == false)
+			self?._storeSnapshotToURL(u, database: db1)
 			dispatchToMainQueueAsynchronously { [weak self] in
 				self?._isBusy.value	=	false
 			}
-//		}
+		}
 	}
+	private func _storeSnapshotToURL(u: NSURL, database: WorkspaceItemTreeDatabase) {
+		let	s	=	database.snapshot()
+		Debug.log("Storing snapshot `\(s)`...")
+		let	d	=	s.dataUsingEncoding(NSUTF8StringEncoding)!
+		do {
+			try Platform.thePlatform.fileSystem.replaceContentOfFileAtURLAtomically(u, data: d)
+		}
+		catch let error as NSError {
+			assert(false, "Could not write to file `\(u)`. An error `\(error)` occured.")
+			markUnimplemented()
+		}
+	}
+
 	private func _snapshotFileURL() -> NSURL {
 		assert(workspace.location.value != nil)
 		return	workspace.location.value!.URLByAppendingPathComponent("Workspace.EditorFileList")
 	}
+
+	///
+
+	private func _insertNodeAtPath(path: WorkspaceItemPath) {
+		let	containerPath	=	path.pathByDeletingLastComponent()
+		if let node = _findNodeForPath(containerPath) {
+			for subnode in node.subnodes.array {
+				if subnode.path.value == path {
+					markUnimplemented()
+					return
+				}
+			}
+//			assert(node.subnodes.array.filter({ $0.path.value == path }).count == 0)
+
+			_db.insertItemAtPath(path)
+			_db.appendSubitemAtPath(path, to: containerPath)
+			let	newnode		=	FileNodeModel()
+			newnode.owner		=	self
+			newnode.supernode	=	node
+			newnode._path.value	=	path
+			node._subnodes.append(newnode)
+			return
+		}
+		assert(false)
+	}
+	private func _deleteNodeAtPath(path: WorkspaceItemPath) {
+		if let node = _findNodeForPath(path) {
+			if let supernode = node.supernode {
+				if let idx = supernode.subnodes.array.indexOfValueByReferentialIdentity(node) {
+					supernode._subnodes.delete(idx...idx)
+					_db.deleteItemAndSubtreeRecursivelyAtPath(path)
+					return
+				}
+			}
+		}
+		assert(false)
+	}
+
 
 	///
 
@@ -157,6 +224,7 @@ public class FileNodeModel: ModelSubnode<FileTreeModel> {
 
 	public var tree: FileTreeModel {
 		get {
+			assert(owner != nil)
 			return	owner!
 		}
 	}
@@ -268,20 +336,22 @@ public class FileNodeModel: ModelSubnode<FileTreeModel> {
 
 
 /// Can be executed in any single thread.
-private func _rebuildFileNodeModelTree(snapshotDatabase: WorkspaceItemTreeDatabase) -> FileNodeModel {
-	return	_rebuildFileNodeModelSubtree(snapshotDatabase, `for`: WorkspaceItemPath.root)
+private func _rebuildFileNodeModelTree(tree: FileTreeModel, _ snapshotDatabase: WorkspaceItemTreeDatabase) -> FileNodeModel {
+	return	_rebuildFileNodeModelSubtree(tree, snapshotDatabase, `for`: WorkspaceItemPath.root)
 }
 /// Can be executed in any single thread.
-private func _rebuildFileNodeModelSubtree(snapshotDatabase: WorkspaceItemTreeDatabase, `for` path: WorkspaceItemPath) -> FileNodeModel {
+private func _rebuildFileNodeModelSubtree(tree: FileTreeModel, _ snapshotDatabase: WorkspaceItemTreeDatabase, `for` path: WorkspaceItemPath) -> FileNodeModel {
 	let	node		=	FileNodeModel()
 	node._path.value	=	path
 	node._comment.value	=	snapshotDatabase.commentOfItemAtPath(path)
+	node.owner		=	tree
 
 	let	subpaths	=	snapshotDatabase.allSubitemsOfItemAtPath(path)
 	var	subnodes	=	[FileNodeModel]()
 	subnodes.reserveCapacity(subpaths.count)
 	for subpath in subpaths {
-		let	subnode		=	_rebuildFileNodeModelSubtree(snapshotDatabase, `for`: subpath)
+		let	subnode		=	_rebuildFileNodeModelSubtree(tree, snapshotDatabase, `for`: subpath)
+		subnode.supernode	=	node
 		subnodes.append(subnode)
 	}
 	node._subnodes.extend(subnodes)
