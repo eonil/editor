@@ -12,6 +12,12 @@ import EditorCommon
 
 public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
+	deinit {
+		assert(_isInstalled == false)
+	}
+
+	///
+
 	public var workspace: WorkspaceModel {
 		get {
 			assert(owner != nil)
@@ -38,6 +44,16 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 	public var isBusy: ValueStorage<Bool> {
 		get {
 			return	_isBusy
+		}
+	}
+	public var storing: CompletionChannel {
+		get{
+			return	_storing
+		}
+	}
+	public var restoring: CompletionChannel {
+		get {
+			return	_restoring
 		}
 	}
 
@@ -82,18 +98,41 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 	private var	_db	=	WorkspaceItemTreeDatabase()
 	private let	_isBusy	=	MutableValueStorage<Bool>(false)
 
+	private let	_storing	=	CompletionQueue()
+	private let	_restoring	=	CompletionQueue()
+
+	private var	_isInstalled	=	false
+
 	///
 
 	private func _install() {
 		assert(_root.value == nil)
-		let	node		=	FileNodeModel()
+		assert(_isInstalled == false)
+
+		_installRoot()
+		_isInstalled		=	true
+	}
+	private func _deinstall() {
+		assert(_root.value != nil)
+		assert(_isInstalled == true)
+
+		_deinstallRoot()
+		_isInstalled		=	false
+	}
+
+	/// Installs a new root node from database.
+	private func _installRoot() {
+		assert(_root.value === nil)
+
+		let	node		=	_rebuildFileNodeModelTree(self, _db)
 		node._path.value	=	WorkspaceItemPath.root
 		node._comment.value	=	_db.commentOfItemAtPath(WorkspaceItemPath.root)
 		node.owner		=	self
 		_root.value		=	node
 	}
-	private func _deinstall() {
-		assert(_root.value != nil)
+	private func _deinstallRoot() {
+		assert(_root.value !== nil)
+
 		let	node		=	_root.value!
 		_root.value		=	nil
 		node.owner		=	nil
@@ -111,19 +150,23 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 //		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { [weak self] in
 			self?._restoreSnapshotFromURL(u)
 			dispatchToMainQueueAsynchronously { [weak self] in
+				self?._restoring.cast()
 				self?._isBusy.value	=	false
 			}
 		}
 	}
 
 	private func _restoreSnapshotFromURL(u: NSURL) {
+//		Debug.assertNonMainThread()
 		do {
 			let	data	=	try Platform.thePlatform.fileSystem.contentOfFileAtURLAtomically(u)
 			if let s = NSString(data: data, encoding: NSUTF8StringEncoding) as String? {
+				_deinstallRoot()
+
 				let	db		=	try! WorkspaceItemTreeDatabase(snapshot: s, repairAutomatically: false)
-				let	node		=	_rebuildFileNodeModelTree(self, db)
 				_db		=	db
-				_root.value	=	node
+
+				_installRoot()
 			}
 			else {
 				assert(false, "Could not read a valid UTF-8 string from file `\(u)`.")
@@ -142,14 +185,22 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		let	u	=	_snapshotFileURL()
 		dispatchToMainQueueAsynchronously { [weak self] in
 //		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) {
+			guard self != nil else {
+				return
+			}
+
 			precondition(self!._isBusy.value == false)
-			self?._storeSnapshotToURL(u, database: db1)
+			self!._storeSnapshotToURL(u, database: db1)
 			dispatchToMainQueueAsynchronously { [weak self] in
-				self?._isBusy.value	=	false
+				if let _ = self {
+					self!._storing.cast()
+					self!._isBusy.value	=	false
+				}
 			}
 		}
 	}
 	private func _storeSnapshotToURL(u: NSURL, database: WorkspaceItemTreeDatabase) {
+//		Debug.assertNonMainThread()
 		let	s	=	database.snapshot()
 		Debug.log("Storing snapshot `\(s)`...")
 		let	d	=	s.dataUsingEncoding(NSUTF8StringEncoding)!
@@ -222,6 +273,12 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 /// Also you must manually call `unloadSubodes` when you don't use them anymore.
 public class FileNodeModel: ModelSubnode<FileTreeModel> {
 
+	deinit {
+		assert(_isInstalled == false)
+	}
+
+	///
+
 	public var tree: FileTreeModel {
 		get {
 			assert(owner != nil)
@@ -271,13 +328,29 @@ public class FileNodeModel: ModelSubnode<FileTreeModel> {
 	private let	_comment	=	MutableValueStorage<String?>(nil)
 	private let	_subnodes	=	MutableArrayStorage<FileNodeModel>([])
 	private var	_isLoaded	=	true
+	internal var	_isInstalled	=	false
 
 	///
 
 	private func _install() {
+		assert(_isInstalled == false)
 
+		for subnode in subnodes.array {
+			assert(subnode.owner === nil)
+			subnode.owner	=	owner!
+		}
+
+		_isInstalled	=	true
 	}
 	private func _deinstall() {
+		assert(_isInstalled == true)
+
+		for subnode in subnodes.array {
+			assert(subnode.owner === owner!)
+			subnode.owner	=	nil
+		}
+
+		_isInstalled	=	false
 	}
 
 	private func _insertSubnodes(subnodes: [FileNodeModel], at index: Int) {
@@ -363,9 +436,14 @@ private func _rebuildFileNodeModelSubtree(tree: FileTreeModel, _ snapshotDatabas
 
 
 
-
-
-
+internal func TEST_STUB_rebuildFileNodeModelTree(tree: FileTreeModel, _ snapshotDatabase: WorkspaceItemTreeDatabase) -> FileNodeModel {
+	return	_rebuildFileNodeModelTree(tree, snapshotDatabase)
+}
+extension FileTreeModel {
+	internal func TEST_STUB_restoreSnapshotFromURL(u: NSURL) {
+		_restoreSnapshotFromURL(u)
+	}
+}
 
 
 

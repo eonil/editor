@@ -20,7 +20,6 @@ class MockPlatformWithPseudoFileSystem: MockPlatform {
 			self!.fileContentMappings[u]	=	nil
 		}
 		testFileSystem.testDelegate.contentOfFileAtURLAtomically	=	{ [weak self] (u: NSURL)->NSData in
-			
 			precondition(self!.fileContentMappings[u] != nil, "File content does not exist for URL `\(u.absoluteString)` ")
 			return	self!.fileContentMappings[u]!
 		}

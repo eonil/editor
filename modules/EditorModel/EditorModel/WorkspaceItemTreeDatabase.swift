@@ -22,13 +22,22 @@ import Foundation
 ///
 final class WorkspaceItemTreeDatabase {
 
+	/// Creates a database with default root element that has no child.
 	init() {
 		_createEmptyRootItem()
 	}
+	/// Creates a database with list of path-contents.
+	///
+	/// - Parameters:
+	///	- mappings
+	///		List of path-contents. This list must contain
+	///		a root element at first.
 	private init(mappings: [WorkspaceItemPath: _InMemoryContent]) {
 		_mappings	=	mappings
 	}
 
+	/// Creates a new, separated database intance that contains exact 
+	/// copy of current database.
 	func duplicate() -> WorkspaceItemTreeDatabase {
 		return	WorkspaceItemTreeDatabase(mappings: _mappings)
 	}
@@ -125,7 +134,7 @@ extension WorkspaceItemTreeDatabase {
 	typealias	Error	=	WorkspaceItemSerialization.Error
 
 	convenience init(snapshot: String, repairAutomatically: Bool) throws {
-		assert(repairAutomatically == false, "Repairing is not supported nor implemented yet.")
+		precondition(repairAutomatically == false, "Repairing is not supported nor implemented yet.")
 		self.init()
 
 		func insertItem(item: WorkspaceItemSerialization.PersistentItem) {
