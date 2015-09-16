@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// A relative path from workspace root.
+/// An absolute path from workspace root.
 ///
 public struct WorkspaceItemPath {
 

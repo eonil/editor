@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import EditorCommon
 
 struct Dialogue {
 	/*!
@@ -75,7 +76,8 @@ struct Dialogue {
 			fallthrough
 
 		default:
-			///	WTF?
+			/// WTF?
+			reportToDevelopers()
 			break
 		}
 
@@ -83,6 +85,37 @@ struct Dialogue {
 		return
 	}
 
+	static func runSavingNewFile(continuation: NSURL?->()) {
+		let	saveP			=	NSSavePanel()
+		saveP.canCreateDirectories	=	true
+
+		let	result			=	saveP.runModal()
+
+		switch result {
+		case NSFileHandlingPanelOKButton:
+			if let u = saveP.URL {
+				continuation(u)
+				return
+			}
+
+		case NSFileHandlingPanelCancelButton:
+			fallthrough
+
+		default:
+			/// WTF?
+			reportToDevelopers()
+			break
+		}
+
+		continuation(nil)
+		return
+	}
+
+
+
+	static func runErrorAlertModally(error: ErrorType) {
+		NSAlert(error: error as NSError).runModal()
+	}
 }
 
 

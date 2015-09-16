@@ -8,6 +8,35 @@
 
 import Foundation
 
+public func checkAndReportFailureToDevelopers(@autoclosure condition: ()->Bool, _ message: String? = nil) {
+	let	conditionEvaluation	=	condition()
+
+	if let message = message {
+		assert(conditionEvaluation, message)
+	}
+	else {
+		assert(conditionEvaluation)
+	}
+
+	reportToDevelopers(message)
+
+	#if Debug
+		if conditionEvaluation == false {
+			fatalError()
+		}
+	#endif
+}
+
+public func reportToDevelopers(message: String? = nil) {
+	// Not yet implemented.
+	// Here will be a code that reports failure to developers.
+	// 1. Persist error on disk to secure it.
+	// 2. Try to dispatch this to dev server in synchronous manner.
+	// 3. Erased persisted error if it's been successfully sent.
+	//    Otherwise retry sending at next launch.
+}
+
+
 public func assertAndReportFailure(@autoclosure condition: ()->Bool, _ message: String) {
 	assert(condition(), message)
 }

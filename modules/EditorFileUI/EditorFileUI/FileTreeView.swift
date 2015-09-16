@@ -65,8 +65,16 @@ public class FileTreeView: CommonUIView {
 		model!.root.registerWillSet(ObjectIdentifier(self)) { [weak self] in
 			self?._willSetRoot()
 		}
+
+		model!.onDidChange.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+			guard self != nil else {
+				return
+			}
+			self!._onDidChangeTree()
+		}
 	}
 	private func _deinstall() {
+		model!.onDidChange.deregisterDidSet(ObjectIdentifier(self))
 		model!.root.deregisterWillSet(ObjectIdentifier(self))
 		model!.root.deregisterDidSet(ObjectIdentifier(self))
 		_willSetRoot()
@@ -81,6 +89,12 @@ public class FileTreeView: CommonUIView {
 	}
 	private func _layout() {
 		_scrollView.frame		=	bounds
+	}
+
+	///
+
+	private func _onDidChangeTree() {
+		_outlineView.reloadData()
 	}
 
 	///
@@ -153,8 +167,21 @@ private func _instantiateOutlineView() -> NSOutlineView {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
 	weak var owner: FileTreeView?
+
 	@objc
 	private func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
 		if item == nil {
@@ -169,6 +196,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 			}
 		}
 	}
+
 	@objc
 	private func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
 		if let item = item as? FileNodeModel {
@@ -178,6 +206,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 			fatalError("Unknown data node.")
 		}
 	}
+
 	@objc
 	private func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
 		if item == nil {
@@ -193,6 +222,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 			}
 		}
 	}
+
 	@objc
 	private func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
 		func toData(model: FileNodeModel) -> FileNodeView.Data {

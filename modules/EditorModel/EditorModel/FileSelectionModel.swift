@@ -11,6 +11,7 @@ import MulticastingStorage
 import EditorCommon
 
 public class FileSelectionModel: ModelSubnode<FileTreeModel> {
+
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
 		_install()
@@ -22,11 +23,30 @@ public class FileSelectionModel: ModelSubnode<FileTreeModel> {
 
 	///
 
-	private let	_focused	=	MutableValueStorage<WorkspaceItemPath?>(nil)
-	private let	_marked		=	MutableArrayStorage<WorkspaceItemPath>([])
+	public func focusFileAtPath(path: WorkspaceItemPath) {
+		assert(_focusedPath.value == nil)
+		_focusedPath.value	=	path
+	}
+	public func defocusFileAtPath() {
+		assert(_focusedPath.value != nil)
+		_focusedPath.value	=	nil
+	}
+	public func selectFileAtPath(path: WorkspaceItemPath) {
+		_selectedPaths.append(path)
+	}
+	public func deselectFileAtPath(path: WorkspaceItemPath) {
+		_selectedPaths.removeFirstEqualValue(path)
+	}
+
+	///
+
+	private let	_focusedPath	=	MutableValueStorage<WorkspaceItemPath?>(nil)
+	private let	_selectedPaths	=	MutableArrayStorage<WorkspaceItemPath>([])
+
+	///
 
 	private func _install() {
-
+		
 	}
 	private func _deinstall() {
 

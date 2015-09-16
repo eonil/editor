@@ -43,6 +43,7 @@ public class Driver {
 	}
 	
 	public func run() {
+		Platform.initiate(_cocoaPlatform)
 
 		_ui.model	=	_model
 		_ui.run()
@@ -63,9 +64,12 @@ public class Driver {
 		_ui.halt()
 		_ui.model	=	nil
 
+		Platform.terminate()
 	}
 
 	///
+
+	private let	_cocoaPlatform		=	CocoaPlatform()
 
 	private let	_ui			=	ApplicationUIController()
 	private let	_model			=	ApplicationModel()

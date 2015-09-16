@@ -144,7 +144,7 @@ class FileNewMenuController: SessionProtocol {
 	}
 
 	private func _clickWorkspace() {
-		assert(model!.defaultWorkspace.value != nil)
+		checkAndReportFailureToDevelopers(model!.defaultWorkspace.value != nil)
 		Dialogue.runSavingWorkspace({ [weak self] (u: NSURL?) -> () in
 			if let u = u {
 				self?.model!.createAndOpenWorkspaceAtURL(u)
@@ -152,17 +152,67 @@ class FileNewMenuController: SessionProtocol {
 		})
 	}
 	private func _clickFile() {
-		assert(model!.defaultWorkspace.value != nil)
-		if let ws = model!.defaultWorkspace.value {
-			markUnimplemented()
-			ws.file.runCreatingFileAtPath(WorkspaceItemPath(parts: ["ttt1"]))
-			ws.file.runCreatingFileAtPath(WorkspaceItemPath(parts: ["ttt1", "ttt2"]))
-		}
+		checkAndReportFailureToDevelopers(model!.defaultWorkspace.value != nil)
+		_testCreatingFile1()
 	}
 	private func _clickFolder() {
-		assert(model!.defaultWorkspace.value != nil)
+		checkAndReportFailureToDevelopers(model!.defaultWorkspace.value != nil)
+		_testCreatingFolder1()
+	}
+
+	///
+
+	private func _testCreatingFile1() {
 		if let ws = model!.defaultWorkspace.value {
-			ws.file.runCreatingFolderAtPath(WorkspaceItemPath(parts: ["src", "testfolder1"]))
+			let	p	=	WorkspaceItemPath(parts: ["ttt1"])
+			if ws.file.containsNodeAtPath(p) == false {
+				do {
+					try ws.file.createFolderAtPath(p)
+				}
+				catch let error {
+					Dialogue.runErrorAlertModally(error)
+				}
+			}
+
+			struct Local {
+				static var	once	=	false
+			}
+			if Local.once {
+				let	p1	=	WorkspaceItemPath(parts: ["ttt1", "ttt2"])
+				if ws.file.containsNodeAtPath(p1) == false {
+					do {
+						try ws.file.createFileAtPath(p1)
+					}
+					catch let error {
+						Dialogue.runErrorAlertModally(error)
+					}
+				}
+			}
+			else {
+				let	p1	=	WorkspaceItemPath(parts: ["ttt1", "ttt3"])
+				if ws.file.containsNodeAtPath(p1) == false {
+					do {
+						try ws.file.createFileAtPath(p1)
+					}
+					catch let error {
+						Dialogue.runErrorAlertModally(error)
+					}
+				}
+			}
+
+			Local.once	=	true
+		}
+	}
+
+	private func _testCreatingFolder1() {
+		if let ws = model!.defaultWorkspace.value {
+			do {
+//				try ws.file.createFolderAtPath(WorkspaceItemPath(parts: ["src", "t1"]))
+				try ws.file.createFolderAtPath(WorkspaceItemPath(parts: ["z1", "y2"]))
+			}
+			catch let error {
+				Dialogue.runErrorAlertModally(error)
+			}
 		}
 	}
 }

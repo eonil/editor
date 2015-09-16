@@ -17,6 +17,7 @@
 		4554C9FC1B7DC2FC004987CC /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C9ED1B7DC2E4004987CC /* EditorUICommon.framework */; };
 		4554CAA01B7DC755004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C9DB1B7DC2D0004987CC /* EditorModel.framework */; };
 		4554CAA11B7DC757004987CC /* EditorShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C9E41B7DC2DB004987CC /* EditorShell.framework */; };
+		459A8C741B9526BB005CB0CC /* CocoaPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459A8C731B9526BB005CB0CC /* CocoaPlatform.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		4554C9DE1B7DC2DB004987CC /* EditorShell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorShell.xcodeproj; path = ../EditorShell/EditorShell.xcodeproj; sourceTree = "<group>"; };
 		4554C9E71B7DC2E4004987CC /* EditorUICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUICommon.xcodeproj; path = ../EditorUICommon/EditorUICommon.xcodeproj; sourceTree = "<group>"; };
 		4554C9F01B7DC2E9004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
+		459A8C731B9526BB005CB0CC /* CocoaPlatform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CocoaPlatform.swift; sourceTree = "<group>"; };
 		45B5EBB31B915A1600C4247A /* EditorDebugUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebugUI.xcodeproj; path = ../EditorDebugUI/EditorDebugUI.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,6 +219,7 @@
 			children = (
 				4554C9CB1B7DC212004987CC /* Driver.swift */,
 				450C0F951B7F382D0048E7A1 /* WorkspaceDocument.swift */,
+				459A8C731B9526BB005CB0CC /* CocoaPlatform.swift */,
 				450C0FB41B7F49BB0048E7A1 /* (external tools) */,
 				4554C9021B7DBF6A004987CC /* Info.plist */,
 			);
@@ -496,6 +499,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459A8C741B9526BB005CB0CC /* CocoaPlatform.swift in Sources */,
 				4554C9C41B7DC143004987CC /* Tools.swift in Sources */,
 				4554C9CC1B7DC212004987CC /* Driver.swift in Sources */,
 				450C0F961B7F382D0048E7A1 /* WorkspaceDocument.swift in Sources */,

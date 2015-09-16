@@ -49,6 +49,15 @@ public protocol PlatformProtocol: class {
 }
 
 public protocol PlatformFileSystemProtocol: class {
+
+	/// Creates a directory at URL.
+	/// The URL must be a file URL.
+	func createDirectoryAtURL(u: NSURL, recursively: Bool) throws
+
+	/// Deletes a directory at URL.
+	/// The URL must be a file URL.
+	func deleteDirectoryAtURL(u: NSURL, recursively: Bool) throws
+
 	/// Creates a new empty file at the URL.
 	/// The URL must be a file URL.
 	func createFileAtURL(u: NSURL) throws
@@ -63,6 +72,10 @@ public protocol PlatformFileSystemProtocol: class {
 	func replaceContentOfFileAtURLAtomically(u: NSURL, data: NSData) throws
 }
 
+public enum PlatformFileSystemError: ErrorType {
+	case AlreadyExists
+	case DoesNotExist
+}
 
 
 

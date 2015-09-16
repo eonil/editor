@@ -8,11 +8,38 @@
 
 import Foundation
 
+/// Provides serialization of workspace path items.
+///
+/// This serializes a path item into a custom schemed URL.
+/// Each path items will be stored in this form.
+///
+/// 	editor://workspace/folder1/folder2?group
+/// 	editor://workspace/folder1/folder2/file3?comment=extra%20info
+///
+/// Rules
+/// -----
+/// 1. Conforms RFC URL standards. (done automatically by Cocoa classes)
+/// 2. Slashes(`/`) cannot be a part of node name. Even with escapes.
+///    This equally applied to all of Unix file systems and URL standards. 
+///    You must use slashes as a directory separator even if you're using 
+///    this data on Windows to conform URL standard.
+/// 3. All files are stored in sorted flat list. Yes, base paths are 
+///    duplicated redundant data, but this provides far more DVCS-friendly
+///    (diff/merge) data form, and I believe that is far more important
+///    then micro spatial efficiency. Also, in most cases, you will be 
+///    using at least a kind of compression, and this kind of redundancy
+///    is very compression friendly.
+///
+/// Strict reader requires all intermediate folders comes up before any 
+/// descendant nodes. Anyway error-tolerant reader will be provided later
+/// for practical use with DVCS systems.
+///
 struct WorkspaceItemSerialization {
-	typealias	PersistentItem	=	(path: WorkspaceItemPath, comment: String?)
+	typealias	PersistentItem	=	(path: WorkspaceItemPath, group: Bool, comment: String?)
 
 	struct Error: ErrorType {
 		let	message	:	String
+
 	}
 
 	static func deserialize(u: NSURLComponents) throws -> PersistentItem {
@@ -35,6 +62,7 @@ struct WorkspaceItemSerialization {
 
 		var	parts	=	[String]()
 		var	comment	=	nil as String?
+		var	group	=	false
 
 		parts		=	u.path!.componentsSeparatedByString("/")
 		assert(parts.count >= 1)
@@ -54,24 +82,39 @@ struct WorkspaceItemSerialization {
 			if q.name == "comment" {
 				comment	=	q.value
 			}
+			if q.name == "group" {
+				group	=	true
+			}
 		}
 
 		let	path	=	WorkspaceItemPath(parts: parts)
-		return	(path, comment)
+		return	(path, group, comment)
 	}
+
 	static func serialize(item: PersistentItem) -> NSURLComponents {
 		for p in item.path.parts {
 			precondition(p.containsString("/") == false)
+		}
+
+		func getQueryItems() -> [NSURLQueryItem] {
+			let	items	=	[
+				item.group == false ? Optional.None : NSURLQueryItem(name: "group", value: nil),
+				item.comment == nil ? Optional.None : NSURLQueryItem(name: "comment", value: item.comment),
+			]
+			as [NSURLQueryItem?]
+			return	items.filter { $0 != nil }.map { $0! }
 		}
 
 		let	u	=	NSURLComponents()
 		u.scheme	=	"editor"
 		u.host		=	"workspace"
 		u.path		=	"/" + item.path.parts.joinWithSeparator("/")
-		u.queryItems	=	item.comment == nil ? nil : [NSURLQueryItem(name: "comment", value: item.comment!)]
+		u.queryItems	=	getQueryItems()
 		return	u
 	}
 }
+
+
 
 extension WorkspaceItemSerialization {
 	static func deserializeList(snapshot: String) throws -> [PersistentItem] {
