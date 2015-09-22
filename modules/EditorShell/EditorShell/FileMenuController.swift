@@ -12,6 +12,7 @@ import EditorCommon
 import EditorModel
 
 
+
 class FileMenuController: SessionProtocol {
 
 	weak var model: ApplicationModel?
@@ -96,7 +97,6 @@ class FileMenuController: SessionProtocol {
 		}
 	}
 }
-
 
 
 
