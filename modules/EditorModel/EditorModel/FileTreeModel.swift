@@ -126,7 +126,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		let	containerPath	=	path.pathByDeletingLastComponent()
 
 		// Creates all intermediate directories.
-		if _db.containsItemForPath(containerPath) == false {
+		if _db.containsNodeAtPath(containerPath) == false {
 			try createFolderAtPath(containerPath)
 		}
 
@@ -141,7 +141,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			throw error
 		}
 
-		assert(_db.containsItemForPath(containerPath))
+		assert(_db.containsNodeAtPath(containerPath))
 		_insertNodeAtPath(path)
 
 		_onDidChange.value	=	()
