@@ -63,6 +63,8 @@ public class ApplicationModel: ModelRootNode {
 			return	_currentWorkspace
 		}
 	}
+	
+	/// A workspace will be activated at application start up.
 	public var defaultWorkspace: ValueStorage<WorkspaceModel?> {
 		get {
 			return	_currentWorkspace
@@ -79,7 +81,9 @@ public class ApplicationModel: ModelRootNode {
 	/// Just opens a workspace, and create it at the place.
 	///
 	/// - Parameters:
-	///	- location:	
+	///
+	///	  - location:
+	///
 	///		A URL to a file path that will become a workspace.
 	///		This location will be created by `cargo` and must
 	///		not exist at the point of calling.

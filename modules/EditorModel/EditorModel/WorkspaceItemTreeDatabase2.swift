@@ -71,7 +71,7 @@ public class WorkspaceItemTreeDatabase {
 	///
 	/// Newrly created database is fully empty, and does not even have
 	/// a root node. You need to call `createRoot` to make it usable
-	/// state. For example, you cannot add a subitem with no root.
+	/// state. You cannot add any subitem with no root.
 	public init() {
 	}
 
