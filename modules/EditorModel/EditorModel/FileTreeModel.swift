@@ -17,13 +17,18 @@ import EditorCommon
 /// of high level interfaces. So you cannot get a synchronous state 
 /// query or specific state guarantee. All operations are done in 
 /// try-and-see manner. You just issue a command and see what happens.
-/// All file operations are provided in synchronous manner for your 
-/// convenience, and you'll get result synchronously. All file operations
+///
+/// All file operations are provided in synchronous interface only for 
+/// your convenience, and you'll get result synchronously. All file operations
 /// `return` on success, and `throw` on failure.
 ///
 /// Anyway, non-file-operations are not written in this manner. For 
 /// example, file view node management are fully predictable and synchronous,
 /// so it can be asserted, and checked regardless of file operations.
+///
+/// Internally, this class maintains a `WorkspaceItemTree` instance to 
+/// track file item list.
+///
 public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 
@@ -32,6 +37,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			case CannotMoveDueToLackOfNodeAtFromPath
 			case CannotMoveDueToExistingNodeAtToPath
 		}
+		
 		var	code	:	Code
 		var	message	:	String
 	}
@@ -71,11 +77,11 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			return	_root
 		}
 	}
-	public var isBusy: ValueStorage<Bool> {
-		get {
-			return	_isBusy
-		}
-	}
+//	public var isBusy: ValueStorage<Bool> {
+//		get {
+//			return	_isBusy
+//		}
+//	}
 	public var storing: CompletionChannel {
 		get{
 			return	_storing
@@ -100,17 +106,13 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 	///
 
 	public func runRestoringSnapshot() {
-		_runRestoringSnapshot() { [weak self] in
-			guard self != nil else {
-				return
-			}
-
-			self!._onDidChange.value	=	()
-		}
+		let	u	=	_snapshotFileURL()
+		_restoreSnapshotFromURL(u)
+		_onDidChange.value	=	()
 	}
 	public func runStoringSnapshot() {
-		_runStoringSnapshot() {
-		}
+		let	u	=	_snapshotFileURL()
+		_storeSnapshotToURL(u)
 	}
 
 	///
@@ -126,7 +128,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		let	containerPath	=	path.pathByDeletingLastComponent()
 
 		// Creates all intermediate directories.
-		if _db.containsNodeAtPath(containerPath) == false {
+		if _tree.root.findNodeForPath(containerPath) != nil {
 			try createFolderAtPath(containerPath)
 		}
 
@@ -141,7 +143,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			throw error
 		}
 
-		assert(_db.containsNodeAtPath(containerPath))
+		assert(_tree.root.findNodeForPath(containerPath) != nil)
 		_insertNodeAtPath(path)
 
 		_onDidChange.value	=	()
@@ -173,8 +175,8 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 	///
 
 	private let	_root	=	MutableValueStorage<FileNodeModel?>(nil)
-	private var	_db	=	WorkspaceItemTreeDatabase()
-	private let	_isBusy	=	MutableValueStorage<Bool>(false)
+	private var	_tree	=	WorkspaceItemTree()
+//	private let	_isBusy	=	MutableValueStorage<Bool>(false)
 
 	private let	_storing	=	CompletionQueue()
 	private let	_restoring	=	CompletionQueue()
@@ -192,7 +194,8 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 		selection.owner		=	self
 
-		_installRoot(_rebuildFileNodeModelTree(self, _db))
+		_tree.createRoot()
+		_installRoot(_rebuildFileNodeModelTree(self, _tree))
 
 		_isInstalled		=	true
 	}
@@ -202,6 +205,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		assert(_isInstalled == true)
 
 		_deinstallRoot()
+		_tree.deleteRoot()
 
 		selection.owner		=	nil
 
@@ -216,7 +220,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		assert(_root.value === nil)
 
 		node._path.value	=	WorkspaceItemPath.root
-		node._comment.value	=	_db.commentOfItemAtPath(WorkspaceItemPath.root)
+		node._comment.value	=	_tree.root.comment
 		node.owner		=	self
 		_root.value		=	node
 
@@ -238,40 +242,20 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
-	private func _runRestoringSnapshot(continuation: ()->()) {
-		Debug.assertMainThread()
-		precondition(_isBusy.value == false)
-		_isBusy.value	=	true
-		let	u	=	_snapshotFileURL()
-		dispatchToMainQueueAsynchronously { [weak self] in
-//		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { [weak self] in
-			self?._restoreSnapshotFromURLInNonMainThread(u) {
-				dispatchToMainQueueAsynchronously { [weak self] in
-					self?._restoring.cast()
-					self?._isBusy.value	=	false
-					continuation()
-				}
-			}
-		}
-	}
-
-	private func _restoreSnapshotFromURLInNonMainThread(u: NSURL, continuation: ()->()) {
-//		Debug.assertNonMainThread()
+	private func _restoreSnapshotFromURL(u: NSURL) {
 		do {
 			let	data	=	try Platform.thePlatform.fileSystem.contentOfFileAtURLAtomically(u)
 			if let s = NSString(data: data, encoding: NSUTF8StringEncoding) as String? {
-				let	db	=	try! WorkspaceItemTreeDatabase(snapshot: s, repairAutomatically: false)
-				let	node	=	_rebuildFileNodeModelTree(self, db)
+				let	tree	=	try! WorkspaceItemTree(snapshot: s)
+				let	node	=	_rebuildFileNodeModelTree(self, tree)
 
 				dispatchToMainQueueAsynchronously() { [weak self] in
 					guard self != nil else {
 						return
 					}
 					self!._deinstallRoot()
-					self!._db	=	db
+					self!._tree	=	tree
 					self!._installRoot(node)
-
-					continuation()
 				}
 			}
 			else {
@@ -284,42 +268,12 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			markUnimplemented()
 		}
 	}
-	private func _runStoringSnapshot(continuation: ()->()) {
-		Debug.assertMainThread()
-
-		_isBusy.value	=	true
-		let	db1	=	_db.duplicate()
-		let	u	=	_snapshotFileURL()
-		dispatchToMainQueueAsynchronously { [weak self] in
-//		dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) { [weak self] in
-			guard self != nil else {
-				return
-			}
-
-			self!._storeSnapshotToURLInNonMainThread(u, database: db1) { [weak self] in
-				dispatchToMainQueueAsynchronously { [weak self] in
-					guard self != nil else {
-						return
-					}
-					self!._storing.cast()
-					self!._isBusy.value	=	false
-
-					continuation()
-				}
-			}
-		}
-	}
-	private func _storeSnapshotToURLInNonMainThread(u: NSURL, database: WorkspaceItemTreeDatabase, continuation: ()->()) {
-//		Debug.assertNonMainThread()
-		assert(database !== _db)
-
-		let	s	=	database.snapshot()
+	private func _storeSnapshotToURL(u: NSURL) {
+		let	s	=	_tree.snapshot()
 		Debug.log("Storing snapshot `\(s)`...")
 		let	d	=	s.dataUsingEncoding(NSUTF8StringEncoding)!
 		do {
 			try Platform.thePlatform.fileSystem.replaceContentOfFileAtURLAtomically(u, data: d)
-
-			continuation()
 		}
 		catch let error as NSError {
 			assert(false, "Could not write to file `\(u)`. An error `\(error)` occured.")
@@ -360,9 +314,12 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		assert(_findNodeForPath(path) == nil, "There's already a node at the path `\(path)`.")
 
 		let	containerPath	=	path.pathByDeletingLastComponent()
+		assert(_tree.root.findNodeForPath(containerPath) != nil)
+
 		if let node = _findNodeForPath(containerPath) {
-			_db.insertItemAtPath(path)
-			_db.appendSubitemAtPath(path, to: containerPath)
+			let	item	=	WorkspaceItemNode(name: path.parts.last!, isGroup: false)
+			_tree.root.findNodeForPath(containerPath)!.subnodes.append(item)
+
 			let	newnode		=	FileNodeModel()
 			newnode.owner		=	self
 			newnode.supernode	=	node
@@ -378,11 +335,14 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 	}
 	private func _deleteNodeAtPath(path: WorkspaceItemPath) {
 		Debug.assertMainThread()
+		assert(path != WorkspaceItemPath.root)
+
 		if let node = _findNodeForPath(path) {
 			if let supernode = node.supernode {
 				if let idx = supernode.subnodes.array.indexOfValueByReferentialIdentity(node) {
 					supernode._subnodes.delete(idx...idx)
-					_db.deleteItemAndSubtreeRecursivelyAtPath(path)
+					let	item	=	_tree.root.findNodeForPath(path)!
+					item.supernode!.subnodes.remove(item)
 
 					assert(_checkDBAndTreeSynhronicity())
 					return
@@ -408,12 +368,12 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			return	_checkDBAndTreeSynhronicityAtNode(root, path: WorkspaceItemPath.root)
 		}
 		else {
-			return	_db.count == 0
+			return	_tree.root.count == 0
 		}
 	}
 	private func _checkDBAndTreeSynhronicityAtNode(node: FileNodeModel, path: WorkspaceItemPath) -> Bool {
 		Debug.assertMainThread()
-		guard _db.containsItemForPath(path) else {
+		guard _tree.root.findNodeForPath(path) != nil else {
 			assert(false)
 			return	false
 		}
@@ -426,7 +386,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		///
 
 		let	subnodes	=	node.subnodes.array
-		let	subpaths	=	_db.allSubitemsOfItemAtPath(path)
+		let	subpaths	=	_tree.root.findNodeForPath(path)!.subnodes.map({ $0.resolvePath() })
 
 		guard subnodes.count == subpaths.count else {
 			assert(false)
@@ -437,7 +397,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			let	subnode	=	subnodes[i]
 			let	subpath	=	subpaths[i]
 
-			guard _db.containsItemForPath(subpath.pathByDeletingLastComponent()) else {
+			guard _tree.root.findNodeForPath(subpath.pathByDeletingLastComponent()) != nil else {
 				assert(false)
 				return	false
 			}
@@ -653,8 +613,8 @@ public class FileNodeModel: ModelSubnode<FileTreeModel> {
 
 
 /// Can be executed on any thread.
-private func _rebuildFileNodeModelTree(tree: FileTreeModel, _ snapshotDatabase: WorkspaceItemTreeDatabase) -> FileNodeModel {
-	return	_rebuildFileNodeModelSubtree(tree, snapshotDatabase, `for`: WorkspaceItemPath.root)
+private func _rebuildFileNodeModelTree(modelTree: FileTreeModel, _ snapshotTree: WorkspaceItemTree) -> FileNodeModel {
+	return	_rebuildFileNodeModelSubtree(modelTree, snapshotTree, `for`: WorkspaceItemPath.root)
 }
 /// Can be executed on any thread.
 ///
@@ -662,17 +622,17 @@ private func _rebuildFileNodeModelTree(tree: FileTreeModel, _ snapshotDatabase: 
 ///	- tree
 ///		This object will not be accessed at all, and only its pointer will be used to each subnodes.
 ///
-private func _rebuildFileNodeModelSubtree(tree: FileTreeModel, _ snapshotDatabase: WorkspaceItemTreeDatabase, `for` path: WorkspaceItemPath) -> FileNodeModel {
+private func _rebuildFileNodeModelSubtree(modelTree: FileTreeModel, _ snapshotTree: WorkspaceItemTree, `for` path: WorkspaceItemPath) -> FileNodeModel {
 	let	node		=	FileNodeModel()
 	node._path.value	=	path
-	node._comment.value	=	snapshotDatabase.commentOfItemAtPath(path)
-	node.owner		=	tree
+	node._comment.value	=	snapshotTree.root.findNodeForPath(path)!.comment
+	node.owner		=	modelTree
 
-	let	subpaths	=	snapshotDatabase.allSubitemsOfItemAtPath(path)
+	let	subpaths	=	snapshotTree.root.findNodeForPath(path)!.subnodes.map({ $0.resolvePath() })
 	var	subnodes	=	[FileNodeModel]()
 	subnodes.reserveCapacity(subpaths.count)
 	for subpath in subpaths {
-		let	subnode		=	_rebuildFileNodeModelSubtree(tree, snapshotDatabase, `for`: subpath)
+		let	subnode		=	_rebuildFileNodeModelSubtree(modelTree, snapshotTree, `for`: subpath)
 		subnode.supernode	=	node
 		subnodes.append(subnode)
 	}
@@ -685,14 +645,14 @@ private func _rebuildFileNodeModelSubtree(tree: FileTreeModel, _ snapshotDatabas
 
 
 
-internal func TEST_STUB_rebuildFileNodeModelTree(tree: FileTreeModel, _ snapshotDatabase: WorkspaceItemTreeDatabase) -> FileNodeModel {
-	return	_rebuildFileNodeModelTree(tree, snapshotDatabase)
-}
-extension FileTreeModel {
-	internal func TEST_STUB_restoreSnapshotFromURL(u: NSURL) {
-		_restoreSnapshotFromURLInNonMainThread(u) {}
-	}
-}
+//internal func TEST_STUB_rebuildFileNodeModelTree(modelTree: FileTreeModel, _ snapshotTree: WorkspaceItemTree) -> FileNodeModel {
+//	return	_rebuildFileNodeModelTree(modelTree, snapshotTree)
+//}
+//extension FileTreeModel {
+//	internal func TEST_STUB_restoreSnapshotFromURL(u: NSURL) {
+//		_restoreSnapshotFromURL(u) {}
+//	}
+//}
 
 
 

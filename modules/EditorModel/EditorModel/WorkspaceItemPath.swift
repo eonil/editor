@@ -33,9 +33,13 @@ public struct WorkspaceItemPath {
 		assert(WorkspaceItemPath._isPartValid(part))
 		return	WorkspaceItemPath(parts: parts + [part])
 	}
+//	public func pathByDeletingFirstComponent() -> WorkspaceItemPath {
+//		precondition(parts.count > 0)
+//		return	WorkspaceItemPath(parts: Array(parts[parts.startIndex.successor()..<parts.endIndex]))
+//	}
 	public func pathByDeletingLastComponent() -> WorkspaceItemPath {
 		precondition(parts.count > 0)
-		return	WorkspaceItemPath(parts: Array(parts[0..<parts.endIndex-1]))
+		return	WorkspaceItemPath(parts: Array(parts[parts.startIndex..<parts.endIndex.predecessor()]))
 	}
 	public func hasPrefix(prefixPath: WorkspaceItemPath) -> Bool {
 		guard prefixPath.parts.count <= _parts.count else {
@@ -81,37 +85,37 @@ public struct WorkspaceItemPath {
 
 public extension WorkspaceItemPath {
 
-	public init?(absoluteFileURL u: NSURL, `for` workspace: WorkspaceModel) throws {
-		guard u.fileURL else {
-			return	nil
-		}
-
-		if workspace.location.value! == u {
-			// Path to root. Nothing to do.
-			return
-		}
-		else {
-			var	u	=	u
-			while let p = u.lastPathComponent {
-				_parts.append(p)
-				if let u1 = u.URLByDeletingLastPathComponent {
-					u	=	u1
-					if workspace.location.value! == u {
-						// Path discovered.
-						return
-					}
-				}
-				else {
-					break
-				}
-			}
-
-			// No more part, but still not a path to this workspace.
-			// Invalid, wrong URL.
-			throw WorkspaceItemPathError(message: "The `absoluteFileURL` is not a part of this workspace.")
-		}
-
-	}
+//	public init?(absoluteFileURL u: NSURL, `for` workspace: WorkspaceModel) throws {
+//		guard u.fileURL else {
+//			return	nil
+//		}
+//
+//		if workspace.location.value! == u {
+//			// Path to root. Nothing to do.
+//			return
+//		}
+//		else {
+//			var	u	=	u
+//			while let p = u.lastPathComponent {
+//				_parts.append(p)
+//				if let u1 = u.URLByDeletingLastPathComponent {
+//					u	=	u1
+//					if workspace.location.value! == u {
+//						// Path discovered.
+//						return
+//					}
+//				}
+//				else {
+//					break
+//				}
+//			}
+//
+//			// No more part, but still not a path to this workspace.
+//			// Invalid, wrong URL.
+//			throw WorkspaceItemPathError(message: "The `absoluteFileURL` is not a part of this workspace.")
+//		}
+//
+//	}
 
 	public func absoluteFileURL(`for` workspace: WorkspaceModel) -> NSURL {
 		assert(workspace.location.value!.fileURL == true)

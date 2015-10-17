@@ -40,24 +40,24 @@ public struct WorkspaceItemPointer {
 
 }
 
-public extension WorkspaceItemPointer {
-
-	public init?(workspace: WorkspaceModel, absoluteFileURL u: NSURL) throws {
-		guard u.fileURL else {
-			return	nil
-		}
-
-		_workspace	=	workspace
-		_path		=	try! WorkspaceItemPath(absoluteFileURL: u, `for`: workspace)!
-	}
-
-	public func absoluteFileURL() -> NSURL {
-		assert(_workspace!.location.value!.fileURL == true)
-
-		return	_path.absoluteFileURL(`for`: _workspace!)
-	}
-
-}
+//public extension WorkspaceItemPointer {
+//
+//	public init?(workspace: WorkspaceModel, absoluteFileURL u: NSURL) throws {
+//		guard u.fileURL else {
+//			return	nil
+//		}
+//
+//		_workspace	=	workspace
+//		_path		=	try! WorkspaceItemPointer(absoluteFileURL: u, `for`: workspace)!
+//	}
+//
+//	public func absoluteFileURL() -> NSURL {
+//		assert(_workspace!.location.value!.fileURL == true)
+//
+//		return	_path.absoluteFileURL(`for`: _workspace!)
+//	}
+//
+//}
 
 extension WorkspaceItemPointer: Equatable, Hashable {
 	public var hashValue: Int {
