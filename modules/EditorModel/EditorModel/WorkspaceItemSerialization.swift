@@ -18,11 +18,11 @@ import Foundation
 ///
 /// Rules
 /// -----
-/// 1. Conforms RFC URL standards. (done automatically by Cocoa classes)
+/// 1. Conforms RFC URL standards. (done by Cocoa classes)
 /// 2. Slashes(`/`) cannot be a part of node name. Even with escapes.
 ///    This equally applied to all of Unix file systems and URL standards. 
-///    You must use slashes as a directory separator even if you're using 
-///    this data on Windows to conform URL standard.
+///    You must use slashes as a directory separator to conform URL standard
+///    even if you're using this data on Windows.
 /// 3. All files are stored in sorted flat list. Yes, base paths are 
 ///    duplicated redundant data, but this provides far more DVCS-friendly
 ///    (diff/merge) data form, and I believe that is far more important

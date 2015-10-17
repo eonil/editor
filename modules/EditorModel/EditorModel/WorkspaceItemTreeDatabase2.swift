@@ -15,7 +15,7 @@ import Foundation
 /// Workspace item is a sorted list of paths to files in the workspace.
 /// All items are full paths to workspace root.
 /// Container directories must have an explicit entry. Missing container
-/// is an error, and will not be created implicitly.
+/// is an error, and will not be tolerated.
 ///
 /// Thread Consideration
 /// --------------------
@@ -33,7 +33,7 @@ import Foundation
 /// every paths of target subtree, and that is ridiculously expensive, and
 /// unacceptable.
 ///
-/// This design keeps a separated unique ID and does not use path as a key.
+/// Current design keeps a separated unique ID and does not use path as a key.
 /// So all the keys don't need to be updated for "move" operation. Anyway,
 /// lookup-by-path cost increased from hash-lookup `O(1) ~ O(n)` to binary-
 /// tree lookup `O(log n)`. But I think this is better because cost is 

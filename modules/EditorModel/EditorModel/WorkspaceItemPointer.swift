@@ -10,6 +10,9 @@ import Foundation
 
 /// An absolute pointer to a workspace item.
 ///
+/// "Absolute" means this pointer identifies a workspace item globally in
+/// process memory.
+///
 public struct WorkspaceItemPointer {
 
 	public init(workspace: WorkspaceModel, path: WorkspaceItemPath) {

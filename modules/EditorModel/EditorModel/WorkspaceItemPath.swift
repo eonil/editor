@@ -16,8 +16,9 @@ public struct WorkspaceItemPath {
 
 	public init(parts: [String]) {
 		assert(parts.filter({ $0 == "" }).count == 0, "Empty string cannot be a name part.")
+		assert(parts.map(WorkspaceItemPath._isPartValid).reduce(true, combine: { $0 && $1 }))
 
-		_parts		=	parts
+		_parts	=	parts
 	}
 
 	///
@@ -28,6 +29,10 @@ public struct WorkspaceItemPath {
 		}
 	}
 
+	public func pathByAppendingLastComponent(part: String) -> WorkspaceItemPath {
+		assert(WorkspaceItemPath._isPartValid(part))
+		return	WorkspaceItemPath(parts: parts + [part])
+	}
 	public func pathByDeletingLastComponent() -> WorkspaceItemPath {
 		precondition(parts.count > 0)
 		return	WorkspaceItemPath(parts: Array(parts[0..<parts.endIndex-1]))
@@ -46,7 +51,32 @@ public struct WorkspaceItemPath {
 
 	///
 
-	private var		_parts		=	[String]()
+	private enum _PartError: ErrorType {
+		/// A part is empty.
+		case PartIsEmpty
+		/// A path part cannot contain any slash character (`/`) that is reserved for part separator.
+		case PartContainsSlash
+	}
+
+	private var	_parts	=	[String]()
+
+	private static func _isPartValid(part: String) -> Bool {
+		do {
+			try _validatePart(part)
+			return	true
+		}
+		catch {
+			return	false
+		}
+	}
+	private static func _validatePart(part: String) throws {
+		guard part != "" else {
+			throw	_PartError.PartIsEmpty
+		}
+		guard part.containsString("/") == false else {
+			throw	_PartError.PartContainsSlash
+		}
+	}
 }
 
 public extension WorkspaceItemPath {
