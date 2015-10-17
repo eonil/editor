@@ -128,7 +128,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		let	containerPath	=	path.pathByDeletingLastComponent()
 
 		// Creates all intermediate directories.
-		if _tree.root.findNodeForPath(containerPath) != nil {
+		if _tree.root.findNodeForPath(containerPath) == nil {
 			try createFolderAtPath(containerPath)
 		}
 
@@ -145,6 +145,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 		assert(_tree.root.findNodeForPath(containerPath) != nil)
 		_insertNodeAtPath(path)
+		_tree.root.findNodeForPath(path)!.isGroup	=	true;
 
 		_onDidChange.value	=	()
 	}

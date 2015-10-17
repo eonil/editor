@@ -129,6 +129,13 @@ public extension WorkspaceItemPath {
 
 }
 
+extension WorkspaceItemPath: CustomStringConvertible {
+	public var description: String {
+		get {
+			return	"(WorkspaceItemPath: \(_parts))"
+		}
+	}
+}
 extension WorkspaceItemPath: Equatable, Hashable {
 	public var hashValue: Int {
 		get {
