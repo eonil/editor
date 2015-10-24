@@ -52,6 +52,9 @@ public protocol PlatformFileSystemProtocol: class {
 
 	/// Creates a directory at URL.
 	/// The URL must be a file URL.
+	///
+	/// This does not throw an error if destination 
+	/// directory already exists. (treats as success)
 	func createDirectoryAtURL(u: NSURL, recursively: Bool) throws
 
 	/// Deletes a directory at URL.

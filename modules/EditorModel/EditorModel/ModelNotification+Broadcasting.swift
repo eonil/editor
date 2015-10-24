@@ -101,6 +101,7 @@ private final class _ListBox<N: NotificationType> {
 	func register<T: NotificationObserver where T.Notification == N>(observer: T) {
 		let	dispatch	=	{ [weak observer] (n: N)->() in
 			precondition(observer != nil)
+			print(n)
 			observer!.processNotification(n)
 		}
 		list.append((ObjectIdentifier(observer), dispatch))

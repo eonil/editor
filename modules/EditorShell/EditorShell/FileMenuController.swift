@@ -163,6 +163,18 @@ class FileNewMenuController: SessionProtocol {
 	///
 
 	private func _testCreatingFile1() {
+		guard let ws = model!.defaultWorkspace.value else {
+			fatalError("This shouldn't be called if current workspace is `nil`.")
+		}
+
+		do {
+			let	n	=	FileNodeModel(name: "qqQq", isGroup: false)
+			try ws.file.searchNodeAtPath(WorkspaceItemPath(parts: ["src"]))!.subnodes.append(n)
+		}
+		catch let error {
+			Dialogue.runErrorAlertModally(error)
+		}
+
 //		if let ws = model!.defaultWorkspace.value {
 //			let	p	=	WorkspaceItemPath(parts: ["ttt1"])
 //			if ws.file.containsNodeAtPath(p) == false {
@@ -207,15 +219,17 @@ class FileNewMenuController: SessionProtocol {
 	}
 
 	private func _testCreatingFolder1() {
-//		if let ws = model!.defaultWorkspace.value {
-//			do {
-////				try ws.file.createFolderAtPath(WorkspaceItemPath(parts: ["src", "t1"]))
+		if let ws = model!.defaultWorkspace.value {
+			do {
+				let	n	=	FileNodeModel(name: "yyY", isGroup: true)
+				try ws.file.searchNodeAtPath(WorkspaceItemPath(parts: ["src"]))!.subnodes.append(n)
+//				try ws.file.createFolderAtPath(WorkspaceItemPath(parts: ["src", "t1"]))
 //				try ws.file.createFolderAtPath(WorkspaceItemPath(parts: ["z1", "y2"]))
-//			}
-//			catch let error {
-//				Dialogue.runErrorAlertModally(error)
-//			}
-//		}
+			}
+			catch let error {
+				Dialogue.runErrorAlertModally(error)
+			}
+		}
 	}
 }
 class FileOpenMenuController: SessionProtocol {

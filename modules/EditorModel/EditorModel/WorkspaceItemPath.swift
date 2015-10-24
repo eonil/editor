@@ -33,10 +33,10 @@ public struct WorkspaceItemPath {
 		assert(WorkspaceItemPath._isPartValid(part))
 		return	WorkspaceItemPath(parts: parts + [part])
 	}
-//	public func pathByDeletingFirstComponent() -> WorkspaceItemPath {
-//		precondition(parts.count > 0)
-//		return	WorkspaceItemPath(parts: Array(parts[parts.startIndex.successor()..<parts.endIndex]))
-//	}
+	public func pathByDeletingFirstComponent() -> WorkspaceItemPath {
+		precondition(parts.count > 0)
+		return	WorkspaceItemPath(parts: Array(parts[parts.startIndex.successor()..<parts.endIndex]))
+	}
 	public func pathByDeletingLastComponent() -> WorkspaceItemPath {
 		precondition(parts.count > 0)
 		return	WorkspaceItemPath(parts: Array(parts[parts.startIndex..<parts.endIndex.predecessor()]))

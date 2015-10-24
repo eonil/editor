@@ -94,7 +94,7 @@ public class WorkspaceItemNode {
 	}
 	public var name: String {
 		willSet {
-			assertNoError(WorkspaceItemNode.validateName(name, withSupernode: _supernode))
+			assertNoError(WorkspaceItemNode.validateName(newValue, withSupernode: _supernode))
 		}
 		didSet {
 		}

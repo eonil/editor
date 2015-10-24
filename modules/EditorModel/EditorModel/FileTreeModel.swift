@@ -614,7 +614,7 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 		}
 		for subnode in _subnodes {
 			if path.parts[0] == subnode.name {
-				if let discover = subnode.search(path) {
+				if let discover = subnode.search(path.pathByDeletingLastComponent()) {
 					return	discover
 				}
 			}
@@ -674,7 +674,11 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		}
 
 		assert(hostNode._subnodes.indexOfValueByReferentialIdentity(node) == nil)
+		try WorkspaceItemNode.validateName(node._dataNode.name, withSupernode: hostNode._dataNode)()
+
+		hostNode._dataNode.subnodes.insert(node._dataNode, atIndex: index)
 		hostNode._subnodes.insert(node, atIndex: index)
+
 		assert(node.owner == nil, "Supplied node `\(node)` must be a detached node.")
 		assert(node.supernode == nil, "Supplied node `\(node)` must be a detached node.")
 		node.owner	=	hostNode.owner
@@ -701,6 +705,8 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		else {
 			try Platform.thePlatform.fileSystem.deleteFileAtURL(destFileSystemNodeURL)
 		}
+
+		hostNode._dataNode.subnodes.removeAtIndex(index)
 
 		assert(hostNode._subnodes[index].owner === hostNode)
 		FileNodeEvent.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).broadcastBy(hostNode)

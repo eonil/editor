@@ -43,7 +43,7 @@ public class FileTreeView: CommonView, NotificationObserver {
 	}
 	
 	public func processNotification(notification: Notification<FileNodeModel, FileNodeEvent>) {
-		guard notification.sender === model else {
+		guard notification.sender.tree === model else {
 			return
 		}
 
