@@ -1,5 +1,5 @@
 //
-//  CommonUIWindowController.swift
+//  CommonWindowController.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/14.
@@ -13,7 +13,7 @@ import EditorModel
 /// Fixes some bugs in AppKit.
 /// Provides automatic shell propagations through view and view-controllers.
 ///
-public class CommonUIWindowController: NSWindowController {
+public class CommonWindowController: NSWindowController {
 
 	public init() {
 		_inInit	=	true
@@ -51,8 +51,8 @@ public class CommonUIWindowController: NSWindowController {
 			return	super.contentViewController
 		}
 		set {
-			assert(newValue is CommonUIController)
-			if let newValue = newValue as? CommonUIController {
+			assert(newValue is CommonViewController)
+			if let newValue = newValue as? CommonViewController {
 				super.contentViewController	=	newValue
 			}
 		}

@@ -10,6 +10,10 @@ import Foundation
 import MulticastingStorage
 import EditorCommon
 
+//public protocol ModelNotificationDelegate: class {
+//	func applicationModelNotify(applicationModel: ApplicationModel, notification: ModelNotification)
+//}
+
 /// A model for application.
 /// This manages whole application state, not only single document
 /// or something else.
@@ -26,6 +30,8 @@ public class ApplicationModel: ModelRootNode {
 //		let	a	=	ToolLocationResolver.cargoToolLocation()
 //		assert(a == "/Users/Eonil/Unix/homebrew/bin/cargo")
 	}
+
+	///
 
 	///
 

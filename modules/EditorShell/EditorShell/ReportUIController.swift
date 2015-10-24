@@ -13,7 +13,7 @@ import EditorCommon
 import EditorModel
 import EditorUICommon
 
-class ReportingUIController: CommonUIController {
+class ReportingUIController: CommonViewController {
 
 	weak var model: WorkspaceModel?
 

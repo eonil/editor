@@ -30,9 +30,14 @@ import Foundation
 ///    using at least a kind of compression, and this kind of redundancy
 ///    is very compression friendly.
 ///
+/// Workspace is defined by a sorted list of paths to files in the workspace.
+/// All items are full paths to workspace root.
+/// Container directories must have an explicit entry. Missing container
+/// is an error.
+///
 /// Strict reader requires all intermediate folders comes up before any 
 /// descendant nodes. Anyway error-tolerant reader will be provided later
-/// for practical use with DVCS systems.
+/// for practical use with DVCS systems by inferring missing containers.
 ///
 struct WorkspaceItemSerialization {
 	typealias	PersistentItem	=	(path: WorkspaceItemPath, group: Bool, comment: String?)

@@ -11,7 +11,7 @@ import EditorModel
 import EditorUICommon
 import EditorFileUI
 
-class FileTreeUIController: CommonUIController {
+class FileTreeUIController: CommonViewController {
 
 	weak var model: FileTreeModel? {
 		get {

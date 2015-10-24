@@ -1,5 +1,5 @@
 //
-//  CommonUIController.swift
+//  CommonViewController.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/14.
@@ -15,10 +15,10 @@ import EditorModel
 /// Shell Propagation
 /// -----------------
 /// `shell` will automatically be propagated to child view controllers and
-/// `view`. Because the `view` is `CommonUIView`, it will propagate shell
+/// `view`. Because the `view` is `CommonView`, it will propagate shell
 /// object to all of its subviews.
 ///
-public class CommonUIController: NSViewController {
+public class CommonViewController: NSViewController {
 
 	/// The designated initializer.
 	public init() {
@@ -51,6 +51,15 @@ public class CommonUIController: NSViewController {
 
 	///
 
+	@available(*, unavailable, message="This property is not supported.")
+	public override var representedObject: AnyObject? {
+		get {
+			fatalError("This property is not supported.")
+		}
+		set {
+			fatalError("This property is not supported.")
+		}
+	}
 //	override func loadView() {
 //		let	v	=	_InstallationEventRoutingView(frame: CGRect.zeroRect)
 //		v.owner		=	self
@@ -75,8 +84,8 @@ public class CommonUIController: NSViewController {
 	}
 }
 
-final class _InstallationEventRoutingView: CommonUIView {
-	weak var owner: CommonUIController?
+final class _InstallationEventRoutingView: CommonView {
+	weak var owner: CommonViewController?
 	override func installSubcomponents() {
 		super.installSubcomponents()
 		owner!._install()

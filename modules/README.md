@@ -6,6 +6,50 @@
 
 
 
+
+
+
+
+
+
+
+
+Architecture & Naming Convention
+--------------------------------
+A UI component is built with a controller and its view or view-controllers.
+
+A UI component and is built with two parts. One is controller and
+the other is view. For example,
+
+- FileTreeController
+- FileTreeView
+
+
+
+Every UI is basically implemented in view, and named like `~View`.
+
+
+All views are named like `~View`. Viewd named like `~View` are all pure views,
+and does not interact with model. 
+Model interactions are all done in a view-controller. These view-controllers
+are in charge of interacting with model. 
+
+-	ViewController1
+	-	ViewController2
+		-	View4
+			-	View5
+			-	View6
+	-	ViewController3
+			-	View7
+
+
+
+
+
+
+
+
+
 Lifecycling
 -----------
 Model exists independently from UI. Then it will never be affected by UI.
@@ -16,7 +60,7 @@ UI depends on model. Each UI component that consumes model always have
 
 All UI components should have explicit concept of session start/end. For
 `NSView` classes, it's recommended to use `willMoveToWindow/didMoveToWindow`
-pair. `CommonUIView/CommonUIViewController` provides `installSubcomponents/
+pair. `CommonView/CommonViewController` provides `installSubcomponents/
 deinstallSubcomponents` methods for your convenience.
 
 A model must be assigned **before UI session starts**, and must be deassigned

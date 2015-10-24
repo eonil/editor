@@ -14,7 +14,7 @@ import EditorModel
 import EditorUICommon
 import EditorDebugUI
 
-class ContextTreeUIController: CommonUIController {
+class ContextTreeUIController: CommonViewController {
 
 	weak var model: DebuggingModel? 
 

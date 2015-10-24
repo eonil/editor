@@ -11,12 +11,11 @@
 		451372BD1B7ED78500ED9829 /* MulticastingStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372B91B7ED76F00ED9829 /* MulticastingStorage.framework */; };
 		4554C9851B7DC068004987CC /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C97A1B7DC068004987CC /* EditorUICommon.framework */; };
 		4554C98A1B7DC068004987CC /* EditorUICommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9891B7DC068004987CC /* EditorUICommonTests.swift */; };
-		4554C99B1B7DC08E004987CC /* CommonUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9941B7DC08E004987CC /* CommonUIController.swift */; };
-		4554C99C1B7DC08E004987CC /* CommonUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9951B7DC08E004987CC /* CommonUIView.swift */; };
-		4554C99D1B7DC08E004987CC /* CommonUIWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9961B7DC08E004987CC /* CommonUIWindowController.swift */; };
-		4554C99E1B7DC08E004987CC /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9971B7DC08E004987CC /* CommonView.swift */; };
+		4554C99B1B7DC08E004987CC /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9941B7DC08E004987CC /* CommonViewController.swift */; };
+		4554C99C1B7DC08E004987CC /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9951B7DC08E004987CC /* CommonView.swift */; };
+		4554C99D1B7DC08E004987CC /* CommonWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9961B7DC08E004987CC /* CommonWindowController.swift */; };
 		4554C99F1B7DC08E004987CC /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9981B7DC08E004987CC /* CoreGraphicsExtensions.swift */; };
-		4554C9A01B7DC08E004987CC /* DummyUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9991B7DC08E004987CC /* DummyUIController.swift */; };
+		4554C9A01B7DC08E004987CC /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9991B7DC08E004987CC /* DummyViewController.swift */; };
 		4554C9A51B7DC0B9004987CC /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A31B7DC0B9004987CC /* SplitViewController.swift */; };
 		4554C9A61B7DC0B9004987CC /* ToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A41B7DC0B9004987CC /* ToolbarController.swift */; };
 		4554CA841B7DC451004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA811B7DC44B004987CC /* EditorModel.framework */; };
@@ -90,12 +89,11 @@
 		4554C9841B7DC068004987CC /* EditorUICommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorUICommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C9891B7DC068004987CC /* EditorUICommonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorUICommonTests.swift; sourceTree = "<group>"; };
 		4554C98B1B7DC068004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4554C9941B7DC08E004987CC /* CommonUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUIController.swift; sourceTree = "<group>"; };
-		4554C9951B7DC08E004987CC /* CommonUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUIView.swift; sourceTree = "<group>"; };
-		4554C9961B7DC08E004987CC /* CommonUIWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUIWindowController.swift; sourceTree = "<group>"; };
-		4554C9971B7DC08E004987CC /* CommonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
+		4554C9941B7DC08E004987CC /* CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewController.swift; sourceTree = "<group>"; };
+		4554C9951B7DC08E004987CC /* CommonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
+		4554C9961B7DC08E004987CC /* CommonWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonWindowController.swift; sourceTree = "<group>"; };
 		4554C9981B7DC08E004987CC /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
-		4554C9991B7DC08E004987CC /* DummyUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyUIController.swift; sourceTree = "<group>"; };
+		4554C9991B7DC08E004987CC /* DummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
 		4554C9A31B7DC0B9004987CC /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		4554C9A41B7DC0B9004987CC /* ToolbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarController.swift; sourceTree = "<group>"; };
 		4554CA7B1B7DC44B004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
@@ -186,10 +184,9 @@
 				4554C9A31B7DC0B9004987CC /* SplitViewController.swift */,
 				4554C9A41B7DC0B9004987CC /* ToolbarController.swift */,
 				4554C9A21B7DC096004987CC /* (dummies for quickies) */,
-				4554C9961B7DC08E004987CC /* CommonUIWindowController.swift */,
-				4554C9941B7DC08E004987CC /* CommonUIController.swift */,
-				4554C9951B7DC08E004987CC /* CommonUIView.swift */,
-				4554C9971B7DC08E004987CC /* CommonView.swift */,
+				4554C9961B7DC08E004987CC /* CommonWindowController.swift */,
+				4554C9941B7DC08E004987CC /* CommonViewController.swift */,
+				4554C9951B7DC08E004987CC /* CommonView.swift */,
 				4554C9981B7DC08E004987CC /* CoreGraphicsExtensions.swift */,
 				45C77AF51B7F2AA50064C363 /* Delay.swift */,
 				4554C97F1B7DC068004987CC /* Info.plist */,
@@ -209,7 +206,7 @@
 		4554C9A21B7DC096004987CC /* (dummies for quickies) */ = {
 			isa = PBXGroup;
 			children = (
-				4554C9991B7DC08E004987CC /* DummyUIController.swift */,
+				4554C9991B7DC08E004987CC /* DummyViewController.swift */,
 			);
 			name = "(dummies for quickies)";
 			sourceTree = "<group>";
@@ -396,14 +393,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4554C99B1B7DC08E004987CC /* CommonUIController.swift in Sources */,
-				4554C99C1B7DC08E004987CC /* CommonUIView.swift in Sources */,
+				4554C99B1B7DC08E004987CC /* CommonViewController.swift in Sources */,
+				4554C99C1B7DC08E004987CC /* CommonView.swift in Sources */,
 				4554C9A61B7DC0B9004987CC /* ToolbarController.swift in Sources */,
-				4554C99D1B7DC08E004987CC /* CommonUIWindowController.swift in Sources */,
+				4554C99D1B7DC08E004987CC /* CommonWindowController.swift in Sources */,
 				4554C99F1B7DC08E004987CC /* CoreGraphicsExtensions.swift in Sources */,
-				4554C9A01B7DC08E004987CC /* DummyUIController.swift in Sources */,
+				4554C9A01B7DC08E004987CC /* DummyViewController.swift in Sources */,
 				45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */,
-				4554C99E1B7DC08E004987CC /* CommonView.swift in Sources */,
 				4554C9A51B7DC0B9004987CC /* SplitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -463,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -503,7 +499,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				VERSIONING_SYSTEM = "apple-generic";

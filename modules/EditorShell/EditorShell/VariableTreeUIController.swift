@@ -12,7 +12,7 @@ import EditorModel
 import EditorUICommon
 import EditorDebugUI
 
-class VariableTreeUIController: CommonUIController {
+class VariableTreeUIController: CommonViewController {
 
 	weak var model: DebuggingModel?
 

@@ -10,6 +10,6 @@ import Foundation
 import AppKit
 import EditorUICommon
 
-class EditUIController: CommonUIController {
+class EditUIController: CommonViewController {
 	
 }

@@ -31,7 +31,6 @@ import EditorCommon
 ///
 public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
-
 	struct Error: ErrorType {
 		enum Code {
 			case CannotMoveDueToLackOfNodeAtFromPath
@@ -426,6 +425,30 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 //	func didDeleteNodesAtPaths()
 //}
 //
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

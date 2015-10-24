@@ -13,7 +13,7 @@ import MulticastingStorage
 import EditorCommon
 import EditorUICommon
 
-public class ContextTreeView: CommonUIView {
+public class ContextTreeView: CommonView {
 
 //	public var onUserDidSelectProcess	:	(()->())?
 //	public var onUserWillDeselectProcess	:	(()->())?

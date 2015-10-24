@@ -12,7 +12,7 @@ import LLDBWrapper
 import EditorCommon
 import EditorUICommon
 
-public class VariableTreeView: CommonUIView {
+public class VariableTreeView: CommonView {
 
 	public var onUserDidSelectVariable	:	(()->())?
 	public var onUserWillDeselectVariable	:	(()->())?

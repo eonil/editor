@@ -12,7 +12,7 @@ import EditorModel
 import EditorCommon
 import EditorUICommon
 
-public final class WorkspaceWindowUIController: CommonUIWindowController, SessionProtocol {
+public final class WorkspaceWindowUIController: CommonWindowController, SessionProtocol {
 
 	/// Will be set by upper level node.
 	public weak var model: WorkspaceModel? {

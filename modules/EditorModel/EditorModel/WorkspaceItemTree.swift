@@ -10,11 +10,6 @@ import Foundation
 
 /// Manages workspace items.
 ///
-/// Workspace is defined by a sorted list of paths to files in the workspace.
-/// All items are full paths to workspace root.
-/// Container directories must have an explicit entry. Missing container
-/// is an error, and will not be tolerated.
-///
 /// Thread Consideration
 /// --------------------
 /// This class is single-thread only. Do not use this object from multiple
@@ -25,6 +20,8 @@ public class WorkspaceItemTree {
 	public init() {
 	}
 
+	///
+
 	public var root: WorkspaceItemNode {
 		get {
 			assert(_root != nil, "You must create root first.")
@@ -34,17 +31,43 @@ public class WorkspaceItemTree {
 	public func createRoot() {
 		_root	=	WorkspaceItemNode(name: "workspace", isGroup: true)
 	}
-	public func createRootFromSnapshot() {
-		_root	=	nil
-	}
+//	public func createRootFromSnapshot() {
+//	}
 	public func deleteRoot() {
-
+		_root	=	nil
 	}
 
 	///
 
 	private var	_root	:	WorkspaceItemNode?
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 public class WorkspaceItemNode {
 

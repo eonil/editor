@@ -13,7 +13,7 @@ import EditorUICommon
 import EditorFileUI
 import EditorDebugUI
 
-class DivisionUIController: CommonUIController {
+class DivisionUIController: CommonViewController {
 
 	weak var model: WorkspaceModel? {
 		didSet {
@@ -39,10 +39,10 @@ class DivisionUIController: CommonUIController {
 	private let	_innerSplit	=	SplitViewController()
 	private let	_edit		=	EditUIController()
 
-	private let	_sample1	=	DummyUIController()
-//	private let	_sample2	=	DummyUIController()
-	private let	_sample3	=	DummyUIController()
-//	private let	_sample4	=	DummyUIController()
+	private let	_sample1	=	DummyViewController()
+//	private let	_sample2	=	DummyViewController()
+	private let	_sample3	=	DummyViewController()
+//	private let	_sample4	=	DummyViewController()
 
 	private let	_files		=	FileTreeUIController()
 	private let	_contexts	=	ContextTreeUIController()

@@ -1,5 +1,5 @@
 //
-//  DummyUIController.swift
+//  DummyViewController.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/14.
@@ -9,10 +9,10 @@
 import Foundation
 import AppKit
 
-public class DummyUIController: CommonUIController {
+public class DummyViewController: CommonViewController {
 
 	public override func loadView() {
-		view		=	CommonUIView()
+		view		=	CommonView()
 	}
 
 	public var backgroundColor: NSColor? {

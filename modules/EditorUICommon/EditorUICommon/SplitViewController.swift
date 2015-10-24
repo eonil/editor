@@ -31,7 +31,7 @@ public final class SplitItem {
 	private weak var _owner: SplitViewController?
 }
 
-public final class SplitViewController: CommonUIController, NSSplitViewDelegate {
+public final class SplitViewController: CommonViewController, NSSplitViewDelegate {
 
 	public var vertical: Bool {
 		get {

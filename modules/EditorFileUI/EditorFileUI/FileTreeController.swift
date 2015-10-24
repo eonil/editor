@@ -13,11 +13,11 @@ import EditorCommon
 import EditorModel
 import EditorUICommon
 
-public class FileTreeView: CommonView {
+public class FileTreeController: CommonViewController {
 
 	public weak var model: FileTreeModel? {
 		willSet {
-			assert(window == nil)
+			assert(view.window == nil)
 		}
 	}
 
@@ -55,7 +55,7 @@ public class FileTreeView: CommonView {
 		_outlineView.setDataSource(_outlineAgent)
 		_outlineView.setDelegate(_outlineAgent)
 		_scrollView.documentView	=	_outlineView
-		addSubview(_scrollView)
+		view.addSubview(_scrollView)
 		_outlineView.reloadData()
 
 		_didSetRoot()
@@ -88,7 +88,7 @@ public class FileTreeView: CommonView {
 		_outlineView.reloadData()
 	}
 	private func _layout() {
-		_scrollView.frame		=	bounds
+		_scrollView.frame		=	view.bounds
 	}
 
 	///
@@ -180,7 +180,7 @@ private func _instantiateOutlineView() -> NSOutlineView {
 
 
 private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
-	weak var owner: FileTreeView?
+	weak var owner: FileTreeController?
 
 	@objc
 	private func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
@@ -270,7 +270,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 
 
 private final class _SubnodeArrayAgent: ArrayStorageDelegate {
-	weak var owner: FileTreeView?
+	weak var owner: FileTreeController?
 	weak var node: FileNodeModel?
 
 	private func willInsertRange(range: Range<Int>) {
