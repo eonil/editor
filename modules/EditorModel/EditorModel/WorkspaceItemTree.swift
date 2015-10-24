@@ -136,7 +136,7 @@ public class WorkspaceItemNode {
 	}
 
 	public func findNodeForPath(path: WorkspaceItemPath) -> WorkspaceItemNode? {
-		precondition(supernode == nil, "You can call this only on root node. (no supernode)")
+//		precondition(supernode == nil, "You can call this only on root node. (no supernode)")
 		if path.parts.count == 0 {
 			return	self
 		}

@@ -75,10 +75,9 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
-	public var root: FileNodeModel {
+	public var root: FileNodeModel? {
 		get {
-			assert(_rootNodeModel != nil)
-			return	_rootNodeModel!
+			return	_rootNodeModel
 		}
 	}
 
@@ -98,6 +97,10 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 	public func containsNodeAtPath(path: WorkspaceItemPath) -> Bool {
 		return	_dataTree!.root!.findNodeForPath(path) != nil
+	}
+
+	public func searchNodeAtPath(path: WorkspaceItemPath) -> FileNodeModel? {
+		return	_rootNodeModel?.search(path)
 	}
 
 //	/// This does not create any intermediate node. Due to lack of destination index informations
@@ -204,10 +207,10 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		assert(_dataTree!.root != nil)
 		_rootNodeModel		=	FileNodeModel(dataNode: _dataTree!.root!)
 		_rootNodeModel!.owner	=	self
-		FileTreeNotification.DidCreateRoot(tree: self, root: _rootNodeModel!).broadcast()
+		FileTreeEvent.DidCreateRoot(root: _rootNodeModel!).broadcastBy(self)
 	}
 	private func _deinstallModelRoot() {
-		FileTreeNotification.WillDeleteRoot(tree: self, root: _rootNodeModel!).broadcast()
+		FileTreeEvent.WillDeleteRoot(root: _rootNodeModel!).broadcastBy(self)
 		assert(_rootNodeModel != nil)
 		assert(_dataTree != nil)
 		assert(_dataTree!.root != nil)
@@ -573,9 +576,9 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 		do {
 			try	Platform.thePlatform.fileSystem.moveFile(fromURL: fromFileURL, toURL: toFileURL)
 
-			FileNodeNotification.WillChangeName(node: self, old: oldValue, new: newValue).broadcast()
+			FileNodeEvent.WillChangeName(old: oldValue, new: newValue).broadcastBy(self)
 			_dataNode.name		=	newValue
-			FileNodeNotification.DidChangeName(node: self, old: oldValue, new: newValue).broadcast()
+			FileNodeEvent.DidChangeName(old: oldValue, new: newValue).broadcastBy(self)
 		}
 		catch let error {
 			// Rollback mutation on any error.
@@ -589,9 +592,10 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 		}
 		set {
 			let	oldValue	=	_dataNode.comment
-			FileNodeNotification.WillChangeComment(node: self, old: oldValue, new: newValue)
+
+			FileNodeEvent.WillChangeComment(old: oldValue, new: newValue).broadcastBy(self)
 			_dataNode.comment	=	newValue
-			FileNodeNotification.DidChangeComment(node: self, old: oldValue, new: newValue)
+			FileNodeEvent.DidChangeComment(old: oldValue, new: newValue).broadcastBy(self)
 		}
 	}
 
@@ -602,6 +606,20 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 	}
 	public func resolvePath() -> WorkspaceItemPath {
 		return	_dataNode.resolvePath()
+	}
+
+	public func search(path: WorkspaceItemPath) -> FileNodeModel? {
+		if path.parts.count == 0 {
+			return	self
+		}
+		for subnode in _subnodes {
+			if path.parts[0] == subnode.name {
+				if let discover = subnode.search(path) {
+					return	discover
+				}
+			}
+		}
+		return	nil
 	}
 
 	///
@@ -662,7 +680,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		node.owner	=	hostNode.owner
 		node.supernode	=	hostNode
 
-		FileNodeNotification.DidInsertSubnode(node: hostNode, subnode: node, index: index)
+		FileNodeEvent.DidInsertSubnode(subnode: node, index: index).broadcastBy(hostNode)
 	}
 	public func remove(node: FileNodeModel) throws {
 		guard let idx = hostNode._subnodes.indexOfValueByReferentialIdentity(node) else {
@@ -685,7 +703,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		}
 
 		assert(hostNode._subnodes[index].owner === hostNode)
-		FileNodeNotification.WillDeleteSubnode(node: hostNode, subnode: hostNode._subnodes[index], index: index)
+		FileNodeEvent.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).broadcastBy(hostNode)
 
 		let	removedNode	=	hostNode._subnodes.removeAtIndex(index)
 		removedNode.supernode	=	nil

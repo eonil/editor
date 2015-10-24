@@ -163,57 +163,59 @@ class FileNewMenuController: SessionProtocol {
 	///
 
 	private func _testCreatingFile1() {
-		if let ws = model!.defaultWorkspace.value {
-			let	p	=	WorkspaceItemPath(parts: ["ttt1"])
-			if ws.file.containsNodeAtPath(p) == false {
-				do {
-					try ws.file.createFolderAtPath(p)
-				}
-				catch let error {
-					Dialogue.runErrorAlertModally(error)
-				}
-			}
-
-			struct Local {
-				static var	once	=	false
-			}
-			if Local.once {
-				let	p1	=	WorkspaceItemPath(parts: ["ttt1", "ttt2"])
-				if ws.file.containsNodeAtPath(p1) == false {
-					do {
-						try ws.file.createFileAtPath(p1)
-					}
-					catch let error {
-						Dialogue.runErrorAlertModally(error)
-					}
-				}
-			}
-			else {
-				let	p1	=	WorkspaceItemPath(parts: ["ttt1", "ttt3"])
-				if ws.file.containsNodeAtPath(p1) == false {
-					do {
-						try ws.file.createFileAtPath(p1)
-					}
-					catch let error {
-						Dialogue.runErrorAlertModally(error)
-					}
-				}
-			}
-
-			Local.once	=	true
-		}
+//		if let ws = model!.defaultWorkspace.value {
+//			let	p	=	WorkspaceItemPath(parts: ["ttt1"])
+//			if ws.file.containsNodeAtPath(p) == false {
+//				do {
+//					let	newFolderNode	=	FileNodeModel(name: "GGG", isGroup: true)
+//					try ws.file.searchNodeAtPath(p)?.subnodes.append(newFolderNode)
+//				}
+//				catch let error {
+//					Dialogue.runErrorAlertModally(error)
+//				}
+//			}
+//
+//			struct Local {
+//				static var	once	=	false
+//			}
+//			if Local.once {
+//				let	p1	=	WorkspaceItemPath(parts: ["ttt1", "ttt2"])
+//				if ws.file.containsNodeAtPath(p1) == false {
+//					do {
+//						ws.file.searchNodeAtPath(p1)
+//						try ws.file.createFileAtPath(p1)
+//					}
+//					catch let error {
+//						Dialogue.runErrorAlertModally(error)
+//					}
+//				}
+//			}
+//			else {
+//				let	p1	=	WorkspaceItemPath(parts: ["ttt1", "ttt3"])
+//				if ws.file.containsNodeAtPath(p1) == false {
+//					do {
+//						try ws.file.createFileAtPath(p1)
+//					}
+//					catch let error {
+//						Dialogue.runErrorAlertModally(error)
+//					}
+//				}
+//			}
+//
+//			Local.once	=	true
+//		}
 	}
 
 	private func _testCreatingFolder1() {
-		if let ws = model!.defaultWorkspace.value {
-			do {
-//				try ws.file.createFolderAtPath(WorkspaceItemPath(parts: ["src", "t1"]))
-				try ws.file.createFolderAtPath(WorkspaceItemPath(parts: ["z1", "y2"]))
-			}
-			catch let error {
-				Dialogue.runErrorAlertModally(error)
-			}
-		}
+//		if let ws = model!.defaultWorkspace.value {
+//			do {
+////				try ws.file.createFolderAtPath(WorkspaceItemPath(parts: ["src", "t1"]))
+//				try ws.file.createFolderAtPath(WorkspaceItemPath(parts: ["z1", "y2"]))
+//			}
+//			catch let error {
+//				Dialogue.runErrorAlertModally(error)
+//			}
+//		}
 	}
 }
 class FileOpenMenuController: SessionProtocol {

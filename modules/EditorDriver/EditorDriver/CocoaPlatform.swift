@@ -51,6 +51,9 @@ class CocoaPlatformFileSystem: PlatformFileSystemProtocol {
 	func deleteFileAtURL(u: NSURL) throws {
 		try NSFileManager.defaultManager().removeItemAtPath(u.path!)
 	}
+	func moveFile(fromURL fromURL: NSURL, toURL: NSURL) throws {
+		try NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL)
+	}
 
 	func contentOfFileAtURLAtomically(u: NSURL) throws -> NSData {
 		return	NSData(contentsOfURL: u)!
@@ -61,3 +64,27 @@ class CocoaPlatformFileSystem: PlatformFileSystemProtocol {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

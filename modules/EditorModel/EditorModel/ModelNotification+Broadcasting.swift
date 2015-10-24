@@ -1,96 +1,125 @@
-////
-////  ModelNotification+Broadcasting.swift
-////  EditorModel
-////
-////  Created by Hoon H. on 2015/10/24.
-////  Copyright © 2015 Eonil. All rights reserved.
-////
 //
-//import Foundation
+//  ModelNotification+SubcategoryBroadcasting.swift
+//  EditorModel
 //
-//public protocol ModelNotificationObserver: class {
-//	func processNotification(n: ModelNotification)
-//}
+//  Created by Hoon H. on 2015/10/24.
+//  Copyright © 2015 Eonil. All rights reserved.
 //
-///// You can send notification by calling `broadcast` method.
-///// This will cast event to every registered observers.
-/////
-///// As any component of app can recieve any event, this is a
-///// kind of global structure, but it doesn't matter because
-///// this does not contain any state except observer list.
-///// What the evil is global **state**, not global structure.
-/////
-///// Each notification carries some context informations, and
-///// you can find
-/////
-///// Thread Consideration
-///// --------------------
-///// Global multicasting is designed to be used only in main
-///// thread. Do not cast them in non-main thread.
-/////
-//public extension ModelNotification {
-//	public static func containsObserver(observer: ModelNotificationObserver) -> Bool {
-//		assert(NSThread.isMainThread())
-//		return	_observers.contains { $0 == _WeakObserverBox(observer: observer) }
-//	}
-//	public static func registerObserver(observer: ModelNotificationObserver) {
-//		_observers.append(_WeakObserverBox(observer: observer))
-//	}
-//	public static func deregisterObserver(observer: ModelNotificationObserver) {
-//		let	range	=	_observers.startIndex..<_observers.endIndex
-//		for i in range.reverse() {
-//			let	o	=	_observers[i]
-//			precondition(o.observer != nil, "A registered observer has became `nil`, which means logic bug.")
-//			if o.observer === observer {
-//				_observers.removeAtIndex(i)
-//				return
-//			}
-//		}
-//		fatalError("Cannot find specified observer `\(observer)` from the registered observer list.")
-//	}
-//
-//	///
-//
-//	internal func broadcast() {
-//		assert(NSThread.isMainThread())
-//		_broadcastLocally()
-//		_broadcastGlobally()
-//	}
-//
-//	///
-//	
-//	private func _broadcastGlobally() {
-//		for o in _observers {
-//			assert(o.observer != nil, "A registered observer has became `nil`, which means logic bug.")
-//			o.observer!.processNotification(self)
-//		}
-//	}
-//	private func _broadcastLocally() {
-//		switch	self {
-//		case	.ApplicationNotification(let n):	n.broadcast()
-//		case	.WorkspaceNotification(let n):		n.broadcast()
-//		}
-//	}
-//}
-//
-//
-//
-//
-//
-//
-//private var	_observers	=	[_WeakObserverBox]()
-//
-//
-//private func == (left: _WeakObserverBox, right: _WeakObserverBox) -> Bool {
-//	return	left.observer === right.observer
-//}
-//private struct _WeakObserverBox {
-//	weak var observer: ModelNotificationObserver?
-//}
-//
-//
-//
-//
-//
-//
-//
+
+import Foundation
+
+
+
+
+
+
+
+
+
+/// Defines subcategory notification type.
+///
+/// You cannot broadcast subcateogory notification directly.
+/// But you can observe for them if one of them are notified using `ModelNotification.broadcast`.
+/// The notification will be arrived **before** observer registered to `ModelNotification`.
+///
+public protocol NotificationType {
+	static func registerObserver<T: NotificationObserver where T.Notification == Self>(observer: T)
+	static func deregisterObserver<T: NotificationObserver where T.Notification == Self>(observer: T)
+}
+public protocol NotificationObserver: class {
+	typealias	Notification: NotificationType
+	func processNotification(notification: Notification)
+}
+public extension NotificationType {
+	public func broadcast() {
+		if let box = _listMapping[Self._getTypeID()] {
+			let	listBox	=	box as! _ListBox<Self>
+			for atom in listBox.list {
+				let	observer	=	atom.dispatch as! (Self->())
+				observer(self)
+			}
+		}
+	}
+	public static func registerObserver<T: NotificationObserver where T.Notification == Self>(observer: T) {
+		let	typeID	=	ObjectIdentifier(self)
+		var	box	=	_listMapping[typeID]
+		if box == nil {
+			box			=	_ListBox<T.Notification>()
+			_listMapping[typeID]	=	box
+		}
+		let	listBox	=	box! as! _ListBox<T.Notification>
+		listBox.register(observer)
+	}
+	public static func deregisterObserver<T: NotificationObserver where T.Notification == Self>(observer: T) {
+		let	typeID	=	ObjectIdentifier(Self)
+		let	box	=	_listMapping[typeID]
+
+		assert(box != nil)
+		let	listBox	=	box! as! _ListBox<T.Notification>
+		listBox.deregister(observer)
+
+		if listBox.list.count == 0 {
+			_listMapping[typeID]	=	nil
+		}
+	}
+
+	///
+
+	static private func _getTypeID() -> ObjectIdentifier {
+		return	ObjectIdentifier(self)
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private var	_listMapping	=	[ObjectIdentifier: AnyObject]()		// Value is actually `_ListBox` type, but the type has been erased to avoid generic parameter resolution.
+
+private final class _ListBox<N: NotificationType> {
+	var	list	=	Array<_ObserverAtom>()
+
+	func register<T: NotificationObserver where T.Notification == N>(observer: T) {
+		let	dispatch	=	{ [weak observer] (n: N)->() in
+			precondition(observer != nil)
+			observer!.processNotification(n)
+		}
+		list.append((ObjectIdentifier(observer), dispatch))
+	}
+	func deregister<T: NotificationObserver where T.Notification == N>(observer: T) {
+		let	range	=	list.startIndex..<list.endIndex
+		for i in range.reverse() {
+			if list[i].id == ObjectIdentifier(observer) {
+				list.removeAtIndex(i)
+				return
+			}
+		}
+		fatalError()
+	}
+}
+
+private typealias _ObserverAtom = (id: ObjectIdentifier, dispatch: Any)	// 2nd parameter is actually `N->() where N: SubcategoryNotificationType`.
+
+
+
+
+

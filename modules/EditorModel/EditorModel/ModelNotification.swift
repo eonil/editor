@@ -8,32 +8,88 @@
 
 import Foundation
 
-public enum ApplicationNotification: SubcategoryNotificationType {
+public struct Notification<O, N>: NotificationType {
+	public init(_ sender: O, _ event: N) {
+		self	=	Notification(sender: sender, event: event)
+	}
+	public init(sender: O, event: N) {
+		self.sender		=	sender
+		self.event		=	event
+	}
+	public var	sender: O
+	public var	event: N
+}
+
+
+//internal func broadcast<Sender, Event>(sender: Sender, _ event: Event) {
+//	Notification(sender, event).broadcast()
+//}
+
+public enum ApplicationEvent: BroadcastableEventType {
+	public typealias	Sender	=	ApplicationModel
 	/// Newrly created workspace will also be notified using this.
 	case DidOpenWorkspace(workspace: WorkspaceModel)
 	case WillCloseWorkspace(workspace: WorkspaceModel)
 }
 
-public enum WorkspaceNotification: SubcategoryNotificationType {
-	case WillRelocate(workspace: WorkspaceModel, from: NSURL, to: NSURL)
-	case DidRelocate(workspace: WorkspaceModel, from: NSURL, to: NSURL)
+public enum WorkspaceEvent: BroadcastableEventType {
+	public typealias	Sender	=	WorkspaceModel
+	case WillRelocate(from: NSURL, to: NSURL)
+	case DidRelocate(from: NSURL, to: NSURL)
 }
 
-public enum FileTreeNotification: SubcategoryNotificationType {
-	case DidCreateRoot(tree: FileTreeModel, root: FileNodeModel)
-	case WillDeleteRoot(tree: FileTreeModel, root: FileNodeModel)
+public enum FileTreeEvent: BroadcastableEventType {
+	public typealias	Sender	=	FileTreeModel
+	case DidCreateRoot(root: FileNodeModel)
+	case WillDeleteRoot(root: FileNodeModel)
 }
 
-public enum FileNodeNotification: SubcategoryNotificationType {
-	case DidInsertSubnode(node: FileNodeModel, subnode: FileNodeModel, index: Int)
-	case WillDeleteSubnode(node: FileNodeModel, subnode: FileNodeModel, index: Int)
-	case WillChangeGrouping(node: FileNodeModel, old: Bool, new: Bool)
-	case DidChangeGrouping(node: FileNodeModel, old: Bool, new: Bool)
-	case WillChangeName(node: FileNodeModel, old: String, new: String)
-	case DidChangeName(node: FileNodeModel, old: String, new: String)
-	case WillChangeComment(node: FileNodeModel, old: String?, new: String?)
-	case DidChangeComment(node: FileNodeModel, old: String?, new: String?)
+public enum FileNodeEvent: BroadcastableEventType {
+	public typealias	Sender	=	FileNodeModel
+	case DidInsertSubnode(subnode: FileNodeModel, index: Int)
+	case WillDeleteSubnode(subnode: FileNodeModel, index: Int)
+	case WillChangeGrouping(old: Bool, new: Bool)
+	case DidChangeGrouping(old: Bool, new: Bool)
+	case WillChangeName(old: String, new: String)
+	case DidChangeName(old: String, new: String)
+	case WillChangeComment(old: String?, new: String?)
+	case DidChangeComment(old: String?, new: String?)
 }
+
+
+internal protocol BroadcastableEventType: EventType {
+	func broadcastBy(sender: Sender)
+}
+internal extension BroadcastableEventType {
+	func broadcastBy(sender: Sender) {
+		Notification(sender, self).broadcast()
+	}
+}
+public protocol EventType {
+	typealias	Sender
+	static func registerObserver<T: NotificationObserver where T.Notification == Notification<Sender,Self>>(observer: T)
+	static func deregisterObserver<T: NotificationObserver where T.Notification == Notification<Sender,Self>>(observer: T)
+}
+public extension EventType {
+	private typealias	EventNotification	=	Notification<Sender,Self>
+	public static func registerObserver<T: NotificationObserver where T.Notification == Notification<Sender,Self>>(observer: T) {
+		EventNotification.registerObserver(observer)
+	}
+	public static func deregisterObserver<T: NotificationObserver where T.Notification == Notification<Sender,Self>>(observer: T) {
+		EventNotification.deregisterObserver(observer)
+	}
+}
+
+//public enum FileNodeNotification: SubcategoryNotificationType {
+//	case DidInsertSubnode(node: FileNodeModel, subnode: FileNodeModel, index: Int)
+//	case WillDeleteSubnode(node: FileNodeModel, subnode: FileNodeModel, index: Int)
+//	case WillChangeGrouping(node: FileNodeModel, old: Bool, new: Bool)
+//	case DidChangeGrouping(node: FileNodeModel, old: Bool, new: Bool)
+//	case WillChangeName(node: FileNodeModel, old: String, new: String)
+//	case DidChangeName(node: FileNodeModel, old: String, new: String)
+//	case WillChangeComment(node: FileNodeModel, old: String?, new: String?)
+//	case DidChangeComment(node: FileNodeModel, old: String?, new: String?)
+//}
 
 
 
