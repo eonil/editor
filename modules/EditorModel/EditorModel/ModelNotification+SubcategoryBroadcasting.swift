@@ -10,7 +10,21 @@ import Foundation
 
 
 
+
+
+
+
+
+
+/// Defines subcategory notification type.
+///
+/// You cannot broadcast subcateogory notification directly.
+/// But you can observe for them if one of them are notified using `ModelNotification.broadcast`.
+/// The notification will be arrived **before** observer registered to `ModelNotification`.
+///
 public protocol SubcategoryNotificationType {
+	static func registerObserver<T: SubcategoryNotificationObserver where T.Notification == Self>(observer: T)
+	static func deregisterObserver<T: SubcategoryNotificationObserver where T.Notification == Self>(observer: T)
 }
 public protocol SubcategoryNotificationObserver: class {
 	typealias	Notification: SubcategoryNotificationType
@@ -55,6 +69,16 @@ public extension SubcategoryNotificationType {
 		return	ObjectIdentifier(self)
 	}
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

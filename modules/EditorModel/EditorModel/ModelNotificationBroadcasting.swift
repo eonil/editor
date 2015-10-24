@@ -1,5 +1,5 @@
 ////
-////  ModelNotification+Broadcasting.swift
+////  ModelNotificationBroadcasting.swift
 ////  EditorModel
 ////
 ////  Created by Hoon H. on 2015/10/24.
@@ -8,27 +8,8 @@
 //
 //import Foundation
 //
-//public protocol ModelNotificationObserver: class {
-//	func processNotification(n: ModelNotification)
-//}
+//class Broadcaster {
 //
-///// You can send notification by calling `broadcast` method.
-///// This will cast event to every registered observers.
-/////
-///// As any component of app can recieve any event, this is a
-///// kind of global structure, but it doesn't matter because
-///// this does not contain any state except observer list.
-///// What the evil is global **state**, not global structure.
-/////
-///// Each notification carries some context informations, and
-///// you can find
-/////
-///// Thread Consideration
-///// --------------------
-///// Global multicasting is designed to be used only in main
-///// thread. Do not cast them in non-main thread.
-/////
-//public extension ModelNotification {
 //	public static func containsObserver(observer: ModelNotificationObserver) -> Bool {
 //		assert(NSThread.isMainThread())
 //		return	_observers.contains { $0 == _WeakObserverBox(observer: observer) }
@@ -58,7 +39,9 @@
 //	}
 //
 //	///
-//	
+//
+//	private var	_observers	=	[_WeakObserverBox]()
+//
 //	private func _broadcastGlobally() {
 //		for o in _observers {
 //			assert(o.observer != nil, "A registered observer has became `nil`, which means logic bug.")
@@ -66,9 +49,19 @@
 //		}
 //	}
 //	private func _broadcastLocally() {
-//		switch	self {
-//		case	.ApplicationNotification(let n):	n.broadcast()
-//		case	.WorkspaceNotification(let n):		n.broadcast()
+//		switch self {
+//		case .ApplicationNotification(let n):
+//			n.broadcast()
+//
+//		case .WorkspaceNotification(let n):
+//			n.broadcast()
+//
+//			//		case .FileNodeNotification(let n):
+//			//			n.broadcast()
+//			//
+//			//		case .FileTreeNotification(let n):
+//			//			n.broadcast()
+//			
 //		}
 //	}
 //}
@@ -77,8 +70,6 @@
 //
 //
 //
-//
-//private var	_observers	=	[_WeakObserverBox]()
 //
 //
 //private func == (left: _WeakObserverBox, right: _WeakObserverBox) -> Bool {
@@ -87,10 +78,3 @@
 //private struct _WeakObserverBox {
 //	weak var observer: ModelNotificationObserver?
 //}
-//
-//
-//
-//
-//
-//
-//

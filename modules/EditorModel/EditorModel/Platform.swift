@@ -64,6 +64,11 @@ public protocol PlatformFileSystemProtocol: class {
 	/// Deletes an existing file at the URL.
 	/// The URL must be a file URL.
 	func deleteFileAtURL(u: NSURL) throws
+
+	/// Moves an existing file at the URL.
+	/// The URLs must be file URLs.
+	func moveFile(fromURL fromURL: NSURL, toURL: NSURL) throws
+
 	/// Gets whole file content from the URL.
 	/// The URL must be a file URL.
 	func contentOfFileAtURLAtomically(u: NSURL) throws -> NSData

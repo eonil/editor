@@ -20,7 +20,7 @@ extension WorkspaceItemTree {
 		createRoot()
 		for item in list[list.startIndex.successor()..<list.endIndex] {
 			let	superpath	=	item.path.pathByDeletingLastComponent()
-			if let supernode = root.findNodeForPath(superpath) {
+			if let supernode = root!.findNodeForPath(superpath) {
 				let	node	=	WorkspaceItemNode(name: item.path.parts.last!, isGroup: item.group)
 				node.comment	=	item.comment
 				supernode.subnodes.append(node)
@@ -41,7 +41,7 @@ extension WorkspaceItemTree {
 			items.append(item)
 		}
 
-		root._applyRecursively() { node in
+		root!._applyRecursively() { node in
 			appendNode(node)
 		}
 

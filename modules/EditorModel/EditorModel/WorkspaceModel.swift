@@ -102,11 +102,11 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 	public func locate(u: NSURL) {
 		assert(_location.value == nil)
 		_location.value	=	u
-		file.runRestoringSnapshot()
+		file.restoreSnapshot()
 	}
 	public func delocate() {
 		assert(_location.value != nil)
-		file.runStoringSnapshot()
+		file.storeSnapshot()
 		_location.value	=	nil
 	}
 

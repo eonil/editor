@@ -22,10 +22,9 @@ public class WorkspaceItemTree {
 
 	///
 
-	public var root: WorkspaceItemNode {
+	public var root: WorkspaceItemNode? {
 		get {
-			assert(_root != nil, "You must create root first.")
-			return	_root!
+			return	_root
 		}
 	}
 	public func createRoot() {
@@ -137,6 +136,7 @@ public class WorkspaceItemNode {
 	}
 
 	public func findNodeForPath(path: WorkspaceItemPath) -> WorkspaceItemNode? {
+		precondition(supernode == nil, "You can call this only on root node. (no supernode)")
 		if path.parts.count == 0 {
 			return	self
 		}
@@ -233,6 +233,13 @@ public struct WorkspaceItemSubnodeList: SequenceType {
 			}
 		}
 		return	nil
+	}
+
+	/// O(1).
+	public subscript(index: Int) -> WorkspaceItemNode {
+		get {
+			return	_host!._subnodes[index]
+		}
 	}
 
 	/// O(1) at best, O(n) at worst where n == count.

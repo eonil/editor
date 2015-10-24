@@ -8,7 +8,7 @@
 
 import Foundation
 
-public extension Array {
+public extension Indexable {
 	/// Returns `startIndex..<endIndex`.
 	var wholeRange: Range<Index> {
 		get {
@@ -16,8 +16,8 @@ public extension Array {
 		}
 	}
 }
-public extension Array where Element: AnyObject {
 
+public extension Array where Element: AnyObject {
 	public func containsValueByReferentialIdentity(object: Element) -> Bool {
 		return	indexOfValueByReferentialIdentity(object) != nil
 	}
@@ -29,5 +29,4 @@ public extension Array where Element: AnyObject {
 		}
 		return	nil
 	}
-
 }
