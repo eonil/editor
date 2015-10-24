@@ -96,7 +96,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 	///
 
 	public func containsNodeAtPath(path: WorkspaceItemPath) -> Bool {
-		return	_dataTree!.root!.findNodeForPath(path) != nil
+		return	_dataTree!.root!.searchNodeForPath(path) != nil
 	}
 
 	public func searchNodeAtPath(path: WorkspaceItemPath) -> FileNodeModel? {
@@ -393,7 +393,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 	}
 	private func _checkFileTreeAndWorkspaceItemTreeStructuralEqualityAtNode(node: FileNodeModel, path: WorkspaceItemPath) -> Bool {
 		Debug.assertMainThread()
-		guard _dataTree!.root!.findNodeForPath(path) != nil else {
+		guard _dataTree!.root!.searchNodeForPath(path) != nil else {
 			assert(false)
 			return	false
 		}
@@ -406,7 +406,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		///
 
 		let subnodes	=	node.subnodes
-		let subpaths	=	_dataTree!.root!.findNodeForPath(path)!.subnodes.map({ $0.resolvePath() })
+		let subpaths	=	_dataTree!.root!.searchNodeForPath(path)!.subnodes.map({ $0.resolvePath() })
 
 		guard subnodes.count == subpaths.count else {
 			assert(false)
@@ -417,7 +417,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			let subnode	=	subnodes[i]
 			let subpath	=	subpaths[i]
 
-			guard _dataTree!.root!.findNodeForPath(subpath.pathByDeletingLastComponent()) != nil else {
+			guard _dataTree!.root!.searchNodeForPath(subpath.pathByDeletingLastComponent()) != nil else {
 				assert(false)
 				return	false
 			}
