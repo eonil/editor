@@ -18,6 +18,7 @@
 		45B1855A1B802288004E3B28 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185591B802288004E3B28 /* Log.swift */; };
 		45F5720A1B86242600E34CA2 /* Atomics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F572091B86242600E34CA2 /* Atomics.swift */; };
 		45FF2EC21BDCC693001577B7 /* ValueStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF2EC11BDCC693001577B7 /* ValueStorage2.swift */; settings = {ASSET_TAGS = (); }; };
+		45FF2F001BDCFA51001577B7 /* OptionalWeakValueStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF2EFF1BDCFA51001577B7 /* OptionalWeakValueStorage2.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		45B185591B802288004E3B28 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		45F572091B86242600E34CA2 /* Atomics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Atomics.swift; sourceTree = "<group>"; };
 		45FF2EC11BDCC693001577B7 /* ValueStorage2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueStorage2.swift; sourceTree = "<group>"; };
+		45FF2EFF1BDCFA51001577B7 /* OptionalWeakValueStorage2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalWeakValueStorage2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			children = (
 				4554C9681B7DC025004987CC /* ObjectSet.swift */,
 				45FF2EC11BDCC693001577B7 /* ValueStorage2.swift */,
+				45FF2EFF1BDCFA51001577B7 /* OptionalWeakValueStorage2.swift */,
 				4554C96A1B7DC025004987CC /* Weak.swift */,
 				4554C96B1B7DC025004987CC /* WeakArray.swift */,
 				4554C9691B7DC025004987CC /* Reporting.swift */,
@@ -225,6 +228,7 @@
 				4554C96F1B7DC025004987CC /* WeakArray.swift in Sources */,
 				4554C96C1B7DC025004987CC /* ObjectSet.swift in Sources */,
 				4554C96E1B7DC025004987CC /* Weak.swift in Sources */,
+				45FF2F001BDCFA51001577B7 /* OptionalWeakValueStorage2.swift in Sources */,
 				45B185581B801F4A004E3B28 /* SwiftExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

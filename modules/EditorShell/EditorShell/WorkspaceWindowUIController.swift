@@ -14,6 +14,16 @@ import EditorUICommon
 
 public final class WorkspaceWindowUIController: CommonWindowController, SessionProtocol, WorkspaceUIProtocol {
 
+	public override init() {
+		super.init()
+		Debug.log("WorkspaceWindowUIController `\(self)` init")
+	}
+	deinit {
+		Debug.log("WorkspaceWindowUIController `\(self)` deinit")
+	}
+
+	///
+
 	/// Will be set by upper level node.
 	public weak var model: WorkspaceModel? {
 		didSet {

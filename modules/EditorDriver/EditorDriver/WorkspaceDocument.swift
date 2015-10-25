@@ -8,10 +8,21 @@
 
 import Foundation
 import AppKit
+import EditorCommon
 import EditorShell
 
 @objc
 public class WorkspaceDocument: NSDocument {
+
+	public override init() {
+		super.init()
+		Debug.log("WorkspaceDocument `\(self)` init.")
+	}
+	deinit {
+		Debug.log("WorkspaceDocument `\(self)` deinit.")
+	}
+
+	///
 
 	public override class func autosavesInPlace() -> Bool {
 		return true

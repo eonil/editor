@@ -94,6 +94,9 @@ public class MulticastChannel<Parameter> {
 
 	private init() {
 	}
+	deinit {
+		assert(_list.count == 0, "You MUST deregister all observers before this object `\(self)` dies.")
+	}
 	public func register<T: AnyObject>(object: T, _ instanceMethod: (T) -> Callback) {
 		let	invoke	=	{ [weak object] (parameter: Parameter)->() in
 			guard let object = object else {
