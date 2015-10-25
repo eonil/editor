@@ -43,7 +43,7 @@ class ProductMenuController: SessionProtocol {
 		assert(model != nil)
 		_applyEnabledStates()
 
-		WorkspaceWindowUIController.Event.register(self)	{ [weak self] in self?._process($0) }
+		ApplicationUIController.Event.register(self)		{ [weak self] in self?._process($0) }
 		BuildModel.Event.register(self)				{ [weak self] in self?._process($0) }
 		DebuggingTargetExecutionModel.Event.register(self)	{ [weak self] in self?._process($0) }
 
@@ -77,7 +77,7 @@ class ProductMenuController: SessionProtocol {
 
 		DebuggingTargetExecutionModel.Event.deregister(self)
 		BuildModel.Event.deregister(self)
-		WorkspaceWindowUIController.Event.deregister(self)
+		ApplicationUIController.Event.deregister(self)
 		_applyEnabledStates()
 	}
 
@@ -165,21 +165,21 @@ class ProductMenuController: SessionProtocol {
 
 	///
 
-	private func _process(notification: WorkspaceWindowUIController.Event.Notification) {
-		guard notification.sender === applicationUI!.currentWorkspaceUI?.model else {
+	private func _process(notification: ApplicationUIController.Event.Notification) {
+		guard notification.sender === applicationUI! else {
 			return
 		}
 
 		switch notification.event {
-		case .DidBecomeCurrent:
+		case .DidBeginCurrentWorkspaceUI:
 			_applyEnabledStates()
 
-		case .WillResignCurrent:
+		case .WillEndCurrentWorkspaceUI:
 			_applyEnabledStates()
 		}
 	}
 	private func _process(notification: BuildModel.Event.Notification) {
-		guard notification.sender.workspace === applicationUI!.currentWorkspaceUI?.model else {
+		guard notification.sender.workspace === applicationUI!.currentWorkspaceUI2.value?.model else {
 			return
 		}
 
@@ -192,7 +192,7 @@ class ProductMenuController: SessionProtocol {
 		}
 	}
 	private func _process(notification: DebuggingTargetExecutionModel.Event.Notification) {
-		guard notification.sender.target === applicationUI!.currentWorkspaceUI?.model?.debug.currentTarget.value else {
+		guard notification.sender.target === applicationUI!.currentWorkspaceUI2.value?.model?.debug.currentTarget.value else {
 			return
 		}
 		switch notification.event {
@@ -211,7 +211,7 @@ class ProductMenuController: SessionProtocol {
 		assert(applicationUI != nil)
 		assert(model != nil)
 
-		let	ws	=	applicationUI!.currentWorkspaceUI?.model
+		let	ws	=	applicationUI!.currentWorkspaceUI2.value?.model
 		let	cmds	=	ws?.build.runnableCommands2 ?? []
 		let	running	=	ws?.debug.currentTarget.value?.execution.value != nil
 		launch.enabled	=	true
@@ -223,8 +223,8 @@ class ProductMenuController: SessionProtocol {
 	///
 
 	private func _runLaunchOnCurrentWorkspace() {
-		assert(model!.currentWorkspace.value != nil)
-		if let ws = model!.currentWorkspace.value {
+		assert(_resolveCurrentWorkspaceModel() != nil)
+		if let ws = _resolveCurrentWorkspaceModel() {
 			if ws.debug.currentTarget.value == nil {
 				if ws.debug.targets.array.count == 0 {
 					markUnimplemented("We need to query `Cargo.toml` file to get proper executable location.")
@@ -240,23 +240,29 @@ class ProductMenuController: SessionProtocol {
 		}
 	}
 	private func _runBuildOnCurrentWorkspace() {
-		assert(model!.currentWorkspace.value != nil)
-		if let ws = model!.currentWorkspace.value {
+		assert(_resolveCurrentWorkspaceModel() != nil)
+		if let ws = _resolveCurrentWorkspaceModel() {
 			ws.build.runBuild()
 		}
 	}
 	private func _runCleanOnCurrentWorkspace() {
-		assert(model!.currentWorkspace.value != nil)
-		if let ws = model!.currentWorkspace.value {
+		assert(_resolveCurrentWorkspaceModel() != nil)
+		if let ws = _resolveCurrentWorkspaceModel() {
 			ws.build.runClean()
 		}
 	}
 	private func _stopAnyOnCurrentWorkspace() {
-		assert(model!.currentWorkspace.value != nil)
-		if let ws = model!.currentWorkspace.value {
+		assert(_resolveCurrentWorkspaceModel() != nil)
+		if let ws = _resolveCurrentWorkspaceModel() {
 			ws.build.stop()
 			ws.debug.currentTarget.value?.halt()
 		}
+	}
+
+	///
+
+	private func _resolveCurrentWorkspaceModel() -> WorkspaceModel? {
+		return	applicationUI!.currentWorkspaceUI2.value?.model
 	}
 }
 

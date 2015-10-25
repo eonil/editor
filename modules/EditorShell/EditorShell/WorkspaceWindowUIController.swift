@@ -84,23 +84,26 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 		_tools.halt()
 	}
 
-	private func _becomeCurrentWorkspace() {
-		if model!.application.currentWorkspace.value !== self {
-//			if model!.application.currentWorkspace.value != nil {
-//				model!.application.deselectCurrentWorkspace()
-//			}
-//			model!.application.selectCurrentWorkspace(model!)
-//			model!.application.reselectCurrentWorkspace(model!)
-		}
-
-		Event.DidBecomeCurrent.broadcastWithSender(self)
-	}
-	private func _resignCurrentWorkspace() {
-		Event.WillResignCurrent.broadcastWithSender(self)
-
-//		assert(model!.application.currentWorkspace.value === self)
-//		model!.application.reselectCurrentWorkspace
-//		markUnimplemented()
+//	private func _becomeCurrentWorkspace() {
+////		if model!.application.currentWorkspace.value !== self {
+//////			if model!.application.currentWorkspace.value != nil {
+//////				model!.application.deselectCurrentWorkspace()
+//////			}
+//////			model!.application.selectCurrentWorkspace(model!)
+//////			model!.application.reselectCurrentWorkspace(model!)
+////		}
+//
+//		Event.DidBecomeCurrent.broadcastWithSender(self)
+//	}
+//	private func _resignCurrentWorkspace() {
+//		Event.WillResignCurrent.broadcastWithSender(self)
+//
+////		assert(model!.application.currentWorkspace.value === self)
+////		model!.application.reselectCurrentWorkspace
+////		markUnimplemented()
+//	}
+	private func _closeCurrentWorkspace() {
+		model!.application.closeWorkspace(model!)
 	}
 }
 
@@ -125,15 +128,20 @@ private final class _Agent: NSObject, NSWindowDelegate {
 			])
 	}
 
+//	@objc
+//	private func windowDidBecomeMain(notification: NSNotification) {
+////		print(notification)
+////		owner!._becomeCurrentWorkspace()
+//	}
+//	@objc
+//	private func windowDidResignMain(notification: NSNotification) {
+////		print(notification)
+////		owner!._resignCurrentWorkspace()
+//	}
+
 	@objc
-	private func windowDidBecomeMain(notification: NSNotification) {
-//		print(notification)
-		owner!._becomeCurrentWorkspace()
-	}
-	@objc
-	private func windowDidResignMain(notification: NSNotification) {
-//		print(notification)
-		owner!._resignCurrentWorkspace()
+	private func windowWillClose(notification: NSNotification) {
+		owner!._closeCurrentWorkspace()
 	}
 }
 

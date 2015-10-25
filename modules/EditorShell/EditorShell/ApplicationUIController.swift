@@ -28,9 +28,14 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 
 	///
 
-	public var currentWorkspaceUI: WorkspaceUIProtocol? {
+//	public var currentWorkspaceUI: WorkspaceUIProtocol? {
+//		get {
+//			return	_currentWorkspaceUI.value
+//		}
+//	}
+	public var currentWorkspaceUI2: ValueStorage2<WorkspaceUIProtocol?> {
 		get {
-			return	NSApplication.sharedApplication().mainWindow?.windowController as? WorkspaceWindowUIController
+			return	_currentWorkspaceUI
 		}
 	}
 	
@@ -39,14 +44,14 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 
 
 		_installMenu()
-		_installAgents()
-		_installNotificationHandlers()
+//		_installAgents()
+		_installCocoaNotificationHandlers()
 	}
 	public func halt() {
 		assert(model != nil)
 
-		_deinstallNotificaitonHandlers()
-		_deinstallAgents()
+		_deinstallCocoaNotificaitonHandlers()
+//		_deinstallAgents()
 		_deinstallMenu()
 	}
 
@@ -54,6 +59,7 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 
 	private let	_menuUI			=	MainMenuController()
 	private var	_isRunning		=	false
+	private let	_currentWorkspaceUI	=	MutableValueStorage2<WorkspaceUIProtocol?>(nil)
 
 	private func _installMenu() {
 		//	I believe the application-menu can be replaced.
@@ -87,65 +93,78 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 		}
 	}
 
-	private func _installAgents() {
-		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-			if let curWS = self!.model!.currentWorkspace.value {
-				if let ui = self!._findUIForModel(curWS) {
-					ui.showWindow(self)
-				}
-				else {
-					fatalError("A UI for the workspace must be exists, but it was not.")
-				}
+//	private func _installAgents() {
+//		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+//			if let curWS = self!.model!.currentWorkspace.value {
+//				if let ui = self!._findUIForModel(curWS) {
+//					ui.showWindow(self)
+//				}
+//				else {
+//					fatalError("A UI for the workspace must be exists, but it was not.")
+//				}
+//			}
+//			else {
+//				//	No current workspace. Nothing to do.
+//			}
+//		}
+//	}
+//	private func _deinstallAgents() {
+//		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
+//	}
+
+//	private func _findUIForModel(workspace: WorkspaceModel) -> WorkspaceWindowUIController? {
+//		for doc in NSDocumentController.sharedDocumentController().documents {
+//			for wc in doc.windowControllers {
+//				if let wc = wc as? WorkspaceWindowUIController {
+//					if wc.model === workspace {
+//						return	wc
+//					}
+//				}
+//			}
+//		}
+//		return	nil
+//	}
+
+
+
+
+
+
+
+	private func _installCocoaNotificationHandlers() {
+		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidBecomeMainNotification) { [weak self] (n: NSNotification) -> () in
+			guard let window = n.object as? NSWindow else {
+				fatalError("Cannot find the window object which became main.")
 			}
-			else {
-				//	No current workspace. Nothing to do.
+			guard self != nil else {
+				return
 			}
+			guard let workspaceUI = window.windowController as? WorkspaceWindowUIController else {
+				return
+			}
+
+			self!._currentWorkspaceUI.value	=	workspaceUI
+			Event.DidBeginCurrentWorkspaceUI.broadcastWithSender(self!)
+		}
+		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification) { [weak self] (n: NSNotification) -> () in
+			guard let window = n.object as? NSWindow else {
+				fatalError("Cannot find the window object which resigned main.")
+			}
+			guard self != nil else {
+				return
+			}
+			guard let workspaceUI = window.windowController as? WorkspaceWindowUIController else {
+				return
+			}
+
+			assert(self!._currentWorkspaceUI.value === workspaceUI)
+			Event.WillEndCurrentWorkspaceUI.broadcastWithSender(self!)
+			self!._currentWorkspaceUI.value	=	nil
 		}
 	}
-	private func _deinstallAgents() {
-		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
-	}
-
-	private func _findUIForModel(workspace: WorkspaceModel) -> WorkspaceWindowUIController? {
-		for doc in NSDocumentController.sharedDocumentController().documents {
-			for wc in doc.windowControllers {
-				if let wc = wc as? WorkspaceWindowUIController {
-					if wc.model === workspace {
-						return	wc
-					}
-				}
-			}
-		}
-		return	nil
-	}
-
-
-
-
-
-	private func _installNotificationHandlers() {
-//		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidBecomeMainNotification) { [weak self] (n: NSNotification) -> () in
-//			guard let _ = n.object as? NSWindow else {
-//				fatalError("Cannot find the window object which became main.")
-//			}
-//			guard self != nil else {
-//				return
-//			}
-//			Event.DidChangeCurrentWorkspace.broadcastWithSender(self!)
-//		}
-//		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification) { [weak self] (n: NSNotification) -> () in
-//			guard let _ = n.object as? NSWindow else {
-//				fatalError("Cannot find the window object which resigned main.")
-//			}
-//			guard self != nil else {
-//				return
-//			}
-//			Event.DidChangeCurrentWorkspace.broadcastWithSender(self!)
-//		}
-	}
-	private func _deinstallNotificaitonHandlers() {
-//		NSNotificationCenter.defaultCenter().removeUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification)
-//		NSNotificationCenter.defaultCenter().removeUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidBecomeMainNotification)
+	private func _deinstallCocoaNotificaitonHandlers() {
+		NSNotificationCenter.defaultCenter().removeUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification)
+		NSNotificationCenter.defaultCenter().removeUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidBecomeMainNotification)
 	}
 }
 

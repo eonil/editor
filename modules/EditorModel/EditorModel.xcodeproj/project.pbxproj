@@ -65,6 +65,7 @@
 		45DDABD81B82395300F85E06 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DDABD71B82395300F85E06 /* FoundationExtensions.swift */; };
 		45EF9BB81BD28440009E3787 /* WorkspaceItemTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF9BB61BD28440009E3787 /* WorkspaceItemTree.swift */; settings = {ASSET_TAGS = (); }; };
 		45EF9BB91BD28440009E3787 /* WorkspaceItemTree+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF9BB71BD28440009E3787 /* WorkspaceItemTree+Snapshot.swift */; settings = {ASSET_TAGS = (); }; };
+		45FF2EEF1BDCF46E001577B7 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF2EEE1BDCF46E001577B7 /* Globals.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +258,7 @@
 		45DDABD71B82395300F85E06 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		45EF9BB61BD28440009E3787 /* WorkspaceItemTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceItemTree.swift; sourceTree = "<group>"; };
 		45EF9BB71BD28440009E3787 /* WorkspaceItemTree+Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WorkspaceItemTree+Snapshot.swift"; sourceTree = "<group>"; };
+		45FF2EEE1BDCF46E001577B7 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -388,6 +390,7 @@
 		4554C8601B7DBEF7004987CC /* EditorModel */ = {
 			isa = PBXGroup;
 			children = (
+				45FF2EEE1BDCF46E001577B7 /* Globals.swift */,
 				4554C9B71B7DC106004987CC /* Command.swift */,
 				45C77AEC1B7F1DD80064C363 /* CommandQueue.swift */,
 				45C87DC11B8BF7F600E75A5B /* ImmediateCommandModel.swift */,
@@ -755,6 +758,7 @@
 				455978E91B884E8200626F6B /* SelectionModel2.swift in Sources */,
 				45B185641B804833004E3B28 /* ShellTaskExecutionController.swift in Sources */,
 				451373471B7ED93700ED9829 /* DebuggingModel.swift in Sources */,
+				45FF2EEF1BDCF46E001577B7 /* Globals.swift in Sources */,
 				4554C9BD1B7DC106004987CC /* ApplicationModel.swift in Sources */,
 				45DDABD81B82395300F85E06 /* FoundationExtensions.swift in Sources */,
 				45B5ECA71B91D2D900C4247A /* FileTreeModel.swift in Sources */,

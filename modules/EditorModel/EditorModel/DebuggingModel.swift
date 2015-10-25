@@ -22,6 +22,13 @@ public enum DebuggingCommand {
 
 public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 
+	internal override init() {
+		Debug.log("DebuggingModel.init")
+	}
+	deinit {
+		Debug.log("DebuggingModel.deinit")
+	}
+
 	public var workspace: WorkspaceModel {
 		get {
 			assert(owner != nil)

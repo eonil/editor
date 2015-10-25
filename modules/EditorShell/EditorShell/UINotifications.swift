@@ -12,13 +12,16 @@ import EditorModel
 public extension ApplicationUIController {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	ApplicationUIController
+		case DidBeginCurrentWorkspaceUI
+		case WillEndCurrentWorkspaceUI
 	}
 }
+
 public extension WorkspaceWindowUIController {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	WorkspaceWindowUIController
-		case WillResignCurrent
-		case DidBecomeCurrent
+//		case WillResignCurrent
+//		case DidBecomeCurrent
 	}
 }
 

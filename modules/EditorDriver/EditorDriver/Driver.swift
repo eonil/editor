@@ -28,8 +28,12 @@ public class Driver {
 	public init() {
 		assert(Driver._currentDriver == nil)
 		Driver._currentDriver	=	self
+
+		initializeModelModule()
 	}
 	deinit {
+		terminateModelModule()
+
 		assert(Driver._currentDriver === self)
 		Driver._currentDriver	=	nil
 	}

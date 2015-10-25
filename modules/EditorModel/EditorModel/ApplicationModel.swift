@@ -24,6 +24,10 @@ import EditorCommon
 /// performed with special care. Also, you must minimize performing
 /// heavy load operations in main thread.
 ///
+/// Current window is trackable, but current window selection algorithm
+/// is hidden and complex, so it's impractical to synchronize it by model.
+/// And I removed `currentWorkspace`. Find current workspace from UI graph.
+///
 public class ApplicationModel: ModelRootNode {
 
 	public override init() {
@@ -63,12 +67,12 @@ public class ApplicationModel: ModelRootNode {
 			return	_workspaces
 		}
 	}
-	public var currentWorkspace: ValueStorage<WorkspaceModel?> {
-		get {
-			return	_currentWorkspace
-		}
-	}
-
+//	public var currentWorkspace: ValueStorage<WorkspaceModel?> {
+//		get {
+//			return	_currentWorkspace
+//		}
+//	}
+//
 //	public var selection: SelectionModel2 {
 //		get {
 //			return	_selection
@@ -105,13 +109,13 @@ public class ApplicationModel: ModelRootNode {
 		for ws in workspaces.array {
 			if ws.location.value == u {
 				Debug.log("a workspace already exist for address \(u), adding cancelled, and will select it, ws count = \(_workspaces.array.count)")
-				if let u1 = currentWorkspace.value?.location.value {
-					if u1 != u {
-//						reselectCurrentWorkspace(ws)
-						deselectCurrentWorkspace()
-						selectCurrentWorkspace(ws)
-					}
-				}
+//				if let u1 = currentWorkspace.value?.location.value {
+//					if u1 != u {
+////						reselectCurrentWorkspace(ws)
+////						deselectCurrentWorkspace()
+////						selectCurrentWorkspace(ws)
+//					}
+//				}
 				return
 			}
 		}
@@ -142,23 +146,23 @@ public class ApplicationModel: ModelRootNode {
 		Debug.log("did remove a workspace \(ws), ws count = \(_workspaces.array.count)")
 	}
 
-	public func selectCurrentWorkspace(ws: WorkspaceModel) {
-		assert(_workspaces.contains(ws))
-		assert(_currentWorkspace.value == nil)
-		_currentWorkspace.value		=	ws
-		Debug.log("did select a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
-	}
-
-	/// Deselects current workspace. Current workspace will become `nil`.
-	public func deselectCurrentWorkspace() {
-		assert(_currentWorkspace.value != nil)
-		assert(_workspaces.contains(_currentWorkspace.value!))
-		Debug.log("will deselect a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
-
-		if let _ = _currentWorkspace.value {
-			_currentWorkspace.value		=	nil
-		}
-	}
+//	public func selectCurrentWorkspace(ws: WorkspaceModel) {
+//		assert(_workspaces.contains(ws))
+//		assert(_currentWorkspace.value == nil)
+//		_currentWorkspace.value		=	ws
+//		Debug.log("did select a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
+//	}
+//
+//	/// Deselects current workspace. Current workspace will become `nil`.
+//	public func deselectCurrentWorkspace() {
+//		assert(_currentWorkspace.value != nil)
+//		assert(_workspaces.contains(_currentWorkspace.value!))
+//		Debug.log("will deselect a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
+//
+//		if let _ = _currentWorkspace.value {
+//			_currentWorkspace.value		=	nil
+//		}
+//	}
 //	/// Selects another workspace.
 //	/// 
 //	/// Current workspace cannot be nil if there's any open workspace.
@@ -174,7 +178,7 @@ public class ApplicationModel: ModelRootNode {
 	
 	private let	_preference		=	PreferenceModel()
 	private let	_workspaces		=	MutableArrayStorage<WorkspaceModel>([])
-	private let	_currentWorkspace	=	MutableValueStorage<WorkspaceModel?>(nil)
+//	private let	_currentWorkspace	=	MutableValueStorage<WorkspaceModel?>(nil)
 //	private let	_selection		=	SelectionModel2()
 
 //	private func _nextWorkspaceOfWorkspace(workspace: WorkspaceModel) -> WorkspaceModel? {
