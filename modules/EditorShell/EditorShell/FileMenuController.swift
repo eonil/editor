@@ -140,7 +140,7 @@ class FileNewMenuController: SessionProtocol {
 //		}
 	}
 	func halt() {
-		model!.defaultWorkspace.deregisterDidSet(ObjectIdentifier(self))
+		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
 		_reapplyEnability()
 
 		folder.clickHandler	=	nil
@@ -151,14 +151,14 @@ class FileNewMenuController: SessionProtocol {
 	///
 
 	private func _reapplyEnability() {
-		let	hasSelectedFile	=	model!.defaultWorkspace.value != nil && model!.defaultWorkspace.value!.location.value != nil // && model!.defaultWorkspace.value!.file.selection.
+		let	hasSelectedFile	=	model!.currentWorkspace.value != nil && model!.currentWorkspace.value!.location.value != nil // && model!.defaultWorkspace.value!.file.selection.
 		workspace.enabled	=	true
 		file.enabled		=	hasSelectedFile
 		folder.enabled		=	hasSelectedFile
 	}
 
 	private func _clickWorkspace() {
-		checkAndReportFailureToDevelopers(model!.defaultWorkspace.value != nil)
+		checkAndReportFailureToDevelopers(model!.currentWorkspace.value != nil)
 		Dialogue.runSavingWorkspace({ [weak self] (u: NSURL?) -> () in
 			if let u = u {
 				self?.model!.createAndOpenWorkspaceAtURL(u)
@@ -166,7 +166,7 @@ class FileNewMenuController: SessionProtocol {
 		})
 	}
 	private func _clickFile() {
-		checkAndReportFailureToDevelopers(model!.defaultWorkspace.value != nil)
+		checkAndReportFailureToDevelopers(model!.currentWorkspace.value != nil)
 
 		// TODO:
 		// 1. Select location by asking user with file open panel.
@@ -175,7 +175,7 @@ class FileNewMenuController: SessionProtocol {
 		_testCreatingFile1()
 	}
 	private func _clickFolder() {
-		checkAndReportFailureToDevelopers(model!.defaultWorkspace.value != nil)
+		checkAndReportFailureToDevelopers(model!.currentWorkspace.value != nil)
 
 		// TODO:
 		// 1. Select location by asking user with file open panel.
@@ -187,7 +187,7 @@ class FileNewMenuController: SessionProtocol {
 	///
 
 	private func _testCreatingFile1() {
-		guard let ws = model!.defaultWorkspace.value else {
+		guard let ws = model!.currentWorkspace.value else {
 			fatalError("This shouldn't be called if current workspace is `nil`.")
 		}
 
@@ -243,7 +243,7 @@ class FileNewMenuController: SessionProtocol {
 	}
 
 	private func _testCreatingFolder1() {
-		if let ws = model!.defaultWorkspace.value {
+		if let ws = model!.currentWorkspace.value {
 			do {
 				let	n	=	FileNodeModel(name: "yyY", isGroup: true)
 				try ws.file.searchNodeAtPath(WorkspaceItemPath(parts: ["src"]))!.subnodes.append(n)

@@ -20,11 +20,6 @@ public struct Notification<O, N>: NotificationType {
 	public var	event: N
 }
 
-
-//internal func broadcast<Sender, Event>(sender: Sender, _ event: Event) {
-//	Notification(sender, event).broadcast()
-//}
-
 public enum ApplicationEvent: BroadcastableEventType {
 	public typealias	Sender	=	ApplicationModel
 	/// Newrly created workspace will also be notified using this.
@@ -56,12 +51,33 @@ public enum FileNodeEvent: BroadcastableEventType {
 	case DidChangeComment(old: String?, new: String?)
 }
 
-//public extension BuildModel {
-//	public enum Event {
-//		case WillChangeRunnableCommand
-//		case DidChangeRunnableCommand
-//	}
-//}
+public extension BuildModel {
+	public enum Event: BroadcastableEventType {
+		public typealias	Sender	=	BuildModel
+		case WillChangeRunnableCommand
+		case DidChangeRunnableCommand
+	}
+}
+
+public extension DebuggingTargetExecutionModel {
+	public enum Event: BroadcastableEventType {
+		public typealias	Sender	=	DebuggingTargetExecutionModel
+		case WillChangeState
+		case DidChangeState
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 internal protocol BroadcastableEventType: EventType {
@@ -74,16 +90,36 @@ internal extension BroadcastableEventType {
 }
 public protocol EventType {
 	typealias	Sender
-	static func registerObserver<T: NotificationObserver where T.Notification == Notification<Sender,Self>>(observer: T)
-	static func deregisterObserver<T: NotificationObserver where T.Notification == Notification<Sender,Self>>(observer: T)
+	static func registerObserver<T: NotificationObserver where T.Notification == EditorModel.Notification<Sender,Self>>(observer: T)
+	static func deregisterObserver<T: NotificationObserver where T.Notification == EditorModel.Notification<Sender,Self>>(observer: T)
+
+//	static func registerObserver(identity: ObjectIdentifier, observer: EditorModel.Notification<Sender,Self>->())
+//	static func deregisterObserver(identity: ObjectIdentifier)
+
+	static func register<T: AnyObject>(identity: T, observer: Notification->())
+	static func deregister<T: AnyObject>(identity: T)
 }
 public extension EventType {
-	private typealias	EventNotification	=	Notification<Sender,Self>
-	public static func registerObserver<T: NotificationObserver where T.Notification == Notification<Sender,Self>>(observer: T) {
-		EventNotification.registerObserver(observer)
+	public typealias	Notification		=	EditorModel.Notification<Sender,Self>
+	public static func registerObserver<T: NotificationObserver where T.Notification == Notification>(observer: T) {
+		Notification.registerObserver(observer)
 	}
-	public static func deregisterObserver<T: NotificationObserver where T.Notification == Notification<Sender,Self>>(observer: T) {
-		EventNotification.deregisterObserver(observer)
+	public static func deregisterObserver<T: NotificationObserver where T.Notification == Notification>(observer: T) {
+		Notification.deregisterObserver(observer)
+	}
+
+//	public static func registerObserverWithIdentity(identity: ObjectIdentifier, observer: Notification->()) {
+//		Notification.registerObserver(identity, observer: observer)
+//	}
+//	public static func deregisterObserverWithIdentity(identity: ObjectIdentifier) {
+//		Notification.deregisterObserver(identity)
+//	}
+
+	public static func register<T: AnyObject>(identity: T, observer: Notification->()) {
+		Notification.registerObserver(ObjectIdentifier(identity), observer: observer)
+	}
+	public static func deregister<T: AnyObject>(identity: T) {
+		Notification.deregisterObserver(ObjectIdentifier(identity))
 	}
 }
 

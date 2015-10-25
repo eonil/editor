@@ -72,7 +72,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 			return	_targets
 		}
 	}
-	public var currentTarget: ValueStorage<DebuggingTargetModel?> {
+	public var currentTarget: ValueStorage2<DebuggingTargetModel?> {
 		get {
 			return	_currentTarget
 		}
@@ -113,7 +113,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 //	private let	_stackFrames		=	MutableArrayStorage<StackFrame>([])
 //	private let	_frameVariables		=	MutableArrayStorage<FrameVariable>([])
 	private let	_targets		=	MutableArrayStorage<DebuggingTargetModel>([])
-	private let	_currentTarget		=	MutableValueStorage<DebuggingTargetModel?>(nil)
+	private let	_currentTarget		=	MutableValueStorage2<DebuggingTargetModel?>(nil)
 
 	private let	_lldbDebugger		=	LLDBDebugger()
 	private let	_eventWaiter		=	DebuggingEventWaiter()

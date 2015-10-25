@@ -16,6 +16,7 @@ import Foundation
 
 
 
+
 /// Defines subcategory notification type.
 ///
 /// You cannot broadcast subcateogory notification directly.
@@ -30,6 +31,7 @@ public protocol NotificationObserver: class {
 	typealias	Notification: NotificationType
 	func processNotification(notification: Notification)
 }
+
 public extension NotificationType {
 	public func broadcast() {
 		if let box = _listMapping[Self._getTypeID()] {
@@ -57,6 +59,30 @@ public extension NotificationType {
 		assert(box != nil)
 		let	listBox	=	box! as! _ListBox<T.Notification>
 		listBox.deregister(observer)
+
+		if listBox.list.count == 0 {
+			_listMapping[typeID]	=	nil
+		}
+	}
+	public static func registerObserver(identifier: ObjectIdentifier, observer: Self->()) {
+		typealias	T	=	Self
+		let	typeID	=	ObjectIdentifier(self)
+		var	box	=	_listMapping[typeID]
+		if box == nil {
+			box			=	_ListBox<T>()
+			_listMapping[typeID]	=	box
+		}
+		let	listBox	=	box! as! _ListBox<Self>
+		listBox.register(identifier, observer: observer)
+	}
+	public static func deregisterObserver(identifier: ObjectIdentifier) {
+		typealias	T	=	Self
+		let	typeID	=	ObjectIdentifier(Self)
+		let	box	=	_listMapping[typeID]
+
+		assert(box != nil)
+		let	listBox	=	box! as! _ListBox<T>
+		listBox.deregister(identifier)
 
 		if listBox.list.count == 0 {
 			_listMapping[typeID]	=	nil
@@ -104,12 +130,18 @@ private final class _ListBox<N: NotificationType> {
 			print(n)
 			observer!.processNotification(n)
 		}
-		list.append((ObjectIdentifier(observer), dispatch))
+		register(ObjectIdentifier(observer), observer: dispatch)
+	}
+	func register(identity: ObjectIdentifier, observer: N->()) {
+		list.append((identity, observer))
 	}
 	func deregister<T: NotificationObserver where T.Notification == N>(observer: T) {
+		deregister(ObjectIdentifier(observer))
+	}
+	func deregister(identity: ObjectIdentifier) {
 		let	range	=	list.startIndex..<list.endIndex
 		for i in range.reverse() {
-			if list[i].id == ObjectIdentifier(observer) {
+			if list[i].id == identity {
 				list.removeAtIndex(i)
 				return
 			}
@@ -118,7 +150,7 @@ private final class _ListBox<N: NotificationType> {
 	}
 }
 
-private typealias _ObserverAtom = (id: ObjectIdentifier, dispatch: Any)	// 2nd parameter is actually `N->() where N: SubcategoryNotificationType`.
+private typealias _ObserverAtom = (id: ObjectIdentifier, dispatch: Any)	// 2nd parameter is actually `N->() where N: NotificationType`.
 
 
 

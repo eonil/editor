@@ -13,7 +13,7 @@ import EditorCommon
 import EditorUICommon
 import EditorModel
 
-class ProductMenuController: SessionProtocol, NotificationObserver {
+class ProductMenuController: SessionProtocol {
 
 	weak var applicationUI	:	ApplicationUIProtocol?
 	weak var model		:	ApplicationModel?
@@ -42,7 +42,10 @@ class ProductMenuController: SessionProtocol, NotificationObserver {
 		assert(applicationUI != nil)
 		assert(model != nil)
 		_applyEnabledStates()
-		WorkspaceWindowUIController.Event.registerObserver(self)
+
+		WorkspaceWindowUIController.Event.register(self)	{ [weak self] in self?._process($0) }
+		BuildModel.Event.register(self)				{ [weak self] in self?._process($0) }
+		DebuggingTargetExecutionModel.Event.register(self)	{ [weak self] in self?._process($0) }
 
 //		_didSetDefaultWorkspace()
 //		model!.currentWorkspace.registerWillSet(ObjectIdentifier(self)) { [weak self] in
@@ -72,18 +75,10 @@ class ProductMenuController: SessionProtocol, NotificationObserver {
 //		model!.currentWorkspace.deregisterWillSet(ObjectIdentifier(self))
 //		_willSetDefaultWorkspace()
 
-		WorkspaceWindowUIController.Event.deregisterObserver(self)
+		DebuggingTargetExecutionModel.Event.deregister(self)
+		BuildModel.Event.deregister(self)
+		WorkspaceWindowUIController.Event.deregister(self)
 		_applyEnabledStates()
-	}
-
-	func processNotification(notification: WorkspaceWindowUIController.Event.Notification) {
-		switch notification.event {
-		case .DidBecomeCurrent:
-			_applyEnabledStates()
-
-		case .WillResignCurrent:
-			_applyEnabledStates()
-		}
 	}
 
 	///
@@ -128,11 +123,11 @@ class ProductMenuController: SessionProtocol, NotificationObserver {
 //		}
 	}
 	private func _willSetDefaultWorkspace() {
-		if let ws = model!.currentWorkspace.value {
-			ws.build.runnableCommands.deregisterWillSet(ObjectIdentifier(self))
-			ws.build.runnableCommands.deregisterDidSet(ObjectIdentifier(self))
-			_applyEnabledStates()
-		}
+//		if let ws = model!.currentWorkspace.value {
+//			ws.build.runnableCommands.deregisterWillSet(ObjectIdentifier(self))
+//			ws.build.runnableCommands.deregisterDidSet(ObjectIdentifier(self))
+//			_applyEnabledStates()
+//		}
 	}
 
 	private func _didSetDefaultTarget(t: DebuggingTargetModel?) {
@@ -141,34 +136,73 @@ class ProductMenuController: SessionProtocol, NotificationObserver {
 	private func _willSetDefaultTarget(t: DebuggingTargetModel?) {
 	}
 
-	private func _didSetExecution() {
-		if let execution = model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value {
-			_didSetExecutionState()
-			execution.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-				self!._didSetExecutionState()
-			}
-			execution.state.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-				self!._willSetExecutionState()
-			}
-		}
-		_applyEnabledStates()
-	}
-	private func _willSetExecution() {
-		if let execution = model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value {
-			execution.state.deregisterDidSet(ObjectIdentifier(self))
-			execution.state.deregisterWillSet(ObjectIdentifier(self))
-			_willSetExecutionState()
-		}
-		_applyEnabledStates()
-	}
-	private func _didSetExecutionState() {
-		_applyEnabledStates()
-	}
-	private func _willSetExecutionState() {
-		_applyEnabledStates()
-	}
+//	private func _didSetExecution() {
+//		if let execution = model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value {
+//			_didSetExecutionState()
+//			execution.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+//				self!._didSetExecutionState()
+//			}
+//			execution.state.registerWillSet(ObjectIdentifier(self)) { [weak self] in
+//				self!._willSetExecutionState()
+//			}
+//		}
+//		_applyEnabledStates()
+//	}
+//	private func _willSetExecution() {
+//		if let execution = model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value {
+//			execution.state.deregisterDidSet(ObjectIdentifier(self))
+//			execution.state.deregisterWillSet(ObjectIdentifier(self))
+//			_willSetExecutionState()
+//		}
+//		_applyEnabledStates()
+//	}
+//	private func _didSetExecutionState() {
+//		_applyEnabledStates()
+//	}
+//	private func _willSetExecutionState() {
+//		_applyEnabledStates()
+//	}
 
 	///
+
+	private func _process(notification: WorkspaceWindowUIController.Event.Notification) {
+		guard notification.sender === applicationUI!.currentWorkspaceUI?.model else {
+			return
+		}
+
+		switch notification.event {
+		case .DidBecomeCurrent:
+			_applyEnabledStates()
+
+		case .WillResignCurrent:
+			_applyEnabledStates()
+		}
+	}
+	private func _process(notification: BuildModel.Event.Notification) {
+		guard notification.sender.workspace === applicationUI!.currentWorkspaceUI?.model else {
+			return
+		}
+
+		switch notification.event {
+		case .WillChangeRunnableCommand:
+			_applyEnabledStates()
+
+		case .DidChangeRunnableCommand:
+			_applyEnabledStates()
+		}
+	}
+	private func _process(notification: DebuggingTargetExecutionModel.Event.Notification) {
+		guard notification.sender.target === applicationUI!.currentWorkspaceUI?.model?.debug.currentTarget.value else {
+			return
+		}
+		switch notification.event {
+		case .WillChangeState:
+			_applyEnabledStates()
+
+		case .DidChangeState:
+			_applyEnabledStates()
+		}
+	}
 
 	private func _handleCurrentWorkspaceBuildCommandsDidSet() {
 		_applyEnabledStates()
@@ -178,7 +212,7 @@ class ProductMenuController: SessionProtocol, NotificationObserver {
 		assert(model != nil)
 
 		let	ws	=	applicationUI!.currentWorkspaceUI?.model
-		let	cmds	=	ws?.build.runnableCommands.value ?? []
+		let	cmds	=	ws?.build.runnableCommands2 ?? []
 		let	running	=	ws?.debug.currentTarget.value?.execution.value != nil
 		launch.enabled	=	true
 		build.enabled	=	cmds.contains(.Build)

@@ -92,48 +92,78 @@ class DebugMenuController: SessionProtocol {
 
 	///
 
+	private func _didBeginCurrentTarget(target: DebuggingTargetModel?) {
+		if let target = target {
+			target.execution.registerDidSet(ObjectIdentifier(self)) { [weak self, weak target] in
+				precondition(target != nil)
+				assert(self != nil)
+				if let e = target?.execution.value {
+					self?._didInsertExecution(e)
+				}
+			}
+			target.execution.registerWillSet(ObjectIdentifier(self)) { [weak self, weak target] in
+				precondition(target != nil)
+				assert(self != nil)
+				if let e = target?.execution.value {
+					self?._willDeleteExecution(e)
+				}
+			}
+		}
+	}
+	private func _willEndCurrentTarget(target: DebuggingTargetModel?) {
+		if let target = target {
+			target.execution.deregisterWillSet(ObjectIdentifier(self))
+			target.execution.deregisterDidSet(ObjectIdentifier(self))
+		}
+	}
 	private func _didInsertCurrentWorkspace(workspace: WorkspaceModel) {
-		workspace.debug.currentTarget.registerDidSet(ObjectIdentifier(self)) { [weak self, weak workspace] in
-			precondition(workspace != nil)
-			assert(self != nil)
-			if let t = workspace?.debug.currentTarget.value {
-				self?._didInsertCurrentDebuggingTarget(t)
-			}
-		}
-		workspace.debug.currentTarget.registerWillSet(ObjectIdentifier(self)) { [weak self, weak workspace] in
-			precondition(workspace != nil)
-			assert(self != nil)
-			if let t = workspace?.debug.currentTarget.value {
-				self?._willDeleteCurrentDebuggingTarget(t)
-			}
-		}
+		workspace.debug.currentTarget.onDidBeginValue.register(self, DebugMenuController._didBeginCurrentTarget)
+		workspace.debug.currentTarget.onWillEndValue.register(self, DebugMenuController._willEndCurrentTarget)
+
+//		workspace.debug.currentTarget.registerDidSet(ObjectIdentifier(self)) { [weak self, weak workspace] in
+//			precondition(workspace != nil)
+//			assert(self != nil)
+//			if let t = workspace?.debug.currentTarget.value {
+//				self?._didInsertCurrentDebuggingTarget(t)
+//			}
+//		}
+//		workspace.debug.currentTarget.registerWillSet(ObjectIdentifier(self)) { [weak self, weak workspace] in
+//			precondition(workspace != nil)
+//			assert(self != nil)
+//			if let t = workspace?.debug.currentTarget.value {
+//				self?._willDeleteCurrentDebuggingTarget(t)
+//			}
+//		}
 	}
 	private func _willDeleteCurrentWorkspace(workspace: WorkspaceModel) {
-		workspace.debug.currentTarget.deregisterWillSet(ObjectIdentifier(self))
-		workspace.debug.currentTarget.deregisterDidSet(ObjectIdentifier(self))
+//		workspace.debug.currentTarget.deregisterWillSet(ObjectIdentifier(self))
+//		workspace.debug.currentTarget.deregisterDidSet(ObjectIdentifier(self))
+
+		workspace.debug.currentTarget.onWillEndValue.deregister(self)
+		workspace.debug.currentTarget.onDidBeginValue.deregister(self)
 	}
 
-	private func _didInsertCurrentDebuggingTarget(target: DebuggingTargetModel) {
-		target.execution.registerDidSet(ObjectIdentifier(self)) { [weak self, weak target] in
-			precondition(target != nil)
-			assert(self != nil)
-			if let e = target?.execution.value {
-				self?._didInsertExecution(e)
-			}
-		}
-		target.execution.registerWillSet(ObjectIdentifier(self)) { [weak self, weak target] in
-			precondition(target != nil)
-			assert(self != nil)
-			if let e = target?.execution.value {
-				self?._willDeleteExecution(e)
-			}
-		}
-	}
-
-	private func _willDeleteCurrentDebuggingTarget(target: DebuggingTargetModel) {
-		target.execution.deregisterWillSet(ObjectIdentifier(self))
-		target.execution.deregisterDidSet(ObjectIdentifier(self))
-	}
+//	private func _didInsertCurrentDebuggingTarget(target: DebuggingTargetModel) {
+//		target.execution.registerDidSet(ObjectIdentifier(self)) { [weak self, weak target] in
+//			precondition(target != nil)
+//			assert(self != nil)
+//			if let e = target?.execution.value {
+//				self?._didInsertExecution(e)
+//			}
+//		}
+//		target.execution.registerWillSet(ObjectIdentifier(self)) { [weak self, weak target] in
+//			precondition(target != nil)
+//			assert(self != nil)
+//			if let e = target?.execution.value {
+//				self?._willDeleteExecution(e)
+//			}
+//		}
+//	}
+//
+//	private func _willDeleteCurrentDebuggingTarget(target: DebuggingTargetModel) {
+//		target.execution.deregisterWillSet(ObjectIdentifier(self))
+//		target.execution.deregisterDidSet(ObjectIdentifier(self))
+//	}
 
 	private func _didInsertExecution(execution: DebuggingTargetExecutionModel) {
 		_reapplyCurrentDebuggingTargetRunnableCommands()

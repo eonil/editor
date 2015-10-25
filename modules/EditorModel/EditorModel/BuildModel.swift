@@ -31,23 +31,34 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
-		_runnableCommands.value	=	[.Build, .Clean]
+		runnableCommands2	=	[.Build, .Clean]
 		workspace.cargo.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in self?._applyCargoState() }
 	}
 	override func willLeaveModelRoot() {
 		workspace.cargo.state.deregisterDidSet(ObjectIdentifier(self))
-		_runnableCommands.value	=	[]
+		runnableCommands2	=	[]
 		super.willLeaveModelRoot()
 	}
 
 	///
 
-	public var runnableCommands: ValueStorage<Set<BuildCommand>> {
-		get {
-			assert(isRooted || _runnableCommands.value == [])
-			return	_runnableCommands
+	public private(set) var runnableCommands2: Set<BuildCommand> = [] {
+		willSet {
+			assert(isRooted || runnableCommands2 == [])
+			Event.WillChangeRunnableCommand.broadcastWithSender(self)
+		}
+		didSet {
+			_runnableCommands.value	=	runnableCommands2
+			Event.DidChangeRunnableCommand.broadcastWithSender(self)
 		}
 	}
+//	@available(*, deprecated=1, message="AA")
+//	public var runnableCommands: ValueStorage<Set<BuildCommand>> {
+//		get {
+//			assert(isRooted || _runnableCommands.value == [])
+//			return	_runnableCommands
+//		}
+//	}
 
 	///
 
@@ -64,7 +75,7 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 	}
 	public func runClean() {
 		assert(isRooted)
-		_runnableCommands.value	=	[.Stop]
+		runnableCommands2	=	[.Stop]
 		markUnimplemented()
 	}
 	public func stop() {
@@ -80,24 +91,24 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 		if let state = workspace.cargo.state.value {
 			switch state {
 			case .Ready:
-				_runnableCommands.value	=	[]
+				runnableCommands2	=	[]
 			case .Running:
-				_runnableCommands.value	=	[.Stop]
+				runnableCommands2	=	[.Stop]
 			case .Done:
 				//	Can do nothing at this state.
 				//	Wait for resetting...
-				_runnableCommands.value	=	[]
+				runnableCommands2	=	[]
 				break
 
 			case .Error:
 				//	Can do nothing at this state.
 				//	Wait for resetting...
-				_runnableCommands.value	=	[]
+				runnableCommands2	=	[]
 				break
 			}
 		}
 		else {
-			_runnableCommands.value	=	[.Build, .Clean]
+			runnableCommands2	=	[.Build, .Clean]
 		}
 	}
 }

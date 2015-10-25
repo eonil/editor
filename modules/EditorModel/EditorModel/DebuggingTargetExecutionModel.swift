@@ -48,11 +48,20 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 			return	_runnableCommands
 		}
 	}
-	public var state: ValueStorage<LLDBStateType> {
-		get {
-			return	_state
+	public private(set) var state2: LLDBStateType = .Invalid {
+		willSet {
+			Event.WillChangeState.broadcastWithSender(self)
+		}
+		didSet {
+			_state.value	=	state2
+			Event.DidChangeState.broadcastWithSender(self)
 		}
 	}
+//	public var state: ValueStorage<LLDBStateType> {
+//		get {
+//			return	_state
+//		}
+//	}
 
 	public func runCommand(command: DebuggingCommand) {
 		switch command {
@@ -154,7 +163,7 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 
 	private func _handleEvent(e: LLDBEvent) {
 		Debug.assertMainThread()
-		_state.value	=	_lldbProcess.state
+		state2	=	_lldbProcess.state
 		_reapplyRunnableCommandState()
 	}
 

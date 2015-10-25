@@ -90,7 +90,7 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 //				model!.application.deselectCurrentWorkspace()
 //			}
 //			model!.application.selectCurrentWorkspace(model!)
-			model!.application.reselectCurrentWorkspace(model!)
+//			model!.application.reselectCurrentWorkspace(model!)
 		}
 
 		Event.DidBecomeCurrent.broadcastWithSender(self)
@@ -127,12 +127,12 @@ private final class _Agent: NSObject, NSWindowDelegate {
 
 	@objc
 	private func windowDidBecomeMain(notification: NSNotification) {
-		print(notification)
+//		print(notification)
 		owner!._becomeCurrentWorkspace()
 	}
 	@objc
 	private func windowDidResignMain(notification: NSNotification) {
-		print(notification)
+//		print(notification)
 		owner!._resignCurrentWorkspace()
 	}
 }

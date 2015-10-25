@@ -16,12 +16,12 @@ public class ProjectModel {
 	internal weak var owner: WorkspaceModel?
 
 	internal init() {
-		selection.owner		=	self
+//		selection.owner		=	self
 	}
 
 	///
 
-	public let	selection	=	ProjectSelection()
+//	public let	selection	=	ProjectSelection()
 
 	public var rootURL: ValueStorage<NSURL?> {
 		get {
@@ -61,49 +61,49 @@ public class ProjectModel {
 	}
 }
 
-public class ProjectSelection {
-	weak var owner: ProjectModel?
-
-	public var files: ArrayStorage<NSURL> {
-		get {
-			return	_files
-		}
-	}
-	public var revealingFile: ValueStorage<NSURL?> {
-		get {
-			return	_revealingFile
-		}
-	}
-
-	public func revealFile(file: NSURL) {
-		fatalErrorBecauseUnimplementedYet()
-	}
-
-	public func selectFiles(files: [NSURL]) {
-		fatalErrorBecauseUnimplementedYet()
-	}
-	public func deselectAllFiles() {
-		fatalErrorBecauseUnimplementedYet()
-	}
-
-	public func runFolderCreation(containerFolderURL: NSURL) {
-
-	}
-	public func runFolderDeletion(folderURL: NSURL) {
-
-	}
-	public func runFileCreation(u: NSURL) {
-
-	}
-	public func runFileDeletion(u: NSURL) {
-
-	}
-
-	///
-
-	private let	_files			=	MutableArrayStorage<NSURL>([])
-	private let	_revealingFile		=	MutableValueStorage<NSURL?>(nil)
-}
+//public class ProjectSelection {
+//	weak var owner: ProjectModel?
+//
+//	public var files: ArrayStorage<NSURL> {
+//		get {
+//			return	_files
+//		}
+//	}
+//	public var revealingFile: ValueStorage<NSURL?> {
+//		get {
+//			return	_revealingFile
+//		}
+//	}
+//
+//	public func revealFile(file: NSURL) {
+//		fatalErrorBecauseUnimplementedYet()
+//	}
+//
+//	public func selectFiles(files: [NSURL]) {
+//		fatalErrorBecauseUnimplementedYet()
+//	}
+//	public func deselectAllFiles() {
+//		fatalErrorBecauseUnimplementedYet()
+//	}
+//
+//	public func runFolderCreation(containerFolderURL: NSURL) {
+//
+//	}
+//	public func runFolderDeletion(folderURL: NSURL) {
+//
+//	}
+//	public func runFileCreation(u: NSURL) {
+//
+//	}
+//	public func runFileDeletion(u: NSURL) {
+//
+//	}
+//
+//	///
+//
+//	private let	_files			=	MutableArrayStorage<NSURL>([])
+//	private let	_revealingFile		=	MutableValueStorage<NSURL?>(nil)
+//}
 
 
 
