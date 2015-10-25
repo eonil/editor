@@ -56,7 +56,8 @@ class FileMenuController: SessionProtocol, NotificationObserver {
 		}
 
 		_applyEnabledStates()
-		ApplicationUIController.Event.register(self) { [weak self] in self?.processNotification($0) }
+		ApplicationUIController.Event.register(self, FileMenuController.processNotification)
+//		ApplicationUIController.Event.register(self) { [weak self] in self?.processNotification($0) }
 //		applicationUI!.currentWorkspaceUI2.onDidBeginValue.register(self, FileMenuController._didBeginCurrentWorkspaceUI)
 //		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self), handler: apply)
 

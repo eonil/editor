@@ -34,6 +34,9 @@ public class ApplicationModel: ModelRootNode {
 //		let	a	=	ToolLocationResolver.cargoToolLocation()
 //		assert(a == "/Users/Eonil/Unix/homebrew/bin/cargo")
 	}
+	deinit {
+		assert(currentWorkspace == nil)
+	}
 
 	///
 
@@ -67,12 +70,19 @@ public class ApplicationModel: ModelRootNode {
 			return	_workspaces
 		}
 	}
-//	public var currentWorkspace: ValueStorage<WorkspaceModel?> {
-//		get {
-//			return	_currentWorkspace
-//		}
-//	}
-//
+	public private(set) weak var currentWorkspace: WorkspaceModel? {
+		willSet {
+			if let currentWorkspace = currentWorkspace {
+				Event.WillEndCurrentWorkspace(workspace: currentWorkspace)
+			}
+		}
+		didSet {
+			if let currentWorkspace = currentWorkspace {
+				Event.DidBeginCurrentWorkspace(workspace: currentWorkspace)
+			}
+		}
+	}
+
 //	public var selection: SelectionModel2 {
 //		get {
 //			return	_selection
@@ -137,8 +147,12 @@ public class ApplicationModel: ModelRootNode {
 	///
 	public func closeWorkspace(ws: WorkspaceModel) {
 		assert(_workspaces.contains(ws))
+		assert(currentWorkspace !== ws)
 		Debug.log("will remove a workspace \(ws), ws count = \(_workspaces.array.count)")
 
+//		if currentWorkspace === ws {
+//			currentWorkspace	=	nil
+//		}
 		_workspaces.removeFirstMatchingObject(ws)
 		ws.delocate()
 		ws.owner	=	nil
@@ -163,22 +177,24 @@ public class ApplicationModel: ModelRootNode {
 //			_currentWorkspace.value		=	nil
 //		}
 //	}
-//	/// Selects another workspace.
-//	/// 
-//	/// Current workspace cannot be nil if there's any open workspace.
-//	/// This limitation is set by Cocoa AppKit because any next window
-//	/// will be selected automatically.
-//	public func reselectCurrentWorkspace(ws: WorkspaceModel) {
-//		if _currentWorkspace.value !== ws {
-//			_currentWorkspace.value	=	ws
-//		}
-//	}
+
+	/// Selects another workspace.
+	/// 
+	/// Current workspace cannot be nil if there's any open workspace.
+	/// This limitation is set by Cocoa AppKit because any next window
+	/// will be selected automatically.
+	public func reselectCurrentWorkspace(workspace: WorkspaceModel) {
+		assert(_workspaces.array.containsValueByReferentialIdentity(workspace))
+		if currentWorkspace !== workspace {
+			currentWorkspace	=	workspace
+		}
+	}
 
 	///
 	
 	private let	_preference		=	PreferenceModel()
 	private let	_workspaces		=	MutableArrayStorage<WorkspaceModel>([])
-//	private let	_currentWorkspace	=	MutableValueStorage<WorkspaceModel?>(nil)
+//	private let	_currentWorkspace	=	MutableOptionalWeakObjectStorage2<WorkspaceModel>(nil)
 //	private let	_selection		=	SelectionModel2()
 
 //	private func _nextWorkspaceOfWorkspace(workspace: WorkspaceModel) -> WorkspaceModel? {

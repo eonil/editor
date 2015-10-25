@@ -38,6 +38,8 @@
 		45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */; };
 		45C77B0C1B7F2F0A0064C363 /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */; };
 		45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */; };
+		45FF2F031BDD0A32001577B7 /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF2F021BDD0A32001577B7 /* WorkspaceDocument.swift */; settings = {ASSET_TAGS = (); }; };
+		45FF2F101BDD0B2E001577B7 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF2F0F1BDD0B2E001577B7 /* Command.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +164,8 @@
 		45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
 		45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
 		45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationUIController.swift; sourceTree = "<group>"; };
+		45FF2F021BDD0A32001577B7 /* WorkspaceDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocument.swift; sourceTree = "<group>"; };
+		45FF2F0F1BDD0B2E001577B7 /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,11 +254,13 @@
 		4554C80F1B7DBED9004987CC /* EditorShell */ = {
 			isa = PBXGroup;
 			children = (
+				45FF2F0F1BDD0B2E001577B7 /* Command.swift */,
 				45B1852E1B7F865B004E3B28 /* (menu components) */,
 				45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */,
 				45A0B2631BDC477E00889B32 /* UIProtocols.swift */,
 				45A0B2721BDC69F400889B32 /* UINotifications.swift */,
 				45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */,
+				45FF2F021BDD0A32001577B7 /* WorkspaceDocument.swift */,
 				4554C9AD1B7DC0D7004987CC /* WorkspaceWindowUIController.swift */,
 				4554C9A71B7DC0D7004987CC /* DivisionUIController.swift */,
 				4554C9A81B7DC0D7004987CC /* EditUIController.swift */,
@@ -559,6 +565,8 @@
 				45C3793A1B90B1D600F5B984 /* ContextTreeUIController.swift in Sources */,
 				45A0B2731BDC69F400889B32 /* UINotifications.swift in Sources */,
 				4526B1271B850F280023C626 /* DebugMenuController.swift in Sources */,
+				45FF2F101BDD0B2E001577B7 /* Command.swift in Sources */,
+				45FF2F031BDD0A32001577B7 /* WorkspaceDocument.swift in Sources */,
 				4522B19A1B84E51F00E219F9 /* FileMenuController.swift in Sources */,
 				4554C9B61B7DC0D7004987CC /* ToolUIController.swift in Sources */,
 				45C379381B90B0F900F5B984 /* VariableTreeUIController.swift in Sources */,

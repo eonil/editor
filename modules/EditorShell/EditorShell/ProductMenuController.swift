@@ -43,9 +43,12 @@ class ProductMenuController: SessionProtocol {
 		assert(model != nil)
 		_applyEnabledStates()
 
-		ApplicationUIController.Event.register(self)		{ [weak self] in self?._process($0) }
-		BuildModel.Event.register(self)				{ [weak self] in self?._process($0) }
-		DebuggingTargetExecutionModel.Event.register(self)	{ [weak self] in self?._process($0) }
+		ApplicationUIController.Event.register		(self, ProductMenuController._process)
+		BuildModel.Event.register			(self, ProductMenuController._process)
+		DebuggingTargetExecutionModel.Event.register	(self, ProductMenuController._process)
+//		ApplicationUIController.Event.register(self)		{ [weak self] in self?._process($0) }
+//		BuildModel.Event.register(self)				{ [weak self] in self?._process($0) }
+//		DebuggingTargetExecutionModel.Event.register(self)	{ [weak self] in self?._process($0) }
 
 //		_didSetDefaultWorkspace()
 //		model!.currentWorkspace.registerWillSet(ObjectIdentifier(self)) { [weak self] in
@@ -61,7 +64,6 @@ class ProductMenuController: SessionProtocol {
 		build.clickHandler	=	{ [weak self] in self?._runBuildOnCurrentWorkspace() }
 		clean.clickHandler	=	{ [weak self] in self?._runCleanOnCurrentWorkspace() }
 		stop.clickHandler	=	{ [weak self] in self?._stopAnyOnCurrentWorkspace() }
-
 	}
 	func halt() {
 		assert(applicationUI != nil)
@@ -75,9 +77,9 @@ class ProductMenuController: SessionProtocol {
 //		model!.currentWorkspace.deregisterWillSet(ObjectIdentifier(self))
 //		_willSetDefaultWorkspace()
 
-		DebuggingTargetExecutionModel.Event.deregister(self)
-		BuildModel.Event.deregister(self)
-		ApplicationUIController.Event.deregister(self)
+		DebuggingTargetExecutionModel.Event.deregister	(self)
+		BuildModel.Event.deregister			(self)
+		ApplicationUIController.Event.deregister	(self)
 		_applyEnabledStates()
 	}
 

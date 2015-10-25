@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		450C0F961B7F382D0048E7A1 /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450C0F951B7F382D0048E7A1 /* WorkspaceDocument.swift */; };
 		451372E31B7ED7C100ED9829 /* MulticastingStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372DF1B7ED7AD00ED9829 /* MulticastingStorage.framework */; };
 		4554C9081B7DBF6B004987CC /* EditorDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C8FD1B7DBF6A004987CC /* EditorDriver.framework */; };
 		4554C90D1B7DBF6B004987CC /* EditorDriverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C90C1B7DBF6B004987CC /* EditorDriverTests.swift */; };
@@ -115,7 +114,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		450C0F951B7F382D0048E7A1 /* WorkspaceDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocument.swift; sourceTree = "<group>"; };
 		451372D91B7ED7AD00ED9829 /* MulticastingStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MulticastingStorage.xcodeproj; path = ../../submodules/MulticastingStorage/MulticastingStorage.xcodeproj; sourceTree = "<group>"; };
 		4554C8FD1B7DBF6A004987CC /* EditorDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C9021B7DBF6A004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				4554C9CB1B7DC212004987CC /* Driver.swift */,
-				450C0F951B7F382D0048E7A1 /* WorkspaceDocument.swift */,
 				459A8C731B9526BB005CB0CC /* CocoaPlatform.swift */,
 				450C0FB41B7F49BB0048E7A1 /* (external tools) */,
 				4554C9021B7DBF6A004987CC /* Info.plist */,
@@ -502,7 +499,6 @@
 				459A8C741B9526BB005CB0CC /* CocoaPlatform.swift in Sources */,
 				4554C9C41B7DC143004987CC /* Tools.swift in Sources */,
 				4554C9CC1B7DC212004987CC /* Driver.swift in Sources */,
-				450C0F961B7F382D0048E7A1 /* WorkspaceDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,13 +33,17 @@ public protocol NotificationObserver: class {
 }
 
 public extension NotificationType {
-	public func broadcast() {
+	public func broadcast(doNotCallBroadcast2: Bool = false) {
 		if let box = _listMapping[Self._getTypeID()] {
 			let	listBox	=	box as! _ListBox<Self>
 			for atom in listBox.list {
 				let	observer	=	atom.dispatch as! (Self->())
 				observer(self)
 			}
+		}
+
+		if doNotCallBroadcast2 == false {
+			broadcast2()
 		}
 	}
 	public static func registerObserver<T: NotificationObserver where T.Notification == Self>(observer: T) {

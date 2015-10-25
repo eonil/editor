@@ -22,35 +22,51 @@ public class MutableValueStorage2<T>: ValueStorage2<T> {
 }
 public class ValueStorage2<T> {
 	private init(_ value: T) {
-		self.value	=	value
-
+		Debug.assertMainThread()
+		_value					=	value
 		_onDidBeginValue.onDidRegister		=	{ [weak self] in $0(self!.value) }
 		_onWillEndValue.onWillDeregister	=	{ [weak self] in $0(self!.value) }
 	}
 	deinit {
+		Debug.assertMainThread()
 	}
 
 	///
 
 	public private(set) var value: T {
-		willSet {
-			_onWillEndValue.cast(value)
+		get {
+			Debug.assertMainThread()
+			return	_value
 		}
-		didSet {
-			_onDidBeginValue.cast(value)
+		set {
+			Debug.assertMainThread()
+			assert(_isMutating == false)
+			_isMutating	=	true
+			do {
+				_onWillEndValue.cast(value)
+				_value	=	newValue
+				_onDidBeginValue.cast(value)
+			}
+			_isMutating	=	false
 		}
 	}
 	public var onDidBeginValue: MulticastChannel<T> {
 		get {
+			Debug.assertMainThread()
 			return	_onDidBeginValue
 		}
 	}
 	public var onWillEndValue: MulticastChannel<T> {
 		get {
+			Debug.assertMainThread()
 			return	_onDidBeginValue
 		}
 	}
 
+	///
+
+	private var	_value			:	T
+	private var	_isMutating		=	false
 	private let	_onDidBeginValue	=	MulticastStation<T>()
 	private let	_onWillEndValue		=	MulticastStation<T>()
 }
@@ -96,6 +112,11 @@ public class MulticastChannel<Parameter> {
 	}
 	deinit {
 		assert(_list.count == 0, "You MUST deregister all observers before this object `\(self)` dies.")
+	}
+	public var observerCount: Int {
+		get {
+			return	_list.count
+		}
 	}
 	public func register<T: AnyObject>(object: T, _ instanceMethod: (T) -> Callback) {
 		let	invoke	=	{ [weak object] (parameter: Parameter)->() in

@@ -20,3 +20,31 @@ public protocol ApplicationUIProtocol: class {
 public protocol WorkspaceUIProtocol: class {
 	weak var model: WorkspaceModel? { get }
 }
+
+
+
+
+
+
+//public protocol MenuItemUIProtocol: class {
+//	var enabled: Bool { get set }
+//}
+//
+//public protocol FileMenuUIProtocol: class {
+//	var new: FileNewMenuUIProtocol { get }
+//}
+//public protocol FileNewMenuUIProtocol: class {
+//	var workspace: MenuItemUIProtocol { get }
+//}
+//
+
+
+
+
+
+
+
+
+
+
+

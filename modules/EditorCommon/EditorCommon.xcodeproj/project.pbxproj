@@ -90,8 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				4554C9681B7DC025004987CC /* ObjectSet.swift */,
-				45FF2EC11BDCC693001577B7 /* ValueStorage2.swift */,
-				45FF2EFF1BDCFA51001577B7 /* OptionalWeakValueStorage2.swift */,
+				45FF2F011BDD05F6001577B7 /* (MS2) */,
 				4554C96A1B7DC025004987CC /* Weak.swift */,
 				4554C96B1B7DC025004987CC /* WeakArray.swift */,
 				4554C9691B7DC025004987CC /* Reporting.swift */,
@@ -111,6 +110,15 @@
 				4554C95F1B7DBF9B004987CC /* Info.plist */,
 			);
 			path = EditorCommonTests;
+			sourceTree = "<group>";
+		};
+		45FF2F011BDD05F6001577B7 /* (MS2) */ = {
+			isa = PBXGroup;
+			children = (
+				45FF2EC11BDCC693001577B7 /* ValueStorage2.swift */,
+				45FF2EFF1BDCFA51001577B7 /* OptionalWeakValueStorage2.swift */,
+			);
+			name = "(MS2)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

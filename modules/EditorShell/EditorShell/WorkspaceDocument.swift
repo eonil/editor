@@ -9,7 +9,6 @@
 import Foundation
 import AppKit
 import EditorCommon
-import EditorShell
 
 @objc
 public class WorkspaceDocument: NSDocument {

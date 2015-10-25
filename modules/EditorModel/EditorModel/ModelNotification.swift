@@ -20,54 +20,6 @@ public struct Notification<O, N>: NotificationType {
 	public var	event: N
 }
 
-public enum ApplicationEvent: BroadcastableEventType {
-	public typealias	Sender	=	ApplicationModel
-	/// Newrly created workspace will also be notified using this.
-	case DidOpenWorkspace(workspace: WorkspaceModel)
-	case WillCloseWorkspace(workspace: WorkspaceModel)
-}
-
-public enum WorkspaceEvent: BroadcastableEventType {
-	public typealias	Sender	=	WorkspaceModel
-	case WillRelocate(from: NSURL, to: NSURL)
-	case DidRelocate(from: NSURL, to: NSURL)
-}
-
-public enum FileTreeEvent: BroadcastableEventType {
-	public typealias	Sender	=	FileTreeModel
-	case DidCreateRoot(root: FileNodeModel)
-	case WillDeleteRoot(root: FileNodeModel)
-}
-
-public enum FileNodeEvent: BroadcastableEventType {
-	public typealias	Sender	=	FileNodeModel
-	case DidInsertSubnode(subnode: FileNodeModel, index: Int)
-	case WillDeleteSubnode(subnode: FileNodeModel, index: Int)
-	case WillChangeGrouping(old: Bool, new: Bool)
-	case DidChangeGrouping(old: Bool, new: Bool)
-	case WillChangeName(old: String, new: String)
-	case DidChangeName(old: String, new: String)
-	case WillChangeComment(old: String?, new: String?)
-	case DidChangeComment(old: String?, new: String?)
-}
-
-public extension BuildModel {
-	public enum Event: BroadcastableEventType {
-		public typealias	Sender	=	BuildModel
-		case WillChangeRunnableCommand
-		case DidChangeRunnableCommand
-	}
-}
-
-public extension DebuggingTargetExecutionModel {
-	public enum Event: BroadcastableEventType {
-		public typealias	Sender	=	DebuggingTargetExecutionModel
-		case WillChangeState
-		case DidChangeState
-	}
-
-}
-
 
 
 
@@ -96,7 +48,10 @@ public protocol EventType {
 //	static func registerObserver(identity: ObjectIdentifier, observer: EditorModel.Notification<Sender,Self>->())
 //	static func deregisterObserver(identity: ObjectIdentifier)
 
-	static func register<T: AnyObject>(identity: T, observer: Notification->())
+//	static func register<T: AnyObject>(identity: T, observer: Notification->())
+//	static func deregister<T: AnyObject>(identity: T)
+
+	static func register<T: AnyObject>(identity: T, _ instanceMethod: T -> Notification -> ())
 	static func deregister<T: AnyObject>(identity: T)
 }
 public extension EventType {
@@ -115,11 +70,18 @@ public extension EventType {
 //		Notification.deregisterObserver(identity)
 //	}
 
-	public static func register<T: AnyObject>(identity: T, observer: Notification->()) {
-		Notification.registerObserver(ObjectIdentifier(identity), observer: observer)
+//	public static func register<T: AnyObject>(identity: T, observer: Notification->()) {
+//		Notification.registerObserver(ObjectIdentifier(identity), observer: observer)
+//	}
+//	public static func deregister<T: AnyObject>(identity: T) {
+//		Notification.deregisterObserver(ObjectIdentifier(identity))
+//	}
+
+	public static func register<T: AnyObject>(object: T, _ instanceMethod: T -> Notification -> ()) {
+		Notification.register(object, instanceMethod)
 	}
-	public static func deregister<T: AnyObject>(identity: T) {
-		Notification.deregisterObserver(ObjectIdentifier(identity))
+	public static func deregister<T: AnyObject>(object: T) {
+		Notification.deregister(object)
 	}
 }
 

@@ -73,7 +73,7 @@ public class FileTreeView: CommonView, NotificationObserver, FileTreeUIProtocol 
 		_layout()
 	}
 	
-	public func processNotification(notification: Notification<FileNodeModel, FileNodeEvent>) {
+	public func processNotification(notification: FileNodeModel.Event.Notification) {
 		guard notification.sender.tree === model else {
 			return
 		}
@@ -107,10 +107,10 @@ public class FileTreeView: CommonView, NotificationObserver, FileTreeUIProtocol 
 		_outlineView.reloadData()
 
 //		_didSetRoot()
-		FileNodeEvent.registerObserver(self)
+		FileNodeModel.Event.registerObserver(self)
 	}
 	private func _deinstall() {
-		FileNodeEvent.deregisterObserver(self)
+		FileNodeModel.Event.deregisterObserver(self)
 //		_willSetRoot()
 
 		_scrollView.documentView	=	nil

@@ -565,9 +565,9 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 		do {
 			try	Platform.thePlatform.fileSystem.moveFile(fromURL: fromFileURL, toURL: toFileURL)
 
-			FileNodeEvent.WillChangeName(old: oldValue, new: newValue).broadcastWithSender(self)
+			FileNodeModel.Event.WillChangeName(old: oldValue, new: newValue).broadcastWithSender(self)
 			_dataNode.name		=	newValue
-			FileNodeEvent.DidChangeName(old: oldValue, new: newValue).broadcastWithSender(self)
+			FileNodeModel.Event.DidChangeName(old: oldValue, new: newValue).broadcastWithSender(self)
 		}
 		catch let error {
 			// Rollback mutation on any error.
@@ -582,9 +582,9 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 		set {
 			let	oldValue	=	_dataNode.comment
 
-			FileNodeEvent.WillChangeComment(old: oldValue, new: newValue).broadcastWithSender(self)
+			FileNodeModel.Event.WillChangeComment(old: oldValue, new: newValue).broadcastWithSender(self)
 			_dataNode.comment	=	newValue
-			FileNodeEvent.DidChangeComment(old: oldValue, new: newValue).broadcastWithSender(self)
+			FileNodeModel.Event.DidChangeComment(old: oldValue, new: newValue).broadcastWithSender(self)
 		}
 	}
 
@@ -673,7 +673,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		node.owner	=	hostNode.owner
 		node.supernode	=	hostNode
 
-		FileNodeEvent.DidInsertSubnode(subnode: node, index: index).broadcastWithSender(hostNode)
+		FileNodeModel.Event.DidInsertSubnode(subnode: node, index: index).broadcastWithSender(hostNode)
 	}
 	public func remove(node: FileNodeModel) throws {
 		guard let idx = hostNode._subnodes.indexOfValueByReferentialIdentity(node) else {
@@ -698,7 +698,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		hostNode._dataNode.subnodes.removeAtIndex(index)
 
 		assert(hostNode._subnodes[index].owner === hostNode)
-		FileNodeEvent.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).broadcastWithSender(hostNode)
+		FileNodeModel.Event.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).broadcastWithSender(hostNode)
 
 		let	removedNode	=	hostNode._subnodes.removeAtIndex(index)
 		removedNode.supernode	=	nil

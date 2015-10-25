@@ -9,8 +9,9 @@
 import Foundation
 
 public class MutableOptionalWeakObjectStorage2<T: AnyObject>: OptionalWeakObjectStorage2<T> {
-	public override init(_ value: T?) {
-		super.init(value)
+	public override init(_ value: T?, skipCastingForIdenticalObjects: Bool = false){
+		super.init(value, skipCastingForIdenticalObjects: skipCastingForIdenticalObjects)
+
 	}
 
 	public override var value: T? {
@@ -28,7 +29,9 @@ public class MutableOptionalWeakObjectStorage2<T: AnyObject>: OptionalWeakObject
 /// alive while it is being used in this storage. Remove the value explicitly
 /// from this storage if you set it to `nil`.
 public class OptionalWeakObjectStorage2<T: AnyObject> {
-	private init(_ value: T?) {
+	private init(_ value: T?, skipCastingForIdenticalObjects: Bool) {
+		Debug.assertMainThread()
+		_skipIdenticals				=	skipCastingForIdenticalObjects
 		_value					=	value
 		_valueIsNil				=	value == nil
 		_onDidBeginValue.onDidRegister		=	{ [weak self] in $0(self!.value) }
@@ -41,31 +44,46 @@ public class OptionalWeakObjectStorage2<T: AnyObject> {
 
 	public private(set) var value: T? {
 		get {
+			Debug.assertMainThread()
 			return	_value
 		}
 		set {
+			Debug.assertMainThread()
+			guard _skipIdenticals == false || _value !== newValue else {
+				return
+			}
+
 			assert(_valueIsNil == (_value == nil))
-			_onWillEndValue.cast(value)
-			_value		=	newValue
-			_valueIsNil	=	_value == nil
-			_onDidBeginValue.cast(value)
+			assert(_isMutating == false)
+			_isMutating	=	true
+			do {
+				_onWillEndValue.cast(value)
+				_value		=	newValue
+				_valueIsNil	=	_value == nil
+				_onDidBeginValue.cast(value)
+			}
+			_isMutating	=	false
 		}
 	}
 	public var onDidBeginValue: MulticastChannel<T?> {
 		get {
+			Debug.assertMainThread()
 			return	_onDidBeginValue
 		}
 	}
 	public var onWillEndValue: MulticastChannel<T?> {
 		get {
+			Debug.assertMainThread()
 			return	_onDidBeginValue
 		}
 	}
 
 	///
 
+	private let		_skipIdenticals		:	Bool
 	private weak var 	_value			:	T?
 	private var		_valueIsNil		=	false
+	private var		_isMutating		=	false
 	private let		_onDidBeginValue	=	MulticastStation<T?>()
 	private let		_onWillEndValue		=	MulticastStation<T?>()
 }

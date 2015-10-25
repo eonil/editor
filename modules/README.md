@@ -46,6 +46,28 @@ are in charge of interacting with model.
 
 
 
+- Views don't talk to each other for data.
+  
+  Multicasting event has a serious issue. That is undefined order between observers.
+  So, if your views talk to each other for some data retrieved from model, it's very likely
+  to be unsynced. Some view always take data earlier than another view, and this makes
+  unpredictable bugs. Just don't make views to talk to each other, and synchronize all
+  data via model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
