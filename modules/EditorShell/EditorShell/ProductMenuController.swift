@@ -13,19 +13,21 @@ import EditorCommon
 import EditorUICommon
 import EditorModel
 
-class ProductMenuController: SessionProtocol {
+class ProductMenuController: SessionProtocol, NotificationObserver {
 
-	weak var model: ApplicationModel?
+	weak var applicationUI	:	ApplicationUIProtocol?
+	weak var model		:	ApplicationModel?
 
 	///
 
 	init() {
-		menu	=	_topLevelMenu("Product", items: [
-			launch,
-			build,
-			clean,
-			stop,
-			])
+		menu	=
+			_topLevelMenu("Product", items: [
+				launch,
+				build,
+				clean,
+				stop,
+				])
 	}
 
 	///
@@ -37,18 +39,20 @@ class ProductMenuController: SessionProtocol {
 	let	stop		=	_menuItem("Stop", shortcut: Command+".")
 
 	func run() {
+		assert(applicationUI != nil)
 		assert(model != nil)
 		_applyEnabledStates()
+		WorkspaceWindowUIController.Event.registerObserver(self)
 
-		_didSetDefaultWorkspace()
-		model!.currentWorkspace.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-			assert(self != nil)
-			self!._didSetDefaultWorkspace()
-		}
-		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-			assert(self != nil)
-			self!._didSetDefaultWorkspace()
-		}
+//		_didSetDefaultWorkspace()
+//		model!.currentWorkspace.registerWillSet(ObjectIdentifier(self)) { [weak self] in
+//			assert(self != nil)
+//			self!._didSetDefaultWorkspace()
+//		}
+//		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+//			assert(self != nil)
+//			self!._didSetDefaultWorkspace()
+//		}
 
 		launch.clickHandler	=	{ [weak self] in self?._runLaunchOnCurrentWorkspace() }
 		build.clickHandler	=	{ [weak self] in self?._runBuildOnCurrentWorkspace() }
@@ -57,15 +61,29 @@ class ProductMenuController: SessionProtocol {
 
 	}
 	func halt() {
+		assert(applicationUI != nil)
 		assert(model != nil)
 
 		stop.clickHandler	=	nil
 		clean.clickHandler	=	nil
 		build.clickHandler	=	nil
 
-		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
-		model!.currentWorkspace.deregisterWillSet(ObjectIdentifier(self))
-		_willSetDefaultWorkspace()
+//		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
+//		model!.currentWorkspace.deregisterWillSet(ObjectIdentifier(self))
+//		_willSetDefaultWorkspace()
+
+		WorkspaceWindowUIController.Event.deregisterObserver(self)
+		_applyEnabledStates()
+	}
+
+	func processNotification(notification: WorkspaceWindowUIController.Event.Notification) {
+		switch notification.event {
+		case .DidBecomeCurrent:
+			_applyEnabledStates()
+
+		case .WillResignCurrent:
+			_applyEnabledStates()
+		}
 	}
 
 	///
@@ -76,38 +94,38 @@ class ProductMenuController: SessionProtocol {
 	}
 
 	private func _didSetDefaultWorkspace() {
-		assert(model != nil)
-		if let ws = model!.currentWorkspace.value {
-			_applyEnabledStates()
-			ws.build.runnableCommands.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-				assert(self != nil)
-				self!._handleCurrentWorkspaceBuildCommandsDidSet()
-			}
-			ws.build.runnableCommands.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-				assert(self != nil)
-			}
-			ws.debug.currentTarget.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-				if let target = self!.model!.currentWorkspace.value!.debug.currentTarget.value {
-					self!._didSetExecution()
-					target.execution.registerDidSet(ObjectIdentifier(self!)) { [weak self] in
-						self!._didSetExecution()
-					}
-					target.execution.registerWillSet(ObjectIdentifier(self!)) { [weak self] in
-						self!._willSetExecution()
-					}
-					self!._willSetExecution()
-				}
-			}
-			ws.debug.currentTarget.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-				if let target = self!.model!.currentWorkspace.value!.debug.currentTarget.value {
-					target.execution.deregisterWillSet(ObjectIdentifier(self!))
-					target.execution.deregisterDidSet(ObjectIdentifier(self!))
-				}
-			}
-		}
-		else {
-
-		}
+//		assert(model != nil)
+//		if let ws = model!.currentWorkspace.value {
+//			_applyEnabledStates()
+//			ws.build.runnableCommands.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+//				assert(self != nil)
+//				self!._handleCurrentWorkspaceBuildCommandsDidSet()
+//			}
+//			ws.build.runnableCommands.registerWillSet(ObjectIdentifier(self)) { [weak self] in
+//				assert(self != nil)
+//			}
+//			ws.debug.currentTarget.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+//				if let target = self!.model!.currentWorkspace.value!.debug.currentTarget.value {
+//					self!._didSetExecution()
+//					target.execution.registerDidSet(ObjectIdentifier(self!)) { [weak self] in
+//						self!._didSetExecution()
+//					}
+//					target.execution.registerWillSet(ObjectIdentifier(self!)) { [weak self] in
+//						self!._willSetExecution()
+//					}
+//					self!._willSetExecution()
+//				}
+//			}
+//			ws.debug.currentTarget.registerWillSet(ObjectIdentifier(self)) { [weak self] in
+//				if let target = self!.model!.currentWorkspace.value!.debug.currentTarget.value {
+//					target.execution.deregisterWillSet(ObjectIdentifier(self!))
+//					target.execution.deregisterDidSet(ObjectIdentifier(self!))
+//				}
+//			}
+//		}
+//		else {
+//
+//		}
 	}
 	private func _willSetDefaultWorkspace() {
 		if let ws = model!.currentWorkspace.value {
@@ -156,9 +174,12 @@ class ProductMenuController: SessionProtocol {
 		_applyEnabledStates()
 	}
 	private func _applyEnabledStates() {
+		assert(applicationUI != nil)
 		assert(model != nil)
-		let	cmds	=	model!.currentWorkspace.value?.build.runnableCommands.value ?? []
-		let	running	=	model!.currentWorkspace.value?.debug.currentTarget.value?.execution.value != nil
+
+		let	ws	=	applicationUI!.currentWorkspaceUI?.model
+		let	cmds	=	ws?.build.runnableCommands.value ?? []
+		let	running	=	ws?.debug.currentTarget.value?.execution.value != nil
 		launch.enabled	=	true
 		build.enabled	=	cmds.contains(.Build)
 		clean.enabled	=	cmds.contains(.Clean)

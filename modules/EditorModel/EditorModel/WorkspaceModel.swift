@@ -99,14 +99,24 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel> {
 	///
 
 	/// Specifies location of this workspace.
+	///
+	/// This method is transactional. Rollbacks any changes on error.
 	public func locate(u: NSURL) {
 		assert(_location.value == nil)
+		let	oldLocation	=	_location.value
 		_location.value	=	u
-		file.restoreSnapshot()
+
+//		do {
+//			try file.restoreSnapshot()
+//		}
+//		catch let error {
+//			_location.value	=	oldLocation
+//			throw	error
+//		}
 	}
 	public func delocate() {
 		assert(_location.value != nil)
-		file.storeSnapshot()
+//		file.storeSnapshot()
 		_location.value	=	nil
 	}
 

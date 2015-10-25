@@ -12,7 +12,7 @@ import MulticastingStorage
 import EditorCommon
 import EditorModel
 
-public class ApplicationUIController: SessionProtocol {
+public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 
 	public init() {
 
@@ -28,16 +28,24 @@ public class ApplicationUIController: SessionProtocol {
 
 	///
 
+	public var currentWorkspaceUI: WorkspaceUIProtocol? {
+		get {
+			return	NSApplication.sharedApplication().mainWindow?.windowController as? WorkspaceWindowUIController
+		}
+	}
+	
 	public func run() {
 		assert(model != nil)
 
 
 		_installMenu()
 		_installAgents()
+		_installNotificationHandlers()
 	}
 	public func halt() {
 		assert(model != nil)
 
+		_deinstallNotificaitonHandlers()
 		_deinstallAgents()
 		_deinstallMenu()
 	}
@@ -58,12 +66,14 @@ public class ApplicationUIController: SessionProtocol {
 			NSApplication.sharedApplication().mainMenu!.addItem(item)
 		}
 
-		_menuUI.model	=	model!
+		_menuUI.applicationUI	=	self
+		_menuUI.model		=	model!
 		_menuUI.run()
 	}
 	private func _deinstallMenu() {
 		_menuUI.halt()
-		_menuUI.model	=	nil
+		_menuUI.model		=	nil
+		_menuUI.applicationUI	=	nil
 
 		let	menus	=	Set(_menuUI.topLevelMenus)
 		var	kills	=	[NSMenuItem]()
@@ -107,6 +117,35 @@ public class ApplicationUIController: SessionProtocol {
 			}
 		}
 		return	nil
+	}
+
+
+
+
+
+	private func _installNotificationHandlers() {
+//		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidBecomeMainNotification) { [weak self] (n: NSNotification) -> () in
+//			guard let _ = n.object as? NSWindow else {
+//				fatalError("Cannot find the window object which became main.")
+//			}
+//			guard self != nil else {
+//				return
+//			}
+//			Event.DidChangeCurrentWorkspace.broadcastWithSender(self!)
+//		}
+//		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification) { [weak self] (n: NSNotification) -> () in
+//			guard let _ = n.object as? NSWindow else {
+//				fatalError("Cannot find the window object which resigned main.")
+//			}
+//			guard self != nil else {
+//				return
+//			}
+//			Event.DidChangeCurrentWorkspace.broadcastWithSender(self!)
+//		}
+	}
+	private func _deinstallNotificaitonHandlers() {
+//		NSNotificationCenter.defaultCenter().removeUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification)
+//		NSNotificationCenter.defaultCenter().removeUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidBecomeMainNotification)
 	}
 }
 

@@ -13,7 +13,38 @@ import EditorCommon
 import EditorModel
 import EditorUICommon
 
-public class FileTreeView: CommonView, NotificationObserver {
+public protocol FileTreeViewDelegate: class {
+	func fileTreeView(fileTreeView: FileTreeView, didSelectFileNodes: [FileNodeModel])
+	func fileTreeView(fileTreeView: FileTreeView, didDeselectFileNodes: [FileNodeModel])
+}
+public class FileTreeView: CommonView, NotificationObserver, FileTreeUIProtocol {
+
+	public weak var delegate: FileTreeViewDelegate?
+
+	public var selectedFileNodes: [FileNodeModel] {
+		get {
+			func fileNodeAtIndex(index: Int) -> FileNodeModel {
+				precondition(index != -1)
+				return	_outlineView.itemAtRow(index) as! FileNodeModel
+			}
+			return	_outlineView.selectedRowIndexes.map(fileNodeAtIndex)
+		}
+	}
+	public func isFileNodeDisplayed(fileNode: FileNodeModel) -> Bool {
+		let idx = _outlineView.rowForItem(fileNode)
+		return idx != -1
+	}
+	public func selectFileNode(fileNode: FileNodeModel) {
+		assert(isFileNodeDisplayed(fileNode))
+		let idx = _outlineView.rowForItem(fileNode)
+		guard idx != -1 else {
+			fatalError("The file node `\(fileNode)` is not on the list right now.")
+		}
+		_outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
+	}
+	public func deselectAllFileNodes() {
+		_outlineView.deselectAll(self)
+	}
 
 	public weak var model: FileTreeModel? {
 		willSet {

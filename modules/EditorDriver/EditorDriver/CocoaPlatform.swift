@@ -56,7 +56,7 @@ class CocoaPlatformFileSystem: PlatformFileSystemProtocol {
 	}
 
 	func contentOfFileAtURLAtomically(u: NSURL) throws -> NSData {
-		return	NSData(contentsOfURL: u)!
+		return	try NSData(contentsOfURL: u, options: [NSDataReadingOptions.DataReadingUncached])
 	}
 
 	func replaceContentOfFileAtURLAtomically(u: NSURL, data: NSData) throws {

@@ -12,7 +12,7 @@ import EditorModel
 import EditorCommon
 import EditorUICommon
 
-public final class WorkspaceWindowUIController: CommonWindowController, SessionProtocol {
+public final class WorkspaceWindowUIController: CommonWindowController, SessionProtocol, WorkspaceUIProtocol {
 
 	/// Will be set by upper level node.
 	public weak var model: WorkspaceModel? {
@@ -92,9 +92,15 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 //			model!.application.selectCurrentWorkspace(model!)
 			model!.application.reselectCurrentWorkspace(model!)
 		}
+
+		Event.DidBecomeCurrent.broadcastWithSender(self)
 	}
 	private func _resignCurrentWorkspace() {
-		markUnimplemented()
+		Event.WillResignCurrent.broadcastWithSender(self)
+
+//		assert(model!.application.currentWorkspace.value === self)
+//		model!.application.reselectCurrentWorkspace
+//		markUnimplemented()
 	}
 }
 
@@ -120,8 +126,14 @@ private final class _Agent: NSObject, NSWindowDelegate {
 	}
 
 	@objc
-	private func windowDidBecomeKey(notification: NSNotification) {
+	private func windowDidBecomeMain(notification: NSNotification) {
+		print(notification)
 		owner!._becomeCurrentWorkspace()
+	}
+	@objc
+	private func windowDidResignMain(notification: NSNotification) {
+		print(notification)
+		owner!._resignCurrentWorkspace()
 	}
 }
 

@@ -33,6 +33,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 	struct Error: ErrorType {
 		enum Code {
+			case CannotRestoreBecuaseCannotReadWorkspaceFileListAsUTF8String
 			case CannotCreateFolderBecuaseThereIsAlreadyAnotherNodeAtPath
 			case CannotMoveDueToLackOfFromContainerNode
 			case CannotMoveDueToLackOfToContainerNode
@@ -44,6 +45,8 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		var code	:	Code
 		var message	:	String
 	}
+
+	typealias	Event	=	FileTreeEvent
 
 	///
 
@@ -83,10 +86,9 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
-	public func restoreSnapshot() {
+	public func restoreSnapshot() throws {
 		let u	=	_snapshotFileURL()
-		_restoreSnapshotFromURL(u)
-		_onDidChange.value	=	()
+		try _restoreSnapshotFromURL(u)
 	}
 	public func storeSnapshot() {
 		let u	=	_snapshotFileURL()
@@ -207,10 +209,10 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		assert(_dataTree!.root != nil)
 		_rootNodeModel		=	FileNodeModel(dataNode: _dataTree!.root!)
 		_rootNodeModel!.owner	=	self
-		FileTreeEvent.DidCreateRoot(root: _rootNodeModel!).broadcastBy(self)
+		FileTreeEvent.DidCreateRoot(root: _rootNodeModel!).broadcastWithSender(self)
 	}
 	private func _deinstallModelRoot() {
-		FileTreeEvent.WillDeleteRoot(root: _rootNodeModel!).broadcastBy(self)
+		FileTreeEvent.WillDeleteRoot(root: _rootNodeModel!).broadcastWithSender(self)
 		assert(_rootNodeModel != nil)
 		assert(_dataTree != nil)
 		assert(_dataTree!.root != nil)
@@ -248,33 +250,20 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
-	private func _restoreSnapshotFromURL(u: NSURL) {
+	/// This method is transactional. Nothing will be changed on any error.
+	private func _restoreSnapshotFromURL(u: NSURL) throws {
 		Debug.assertMainThread()
-		do {
-			let	data	=	try Platform.thePlatform.fileSystem.contentOfFileAtURLAtomically(u)
-			if let s = NSString(data: data, encoding: NSUTF8StringEncoding) as String? {
-				let	tree	=	try! WorkspaceItemTree(snapshot: s)
-//				let	node	=	_rebuildFileNodeModelTree(self, tree)
 
-				dispatchToMainQueueAsynchronously() { [weak self] in
-					guard self != nil else {
-						return
-					}
+		let	data	=	try Platform.thePlatform.fileSystem.contentOfFileAtURLAtomically(u)
+		guard let s = NSString(data: data, encoding: NSUTF8StringEncoding) as String? else {
+			throw	Error(code: FileTreeModel.Error.Code.CannotRestoreBecuaseCannotReadWorkspaceFileListAsUTF8String, message: "Could not read a valid UTF-8 string from file `\(u)`.")
+		}
+		let	tree	=	try WorkspaceItemTree(snapshot: s)
 
-					self!._deinstallModelRoot()
-					self!._dataTree	=	tree
-					self!._installModelRoot()
-				}
-			}
-			else {
-				assert(false, "Could not read a valid UTF-8 string from file `\(u)`.")
-				markUnimplemented()
-			}
-		}
-		catch let error as NSError {
-			assert(false, "Could not find file `\(u)`. An error `\(error)` occured.")
-			markUnimplemented()
-		}
+		// Status OK. Mutate it.
+		_deinstallModelRoot()
+		_dataTree	=	tree
+		_installModelRoot()
 	}
 	private func _storeSnapshotToURL(u: NSURL) {
 		Debug.assertMainThread()
@@ -576,9 +565,9 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 		do {
 			try	Platform.thePlatform.fileSystem.moveFile(fromURL: fromFileURL, toURL: toFileURL)
 
-			FileNodeEvent.WillChangeName(old: oldValue, new: newValue).broadcastBy(self)
+			FileNodeEvent.WillChangeName(old: oldValue, new: newValue).broadcastWithSender(self)
 			_dataNode.name		=	newValue
-			FileNodeEvent.DidChangeName(old: oldValue, new: newValue).broadcastBy(self)
+			FileNodeEvent.DidChangeName(old: oldValue, new: newValue).broadcastWithSender(self)
 		}
 		catch let error {
 			// Rollback mutation on any error.
@@ -593,9 +582,9 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 		set {
 			let	oldValue	=	_dataNode.comment
 
-			FileNodeEvent.WillChangeComment(old: oldValue, new: newValue).broadcastBy(self)
+			FileNodeEvent.WillChangeComment(old: oldValue, new: newValue).broadcastWithSender(self)
 			_dataNode.comment	=	newValue
-			FileNodeEvent.DidChangeComment(old: oldValue, new: newValue).broadcastBy(self)
+			FileNodeEvent.DidChangeComment(old: oldValue, new: newValue).broadcastWithSender(self)
 		}
 	}
 
@@ -684,7 +673,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		node.owner	=	hostNode.owner
 		node.supernode	=	hostNode
 
-		FileNodeEvent.DidInsertSubnode(subnode: node, index: index).broadcastBy(hostNode)
+		FileNodeEvent.DidInsertSubnode(subnode: node, index: index).broadcastWithSender(hostNode)
 	}
 	public func remove(node: FileNodeModel) throws {
 		guard let idx = hostNode._subnodes.indexOfValueByReferentialIdentity(node) else {
@@ -709,7 +698,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		hostNode._dataNode.subnodes.removeAtIndex(index)
 
 		assert(hostNode._subnodes[index].owner === hostNode)
-		FileNodeEvent.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).broadcastBy(hostNode)
+		FileNodeEvent.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).broadcastWithSender(hostNode)
 
 		let	removedNode	=	hostNode._subnodes.removeAtIndex(index)
 		removedNode.supernode	=	nil

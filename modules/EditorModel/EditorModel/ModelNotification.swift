@@ -56,12 +56,19 @@ public enum FileNodeEvent: BroadcastableEventType {
 	case DidChangeComment(old: String?, new: String?)
 }
 
+//public extension BuildModel {
+//	public enum Event {
+//		case WillChangeRunnableCommand
+//		case DidChangeRunnableCommand
+//	}
+//}
+
 
 internal protocol BroadcastableEventType: EventType {
-	func broadcastBy(sender: Sender)
+	func broadcastWithSender(sender: Sender)
 }
 internal extension BroadcastableEventType {
-	func broadcastBy(sender: Sender) {
+	func broadcastWithSender(sender: Sender) {
 		Notification(sender, self).broadcast()
 	}
 }

@@ -13,8 +13,9 @@ import EditorModel
 
 
 
-class FileMenuController: SessionProtocol {
+class FileMenuController: SessionProtocol, NotificationObserver {
 
+	weak var applicationUI: ApplicationUIProtocol?
 	weak var model: ApplicationModel?
 
 	///
@@ -51,6 +52,7 @@ class FileMenuController: SessionProtocol {
 		}
 
 		_applyEnabledStates()
+		WorkspaceWindowUIController.Event.registerObserver(self)
 		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self), handler: apply)
 
 		new.model	=	model!
@@ -69,9 +71,20 @@ class FileMenuController: SessionProtocol {
 		new.model	=	nil
 
 		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
+		WorkspaceWindowUIController.Event.deregisterObserver(self)
 		_applyEnabledStates()
 
 		closeWorkspace.clickHandler	=	nil
+	}
+
+	func processNotification(notification: WorkspaceWindowUIController.Event.Notification) {
+		switch notification.event {
+		case .DidBecomeCurrent:
+			_applyEnabledStates()
+
+		case .WillResignCurrent:
+			_applyEnabledStates()
+		}
 	}
 
 	///
@@ -79,6 +92,7 @@ class FileMenuController: SessionProtocol {
 	private func _applyEnabledStates() {
 		assert(model != nil)
 		closeWorkspace.enabled		=	model!.currentWorkspace.value != nil
+//		closeWorkspace.enabled		=	applicationUI!.currentWorkspaceUI != nil
 	}
 	private func _handleClosingCurrentWorkspace() {
 		assert(model != nil)
@@ -121,9 +135,9 @@ class FileNewMenuController: SessionProtocol {
 		folder.clickHandler	=	{ [weak self] in self!._clickFolder() }
 
 		_reapplyEnability()
-		model!.defaultWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-			self?._reapplyEnability()
-		}
+//		model!.defaultWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
+//			self?._reapplyEnability()
+//		}
 	}
 	func halt() {
 		model!.defaultWorkspace.deregisterDidSet(ObjectIdentifier(self))
@@ -153,10 +167,20 @@ class FileNewMenuController: SessionProtocol {
 	}
 	private func _clickFile() {
 		checkAndReportFailureToDevelopers(model!.defaultWorkspace.value != nil)
+
+		// TODO:
+		// 1. Select location by asking user with file open panel.
+		//    We cannot depend on file-tree UI's selection state.
+		// 2. Try to create one at there.
 		_testCreatingFile1()
 	}
 	private func _clickFolder() {
 		checkAndReportFailureToDevelopers(model!.defaultWorkspace.value != nil)
+
+		// TODO:
+		// 1. Select location by asking user with file open panel.
+		//    We cannot depend on file-tree UI's selection state.
+		// 2. Try to create one at there.
 		_testCreatingFolder1()
 	}
 

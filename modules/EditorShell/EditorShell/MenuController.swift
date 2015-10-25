@@ -14,6 +14,11 @@ import EditorModel
 
 public class MainMenuController: SessionProtocol {
 
+	public weak var applicationUI: ApplicationUIProtocol? {
+		didSet {
+			_product.applicationUI	=	applicationUI
+		}
+	}
 	public weak var model: ApplicationModel? {
 		willSet {
 			assert(_isRunning == false)
