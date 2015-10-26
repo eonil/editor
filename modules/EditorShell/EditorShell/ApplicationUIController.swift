@@ -27,17 +27,6 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 	}
 
 	///
-
-//	public var currentWorkspaceUI: WorkspaceUIProtocol? {
-//		get {
-//			return	_currentWorkspaceUI.value
-//		}
-//	}
-	public var currentWorkspaceUI2: ValueStorage2<WorkspaceUIProtocol?> {
-		get {
-			return	_currentWorkspaceUI
-		}
-	}
 	
 	public func run() {
 		assert(model != nil)
@@ -61,7 +50,6 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 
 	private let	_menuUI			=	MainMenuController()
 	private var	_isRunning		=	false
-	private let	_currentWorkspaceUI	=	MutableValueStorage2<WorkspaceUIProtocol?>(nil)
 
 	private func _installMenu() {
 		//	I believe the application-menu can be replaced.
@@ -129,6 +117,30 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 
 
 
+	private func _installModelObservers() {
+		ApplicationModel.Event.register(self, ApplicationUIController._process)
+	}
+	private func _deinstallModelObservers() {
+
+	}
+
+	private func _process(n: ApplicationModel.Event.Notification) {
+		switch n.event {
+		case .DidBeginCurrentWorkspace(let workspace):
+			_findUIForModel(workspace)!.windowController.window!.makeMainWindow()
+
+		case .WillEndCurrentWorkspace(_):
+			break
+
+		case .DidAddWorkspace(let workspace):
+			_insertWorkspaceUIForWorkspace(workspace)
+			break
+
+		case .WillRemoveWorkspace(let workspace):
+			_deleteWorkspaceUIForWorkspace(workspace)
+			break
+		}
+	}
 
 
 
@@ -145,8 +157,8 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 				return
 			}
 
-			self!._currentWorkspaceUI.value	=	workspaceUI
-			Event.DidBeginCurrentWorkspaceUI.broadcastWithSender(self!)
+			self!.model!.reselectCurrentWorkspace(workspaceUI.model!)
+//			Event.DidBeginCurrentWorkspaceUI.broadcastWithSender(self!)
 		}
 		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification) { [weak self] (n: NSNotification) -> () in
 			guard let window = n.object as? NSWindow else {
@@ -159,9 +171,9 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 				return
 			}
 
-			assert(self!._currentWorkspaceUI.value === workspaceUI)
-			Event.WillEndCurrentWorkspaceUI.broadcastWithSender(self!)
-			self!._currentWorkspaceUI.value	=	nil
+//			Event.WillEndCurrentWorkspaceUI.broadcastWithSender(self!)
+			self!.model!.reselectCurrentWorkspace(workspaceUI.model!)
+//			self!._currentWorkspaceUI.value	=	nil
 		}
 	}
 	private func _deinstallCocoaNotificaitonHandlers() {
@@ -185,20 +197,20 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 
 	///
 
-	private let	_workspaceArrayAgent	=	_WorkspaceArrayAgent()
+//	private let	_workspaceArrayAgent	=	_WorkspaceArrayAgent()
 	private var	_workspaceModelToUIMap	=	[ObjectIdentifier: WorkspaceWindowUIController]()		//<	ObjectIdentifier(WorkspaceModel) -> WorkspaceWindowUIController
 	private var	_workspaceModelToDocMap	=	[ObjectIdentifier: WorkspaceDocument]()				//<	ObjectIdentifier(WorkspaceModel) -> WorkspaceDocument
 
 	///
 
-	private func _installAgents() {
-		_workspaceArrayAgent.owner	=	self
-		model!.workspaces.register(_workspaceArrayAgent)
-	}
-	private func _deinstallAgents() {
-		model!.workspaces.deregister(_workspaceArrayAgent)
-		_workspaceArrayAgent.owner	=	nil
-	}
+//	private func _installAgents() {
+//		_workspaceArrayAgent.owner	=	self
+//		model!.workspaces.register(_workspaceArrayAgent)
+//	}
+//	private func _deinstallAgents() {
+//		model!.workspaces.deregister(_workspaceArrayAgent)
+//		_workspaceArrayAgent.owner	=	nil
+//	}
 	private func _insertWorkspaceUIForWorkspace(workspace: WorkspaceModel) {
 		let	doc	=	WorkspaceDocument()
 		NSDocumentController.sharedDocumentController().addDocument(doc)
@@ -222,18 +234,18 @@ public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
 		}
 	}
 
-	//	private func _findUIForModel(workspace: WorkspaceModel) -> (document: WorkspaceDocument, windowController: WorkspaceWindowUIController)? {
-	//		for doc in NSDocumentController.sharedDocumentController().documents {
-	//			if let doc = doc as? WorkspaceDocument {
-	//				for wc in doc.windowControllers {
-	//					if let wc = wc as? WorkspaceWindowUIController {
-	//						return	(doc, wc)
-	//					}
-	//				}
-	//			}
-	//		}
-	//		return	nil
-	//	}
+	private func _findUIForModel(workspace: WorkspaceModel) -> (document: WorkspaceDocument, windowController: WorkspaceWindowUIController)? {
+		for doc in NSDocumentController.sharedDocumentController().documents {
+			if let doc = doc as? WorkspaceDocument {
+				for wc in doc.windowControllers {
+					if let wc = wc as? WorkspaceWindowUIController {
+						return	(doc, wc)
+					}
+				}
+			}
+		}
+		return	nil
+	}
 }
 
 

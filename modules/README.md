@@ -16,6 +16,32 @@
 
 Architecture & Naming Convention
 --------------------------------
+Driver runs shell and model. And does nothing else.
+Shell manages GUI. It places GUI components and manages layout and transition.
+Model keeps all data and selection* states. It limits mutation, and provides
+shared storage for states that used by multiple GUI components.
+Each GUI components are fully segregated, and don't talk each other for data.
+Each GUI components can be out-synced, and no guaratee of synchronization is
+provided.
+Nested GUI components are all same. But container GUI component need to set 
+contextual model and capsulated container GUI component.
+
+* If you're not sure what's selection state that need to be stored in model,
+  check whether it should be shared among multiple view components.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 A UI component is built with a controller and its view or view-controllers.
 
 A UI component and is built with two parts. One is controller and

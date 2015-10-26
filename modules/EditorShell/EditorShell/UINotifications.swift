@@ -12,8 +12,8 @@ import EditorModel
 public extension ApplicationUIController {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	ApplicationUIController
-		case DidBeginCurrentWorkspaceUI
-		case WillEndCurrentWorkspaceUI
+//		case DidBeginCurrentWorkspaceUI
+//		case WillEndCurrentWorkspaceUI
 	}
 }
 

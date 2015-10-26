@@ -13,8 +13,10 @@ public extension ApplicationModel {
 		public typealias	Sender	=	ApplicationModel
 		case DidAddWorkspace(workspace: WorkspaceModel)
 		case WillRemoveWorkspace(workspace: WorkspaceModel)
-		case DidBeginCurrentWorkspace(workspace: WorkspaceModel)
-		case WillEndCurrentWorkspace(workspace: WorkspaceModel)
+		case DidChangeCurrentWorkspace(workspace: WorkspaceModel?)
+		case WillChangeCurrentWorkspace(workspace: WorkspaceModel?)
+
+		case Debug(DebuggingModel.Event.Notification)
 	}
 }
 
@@ -53,6 +55,12 @@ public extension BuildModel {
 		public typealias	Sender	=	BuildModel
 		case WillChangeRunnableCommand
 		case DidChangeRunnableCommand
+	}
+}
+
+public extension DebuggingModel {
+	public enum Event: BroadcastableEventType {
+		public typealias	Sender	=	DebuggingModel
 	}
 }
 

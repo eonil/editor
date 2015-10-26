@@ -1,5 +1,5 @@
 //
-//  ModelNotification+SubcategoryBroadcasting.swift
+//  Notification+Broadcasting.swift
 //  EditorModel
 //
 //  Created by Hoon H. on 2015/10/24.
