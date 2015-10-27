@@ -15,7 +15,7 @@ import EditorModel
 //}
 public protocol ApplicationUIProtocol: class {
 //	var currentWorkspaceUI: WorkspaceUIProtocol? { get }
-	var currentWorkspaceUI2: ValueStorage2<WorkspaceUIProtocol?> { get }
+//	var currentWorkspaceUI2: ValueStorage2<WorkspaceUIProtocol?> { get }
 }
 public protocol WorkspaceUIProtocol: class {
 	weak var model: WorkspaceModel? { get }

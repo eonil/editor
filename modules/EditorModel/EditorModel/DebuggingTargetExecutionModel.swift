@@ -19,6 +19,13 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 
 	///
 
+	public typealias	State	=	LLDBStateType
+
+	public var event: MulticastChannel<Event> {
+		get {
+			return	_event
+		}
+	}
 	public var target: DebuggingTargetModel {
 		get {
 			assert(owner != nil)
@@ -50,11 +57,13 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 	}
 	public private(set) var state2: LLDBStateType = .Invalid {
 		willSet {
-			Event.WillChangeState.broadcastWithSender(self)
+			_event.cast(Event.DidChangeState(state: state2))
+//			Event.WillChangeState.broadcastWithSender(self)
 		}
 		didSet {
 			_state.value	=	state2
-			Event.DidChangeState.broadcastWithSender(self)
+//			Event.DidChangeState.broadcastWithSender(self)
+			_event.cast(Event.WillChangeState(state: state2))
 		}
 	}
 //	public var state: ValueStorage<LLDBStateType> {
@@ -131,6 +140,7 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 
 	///
 
+	private let	_event			=	MulticastStation<Event>()
 	private let	_lldbProcess		:	LLDBProcess
 	private let	_eventWaiter		=	DebuggingEventWaiter()
 

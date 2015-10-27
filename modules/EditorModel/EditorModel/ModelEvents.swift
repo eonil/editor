@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EditorCommon
 
 public extension ApplicationModel {
 	public enum Event: BroadcastableEventType {
@@ -61,16 +62,50 @@ public extension BuildModel {
 public extension DebuggingModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	DebuggingModel
+		case WillChangeCurrentTarget(target: DebuggingTargetModel?)
+		case DidChangeCurrentTarget(target: DebuggingTargetModel?)
+	}
+}
+
+public extension DebuggingTargetModel {
+	public enum Event: BroadcastableEventType {
+		public typealias	Sender	=	DebuggingTargetModel
+		case WillChangeExecution(execution: DebuggingTargetExecutionModel?)
+		case DidChangeExecution(execution: DebuggingTargetExecutionModel?)
 	}
 }
 
 public extension DebuggingTargetExecutionModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	DebuggingTargetExecutionModel
-		case WillChangeState
-		case DidChangeState
+		case WillChangeState(state: DebuggingTargetExecutionModel.State)
+		case DidChangeState(state: DebuggingTargetExecutionModel.State)
+		case WillChangeRunnableCommands(commands: Set<DebuggingCommand>)
+		case DidChangeRunnableCommands(commands: Set<DebuggingCommand>)
 	}
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

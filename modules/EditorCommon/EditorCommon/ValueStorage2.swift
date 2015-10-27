@@ -113,6 +113,9 @@ public class MulticastChannel<Parameter> {
 	deinit {
 		assert(_list.count == 0, "You MUST deregister all observers before this object `\(self)` dies.")
 	}
+
+	///
+
 	public var observerCount: Int {
 		get {
 			return	_list.count
@@ -125,15 +128,24 @@ public class MulticastChannel<Parameter> {
 			}
 			instanceMethod(object)(parameter)
 		}
-		let	atom	=	(ObjectIdentifier(object), invoke)
+		register(ObjectIdentifier(object), invoke)
+	}
+	public func deregister<T: AnyObject>(object: T) {
+		deregister(ObjectIdentifier(object))
+	}
+
+	///
+
+	public func register(identifier: ObjectIdentifier, _ function: Callback) {
+		let	atom	=	(identifier, function)
 		_list.append(atom)
 		_onDidRegister?(atom.1)
 	}
-	public func deregister<T: AnyObject>(object: T) {
+	public func deregister(identifier: ObjectIdentifier) {
 		let	range	=	_list.startIndex..<_list.endIndex
 		for i in range.reverse() {
 			let	atom	=	_list[i]
-			if atom.0 == ObjectIdentifier(object) {
+			if atom.0 == identifier {
 				_onWillDeregister?(atom.1)
 				_list.removeAtIndex(i)
 				return

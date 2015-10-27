@@ -12,7 +12,7 @@ import MulticastingStorage
 import EditorCommon
 import EditorModel
 
-public class ApplicationUIController: SessionProtocol, ApplicationUIProtocol {
+public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIProtocol {
 
 	public init() {
 

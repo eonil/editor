@@ -29,4 +29,22 @@ public extension Array where Element: AnyObject {
 		}
 		return	nil
 	}
+	public mutating func removeValueByReferentialIdentity(element: Element) {
+		guard let idx = indexOfValueByReferentialIdentity(element) else {
+			fatalError()
+		}
+		removeAtIndex(idx)
+	}
 }
+
+public extension Array where Element: AnyObject {
+	public mutating func areAllElementsUniqueReferences() -> Bool {
+		for i in wholeRange {
+			if isUniquelyReferencedNonObjC(&self[i]) == false {
+				return	false
+			}
+		}
+		return	true
+	}
+}
+

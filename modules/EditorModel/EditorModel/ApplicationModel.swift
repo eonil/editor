@@ -12,21 +12,6 @@ import EditorCommon
 
 
 
-extension Array where Element: AnyObject {
-	mutating func areAllElementsUniquelyReferenced() -> Bool {
-		for i in wholeRange {
-			if isUniquelyReferencedNonObjC(&self[i]) == false {
-				return	false
-			}
-		}
-		return	true
-	}
-}
-
-//public protocol ModelNotificationDelegate: class {
-//	func applicationModelNotify(applicationModel: ApplicationModel, notification: ModelNotification)
-//}
-
 /// A model for application.
 /// This manages whole application state, not only single document
 /// or something else.
@@ -64,10 +49,10 @@ public class ApplicationModel: ModelRootNode {
 
 	public private(set) var workspaces: [WorkspaceModel] = [] {
 //		willSet {
-//			assert(workspaces.areAllElementsUniquelyReferenced())
+//			assert(workspaces.areAllElementsUniqueReferences())
 //		}
 		didSet {
-			assert(workspaces.areAllElementsUniquelyReferenced())
+			assert(workspaces.areAllElementsUniqueReferences())
 		}
 	}
 	public private(set) weak var currentWorkspace: WorkspaceModel? {
@@ -108,11 +93,6 @@ public class ApplicationModel: ModelRootNode {
 			return	_preference
 		}
 	}
-//	public var workspaces: ArrayStorage<WorkspaceModel> {
-//		get {
-//			return	_workspaces
-//		}
-//	}
 //	public var selection: SelectionModel2 {
 //		get {
 //			return	_selection
@@ -136,11 +116,11 @@ public class ApplicationModel: ModelRootNode {
 			ws.owner	=	self
 			ws.locate(location)
 			ws.tryCreating()
-			_workspaces.append(ws)
-			Debug.log("did create and add a workspace \(ws), ws count = \(_workspaces.array.count)")
+			workspaces.append(ws)
+			Debug.log("did create and add a workspace \(ws), ws count = \(workspaces.count)")
 			_event.cast(Event.DidAddWorkspace(workspace: ws))
 		}
-		assert(workspaces.areAllElementsUniquelyReferenced())
+		assert(workspaces.areAllElementsUniqueReferences())
 	}
 
 	/// You can supply any URL, and a workspace will be open only if
@@ -149,10 +129,10 @@ public class ApplicationModel: ModelRootNode {
 	/// selected.
 	public func openWorkspaceAtURL(u: NSURL) {
 		do {
-			Debug.log("will open a workspace at \(u), ws count = \(_workspaces.array.count)")
+			Debug.log("will open a workspace at \(u), ws count = \(workspaces.count)")
 			for ws in workspaces {
 				if ws.location.value == u {
-					Debug.log("a workspace already exist for address \(u), adding cancelled, and will select it, ws count = \(_workspaces.array.count)")
+					Debug.log("a workspace already exist for address \(u), adding cancelled, and will select it, ws count = \(workspaces.count)")
 					//				if let u1 = currentWorkspace.value?.location.value {
 					//					if u1 != u {
 					////						reselectCurrentWorkspace(ws)
@@ -169,10 +149,10 @@ public class ApplicationModel: ModelRootNode {
 			let	ws	=	WorkspaceModel()
 			ws.owner	=	self
 			ws.locate(u)
-			_workspaces.append(ws)
-			Debug.log("did open by adding a workspace \(ws), ws count = \(_workspaces.array.count)")
+			workspaces.append(ws)
+			Debug.log("did open by adding a workspace \(ws), ws count = \(workspaces.count)")
 		}
-		assert(workspaces.areAllElementsUniquelyReferenced())
+		assert(workspaces.areAllElementsUniqueReferences())
 	}
 
 	/// Closes a workspace.
@@ -182,40 +162,22 @@ public class ApplicationModel: ModelRootNode {
 	///		Can be either of current or non-current workspace.
 	///
 	public func closeWorkspace(ws: WorkspaceModel) {
-		assert(_workspaces.contains(ws))
+		assert(workspaces.containsValueByReferentialIdentity(ws))
 		assert(currentWorkspace !== ws)
 		do {
-			Debug.log("will remove a workspace \(ws), ws count = \(_workspaces.array.count)")
+			Debug.log("will remove a workspace \(ws), ws count = \(workspaces.count)")
 
-			//		if currentWorkspace === ws {
-			//			currentWorkspace	=	nil
-			//		}
-			_workspaces.removeFirstMatchingObject(ws)
+			if currentWorkspace === ws {
+				currentWorkspace	=	nil
+			}
+			workspaces.removeValueByReferentialIdentity(ws)
 			ws.delocate()
 			ws.owner	=	nil
 
-			Debug.log("did remove a workspace \(ws), ws count = \(_workspaces.array.count)")
+			Debug.log("did remove a workspace \(ws), ws count = \(workspaces.count)")
 		}
-		assert(workspaces.areAllElementsUniquelyReferenced())
+		assert(workspaces.areAllElementsUniqueReferences())
 	}
-
-//	public func selectCurrentWorkspace(ws: WorkspaceModel) {
-//		assert(_workspaces.contains(ws))
-//		assert(_currentWorkspace.value == nil)
-//		_currentWorkspace.value		=	ws
-//		Debug.log("did select a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
-//	}
-//
-//	/// Deselects current workspace. Current workspace will become `nil`.
-//	public func deselectCurrentWorkspace() {
-//		assert(_currentWorkspace.value != nil)
-//		assert(_workspaces.contains(_currentWorkspace.value!))
-//		Debug.log("will deselect a workspace \(_currentWorkspace.value!), ws count = \(_workspaces.array.count)")
-//
-//		if let _ = _currentWorkspace.value {
-//			_currentWorkspace.value		=	nil
-//		}
-//	}
 
 	/// Selects another workspace.
 	/// 
@@ -223,45 +185,19 @@ public class ApplicationModel: ModelRootNode {
 	/// This limitation is set by Cocoa AppKit because any next window
 	/// will be selected automatically.
 	public func reselectCurrentWorkspace(workspace: WorkspaceModel?) {
-		assert(workspace == nil || _workspaces.array.containsValueByReferentialIdentity(workspace!))
-		assert(workspace != nil || _workspaces.array.count == 1)
-		if currentWorkspace !== workspace {
-			currentWorkspace	=	workspace
+		assert(workspace == nil || workspaces.containsValueByReferentialIdentity(workspace!))
+		assert(workspace != nil || workspaces.count == 1)
+		do {
+			if currentWorkspace !== workspace {
+				currentWorkspace	=	workspace
+			}
 		}
 	}
 
 	///
 	
 	private let	_preference		=	PreferenceModel()
-	private let	_workspaces		=	MutableArrayStorage<WorkspaceModel>([])
-//	private let	_currentWorkspace	=	MutableOptionalWeakObjectStorage2<WorkspaceModel>(nil)
 //	private let	_selection		=	SelectionModel2()
-
-//	private func _nextWorkspaceOfWorkspace(workspace: WorkspaceModel) -> WorkspaceModel? {
-//		if let idx = _indexOfWorkspace(workspace) {
-//			if idx < (_workspaces.array.count - 1) {
-//				return	_workspaces.array[idx+1]
-//			}
-//		}
-//		return	nil
-//	}
-//	private func _priorWorkspaceOfWorkspace(workspace: WorkspaceModel) -> WorkspaceModel? {
-//		if let idx = _indexOfWorkspace(workspace) {
-//			if idx > 0 {
-//				return	_workspaces.array[idx-1]
-//			}
-//		}
-//		return	nil
-//	}
-//	public func _indexOfWorkspace(workspace: WorkspaceModel) -> Int? {
-//		for i in 0..<_workspaces.array.count {
-//			let	ws	=	_workspaces.array[i]
-//			if ws === workspace {
-//				return	i
-//			}
-//		}
-//		return	0
-//	}
 }
 
 

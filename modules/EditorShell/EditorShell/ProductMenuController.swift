@@ -43,7 +43,8 @@ class ProductMenuController: SessionProtocol {
 		assert(model != nil)
 		_applyEnabledStates()
 
-		ApplicationUIController.Event.register		(self, ProductMenuController._process)
+		model!.event.register(self, ProductMenuController._processEvent)
+//		ApplicationUIController.Event.register		(self, ProductMenuController._process)
 		BuildModel.Event.register			(self, ProductMenuController._process)
 		DebuggingTargetExecutionModel.Event.register	(self, ProductMenuController._process)
 //		ApplicationUIController.Event.register(self)		{ [weak self] in self?._process($0) }
@@ -79,7 +80,7 @@ class ProductMenuController: SessionProtocol {
 
 		DebuggingTargetExecutionModel.Event.deregister	(self)
 		BuildModel.Event.deregister			(self)
-		ApplicationUIController.Event.deregister	(self)
+//		ApplicationUIController.Event.deregister	(self)
 		_applyEnabledStates()
 	}
 
@@ -90,95 +91,53 @@ class ProductMenuController: SessionProtocol {
 	private func _deinstall() {
 	}
 
-	private func _didSetDefaultWorkspace() {
-//		assert(model != nil)
-//		if let ws = model!.currentWorkspace.value {
-//			_applyEnabledStates()
-//			ws.build.runnableCommands.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-//				assert(self != nil)
-//				self!._handleCurrentWorkspaceBuildCommandsDidSet()
-//			}
-//			ws.build.runnableCommands.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-//				assert(self != nil)
-//			}
-//			ws.debug.currentTarget.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-//				if let target = self!.model!.currentWorkspace.value!.debug.currentTarget.value {
-//					self!._didSetExecution()
-//					target.execution.registerDidSet(ObjectIdentifier(self!)) { [weak self] in
-//						self!._didSetExecution()
-//					}
-//					target.execution.registerWillSet(ObjectIdentifier(self!)) { [weak self] in
-//						self!._willSetExecution()
-//					}
-//					self!._willSetExecution()
-//				}
-//			}
-//			ws.debug.currentTarget.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-//				if let target = self!.model!.currentWorkspace.value!.debug.currentTarget.value {
-//					target.execution.deregisterWillSet(ObjectIdentifier(self!))
-//					target.execution.deregisterDidSet(ObjectIdentifier(self!))
-//				}
-//			}
-//		}
-//		else {
-//
-//		}
-	}
-	private func _willSetDefaultWorkspace() {
-//		if let ws = model!.currentWorkspace.value {
-//			ws.build.runnableCommands.deregisterWillSet(ObjectIdentifier(self))
-//			ws.build.runnableCommands.deregisterDidSet(ObjectIdentifier(self))
-//			_applyEnabledStates()
-//		}
-	}
-
-	private func _didSetDefaultTarget(t: DebuggingTargetModel?) {
-		_applyEnabledStates()
-	}
-	private func _willSetDefaultTarget(t: DebuggingTargetModel?) {
-	}
-
-//	private func _didSetExecution() {
-//		if let execution = model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value {
-//			_didSetExecutionState()
-//			execution.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-//				self!._didSetExecutionState()
-//			}
-//			execution.state.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-//				self!._willSetExecutionState()
-//			}
-//		}
-//		_applyEnabledStates()
-//	}
-//	private func _willSetExecution() {
-//		if let execution = model!.currentWorkspace.value!.debug.currentTarget.value!.execution.value {
-//			execution.state.deregisterDidSet(ObjectIdentifier(self))
-//			execution.state.deregisterWillSet(ObjectIdentifier(self))
-//			_willSetExecutionState()
-//		}
-//		_applyEnabledStates()
-//	}
-//	private func _didSetExecutionState() {
-//		_applyEnabledStates()
-//	}
-//	private func _willSetExecutionState() {
-//		_applyEnabledStates()
-//	}
-
 	///
 
-	private func _process(notification: ApplicationUIController.Event.Notification) {
-		guard notification.sender === applicationUI! else {
-			return
-		}
+	private func _processEvent(event: ApplicationModel.Event) {
+		_applyEnabledStates()
+		switch event {
+		case .DidChangeCurrentWorkspace(let ws):
+			if let ws = ws {
+				ws.debug.currentTarget
+			}
 
-		switch notification.event {
-		case .DidBeginCurrentWorkspaceUI:
-			_applyEnabledStates()
+		case .WillChangeCurrentWorkspace(let ws):
+			if let ws = ws {
+				ws.debug.currentTarget
+			}
 
-		case .WillEndCurrentWorkspaceUI:
-			_applyEnabledStates()
+		default:
+			break
 		}
+	}
+	private func _processEvent(event: DebuggingModel.Event) {
+		_applyEnabledStates()
+		switch event {
+		case .WillChangeCurrentTarget(let target):
+			if let target = target {
+				target.event.register(self, ProductMenuController._processEvent)
+			}
+		case .DidChangeCurrentTarget(let target):
+			if let target = target {
+				target.event.deregister(self)
+			}
+		}
+	}
+	private func _processEvent(event: DebuggingTargetModel.Event) {
+		_applyEnabledStates()
+		switch event {
+		case .WillChangeExecution(let execution):
+			if let execution = execution {
+				execution.event.register(self, ProductMenuController._processEvent)
+			}
+		case .DidChangeExecution(let execution):
+			if let execution = execution {
+				execution.event.deregister(self)
+			}
+		}
+	}
+	private func _processEvent(event: DebuggingTargetExecutionModel.Event) {
+		_applyEnabledStates()
 	}
 	private func _process(notification: BuildModel.Event.Notification) {
 		guard notification.sender.workspace === applicationUI!.currentWorkspaceUI2.value?.model else {
