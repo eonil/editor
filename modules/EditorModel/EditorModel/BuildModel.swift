@@ -26,8 +26,23 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
+	override init() {
+		super.init()
+		_event.sender	=	self
+	}
 	deinit {
 	}
+
+	///
+
+	public var event: MulticastChannel<Event> {
+		get {
+			return	_event
+		}
+	}
+	private let	_event	=	MulticastStationWithGlobalNotification<Event>()
+
+	///
 
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()

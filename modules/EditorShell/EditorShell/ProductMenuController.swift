@@ -139,6 +139,7 @@ class ProductMenuController: SessionProtocol {
 	private func _processEvent(event: DebuggingTargetExecutionModel.Event) {
 		_applyEnabledStates()
 	}
+
 	private func _process(notification: BuildModel.Event.Notification) {
 		guard notification.sender.workspace === applicationUI!.currentWorkspaceUI2.value?.model else {
 			return

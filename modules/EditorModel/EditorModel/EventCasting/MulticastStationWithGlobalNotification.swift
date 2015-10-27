@@ -12,9 +12,13 @@ import EditorCommon
 class MulticastStationWithGlobalNotification<E: EventType where E.Sender: AnyObject>: MulticastStation<E> {
 	weak var sender: E.Sender?
 	override func cast(parameter: E) {
+		guard let sender = sender else {
+			fatalError("You MUST set a `sender` to cast a value globally.")
+		}
+
 		super.cast(parameter)
 		assert(_ms != nil)				// Global caster must be cached at this point.
-		_ms!.cast(Notification(sender!, parameter))	// Global casting always follow local casting.
+		_ms!.cast(Notification(sender, parameter))	// Global casting always follow local casting.
 	}
 
 	override init() {
