@@ -20,7 +20,7 @@ public enum DebuggingCommand {
 	case StepOut
 }
 
-public class DebuggingModel: ModelSubnode<WorkspaceModel> {
+public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 	internal override init() {
 		Debug.log("DebuggingModel.init")
@@ -28,6 +28,10 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 	deinit {
 		Debug.log("DebuggingModel.deinit")
 	}
+
+	///
+
+	public let event = EventMulticast<Event>()
 
 	public var workspace: WorkspaceModel {
 		get {
@@ -49,7 +53,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
-	public let	event		=	DebuggingEventWaiter()
+	public let	waiter		=	DebuggingEventWaiter()
 	public let	selection	=	ExecutionStateSelectionModel()
 //	public let	inspection	=	ExecutionStateInspectionModel()
 
@@ -128,7 +132,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 	///
 
 	private func _install() {
-		event.owner			=	self
+		waiter.owner			=	self
 		selection.owner			=	self
 //		inspection.owner		=	self
 
@@ -136,7 +140,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel> {
 	private func _deinstall() {
 //		inspection.owner		=	nil
 		selection.owner			=	nil
-		event.owner			=	nil
+		waiter.owner			=	nil
 	}
 
 //	public class StackFrame {

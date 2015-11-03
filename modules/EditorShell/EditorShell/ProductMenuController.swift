@@ -98,12 +98,14 @@ class ProductMenuController: SessionProtocol {
 		switch event {
 		case .DidChangeCurrentWorkspace(let ws):
 			if let ws = ws {
+				ws.build.event.register(self, ProductMenuController._processEvent)
 				ws.debug.currentTarget
 			}
 
 		case .WillChangeCurrentWorkspace(let ws):
 			if let ws = ws {
 				ws.debug.currentTarget
+				ws.build.event.deregister(self)
 			}
 
 		default:

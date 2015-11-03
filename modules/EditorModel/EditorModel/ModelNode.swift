@@ -1,5 +1,5 @@
 //
-//  ModelNodeProtocol.swift
+//  ModelNode.swift
 //  EditorModel
 //
 //  Created by Hoon H. on 2015/08/15.

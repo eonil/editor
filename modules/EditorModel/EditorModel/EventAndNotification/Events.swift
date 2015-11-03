@@ -1,5 +1,5 @@
 //
-//  ModelEvents.swift
+//  Events.swift
 //  EditorModel
 //
 //  Created by Hoon H. on 2015/10/25.
@@ -30,7 +30,7 @@ public extension WorkspaceModel {
 }
 
 public extension FileTreeModel {
-	public enum FileTreeEvent: BroadcastableEventType {
+	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	FileTreeModel
 		case DidCreateRoot(root: FileNodeModel)
 		case WillDeleteRoot(root: FileNodeModel)

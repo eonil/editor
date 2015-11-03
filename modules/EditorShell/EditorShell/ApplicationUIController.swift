@@ -158,7 +158,7 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 			}
 
 			self!.model!.reselectCurrentWorkspace(workspaceUI.model!)
-//			Event.DidBeginCurrentWorkspaceUI.broadcastWithSender(self!)
+//			Event.DidBeginCurrentWorkspaceUI.dualcastWithSender(self!)
 		}
 		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification) { [weak self] (n: NSNotification) -> () in
 			guard let window = n.object as? NSWindow else {
@@ -171,7 +171,7 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 				return
 			}
 
-//			Event.WillEndCurrentWorkspaceUI.broadcastWithSender(self!)
+//			Event.WillEndCurrentWorkspaceUI.dualcastWithSender(self!)
 			self!.model!.reselectCurrentWorkspace(workspaceUI.model!)
 //			self!._currentWorkspaceUI.value	=	nil
 		}

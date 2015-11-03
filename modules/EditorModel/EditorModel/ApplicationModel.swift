@@ -26,7 +26,7 @@ import EditorCommon
 /// is hidden and complex, so it's impractical to synchronize it by model.
 /// And I removed `currentWorkspace`. Find current workspace from UI graph.
 ///
-public class ApplicationModel: ModelRootNode {
+public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 
 	public override init() {
 //		let	a	=	ToolLocationResolver.cargoToolLocation()
@@ -38,12 +38,7 @@ public class ApplicationModel: ModelRootNode {
 
 	///
 
-	public var event: MulticastChannel<Event> {
-		get {
-			return	_event
-		}
-	}
-	private let	_event	=	MulticastStation<Event>()
+	public let event	=	EventMulticast<Event>()
 
 	///
 
@@ -58,12 +53,12 @@ public class ApplicationModel: ModelRootNode {
 	public private(set) weak var currentWorkspace: WorkspaceModel? {
 		willSet {
 //			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
-			_event.cast(Event.WillChangeCurrentWorkspace(workspace: currentWorkspace))
+			Event.WillChangeCurrentWorkspace(workspace: currentWorkspace).dualcastWithSender(self)
 //			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
 		}
 		didSet {
 			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
-			_event.cast(Event.DidChangeCurrentWorkspace(workspace: currentWorkspace))
+			Event.DidChangeCurrentWorkspace(workspace: currentWorkspace).dualcastWithSender(self)
 			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
 		}
 	}
@@ -118,7 +113,7 @@ public class ApplicationModel: ModelRootNode {
 			ws.tryCreating()
 			workspaces.append(ws)
 			Debug.log("did create and add a workspace \(ws), ws count = \(workspaces.count)")
-			_event.cast(Event.DidAddWorkspace(workspace: ws))
+			Event.DidAddWorkspace(workspace: ws).dualcastWithSender(self)
 		}
 		assert(workspaces.areAllElementsUniqueReferences())
 	}
@@ -151,6 +146,7 @@ public class ApplicationModel: ModelRootNode {
 			ws.locate(u)
 			workspaces.append(ws)
 			Debug.log("did open by adding a workspace \(ws), ws count = \(workspaces.count)")
+			Event.DidAddWorkspace(workspace: ws).dualcastWithSender(self)
 		}
 		assert(workspaces.areAllElementsUniqueReferences())
 	}
@@ -170,6 +166,8 @@ public class ApplicationModel: ModelRootNode {
 			if currentWorkspace === ws {
 				currentWorkspace	=	nil
 			}
+
+			Event.WillRemoveWorkspace(workspace: ws).dualcastWithSender(self)
 			workspaces.removeValueByReferentialIdentity(ws)
 			ws.delocate()
 			ws.owner	=	nil

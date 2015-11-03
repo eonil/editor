@@ -11,7 +11,11 @@ import MulticastingStorage
 import LLDBWrapper
 import EditorCommon
 
-public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
+public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, BroadcastingModelType {
+
+	public typealias	State	=	LLDBStateType
+
+	///
 
 	internal init(LLDBProcess lldbProcess: LLDBProcess) {
 		_lldbProcess	=	lldbProcess
@@ -19,13 +23,8 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 
 	///
 
-	public typealias	State	=	LLDBStateType
+	public let event	=	EventMulticast<Event>()
 
-	public var event: MulticastChannel<Event> {
-		get {
-			return	_event
-		}
-	}
 	public var target: DebuggingTargetModel {
 		get {
 			assert(owner != nil)
@@ -57,13 +56,11 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 	}
 	public private(set) var state2: LLDBStateType = .Invalid {
 		willSet {
-			_event.cast(Event.DidChangeState(state: state2))
-//			Event.WillChangeState.broadcastWithSender(self)
+			Event.WillChangeState(state: state2).dualcastWithSender(self)
 		}
 		didSet {
 			_state.value	=	state2
-//			Event.DidChangeState.broadcastWithSender(self)
-			_event.cast(Event.WillChangeState(state: state2))
+			Event.DidChangeState(state: state2).dualcastWithSender(self)
 		}
 	}
 //	public var state: ValueStorage<LLDBStateType> {
@@ -140,7 +137,6 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 
 	///
 
-	private let	_event			=	MulticastStation<Event>()
 	private let	_lldbProcess		:	LLDBProcess
 	private let	_eventWaiter		=	DebuggingEventWaiter()
 
@@ -151,8 +147,6 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel> {
 
 	private func _install() {
 		_reapplyRunnableCommandState()
-
-		target.debugging.event.register(ObjectIdentifier(self)) { [weak self] in self?._handleEvent($0) }
 //		_eventWaiter.onEvent	=	{ [weak self] in self?._handleEvent($0) }
 //		_lldbProcess.addListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
 //		_eventWaiter.run()

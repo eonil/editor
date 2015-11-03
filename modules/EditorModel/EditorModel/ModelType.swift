@@ -11,3 +11,11 @@ import Foundation
 public protocol ModelType: class {
 	typealias	Event: EventType
 }
+
+
+
+
+
+public protocol BroadcastingModelType: ModelType {
+	var event: EventMulticast<Event> { get }
+}

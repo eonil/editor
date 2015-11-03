@@ -13,7 +13,7 @@ import EditorCommon
 
 /// A wrapper around `LLDBTarget` to provide UI-friendly interface
 ///
-public class DebuggingTargetModel: ModelSubnode<DebuggingModel> {
+public class DebuggingTargetModel: ModelSubnode<DebuggingModel>, BroadcastingModelType {
 
 	internal init(LLDBTarget lldbTarget: LLDBTarget) {
 		_lldbTarget	=	lldbTarget
@@ -21,11 +21,8 @@ public class DebuggingTargetModel: ModelSubnode<DebuggingModel> {
 
 	///
 
-	public var event: MulticastChannel<Event> {
-		get {
-			return	_event
-		}
-	}
+	public let event = EventMulticast<Event>()
+
 	public var debugging: DebuggingModel {
 		get {
 			assert(owner != nil)
@@ -64,7 +61,6 @@ public class DebuggingTargetModel: ModelSubnode<DebuggingModel> {
 
 	///
 
-	private let	_event			=	MulticastStation<Event>()
 	private let	_runnableCommands	=	MutableValueStorage<Set<DebuggingCommand>>([])
 	private let	_lldbTarget		:	LLDBTarget
 	private let	_execution		=	MutableValueStorage<DebuggingTargetExecutionModel?>(nil)

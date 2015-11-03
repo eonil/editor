@@ -16,7 +16,7 @@ public enum BuildCommand {
 	case Stop
 }
 
-public class BuildModel: ModelSubnode<WorkspaceModel> {
+public class BuildModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 	public var workspace: WorkspaceModel {
 		get {
@@ -26,21 +26,12 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 
 	///
 
-	override init() {
-		super.init()
-		_event.sender	=	self
-	}
 	deinit {
 	}
 
 	///
 
-	public var event: MulticastChannel<Event> {
-		get {
-			return	_event
-		}
-	}
-	private let	_event	=	MulticastStationWithGlobalNotification<Event>()
+	public let event = EventMulticast<Event>()
 
 	///
 
@@ -60,11 +51,11 @@ public class BuildModel: ModelSubnode<WorkspaceModel> {
 	public private(set) var runnableCommands2: Set<BuildCommand> = [] {
 		willSet {
 			assert(isRooted || runnableCommands2 == [])
-			Event.WillChangeRunnableCommand.broadcastWithSender(self)
+			Event.WillChangeRunnableCommand.dualcastWithSender(self)
 		}
 		didSet {
 			_runnableCommands.value	=	runnableCommands2
-			Event.DidChangeRunnableCommand.broadcastWithSender(self)
+			Event.DidChangeRunnableCommand.dualcastWithSender(self)
 		}
 	}
 //	@available(*, deprecated=1, message="AA")

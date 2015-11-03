@@ -17,7 +17,7 @@ public protocol FileTreeViewDelegate: class {
 	func fileTreeView(fileTreeView: FileTreeView, didSelectFileNodes: [FileNodeModel])
 	func fileTreeView(fileTreeView: FileTreeView, didDeselectFileNodes: [FileNodeModel])
 }
-public class FileTreeView: CommonView, NotificationObserver, FileTreeUIProtocol {
+public class FileTreeView: CommonView, FileTreeUIProtocol {
 
 	public weak var delegate: FileTreeViewDelegate?
 
@@ -72,23 +72,6 @@ public class FileTreeView: CommonView, NotificationObserver, FileTreeUIProtocol 
 		super.layoutSubcomponents()
 		_layout()
 	}
-	
-	public func processNotification(notification: FileNodeModel.Event.Notification) {
-		guard notification.sender.tree === model else {
-			return
-		}
-
-//		switch notification.event {
-//		case .DidInsertSubnode(let arguments):
-//			break
-//
-//		case .WillDeleteSubnode(let arguments):
-//
-//			break
-//		}
-
-		_outlineView.reloadData()
-	}
 
 	///
 
@@ -107,10 +90,10 @@ public class FileTreeView: CommonView, NotificationObserver, FileTreeUIProtocol 
 		_outlineView.reloadData()
 
 //		_didSetRoot()
-		FileNodeModel.Event.registerObserver(self)
+		FileNodeModel.Event.Notification.register(ObjectIdentifier(self)) { [weak self] in self?._processNotification($0) }
 	}
 	private func _deinstall() {
-		FileNodeModel.Event.deregisterObserver(self)
+		FileNodeModel.Event.Notification.deregister(ObjectIdentifier(self))
 //		_willSetRoot()
 
 		_scrollView.documentView	=	nil
@@ -123,6 +106,23 @@ public class FileTreeView: CommonView, NotificationObserver, FileTreeUIProtocol 
 	}
 	private func _layout() {
 		_scrollView.frame		=	bounds
+	}
+
+	private func _processNotification(notification: FileNodeModel.Event.Notification) {
+		guard notification.sender.tree === model else {
+			return
+		}
+
+//		switch notification.event {
+//		case .DidInsertSubnode(let arguments):
+//			break
+//
+//		case .WillDeleteSubnode(let arguments):
+//
+//			break
+//		}
+
+		_outlineView.reloadData()
 	}
 
 	///

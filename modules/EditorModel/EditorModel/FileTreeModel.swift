@@ -29,7 +29,7 @@ import EditorCommon
 /// Internally, this class maintains a `WorkspaceItemTree` instance to 
 /// track file item list.
 ///
-public class FileTreeModel: ModelSubnode<WorkspaceModel> {
+public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 	struct Error: ErrorType {
 		enum Code {
@@ -46,10 +46,11 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		var message	:	String
 	}
 
-	typealias	Event	=	FileTreeEvent
-
 	///
 
+	override init() {
+		super.init()
+	}
 	deinit {
 		assert(_isInstalled == false)
 	}
@@ -62,6 +63,12 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 			return	owner!
 		}
 	}
+
+	///
+
+	public let event	=	EventMulticast<Event>()
+
+	///
 
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
@@ -209,10 +216,10 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 		assert(_dataTree!.root != nil)
 		_rootNodeModel		=	FileNodeModel(dataNode: _dataTree!.root!)
 		_rootNodeModel!.owner	=	self
-		FileTreeEvent.DidCreateRoot(root: _rootNodeModel!).broadcastWithSender(self)
+		FileTreeModel.Event.DidCreateRoot(root: _rootNodeModel!).dualcastWithSender(self)
 	}
 	private func _deinstallModelRoot() {
-		FileTreeEvent.WillDeleteRoot(root: _rootNodeModel!).broadcastWithSender(self)
+		FileTreeModel.Event.WillDeleteRoot(root: _rootNodeModel!).dualcastWithSender(self)
 		assert(_rootNodeModel != nil)
 		assert(_dataTree != nil)
 		assert(_dataTree!.root != nil)
@@ -497,7 +504,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel> {
 /// Also you must manually call `unloadSubodes` when you don't use them anymore
 /// to save memory.
 ///
-public final class FileNodeModel: ModelSubnode<FileTreeModel> {
+public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModelType {
 
 	public convenience init(name: String, isGroup: Bool) {
 		self.init(dataNode: WorkspaceItemNode(name: name, isGroup: isGroup))
@@ -519,6 +526,8 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 
 	///
 
+	public let event = EventMulticast<Event>()
+
 	public var tree: FileTreeModel {
 		get {
 			assert(owner != nil)
@@ -527,6 +536,10 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 	}
 
 	public private(set) weak var supernode: FileNodeModel?
+
+	///
+
+	public 
 
 	///
 
@@ -565,9 +578,9 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 		do {
 			try	Platform.thePlatform.fileSystem.moveFile(fromURL: fromFileURL, toURL: toFileURL)
 
-			FileNodeModel.Event.WillChangeName(old: oldValue, new: newValue).broadcastWithSender(self)
+			FileNodeModel.Event.WillChangeName(old: oldValue, new: newValue).dualcastWithSender(self)
 			_dataNode.name		=	newValue
-			FileNodeModel.Event.DidChangeName(old: oldValue, new: newValue).broadcastWithSender(self)
+			FileNodeModel.Event.DidChangeName(old: oldValue, new: newValue).dualcastWithSender(self)
 		}
 		catch let error {
 			// Rollback mutation on any error.
@@ -582,9 +595,9 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel> {
 		set {
 			let	oldValue	=	_dataNode.comment
 
-			FileNodeModel.Event.WillChangeComment(old: oldValue, new: newValue).broadcastWithSender(self)
+			FileNodeModel.Event.WillChangeComment(old: oldValue, new: newValue).dualcastWithSender(self)
 			_dataNode.comment	=	newValue
-			FileNodeModel.Event.DidChangeComment(old: oldValue, new: newValue).broadcastWithSender(self)
+			FileNodeModel.Event.DidChangeComment(old: oldValue, new: newValue).dualcastWithSender(self)
 		}
 	}
 
@@ -673,7 +686,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		node.owner	=	hostNode.owner
 		node.supernode	=	hostNode
 
-		FileNodeModel.Event.DidInsertSubnode(subnode: node, index: index).broadcastWithSender(hostNode)
+		FileNodeModel.Event.DidInsertSubnode(subnode: node, index: index).dualcastWithSender(hostNode)
 	}
 	public func remove(node: FileNodeModel) throws {
 		guard let idx = hostNode._subnodes.indexOfValueByReferentialIdentity(node) else {
@@ -698,7 +711,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		hostNode._dataNode.subnodes.removeAtIndex(index)
 
 		assert(hostNode._subnodes[index].owner === hostNode)
-		FileNodeModel.Event.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).broadcastWithSender(hostNode)
+		FileNodeModel.Event.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).dualcastWithSender(hostNode)
 
 		let	removedNode	=	hostNode._subnodes.removeAtIndex(index)
 		removedNode.supernode	=	nil

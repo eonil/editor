@@ -103,10 +103,10 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 //////			model!.application.reselectCurrentWorkspace(model!)
 ////		}
 //
-//		Event.DidBecomeCurrent.broadcastWithSender(self)
+//		Event.DidBecomeCurrent.dualcastWithSender(self)
 //	}
 //	private func _resignCurrentWorkspace() {
-//		Event.WillResignCurrent.broadcastWithSender(self)
+//		Event.WillResignCurrent.dualcastWithSender(self)
 //
 ////		assert(model!.application.currentWorkspace.value === self)
 ////		model!.application.reselectCurrentWorkspace

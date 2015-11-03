@@ -25,7 +25,13 @@ import EditorCommon
 /// A workspace can work even with `nil` locaiton. Anyway most
 /// feature won't work with invalid paths.
 ///
-public class WorkspaceModel: ModelSubnode<ApplicationModel> {
+public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelType {
+
+	///
+
+	public let event	=	EventMulticast<Event>()
+
+	///
 
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()

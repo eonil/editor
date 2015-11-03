@@ -13,7 +13,7 @@ import EditorModel
 
 
 
-class FileMenuController: SessionProtocol, NotificationObserver {
+class FileMenuController: SessionProtocol {
 
 	weak var applicationUI: ApplicationUIProtocol? {
 		didSet {
@@ -56,7 +56,7 @@ class FileMenuController: SessionProtocol, NotificationObserver {
 		}
 
 		_applyEnabledStates()
-		ApplicationUIController.Event.register(self, FileMenuController.processNotification)
+		ApplicationModel.Event.Notification.register(self, FileMenuController._processNotification)
 //		ApplicationUIController.Event.register(self) { [weak self] in self?.processNotification($0) }
 //		applicationUI!.currentWorkspaceUI2.onDidBeginValue.register(self, FileMenuController._didBeginCurrentWorkspaceUI)
 //		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self), handler: apply)
@@ -78,17 +78,17 @@ class FileMenuController: SessionProtocol, NotificationObserver {
 
 //		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
 //		applicationUI!.currentWorkspaceUI2.onDidBeginValue.deregister(self)
-		ApplicationUIController.Event.deregister(self)
+		ApplicationModel.Event.Notification.deregister(self)
 		_applyEnabledStates()
 
 		closeWorkspace.clickHandler	=	nil
 	}
 
-	func processNotification(notification: ApplicationUIController.Event.Notification) {
+	private func _processNotification(notification: ApplicationModel.Event.Notification) {
 		switch notification.event {
-		case .DidBeginCurrentWorkspaceUI:
+		case .DidChangeCurrentWorkspace:
 			_applyEnabledStates()
-		case .WillEndCurrentWorkspaceUI:
+		case .WillChangeCurrentWorkspace:
 			_applyEnabledStates()
 		}
 	}
@@ -115,23 +115,17 @@ class FileMenuController: SessionProtocol, NotificationObserver {
 	private func _handleClosingCurrentWorkspace() {
 		assert(model != nil)
 		assert(_resolveCurrentWorkspaceUI() != nil)
-		if let curWS = _resolveCurrentWorkspaceUI()!.model {
-			assert(model!.workspaces.contains(curWS) == true)
+		if let curWS = model!.currentWorkspace {
+			assert(model!.workspaces.containsValueByReferentialIdentity(curWS) == true)
 //			model!.deselectCurrentWorkspace()
 //			assert(model!.currentWorkspace.value !== curWS)
 //			assert(model!.workspaces.contains(curWS) == true)
 			model!.closeWorkspace(curWS)
-			assert(model!.workspaces.contains(curWS) == false)
+			assert(model!.workspaces.containsValueByReferentialIdentity(curWS) == false)
 		}
 		else {
 			fatalError()
 		}
-	}
-
-	///
-
-	private func _resolveCurrentWorkspaceUI() -> WorkspaceUIProtocol? {
-		return	applicationUI!.currentWorkspaceUI2.value
 	}
 }
 
@@ -180,6 +174,8 @@ class FileNewMenuController: SessionProtocol {
 //			self?._reapplyEnability()
 //		}
 
+		ApplicationModel.Event.Notification.register(self, FileNewMenuController._processNotification)
+		model!.event.register(self, FileNewMenuController._processNotification)
 		applicationUI!.currentWorkspaceUI2.onDidBeginValue.register(self, FileNewMenuController._onDidBeginCurrentWorkspaceUI)
 		applicationUI!.currentWorkspaceUI2.onWillEndValue.register(self, FileNewMenuController._onWillEndCurrentWorkspacEUI)
 	}
@@ -196,6 +192,9 @@ class FileNewMenuController: SessionProtocol {
 
 	///
 
+	private func _processNotification(notification: ApplicationModel.Event.Notification) {
+
+	}
 	private func _onDidBeginCurrentWorkspaceUI(workspaceUI: WorkspaceUIProtocol?) {
 		_reapplyEnability()
 	}

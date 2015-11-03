@@ -36,11 +36,11 @@ public extension WorkspaceWindowUIController {
 
 
 internal protocol BroadcastableEventType: EventType {
-	func broadcastWithSender(sender: Sender)
+	func dualcastWithSender(sender: Sender)
 }
 internal extension BroadcastableEventType {
 	typealias	Notification	=	EditorModel.Notification<Sender, Self>
-	func broadcastWithSender(sender: Sender) {
+	func dualcastWithSender(sender: Sender) {
 		Notification(sender, self).broadcast()
 	}
 }

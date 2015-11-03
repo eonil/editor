@@ -27,7 +27,7 @@ public protocol NotificationType {
 	static func register<T: AnyObject>(object: T, _ instanceMethod: T -> Self -> ())
 	static func deregister<T: AnyObject>(object: T)
 
-	static func register(identifier: ObjectIdentifier, function: Self->())
+	static func register(identifier: ObjectIdentifier, _ function: Self->())
 	static func deregister(identifier: ObjectIdentifier)
 }
 
@@ -47,7 +47,7 @@ public extension NotificationType {
 	}
 
 	/// Registers a global notification observer.
-	public static func register(identifier: ObjectIdentifier, function: Self->()) {
+	public static func register(identifier: ObjectIdentifier, _ function: Self->()) {
 		_register(self, identifier, function)
 	}
 	/// Deregisters a global notification observer.
