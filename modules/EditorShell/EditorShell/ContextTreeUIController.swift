@@ -47,13 +47,13 @@ class ContextTreeUIController: CommonViewController {
 		}
 		view.addSubview(_treeView)
 
-		model!.event.register(ObjectIdentifier(self)) { [weak self] in self?._handleEvent($0) }
+		DebuggingModel.Event.Notification.register	(self, ContextTreeUIController._processDebuggingNotification)
 	}
 	private func _deinstall() {
 		assert(model != nil)
 
-		model!.event.deregister(ObjectIdentifier(self))
-
+		DebuggingModel.Event.Notification.deregister	(self)
+		
 		_treeView.removeFromSuperview()
 		_treeView.onUserWillSetFrame	=	nil
 		_treeView.onUserDidSetFrame		=	nil
@@ -73,7 +73,11 @@ class ContextTreeUIController: CommonViewController {
 
 	///
 
-	private func _handleEvent(e: LLDBEvent) {
+	private func _processDebuggingNotification(notification: DebuggingModel.Event.Notification) {
+		guard notification.sender === model else {
+			return
+		}
+
 		_treeView.reconfigure(model!.debugger)
 	}
 }

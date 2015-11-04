@@ -31,19 +31,17 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 	public func run() {
 		assert(model != nil)
 
-
-		_installAgents()
 		_installMenu()
 //		_installAgents()
 		_installCocoaNotificationHandlers()
+		_installModelObservers()
 	}
 	public func halt() {
 		assert(model != nil)
-
+		_deinstallModelObservers()
 		_deinstallCocoaNotificaitonHandlers()
 //		_deinstallAgents()
 		_deinstallMenu()
-		_deinstallAgents()
 	}
 
 	///
@@ -83,45 +81,11 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 		}
 	}
 
-//	private func _installAgents() {
-//		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-//			if let curWS = self!.model!.currentWorkspace.value {
-//				if let ui = self!._findUIForModel(curWS) {
-//					ui.showWindow(self)
-//				}
-//				else {
-//					fatalError("A UI for the workspace must be exists, but it was not.")
-//				}
-//			}
-//			else {
-//				//	No current workspace. Nothing to do.
-//			}
-//		}
-//	}
-//	private func _deinstallAgents() {
-//		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
-//	}
-
-//	private func _findUIForModel(workspace: WorkspaceModel) -> WorkspaceWindowUIController? {
-//		for doc in NSDocumentController.sharedDocumentController().documents {
-//			for wc in doc.windowControllers {
-//				if let wc = wc as? WorkspaceWindowUIController {
-//					if wc.model === workspace {
-//						return	wc
-//					}
-//				}
-//			}
-//		}
-//		return	nil
-//	}
-
-
-
 	private func _installModelObservers() {
-		ApplicationModel.Event.register(self, ApplicationUIController._process)
+		ApplicationModel.Event.Notification.register	(self, ApplicationUIController._process)
 	}
 	private func _deinstallModelObservers() {
-
+		ApplicationModel.Event.Notification.deregister	(self)
 	}
 
 	private func _process(n: ApplicationModel.Event.Notification) {
@@ -197,25 +161,19 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 
 	///
 
-//	private let	_workspaceArrayAgent	=	_WorkspaceArrayAgent()
 	private var	_workspaceModelToUIMap	=	[ObjectIdentifier: WorkspaceWindowUIController]()		//<	ObjectIdentifier(WorkspaceModel) -> WorkspaceWindowUIController
 	private var	_workspaceModelToDocMap	=	[ObjectIdentifier: WorkspaceDocument]()				//<	ObjectIdentifier(WorkspaceModel) -> WorkspaceDocument
 
+
+
+
 	///
 
-//	private func _installAgents() {
-//		_workspaceArrayAgent.owner	=	self
-//		model!.workspaces.register(_workspaceArrayAgent)
-//	}
-//	private func _deinstallAgents() {
-//		model!.workspaces.deregister(_workspaceArrayAgent)
-//		_workspaceArrayAgent.owner	=	nil
-//	}
 	private func _insertWorkspaceUIForWorkspace(workspace: WorkspaceModel) {
 		let	doc	=	WorkspaceDocument()
 		NSDocumentController.sharedDocumentController().addDocument(doc)
 		NSDocumentController.sharedDocumentController().noteNewRecentDocument(doc)
-		NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(workspace.location.value!)
+		NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(workspace.location!)
 
 		let	wc	=	WorkspaceWindowUIController()
 		wc.model	=	workspace
@@ -291,34 +249,6 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 
 
 
-
-
-
-private final class _WorkspaceArrayAgent: ArrayStorageDelegate {
-	weak var owner: ApplicationUIController?
-	private func willInsertRange(range: Range<Int>) {
-
-	}
-	private func didInsertRange(range: Range<Int>) {
-		for ws in owner!.model!.workspaces.array[range] {
-			owner!._insertWorkspaceUIForWorkspace(ws)
-		}
-	}
-	private func willUpdateRange(range: Range<Int>) {
-
-	}
-	private func didUpdateRange(range: Range<Int>) {
-
-	}
-	private func willDeleteRange(range: Range<Int>) {
-		for ws in owner!.model!.workspaces.array[range] {
-			owner!._deleteWorkspaceUIForWorkspace(ws)
-		}
-	}
-	private func didDeleteRange(range: Range<Int>) {
-
-	}
-}
 
 
 

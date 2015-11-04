@@ -9,8 +9,14 @@
 import Foundation
 
 /// A set that uses reference equality to compare equality of two objects.
-public struct ObjectSet<T: AnyObject>: SequenceType {
+public struct ObjectSet<T: AnyObject>: SequenceType, ArrayLiteralConvertible {
 
+	public init(arrayLiteral elements: T...) {
+		self	=	ObjectSet()
+		for e in elements {
+			self.insert(e)
+		}
+	}
 	public init() {
 		_set	=	Set<_RefBox<T>>()
 	}

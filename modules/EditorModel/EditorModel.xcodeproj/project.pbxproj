@@ -12,6 +12,10 @@
 		4513729B1B7ED72A00ED9829 /* MulticastingStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372971B7ED71700ED9829 /* MulticastingStorage.framework */; };
 		451373411B7ED91000ED9829 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451373401B7ED91000ED9829 /* SearchModel.swift */; };
 		451373471B7ED93700ED9829 /* DebuggingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451373461B7ED93700ED9829 /* DebuggingModel.swift */; };
+		45250ACE1BEA2D93003A862A /* GlobalModelLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45250ACD1BEA2D93003A862A /* GlobalModelLock.swift */; };
+		45250B0B1BEA576B003A862A /* StateVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45250B0A1BEA576B003A862A /* StateVersion.swift */; };
+		45250B0D1BEA584D003A862A /* xEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45250B0C1BEA584D003A862A /* xEvents.swift */; };
+		45250B0F1BEA5943003A862A /* ModelNodeVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45250B0E1BEA5942003A862A /* ModelNodeVersion.swift */; };
 		4526B11B1B8501EB0023C626 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4526B10D1B8501DF0023C626 /* LLDBWrapper.framework */; };
 		4526B1251B8503370023C626 /* LLDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526B1241B8503370023C626 /* LLDBModel.swift */; };
 		452B915B1B8556E600EAB775 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452B914B1B8556E000EAB775 /* EonilFileSystemEvents.framework */; };
@@ -209,6 +213,11 @@
 		4513728F1B7ED71700ED9829 /* MulticastingStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MulticastingStorage.xcodeproj; path = ../../submodules/MulticastingStorage/MulticastingStorage.xcodeproj; sourceTree = "<group>"; };
 		451373401B7ED91000ED9829 /* SearchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		451373461B7ED93700ED9829 /* DebuggingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingModel.swift; sourceTree = "<group>"; };
+		45250ABC1BEA2AA1003A862A /* Note.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Note.md; sourceTree = "<group>"; };
+		45250ACD1BEA2D93003A862A /* GlobalModelLock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalModelLock.swift; sourceTree = "<group>"; };
+		45250B0A1BEA576B003A862A /* StateVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateVersion.swift; sourceTree = "<group>"; };
+		45250B0C1BEA584D003A862A /* xEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = xEvents.swift; sourceTree = "<group>"; };
+		45250B0E1BEA5942003A862A /* ModelNodeVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelNodeVersion.swift; sourceTree = "<group>"; };
 		4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		4526B1241B8503370023C626 /* LLDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBModel.swift; sourceTree = "<group>"; };
 		452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = ../../submodules/FileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
@@ -405,9 +414,12 @@
 		4554C8601B7DBEF7004987CC /* EditorModel */ = {
 			isa = PBXGroup;
 			children = (
+				45250ABC1BEA2AA1003A862A /* Note.md */,
 				45FF2EEE1BDCF46E001577B7 /* Globals.swift */,
+				45250ACD1BEA2D93003A862A /* GlobalModelLock.swift */,
 				45C87DC11B8BF7F600E75A5B /* ImmediateCommandModel.swift */,
 				45BFAED61BDE5F29006D2193 /* ModelType.swift */,
+				45250B0A1BEA576B003A862A /* StateVersion.swift */,
 				456497F81BE2E42500F9163F /* Command */,
 				45BFAEE51BDF02B8006D2193 /* EventAndNotification */,
 				455978EA1B885F6900626F6B /* (unused) */,
@@ -429,6 +441,7 @@
 				455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */,
 				4554CAB11B7DCD3A004987CC /* PreferenceModel.swift */,
 				45B1852C1B7F7ADC004E3B28 /* ModelNode.swift */,
+				45250B0E1BEA5942003A862A /* ModelNodeVersion.swift */,
 				452EDACE1B93C4C800E1E049 /* Operation.swift */,
 				4526B1231B8503280023C626 /* (specific tool models) */,
 				450C0FB51B7F69C70048E7A1 /* (external tools) */,
@@ -512,6 +525,7 @@
 			children = (
 				45BFAEF21BDF0550006D2193 /* Note.md */,
 				45BFAEE81BDF02B8006D2193 /* Events.swift */,
+				45250B0C1BEA584D003A862A /* xEvents.swift */,
 				45BFAEE71BDF02B8006D2193 /* EventType.swift */,
 				45BFAEE61BDF02B8006D2193 /* EventMulticast.swift */,
 				45BFAEE91BDF02B8006D2193 /* MulticastStationWithGlobalNotification.swift */,
@@ -762,6 +776,7 @@
 				45C87DC21B8BF7F600E75A5B /* ImmediateCommandModel.swift in Sources */,
 				4554C9C01B7DC106004987CC /* WorkspaceModel.swift in Sources */,
 				450C0FBC1B7F69DD0048E7A1 /* CargoTool.swift in Sources */,
+				45250B0D1BEA584D003A862A /* xEvents.swift in Sources */,
 				45BFAED71BDE5F29006D2193 /* ModelType.swift in Sources */,
 				45B1855C1B802458004E3B28 /* WorkspaceModelExtensions.swift in Sources */,
 				456497FC1BE2E42500F9163F /* CommandQueue.swift in Sources */,
@@ -789,6 +804,7 @@
 				4526B1251B8503370023C626 /* LLDBModel.swift in Sources */,
 				452B91751B855D5100EAB775 /* TOMLQueryTool.swift in Sources */,
 				45BFAEEC1BDF02B8006D2193 /* EventMulticast.swift in Sources */,
+				45250ACE1BEA2D93003A862A /* GlobalModelLock.swift in Sources */,
 				455978EC1B897E0300626F6B /* SwitchableValueStorage2.swift in Sources */,
 				45EF9BB81BD28440009E3787 /* WorkspaceItemTree.swift in Sources */,
 				45B5EC551B91BAF500C4247A /* WorkspaceItemPointer.swift in Sources */,
@@ -798,12 +814,14 @@
 				456497FB1BE2E42500F9163F /* xCommand.swift in Sources */,
 				4564980D1BE2E45600F9163F /* Command.swift in Sources */,
 				45B185241B7F7626004E3B28 /* BuildModel.swift in Sources */,
+				45250B0B1BEA576B003A862A /* StateVersion.swift in Sources */,
 				45B185661B8048CA004E3B28 /* StringStreamProcessing.swift in Sources */,
 				45B5EC571B91C66400C4247A /* WorkspaceItemSerialization.swift in Sources */,
 				455978E91B884E8200626F6B /* SelectionModel2.swift in Sources */,
 				45B185641B804833004E3B28 /* ShellTaskExecutionController.swift in Sources */,
 				451373471B7ED93700ED9829 /* DebuggingModel.swift in Sources */,
 				45FF2EEF1BDCF46E001577B7 /* Globals.swift in Sources */,
+				45250B0F1BEA5943003A862A /* ModelNodeVersion.swift in Sources */,
 				4554C9BD1B7DC106004987CC /* ApplicationModel.swift in Sources */,
 				45DDABD81B82395300F85E06 /* FoundationExtensions.swift in Sources */,
 				45BFAEF01BDF02B8006D2193 /* Notification.swift in Sources */,

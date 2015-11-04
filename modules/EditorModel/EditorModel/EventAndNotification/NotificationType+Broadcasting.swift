@@ -111,7 +111,7 @@ private func _deregister<N: NotificationType, T: AnyObject>(type: N.Type, _ obje
 	let	typeID	=	ObjectIdentifier(type)
 	let	mc	=	_mappings[typeID]! as! MulticastStation<N>
 	mc.deregister(object)
-	if mc.observerCount == 0 {
+	if mc.numberOfObservers == 0 {
 		_mappings[typeID]	=	nil
 	}
 }
@@ -127,7 +127,7 @@ private func _deregister<N: NotificationType>(type: N.Type, _ identifier: Object
 	let	typeID	=	ObjectIdentifier(type)
 	let	mc	=	_mappings[typeID]! as! MulticastStation<N>
 	mc.deregister(identifier)
-	if mc.observerCount == 0 {
+	if mc.numberOfObservers == 0 {
 		_mappings[typeID]	=	nil
 	}
 }

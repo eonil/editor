@@ -289,8 +289,8 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 
 	private func _snapshotFileURL() -> NSURL {
 		Debug.assertMainThread()
-		assert(workspace.location.value != nil)
-		return	workspace.location.value!.URLByAppendingPathComponent("Workspace.EditorFileList")
+		assert(workspace.location != nil)
+		return	workspace.location!.URLByAppendingPathComponent("Workspace.EditorFileList")
 	}
 
 	///

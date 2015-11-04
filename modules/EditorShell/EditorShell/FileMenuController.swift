@@ -50,16 +50,8 @@ class FileMenuController: SessionProtocol {
 			self?._handleClosingCurrentWorkspace()
 		}
 
-		let	apply	=	{ [weak self] in
-			assert(self != nil)
-			self?._applyEnabledStates()
-		}
-
-		_applyEnabledStates()
-		ApplicationModel.Event.Notification.register(self, FileMenuController._processNotification)
-//		ApplicationUIController.Event.register(self) { [weak self] in self?.processNotification($0) }
-//		applicationUI!.currentWorkspaceUI2.onDidBeginValue.register(self, FileMenuController._didBeginCurrentWorkspaceUI)
-//		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self), handler: apply)
+		_applyModelState()
+		ApplicationModel.Event.Notification.register	(self, FileMenuController._process)
 
 		new.model	=	model!
 		new.run()
@@ -76,52 +68,37 @@ class FileMenuController: SessionProtocol {
 		new.halt()
 		new.model	=	nil
 
-//		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
-//		applicationUI!.currentWorkspaceUI2.onDidBeginValue.deregister(self)
 		ApplicationModel.Event.Notification.deregister(self)
-		_applyEnabledStates()
 
 		closeWorkspace.clickHandler	=	nil
 	}
 
-	private func _processNotification(notification: ApplicationModel.Event.Notification) {
-		switch notification.event {
-		case .DidChangeCurrentWorkspace:
-			_applyEnabledStates()
-		case .WillChangeCurrentWorkspace:
-			_applyEnabledStates()
-		}
+	private func _process(n: ApplicationModel.Event.Notification) {
+		_applyModelState()
 	}
 
-//	private func _didBeginCurrentWorkspaceUI(workspaceUI: WorkspaceUIProtocol?) {
-//		if let workspaceUI = workspaceUI {
-//
-//		}
-//	}
-//	private func _willEndCurrentWorkspaceUI(workspaceUI: WorkspaceUIProtocol?) {
-//		if let workspaceUI = workspaceUI {
-//
-//		}
-//	}
+
+
+
+
 
 	///
 
-	private func _applyEnabledStates() {
+	private func _applyModelState() {
 		print("_applyEnabledStates")
 		assert(model != nil)
-		closeWorkspace.enabled		=	_resolveCurrentWorkspaceUI() != nil
-//		closeWorkspace.enabled		=	applicationUI!.currentWorkspaceUI != nil
+		closeWorkspace.enabled		=	model!.currentWorkspace != nil
 	}
 	private func _handleClosingCurrentWorkspace() {
 		assert(model != nil)
-		assert(_resolveCurrentWorkspaceUI() != nil)
+		assert(model!.currentWorkspace != nil)
 		if let curWS = model!.currentWorkspace {
-			assert(model!.workspaces.containsValueByReferentialIdentity(curWS) == true)
+			assert(model!.workspaces.contains(curWS) == true)
 //			model!.deselectCurrentWorkspace()
 //			assert(model!.currentWorkspace.value !== curWS)
 //			assert(model!.workspaces.contains(curWS) == true)
 			model!.closeWorkspace(curWS)
-			assert(model!.workspaces.containsValueByReferentialIdentity(curWS) == false)
+			assert(model!.workspaces.contains(curWS) == false)
 		}
 		else {
 			fatalError()
@@ -165,26 +142,14 @@ class FileNewMenuController: SessionProtocol {
 			])
 	}
 	func run() {
+		_applyModelState()
 		workspace.clickHandler	=	{ [weak self] in self!._clickWorkspace() }
 		file.clickHandler	=	{ [weak self] in self!._clickFile() }
 		folder.clickHandler	=	{ [weak self] in self!._clickFolder() }
-
-		_reapplyEnability()
-//		model!.defaultWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-//			self?._reapplyEnability()
-//		}
-
-		ApplicationModel.Event.Notification.register(self, FileNewMenuController._processNotification)
-		model!.event.register(self, FileNewMenuController._processNotification)
-		applicationUI!.currentWorkspaceUI2.onDidBeginValue.register(self, FileNewMenuController._onDidBeginCurrentWorkspaceUI)
-		applicationUI!.currentWorkspaceUI2.onWillEndValue.register(self, FileNewMenuController._onWillEndCurrentWorkspacEUI)
+		ApplicationModel.Event.Notification.register		(self, FileNewMenuController._process)
 	}
 	func halt() {
-		applicationUI!.currentWorkspaceUI2.onWillEndValue.deregister(self)
-		applicationUI!.currentWorkspaceUI2.onDidBeginValue.deregister(self)
-//		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
-//		_reapplyEnability()
-
+		ApplicationModel.Event.Notification.deregister		(self)
 		folder.clickHandler	=	nil
 		file.clickHandler	=	nil
 		workspace.clickHandler	=	nil
@@ -192,17 +157,19 @@ class FileNewMenuController: SessionProtocol {
 
 	///
 
-	private func _processNotification(notification: ApplicationModel.Event.Notification) {
-
-	}
-	private func _onDidBeginCurrentWorkspaceUI(workspaceUI: WorkspaceUIProtocol?) {
-		_reapplyEnability()
-	}
-	private func _onWillEndCurrentWorkspacEUI(workspaceUI: WorkspaceUIProtocol?) {
+	private func _process(n: ApplicationModel.Event.Notification) {
+		_applyModelState()
 	}
 
-	private func _reapplyEnability() {
-		let	hasSelectedFile	=	_resolveCurrentWorkspaceModel() != nil && _resolveCurrentWorkspaceModel()!.location.value != nil // && model!.defaultWorkspace.value!.file.selection.
+
+
+
+
+
+	///
+
+	private func _applyModelState() {
+		let	hasSelectedFile	=	model!.currentWorkspace != nil && model!.currentWorkspace!.location != nil // && model!.defaultWorkspace.value!.file.selection.
 		workspace.enabled	=	true
 		file.enabled		=	hasSelectedFile
 		folder.enabled		=	hasSelectedFile
@@ -211,12 +178,12 @@ class FileNewMenuController: SessionProtocol {
 	private func _clickWorkspace() {
 		Dialogue.runSavingWorkspace({ [weak self] (u: NSURL?) -> () in
 			if let u = u {
-				self?.model!.createAndOpenWorkspaceAtURL(u)
+				try! self?.model!.createAndOpenWorkspaceAtURL(u)
 			}
 		})
 	}
 	private func _clickFile() {
-		checkAndReportFailureToDevelopers(_resolveCurrentWorkspaceModel() != nil)
+		checkAndReportFailureToDevelopers(model!.currentWorkspace != nil)
 
 		// TODO:
 		// 1. Select location by asking user with file open panel.
@@ -225,7 +192,7 @@ class FileNewMenuController: SessionProtocol {
 		_testCreatingFile1()
 	}
 	private func _clickFolder() {
-		checkAndReportFailureToDevelopers(_resolveCurrentWorkspaceModel() != nil)
+		checkAndReportFailureToDevelopers(model!.currentWorkspace != nil)
 
 		// TODO:
 		// 1. Select location by asking user with file open panel.
@@ -237,7 +204,7 @@ class FileNewMenuController: SessionProtocol {
 	///
 
 	private func _testCreatingFile1() {
-		guard let ws = _resolveCurrentWorkspaceModel() else {
+		guard let ws = model!.currentWorkspace else {
 			fatalError("This shouldn't be called if current workspace is `nil`.")
 		}
 
@@ -293,7 +260,7 @@ class FileNewMenuController: SessionProtocol {
 	}
 
 	private func _testCreatingFolder1() {
-		if let ws = _resolveCurrentWorkspaceModel() {
+		if let ws = model!.currentWorkspace {
 			do {
 				let	n	=	FileNodeModel(name: "yyY", isGroup: true)
 				try ws.file.searchNodeAtPath(WorkspaceItemPath(parts: ["src"]))!.subnodes.append(n)
@@ -304,10 +271,6 @@ class FileNewMenuController: SessionProtocol {
 				Dialogue.runErrorAlertModally(error)
 			}
 		}
-	}
-
-	private func _resolveCurrentWorkspaceModel() -> WorkspaceModel? {
-		return	applicationUI!.currentWorkspaceUI2.value?.model
 	}
 }
 class FileOpenMenuController: SessionProtocol {

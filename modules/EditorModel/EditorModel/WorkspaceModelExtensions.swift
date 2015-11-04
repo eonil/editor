@@ -12,7 +12,7 @@ extension WorkspaceModel: CustomStringConvertible {
 	public var description: String {
 		get {
 			let	ptr	=	unsafeAddressOf(self)
-			let	addr	=	self.location.value?.absoluteString ?? "(nil)"
+			let	addr	=	self.location?.absoluteString ?? "(nil)"
 			return	"(WorkspaceModel: \(ptr), \(addr)))"
 		}
 	}

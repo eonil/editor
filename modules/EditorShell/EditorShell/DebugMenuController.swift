@@ -44,152 +44,48 @@ class DebugMenuController: SessionProtocol {
 	func run() {
 		assert(model != nil)
 
-		func getExecution() -> DebuggingTargetExecutionModel? {
-			return	_resolveCurrentWorkspaceModel()?.debug.currentTarget.value?.execution.value
+		let	getExecution	=	{ [weak self] () -> DebuggingTargetExecutionModel? in
+			assert(self != nil)
+			assert(self!.model!.currentWorkspace?.debug.currentTarget != nil)
+			return	self!.model!.currentWorkspace?.debug.currentTarget?.execution.value
 		}
 
-		pause.clickHandler	=	{ [weak self] in
-			assert(self?._resolveCurrentWorkspaceModel()?.debug.currentTarget.value !== nil)
-			getExecution()?.pause()
-		}
-		resume.clickHandler	=	{ [weak self] in
-			assert(self?._resolveCurrentWorkspaceModel()?.debug.currentTarget.value !== nil)
-			getExecution()?.resume()
-		}
-		stop.clickHandler	=	{ [weak self] in
-			assert(self?._resolveCurrentWorkspaceModel()?.debug.currentTarget.value !== nil)
-			getExecution()?.halt()
-		}
-		stepInto.clickHandler	=	{ [weak self] in
-			assert(self?._resolveCurrentWorkspaceModel()?.debug.currentTarget.value !== nil)
-			getExecution()?.stepInto()
-		}
-		stepOut.clickHandler	=	{ [weak self] in
-			assert(self?._resolveCurrentWorkspaceModel()?.debug.currentTarget.value !== nil)
-			getExecution()?.stepOut()
-		}
-		stepOver.clickHandler	=	{ [weak self] in
-			assert(self?._resolveCurrentWorkspaceModel()?.debug.currentTarget.value !== nil)
-			getExecution()?.stepOver()
-		}
+		pause.clickHandler	=	{ getExecution()?.pause() }
+		resume.clickHandler	=	{ getExecution()?.resume() }
+		stop.clickHandler	=	{ getExecution()?.halt() }
+		stepInto.clickHandler	=	{ getExecution()?.stepInto() }
+		stepOut.clickHandler	=	{ getExecution()?.stepOut() }
+		stepOver.clickHandler	=	{ getExecution()?.stepOver() }
 
-		applicationUI!.currentWorkspaceUI2.onDidBeginValue.register(self, DebugMenuController._didBeginCurrentWorkspace)
-		applicationUI!.currentWorkspaceUI2.onWillEndValue.register(self, DebugMenuController._willEndCurrentWorkspace)
 
-//		model!.currentWorkspace.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-//			if let ws = self?.model!.currentWorkspace.value {
-//				self?._didInsertCurrentWorkspace(ws)
-//			}
-//		}
-//		model!.currentWorkspace.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-//			if let ws = self?.model!.currentWorkspace.value {
-//				self?._willDeleteCurrentWorkspace(ws)
-//			}
-//		}
+		DebuggingTargetExecutionModel.Event.Notification.register	(self, DebugMenuController._processDebuggingTargetExecutionNotification)
 	}
 	func halt() {
 		assert(model != nil)
-
-//		model!.currentWorkspace.deregisterWillSet(ObjectIdentifier(self))
-//		model!.currentWorkspace.deregisterDidSet(ObjectIdentifier(self))
-
-		applicationUI!.currentWorkspaceUI2.onWillEndValue.deregister(self)
-		applicationUI!.currentWorkspaceUI2.onDidBeginValue.deregister(self)
+		DebuggingTargetExecutionModel.Event.Notification.deregister	(self)
 	}
+
+
+
+
+
+
+
 
 	///
 
-	private func _didBeginCurrentWorkspace(workspaceUI: WorkspaceUIProtocol?) {
-		if let workspaceUI = workspaceUI {
-			workspaceUI.model!.debug.currentTarget.onDidBeginValue.register(self, DebugMenuController._didBeginCurrentTarget)
-			workspaceUI.model!.debug.currentTarget.onWillEndValue.register(self, DebugMenuController._willEndCurrentTarget)
+	private func _processDebuggingTargetExecutionNotification(notification: DebuggingTargetExecutionModel.Event.Notification) {
+		guard notification.sender.target.debugging.workspace === model!.currentWorkspace else {
+			return
 		}
-	}
-	private func _willEndCurrentWorkspace(workspaceUI: WorkspaceUIProtocol?) {
-		if let workspaceUI = workspaceUI {
-			workspaceUI.model!.debug.currentTarget.onWillEndValue.deregister(self)
-			workspaceUI.model!.debug.currentTarget.onDidBeginValue.deregister(self)
-		}
-	}
 
-	private func _didBeginCurrentTarget(target: DebuggingTargetModel?) {
-		if let target = target {
-			target.execution.registerDidSet(ObjectIdentifier(self)) { [weak self, weak target] in
-				precondition(target != nil)
-				assert(self != nil)
-				if let e = target?.execution.value {
-					self?._didInsertExecution(e)
-				}
-			}
-			target.execution.registerWillSet(ObjectIdentifier(self)) { [weak self, weak target] in
-				precondition(target != nil)
-				assert(self != nil)
-				if let e = target?.execution.value {
-					self?._willDeleteExecution(e)
-				}
-			}
-		}
-	}
-	private func _willEndCurrentTarget(target: DebuggingTargetModel?) {
-		if let target = target {
-			target.execution.deregisterWillSet(ObjectIdentifier(self))
-			target.execution.deregisterDidSet(ObjectIdentifier(self))
-		}
-	}
-//	private func _didInsertCurrentWorkspace(workspace: WorkspaceModel) {
-////		workspace.debug.currentTarget.registerDidSet(ObjectIdentifier(self)) { [weak self, weak workspace] in
-////			precondition(workspace != nil)
-////			assert(self != nil)
-////			if let t = workspace?.debug.currentTarget.value {
-////				self?._didInsertCurrentDebuggingTarget(t)
-////			}
-////		}
-////		workspace.debug.currentTarget.registerWillSet(ObjectIdentifier(self)) { [weak self, weak workspace] in
-////			precondition(workspace != nil)
-////			assert(self != nil)
-////			if let t = workspace?.debug.currentTarget.value {
-////				self?._willDeleteCurrentDebuggingTarget(t)
-////			}
-////		}
-//	}
-//	private func _willDeleteCurrentWorkspace(workspace: WorkspaceModel) {
-////		workspace.debug.currentTarget.deregisterWillSet(ObjectIdentifier(self))
-////		workspace.debug.currentTarget.deregisterDidSet(ObjectIdentifier(self))
-//	}
-
-//	private func _didInsertCurrentDebuggingTarget(target: DebuggingTargetModel) {
-//		target.execution.registerDidSet(ObjectIdentifier(self)) { [weak self, weak target] in
-//			precondition(target != nil)
-//			assert(self != nil)
-//			if let e = target?.execution.value {
-//				self?._didInsertExecution(e)
-//			}
-//		}
-//		target.execution.registerWillSet(ObjectIdentifier(self)) { [weak self, weak target] in
-//			precondition(target != nil)
-//			assert(self != nil)
-//			if let e = target?.execution.value {
-//				self?._willDeleteExecution(e)
-//			}
-//		}
-//	}
-//
-//	private func _willDeleteCurrentDebuggingTarget(target: DebuggingTargetModel) {
-//		target.execution.deregisterWillSet(ObjectIdentifier(self))
-//		target.execution.deregisterDidSet(ObjectIdentifier(self))
-//	}
-
-	private func _didInsertExecution(execution: DebuggingTargetExecutionModel) {
-		_reapplyCurrentDebuggingTargetRunnableCommands()
-		execution.runnableCommands.registerDidSet(ObjectIdentifier(self)) { [weak self] in self?._reapplyCurrentDebuggingTargetRunnableCommands() }
-	}
-	private func _willDeleteExecution(execution: DebuggingTargetExecutionModel) {
-		execution.runnableCommands.deregisterDidSet(ObjectIdentifier(self))
 		_reapplyCurrentDebuggingTargetRunnableCommands()
 	}
+
+
 
 	private func _reapplyCurrentDebuggingTargetRunnableCommands() {
-		let	commands	=	_resolveCurrentWorkspaceModel()!.debug.currentTarget.value!.execution.value!.runnableCommands.value
+		let	commands	=	model!.currentWorkspace!.debug.currentTarget!.execution.value!.runnableCommands.value
 		pause.enabled		=	commands.contains(DebuggingCommand.Pause)
 		resume.enabled		=	commands.contains(DebuggingCommand.Resume)
 		stop.enabled		=	commands.contains(DebuggingCommand.Halt)
@@ -198,11 +94,6 @@ class DebugMenuController: SessionProtocol {
 		stepOver.enabled	=	commands.contains(DebuggingCommand.StepOver)
 	}
 
-	///
-
-	private func _resolveCurrentWorkspaceModel() -> WorkspaceModel? {
-		return	applicationUI!.currentWorkspaceUI2.value?.model
-	}
 }
 
 

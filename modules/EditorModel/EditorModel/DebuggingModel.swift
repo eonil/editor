@@ -57,6 +57,15 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 	public let	selection	=	ExecutionStateSelectionModel()
 //	public let	inspection	=	ExecutionStateInspectionModel()
 
+	public var currentFrame: LLDBFrame? {
+		willSet {
+			Event.WillChangeCurrentTarget.dualcastWithSender(self)
+		}
+		didSet {
+			Event.DidChangeCurrentTarget.dualcastWithSender(self)
+		}
+	}
+
 	///
 
 	public var debugger: LLDBDebugger {
@@ -78,14 +87,13 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 //		}
 //	}
 
-	public var targets: ArrayStorage<DebuggingTargetModel> {
-		get {
-			return	_targets
+	public private(set) var targets: [DebuggingTargetModel] = []
+	public private(set) var currentTarget: DebuggingTargetModel? {
+		willSet {
+			Event.WillChangeCurrentTarget.dualcastWithSender(self)
 		}
-	}
-	public var currentTarget: ValueStorage2<DebuggingTargetModel?> {
-		get {
-			return	_currentTarget
+		didSet {
+			Event.DidChangeCurrentTarget.dualcastWithSender(self)
 		}
 	}
 
@@ -101,30 +109,28 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 
 		let	m	=	DebuggingTargetModel(LLDBTarget: t)
 		m.owner		=	self
-		_targets.insert([m], atIndex: _targets.array.startIndex)
+		_insertTargetWithEventCasting(m, at: targets.startIndex)
 		return	m
 	}
 	public func deleteTarget(target: DebuggingTargetModel) {
 		target.owner	=	nil
-		if let idx = _targets.array.indexOfValueByReferentialIdentity(target) {
+		if let idx = targets.indexOfValueByReferentialIdentity(target) {
 			_lldbDebugger.deleteTarget(target.LLDBObject)
-			_targets.delete(idx...idx)
+			_removeTargetWithEventCasting(at: idx)
 		}
 	}
 
 	public func selectTarget(target: DebuggingTargetModel) {
-		_currentTarget.value	=	target
+		currentTarget	=	target
 	}
 	public func deselectTarget(target: DebuggingTargetModel) {
-		_currentTarget.value	=	nil
+		currentTarget	=	nil
 	}
 
 	///
 
 //	private let	_stackFrames		=	MutableArrayStorage<StackFrame>([])
 //	private let	_frameVariables		=	MutableArrayStorage<FrameVariable>([])
-	private let	_targets		=	MutableArrayStorage<DebuggingTargetModel>([])
-	private let	_currentTarget		=	MutableValueStorage2<DebuggingTargetModel?>(nil)
 
 	private let	_lldbDebugger		=	LLDBDebugger()
 	private let	_eventWaiter		=	DebuggingEventWaiter()
@@ -148,6 +154,22 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 //	public class FrameVariable {
 //	}
 
+
+
+
+
+
+
+	private func _insertTargetWithEventCasting(target: DebuggingTargetModel, at index: Int) {
+		Event.WillChangeCurrentTarget.dualcastWithSender(self)
+		targets.insert(target, atIndex: index)
+		Event.DidChangeCurrentTarget.dualcastWithSender(self)
+	}
+	private func _removeTargetWithEventCasting(at index: Int) {
+		Event.WillChangeCurrentTarget.dualcastWithSender(self)
+		targets.removeAtIndex(index)
+		Event.DidChangeCurrentTarget.dualcastWithSender(self)
+	}
 }
 
 

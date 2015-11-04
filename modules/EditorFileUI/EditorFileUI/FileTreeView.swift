@@ -263,7 +263,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 			func getName() -> String {
 				let path = model.resolvePath()
 				if path == WorkspaceItemPath.root {
-					return	model.tree.workspace.location.value?.lastPathComponent ?? "(????)"
+					return	model.tree.workspace.location?.lastPathComponent ?? "(????)"
 				}
 				else {
 					assert(path.parts.last != nil)

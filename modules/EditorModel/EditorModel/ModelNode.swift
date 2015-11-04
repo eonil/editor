@@ -82,6 +82,10 @@ public class ModelNode: ModelNodeSessionProtocol {
 
 	///
 
+	public internal(set) var version	=	StateVersion()
+
+	///
+
 	internal var isRooted: Bool {
 		get {
 			return	_isRooted

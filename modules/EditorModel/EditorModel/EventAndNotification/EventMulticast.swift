@@ -49,8 +49,10 @@ internal extension BroadcastableEventType where Self == Sender.Event {
 	/// follows.
 	internal func dualcastWithSender(sender: Sender) {
 //		sender.event.cat(self)
+		GlobalModelLock.lockBeforeDispatchingEvent()
 		sender.event._event.cast(self)
 		Notification(sender, self).broadcast()
+		GlobalModelLock.unlockAfterDispatchingEvent()
 	}
 }
 

@@ -42,23 +42,27 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 
 	///
 
-	public private(set) var workspaces: [WorkspaceModel] = [] {
+	public private(set) var workspaces: ObjectSet<WorkspaceModel> = [] {
 //		willSet {
 //			assert(workspaces.areAllElementsUniqueReferences())
 //		}
 		didSet {
-			assert(workspaces.areAllElementsUniqueReferences())
+//			assert(workspaces.areAllElementsUniqueReferences())
 		}
 	}
 	public private(set) weak var currentWorkspace: WorkspaceModel? {
 		willSet {
 //			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
-			Event.WillChangeCurrentWorkspace(workspace: currentWorkspace).dualcastWithSender(self)
+			if let currentWorkspace = currentWorkspace {
+				Event.WillEndCurrentWorkspace(currentWorkspace).dualcastWithSender(self)
+			}
 //			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
 		}
 		didSet {
 			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
-			Event.DidChangeCurrentWorkspace(workspace: currentWorkspace).dualcastWithSender(self)
+			if let currentWorkspace = currentWorkspace {
+				Event.DidBeginCurrentWorkspace(currentWorkspace).dualcastWithSender(self)
+			}
 			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
 		}
 	}
@@ -105,17 +109,19 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	///		A URL to a file path that will become a workspace.
 	///		This location will be created by `cargo` and must
 	///		not exist at the point of calling.
-	public func createAndOpenWorkspaceAtURL(location: NSURL) {
+	public func createAndOpenWorkspaceAtURL(location: NSURL) throws {
 		do {
-			let	ws	=	WorkspaceModel()
-			ws.owner	=	self
-			ws.locate(location)
-			ws.tryCreating()
-			workspaces.append(ws)
-			Debug.log("did create and add a workspace \(ws), ws count = \(workspaces.count)")
-			Event.DidAddWorkspace(workspace: ws).dualcastWithSender(self)
+			try mutateWithGlobalCheck {
+				let	ws	=	WorkspaceModel()
+				ws.owner	=	self
+				ws.location	=	location
+				try ws.construct()
+
+				_addWorkspace(ws)
+				Debug.log("did create and add a workspace \(ws), ws count = \(workspaces.count)")
+			}
 		}
-		assert(workspaces.areAllElementsUniqueReferences())
+//		assert(workspaces.areAllElementsUniqueReferences())
 	}
 
 	/// You can supply any URL, and a workspace will be open only if
@@ -124,31 +130,33 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	/// selected.
 	public func openWorkspaceAtURL(u: NSURL) {
 		do {
-			Debug.log("will open a workspace at \(u), ws count = \(workspaces.count)")
-			for ws in workspaces {
-				if ws.location.value == u {
-					Debug.log("a workspace already exist for address \(u), adding cancelled, and will select it, ws count = \(workspaces.count)")
-					//				if let u1 = currentWorkspace.value?.location.value {
-					//					if u1 != u {
-					////						reselectCurrentWorkspace(ws)
-					////						deselectCurrentWorkspace()
-					////						selectCurrentWorkspace(ws)
-					//					}
-					//				}
-					return
+			mutateWithGlobalCheck {
+				Debug.log("will open a workspace at \(u), ws count = \(workspaces.count)")
+				for ws in workspaces {
+					if ws.location == u {
+						Debug.log("a workspace already exist for address \(u), adding cancelled, and will select it, ws count = \(workspaces.count)")
+						//				if let u1 = currentWorkspace.value?.location.value {
+						//					if u1 != u {
+						////						reselectCurrentWorkspace(ws)
+						////						deselectCurrentWorkspace()
+						////						selectCurrentWorkspace(ws)
+						//					}
+						//				}
+						return
+					}
 				}
+
+				///
+
+				let	ws	=	WorkspaceModel()
+				ws.owner	=	self
+				ws.location	=	u
+
+				_addWorkspace(ws)
+				Debug.log("did open by adding a workspace \(ws), ws count = \(workspaces.count)")
 			}
-
-			///
-
-			let	ws	=	WorkspaceModel()
-			ws.owner	=	self
-			ws.locate(u)
-			workspaces.append(ws)
-			Debug.log("did open by adding a workspace \(ws), ws count = \(workspaces.count)")
-			Event.DidAddWorkspace(workspace: ws).dualcastWithSender(self)
 		}
-		assert(workspaces.areAllElementsUniqueReferences())
+//		assert(workspaces.areAllElementsUniqueReferences())
 	}
 
 	/// Closes a workspace.
@@ -158,23 +166,24 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	///		Can be either of current or non-current workspace.
 	///
 	public func closeWorkspace(ws: WorkspaceModel) {
-		assert(workspaces.containsValueByReferentialIdentity(ws))
+		assert(workspaces.contains(ws))
 		assert(currentWorkspace !== ws)
-		do {
-			Debug.log("will remove a workspace \(ws), ws count = \(workspaces.count)")
+		mutateWithGlobalCheck {
+			do {
+				Debug.log("will remove a workspace \(ws), ws count = \(workspaces.count)")
 
-			if currentWorkspace === ws {
-				currentWorkspace	=	nil
+				if currentWorkspace === ws {
+					currentWorkspace	=	nil
+				}
+
+				_removeWorkspace(ws)
+				ws.location	=	nil
+				ws.owner	=	nil
+
+				Debug.log("did remove a workspace \(ws), ws count = \(workspaces.count)")
 			}
-
-			Event.WillRemoveWorkspace(workspace: ws).dualcastWithSender(self)
-			workspaces.removeValueByReferentialIdentity(ws)
-			ws.delocate()
-			ws.owner	=	nil
-
-			Debug.log("did remove a workspace \(ws), ws count = \(workspaces.count)")
+			//		assert(workspaces.areAllElementsUniqueReferences())
 		}
-		assert(workspaces.areAllElementsUniqueReferences())
 	}
 
 	/// Selects another workspace.
@@ -183,11 +192,13 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	/// This limitation is set by Cocoa AppKit because any next window
 	/// will be selected automatically.
 	public func reselectCurrentWorkspace(workspace: WorkspaceModel?) {
-		assert(workspace == nil || workspaces.containsValueByReferentialIdentity(workspace!))
+		assert(workspace == nil || workspaces.contains(workspace!))
 		assert(workspace != nil || workspaces.count == 1)
-		do {
-			if currentWorkspace !== workspace {
-				currentWorkspace	=	workspace
+		mutateWithGlobalCheck {
+			do {
+				if currentWorkspace !== workspace {
+					currentWorkspace	=	workspace
+				}
 			}
 		}
 	}
@@ -196,6 +207,19 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	
 	private let	_preference		=	PreferenceModel()
 //	private let	_selection		=	SelectionModel2()
+
+
+
+
+
+	private func _addWorkspace(workspace: WorkspaceModel) {
+		workspaces.insert(workspace)
+		Event.DidAddWorkspace(workspace)
+	}
+	private func _removeWorkspace(workspace: WorkspaceModel) {
+		Event.WillRemoveWorkspace(workspace)
+		workspaces.remove(workspace)
+	}
 }
 
 

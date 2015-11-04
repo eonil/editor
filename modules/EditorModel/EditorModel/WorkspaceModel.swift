@@ -27,6 +27,10 @@ import EditorCommon
 ///
 public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelType {
 
+
+
+
+
 	///
 
 	public let event	=	EventMulticast<Event>()
@@ -85,72 +89,57 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	/// For instance, user can move workspace directory to another
 	/// location, and we can just replace location without re-creating
 	/// whole workspace UI.
-	public var location: ValueStorage<NSURL?> {
-		get {
-			return	_location
+	public var location: NSURL? {
+		willSet {
+			Event.WillRelocate(from: location, to: newValue).dualcastWithSender(self)
+			_willLocate()
+		}
+		didSet {
+			_didLocate()
+			Event.DidRelocate(from: oldValue, to: location).dualcastWithSender(self)
 		}
 	}
 
-	public var allProjects: ArrayStorage<ProjectModel> {
-		get {
-			return	_projects
-		}
-	}
-	public var currentProject: ValueStorage<ProjectModel?> {
-		get {
-			return	_currentProject
-		}
-	}
+	public private(set) var allProjects: [ProjectModel] = []
+	public private(set) var currentProject: ProjectModel?
 
 	///
-
-	/// Specifies location of this workspace.
-	///
-	/// This method is transactional. Rollbacks any changes on error.
-	public func locate(u: NSURL) {
-		assert(_location.value == nil)
-		let	oldLocation	=	_location.value
-		_location.value	=	u
-
-//		do {
-//			try file.restoreSnapshot()
-//		}
-//		catch let error {
-//			_location.value	=	oldLocation
-//			throw	error
-//		}
-	}
-	public func delocate() {
-		assert(_location.value != nil)
-//		file.storeSnapshot()
-		_location.value	=	nil
-	}
 
 	/// Creates a new workspace file structure at current location
 	/// if there's none. This method does not guarantee proper creation,
 	/// and can fail for any reason.
-	public func tryCreating() {
-		assert(_location.value != nil)
-		let	u	=	_location.value!
-		cargo.runNewAtURL(u)
+	public func construct() throws {
+		assert(location != nil)
+		cargo.runNewAtURL(location!)
 	}
+//	public func demolish() {
+//	}
 
 	public func insertProjectWithRootURL(url: NSURL) {
-		assert(_location.value != nil, "You cannot manage projects on a workspace with no location.")
-		let	p	=	ProjectModel()
-		p.owner		=	self
-		_projects
+		assert(location != nil, "You cannot manage projects on a workspace with no location.")
+		markUnimplemented()
+//		let	p	=	ProjectModel()
+//		p.owner		=	self
+//		_projects
 	}
 	public func deleteProject(project: ProjectModel) {
-		assert(_location.value != nil, "You cannot manage projects on a workspace with no location.")
+		assert(location != nil, "You cannot manage projects on a workspace with no location.")
 		markUnimplemented()
 	}
 
+
+
+
+
+
+
+
 	///
 
-	private let	_location	=	MutableValueStorage<NSURL?>(nil)
-	private let	_projects	=	MutableArrayStorage<ProjectModel>([])
-	private let	_currentProject	=	MutableValueStorage<ProjectModel?>(nil)
+	private func _willLocate() {
+	}
+	private func _didLocate() {
+	}
 }
 
 
@@ -164,7 +153,6 @@ public class WorkspaceUIModel: ModelSubnode<WorkspaceModel> {
 	public let	consolePane	=	MutableValueStorage<Bool>(false)
 
 }
-
 
 
 

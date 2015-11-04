@@ -73,8 +73,8 @@ public class BuildModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 //		assert(workspace.currentProject.value != nil)
 //		assert(workspace.currentProject.value!.rootURL.value != nil)
 
-		assert(workspace.location.value != nil)
-		if let u =  workspace.location.value {
+		assert(workspace.location != nil)
+		if let u =  workspace.location {
 			workspace.cargo.runBuildAtURL(u)
 			assert(workspace.cargo.state.value == .Running)
 		}

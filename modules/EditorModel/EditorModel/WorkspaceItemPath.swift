@@ -118,9 +118,9 @@ public extension WorkspaceItemPath {
 //	}
 
 	public func absoluteFileURL(`for` workspace: WorkspaceModel) -> NSURL {
-		assert(workspace.location.value!.fileURL == true)
+		assert(workspace.location!.fileURL == true)
 
-		var	u	=	workspace.location.value!
+		var	u	=	workspace.location!
 		for p in _parts {
 			u	=	u.URLByAppendingPathComponent(p)
 		}

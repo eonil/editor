@@ -9,23 +9,33 @@
 import Foundation
 import EditorCommon
 
+
+// In C/C++ or Rust, we can use pointers to identify a value-type storage.
+// But Swift does not support such thing, so we have to figure out something else.
+// And of course, there's no good way.
+//
+// Having an explicit identity using reference-type will double-up object tree depth.
+// So we just don't try to identify them using pointers. We just identify them using 
+// names manually.
+
+
+
+
 public extension ApplicationModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	ApplicationModel
-		case DidAddWorkspace(workspace: WorkspaceModel)
-		case WillRemoveWorkspace(workspace: WorkspaceModel)
-		case DidChangeCurrentWorkspace(workspace: WorkspaceModel?)
-		case WillChangeCurrentWorkspace(workspace: WorkspaceModel?)
-
-		case Debug(DebuggingModel.Event.Notification)
+		case DidAddWorkspace(WorkspaceModel)
+		case WillRemoveWorkspace(WorkspaceModel)
+		case DidBeginCurrentWorkspace(WorkspaceModel)
+		case WillEndCurrentWorkspace(WorkspaceModel)
 	}
 }
 
 public extension WorkspaceModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	WorkspaceModel
-		case WillRelocate(from: NSURL, to: NSURL)
-		case DidRelocate(from: NSURL, to: NSURL)
+		case WillRelocate(from: NSURL?, to: NSURL?)
+		case DidRelocate(from: NSURL?, to: NSURL?)
 	}
 }
 
@@ -34,6 +44,7 @@ public extension FileTreeModel {
 		public typealias	Sender	=	FileTreeModel
 		case DidCreateRoot(root: FileNodeModel)
 		case WillDeleteRoot(root: FileNodeModel)
+		case NodeEvent(sender: FileNodeModel, event: FileNodeModel.Event)
 	}
 }
 
@@ -62,16 +73,22 @@ public extension BuildModel {
 public extension DebuggingModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	DebuggingModel
-		case WillChangeCurrentTarget(target: DebuggingTargetModel?)
-		case DidChangeCurrentTarget(target: DebuggingTargetModel?)
+		case WillChangeCurrentTarget
+		case DidChangeCurrentTarget
+		case WillChangeTargetList
+		case DidChangeTargetList
+		case WillChangeSelection
+		case DidChangeSelection
+		case TargetEvent(sender: DebuggingTargetModel, event: DebuggingTargetModel.Event)
 	}
 }
 
 public extension DebuggingTargetModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	DebuggingTargetModel
-		case WillChangeExecution(execution: DebuggingTargetExecutionModel?)
-		case DidChangeExecution(execution: DebuggingTargetExecutionModel?)
+		case StartExecution(execution: DebuggingTargetExecutionModel)
+		case EndExecution(execution: DebuggingTargetExecutionModel)
+		case ExecutionEvent(sender: DebuggingTargetExecutionModel, event: DebuggingTargetExecutionModel.Event)
 	}
 }
 

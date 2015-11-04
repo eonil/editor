@@ -36,20 +36,13 @@ class VariableTreeUIController: CommonViewController {
 	private func _install() {
 		assert(model != nil)
 		view.addSubview(_treeView)
-
-		_didSetFrame()
-		model!.selection.frame.registerDidSet(ObjectIdentifier(self)) { [weak self] in self!._didSetFrame() }
-		model!.selection.frame.registerWillSet(ObjectIdentifier(self)) { [weak self] in self!._willSetFrame() }
-		model!.event.register(ObjectIdentifier(self)) { [weak self] in self?._handleEvent($0) }
+		DebuggingModel.Event.Notification.register			(self, VariableTreeUIController._process)
+		DebuggingTargetExecutionModel.Event.Notification.register	(self, VariableTreeUIController._processDebuggingTargetExecutionModelEventNotification)
 	}
 	private func _deinstall() {
 		assert(model != nil)
-
-		model!.event.deregister(ObjectIdentifier(self))
-		model!.selection.frame.deregisterDidSet(ObjectIdentifier(self))
-		model!.selection.frame.deregisterWillSet(ObjectIdentifier(self))
-		_willSetFrame()
-
+		DebuggingTargetExecutionModel.Event.Notification.deregister	(self)
+		DebuggingModel.Event.Notification.deregister			(self)
 		_treeView.removeFromSuperview()
 	}
 	private func _layout() {
@@ -58,25 +51,32 @@ class VariableTreeUIController: CommonViewController {
 
 	///
 
-	private func _didSetFrame() {
-		if let frame = model!.selection.frame.value {
-			_treeView.reconfigure(frame)
+	private func _process(n: DebuggingModel.Event.Notification) {
+		guard n.sender === model else {
+			return
+		}
+
+		switch n.event {
+		case .DidChangeSelection(_):
+			_applyFrameSelection()
+		default:
+			break
 		}
 	}
-	private func _willSetFrame() {
-		if let _ = model!.selection.frame.value {
-			_treeView.reconfigure(nil)
-		}
+	private func _processDebuggingTargetExecutionModelEventNotification(notification: DebuggingTargetExecutionModel.Event.Notification) {
+
 	}
 
-	private func _handleEvent(event: LLDBEvent) {
+
+
+
+	private func _applyFrameSelection() {
 		if let frame = model!.selection.frame.value {
 			_treeView.reconfigure(frame)
 		}
 		else {
 			_treeView.reconfigure(nil)
 		}
-
 	}
 }
 

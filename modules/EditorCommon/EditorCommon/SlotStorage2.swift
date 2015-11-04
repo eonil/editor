@@ -1,83 +1,102 @@
+////
+////  SlotStorage.swift
+////  EditorCommon
+////
+////  Created by Hoon H. on 2015/10/25.
+////  Copyright © 2015 Eonil. All rights reserved.
+////
 //
-//  MulticastingStorageExtensions.swift
-//  EditorCommon
+//import Foundation
 //
-//  Created by Hoon H. on 2015/10/25.
-//  Copyright © 2015 Eonil. All rights reserved.
+//public class MutableValueStorage2<T>: ValueStorage2<T> {
+//	public override init(_ value: T) {
+//		super.init(value)
+//	}
 //
-
-import Foundation
-
-public class MutableValueStorage2<T>: ValueStorage2<T> {
-	public override init(_ value: T) {
-		super.init(value)
-	}
-
-	public override var value: T {
-		willSet {
-		}
-		didSet {
-		}
-	}
-}
-public class ValueStorage2<T> {
-	private init(_ value: T) {
-		Debug.assertMainThread()
-		_value					=	value
-		_onDidBeginValue.onDidRegister		=	{ [weak self] in $0(self!.value) }
-		_onWillEndValue.onWillDeregister	=	{ [weak self] in $0(self!.value) }
-	}
-	deinit {
-		Debug.assertMainThread()
-	}
-
-	///
-
-	public private(set) var value: T {
-		get {
-			Debug.assertMainThread()
-			return	_value
-		}
-		set {
-			Debug.assertMainThread()
-			assert(_isMutating == false)
-			_isMutating	=	true
-			do {
-				_onWillEndValue.cast(value)
-				_value	=	newValue
-				_onDidBeginValue.cast(value)
-			}
-			_isMutating	=	false
-		}
-	}
-	public var onDidBeginValue: MulticastChannel<T> {
-		get {
-			Debug.assertMainThread()
-			return	_onDidBeginValue
-		}
-	}
-	public var onWillEndValue: MulticastChannel<T> {
-		get {
-			Debug.assertMainThread()
-			return	_onDidBeginValue
-		}
-	}
-
-	///
-
-	private var	_value			:	T
-	private var	_isMutating		=	false
-	private let	_onDidBeginValue	=	MulticastStation<T>()
-	private let	_onWillEndValue		=	MulticastStation<T>()
-}
-
-
-//class AAA {
-//	func aaa(i: Int) {
-//		let	m	=	MulticastChannel<Int>()
-//		m.register(self, AAA.aaa)
+//	public override var value: T {
+//		willSet {
+//		}
+//		didSet {
+//		}
 //	}
 //}
+//public class ValueStorage2<T> {
+//	private init(_ value: T) {
+//		Debug.assertMainThread()
+//		_value					=	value
+//		_onDidBeginValue.onDidRegister		=	{ [weak self] in $0(self!.value) }
+//		_onWillEndValue.onWillDeregister	=	{ [weak self] in $0(self!.value) }
+//	}
+//	deinit {
+//		Debug.assertMainThread()
+//	}
+//
+//	///
+//
+//	public private(set) var value: T {
+//		get {
+//			Debug.assertMainThread()
+//			return	_value
+//		}
+//		set {
+//			Debug.assertMainThread()
+//			assert(_isMutating == false)
+//			_isMutating	=	true
+//			do {
+//				_onWillEndValue.cast(value)
+//				_value	=	newValue
+//				_onDidBeginValue.cast(value)
+//			}
+//			_isMutating	=	false
+//		}
+//	}
+//	public var onDidBeginValue: MulticastChannel<T> {
+//		get {
+//			Debug.assertMainThread()
+//			return	_onDidBeginValue
+//		}
+//	}
+//	public var onWillEndValue: MulticastChannel<T> {
+//		get {
+//			Debug.assertMainThread()
+//			return	_onDidBeginValue
+//		}
+//	}
+//
+//	///
+//
+//	private var	_value			:	T
+//	private var	_isMutating		=	false
+//	private let	_onDidBeginValue	=	MulticastStation<T>()
+//	private let	_onWillEndValue		=	MulticastStation<T>()
+//}
+//
+//
+////class AAA {
+////	func aaa(i: Int) {
+////		let	m	=	MulticastChannel<Int>()
+////		m.register(self, AAA.aaa)
+////	}
+////}
+//
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 public class MulticastStation<Parameter>: MulticastChannel<Parameter> {
@@ -116,7 +135,7 @@ public class MulticastChannel<Parameter> {
 
 	///
 
-	public var observerCount: Int {
+	public var numberOfObservers: Int {
 		get {
 			return	_list.count
 		}
