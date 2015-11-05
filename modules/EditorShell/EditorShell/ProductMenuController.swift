@@ -15,7 +15,6 @@ import EditorModel
 
 class ProductMenuController: SessionProtocol {
 
-	weak var applicationUI	:	ApplicationUIProtocol?
 	weak var model		:	ApplicationModel?
 
 	///
@@ -39,7 +38,6 @@ class ProductMenuController: SessionProtocol {
 	let	stop		=	_menuItem("Stop", shortcut: Command+".")
 
 	func run() {
-		assert(applicationUI != nil)
 		assert(model != nil)
 		_applyEnabledStates()
 
@@ -52,7 +50,6 @@ class ProductMenuController: SessionProtocol {
 		stop.clickHandler	=	{ [weak self] in self?._stopAnyOnCurrentWorkspace() }
 	}
 	func halt() {
-		assert(applicationUI != nil)
 		assert(model != nil)
 
 		stop.clickHandler	=	nil
@@ -99,7 +96,6 @@ class ProductMenuController: SessionProtocol {
 		_applyEnabledStates()
 	}
 	private func _applyEnabledStates() {
-		assert(applicationUI != nil)
 		assert(model != nil)
 
 		let	ws	=	model!.currentWorkspace
@@ -119,7 +115,7 @@ class ProductMenuController: SessionProtocol {
 		guard let workspace = model!.currentWorkspace else {
 			fatalError()
 		}
-		guard let target = workspace.debug.currentTarget else {
+		guard workspace.debug.currentTarget == nil else {
 			fatalError()
 		}
 

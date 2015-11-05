@@ -12,7 +12,6 @@ import EditorModel
 
 class DebugMenuController: SessionProtocol {
 
-	weak var applicationUI: ApplicationUIProtocol?
 	weak var model: ApplicationModel?
 
 	///

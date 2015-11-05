@@ -155,7 +155,7 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, 
 //		_eventWaiter.halt()
 //		_lldbProcess.removeListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
 //		_eventWaiter.onEvent	=	nil
-		target.debugging.event.deregister(ObjectIdentifier(self))
+//		target.debugging.event.deregister(ObjectIdentifier(self))
 		_reapplyRunnableCommandState()
 	}
 

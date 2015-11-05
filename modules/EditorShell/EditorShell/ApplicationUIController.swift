@@ -12,7 +12,7 @@ import MulticastingStorage
 import EditorCommon
 import EditorModel
 
-public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIProtocol {
+public class ApplicationUIController: SessionProtocol {
 
 	public init() {
 
@@ -32,7 +32,6 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 		assert(model != nil)
 
 		_installMenu()
-//		_installAgents()
 		_installCocoaNotificationHandlers()
 		_installModelObservers()
 	}
@@ -40,9 +39,19 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 		assert(model != nil)
 		_deinstallModelObservers()
 		_deinstallCocoaNotificaitonHandlers()
-//		_deinstallAgents()
 		_deinstallMenu()
 	}
+
+
+
+
+
+
+
+
+
+
+
 
 	///
 
@@ -60,14 +69,12 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 			NSApplication.sharedApplication().mainMenu!.addItem(item)
 		}
 
-		_menuUI.applicationUI	=	self
 		_menuUI.model		=	model!
 		_menuUI.run()
 	}
 	private func _deinstallMenu() {
 		_menuUI.halt()
 		_menuUI.model		=	nil
-		_menuUI.applicationUI	=	nil
 
 		let	menus	=	Set(_menuUI.topLevelMenus)
 		var	kills	=	[NSMenuItem]()
@@ -121,8 +128,7 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 				return
 			}
 
-			self!.model!.reselectCurrentWorkspace(workspaceUI.model!)
-//			Event.DidBeginCurrentWorkspaceUI.dualcastWithSender(self!)
+			self!.model!.currentWorkspace	=	workspaceUI.model!
 		}
 		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification) { [weak self] (n: NSNotification) -> () in
 			guard let window = n.object as? NSWindow else {
@@ -131,13 +137,11 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 			guard self != nil else {
 				return
 			}
-			guard let workspaceUI = window.windowController as? WorkspaceWindowUIController else {
+			guard let ui = window.windowController as? WorkspaceWindowUIController else {
 				return
 			}
 
-//			Event.WillEndCurrentWorkspaceUI.dualcastWithSender(self!)
-			self!.model!.reselectCurrentWorkspace(workspaceUI.model!)
-//			self!._currentWorkspaceUI.value	=	nil
+			self!.model!.currentWorkspace	=	nil
 		}
 	}
 	private func _deinstallCocoaNotificaitonHandlers() {
@@ -161,9 +165,6 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 
 	///
 
-	private var	_workspaceModelToUIMap	=	[ObjectIdentifier: WorkspaceWindowUIController]()		//<	ObjectIdentifier(WorkspaceModel) -> WorkspaceWindowUIController
-	private var	_workspaceModelToDocMap	=	[ObjectIdentifier: WorkspaceDocument]()				//<	ObjectIdentifier(WorkspaceModel) -> WorkspaceDocument
-
 
 
 
@@ -179,17 +180,14 @@ public class ApplicationUIController: ModelType, SessionProtocol, ApplicationUIP
 		wc.model	=	workspace
 		doc.addWindowController(wc)
 
-		_workspaceModelToUIMap[ObjectIdentifier(workspace)]	=	wc
-
 		wc.run()
 	}
 	private func _deleteWorkspaceUIForWorkspace(workspace: WorkspaceModel) {
-		assert(_workspaceModelToUIMap[ObjectIdentifier(workspace)] != nil)
-		if let wsUI = _workspaceModelToUIMap[ObjectIdentifier(workspace)] {
-			wsUI.halt()
-			assert(wsUI.document is WorkspaceDocument)
-			NSDocumentController.sharedDocumentController().removeDocument(wsUI.document! as! WorkspaceDocument)
+		guard let (doc, uic) = _findUIForModel(workspace) else {
+			fatalError("Cannot find UI objects for the workspace `\(workspace)`.")
 		}
+		uic.halt()
+		NSDocumentController.sharedDocumentController().removeDocument(doc)
 	}
 
 	private func _findUIForModel(workspace: WorkspaceModel) -> (document: WorkspaceDocument, windowController: WorkspaceWindowUIController)? {

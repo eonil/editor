@@ -15,11 +15,6 @@ import EditorModel
 
 class FileMenuController: SessionProtocol {
 
-	weak var applicationUI: ApplicationUIProtocol? {
-		didSet {
-			new.applicationUI	=	applicationUI
-		}
-	}
 	weak var model: ApplicationModel?
 
 	///
@@ -126,7 +121,6 @@ class FileMenuController: SessionProtocol {
 
 
 class FileNewMenuController: SessionProtocol {
-	weak var applicationUI: ApplicationUIProtocol?
 	weak var model: ApplicationModel?
 
 	let	menu		:	NSMenu

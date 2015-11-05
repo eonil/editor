@@ -40,30 +40,43 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 
 	public let event	=	EventMulticast<Event>()
 
+
+
+
+
+
+
+
+
+
+
+	
 	///
 
+	/// Though Cocoa does not allow no-main-window state,
+	/// we can have such state virtually. Anyway, by the environment,
+	/// another workspace expected to be selected immediately if there's
+	/// one.
 	public private(set) var workspaces: ObjectSet<WorkspaceModel> = [] {
 //		willSet {
 //			assert(workspaces.areAllElementsUniqueReferences())
 //		}
 		didSet {
+			assert(currentWorkspace === nil || workspaces.contains(currentWorkspace!))
 //			assert(workspaces.areAllElementsUniqueReferences())
 		}
 	}
-	public private(set) weak var currentWorkspace: WorkspaceModel? {
+	public weak var currentWorkspace: WorkspaceModel? {
 		willSet {
-//			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
 			if let currentWorkspace = currentWorkspace {
+				assert(workspaces.contains(currentWorkspace))
 				Event.WillEndCurrentWorkspace(currentWorkspace).dualcastWithSender(self)
 			}
-//			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
 		}
 		didSet {
-			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
 			if let currentWorkspace = currentWorkspace {
 				Event.DidBeginCurrentWorkspace(currentWorkspace).dualcastWithSender(self)
 			}
-			assert(isUniquelyReferencedNonObjC(&currentWorkspace))
 		}
 	}
 
@@ -111,7 +124,7 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	///		not exist at the point of calling.
 	public func createAndOpenWorkspaceAtURL(location: NSURL) throws {
 		do {
-			try mutateWithGlobalCheck {
+//			try mutateWithGlobalCheck {
 				let	ws	=	WorkspaceModel()
 				ws.owner	=	self
 				ws.location	=	location
@@ -119,7 +132,7 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 
 				_addWorkspace(ws)
 				Debug.log("did create and add a workspace \(ws), ws count = \(workspaces.count)")
-			}
+//			}
 		}
 //		assert(workspaces.areAllElementsUniqueReferences())
 	}
@@ -130,7 +143,7 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	/// selected.
 	public func openWorkspaceAtURL(u: NSURL) {
 		do {
-			mutateWithGlobalCheck {
+//			mutateWithGlobalCheck {
 				Debug.log("will open a workspace at \(u), ws count = \(workspaces.count)")
 				for ws in workspaces {
 					if ws.location == u {
@@ -154,7 +167,7 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 
 				_addWorkspace(ws)
 				Debug.log("did open by adding a workspace \(ws), ws count = \(workspaces.count)")
-			}
+//			}
 		}
 //		assert(workspaces.areAllElementsUniqueReferences())
 	}
@@ -167,8 +180,8 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	///
 	public func closeWorkspace(ws: WorkspaceModel) {
 		assert(workspaces.contains(ws))
-		assert(currentWorkspace !== ws)
-		mutateWithGlobalCheck {
+//		assert(currentWorkspace !== ws)
+//		mutateWithGlobalCheck {
 			do {
 				Debug.log("will remove a workspace \(ws), ws count = \(workspaces.count)")
 
@@ -183,25 +196,20 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 				Debug.log("did remove a workspace \(ws), ws count = \(workspaces.count)")
 			}
 			//		assert(workspaces.areAllElementsUniqueReferences())
-		}
+//		}
 	}
 
-	/// Selects another workspace.
-	/// 
-	/// Current workspace cannot be nil if there's any open workspace.
-	/// This limitation is set by Cocoa AppKit because any next window
-	/// will be selected automatically.
-	public func reselectCurrentWorkspace(workspace: WorkspaceModel?) {
-		assert(workspace == nil || workspaces.contains(workspace!))
-		assert(workspace != nil || workspaces.count == 1)
-		mutateWithGlobalCheck {
-			do {
-				if currentWorkspace !== workspace {
-					currentWorkspace	=	workspace
-				}
-			}
-		}
-	}
+
+
+
+
+
+
+
+
+
+
+
 
 	///
 	
@@ -214,12 +222,14 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 
 	private func _addWorkspace(workspace: WorkspaceModel) {
 		workspaces.insert(workspace)
-		Event.DidAddWorkspace(workspace)
+		Event.DidAddWorkspace(workspace).dualcastWithSender(self)
 	}
 	private func _removeWorkspace(workspace: WorkspaceModel) {
-		Event.WillRemoveWorkspace(workspace)
+		Event.WillRemoveWorkspace(workspace).dualcastWithSender(self)
 		workspaces.remove(workspace)
 	}
+
+
 }
 
 

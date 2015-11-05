@@ -12,7 +12,7 @@ import EditorModel
 import EditorCommon
 import EditorUICommon
 
-public final class WorkspaceWindowUIController: CommonWindowController, SessionProtocol, WorkspaceUIProtocol {
+public final class WorkspaceWindowUIController: CommonWindowController, SessionProtocol {
 
 	public override init() {
 		super.init()
