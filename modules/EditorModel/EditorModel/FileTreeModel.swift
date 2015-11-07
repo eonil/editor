@@ -498,11 +498,14 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 
 
 
-/// NO LAZY LOADING RIGHT NOW. UNIMPLEMENTED YET.
+/// Represents a file node in file tree.
 ///
-/// You must manually `loadSubnodes` subnodes before accesing `subnode` property.
-/// Also you must manually call `unloadSubodes` when you don't use them anymore
-/// to save memory.
+/// This is essentially just a workspace item node with performing
+/// expected file-system operations.
+/// Though this `throws` on any file-system operation failure, 
+/// file-system state will become undefined state after failture.
+/// Also, as file-system is a remote system, it's impossible to
+/// synchronize file-system operations. Always prepare for failure.
 ///
 public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModelType {
 
