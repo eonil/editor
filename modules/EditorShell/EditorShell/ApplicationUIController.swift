@@ -55,7 +55,8 @@ public class ApplicationUIController: SessionProtocol {
 
 	///
 
-	private let	_menuUI			=	MainMenuController()
+//	private let	_menuUI			=	MainMenuController()
+	private let	_menuUI			=	MenuController2()
 	private var	_isRunning		=	false
 
 	private func _installMenu() {
@@ -63,29 +64,29 @@ public class ApplicationUIController: SessionProtocol {
 		//	But it doesn't. Anyway this is beta SDK, and
 		//	I will retry again with final release...
 
-		for menu in _menuUI.topLevelMenus {
-			let	item	=	NSMenuItem(title: "", action: nil, keyEquivalent: "")
-			item.submenu	=	menu
-			NSApplication.sharedApplication().mainMenu!.addItem(item)
-		}
-
-		_menuUI.model		=	model!
-		_menuUI.run()
+//		for menu in _menuUI.topLevelMenus {
+//			let	item	=	NSMenuItem(title: "", action: nil, keyEquivalent: "")
+//			item.submenu	=	menu
+//			NSApplication.sharedApplication().mainMenu!.addItem(item)
+//		}
+//
+//		_menuUI.model		=	model!
+//		_menuUI.run()
 	}
 	private func _deinstallMenu() {
-		_menuUI.halt()
-		_menuUI.model		=	nil
+//		_menuUI.halt()
+//		_menuUI.model		=	nil
 
-		let	menus	=	Set(_menuUI.topLevelMenus)
-		var	kills	=	[NSMenuItem]()
-		for item in NSApplication.sharedApplication().mainMenu!.itemArray {
-			if item.submenu != nil && menus.contains(item.submenu!) {
-				kills.append(item)
-			}
-		}
-		for item in kills {
-			NSApplication.sharedApplication().mainMenu!.removeItem(item)
-		}
+//		let	menus	=	Set(_menuUI.topLevelMenus)
+//		var	kills	=	[NSMenuItem]()
+//		for item in NSApplication.sharedApplication().mainMenu!.itemArray {
+//			if item.submenu != nil && menus.contains(item.submenu!) {
+//				kills.append(item)
+//			}
+//		}
+//		for item in kills {
+//			NSApplication.sharedApplication().mainMenu!.removeItem(item)
+//		}
 	}
 
 	private func _installModelObservers() {

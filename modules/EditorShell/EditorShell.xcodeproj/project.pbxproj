@@ -30,6 +30,8 @@
 		4554CA271B7DC386004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA231B7DC377004987CC /* EditorModel.framework */; };
 		4554CA281B7DC386004987CC /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA0D1B7DC34B004987CC /* EditorUICommon.framework */; };
 		455978D81B87593400626F6B /* MonitorChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455978D71B87593400626F6B /* MonitorChain.swift */; };
+		4598A75D1BEDDA5F00B0F3C8 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4598A75C1BEDDA5F00B0F3C8 /* MainMenuController.swift */; };
+		4598A75F1BEDDA7E00B0F3C8 /* MenuTreeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4598A75E1BEDDA7E00B0F3C8 /* MenuTreeModel.swift */; };
 		45A0B2711BDC669200889B32 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0B2701BDC669200889B32 /* FoundationExtensions.swift */; };
 		45A0B2731BDC69F400889B32 /* UINotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0B2721BDC69F400889B32 /* UINotifications.swift */; };
 		45B185391B7F866B004E3B28 /* ProductMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185381B7F866B004E3B28 /* ProductMenuController.swift */; };
@@ -160,6 +162,8 @@
 		4554CA101B7DC34D004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		4554CA1C1B7DC377004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
 		455978D71B87593400626F6B /* MonitorChain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitorChain.swift; sourceTree = "<group>"; };
+		4598A75C1BEDDA5F00B0F3C8 /* MainMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
+		4598A75E1BEDDA7E00B0F3C8 /* MenuTreeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTreeModel.swift; sourceTree = "<group>"; };
 		45A0B2701BDC669200889B32 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		45A0B2721BDC69F400889B32 /* UINotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINotifications.swift; sourceTree = "<group>"; };
 		45B185381B7F866B004E3B28 /* ProductMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMenuController.swift; sourceTree = "<group>"; };
@@ -264,6 +268,7 @@
 			children = (
 				45250B1B1BEB7875003A862A /* Protocols.swift */,
 				45FF2F0F1BDD0B2E001577B7 /* Command.swift */,
+				4598A7501BEDDA5500B0F3C8 /* MainMenu */,
 				45B1852E1B7F865B004E3B28 /* (menu components) */,
 				45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */,
 				45250B1D1BEB982F003A862A /* UICommand.swift */,
@@ -324,6 +329,15 @@
 				4554CA251B7DC377004987CC /* EditorModelTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		4598A7501BEDDA5500B0F3C8 /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+				4598A75C1BEDDA5F00B0F3C8 /* MainMenuController.swift */,
+				4598A75E1BEDDA7E00B0F3C8 /* MenuTreeModel.swift */,
+			);
+			path = MainMenu;
 			sourceTree = "<group>";
 		};
 		45B1852E1B7F865B004E3B28 /* (menu components) */ = {
@@ -598,6 +612,8 @@
 				45A0B2711BDC669200889B32 /* FoundationExtensions.swift in Sources */,
 				455978D81B87593400626F6B /* MonitorChain.swift in Sources */,
 				45250B201BEB9A74003A862A /* UICommandCenter.swift in Sources */,
+				4598A75D1BEDDA5F00B0F3C8 /* MainMenuController.swift in Sources */,
+				4598A75F1BEDDA7E00B0F3C8 /* MenuTreeModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
