@@ -59,10 +59,10 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 
 	public var currentFrame: LLDBFrame? {
 		willSet {
-			Event.WillChangeCurrentTarget.dualcastWithSender(self)
+			Event.WillMutate.dualcastWithSender(self)
 		}
 		didSet {
-			Event.DidChangeCurrentTarget.dualcastWithSender(self)
+			Event.DidMutate.dualcastWithSender(self)
 		}
 	}
 
@@ -90,10 +90,10 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 	public private(set) var targets: [DebuggingTargetModel] = []
 	public private(set) var currentTarget: DebuggingTargetModel? {
 		willSet {
-			Event.WillChangeCurrentTarget.dualcastWithSender(self)
+			Event.WillMutate.dualcastWithSender(self)
 		}
 		didSet {
-			Event.DidChangeCurrentTarget.dualcastWithSender(self)
+			Event.DidMutate.dualcastWithSender(self)
 		}
 	}
 
@@ -138,12 +138,22 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 	///
 
 	private func _install() {
+		assert(currentTarget == nil)
+		assert(targets.count == 0)
+
 		waiter.owner			=	self
 		selection.owner			=	self
 //		inspection.owner		=	self
 
 	}
 	private func _deinstall() {
+		if currentTarget != nil {
+			currentTarget	=	nil
+		}
+		for t in targets {
+			deleteTarget(t)
+		}
+
 //		inspection.owner		=	nil
 		selection.owner			=	nil
 		waiter.owner			=	nil
@@ -161,14 +171,14 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 
 
 	private func _insertTargetWithEventCasting(target: DebuggingTargetModel, at index: Int) {
-		Event.WillChangeCurrentTarget.dualcastWithSender(self)
+		Event.WillMutate.dualcastWithSender(self)
 		targets.insert(target, atIndex: index)
-		Event.DidChangeCurrentTarget.dualcastWithSender(self)
+		Event.DidMutate.dualcastWithSender(self)
 	}
 	private func _removeTargetWithEventCasting(at index: Int) {
-		Event.WillChangeCurrentTarget.dualcastWithSender(self)
+		Event.WillMutate.dualcastWithSender(self)
 		targets.removeAtIndex(index)
-		Event.DidChangeCurrentTarget.dualcastWithSender(self)
+		Event.DidMutate.dualcastWithSender(self)
 	}
 }
 

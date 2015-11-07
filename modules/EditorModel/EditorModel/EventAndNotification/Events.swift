@@ -77,32 +77,37 @@ public extension BuildModel {
 public extension DebuggingModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	DebuggingModel
-		case WillChangeCurrentTarget
-		case DidChangeCurrentTarget
-		case WillChangeTargetList
-		case DidChangeTargetList
-		case WillChangeSelection
-		case DidChangeSelection
-		case TargetEvent(sender: DebuggingTargetModel, event: DebuggingTargetModel.Event)
+//		case WillChangeTargetList
+//		case DidChangeTargetList
+//		case WillChangeSelection
+//		case DidChangeSelection
+//		case TargetEvent(sender: DebuggingTargetModel, event: DebuggingTargetModel.Event)
+		case WillMutate
+		case DidMutate
 	}
 }
 
 public extension DebuggingTargetModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	DebuggingTargetModel
-		case StartExecution(execution: DebuggingTargetExecutionModel)
-		case EndExecution(execution: DebuggingTargetExecutionModel)
-		case ExecutionEvent(sender: DebuggingTargetExecutionModel, event: DebuggingTargetExecutionModel.Event)
+//		case DidBecomeCurrent
+//		case WillResignCurrent
+		case WillMutate
+		case DidMutate
 	}
 }
 
 public extension DebuggingTargetExecutionModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	DebuggingTargetExecutionModel
-		case WillChangeState(state: DebuggingTargetExecutionModel.State)
-		case DidChangeState(state: DebuggingTargetExecutionModel.State)
-		case WillChangeRunnableCommands(commands: Set<DebuggingCommand>)
-		case DidChangeRunnableCommands(commands: Set<DebuggingCommand>)
+//		case DidStart
+//		case WillEnd
+//		case WillChangeState(state: DebuggingTargetExecutionModel.State)
+//		case DidChangeState(state: DebuggingTargetExecutionModel.State)
+//		case WillChangeRunnableCommands(commands: Set<DebuggingCommand>)
+//		case DidChangeRunnableCommands(commands: Set<DebuggingCommand>)
+		case WillMutate
+		case DidMutate
 	}
 }
 

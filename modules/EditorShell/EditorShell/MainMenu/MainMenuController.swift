@@ -17,24 +17,31 @@ import EditorModel
 
 
 
-enum MainMenuCommand {
-	case NewSubfileInCurrentFolderItemInCurrentWorkspace
-	case NewSubfolderInCurrentFolderItemInCurrentWorkspace
-	case OpenWorkspaceByBrowsingIt
-	case CloseCurrentWorkspace
-
-	case ProductRun
-	case ProductBuild
-	case ProductClean
-	case ProductStop
-
-	case DebugPause
-	case DebugResume
-	case DebugHalt
-	case DebugStepInto
-	case DebugStepOut
-	case DebugStepOver
-}
+//enum MainMenuCommand {
+//	case FileNewWorkspace
+//	case FileNewSubfileInCurrentFolderItemInCurrentWorkspace
+//	case FileNewSubfolderInCurrentFolderItemInCurrentWorkspace
+//	case FileOpenWorkspaceByBrowsingIt
+//	case FileOpenClearRecentWorkspaces
+//	case FileCloseCurrentWorkspace
+//
+//	case ProductRun
+//	case ProductBuild
+//	case ProductClean
+//	case ProductStop
+//
+//	case DebugPause
+//	case DebugResume
+//	case DebugHalt
+//	case DebugStepInto
+//	case DebugStepOut
+//	case DebugStepOver
+//}
+//enum MainMenuCategory {
+//	case PlainCommand
+//	case RecentFileItem
+//	case WindowItem
+//}
 
 
 
@@ -42,47 +49,55 @@ enum MainMenuCommand {
 
 
 class MainMenuController {
+	weak var model: ApplicationModel?
+
 	let	file			=	_instantiateGroupMenuItem("File")
 	let	fileNew			=	_instantiateGroupMenuItem("New")
-	let	fileNewFile		=	_instantiateCommandBroadcastingMenuItem("File...", command: .NewSubfileInCurrentFolderItemInCurrentWorkspace)
-	let	fileNewFolder		=	_instantiateCommandBroadcastingMenuItem("Folder...", command: .NewSubfolderInCurrentFolderItemInCurrentWorkspace)
+	let	fileNewWorkspace	=	_instantiateCommandMenuItem("Worksace...",		Command+Control+"N"		)
+	let	fileNewFile		=	_instantiateCommandMenuItem("File...",			Command+"N"			)
+	let	fileNewFolder		=	_instantiateCommandMenuItem("Folder...",		Command+Alternate+"N"		)
 	let	fileOpen		=	_instantiateGroupMenuItem("Open")
-	let	fileOpenWorkspae	=	_instantiateCommandBroadcastingMenuItem("Workspace...", command: .OpenWorkspaceByBrowsingIt)
-	let	fileCloseWorkspace	=	_instantiateCommandBroadcastingMenuItem("Close Workspace", command: .CloseCurrentWorkspace)
+	let	fileOpenWorkspace	=	_instantiateCommandMenuItem("Workspace...", 		Command+"O"			)
+	let	fileOpenClearWSHistory	=	_instantiateCommandMenuItem("Clear Recent Workspaces",	nil	 			)
+	let	fileCloseWorkspace	=	_instantiateCommandMenuItem("Close Workspace",		Command+"W"			)
 
 	let	product			=	_instantiateGroupMenuItem("Product")
-	let	productRun		=	_instantiateCommandBroadcastingMenuItem("Run", command: .ProductRun)
-	let	productBuild		=	_instantiateCommandBroadcastingMenuItem("Build", command: .ProductBuild)
-	let	productClean		=	_instantiateCommandBroadcastingMenuItem("Clean", command: .ProductClean)
-	let	productStop		=	_instantiateCommandBroadcastingMenuItem("Stop", command: .ProductStop)
+	let	productRun		=	_instantiateCommandMenuItem("Run",			Command+"R"			)
+	let	productBuild		=	_instantiateCommandMenuItem("Build",			Command+"B"			)
+	let	productClean		=	_instantiateCommandMenuItem("Clean",			Command+"K"			)
+	let	productStop		=	_instantiateCommandMenuItem("Stop",			Command+"."			)
 
 	let	debug			=	_instantiateGroupMenuItem("Debug")
-	let	debugPause		=	_instantiateCommandBroadcastingMenuItem("Pause", command: .DebugPause)
-	let	debugResume		=	_instantiateCommandBroadcastingMenuItem("Resume", command: .DebugResume)
-	let	debugHalt		=	_instantiateCommandBroadcastingMenuItem("Halt", command: .DebugHalt)
+	let	debugPause		=	_instantiateCommandMenuItem("Pause",			Command+Control+"Y"		)
+	let	debugResume		=	_instantiateCommandMenuItem("Resume",			Command+Control+"Y"		)
+	let	debugHalt		=	_instantiateCommandMenuItem("Halt",			nil				)
 
-	let	debugStepInto		=	_instantiateCommandBroadcastingMenuItem("Step Into", command: .DebugStepInto)
-	let	debugStepOut		=	_instantiateCommandBroadcastingMenuItem("Step Out", command: .DebugStepOut)
-	let	debugStepOver		=	_instantiateCommandBroadcastingMenuItem("Step Over", command: .DebugStepOver)
+	let	debugStepInto		=	_instantiateCommandMenuItem("Step Into",		_legacyFunctionKeyShortcut(NSF6FunctionKey))
+	let	debugStepOut		=	_instantiateCommandMenuItem("Step Out",			_legacyFunctionKeyShortcut(NSF7FunctionKey))
+	let	debugStepOver		=	_instantiateCommandMenuItem("Step Over",		_legacyFunctionKeyShortcut(NSF8FunctionKey))
 
 	init() {
 		file.addSubmenuItems([
 			fileNew,
 			fileOpen,
+			_instantiateSeparatorMenuItem(),
 			fileCloseWorkspace,
 			])
 		fileNew.addSubmenuItems([
+			fileNewWorkspace,
 			fileNewFile,
 			fileNewFolder,
 			])
 		fileOpen.addSubmenuItems([
-			fileOpenWorkspae,
+			fileOpenWorkspace,
+			fileOpenClearWSHistory,
 			])
 
 		product.addSubmenuItems([
 			productRun,
 			productBuild,
 			productClean,
+			_instantiateSeparatorMenuItem(),
 			productStop,
 			])
 
@@ -96,10 +111,25 @@ class MainMenuController {
 			debugStepOver,
 			])
 
-		_setMainMenu()
 	}
 	deinit {
-		_unsetMainMenu()
+		assert(isRunning == false)
+	}
+
+
+	var isRunning: Bool = false {
+		willSet {
+			if isRunning == true {
+				_terminateCommandProcessing()
+				_unsetMainMenu()
+			}
+		}
+		didSet {
+			if isRunning == true {
+				_setMainMenu()
+				_initiateCommandProcessing()
+			}
+		}
 	}
 }
 extension MainMenuController {
@@ -146,6 +176,16 @@ extension MainMenuController {
 	}
 }
 
+extension MainMenuController {
+	private func _initiateCommandProcessing() {
+		assert(model != nil)
+		Notification<MenuItemController,()>.register	(self, MainMenuController.process)
+	}
+	private func _terminateCommandProcessing() {
+		assert(model != nil)
+		Notification<MenuItemController,()>.deregister	(self)
+	}
+}
 
 
 
@@ -175,24 +215,25 @@ extension MainMenuController {
 
 
 
-
-
+private func _legacyFunctionKeyShortcut(utf16CodeUnit: Int) -> MenuShortcutKeyCombination {
+	return	MenuShortcutKeyCombination(legacyUTF16CodeUnit: unichar(utf16CodeUnit))
+}
 
 private func _instantiateGroupMenuItem(title: String) -> MenuItemController {
 	let	sm			=	NSMenu(title: title)
 	sm.autoenablesItems		=	false
 
 	let	m			=	MenuItemController()
+	m._cocoaMenuItem.enabled	=	true
 	m._cocoaMenuItem.title		=	title
 	m._cocoaMenuItem.submenu	=	sm
-	m._onClick			=	{}
+	m._onClick			=	nil
 	return	m
 }
-
-private func _instantiateCommandBroadcastingMenuItem(title: String, command: MainMenuCommand) -> MenuItemController {
-	return	_instantiateCommandBroadcastingMenuItem(title, shortcut: nil, command: command)
-}
-private func _instantiateCommandBroadcastingMenuItem(title: String, shortcut: MenuShortcutKeyCombination?, command: MainMenuCommand) -> MenuItemController {
+//private func _instantiateCommandMenuItem(title: String, command: MainMenuCommand) -> MenuItemController {
+//	return	_instantiateCommandMenuItem(title, nil, command)
+//}
+private func _instantiateCommandMenuItem(title: String, _ shortcut: MenuShortcutKeyCombination?) -> MenuItemController {
 	let	m			=	MenuItemController()
 	m._cocoaMenuItem.title		=	title
 
@@ -200,15 +241,32 @@ private func _instantiateCommandBroadcastingMenuItem(title: String, shortcut: Me
 		m._cocoaMenuItem.keyEquivalent			=	shortcut.plainTextKeys
 		m._cocoaMenuItem.keyEquivalentModifierMask	=	Int(bitPattern: shortcut.modifierMask)
 	}
-
 	m._onClick = { [weak m] in
-		guard m != nil else {
+		guard let m = m else {
 			return
 		}
-		Notification(m, command).broadcast()
+		Notification<MenuItemController,()>(m, ()).broadcast()
 	}
 	return	m
 }
+//private func _instantiateCommandMenuItem(title: String, _ shortcut: MenuShortcutKeyCombination?, _ command: MainMenuCommand) -> MenuItemController {
+//	let	m			=	MenuItemController()
+//	m._cocoaMenuItem.title		=	title
+//
+//	if let shortcut = shortcut {
+//		m._cocoaMenuItem.keyEquivalent			=	shortcut.plainTextKeys
+//		m._cocoaMenuItem.keyEquivalentModifierMask	=	Int(bitPattern: shortcut.modifierMask)
+//	}
+//
+//	m._onClick = { [weak m] in
+//		guard m != nil else {
+//			return
+//		}
+//		Notification(m, command).broadcast()
+//	}
+//	return	m
+//}
+
 private func _instantiateSeparatorMenuItem() -> MenuItemController {
 	let	m		=	MenuItemController(NSMenuItem.separatorItem())
 	return	m
@@ -284,12 +342,56 @@ class MenuItemController {
 
 
 
+
+	///
+
+	var enabled: Bool {
+		get {
+			return	_cocoaMenuItem.enabled
+		}
+		set {
+			_cocoaMenuItem.enabled	=	newValue
+		}
+	}
+	var onClick: (() -> ())? {
+		get {
+			return	_onClick
+		}
+		set {
+			_onClick	=	newValue
+		}
+	}
+
+
+
+
+
+
 	///
 
 	private var	_onClick	:	(() -> ())?
 	private let	_cocoaMenuItem	:	NSMenuItem
 	private let	_cocoaMenuAgent	=	_MenuItemAgent()
 	private var	_subcontrollers	=	[MenuItemController]()
+}
+extension MenuItemController: CustomStringConvertible, CustomDebugStringConvertible {
+	var description: String {
+		get {
+			var	names	=	[String]()
+			var	m	=	_cocoaMenuItem.menu
+			while let m1 = m {
+				names.insert(m1.title, atIndex: 0)
+				m	=	m?.supermenu
+			}
+			names.append(_cocoaMenuItem.title)
+			return	names.map({"[\($0)]"}).joinWithSeparator(" -> ")
+		}
+	}
+	var debugDescription: String {
+		get {
+			return	description
+		}
+	}
 }
 
 
@@ -298,8 +400,7 @@ private class _MenuItemAgent: NSObject {
 	weak var owner: MenuItemController?
 	@objc
 	func onClick(sender: NSMenuItem) {
-		assert(owner!._onClick != nil)
-		owner!._onClick!()
+		owner!._onClick?()
 	}
 }
 

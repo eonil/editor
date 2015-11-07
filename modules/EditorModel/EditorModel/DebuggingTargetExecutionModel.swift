@@ -56,11 +56,10 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, 
 	}
 	public private(set) var state2: LLDBStateType = .Invalid {
 		willSet {
-			Event.WillChangeState(state: state2).dualcastWithSender(self)
+			Event.WillMutate.dualcastWithSender(self)
 		}
 		didSet {
-			_state.value	=	state2
-			Event.DidChangeState(state: state2).dualcastWithSender(self)
+			Event.DidMutate.dualcastWithSender(self)
 		}
 	}
 //	public var state: ValueStorage<LLDBStateType> {
@@ -141,7 +140,6 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, 
 	private let	_eventWaiter		=	DebuggingEventWaiter()
 
 	private let	_runnableCommands	=	MutableValueStorage<Set<DebuggingCommand>>([])
-	private let	_state			=	MutableValueStorage<LLDBStateType>(.Invalid)
 
 	///
 

@@ -70,6 +70,9 @@ public class DebuggingTargetModel: ModelSubnode<DebuggingModel>, BroadcastingMod
 	private func _install() {
 	}
 	private func _deinstall() {
+		if execution.value != nil {
+			_halt()
+		}
 	}
 
 	private func _launch(workingDirectoryURL: NSURL) {

@@ -124,17 +124,11 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	///		not exist at the point of calling.
 	public func createAndOpenWorkspaceAtURL(location: NSURL) throws {
 		do {
-//			try mutateWithGlobalCheck {
-				let	ws	=	WorkspaceModel()
-				ws.owner	=	self
-				ws.location	=	location
-				try ws.construct()
-
-				_addWorkspace(ws)
-				Debug.log("did create and add a workspace \(ws), ws count = \(workspaces.count)")
-//			}
+			let	ws	=	WorkspaceModel()
+			ws.location	=	location
+			try ws.construct()
+			_addWorkspace(ws)
 		}
-//		assert(workspaces.areAllElementsUniqueReferences())
 	}
 
 	/// You can supply any URL, and a workspace will be open only if
@@ -190,10 +184,6 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 				}
 
 				_removeWorkspace(ws)
-				ws.location	=	nil
-				ws.owner	=	nil
-
-				Debug.log("did remove a workspace \(ws), ws count = \(workspaces.count)")
 			}
 			//		assert(workspaces.areAllElementsUniqueReferences())
 //		}
@@ -222,11 +212,15 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 
 	private func _addWorkspace(workspace: WorkspaceModel) {
 		workspaces.insert(workspace)
+		workspace.owner		=	self
 		Event.DidAddWorkspace(workspace).dualcastWithSender(self)
+		Debug.log("did create and add a workspace \(workspace), ws count = \(workspaces.count)")
 	}
 	private func _removeWorkspace(workspace: WorkspaceModel) {
 		Event.WillRemoveWorkspace(workspace).dualcastWithSender(self)
+		workspace.owner		=	nil
 		workspaces.remove(workspace)
+		Debug.log("did remove a workspace \(workspace), ws count = \(workspaces.count)")
 	}
 
 

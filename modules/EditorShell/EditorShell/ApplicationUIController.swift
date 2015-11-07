@@ -55,16 +55,23 @@ public class ApplicationUIController: SessionProtocol {
 
 	///
 
-	private let	_menuUI			=	MainMenuController()
+	private let	_mainMenuUI		=	MainMenuController()
+	private let	_mainMenuManager	=	MainMenuAvailabilityManager()
 	private var	_isRunning		=	false
 
 	private func _installMenu() {
-//		_menuUI.model		=	model!
-//		_menuUI.run()
+		_mainMenuManager.model			=	model!
+		_mainMenuManager.mainMenuController	=	_mainMenuUI
+		_mainMenuManager.isRunning		=	true
+		_mainMenuUI.model			=	model!
+		_mainMenuUI.isRunning			=	true
 	}
 	private func _deinstallMenu() {
-//		_menuUI.halt()
-//		_menuUI.model		=	nil
+		_mainMenuUI.isRunning			=	false
+		_mainMenuUI.model			=	nil
+		_mainMenuManager.isRunning		=	false
+		_mainMenuManager.mainMenuController	=	nil
+		_mainMenuManager.model			=	nil
 	}
 
 	private func _installModelObservers() {

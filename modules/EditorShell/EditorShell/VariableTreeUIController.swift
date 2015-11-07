@@ -57,10 +57,8 @@ class VariableTreeUIController: CommonViewController {
 		}
 
 		switch n.event {
-		case .DidChangeSelection(_):
-			_applyFrameSelection()
-		default:
-			break
+		case .WillMutate:	break
+		case .DidMutate:	_applyFrameSelection()
 		}
 	}
 	private func _processDebuggingTargetExecutionModelEventNotification(notification: DebuggingTargetExecutionModel.Event.Notification) {
