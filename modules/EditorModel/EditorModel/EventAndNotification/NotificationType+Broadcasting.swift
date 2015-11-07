@@ -47,6 +47,15 @@ public extension NotificationType {
 	}
 
 	/// Registers a global notification observer.
+	public static func register<T>(type: T.Type, _ classMethod: Self -> ()) {
+		register(ObjectIdentifier(type), classMethod)
+	}
+	/// Deregisters a global notification observer.
+	public static func deregister<T>(type: T.Type) {
+		deregister(ObjectIdentifier(type))
+	}
+
+	/// Registers a global notification observer.
 	public static func register(identifier: ObjectIdentifier, _ function: Self->()) {
 		_register(self, identifier, function)
 	}

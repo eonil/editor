@@ -10,8 +10,7 @@ import Foundation
 import MulticastingStorage
 import EditorCommon
 
-public class ConsoleModel: ModelSubnode<WorkspaceModel> {
-
+public class ConsoleModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 	public var workspace: WorkspaceModel {
 		get {
 			assert(owner != nil)
@@ -19,13 +18,16 @@ public class ConsoleModel: ModelSubnode<WorkspaceModel> {
 		}
 	}
 
+	public let	event	=	EventMulticast<Event>()
+
+
+
+
+
 	///
-	
-	public var outputLines: ArrayStorage<String> {
-		get {
-			return	_outputLines
-		}
-	}
+
+	public private(set) var outputLines: [String] = []
+
 	public func appendLine(line: String) {
 		fatalErrorBecauseUnimplementedYet()
 	}
@@ -33,10 +35,6 @@ public class ConsoleModel: ModelSubnode<WorkspaceModel> {
 		fatalErrorBecauseUnimplementedYet()
 	}
 	public func appendLines<C: CollectionType where C.Generator.Element == String, C.Index == Int>(lines: C) {
-		_outputLines.insert(lines, atIndex: _outputLines.array.endIndex)
+		outputLines.appendContentsOf(lines)
 	}
-
-	///
-
-	private let	_outputLines	=	MutableArrayStorage<String>([])
 }

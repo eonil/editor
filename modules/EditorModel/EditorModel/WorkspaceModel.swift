@@ -47,12 +47,12 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 		report.owner		=	self
 		console.owner		=	self
 		cargo.owner		=	self
-		UI.owner		=	self
+
+		Event.DidInitiate.dualcastWithSender(self)
 	}
 	override func willLeaveModelRoot() {
-		super.willLeaveModelRoot()
+		Event.WillTerminate.dualcastWithSender(self)
 
-		UI.owner		=	nil
 		cargo.owner		=	nil
 		console.owner		=	nil
 		report.owner		=	nil
@@ -60,6 +60,8 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 		build.owner		=	nil
 		search.owner		=	nil
 		file.owner		=	nil
+
+		super.willLeaveModelRoot()
 	}
 
 	///
@@ -77,8 +79,6 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	public let	debug		=	DebuggingModel()
 	public let	report		=	ReportingModel()
 	public let	console		=	ConsoleModel()
-
-	public let	UI		=	WorkspaceUIModel()
 
 	internal let	cargo		=	CargoModel()
 
@@ -145,14 +145,6 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 
 
 
-
-public class WorkspaceUIModel: ModelSubnode<WorkspaceModel> {
-
-	public let	navigationPane	=	MutableValueStorage<Bool>(false)
-	public let	inspectionPane	=	MutableValueStorage<Bool>(false)
-	public let	consolePane	=	MutableValueStorage<Bool>(false)
-
-}
 
 
 

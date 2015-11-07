@@ -33,12 +33,21 @@ class ReportingUIController: CommonViewController {
 		_layout()
 	}
 
+
+
+
+
+
+
+
+	
 	///
 
 	private let	_scrollV	=	NSScrollView()
 	private let	_textV		=	NSTextView()
 
-	private let	_consoleLineA	=	_ConsoleLineAgent()
+
+
 
 	///
 
@@ -53,12 +62,10 @@ class ReportingUIController: CommonViewController {
 		view.addSubview(_scrollV)
 		_scrollV.documentView		=	_textV
 
-		_consoleLineA.owner		=	self
-		model!.console.outputLines.register(_consoleLineA)
+		ConsoleModel.Event.Notification.register	(self, ReportingUIController._process)
 	}
 	private func _deinstall() {
-		model!.console.outputLines.deregister(_consoleLineA)
-		_consoleLineA.owner		=	nil
+		ConsoleModel.Event.Notification.deregister	(self)
 
 		assert(model != nil)
 
@@ -73,23 +80,20 @@ class ReportingUIController: CommonViewController {
 
 	///
 
-	private func _handleDidInsertConsoleLinesInRange(range: Range<Int>) {
-		for line in model!.console.outputLines.array[range] {
-			let	s	=	NSAttributedString(string: line)
-			_textV.textStorage!.appendAttributedString(s)
+	private func _process(n: ConsoleModel.Event.Notification) {
+		guard n.sender.workspace === model! else {
+			return
 		}
-	}
-	private func _handleDidDeleteConsoleLinesInRange(range: Range<Int>) {
-		if range.startIndex == model!.console.outputLines.array.startIndex && range.endIndex == model!.console.outputLines.array.endIndex {
-			assert(_textV.textStorage != nil)
-			if let ts = _textV.textStorage {
-				let	r	=	NSRange(location: 0, length: (ts.string as NSString).length)
-				ts.deleteCharactersInRange(r)
+		switch n.event {
+		case .DidAddLines(let range):
+			for i in range {
+				let	s	=	n.sender.outputLines[i]
+				let	s1	=	NSAttributedString(string: s)
+				_textV.textStorage!.appendAttributedString(s1)
 			}
-		}
-		else {
-			markUnimplemented()
-			fatalErrorBecauseUnimplementedYet()
+
+		case .DidClear:
+			_textV.string	=	nil
 		}
 	}
 }
@@ -100,31 +104,6 @@ class ReportingUIController: CommonViewController {
 
 
 
-
-
-
-
-
-private final class _ConsoleLineAgent: ArrayStorageDelegate {
-	weak var owner: ReportingUIController?
-
-	private func willInsertRange(range: Range<Int>) {
-	}
-	private func didInsertRange(range: Range<Int>) {
-		owner!._handleDidInsertConsoleLinesInRange(range)
-	}
-	private func willUpdateRange(range: Range<Int>) {
-	}
-	private func didUpdateRange(range: Range<Int>) {
-		markUnimplemented()
-		fatalErrorBecauseUnimplementedYet()
-	}
-	private func willDeleteRange(range: Range<Int>) {
-	}
-	private func didDeleteRange(range: Range<Int>) {
-		owner!._handleDidDeleteConsoleLinesInRange(range)
-	}
-}
 
 
 

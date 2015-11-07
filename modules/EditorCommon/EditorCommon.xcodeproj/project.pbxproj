@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		45250B091BEA5039003A862A /* ListStorage2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45250B081BEA5039003A862A /* ListStorage2.swift */; };
+		45250B2D1BEDABAB003A862A /* ReferentialIdentity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45250B2C1BEDABAB003A862A /* ReferentialIdentity.swift */; };
 		4554C9591B7DBF9B004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C94E1B7DBF9B004987CC /* EditorCommon.framework */; };
 		4554C95E1B7DBF9B004987CC /* EditorCommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C95D1B7DBF9B004987CC /* EditorCommonTests.swift */; };
 		4554C96C1B7DC025004987CC /* ObjectSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9681B7DC025004987CC /* ObjectSet.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		45250B081BEA5039003A862A /* ListStorage2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListStorage2.swift; sourceTree = "<group>"; };
+		45250B2C1BEDABAB003A862A /* ReferentialIdentity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReferentialIdentity.swift; sourceTree = "<group>"; };
 		4554C94E1B7DBF9B004987CC /* EditorCommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorCommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C9531B7DBF9B004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4554C9581B7DBF9B004987CC /* EditorCommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorCommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,7 @@
 				45F572091B86242600E34CA2 /* Atomics.swift */,
 				45B185591B802288004E3B28 /* Log.swift */,
 				4554C9531B7DBF9B004987CC /* Info.plist */,
+				45250B2C1BEDABAB003A862A /* ReferentialIdentity.swift */,
 			);
 			path = EditorCommon;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				4554C96D1B7DC025004987CC /* Reporting.swift in Sources */,
 				4554C96F1B7DC025004987CC /* WeakArray.swift in Sources */,
 				4554C96C1B7DC025004987CC /* ObjectSet.swift in Sources */,
+				45250B2D1BEDABAB003A862A /* ReferentialIdentity.swift in Sources */,
 				4554C96E1B7DC025004987CC /* Weak.swift in Sources */,
 				45FF2F001BDCFA51001577B7 /* OptionalWeakValueStorage2.swift in Sources */,
 				45250B091BEA5039003A862A /* ListStorage2.swift in Sources */,

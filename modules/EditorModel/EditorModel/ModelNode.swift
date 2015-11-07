@@ -150,3 +150,42 @@ internal protocol ModelNodeSessionProtocol: class {
 
 
 
+
+
+
+
+
+
+
+
+
+protocol ModelNdoeType {
+	typealias	OwnerType: AnyObject
+	weak var owner: OwnerType? { get set }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

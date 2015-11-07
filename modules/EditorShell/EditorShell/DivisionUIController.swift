@@ -15,11 +15,28 @@ import EditorDebugUI
 
 class DivisionUIController: CommonViewController {
 
-	weak var model: WorkspaceModel? {
-		didSet {
 
-		}
-	}
+
+	///
+
+	weak var model: WorkspaceModel? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///
 
 	override func installSubcomponents() {
 		super.installSubcomponents()
@@ -78,12 +95,15 @@ class DivisionUIController: CommonViewController {
 		addChildViewController(_outerSplit)
 		view.addSubview(_outerSplit.view)
 
+
 		///
 
-		_installHandlers()
+		Notification<WorkspaceModel,UIState.Event>.register(self, DivisionUIController._process)
 	}
 	private func _deinstall() {
-		_deinstallHandlers()
+		Notification<WorkspaceModel,UIState.Event>.deregister(self)
+
+		///
 
 		_outerSplit.view.removeFromSuperview()
 		_outerSplit.removeFromParentViewController()
@@ -100,29 +120,30 @@ class DivisionUIController: CommonViewController {
 	}
 
 
-	private func _installHandlers() {
-		_applyNavigationPaneDisplayState()
-		model!.UI.navigationPane.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-			self?._applyNavigationPaneDisplayState()
-		}
-		model!.UI.consolePane.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-			self?._applyNavigationPaneDisplayState()
-		}
-		model!.UI.inspectionPane.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-			self?._applyNavigationPaneDisplayState()
-		}
-	}
-	private func _deinstallHandlers() {
-		model!.UI.navigationPane.deregisterDidSet(ObjectIdentifier(self))
-		model!.UI.consolePane.deregisterDidSet(ObjectIdentifier(self))
-		model!.UI.inspectionPane.deregisterDidSet(ObjectIdentifier(self))
-		_applyNavigationPaneDisplayState()
-	}
 
-	private func _applyNavigationPaneDisplayState() {
-		_outerSplit.items[0].isCollapsed	=	model!.UI.navigationPane.value == false
-		_innerSplit.items[2].isCollapsed	=	model!.UI.consolePane.value == false
-		_outerSplit.items[2].isCollapsed	=	model!.UI.inspectionPane.value == false
+
+
+	///
+
+	private func _process(n: Notification<WorkspaceModel, UIState.Event>) {
+		guard n.sender === model else {
+			return
+		}
+		_applyStateChange()
+	}
+	private func _applyStateChange() {
+		UIState.getStateForWorkspaceModel(model!) {
+			_outerSplit.items[0].isCollapsed	=	$0.navigationPaneVisibility == false
+			_innerSplit.items[2].isCollapsed	=	$0.consolePaneVisibility == false
+			_outerSplit.items[2].isCollapsed	=	$0.inspectionPaneVisibility == false
+		}
+	}
+	private func _notifyStateChange() {
+		UIState.setStateForWorkspaceModel(model!) {
+			$0.navigationPaneVisibility		=	_outerSplit.items[0].isCollapsed
+			$0.consolePaneVisibility		=	_innerSplit.items[2].isCollapsed
+			$0.inspectionPaneVisibility		=	_outerSplit.items[2].isCollapsed
+		}
 	}
 }
 

@@ -17,6 +17,13 @@
 //	}
 //}
 //
+//public extension ToolUIProtocol {
+//	public enum Event: BroadcastableEventType {
+//		public typealias	Sender	=	ToolUIController
+//		case DidChange
+//	}
+//}
+//
 //public extension WorkspaceWindowUIController {
 //	public enum Event: BroadcastableEventType {
 //		public typealias	Sender	=	WorkspaceWindowUIController

@@ -102,6 +102,10 @@ public final class SplitViewController: CommonViewController, NSSplitViewDelegat
 		}
 	}
 	private func _applyCollapsingStateOfItem(item: SplitItem) {
+		guard item.viewController.view.hidden != item.isCollapsed else {
+			return
+		}
+
 		item.viewController.view.hidden	=	item.isCollapsed
 		_splitV.adjustSubviews()
 	}

@@ -22,6 +22,13 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 		Debug.log("WorkspaceWindowUIController `\(self)` deinit")
 	}
 
+
+
+
+
+
+
+
 	///
 
 	/// Will be set by upper level node.
@@ -32,6 +39,19 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 		}
 	}
 	
+
+
+
+
+
+
+
+
+
+
+
+	///
+
 	public func run() {
 		assert(model != nil)
 
@@ -67,7 +87,6 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 		window!.contentViewController	=	nil
 		_deinstallToolbar()
 		_deinstallWindowAgent()
-
 	}
 
 	///
@@ -116,6 +135,48 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 		model!.application.closeWorkspace(model!)
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

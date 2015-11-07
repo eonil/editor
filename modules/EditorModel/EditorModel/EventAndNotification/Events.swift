@@ -24,6 +24,8 @@ import EditorCommon
 public extension ApplicationModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	ApplicationModel
+		case DidInitiate
+		case WillTerminate
 		case DidAddWorkspace(WorkspaceModel)
 		case WillRemoveWorkspace(WorkspaceModel)
 		case DidBeginCurrentWorkspace(WorkspaceModel)
@@ -34,6 +36,8 @@ public extension ApplicationModel {
 public extension WorkspaceModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	WorkspaceModel
+		case DidInitiate
+		case WillTerminate
 		case WillRelocate(from: NSURL?, to: NSURL?)
 		case DidRelocate(from: NSURL?, to: NSURL?)
 	}
@@ -102,6 +106,15 @@ public extension DebuggingTargetExecutionModel {
 	}
 }
 
+
+
+public extension ConsoleModel {
+	public enum Event: BroadcastableEventType {
+		public typealias	Sender	=	ConsoleModel
+		case DidClear
+		case DidAddLines(range : Range<Int>)
+	}
+}
 
 
 

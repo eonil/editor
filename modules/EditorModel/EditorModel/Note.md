@@ -40,3 +40,53 @@ Design Goals
 
 1. Simplicity. Keep minimum abstraction.
 2. Flexibility. Because we don't know the best design yet.
+
+
+
+
+
+
+
+
+
+Why selection state are in Model?
+---------------------------------
+Selections are part of model as long as some other model parts require them.
+Point is dependency. If the selection does not require non-model (e.g. UI)
+details, it's fine to put them in models.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

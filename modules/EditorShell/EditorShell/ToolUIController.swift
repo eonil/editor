@@ -69,8 +69,12 @@ class ToolUIController {
 
 		_agent.owner		=	self
 		_toolbar.delegate	=	_agent
+
+		Notification<WorkspaceModel,WorkspaceUIState>.register(self, ToolUIController._process)
 	}
 	private func _deinstallToolItems() {
+		Notification<WorkspaceModel,WorkspaceUIState>.deregister(self)
+
 		_toolbar.delegate	=	nil
 		_agent.owner		=	nil
 
@@ -78,10 +82,28 @@ class ToolUIController {
 		_divsel.action		=	nil
 	}
 
-	private func _applyDivisionState() {
-		model!.UI.navigationPane.value	=	_divsel.isSelectedForSegment(0)
-		model!.UI.consolePane.value	=	_divsel.isSelectedForSegment(1)
-		model!.UI.inspectionPane.value	=	_divsel.isSelectedForSegment(2)
+
+	private func _process(n: Notification<WorkspaceModel, WorkspaceUIState>) {
+		guard n.sender === model! else {
+			return
+		}
+		_applyStateChange()
+	}
+
+	private func _notifyStateChange() {
+		UIState.setStateForWorkspaceModel(model!) {
+			$0.navigationPaneVisibility	=	_divsel.isSelectedForSegment(0)
+			$0.consolePaneVisibility	=	_divsel.isSelectedForSegment(1)
+			$0.inspectionPaneVisibility	=	_divsel.isSelectedForSegment(2)
+		}
+	}
+
+	private func _applyStateChange() {
+		UIState.getStateForWorkspaceModel(model!) {
+			_divsel.setSelected($0.navigationPaneVisibility, forSegment: 0)
+			_divsel.setSelected($0.consolePaneVisibility, forSegment: 1)
+			_divsel.setSelected($0.inspectionPaneVisibility, forSegment: 2)
+		}
 	}
 }
 
@@ -130,7 +152,7 @@ private final class _ToolbarAgent: NSObject, NSToolbarDelegate {
 
 	@objc
 	func EDITOR_changeDivisionState() {
-		owner!._applyDivisionState()
+		owner!._notifyStateChange()
 	}
 }
 

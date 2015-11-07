@@ -19,7 +19,7 @@ public class ApplicationUIController: SessionProtocol {
 	}
 
 	///
-	
+
 	public weak var model: ApplicationModel? {
 		willSet {
 			assert(_isRunning == false)
@@ -97,6 +97,10 @@ public class ApplicationUIController: SessionProtocol {
 
 	private func _process(n: ApplicationModel.Event.Notification) {
 		switch n.event {
+		case .DidInitiate:
+			break
+		case .WillTerminate:
+			break
 		case .DidBeginCurrentWorkspace(let workspace):
 			_findUIForModel(workspace)!.windowController.window!.makeMainWindow()
 
@@ -203,7 +207,6 @@ public class ApplicationUIController: SessionProtocol {
 		return	nil
 	}
 }
-
 
 
 
