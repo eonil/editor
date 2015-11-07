@@ -23,6 +23,13 @@ import AppKit
 ///	explicitly.
 ///
 struct MenuShortcutKeyCombination {
+	static let Command	=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: true, controlModifier: false, alternateModifier: false, shiftModifier: false)
+	static let Control	=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, controlModifier: true, alternateModifier: false, shiftModifier: false)
+	static let Alternate	=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, controlModifier: false, alternateModifier: true, shiftModifier: false)
+	static let Shift	=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, controlModifier: false, alternateModifier: false, shiftModifier: true)
+
+	
+
 	init(legacyUTF16CodeUnit: unichar) {
 		self	=	MenuShortcutKeyCombination(String(utf16CodeUnits: [legacyUTF16CodeUnit], count: 1))
 	}
@@ -74,11 +81,6 @@ func + (left:MenuShortcutKeyCombination, right:String) -> MenuShortcutKeyCombina
 	s.plainTextKeys	+=	right.lowercaseString
 	return	s
 }
-
-let Command	=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: true, controlModifier: false, alternateModifier: false, shiftModifier: false)
-let Control	=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, controlModifier: true, alternateModifier: false, shiftModifier: false)
-let Alternate	=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, controlModifier: false, alternateModifier: true, shiftModifier: false)
-let Shift	=	MenuShortcutKeyCombination(plainTextKeys: "", commandModifier: false, controlModifier: false, alternateModifier: false, shiftModifier: true)
 
 extension NSMenuItem {
 	convenience init(title:String, shortcut:MenuShortcutKeyCombination, availability:Bool = false) {

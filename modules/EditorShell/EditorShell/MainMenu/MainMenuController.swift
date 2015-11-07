@@ -418,6 +418,19 @@ private class _MenuItemAgent: NSObject {
 
 
 
+private let	Command		=	MenuShortcutKeyCombination.Command
+private let	Control		=	MenuShortcutKeyCombination.Control
+private let	Alternate	=	MenuShortcutKeyCombination.Alternate
+private let	Shift		=	MenuShortcutKeyCombination.Shift
+
+
+
+
+
+
+
+
+
 
 
 
