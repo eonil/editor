@@ -49,12 +49,7 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, 
 		}
 	}
 
-	public var runnableCommands: ValueStorage<Set<DebuggingCommand>> {
-		get {
-			return	_runnableCommands
-		}
-	}
-	public private(set) var state2: LLDBStateType = .Invalid {
+	public private(set) var runnableCommands: Set<DebuggingCommand> = [] {
 		willSet {
 			Event.WillMutate.dualcastWithSender(self)
 		}
@@ -62,11 +57,14 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, 
 			Event.DidMutate.dualcastWithSender(self)
 		}
 	}
-//	public var state: ValueStorage<LLDBStateType> {
-//		get {
-//			return	_state
-//		}
-//	}
+	public private(set) var state: LLDBStateType = .Invalid {
+		willSet {
+			Event.WillMutate.dualcastWithSender(self)
+		}
+		didSet {
+			Event.DidMutate.dualcastWithSender(self)
+		}
+	}
 
 	public func runCommand(command: DebuggingCommand) {
 		switch command {
@@ -137,35 +135,36 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, 
 	///
 
 	private let	_lldbProcess		:	LLDBProcess
-	private let	_eventWaiter		=	DebuggingEventWaiter()
-
-	private let	_runnableCommands	=	MutableValueStorage<Set<DebuggingCommand>>([])
+//	private let	_eventWaiter		=	DebuggingEventWaiter()
+	private let	_eventWaiter		=	DebuggingListener()
 
 	///
 
 	private func _install() {
 		_reapplyRunnableCommandState()
-//		_eventWaiter.onEvent	=	{ [weak self] in self?._handleEvent($0) }
-//		_lldbProcess.addListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
-//		_eventWaiter.run()
+
+		_eventWaiter.onEvent	=	{ [weak self] in self?._handleLLDBEvent($0) }
+		_lldbProcess.addListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
+		_eventWaiter.run()
 	}
 	private func _deinstall() {
-//		_eventWaiter.halt()
-//		_lldbProcess.removeListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
-//		_eventWaiter.onEvent	=	nil
+		_eventWaiter.halt()
+		_lldbProcess.removeListener(_eventWaiter.listener, eventMask: LLDBProcess.BroadcastBit.StateChanged)
+		_eventWaiter.onEvent	=	nil
 //		target.debugging.event.deregister(ObjectIdentifier(self))
+
 		_reapplyRunnableCommandState()
 	}
 
 	private func _reapplyRunnableCommandState() {
 		Debug.log(_lldbProcess.state)
-		_runnableCommands.value	=	_runnableCommandsForProcess(_lldbProcess)
+		runnableCommands	=	_runnableCommandsForProcess(_lldbProcess)
 	}
 
 
-	private func _handleEvent(e: LLDBEvent) {
+	private func _handleLLDBEvent(e: LLDBEvent) {
 		Debug.assertMainThread()
-		state2	=	_lldbProcess.state
+		state	=	_lldbProcess.state
 		_reapplyRunnableCommandState()
 	}
 

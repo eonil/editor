@@ -47,9 +47,12 @@ public class DebuggingTargetModel: ModelSubnode<DebuggingModel>, BroadcastingMod
 		}
 	}
 
-	public var execution: ValueStorage<DebuggingTargetExecutionModel?> {
-		get {
-			return	_execution
+	public private(set) var execution: DebuggingTargetExecutionModel? {
+		willSet {
+			Event.WillMutate.dualcastWithSender(self)
+		}
+		didSet {
+			Event.DidMutate.dualcastWithSender(self)
 		}
 	}
 	public func launch(workingDirectoryURL: NSURL) {
@@ -59,25 +62,30 @@ public class DebuggingTargetModel: ModelSubnode<DebuggingModel>, BroadcastingMod
 		_halt()
 	}
 
+
+
+
+
+
+
 	///
 
 	private let	_runnableCommands	=	MutableValueStorage<Set<DebuggingCommand>>([])
 	private let	_lldbTarget		:	LLDBTarget
-	private let	_execution		=	MutableValueStorage<DebuggingTargetExecutionModel?>(nil)
 
 	///
 
 	private func _install() {
 	}
 	private func _deinstall() {
-		if execution.value != nil {
+		if execution != nil {
 			_halt()
 		}
 	}
 
 	private func _launch(workingDirectoryURL: NSURL) {
 		assert(owner != nil)
-		assert(_execution.value == nil)
+		assert(execution == nil)
 
 		let	b		=	_lldbTarget.createBreakpointByName("main")
 		b.enabled		=	true
@@ -88,15 +96,15 @@ public class DebuggingTargetModel: ModelSubnode<DebuggingModel>, BroadcastingMod
 //		assert(p!.state == .Stopped)
 		let	m		=	DebuggingTargetExecutionModel(LLDBProcess: p)
 		m.owner			=	self
-		_execution.value	=	m
+		execution		=	m
 	}
 	private func _halt() {
 		assert(owner != nil)
-		assert(_execution.value != nil)
+		assert(execution != nil)
 
-		_execution.value!.halt()
-		_execution.value!.owner	=	nil
-		_execution.value	=	nil
+		execution!.halt()
+		execution!.owner	=	nil
+		execution		=	nil
 	}
 }
 

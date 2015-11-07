@@ -53,7 +53,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 
 	///
 
-	public let	waiter		=	DebuggingEventWaiter()
+//	public let	waiter		=	DebuggingEventWaiter()
 	public let	selection	=	ExecutionStateSelectionModel()
 //	public let	inspection	=	ExecutionStateInspectionModel()
 
@@ -133,7 +133,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 //	private let	_frameVariables		=	MutableArrayStorage<FrameVariable>([])
 
 	private let	_lldbDebugger		=	LLDBDebugger()
-	private let	_eventWaiter		=	DebuggingEventWaiter()
+//	private let	_eventWaiter		=	DebuggingEventWaiter()
 
 	///
 
@@ -141,7 +141,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 		assert(currentTarget == nil)
 		assert(targets.count == 0)
 
-		waiter.owner			=	self
+//		waiter.owner			=	self
 		selection.owner			=	self
 //		inspection.owner		=	self
 
@@ -156,7 +156,7 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 
 //		inspection.owner		=	nil
 		selection.owner			=	nil
-		waiter.owner			=	nil
+//		waiter.owner			=	nil
 	}
 
 //	public class StackFrame {

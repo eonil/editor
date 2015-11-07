@@ -53,7 +53,7 @@ internal extension BroadcastableEventType where Self == Sender.Event {
 		sender.event._event.cast(self)
 		Notification(sender, self).broadcast()
 //		GlobalModelLock.unlockAfterDispatchingEvent()
-		print("\(sender): \(self)")
+		Debug.log("\(sender): \(self)")
 	}
 }
 

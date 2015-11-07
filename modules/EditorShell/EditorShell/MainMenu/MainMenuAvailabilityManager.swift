@@ -70,19 +70,19 @@ class MainMenuAvailabilityManager {
 		_applyBuildStateChange()
 	}
 	private func _process(n: DebuggingModel.Event.Notification) {
-		guard n.sender.workspace === model!.currentWorkspace else {
+		guard n.sender === model!.currentWorkspace?.debug else {
 			return
 		}
 		_applyDebuggingStateChange()
 	}
 	private func _process(n: DebuggingTargetModel.Event.Notification) {
-		guard n.sender.debugging.workspace === model!.currentWorkspace else {
+		guard n.sender === model!.currentWorkspace?.debug.currentTarget else {
 			return
 		}
 		_applyDebuggingStateChange()
 	}
 	private func _process(n: DebuggingTargetExecutionModel.Event.Notification) {
-		guard n.sender.target.debugging.workspace === model!.currentWorkspace else {
+		guard n.sender === model!.currentWorkspace?.debug.currentTarget?.execution else {
 			return
 		}
 		_applyDebuggingStateChange()
@@ -98,9 +98,13 @@ class MainMenuAvailabilityManager {
 	}
 	private func _applyBuildStateChange() {
 		mainMenuController!.productRun.enabled		=	model!.currentWorkspace != nil
+		mainMenuController!.productBuild.enabled	=	model!.currentWorkspace?.build.runnableCommands2.contains(.Build) ?? false
+		mainMenuController!.productClean.enabled	=	model!.currentWorkspace?.build.runnableCommands2.contains(.Clean) ?? false
+		mainMenuController!.productStop.enabled		=	(model!.currentWorkspace?.build.runnableCommands2.contains(.Stop) ?? false)
+								||	(model!.currentWorkspace?.debug.currentTarget?.execution?.runnableCommands.contains(.Halt) ?? false)
 	}
 	private func _applyDebuggingStateChange() {
-		let	cmds	=	model!.currentWorkspace?.debug.currentTarget?.execution.value?.runnableCommands.value ?? []
+		let	cmds	=	model!.currentWorkspace?.debug.currentTarget?.execution?.runnableCommands ?? []
 		mainMenuController!.debugPause.enabled		=	cmds.contains(.Pause)
 		mainMenuController!.debugResume.enabled		=	cmds.contains(.Resume)
 		mainMenuController!.debugHalt.enabled		=	cmds.contains(.Halt)

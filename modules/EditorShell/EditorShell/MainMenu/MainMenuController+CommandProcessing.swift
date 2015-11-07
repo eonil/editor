@@ -73,27 +73,27 @@ extension MainMenuController {
 
 
 		case ~~debugPause: do {
-			model!.currentWorkspace!.debug.currentTarget!.execution.value!.runCommand(.Pause)
+			model!.currentWorkspace!.debug.currentTarget!.execution!.runCommand(.Pause)
 			}
 
 		case ~~debugResume: do {
-			model!.currentWorkspace!.debug.currentTarget!.execution.value!.runCommand(.Resume)
+			model!.currentWorkspace!.debug.currentTarget!.execution!.runCommand(.Resume)
 			}
 
 		case ~~debugHalt: do {
-			model!.currentWorkspace!.debug.currentTarget!.execution.value!.runCommand(.Halt)
+			model!.currentWorkspace!.debug.currentTarget!.execution!.runCommand(.Halt)
 			}
 
 		case ~~debugStepInto: do {
-			model!.currentWorkspace!.debug.currentTarget!.execution.value!.runCommand(.StepInto)
+			model!.currentWorkspace!.debug.currentTarget!.execution!.runCommand(.StepInto)
 			}
 
 		case ~~debugStepOut: do {
-			model!.currentWorkspace!.debug.currentTarget!.execution.value!.runCommand(.StepOut)
+			model!.currentWorkspace!.debug.currentTarget!.execution!.runCommand(.StepOut)
 			}
 
 		case ~~debugStepOver: do {
-			model!.currentWorkspace!.debug.currentTarget!.execution.value!.runCommand(.StepOver)
+			model!.currentWorkspace!.debug.currentTarget!.execution!.runCommand(.StepOver)
 			}
 			
 		default:
