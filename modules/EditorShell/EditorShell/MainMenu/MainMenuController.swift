@@ -17,7 +17,7 @@ import EditorModel
 
 
 
-enum MenuCommand {
+enum MainMenuCommand {
 	case NewSubfileInCurrentFolderItemInCurrentWorkspace
 	case NewSubfolderInCurrentFolderItemInCurrentWorkspace
 	case OpenWorkspaceByBrowsingIt
@@ -41,7 +41,7 @@ enum MenuCommand {
 
 
 
-class MenuController2 {
+class MainMenuController {
 	let	file			=	_instantiateGroupMenuItem("File")
 	let	fileNew			=	_instantiateGroupMenuItem("New")
 	let	fileNewFile		=	_instantiateCommandBroadcastingMenuItem("File...", command: .NewSubfileInCurrentFolderItemInCurrentWorkspace)
@@ -98,28 +98,34 @@ class MenuController2 {
 
 		_setMainMenu()
 	}
-
+	deinit {
+		_unsetMainMenu()
+	}
 }
-extension MenuController2 {
+extension MainMenuController {
+	private func _unsetMainMenu() {
+		assert(NSApplication.sharedApplication().mainMenu != nil, "Main menu is not yet set.")
+		NSApplication.sharedApplication().mainMenu	=	nil
+	}
 	private func _setMainMenu() {
 		assert(NSApplication.sharedApplication().mainMenu == nil, "Main menu already been set.")
 
+		let	appName			=	NSBundle.mainBundle().infoDictionary![kCFBundleNameKey as String] as! String
+
 		let	mainMenu		=	NSMenu()									//	`title` really doesn't matter.
 		let	mainAppMenuItem		=	NSMenuItem(title: "Application", action: nil, keyEquivalent: "")		//	`title` really doesn't matter.
-//		let	mainFileMenuItem	=	NSMenuItem(title: "File", action: nil, keyEquivalent: "")
 		mainMenu.addItem(mainAppMenuItem)
-//		mainMenu.addItem(mainFileMenuItem)
 
 		let	appMenu			=	NSMenu()									//	`title` really doesn't matter.
 		mainAppMenuItem.submenu		=	appMenu
 
 		let	appServicesMenu		=	NSMenu()
 		NSApp.servicesMenu		=	appServicesMenu
-		appMenu.addItemWithTitle("About Me", action: nil, keyEquivalent: "")
+		appMenu.addItemWithTitle("About \(appName)", action: nil, keyEquivalent: "")
 		appMenu.addItem(NSMenuItem.separatorItem())
 		appMenu.addItemWithTitle("Preferences...", action: nil, keyEquivalent: ",")
 		appMenu.addItem(NSMenuItem.separatorItem())
-		appMenu.addItemWithTitle("Hide Me", action: "hide:", keyEquivalent: "h")
+		appMenu.addItemWithTitle("Hide \(appName)", action: "hide:", keyEquivalent: "h")
 		appMenu.addItem({ ()->NSMenuItem in
 			let m	=	NSMenuItem(title: "Hide Others", action: "hideOtherApplications:", keyEquivalent: "h")
 			m.keyEquivalentModifierMask	=	Int(NSEventModifierFlags([.CommandKeyMask, .AlternateKeyMask]).rawValue)
@@ -130,11 +136,7 @@ extension MenuController2 {
 		appMenu.addItem(NSMenuItem.separatorItem())
 		appMenu.addItemWithTitle("Services", action: nil, keyEquivalent: "")!.submenu	=	appServicesMenu
 		appMenu.addItem(NSMenuItem.separatorItem())
-		appMenu.addItemWithTitle("Quit Me", action: "terminate:", keyEquivalent: "q")
-//
-//		let	fileMenu		=	NSMenu(title: "File")
-//		mainFileMenuItem.submenu	=	fileMenu
-//		fileMenu.addItemWithTitle("New...", action: "newDocument:", keyEquivalent: "n")
+		appMenu.addItemWithTitle("Quit \(appName)", action: "terminate:", keyEquivalent: "q")
 
 		mainMenu.addItem(file._cocoaMenuItem)
 		mainMenu.addItem(product._cocoaMenuItem)
@@ -177,23 +179,29 @@ extension MenuController2 {
 
 
 private func _instantiateGroupMenuItem(title: String) -> MenuItemController {
-	let	m		=	MenuItemController()
-	m._cocoaMenuItem.title	=	title
-	m._onClick		=	{}
+	let	sm			=	NSMenu(title: title)
+	sm.autoenablesItems		=	false
+
+	let	m			=	MenuItemController()
+	m._cocoaMenuItem.title		=	title
+	m._cocoaMenuItem.submenu	=	sm
+	m._onClick			=	{}
 	return	m
 }
 
-private func _instantiateCommandBroadcastingMenuItem(title: String, command: MenuCommand) -> MenuItemController {
+private func _instantiateCommandBroadcastingMenuItem(title: String, command: MainMenuCommand) -> MenuItemController {
 	return	_instantiateCommandBroadcastingMenuItem(title, shortcut: nil, command: command)
 }
-private func _instantiateCommandBroadcastingMenuItem(title: String, shortcut: MenuShortcutKeyCombination?, command: MenuCommand) -> MenuItemController {
-	let	m		=	MenuItemController()
-	m._cocoaMenuItem.title				=	title
+private func _instantiateCommandBroadcastingMenuItem(title: String, shortcut: MenuShortcutKeyCombination?, command: MainMenuCommand) -> MenuItemController {
+	let	m			=	MenuItemController()
+	m._cocoaMenuItem.title		=	title
+
 	if let shortcut = shortcut {
 		m._cocoaMenuItem.keyEquivalent			=	shortcut.plainTextKeys
 		m._cocoaMenuItem.keyEquivalentModifierMask	=	Int(bitPattern: shortcut.modifierMask)
 	}
-	m._onClick		=	{ [weak m] in
+
+	m._onClick = { [weak m] in
 		guard m != nil else {
 			return
 		}
@@ -246,12 +254,13 @@ private func _instantiateSeparatorMenuItem() -> MenuItemController {
 
 class MenuItemController {
 	func addSubmenuItems(items: [MenuItemController]) {
-		if _cocoaMenuItem.submenu == nil {
-			_cocoaMenuItem.submenu	=	NSMenu()
+		guard _cocoaMenuItem.submenu != nil else {
+			fatalError("Current menu item is not intended to be a group. Please review the code.")
 		}
 		for item in items {
 			_cocoaMenuItem.submenu!.addItem(item._cocoaMenuItem)
 		}
+		_subcontrollers.appendContentsOf(items)
 	}
 
 
@@ -261,6 +270,7 @@ class MenuItemController {
 
 	private init(_ cocoaMenuItem: NSMenuItem = NSMenuItem()) {
 		_cocoaMenuItem		=	cocoaMenuItem
+		_cocoaMenuItem.enabled	=	false
 		_cocoaMenuAgent.owner	=	self
 		_cocoaMenuItem.target	=	_cocoaMenuAgent
 		_cocoaMenuItem.action	=	Selector("onClick:")
@@ -279,6 +289,7 @@ class MenuItemController {
 	private var	_onClick	:	(() -> ())?
 	private let	_cocoaMenuItem	:	NSMenuItem
 	private let	_cocoaMenuAgent	=	_MenuItemAgent()
+	private var	_subcontrollers	=	[MenuItemController]()
 }
 
 

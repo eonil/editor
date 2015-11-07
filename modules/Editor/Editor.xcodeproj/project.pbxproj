@@ -28,9 +28,9 @@
 		4554C8DB1B7DBF51004987CC /* EditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C8DA1B7DBF51004987CC /* EditorTests.swift */; };
 		4554C8E61B7DBF51004987CC /* EditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C8E51B7DBF51004987CC /* EditorUITests.swift */; };
 		4554C9CA1B7DC1E6004987CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9C91B7DC1E6004987CC /* AppDelegate.swift */; };
-		45C77AE71B7F0E0B0064C363 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45C77AE61B7F0E0B0064C363 /* MainMenu.xib */; };
 		45C77AE81B7F0EA90064C363 /* MulticastingStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4513733C1B7ED87F00ED9829 /* MulticastingStorage.framework */; };
 		45C77AE91B7F0EA90064C363 /* MulticastingStorage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4513733C1B7ED87F00ED9829 /* MulticastingStorage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45FECE5C1BEE15CF00C9C3E0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE5B1BEE15CF00C9C3E0 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,7 +320,7 @@
 		4554CA5D1B7DC3DF004987CC /* EditorDriver.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDriver.xcodeproj; path = ../EditorDriver/EditorDriver.xcodeproj; sourceTree = "<group>"; };
 		459796631B837B9B003B4501 /* Editor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Editor.entitlements; sourceTree = "<group>"; };
 		45B5EB9E1B915A0000C4247A /* EditorDebugUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebugUI.xcodeproj; path = ../EditorDebugUI/EditorDebugUI.xcodeproj; sourceTree = "<group>"; };
-		45C77AE61B7F0E0B0064C363 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		45FECE5B1BEE15CF00C9C3E0 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -440,11 +440,11 @@
 			isa = PBXGroup;
 			children = (
 				459796631B837B9B003B4501 /* Editor.entitlements */,
+				45FECE5B1BEE15CF00C9C3E0 /* main.swift */,
 				4554C9C91B7DC1E6004987CC /* AppDelegate.swift */,
 				4554C8C71B7DBF50004987CC /* Document.swift */,
 				4554C8C91B7DBF50004987CC /* xDocument.xib */,
 				4554C8CC1B7DBF50004987CC /* Assets.xcassets */,
-				45C77AE61B7F0E0B0064C363 /* MainMenu.xib */,
 				4554C8D11B7DBF51004987CC /* Info.plist */,
 			);
 			path = Editor;
@@ -849,7 +849,6 @@
 			files = (
 				4554C8CD1B7DBF50004987CC /* Assets.xcassets in Resources */,
 				4554C8CB1B7DBF50004987CC /* xDocument.xib in Resources */,
-				45C77AE71B7F0E0B0064C363 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -876,6 +875,7 @@
 			files = (
 				4554C9CA1B7DC1E6004987CC /* AppDelegate.swift in Sources */,
 				4554C8C81B7DBF50004987CC /* Document.swift in Sources */,
+				45FECE5C1BEE15CF00C9C3E0 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
