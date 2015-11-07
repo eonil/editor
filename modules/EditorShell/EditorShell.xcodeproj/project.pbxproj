@@ -36,6 +36,10 @@
 		45FECE691BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE681BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift */; };
 		45FECE6D1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE6C1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift */; };
 		45FECE6F1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE6E1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift */; };
+		45FECE801BEE43DA00C9C3E0 /* ToolButtonStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE7F1BEE43DA00C9C3E0 /* ToolButtonStrip.swift */; };
+		45FECE821BEE4AF100C9C3E0 /* LayoutBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE811BEE4AF100C9C3E0 /* LayoutBox.swift */; };
+		45FECE841BEE56CF00C9C3E0 /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE831BEE56CF00C9C3E0 /* CoreGraphicsExtensions.swift */; };
+		45FECE861BEE5A4400C9C3E0 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE851BEE5A4400C9C3E0 /* Line.swift */; };
 		45FF2F031BDD0A32001577B7 /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF2F021BDD0A32001577B7 /* WorkspaceDocument.swift */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +163,10 @@
 		45FECE681BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuAvailabilityManager.swift; sourceTree = "<group>"; };
 		45FECE6C1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainMenuController+CommandProcessing.swift"; sourceTree = "<group>"; };
 		45FECE6E1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuShortcutKeyCombination.swift; sourceTree = "<group>"; };
+		45FECE7F1BEE43DA00C9C3E0 /* ToolButtonStrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolButtonStrip.swift; sourceTree = "<group>"; };
+		45FECE811BEE4AF100C9C3E0 /* LayoutBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutBox.swift; sourceTree = "<group>"; };
+		45FECE831BEE56CF00C9C3E0 /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
+		45FECE851BEE5A4400C9C3E0 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		45FF2F021BDD0A32001577B7 /* WorkspaceDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocument.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -265,8 +273,12 @@
 				45C379391B90B1D600F5B984 /* ContextTreeUIController.swift */,
 				45C379371B90B0F900F5B984 /* VariableTreeUIController.swift */,
 				452B91851B855E1000EAB775 /* (toolbar components) */,
+				45FECE7F1BEE43DA00C9C3E0 /* ToolButtonStrip.swift */,
+				45FECE851BEE5A4400C9C3E0 /* Line.swift */,
 				45C77B0B1B7F2F0A0064C363 /* Dialogue.swift */,
+				45FECE811BEE4AF100C9C3E0 /* LayoutBox.swift */,
 				4554C8121B7DBED9004987CC /* Info.plist */,
+				45FECE831BEE56CF00C9C3E0 /* CoreGraphicsExtensions.swift */,
 				45A0B2701BDC669200889B32 /* FoundationExtensions.swift */,
 			);
 			path = EditorShell;
@@ -559,12 +571,15 @@
 				45C77B0C1B7F2F0A0064C363 /* Dialogue.swift in Sources */,
 				45FECE6D1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift in Sources */,
 				4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */,
+				45FECE841BEE56CF00C9C3E0 /* CoreGraphicsExtensions.swift in Sources */,
 				45C3793A1B90B1D600F5B984 /* ContextTreeUIController.swift in Sources */,
 				45250B1C1BEB7875003A862A /* Protocols.swift in Sources */,
 				45FF2F031BDD0A32001577B7 /* WorkspaceDocument.swift in Sources */,
+				45FECE861BEE5A4400C9C3E0 /* Line.swift in Sources */,
 				4522B19A1B84E51F00E219F9 /* FileMenuController.swift in Sources */,
 				45250B421BEDB686003A862A /* UIState.swift in Sources */,
 				4554C9B61B7DC0D7004987CC /* ToolUIController.swift in Sources */,
+				45FECE821BEE4AF100C9C3E0 /* LayoutBox.swift in Sources */,
 				45FECE6F1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift in Sources */,
 				45C379381B90B0F900F5B984 /* VariableTreeUIController.swift in Sources */,
 				45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */,
@@ -574,6 +589,7 @@
 				4554C9B51B7DC0D7004987CC /* WorkspaceWindowUIController.swift in Sources */,
 				45FECE691BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift in Sources */,
 				45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */,
+				45FECE801BEE43DA00C9C3E0 /* ToolButtonStrip.swift in Sources */,
 				4554C9B01B7DC0D7004987CC /* EditUIController.swift in Sources */,
 				4554C9B11B7DC0D7004987CC /* InspectionUIController.swift in Sources */,
 				45A0B2711BDC669200889B32 /* FoundationExtensions.swift in Sources */,

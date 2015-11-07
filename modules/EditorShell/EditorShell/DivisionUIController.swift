@@ -61,16 +61,14 @@ class DivisionUIController: CommonViewController {
 	private let	_sample3	=	DummyViewController()
 //	private let	_sample4	=	DummyViewController()
 
-	private let	_files		=	FileTreeUIController()
-	private let	_contexts	=	ContextTreeUIController()
+	private let	_nav		=	NavigationUIController()
 	private let	_variables	=	VariableTreeUIController()
 	private let	_report		=	ReportingUIController()
 
 	private func _install() {
-		_files.model		=	model!.file
 		_report.model		=	model!
-		_contexts.model		=	model!.debug
 		_variables.model	=	model!.debug
+		_nav.model		=	model!
 
 		_sample1.view.layer!.backgroundColor	=	NSColor.redColor().CGColor
 //		_sample2.view.layer!.backgroundColor	=	NSColor.blueColor().CGColor
@@ -80,7 +78,7 @@ class DivisionUIController: CommonViewController {
 		_outerSplit.vertical		=	true
 		_outerSplit.items		=	[
 //			SplitItem(viewController: _contexts),
-			SplitItem(viewController: _files),
+			SplitItem(viewController: _nav),
 			SplitItem(viewController: _innerSplit),
 			SplitItem(viewController: _variables),
 		]
@@ -108,11 +106,9 @@ class DivisionUIController: CommonViewController {
 		_outerSplit.view.removeFromSuperview()
 		_outerSplit.removeFromParentViewController()
 
+		_nav.model		=	nil
 		_variables.model	=	nil
-		_contexts.model		=	nil
 		_report.model		=	nil
-		_files.model		=	nil
-
 	}
 	private func _layout() {
 		_outerSplit.view.frame			=	view.bounds

@@ -46,6 +46,22 @@ Design Goals
 
 
 
+Implementation Strategies
+-------------------------
+- We do not track precise mutation events. Instead prepare views to update 
+  for any state. (funtional style)
+- We do not fear duplicated mutation events. Make sure views to skip such
+  duplicated events.
+- We DO FEAR too much code. Because our development resources are very 
+  limited. Prefer slow & simple implementation over fast & complex.
+- Let model node die in any state. Do not force external client to
+  clean up them one by one. Instead, clean-up the model node up itself.
+
+- Global command/event is same thing calling method on coupled graph.
+  And then, prefer global notification because we don't need to track event
+  source object one by one.
+
+
 
 
 

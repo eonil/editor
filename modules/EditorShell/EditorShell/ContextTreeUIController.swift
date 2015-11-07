@@ -33,52 +33,66 @@ class ContextTreeUIController: CommonViewController {
 
 	///
 
-	private let	_treeView	=	ContextTreeView()
+	private let _treeUI	=	ContextTreeUI()
 
 	private func _install() {
-		assert(model != nil)
-
-		_treeView.reconfigure(model!.debugger)
-		_treeView.onUserDidSetFrame		=	{ [weak self] in
-			self?._didSetFrame()
-		}
-		_treeView.onUserWillSetFrame	=	{ [weak self] in
-			self?._willSetFrame()
-		}
-		view.addSubview(_treeView)
-
-		DebuggingModel.Event.Notification.register	(self, ContextTreeUIController._processDebuggingNotification)
+		_treeUI.model	=	model!
+		view.addSubview(_treeUI)
 	}
 	private func _deinstall() {
-		assert(model != nil)
-
-		DebuggingModel.Event.Notification.deregister	(self)
-		
-		_treeView.removeFromSuperview()
-		_treeView.onUserWillSetFrame	=	nil
-		_treeView.onUserDidSetFrame		=	nil
-		_treeView.reconfigure(nil)
+		_treeUI.removeFromSuperview()
+		_treeUI.model	=	nil
 	}
 	private func _layout() {
-		_treeView.frame	=	view.bounds
+		_treeUI.frame	=	view.bounds
 	}
 
-	///
-
-	private func _didSetFrame() {
-		model!.selection.setFrame(_treeView.currentFrame)
-	}
-	private func _willSetFrame() {
-	}
-
-	///
-
-	private func _processDebuggingNotification(notification: DebuggingModel.Event.Notification) {
-		guard notification.sender === model else {
-			return
-		}
-
-		_treeView.reconfigure(model!.debugger)
-	}
+//	private let	_treeView	=	ContextTreeView()
+//
+//	private func _install() {
+//		assert(model != nil)
+//
+//		_treeView.reconfigure(model!.debugger)
+//		_treeView.onUserDidSetFrame		=	{ [weak self] in
+//			self?._didSetFrame()
+//		}
+//		_treeView.onUserWillSetFrame	=	{ [weak self] in
+//			self?._willSetFrame()
+//		}
+//		view.addSubview(_treeView)
+//
+//		DebuggingModel.Event.Notification.register	(self, ContextTreeUIController._processDebuggingNotification)
+//	}
+//	private func _deinstall() {
+//		assert(model != nil)
+//
+//		DebuggingModel.Event.Notification.deregister	(self)
+//		
+//		_treeView.removeFromSuperview()
+//		_treeView.onUserWillSetFrame	=	nil
+//		_treeView.onUserDidSetFrame		=	nil
+//		_treeView.reconfigure(nil)
+//	}
+//	private func _layout() {
+//		_treeView.frame	=	view.bounds
+//	}
+//
+//	///
+//
+//	private func _didSetFrame() {
+//		model!.selection.setFrame(_treeView.currentFrame)
+//	}
+//	private func _willSetFrame() {
+//	}
+//
+//	///
+//
+//	private func _processDebuggingNotification(notification: DebuggingModel.Event.Notification) {
+//		guard notification.sender === model else {
+//			return
+//		}
+//
+//		_treeView.reconfigure(model!.debugger)
+//	}
 }
 

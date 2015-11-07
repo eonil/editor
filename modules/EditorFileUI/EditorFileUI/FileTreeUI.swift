@@ -1,5 +1,5 @@
 //
-//  FileTreeView.swift
+//  FileTreeUI.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/29.
@@ -13,13 +13,13 @@ import EditorCommon
 import EditorModel
 import EditorUICommon
 
-public protocol FileTreeViewDelegate: class {
-	func fileTreeView(fileTreeView: FileTreeView, didSelectFileNodes: [FileNodeModel])
-	func fileTreeView(fileTreeView: FileTreeView, didDeselectFileNodes: [FileNodeModel])
+public protocol FileTreeUIDelegate: class {
+	func fileTreeView(fileTreeView: FileTreeUI, didSelectFileNodes: [FileNodeModel])
+	func fileTreeView(fileTreeView: FileTreeUI, didDeselectFileNodes: [FileNodeModel])
 }
-public class FileTreeView: CommonView, FileTreeUIProtocol {
+public class FileTreeUI: CommonView, FileTreeUIProtocol {
 
-	public weak var delegate: FileTreeViewDelegate?
+	public weak var delegate: FileTreeUIDelegate?
 
 	public var selectedFileNodes: [FileNodeModel] {
 		get {
@@ -214,7 +214,7 @@ private func _instantiateOutlineView() -> NSOutlineView {
 
 
 private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
-	weak var owner: FileTreeView?
+	weak var owner: FileTreeUI?
 
 	@objc
 	private func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {

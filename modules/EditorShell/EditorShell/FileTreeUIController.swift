@@ -39,7 +39,7 @@ class FileTreeUIController: CommonViewController {
 
 	///
 
-	private let	_view	=	FileTreeView()
+	private let	_view	=	FileTreeUI()
 	
 	private func _install() {
 		view.addSubview(_view)
