@@ -23,7 +23,6 @@
 		453E40261B7EFCDD00AFAB68 /* EditorDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1EA1B7EDB1100D5AA56 /* EditorDriver.framework */; };
 		453E40271B7EFCDD00AFAB68 /* EditorDriver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 455EE1EA1B7EDB1100D5AA56 /* EditorDriver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4554C8C81B7DBF50004987CC /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C8C71B7DBF50004987CC /* Document.swift */; };
-		4554C8CB1B7DBF50004987CC /* xDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4554C8C91B7DBF50004987CC /* xDocument.xib */; };
 		4554C8CD1B7DBF50004987CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4554C8CC1B7DBF50004987CC /* Assets.xcassets */; };
 		4554C8DB1B7DBF51004987CC /* EditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C8DA1B7DBF51004987CC /* EditorTests.swift */; };
 		4554C8E61B7DBF51004987CC /* EditorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C8E51B7DBF51004987CC /* EditorUITests.swift */; };
@@ -306,7 +305,6 @@
 		452B91221B8556B200EAB775 /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = ../../submodules/FileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		4554C8C21B7DBF50004987CC /* Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8C71B7DBF50004987CC /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
-		4554C8CA1B7DBF50004987CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/xDocument.xib; sourceTree = "<group>"; };
 		4554C8CC1B7DBF50004987CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4554C8D11B7DBF51004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4554C8D61B7DBF51004987CC /* EditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -443,7 +441,6 @@
 				45FECE5B1BEE15CF00C9C3E0 /* main.swift */,
 				4554C9C91B7DC1E6004987CC /* AppDelegate.swift */,
 				4554C8C71B7DBF50004987CC /* Document.swift */,
-				4554C8C91B7DBF50004987CC /* xDocument.xib */,
 				4554C8CC1B7DBF50004987CC /* Assets.xcassets */,
 				4554C8D11B7DBF51004987CC /* Info.plist */,
 			);
@@ -848,7 +845,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4554C8CD1B7DBF50004987CC /* Assets.xcassets in Resources */,
-				4554C8CB1B7DBF50004987CC /* xDocument.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,17 +945,6 @@
 			targetProxy = 45C77AEA1B7F0EA90064C363 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		4554C8C91B7DBF50004987CC /* xDocument.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4554C8CA1B7DBF50004987CC /* Base */,
-			);
-			name = xDocument.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4554C8E81B7DBF51004987CC /* Debug */ = {
