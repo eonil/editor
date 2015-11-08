@@ -85,12 +85,10 @@ class ReportingUIController: CommonViewController {
 			return
 		}
 		switch n.event {
-		case .DidAddLines(let range):
-			for i in range {
-				let	s	=	n.sender.outputLines[i]
-				let	s1	=	NSAttributedString(string: s)
-				_textV.textStorage!.appendAttributedString(s1)
-			}
+		case .DidAppendLine:
+			let	line	=	n.sender.outputLines.last!
+			let	s1	=	NSAttributedString(string: line)
+			_textV.textStorage!.appendAttributedString(s1)
 
 		case .DidClear:
 			_textV.string	=	nil

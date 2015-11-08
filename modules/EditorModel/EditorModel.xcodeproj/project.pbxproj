@@ -75,6 +75,7 @@
 		45DDABD81B82395300F85E06 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DDABD71B82395300F85E06 /* FoundationExtensions.swift */; };
 		45EF9BB81BD28440009E3787 /* WorkspaceItemTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF9BB61BD28440009E3787 /* WorkspaceItemTree.swift */; };
 		45EF9BB91BD28440009E3787 /* WorkspaceItemTree+Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF9BB71BD28440009E3787 /* WorkspaceItemTree+Snapshot.swift */; };
+		45FECE9D1BEF59AE00C9C3E0 /* CargoTool2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE9C1BEF59AE00C9C3E0 /* CargoTool2.swift */; };
 		45FF2EEF1BDCF46E001577B7 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF2EEE1BDCF46E001577B7 /* Globals.swift */; };
 /* End PBXBuildFile section */
 
@@ -280,6 +281,7 @@
 		45DDABD71B82395300F85E06 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		45EF9BB61BD28440009E3787 /* WorkspaceItemTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceItemTree.swift; sourceTree = "<group>"; };
 		45EF9BB71BD28440009E3787 /* WorkspaceItemTree+Snapshot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WorkspaceItemTree+Snapshot.swift"; sourceTree = "<group>"; };
+		45FECE9C1BEF59AE00C9C3E0 /* CargoTool2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoTool2.swift; sourceTree = "<group>"; };
 		45FF2EEE1BDCF46E001577B7 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -359,6 +361,7 @@
 			isa = PBXGroup;
 			children = (
 				450C0FBB1B7F69DD0048E7A1 /* CargoTool.swift */,
+				45FECE9C1BEF59AE00C9C3E0 /* CargoTool2.swift */,
 				450C0FBD1B7F6AE50048E7A1 /* CommandLineTool.swift */,
 				45B185631B804833004E3B28 /* ShellTaskExecutionController.swift */,
 				45B185651B8048CA004E3B28 /* StringStreamProcessing.swift */,
@@ -791,6 +794,7 @@
 				455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */,
 				45B5EC281B91897E00C4247A /* DebuggingEventWaiter.swift in Sources */,
 				455978C71B86AE0300626F6B /* DebuggingTargetExecutionModel.swift in Sources */,
+				45FECE9D1BEF59AE00C9C3E0 /* CargoTool2.swift in Sources */,
 				455978E71B8813A100626F6B /* SwitchableValueStorage.swift in Sources */,
 				45BFAEF11BDF02B8006D2193 /* NotificationType+Broadcasting.swift in Sources */,
 				45BFAEF71BE03CC8006D2193 /* EventAutocastingArray.swift in Sources */,

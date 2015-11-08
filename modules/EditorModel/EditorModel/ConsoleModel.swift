@@ -24,17 +24,69 @@ public class ConsoleModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 
 
+
 	///
 
 	public private(set) var outputLines: [String] = []
 
-	public func appendLine(line: String) {
-		fatalErrorBecauseUnimplementedYet()
+
+
+
+
+
+
+
+	///
+
+	override func didJoinModelRoot() {
+		super.didJoinModelRoot()
+		_install()
 	}
-	public func appendLines(lines: String) {
-		fatalErrorBecauseUnimplementedYet()
+	override func willLeaveModelRoot() {
+		_deinstall()
+		super.willLeaveModelRoot()
 	}
-	public func appendLines<C: CollectionType where C.Generator.Element == String, C.Index == Int>(lines: C) {
-		outputLines.appendContentsOf(lines)
+
+
+
+
+	///
+
+	private func _install() {
+		Notification<CargoModel, CargoModel.Event>.register	(self, ConsoleModel._process)
+	}
+	private func _deinstall() {
+		Notification<CargoModel, CargoModel.Event>.deregister	(self)
+	}
+
+
+	private func _process(n: Notification<CargoModel, CargoModel.Event>) {
+		guard n.sender === workspace.cargo else {
+			return
+		}
+		switch n.event {
+		case .DidChangeState: 			break
+		case .DidComplete: 			break
+		case .DidEmitOutputLogLine(let line):	_appendLine(line)
+		case .DidEmitErrorLogLine(let line):	_appendLine(line)
+		}
+	}
+
+
+	private func _appendLine(line: String) {
+		outputLines.append(line)
+		Event.DidAppendLine.dualcastAsNotificationWithSender(self)
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

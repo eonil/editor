@@ -51,18 +51,18 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, 
 
 	public private(set) var runnableCommands: Set<DebuggingCommand> = [] {
 		willSet {
-			Event.WillMutate.dualcastWithSender(self)
+			Event.WillMutate.dualcastAsNotificationWithSender(self)
 		}
 		didSet {
-			Event.DidMutate.dualcastWithSender(self)
+			Event.DidMutate.dualcastAsNotificationWithSender(self)
 		}
 	}
 	public private(set) var state: LLDBStateType = .Invalid {
 		willSet {
-			Event.WillMutate.dualcastWithSender(self)
+			Event.WillMutate.dualcastAsNotificationWithSender(self)
 		}
 		didSet {
-			Event.DidMutate.dualcastWithSender(self)
+			Event.DidMutate.dualcastAsNotificationWithSender(self)
 		}
 	}
 

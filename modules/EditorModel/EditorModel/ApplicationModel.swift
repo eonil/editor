@@ -70,12 +70,12 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 		willSet {
 			if let currentWorkspace = currentWorkspace {
 				assert(workspaces.contains(currentWorkspace))
-				Event.WillEndCurrentWorkspace(currentWorkspace).dualcastWithSender(self)
+				Event.WillEndCurrentWorkspace(currentWorkspace).dualcastAsNotificationWithSender(self)
 			}
 		}
 		didSet {
 			if let currentWorkspace = currentWorkspace {
-				Event.DidBeginCurrentWorkspace(currentWorkspace).dualcastWithSender(self)
+				Event.DidBeginCurrentWorkspace(currentWorkspace).dualcastAsNotificationWithSender(self)
 			}
 		}
 	}
@@ -213,11 +213,11 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	private func _addWorkspace(workspace: WorkspaceModel) {
 		workspaces.insert(workspace)
 		workspace.owner		=	self
-		Event.DidAddWorkspace(workspace).dualcastWithSender(self)
+		Event.DidAddWorkspace(workspace).dualcastAsNotificationWithSender(self)
 		Debug.log("did create and add a workspace \(workspace), ws count = \(workspaces.count)")
 	}
 	private func _removeWorkspace(workspace: WorkspaceModel) {
-		Event.WillRemoveWorkspace(workspace).dualcastWithSender(self)
+		Event.WillRemoveWorkspace(workspace).dualcastAsNotificationWithSender(self)
 		workspace.owner		=	nil
 		workspaces.remove(workspace)
 		Debug.log("did remove a workspace \(workspace), ws count = \(workspaces.count)")

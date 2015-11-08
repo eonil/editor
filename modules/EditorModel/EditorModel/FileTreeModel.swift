@@ -216,10 +216,10 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		assert(_dataTree!.root != nil)
 		_rootNodeModel		=	FileNodeModel(dataNode: _dataTree!.root!)
 		_rootNodeModel!.owner	=	self
-		FileTreeModel.Event.DidCreateRoot(root: _rootNodeModel!).dualcastWithSender(self)
+		FileTreeModel.Event.DidCreateRoot(root: _rootNodeModel!).dualcastAsNotificationWithSender(self)
 	}
 	private func _deinstallModelRoot() {
-		FileTreeModel.Event.WillDeleteRoot(root: _rootNodeModel!).dualcastWithSender(self)
+		FileTreeModel.Event.WillDeleteRoot(root: _rootNodeModel!).dualcastAsNotificationWithSender(self)
 		assert(_rootNodeModel != nil)
 		assert(_dataTree != nil)
 		assert(_dataTree!.root != nil)
@@ -581,9 +581,9 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModel
 		do {
 			try	Platform.thePlatform.fileSystem.moveFile(fromURL: fromFileURL, toURL: toFileURL)
 
-			FileNodeModel.Event.WillChangeName(old: oldValue, new: newValue).dualcastWithSender(self)
+			FileNodeModel.Event.WillChangeName(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
 			_dataNode.name		=	newValue
-			FileNodeModel.Event.DidChangeName(old: oldValue, new: newValue).dualcastWithSender(self)
+			FileNodeModel.Event.DidChangeName(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
 		}
 		catch let error {
 			// Rollback mutation on any error.
@@ -598,9 +598,9 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModel
 		set {
 			let	oldValue	=	_dataNode.comment
 
-			FileNodeModel.Event.WillChangeComment(old: oldValue, new: newValue).dualcastWithSender(self)
+			FileNodeModel.Event.WillChangeComment(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
 			_dataNode.comment	=	newValue
-			FileNodeModel.Event.DidChangeComment(old: oldValue, new: newValue).dualcastWithSender(self)
+			FileNodeModel.Event.DidChangeComment(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
 		}
 	}
 
@@ -689,7 +689,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		node.owner	=	hostNode.owner
 		node.supernode	=	hostNode
 
-		FileNodeModel.Event.DidInsertSubnode(subnode: node, index: index).dualcastWithSender(hostNode)
+		FileNodeModel.Event.DidInsertSubnode(subnode: node, index: index).dualcastAsNotificationWithSender(hostNode)
 	}
 	public func remove(node: FileNodeModel) throws {
 		guard let idx = hostNode._subnodes.indexOfValueByReferentialIdentity(node) else {
@@ -714,7 +714,7 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		hostNode._dataNode.subnodes.removeAtIndex(index)
 
 		assert(hostNode._subnodes[index].owner === hostNode)
-		FileNodeModel.Event.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).dualcastWithSender(hostNode)
+		FileNodeModel.Event.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).dualcastAsNotificationWithSender(hostNode)
 
 		let	removedNode	=	hostNode._subnodes.removeAtIndex(index)
 		removedNode.supernode	=	nil

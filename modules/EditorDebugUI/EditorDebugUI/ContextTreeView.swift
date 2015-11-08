@@ -124,6 +124,11 @@ public class ContextTreeView: CommonView {
 }
 
 
+
+
+
+
+
 private func _instantiateOutlineView() -> NSOutlineView {
 	let	c	=	NSTableColumn()
 	let	v	=	NSOutlineView()

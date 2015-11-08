@@ -59,10 +59,10 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 
 	public var currentFrame: LLDBFrame? {
 		willSet {
-			Event.WillMutate.dualcastWithSender(self)
+			Event.WillMutate.dualcastAsNotificationWithSender(self)
 		}
 		didSet {
-			Event.DidMutate.dualcastWithSender(self)
+			Event.DidMutate.dualcastAsNotificationWithSender(self)
 		}
 	}
 
@@ -90,10 +90,10 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 	public private(set) var targets: [DebuggingTargetModel] = []
 	public private(set) var currentTarget: DebuggingTargetModel? {
 		willSet {
-			Event.WillMutate.dualcastWithSender(self)
+			Event.WillMutate.dualcastAsNotificationWithSender(self)
 		}
 		didSet {
-			Event.DidMutate.dualcastWithSender(self)
+			Event.DidMutate.dualcastAsNotificationWithSender(self)
 		}
 	}
 
@@ -171,14 +171,14 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 
 
 	private func _insertTargetWithEventCasting(target: DebuggingTargetModel, at index: Int) {
-		Event.WillMutate.dualcastWithSender(self)
+		Event.WillMutate.dualcastAsNotificationWithSender(self)
 		targets.insert(target, atIndex: index)
-		Event.DidMutate.dualcastWithSender(self)
+		Event.DidMutate.dualcastAsNotificationWithSender(self)
 	}
 	private func _removeTargetWithEventCasting(at index: Int) {
-		Event.WillMutate.dualcastWithSender(self)
+		Event.WillMutate.dualcastAsNotificationWithSender(self)
 		targets.removeAtIndex(index)
-		Event.DidMutate.dualcastWithSender(self)
+		Event.DidMutate.dualcastAsNotificationWithSender(self)
 	}
 }
 

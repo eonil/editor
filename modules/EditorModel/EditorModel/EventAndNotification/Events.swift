@@ -113,11 +113,20 @@ public extension DebuggingTargetExecutionModel {
 
 
 
+
+
+
+
+
+
+
+
+
 public extension ConsoleModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	ConsoleModel
 		case DidClear
-		case DidAddLines(range : Range<Int>)
+		case DidAppendLine
 	}
 }
 

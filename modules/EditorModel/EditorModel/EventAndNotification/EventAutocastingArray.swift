@@ -27,10 +27,10 @@
 //
 //	public mutating func insert(value: T, atIndex: Int) {
 //		_array.insert(value, atIndex: atIndex)
-//		_onDidInsert(atIndex, value).dualcastWithSender(_host)
+//		_onDidInsert(atIndex, value).dualcastAsNotificationWithSender(_host)
 //	}
 //	public mutating func removeAtIndex(index: Int) {
-//		_onWillDelete(index, _array[index]).dualcastWithSender(_host)
+//		_onWillDelete(index, _array[index]).dualcastAsNotificationWithSender(_host)
 //		_array.removeAtIndex(index)
 //	}
 //

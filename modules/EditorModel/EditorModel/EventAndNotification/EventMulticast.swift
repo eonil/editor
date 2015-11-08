@@ -28,7 +28,7 @@ public struct EventMulticast<E> {
 
 //	/// Just multicast evnt only to local observers.
 //	/// If you also need to cast globally, you need to use 
-//	/// `Notification.dualcastWithSender()` method.
+//	/// `Notification.dualcastAsNotificationWithSender()` method.
 //	internal func cast(event: E) {
 //		_event.cast(event)
 //	}
@@ -47,7 +47,7 @@ internal extension BroadcastableEventType where Self == Sender.Event {
 	/// observer.
 	/// Always, local multicasting comes first, and global broadcasting
 	/// follows.
-	internal func dualcastWithSender(sender: Sender) {
+	internal func dualcastAsNotificationWithSender(sender: Sender) {
 //		sender.event.cat(self)
 //		GlobalModelLock.lockBeforeDispatchingEvent()
 		sender.event._event.cast(self)

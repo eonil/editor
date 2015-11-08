@@ -33,29 +33,22 @@ public class BuildModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 	public let event = EventMulticast<Event>()
 
+
+
+
+
+
+	
 	///
 
-	override func didJoinModelRoot() {
-		super.didJoinModelRoot()
-		runnableCommands2	=	[.Build, .Clean]
-		workspace.cargo.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in self?._applyCargoState() }
-	}
-	override func willLeaveModelRoot() {
-		workspace.cargo.state.deregisterDidSet(ObjectIdentifier(self))
-		runnableCommands2	=	[]
-		super.willLeaveModelRoot()
-	}
-
-	///
-
-	public private(set) var runnableCommands2: Set<BuildCommand> = [] {
+	public private(set) var runnableCommands: Set<BuildCommand> = [] {
 		willSet {
-			assert(isRooted || runnableCommands2 == [])
-			Event.WillChangeRunnableCommand.dualcastWithSender(self)
+			assert(isRooted || runnableCommands == [])
+			Event.WillChangeRunnableCommand.dualcastAsNotificationWithSender(self)
 		}
 		didSet {
-			_runnableCommands.value	=	runnableCommands2
-			Event.DidChangeRunnableCommand.dualcastWithSender(self)
+			_runnableCommands.value	=	runnableCommands
+			Event.DidChangeRunnableCommand.dualcastAsNotificationWithSender(self)
 		}
 	}
 //	@available(*, deprecated=1, message="AA")
@@ -76,45 +69,126 @@ public class BuildModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 		assert(workspace.location != nil)
 		if let u =  workspace.location {
 			workspace.cargo.runBuildAtURL(u)
-			assert(workspace.cargo.state.value == .Running)
+			assert(workspace.cargo.state == .Running)
 		}
+
+		runnableCommands	=	[.Stop]
 	}
 	public func runClean() {
 		assert(isRooted)
-		runnableCommands2	=	[.Stop]
-		markUnimplemented()
+
+		assert(workspace.location != nil)
+		if let u = workspace.location {
+			workspace.cargo.runCleanAtURL(u)
+		}
+
+		runnableCommands	=	[.Stop]
 	}
 	public func stop() {
 		assert(isRooted)
 		markUnimplemented()
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+	///
+
+	/// Will be called by `CargoModel`.
+	func notifyCargoStateDidChange() {
+		_applyCargoState()
+	}
+
+
+
+
+
+
+
+
+
+	///
+
+	override func didJoinModelRoot() {
+		super.didJoinModelRoot()
+		runnableCommands	=	[.Build, .Clean]
+
+		Notification<CargoModel,CargoModel.Event>.register	(self, BuildModel._process)
+	}
+	override func willLeaveModelRoot() {
+		Notification<CargoModel,CargoModel.Event>.deregister	(self)
+
+		runnableCommands	=	[]
+		super.willLeaveModelRoot()
+	}
+
+
+
+
+
+
+
+
+	private func _process(n: Notification<CargoModel, CargoModel.Event>) {
+		guard n.sender === workspace.cargo else {
+			return
+		}
+		switch n.event {
+		case .DidChangeState:
+			_applyCargoState()
+
+		case .DidComplete:
+			break
+
+		case .DidEmitErrorLogLine:
+			break
+
+		case .DidEmitOutputLogLine:
+			break
+
+		}
+	}
+
+
+
+
+
+
+
 	///
 
 	private let	_runnableCommands	=	MutableValueStorage<Set<BuildCommand>>([])
 
 	private func _applyCargoState() {
-		if let state = workspace.cargo.state.value {
+		if let state = workspace.cargo.state {
 			switch state {
 			case .Ready:
-				runnableCommands2	=	[]
+				runnableCommands	=	[]
 			case .Running:
-				runnableCommands2	=	[.Stop]
+				runnableCommands	=	[.Stop]
 			case .Done:
 				//	Can do nothing at this state.
 				//	Wait for resetting...
-				runnableCommands2	=	[]
+				runnableCommands	=	[]
 				break
 
 			case .Error:
 				//	Can do nothing at this state.
 				//	Wait for resetting...
-				runnableCommands2	=	[]
+				runnableCommands	=	[]
 				break
 			}
 		}
 		else {
-			runnableCommands2	=	[.Build, .Clean]
+			runnableCommands	=	[.Build, .Clean]
 		}
 	}
 }

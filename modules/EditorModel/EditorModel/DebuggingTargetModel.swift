@@ -49,10 +49,10 @@ public class DebuggingTargetModel: ModelSubnode<DebuggingModel>, BroadcastingMod
 
 	public private(set) var execution: DebuggingTargetExecutionModel? {
 		willSet {
-			Event.WillMutate.dualcastWithSender(self)
+			Event.WillMutate.dualcastAsNotificationWithSender(self)
 		}
 		didSet {
-			Event.DidMutate.dualcastWithSender(self)
+			Event.DidMutate.dualcastAsNotificationWithSender(self)
 		}
 	}
 	public func launch(workingDirectoryURL: NSURL) {

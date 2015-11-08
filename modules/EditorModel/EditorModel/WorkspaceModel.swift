@@ -48,10 +48,10 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 		console.owner		=	self
 		cargo.owner		=	self
 
-		Event.DidInitiate.dualcastWithSender(self)
+		Event.DidInitiate.dualcastAsNotificationWithSender(self)
 	}
 	override func willLeaveModelRoot() {
-		Event.WillTerminate.dualcastWithSender(self)
+		Event.WillTerminate.dualcastAsNotificationWithSender(self)
 
 		cargo.owner		=	nil
 		console.owner		=	nil
@@ -91,12 +91,12 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	/// whole workspace UI.
 	public var location: NSURL? {
 		willSet {
-			Event.WillRelocate(from: location, to: newValue).dualcastWithSender(self)
+			Event.WillRelocate(from: location, to: newValue).dualcastAsNotificationWithSender(self)
 			_willLocate()
 		}
 		didSet {
 			_didLocate()
-			Event.DidRelocate(from: oldValue, to: location).dualcastWithSender(self)
+			Event.DidRelocate(from: oldValue, to: location).dualcastAsNotificationWithSender(self)
 		}
 	}
 

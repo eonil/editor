@@ -98,9 +98,9 @@ class MainMenuAvailabilityManager {
 	}
 	private func _applyBuildStateChange() {
 		mainMenuController!.productRun.enabled		=	model!.currentWorkspace != nil
-		mainMenuController!.productBuild.enabled	=	model!.currentWorkspace?.build.runnableCommands2.contains(.Build) ?? false
-		mainMenuController!.productClean.enabled	=	model!.currentWorkspace?.build.runnableCommands2.contains(.Clean) ?? false
-		mainMenuController!.productStop.enabled		=	(model!.currentWorkspace?.build.runnableCommands2.contains(.Stop) ?? false)
+		mainMenuController!.productBuild.enabled	=	model!.currentWorkspace?.build.runnableCommands.contains(.Build) ?? false
+		mainMenuController!.productClean.enabled	=	model!.currentWorkspace?.build.runnableCommands.contains(.Clean) ?? false
+		mainMenuController!.productStop.enabled		=	(model!.currentWorkspace?.build.runnableCommands.contains(.Stop) ?? false)
 								||	(model!.currentWorkspace?.debug.currentTarget?.execution?.runnableCommands.contains(.Halt) ?? false)
 	}
 	private func _applyDebuggingStateChange() {

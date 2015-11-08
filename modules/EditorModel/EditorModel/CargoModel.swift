@@ -10,15 +10,41 @@ import Foundation
 import MulticastingStorage
 import EditorCommon
 
+
+
+
+
+
 /// Multiple-time re-usable cargo tool.
 ///
+/// This serializes access to cargo tool to acceidental prevent conflict.
+///
 class CargoModel: ModelSubnode<WorkspaceModel> {
+
+	typealias	Event	=	CargoTool2.Event
+
+
+
+
+
+
+	///
 
 	var workspace: WorkspaceModel {
 		get {
 			return	owner!
 		}
 	}
+
+
+
+
+
+
+
+
+
+	///
 
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
@@ -37,9 +63,9 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 		}
 	}
 
-	var state: ValueStorage<CargoTool.State?> {
+	var state: CargoTool2.State? {
 		get {
-			return	_state
+			return	_cargoTool?.state
 		}
 	}
 
@@ -59,53 +85,75 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 		_installCargoTool()
 		_cargoTool!.runBuild(path: u.path!)
 	}
+	func runCleanAtURL(u: NSURL) {
+		assert(owner != nil)
+		precondition(u.scheme == "file")
+		precondition(u.path != nil)
+		assert(_cargoTool == nil)
+		_installCargoTool()
+		_cargoTool!.runClean(path: u.path!)
+	}
 	func stop() {
 		assert(owner != nil)
 		assert(_cargoTool != nil)
-		if _cargoTool!.state.value == .Running {
+		if _cargoTool!.state == .Running {
 			_cargoTool!.stop()
 		}
 		_deinstallCargoTool()
 	}
 
+
+
+
+
+
+
+
+
+
+
 	///
 
-	private let	_state		=	MutableValueStorage<CargoTool.State?>(nil)
-	private var	_cargoTool	:	CargoTool?
+	private var	_cargoTool	:	CargoTool2?
 
-	private let	_cargoOutputA	=	_OutputLogAgent()
+
+
 
 	///
 
 	private func _installCargoTool() {
 		assert(_cargoTool == nil)
-		_cargoTool		=	CargoTool()
-		_cargoTool!.completion.queue() { [weak self] in self!._handleCargoCompletion() }
-		_cargoTool!.state.registerDidSet(ObjectIdentifier(self)) { [weak self] in self!._applyCargoToolState() }
-
-		_handleCargoOutputLinesDidInsertInRange(_cargoTool!.outputLog.array.wholeRange)
-		_cargoOutputA.owner	=	self
-		_cargoTool!.outputLog.register(_cargoOutputA)
+		_cargoTool		=	CargoTool2()
+		_cargoTool!.onEvent	=	{ [weak self] in self?._process($0) }
 	}
 	private func _deinstallCargoTool() {
 		assert(_cargoTool != nil)
-
-		_cargoTool!.outputLog.deregister(_cargoOutputA)
-		_cargoOutputA.owner	=	nil
-
-		_cargoTool!.state.deregisterDidSet(ObjectIdentifier(self))
+		_cargoTool!.onEvent	=	nil
 		_cargoTool		=	nil
 	}
 
 	///
 
-	private func _applyCargoToolState() {
-		assert(_cargoTool != nil)
-		if _state.value != _cargoTool!.state.value {
-			_state.value	=	_cargoTool!.state.value
+	private func _process(e: CargoTool2.Event) {
+		switch e {
+		case .DidChangeState:
+			_applyCargoToolState()
+			
+		case .DidComplete:
+			_handleCargoCompletion()
+
+		case .DidEmitOutputLogLine(_):
+			break
+
+		case .DidEmitErrorLogLine(_):
+			break
 		}
 
-		switch _cargoTool!.state.value {
+		Notification(self,e).broadcast()
+	}
+	private func _applyCargoToolState() {
+		assert(_cargoTool != nil)
+		switch _cargoTool!.state {
 		case .Ready:
 			break
 		case .Running:
@@ -117,37 +165,9 @@ class CargoModel: ModelSubnode<WorkspaceModel> {
 		}
 	}
 	private func _handleCargoCompletion() {
-		_state.value	=	nil
 		_deinstallCargoTool()
 	}
 
-	private func _handleCargoOutputLinesDidInsertInRange(range: Range<Int>) {
-		workspace.console.appendLines(_cargoTool!.outputLog.array[range])
-	}
 }
-
-
-
-
-
-
-
-private final class _OutputLogAgent: ArrayStorageDelegate {
-	weak var owner: CargoModel?
-	private func willInsertRange(range: Range<Int>) {
-	}
-	private func didInsertRange(range: Range<Int>) {
-		owner!._handleCargoOutputLinesDidInsertInRange(range)
-	}
-	private func willUpdateRange(range: Range<Int>) {
-	}
-	private func didUpdateRange(range: Range<Int>) {
-	}
-	private func willDeleteRange(range: Range<Int>) {
-	}
-	private func didDeleteRange(range: Range<Int>) {
-	}
-}
-
 
 
