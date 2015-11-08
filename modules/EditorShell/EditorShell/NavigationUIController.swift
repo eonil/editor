@@ -54,7 +54,7 @@ class NavigationUIController: CommonViewController {
 	///
 
 	private enum _Mode {
-		case Files
+		case Project
 		case Debug
 	}
 
@@ -66,7 +66,7 @@ class NavigationUIController: CommonViewController {
 	private let _fileTreeUI			=	FileTreeUIController()
 	private let _contextTreeUI		=	ContextTreeUIController()
 
-	private var _mode			=	_Mode.Files
+	private var _mode			=	_Mode.Project
 
 
 
@@ -101,9 +101,12 @@ class NavigationUIController: CommonViewController {
 
 		_debuggingToolButton.target	=	self
 		_debuggingToolButton.action	=	"EDITOR_onTapDebug"
+
+		Notification<WorkspaceModel,UIState.Event>.register	(self, NavigationUIController._process)
 	}
 	private func _deinstall() {
 		assert(model != nil)
+		Notification<WorkspaceModel,UIState.Event>.deregister	(self)
 
 		_contextTreeUI.view.removeFromSuperview()
 		_fileTreeUI.view.removeFromSuperview()
@@ -125,9 +128,38 @@ class NavigationUIController: CommonViewController {
 		modeSelCut.rest.applyToView(_fileTreeUI.view)
 		modeSelCut.rest.applyToView(_contextTreeUI.view)
 	}
+
+
+
+	private func _process(n: Notification<WorkspaceModel, UIState.Event>) {
+		guard n.sender === model! else {
+			return
+		}
+//		switch n.event {
+//		case .Initiate:
+//		case .Invalidate:
+//		case .Terminate:
+//		}
+
+		let	oldMode	=	_mode
+		UIState.getStateForWorkspaceModel(model!) { state in
+			_mode	=	{
+				switch state.navigator {
+				case .Project:	return	.Project
+				case .Debug:	return	.Debug
+				}
+			}() as _Mode
+
+		}
+		if oldMode != _mode {
+			_applyModeSelectionChange()
+		}
+	}
+
+
 	private func _applyModeSelectionChange() {
 		switch _mode {
-		case .Files:
+		case .Project:
 			_fileTreeUI.view.hidden		=	false
 			_fileTreeToolButton.state	=	NSOnState
 			_contextTreeUI.view.hidden	=	true
@@ -155,7 +187,7 @@ class NavigationUIController: CommonViewController {
 
 	@objc
 	private func EDITOR_onTapFiles() {
-		_mode	=	.Files
+		_mode	=	.Project
 		_applyModeSelectionChange()
 	}
 	@objc

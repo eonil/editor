@@ -10,6 +10,35 @@
 
 
 
+Design Decisions --- File Tree
+------------------------------
+File tree navigaton NEVER steal user focus. (Xcode does this and it's annoying)
+
+
+
+
+
+To Do
+-----
+- Implement file tree display correctly.
+- Add file tree context menu operations: new file, new folder, reveal in Finder, ...
+- Add dumb text editor.
+- Handle selecting file in file tree and show it in text editor.
+
+- Add shortcuts to left subpanes. (Command+1, Command+2, Command+3, ...)
+- Add shortcut to close currently open file (
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

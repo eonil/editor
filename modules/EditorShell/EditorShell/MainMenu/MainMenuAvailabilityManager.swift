@@ -49,6 +49,7 @@ class MainMenuAvailabilityManager {
 		_applyFileStateChange()
 		_applyBuildStateChange()
 		_applyDebuggingStateChange()
+		_applyUIStateChange()
 		ApplicationModel.Event.Notification.register			(self, MainMenuAvailabilityManager._process)
 		DebuggingModel.Event.Notification.register			(self, MainMenuAvailabilityManager._process)
 		DebuggingTargetModel.Event.Notification.register		(self, MainMenuAvailabilityManager._process)
@@ -60,6 +61,7 @@ class MainMenuAvailabilityManager {
 		DebuggingTargetModel.Event.Notification.deregister		(self)
 		DebuggingModel.Event.Notification.deregister			(self)
 		ApplicationModel.Event.Notification.deregister			(self)
+		_applyUIStateChange()
 		_applyDebuggingStateChange()
 		_applyBuildStateChange()
 		_applyFileStateChange()
@@ -87,6 +89,12 @@ class MainMenuAvailabilityManager {
 		}
 		_applyDebuggingStateChange()
 	}
+	private func _process(n: Notification<WorkspaceModel, UIState.Event>) {
+		guard n.sender === model!.currentWorkspace else {
+			return
+		}
+		_applyUIStateChange()
+	}
 
 
 
@@ -94,7 +102,7 @@ class MainMenuAvailabilityManager {
 
 
 	private func _applyFileStateChange() {
-		mainMenuController!.fileCloseWorkspace.enabled	=	model!.currentWorkspace != nil
+		mainMenuController!.fileCloseCurrentWorkspace.enabled	=	model!.currentWorkspace != nil
 	}
 	private func _applyBuildStateChange() {
 		mainMenuController!.productRun.enabled		=	model!.currentWorkspace != nil
@@ -111,6 +119,10 @@ class MainMenuAvailabilityManager {
 		mainMenuController!.debugStepInto.enabled	=	cmds.contains(.StepInto)
 		mainMenuController!.debugStepOut.enabled	=	cmds.contains(.StepOut)
 		mainMenuController!.debugStepOver.enabled	=	cmds.contains(.StepOver)
+	}
+	private func _applyUIStateChange() {
+		mainMenuController!.viewNavivatorFiles.enabled	=	true
+		mainMenuController!.viewNavivatorDebug.enabled	=	true
 	}
 }
 

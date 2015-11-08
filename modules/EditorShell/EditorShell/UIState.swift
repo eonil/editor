@@ -99,6 +99,13 @@ struct WorkspaceUIState {
 	var navigationPaneVisibility: Bool	=	false
 	var inspectionPaneVisibility: Bool	=	false
 	var consolePaneVisibility: Bool		=	false
+
+
+	enum Navigator {
+		case Project
+		case Debug
+	}
+	var navigator: Navigator		=	.Project
 }
 
 

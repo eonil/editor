@@ -51,37 +51,47 @@ import EditorModel
 class MainMenuController {
 	weak var model: ApplicationModel?
 
-	let	file			=	_instantiateGroupMenuItem("File")
-	let	fileNew			=	_instantiateGroupMenuItem("New")
-	let	fileNewWorkspace	=	_instantiateCommandMenuItem("Worksace...",		Command+Control+"N"		)
-	let	fileNewFile		=	_instantiateCommandMenuItem("File...",			Command+"N"			)
-	let	fileNewFolder		=	_instantiateCommandMenuItem("Folder...",		Command+Alternate+"N"		)
-	let	fileOpen		=	_instantiateGroupMenuItem("Open")
-	let	fileOpenWorkspace	=	_instantiateCommandMenuItem("Workspace...", 		Command+"O"			)
-	let	fileOpenClearWSHistory	=	_instantiateCommandMenuItem("Clear Recent Workspaces",	nil	 			)
-	let	fileCloseWorkspace	=	_instantiateCommandMenuItem("Close Workspace",		Command+"W"			)
+	//	Keep: (menu item identifier length < 64).
 
-	let	product			=	_instantiateGroupMenuItem("Product")
-	let	productRun		=	_instantiateCommandMenuItem("Run",			Command+"R"			)
-	let	productBuild		=	_instantiateCommandMenuItem("Build",			Command+"B"			)
-	let	productClean		=	_instantiateCommandMenuItem("Clean",			Command+"K"			)
-	let	productStop		=	_instantiateCommandMenuItem("Stop",			Command+"."			)
+	let	file				=	_instantiateGroupMenuItem("File")
+	let	fileNew				=	_instantiateGroupMenuItem("New")
+	let	fileNewWorkspace		=	_instantiateCommandMenuItem("Worksace...",		Command+Control+"N"		)
+	let	fileNewFile			=	_instantiateCommandMenuItem("File...",			Command+"N"			)
+	let	fileNewFolder			=	_instantiateCommandMenuItem("Folder...",		Command+Alternate+"N"		)
+	let	fileOpen			=	_instantiateGroupMenuItem("Open")
+	let	fileOpenWorkspace		=	_instantiateCommandMenuItem("Workspace...", 		Command+"O"			)
+	let	fileOpenClearWorkspaceHistory		=	_instantiateCommandMenuItem("Clear Recent Workspaces",	nil	 		)
+	let	fileCloseCurrentFile		=	_instantiateCommandMenuItem("Close File",		Command+Shift+"W"		)
+	let	fileCloseCurrentWorkspace	=	_instantiateCommandMenuItem("Close Workspace",		Command+"W"			)
 
-	let	debug			=	_instantiateGroupMenuItem("Debug")
-	let	debugPause		=	_instantiateCommandMenuItem("Pause",			Command+Control+"Y"		)
-	let	debugResume		=	_instantiateCommandMenuItem("Resume",			Command+Control+"Y"		)
-	let	debugHalt		=	_instantiateCommandMenuItem("Halt",			nil				)
+	let	view				=	_instantiateGroupMenuItem("View")
+	let	viewNavigators			=	_instantiateGroupMenuItem("Navigators")
+//	let	viewNavivatorProject		=	_instantiateGroupMenuItem("Project Navigator",		Command+"1"			)
+	let	viewNavivatorFiles		=	_instantiateCommandMenuItem("File Navigator",		Command+"1"			)
+	let	viewNavivatorDebug		=	_instantiateCommandMenuItem("Debug Navigator",		Command+"2"			)
 
-	let	debugStepInto		=	_instantiateCommandMenuItem("Step Into",		_legacyFunctionKeyShortcut(NSF6FunctionKey))
-	let	debugStepOut		=	_instantiateCommandMenuItem("Step Out",			_legacyFunctionKeyShortcut(NSF7FunctionKey))
-	let	debugStepOver		=	_instantiateCommandMenuItem("Step Over",		_legacyFunctionKeyShortcut(NSF8FunctionKey))
+	let	product				=	_instantiateGroupMenuItem("Product")
+	let	productRun			=	_instantiateCommandMenuItem("Run",			Command+"R"			)
+	let	productBuild			=	_instantiateCommandMenuItem("Build",			Command+"B"			)
+	let	productClean			=	_instantiateCommandMenuItem("Clean",			Command+"K"			)
+	let	productStop			=	_instantiateCommandMenuItem("Stop",			Command+"."			)
+
+	let	debug				=	_instantiateGroupMenuItem("Debug")
+	let	debugPause			=	_instantiateCommandMenuItem("Pause",			Command+Control+"Y"		)
+	let	debugResume			=	_instantiateCommandMenuItem("Resume",			Command+Control+"Y"		)
+	let	debugHalt			=	_instantiateCommandMenuItem("Halt",			nil				)
+
+	let	debugStepInto			=	_instantiateCommandMenuItem("Step Into",		_legacyFunctionKeyShortcut(NSF6FunctionKey))
+	let	debugStepOut			=	_instantiateCommandMenuItem("Step Out",			_legacyFunctionKeyShortcut(NSF7FunctionKey))
+	let	debugStepOver			=	_instantiateCommandMenuItem("Step Over",		_legacyFunctionKeyShortcut(NSF8FunctionKey))
 
 	init() {
 		file.addSubmenuItems([
 			fileNew,
 			fileOpen,
 			_instantiateSeparatorMenuItem(),
-			fileCloseWorkspace,
+			fileCloseCurrentFile,
+			fileCloseCurrentWorkspace,
 			])
 		fileNew.addSubmenuItems([
 			fileNewWorkspace,
@@ -90,7 +100,16 @@ class MainMenuController {
 			])
 		fileOpen.addSubmenuItems([
 			fileOpenWorkspace,
-			fileOpenClearWSHistory,
+			fileOpenClearWorkspaceHistory,
+			])
+
+		view.addSubmenuItems([
+			viewNavigators,
+			_instantiateSeparatorMenuItem()		//	Cocoa will add `Enter Full Screen` menu item automatically after this items. Prepare a separator for it.
+			])
+		viewNavigators.addSubmenuItems([
+			viewNavivatorFiles,
+			viewNavivatorDebug,
 			])
 
 		product.addSubmenuItems([
@@ -169,6 +188,7 @@ extension MainMenuController {
 		appMenu.addItemWithTitle("Quit \(appName)", action: "terminate:", keyEquivalent: "q")
 
 		mainMenu.addItem(file._cocoaMenuItem)
+		mainMenu.addItem(view._cocoaMenuItem)
 		mainMenu.addItem(product._cocoaMenuItem)
 		mainMenu.addItem(debug._cocoaMenuItem)
 

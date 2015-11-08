@@ -29,12 +29,22 @@ extension MainMenuController {
 //
 //			}
 
-		case ~~fileCloseWorkspace: do {
+		case ~~fileCloseCurrentWorkspace: do {
 			assert(model!.currentWorkspace != nil, "This menu shouldn't be called if there's no current workspace.")
 			model!.closeWorkspace(model!.currentWorkspace!)
 			}
 
 
+		case ~~viewNavivatorFiles: do {
+			UIState.setStateForWorkspaceModel(model!.currentWorkspace!) { (inout state: WorkspaceUIState) -> () in
+				state.navigator	=	.Project
+			}
+		}
+		case ~~viewNavivatorDebug: do {
+			UIState.setStateForWorkspaceModel(model!.currentWorkspace!) { (inout state: WorkspaceUIState) -> () in
+				state.navigator	=	.Debug
+			}
+		}
 
 		case ~~productRun: do {
 			guard let workspace = model!.currentWorkspace else {
