@@ -86,6 +86,7 @@ class ToolButtonStrip: CommonView {
 			toolButtons[i].frame.origin	=	CGPoint(x: x, y: y)
 
 			x	+=	button.frame.width
+			x	+=	interButtonGap
 		}
 	}
 

@@ -55,20 +55,10 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 	public func run() {
 		assert(model != nil)
 
+		_reconfigureWindowAppearanceBehaviors()
+
 		_div.view.frame			=	CGRect(origin: CGPoint.zero, size: _getMinSize())
 		window!.contentViewController	=	_div
-
-		///
-
-		window!.styleMask		|=	NSClosableWindowMask
-						|	NSResizableWindowMask
-						|	NSMiniaturizableWindowMask
-		window!.titleVisibility		=	.Hidden
-
-		window!.setContentSize(_getMinSize())
-		window!.minSize			=	window!.frame.size
-		window!.setFrame(_getInitialFrameForScreen(window!.screen!, size: window!.minSize), display: false)
-		window!.collectionBehavior	=	NSWindowCollectionBehavior.FullScreenPrimary
 
 		///
 
@@ -95,6 +85,17 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 	private let	_div		=	DivisionUIController()
 	private let	_tools		=	ToolUIController()
 
+	private func _reconfigureWindowAppearanceBehaviors() {
+		window!.collectionBehavior	=	NSWindowCollectionBehavior.FullScreenPrimary
+		window!.styleMask		|=	NSClosableWindowMask
+						|	NSResizableWindowMask
+						|	NSMiniaturizableWindowMask
+		window!.titleVisibility		=	.Hidden
+
+		window!.setContentSize(_getMinSize())
+		window!.minSize			=	window!.frame.size
+		window!.setFrame(_getInitialFrameForScreen(window!.screen!, size: window!.minSize), display: false)
+	}
 	private func _installWindowAgent() {
 		_agent.owner		=	self
 	}

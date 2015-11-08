@@ -83,6 +83,7 @@ class NavigationUIController: CommonViewController {
 		_bottomLine.lineColor		=	NSColor.gridColor()
 		view.addSubview(_bottomLine)
 
+		_modeSelector.interButtonGap	=	2
 		_modeSelector.toolButtons	=	[
 			_fileTreeToolButton,
 			_debuggingToolButton,

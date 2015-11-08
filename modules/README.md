@@ -55,7 +55,7 @@ the other is view. For example,
 Every UI is basically implemented in view, and named like `~View`.
 
 
-All views are named like `~View`. Viewd named like `~View` are all pure views,
+All views are named like `~View`. Views named like `~View` are all pure views,
 and does not interact with model. 
 Model interactions are all done in a view-controller. These view-controllers
 are in charge of interacting with model. 
@@ -163,8 +163,8 @@ Issue History
 	this application at least for a while.
 
 	So, I cannot enable sandboxing. And temporarily, I decided
-	just to disable C++ exceptions. This with this, I cannot
-	track LLDB exceptions...
+	just to disable C++ exceptions. Though I cannot track LLDB
+	exceptions with this...
 
 
 

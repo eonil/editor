@@ -29,11 +29,10 @@ class FileNodeView: NSTableCellView {
 		}
 	}
 
-//	weak var model: FileNodeModel? {
-//		willSet {
-//			assert(window == nil)
-//		}
-//	}
+
+
+
+
 
 	///
 
@@ -62,33 +61,13 @@ class FileNodeView: NSTableCellView {
 		self.textField	=	_exprField
 		addSubview(_iconView)
 		addSubview(_exprField)
-
-
-
-//		_didSetPath()
-//		model!.path.registerDidSet(ObjectIdentifier(self)) { [weak self] in
-//			self!._didSetPath()
-//		}
-//		model!.path.registerWillSet(ObjectIdentifier(self)) { [weak self] in
-//			self!._willSetPath()
-//		}
 	}
 	private func _deinstall() {
-//		model!.path.deregisterDidSet(ObjectIdentifier(self))
-//		model!.path.deregisterWillSet(ObjectIdentifier(self))
-//		_willSetPath()
-
 		_exprField.removeFromSuperview()
 		_iconView.removeFromSuperview()
 		self.textField	=	nil
 		self.imageView	=	nil
 	}
-
-//	private func _didSetPath() {
-//		_exprField.stringValue	=	model!.path.value?.parts.last ?? ""
-//	}
-//	private func _willSetPath() {
-//	}
 }
 
 

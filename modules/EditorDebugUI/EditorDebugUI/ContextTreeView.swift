@@ -101,6 +101,7 @@ public class ContextTreeView: CommonView {
 
 	private func _install() {
 		_outlineA.owner		=	self
+		_outlineV.headerView	=	nil
 		_outlineV.setDataSource(_outlineA)
 		_outlineV.setDelegate(_outlineA)
 

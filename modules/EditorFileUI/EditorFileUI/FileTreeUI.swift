@@ -73,28 +73,32 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 		_layout()
 	}
 
+
+
+
+
+
+
 	///
 
 	private let	_scrollView	=	NSScrollView()
 	private let	_outlineView	=	_instantiateOutlineView()
 	private let	_outlineAgent	=	_OutlineAgent()
 
-//	private var	_subnodeArrayAgentMapping	=	[ObjectIdentifier: _SubnodeArrayAgent]()		//< Key is object identifier of source node.
 
 	private func _install() {
 		_outlineAgent.owner		=	self
+		_outlineView.headerView		=	nil
 		_outlineView.setDataSource(_outlineAgent)
 		_outlineView.setDelegate(_outlineAgent)
 		_scrollView.documentView	=	_outlineView
 		addSubview(_scrollView)
 		_outlineView.reloadData()
 
-//		_didSetRoot()
 		FileNodeModel.Event.Notification.register(ObjectIdentifier(self)) { [weak self] in self?._processNotification($0) }
 	}
 	private func _deinstall() {
 		FileNodeModel.Event.Notification.deregister(ObjectIdentifier(self))
-//		_willSetRoot()
 
 		_scrollView.documentView	=	nil
 		_scrollView.removeFromSuperview()
@@ -124,62 +128,18 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 
 		_outlineView.reloadData()
 	}
-
-	///
-
-//	private func _onDidChangeTree() {
-//		_outlineView.reloadData()
-//	}
-
-	///
-
-//	private func _didSetRoot() {
-//		if let root = model!.root.value {
-//			let	a	=	_SubnodeArrayAgent()
-//			a.owner		=	self
-//			a.node		=	root
-//			root.subnodes.register(a)
-//			assert(_subnodeArrayAgentMapping[ObjectIdentifier(root)] == nil)
-//			_subnodeArrayAgentMapping[ObjectIdentifier(root)]	=	a
-//		}
-//		_outlineView.reloadData()
-//	}
-//	private func _willSetRoot() {
-//		if let root = model!.root.value {
-//			assert(_subnodeArrayAgentMapping[ObjectIdentifier(root)] != nil)
-//			let	a	=	_subnodeArrayAgentMapping[ObjectIdentifier(root)]!
-//			_subnodeArrayAgentMapping[ObjectIdentifier(root)]	=	nil
-//			root.subnodes.deregister(a)
-//			a.node		=	nil
-//			a.owner		=	nil
-//		}
-//		_outlineView.reloadData()
-//	}
-//
-//	private func _didInsertSubnodesInRange(range: Range<Int>, of node: FileNodeModel) {
-//		for subnode in node.subnodes.array[range] {
-//			let	a	=	_SubnodeArrayAgent()
-//			a.owner		=	self
-//			a.node		=	subnode
-//			subnode.subnodes.register(a)
-//			assert(_subnodeArrayAgentMapping[ObjectIdentifier(subnode)] == nil)
-//			_subnodeArrayAgentMapping[ObjectIdentifier(subnode)]	=	a
-//		}
-//		_outlineView.reloadData()
-//	}
-//	private func _willDeleteSubnodesInRange(range: Range<Int>, of node: FileNodeModel) {
-//		for subnode in node.subnodes.array[range] {
-//			assert(_subnodeArrayAgentMapping[ObjectIdentifier(subnode)] != nil)
-//			let	a	=	_subnodeArrayAgentMapping[ObjectIdentifier(subnode)]!
-//			_subnodeArrayAgentMapping[ObjectIdentifier(subnode)]	=	nil
-//			subnode.subnodes.deregister(a)
-//			a.owner		=	nil
-//			a.node		=	nil
-//		}
-//		_outlineView.reloadData()
-//	}
-
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

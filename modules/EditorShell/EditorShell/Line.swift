@@ -51,7 +51,6 @@ class Line: CommonView {
 
 
 
-
 	///
 
 	private let _lineView	=	CommonView()
