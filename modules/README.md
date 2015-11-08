@@ -25,9 +25,6 @@ To Do
 - Add dumb text editor.
 - Handle selecting file in file tree and show it in text editor.
 
-- Add shortcuts to left subpanes. (Command+1, Command+2, Command+3, ...)
-- Add shortcut to close currently open file (
-
 
 
 
