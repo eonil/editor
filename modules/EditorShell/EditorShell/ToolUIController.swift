@@ -59,7 +59,7 @@ class ToolUIController {
 
 		_divsel.segmentCount	=	3
 		_divsel.setLabel("Navigator", forSegment: 0)
-		_divsel.setLabel("Editor", forSegment: 1)
+		_divsel.setLabel("Console", forSegment: 1)
 		_divsel.setLabel("Inspector", forSegment: 2)
 		_divsel.sizeToFit()
 		_divsel.target		=	_agent
