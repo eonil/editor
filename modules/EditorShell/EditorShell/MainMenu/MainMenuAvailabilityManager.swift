@@ -121,8 +121,9 @@ class MainMenuAvailabilityManager {
 		mainMenuController!.debugStepOver.enabled	=	cmds.contains(.StepOver)
 	}
 	private func _applyUIStateChange() {
-		mainMenuController!.viewNavivatorFiles.enabled	=	true
-		mainMenuController!.viewNavivatorDebug.enabled	=	true
+		mainMenuController!.viewShowProjectNavivator.enabled	=	true
+		mainMenuController!.viewShowDebugNavivator.enabled	=	true
+		mainMenuController!.viewHideNavigator.enabled		=	true
 	}
 }
 

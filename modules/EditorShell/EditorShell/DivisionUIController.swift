@@ -125,16 +125,16 @@ class DivisionUIController: CommonViewController {
 		guard n.sender === model else {
 			return
 		}
-		_applyStateChange()
+		_applyUIStateChange()
 	}
-	private func _applyStateChange() {
+	private func _applyUIStateChange() {
 		UIState.getStateForWorkspaceModel(model!) {
 			_outerSplit.items[0].isCollapsed	=	$0.navigationPaneVisibility == false
 			_innerSplit.items[2].isCollapsed	=	$0.consolePaneVisibility == false
 			_outerSplit.items[2].isCollapsed	=	$0.inspectionPaneVisibility == false
 		}
 	}
-	private func _notifyStateChange() {
+	private func _notifyUIStateChange() {
 		UIState.setStateForWorkspaceModel(model!) {
 			$0.navigationPaneVisibility		=	_outerSplit.items[0].isCollapsed
 			$0.consolePaneVisibility		=	_innerSplit.items[2].isCollapsed

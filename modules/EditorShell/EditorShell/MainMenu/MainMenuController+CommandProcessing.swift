@@ -35,14 +35,21 @@ extension MainMenuController {
 			}
 
 
-		case ~~viewNavivatorFiles: do {
+		case ~~viewShowProjectNavivator: do {
 			UIState.setStateForWorkspaceModel(model!.currentWorkspace!) { (inout state: WorkspaceUIState) -> () in
-				state.navigator	=	.Project
+				state.navigationPaneVisibility	=	true
+				state.navigator			=	.Project
 			}
 		}
-		case ~~viewNavivatorDebug: do {
+		case ~~viewShowDebugNavivator: do {
 			UIState.setStateForWorkspaceModel(model!.currentWorkspace!) { (inout state: WorkspaceUIState) -> () in
-				state.navigator	=	.Debug
+				state.navigationPaneVisibility	=	true
+				state.navigator			=	.Debug
+			}
+		}
+		case ~~viewHideNavigator: do {
+			UIState.setStateForWorkspaceModel(model!.currentWorkspace!) { (inout state: WorkspaceUIState) -> () in
+				state.navigationPaneVisibility	=	false
 			}
 		}
 

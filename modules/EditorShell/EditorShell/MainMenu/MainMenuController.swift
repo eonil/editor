@@ -66,9 +66,9 @@ class MainMenuController {
 
 	let	view				=	_instantiateGroupMenuItem("View")
 	let	viewNavigators			=	_instantiateGroupMenuItem("Navigators")
-//	let	viewNavivatorProject		=	_instantiateGroupMenuItem("Project Navigator",		Command+"1"			)
-	let	viewNavivatorFiles		=	_instantiateCommandMenuItem("File Navigator",		Command+"1"			)
-	let	viewNavivatorDebug		=	_instantiateCommandMenuItem("Debug Navigator",		Command+"2"			)
+	let	viewShowProjectNavivator	=	_instantiateCommandMenuItem("Show File Navigator",	Command+"1"			)
+	let	viewShowDebugNavivator		=	_instantiateCommandMenuItem("Show Debug Navigator",	Command+"2"			)
+	let	viewHideNavigator		=	_instantiateCommandMenuItem("Hide Navigator", 		Command+"0"			)
 
 	let	product				=	_instantiateGroupMenuItem("Product")
 	let	productRun			=	_instantiateCommandMenuItem("Run",			Command+"R"			)
@@ -108,8 +108,10 @@ class MainMenuController {
 			_instantiateSeparatorMenuItem()		//	Cocoa will add `Enter Full Screen` menu item automatically after this items. Prepare a separator for it.
 			])
 		viewNavigators.addSubmenuItems([
-			viewNavivatorFiles,
-			viewNavivatorDebug,
+			viewShowProjectNavivator,
+			viewShowDebugNavivator,
+			_instantiateSeparatorMenuItem(),
+			viewHideNavigator,
 			])
 
 		product.addSubmenuItems([

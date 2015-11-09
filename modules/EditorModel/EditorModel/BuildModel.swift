@@ -100,12 +100,7 @@ public class BuildModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 
 
-	///
 
-	/// Will be called by `CargoModel`.
-	func notifyCargoStateDidChange() {
-		_applyCargoState()
-	}
 
 
 
