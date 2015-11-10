@@ -64,9 +64,13 @@ class NavigationUIController: CommonViewController {
 	private let _bottomLine			=	Line()
 
 	private let _fileTreeUI			=	FileTreeUIController()
-	private let _contextTreeUI		=	ContextTreeUIController()
+	private let _debuggingNavigatorUI	=	DebuggingNavigatorUIController()
 
 	private var _mode			=	_Mode.Project
+
+
+
+
 
 
 
@@ -77,7 +81,7 @@ class NavigationUIController: CommonViewController {
 	private func _install() {
 		assert(model != nil)
 		_fileTreeUI.model		=	model!.file
-		_contextTreeUI.model		=	model!.debug
+		_debuggingNavigatorUI.model	=	model!.debug
 
 		_bottomLine.position		=	.MinY
 		_bottomLine.lineColor		=	NSColor.gridColor()
@@ -91,10 +95,9 @@ class NavigationUIController: CommonViewController {
 		view.addSubview(_modeSelector)
 
 		addChildViewController(_fileTreeUI)
-		addChildViewController(_contextTreeUI)
+		addChildViewController(_debuggingNavigatorUI)
 		view.addSubview(_fileTreeUI.view)
-		view.addSubview(_contextTreeUI.view)
-
+		view.addSubview(_debuggingNavigatorUI.view)
 
 		_fileTreeToolButton.target	=	self
 		_fileTreeToolButton.action	=	"EDITOR_onTapFiles"
@@ -108,16 +111,16 @@ class NavigationUIController: CommonViewController {
 		assert(model != nil)
 		Notification<WorkspaceModel,UIState.Event>.deregister	(self)
 
-		_contextTreeUI.view.removeFromSuperview()
+		_debuggingNavigatorUI.view.removeFromSuperview()
 		_fileTreeUI.view.removeFromSuperview()
-		_contextTreeUI.removeFromParentViewController()
+		_debuggingNavigatorUI.removeFromParentViewController()
 		_fileTreeUI.removeFromParentViewController()
 
 		_modeSelector.removeFromSuperview()
 		_bottomLine.removeFromSuperview()
 		_modeSelector.toolButtons	=	[]
 
-		_contextTreeUI.model		=	nil
+		_debuggingNavigatorUI.model		=	nil
 		_fileTreeUI.model		=	nil
 	}
 	private func _layout() {
@@ -126,7 +129,7 @@ class NavigationUIController: CommonViewController {
 		modeSelCut.maxY.applyToView(_modeSelector)
 		modeSelCut.maxY.applyToView(_bottomLine)
 		modeSelCut.rest.applyToView(_fileTreeUI.view)
-		modeSelCut.rest.applyToView(_contextTreeUI.view)
+		modeSelCut.rest.applyToView(_debuggingNavigatorUI.view)
 	}
 
 
@@ -160,16 +163,16 @@ class NavigationUIController: CommonViewController {
 	private func _applyModeSelectionChange() {
 		switch _mode {
 		case .Project:
-			_fileTreeUI.view.hidden		=	false
-			_fileTreeToolButton.state	=	NSOnState
-			_contextTreeUI.view.hidden	=	true
-			_debuggingToolButton.state	=	NSOffState
+			_fileTreeUI.view.hidden			=	false
+			_fileTreeToolButton.state		=	NSOnState
+			_debuggingNavigatorUI.view.hidden	=	true
+			_debuggingToolButton.state		=	NSOffState
 
 		case .Debug:
-			_fileTreeUI.view.hidden		=	true
-			_fileTreeToolButton.state	=	NSOffState
-			_contextTreeUI.view.hidden	=	false
-			_debuggingToolButton.state	=	NSOnState
+			_fileTreeUI.view.hidden			=	true
+			_fileTreeToolButton.state		=	NSOffState
+			_debuggingNavigatorUI.view.hidden	=	false
+			_debuggingToolButton.state		=	NSOnState
 
 		}
 	}

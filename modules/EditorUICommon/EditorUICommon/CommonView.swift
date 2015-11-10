@@ -8,7 +8,6 @@
 
 import Foundation
 import AppKit
-import EditorModel
 
 /// Provides a common feature set for a view.
 ///

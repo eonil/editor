@@ -70,10 +70,10 @@ class ToolUIController {
 		_agent.owner		=	self
 		_toolbar.delegate	=	_agent
 
-		Notification<WorkspaceModel,WorkspaceUIState>.register(self, ToolUIController._process)
+		Notification<WorkspaceModel,UIState.Event>.register(self, ToolUIController._process)
 	}
 	private func _deinstallToolItems() {
-		Notification<WorkspaceModel,WorkspaceUIState>.deregister(self)
+		Notification<WorkspaceModel,UIState.Event>.deregister(self)
 
 		_toolbar.delegate	=	nil
 		_agent.owner		=	nil
@@ -82,8 +82,9 @@ class ToolUIController {
 		_divsel.action		=	nil
 	}
 
+	
 
-	private func _process(n: Notification<WorkspaceModel, WorkspaceUIState>) {
+	private func _process(n: Notification<WorkspaceModel, UIState.Event>) {
 		guard n.sender === model! else {
 			return
 		}

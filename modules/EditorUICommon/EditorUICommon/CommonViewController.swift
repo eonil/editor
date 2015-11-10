@@ -8,7 +8,6 @@
 
 import Foundation
 import AppKit
-import EditorModel
 
 /// Provides a common feature set for a view-controller.
 ///
@@ -27,6 +26,10 @@ public class CommonViewController: NSViewController {
 		let	v	=	_InstallationEventRoutingView(frame: CGRect(x: 0, y: 0, width: 1024, height: 1024))	//	Initial frame size must be non-zero size. Otherwise AppKit will be broken.
 		v.owner		=	self
 		view		=	v
+
+		if _calledViewDidLoadOnceFlag == false {
+			viewDidLoad()
+		}
 	}
 	@available(*,unavailable)
 	public override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -67,11 +70,15 @@ public class CommonViewController: NSViewController {
 //	}
 	public override func viewDidLoad() {
 		super.viewDidLoad()
+		assert(_calledViewDidLoadOnceFlag == false)
+		_calledViewDidLoadOnceFlag	=	true
 //		view.addSubview(_installationEventRoutingView)
 	}
 
 
 	///
+
+	private var _calledViewDidLoadOnceFlag	=	false
 
 	private func _install() {
 		installSubcomponents()
