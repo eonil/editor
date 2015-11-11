@@ -57,14 +57,13 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 	public let	selection	=	ExecutionStateSelectionModel()
 //	public let	inspection	=	ExecutionStateInspectionModel()
 
-	public var currentFrame: LLDBFrame? {
-		willSet {
-			Event.WillMutate.dualcastAsNotificationWithSender(self)
-		}
-		didSet {
-			Event.DidMutate.dualcastAsNotificationWithSender(self)
-		}
-	}
+
+
+
+
+
+
+
 
 	///
 
@@ -74,18 +73,16 @@ public class DebuggingModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType
 		}
 	}
 
-	///
 
-//	public var stackFrames: ArrayStorage<StackFrame> {
-//		get {
-//			return	_stackFrames
-//		}
-//	}
-//	public var frameVariables: ArrayStorage<FrameVariable> {
-//		get {
-//			return	_frameVariables
-//		}
-//	}
+
+
+
+
+
+
+
+
+	///
 
 	public private(set) var targets: [DebuggingTargetModel] = []
 	public private(set) var currentTarget: DebuggingTargetModel? {

@@ -15,6 +15,10 @@ import EditorCommon
 ///
 class DebuggingListener {
 
+
+
+	///
+
 	var onEvent: (LLDBEvent->())?
 
 	var listener: LLDBListener {
@@ -23,12 +27,33 @@ class DebuggingListener {
 		}
 	}
 
+
+
+
+
+
+
+
+
+	///
+
 	func run() {
 		_run()
 	}
 	func halt() {
 		_halt()
 	}
+
+
+
+
+
+
+
+
+
+
+
 
 	///
 

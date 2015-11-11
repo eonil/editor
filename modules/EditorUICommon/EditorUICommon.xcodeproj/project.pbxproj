@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		451372A91B7ED75100ED9829 /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372A31B7ED74200ED9829 /* EditorCommon.framework */; };
 		451372BD1B7ED78500ED9829 /* MulticastingStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451372B91B7ED76F00ED9829 /* MulticastingStorage.framework */; };
+		454314551BF36EB800BF0EDA /* UIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454314541BF36EB800BF0EDA /* UIState.swift */; };
 		4554C9851B7DC068004987CC /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C97A1B7DC068004987CC /* EditorUICommon.framework */; };
 		4554C98A1B7DC068004987CC /* EditorUICommonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9891B7DC068004987CC /* EditorUICommonTests.swift */; };
 		4554C99B1B7DC08E004987CC /* CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9941B7DC08E004987CC /* CommonViewController.swift */; };
@@ -84,6 +85,7 @@
 /* Begin PBXFileReference section */
 		4513729D1B7ED74100ED9829 /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		451372B31B7ED76F00ED9829 /* MulticastingStorage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MulticastingStorage.xcodeproj; path = ../../submodules/MulticastingStorage/MulticastingStorage.xcodeproj; sourceTree = "<group>"; };
+		454314541BF36EB800BF0EDA /* UIState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIState.swift; sourceTree = "<group>"; };
 		4554C97A1B7DC068004987CC /* EditorUICommon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorUICommon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C97F1B7DC068004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4554C9841B7DC068004987CC /* EditorUICommonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorUICommonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +183,7 @@
 		4554C97C1B7DC068004987CC /* EditorUICommon */ = {
 			isa = PBXGroup;
 			children = (
+				454314541BF36EB800BF0EDA /* UIState.swift */,
 				4554C9A31B7DC0B9004987CC /* SplitViewController.swift */,
 				4554C9A41B7DC0B9004987CC /* ToolbarController.swift */,
 				4554C9A21B7DC096004987CC /* (dummies for quickies) */,
@@ -398,6 +401,7 @@
 				4554C9A61B7DC0B9004987CC /* ToolbarController.swift in Sources */,
 				4554C99D1B7DC08E004987CC /* CommonWindowController.swift in Sources */,
 				4554C99F1B7DC08E004987CC /* CoreGraphicsExtensions.swift in Sources */,
+				454314551BF36EB800BF0EDA /* UIState.swift in Sources */,
 				4554C9A01B7DC08E004987CC /* DummyViewController.swift in Sources */,
 				45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */,
 				4554C9A51B7DC0B9004987CC /* SplitViewController.swift in Sources */,

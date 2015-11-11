@@ -101,11 +101,23 @@ private func _searchBroadcastingStation<T: NotificationType>(_: T.Type) -> Multi
 
 
 private func _cast<N: NotificationType>(instance: N) {
+	Debug.log("Will broadcast: \(N.self) \(instance)")
+	assert({
+		guard N.self != ApplicationModel.Event.Notification.self else {
+			return	true
+		}
+		guard N.self != WorkspaceModel.Event.Notification.self else {
+			return	true
+		}
+		print("???")
+		return	true
+		}())
 	let	typeID	=	ObjectIdentifier(N)
 	if let mc = _mappings[typeID] {
 		let	mc1	=	mc as! MulticastStation<N>
 		mc1.cast(instance)
 	}
+	Debug.log("Did broadcast:  \(N.self) \(instance)")
 }
 
 private func _register<N: NotificationType, T: AnyObject>(type: N.Type, _ object: T, _ instanceMethod: T -> N -> ()) {

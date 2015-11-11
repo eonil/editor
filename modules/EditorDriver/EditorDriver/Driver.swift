@@ -11,6 +11,8 @@ import AppKit
 import MulticastingStorage
 import EditorModel
 import EditorShell
+import EditorUICommon
+
 
 
 public class Driver {

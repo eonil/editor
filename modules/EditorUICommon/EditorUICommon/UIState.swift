@@ -9,7 +9,7 @@
 import Foundation
 import EditorCommon
 import EditorModel
-
+import LLDBWrapper
 
 
 
@@ -24,11 +24,13 @@ public struct UIState {
 		assert(_isReady == false)
 		WorkspaceModel.Event.Notification.register(self, _process)
 		_isReady	=	true
+		Debug.log("UIState.initiate")
 	}
 	public static func terminate() {
 		assert(_isReady == true)
 		WorkspaceModel.Event.Notification.deregister(self)
 		_isReady	=	false
+		Debug.log("UIState.terminate")
 	}
 
 
@@ -37,7 +39,7 @@ public struct UIState {
 
 	///
 
-	enum Event {
+	public enum Event {
 		case Initiate
 		case Invalidate
 		case Terminate
@@ -48,19 +50,26 @@ public struct UIState {
 
 
 
+
+
+
 	///
 
-	static func getStateForWorkspaceModel(m: WorkspaceModel, @noescape process: (state: WorkspaceUIState) -> ()) {
-		assert(_isReady == true, "You must `initialize` this struct before using.")
-		assert(_workspaceToState[identityOf(m)] != nil, "A state for model `\(m)` has not been registered yet.")
-		process(state: _workspaceToState[identityOf(m)]!)
-	}
-	/// Fires a `Notification<WorkspaceModel,UIState.Event>` after state change.
-	static func setStateForWorkspaceModel(m: WorkspaceModel, @noescape process: (inout state: WorkspaceUIState) -> ()) {
-		assert(_isReady == true, "You must `initialize` this struct before using.")
-		assert(_workspaceToState[identityOf(m)] != nil, "A state for model `\(m)` has not been registered yet.")
-		process(state: &_workspaceToState[identityOf(m)]!)
-		Notification(m, Event.Invalidate).broadcast()
+	public enum ForWorkspaceModel {
+		public typealias	Notification	=	EditorModel.Notification<WorkspaceModel, Event>
+
+		public static func get(m: WorkspaceModel, @noescape process: (state: WorkspaceUIState) -> ()) {
+			assert(_isReady == true, "You must `initialize` this struct before using.")
+			assert(_workspaceToState[identityOf(m)] != nil, "Cannot find UI state for model `\(m)`.")
+			process(state: _workspaceToState[identityOf(m)]!)
+		}
+		/// Fires a `Notification<WorkspaceModel,UIState.Event>` after state change.
+		public static func set(m: WorkspaceModel, @noescape process: (inout state: WorkspaceUIState) -> ()) {
+			assert(_isReady == true, "You must `initialize` this struct before using.")
+			assert(_workspaceToState[identityOf(m)] != nil, "Cannot find UI state for model `\(m)`.")
+			process(state: &_workspaceToState[identityOf(m)]!)
+			Notification(m, Event.Invalidate).broadcast()
+		}
 	}
 
 
@@ -95,17 +104,19 @@ public struct UIState {
 
 
 
-struct WorkspaceUIState {
-	var navigationPaneVisibility: Bool	=	false
-	var inspectionPaneVisibility: Bool	=	false
-	var consolePaneVisibility: Bool		=	false
+public struct WorkspaceUIState {
+	public var navigationPaneVisibility: Bool	=	false
+	public var inspectionPaneVisibility: Bool	=	false
+	public var consolePaneVisibility: Bool		=	false
 
 
-	enum Navigator {
+	public enum Navigator {
 		case Project
 		case Debug
 	}
-	var navigator: Navigator		=	.Project
+	public var navigator: Navigator		=	.Project
+
+	public var debuggingSelection: (target: DebuggingTargetModel?, thread: LLDBThread?, frame: LLDBFrame?)		=	(nil, nil, nil)
 }
 
 

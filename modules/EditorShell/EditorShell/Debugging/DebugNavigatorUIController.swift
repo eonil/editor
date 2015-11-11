@@ -61,8 +61,8 @@ class DebuggingNavigatorUIController: CommonViewController {
 	///
 
 	private let	_splitViewController		=	NSSplitViewController()
-	private let	_frameStackTreeUIC		=	ContextTreeUIController()
-	private let	_frameVariableTreeUIC		=	VariableTreeUIController()
+	private let	_frameStackTreeUIC		=	FrameStackTreeUIController()
+	private let	_frameVariableTreeUIC		=	FrameVariableTreeUIController()
 }
 
 

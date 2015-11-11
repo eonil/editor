@@ -1,5 +1,5 @@
 //
-//  ContextTreeUIController.swift
+//  FrameStackTreeUIController.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/29.
@@ -14,7 +14,7 @@ import EditorModel
 import EditorUICommon
 import EditorDebugUI
 
-class ContextTreeUIController: CommonViewController {
+class FrameStackTreeUIController: CommonViewController {
 
 	weak var model: DebuggingModel? 
 
@@ -61,7 +61,7 @@ class ContextTreeUIController: CommonViewController {
 //		}
 //		view.addSubview(_treeView)
 //
-//		DebuggingModel.Event.Notification.register	(self, ContextTreeUIController._processDebuggingNotification)
+//		DebuggingModel.Event.Notification.register	(self, FrameStackTreeUIController._processDebuggingNotification)
 //	}
 //	private func _deinstall() {
 //		assert(model != nil)

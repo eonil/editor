@@ -1,5 +1,5 @@
 //
-//  VariableTreeUIController.swift
+//  FrameVariableTreeUIController.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/29.
@@ -12,7 +12,7 @@ import EditorModel
 import EditorUICommon
 import EditorDebugUI
 
-class VariableTreeUIController: CommonViewController {
+class FrameVariableTreeUIController: CommonViewController {
 
 	weak var model: DebuggingModel?
 
@@ -36,11 +36,13 @@ class VariableTreeUIController: CommonViewController {
 	private func _install() {
 		assert(model != nil)
 		view.addSubview(_treeView)
-		DebuggingModel.Event.Notification.register			(self, VariableTreeUIController._process)
-		DebuggingTargetExecutionModel.Event.Notification.register	(self, VariableTreeUIController._processDebuggingTargetExecutionModelEventNotification)
+		DebuggingModel.Event.Notification.register			(self, FrameVariableTreeUIController._process)
+		DebuggingTargetExecutionModel.Event.Notification.register	(self, FrameVariableTreeUIController._processDebuggingTargetExecutionModelEventNotification)
+		UIState.ForWorkspaceModel.Notification.register			(self, FrameVariableTreeUIController._process)
 	}
 	private func _deinstall() {
 		assert(model != nil)
+		UIState.ForWorkspaceModel.Notification.deregister		(self)	
 		DebuggingTargetExecutionModel.Event.Notification.deregister	(self)
 		DebuggingModel.Event.Notification.deregister			(self)
 		_treeView.removeFromSuperview()
@@ -64,6 +66,14 @@ class VariableTreeUIController: CommonViewController {
 	private func _processDebuggingTargetExecutionModelEventNotification(notification: DebuggingTargetExecutionModel.Event.Notification) {
 
 	}
+	private func _process(n: UIState.ForWorkspaceModel.Notification) {
+		guard n.sender === model!.workspace else {
+			return
+		}
+		UIState.ForWorkspaceModel.get(model!.workspace) {
+			_treeView.reconfigure($0.debuggingSelection.frame)
+		}
+	}
 
 
 
@@ -77,6 +87,19 @@ class VariableTreeUIController: CommonViewController {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

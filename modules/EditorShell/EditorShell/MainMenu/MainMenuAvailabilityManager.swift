@@ -8,6 +8,9 @@
 
 import Foundation
 import EditorModel
+import EditorUICommon
+
+
 
 class MainMenuAvailabilityManager {
 

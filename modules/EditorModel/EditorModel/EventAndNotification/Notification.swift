@@ -21,7 +21,13 @@ public struct Notification<O, N>: NotificationType {
 	public var	event: N
 }
 
-
+extension Notification: CustomStringConvertible {
+	public var description: String {
+		get {
+			return	"[NOTI: \(sender), \(event)]"
+		}
+	}
+}
 
 
 

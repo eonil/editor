@@ -145,7 +145,7 @@ class NavigationUIController: CommonViewController {
 //		}
 
 		let	oldMode	=	_mode
-		UIState.getStateForWorkspaceModel(model!) { state in
+		UIState.ForWorkspaceModel.get(model!) { state in
 			_mode	=	{
 				switch state.navigator {
 				case .Project:	return	.Project

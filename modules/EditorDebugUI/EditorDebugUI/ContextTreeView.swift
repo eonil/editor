@@ -84,11 +84,11 @@ public class ContextTreeView: CommonView {
 //		}
 //	}
 	public private(set) var currentFrame: LLDBFrame? {
-		didSet {
-			onUserDidSetFrame?()
-		}
 		willSet {
 			onUserWillSetFrame?()
+		}
+		didSet {
+			onUserDidSetFrame?()
 		}
 	}
 
@@ -129,14 +129,30 @@ public class ContextTreeView: CommonView {
 
 
 
-private func _instantiateOutlineView() -> NSOutlineView {
-	let	c	=	NSTableColumn()
-	let	v	=	NSOutlineView()
-	v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
-	v.addTableColumn(c)
-	v.outlineTableColumn	=	c
-	return	v
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -281,3 +297,25 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private func _instantiateOutlineView() -> NSOutlineView {
+	let	c	=	NSTableColumn()
+	let	v	=	NSOutlineView()
+	v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
+	v.addTableColumn(c)
+	v.outlineTableColumn	=	c
+	return	v
+}

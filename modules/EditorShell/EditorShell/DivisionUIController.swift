@@ -62,7 +62,7 @@ class DivisionUIController: CommonViewController {
 //	private let	_sample4	=	DummyViewController()
 
 	private let	_nav		=	NavigationUIController()
-	private let	_variables	=	VariableTreeUIController()
+	private let	_variables	=	FrameVariableTreeUIController()
 	private let	_report		=	ReportingUIController()
 
 	private func _install() {
@@ -128,14 +128,14 @@ class DivisionUIController: CommonViewController {
 		_applyUIStateChange()
 	}
 	private func _applyUIStateChange() {
-		UIState.getStateForWorkspaceModel(model!) {
+		UIState.ForWorkspaceModel.get(model!) {
 			_outerSplit.items[0].isCollapsed	=	$0.navigationPaneVisibility == false
 			_innerSplit.items[2].isCollapsed	=	$0.consolePaneVisibility == false
 			_outerSplit.items[2].isCollapsed	=	$0.inspectionPaneVisibility == false
 		}
 	}
 	private func _notifyUIStateChange() {
-		UIState.setStateForWorkspaceModel(model!) {
+		UIState.ForWorkspaceModel.set(model!) {
 			$0.navigationPaneVisibility		=	_outerSplit.items[0].isCollapsed
 			$0.consolePaneVisibility		=	_innerSplit.items[2].isCollapsed
 			$0.inspectionPaneVisibility		=	_outerSplit.items[2].isCollapsed

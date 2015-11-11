@@ -15,11 +15,27 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, 
 
 	public typealias	State	=	LLDBStateType
 
+
+
+
+
+
+
+	
 	///
 
 	internal init(LLDBProcess lldbProcess: LLDBProcess) {
 		_lldbProcess	=	lldbProcess
 	}
+
+
+
+
+
+
+
+
+
 
 	///
 
@@ -119,18 +135,21 @@ public class DebuggingTargetExecutionModel: ModelSubnode<DebuggingTargetModel>, 
 		}
 	}
 
-	func selectFrameAtIndex(index: Int) {
-		markUnimplemented()
-		fatalErrorBecauseUnimplementedYet()
-	}
-	func deselectFrame() {
-		markUnimplemented()
-		fatalErrorBecauseUnimplementedYet()
-	}
-	func reloadFrameAtIndex(index: Int) {
-		markUnimplemented()
-		fatalErrorBecauseUnimplementedYet()
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	///
 

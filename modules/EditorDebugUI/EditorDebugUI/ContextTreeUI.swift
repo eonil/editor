@@ -57,8 +57,16 @@ public class ContextTreeUI: CommonView {
 		DebuggingModel.Event.Notification.register			(self, ContextTreeUI._process)
 		DebuggingTargetModel.Event.Notification.register		(self, ContextTreeUI._process)
 		DebuggingTargetExecutionModel.Event.Notification.register	(self, ContextTreeUI._process)
+
+		_contextView.onUserDidSetFrame	=	{ [weak self] in
+			guard self != nil else {
+				return
+			}
+			self!._notifyChanges()
+		}
 	}
 	private func _deinstall() {
+		_contextView.onUserDidSetFrame	=	nil
 		DebuggingTargetExecutionModel.Event.Notification.deregister	(self)
 		DebuggingTargetModel.Event.Notification.deregister		(self)
 		DebuggingModel.Event.Notification.deregister			(self)
@@ -73,6 +81,36 @@ public class ContextTreeUI: CommonView {
 
 
 
+
+
+
+
+	///
+
+	private func _notifyChanges() {
+		assert(model != nil)
+		if let f = _contextView.currentFrame {
+			if let th = f.thread {
+				UIState.ForWorkspaceModel.set(model!.workspace) {
+					$0.debuggingSelection	=	(model!.currentTarget!, th, f)
+					()
+				}
+			}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+	///
 
 	private func _process(n: DebuggingModel.Event.Notification) {
 		guard n.sender === model else {
@@ -92,11 +130,6 @@ public class ContextTreeUI: CommonView {
 		}
 		_applyChanges()
 	}
-
-
-
-
-
 	private func _applyChanges() {
 		_contextView.reconfigure(model!.debugger)
 	}

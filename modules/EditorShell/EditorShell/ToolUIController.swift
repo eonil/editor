@@ -9,6 +9,9 @@
 import Foundation
 import AppKit
 import EditorModel
+import EditorUICommon
+
+
 
 class ToolUIController {
 
@@ -92,7 +95,7 @@ class ToolUIController {
 	}
 
 	private func _notifyStateChange() {
-		UIState.setStateForWorkspaceModel(model!) {
+		UIState.ForWorkspaceModel.set(model!) {
 			$0.navigationPaneVisibility	=	_divsel.isSelectedForSegment(0)
 			$0.consolePaneVisibility	=	_divsel.isSelectedForSegment(1)
 			$0.inspectionPaneVisibility	=	_divsel.isSelectedForSegment(2)
@@ -100,7 +103,7 @@ class ToolUIController {
 	}
 
 	private func _applyStateChange() {
-		UIState.getStateForWorkspaceModel(model!) {
+		UIState.ForWorkspaceModel.get(model!) {
 			_divsel.setSelected($0.navigationPaneVisibility, forSegment: 0)
 			_divsel.setSelected($0.consolePaneVisibility, forSegment: 1)
 			_divsel.setSelected($0.inspectionPaneVisibility, forSegment: 2)

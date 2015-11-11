@@ -97,6 +97,7 @@ private final class _VariableTreeAgent: NSObject, NSOutlineViewDataSource, NSOut
 	@objc
 	private func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
 		if item == nil {
+			Debug.log("owner!._dataTree.variables.count = \(owner!._dataTree.variables.count)")
 			return	owner!._dataTree.variables.count
 		}
 		if let node = item as? VariableNode {
@@ -181,6 +182,7 @@ private extension NSIndexSet {
 private func _instantiateOutlineView() -> NSOutlineView {
 	let	c	=	NSTableColumn()
 	let	v	=	NSOutlineView()
+	v.headerView	=	nil
 	v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
 	v.addTableColumn(c)
 	v.outlineTableColumn	=	c
