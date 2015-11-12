@@ -73,10 +73,10 @@ class ToolUIController {
 		_agent.owner		=	self
 		_toolbar.delegate	=	_agent
 
-		Notification<WorkspaceModel,UIState.Event>.register(self, ToolUIController._process)
+		Notification<WorkspaceModel,UIState.Event>.register	(self, ToolUIController._process)
 	}
 	private func _deinstallToolItems() {
-		Notification<WorkspaceModel,UIState.Event>.deregister(self)
+		Notification<WorkspaceModel,UIState.Event>.deregister	(self)
 
 		_toolbar.delegate	=	nil
 		_agent.owner		=	nil
@@ -91,7 +91,7 @@ class ToolUIController {
 		guard n.sender === model! else {
 			return
 		}
-		_applyStateChange()
+		_applyStateToOutput()
 	}
 
 	private func _notifyStateChange() {
@@ -102,7 +102,7 @@ class ToolUIController {
 		}
 	}
 
-	private func _applyStateChange() {
+	private func _applyStateToOutput() {
 		UIState.ForWorkspaceModel.get(model!) {
 			_divsel.setSelected($0.navigationPaneVisibility, forSegment: 0)
 			_divsel.setSelected($0.consolePaneVisibility, forSegment: 1)

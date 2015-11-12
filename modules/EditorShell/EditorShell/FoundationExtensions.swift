@@ -10,6 +10,22 @@ import Foundation
 
 extension NSNotificationCenter {
 	/// Only for main thread.
+	func addUIObserver<T: AnyObject>(instance: T, _ instanceMethod: T -> (NSNotification) -> (), _ notificationName: String) {
+		assert(NSThread.isMainThread())
+		addUIObserver(ObjectIdentifier(instance), forNotificationName: notificationName) { [weak instance](n: NSNotification) -> () in
+			assert(instance != nil)
+			instanceMethod(instance!)(n)
+		}
+	}
+	/// Only for main thread.
+	func removeUIObserver<T: AnyObject>(instance: T, _ notificationName: String) {
+		assert(NSThread.isMainThread())
+		removeUIObserver(ObjectIdentifier(instance), forNotificationName: notificationName)
+	}
+	
+
+
+	/// Only for main thread.
 	func addUIObserver(identifier: ObjectIdentifier, forNotificationName name: String, handler: (NSNotification)->()) {
 		assert(NSThread.isMainThread())
 

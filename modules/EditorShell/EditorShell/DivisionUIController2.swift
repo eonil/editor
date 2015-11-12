@@ -68,6 +68,7 @@ class DivisionUIController2: CommonViewController {
 
 
 
+
 	///
 
 	private let _outerSplitVC		=	NSSplitViewController()
@@ -84,9 +85,12 @@ class DivisionUIController2: CommonViewController {
 	private let _editingVC			=	EditUIController()
 
 	private var _splitItems			:	(outer: (left: NSSplitViewItem, right: NSSplitViewItem), inner: (top: NSSplitViewItem, bottom: NSSplitViewItem))?
+	private var _collapsingState		:	(outer: (left: Bool, right: Bool), inner: (top: Bool, bottom: Bool))?
+
 //	private var _splitItemMapping		=	Dictionary<ReferentialIdentity<NSViewController>, NSSplitView>()
 
 	private func _install() {
+		// Initial metrics defines initial layout. We need these.
 		_navigationVC.view.frame.size.width	=	200
 		_inspectionVC.view.frame.size.width	=	200
 		_reportingVC.view.frame.size.height	=	100
@@ -96,6 +100,7 @@ class DivisionUIController2: CommonViewController {
 			m.minimumThickness		=	100
 			m.preferredThicknessFraction	=	0.1
 			m.automaticMaximumThickness	=	100
+			m.canCollapse			=	true
 			return	m
 		}
 		func inspItem() -> NSSplitViewItem {
@@ -103,6 +108,7 @@ class DivisionUIController2: CommonViewController {
 			m.minimumThickness		=	100
 			m.preferredThicknessFraction	=	0.1
 			m.automaticMaximumThickness	=	100
+			m.canCollapse			=	true
 			return	m
 		}
 		func centerItem() -> NSSplitViewItem {
@@ -117,6 +123,7 @@ class DivisionUIController2: CommonViewController {
 			m.minimumThickness		=	100
 			m.preferredThicknessFraction	=	0.1
 			m.automaticMaximumThickness	=	100
+			m.canCollapse			=	true
 			return	m
 		}
 		func editItem() -> NSSplitViewItem {
@@ -149,10 +156,12 @@ class DivisionUIController2: CommonViewController {
 		addChildViewController(_outerSplitVC)
 		view.addSubview(_outerSplitVC.view)
 
+		NSNotificationCenter.defaultCenter().addUIObserver	(self, DivisionUIController2._process, NSSplitViewDidResizeSubviewsNotification)
 		UIState.ForWorkspaceModel.Notification.register		(self, DivisionUIController2._process)
 	}
 	private func _deinstall() {
 		UIState.ForWorkspaceModel.Notification.deregister	(self)
+		NSNotificationCenter.defaultCenter().removeUIObserver	(self, NSSplitViewDidResizeSubviewsNotification)
 
 		_outerSplitVC.view.removeFromSuperview()
 		_outerSplitVC.removeFromParentViewController()
@@ -173,12 +182,59 @@ class DivisionUIController2: CommonViewController {
 
 
 
-	///
-//	public var navigationPaneVisibility: Bool	=	false
-//	public var inspectionPaneVisibility: Bool	=	false
-//	public var consolePaneVisibility: Bool		=	false
 
-	private func _notifyStateChanges() {
+
+
+
+
+
+	/// 
+
+	private func _getCollapsingState() -> (outer: (left: Bool, right: Bool), inner: (top: Bool, bottom: Bool)) {
+		return	(
+			(_splitItems!.outer.left.collapsed, _splitItems!.outer.right.collapsed),
+			(_splitItems!.inner.top.collapsed, _splitItems!.inner.bottom.collapsed))
+	}
+	private func _process(n: NSNotification) {
+		guard n.object === _outerSplitVC.splitView || n.object === _innerSplitVC.splitView else {
+			return
+		}
+
+		switch n.name {
+		case NSSplitViewDidResizeSubviewsNotification:
+			let	oldState	=	_collapsingState ?? _getCollapsingState()
+			let	newState	=	_getCollapsingState()
+			let	noChange	=	newState.outer.left == oldState.outer.left
+						&&	newState.outer.right == oldState.outer.right
+						&&	newState.inner.top == oldState.inner.top
+						&&	newState.inner.bottom == oldState.inner.bottom
+
+			if noChange == false {
+				_applyInputToState()
+			}
+
+			_collapsingState	=	newState
+
+		default:
+			fatalError()
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///
+
+	private func _applyInputToState() {
 		UIState.ForWorkspaceModel.set(model!) {
 			$0.navigationPaneVisibility	=	_splitItems!.outer.left.collapsed == false
 			$0.inspectionPaneVisibility	=	_splitItems!.outer.right.collapsed == false
@@ -225,6 +281,44 @@ class DivisionUIController2: CommonViewController {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//private class _ObserveableSplitViewController: NSSplitViewController {
+//	var onWillResizeSubviews: (()->())?
+//	var onDidResizeSubviews: (()->())?
+//	private func splitViewWillResizeSubviews(notification: NSNotification) {
+//		super.splitViewWillResizeSubviews(notification)
+//	}
+//	private override func splitViewDidResizeSubviews(notification: NSNotification) {
+//		onDidResizeSubviews?()
+//		super.splitViewDidResizeSubviews(notification)
+//	}
+//}
 
 
 

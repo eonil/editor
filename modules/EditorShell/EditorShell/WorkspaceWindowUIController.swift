@@ -67,6 +67,12 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 
 		window!.delegate		=	_agent
 		window!.makeKeyAndOrderFront(nil)
+
+		UIState.ForWorkspaceModel.set(model!) {
+			$0.navigationPaneVisibility	=	true
+			$0.inspectionPaneVisibility	=	true
+			$0.consolePaneVisibility	=	true
+		}
 	}
 	public func halt() {
 		assert(model != nil)
