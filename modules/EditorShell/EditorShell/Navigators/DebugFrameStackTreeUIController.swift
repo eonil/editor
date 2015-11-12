@@ -1,5 +1,5 @@
 //
-//  FrameStackTreeUIController.swift
+//  DebugFrameStackTreeUIController.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/29.
@@ -14,7 +14,7 @@ import EditorModel
 import EditorUICommon
 import EditorDebugUI
 
-class FrameStackTreeUIController: CommonViewController {
+class DebugFrameStackTreeUIController: CommonViewController {
 
 	weak var model: DebuggingModel? 
 

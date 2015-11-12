@@ -1,5 +1,5 @@
 //
-//  FrameVariableTreeUIController.swift
+//  DebugFrameVariableTreeUIController.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/29.
@@ -12,7 +12,7 @@ import EditorModel
 import EditorUICommon
 import EditorDebugUI
 
-class FrameVariableTreeUIController: CommonViewController {
+class DebugFrameVariableTreeUIController: CommonViewController {
 
 	weak var model: DebuggingModel?
 
@@ -36,9 +36,9 @@ class FrameVariableTreeUIController: CommonViewController {
 	private func _install() {
 		assert(model != nil)
 		view.addSubview(_treeView)
-		DebuggingModel.Event.Notification.register			(self, FrameVariableTreeUIController._process)
-		DebuggingTargetExecutionModel.Event.Notification.register	(self, FrameVariableTreeUIController._processDebuggingTargetExecutionModelEventNotification)
-		UIState.ForWorkspaceModel.Notification.register			(self, FrameVariableTreeUIController._process)
+		DebuggingModel.Event.Notification.register			(self, DebugFrameVariableTreeUIController._process)
+		DebuggingTargetExecutionModel.Event.Notification.register	(self, DebugFrameVariableTreeUIController._processDebuggingTargetExecutionModelEventNotification)
+		UIState.ForWorkspaceModel.Notification.register			(self, DebugFrameVariableTreeUIController._process)
 	}
 	private func _deinstall() {
 		assert(model != nil)

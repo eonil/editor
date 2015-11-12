@@ -14,9 +14,6 @@
 		453DFED31BF4CEC3008D7DB1 /* InspectionUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFECF1BF4CEC3008D7DB1 /* InspectionUIController.swift */; };
 		453DFED41BF4CEC3008D7DB1 /* NavigationUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFED01BF4CEC3008D7DB1 /* NavigationUIController.swift */; };
 		453DFED51BF4CEC3008D7DB1 /* ReportUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFED11BF4CEC3008D7DB1 /* ReportUIController.swift */; };
-		453DFEE71BF4CF5E008D7DB1 /* DebugNavigatorUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEE31BF4CF5E008D7DB1 /* DebugNavigatorUIController.swift */; };
-		453DFEE81BF4CF5E008D7DB1 /* FrameStackTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEE41BF4CF5E008D7DB1 /* FrameStackTreeUIController.swift */; };
-		453DFEE91BF4CF5E008D7DB1 /* FrameVariableTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEE51BF4CF5E008D7DB1 /* FrameVariableTreeUIController.swift */; };
 		453DFEEA1BF4CF5E008D7DB1 /* FileTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEE61BF4CF5E008D7DB1 /* FileTreeUIController.swift */; };
 		453DFEF21BF4CFB7008D7DB1 /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEEC1BF4CFB7008D7DB1 /* CoreGraphicsExtensions.swift */; };
 		453DFEF31BF4CFB7008D7DB1 /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEED1BF4CFB7008D7DB1 /* Dialogue.swift */; };
@@ -24,6 +21,9 @@
 		453DFEF51BF4CFB7008D7DB1 /* LayoutBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEEF1BF4CFB7008D7DB1 /* LayoutBox.swift */; };
 		453DFEF61BF4CFB7008D7DB1 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEF01BF4CFB7008D7DB1 /* Line.swift */; };
 		453DFEF71BF4CFB7008D7DB1 /* ToolButtonStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEF11BF4CFB7008D7DB1 /* ToolButtonStrip.swift */; };
+		453DFEFB1BF4D077008D7DB1 /* DebugFrameStackTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEF81BF4D077008D7DB1 /* DebugFrameStackTreeUIController.swift */; };
+		453DFEFC1BF4D077008D7DB1 /* DebugFrameVariableTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEF91BF4D077008D7DB1 /* DebugFrameVariableTreeUIController.swift */; };
+		453DFEFD1BF4D077008D7DB1 /* DebugNavigatorUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEFA1BF4D077008D7DB1 /* DebugNavigatorUIController.swift */; };
 		4543145E1BF3A50700BF0EDA /* DivisionUIController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543145D1BF3A50700BF0EDA /* DivisionUIController2.swift */; };
 		4554C8181B7DBED9004987CC /* EditorShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C80D1B7DBED9004987CC /* EditorShell.framework */; };
 		4554C81D1B7DBED9004987CC /* EditorShellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C81C1B7DBED9004987CC /* EditorShellTests.swift */; };
@@ -139,9 +139,6 @@
 		453DFECF1BF4CEC3008D7DB1 /* InspectionUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectionUIController.swift; sourceTree = "<group>"; };
 		453DFED01BF4CEC3008D7DB1 /* NavigationUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationUIController.swift; sourceTree = "<group>"; };
 		453DFED11BF4CEC3008D7DB1 /* ReportUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUIController.swift; sourceTree = "<group>"; };
-		453DFEE31BF4CF5E008D7DB1 /* DebugNavigatorUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugNavigatorUIController.swift; sourceTree = "<group>"; };
-		453DFEE41BF4CF5E008D7DB1 /* FrameStackTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameStackTreeUIController.swift; sourceTree = "<group>"; };
-		453DFEE51BF4CF5E008D7DB1 /* FrameVariableTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameVariableTreeUIController.swift; sourceTree = "<group>"; };
 		453DFEE61BF4CF5E008D7DB1 /* FileTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeUIController.swift; sourceTree = "<group>"; };
 		453DFEEC1BF4CFB7008D7DB1 /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
 		453DFEED1BF4CFB7008D7DB1 /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
@@ -149,6 +146,9 @@
 		453DFEEF1BF4CFB7008D7DB1 /* LayoutBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutBox.swift; sourceTree = "<group>"; };
 		453DFEF01BF4CFB7008D7DB1 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		453DFEF11BF4CFB7008D7DB1 /* ToolButtonStrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolButtonStrip.swift; sourceTree = "<group>"; };
+		453DFEF81BF4D077008D7DB1 /* DebugFrameStackTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameStackTreeUIController.swift; sourceTree = "<group>"; };
+		453DFEF91BF4D077008D7DB1 /* DebugFrameVariableTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFrameVariableTreeUIController.swift; sourceTree = "<group>"; };
+		453DFEFA1BF4D077008D7DB1 /* DebugNavigatorUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugNavigatorUIController.swift; sourceTree = "<group>"; };
 		4543145D1BF3A50700BF0EDA /* DivisionUIController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivisionUIController2.swift; sourceTree = "<group>"; };
 		4554C80D1B7DBED9004987CC /* EditorShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8121B7DBED9004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -242,19 +242,11 @@
 			isa = PBXGroup;
 			children = (
 				453DFEE61BF4CF5E008D7DB1 /* FileTreeUIController.swift */,
-				453DFEE21BF4CF5E008D7DB1 /* Debugging */,
+				453DFEF81BF4D077008D7DB1 /* DebugFrameStackTreeUIController.swift */,
+				453DFEF91BF4D077008D7DB1 /* DebugFrameVariableTreeUIController.swift */,
+				453DFEFA1BF4D077008D7DB1 /* DebugNavigatorUIController.swift */,
 			);
 			path = Navigators;
-			sourceTree = "<group>";
-		};
-		453DFEE21BF4CF5E008D7DB1 /* Debugging */ = {
-			isa = PBXGroup;
-			children = (
-				453DFEE31BF4CF5E008D7DB1 /* DebugNavigatorUIController.swift */,
-				453DFEE41BF4CF5E008D7DB1 /* FrameStackTreeUIController.swift */,
-				453DFEE51BF4CF5E008D7DB1 /* FrameVariableTreeUIController.swift */,
-			);
-			path = Debugging;
 			sourceTree = "<group>";
 		};
 		453DFEEB1BF4CFB7008D7DB1 /* Common */ = {
@@ -597,22 +589,22 @@
 			files = (
 				453DFED51BF4CEC3008D7DB1 /* ReportUIController.swift in Sources */,
 				45FECE6D1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift in Sources */,
+				453DFEFD1BF4D077008D7DB1 /* DebugNavigatorUIController.swift in Sources */,
+				453DFEFB1BF4D077008D7DB1 /* DebugFrameStackTreeUIController.swift in Sources */,
 				453DFEF71BF4CFB7008D7DB1 /* ToolButtonStrip.swift in Sources */,
 				4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */,
-				453DFEE81BF4CF5E008D7DB1 /* FrameStackTreeUIController.swift in Sources */,
 				45250B1C1BEB7875003A862A /* Protocols.swift in Sources */,
-				453DFEE71BF4CF5E008D7DB1 /* DebugNavigatorUIController.swift in Sources */,
 				45FF2F031BDD0A32001577B7 /* WorkspaceDocument.swift in Sources */,
 				4522B19A1B84E51F00E219F9 /* xFileMenuController.swift in Sources */,
 				453DFEF51BF4CFB7008D7DB1 /* LayoutBox.swift in Sources */,
 				453DFEEA1BF4CF5E008D7DB1 /* FileTreeUIController.swift in Sources */,
 				453DFEF61BF4CFB7008D7DB1 /* Line.swift in Sources */,
 				4554C9B61B7DC0D7004987CC /* ToolUIController.swift in Sources */,
-				453DFEE91BF4CF5E008D7DB1 /* FrameVariableTreeUIController.swift in Sources */,
 				45FECE6F1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift in Sources */,
 				45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */,
 				453DFED31BF4CEC3008D7DB1 /* InspectionUIController.swift in Sources */,
 				453DFED21BF4CEC3008D7DB1 /* EditUIController.swift in Sources */,
+				453DFEFC1BF4D077008D7DB1 /* DebugFrameVariableTreeUIController.swift in Sources */,
 				4554C9B51B7DC0D7004987CC /* WorkspaceWindowUIController.swift in Sources */,
 				4543145E1BF3A50700BF0EDA /* DivisionUIController2.swift in Sources */,
 				45FECE691BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift in Sources */,
