@@ -60,7 +60,7 @@ class MainMenuController {
 	let	fileNewFolder			=	_instantiateCommandMenuItem("Folder...",		Command+Alternate+"N"		)
 	let	fileOpen			=	_instantiateGroupMenuItem("Open")
 	let	fileOpenWorkspace		=	_instantiateCommandMenuItem("Workspace...", 		Command+"O"			)
-	let	fileOpenClearWorkspaceHistory		=	_instantiateCommandMenuItem("Clear Recent Workspaces",	nil	 		)
+	let	fileOpenClearWorkspaceHistory	=	_instantiateCommandMenuItem("Clear Recent Workspaces",	nil	 		)
 	let	fileCloseCurrentFile		=	_instantiateCommandMenuItem("Close File",		Command+Shift+"W"		)
 	let	fileCloseCurrentWorkspace	=	_instantiateCommandMenuItem("Close Workspace",		Command+"W"			)
 
