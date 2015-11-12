@@ -116,7 +116,8 @@ public struct WorkspaceUIState {
 	}
 	public var navigator: Navigator		=	.Project
 
-	public var debuggingSelection: (target: DebuggingTargetModel?, thread: LLDBThread?, frame: LLDBFrame?)		=	(nil, nil, nil)
+	public var debuggingSelection		:	(target: DebuggingTargetModel?, thread: LLDBThread?, frame: LLDBFrame?)		=	(nil, nil, nil)
+	public var editingSelection		:	NSURL?
 }
 
 

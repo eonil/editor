@@ -127,7 +127,7 @@ public class ApplicationUIController: SessionProtocol {
 			guard self != nil else {
 				return
 			}
-			guard let ui = window.windowController as? WorkspaceWindowUIController else {
+			guard let _ = window.windowController as? WorkspaceWindowUIController else {
 				return
 			}
 

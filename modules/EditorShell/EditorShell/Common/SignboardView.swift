@@ -72,7 +72,8 @@ class SignboardView: CommonView {
 		addLayoutGuide(_contentBox)
 
 		_constraints	=	[
-			_bodyLabel.topAnchor.constraintLessThanOrEqualToAnchor(_headLabel.bottomAnchor, constant: 10),
+//			_bodyLabel.topAnchor.constraintEqualToAnchor(_headLabel.bottomAnchor),
+			_bodyLabel.topAnchor.constraintGreaterThanOrEqualToAnchor(_headLabel.bottomAnchor, constant: 10),
 			_headLabel.centerXAnchor.constraintEqualToAnchor(_contentBox.centerXAnchor),
 			_bodyLabel.centerXAnchor.constraintEqualToAnchor(_contentBox.centerXAnchor),
 			_contentBox.topAnchor.constraintEqualToAnchor(_headLabel.topAnchor),
@@ -91,6 +92,8 @@ class SignboardView: CommonView {
 		_headLabel.removeFromSuperview()
 	}
 	private func _layout() {
+		_headLabel.preferredMaxLayoutWidth	=	bounds.width - 20
+		_bodyLabel.preferredMaxLayoutWidth	=	bounds.width - 20
 	}
 }
 
@@ -109,14 +112,14 @@ private func _instantiateContentBox() -> NSLayoutGuide {
 private func _instantiateBodyLabel() -> NSTextField {
 	let	v	=	_instantiateLabel()
 	v.identifier	=	"BODY"
-	v.font		=	NSFont.systemFontOfSize(14, weight: 0)
+	v.font		=	NSFont.systemFontOfSize(12, weight: 0)
 	v.textColor	=	NSColor.disabledControlTextColor()
 	return	v
 }
 private func _instantiateHeadLabel() -> NSTextField {
 	let	v	=	_instantiateLabel()
 	v.identifier	=	"HEAD"
-	v.font		=	NSFont.systemFontOfSize(12, weight: 0)
+	v.font		=	NSFont.systemFontOfSize(14, weight: 0)
 	v.textColor	=	NSColor.disabledControlTextColor()
 	return	v
 }
@@ -143,6 +146,7 @@ private func _instantiateLabel() -> NSTextField {
 	v.editable		=	false
 	v.bordered		=	false
 	v.backgroundColor	=	nil
+	v.alignment		=	.Center
 	return	v
 }
 

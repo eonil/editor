@@ -13,12 +13,16 @@ import EditorUICommon
 
 class EditTextFileUIController: CommonViewController {
 
-	var location: NSURL? {
+	var string: String? {
 		willSet {
-
+			if let _ = string {
+				_textView.string	=	nil
+			}
 		}
 		didSet {
-
+			if let string = string {
+				_textView.string	=	string
+			}
 		}
 	}
 

@@ -13,13 +13,13 @@ import EditorCommon
 import EditorModel
 import EditorUICommon
 
-public protocol FileTreeUIDelegate: class {
-	func fileTreeView(fileTreeView: FileTreeUI, didSelectFileNodes: [FileNodeModel])
-	func fileTreeView(fileTreeView: FileTreeUI, didDeselectFileNodes: [FileNodeModel])
-}
+//public protocol FileTreeUIDelegate: class {
+//	func fileTreeView(fileTreeView: FileTreeUI, didSelectFileNodes: [FileNodeModel])
+//	func fileTreeView(fileTreeView: FileTreeUI, didDeselectFileNodes: [FileNodeModel])
+//}
 public class FileTreeUI: CommonView, FileTreeUIProtocol {
 
-	public weak var delegate: FileTreeUIDelegate?
+//	public weak var delegate: FileTreeUIDelegate?
 
 	public var selectedFileNodes: [FileNodeModel] {
 		get {
@@ -98,7 +98,6 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 	private func _install() {
 		_scrollView.drawsBackground	=	false
 		_outlineAgent.owner		=	self
-
 		_outlineView.setDataSource(_outlineAgent)
 		_outlineView.setDelegate(_outlineAgent)
 		_scrollView.documentView	=	_outlineView
@@ -257,6 +256,41 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 			return	v
 		}
 		return	nil
+	}
+
+
+
+
+
+//	@objc
+//	private func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool {
+//
+//	}
+
+	@objc
+	private func outlineViewSelectionDidChange(notification: NSNotification) {
+		func getSelectedItem() -> FileNodeModel? {
+			let	ridx	=	owner!._outlineView.selectedRow
+			guard ridx != NSNotFound else {
+				return	nil
+			}
+			guard let item = owner!._outlineView.itemAtRow(ridx) as? FileNodeModel else {
+				return	nil
+			}
+			return	item
+		}
+		if let item = getSelectedItem() {
+			UIState.ForWorkspaceModel.set(owner!.model!.workspace) {
+				$0.editingSelection	=	item.resolvePath().absoluteFileURL(`for`: owner!.model!.workspace)
+				()
+			}
+		}
+		else {
+			UIState.ForWorkspaceModel.set(owner!.model!.workspace) {
+				$0.editingSelection	=	nil
+				()
+			}
+		}
 	}
 }
 

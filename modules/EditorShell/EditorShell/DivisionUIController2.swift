@@ -29,7 +29,7 @@ class DivisionUIController2: CommonViewController {
 			_navigationVC.model	=	model
 			_reportingVC.model	=	model
 //			_inspectionVC.model	=	model
-//			_editingVC.model
+			_editingVC.model	=	model
 		}
 	}
 
