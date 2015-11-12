@@ -52,7 +52,7 @@ public class VariableTreeView: CommonView {
 
 	///
 
-	private let	_scrollView	=	NSScrollView()
+	private let	_scrollView	=	_instantiateScrollView()
 	private let	_outlineView	=	_instantiateOutlineView()
 	private let	_outlineAgent	=	_VariableTreeAgent()
 	private let	_dataTree	=	VariableTree()
@@ -178,6 +178,13 @@ private extension NSIndexSet {
 
 
 
+
+private func _instantiateScrollView() -> NSScrollView {
+	let	v	=	NSScrollView()
+	v.drawsBackground	=	false
+	return	v
+}
+
 private func _instantiateOutlineView() -> NSOutlineView {
 	let	c	=	NSTableColumn()
 	let	v	=	NSOutlineView()
@@ -185,6 +192,7 @@ private func _instantiateOutlineView() -> NSOutlineView {
 	v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
 	v.addTableColumn(c)
 	v.outlineTableColumn	=	c
+	v.backgroundColor	=	NSColor.clearColor()
 	return	v
 }
 

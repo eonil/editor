@@ -58,6 +58,15 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 		_outlineView.reloadData()
 	}
 
+
+
+
+
+
+
+
+
+
 	///
 
 	public override func installSubcomponents() {
@@ -87,8 +96,9 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 
 
 	private func _install() {
+		_scrollView.drawsBackground	=	false
 		_outlineAgent.owner		=	self
-		_outlineView.headerView		=	nil
+
 		_outlineView.setDataSource(_outlineAgent)
 		_outlineView.setDelegate(_outlineAgent)
 		_scrollView.documentView	=	_outlineView
@@ -149,6 +159,8 @@ private func _instantiateOutlineView() -> NSOutlineView {
 	v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
 	v.addTableColumn(c)
 	v.outlineTableColumn	=	c
+	v.headerView		=	nil
+	v.backgroundColor	=	NSColor.clearColor()
 	return	v
 }
 

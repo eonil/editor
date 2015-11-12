@@ -94,18 +94,17 @@ public class ContextTreeView: CommonView {
 
 	///
 
-	private let	_scrollV	=	NSScrollView()
+	private let	_scrollV	=	_instantiateScrollView()
 	private let	_outlineV	=	_instantiateOutlineView()
 	private let	_outlineA	=	_OutlineAgent()
 	private let	_dataTree	=	ContextTree()
 
 	private func _install() {
 		_outlineA.owner		=	self
-		_outlineV.headerView	=	nil
 		_outlineV.setDataSource(_outlineA)
 		_outlineV.setDelegate(_outlineA)
 
-		_scrollV.documentView	=	_outlineV
+		_scrollV.documentView		=	_outlineV
 		addSubview(_scrollV)
 
 		_outlineV.reloadData()
@@ -309,7 +308,11 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 
 
 
-
+private func _instantiateScrollView() -> NSScrollView {
+	let	v	=	NSScrollView()
+	v.drawsBackground	=	false
+	return	v
+}
 
 private func _instantiateOutlineView() -> NSOutlineView {
 	let	c	=	NSTableColumn()
@@ -317,5 +320,10 @@ private func _instantiateOutlineView() -> NSOutlineView {
 	v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
 	v.addTableColumn(c)
 	v.outlineTableColumn	=	c
+	v.headerView		=	nil
+	v.backgroundColor	=	NSColor.clearColor()
 	return	v
 }
+
+
+

@@ -80,6 +80,7 @@ class NavigationUIController: CommonViewController {
 
 	private func _install() {
 		assert(model != nil)
+
 		_fileTreeUI.model		=	model!.file
 		_debuggingNavigatorUI.model	=	model!.debug
 
