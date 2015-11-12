@@ -13,6 +13,7 @@
 		454314511BF24FD900BF0EDA /* FrameStackTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543144E1BF24FD900BF0EDA /* FrameStackTreeUIController.swift */; };
 		454314521BF24FD900BF0EDA /* DebugNavigatorUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543144F1BF24FD900BF0EDA /* DebugNavigatorUIController.swift */; };
 		454314531BF24FD900BF0EDA /* FrameVariableTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454314501BF24FD900BF0EDA /* FrameVariableTreeUIController.swift */; };
+		4543145E1BF3A50700BF0EDA /* DivisionUIController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543145D1BF3A50700BF0EDA /* DivisionUIController2.swift */; };
 		4554C8181B7DBED9004987CC /* EditorShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C80D1B7DBED9004987CC /* EditorShell.framework */; };
 		4554C81D1B7DBED9004987CC /* EditorShellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C81C1B7DBED9004987CC /* EditorShellTests.swift */; };
 		4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A71B7DC0D7004987CC /* DivisionUIController.swift */; };
@@ -137,6 +138,7 @@
 		4543144E1BF24FD900BF0EDA /* FrameStackTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameStackTreeUIController.swift; sourceTree = "<group>"; };
 		4543144F1BF24FD900BF0EDA /* DebugNavigatorUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugNavigatorUIController.swift; sourceTree = "<group>"; };
 		454314501BF24FD900BF0EDA /* FrameVariableTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameVariableTreeUIController.swift; sourceTree = "<group>"; };
+		4543145D1BF3A50700BF0EDA /* DivisionUIController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivisionUIController2.swift; sourceTree = "<group>"; };
 		4554C80D1B7DBED9004987CC /* EditorShell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EditorShell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C8121B7DBED9004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4554C8171B7DBED9004987CC /* EditorShellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorShellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -274,6 +276,7 @@
 				45FF2F021BDD0A32001577B7 /* WorkspaceDocument.swift */,
 				4554C9AD1B7DC0D7004987CC /* WorkspaceWindowUIController.swift */,
 				4554C9A71B7DC0D7004987CC /* DivisionUIController.swift */,
+				4543145D1BF3A50700BF0EDA /* DivisionUIController2.swift */,
 				4554C9A81B7DC0D7004987CC /* EditUIController.swift */,
 				4554C9A91B7DC0D7004987CC /* InspectionUIController.swift */,
 				4554C9AA1B7DC0D7004987CC /* NavigationUIController.swift */,
@@ -595,6 +598,7 @@
 				4554C9B31B7DC0D7004987CC /* ReportUIController.swift in Sources */,
 				454314511BF24FD900BF0EDA /* FrameStackTreeUIController.swift in Sources */,
 				4554C9B51B7DC0D7004987CC /* WorkspaceWindowUIController.swift in Sources */,
+				4543145E1BF3A50700BF0EDA /* DivisionUIController2.swift in Sources */,
 				45FECE691BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift in Sources */,
 				45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */,
 				45FECE801BEE43DA00C9C3E0 /* ToolButtonStrip.swift in Sources */,

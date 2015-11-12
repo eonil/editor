@@ -7,3 +7,9 @@
 //
 
 import Foundation
+import AppKit
+import EditorUICommon
+
+class InspectionUIController: CommonViewController {
+	
+}

@@ -82,7 +82,7 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 	///
 
 	private let	_agent		=	_Agent()
-	private let	_div		=	DivisionUIController()
+	private let	_div		=	DivisionUIController2()
 	private let	_tools		=	ToolUIController()
 
 	private func _reconfigureWindowAppearanceBehaviors() {

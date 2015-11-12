@@ -97,7 +97,6 @@ private final class _VariableTreeAgent: NSObject, NSOutlineViewDataSource, NSOut
 	@objc
 	private func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
 		if item == nil {
-			Debug.log("owner!._dataTree.variables.count = \(owner!._dataTree.variables.count)")
 			return	owner!._dataTree.variables.count
 		}
 		if let node = item as? VariableNode {
