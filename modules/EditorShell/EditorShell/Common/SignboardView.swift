@@ -72,7 +72,8 @@ class SignboardView: CommonView {
 		addLayoutGuide(_contentBox)
 
 		_constraints	=	[
-//			_bodyLabel.topAnchor.constraintEqualToAnchor(_headLabel.bottomAnchor),
+			_headLabel.topAnchor.constraintGreaterThanOrEqualToAnchor(topAnchor),
+			_bodyLabel.bottomAnchor.constraintLessThanOrEqualToAnchor(bottomAnchor),
 			_bodyLabel.topAnchor.constraintGreaterThanOrEqualToAnchor(_headLabel.bottomAnchor, constant: 10),
 			_headLabel.centerXAnchor.constraintEqualToAnchor(_contentBox.centerXAnchor),
 			_bodyLabel.centerXAnchor.constraintEqualToAnchor(_contentBox.centerXAnchor),
@@ -147,6 +148,7 @@ private func _instantiateLabel() -> NSTextField {
 	v.bordered		=	false
 	v.backgroundColor	=	nil
 	v.alignment		=	.Center
+	v.lineBreakMode		=	.ByWordWrapping
 	return	v
 }
 

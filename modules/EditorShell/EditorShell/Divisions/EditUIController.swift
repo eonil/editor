@@ -64,7 +64,7 @@ class EditUIController: CommonViewController {
 
 	private enum _State {
 		case Empty
-		case Error(ErrorType)
+		case Error(String)
 		case Text(String)
 	}
 //	private enum _Error: ErrorType {
@@ -109,8 +109,8 @@ class EditUIController: CommonViewController {
 						let	string		=	try NSString(contentsOfURL: u, encoding: NSUTF8StringEncoding)
 						return	.Text(string as String)
 					}
-					catch let e {
-						return	.Error(e)
+					catch let e as NSError {
+						return	.Error(e.localizedDescription)
 					}
 				}
 				else {
@@ -129,7 +129,7 @@ class EditUIController: CommonViewController {
 			case .Error(let e):
 				_signboard.hidden		=	false
 				_signboard.headText		=	"Error"
-				_signboard.bodyText		=	"\(e)"
+				_signboard.bodyText		=	e
 				_editTextFileUIC.view.hidden	=	true
 				_editTextFileUIC.string		=	nil
 			case .Text(let s):
