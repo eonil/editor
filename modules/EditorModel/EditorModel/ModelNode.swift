@@ -45,7 +45,7 @@ public class ModelSubnode<T: ModelNode>: ModelNode {
 		super.init()
 	}
 	deinit {
-		assert(_hasOwner == false, "You must unset (assigning `nil`) `owner` explicitly before this object dies for proper clean-up.")
+		assert(_hasOwner == false, "You must unset (assigning `nil`) `owner` explicitly for proper clean-up before this object dies.")
 	}
 
 	///

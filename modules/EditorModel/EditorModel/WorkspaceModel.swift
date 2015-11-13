@@ -139,6 +139,7 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	private func _willLocate() {
 	}
 	private func _didLocate() {
+		try! file.restoreSnapshot()
 	}
 }
 

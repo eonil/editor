@@ -104,17 +104,54 @@ class MainMenuAvailabilityManager {
 
 
 
+
+
+
+
+	///
+
 	private func _applyFileStateChange() {
-		mainMenuController!.fileCloseCurrentWorkspace.enabled	=	model!.currentWorkspace != nil
+		_updateFileMenuAvailability()
 	}
 	private func _applyBuildStateChange() {
+		_updateProductMenuAvailability()
+	}
+	private func _applyDebuggingStateChange() {
+		_updateDebuggingMenuAvailability()
+		_updateProductMenuAvailability()
+	}
+	private func _applyUIStateChange() {
+		_updateViewMenuAvailability()
+	}
+
+
+
+
+
+
+
+
+
+	///
+
+	private func _updateFileMenuAvailability() {
+		mainMenuController!.fileCloseCurrentWorkspace.enabled	=	model!.currentWorkspace != nil
+	}
+	private func _updateViewMenuAvailability() {
+		mainMenuController!.viewShowProjectNavivator.enabled	=	true
+		mainMenuController!.viewShowDebugNavivator.enabled	=	true
+		mainMenuController!.viewHideNavigator.enabled		=	true
+	}
+
+	private func _updateProductMenuAvailability() {
 		mainMenuController!.productRun.enabled		=	model!.currentWorkspace != nil
 		mainMenuController!.productBuild.enabled	=	model!.currentWorkspace?.build.runnableCommands.contains(.Build) ?? false
 		mainMenuController!.productClean.enabled	=	model!.currentWorkspace?.build.runnableCommands.contains(.Clean) ?? false
 		mainMenuController!.productStop.enabled		=	(model!.currentWorkspace?.build.runnableCommands.contains(.Stop) ?? false)
-								||	(model!.currentWorkspace?.debug.currentTarget?.execution?.runnableCommands.contains(.Halt) ?? false)
+								||	(model!.currentWorkspace?.debug.currentTarget?.execution != nil)
+
 	}
-	private func _applyDebuggingStateChange() {
+	private func _updateDebuggingMenuAvailability() {
 		let	cmds	=	model!.currentWorkspace?.debug.currentTarget?.execution?.runnableCommands ?? []
 		mainMenuController!.debugPause.enabled		=	cmds.contains(.Pause)
 		mainMenuController!.debugResume.enabled		=	cmds.contains(.Resume)
@@ -122,13 +159,13 @@ class MainMenuAvailabilityManager {
 		mainMenuController!.debugStepInto.enabled	=	cmds.contains(.StepInto)
 		mainMenuController!.debugStepOut.enabled	=	cmds.contains(.StepOut)
 		mainMenuController!.debugStepOver.enabled	=	cmds.contains(.StepOver)
-	}
-	private func _applyUIStateChange() {
-		mainMenuController!.viewShowProjectNavivator.enabled	=	true
-		mainMenuController!.viewShowDebugNavivator.enabled	=	true
-		mainMenuController!.viewHideNavigator.enabled		=	true
+
 	}
 }
+
+
+
+
 
 
 

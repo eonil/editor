@@ -46,6 +46,13 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		var message	:	String
 	}
 
+
+
+
+
+
+
+
 	///
 
 	override init() {
@@ -54,6 +61,11 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 	deinit {
 		assert(_isInstalled == false)
 	}
+
+
+
+
+
 
 	///
 
@@ -64,9 +76,22 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		}
 	}
 
+
+
+
+
+
+
 	///
 
 	public let event	=	EventMulticast<Event>()
+
+
+
+
+
+
+
 
 	///
 
@@ -79,12 +104,17 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		super.willLeaveModelRoot()
 	}
 
+
+
+
+
+
+
+
+
 	///
 
-//	public let selection	=	FileSelectionModel()
-
-	///
-
+	/// Can be `nil` for any errors.
 	public var root: FileNodeModel? {
 		get {
 			return	_rootNodeModel
@@ -184,29 +214,12 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 
 	private func _install() {
 		Debug.assertMainThread()
-		assert(_rootNodeModel == nil)
 		assert(_isInstalled == false)
-
-//		selection.owner		=	self
-
-		_dataTree		=	WorkspaceItemTree()
-		_dataTree!.createRoot()		// Now root has no child.
-		_installModelRoot()
-
 		_isInstalled		=	true
 	}
 	private func _deinstall() {
 		Debug.assertMainThread()
-		assert(_rootNodeModel != nil)
 		assert(_isInstalled == true)
-
-		_deinstallModelRoot()
-		_rootNodeModel		=	nil
-		_dataTree!.deleteRoot()
-		_dataTree		=	nil
-
-//		selection.owner		=	nil
-
 		_isInstalled		=	false
 	}
 
@@ -268,7 +281,9 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		let	tree	=	try WorkspaceItemTree(snapshot: s)
 
 		// Status OK. Mutate it.
-		_deinstallModelRoot()
+		if _rootNodeModel != nil {
+			_deinstallModelRoot()
+		}
 		_dataTree	=	tree
 		_installModelRoot()
 	}
@@ -527,6 +542,11 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModel
 		assert(_isInstalled == false)
 	}
 
+
+
+
+
+
 	///
 
 	public let event = EventMulticast<Event>()
@@ -540,9 +560,11 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModel
 
 	public private(set) weak var supernode: FileNodeModel?
 
-	///
 
-	public 
+
+
+
+
 
 	///
 

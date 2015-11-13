@@ -315,15 +315,9 @@ private func _instantiateScrollView() -> NSScrollView {
 }
 
 private func _instantiateOutlineView() -> NSOutlineView {
-	let	c	=	NSTableColumn()
-	let	v	=	NSOutlineView()
-	v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
-	v.addTableColumn(c)
-	v.outlineTableColumn	=	c
-	v.headerView		=	nil
-	v.backgroundColor	=	NSColor.clearColor()
-	return	v
+	return	CommonViewFactory.instantiateOutlineViewForUseInSidebar()
 }
+
 
 
 

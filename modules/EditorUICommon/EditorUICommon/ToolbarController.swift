@@ -17,6 +17,11 @@ class ToolbarItemTemplate {
 
 		_agent.owner		=	self
 	}
+	var enabled: Bool = false {
+		didSet {
+			_owner?._updateItemsForTemplate(self)
+		}
+	}
 	var label: String {
 		didSet {
 			_owner?._updateItemsForTemplate(self)
@@ -131,6 +136,7 @@ private final class _ToolbarAgent: NSObject, NSToolbarDelegate {
 			item.paletteLabel	=	tmpl.paletteLabel
 			item.target		=	tmpl._agent
 			item.action		=	"EDITOR_onSelect:"
+			item.enabled		=	tmpl.enabled
 			return	item
 		}
 		else {

@@ -142,13 +142,13 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 				for ws in workspaces {
 					if ws.location == u {
 						Debug.log("a workspace already exist for address \(u), adding cancelled, and will select it, ws count = \(workspaces.count)")
-						//				if let u1 = currentWorkspace.value?.location.value {
-						//					if u1 != u {
-						////						reselectCurrentWorkspace(ws)
-						////						deselectCurrentWorkspace()
-						////						selectCurrentWorkspace(ws)
-						//					}
-						//				}
+			//				if let u1 = currentWorkspace.value?.location.value {
+			//					if u1 != u {
+			////						reselectCurrentWorkspace(ws)
+			////						deselectCurrentWorkspace()
+			////						selectCurrentWorkspace(ws)
+			//					}
+			//				}
 						return
 					}
 				}

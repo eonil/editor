@@ -70,7 +70,7 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 
 		UIState.ForWorkspaceModel.set(model!) {
 			$0.navigationPaneVisibility	=	true
-			$0.inspectionPaneVisibility	=	true
+			$0.inspectionPaneVisibility	=	false
 			$0.consolePaneVisibility	=	true
 		}
 	}

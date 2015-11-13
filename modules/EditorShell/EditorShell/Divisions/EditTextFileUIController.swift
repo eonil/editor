@@ -16,12 +16,13 @@ class EditTextFileUIController: CommonViewController {
 	var string: String? {
 		willSet {
 			if let _ = string {
-				_textView.string	=	nil
+				_textView.string	=	""
 			}
 		}
 		didSet {
 			if let string = string {
-				_textView.string	=	string
+				let	s1		=	NSAttributedString(string: string, attributes: _textView.typingAttributes)
+				_textView.textStorage!.appendAttributedString(s1)
 			}
 		}
 	}
@@ -46,11 +47,10 @@ class EditTextFileUIController: CommonViewController {
 
 
 
-
 	///
 
-	private let _scrollView		=	_instantiateScrollView()
-	private let _textView		=	_instantiateTextView()
+	private let _scrollView			=	_instantiateScrollView()
+	private let _textView			=	_instantiateTextView()
 
 	private func _install() {
 		view.addSubview(_scrollView)
@@ -61,7 +61,7 @@ class EditTextFileUIController: CommonViewController {
 		_scrollView.removeFromSuperview()
 	}
 	private func _layout() {
-		_scrollView.frame	=	view.bounds
+		_scrollView.frame		=	view.bounds
 	}
 
 }
@@ -79,17 +79,11 @@ class EditTextFileUIController: CommonViewController {
 
 
 private func _instantiateScrollView() -> NSScrollView {
-	let	v	=	NSScrollView()
-	v.hasHorizontalScroller	=	true
-	v.hasVerticalScroller	=	true
-	return	v
+	return	CommonViewFactory.instantiateScrollViewForCodeDisplayTextView()
 }
 
 private func _instantiateTextView() -> NSTextView {
-	let	v	=	NSTextView()
-	v.verticallyResizable	=	true
-	v.horizontallyResizable	=	true
-	return	v
+	return	CommonViewFactory.instantiateTextViewForCodeDisplay()
 }
 
 

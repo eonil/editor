@@ -64,6 +64,7 @@ class ToolUIController {
 		_divsel.setLabel("Navigator", forSegment: 0)
 		_divsel.setLabel("Console", forSegment: 1)
 		_divsel.setLabel("Inspector", forSegment: 2)
+		_divsel.setEnabled(false, forSegment: 2)
 		_divsel.sizeToFit()
 		_divsel.target		=	_agent
 		_divsel.action		=	"EDITOR_changeDivisionState"

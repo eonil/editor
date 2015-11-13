@@ -104,7 +104,7 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 		addSubview(_scrollView)
 		_outlineView.reloadData()
 
-		FileNodeModel.Event.Notification.register(ObjectIdentifier(self)) { [weak self] in self?._processNotification($0) }
+		FileNodeModel.Event.Notification.register(ObjectIdentifier(self)) { [weak self] in self?._process($0) }
 	}
 	private func _deinstall() {
 		FileNodeModel.Event.Notification.deregister(ObjectIdentifier(self))
@@ -121,7 +121,7 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 		_scrollView.frame		=	bounds
 	}
 
-	private func _processNotification(notification: FileNodeModel.Event.Notification) {
+	private func _process(notification: FileNodeModel.Event.Notification) {
 		guard notification.sender.tree === model else {
 			return
 		}
@@ -142,26 +142,6 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 
 
 
-
-
-
-
-
-
-
-
-
-
-private func _instantiateOutlineView() -> NSOutlineView {
-	let	c	=	NSTableColumn()
-	let	v	=	NSOutlineView()
-	v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
-	v.addTableColumn(c)
-	v.outlineTableColumn	=	c
-	v.headerView		=	nil
-	v.backgroundColor	=	NSColor.clearColor()
-	return	v
-}
 
 
 
@@ -308,28 +288,15 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 
 
 
-//
-//private final class _SubnodeArrayAgent: ArrayStorageDelegate {
-//	weak var owner: FileTreeView?
-//	weak var node: FileNodeModel?
-//
-//	private func willInsertRange(range: Range<Int>) {
-//	}
-//	private func didInsertRange(range: Range<Int>) {
-//		owner!._didInsertSubnodesInRange(range, of: node!)
-//	}
-//	private func willUpdateRange(range: Range<Int>) {
-//		owner!._willDeleteSubnodesInRange(range, of: node!)
-//	}
-//	private func didUpdateRange(range: Range<Int>) {
-//		owner!._didInsertSubnodesInRange(range, of: node!)
-//	}
-//	private func willDeleteRange(range: Range<Int>) {
-//		owner!._willDeleteSubnodesInRange(range, of: node!)
-//	}
-//	private func didDeleteRange(range: Range<Int>) {
-//	}
-//}
+
+
+
+
+
+
+private func _instantiateOutlineView() -> NSOutlineView {
+	return	CommonViewFactory.instantiateOutlineViewForUseInSidebar()
+}
 
 
 

@@ -89,7 +89,8 @@ class EditUIController: CommonViewController {
 		_signboard.removeFromSuperview()
 	}
 	private func _layout() {
-		_signboard.frame	=	view.bounds
+		_signboard.frame		=	view.bounds
+		_editTextFileUIC.view.frame	=	view.bounds
 	}
 
 	private func _process(n: UIState.ForWorkspaceModel.Notification) {

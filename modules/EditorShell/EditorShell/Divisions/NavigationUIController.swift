@@ -53,6 +53,38 @@ class NavigationUIController: CommonViewController {
 
 	///
 
+	@objc
+	private func EDITOR_onTapFiles() {
+		UIState.ForWorkspaceModel.set(model!) {
+			$0.navigator	=	.Project
+			()
+		}
+	}
+	@objc
+	private func EDITOR_onTapDebug() {
+		UIState.ForWorkspaceModel.set(model!) {
+			$0.navigator	=	.Debug
+			()
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///
+
 	private enum _Mode {
 		case Project
 		case Debug
@@ -135,6 +167,26 @@ class NavigationUIController: CommonViewController {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///
+
 	private func _process(n: Notification<WorkspaceModel, UIState.Event>) {
 		guard n.sender === model! else {
 			return
@@ -185,20 +237,6 @@ class NavigationUIController: CommonViewController {
 
 
 
-
-
-	///
-
-	@objc
-	private func EDITOR_onTapFiles() {
-		_mode	=	.Project
-		_applyModeSelectionChange()
-	}
-	@objc
-	private func EDITOR_onTapDebug() {
-		_mode	=	.Debug
-		_applyModeSelectionChange()
-	}
 }
 
 

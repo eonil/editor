@@ -109,9 +109,9 @@ private func _cast<N: NotificationType>(instance: N) {
 		guard N.self != WorkspaceModel.Event.Notification.self else {
 			return	true
 		}
-		print("???")
+//		print("???")
 		return	true
-		}())
+	}())
 	let	typeID	=	ObjectIdentifier(N)
 	if let mc = _mappings[typeID] {
 		let	mc1	=	mc as! MulticastStation<N>

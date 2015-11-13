@@ -43,8 +43,8 @@ class ReportingUIController: CommonViewController {
 	
 	///
 
-	private let	_scrollV	=	NSScrollView()
-	private let	_textV		=	NSTextView()
+	private let	_scrollV	=	CommonViewFactory.instantiateScrollViewForCodeDisplayTextView()
+	private let	_textView	=	CommonViewFactory.instantiateTextViewForCodeDisplay()
 
 
 
@@ -53,28 +53,18 @@ class ReportingUIController: CommonViewController {
 
 	private func _install() {
 		assert(model != nil)
-
-		_scrollV.hasVerticalScroller	=	true
-		_scrollV.hasHorizontalScroller	=	true
-		_textV.verticallyResizable	=	true
-		_textV.horizontallyResizable	=	true
-
 		view.addSubview(_scrollV)
-		_scrollV.documentView		=	_textV
-
+		_scrollV.documentView		=	_textView
 		ConsoleModel.Event.Notification.register	(self, ReportingUIController._process)
 	}
 	private func _deinstall() {
-		ConsoleModel.Event.Notification.deregister	(self)
-
 		assert(model != nil)
-
+		ConsoleModel.Event.Notification.deregister	(self)
 		_scrollV.documentView		=	nil
 		_scrollV.removeFromSuperview()
 	}
 	private func _layout() {
 		assert(model != nil)
-
 		_scrollV.frame			=	view.bounds
 	}
 
@@ -87,11 +77,11 @@ class ReportingUIController: CommonViewController {
 		switch n.event {
 		case .DidAppendLine:
 			let	line	=	n.sender.outputLines.last!
-			let	s1	=	NSAttributedString(string: line)
-			_textV.textStorage!.appendAttributedString(s1)
+			let	s1	=	NSAttributedString(string: line, attributes: _textView.typingAttributes)
+			_textView.textStorage!.appendAttributedString(s1)
 
 		case .DidClear:
-			_textV.string	=	nil
+			_textView.string	=	nil
 		}
 	}
 }
