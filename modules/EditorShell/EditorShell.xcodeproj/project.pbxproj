@@ -29,7 +29,6 @@
 		4543145E1BF3A50700BF0EDA /* DivisionUIController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4543145D1BF3A50700BF0EDA /* DivisionUIController2.swift */; };
 		4554C8181B7DBED9004987CC /* EditorShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554C80D1B7DBED9004987CC /* EditorShell.framework */; };
 		4554C81D1B7DBED9004987CC /* EditorShellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C81C1B7DBED9004987CC /* EditorShellTests.swift */; };
-		4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A71B7DC0D7004987CC /* DivisionUIController.swift */; };
 		4554C9B51B7DC0D7004987CC /* WorkspaceWindowUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9AD1B7DC0D7004987CC /* WorkspaceWindowUIController.swift */; };
 		4554C9B61B7DC0D7004987CC /* ToolUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9AE1B7DC0D7004987CC /* ToolUIController.swift */; };
 		4554CA261B7DC386004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA161B7DC34E004987CC /* EditorCommon.framework */; };
@@ -159,7 +158,6 @@
 		4554C8171B7DBED9004987CC /* EditorShellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorShellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4554C81C1B7DBED9004987CC /* EditorShellTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorShellTests.swift; sourceTree = "<group>"; };
 		4554C81E1B7DBED9004987CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4554C9A71B7DC0D7004987CC /* DivisionUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DivisionUIController.swift; sourceTree = "<group>"; };
 		4554C9AD1B7DC0D7004987CC /* WorkspaceWindowUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceWindowUIController.swift; sourceTree = "<group>"; };
 		4554C9AE1B7DC0D7004987CC /* ToolUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolUIController.swift; sourceTree = "<group>"; };
 		4554CA071B7DC34A004987CC /* EditorUICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUICommon.xcodeproj; path = ../EditorUICommon/EditorUICommon.xcodeproj; sourceTree = "<group>"; };
@@ -299,7 +297,6 @@
 				45FF2F021BDD0A32001577B7 /* WorkspaceDocument.swift */,
 				4554C9AD1B7DC0D7004987CC /* WorkspaceWindowUIController.swift */,
 				4554C9AE1B7DC0D7004987CC /* ToolUIController.swift */,
-				4554C9A71B7DC0D7004987CC /* DivisionUIController.swift */,
 				4543145D1BF3A50700BF0EDA /* DivisionUIController2.swift */,
 				453DFECD1BF4CEC3008D7DB1 /* Divisions */,
 				453DFEE11BF4CF5E008D7DB1 /* Navigators */,
@@ -598,7 +595,6 @@
 				453DFEFD1BF4D077008D7DB1 /* DebugNavigatorUIController.swift in Sources */,
 				453DFEFB1BF4D077008D7DB1 /* DebugFrameStackTreeUIController.swift in Sources */,
 				453DFEF71BF4CFB7008D7DB1 /* ToolButtonStrip.swift in Sources */,
-				4554C9AF1B7DC0D7004987CC /* DivisionUIController.swift in Sources */,
 				453DFEFF1BF4D382008D7DB1 /* EditTextFileUIController.swift in Sources */,
 				45250B1C1BEB7875003A862A /* Protocols.swift in Sources */,
 				45FF2F031BDD0A32001577B7 /* WorkspaceDocument.swift in Sources */,

@@ -17,7 +17,6 @@
 		4554C99D1B7DC08E004987CC /* CommonWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9961B7DC08E004987CC /* CommonWindowController.swift */; };
 		4554C99F1B7DC08E004987CC /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9981B7DC08E004987CC /* CoreGraphicsExtensions.swift */; };
 		4554C9A01B7DC08E004987CC /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9991B7DC08E004987CC /* DummyViewController.swift */; };
-		4554C9A51B7DC0B9004987CC /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A31B7DC0B9004987CC /* SplitViewController.swift */; };
 		4554C9A61B7DC0B9004987CC /* ToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A41B7DC0B9004987CC /* ToolbarController.swift */; };
 		4554CA841B7DC451004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA811B7DC44B004987CC /* EditorModel.framework */; };
 		457297D71BF62D35009DAE11 /* CommonViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457297D61BF62D35009DAE11 /* CommonViewFactory.swift */; };
@@ -97,7 +96,6 @@
 		4554C9961B7DC08E004987CC /* CommonWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonWindowController.swift; sourceTree = "<group>"; };
 		4554C9981B7DC08E004987CC /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
 		4554C9991B7DC08E004987CC /* DummyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
-		4554C9A31B7DC0B9004987CC /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		4554C9A41B7DC0B9004987CC /* ToolbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarController.swift; sourceTree = "<group>"; };
 		4554CA7B1B7DC44B004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
 		457297D61BF62D35009DAE11 /* CommonViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewFactory.swift; sourceTree = "<group>"; };
@@ -186,10 +184,9 @@
 			isa = PBXGroup;
 			children = (
 				454314541BF36EB800BF0EDA /* UIState.swift */,
-				4554C9A31B7DC0B9004987CC /* SplitViewController.swift */,
 				4554C9A41B7DC0B9004987CC /* ToolbarController.swift */,
-				457297D61BF62D35009DAE11 /* CommonViewFactory.swift */,
 				4554C9A21B7DC096004987CC /* (dummies for quickies) */,
+				457297D61BF62D35009DAE11 /* CommonViewFactory.swift */,
 				4554C9961B7DC08E004987CC /* CommonWindowController.swift */,
 				4554C9941B7DC08E004987CC /* CommonViewController.swift */,
 				4554C9951B7DC08E004987CC /* CommonView.swift */,
@@ -408,7 +405,6 @@
 				454314551BF36EB800BF0EDA /* UIState.swift in Sources */,
 				4554C9A01B7DC08E004987CC /* DummyViewController.swift in Sources */,
 				45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */,
-				4554C9A51B7DC0B9004987CC /* SplitViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
