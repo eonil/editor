@@ -53,15 +53,19 @@ class NavigationUIController: CommonViewController {
 
 	///
 
-	@objc
-	private func EDITOR_onTapFiles() {
+	private func _onTapProjectPaneButton() {
 		UIState.ForWorkspaceModel.set(model!) {
 			$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Project)
 			()
 		}
 	}
-	@objc
-	private func EDITOR_onTapDebug() {
+	private func _onTapIssuePaneButton() {
+		UIState.ForWorkspaceModel.set(model!) {
+			$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Issue)
+			()
+		}
+	}
+	private func _onTapDebugPaneButton() {
 		UIState.ForWorkspaceModel.set(model!) {
 			$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Debug)
 			()
@@ -141,8 +145,9 @@ class NavigationUIController: CommonViewController {
 		addChildViewController(_debuggingNavigatorUI)
 		view.addSubview(_debuggingNavigatorUI.view)
 
-		_fileTreeToolButton.onClick	=	{ [weak self] in self?.EDITOR_onTapFiles() }
-		_debuggingToolButton.onClick	=	{ [weak self] in self?.EDITOR_onTapDebug() }
+		_fileTreeToolButton.onClick	=	{ [weak self] in self?._onTapProjectPaneButton() }
+		_issueListToolButton.onClick	=	{ [weak self] in self?._onTapIssuePaneButton() }
+		_debuggingToolButton.onClick	=	{ [weak self] in self?._onTapDebugPaneButton() }
 
 		Notification<WorkspaceModel,UIState.Event>.register	(self, NavigationUIController._process)
 	}
