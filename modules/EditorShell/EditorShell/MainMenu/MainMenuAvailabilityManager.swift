@@ -66,10 +66,10 @@ class MainMenuAvailabilityManager {
 		DebuggingTargetModel.Event.Notification.deregister		(self)
 		DebuggingModel.Event.Notification.deregister			(self)
 		ApplicationModel.Event.Notification.deregister			(self)
-		_applyUIStateChange()
-		_applyDebuggingStateChange()
-		_applyBuildStateChange()
-		_applyFileStateChange()
+//		_applyUIStateChange()
+//		_applyDebuggingStateChange()
+//		_applyBuildStateChange()
+//		_applyFileStateChange()
 	}
 
 	private func _process(n: ApplicationModel.Event.Notification) {
