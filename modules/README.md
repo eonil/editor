@@ -56,6 +56,11 @@ contextual model and capsulated container GUI component.
   check whether it should be shared among multiple view components.
 
 
+- "Event" means an event happened to an object. 
+- "Notification" is a composition of "sender" and "event".
+- For `UIState`, notification sender works as an identifier to identify where 
+  the state belongs to.
+
 
 
 
