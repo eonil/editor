@@ -29,7 +29,10 @@ public class ConsoleModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 	public private(set) var outputLines: [String] = []
 
-
+	public func clear() {
+		outputLines	=	[]
+		Event.DidClear.dualcastAsNotificationWithSender(self)
+	}
 
 
 

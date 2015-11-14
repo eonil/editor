@@ -40,6 +40,14 @@ class EditTextFileUIController: CommonViewController {
 		_layout()
 	}
 
+	override var acceptsFirstResponder: Bool {
+		get {
+			return	_textView.acceptsFirstResponder
+		}
+	}
+	override func becomeFirstResponder() -> Bool {
+		return	view.window!.makeFirstResponder(_textView)
+	}
 
 
 

@@ -24,6 +24,7 @@
 		45C5AD551BF6D9FC00B1CBAB /* CommonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD541BF6D9FC00B1CBAB /* CommonColor.swift */; };
 		45C5AD5E1BF6F31300B1CBAB /* PaneSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD5D1BF6F31300B1CBAB /* PaneSplitView.swift */; };
 		45C5AD601BF6F44600B1CBAB /* PaneSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD5F1BF6F44600B1CBAB /* PaneSplitViewController.swift */; };
+		45C5AD621BF73DC800B1CBAB /* CommonFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD611BF73DC800B1CBAB /* CommonFont.swift */; };
 		45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77AF51B7F2AA50064C363 /* Delay.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,7 @@
 		45C5AD541BF6D9FC00B1CBAB /* CommonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonColor.swift; sourceTree = "<group>"; };
 		45C5AD5D1BF6F31300B1CBAB /* PaneSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneSplitView.swift; sourceTree = "<group>"; };
 		45C5AD5F1BF6F44600B1CBAB /* PaneSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneSplitViewController.swift; sourceTree = "<group>"; };
+		45C5AD611BF73DC800B1CBAB /* CommonFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonFont.swift; sourceTree = "<group>"; };
 		45C77AF51B7F2AA50064C363 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,6 +202,7 @@
 				4554C9941B7DC08E004987CC /* CommonViewController.swift */,
 				4554C9951B7DC08E004987CC /* CommonView.swift */,
 				45C5AD541BF6D9FC00B1CBAB /* CommonColor.swift */,
+				45C5AD611BF73DC800B1CBAB /* CommonFont.swift */,
 				4554C9981B7DC08E004987CC /* CoreGraphicsExtensions.swift */,
 				45C77AF51B7F2AA50064C363 /* Delay.swift */,
 				4554C97F1B7DC068004987CC /* Info.plist */,
@@ -427,6 +430,7 @@
 				454314551BF36EB800BF0EDA /* UIState.swift in Sources */,
 				45C5AD551BF6D9FC00B1CBAB /* CommonColor.swift in Sources */,
 				45C5AD5E1BF6F31300B1CBAB /* PaneSplitView.swift in Sources */,
+				45C5AD621BF73DC800B1CBAB /* CommonFont.swift in Sources */,
 				4554C9A01B7DC08E004987CC /* DummyViewController.swift in Sources */,
 				45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */,
 			);

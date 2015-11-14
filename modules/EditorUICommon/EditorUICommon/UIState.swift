@@ -114,7 +114,12 @@ public struct WorkspaceUIState {
 		case Project
 		case Debug
 	}
-	public var navigator: Navigator		=	.Project
+	public enum Pane {
+		case Navigation(Navigator)
+		case Editor
+	}
+
+	public var paneSelection		=	Pane.Navigation(.Project)
 
 	public var debuggingSelection		:	(target: DebuggingTargetModel?, thread: LLDBThread?, frame: LLDBFrame?)		=	(nil, nil, nil)
 	public var editingSelection		:	NSURL?

@@ -57,9 +57,11 @@ class MainMenuAvailabilityManager {
 		DebuggingModel.Event.Notification.register			(self, MainMenuAvailabilityManager._process)
 		DebuggingTargetModel.Event.Notification.register		(self, MainMenuAvailabilityManager._process)
 		DebuggingTargetExecutionModel.Event.Notification.register	(self, MainMenuAvailabilityManager._process)
+		UIState.ForWorkspaceModel.Notification.register			(self, MainMenuAvailabilityManager._process)
 	}
 	private func _deinstall() {
 		assert(model != nil)
+		UIState.ForWorkspaceModel.Notification.deregister		(self)
 		DebuggingTargetExecutionModel.Event.Notification.deregister	(self)
 		DebuggingTargetModel.Event.Notification.deregister		(self)
 		DebuggingModel.Event.Notification.deregister			(self)
@@ -92,7 +94,7 @@ class MainMenuAvailabilityManager {
 		}
 		_applyDebuggingStateChange()
 	}
-	private func _process(n: Notification<WorkspaceModel, UIState.Event>) {
+	private func _process(n: UIState.ForWorkspaceModel.Notification) {
 		guard n.sender === model!.currentWorkspace else {
 			return
 		}
@@ -138,9 +140,20 @@ class MainMenuAvailabilityManager {
 		mainMenuController!.fileCloseCurrentWorkspace.enabled	=	model!.currentWorkspace != nil
 	}
 	private func _updateViewMenuAvailability() {
+		mainMenuController!.viewEditor.enabled			=	{
+			guard model!.currentWorkspace != nil else {
+				return	false
+			}
+			var	ok	=	false
+			UIState.ForWorkspaceModel.get(model!.currentWorkspace!) {
+				ok	=	$0.editingSelection != nil
+			}
+			return	ok
+		}() as Bool
 		mainMenuController!.viewShowProjectNavivator.enabled	=	true
 		mainMenuController!.viewShowDebugNavivator.enabled	=	true
 		mainMenuController!.viewHideNavigator.enabled		=	true
+		mainMenuController!.viewConsole.enabled			=	true
 	}
 
 	private func _updateProductMenuAvailability() {
@@ -159,6 +172,7 @@ class MainMenuAvailabilityManager {
 		mainMenuController!.debugStepInto.enabled	=	cmds.contains(.StepInto)
 		mainMenuController!.debugStepOut.enabled	=	cmds.contains(.StepOut)
 		mainMenuController!.debugStepOver.enabled	=	cmds.contains(.StepOver)
+		mainMenuController!.debugClearConsole.enabled	=	true
 
 	}
 }

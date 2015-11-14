@@ -44,7 +44,7 @@ class ReportingUIController: CommonViewController {
 	///
 
 	private let	_scrollV	=	CommonViewFactory.instantiateScrollViewForCodeDisplayTextView()
-	private let	_textView	=	CommonViewFactory.instantiateTextViewForCodeDisplay()
+	private let	_textView	=	_instantiateReportTextView()
 
 
 
@@ -76,12 +76,12 @@ class ReportingUIController: CommonViewController {
 		}
 		switch n.event {
 		case .DidAppendLine:
-			let	line	=	n.sender.outputLines.last!
+			let	line	=	n.sender.outputLines.last! + "\n"
 			let	s1	=	NSAttributedString(string: line, attributes: _textView.typingAttributes)
 			_textView.textStorage!.appendAttributedString(s1)
 
 		case .DidClear:
-			_textView.string	=	nil
+			_textView.textStorage!.deleteCharactersInRange(NSRange(location: 0, length: _textView.textStorage!.length))
 		}
 	}
 }
@@ -99,8 +99,11 @@ class ReportingUIController: CommonViewController {
 
 
 
-
-
+private func _instantiateReportTextView() -> NSTextView {
+	let	v	=	CommonViewFactory.instantiateTextViewForCodeDisplay()
+	v.font		=	CommonFont.codeFontOfSize(NSFont.systemFontSizeForControlSize(.SmallControlSize))
+	return	v
+}
 
 
 

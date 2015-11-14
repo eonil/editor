@@ -65,15 +65,17 @@ class MainMenuController {
 	let	fileCloseCurrentWorkspace	=	_instantiateCommandMenuItem("Close Workspace",		Command+"W"			)
 
 	let	view				=	_instantiateGroupMenuItem("View")
+	let	viewEditor			=	_instantiateCommandMenuItem("Editor",			Command+"\n"			)
 	let	viewNavigators			=	_instantiateGroupMenuItem("Navigators")
 	let	viewShowProjectNavivator	=	_instantiateCommandMenuItem("Show File Navigator",	Command+"1"			)
 	let	viewShowDebugNavivator		=	_instantiateCommandMenuItem("Show Debug Navigator",	Command+"2"			)
 	let	viewHideNavigator		=	_instantiateCommandMenuItem("Hide Navigator", 		Command+"0"			)
+	let	viewConsole			=	_instantiateCommandMenuItem("Logs", 			Command+Shift+"C"		)
 
 	let	product				=	_instantiateGroupMenuItem("Product")
 	let	productRun			=	_instantiateCommandMenuItem("Run",			Command+"R"			)
 	let	productBuild			=	_instantiateCommandMenuItem("Build",			Command+"B"			)
-	let	productClean			=	_instantiateCommandMenuItem("Clean",			Command+"K"			)
+	let	productClean			=	_instantiateCommandMenuItem("Clean",			Command+Shift+"K"			)
 	let	productStop			=	_instantiateCommandMenuItem("Stop",			Command+"."			)
 
 	let	debug				=	_instantiateGroupMenuItem("Debug")
@@ -84,6 +86,8 @@ class MainMenuController {
 	let	debugStepInto			=	_instantiateCommandMenuItem("Step Into",		_legacyFunctionKeyShortcut(NSF6FunctionKey))
 	let	debugStepOut			=	_instantiateCommandMenuItem("Step Out",			_legacyFunctionKeyShortcut(NSF7FunctionKey))
 	let	debugStepOver			=	_instantiateCommandMenuItem("Step Over",		_legacyFunctionKeyShortcut(NSF8FunctionKey))
+
+	let	debugClearConsole		=	_instantiateCommandMenuItem("Clear Console", 		Command+"K")
 
 	init() {
 		file.addSubmenuItems([
@@ -104,7 +108,9 @@ class MainMenuController {
 			])
 
 		view.addSubmenuItems([
+			viewEditor,
 			viewNavigators,
+			viewConsole,
 			_instantiateSeparatorMenuItem()		//	Cocoa will add `Enter Full Screen` menu item automatically after this items. Prepare a separator for it.
 			])
 		viewNavigators.addSubmenuItems([
@@ -130,6 +136,8 @@ class MainMenuController {
 			debugStepInto,
 			debugStepOut,
 			debugStepOver,
+			_instantiateSeparatorMenuItem(),
+			debugClearConsole,
 			])
 
 	}

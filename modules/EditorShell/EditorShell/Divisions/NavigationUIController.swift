@@ -56,14 +56,14 @@ class NavigationUIController: CommonViewController {
 	@objc
 	private func EDITOR_onTapFiles() {
 		UIState.ForWorkspaceModel.set(model!) {
-			$0.navigator	=	.Project
+			$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Project)
 			()
 		}
 	}
 	@objc
 	private func EDITOR_onTapDebug() {
 		UIState.ForWorkspaceModel.set(model!) {
-			$0.navigator	=	.Debug
+			$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Debug)
 			()
 		}
 	}
@@ -196,13 +196,20 @@ class NavigationUIController: CommonViewController {
 
 		let	oldMode	=	_mode
 		UIState.ForWorkspaceModel.get(model!) { state in
-			_mode	=	{
-				switch state.navigator {
-				case .Project:	return	.Project
-				case .Debug:	return	.Debug
-				}
-			}() as _Mode
+			switch state.paneSelection {
+			case .Editor:
+				return
 
+			case .Navigation(let nav):
+				_mode	=	{
+					switch nav {
+					case .Project:
+						return	.Project
+					case .Debug:
+						return	.Debug
+					}
+					}() as _Mode
+			}
 		}
 		if oldMode != _mode {
 			_applyModeSelectionChange()

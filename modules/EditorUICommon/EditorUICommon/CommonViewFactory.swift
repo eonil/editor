@@ -53,7 +53,7 @@ public struct CommonViewFactory {
 
 
 private func _codeFont() -> NSFont {
-	return	NSFont(name: "Menlo", size: NSFont.systemFontSize())!
+	return	CommonFont.codeFontOfSize(NSFont.systemFontSize())
 }
 
 

@@ -51,6 +51,20 @@ class EditUIController: CommonViewController {
 		super.layoutSubcomponents()
 		_layout()
 	}
+	override var acceptsFirstResponder: Bool {
+		get {
+			return	_currentEditor()?.acceptsFirstResponder ?? false
+		}
+	}
+	override func becomeFirstResponder() -> Bool {
+		return	_currentEditor()?.becomeFirstResponder() ?? false
+	}
+
+
+
+
+
+
 
 
 
@@ -140,8 +154,43 @@ class EditUIController: CommonViewController {
 				_editTextFileUIC.view.hidden	=	false
 				_editTextFileUIC.string		=	s
 			}
+
+
+
+			//
+			
+			switch $0.paneSelection {
+			case .Editor:
+				view.window?.makeFirstResponder(self)
+			default:
+				return
+			}
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///
+
+	private func _currentEditor() -> NSResponder? {
+		switch _state {
+		case .Empty:		return	nil
+		case .Error(_):		return	nil
+		case .Text(_):		return	_editTextFileUIC
+		}
+	}
+
 
 
 }
