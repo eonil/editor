@@ -151,6 +151,7 @@ class MainMenuAvailabilityManager {
 			return	ok
 		}() as Bool
 		mainMenuController!.viewShowProjectNavivator.enabled	=	true
+		mainMenuController!.viewShowIssueNavivator.enabled	=	true
 		mainMenuController!.viewShowDebugNavivator.enabled	=	true
 		mainMenuController!.viewHideNavigator.enabled		=	true
 		mainMenuController!.viewConsole.enabled			=	true

@@ -112,6 +112,7 @@ public struct WorkspaceUIState {
 
 	public enum Navigator {
 		case Project
+		case Issue
 		case Debug
 	}
 	public enum Pane {

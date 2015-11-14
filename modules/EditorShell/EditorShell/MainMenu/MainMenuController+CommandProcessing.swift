@@ -48,6 +48,12 @@ extension MainMenuController {
 				$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Project)
 			}
 		}
+		case ~~viewShowIssueNavivator: do {
+			UIState.ForWorkspaceModel.set(model!.currentWorkspace!) {
+				$0.navigationPaneVisibility	=	true
+				$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Issue)
+			}
+		}
 		case ~~viewShowDebugNavivator: do {
 			UIState.ForWorkspaceModel.set(model!.currentWorkspace!) {
 				$0.navigationPaneVisibility	=	true

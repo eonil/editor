@@ -87,15 +87,18 @@ class NavigationUIController: CommonViewController {
 
 	private enum _Mode {
 		case Project
+		case Issue
 		case Debug
 	}
 
 	private let _fileTreeToolButton		=	_instantiateScopeButton("Files")
+	private let _issueListToolButton	=	_instantiateScopeButton("Issues")
 	private let _debuggingToolButton	=	_instantiateScopeButton("Debug")
 	private let _modeSelector		=	ToolButtonStrip()
 	private let _bottomLine			=	Line()
 
 	private let _fileTreeUI			=	FileTreeUIController()
+	private let _issueListUI		=	IssueListUIController()
 	private let _debuggingNavigatorUI	=	DebuggingNavigatorUIController()
 
 	private var _mode			=	_Mode.Project
@@ -114,6 +117,7 @@ class NavigationUIController: CommonViewController {
 		assert(model != nil)
 
 		_fileTreeUI.model		=	model!.file
+		_issueListUI.model		=	model!.report
 		_debuggingNavigatorUI.model	=	model!.debug
 
 		_bottomLine.position		=	.MinY
@@ -123,13 +127,18 @@ class NavigationUIController: CommonViewController {
 		_modeSelector.interButtonGap	=	2
 		_modeSelector.toolButtons	=	[
 			_fileTreeToolButton,
+			_issueListToolButton,
 			_debuggingToolButton,
 		]
 		view.addSubview(_modeSelector)
 
 		addChildViewController(_fileTreeUI)
-		addChildViewController(_debuggingNavigatorUI)
 		view.addSubview(_fileTreeUI.view)
+
+		addChildViewController(_issueListUI)
+		view.addSubview(_issueListUI.view)
+
+		addChildViewController(_debuggingNavigatorUI)
 		view.addSubview(_debuggingNavigatorUI.view)
 
 		_fileTreeToolButton.onClick	=	{ [weak self] in self?.EDITOR_onTapFiles() }
@@ -142,15 +151,20 @@ class NavigationUIController: CommonViewController {
 		Notification<WorkspaceModel,UIState.Event>.deregister	(self)
 
 		_debuggingNavigatorUI.view.removeFromSuperview()
-		_fileTreeUI.view.removeFromSuperview()
 		_debuggingNavigatorUI.removeFromParentViewController()
+
+		_issueListUI.view.removeFromSuperview()
+		_issueListUI.removeFromParentViewController()
+
+		_fileTreeUI.view.removeFromSuperview()
 		_fileTreeUI.removeFromParentViewController()
 
 		_modeSelector.removeFromSuperview()
 		_bottomLine.removeFromSuperview()
 		_modeSelector.toolButtons	=	[]
 
-		_debuggingNavigatorUI.model		=	nil
+		_debuggingNavigatorUI.model	=	nil
+		_issueListUI.model		=	nil
 		_fileTreeUI.model		=	nil
 	}
 	private func _layout() {
@@ -205,6 +219,8 @@ class NavigationUIController: CommonViewController {
 					switch nav {
 					case .Project:
 						return	.Project
+					case .Issue:
+						return	.Issue
 					case .Debug:
 						return	.Debug
 					}
@@ -218,21 +234,27 @@ class NavigationUIController: CommonViewController {
 
 
 	private func _applyModeSelectionChange() {
+		func setVisibility(visibleButton: ScopeButton, visibleViewController: NSViewController) {
+			_fileTreeToolButton.selected		=	visibleButton === _fileTreeToolButton
+			_issueListToolButton.selected		=	visibleButton === _issueListToolButton
+			_debuggingToolButton.selected		=	visibleButton === _debuggingToolButton
+			_fileTreeUI.view.hidden			=	visibleViewController !== _fileTreeUI
+			_issueListUI.view.hidden		=	visibleViewController !== _issueListUI
+			_debuggingNavigatorUI.view.hidden	=	visibleViewController !== _debuggingNavigatorUI
+		}
+
 		switch _mode {
 		case .Project:
-			_fileTreeToolButton.selected		=	true
-			_debuggingToolButton.selected		=	false
-			_fileTreeUI.view.hidden			=	false
-			_debuggingNavigatorUI.view.hidden	=	true
+			setVisibility(_fileTreeToolButton, visibleViewController: _fileTreeUI)
 			view.window!.makeFirstResponder(_fileTreeUI)
 
-		case .Debug:
-			_fileTreeToolButton.selected		=	false
-			_debuggingToolButton.selected		=	true
-			_fileTreeUI.view.hidden			=	true
-			_debuggingNavigatorUI.view.hidden	=	false
-			view.window!.makeFirstResponder(_debuggingNavigatorUI)
+		case .Issue:
+			setVisibility(_issueListToolButton, visibleViewController: _issueListUI)
+			view.window!.makeFirstResponder(_issueListUI)
 
+		case .Debug:
+			setVisibility(_debuggingToolButton, visibleViewController: _debuggingNavigatorUI)
+			view.window!.makeFirstResponder(_debuggingNavigatorUI)
 		}
 	}
 
@@ -313,3 +335,6 @@ private func _instantiateScopeButton(title: String) -> ScopeButton {
 
 
 
+class IssueListUIController: CommonViewController {
+	weak var model: ReportingModel?
+}

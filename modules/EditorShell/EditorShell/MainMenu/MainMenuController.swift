@@ -68,7 +68,8 @@ class MainMenuController {
 	let	viewEditor			=	_instantiateCommandMenuItem("Editor",			Command+"\n"			)
 	let	viewNavigators			=	_instantiateGroupMenuItem("Navigators")
 	let	viewShowProjectNavivator	=	_instantiateCommandMenuItem("Show File Navigator",	Command+"1"			)
-	let	viewShowDebugNavivator		=	_instantiateCommandMenuItem("Show Debug Navigator",	Command+"2"			)
+	let	viewShowIssueNavivator		=	_instantiateCommandMenuItem("Show Issue Navigator",	Command+"2"			)
+	let	viewShowDebugNavivator		=	_instantiateCommandMenuItem("Show Debug Navigator",	Command+"3"			)
 	let	viewHideNavigator		=	_instantiateCommandMenuItem("Hide Navigator", 		Command+"0"			)
 	let	viewConsole			=	_instantiateCommandMenuItem("Logs", 			Command+Shift+"C"		)
 
@@ -115,6 +116,7 @@ class MainMenuController {
 			])
 		viewNavigators.addSubmenuItems([
 			viewShowProjectNavivator,
+			viewShowIssueNavivator,
 			viewShowDebugNavivator,
 			_instantiateSeparatorMenuItem(),
 			viewHideNavigator,
