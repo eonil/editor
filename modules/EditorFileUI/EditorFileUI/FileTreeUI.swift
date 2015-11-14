@@ -130,10 +130,12 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 		_outlineView.reloadData()
 		_menuController.model		=	model
 
+		_outlineView.registerForDraggedTypes([NSFilenamesPboardType])
 		FileNodeModel.Event.Notification.register(ObjectIdentifier(self)) { [weak self] in self?._process($0) }
 	}
 	private func _deinstall() {
 		FileNodeModel.Event.Notification.deregister(ObjectIdentifier(self))
+		_outlineView.unregisterDraggedTypes()
 
 		_menuController.model		=	nil
 		_scrollView.documentView	=	nil
@@ -336,6 +338,59 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 	@objc
 	private func outlineViewSelectionDidChange(notification: NSNotification) {
 		owner!._didChangeSelection()
+	}
+
+
+
+
+
+
+
+	///
+
+	@objc
+	private func outlineView(outlineView: NSOutlineView, validateDrop info: NSDraggingInfo, proposedItem item: AnyObject?, proposedChildIndex index: Int) -> NSDragOperation {
+		return	NSDragOperation.Copy
+	}
+	@objc
+	private func outlineView(outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: AnyObject?, childIndex index: Int) -> Bool {
+		guard let item = item as? FileNodeModel else {
+			return	false
+		}
+		guard item.isGroup else {
+			fatalError("Non-group node shouldn't be a dropping target.")
+		}
+
+		let	pb	=	info.draggingPasteboard()
+		let	files	=	pb.propertyListForType(NSFilenamesPboardType)
+
+		guard let filePaths = files as? NSArray as? [String] else {
+			fatalError("Non-path file dropping is not supported.")
+			return	false
+		}
+
+//		var subnodes	=	[FileNodeModel]()
+//		for fileURL in fileURLs {
+//			guard let filePath = fileURL.path else {
+//				break
+//			}
+//			guard let fileName = fileURL.lastPathComponent else {
+//				break
+//			}
+//			var	isDir	=	false as ObjCBool
+//			let	ok	=	NSFileManager.defaultManager().fileExistsAtPath(filePath, isDirectory: &isDir)
+//			guard ok else {
+//				break
+//			}
+//			let	n	=	FileNodeModel(name: fileName, isGroup: false)
+//			subnodes.append(n)
+//		}
+//
+////		// Transactional commit.
+////		for i in 0..<subnodes.count {
+////			try? item.subnodes.insert(subnodes[i], at: index + i)
+////		}
+		return	false
 	}
 }
 

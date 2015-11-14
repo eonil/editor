@@ -581,6 +581,13 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModel
 		super.willLeaveModelRoot()
 	}
 
+
+
+
+
+
+
+
 	///
 
 	public var name: String {
@@ -588,8 +595,14 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModel
 			return	_dataNode.name
 		}
 	}
+	public var isGroup: Bool {
+		get {
+			return	_dataNode.isGroup
+		}
+	}
 
-	/// Because Swift does not support `throws` on stters yet...
+
+	/// Because Swift does not support `throws` on setters yet...
 	///
 	/// If file-system node renaming fails, an error will be thrown and nothing will be
 	/// changed on data model. (transactional) File-system state is always unknown.
