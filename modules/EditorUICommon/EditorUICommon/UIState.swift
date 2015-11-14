@@ -72,7 +72,22 @@ public struct UIState {
 		}
 	}
 
+	public enum ForFileTreeModel {
+		public typealias	Notification	=	EditorModel.Notification<FileTreeModel, Event>
 
+		public static func get(m: FileTreeModel, @noescape process: (state: ProjectUIState) -> ()) {
+			assert(_isReady == true, "You must `initialize` this struct before using.")
+			assert(_fileTreeToState[identityOf(m)] != nil, "Cannot find UI state for model `\(m)`.")
+			process(state: _fileTreeToState[identityOf(m)]!)
+		}
+		/// Fires a `Notification<FileTreeModel,UIState.Event>` after state change.
+		public static func set(m: FileTreeModel, @noescape process: (inout state: ProjectUIState) -> ()) {
+			assert(_isReady == true, "You must `initialize` this struct before using.")
+			assert(_fileTreeToState[identityOf(m)] != nil, "Cannot find UI state for model `\(m)`.")
+			process(state: &_fileTreeToState[identityOf(m)]!)
+			Notification(m, Event.Invalidate).broadcast()
+		}
+	}
 
 
 
@@ -82,17 +97,20 @@ public struct UIState {
 
 	private static var	_isReady		=	false
 	private static var	_workspaceToState	=	Dictionary<ReferentialIdentity<WorkspaceModel>, WorkspaceUIState>()
+	private static var	_fileTreeToState	=	Dictionary<ReferentialIdentity<FileTreeModel>, ProjectUIState>()
 
 	private static func _process(n: WorkspaceModel.Event.Notification) {
 		switch n.event {
 		case .DidInitiate:
 			assert(_workspaceToState[identityOf(n.sender)] == nil)
-			_workspaceToState[identityOf(n.sender)]	=	WorkspaceUIState()
+			_workspaceToState[identityOf(n.sender)]		=	WorkspaceUIState()
+			_fileTreeToState[identityOf(n.sender.file)]	=	ProjectUIState()
 			Notification(n.sender,Event.Initiate).broadcast()
 		case .WillTerminate:
 			assert(_workspaceToState[identityOf(n.sender)] != nil)
 			Notification(n.sender,Event.Terminate).broadcast()
-			_workspaceToState[identityOf(n.sender)]	=	nil
+			_fileTreeToState[identityOf(n.sender.file)]	=	nil
+			_workspaceToState[identityOf(n.sender)]		=	nil
 		default:
 			break
 		}
@@ -127,7 +145,10 @@ public struct WorkspaceUIState {
 }
 
 
-
+public struct ProjectUIState {
+	public var fileTemporalGrabbing		:	FileNodeModel?
+	public var fileSustainingSelection	=	[FileNodeModel]()
+}
 
 
 

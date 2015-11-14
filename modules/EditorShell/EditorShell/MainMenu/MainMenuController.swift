@@ -228,7 +228,7 @@ private func _instantiateGroupMenuItem(title: String) -> MenuItemController {
 
 	let	m		=	MenuItemController()
 	m.menuItem.enabled	=	true
-	m.menuItem.title		=	title
+	m.menuItem.title	=	title
 	m.menuItem.submenu	=	sm
 	m.onClick		=	nil
 	return	m

@@ -10,7 +10,15 @@ import Foundation
 import AppKit
 
 
-/// Wraps `NSMenuItem` ti provide better dynamic management.
+/// Wraps `NSMenuItem` to provide a better interface.
+///
+/// - Gains ensure on instance behaviors. `NSMenuItem` implementation is
+///   total black-box. For example, we don't know how equality comparison
+///   would work, and so on.
+/// - Limits possible mutators. (though it's just an illusion...)
+/// - Provides convenient add submenu method.
+/// - Provides better debug description.
+///
 public class MenuItemController {
 	public func addSubmenuItems(subitemControllers: [MenuItemController]) {
 		guard _cocoaMenuItem.submenu != nil else {
@@ -21,6 +29,9 @@ public class MenuItemController {
 		}
 		_subcontrollers.appendContentsOf(subitemControllers)
 	}
+
+
+
 
 
 
@@ -44,8 +55,16 @@ public class MenuItemController {
 
 
 
+
+
+
 	///
 
+	public var menuItem: NSMenuItem {
+		get {
+			return	_cocoaMenuItem
+		}
+	}
 	public var enabled: Bool {
 		get {
 			return	_cocoaMenuItem.enabled
@@ -60,11 +79,6 @@ public class MenuItemController {
 		}
 		set {
 			_onClick	=	newValue
-		}
-	}
-	public var menuItem: NSMenuItem {
-		get {
-			return	_cocoaMenuItem
 		}
 	}
 
@@ -99,6 +113,22 @@ extension MenuItemController: CustomStringConvertible, CustomDebugStringConverti
 		}
 	}
 }
+extension MenuItemController {
+	public static func groupMenuItem(title: String) -> MenuItemController {
+		let	sm		=	NSMenu(title: title)
+		sm.autoenablesItems	=	false
+
+		let	m		=	MenuItemController()
+		m.menuItem.enabled	=	true
+		m.menuItem.title	=	title
+		m.menuItem.submenu	=	sm
+		m.onClick		=	nil
+		return	m
+	}
+	public static func separatorMenuItemController() -> MenuItemController {
+		return	MenuItemController(menuItem: NSMenuItem.separatorItem())
+	}
+}
 
 
 @objc
@@ -109,3 +139,13 @@ private class _MenuItemAgent: NSObject {
 		owner!._onClick?()
 	}
 }
+
+
+
+
+
+
+
+
+
+

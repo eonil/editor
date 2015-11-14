@@ -90,6 +90,11 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 	public override func becomeFirstResponder() -> Bool {
 		return	window!.makeFirstResponder(_outlineView)
 	}
+	public override func menuForEvent(event: NSEvent) -> NSMenu? {
+		return	_menuController.menu
+	}
+
+
 
 
 
@@ -105,6 +110,15 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 	private let	_outlineView	=	_instantiateOutlineView()
 	private let	_outlineAgent	=	_OutlineAgent()
 
+	private let	_menuController	=	FileTreeUIMenuController()
+
+
+
+
+
+
+
+	///
 
 	private func _install() {
 		_scrollView.drawsBackground	=	false
@@ -114,12 +128,14 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 		_scrollView.documentView	=	_outlineView
 		addSubview(_scrollView)
 		_outlineView.reloadData()
+		_menuController.model		=	model
 
 		FileNodeModel.Event.Notification.register(ObjectIdentifier(self)) { [weak self] in self?._process($0) }
 	}
 	private func _deinstall() {
 		FileNodeModel.Event.Notification.deregister(ObjectIdentifier(self))
 
+		_menuController.model		=	nil
 		_scrollView.documentView	=	nil
 		_scrollView.removeFromSuperview()
 		_outlineView.setDelegate(nil)
@@ -131,6 +147,65 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 	private func _layout() {
 		_scrollView.frame		=	bounds
 	}
+
+
+
+
+
+	private func _didChangeSelection() {
+		func getSelectedItem() -> FileNodeModel? {
+			let	ridx	=	_outlineView.selectedRow
+			guard ridx != NSNotFound else {
+				return	nil
+			}
+			guard let item = _outlineView.itemAtRow(ridx) as? FileNodeModel else {
+				return	nil
+			}
+			return	item
+		}
+		func getSustaningItemSelectionList() -> [FileNodeModel] {
+			func convert(rowIndex: Int) -> FileNodeModel {
+				return	_outlineView.itemAtRow(rowIndex) as! FileNodeModel
+			}
+			return	_outlineView.selectedRowIndexes.map(convert)
+		}
+
+		///
+
+		if let item = getSelectedItem() {
+			UIState.ForWorkspaceModel.set(model!.workspace) {
+				$0.editingSelection	=	item.resolvePath().absoluteFileURL(`for`: model!.workspace)
+				()
+			}
+		}
+		else {
+			UIState.ForWorkspaceModel.set(model!.workspace) {
+				$0.editingSelection	=	nil
+				()
+			}
+		}
+
+
+
+		UIState.ForFileTreeModel.set(model!) {
+			$0.fileSustainingSelection	=	{ [weak self] in
+				guard self != nil else {
+					return	[]
+				}
+				func convert(rowIndex: Int) -> FileNodeModel {
+					return	self!._outlineView.itemAtRow(rowIndex) as! FileNodeModel
+				}
+				return	self!._outlineView.selectedRowIndexes.map(convert)
+			}()
+			()
+		}
+	}
+
+
+
+
+
+
 
 	private func _process(notification: FileNodeModel.Event.Notification) {
 		guard notification.sender.tree === model else {
@@ -260,28 +335,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 
 	@objc
 	private func outlineViewSelectionDidChange(notification: NSNotification) {
-		func getSelectedItem() -> FileNodeModel? {
-			let	ridx	=	owner!._outlineView.selectedRow
-			guard ridx != NSNotFound else {
-				return	nil
-			}
-			guard let item = owner!._outlineView.itemAtRow(ridx) as? FileNodeModel else {
-				return	nil
-			}
-			return	item
-		}
-		if let item = getSelectedItem() {
-			UIState.ForWorkspaceModel.set(owner!.model!.workspace) {
-				$0.editingSelection	=	item.resolvePath().absoluteFileURL(`for`: owner!.model!.workspace)
-				()
-			}
-		}
-		else {
-			UIState.ForWorkspaceModel.set(owner!.model!.workspace) {
-				$0.editingSelection	=	nil
-				()
-			}
-		}
+		owner!._didChangeSelection()
 	}
 }
 
