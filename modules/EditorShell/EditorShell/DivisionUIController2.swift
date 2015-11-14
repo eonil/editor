@@ -22,12 +22,15 @@ class DivisionUIController2: CommonViewController {
 
 
 
+	
+
+
 	///
 
 	weak var model: WorkspaceModel? {
 		didSet {
 			_navigationVC.model	=	model
-			_reportingVC.model	=	model
+			_consoleVC.model	=	model
 //			_inspectionVC.model	=	model
 			_editingVC.model	=	model
 		}
@@ -92,7 +95,7 @@ class DivisionUIController2: CommonViewController {
 	private let _innerBottomSplitItem	=	NSSplitViewItem()
 
 	private let _navigationVC		=	NavigationUIController()
-	private let _reportingVC		=	ReportingUIController()
+	private let _consoleVC			=	ConsoleUIController()
 	private let _inspectionVC		=	DummyViewController()
 	private let _editingVC			=	EditUIController()
 
@@ -114,7 +117,7 @@ class DivisionUIController2: CommonViewController {
 		// Initial metrics defines initial layout. We need these.
 		_navigationVC.view.frame.size.width	=	200
 		_inspectionVC.view.frame.size.width	=	200
-		_reportingVC.view.frame.size.height	=	100
+		_consoleVC.view.frame.size.height	=	100
 
 		func navItem() -> NSSplitViewItem {
 			let	m	=	NSSplitViewItem(sidebarWithViewController: _navigationVC)
@@ -139,8 +142,8 @@ class DivisionUIController2: CommonViewController {
 			m.automaticMaximumThickness	=	NSSplitViewItemUnspecifiedDimension
 			return	m
 		}
-		func reportItem() -> NSSplitViewItem {
-			let	m	=	NSSplitViewItem(viewController: _reportingVC)
+		func consoleItem() -> NSSplitViewItem {
+			let	m	=	NSSplitViewItem(viewController: _consoleVC)
 			m.minimumThickness		=	100
 			m.preferredThicknessFraction	=	0.1
 			m.automaticMaximumThickness	=	100
@@ -162,7 +165,7 @@ class DivisionUIController2: CommonViewController {
 				right:	inspItem()),
 			inner:
 				(top:	editItem(),
-				bottom:	reportItem()))
+				bottom:	consoleItem()))
 
 		_innerSplitVC.splitView.vertical	=	false
 		_innerSplitVC.splitViewItems		=	[

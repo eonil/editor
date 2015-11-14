@@ -13,7 +13,7 @@
 		453DFED21BF4CEC3008D7DB1 /* EditUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFECE1BF4CEC3008D7DB1 /* EditUIController.swift */; };
 		453DFED31BF4CEC3008D7DB1 /* InspectionUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFECF1BF4CEC3008D7DB1 /* InspectionUIController.swift */; };
 		453DFED41BF4CEC3008D7DB1 /* NavigationUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFED01BF4CEC3008D7DB1 /* NavigationUIController.swift */; };
-		453DFED51BF4CEC3008D7DB1 /* ReportUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFED11BF4CEC3008D7DB1 /* ReportUIController.swift */; };
+		453DFED51BF4CEC3008D7DB1 /* ConsoleUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFED11BF4CEC3008D7DB1 /* ConsoleUIController.swift */; };
 		453DFEEA1BF4CF5E008D7DB1 /* FileTreeUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEE61BF4CF5E008D7DB1 /* FileTreeUIController.swift */; };
 		453DFEF21BF4CFB7008D7DB1 /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEEC1BF4CFB7008D7DB1 /* CoreGraphicsExtensions.swift */; };
 		453DFEF31BF4CFB7008D7DB1 /* Dialogue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453DFEED1BF4CFB7008D7DB1 /* Dialogue.swift */; };
@@ -140,7 +140,7 @@
 		453DFECE1BF4CEC3008D7DB1 /* EditUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditUIController.swift; sourceTree = "<group>"; };
 		453DFECF1BF4CEC3008D7DB1 /* InspectionUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectionUIController.swift; sourceTree = "<group>"; };
 		453DFED01BF4CEC3008D7DB1 /* NavigationUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationUIController.swift; sourceTree = "<group>"; };
-		453DFED11BF4CEC3008D7DB1 /* ReportUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportUIController.swift; sourceTree = "<group>"; };
+		453DFED11BF4CEC3008D7DB1 /* ConsoleUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleUIController.swift; sourceTree = "<group>"; };
 		453DFEE61BF4CF5E008D7DB1 /* FileTreeUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeUIController.swift; sourceTree = "<group>"; };
 		453DFEEC1BF4CFB7008D7DB1 /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
 		453DFEED1BF4CFB7008D7DB1 /* Dialogue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.swift; sourceTree = "<group>"; };
@@ -236,7 +236,7 @@
 			children = (
 				453DFED01BF4CEC3008D7DB1 /* NavigationUIController.swift */,
 				453DFECF1BF4CEC3008D7DB1 /* InspectionUIController.swift */,
-				453DFED11BF4CEC3008D7DB1 /* ReportUIController.swift */,
+				453DFED11BF4CEC3008D7DB1 /* ConsoleUIController.swift */,
 				453DFECE1BF4CEC3008D7DB1 /* EditUIController.swift */,
 				453DFEFE1BF4D382008D7DB1 /* EditTextFileUIController.swift */,
 			);
@@ -593,7 +593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				453DFED51BF4CEC3008D7DB1 /* ReportUIController.swift in Sources */,
+				453DFED51BF4CEC3008D7DB1 /* ConsoleUIController.swift in Sources */,
 				45FECE6D1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift in Sources */,
 				453DFEFD1BF4D077008D7DB1 /* DebugNavigatorUIController.swift in Sources */,
 				453DFEFB1BF4D077008D7DB1 /* DebugFrameStackTreeUIController.swift in Sources */,

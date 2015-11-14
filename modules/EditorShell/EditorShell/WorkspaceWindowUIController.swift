@@ -109,7 +109,7 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 				window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
 				window.invalidateShadow()
 
-				func makeDark(_ b:NSButton, _ alpha:CGFloat) {
+				func makeDark(b:NSButton, _ alpha:CGFloat) {
 					let	f	=	CIFilter(name: "CIColorMonochrome")!
 					f.setDefaults()
 					f.setValue(CIColor(red: 0.5, green: 0.3, blue: 0.5, alpha: alpha), forKey: "inputColor")		//	I got this number accidentally, and I like this tone.

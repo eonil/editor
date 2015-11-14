@@ -1,5 +1,5 @@
 //
-//  ReportUIController.swift
+//  ConsoleUIController.swift
 //  EditorShell
 //
 //  Created by Hoon H. on 2015/08/14.
@@ -13,7 +13,7 @@ import EditorCommon
 import EditorModel
 import EditorUICommon
 
-class ReportingUIController: CommonViewController {
+class ConsoleUIController: CommonViewController {
 
 	weak var model: WorkspaceModel?
 
@@ -55,7 +55,7 @@ class ReportingUIController: CommonViewController {
 		assert(model != nil)
 		view.addSubview(_scrollV)
 		_scrollV.documentView		=	_textView
-		ConsoleModel.Event.Notification.register	(self, ReportingUIController._process)
+		ConsoleModel.Event.Notification.register	(self, ConsoleUIController._process)
 	}
 	private func _deinstall() {
 		assert(model != nil)

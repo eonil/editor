@@ -232,7 +232,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 					return	path.parts.last ?? ""
 				}
 			
-				return	"(????)"
+//				return	"(????)"
 			}
 
 			let	name	=	getName()
