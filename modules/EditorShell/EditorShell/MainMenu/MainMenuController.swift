@@ -8,40 +8,11 @@
 
 import AppKit
 import EditorModel
+import EditorUICommon
 
 
 
 
-
-
-
-
-
-//enum MainMenuCommand {
-//	case FileNewWorkspace
-//	case FileNewSubfileInCurrentFolderItemInCurrentWorkspace
-//	case FileNewSubfolderInCurrentFolderItemInCurrentWorkspace
-//	case FileOpenWorkspaceByBrowsingIt
-//	case FileOpenClearRecentWorkspaces
-//	case FileCloseCurrentWorkspace
-//
-//	case ProductRun
-//	case ProductBuild
-//	case ProductClean
-//	case ProductStop
-//
-//	case DebugPause
-//	case DebugResume
-//	case DebugHalt
-//	case DebugStepInto
-//	case DebugStepOut
-//	case DebugStepOver
-//}
-//enum MainMenuCategory {
-//	case PlainCommand
-//	case RecentFileItem
-//	case WindowItem
-//}
 
 
 
@@ -199,10 +170,10 @@ extension MainMenuController {
 		appMenu.addItem(NSMenuItem.separatorItem())
 		appMenu.addItemWithTitle("Quit \(appName)", action: "terminate:", keyEquivalent: "q")
 
-		mainMenu.addItem(file._cocoaMenuItem)
-		mainMenu.addItem(view._cocoaMenuItem)
-		mainMenu.addItem(product._cocoaMenuItem)
-		mainMenu.addItem(debug._cocoaMenuItem)
+		mainMenu.addItem(file.menuItem)
+		mainMenu.addItem(view.menuItem)
+		mainMenu.addItem(product.menuItem)
+		mainMenu.addItem(debug.menuItem)
 
 		NSApplication.sharedApplication().mainMenu		=	mainMenu
 	}
@@ -252,28 +223,28 @@ private func _legacyFunctionKeyShortcut(utf16CodeUnit: Int) -> MenuShortcutKeyCo
 }
 
 private func _instantiateGroupMenuItem(title: String) -> MenuItemController {
-	let	sm			=	NSMenu(title: title)
-	sm.autoenablesItems		=	false
+	let	sm		=	NSMenu(title: title)
+	sm.autoenablesItems	=	false
 
-	let	m			=	MenuItemController()
-	m._cocoaMenuItem.enabled	=	true
-	m._cocoaMenuItem.title		=	title
-	m._cocoaMenuItem.submenu	=	sm
-	m._onClick			=	nil
+	let	m		=	MenuItemController()
+	m.menuItem.enabled	=	true
+	m.menuItem.title		=	title
+	m.menuItem.submenu	=	sm
+	m.onClick		=	nil
 	return	m
 }
 //private func _instantiateCommandMenuItem(title: String, command: MainMenuCommand) -> MenuItemController {
 //	return	_instantiateCommandMenuItem(title, nil, command)
 //}
 private func _instantiateCommandMenuItem(title: String, _ shortcut: MenuShortcutKeyCombination?) -> MenuItemController {
-	let	m			=	MenuItemController()
-	m._cocoaMenuItem.title		=	title
+	let	m		=	MenuItemController()
+	m.menuItem.title	=	title
 
 	if let shortcut = shortcut {
-		m._cocoaMenuItem.keyEquivalent			=	shortcut.plainTextKeys
-		m._cocoaMenuItem.keyEquivalentModifierMask	=	Int(bitPattern: shortcut.modifierMask)
+		m.menuItem.keyEquivalent			=	shortcut.plainTextKeys
+		m.menuItem.keyEquivalentModifierMask	=	Int(bitPattern: shortcut.modifierMask)
 	}
-	m._onClick = { [weak m] in
+	m.onClick = { [weak m] in
 		guard let m = m else {
 			return
 		}
@@ -300,7 +271,7 @@ private func _instantiateCommandMenuItem(title: String, _ shortcut: MenuShortcut
 //}
 
 private func _instantiateSeparatorMenuItem() -> MenuItemController {
-	let	m		=	MenuItemController(NSMenuItem.separatorItem())
+	let	m		=	MenuItemController(menuItem: NSMenuItem.separatorItem())
 	return	m
 }
 
@@ -339,102 +310,6 @@ private func _instantiateSeparatorMenuItem() -> MenuItemController {
 
 
 
-
-
-
-class MenuItemController {
-	func addSubmenuItems(items: [MenuItemController]) {
-		guard _cocoaMenuItem.submenu != nil else {
-			fatalError("Current menu item is not intended to be a group. Please review the code.")
-		}
-		for item in items {
-			_cocoaMenuItem.submenu!.addItem(item._cocoaMenuItem)
-		}
-		_subcontrollers.appendContentsOf(items)
-	}
-
-
-
-
-	///
-
-	private init(_ cocoaMenuItem: NSMenuItem = NSMenuItem()) {
-		_cocoaMenuItem		=	cocoaMenuItem
-		_cocoaMenuItem.enabled	=	false
-		_cocoaMenuAgent.owner	=	self
-		_cocoaMenuItem.target	=	_cocoaMenuAgent
-		_cocoaMenuItem.action	=	Selector("onClick:")
-	}
-	deinit {
-		_cocoaMenuItem.target	=	nil
-		_cocoaMenuItem.action	=	nil
-		_cocoaMenuAgent.owner	=	nil
-	}
-
-
-
-
-
-	///
-
-	var enabled: Bool {
-		get {
-			return	_cocoaMenuItem.enabled
-		}
-		set {
-			_cocoaMenuItem.enabled	=	newValue
-		}
-	}
-	var onClick: (() -> ())? {
-		get {
-			return	_onClick
-		}
-		set {
-			_onClick	=	newValue
-		}
-	}
-
-
-
-
-
-
-	///
-
-	private var	_onClick	:	(() -> ())?
-	private let	_cocoaMenuItem	:	NSMenuItem
-	private let	_cocoaMenuAgent	=	_MenuItemAgent()
-	private var	_subcontrollers	=	[MenuItemController]()
-}
-extension MenuItemController: CustomStringConvertible, CustomDebugStringConvertible {
-	var description: String {
-		get {
-			var	names	=	[String]()
-			var	m	=	_cocoaMenuItem.menu
-			while let m1 = m {
-				names.insert(m1.title, atIndex: 0)
-				m	=	m?.supermenu
-			}
-			names.append(_cocoaMenuItem.title)
-			return	names.map({"[\($0)]"}).joinWithSeparator(" -> ")
-		}
-	}
-	var debugDescription: String {
-		get {
-			return	description
-		}
-	}
-}
-
-
-@objc
-private class _MenuItemAgent: NSObject {
-	weak var owner: MenuItemController?
-	@objc
-	func onClick(sender: NSMenuItem) {
-		owner!._onClick?()
-	}
-}
 
 
 
