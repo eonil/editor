@@ -70,7 +70,9 @@ extension MainMenuController {
 				fatalError()
 			}
 			if let target = workspace.debug.currentTarget {
-				target.halt()
+				if target.execution != nil {
+					target.halt()
+				}
 				workspace.debug.deselectTarget(target)
 			}
 			if workspace.debug.targets.count == 0 {
