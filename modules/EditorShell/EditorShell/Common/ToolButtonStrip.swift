@@ -19,7 +19,7 @@ class ToolButtonStrip: CommonView {
 
 
 
-	var toolButtons: [NSButton] = [] {
+	var toolButtons: [CommonView] = [] {
 		willSet {
 			_deinstallToolButtons()
 		}
@@ -78,13 +78,14 @@ class ToolButtonStrip: CommonView {
 	}
 	private func _layout() {
 		let	idealSZ		=	idealSize
-		let	startingX	=	round(bounds.midX - (idealSZ.width / 2))
+		let	startingX	=	bounds.midX - (idealSZ.width / 2)
 		var	x		=	startingX
 		for i in 0..<toolButtons.count {
 			let	button			=	toolButtons[i]
-			let	y			=	round(bounds.midY - (button.frame.size.height / 2))
-			toolButtons[i].frame.origin	=	CGPoint(x: x, y: y)
+			let	y			=	bounds.midY - (button.frame.size.height / 2)
+			toolButtons[i].frame.origin	=	CGPoint(x: round(x), y: round(y))
 
+			assert(button.frame.width != 0, "Expects non-zero width.")
 			x	+=	button.frame.width
 			x	+=	interButtonGap
 		}

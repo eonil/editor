@@ -27,6 +27,16 @@ public class CommonView: NSView {
 		assert(_isInstalled == false)
 	}
 
+
+
+
+
+
+
+
+
+
+
 	///
 
 	public func installSubcomponents() {
@@ -41,6 +51,24 @@ public class CommonView: NSView {
 		assert(_supercallCheckFlag == false)
 		_supercallCheckFlag	=	true
 	}
+
+	public func sizeThatFits(size: CGSize) -> CGSize {
+		return	size
+	}
+	public func sizeToFit() {
+		frame.size	=	sizeThatFits(frame.size)
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 	///
 

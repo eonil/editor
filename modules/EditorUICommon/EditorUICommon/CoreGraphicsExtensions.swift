@@ -14,6 +14,18 @@ public extension CGRect {
 			return	CGPoint(x: midX, y: midY)
 		}
 	}
+//	public var round: CGRect {
+//		get {
+//			return	CGRect(x: <#T##CGFloat#>, y: <#T##CGFloat#>, width: <#T##CGFloat#>, height: <#T##CGFloat#>)
+//		}
+//	}
+}
+public extension CGSize {
+	public var ceil: CGSize {
+		get {
+			return	CGSize(width: _ceil(width), height: _ceil(height))
+		}
+	}
 }
 public extension NSEdgeInsets {
 	public func insetRect(rect: CGRect) -> CGRect {
@@ -25,4 +37,22 @@ public extension NSEdgeInsets {
 
 		return	rect1
 	}
+}
+public prefix func -(insets: NSEdgeInsets) -> NSEdgeInsets {
+	return	NSEdgeInsets(top: -insets.top, left: -insets.left, bottom: -insets.bottom, right: -insets.right)
+}
+
+
+
+
+
+
+
+
+
+private func _round(v: CGFloat) -> CGFloat {
+	return	round(v)
+}
+private func _ceil(v: CGFloat) -> CGFloat {
+	return	ceil(v)
 }

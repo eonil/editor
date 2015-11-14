@@ -277,4 +277,15 @@ private let	_TOOLBAR_ID	=	"Root/Tool"
 
 
 
+public class DarkSegmentedControl: NSSegmentedControl {
+
+}
+
+public class DarkSegmentedCell: NSSegmentedCell {
+	
+}
+
+
+
+
 

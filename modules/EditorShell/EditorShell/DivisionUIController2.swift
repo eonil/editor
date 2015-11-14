@@ -71,8 +71,32 @@ class DivisionUIController2: CommonViewController {
 
 	///
 
-	private let _outerSplitVC		=	NSSplitViewController()
-	private let _innerSplitVC		=	NSSplitViewController()
+	private class _DarkSplitView: NSSplitView {
+		override var dividerColor: NSColor {
+			get {
+				return	WindowDivisionSplitDividerColor
+			}
+		}
+	}
+	private class _DarkSplitViewController: NSSplitViewController {
+		override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+			super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+			let	v		=	_DarkSplitView()
+			v.translatesAutoresizingMaskIntoConstraints	=	false
+			v.vertical					=	true
+			v.dividerStyle					=	.Thin
+			splitView		=	v
+		}
+		required init?(coder: NSCoder) {
+			fatalError()
+		}
+		private override func viewDidLoad() {
+			super.viewDidLoad()
+		}
+	}
+
+	private let _outerSplitVC		=	_DarkSplitViewController()
+	private let _innerSplitVC		=	_DarkSplitViewController()
 
 	private let _outerLeftSplitItem		=	NSSplitViewItem()
 	private let _outerRightSplitItem	=	NSSplitViewItem()

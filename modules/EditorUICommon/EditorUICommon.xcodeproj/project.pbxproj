@@ -20,6 +20,8 @@
 		4554C9A61B7DC0B9004987CC /* ToolbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4554C9A41B7DC0B9004987CC /* ToolbarController.swift */; };
 		4554CA841B7DC451004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA811B7DC44B004987CC /* EditorModel.framework */; };
 		457297D71BF62D35009DAE11 /* CommonViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457297D61BF62D35009DAE11 /* CommonViewFactory.swift */; };
+		45C5AD301BF6CD8F00B1CBAB /* ScopeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD2F1BF6CD8F00B1CBAB /* ScopeButton.swift */; };
+		45C5AD551BF6D9FC00B1CBAB /* CommonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD541BF6D9FC00B1CBAB /* CommonColor.swift */; };
 		45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77AF51B7F2AA50064C363 /* Delay.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +101,8 @@
 		4554C9A41B7DC0B9004987CC /* ToolbarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarController.swift; sourceTree = "<group>"; };
 		4554CA7B1B7DC44B004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
 		457297D61BF62D35009DAE11 /* CommonViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewFactory.swift; sourceTree = "<group>"; };
+		45C5AD2F1BF6CD8F00B1CBAB /* ScopeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeButton.swift; sourceTree = "<group>"; };
+		45C5AD541BF6D9FC00B1CBAB /* CommonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonColor.swift; sourceTree = "<group>"; };
 		45C77AF51B7F2AA50064C363 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -183,6 +187,7 @@
 		4554C97C1B7DC068004987CC /* EditorUICommon */ = {
 			isa = PBXGroup;
 			children = (
+				45C5AD271BF6CD4900B1CBAB /* Controls */,
 				454314541BF36EB800BF0EDA /* UIState.swift */,
 				4554C9A41B7DC0B9004987CC /* ToolbarController.swift */,
 				4554C9A21B7DC096004987CC /* (dummies for quickies) */,
@@ -190,6 +195,7 @@
 				4554C9961B7DC08E004987CC /* CommonWindowController.swift */,
 				4554C9941B7DC08E004987CC /* CommonViewController.swift */,
 				4554C9951B7DC08E004987CC /* CommonView.swift */,
+				45C5AD541BF6D9FC00B1CBAB /* CommonColor.swift */,
 				4554C9981B7DC08E004987CC /* CoreGraphicsExtensions.swift */,
 				45C77AF51B7F2AA50064C363 /* Delay.swift */,
 				4554C97F1B7DC068004987CC /* Info.plist */,
@@ -221,6 +227,14 @@
 				4554CA831B7DC44B004987CC /* EditorModelTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		45C5AD271BF6CD4900B1CBAB /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				45C5AD2F1BF6CD8F00B1CBAB /* ScopeButton.swift */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,9 +414,11 @@
 				4554C99B1B7DC08E004987CC /* CommonViewController.swift in Sources */,
 				4554C99C1B7DC08E004987CC /* CommonView.swift in Sources */,
 				4554C9A61B7DC0B9004987CC /* ToolbarController.swift in Sources */,
+				45C5AD301BF6CD8F00B1CBAB /* ScopeButton.swift in Sources */,
 				4554C99D1B7DC08E004987CC /* CommonWindowController.swift in Sources */,
 				4554C99F1B7DC08E004987CC /* CoreGraphicsExtensions.swift in Sources */,
 				454314551BF36EB800BF0EDA /* UIState.swift in Sources */,
+				45C5AD551BF6D9FC00B1CBAB /* CommonColor.swift in Sources */,
 				4554C9A01B7DC08E004987CC /* DummyViewController.swift in Sources */,
 				45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */,
 			);

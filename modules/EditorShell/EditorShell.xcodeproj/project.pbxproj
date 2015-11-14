@@ -37,6 +37,7 @@
 		4598A75D1BEDDA5F00B0F3C8 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4598A75C1BEDDA5F00B0F3C8 /* MainMenuController.swift */; };
 		45B5ED751B91EA0400C4247A /* EditorFileUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B5ED6D1B91E9FD00C4247A /* EditorFileUI.framework */; };
 		45C379291B90B06400F5B984 /* EditorDebugUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C379211B90B05700F5B984 /* EditorDebugUI.framework */; };
+		45C5ABED1BF639EB00B1CBAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5ABEC1BF639EB00B1CBAB /* Constants.swift */; };
 		45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */; };
 		45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */; };
 		45FECE691BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE681BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift */; };
@@ -166,6 +167,7 @@
 		4598A75C1BEDDA5F00B0F3C8 /* MainMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
 		45B5ED651B91E9FD00C4247A /* EditorFileUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorFileUI.xcodeproj; path = ../EditorFileUI/EditorFileUI.xcodeproj; sourceTree = "<group>"; };
 		45C3791A1B90B05700F5B984 /* EditorDebugUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebugUI.xcodeproj; path = ../EditorDebugUI/EditorDebugUI.xcodeproj; sourceTree = "<group>"; };
+		45C5ABEC1BF639EB00B1CBAB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
 		45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationUIController.swift; sourceTree = "<group>"; };
 		45FECE681BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuAvailabilityManager.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				45250B1B1BEB7875003A862A /* Protocols.swift */,
+				45C5ABEC1BF639EB00B1CBAB /* Constants.swift */,
 				4598A7501BEDDA5500B0F3C8 /* MainMenu */,
 				45B1852E1B7F865B004E3B28 /* (menu components) */,
 				45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */,
@@ -595,6 +598,7 @@
 				453DFEFD1BF4D077008D7DB1 /* DebugNavigatorUIController.swift in Sources */,
 				453DFEFB1BF4D077008D7DB1 /* DebugFrameStackTreeUIController.swift in Sources */,
 				453DFEF71BF4CFB7008D7DB1 /* ToolButtonStrip.swift in Sources */,
+				45C5ABED1BF639EB00B1CBAB /* Constants.swift in Sources */,
 				453DFEFF1BF4D382008D7DB1 /* EditTextFileUIController.swift in Sources */,
 				45250B1C1BEB7875003A862A /* Protocols.swift in Sources */,
 				45FF2F031BDD0A32001577B7 /* WorkspaceDocument.swift in Sources */,

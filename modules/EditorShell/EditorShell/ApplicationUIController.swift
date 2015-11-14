@@ -30,10 +30,11 @@ public class ApplicationUIController: SessionProtocol {
 	
 	public func run() {
 		assert(model != nil)
-
 		_installMenu()
 		_installCocoaNotificationHandlers()
 		_installModelObservers()
+
+		NSAppearance.setCurrentAppearance(NSAppearance(named: NSAppearanceNameVibrantDark))
 	}
 	public func halt() {
 		assert(model != nil)

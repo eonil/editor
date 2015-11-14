@@ -132,11 +132,8 @@ class NavigationUIController: CommonViewController {
 		view.addSubview(_fileTreeUI.view)
 		view.addSubview(_debuggingNavigatorUI.view)
 
-		_fileTreeToolButton.target	=	self
-		_fileTreeToolButton.action	=	"EDITOR_onTapFiles"
-
-		_debuggingToolButton.target	=	self
-		_debuggingToolButton.action	=	"EDITOR_onTapDebug"
+		_fileTreeToolButton.onClick	=	{ [weak self] in self?.EDITOR_onTapFiles() }
+		_debuggingToolButton.onClick	=	{ [weak self] in self?.EDITOR_onTapDebug() }
 
 		Notification<WorkspaceModel,UIState.Event>.register	(self, NavigationUIController._process)
 	}
@@ -217,15 +214,15 @@ class NavigationUIController: CommonViewController {
 		switch _mode {
 		case .Project:
 			_fileTreeUI.view.hidden			=	false
-			_fileTreeToolButton.state		=	NSOnState
+			_fileTreeToolButton.selected		=	true
 			_debuggingNavigatorUI.view.hidden	=	true
-			_debuggingToolButton.state		=	NSOffState
+			_debuggingToolButton.selected		=	false
 
 		case .Debug:
 			_fileTreeUI.view.hidden			=	true
-			_fileTreeToolButton.state		=	NSOffState
+			_fileTreeToolButton.selected		=	false
 			_debuggingNavigatorUI.view.hidden	=	false
-			_debuggingToolButton.state		=	NSOnState
+			_debuggingToolButton.selected		=	true
 
 		}
 	}
@@ -274,21 +271,34 @@ class NavigationUIController: CommonViewController {
 
 
 
-
-private func _instantiateScopeButton(title: String) -> NSButton {
-	let	sz	=	NSControlSize.SmallControlSize
-	let	v	=	NSButton()
-	v.font		=	NSFont.systemFontOfSize(NSFont.systemFontSizeForControlSize(sz))
-	v.controlSize	=	sz
+private func _instantiateScopeButton(title: String) -> ScopeButton {
+	let	v	=	ScopeButton()
+	v.onShouldChangeSelectionStateByUserClick	=	{ [weak v] in
+		guard let v = v else {
+			return	false
+		}
+		return	v.selected == false
+	}
 	v.title		=	title
-	v.bezelStyle	=	NSBezelStyle.RecessedBezelStyle
-	v.state		=	NSOffState
-	v.highlighted	=	false
-	v.showsBorderOnlyWhileMouseInside	=	true
-	v.setButtonType(NSButtonType.PushOnPushOffButton)
+	v.titleFont	=	NSFont.systemFontOfSize(NSFont.systemFontSizeForControlSize(.SmallControlSize))
 	v.sizeToFit()
 	return	v
 }
+//private func _instantiateScopeButton(title: String) -> NSButton {
+//	let	sz	=	NSControlSize.SmallControlSize
+//	let	v	=	NSButton()
+//	v.font		=	NSFont.systemFontOfSize(NSFont.systemFontSizeForControlSize(sz))
+//	v.controlSize	=	sz
+//	v.title		=	title
+//	v.bezelStyle	=	NSBezelStyle.RecessedBezelStyle
+//	v.state		=	NSOffState
+//	v.highlighted	=	false
+//	v.showsBorderOnlyWhileMouseInside	=	true
+//	v.setButtonType(NSButtonType.PushOnPushOffButton)
+//	v.sizeToFit()
+//	v.wantsLayer	=	true
+//	return	v
+//}
 
 
 
