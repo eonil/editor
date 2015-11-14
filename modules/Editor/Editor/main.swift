@@ -27,6 +27,9 @@ autoreleasepool {
 ////		let	_	=	class_replaceMethod(NSColor.self, name, impl2, method_getTypeEncoding(method1))
 //	}
 
+
+	NSAppearance.setCurrentAppearance(NSAppearance(named: NSAppearanceNameVibrantDark))
+	
 	let	applicationDelegate			=	AppDelegate()
 	NSApplication.sharedApplication().delegate	=	applicationDelegate
 	NSApplication.sharedApplication().run()

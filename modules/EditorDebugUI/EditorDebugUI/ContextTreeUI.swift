@@ -25,6 +25,18 @@ public class ContextTreeUI: CommonView {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 	///
 
 	public override func installSubcomponents() {
@@ -40,6 +52,35 @@ public class ContextTreeUI: CommonView {
 		super.layoutSubcomponents()
 		_layout()
 	}
+
+	public override var acceptsFirstResponder: Bool {
+		get {
+			return	_contextView.acceptsFirstResponder
+		}
+	}
+	public override func becomeFirstResponder() -> Bool {
+		return	window!.makeFirstResponder(_contextView)
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

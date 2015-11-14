@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AppKit
 import EditorModel
 import EditorUICommon
 import EditorFileUI
@@ -36,6 +37,31 @@ class FileTreeUIController: CommonViewController {
 		super.layoutSubcomponents()
 		_layout()
 	}
+
+
+
+
+	override var acceptsFirstResponder: Bool {
+		get {
+			return	_view.acceptsFirstResponder
+		}
+	}
+	override func becomeFirstResponder() -> Bool {
+		return	view.window!.makeFirstResponder(_view)
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	///
 

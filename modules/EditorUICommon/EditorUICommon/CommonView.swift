@@ -169,3 +169,91 @@ public class CommonView: NSView {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private class _OuterSplitView: NSSplitView {
+	override var dividerColor: NSColor {
+		get {
+			return	NSColor.clearColor()
+		}
+	}
+	override var dividerThickness: CGFloat {
+		get {
+			return	0
+		}
+	}
+	//	private override func drawDividerInRect(rect: NSRect) {
+	//		// Do nothing.
+	//		return
+	//	}
+}
+private class _OuterSplitViewController: NSSplitViewController {
+	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		let	v					=	_OuterSplitView()
+		v.translatesAutoresizingMaskIntoConstraints	=	false
+		v.vertical					=	true
+		v.dividerStyle					=	.Thin
+		splitView					=	v
+	}
+	required init?(coder: NSCoder) {
+		fatalError()
+	}
+	private override func viewDidLoad() {
+		super.viewDidLoad()
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -24,6 +24,16 @@ public class ContextTreeView: CommonView {
 	public var onUserDidSetFrame		:	(()->())?
 	public var onUserWillSetFrame		:	(()->())?
 
+
+
+
+
+
+
+
+
+	///
+
 	public func reconfigure(debugger: LLDBDebugger?) {
 		_dataTree.reconfigure(debugger)
 		_outlineV.reloadData()
@@ -58,6 +68,24 @@ public class ContextTreeView: CommonView {
 		super.layoutSubcomponents()
 		_layout()
 	}
+
+
+	public override var acceptsFirstResponder: Bool {
+		get {
+			return	_outlineV.acceptsFirstResponder
+		}
+	}
+	public override func becomeFirstResponder() -> Bool {
+		return	window!.makeFirstResponder(_outlineV)
+	}
+
+
+
+
+
+
+
+
 
 //	public private(set) var currentProcess: LLDBProcess? {
 //		didSet {

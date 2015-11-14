@@ -82,6 +82,17 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 		_layout()
 	}
 
+	public override var acceptsFirstResponder: Bool {
+		get {
+			return	_outlineView.acceptsFirstResponder
+		}
+	}
+	public override func becomeFirstResponder() -> Bool {
+		return	window!.makeFirstResponder(_outlineView)
+	}
+
+
+
 
 
 

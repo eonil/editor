@@ -22,6 +22,8 @@
 		457297D71BF62D35009DAE11 /* CommonViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457297D61BF62D35009DAE11 /* CommonViewFactory.swift */; };
 		45C5AD301BF6CD8F00B1CBAB /* ScopeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD2F1BF6CD8F00B1CBAB /* ScopeButton.swift */; };
 		45C5AD551BF6D9FC00B1CBAB /* CommonColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD541BF6D9FC00B1CBAB /* CommonColor.swift */; };
+		45C5AD5E1BF6F31300B1CBAB /* PaneSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD5D1BF6F31300B1CBAB /* PaneSplitView.swift */; };
+		45C5AD601BF6F44600B1CBAB /* PaneSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5AD5F1BF6F44600B1CBAB /* PaneSplitViewController.swift */; };
 		45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77AF51B7F2AA50064C363 /* Delay.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,6 +105,8 @@
 		457297D61BF62D35009DAE11 /* CommonViewFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonViewFactory.swift; sourceTree = "<group>"; };
 		45C5AD2F1BF6CD8F00B1CBAB /* ScopeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScopeButton.swift; sourceTree = "<group>"; };
 		45C5AD541BF6D9FC00B1CBAB /* CommonColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonColor.swift; sourceTree = "<group>"; };
+		45C5AD5D1BF6F31300B1CBAB /* PaneSplitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneSplitView.swift; sourceTree = "<group>"; };
+		45C5AD5F1BF6F44600B1CBAB /* PaneSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaneSplitViewController.swift; sourceTree = "<group>"; };
 		45C77AF51B7F2AA50064C363 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -233,6 +237,8 @@
 			isa = PBXGroup;
 			children = (
 				45C5AD2F1BF6CD8F00B1CBAB /* ScopeButton.swift */,
+				45C5AD5D1BF6F31300B1CBAB /* PaneSplitView.swift */,
+				45C5AD5F1BF6F44600B1CBAB /* PaneSplitViewController.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -414,11 +420,13 @@
 				4554C99B1B7DC08E004987CC /* CommonViewController.swift in Sources */,
 				4554C99C1B7DC08E004987CC /* CommonView.swift in Sources */,
 				4554C9A61B7DC0B9004987CC /* ToolbarController.swift in Sources */,
+				45C5AD601BF6F44600B1CBAB /* PaneSplitViewController.swift in Sources */,
 				45C5AD301BF6CD8F00B1CBAB /* ScopeButton.swift in Sources */,
 				4554C99D1B7DC08E004987CC /* CommonWindowController.swift in Sources */,
 				4554C99F1B7DC08E004987CC /* CoreGraphicsExtensions.swift in Sources */,
 				454314551BF36EB800BF0EDA /* UIState.swift in Sources */,
 				45C5AD551BF6D9FC00B1CBAB /* CommonColor.swift in Sources */,
+				45C5AD5E1BF6F31300B1CBAB /* PaneSplitView.swift in Sources */,
 				4554C9A01B7DC08E004987CC /* DummyViewController.swift in Sources */,
 				45C77AF61B7F2AA50064C363 /* Delay.swift in Sources */,
 			);

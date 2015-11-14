@@ -50,6 +50,15 @@ class DebuggingNavigatorUIController: CommonViewController {
 		_splitViewController.view.frame		=	view.bounds
 	}
 
+	override var acceptsFirstResponder: Bool {
+		get {
+			return	_frameStackTreeUIC.acceptsFirstResponder
+		}
+	}
+	override func becomeFirstResponder() -> Bool {
+		return	view.window!.makeFirstResponder(_frameStackTreeUIC)
+	}
+
 
 
 

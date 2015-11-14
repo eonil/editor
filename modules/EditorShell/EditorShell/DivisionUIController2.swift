@@ -69,34 +69,22 @@ class DivisionUIController2: CommonViewController {
 
 
 
+
+
+
+
+
+
+
+
+	
+
+
+
 	///
 
-	private class _DarkSplitView: NSSplitView {
-		override var dividerColor: NSColor {
-			get {
-				return	WindowDivisionSplitDividerColor
-			}
-		}
-	}
-	private class _DarkSplitViewController: NSSplitViewController {
-		override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-			super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-			let	v		=	_DarkSplitView()
-			v.translatesAutoresizingMaskIntoConstraints	=	false
-			v.vertical					=	true
-			v.dividerStyle					=	.Thin
-			splitView		=	v
-		}
-		required init?(coder: NSCoder) {
-			fatalError()
-		}
-		private override func viewDidLoad() {
-			super.viewDidLoad()
-		}
-	}
-
-	private let _outerSplitVC		=	_DarkSplitViewController()
-	private let _innerSplitVC		=	_DarkSplitViewController()
+	private let _outerSplitVC		=	_instantiateOuterSplitViewController()
+	private let _innerSplitVC		=	_instantiateInnerSplitViewController()
 
 	private let _outerLeftSplitItem		=	NSSplitViewItem()
 	private let _outerRightSplitItem	=	NSSplitViewItem()
@@ -114,6 +102,15 @@ class DivisionUIController2: CommonViewController {
 //	private var _splitItemMapping		=	Dictionary<ReferentialIdentity<NSViewController>, NSSplitView>()
 
 	private func _install() {
+		view.wantsLayer					=	true
+		view.layer!.backgroundColor			=	WindowBackgroundFillColor.CGColor
+		_outerSplitVC.view.wantsLayer			=	true
+		_outerSplitVC.view.layer!.backgroundColor	=	WindowBackgroundFillColor.CGColor
+		_outerSplitVC.splitView.wantsLayer			=	true
+		_outerSplitVC.splitView.layer!.backgroundColor	=	WindowBackgroundFillColor.CGColor
+		_innerSplitVC.view.wantsLayer			=	true
+		_innerSplitVC.view.layer!.backgroundColor	=	WindowBackgroundFillColor.CGColor
+
 		// Initial metrics defines initial layout. We need these.
 		_navigationVC.view.frame.size.width	=	200
 		_inspectionVC.view.frame.size.width	=	200
@@ -328,21 +325,81 @@ class DivisionUIController2: CommonViewController {
 
 
 
+private func _instantiateOuterSplitViewController() -> PaneSplitViewController {
+	let	vc				=	PaneSplitViewController()
+	vc.paneSplitView.dividerThickness	=	0
+	vc.paneSplitView.dividerColor		=	NSColor.clearColor()
+	return	vc
+}
+private func _instantiateInnerSplitViewController() -> PaneSplitViewController {
+	let	vc				=	PaneSplitViewController()
+	vc.paneSplitView.dividerThickness	=	1
+	vc.paneSplitView.dividerColor		=	WindowDivisionSplitDividerColor
+	return	vc
+}
 
 
 
 
-//private class _ObserveableSplitViewController: NSSplitViewController {
-//	var onWillResizeSubviews: (()->())?
-//	var onDidResizeSubviews: (()->())?
-//	private func splitViewWillResizeSubviews(notification: NSNotification) {
-//		super.splitViewWillResizeSubviews(notification)
+
+//private class _OuterSplitView: NSSplitView {
+//	override var dividerColor: NSColor {
+//		get {
+//			return	NSColor.clearColor()
+//		}
 //	}
-//	private override func splitViewDidResizeSubviews(notification: NSNotification) {
-//		onDidResizeSubviews?()
-//		super.splitViewDidResizeSubviews(notification)
+//	override var dividerThickness: CGFloat {
+//		get {
+//			return	0
+//		}
+//	}
+////	private override func drawDividerInRect(rect: NSRect) {
+////		// Do nothing.
+////		return
+////	}
+//}
+//private class _OuterSplitViewController: NSSplitViewController {
+//	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+//		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//		let	v					=	_OuterSplitView()
+//		v.translatesAutoresizingMaskIntoConstraints	=	false
+//		v.vertical					=	true
+//		v.dividerStyle					=	.Thin
+//		splitView					=	v
+//	}
+//	required init?(coder: NSCoder) {
+//		fatalError()
+//	}
+//	private override func viewDidLoad() {
+//		super.viewDidLoad()
 //	}
 //}
+//
+//
+//private class _InnerSplitView: NSSplitView {
+//	override var dividerColor: NSColor {
+//		get {
+//			return	WindowDivisionSplitDividerColor
+//		}
+//	}
+//}
+//private class _InnerSplitViewController: NSSplitViewController {
+//	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+//		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//		let	v					=	_InnerSplitView()
+//		v.translatesAutoresizingMaskIntoConstraints	=	false
+//		v.vertical					=	true
+//		v.dividerStyle					=	.Thin
+//		splitView					=	v
+//	}
+//	required init?(coder: NSCoder) {
+//		fatalError()
+//	}
+//	private override func viewDidLoad() {
+//		super.viewDidLoad()
+//	}
+//}
+//
 
 
 

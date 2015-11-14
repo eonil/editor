@@ -213,16 +213,18 @@ class NavigationUIController: CommonViewController {
 	private func _applyModeSelectionChange() {
 		switch _mode {
 		case .Project:
-			_fileTreeUI.view.hidden			=	false
 			_fileTreeToolButton.selected		=	true
-			_debuggingNavigatorUI.view.hidden	=	true
 			_debuggingToolButton.selected		=	false
+			_fileTreeUI.view.hidden			=	false
+			_debuggingNavigatorUI.view.hidden	=	true
+			view.window!.makeFirstResponder(_fileTreeUI)
 
 		case .Debug:
-			_fileTreeUI.view.hidden			=	true
 			_fileTreeToolButton.selected		=	false
-			_debuggingNavigatorUI.view.hidden	=	false
 			_debuggingToolButton.selected		=	true
+			_fileTreeUI.view.hidden			=	true
+			_debuggingNavigatorUI.view.hidden	=	false
+			view.window!.makeFirstResponder(_debuggingNavigatorUI)
 
 		}
 	}

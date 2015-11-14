@@ -18,6 +18,17 @@ class DebugFrameStackTreeUIController: CommonViewController {
 
 	weak var model: DebuggingModel? 
 
+
+
+
+
+
+
+
+
+
+	///
+
 	override func installSubcomponents() {
 		super.installSubcomponents()
 		_install()
@@ -30,6 +41,32 @@ class DebugFrameStackTreeUIController: CommonViewController {
 		super.layoutSubcomponents()
 		_layout()
 	}
+
+	override var acceptsFirstResponder: Bool {
+		get {
+			return	_treeUI.acceptsFirstResponder
+		}
+	}
+	override func becomeFirstResponder() -> Bool {
+		return	view.window!.makeFirstResponder(_treeUI)
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	///
 

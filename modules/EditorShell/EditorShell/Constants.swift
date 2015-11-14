@@ -13,5 +13,5 @@ import AppKit
 
 
 
-
-let	WindowDivisionSplitDividerColor		=	NSColor.redColor()
+let	WindowBackgroundFillColor		=	NSColor.controlBackgroundColor()
+let	WindowDivisionSplitDividerColor		=	NSColor.gridColor().colorWithAlphaComponent(0.25)

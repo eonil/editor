@@ -32,9 +32,11 @@ public struct CommonViewFactory {
 		let	v	=	NSTextView()
 		v.verticallyResizable	=	true
 		v.horizontallyResizable	=	true
+		v.backgroundColor	=	NSColor.controlBackgroundColor()
 		v.font			=	_codeFont()
 		v.typingAttributes	=	[
-			NSFontAttributeName	:	_codeFont()
+			NSFontAttributeName		:	_codeFont(),
+			NSForegroundColorAttributeName	:	NSColor.controlTextColor(),
 		]
 		v.textContainer!.widthTracksTextView	=	false
 		v.textContainer!.containerSize		=	CGSize(width: CGFloat.max, height: CGFloat.max)
