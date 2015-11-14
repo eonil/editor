@@ -23,25 +23,33 @@ public class ReportingModel: ModelSubnode<WorkspaceModel> {
 
 	///
 	
-	public var errors: ArrayStorage<Issue> {
-		get {
-			return	_errors
-		}
-	}
-	public var warnings: ArrayStorage<Issue> {
-		get {
-			return	_errors
-		}
-	}
-	public var informations: ArrayStorage<Issue> {
-		get {
-			return	_errors
+	public private(set) var errors		=	[Issue]()
+	public private(set) var warnings	=	[Issue]()
+	public private(set) var informations	=	[Issue]()
+
+
+
+
+
+
+
+
+
+	///
+
+	internal func addIssue(issue: Issue) {
+		switch issue.severity {
+		case .Information:	errors.append(issue)
+		case .Warning:		warnings.append(issue)
+		case .Error:		informations.append(issue)
 		}
 	}
 
-	private let	_errors		=	MutableArrayStorage<Issue>([])
-	private let	_warnings	=	MutableArrayStorage<Issue>([])
-	private let	_informations	=	MutableArrayStorage<Issue>([])
+	internal func removeAllIssues() {
+		errors		=	[]
+		warnings	=	[]
+		informations	=	[]
+	}
 }
 
 
