@@ -11,6 +11,10 @@ import EditorDriver
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+	func applicationWillFinishLaunching(notification: NSNotification) {
+		// Prevents autogeneration of full-screen menu.
+		NSUserDefaults.standardUserDefaults().setBool(false, forKey: "NSFullScreenMenuItemEverywhere")
+	}
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
 		_driver.run()
 	}

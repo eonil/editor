@@ -31,7 +31,7 @@ class MainMenuController {
 	let	fileNewFolder			=	_instantiateCommandMenuItem("Folder...",		Command+Alternate+"N"		)
 	let	fileOpen			=	_instantiateGroupMenuItem("Open")
 	let	fileOpenWorkspace		=	_instantiateCommandMenuItem("Workspace...", 		Command+"O"			)
-	let	fileOpenClearWorkspaceHistory	=	_instantiateCommandMenuItem("Clear Recent Workspaces",	nil	 		)
+	let	fileOpenClearWorkspaceHistory	=	_instantiateCommandMenuItem("Clear Recent Workspaces",	nil	 			)
 	let	fileCloseCurrentFile		=	_instantiateCommandMenuItem("Close File",		Command+Shift+"W"		)
 	let	fileCloseCurrentWorkspace	=	_instantiateCommandMenuItem("Close Workspace",		Command+"W"			)
 
@@ -43,11 +43,12 @@ class MainMenuController {
 	let	viewShowDebugNavivator		=	_instantiateCommandMenuItem("Show Debug Navigator",	Command+"3"			)
 	let	viewHideNavigator		=	_instantiateCommandMenuItem("Hide Navigator", 		Command+"0"			)
 	let	viewConsole			=	_instantiateCommandMenuItem("Logs", 			Command+Shift+"C"		)
+	let	viewFullscreen			=	_instantiateCommandMenuItem("Toggle Full Screen",	Command+Control+"F"		)
 
 	let	product				=	_instantiateGroupMenuItem("Product")
 	let	productRun			=	_instantiateCommandMenuItem("Run",			Command+"R"			)
 	let	productBuild			=	_instantiateCommandMenuItem("Build",			Command+"B"			)
-	let	productClean			=	_instantiateCommandMenuItem("Clean",			Command+Shift+"K"			)
+	let	productClean			=	_instantiateCommandMenuItem("Clean",			Command+Shift+"K"		)
 	let	productStop			=	_instantiateCommandMenuItem("Stop",			Command+"."			)
 
 	let	debug				=	_instantiateGroupMenuItem("Debug")
@@ -59,7 +60,7 @@ class MainMenuController {
 	let	debugStepOut			=	_instantiateCommandMenuItem("Step Out",			_legacyFunctionKeyShortcut(NSF7FunctionKey))
 	let	debugStepOver			=	_instantiateCommandMenuItem("Step Over",		_legacyFunctionKeyShortcut(NSF8FunctionKey))
 
-	let	debugClearConsole		=	_instantiateCommandMenuItem("Clear Console", 		Command+"K")
+	let	debugClearConsole		=	_instantiateCommandMenuItem("Clear Console", 		Command+"K"			)
 
 	init() {
 		file.addSubmenuItems([
@@ -83,7 +84,8 @@ class MainMenuController {
 			viewEditor,
 			viewNavigators,
 			viewConsole,
-			_instantiateSeparatorMenuItem()		//	Cocoa will add `Enter Full Screen` menu item automatically after this items. Prepare a separator for it.
+			_instantiateSeparatorMenuItem(),
+			viewFullscreen,
 			])
 		viewNavigators.addSubmenuItems([
 			viewShowProjectNavivator,
@@ -112,7 +114,6 @@ class MainMenuController {
 			_instantiateSeparatorMenuItem(),
 			debugClearConsole,
 			])
-
 	}
 	deinit {
 		assert(isRunning == false)
@@ -134,6 +135,7 @@ class MainMenuController {
 		}
 	}
 }
+
 extension MainMenuController {
 	private func _unsetMainMenu() {
 		assert(NSApplication.sharedApplication().mainMenu != nil, "Main menu is not yet set.")

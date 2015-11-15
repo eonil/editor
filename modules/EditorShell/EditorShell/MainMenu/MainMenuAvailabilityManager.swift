@@ -155,6 +155,7 @@ class MainMenuAvailabilityManager {
 		mainMenuController!.viewShowDebugNavivator.enabled	=	true
 		mainMenuController!.viewHideNavigator.enabled		=	true
 		mainMenuController!.viewConsole.enabled			=	true
+		mainMenuController!.viewFullscreen.enabled		=	true
 	}
 
 	private func _updateProductMenuAvailability() {

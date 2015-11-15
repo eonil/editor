@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AppKit
 import EditorCommon
 import EditorModel
 import EditorUICommon
@@ -70,6 +71,9 @@ extension MainMenuController {
 				state.consolePaneVisibility	=	true
 			}
 		}
+		case ~~viewFullscreen: do {
+			NSApplication.sharedApplication().mainWindow?.toggleFullScreen(self)
+			}
 
 		case ~~productRun: do {
 			guard let workspace = model!.currentWorkspace else {
