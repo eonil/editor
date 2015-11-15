@@ -8,6 +8,15 @@
       location = "group:NOTE.md">
    </FileRef>
    <FileRef
+      location = "group:ATTRIBUTIONS.md">
+   </FileRef>
+   <FileRef
+      location = "group:DEPENDENCIES.md">
+   </FileRef>
+   <FileRef
+      location = "group:LICENSE.md">
+   </FileRef>
+   <FileRef
       location = "group:/Users/Eonil/Workshop/Sandbox3/Editor2/Preview.png">
    </FileRef>
    <Group
