@@ -13,7 +13,7 @@ import EditorCommon
 import EditorModel
 import EditorUICommon
 
-public class FileTreeUI: CommonView {
+public class FileTreeUI: CommonView, NSTextFieldDelegate {
 
 
 	public weak var model: FileTreeModel? {
@@ -87,6 +87,51 @@ public class FileTreeUI: CommonView {
 		// Do nothing.
 		return
 	}
+
+//	public func control(control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+//		return	true
+//	}
+//	public func control(control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+//		return	true
+//	}
+//	public override func controlTextDidBeginEditing(obj: NSNotification) {
+//
+//	}
+
+	public func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
+		return	true
+	}
+	/// This it the only event that works. All above events won't be sent.
+	public override func controlTextDidEndEditing(notification: NSNotification) {
+		let	v	=	notification.object as! NSTextField
+		let	v1	=	v.superview as! FileNodeView
+		let	n	=	v1.node!
+
+		let	newName	=	v.stringValue
+		try! model!.renameNode(n, toName: newName)
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -267,6 +312,27 @@ public class FileTreeUI: CommonView {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineViewDelegate {
 	weak var owner: FileTreeUI?
 
@@ -329,13 +395,16 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 
 			let	name	=	getName()
 			let	comment	=	node.comment == nil ? "" : " (\(node.comment!))"
-			let	text	=	"\(name)\(comment)"
+//			let	text	=	"\(name)\(comment)"
+			let	text	=	name
 			return	FileNodeView.Data(icon: nil, text: text)
 		}
 
 		if let item = item as? WorkspaceItemNode {
-			let	v	=	FileNodeView()
-			v.data		=	toData(item)
+			let	v		=	FileNodeView()
+			v.node			=	item
+			v.data			=	toData(item)
+			v.textFieldDelegate	=	owner!
 			return	v
 		}
 		return	nil
@@ -430,6 +499,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 ////		}
 		return	false
 	}
+
 }
 
 

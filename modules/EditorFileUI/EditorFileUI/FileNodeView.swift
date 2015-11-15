@@ -20,7 +20,21 @@ class FileNodeView: NSTableCellView {
 	struct Data {
 		var	icon	:	NSImage?
 		var	text	:	String?
+
 	}
+
+
+	weak var textFieldDelegate: NSTextFieldDelegate? {
+		get {
+			return	_exprField.delegate
+		}
+		set {
+			_exprField.delegate	=	newValue
+		}
+	}
+
+//	weak var model: FileTreeModel?
+	weak var node: WorkspaceItemNode?
 
 	var data: Data? {
 		didSet {
@@ -65,6 +79,26 @@ class FileNodeView: NSTableCellView {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	///
 
 	private let	_iconView	=	NSImageView()
@@ -73,16 +107,16 @@ class FileNodeView: NSTableCellView {
 	private func _install() {
 		assert(self.imageView === nil)
 		assert(self.textField === nil)
-		self.imageView	=	_iconView
-		self.textField	=	_exprField
+		self.imageView		=	_iconView
+		self.textField		=	_exprField
 		addSubview(_iconView)
 		addSubview(_exprField)
 	}
 	private func _deinstall() {
 		_exprField.removeFromSuperview()
 		_iconView.removeFromSuperview()
-		self.textField	=	nil
-		self.imageView	=	nil
+		self.textField		=	nil
+		self.imageView		=	nil
 	}
 }
 

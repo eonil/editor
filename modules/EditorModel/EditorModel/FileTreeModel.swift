@@ -199,6 +199,18 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		markUnimplemented()
 	}
 
+	public func renameNode(node: WorkspaceItemNode, toName: String) throws {
+		defer {
+			Event.DidChangeNodeAttribute.dualcastAsNotificationWithSender(self)
+		}
+
+		let	u1	=	node.resolvePath().absoluteFileURL(`for`: workspace)
+		node.name	=	toName
+		let	u2	=	node.resolvePath().absoluteFileURL(`for`: workspace)
+
+		try Platform.thePlatform.fileSystem.moveFile(fromURL: u1, toURL: u2)
+	}
+
 	/// All file nodes will be deleted regardless of file-system operation failure.
 	/// Anyway, such failure will throw an error at the end of process.
 	/// This method automatically handles nested nodes, so you don't need to deduplicate
