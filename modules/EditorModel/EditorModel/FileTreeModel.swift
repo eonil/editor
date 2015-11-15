@@ -200,6 +200,9 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 	}
 
 	public func renameNode(node: WorkspaceItemNode, toName: String) throws {
+		guard toName != node.name else {
+			return	
+		}
 		defer {
 			Event.DidChangeNodeAttribute.dualcastAsNotificationWithSender(self)
 		}
