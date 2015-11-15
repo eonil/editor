@@ -212,6 +212,7 @@ public class FileTreeUI: CommonView {
 		}
 
 		_outlineView.reloadData()
+		_saveProjectFileList()
 	}
 
 
@@ -223,6 +224,10 @@ public class FileTreeUI: CommonView {
 
 
 	///
+
+	private func _saveProjectFileList() {
+		model!.storeSnapshot()
+	}
 
 	private func _getClickedFileNode() -> WorkspaceItemNode? {
 		let	rowIndex	=	_outlineView.clickedRow

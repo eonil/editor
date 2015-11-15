@@ -16,6 +16,7 @@
 
 To Do
 -----
+- Project file list saving.
 - Pretty display of stacks and variables in debugging UI.
 - Drag & drop support in project file tree pane. 
 - Cargo output parsing and display. (via Unix pipe)
