@@ -27,14 +27,32 @@ public class WorkspaceItemTree {
 			return	_root
 		}
 	}
-	public func createRoot() {
+
+
+
+
+
+
+
+
+
+
+	///
+
+	internal func createRoot() {
 		_root	=	WorkspaceItemNode(name: "workspace", isGroup: true)
 	}
-//	public func createRootFromSnapshot() {
+//	internal func createRootFromSnapshot() {
 //	}
-	public func deleteRoot() {
+	internal func deleteRoot() {
 		_root	=	nil
 	}
+
+
+
+
+
+
 
 	///
 
@@ -92,7 +110,7 @@ public class WorkspaceItemNode {
 			return	subnodes.map({ $0.count }).reduce(1, combine: +)
 		}
 	}
-	public var name: String {
+	public internal(set) var name: String {
 		willSet {
 			assertNoError(WorkspaceItemNode.validateName(newValue, withSupernode: _supernode))
 		}
@@ -100,7 +118,7 @@ public class WorkspaceItemNode {
 		}
 	}
 
-	public var isGroup: Bool = false {
+	public internal(set) var isGroup: Bool = false {
 		willSet {
 			assert(newValue == true || subnodes.count == 0, "You cannot convert this node into a non-group node if there's any subnode.")
 		}
@@ -108,7 +126,7 @@ public class WorkspaceItemNode {
 		}
 	}
 
-	public var comment: String? {
+	public internal(set) var comment: String? {
 		willSet {
 		}
 		didSet {
@@ -160,11 +178,20 @@ public class WorkspaceItemNode {
 		}
 	}
 
+
+
+
+
 	///
 
 	public static func validateName(name: String, withSupernode supernode: WorkspaceItemNode?)() throws {
 		return	try _validateName(name, withSupernode: supernode)
 	}
+
+
+
+
+
 
 	///
 
@@ -184,11 +211,39 @@ public class WorkspaceItemNode {
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public struct WorkspaceItemSubnodeList: SequenceType {
 
 	private init(host: WorkspaceItemNode) {
 		_host	=	host
 	}
+
+
+
+
+
+
+
 
 	///
 
@@ -196,39 +251,6 @@ public struct WorkspaceItemSubnodeList: SequenceType {
 		get {
 			return	_host!._subnodes.count
 		}
-	}
-
-	/// Appends a node at the end of list.
-	///
-	/// This is equivalent with `insert(node, atIndex: count)`.
-	public func append(node: WorkspaceItemNode) {
-		insert(node, atIndex: count)
-	}
-
-	/// Inserts a node at specified position.
-	///
-	/// You must provide node with only valid names.
-	/// Use `WorkspaceItemNode.validateName` to check name validity.
-	public func insert(node: WorkspaceItemNode, atIndex index: Int) {
-		assert(node._supernode == nil, "The node `\(node)` is already a subnode of this node.")
-		assert(_host!.isGroup == true, "You cannot insert a subnode to a non-group node.")
-		assertNoError(WorkspaceItemNode.validateName(node.name, withSupernode: _host!))
-		_host!._subnodes.insert(node, atIndex: index)
-		node._supernode	=	_host
-	}
-
-	public func remove(node: WorkspaceItemNode) {
-		if let idx = _host!._subnodes.indexOf ({ node === $0 }) {
-			removeAtIndex(idx)
-		}
-		fatalError("Cannot find specified node in this node.")
-	}
-
-	public func removeAtIndex(index: Int) {
-		let	node	=	_host!._subnodes[index]
-		assert(node._supernode === _host, "The node `\(node)` is not a subnode of this node.")
-		node._supernode	=	nil
-		_host!._subnodes.removeAtIndex(index)
 	}
 
 	/// O(1) at best, O(n) at worst where n == count.
@@ -259,16 +281,102 @@ public struct WorkspaceItemSubnodeList: SequenceType {
 		}
 	}
 
+
+
+
+
+
+
+
+
 	///
 
 	public func generate() -> Array<WorkspaceItemNode>.Generator {
 		return	_host!._subnodes.generate()
 	}
 
+
+
+
+
+
+
+
+
+
+	///
+
+	/// Appends a node at the end of list.
+	///
+	/// This is equivalent with `insert(node, atIndex: count)`.
+	internal func append(node: WorkspaceItemNode) {
+		insert(node, atIndex: count)
+	}
+
+	/// Inserts a node at specified position.
+	///
+	/// You must provide node with only valid names.
+	/// Use `WorkspaceItemNode.validateName` to check name validity.
+	internal func insert(node: WorkspaceItemNode, atIndex index: Int) {
+		assert(node._supernode == nil, "The node `\(node)` is already a subnode of this node.")
+		assert(_host!.isGroup == true, "You cannot insert a subnode to a non-group node.")
+		assertNoError(WorkspaceItemNode.validateName(node.name, withSupernode: _host!))
+		_host!._subnodes.insert(node, atIndex: index)
+		node._supernode	=	_host
+	}
+
+	internal func remove(node: WorkspaceItemNode) {
+		if let idx = _host!._subnodes.indexOf ({ node === $0 }) {
+			removeAtIndex(idx)
+		}
+		fatalError("Cannot find specified node in this node.")
+	}
+
+	internal func removeAtIndex(index: Int) {
+		let	node	=	_host!._subnodes[index]
+		assert(node._supernode === _host, "The node `\(node)` is not a subnode of this node.")
+		node._supernode	=	nil
+		_host!._subnodes.removeAtIndex(index)
+	}
+	
+
+
+
+
+
+
+
 	///
 
 	private weak var	_host	:	WorkspaceItemNode?
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

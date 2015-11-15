@@ -522,16 +522,6 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 }
 
 
-//
-//public protocol FileTreeModelDelegate {
-//	func willInsertNodesAtPaths()
-//	func didInsertNodesAtPaths()
-//	func willUpdateNodesAtPaths()
-//	func didUpdateNodesAtPaths()
-//	func willDeleteNodesAtPaths()
-//	func didDeleteNodesAtPaths()
-//}
-//
 
 
 
