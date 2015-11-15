@@ -10,11 +10,11 @@ import Foundation
 import EditorModel
 
 public protocol FileTreeUIProtocol {
-	var selectedFileNodes: [FileNodeModel] { get }
-
-	func isFileNodeDisplayed(fileNode: FileNodeModel) -> Bool
-	func selectFileNode(fileNode: FileNodeModel)
-	func deselectAllFileNodes()
+//	var selectedFileNodes: [FileNodeModel] { get }
+//
+//	func isFileNodeDisplayed(fileNode: FileNodeModel) -> Bool
+//	func selectFileNode(fileNode: FileNodeModel)
+//	func deselectAllFileNodes()
 }
 
 

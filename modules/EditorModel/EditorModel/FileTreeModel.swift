@@ -33,13 +33,14 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 
 	struct Error: ErrorType {
 		enum Code {
+			case BadName
 			case CannotRestoreBecuaseCannotReadWorkspaceFileListAsUTF8String
-			case CannotCreateFolderBecuaseThereIsAlreadyAnotherNodeAtPath
-			case CannotMoveDueToLackOfFromContainerNode
-			case CannotMoveDueToLackOfToContainerNode
-			case CannotMoveBecauseOriginationIndexIsOutOfRange
-			case CannotMoveBecauseDestinationIndexIsOutOfRange
-			case CannotMoveDueToExistingNodeAtToPath
+//			case CannotCreateFolderBecuaseThereIsAlreadyAnotherNodeAtPath
+//			case CannotMoveDueToLackOfFromContainerNode
+//			case CannotMoveDueToLackOfToContainerNode
+//			case CannotMoveBecauseOriginationIndexIsOutOfRange
+//			case CannotMoveBecauseDestinationIndexIsOutOfRange
+//			case CannotMoveDueToExistingNodeAtToPath
 		}
 		
 		var code	:	Code
@@ -132,6 +133,13 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		_storeSnapshotToURL(u)
 	}
 
+
+
+
+
+
+
+
 	///
 
 	public func containsNodeAtPath(path: WorkspaceItemPath) -> Bool {
@@ -141,6 +149,117 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 	public func searchNodeAtPath(path: WorkspaceItemPath) -> FileNodeModel? {
 		return	_rootNodeModel?.search(path)
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	///
+
+	/// A new file node will be created regardless of file-system operation failure.
+	/// Anyway, such failure will throw an error at the end of process.
+	/// Name will be chosen automatically.
+	public func newFileInNode(parentNode: FileNodeModel, atIndex: Int) throws {
+		defer {
+			Event.DidChangeTreeTopology.dualcastAsNotificationWithSender(self)
+		}
+		for i in 0..<100 {
+			let	name	=	"file\(i).rs"
+			do {
+				try WorkspaceItemNode.validateName(name, withSupernode: parentNode._dataNode)()
+				let	node	=	FileNodeModel(name: name, isGroup: false)
+				parentNode.subnodes.insert(node, at: atIndex)
+				let	u	=	node.resolvePath().absoluteFileURL(`for`: workspace)
+				let	_	=	try? Platform.thePlatform.fileSystem.createFileAtURL(u)
+				return
+			}
+			catch {
+				continue
+			}
+		}
+		throw	Error(code: FileTreeModel.Error.Code.BadName, message: "Can't select a name for new file.")
+	}
+
+	/// A new file node will be created regardless of file-system operation failure.
+	/// Anyway, such failure will throw an error at the end of process.
+	/// Name will be chosen automatically.
+	public func newFolderInNode(parentNode: FileNodeModel, atIndex: Int) throws {
+		for i in 0..<100 {
+			let	name	=	"folder\(i)"
+			do {
+				try WorkspaceItemNode.validateName(name, withSupernode: parentNode._dataNode)()
+				let	node	=	FileNodeModel(name: name, isGroup: true)
+				parentNode.subnodes.insert(node, at: atIndex)
+				let	u	=	node.resolvePath().absoluteFileURL(`for`: workspace)
+				let	_	=	try? Platform.thePlatform.fileSystem.createDirectoryAtURL(u, recursively: true)
+				return
+			}
+			catch {
+				continue
+			}
+		}
+		Event.DidChangeTreeTopology.dualcastAsNotificationWithSender(self)
+		throw	Error(code: FileTreeModel.Error.Code.BadName, message: "Can't select a name for new file.")
+	}
+
+	/// File nodes for all paths will be created regardless of file-system operation
+	/// failure.
+	/// Anyway, such failure will throw an error at the end of process.
+	public func copyFilesAtPaths(paths: [String], intoParentNode: FileNodeModel, atIndex: Int) throws {
+		markUnimplemented()
+	}
+
+	/// Node movement will always be done regardless of file-system operation failure.
+	/// Anyway, such failure will throw an error at the end of process.
+	public func moveNodes(originalNodes: [FileNodeModel], intoParentNode: FileNodeModel, atIndex: Int) throws {
+		markUnimplemented()
+	}
+
+	/// All file nodes will be deleted regardless of file-system operation failure.
+	/// Anyway, such failure will throw an error at the end of process.
+	/// This method automatically handles nested nodes, so you don't need to deduplicate
+	/// nested nodes.
+	public func deleteNodes(nodes: [FileNodeModel]) throws {
+		// Collect file URLs.
+		var	discoveredFileURLs	=	Set<NSURL>()
+		for n in nodes {
+			let	u	=	n.resolvePath().absoluteFileURL(`for`: workspace)
+			discoveredFileURLs.insert(u)
+		}
+
+		// Process in-memory states.
+		for n in nodes {
+			guard n.owner != nil else {
+				// Already removed from tree. No need to do it.
+				// And removing it again very likely to trigger some assertions.
+				continue
+			}
+			assert(n.supernode != nil)
+			n.supernode!.subnodes.remove(n)
+		}
+
+		// Process remote file-system.
+		func isOrderedBefore(a: NSURL, b: NSURL) -> Bool {
+			// Expects lexicographical sort.
+			// Or length based sort at least.
+			return	a.absoluteString < b.absoluteString
+		}
+
+		print(discoveredFileURLs)
+		for u in discoveredFileURLs.sort(isOrderedBefore).reverse() {
+			// TODO: Polish this.
+			try Platform.thePlatform.fileSystem.trashFileSystemNodesAtURL(u)
+		}
+	}
+
 
 //	/// This does not create any intermediate node. Due to lack of destination index informations
 //	/// for intermediate nodes.
@@ -610,15 +729,16 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModel
 	/// `WillChangeName` and `DidChangeName` events will be sent if data model has been mutated
 	/// regardless of file-system state.
 	public func ADHOC_setName(newValue: String) throws {
-		let	oldValue	=	_dataNode.name
+//		let	oldValue	=	_dataNode.name
 		let	fromFileURL	=	_dataNode.resolvePath().absoluteFileURL(`for`: tree.workspace)
 		let	toFileURL	=	fromFileURL.URLByDeletingLastPathComponent!.URLByAppendingPathComponent(newValue)
 		do {
 			try	Platform.thePlatform.fileSystem.moveFile(fromURL: fromFileURL, toURL: toFileURL)
 
-			FileNodeModel.Event.WillChangeName(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
+//			FileNodeModel.Event.WillChangeName(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
 			_dataNode.name		=	newValue
-			FileNodeModel.Event.DidChangeName(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
+//			FileNodeModel.Event.DidChangeName(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
+			FileTreeModel.Event.DidChangeNodeAttribute.dualcastAsNotificationWithSender(tree)
 		}
 		catch let error {
 			// Rollback mutation on any error.
@@ -631,11 +751,12 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModel
 			return	_dataNode.comment
 		}
 		set {
-			let	oldValue	=	_dataNode.comment
+//			let	oldValue	=	_dataNode.comment
 
-			FileNodeModel.Event.WillChangeComment(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
+//			FileNodeModel.Event.WillChangeComment(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
 			_dataNode.comment	=	newValue
-			FileNodeModel.Event.DidChangeComment(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
+//			FileNodeModel.Event.DidChangeComment(old: oldValue, new: newValue).dualcastAsNotificationWithSender(self)
+			FileTreeModel.Event.DidChangeNodeAttribute.dualcastAsNotificationWithSender(tree)
 		}
 	}
 
@@ -691,30 +812,25 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 			return	hostNode._subnodes.endIndex
 		}
 	}
-	public func append(node: FileNodeModel) throws {
-		try insert(node, at: count)
-	}
-	/// Operation succeeds regardless of underlying file-system node
-	/// to be created or not.
-	/// `DidInsert` notification will be sent triggered on error.
-	public func insert(node: FileNodeModel, at index: Int) throws {
-		// Mutation must be transactional. Which means rollback on error.
-		// Anyway we don't count alien state like file-system. Transactional
-		// mutation is limited to in-process memory state.
 
+
+
+
+
+
+	///
+
+	internal func append(node: FileNodeModel) {
+		insert(node, at: count)
+	}
+
+	/// `DidInsert` notification will be sent triggered on error.
+	/// Invalid name will crash the program.
+	internal func insert(node: FileNodeModel, at index: Int) {
 		precondition(node.subnodes.count == 0, "Currently, we don't support recursive insertion of file node. You can make only empty folder or file entry.")
 
-		let	hostFileSystemNodeURL	=	hostNode.resolvePath().absoluteFileURL(`for`: hostNode.tree.workspace)
-		let	destFileSystemNodeURL	=	hostFileSystemNodeURL.URLByAppendingPathComponent(node.name)
-		if hostNode._dataNode.isGroup {
-			try Platform.thePlatform.fileSystem.createDirectoryAtURL(destFileSystemNodeURL, recursively: true)
-		}
-		else {
-			try Platform.thePlatform.fileSystem.createFileAtURL(destFileSystemNodeURL)
-		}
-
 		assert(hostNode._subnodes.indexOfValueByReferentialIdentity(node) == nil)
-		try WorkspaceItemNode.validateName(node._dataNode.name, withSupernode: hostNode._dataNode)()
+		try! WorkspaceItemNode.validateName(node._dataNode.name, withSupernode: hostNode._dataNode)()
 
 		hostNode._dataNode.subnodes.insert(node._dataNode, atIndex: index)
 		hostNode._subnodes.insert(node, atIndex: index)
@@ -724,36 +840,29 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		node.owner	=	hostNode.owner
 		node.supernode	=	hostNode
 
-		FileNodeModel.Event.DidInsertSubnode(subnode: node, index: index).dualcastAsNotificationWithSender(hostNode)
+//		FileNodeModel.Event.DidInsertSubnode(subnode: node, index: index).dualcastAsNotificationWithSender(hostNode)
+		FileTreeModel.Event.DidChangeTreeTopology.dualcastAsNotificationWithSender(hostNode.tree)
 	}
-	public func remove(node: FileNodeModel) throws {
+	internal func remove(node: FileNodeModel) {
 		guard let idx = hostNode._subnodes.indexOfValueByReferentialIdentity(node) else {
 			fatalError("Supplied node `\(node)` could not be found in this subnode list.")
 		}
-		try removeAtIndex(idx)
+		removeAtIndex(idx)
 	}
+
 	/// `WillDelete` notification will be sent triggered on error.
-	public func removeAtIndex(index: Int) throws {
-		// Mutation must be transactional. Which means rollback on error.
-		// Anyway we don't count alien state like file-system. Transactional
-		// mutation is limited to in-process memory state.
-
-		let	destFileSystemNodeURL	=	hostNode._subnodes[index].resolvePath().absoluteFileURL(`for`: hostNode.tree.workspace)
-		if hostNode._dataNode.isGroup {
-			try Platform.thePlatform.fileSystem.deleteDirectoryAtURL(destFileSystemNodeURL, recursively: true)
-		}
-		else {
-			try Platform.thePlatform.fileSystem.deleteFileAtURL(destFileSystemNodeURL)
-		}
-
+	internal func removeAtIndex(index: Int) {
 		hostNode._dataNode.subnodes.removeAtIndex(index)
 
-		assert(hostNode._subnodes[index].owner === hostNode)
-		FileNodeModel.Event.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).dualcastAsNotificationWithSender(hostNode)
+		assert(hostNode._subnodes[index].supernode === hostNode)
+		assert(hostNode._subnodes[index].owner === hostNode.owner)
+//		FileNodeModel.Event.WillDeleteSubnode(subnode: hostNode._subnodes[index], index: index).dualcastAsNotificationWithSender(hostNode)
 
 		let	removedNode	=	hostNode._subnodes.removeAtIndex(index)
 		removedNode.supernode	=	nil
 		removedNode.owner	=	nil
+
+		FileTreeModel.Event.DidChangeTreeTopology.dualcastAsNotificationWithSender(hostNode.tree)
 	}
 
 	public func generate() -> Array<FileNodeModel>.Generator {

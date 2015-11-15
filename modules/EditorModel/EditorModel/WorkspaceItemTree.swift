@@ -135,10 +135,12 @@ public class WorkspaceItemNode {
 		}
 	}
 
+	/// Find destination node by evaluating the path.
+	///
 	/// - Parameters:
 	///	- path
 	///		A path is always absolute. This method just treats current node
-	///		a root node, and find destination node by evaluating the path.
+	///		as a root node.
 	///
 	public func searchNodeForPath(path: WorkspaceItemPath) -> WorkspaceItemNode? {
 //		precondition(supernode == nil, "You can call this only on root node. (no supernode)")

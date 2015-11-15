@@ -15,10 +15,14 @@ public struct CommonViewFactory {
 		let	v	=	NSOutlineView()
 		v.rowSizeStyle	=	NSTableViewRowSizeStyle.Small		//<	This is REQUIRED. Otherwise, cell icon/text layout won't work.
 		v.addTableColumn(c)
-		v.outlineTableColumn		=	c
-		v.headerView			=	nil
-		v.backgroundColor		=	NSColor.clearColor()
-		v.selectionHighlightStyle	=	.SourceList
+		v.outlineTableColumn			=	c
+		v.headerView				=	nil
+		v.backgroundColor			=	NSColor.clearColor()
+		v.selectionHighlightStyle		=	.SourceList
+		v.draggingDestinationFeedbackStyle	=	.SourceList
+		v.allowsEmptySelection			=	true
+		v.allowsMultipleSelection		=	true
+		v.focusRingType				=	.None
 		return	v
 	}
 	public static func instantiateScrollViewForCodeDisplayTextView() -> NSScrollView {

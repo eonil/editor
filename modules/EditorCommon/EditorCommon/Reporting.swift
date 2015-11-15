@@ -8,6 +8,8 @@
 
 import Foundation
 
+
+
 public func checkAndReportFailureToDevelopers(@autoclosure condition: ()->Bool, _ message: String? = nil) {
 	let	conditionEvaluation	=	condition()
 
@@ -36,8 +38,10 @@ public func reportToDevelopers(message: String? = nil) {
 	//    Otherwise retry sending at next launch.
 }
 
-
-public func assertAndReportFailure(@autoclosure condition: ()->Bool, _ message: String) {
+/// Report to developer an issue if assertion fails.
+/// Program continue execution regardless of assertion result in release build.
+/// Crashes immediately to bring a debugger in debug build.
+public func assertAndReportFailure(@autoclosure condition: ()->Bool, _ message: String = "") {
 	assert(condition(), message)
 }
 

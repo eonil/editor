@@ -16,6 +16,7 @@ class FileTreeUIMenuController {
 
 	weak var model: FileTreeModel?
 
+	var getClickedFileNode: (()->FileNodeModel?)?
 
 
 
@@ -52,6 +53,9 @@ class FileTreeUIMenuController {
 			menu.addItem(m.menuItem)
 		}
 
+		_agent.owner	=	self
+		menu.delegate	=	_agent
+
 		FileNodeModel.Event.Notification.register		(self, FileTreeUIMenuController._process)
 		UIState.ForFileTreeModel.Notification.register		(self, FileTreeUIMenuController._process)
 		_Event.Notification.register				(self, FileTreeUIMenuController._process)
@@ -68,37 +72,71 @@ class FileTreeUIMenuController {
 
 
 
+
+
+
+
+
 	///
+
+	private let _agent	=	_MenuAgent()
 
 	private func _process(n: FileNodeModel.Event.Notification) {
 		guard n.sender.tree === model! else {
 			return
 		}
-
-
 	}
 	private func _process(n: UIState.ForFileTreeModel.Notification) {
 		guard n.sender === model! else {
 			return
 		}
-
-		UIState.ForFileTreeModel.get(model!) {
-			delete.enabled		=	$0.fileSustainingSelection.count > 0
-			showInFinder.enabled	=	$0.fileSustainingSelection.count > 0
-		}
+		_updateMenu()
 	}
+
+	private func _updateMenu() {
+		let	ns		=	_getAppropriateOperationTargetFileNodes()
+		newFile.enabled		=	ns.count == 1 && ns[0].isGroup
+		newFolder.enabled	=	ns.count == 1 && ns[0].isGroup
+		delete.enabled		=	ns.count > 0
+		showInFinder.enabled	=	ns.count > 0
+	}
+
+
+
+
+
+
+
+
 	private func _process(n: _Event.Notification) {
+		let	ns	=	_getAppropriateOperationTargetFileNodes()
+
 		switch ObjectIdentifier(n.sender) {
 		case ObjectIdentifier(newFile): do {
+			assert(ns.count == 1)
+			let	n	=	ns[0]
+			try! model!.newFileInNode(n, atIndex: n.subnodes.count)
 			}
 
 		case ObjectIdentifier(newFolder): do {
+			assert(ns.count == 1)
+			let	n	=	ns[0]
+			try! model!.newFolderInNode(n, atIndex: n.subnodes.count)
 			}
 
 		case ObjectIdentifier(delete): do {
+			try! model!.deleteNodes(ns)
+			UIState.ForFileTreeModel.set(model!) {
+				$0.sustainingFileSelection	=	[]
+				()
+			}
 			}
 
 		case ObjectIdentifier(showInFinder): do {
+			func toURL(n: FileNodeModel) -> NSURL {
+				return	n.resolvePath().absoluteFileURL(`for`: model!.workspace)
+			}
+			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(ns.map(toURL))
 			}
 
 		default: do {
@@ -106,7 +144,86 @@ class FileTreeUIMenuController {
 			}
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	private func _getAppropriateOperationTargetFileNodes() -> [FileNodeModel] {
+		let	momentaryFileGrabbing	=	getClickedFileNode?()
+		let	sustainingFileSelection	=	{
+			var fs	=	[FileNodeModel]()
+			UIState.ForFileTreeModel.get(self.model!) {
+				fs	=	$0.sustainingFileSelection
+			}
+			return	fs
+			}() as [FileNodeModel]
+		let	isSustainingSelectionContainsMomentaryGrabbing	=	{
+			guard let temporalFileGrabbing = momentaryFileGrabbing else {
+				return	false
+			}
+			return	sustainingFileSelection.containsValueByReferentialIdentity(temporalFileGrabbing)
+			}() as Bool
+
+
+
+		if isSustainingSelectionContainsMomentaryGrabbing {
+			return	sustainingFileSelection
+		}
+		else {
+			if let momentaryFileGrabbing = momentaryFileGrabbing {
+				return	[momentaryFileGrabbing]
+			}
+			else {
+				return	sustainingFileSelection
+			}
+		}
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private class _MenuAgent: NSObject, NSMenuDelegate {
+	weak var owner: FileTreeUIMenuController?
+	@objc
+	private func menuNeedsUpdate(menu: NSMenu) {
+		owner!._updateMenu()
+	}
+	@objc
+	private func menuWillOpen(menu: NSMenu) {
+	}
+	@objc
+	private func menuDidClose(menu: NSMenu) {
+	}
+}
+
+
+
+
+
+
+
 
 
 
@@ -126,7 +243,26 @@ private func _instantiateCommandMenuItemController(title: String) -> MenuItemCon
 	m.menuItem.title	=	title
 	m.enabled		=	false
 	m.onClick		=	{
-		Notification(m,_Event.Click).broadcast()
+		_Event.Notification(m, .Click).broadcast()
 	}
 	return	m
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

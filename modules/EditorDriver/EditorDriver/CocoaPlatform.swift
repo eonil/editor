@@ -37,23 +37,23 @@ class CocoaPlatformFileSystem: PlatformFileSystemProtocol {
 		}
 	}
 
-	func deleteDirectoryAtURL(u: NSURL, recursively: Bool) throws {
-		precondition(recursively == true)
-		try NSFileManager.defaultManager().removeItemAtURL(u)
-	}
-
 	///
 
 	func createFileAtURL(u: NSURL) throws {
 		NSFileManager.defaultManager().createFileAtPath(u.path!, contents: nil, attributes: [:])
 	}
 
-	func deleteFileAtURL(u: NSURL) throws {
-		try NSFileManager.defaultManager().removeItemAtPath(u.path!)
+	func deleteFileSystemNodeAtURL(u: NSURL) throws {
+		try NSFileManager.defaultManager().removeItemAtURL(u)
 	}
 	func moveFile(fromURL fromURL: NSURL, toURL: NSURL) throws {
 		try NSFileManager.defaultManager().moveItemAtURL(fromURL, toURL: toURL)
 	}
+
+	func trashFileSystemNodesAtURL(u: NSURL) throws {
+		try NSFileManager.defaultManager().trashItemAtURL(u, resultingItemURL: nil)
+	}
+
 
 	func contentOfFileAtURLAtomically(u: NSURL) throws -> NSData {
 		return	try NSData(contentsOfURL: u, options: [NSDataReadingOptions.DataReadingUncached])

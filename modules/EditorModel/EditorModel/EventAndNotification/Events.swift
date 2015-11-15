@@ -48,21 +48,23 @@ public extension FileTreeModel {
 		public typealias	Sender	=	FileTreeModel
 		case DidCreateRoot(root: FileNodeModel)
 		case WillDeleteRoot(root: FileNodeModel)
-		case NodeEvent(sender: FileNodeModel, event: FileNodeModel.Event)
+		case DidChangeTreeTopology
+		case DidChangeNodeAttribute
+//		case NodeEvent(sender: FileNodeModel, event: FileNodeModel.Event)
 	}
 }
 
 public extension FileNodeModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	FileNodeModel
-		case DidInsertSubnode(subnode: FileNodeModel, index: Int)
-		case WillDeleteSubnode(subnode: FileNodeModel, index: Int)
-		case WillChangeGrouping(old: Bool, new: Bool)
-		case DidChangeGrouping(old: Bool, new: Bool)
-		case WillChangeName(old: String, new: String)
-		case DidChangeName(old: String, new: String)
-		case WillChangeComment(old: String?, new: String?)
-		case DidChangeComment(old: String?, new: String?)
+//		case DidInsertSubnode(subnode: FileNodeModel, index: Int)
+//		case WillDeleteSubnode(subnode: FileNodeModel, index: Int)
+//		case WillChangeGrouping(old: Bool, new: Bool)
+//		case DidChangeGrouping(old: Bool, new: Bool)
+//		case WillChangeName(old: String, new: String)
+//		case DidChangeName(old: String, new: String)
+//		case WillChangeComment(old: String?, new: String?)
+//		case DidChangeComment(old: String?, new: String?)
 	}
 }
 

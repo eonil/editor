@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import EditorCommon
 
 
 /// Wraps `NSMenuItem` to provide a better interface.
@@ -43,7 +44,7 @@ public class MenuItemController {
 		_cocoaMenuItem.enabled	=	false
 		_cocoaMenuAgent.owner	=	self
 		_cocoaMenuItem.target	=	_cocoaMenuAgent
-		_cocoaMenuItem.action	=	Selector("onClick:")
+		_cocoaMenuItem.action	=	Selector("EDITOR_onClick:")
 	}
 	deinit {
 		_cocoaMenuItem.target	=	nil
@@ -135,13 +136,12 @@ extension MenuItemController {
 private class _MenuItemAgent: NSObject {
 	weak var owner: MenuItemController?
 	@objc
-	func onClick(sender: NSMenuItem) {
-		owner!._onClick?()
+	func EDITOR_onClick(sender: NSMenuItem?) {
+		assertAndReportFailure(owner !== nil)
+		assertAndReportFailure(owner!.onClick != nil)
+		owner?._onClick?()
 	}
 }
-
-
-
 
 
 
