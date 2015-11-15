@@ -149,6 +149,7 @@ class MainMenuAvailabilityManager {
 
 		mainMenuController!.fileNewFile.enabled			=	hostNodeForNewFileSubentryOperation() != nil
 		mainMenuController!.fileNewFolder.enabled		=	hostNodeForNewFileSubentryOperation() != nil
+		mainMenuController!.fileOpenWorkspace.enabled		=	true
 		mainMenuController!.fileCloseCurrentWorkspace.enabled	=	model!.currentWorkspace != nil
 		mainMenuController!.fileDelete.enabled			=	(model!.currentWorkspace?.file.projectUIState.sustainingFileSelection.count ?? 0) > 0
 	}

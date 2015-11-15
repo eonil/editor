@@ -45,6 +45,17 @@ extension MainMenuController {
 			}
 			}
 
+		case ~~fileOpenWorkspace: do {
+			Dialogue.runOpeningWorkspace() { [weak self] in
+				guard self != nil else {
+					return
+				}
+				if let u = $0 {
+					self!.model!.openWorkspaceAtURL(u)
+				}
+			}
+			}
+
 		case ~~fileCloseCurrentWorkspace: do {
 			assert(model!.currentWorkspace != nil, "This menu shouldn't be called if there's no current workspace.")
 			model!.closeWorkspace(model!.currentWorkspace!)

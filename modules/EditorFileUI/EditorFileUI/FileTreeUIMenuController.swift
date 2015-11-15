@@ -50,6 +50,9 @@ class FileTreeUIMenuController {
 		]
 
 		for m in items {
+			if let m = m as? ContextualMenuItemController {
+				m.context	=	self
+			}
 			menu.addItem(m.menuItem)
 		}
 
@@ -109,6 +112,9 @@ class FileTreeUIMenuController {
 
 
 	private func _process(n: _Event.Notification) {
+		guard n.sender.context === self else {
+			return
+		}
 		let	ns	=	_getAppropriateOperationTargetFileNodes()
 
 		switch ObjectIdentifier(n.sender) {
@@ -182,6 +188,10 @@ class FileTreeUIMenuController {
 
 }
 
+class ContextualMenuItemController: MenuItemController {
+	weak var context: FileTreeUIMenuController?
+}
+
 
 
 
@@ -225,12 +235,12 @@ private class _MenuAgent: NSObject, NSMenuDelegate {
 
 
 private enum _Event {
-	typealias	Notification	=	EditorModel.Notification<MenuItemController, _Event>
+	typealias	Notification	=	EditorModel.Notification<ContextualMenuItemController, _Event>
 	case Click
 }
 
-private func _instantiateCommandMenuItemController(title: String) -> MenuItemController {
-	let	m		=	MenuItemController()
+private func _instantiateCommandMenuItemController(title: String) -> ContextualMenuItemController {
+	let	m		=	ContextualMenuItemController()
 	m.menuItem.title	=	title
 	m.enabled		=	false
 	m.onClick		=	{
@@ -238,8 +248,6 @@ private func _instantiateCommandMenuItemController(title: String) -> MenuItemCon
 	}
 	return	m
 }
-
-
 
 
 
