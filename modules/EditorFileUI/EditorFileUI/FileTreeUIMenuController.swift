@@ -16,7 +16,7 @@ class FileTreeUIMenuController {
 
 	weak var model: FileTreeModel?
 
-	var getClickedFileNode: (()->FileNodeModel?)?
+	var getClickedFileNode: (()->WorkspaceItemNode?)?
 
 
 
@@ -56,14 +56,14 @@ class FileTreeUIMenuController {
 		_agent.owner	=	self
 		menu.delegate	=	_agent
 
-		FileNodeModel.Event.Notification.register		(self, FileTreeUIMenuController._process)
+		FileTreeModel.Event.Notification.register		(self, FileTreeUIMenuController._process)
 		UIState.ForFileTreeModel.Notification.register		(self, FileTreeUIMenuController._process)
 		_Event.Notification.register				(self, FileTreeUIMenuController._process)
 	}
 	deinit {
 		_Event.Notification.deregister				(self)
 		UIState.ForFileTreeModel.Notification.deregister	(self)
-		FileNodeModel.Event.Notification.deregister		(self)
+		FileTreeModel.Event.Notification.deregister		(self)
 	}
 
 
@@ -81,7 +81,7 @@ class FileTreeUIMenuController {
 
 	private let _agent	=	_MenuAgent()
 
-	private func _process(n: FileNodeModel.Event.Notification) {
+	private func _process(n: FileTreeModel.Event.Notification) {
 		guard n.sender.tree === model! else {
 			return
 		}
@@ -133,7 +133,7 @@ class FileTreeUIMenuController {
 			}
 
 		case ObjectIdentifier(showInFinder): do {
-			func toURL(n: FileNodeModel) -> NSURL {
+			func toURL(n: WorkspaceItemNode) -> NSURL {
 				return	n.resolvePath().absoluteFileURL(`for`: model!.workspace)
 			}
 			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(ns.map(toURL))
@@ -158,15 +158,15 @@ class FileTreeUIMenuController {
 
 
 
-	private func _getAppropriateOperationTargetFileNodes() -> [FileNodeModel] {
+	private func _getAppropriateOperationTargetFileNodes() -> [WorkspaceItemNode] {
 		let	momentaryFileGrabbing	=	getClickedFileNode?()
 		let	sustainingFileSelection	=	{
-			var fs	=	[FileNodeModel]()
+			var fs	=	[WorkspaceItemNode]()
 			UIState.ForFileTreeModel.get(self.model!) {
 				fs	=	$0.sustainingFileSelection
 			}
 			return	fs
-			}() as [FileNodeModel]
+			}() as [WorkspaceItemNode]
 		let	isSustainingSelectionContainsMomentaryGrabbing	=	{
 			guard let temporalFileGrabbing = momentaryFileGrabbing else {
 				return	false

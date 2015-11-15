@@ -326,10 +326,11 @@ public struct WorkspaceItemSubnodeList: SequenceType {
 	}
 
 	internal func remove(node: WorkspaceItemNode) {
-		if let idx = _host!._subnodes.indexOf ({ node === $0 }) {
-			removeAtIndex(idx)
+		guard let idx = _host!._subnodes.indexOfValueByReferentialIdentity(node) else {
+			fatalError("Cannot find specified node in this node.")
+
 		}
-		fatalError("Cannot find specified node in this node.")
+		removeAtIndex(idx)
 	}
 
 	internal func removeAtIndex(index: Int) {

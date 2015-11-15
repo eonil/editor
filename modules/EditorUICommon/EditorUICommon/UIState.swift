@@ -146,8 +146,8 @@ public struct WorkspaceUIState {
 
 
 public struct ProjectUIState {
-//	public var temporalFileGrabbing		:	FileNodeModel?		// Cannot be implemented because Cocoa menu does not support mutation on open/close event.
-	public var sustainingFileSelection	=	[FileNodeModel]()
+//	public var temporalFileGrabbing		:	WorkspaceItemNode?		// Cannot be implemented because Cocoa menu does not support mutation on open/close event.
+	public var sustainingFileSelection	=	[WorkspaceItemNode]()
 }
 
 

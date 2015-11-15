@@ -151,10 +151,8 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 
 		_outlineView.registerForDraggedTypes([NSFilenamesPboardType])
 		FileTreeModel.Event.Notification.register	(self, FileTreeUI._process)
-		FileNodeModel.Event.Notification.register	(ObjectIdentifier(self)) { [weak self] in self?._process($0) }
 	}
 	private func _deinstall() {
-		FileNodeModel.Event.Notification.deregister(ObjectIdentifier(self))
 		FileTreeModel.Event.Notification.deregister	(self)
 		_outlineView.unregisterDraggedTypes()
 
@@ -180,19 +178,19 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 
 
 	private func _didChangeSelection() {
-		func getSelectedItem() -> FileNodeModel? {
+		func getSelectedItem() -> WorkspaceItemNode? {
 			let	ridx	=	_outlineView.selectedRow
 			guard ridx != NSNotFound else {
 				return	nil
 			}
-			guard let item = _outlineView.itemAtRow(ridx) as? FileNodeModel else {
+			guard let item = _outlineView.itemAtRow(ridx) as? WorkspaceItemNode else {
 				return	nil
 			}
 			return	item
 		}
-		func getSustaningItemSelectionList() -> [FileNodeModel] {
-			func convert(rowIndex: Int) -> FileNodeModel {
-				return	_outlineView.itemAtRow(rowIndex) as! FileNodeModel
+		func getSustaningItemSelectionList() -> [WorkspaceItemNode] {
+			func convert(rowIndex: Int) -> WorkspaceItemNode {
+				return	_outlineView.itemAtRow(rowIndex) as! WorkspaceItemNode
 			}
 			return	_outlineView.selectedRowIndexes.map(convert)
 		}
@@ -219,8 +217,8 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 				guard self != nil else {
 					return	[]
 				}
-				func convert(rowIndex: Int) -> FileNodeModel {
-					return	self!._outlineView.itemAtRow(rowIndex) as! FileNodeModel
+				func convert(rowIndex: Int) -> WorkspaceItemNode {
+					return	self!._outlineView.itemAtRow(rowIndex) as! WorkspaceItemNode
 				}
 				return	self!._outlineView.selectedRowIndexes.map(convert)
 			}()
@@ -234,22 +232,6 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 
 
 
-	private func _process(notification: FileNodeModel.Event.Notification) {
-		guard notification.sender.tree === model else {
-			return
-		}
-
-//		switch notification.event {
-//		case .DidInsertSubnode(let arguments):
-//			break
-//
-//		case .WillDeleteSubnode(let arguments):
-//
-//			break
-//		}
-
-		_outlineView.reloadData()
-	}
 	private func _process(n: FileTreeModel.Event.Notification) {
 		guard n.sender === model else {
 			return
@@ -268,12 +250,12 @@ public class FileTreeUI: CommonView, FileTreeUIProtocol {
 
 	///
 
-	private func _getClickedFileNode() -> FileNodeModel? {
+	private func _getClickedFileNode() -> WorkspaceItemNode? {
 		let	rowIndex	=	_outlineView.clickedRow
 		guard rowIndex != -1 else {
 			return	nil
 		}
-		guard let n = _outlineView.itemAtRow(rowIndex) as? FileNodeModel else {
+		guard let n = _outlineView.itemAtRow(rowIndex) as? WorkspaceItemNode else {
 			return	nil
 		}
 
@@ -312,10 +294,10 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 	@objc
 	private func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
 		if item == nil {
-			return	owner!.model!.root == nil ? 0 : 1
+			return	owner!.model!.tree == nil ? 0 : 1
 		}
 		else {
-			if let item = item as? FileNodeModel {
+			if let item = item as? WorkspaceItemNode {
 				return	item.subnodes.count
 			}
 			else {
@@ -326,7 +308,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 
 	@objc
 	private func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-		if let item = item as? FileNodeModel {
+		if let item = item as? WorkspaceItemNode {
 			return	item.isGroup
 		}
 		else {
@@ -338,10 +320,10 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 	private func outlineView(outlineView: NSOutlineView, child index: Int, ofItem item: AnyObject?) -> AnyObject {
 		if item == nil {
 			precondition(index == 0)
-			return	owner!.model!.root!
+			return	owner!.model!.tree!.root!
 		}
 		else {
-			if let item = item as? FileNodeModel {
+			if let item = item as? WorkspaceItemNode {
 				return	item.subnodes[index]
 			}
 			else {
@@ -352,11 +334,11 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 
 	@objc
 	private func outlineView(outlineView: NSOutlineView, viewForTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> NSView? {
-		func toData(model: FileNodeModel) -> FileNodeView.Data {
+		func toData(node: WorkspaceItemNode) -> FileNodeView.Data {
 			func getName() -> String {
-				let path = model.resolvePath()
+				let path = node.resolvePath()
 				if path == WorkspaceItemPath.root {
-					return	model.tree.workspace.location?.lastPathComponent ?? "(????)"
+					return	owner!.model!.workspace.location?.lastPathComponent ?? "(????)"
 				}
 				else {
 					assert(path.parts.last != nil)
@@ -367,12 +349,12 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 			}
 
 			let	name	=	getName()
-			let	comment	=	model.comment == nil ? "" : " (\(model.comment!))"
+			let	comment	=	node.comment == nil ? "" : " (\(node.comment!))"
 			let	text	=	"\(name)\(comment)"
 			return	FileNodeView.Data(icon: nil, text: text)
 		}
 
-		if let item = item as? FileNodeModel {
+		if let item = item as? WorkspaceItemNode {
 			let	v	=	FileNodeView()
 			v.data		=	toData(item)
 			return	v
@@ -418,10 +400,10 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 	///
 	@objc
 	private func outlineView(outlineView: NSOutlineView, writeItems items: [AnyObject], toPasteboard pasteboard: NSPasteboard) -> Bool {
-		func toPath(n: FileNodeModel) -> String {
+		func toPath(n: WorkspaceItemNode) -> String {
 			return	n.resolvePath().absoluteFileURL(`for`: owner!.model!.workspace).path!
 		}
-		let	ss	=	(items as? [FileNodeModel] ?? []).map(toPath)
+		let	ss	=	(items as? [WorkspaceItemNode] ?? []).map(toPath)
 		pasteboard.declareTypes([NSFilenamesPboardType], owner: self)
 		pasteboard.setPropertyList(ss, forType: NSFilenamesPboardType)
 		return	true
@@ -436,7 +418,7 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 	}
 	@objc
 	private func outlineView(outlineView: NSOutlineView, acceptDrop info: NSDraggingInfo, item: AnyObject?, childIndex index: Int) -> Bool {
-		guard let item = item as? FileNodeModel else {
+		guard let item = item as? WorkspaceItemNode else {
 			return	false
 		}
 		guard item.isGroup else {

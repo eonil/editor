@@ -46,27 +46,27 @@ public extension WorkspaceModel {
 public extension FileTreeModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	FileTreeModel
-		case DidCreateRoot(root: FileNodeModel)
-		case WillDeleteRoot(root: FileNodeModel)
+//		case DidCreateRoot
+//		case WillDeleteRoot
 		case DidChangeTreeTopology
 		case DidChangeNodeAttribute
 //		case NodeEvent(sender: FileNodeModel, event: FileNodeModel.Event)
 	}
 }
 
-public extension FileNodeModel {
-	public enum Event: BroadcastableEventType {
-		public typealias	Sender	=	FileNodeModel
-//		case DidInsertSubnode(subnode: FileNodeModel, index: Int)
-//		case WillDeleteSubnode(subnode: FileNodeModel, index: Int)
-//		case WillChangeGrouping(old: Bool, new: Bool)
-//		case DidChangeGrouping(old: Bool, new: Bool)
-//		case WillChangeName(old: String, new: String)
-//		case DidChangeName(old: String, new: String)
-//		case WillChangeComment(old: String?, new: String?)
-//		case DidChangeComment(old: String?, new: String?)
-	}
-}
+//public extension FileNodeModel {
+//	public enum Event: BroadcastableEventType {
+//		public typealias	Sender	=	FileNodeModel
+////		case DidInsertSubnode(subnode: FileNodeModel, index: Int)
+////		case WillDeleteSubnode(subnode: FileNodeModel, index: Int)
+////		case WillChangeGrouping(old: Bool, new: Bool)
+////		case DidChangeGrouping(old: Bool, new: Bool)
+////		case WillChangeName(old: String, new: String)
+////		case DidChangeName(old: String, new: String)
+////		case WillChangeComment(old: String?, new: String?)
+////		case DidChangeComment(old: String?, new: String?)
+//	}
+//}
 
 public extension BuildModel {
 	public enum Event: BroadcastableEventType {
