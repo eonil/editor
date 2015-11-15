@@ -52,6 +52,7 @@ public class ModelSubnode<T: ModelNode>: ModelNode {
 
 	internal weak var owner: T? {
 		willSet {
+			assert((owner == nil && newValue != nil) || (owner != nil && newValue == nil))
 			if owner != nil {
 				owner!._deregisterSubnode(self)
 				_hasOwner	=	false

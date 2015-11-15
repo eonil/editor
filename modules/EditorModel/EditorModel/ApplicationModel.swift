@@ -156,10 +156,8 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 				///
 
 				let	ws	=	WorkspaceModel()
-				ws.owner	=	self
-				ws.location	=	u
-
 				_addWorkspace(ws)
+				ws.location	=	u
 				Debug.log("did open by adding a workspace \(ws), ws count = \(workspaces.count)")
 //			}
 		}

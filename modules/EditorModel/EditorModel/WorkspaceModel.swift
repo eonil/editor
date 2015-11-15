@@ -91,6 +91,7 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	/// whole workspace UI.
 	public var location: NSURL? {
 		willSet {
+			assert(owner != nil, "Detached model node cannot be manipulated.")
 			Event.WillRelocate(from: location, to: newValue).dualcastAsNotificationWithSender(self)
 			_willLocate()
 		}

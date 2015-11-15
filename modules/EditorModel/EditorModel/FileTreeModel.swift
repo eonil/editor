@@ -35,12 +35,6 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		enum Code {
 			case BadName
 			case CannotRestoreBecuaseCannotReadWorkspaceFileListAsUTF8String
-//			case CannotCreateFolderBecuaseThereIsAlreadyAnotherNodeAtPath
-//			case CannotMoveDueToLackOfFromContainerNode
-//			case CannotMoveDueToLackOfToContainerNode
-//			case CannotMoveBecauseOriginationIndexIsOutOfRange
-//			case CannotMoveBecauseDestinationIndexIsOutOfRange
-//			case CannotMoveDueToExistingNodeAtToPath
 		}
 		
 		var code	:	Code
@@ -99,8 +93,10 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
 		_install()
+		_assertFileTreeIntegrity(self)
 	}
 	override func willLeaveModelRoot() {
+		_assertFileTreeIntegrity(self)
 		_deinstall()
 		super.willLeaveModelRoot()
 	}
@@ -169,6 +165,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 	/// Name will be chosen automatically.
 	public func newFileInNode(parentNode: FileNodeModel, atIndex: Int) throws {
 		defer {
+			_assertFileTreeIntegrity(self)
 			Event.DidChangeTreeTopology.dualcastAsNotificationWithSender(self)
 		}
 		for i in 0..<100 {
@@ -192,6 +189,10 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 	/// Anyway, such failure will throw an error at the end of process.
 	/// Name will be chosen automatically.
 	public func newFolderInNode(parentNode: FileNodeModel, atIndex: Int) throws {
+		defer {
+			Event.DidChangeTreeTopology.dualcastAsNotificationWithSender(self)
+			_assertFileTreeIntegrity(self)
+		}
 		for i in 0..<100 {
 			let	name	=	"folder\(i)"
 			do {
@@ -206,7 +207,6 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 				continue
 			}
 		}
-		Event.DidChangeTreeTopology.dualcastAsNotificationWithSender(self)
 		throw	Error(code: FileTreeModel.Error.Code.BadName, message: "Can't select a name for new file.")
 	}
 
@@ -228,6 +228,13 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 	/// This method automatically handles nested nodes, so you don't need to deduplicate
 	/// nested nodes.
 	public func deleteNodes(nodes: [FileNodeModel]) throws {
+		defer {
+			Event.DidChangeTreeTopology.dualcastAsNotificationWithSender(self)
+			_assertFileTreeIntegrity(self)
+		}
+
+
+
 		// Collect file URLs.
 		var	discoveredFileURLs	=	Set<NSURL>()
 		for n in nodes {
@@ -261,66 +268,13 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 	}
 
 
-//	/// This does not create any intermediate node. Due to lack of destination index informations
-//	/// for intermediate nodes.
-//	public func createFolder(location: (containerPath: WorkspaceItemPath, destinationIndex: Int), name: String) throws {
-//		Debug.assertMainThread()
-//		assert(_checkFileTreeAndWorkspaceItemTreeStructuralEquality())
-//
-//		guard let containerNode = _tree.root.findNodeForPath(location.containerPath) else {
-//			fatalError("You must supply a proper container path")
-//		}
-//		guard containerNode.subnodes.count >= location.destinationIndex else {
-//			fatalError("You must supply a proper destination index.")
-//		}
-//		guard containerNode.subnodes[name] == nil else {
-//			fatalError("There's already node at the destination location `\(location)` + `\(name)`.")
-//		}
-//		guard _tree.root.findNodeForPath(location.containerPath) == nil else {
-//			throw Error(code: FileTreeModel.Error.Code.CannotCreateFolderBecuaseThereIsAlreadyAnotherNodeAtPath, message: "Cannot create folder at path `\(location.containerPath)` because there's already a node.")
-//		}
-//
-//		let	destinationPath	=	location.containerPath.pathByAppendingLastComponent(name)
-//		let	fileURL		=	destinationPath.absoluteFileURL(`for`: workspace)
-//		do {
-//			try Platform.thePlatform.fileSystem.createDirectoryAtURL(fileURL, recursively: false)
-//		}
-//		catch let error as PlatformFileSystemError where error == .AlreadyExists {
-//			// Just ignore it.
-//		}
-//		catch let error {
-//			throw error
-//		}
-//
-//		let	newFolderNode	=	WorkspaceItemNode(name: name, isGroup: true)
-//		containerNode.subnodes.insert(newFolderNode, atIndex: location.destinationIndex)
-//
-//		ModelNotification.WorkspaceNotification(WorkspaceNotification.FileNodeNotification(FileNodeNotification.DidInsertSubnode(supernode: containerNode, subnode: newFolderNode, index: location.destinationIndex)))
-//		_onDidChange.value	=	()
-//	}
-//	public func deleteFolderAtPath(path: WorkspaceItemPath) throws {
-//		markUnimplemented()
-//
-//		_onDidChange.value	=	()
-//	}
-//	public func createFileAtPath(path: WorkspaceItemPath) throws {
-//		let	fu	=	path.absoluteFileURL(`for`: workspace)
-//		do {
-//			try Platform.thePlatform.fileSystem.createFileAtURL(fu)
-//			_insertNodeAtPath(path)
-//
-//		}
-//		catch {
-//			markUnimplemented()
-//		}
-//
-//		_onDidChange.value	=	()
-//	}
-//	public func deleteFileAtPath(path: WorkspaceItemPath) {
-//		_deleteNodeAtPath(path)
-//
-//		_onDidChange.value	=	()
-//	}
+
+
+
+
+
+
+
 
 	///
 
@@ -338,6 +292,9 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 	}
 	private func _deinstall() {
 		Debug.assertMainThread()
+//		if _rootNodeModel != nil {
+//			_deinstallModelRoot()
+//		}
 		assert(_isInstalled == true)
 		_isInstalled		=	false
 	}
@@ -690,11 +647,13 @@ public final class FileNodeModel: ModelSubnode<FileTreeModel>, BroadcastingModel
 	override func didJoinModelRoot() {
 		super.didJoinModelRoot()
 		for subnode in _subnodes {
+			assert(subnode.owner === nil)
 			subnode.owner	=	owner
 		}
 	}
 	override func willLeaveModelRoot() {
 		for subnode in _subnodes {
+			assert(subnode.owner !== nil)
 			subnode.owner	=	nil
 		}
 		super.willLeaveModelRoot()
@@ -874,10 +833,66 @@ public struct FileSubnodeModelList: SequenceType, Indexable {
 		}
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
 	///
 
 	private unowned let	hostNode	:	FileNodeModel
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private func _assertFileTreeIntegrity(tree: FileTreeModel) {
+	if let root = tree.root {
+		_assertFileNodeIntegrity(root)
+	}
+}
+private func _assertFileNodeIntegrity(node: FileNodeModel) {
+	assert(node.owner != nil)
+	for sn in node.subnodes {
+		_assertFileNodeIntegrity(sn)
+	}
+}
+
+
+
+
+
+
+
 
 
 
