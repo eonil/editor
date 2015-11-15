@@ -62,6 +62,14 @@ public class FileTreeUI: CommonView {
 	}
 
 
+	public override func keyDown(theEvent: NSEvent) {
+		if theEvent.charactersIgnoringModifiers == "\r" {
+			_outlineView.editColumn(0, row: _outlineView.selectedRow, withEvent: theEvent, select: true)
+		}
+		else {
+			super.keyDown(theEvent)
+		}
+	}
 
 
 
@@ -181,19 +189,15 @@ public class FileTreeUI: CommonView {
 		}
 
 
-
-		UIState.ForFileTreeModel.set(model!) {
-			$0.sustainingFileSelection	=	{ [weak self] in
-				guard self != nil else {
-					return	[]
-				}
-				func convert(rowIndex: Int) -> WorkspaceItemNode {
-					return	self!._outlineView.itemAtRow(rowIndex) as! WorkspaceItemNode
-				}
-				return	self!._outlineView.selectedRowIndexes.map(convert)
+		model!.projectUIState.sustainingFileSelection	=	{ [weak self] in
+			guard self != nil else {
+				return	[]
+			}
+			func convert(rowIndex: Int) -> WorkspaceItemNode {
+				return	self!._outlineView.itemAtRow(rowIndex) as! WorkspaceItemNode
+			}
+			return	self!._outlineView.selectedRowIndexes.map(convert)
 			}()
-			()
-		}
 	}
 
 
@@ -444,7 +448,8 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 
 
 private func _instantiateOutlineView() -> NSOutlineView {
-	return	CommonViewFactory.instantiateOutlineViewForUseInSidebar()
+	let	v	=	CommonViewFactory.instantiateOutlineViewForUseInSidebar()
+	return	v
 }
 
 

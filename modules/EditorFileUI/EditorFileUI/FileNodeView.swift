@@ -48,6 +48,22 @@ class FileNodeView: NSTableCellView {
 		}
 		super.viewWillMoveToWindow(newWindow)
 	}
+	override var acceptsFirstResponder: Bool {
+		get {
+			return	true
+		}
+	}
+	override func becomeFirstResponder() -> Bool {
+		return	window!.makeFirstResponder(_exprField)
+	}
+
+
+
+
+
+
+
+
 
 	///
 

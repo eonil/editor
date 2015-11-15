@@ -34,6 +34,7 @@
 		4554CA261B7DC386004987CC /* EditorCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA161B7DC34E004987CC /* EditorCommon.framework */; };
 		4554CA271B7DC386004987CC /* EditorModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA231B7DC377004987CC /* EditorModel.framework */; };
 		4554CA281B7DC386004987CC /* EditorUICommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4554CA0D1B7DC34B004987CC /* EditorUICommon.framework */; };
+		45551B921BF8C4D000EA0F68 /* MainMenuController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45551B911BF8C4D000EA0F68 /* MainMenuController+Utility.swift */; };
 		4598A75D1BEDDA5F00B0F3C8 /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4598A75C1BEDDA5F00B0F3C8 /* MainMenuController.swift */; };
 		45B5ED751B91EA0400C4247A /* EditorFileUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B5ED6D1B91E9FD00C4247A /* EditorFileUI.framework */; };
 		45C379291B90B06400F5B984 /* EditorDebugUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C379211B90B05700F5B984 /* EditorDebugUI.framework */; };
@@ -164,6 +165,7 @@
 		4554CA071B7DC34A004987CC /* EditorUICommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorUICommon.xcodeproj; path = ../EditorUICommon/EditorUICommon.xcodeproj; sourceTree = "<group>"; };
 		4554CA101B7DC34D004987CC /* EditorCommon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorCommon.xcodeproj; path = ../EditorCommon/EditorCommon.xcodeproj; sourceTree = "<group>"; };
 		4554CA1C1B7DC377004987CC /* EditorModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorModel.xcodeproj; path = ../EditorModel/EditorModel.xcodeproj; sourceTree = "<group>"; };
+		45551B911BF8C4D000EA0F68 /* MainMenuController+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainMenuController+Utility.swift"; sourceTree = "<group>"; };
 		4598A75C1BEDDA5F00B0F3C8 /* MainMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
 		45B5ED651B91E9FD00C4247A /* EditorFileUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorFileUI.xcodeproj; path = ../EditorFileUI/EditorFileUI.xcodeproj; sourceTree = "<group>"; };
 		45C3791A1B90B05700F5B984 /* EditorDebugUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EditorDebugUI.xcodeproj; path = ../EditorDebugUI/EditorDebugUI.xcodeproj; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				4598A75C1BEDDA5F00B0F3C8 /* MainMenuController.swift */,
+				45551B911BF8C4D000EA0F68 /* MainMenuController+Utility.swift */,
 				45FECE6C1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift */,
 				45FECE681BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift */,
 				45FECE6E1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift */,
@@ -611,6 +614,7 @@
 				45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */,
 				453DFED31BF4CEC3008D7DB1 /* InspectionUIController.swift in Sources */,
 				453DFED21BF4CEC3008D7DB1 /* EditUIController.swift in Sources */,
+				45551B921BF8C4D000EA0F68 /* MainMenuController+Utility.swift in Sources */,
 				453DFEFC1BF4D077008D7DB1 /* DebugFrameVariableTreeUIController.swift in Sources */,
 				4554C9B51B7DC0D7004987CC /* WorkspaceWindowUIController.swift in Sources */,
 				4543145E1BF3A50700BF0EDA /* DivisionUIController2.swift in Sources */,

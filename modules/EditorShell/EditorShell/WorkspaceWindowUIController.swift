@@ -112,14 +112,14 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 				func makeDark(b:NSButton, _ alpha:CGFloat) {
 					let	f	=	CIFilter(name: "CIColorMonochrome")!
 					f.setDefaults()
-					f.setValue(CIColor(red: 0.5, green: 0.3, blue: 0.5, alpha: alpha), forKey: "inputColor")		//	I got this number accidentally, and I like this tone.
-//					f.setValue(CIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: alpha), forKey: "inputColor")
+//					f.setValue(CIColor(red: 0.5, green: 0.3, blue: 0.5, alpha: alpha), forKey: "inputColor")		//	I got this number accidentally, and I like this tone.
+					f.setValue(CIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: alpha), forKey: "inputColor")
 //
-//					let	f1	=	CIFilter(name: "CIGammaAdjust")
+//					let	f1	=	CIFilter(name: "CIGammaAdjust")!
 //					f1.setDefaults()
 //					f1.setValue(0.3, forKey: "inputPower")
 //
-//					let	f2	=	CIFilter(name: "CIColorInvert")
+//					let	f2	=	CIFilter(name: "CIColorInvert")!
 //					f2.setDefaults()
 
 					b.contentFilters	=	[f]

@@ -74,19 +74,6 @@ public struct UIState {
 
 	public enum ForFileTreeModel {
 		public typealias	Notification	=	EditorModel.Notification<FileTreeModel, Event>
-
-		public static func get(m: FileTreeModel, @noescape process: (state: ProjectUIState) -> ()) {
-			assert(_isReady == true, "You must `initialize` this struct before using.")
-			assert(_fileTreeToState[identityOf(m)] != nil, "Cannot find UI state for model `\(m)`.")
-			process(state: _fileTreeToState[identityOf(m)]!)
-		}
-		/// Fires a `Notification<FileTreeModel,UIState.Event>` after state change.
-		public static func set(m: FileTreeModel, @noescape process: (inout state: ProjectUIState) -> ()) {
-			assert(_isReady == true, "You must `initialize` this struct before using.")
-			assert(_fileTreeToState[identityOf(m)] != nil, "Cannot find UI state for model `\(m)`.")
-			process(state: &_fileTreeToState[identityOf(m)]!)
-			Notification(m, Event.Invalidate).broadcast()
-		}
 	}
 
 
@@ -95,9 +82,6 @@ public struct UIState {
 
 	///
 
-	private static var	_isReady		=	false
-	private static var	_workspaceToState	=	Dictionary<ReferentialIdentity<WorkspaceModel>, WorkspaceUIState>()
-	private static var	_fileTreeToState	=	Dictionary<ReferentialIdentity<FileTreeModel>, ProjectUIState>()
 
 	private static func _process(n: WorkspaceModel.Event.Notification) {
 		switch n.event {
@@ -116,6 +100,14 @@ public struct UIState {
 		}
 	}
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -157,6 +149,73 @@ public struct ProjectUIState {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public extension WorkspaceModel {
+	/// Fires a `Notification<WorkspaceModel,UIState.Event>` after state change.
+	public var overallUIState: WorkspaceUIState {
+		get {
+			assert(_isReady == true, "You must `initialize` this struct before using.")
+			assert(_workspaceToState[identityOf(self)] != nil, "Cannot find UI state for model `\(self)`.")
+			return	_workspaceToState[identityOf(self)]!
+		}
+		set {
+			assert(_isReady == true, "You must `initialize` this struct before using.")
+			assert(_workspaceToState[identityOf(self)] != nil, "Cannot find UI state for model `\(self)`.")
+			_workspaceToState[identityOf(self)]!	=	newValue
+			Notification(self, UIState.Event.Invalidate).broadcast()
+		}
+	}
+}
+public extension FileTreeModel {
+	/// Fires a `Notification<FileTreeModel,UIState.Event>` after state change.
+	public var projectUIState: ProjectUIState {
+		get {
+			assert(_isReady == true, "You must `initialize` this struct before using.")
+			assert(_fileTreeToState[identityOf(self)] != nil, "Cannot find UI state for model `\(self)`.")
+			return	_fileTreeToState[identityOf(self)]!
+		}
+		set {
+			assert(_isReady == true, "You must `initialize` this struct before using.")
+			assert(_fileTreeToState[identityOf(self)] != nil, "Cannot find UI state for model `\(self)`.")
+			_fileTreeToState[identityOf(self)]!	=	newValue
+			Notification(self, UIState.Event.Invalidate).broadcast()
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private var	_isReady		=	false
+private var	_workspaceToState	=	Dictionary<ReferentialIdentity<WorkspaceModel>, WorkspaceUIState>()
+private var	_fileTreeToState	=	Dictionary<ReferentialIdentity<FileTreeModel>, ProjectUIState>()
 
 
 

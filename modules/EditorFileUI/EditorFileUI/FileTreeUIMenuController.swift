@@ -126,10 +126,7 @@ class FileTreeUIMenuController {
 
 		case ObjectIdentifier(delete): do {
 			try! model!.deleteNodes(ns)
-			UIState.ForFileTreeModel.set(model!) {
-				$0.sustainingFileSelection	=	[]
-				()
-			}
+			model!.projectUIState.sustainingFileSelection	=	[]
 			}
 
 		case ObjectIdentifier(showInFinder): do {
@@ -160,13 +157,7 @@ class FileTreeUIMenuController {
 
 	private func _getAppropriateOperationTargetFileNodes() -> [WorkspaceItemNode] {
 		let	momentaryFileGrabbing	=	getClickedFileNode?()
-		let	sustainingFileSelection	=	{
-			var fs	=	[WorkspaceItemNode]()
-			UIState.ForFileTreeModel.get(self.model!) {
-				fs	=	$0.sustainingFileSelection
-			}
-			return	fs
-			}() as [WorkspaceItemNode]
+		let	sustainingFileSelection	=	model!.projectUIState.sustainingFileSelection
 		let	isSustainingSelectionContainsMomentaryGrabbing	=	{
 			guard let temporalFileGrabbing = momentaryFileGrabbing else {
 				return	false

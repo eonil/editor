@@ -15,7 +15,6 @@ import EditorUICommon
 
 
 extension MainMenuController {
-
 	/// Observes main-menu command and applies proper mutations
 	/// to model and view.
 	func process(n: Notification<MenuItemController,()>) {
@@ -23,13 +22,28 @@ extension MainMenuController {
 
 		switch ~~n.sender {
 
-//		case ~~fileNewFile: do {
-//
-//			}
-//
-//		case ~~fileNewFolder: do {
-//
-//			}
+		case ~~fileNewFile: do {
+			if let workspace = model!.currentWorkspace {
+				if let node = MainMenuController.hostFileNodeForNewFileSubentryOperationInFileTree(workspace.file) {
+					try! model!.currentWorkspace?.file.newFileInNode(node, atIndex: 0)
+				}
+			}
+			}
+
+		case ~~fileNewFolder: do {
+			if let workspace = model!.currentWorkspace {
+				if let node = MainMenuController.hostFileNodeForNewFileSubentryOperationInFileTree(workspace.file) {
+					try! model!.currentWorkspace?.file.newFolderInNode(node, atIndex: 0)
+				}
+			}
+			}
+
+		case ~~fileDelete: do {
+			assertAndReportFailure(model!.currentWorkspace != nil)
+			if let workspace = model!.currentWorkspace {
+				try! workspace.file.deleteNodes(workspace.file.projectUIState.sustainingFileSelection)
+			}
+			}
 
 		case ~~fileCloseCurrentWorkspace: do {
 			assert(model!.currentWorkspace != nil, "This menu shouldn't be called if there's no current workspace.")

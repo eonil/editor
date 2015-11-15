@@ -34,6 +34,7 @@ class MainMenuController {
 	let	fileOpenClearWorkspaceHistory	=	_instantiateCommandMenuItem("Clear Recent Workspaces",	nil	 			)
 	let	fileCloseCurrentFile		=	_instantiateCommandMenuItem("Close File",		Command+Shift+"W"		)
 	let	fileCloseCurrentWorkspace	=	_instantiateCommandMenuItem("Close Workspace",		Command+"W"			)
+	let	fileDelete			=	_instantiateCommandMenuItem("Delete",			Command+Delete			)
 
 	let	view				=	_instantiateGroupMenuItem("View")
 	let	viewEditor			=	_instantiateCommandMenuItem("Editor",			Command+"\n"			)
@@ -69,6 +70,8 @@ class MainMenuController {
 			_instantiateSeparatorMenuItem(),
 			fileCloseCurrentFile,
 			fileCloseCurrentWorkspace,
+			_instantiateSeparatorMenuItem(),
+			fileDelete,
 			])
 		fileNew.addSubmenuItems([
 			fileNewWorkspace,
@@ -306,7 +309,8 @@ private func _instantiateSeparatorMenuItem() -> MenuItemController {
 
 
 
-
+//private let	Delete		=	String(Character(UnicodeScalar(NSDeleteCharacter)))
+private let	Delete		=	"\u{0008}"
 
 private let	Command		=	MenuShortcutKeyCombination.Command
 private let	Control		=	MenuShortcutKeyCombination.Control

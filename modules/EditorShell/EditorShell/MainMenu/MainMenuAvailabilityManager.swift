@@ -66,6 +66,8 @@ class MainMenuAvailabilityManager {
 		DebuggingTargetModel.Event.Notification.deregister		(self)
 		DebuggingModel.Event.Notification.deregister			(self)
 		ApplicationModel.Event.Notification.deregister			(self)
+
+		// Applying at this point will cause a crash by a missing UI state object.
 //		_applyUIStateChange()
 //		_applyDebuggingStateChange()
 //		_applyBuildStateChange()
@@ -123,6 +125,7 @@ class MainMenuAvailabilityManager {
 		_updateProductMenuAvailability()
 	}
 	private func _applyUIStateChange() {
+		_updateFileMenuAvailability()
 		_updateViewMenuAvailability()
 	}
 
@@ -137,7 +140,17 @@ class MainMenuAvailabilityManager {
 	///
 
 	private func _updateFileMenuAvailability() {
+		func hostNodeForNewFileSubentryOperation() -> WorkspaceItemNode? {
+			if let workspace = model!.currentWorkspace {
+				return	MainMenuController.hostFileNodeForNewFileSubentryOperationInFileTree(workspace.file)
+			}
+			return	nil
+		}
+
+		mainMenuController!.fileNewFile.enabled			=	hostNodeForNewFileSubentryOperation() != nil
+		mainMenuController!.fileNewFolder.enabled		=	hostNodeForNewFileSubentryOperation() != nil
 		mainMenuController!.fileCloseCurrentWorkspace.enabled	=	model!.currentWorkspace != nil
+		mainMenuController!.fileDelete.enabled			=	(model!.currentWorkspace?.file.projectUIState.sustainingFileSelection.count ?? 0) > 0
 	}
 	private func _updateViewMenuAvailability() {
 		mainMenuController!.viewEditor.enabled			=	{
@@ -178,11 +191,6 @@ class MainMenuAvailabilityManager {
 
 	}
 }
-
-
-
-
-
 
 
 
