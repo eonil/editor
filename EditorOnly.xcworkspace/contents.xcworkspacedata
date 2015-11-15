@@ -5,6 +5,9 @@
       location = "group:README.md">
    </FileRef>
    <FileRef
+      location = "group:NOTE.md">
+   </FileRef>
+   <FileRef
       location = "group:/Users/Eonil/Workshop/Sandbox3/Editor2/Preview.png">
    </FileRef>
    <Group
