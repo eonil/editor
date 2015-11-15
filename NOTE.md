@@ -135,19 +135,80 @@ In other words, UI (session) lives shorter than models.
 
 Issue History
 -------------
+- `NSOpen/SavePanel` often trigger QuickLook C++ exception.
+  This is due to lack of App Sandbox configuration. Turning 
+  on sandboxing and give some read-write access to user-
+  selected files. Then this will disappear. 
 
--	`NSOpen/SavePanel` often trigger QuickLook C++ exception.
-This is due to lack of App Sandbox configuration. Turning 
-on sandboxing and give some read-write access to user-
-selected files. Then this will disappear. 
+  But! Enabling Sandboxing disables shell command execution
+  that is currently very essential for current version of 
+  this application at least for a while.
 
-But! Enabling Sandboxing disables shell command execution
-that is currently very essential for current version of 
-this application at least for a while.
+  So, I cannot enable sandboxing. And temporarily, I decided
+  just to disable C++ exceptions. Though I cannot track LLDB
+  exceptions with this...
 
-So, I cannot enable sandboxing. And temporarily, I decided
-just to disable C++ exceptions. Though I cannot track LLDB
-exceptions with this...
+
+
+
+
+- Architecture has been replaced completely 3 times. History 
+  of them are all fully stored in these branches.
+
+  - `trial1`
+  - `trial2`
+  - `trial3`
+
+  `trial1` is most feature-complete version with oldest legacy
+  architecture. It worked well, but I could not expand it more
+  because the architecture placed too much responsibility on 
+  higher level controllers. 
+
+  `trial2` and `trial3` was trials to use multicasting storages.
+  It's horribly failed. Major drawback was deep object tree. 
+  Tracking and observer registration state management of deep
+  model object tree was incredibly hard, and I usually ended up
+  with fighting with deep recursive node trackings bugs. If I 
+  had enough time, it wouldn't be so bad, but time is most 
+  precious resource for me, and I had to abandon this 
+  architecture.
+
+  Though separating all each state into multicastable node can
+  provide precise tracking and potentially better performance,
+  but both of them are not very desired for current version of
+  app. (maybe forever?)
+
+  One more lesson learned was GUI component segregation. 
+  "Multicasting" means it's impossible to control order of 
+  executions between observers, then observers cannot assume a
+  specific state when they receive an event. Other component
+  can be in unexpected state. The conclusion is, just segregating
+  them completely. GUI components (views, output, or whatever)
+  should depend soley on model data, and should not interact 
+  to each other. The only allowed interaction should be assigning
+  model object, or pure view operation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
