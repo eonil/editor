@@ -13,38 +13,8 @@ import EditorCommon
 import EditorModel
 import EditorUICommon
 
-//public protocol FileTreeUIDelegate: class {
-//	func fileTreeView(fileTreeView: FileTreeUI, didSelectFileNodes: [FileNodeModel])
-//	func fileTreeView(fileTreeView: FileTreeUI, didDeselectFileNodes: [FileNodeModel])
-//}
-public class FileTreeUI: CommonView, FileTreeUIProtocol {
+public class FileTreeUI: CommonView {
 
-//	public weak var delegate: FileTreeUIDelegate?
-
-//	public var selectedFileNodes: [FileNodeModel] {
-//		get {
-//			func fileNodeAtIndex(index: Int) -> FileNodeModel {
-//				precondition(index != -1)
-//				return	_outlineView.itemAtRow(index) as! FileNodeModel
-//			}
-//			return	_outlineView.selectedRowIndexes.map(fileNodeAtIndex)
-//		}
-//	}
-//	public func isFileNodeDisplayed(fileNode: FileNodeModel) -> Bool {
-//		let idx = _outlineView.rowForItem(fileNode)
-//		return idx != -1
-//	}
-//	public func selectFileNode(fileNode: FileNodeModel) {
-//		assert(isFileNodeDisplayed(fileNode))
-//		let idx = _outlineView.rowForItem(fileNode)
-//		guard idx != -1 else {
-//			fatalError("The file node `\(fileNode)` is not on the list right now.")
-//		}
-//		_outlineView.selectRowIndexes(NSIndexSet(index: idx), byExtendingSelection: true)
-//	}
-//	public func deselectAllFileNodes() {
-//		_outlineView.deselectAll(self)
-//	}
 
 	public weak var model: FileTreeModel? {
 		willSet {
@@ -374,11 +344,6 @@ private final class _OutlineAgent: NSObject, NSOutlineViewDataSource, NSOutlineV
 	private func outlineView(outlineView: NSOutlineView, shouldTrackCell cell: NSCell, forTableColumn tableColumn: NSTableColumn?, item: AnyObject) -> Bool {
 		return	true
 	}
-
-//	@objc
-//	private func outlineView(outlineView: NSOutlineView, shouldSelectItem item: AnyObject) -> Bool {
-//
-//	}
 
 	@objc
 	private func outlineViewSelectionDidChange(notification: NSNotification) {

@@ -233,9 +233,7 @@ private func _instantiateGroupMenuItem(title: String) -> MenuItemController {
 	m.onClick		=	nil
 	return	m
 }
-//private func _instantiateCommandMenuItem(title: String, command: MainMenuCommand) -> MenuItemController {
-//	return	_instantiateCommandMenuItem(title, nil, command)
-//}
+
 private func _instantiateCommandMenuItem(title: String, _ shortcut: MenuShortcutKeyCombination?) -> MenuItemController {
 	let	m		=	MenuItemController()
 	m.menuItem.title	=	title
@@ -252,23 +250,6 @@ private func _instantiateCommandMenuItem(title: String, _ shortcut: MenuShortcut
 	}
 	return	m
 }
-//private func _instantiateCommandMenuItem(title: String, _ shortcut: MenuShortcutKeyCombination?, _ command: MainMenuCommand) -> MenuItemController {
-//	let	m			=	MenuItemController()
-//	m._cocoaMenuItem.title		=	title
-//
-//	if let shortcut = shortcut {
-//		m._cocoaMenuItem.keyEquivalent			=	shortcut.plainTextKeys
-//		m._cocoaMenuItem.keyEquivalentModifierMask	=	Int(bitPattern: shortcut.modifierMask)
-//	}
-//
-//	m._onClick = { [weak m] in
-//		guard m != nil else {
-//			return
-//		}
-//		Notification(m, command).broadcast()
-//	}
-//	return	m
-//}
 
 private func _instantiateSeparatorMenuItem() -> MenuItemController {
 	let	m		=	MenuItemController(menuItem: NSMenuItem.separatorItem())
