@@ -25,10 +25,10 @@ class FileTreeUIMenuController {
 
 	let	menu		=	NSMenu()
 
+	let	showInFinder	=	_instantiateCommandMenuItemController("Show in Finder")
 	let	newFile		=	_instantiateCommandMenuItemController("New File")
 	let	newFolder	=	_instantiateCommandMenuItemController("New Folder")
 	let	delete		=	_instantiateCommandMenuItemController("Delete")
-	let	showInFinder	=	_instantiateCommandMenuItemController("Show in Finder")
 
 
 
@@ -41,12 +41,12 @@ class FileTreeUIMenuController {
 		menu.autoenablesItems	=	false
 
 		let	items	=	[
+			showInFinder,
+			MenuItemController.separatorMenuItemController(),
 			newFile,
 			newFolder,
 			MenuItemController.separatorMenuItemController(),
 			delete,
-			MenuItemController.separatorMenuItemController(),
-			showInFinder,
 		]
 
 		for m in items {

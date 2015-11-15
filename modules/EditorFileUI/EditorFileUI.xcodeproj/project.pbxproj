@@ -110,8 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				45B5EC721B91D04B00C4247A /* FileTreeUI.swift */,
-				45B5ECFF1B91E23300C4247A /* FileNodeView.swift */,
 				45655B741BF75B840044D95B /* FileTreeUIMenuController.swift */,
+				45B5ECFF1B91E23300C4247A /* FileNodeView.swift */,
 				45B5ED091B91E27900C4247A /* CommonComponentFactory.swift */,
 				45B5EC6B1B91D01D00C4247A /* Info.plist */,
 			);
