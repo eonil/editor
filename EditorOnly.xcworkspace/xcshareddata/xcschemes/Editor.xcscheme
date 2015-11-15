@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0710"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4554C80C1B7DBED9004987CC"
-               BuildableName = "EditorShell.framework"
-               BlueprintName = "EditorShell"
-               ReferencedContainer = "container:EditorShell/EditorShell.xcodeproj">
+               BlueprintIdentifier = "4554C8C11B7DBF50004987CC"
+               BuildableName = "Editor.app"
+               BlueprintName = "Editor"
+               ReferencedContainer = "container:modules/Editor/Editor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,24 +28,14 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4554C8161B7DBED9004987CC"
-               BuildableName = "EditorShellTests.xctest"
-               BlueprintName = "EditorShellTests"
-               ReferencedContainer = "container:EditorShell/EditorShell.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4554C80C1B7DBED9004987CC"
-            BuildableName = "EditorShell.framework"
-            BlueprintName = "EditorShell"
-            ReferencedContainer = "container:EditorShell/EditorShell.xcodeproj">
+            BlueprintIdentifier = "4554C8C11B7DBF50004987CC"
+            BuildableName = "Editor.app"
+            BlueprintName = "Editor"
+            ReferencedContainer = "container:modules/Editor/Editor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -61,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4554C80C1B7DBED9004987CC"
-            BuildableName = "EditorShell.framework"
-            BlueprintName = "EditorShell"
-            ReferencedContainer = "container:EditorShell/EditorShell.xcodeproj">
+            BlueprintIdentifier = "4554C8C11B7DBF50004987CC"
+            BuildableName = "Editor.app"
+            BlueprintName = "Editor"
+            ReferencedContainer = "container:modules/Editor/Editor.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4554C80C1B7DBED9004987CC"
-            BuildableName = "EditorShell.framework"
-            BlueprintName = "EditorShell"
-            ReferencedContainer = "container:EditorShell/EditorShell.xcodeproj">
+            BlueprintIdentifier = "4554C8C11B7DBF50004987CC"
+            BuildableName = "Editor.app"
+            BlueprintName = "Editor"
+            ReferencedContainer = "container:modules/Editor/Editor.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

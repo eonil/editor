@@ -4,8 +4,11 @@
    <FileRef
       location = "group:README.md">
    </FileRef>
+   <FileRef
+      location = "group:/Users/Eonil/Workshop/Sandbox3/Editor2/Preview.png">
+   </FileRef>
    <Group
-      location = "container:"
+      location = "container:modules"
       name = "modules">
       <FileRef
          location = "group:Editor/Editor.xcodeproj">
@@ -33,7 +36,7 @@
       </FileRef>
    </Group>
    <Group
-      location = "container:../submodules"
+      location = "container:submodules"
       name = "submodules">
       <FileRef
          location = "group:MulticastingStorage/MulticastingStorage.xcodeproj">
