@@ -18,10 +18,16 @@ public class CommonView: NSView {
 	public override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
 		super.wantsLayer	=	true
+		layer!.backgroundColor	=	NSColor.clearColor().CGColor
+//		layer!.backgroundColor	=	NSColor.magentaColor().CGColor
+//		assert(layer! is _ClearColorOnlyLayer)
 	}
 	public required init?(coder: NSCoder) {
 		super.init(coder: coder)
 		super.wantsLayer	=	true
+		layer!.backgroundColor	=	NSColor.clearColor().CGColor
+//		layer!.backgroundColor	=	NSColor.magentaColor().CGColor
+//		assert(layer! is _ClearColorOnlyLayer)
 	}
 	deinit {
 		assert(_isInstalled == false)
@@ -72,6 +78,9 @@ public class CommonView: NSView {
 
 	///
 
+//	public override func makeBackingLayer() -> CALayer {
+//		return	_ClearColorOnlyLayer()
+//	}
 	@available(*, unavailable)
 	public override var wantsLayer: Bool {
 		get {
@@ -88,6 +97,7 @@ public class CommonView: NSView {
 		}
 		set {
 			assert(newValue != nil, "This class always use a layer, so you cannot set this property to `nil`.")
+//			assert(newValue is _ClearColorOnlyLayer)
 			super.layer	=	newValue
 		}
 	}
@@ -160,6 +170,13 @@ public class CommonView: NSView {
 
 
 
+//private class _ClearColorOnlyLayer: CALayer {
+//	override var backgroundColor: CGColorRef? {
+//		willSet {
+//			assert(newValue === nil || CGColorEqualToColor(newValue!, NSColor.clearColor().CGColor))
+//		}
+//	}
+//}
 
 
 
@@ -210,40 +227,6 @@ public class CommonView: NSView {
 
 
 
-
-
-private class _OuterSplitView: NSSplitView {
-	override var dividerColor: NSColor {
-		get {
-			return	NSColor.clearColor()
-		}
-	}
-	override var dividerThickness: CGFloat {
-		get {
-			return	0
-		}
-	}
-	//	private override func drawDividerInRect(rect: NSRect) {
-	//		// Do nothing.
-	//		return
-	//	}
-}
-private class _OuterSplitViewController: NSSplitViewController {
-	override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-		let	v					=	_OuterSplitView()
-		v.translatesAutoresizingMaskIntoConstraints	=	false
-		v.vertical					=	true
-		v.dividerStyle					=	.Thin
-		splitView					=	v
-	}
-	required init?(coder: NSCoder) {
-		fatalError()
-	}
-	private override func viewDidLoad() {
-		super.viewDidLoad()
-	}
-}
 
 
 

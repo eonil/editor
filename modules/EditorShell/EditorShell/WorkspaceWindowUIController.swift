@@ -15,6 +15,10 @@ import EditorUICommon
 public final class WorkspaceWindowUIController: CommonWindowController, SessionProtocol {
 
 	public override init() {
+		// I don't know why, but configured "current appearance" disappears 
+		// at some point, and I have to set them again for every time I make
+		// a new window...
+		NSAppearance.setCurrentAppearance(NSAppearance(named: NSAppearanceNameVibrantDark))
 		super.init()
 		Debug.log("WorkspaceWindowUIController `\(self)` init")
 	}
@@ -56,6 +60,9 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 		assert(model != nil)
 
 		_reconfigureWindowAppearanceBehaviors()
+		assert(window!.appearance != nil)
+		assert(window!.appearance!.name == NSAppearanceNameVibrantDark)
+		assert(NSAppearance.currentAppearance().name == NSAppearanceNameVibrantDark)
 
 		_div.view.frame			=	CGRect(origin: CGPoint.zero, size: _getMinSize())
 		window!.contentViewController	=	_div
@@ -104,30 +111,29 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 
 		let	USE_DARK_MODE	=	true
 		if USE_DARK_MODE {
-			if let window = window {
-//				window.titlebarAppearsTransparent	=	true
-				window.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
-				window.invalidateShadow()
+			assert(window != nil)
+//			window!.titlebarAppearsTransparent	=	true
+			window!.appearance	=	NSAppearance(named: NSAppearanceNameVibrantDark)
+			window!.invalidateShadow()
 
-				func makeDark(b:NSButton, _ alpha:CGFloat) {
-					let	f	=	CIFilter(name: "CIColorMonochrome")!
-					f.setDefaults()
-//					f.setValue(CIColor(red: 0.5, green: 0.3, blue: 0.5, alpha: alpha), forKey: "inputColor")		//	I got this number accidentally, and I like this tone.
-					f.setValue(CIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: alpha), forKey: "inputColor")
+			func makeDark(b:NSButton, _ alpha:CGFloat) {
+				let	f	=	CIFilter(name: "CIColorMonochrome")!
+				f.setDefaults()
+//				f.setValue(CIColor(red: 0.5, green: 0.3, blue: 0.5, alpha: alpha), forKey: "inputColor")		//	I got this number accidentally, and I like this tone.
+				f.setValue(CIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: alpha), forKey: "inputColor")
 //
-//					let	f1	=	CIFilter(name: "CIGammaAdjust")!
-//					f1.setDefaults()
-//					f1.setValue(0.3, forKey: "inputPower")
+//				let	f1	=	CIFilter(name: "CIGammaAdjust")!
+//				f1.setDefaults()
+//				f1.setValue(0.3, forKey: "inputPower")
 //
-//					let	f2	=	CIFilter(name: "CIColorInvert")!
-//					f2.setDefaults()
+//				let	f2	=	CIFilter(name: "CIColorInvert")!
+//				f2.setDefaults()
 
-					b.contentFilters	=	[f]
-				}
-				makeDark(window.standardWindowButton(NSWindowButton.CloseButton)!, 1.0)
-				makeDark(window.standardWindowButton(NSWindowButton.MiniaturizeButton)!, 1.0)
-				makeDark(window.standardWindowButton(NSWindowButton.ZoomButton)!, 1.0)
+				b.contentFilters	=	[f]
 			}
+			makeDark(window!.standardWindowButton(NSWindowButton.CloseButton)!, 1.0)
+			makeDark(window!.standardWindowButton(NSWindowButton.MiniaturizeButton)!, 1.0)
+			makeDark(window!.standardWindowButton(NSWindowButton.ZoomButton)!, 1.0)
 		}
 	}
 	private func _installWindowAgent() {

@@ -91,6 +91,22 @@ public class CommonViewController: NSViewController {
 	}
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 final class _InstallationEventRoutingView: CommonView {
 	weak var owner: CommonViewController?
 	override func installSubcomponents() {

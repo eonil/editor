@@ -105,11 +105,14 @@ class DivisionUIController2: CommonViewController {
 //	private var _splitItemMapping		=	Dictionary<ReferentialIdentity<NSViewController>, NSSplitView>()
 
 	private func _install() {
+		assert(view.window!.appearance != nil)
+		assert(view.window!.appearance!.name == NSAppearanceNameVibrantDark)
+		
 		view.wantsLayer					=	true
 		view.layer!.backgroundColor			=	WindowBackgroundFillColor.CGColor
 		_outerSplitVC.view.wantsLayer			=	true
 		_outerSplitVC.view.layer!.backgroundColor	=	WindowBackgroundFillColor.CGColor
-		_outerSplitVC.splitView.wantsLayer			=	true
+		_outerSplitVC.splitView.wantsLayer		=	true
 		_outerSplitVC.splitView.layer!.backgroundColor	=	WindowBackgroundFillColor.CGColor
 		_innerSplitVC.view.wantsLayer			=	true
 		_innerSplitVC.view.layer!.backgroundColor	=	WindowBackgroundFillColor.CGColor

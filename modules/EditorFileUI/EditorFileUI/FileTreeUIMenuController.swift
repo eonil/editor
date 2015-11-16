@@ -117,29 +117,33 @@ class FileTreeUIMenuController {
 		}
 		let	ns	=	_getAppropriateOperationTargetFileNodes()
 
-		switch ObjectIdentifier(n.sender) {
-		case ObjectIdentifier(newFile): do {
+		switch identityOf(n.sender) {
+
+		case identityOf(showInFinder): do {
+			func toURL(n: WorkspaceItemNode) -> NSURL {
+				return	n.resolvePath().absoluteFileURL(`for`: model!.workspace)
+			}
+			// This method works incorrectly sometimes, but there's no way to prevent
+			// or check it because file system is fundamentally asynchronous, and this
+			// method reports nothing.
+			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(ns.map(toURL))
+			}
+
+		case identityOf(newFile): do {
 			assert(ns.count == 1)
 			let	n	=	ns[0]
 			try! model!.newFileInNode(n, atIndex: n.subnodes.count)
 			}
 
-		case ObjectIdentifier(newFolder): do {
+		case identityOf(newFolder): do {
 			assert(ns.count == 1)
 			let	n	=	ns[0]
 			try! model!.newFolderInNode(n, atIndex: n.subnodes.count)
 			}
 
-		case ObjectIdentifier(delete): do {
+		case identityOf(delete): do {
 			try! model!.deleteNodes(ns)
 			model!.projectUIState.sustainingFileSelection	=	[]
-			}
-
-		case ObjectIdentifier(showInFinder): do {
-			func toURL(n: WorkspaceItemNode) -> NSURL {
-				return	n.resolvePath().absoluteFileURL(`for`: model!.workspace)
-			}
-			NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(ns.map(toURL))
 			}
 
 		default: do {

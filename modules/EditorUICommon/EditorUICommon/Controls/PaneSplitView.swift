@@ -29,6 +29,7 @@ public class PaneSplitView: NSSplitView {
 
 	public override var dividerColor: NSColor {
 		get {
+//			return	NSColor.redColor()
 			return	_dividerColor
 		}
 		set {

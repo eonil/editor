@@ -28,8 +28,10 @@ autoreleasepool {
 //	}
 
 
-	NSAppearance.setCurrentAppearance(NSAppearance(named: NSAppearanceNameVibrantDark))
-	
+	// Current appearance will be disappeared at some point, so this code has been
+	// moved to `WorkspaceWindowUIController`. Keeps commented code here for the record.
+//	NSAppearance.setCurrentAppearance(NSAppearance(named: NSAppearanceNameVibrantDark))
+
 	let	applicationDelegate			=	AppDelegate()
 	NSApplication.sharedApplication().delegate	=	applicationDelegate
 	NSApplication.sharedApplication().run()

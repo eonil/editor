@@ -52,9 +52,7 @@ public class CommonWindowController: NSWindowController {
 		}
 		set {
 			assert(newValue is CommonViewController)
-			if let newValue = newValue as? CommonViewController {
-				super.contentViewController	=	newValue
-			}
+			super.contentViewController	=	newValue as! CommonViewController
 		}
 	}
 
