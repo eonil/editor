@@ -23,10 +23,10 @@ import Foundation
 
 
 
-protocol UIStateType {
+
+protocol DefaultInstantiatableUIStateType: UIStateType {
 	init()
 }
-
 final class UIStateKey {
 }
 
@@ -34,7 +34,7 @@ final class UIStateKey {
 
 
 
-final class UIStateBox<StateType: UIStateType> {
+final class UIStateBox<StateType: DefaultInstantiatableUIStateType> {
 	/// Gets an existing or attches a new associated boxed UI-state to specified model object.
 	/// Point of this design is killing associated object at death of the host model object.
 	static func forModel<ModelType: AnyObject>(model: ModelType, key: UIStateKey) -> UIStateBox<StateType> {

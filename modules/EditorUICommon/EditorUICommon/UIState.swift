@@ -27,9 +27,7 @@ public struct UIState {
 	///
 
 	public enum Event {
-		case Initiate
 		case Invalidate
-		case Terminate
 	}
 
 
@@ -44,16 +42,6 @@ public struct UIState {
 
 	public enum ForWorkspaceModel {
 		public typealias	Notification	=	EditorModel.Notification<WorkspaceModel, Event>
-
-		public static func get(m: WorkspaceModel, @noescape process: (state: WorkspaceUIState) -> ()) {
-			process(state: m.overallUIState)
-		}
-		/// Fires a `Notification<WorkspaceModel,UIState.Event>` after state change.
-		public static func set(m: WorkspaceModel, @noescape process: (inout state: WorkspaceUIState) -> ()) {
-			var	s	=	m.overallUIState
-			process(state: &s)
-			m.overallUIState	=	s
-		}
 	}
 
 	public enum ForFileTreeModel {
@@ -72,9 +60,36 @@ public struct UIState {
 
 
 
+public protocol UIStateType {
+}
+public extension UIStateType {
+	public func test1() {
+	}
 
+	/// Performs batched read using a function.
+	public func with(@noescape code: (state: Self)->()) {
+		code(state: self)
+	}
 
-public struct WorkspaceUIState: UIStateType {
+	/// Performs batched write using a function.
+	///
+	/// If you perform multiple mutations on a UI state directly,
+	/// each mutation will trigger global notification. And those
+	/// extra notifications are usually just duplicated and very 
+	/// likely to trigger unnecessary UI rendering processing.
+	/// 
+	/// To avoid such cost, use this method. This method copies UI
+	/// state locally, and performs mutations on the copy, and 
+	/// re-assigns the mutated copy. Mutation count will become 1,
+	/// and so on to the notifications.
+	public mutating func mutate(@noescape mutation: (inout state: Self)->()) {
+		var	copy	=	self
+		mutation(state: &copy)
+		self	=	copy
+	}
+}
+
+public struct WorkspaceUIState: DefaultInstantiatableUIStateType {
 	public var navigationPaneVisibility: Bool	=	false
 	public var inspectionPaneVisibility: Bool	=	false
 	public var consolePaneVisibility: Bool		=	false
@@ -97,7 +112,7 @@ public struct WorkspaceUIState: UIStateType {
 }
 
 
-public struct ProjectUIState: UIStateType {
+public struct ProjectUIState: DefaultInstantiatableUIStateType {
 //	public var temporalFileGrabbing		:	WorkspaceItemNode?		// Cannot be implemented because Cocoa menu does not support mutation on open/close event.
 	public var sustainingFileSelection	=	[WorkspaceItemNode]()
 }

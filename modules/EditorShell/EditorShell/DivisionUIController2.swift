@@ -262,10 +262,10 @@ class DivisionUIController2: CommonViewController {
 	///
 
 	private func _applyInputToState() {
-		UIState.ForWorkspaceModel.set(model!) {
-			$0.navigationPaneVisibility	=	_splitItems!.outer.left.collapsed == false
-			$0.inspectionPaneVisibility	=	_splitItems!.outer.right.collapsed == false
-			$0.consolePaneVisibility	=	_splitItems!.inner.bottom.collapsed == false
+		model!.overallUIState.mutate {
+			$0.navigationPaneVisibility		=	_splitItems!.outer.left.collapsed == false
+			$0.inspectionPaneVisibility		=	_splitItems!.outer.right.collapsed == false
+			$0.consolePaneVisibility		=	_splitItems!.inner.bottom.collapsed == false
 		}
 	}
 
@@ -287,7 +287,7 @@ class DivisionUIController2: CommonViewController {
 		_applyStateChanges()
 	}
 	private func _applyStateChanges() {
-		UIState.ForWorkspaceModel.get(model!) {
+		model!.overallUIState.with {
 			_splitItems!.outer.left.collapsed	=	$0.navigationPaneVisibility == false
 			_splitItems!.outer.right.collapsed	=	$0.inspectionPaneVisibility == false
 			_splitItems!.inner.bottom.collapsed	=	$0.consolePaneVisibility == false

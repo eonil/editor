@@ -54,22 +54,13 @@ class NavigationUIController: CommonViewController {
 	///
 
 	private func _onTapProjectPaneButton() {
-		UIState.ForWorkspaceModel.set(model!) {
-			$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Project)
-			()
-		}
+		model!.overallUIState.paneSelection	=	WorkspaceUIState.Pane.Navigation(.Project)
 	}
 	private func _onTapIssuePaneButton() {
-		UIState.ForWorkspaceModel.set(model!) {
-			$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Issue)
-			()
-		}
+		model!.overallUIState.paneSelection	=	WorkspaceUIState.Pane.Navigation(.Issue)
 	}
 	private func _onTapDebugPaneButton() {
-		UIState.ForWorkspaceModel.set(model!) {
-			$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Debug)
-			()
-		}
+		model!.overallUIState.paneSelection	=	WorkspaceUIState.Pane.Navigation(.Debug)
 	}
 
 
@@ -214,23 +205,22 @@ class NavigationUIController: CommonViewController {
 //		}
 
 		let	oldMode	=	_mode
-		UIState.ForWorkspaceModel.get(model!) { state in
-			switch state.paneSelection {
-			case .Editor:
-				return
 
-			case .Navigation(let nav):
-				_mode	=	{
-					switch nav {
-					case .Project:
-						return	.Project
-					case .Issue:
-						return	.Issue
-					case .Debug:
-						return	.Debug
-					}
-					}() as _Mode
-			}
+		switch model!.overallUIState.paneSelection {
+		case .Editor:
+			break
+
+		case .Navigation(let nav):
+			_mode	=	{
+				switch nav {
+				case .Project:
+					return	.Project
+				case .Issue:
+					return	.Issue
+				case .Debug:
+					return	.Debug
+				}
+				}() as _Mode
 		}
 		if oldMode != _mode {
 			_applyModeSelectionChange()

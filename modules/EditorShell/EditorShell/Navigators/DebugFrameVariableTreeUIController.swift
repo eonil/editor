@@ -70,9 +70,8 @@ class DebugFrameVariableTreeUIController: CommonViewController {
 		guard n.sender === model!.workspace else {
 			return
 		}
-		UIState.ForWorkspaceModel.get(model!.workspace) {
-			_treeView.reconfigure($0.debuggingSelection.frame)
-		}
+
+		_treeView.reconfigure(model!.workspace.overallUIState.debuggingSelection.frame)
 	}
 
 

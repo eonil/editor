@@ -78,7 +78,7 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 		window!.delegate		=	_agent
 		window!.makeKeyAndOrderFront(nil)
 
-		UIState.ForWorkspaceModel.set(model!) {
+		model!.overallUIState.mutate {
 			$0.navigationPaneVisibility	=	true
 			$0.inspectionPaneVisibility	=	false
 			$0.consolePaneVisibility	=	true

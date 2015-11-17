@@ -96,7 +96,7 @@ class ToolUIController {
 	}
 
 	private func _notifyStateChange() {
-		UIState.ForWorkspaceModel.set(model!) {
+		model!.overallUIState.mutate {
 			$0.navigationPaneVisibility	=	_divsel.isSelectedForSegment(0)
 			$0.consolePaneVisibility	=	_divsel.isSelectedForSegment(1)
 			$0.inspectionPaneVisibility	=	_divsel.isSelectedForSegment(2)
@@ -104,7 +104,7 @@ class ToolUIController {
 	}
 
 	private func _applyStateToOutput() {
-		UIState.ForWorkspaceModel.get(model!) {
+		model!.overallUIState.with {
 			_divsel.setSelected($0.navigationPaneVisibility, forSegment: 0)
 			_divsel.setSelected($0.consolePaneVisibility, forSegment: 1)
 			_divsel.setSelected($0.inspectionPaneVisibility, forSegment: 2)

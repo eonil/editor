@@ -116,55 +116,55 @@ class EditUIController: CommonViewController {
 
 
 	private func _applyStateToOutput() {
-		UIState.ForWorkspaceModel.get(model!) {
+		let	s	=	model!.overallUIState
+
+		_editTextFileUIC.string		=	nil
+		_state	=	{ [state = s] in
+			if let u = state.editingSelection {
+				do {
+					let	string		=	try NSString(contentsOfURL: u, encoding: NSUTF8StringEncoding)
+					return	.Text(string as String)
+				}
+				catch let e as NSError {
+					return	.Error(e.localizedDescription)
+				}
+			}
+			else {
+				return	.Empty
+			}
+		}() as _State
+
+
+		switch _state {
+		case .Empty:
+			_signboard.hidden		=	false
+			_signboard.headText		=	"No Editor"
+			_signboard.bodyText		=	nil
+			_editTextFileUIC.view.hidden	=	true
 			_editTextFileUIC.string		=	nil
-			_state	=	{ [state = $0] in
-				if let u = state.editingSelection {
-					do {
-						let	string		=	try NSString(contentsOfURL: u, encoding: NSUTF8StringEncoding)
-						return	.Text(string as String)
-					}
-					catch let e as NSError {
-						return	.Error(e.localizedDescription)
-					}
-				}
-				else {
-					return	.Empty
-				}
-			}() as _State
-
-
-			switch _state {
-			case .Empty:
-				_signboard.hidden		=	false
-				_signboard.headText		=	"No Editor"
-				_signboard.bodyText		=	nil
-				_editTextFileUIC.view.hidden	=	true
-				_editTextFileUIC.string		=	nil
-			case .Error(let e):
-				_signboard.hidden		=	false
-				_signboard.headText		=	"Error"
-				_signboard.bodyText		=	e
-				_editTextFileUIC.view.hidden	=	true
-				_editTextFileUIC.string		=	nil
-			case .Text(let s):
-				_signboard.hidden		=	true
-				_signboard.headText		=	nil
-				_signboard.bodyText		=	nil
-				_editTextFileUIC.view.hidden	=	false
-				_editTextFileUIC.string		=	s
-			}
+		case .Error(let e):
+			_signboard.hidden		=	false
+			_signboard.headText		=	"Error"
+			_signboard.bodyText		=	e
+			_editTextFileUIC.view.hidden	=	true
+			_editTextFileUIC.string		=	nil
+		case .Text(let s):
+			_signboard.hidden		=	true
+			_signboard.headText		=	nil
+			_signboard.bodyText		=	nil
+			_editTextFileUIC.view.hidden	=	false
+			_editTextFileUIC.string		=	s
+		}
 
 
 
-			//
-			
-			switch $0.paneSelection {
-			case .Editor:
-				view.window?.makeFirstResponder(self)
-			default:
-				return
-			}
+		//
+		
+		switch s.paneSelection {
+		case .Editor:
+			view.window?.makeFirstResponder(self)
+		default:
+			return
 		}
 	}
 

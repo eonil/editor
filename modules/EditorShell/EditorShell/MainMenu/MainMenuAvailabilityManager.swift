@@ -185,10 +185,7 @@ class MainMenuAvailabilityManager {
 			guard model!.currentWorkspace != nil else {
 				return	false
 			}
-			var	ok	=	false
-			UIState.ForWorkspaceModel.get(model!.currentWorkspace!) {
-				ok	=	$0.editingSelection != nil
-			}
+			let	ok	=	model!.currentWorkspace!.overallUIState.editingSelection != nil
 			return	ok
 		}() as Bool
 		mainMenuController!.viewShowProjectNavivator.enabled	=	hasCurrentWorkspace

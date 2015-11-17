@@ -132,10 +132,7 @@ public class ContextTreeUI: CommonView {
 		assert(model != nil)
 		if let f = _contextView.currentFrame {
 			if let th = f.thread {
-				UIState.ForWorkspaceModel.set(model!.workspace) {
-					$0.debuggingSelection	=	(model!.currentTarget!, th, f)
-					()
-				}
+				model!.workspace.overallUIState.debuggingSelection	=	(model!.currentTarget!, th, f)
 			}
 		}
 	}

@@ -222,16 +222,10 @@ public class FileTreeUI: CommonView, NSTextFieldDelegate {
 		///
 
 		if let item = getSelectedItem() {
-			UIState.ForWorkspaceModel.set(model!.workspace) {
-				$0.editingSelection	=	item.resolvePath().absoluteFileURL(`for`: model!.workspace)
-				()
-			}
+			model!.workspace.overallUIState.editingSelection	=	item.resolvePath().absoluteFileURL(`for`: model!.workspace)
 		}
 		else {
-			UIState.ForWorkspaceModel.set(model!.workspace) {
-				$0.editingSelection	=	nil
-				()
-			}
+			model!.workspace.overallUIState.editingSelection	=	nil
 		}
 
 

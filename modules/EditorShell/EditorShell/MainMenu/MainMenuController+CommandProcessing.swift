@@ -64,37 +64,36 @@ extension MainMenuController {
 
 
 		case ~~viewEditor: do {
-			UIState.ForWorkspaceModel.set(model!.currentWorkspace!) {
-				$0.paneSelection		=	WorkspaceUIState.Pane.Editor
-				()
-			}
+			model!.currentWorkspace!.overallUIState.paneSelection			=	.Editor
 		}
 		case ~~viewShowProjectNavivator: do {
-			UIState.ForWorkspaceModel.set(model!.currentWorkspace!) {
+			model!.currentWorkspace!.overallUIState.mutate {
 				$0.navigationPaneVisibility	=	true
 				$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Project)
 			}
 		}
 		case ~~viewShowIssueNavivator: do {
-			UIState.ForWorkspaceModel.set(model!.currentWorkspace!) {
+			model!.currentWorkspace!.overallUIState.mutate {
 				$0.navigationPaneVisibility	=	true
 				$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Issue)
 			}
 		}
 		case ~~viewShowDebugNavivator: do {
-			UIState.ForWorkspaceModel.set(model!.currentWorkspace!) {
+			model!.currentWorkspace!.overallUIState.mutate {
 				$0.navigationPaneVisibility	=	true
 				$0.paneSelection		=	WorkspaceUIState.Pane.Navigation(.Debug)
 			}
 		}
 		case ~~viewHideNavigator: do {
-			UIState.ForWorkspaceModel.set(model!.currentWorkspace!) { (inout state: WorkspaceUIState) -> () in
-				state.navigationPaneVisibility	=	false
+			model!.currentWorkspace!.overallUIState.mutate {
+				$0.navigationPaneVisibility	=	false
+				()
 			}
 		}
 		case ~~viewConsole: do {
-			UIState.ForWorkspaceModel.set(model!.currentWorkspace!) { (inout state: WorkspaceUIState) -> () in
-				state.consolePaneVisibility	=	true
+			model!.currentWorkspace!.overallUIState.mutate {
+				$0.consolePaneVisibility	=	true
+				()
 			}
 		}
 		case ~~viewFullscreen: do {
