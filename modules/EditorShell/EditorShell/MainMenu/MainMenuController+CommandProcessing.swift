@@ -22,6 +22,17 @@ extension MainMenuController {
 
 		switch ~~n.sender {
 
+		case ~~fileNewWorkspace: do {
+			Dialogue.runSavingWorkspace { [weak self] in
+				guard self != nil else {
+					return
+				}
+				if let u = $0 {
+					try! self!.model!.createAndOpenWorkspaceAtURL(u)
+				}
+			}
+			}
+
 		case ~~fileNewFile: do {
 			if let workspace = model!.currentWorkspace {
 				if let node = MainMenuController.hostFileNodeForNewFileSubentryOperationInFileTree(workspace.file) {

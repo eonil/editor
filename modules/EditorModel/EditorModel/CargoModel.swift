@@ -17,7 +17,7 @@ import EditorCommon
 
 /// Multiple-time re-usable cargo tool.
 ///
-/// This serializes access to cargo tool to acceidental prevent conflict.
+/// This serializes access to cargo tool to prevent acceidental conflict.
 ///
 class CargoModel: ModelSubnode<WorkspaceModel> {
 

@@ -118,6 +118,11 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 
 	///
 
+	public func instantiateEmptyTree() {
+		_dataTree	=	WorkspaceItemTree()
+		_dataTree!.createRoot()
+		_installModelRoot()
+	}
 	public func restoreSnapshot() throws {
 		let u	=	_snapshotFileURL()
 		try _restoreSnapshotFromURL(u)

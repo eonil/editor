@@ -110,6 +110,7 @@ public protocol PlatformFileSystemProtocol: class {
 	/// Gets whole file content from the URL.
 	/// The URL must be a file URL.
 	func contentOfFileAtURLAtomically(u: NSURL) throws -> NSData
+
 	/// Replaces whole file content to the URL with supplied data 
 	/// The URL must be a file URL.
 	func replaceContentOfFileAtURLAtomically(u: NSURL, data: NSData) throws

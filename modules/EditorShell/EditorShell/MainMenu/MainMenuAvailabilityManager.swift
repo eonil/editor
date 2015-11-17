@@ -84,11 +84,6 @@ class MainMenuAvailabilityManager {
 		_applyBuildStateChange()
 	}
 	private func _process(n: WorkspaceModel.Event.Notification) {
-		switch n.event {
-		case .WillInitiate:	return
-		case .DidTerminate:	return
-		default:		break
-		}
 		_applyFileStateChange()
 		_applyBuildStateChange()
 	}
@@ -173,6 +168,7 @@ class MainMenuAvailabilityManager {
 			return	nil
 		}
 
+		mainMenuController!.fileNewWorkspace.enabled		=	true
 		mainMenuController!.fileNewFile.enabled			=	hostNodeForNewFileSubentryOperation() != nil
 		mainMenuController!.fileNewFolder.enabled		=	hostNodeForNewFileSubentryOperation() != nil
 		mainMenuController!.fileOpenWorkspace.enabled		=	true

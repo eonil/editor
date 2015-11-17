@@ -38,7 +38,6 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	///
 
 	override func didJoinModelRoot() {
-		Event.WillInitiate.dualcastAsNotificationWithSender(self)
 		super.didJoinModelRoot()
 
 		assert(location != nil, "`location` must be set to a non-nil value before attaching workspace model node to model tree.")
@@ -66,8 +65,6 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 		file.owner		=	nil
 
 		super.willLeaveModelRoot()
-
-		Event.DidTerminate.dualcastAsNotificationWithSender(self)
 	}
 
 	///
@@ -116,7 +113,11 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	public func construct() throws {
 		assert(location != nil)
 		cargo.runNewAtURL(location!)
+		file.instantiateEmptyTree()
+		file.storeSnapshot()
+		_relocate()
 	}
+
 //	public func demolish() {
 //	}
 
@@ -144,7 +145,12 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 
 	private func _relocate() {
 		Event.WillRelocate.dualcastAsNotificationWithSender(self)
-		try! file.restoreSnapshot()
+		do {
+			try file.restoreSnapshot()
+		}
+		catch {
+
+		}
 		Event.DidRelocate.dualcastAsNotificationWithSender(self)
 	}
 

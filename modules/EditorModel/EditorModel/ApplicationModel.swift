@@ -120,8 +120,8 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 		do {
 			let	ws	=	WorkspaceModel()
 			ws.location	=	location
-			try ws.construct()
 			_addWorkspace(ws)
+			try ws.construct()
 		}
 	}
 
