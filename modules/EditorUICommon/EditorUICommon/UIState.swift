@@ -19,23 +19,10 @@ import LLDBWrapper
 ///
 /// Register observer on `Notification<T,UIState.Event>` to receive
 /// notifications where `T` is a target model type.
+///
+///
+///
 public struct UIState {
-	public static func initiate() {
-		assert(_isReady == false)
-		WorkspaceModel.Event.Notification.register	(self, _process)
-		_isReady	=	true
-		Debug.log("UIState.initiate")
-	}
-	public static func terminate() {
-		assert(_isReady == true)
-		WorkspaceModel.Event.Notification.deregister	(self)
-		_isReady	=	false
-		Debug.log("UIState.terminate")
-	}
-
-
-
-
 
 	///
 
@@ -59,16 +46,13 @@ public struct UIState {
 		public typealias	Notification	=	EditorModel.Notification<WorkspaceModel, Event>
 
 		public static func get(m: WorkspaceModel, @noescape process: (state: WorkspaceUIState) -> ()) {
-			assert(_isReady == true, "You must `initialize` this struct before using.")
-			assert(_workspaceToState[identityOf(m)] != nil, "Cannot find UI state for model `\(m)`.")
-			process(state: _workspaceToState[identityOf(m)]!)
+			process(state: m.overallUIState)
 		}
 		/// Fires a `Notification<WorkspaceModel,UIState.Event>` after state change.
 		public static func set(m: WorkspaceModel, @noescape process: (inout state: WorkspaceUIState) -> ()) {
-			assert(_isReady == true, "You must `initialize` this struct before using.")
-			assert(_workspaceToState[identityOf(m)] != nil, "Cannot find UI state for model `\(m)`.")
-			process(state: &_workspaceToState[identityOf(m)]!)
-			Notification(m, Event.Invalidate).broadcast()
+			var	s	=	m.overallUIState
+			process(state: &s)
+			m.overallUIState	=	s
 		}
 	}
 
@@ -79,40 +63,6 @@ public struct UIState {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-	
-	///
-
-
-	private static func _process(n: WorkspaceModel.Event.Notification) {
-		let	workspace	=	n.sender
-		switch n.event {
-		case .WillInitiate:
-			assert(_workspaceToState[identityOf(workspace)] == nil)
-			_workspaceToState[identityOf(workspace)]		=	WorkspaceUIState()
-			_fileTreeToState[identityOf(workspace.file)]	=	ProjectUIState()
-			Notification(workspace, UIState.Event.Initiate).broadcast()
-
-		case .DidTerminate:
-			assert(_workspaceToState[identityOf(workspace)] != nil)
-			Notification(workspace, UIState.Event.Terminate).broadcast()
-			_fileTreeToState[identityOf(workspace.file)]	=	nil
-			_workspaceToState[identityOf(workspace)]		=	nil
-
-		default:
-			break
-		}
-	}
 }
 
 
@@ -123,23 +73,8 @@ public struct UIState {
 
 
 
-public extension ApplicationModel {
-	public func addProjectUIStateToWorkspace(workspace: WorkspaceModel) {
-		assert(_workspaceToState[identityOf(workspace)] == nil)
-		_workspaceToState[identityOf(workspace)]		=	WorkspaceUIState()
-		_fileTreeToState[identityOf(workspace.file)]	=	ProjectUIState()
-		Notification(workspace, UIState.Event.Initiate).broadcast()
-	}
-	public func removeProjectUIStateFromWorkspace(workspace: WorkspaceModel) {
-		assert(_workspaceToState[identityOf(workspace)] != nil)
-		Notification(workspace, UIState.Event.Terminate).broadcast()
-		_fileTreeToState[identityOf(workspace.file)]	=	nil
-		_workspaceToState[identityOf(workspace)]		=	nil
-	}
-}
 
-
-public struct WorkspaceUIState {
+public struct WorkspaceUIState: UIStateType {
 	public var navigationPaneVisibility: Bool	=	false
 	public var inspectionPaneVisibility: Bool	=	false
 	public var consolePaneVisibility: Bool		=	false
@@ -162,7 +97,7 @@ public struct WorkspaceUIState {
 }
 
 
-public struct ProjectUIState {
+public struct ProjectUIState: UIStateType {
 //	public var temporalFileGrabbing		:	WorkspaceItemNode?		// Cannot be implemented because Cocoa menu does not support mutation on open/close event.
 	public var sustainingFileSelection	=	[WorkspaceItemNode]()
 }
@@ -195,33 +130,35 @@ public extension WorkspaceModel {
 	/// Fires a `Notification<WorkspaceModel,UIState.Event>` after state change.
 	public var overallUIState: WorkspaceUIState {
 		get {
-			assert(_isReady == true, "You must `initialize` this struct before using.")
-			assert(_workspaceToState[identityOf(self)] != nil, "Cannot find UI state for model `\(self)`.")
-			return	_workspaceToState[identityOf(self)]!
+			return	UIStateBox.forModel(self, key: WorkspaceModel.overallUIStateKey).state
 		}
 		set {
-			assert(_isReady == true, "You must `initialize` this struct before using.")
-			assert(_workspaceToState[identityOf(self)] != nil, "Cannot find UI state for model `\(self)`.")
-			_workspaceToState[identityOf(self)]!	=	newValue
+			UIStateBox.forModel(self, key: WorkspaceModel.overallUIStateKey).state	=	newValue
 			Notification(self, UIState.Event.Invalidate).broadcast()
 		}
 	}
+
+	///
+
+	private static let	overallUIStateKey	=	UIStateKey()
 }
 public extension FileTreeModel {
 	/// Fires a `Notification<FileTreeModel,UIState.Event>` after state change.
 	public var projectUIState: ProjectUIState {
 		get {
-			assert(_isReady == true, "You must `initialize` this struct before using.")
-			assert(_fileTreeToState[identityOf(self)] != nil, "Cannot find UI state for model `\(self)`.")
-			return	_fileTreeToState[identityOf(self)]!
+			return	UIStateBox.forModel(self, key: FileTreeModel.projectUIStateKey).state
 		}
 		set {
-			assert(_isReady == true, "You must `initialize` this struct before using.")
-			assert(_fileTreeToState[identityOf(self)] != nil, "Cannot find UI state for model `\(self)`.")
-			_fileTreeToState[identityOf(self)]!	=	newValue
+			UIStateBox.forModel(self, key: FileTreeModel.projectUIStateKey).state	=	newValue
 			Notification(self, UIState.Event.Invalidate).broadcast()
 		}
 	}
+
+
+
+	///
+
+	private static let	projectUIStateKey	=	UIStateKey()
 }
 
 
@@ -232,16 +169,6 @@ public extension FileTreeModel {
 
 
 
-
-
-
-
-
-
-
-private var	_isReady		=	false
-private var	_workspaceToState	=	Dictionary<ReferentialIdentity<WorkspaceModel>, WorkspaceUIState>()
-private var	_fileTreeToState	=	Dictionary<ReferentialIdentity<FileTreeModel>, ProjectUIState>()
 
 
 
