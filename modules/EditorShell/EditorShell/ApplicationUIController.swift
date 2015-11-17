@@ -11,11 +11,17 @@ import AppKit
 import MulticastingStorage
 import EditorCommon
 import EditorModel
+import EditorUICommon
 
 public class ApplicationUIController: SessionProtocol {
 
 	public init() {
-
+		assert(_theInstance === nil)
+		_theInstance	=	self
+	}
+	deinit {
+		assert(_theInstance === self)
+		_theInstance	=	nil
 	}
 
 	///
@@ -31,13 +37,15 @@ public class ApplicationUIController: SessionProtocol {
 	public func run() {
 		assert(model != nil)
 		_installMenu()
-		_installCocoaNotificationHandlers()
 		_installModelObservers()
+		NSNotificationCenter.defaultCenter().addUIObserver(self, ApplicationUIController._process, NSWindowDidBecomeMainNotification)
+		NSNotificationCenter.defaultCenter().addUIObserver(self, ApplicationUIController._process, NSWindowDidResignMainNotification)
 	}
 	public func halt() {
 		assert(model != nil)
+		NSNotificationCenter.defaultCenter().removeUIObserver(self, NSWindowDidResignMainNotification)
+		NSNotificationCenter.defaultCenter().removeUIObserver(self, NSWindowDidBecomeMainNotification)
 		_deinstallModelObservers()
-		_deinstallCocoaNotificaitonHandlers()
 		_deinstallMenu()
 	}
 
@@ -51,12 +59,32 @@ public class ApplicationUIController: SessionProtocol {
 
 
 
+	///
+
+	internal static var theApplicationUIController: ApplicationUIController? {
+		get {
+			return	_theInstance
+		}
+	}
+
+	internal func workspaceDocumentForModel(workspace: WorkspaceModel) -> WorkspaceDocument {
+		return	_modelToViewMapping[identityOf(workspace)]!
+	}
+
+
+
+
+
+
+
 
 	///
 
 	private let	_mainMenuUI		=	MainMenuController()
 	private let	_mainMenuManager	=	MainMenuAvailabilityManager()
 	private var	_isRunning		=	false
+	private var	_modelToViewMapping	=	Dictionary<ReferentialIdentity<WorkspaceModel>, WorkspaceDocument>()
+
 
 	private func _installMenu() {
 		_mainMenuManager.model			=	model!
@@ -80,117 +108,67 @@ public class ApplicationUIController: SessionProtocol {
 		ApplicationModel.Event.Notification.deregister	(self)
 	}
 
+
+
+
+
+
+	private func _process(n: NSNotification) {
+		switch n.name {
+		case NSWindowDidBecomeMainNotification:
+//			assertAndReportFailure(model!.currentWorkspace !== nil, "model!.currentWorkspace = \(model!.currentWorkspace)")
+//			UIState.ForApplicationModel.Notification(model!, .Invalidate).broadcast()
+			break
+
+		case NSWindowDidResignMainNotification:
+//			assertAndReportFailure(model!.currentWorkspace === nil)
+//			UIState.ForApplicationModel.Notification(model!, .Invalidate).broadcast()
+			break
+
+		default:
+			fatalError()
+		}
+	}
+	
+
 	private func _process(n: ApplicationModel.Event.Notification) {
 		switch n.event {
 		case .DidInitiate:
 			break
+
 		case .WillTerminate:
 			break
-		case .DidBeginCurrentWorkspace(let workspace):
-			_findUIForModel(workspace)!.windowController.window!.makeMainWindow()
 
+		case .DidBeginCurrentWorkspace(_):
+			break
+			
 		case .WillEndCurrentWorkspace(_):
 			break
 
-		case .DidAddWorkspace(let workspace):
-			_insertWorkspaceUIForWorkspace(workspace)
-			break
-
-		case .WillRemoveWorkspace(let workspace):
-			_deleteWorkspaceUIForWorkspace(workspace)
-			break
-		}
-	}
-
-
-
-
-	private func _installCocoaNotificationHandlers() {
-		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidBecomeMainNotification) { [weak self] (n: NSNotification) -> () in
-			guard let window = n.object as? NSWindow else {
-				fatalError("Cannot find the window object which became main.")
-			}
-			guard self != nil else {
-				return
-			}
-			guard let workspaceUI = window.windowController as? WorkspaceWindowUIController else {
-				return
+		case .DidAddWorkspace(let workspace): do {
+			assert(workspace.location != nil)
+			let	doc	=	WorkspaceDocument()
+			_modelToViewMapping[identityOf(workspace)]	=	doc
+			doc.workspaceWindowUIController.model		=	workspace
+			NSDocumentController.sharedDocumentController().addDocument(doc)
+			NSDocumentController.sharedDocumentController().noteNewRecentDocument(doc)
+			NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(workspace.location!)
+			doc.workspaceWindowUIController.run()
 			}
 
-			self!.model!.currentWorkspace	=	workspaceUI.model!
-		}
-		NSNotificationCenter.defaultCenter().addUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification) { [weak self] (n: NSNotification) -> () in
-			guard let window = n.object as? NSWindow else {
-				fatalError("Cannot find the window object which resigned main.")
-			}
-			guard self != nil else {
-				return
-			}
-			guard let _ = window.windowController as? WorkspaceWindowUIController else {
-				return
-			}
-
-			self!.model!.currentWorkspace	=	nil
-		}
-	}
-	private func _deinstallCocoaNotificaitonHandlers() {
-		NSNotificationCenter.defaultCenter().removeUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidResignMainNotification)
-		NSNotificationCenter.defaultCenter().removeUIObserver(ObjectIdentifier(self), forNotificationName: NSWindowDidBecomeMainNotification)
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	///
-
-
-
-
-	///
-
-	private func _insertWorkspaceUIForWorkspace(workspace: WorkspaceModel) {
-		let	doc	=	WorkspaceDocument()
-		NSDocumentController.sharedDocumentController().addDocument(doc)
-		NSDocumentController.sharedDocumentController().noteNewRecentDocument(doc)
-//		NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(workspace.location!)
-
-		let	wc	=	WorkspaceWindowUIController()
-		wc.model	=	workspace
-		doc.addWindowController(wc)
-
-		wc.run()
-	}
-	private func _deleteWorkspaceUIForWorkspace(workspace: WorkspaceModel) {
-		guard let (doc, uic) = _findUIForModel(workspace) else {
-			fatalError("Cannot find UI objects for the workspace `\(workspace)`.")
-		}
-		uic.halt()
-		NSDocumentController.sharedDocumentController().removeDocument(doc)
-	}
-
-	private func _findUIForModel(workspace: WorkspaceModel) -> (document: WorkspaceDocument, windowController: WorkspaceWindowUIController)? {
-		for doc in NSDocumentController.sharedDocumentController().documents {
-			if let doc = doc as? WorkspaceDocument {
-				for wc in doc.windowControllers {
-					if let wc = wc as? WorkspaceWindowUIController {
-						return	(doc, wc)
-					}
-				}
+		case .WillRemoveWorkspace(let workspace): do {
+			let	doc	=	_modelToViewMapping[identityOf(workspace)]!
+			doc.workspaceWindowUIController.halt()
+			NSDocumentController.sharedDocumentController().removeDocument(doc)
+			doc.workspaceWindowUIController.model		=	nil
+			_modelToViewMapping[identityOf(workspace)]	=	nil
 			}
 		}
-		return	nil
+
+
 	}
+
+
 }
 
 
@@ -209,6 +187,13 @@ public class ApplicationUIController: SessionProtocol {
 
 
 
+
+
+
+
+
+// Only one instance is allowed at once.
+private weak var	_theInstance	:	ApplicationUIController?
 
 
 

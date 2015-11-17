@@ -22,13 +22,13 @@ import LLDBWrapper
 public struct UIState {
 	public static func initiate() {
 		assert(_isReady == false)
-		WorkspaceModel.Event.Notification.register(self, _process)
+		WorkspaceModel.Event.Notification.register	(self, _process)
 		_isReady	=	true
 		Debug.log("UIState.initiate")
 	}
 	public static func terminate() {
 		assert(_isReady == true)
-		WorkspaceModel.Event.Notification.deregister(self)
+		WorkspaceModel.Event.Notification.deregister	(self)
 		_isReady	=	false
 		Debug.log("UIState.terminate")
 	}
@@ -80,21 +80,35 @@ public struct UIState {
 
 
 
+
+
+
+
+
+
+
+
+
+
+	
 	///
 
 
 	private static func _process(n: WorkspaceModel.Event.Notification) {
+		let	workspace	=	n.sender
 		switch n.event {
-		case .DidInitiate:
-			assert(_workspaceToState[identityOf(n.sender)] == nil)
-			_workspaceToState[identityOf(n.sender)]		=	WorkspaceUIState()
-			_fileTreeToState[identityOf(n.sender.file)]	=	ProjectUIState()
-			Notification(n.sender,Event.Initiate).broadcast()
-		case .WillTerminate:
-			assert(_workspaceToState[identityOf(n.sender)] != nil)
-			Notification(n.sender,Event.Terminate).broadcast()
-			_fileTreeToState[identityOf(n.sender.file)]	=	nil
-			_workspaceToState[identityOf(n.sender)]		=	nil
+		case .WillInitiate:
+			assert(_workspaceToState[identityOf(workspace)] == nil)
+			_workspaceToState[identityOf(workspace)]		=	WorkspaceUIState()
+			_fileTreeToState[identityOf(workspace.file)]	=	ProjectUIState()
+			Notification(workspace, UIState.Event.Initiate).broadcast()
+
+		case .DidTerminate:
+			assert(_workspaceToState[identityOf(workspace)] != nil)
+			Notification(workspace, UIState.Event.Terminate).broadcast()
+			_fileTreeToState[identityOf(workspace.file)]	=	nil
+			_workspaceToState[identityOf(workspace)]		=	nil
+
 		default:
 			break
 		}
@@ -109,9 +123,20 @@ public struct UIState {
 
 
 
-
-
-
+public extension ApplicationModel {
+	public func addProjectUIStateToWorkspace(workspace: WorkspaceModel) {
+		assert(_workspaceToState[identityOf(workspace)] == nil)
+		_workspaceToState[identityOf(workspace)]		=	WorkspaceUIState()
+		_fileTreeToState[identityOf(workspace.file)]	=	ProjectUIState()
+		Notification(workspace, UIState.Event.Initiate).broadcast()
+	}
+	public func removeProjectUIStateFromWorkspace(workspace: WorkspaceModel) {
+		assert(_workspaceToState[identityOf(workspace)] != nil)
+		Notification(workspace, UIState.Event.Terminate).broadcast()
+		_fileTreeToState[identityOf(workspace.file)]	=	nil
+		_workspaceToState[identityOf(workspace)]		=	nil
+	}
+}
 
 
 public struct WorkspaceUIState {
@@ -164,7 +189,8 @@ public struct ProjectUIState {
 
 
 
-
+public extension ApplicationModel {
+}
 public extension WorkspaceModel {
 	/// Fires a `Notification<WorkspaceModel,UIState.Event>` after state change.
 	public var overallUIState: WorkspaceUIState {
@@ -216,6 +242,40 @@ public extension FileTreeModel {
 private var	_isReady		=	false
 private var	_workspaceToState	=	Dictionary<ReferentialIdentity<WorkspaceModel>, WorkspaceUIState>()
 private var	_fileTreeToState	=	Dictionary<ReferentialIdentity<FileTreeModel>, ProjectUIState>()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

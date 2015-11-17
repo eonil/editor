@@ -16,11 +16,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		NSUserDefaults.standardUserDefaults().setBool(false, forKey: "NSFullScreenMenuItemEverywhere")
 	}
 	func applicationDidFinishLaunching(aNotification: NSNotification) {
-		_driver.run()
+//		_driver.run()
 	}
 
 	func applicationWillTerminate(aNotification: NSNotification) {
-		_driver.halt()
+//		_driver.halt()
 	}
 
 	func applicationShouldOpenUntitledFile(sender: NSApplication) -> Bool {
@@ -29,6 +29,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	///
 
-	private let	_driver		=	Driver()
+//	private let	_driver		=	Driver()
 }
 

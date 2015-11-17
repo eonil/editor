@@ -58,7 +58,8 @@ extension MainMenuController {
 
 		case ~~fileCloseCurrentWorkspace: do {
 			assert(model!.currentWorkspace != nil, "This menu shouldn't be called if there's no current workspace.")
-			model!.closeWorkspace(model!.currentWorkspace!)
+			let	workspace	=	model!.currentWorkspace!
+			model!.closeWorkspace(workspace)
 			}
 
 

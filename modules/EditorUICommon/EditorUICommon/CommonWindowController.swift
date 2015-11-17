@@ -17,7 +17,7 @@ public class CommonWindowController: NSWindowController {
 
 	public init() {
 		_inInit	=	true
-		super.init(window: NSWindow())
+		super.init(window: _TrackingWindow())
 		_inInit	=	false
 	}
 	@available(*,unavailable)
@@ -77,9 +77,28 @@ public class CommonWindowController: NSWindowController {
 
 
 
+private class _TrackingWindow: NSWindow {
+	deinit {
 
+	}
+}
 
-
+//private class CheckingWindow: NSWindow {
+//	private override func becomeMainWindow() {
+//		super.becomeMainWindow()
+//		func app() -> NSApplication {
+//			return	NSApplication.sharedApplication()
+//		}
+//		assert(app().active == false || app().hidden == true || app().mainWindow === self)
+//	}
+//	private override func resignMainWindow() {
+//		super.resignMainWindow()
+//		func app() -> NSApplication {
+//			return	NSApplication.sharedApplication()
+//		}
+//		assert(app().active == false || app().hidden == true || app().mainWindow !== self)
+//	}
+//}
 
 
 class CommonUIWindow: NSWindow {

@@ -36,10 +36,12 @@ public extension ApplicationModel {
 public extension WorkspaceModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	WorkspaceModel
-		case DidInitiate
-		case WillTerminate
-		case WillRelocate(from: NSURL?, to: NSURL?)
-		case DidRelocate(from: NSURL?, to: NSURL?)
+		case WillInitiate	//< Object reference is ready, but nothing else. Should be used only when you need a reference before doting anything else.
+		case DidInitiate	//< Model is fully configured and wired up.
+		case WillTerminate	//< Model is fully still configured and wired up.
+		case DidTerminate	//< Object reference is still available, but nothing else. Should be used only when you need a reference before doting anything else.
+		case WillRelocate
+		case DidRelocate
 	}
 }
 

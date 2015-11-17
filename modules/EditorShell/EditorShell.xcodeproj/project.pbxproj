@@ -41,6 +41,7 @@
 		45C5ABED1BF639EB00B1CBAB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C5ABEC1BF639EB00B1CBAB /* Constants.swift */; };
 		45C77B011B7F2CAF0064C363 /* SessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */; };
 		45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */; };
+		45FDBDF51BF96C4000DD162D /* UIStateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FDBDF41BF96C4000DD162D /* UIStateExtensions.swift */; };
 		45FECE691BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE681BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift */; };
 		45FECE6D1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE6C1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift */; };
 		45FECE6F1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FECE6E1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift */; };
@@ -172,6 +173,7 @@
 		45C5ABEC1BF639EB00B1CBAB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionProtocol.swift; sourceTree = "<group>"; };
 		45C77B0D1B7F34DE0064C363 /* ApplicationUIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationUIController.swift; sourceTree = "<group>"; };
+		45FDBDF41BF96C4000DD162D /* UIStateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStateExtensions.swift; sourceTree = "<group>"; };
 		45FECE681BEE1F0B00C9C3E0 /* MainMenuAvailabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuAvailabilityManager.swift; sourceTree = "<group>"; };
 		45FECE6C1BEE2BEF00C9C3E0 /* MainMenuController+CommandProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainMenuController+CommandProcessing.swift"; sourceTree = "<group>"; };
 		45FECE6E1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuShortcutKeyCombination.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 			children = (
 				45250B1B1BEB7875003A862A /* Protocols.swift */,
 				45C5ABEC1BF639EB00B1CBAB /* Constants.swift */,
+				45FDBDF41BF96C4000DD162D /* UIStateExtensions.swift */,
 				4598A7501BEDDA5500B0F3C8 /* MainMenu */,
 				45B1852E1B7F865B004E3B28 /* (menu components) */,
 				45C77B001B7F2CAF0064C363 /* SessionProtocol.swift */,
@@ -609,6 +612,7 @@
 				453DFEF51BF4CFB7008D7DB1 /* LayoutBox.swift in Sources */,
 				453DFEEA1BF4CF5E008D7DB1 /* FileTreeUIController.swift in Sources */,
 				453DFEF61BF4CFB7008D7DB1 /* Line.swift in Sources */,
+				45FDBDF51BF96C4000DD162D /* UIStateExtensions.swift in Sources */,
 				4554C9B61B7DC0D7004987CC /* ToolUIController.swift in Sources */,
 				45FECE6F1BEE388D00C9C3E0 /* MenuShortcutKeyCombination.swift in Sources */,
 				45C77B0E1B7F34DE0064C363 /* ApplicationUIController.swift in Sources */,

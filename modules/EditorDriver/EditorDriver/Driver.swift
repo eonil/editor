@@ -23,7 +23,7 @@ public class Driver {
 			return	_currentDriver!
 		}
 	}
-	private static var	_currentDriver: Driver?
+	private static weak var	_currentDriver: Driver?
 
 	///
 
@@ -59,7 +59,7 @@ public class Driver {
 		//	TODO:	Remove this on release...
 		//		ADHOC booting.
 
-		_model.openWorkspaceAtURL(NSURL(fileURLWithPath: "/Users/Eonil/Documents/Editor2Test/aaa"))
+//		_model.openWorkspaceAtURL(NSURL(fileURLWithPath: "/Users/Eonil/Documents/Editor2Test/aaa"))
 	}
 
 	public func halt() {

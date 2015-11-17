@@ -12,7 +12,7 @@ import EditorModel
 import EditorCommon
 import EditorUICommon
 
-public final class WorkspaceWindowUIController: CommonWindowController, SessionProtocol {
+public final class WorkspaceWindowUIController: CommonWindowController, SessionProtocol, NSWindowDelegate {
 
 	public override init() {
 		// I don't know why, but configured "current appearance" disappears 
@@ -58,12 +58,15 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 
 	public func run() {
 		assert(model != nil)
+		assert(model!.location != nil)
 
 		_reconfigureWindowAppearanceBehaviors()
 		assert(window!.appearance != nil)
 		assert(window!.appearance!.name == NSAppearanceNameVibrantDark)
 		assert(NSAppearance.currentAppearance().name == NSAppearanceNameVibrantDark)
 
+		window!.restorationClass	=	_RestorationManager.self
+//		window!.releasedWhenClosed	=	false	// Trigger it's owner to release it.
 		_div.view.frame			=	CGRect(origin: CGPoint.zero, size: _getMinSize())
 		window!.contentViewController	=	_div
 
@@ -91,6 +94,35 @@ public final class WorkspaceWindowUIController: CommonWindowController, SessionP
 		_deinstallToolbar()
 		_deinstallWindowAgent()
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	///
 
@@ -240,21 +272,31 @@ private final class _Agent: NSObject, NSWindowDelegate {
 			])
 	}
 
-//	@objc
-//	private func windowDidBecomeMain(notification: NSNotification) {
-////		print(notification)
-////		owner!._becomeCurrentWorkspace()
-//	}
-//	@objc
-//	private func windowDidResignMain(notification: NSNotification) {
-////		print(notification)
-////		owner!._resignCurrentWorkspace()
-//	}
+	@objc
+	private func windowDidBecomeMain(notification: NSNotification) {
+		assert(owner!.model!.application.currentWorkspace === nil)
+		owner!.model!.application.currentWorkspace	=	owner!.model!
+	}
+	@objc
+	private func windowDidResignMain(notification: NSNotification) {
+		// It's impossible to assume specific state becuase this notification is broadcasted.
+		if owner!.model!.application.currentWorkspace === owner!.model! {
+			owner!.model!.application.currentWorkspace	=	nil
+		}
+	}
 
 	@objc
 	private func windowWillClose(notification: NSNotification) {
 		owner!._closeCurrentWorkspace()
 	}
+
+
+	@objc
+	private func window(window: NSWindow, willEncodeRestorableState state: NSCoder) {
+		let	data	=	try! owner!.model!.location!.bookmarkDataWithOptions([], includingResourceValuesForKeys: nil, relativeToURL: nil)
+		state.encodeBytes(unsafeBitCast(data.bytes, UnsafePointer<UInt8>.self), length: data.length, forKey: _WINDOW_STATE_KEY_V0_MODEL_LOCATION)
+	}
+
 }
 
 
@@ -279,6 +321,62 @@ private func _getMinSize() -> CGSize {
 
 
 
+
+
+
+
+
+
+
+
+private let	_WINDOW_STATE_KEY_V0_MODEL_LOCATION	=	"v0/model.location"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+private class _RestorationManager: NSObject, NSWindowRestoration {
+	@objc
+	class func restoreWindowWithIdentifier(identifier: String, state: NSCoder, completionHandler: (NSWindow?, NSError?) -> Void) {
+		var	len	:	Int	=	0
+		let	ptr	=	state.decodeBytesForKey(_WINDOW_STATE_KEY_V0_MODEL_LOCATION, returnedLength: &len)
+		let	data	=	NSData(bytes: ptr, length: len)
+		do {
+			let	url	=	try NSURL(byResolvingBookmarkData: data, options: [], relativeToURL: nil, bookmarkDataIsStale: nil)
+			ApplicationUIController.theApplicationUIController!.model!.openWorkspaceAtURL(url)
+			for workspace in ApplicationUIController.theApplicationUIController!.model!.workspaces {
+				if workspace.location! == url {
+					let	doc	=	ApplicationUIController.theApplicationUIController!.workspaceDocumentForModel(workspace)
+					completionHandler(doc.workspaceWindowUIController.window!, nil)
+					return
+				}
+			}
+		}
+		catch let error as NSError {
+			completionHandler(nil, error)
+		}
+		completionHandler(nil, nil)
+		checkAndReportFailureToDevelopers(false)
+	}
+}
 
 
 

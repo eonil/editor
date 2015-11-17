@@ -38,7 +38,10 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	///
 
 	override func didJoinModelRoot() {
+		Event.WillInitiate.dualcastAsNotificationWithSender(self)
 		super.didJoinModelRoot()
+
+		assert(location != nil, "`location` must be set to a non-nil value before attaching workspace model node to model tree.")
 
 		file.owner		=	self
 		search.owner		=	self
@@ -48,6 +51,7 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 		console.owner		=	self
 		cargo.owner		=	self
 
+		_relocate()
 		Event.DidInitiate.dualcastAsNotificationWithSender(self)
 	}
 	override func willLeaveModelRoot() {
@@ -62,6 +66,8 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 		file.owner		=	nil
 
 		super.willLeaveModelRoot()
+
+		Event.DidTerminate.dualcastAsNotificationWithSender(self)
 	}
 
 	///
@@ -91,18 +97,16 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	/// whole workspace UI.
 	public var location: NSURL? {
 		willSet {
-			assert(owner != nil, "Detached model node cannot be manipulated.")
-			Event.WillRelocate(from: location, to: newValue).dualcastAsNotificationWithSender(self)
-			_willLocate()
 		}
 		didSet {
-			_didLocate()
-			Event.DidRelocate(from: oldValue, to: location).dualcastAsNotificationWithSender(self)
+			if owner != nil {
+				_relocate()
+			}
 		}
 	}
 
 	public private(set) var allProjects: [ProjectModel] = []
-	public private(set) var currentProject: ProjectModel?
+	public private(set) var currentProject: ProjectModel? 
 
 	///
 
@@ -135,13 +139,17 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 
 
 
+
 	///
 
-	private func _willLocate() {
-	}
-	private func _didLocate() {
+	private func _relocate() {
+		Event.WillRelocate.dualcastAsNotificationWithSender(self)
 		try! file.restoreSnapshot()
+		Event.DidRelocate.dualcastAsNotificationWithSender(self)
 	}
+
+
+
 }
 
 

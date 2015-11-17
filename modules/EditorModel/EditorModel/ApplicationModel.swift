@@ -33,7 +33,6 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 //		assert(a == "/Users/Eonil/Unix/homebrew/bin/cargo")
 	}
 	deinit {
-		assert(currentWorkspace == nil)
 	}
 
 	///
@@ -58,25 +57,7 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 	/// another workspace expected to be selected immediately if there's
 	/// one.
 	public private(set) var workspaces: ObjectSet<WorkspaceModel> = [] {
-//		willSet {
-//			assert(workspaces.areAllElementsUniqueReferences())
-//		}
 		didSet {
-			assert(currentWorkspace === nil || workspaces.contains(currentWorkspace!))
-//			assert(workspaces.areAllElementsUniqueReferences())
-		}
-	}
-	public weak var currentWorkspace: WorkspaceModel? {
-		willSet {
-			if let currentWorkspace = currentWorkspace {
-				assert(workspaces.contains(currentWorkspace))
-				Event.WillEndCurrentWorkspace(currentWorkspace).dualcastAsNotificationWithSender(self)
-			}
-		}
-		didSet {
-			if let currentWorkspace = currentWorkspace {
-				Event.DidBeginCurrentWorkspace(currentWorkspace).dualcastAsNotificationWithSender(self)
-			}
 		}
 	}
 
@@ -110,6 +91,19 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 //			return	_selection
 //		}
 //	}
+	public weak var currentWorkspace: WorkspaceModel? {
+		willSet {
+			assert(newValue === nil || workspaces.contains(newValue!), "Workspace must be added before becoming current.")
+			if let currentWorkspace = currentWorkspace {
+				Event.WillEndCurrentWorkspace(currentWorkspace).dualcastAsNotificationWithSender(self)
+			}
+		}
+		didSet {
+			if let currentWorkspace = currentWorkspace {
+				Event.DidBeginCurrentWorkspace(currentWorkspace).dualcastAsNotificationWithSender(self)
+			}
+		}
+	}
 
 	///
 
@@ -155,10 +149,10 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 
 				///
 
-				let	ws	=	WorkspaceModel()
-				_addWorkspace(ws)
-				ws.location	=	u
-				Debug.log("did open by adding a workspace \(ws), ws count = \(workspaces.count)")
+			let	ws	=	WorkspaceModel()
+			ws.location	=	u
+			_addWorkspace(ws)
+			Debug.log("did open by adding a workspace \(ws), ws count = \(workspaces.count)")
 //			}
 		}
 //		assert(workspaces.areAllElementsUniqueReferences())
@@ -176,11 +170,9 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 //		mutateWithGlobalCheck {
 			do {
 				Debug.log("will remove a workspace \(ws), ws count = \(workspaces.count)")
-
 				if currentWorkspace === ws {
 					currentWorkspace	=	nil
 				}
-
 				_removeWorkspace(ws)
 			}
 			//		assert(workspaces.areAllElementsUniqueReferences())
@@ -215,6 +207,7 @@ public class ApplicationModel: ModelRootNode, BroadcastingModelType {
 		Debug.log("did create and add a workspace \(workspace), ws count = \(workspaces.count)")
 	}
 	private func _removeWorkspace(workspace: WorkspaceModel) {
+		assert(workspace !== currentWorkspace, "A workspace must resign current state before to be removed.")
 		Event.WillRemoveWorkspace(workspace).dualcastAsNotificationWithSender(self)
 		workspace.owner		=	nil
 		workspaces.remove(workspace)

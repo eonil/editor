@@ -18,7 +18,8 @@ public class FileTreeUI: CommonView, NSTextFieldDelegate {
 
 	public weak var model: FileTreeModel? {
 		willSet {
-			assert(window == nil)
+			assert(window == nil, "`model` must be set before this view to be placed on a window.")
+			_menuController.model	=	model
 		}
 	}
 

@@ -13,6 +13,11 @@ import EditorCommon
 @objc
 public class WorkspaceDocument: NSDocument {
 
+
+	public let	workspaceWindowUIController	=	WorkspaceWindowUIController()
+
+
+
 	public override init() {
 		super.init()
 		Debug.log("WorkspaceDocument `\(self)` init.")
@@ -22,6 +27,11 @@ public class WorkspaceDocument: NSDocument {
 	}
 
 	///
+
+	public override func makeWindowControllers() {
+		super.makeWindowControllers()
+		addWindowController(workspaceWindowUIController)
+	}
 
 	public override class func autosavesInPlace() -> Bool {
 		return true
@@ -43,4 +53,11 @@ public class WorkspaceDocument: NSDocument {
 	public override func writeToURL(url: NSURL, ofType typeName: String) throws {
 		//	Nothing to do.
 	}
+
+
+
+
+
 }
+
+
