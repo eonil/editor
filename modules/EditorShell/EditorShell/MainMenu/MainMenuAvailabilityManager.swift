@@ -56,6 +56,7 @@ class MainMenuAvailabilityManager {
 		_applyWorkspaceUIStateChange()
 		ApplicationModel.Event.Notification.register			(self, MainMenuAvailabilityManager._process)
 		WorkspaceModel.Event.Notification.register			(self, MainMenuAvailabilityManager._process)
+		BuildModel.Event.Notification.register				(self, MainMenuAvailabilityManager._process)
 		DebuggingModel.Event.Notification.register			(self, MainMenuAvailabilityManager._process)
 		DebuggingTargetModel.Event.Notification.register		(self, MainMenuAvailabilityManager._process)
 		DebuggingTargetExecutionModel.Event.Notification.register	(self, MainMenuAvailabilityManager._process)
@@ -69,6 +70,7 @@ class MainMenuAvailabilityManager {
 		DebuggingTargetExecutionModel.Event.Notification.deregister	(self)
 		DebuggingTargetModel.Event.Notification.deregister		(self)
 		DebuggingModel.Event.Notification.deregister			(self)
+		BuildModel.Event.Notification.deregister			(self)
 		WorkspaceModel.Event.Notification.deregister			(self)
 		ApplicationModel.Event.Notification.deregister			(self)
 
@@ -84,6 +86,10 @@ class MainMenuAvailabilityManager {
 		_applyBuildStateChange()
 	}
 	private func _process(n: WorkspaceModel.Event.Notification) {
+		_applyFileStateChange()
+		_applyBuildStateChange()
+	}
+	private func _process(n: BuildModel.Event.Notification) {
 		_applyFileStateChange()
 		_applyBuildStateChange()
 	}
@@ -193,9 +199,9 @@ class MainMenuAvailabilityManager {
 	}
 
 	private func _updateProductMenuAvailability() {
-		mainMenuController!.productRun.enabled			=	model!.currentWorkspace != nil
-		mainMenuController!.productBuild.enabled		=	model!.currentWorkspace != nil
-		mainMenuController!.productClean.enabled		=	model!.currentWorkspace != nil
+		mainMenuController!.productRun.enabled			=	model!.currentWorkspace?.build.busy == Optional(false)
+		mainMenuController!.productBuild.enabled		=	model!.currentWorkspace?.build.busy == Optional(false)
+		mainMenuController!.productClean.enabled		=	model!.currentWorkspace?.build.busy == Optional(false)
 		mainMenuController!.productStop.enabled			=	(model!.currentWorkspace?.debug.currentTarget?.execution != nil)
 
 //		mainMenuController!.productBuild.enabled		=	model!.currentWorkspace?.build.runnableCommands.contains(.Build) ?? false

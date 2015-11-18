@@ -39,7 +39,7 @@ class MockPlatformFileSystem: PlatformFileSystemProtocol {
 	func contentOfFileAtURLAtomically(u: NSURL) throws -> NSData {
 		return	testDelegate.contentOfFileAtURLAtomically!(u)
 	}
-	func replaceContentOfFileAtURLAtomically(u: NSURL, data: NSData) throws {
+	func setContentOfFileAtURLAtomically(u: NSURL, data: NSData) throws {
 		testDelegate.setContentOfFileAtURLAtomically!(u, data: data)
 	}
 }

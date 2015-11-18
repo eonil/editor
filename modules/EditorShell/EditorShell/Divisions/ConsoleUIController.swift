@@ -75,9 +75,9 @@ class ConsoleUIController: CommonViewController {
 			return
 		}
 		switch n.event {
-		case .DidAppendLine:
-			let	line	=	n.sender.outputLines.last! + "\n"
-			let	s1	=	NSAttributedString(string: line, attributes: _textView.typingAttributes)
+		case .DidAppendString(let s):
+//			let	line	=	n.sender.outputLines.last! +
+			let	s1	=	NSAttributedString(string: s, attributes: _textView.typingAttributes)
 			_textView.textStorage!.appendAttributedString(s1)
 
 		case .DidClear:

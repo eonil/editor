@@ -112,6 +112,7 @@ extension MainMenuController {
 			}
 
 		case ~~productRun: do {
+			assert(model!.currentWorkspace!.build.busy == false)
 			guard let workspace = model!.currentWorkspace else {
 				fatalError()
 			}
@@ -135,14 +136,17 @@ extension MainMenuController {
 			}
 
 		case ~~productBuild: do {
+			assert(model!.currentWorkspace!.build.busy == false)
 			model!.currentWorkspace!.build.runBuild()
 			}
 
 		case ~~productClean: do {
+			assert(model!.currentWorkspace!.build.busy == false)
 			model!.currentWorkspace!.build.runClean()
 			}
 
 		case ~~productStop: do {
+			assert(model!.currentWorkspace!.build.busy == false)
 			model!.currentWorkspace!.debug.currentTarget!.halt()
 			model!.currentWorkspace!.build.stop()
 			}

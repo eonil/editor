@@ -27,10 +27,10 @@ public class ConsoleModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 	///
 
-	public private(set) var outputLines: [String] = []
+	public private(set) var log: String = ""
 
 	public func clear() {
-		outputLines	=	[]
+		log	=	""
 		Event.DidClear.dualcastAsNotificationWithSender(self)
 	}
 
@@ -68,17 +68,17 @@ public class ConsoleModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 			return
 		}
 		switch n.event {
-		case .DidChangeState: 			break
-		case .DidComplete: 			break
-		case .DidEmitOutputLogLine(let line):	_appendLine(line)
-		case .DidEmitErrorLogLine(let line):	_appendLine(line)
+		case .Subevent(_):	break
+		case .Reset:		break
+		case .Output(let s):	_appendString(s)
+		case .Error(let s):	_appendString(s)
 		}
 	}
 
 
-	private func _appendLine(line: String) {
-		outputLines.append(line)
-		Event.DidAppendLine.dualcastAsNotificationWithSender(self)
+	private func _appendString(s: String) {
+		log.appendContentsOf(s)
+		Event.DidAppendString(s).dualcastAsNotificationWithSender(self)
 	}
 }
 

@@ -112,8 +112,20 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	/// and can fail for any reason.
 	public func construct() throws {
 		assert(location != nil)
-		cargo.runNewAtURL(location!)
-		file.instantiateEmptyTree()
+		cargo.runNewAtURL(location!, asExecutable: true)
+		cargo.waitForCompletion()
+		file.tree	=	{
+			let	t	=	WorkspaceItemTree()
+			t.createRoot()
+			let	n	=	WorkspaceItemNode(name: "Cargo.toml", isGroup: false)
+			t.root!.subnodes.append(n)
+			let	n1	=	WorkspaceItemNode(name: "src", isGroup: true)
+			t.root!.subnodes.append(n1)
+			let	n2	=	WorkspaceItemNode(name: "lib.rs", isGroup: false)
+			n1.subnodes.append(n2)
+			return	t
+			}() as WorkspaceItemTree
+		file.tree!.root
 		file.storeSnapshot()
 		_relocate()
 	}

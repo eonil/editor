@@ -43,6 +43,7 @@ public struct CommonViewFactory {
 			NSForegroundColorAttributeName	:	NSColor.controlTextColor(),
 		]
 		v.textContainer!.widthTracksTextView	=	false
+		v.textContainer!.heightTracksTextView	=	false
 		v.textContainer!.containerSize		=	CGSize(width: CGFloat.max, height: CGFloat.max)
 		return	v
 	}

@@ -48,6 +48,8 @@
 		45692BE81B869955002ADB2A /* DebuggingValueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45692BE71B869955002ADB2A /* DebuggingValueModel.swift */; };
 		45692BF01B869C2A002ADB2A /* DebuggingTargetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45692BEF1B869C2A002ADB2A /* DebuggingTargetModel.swift */; };
 		457FC1561BDB79F400075F50 /* NotificationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457FC1551BDB79F400075F50 /* NotificationTest.swift */; };
+		458144FE1BFCACBC00222907 /* CargoTool3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458144FD1BFCACBC00222907 /* CargoTool3.swift */; };
+		4581450F1BFCC25E00222907 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4581450E1BFCC25E00222907 /* StateMachine.swift */; };
 		45B185241B7F7626004E3B28 /* BuildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B185231B7F7626004E3B28 /* BuildModel.swift */; };
 		45B1852D1B7F7ADC004E3B28 /* ModelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1852C1B7F7ADC004E3B28 /* ModelNode.swift */; };
 		45B1855C1B802458004E3B28 /* WorkspaceModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */; };
@@ -253,6 +255,8 @@
 		45692BE71B869955002ADB2A /* DebuggingValueModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingValueModel.swift; sourceTree = "<group>"; };
 		45692BEF1B869C2A002ADB2A /* DebuggingTargetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingTargetModel.swift; sourceTree = "<group>"; };
 		457FC1551BDB79F400075F50 /* NotificationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationTest.swift; sourceTree = "<group>"; };
+		458144FD1BFCACBC00222907 /* CargoTool3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoTool3.swift; sourceTree = "<group>"; };
+		4581450E1BFCC25E00222907 /* StateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 		45B185231B7F7626004E3B28 /* BuildModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildModel.swift; sourceTree = "<group>"; };
 		45B1852C1B7F7ADC004E3B28 /* ModelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelNode.swift; sourceTree = "<group>"; };
 		45B1855B1B802458004E3B28 /* WorkspaceModelExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModelExtensions.swift; sourceTree = "<group>"; };
@@ -362,6 +366,8 @@
 			children = (
 				450C0FBB1B7F69DD0048E7A1 /* CargoTool.swift */,
 				45FECE9C1BEF59AE00C9C3E0 /* CargoTool2.swift */,
+				4581450E1BFCC25E00222907 /* StateMachine.swift */,
+				458144FD1BFCACBC00222907 /* CargoTool3.swift */,
 				450C0FBD1B7F6AE50048E7A1 /* CommandLineTool.swift */,
 				45B185631B804833004E3B28 /* ShellTaskExecutionController.swift */,
 				45B185651B8048CA004E3B28 /* StringStreamProcessing.swift */,
@@ -792,6 +798,7 @@
 				45692BD61B86991E002ADB2A /* DebuggingFrameModel.swift in Sources */,
 				452B91CA1B8611FC00EAB775 /* DebuggingListener.swift in Sources */,
 				455EE20A1B7EDBF800D5AA56 /* ConsoleModel.swift in Sources */,
+				4581450F1BFCC25E00222907 /* StateMachine.swift in Sources */,
 				45B5EC281B91897E00C4247A /* DebuggingEventWaiter.swift in Sources */,
 				455978C71B86AE0300626F6B /* DebuggingTargetExecutionModel.swift in Sources */,
 				45FECE9D1BEF59AE00C9C3E0 /* CargoTool2.swift in Sources */,
@@ -823,6 +830,7 @@
 				45FF2EEF1BDCF46E001577B7 /* Globals.swift in Sources */,
 				45250B0F1BEA5943003A862A /* ModelNodeVersion.swift in Sources */,
 				4554C9BD1B7DC106004987CC /* ApplicationModel.swift in Sources */,
+				458144FE1BFCACBC00222907 /* CargoTool3.swift in Sources */,
 				45DDABD81B82395300F85E06 /* FoundationExtensions.swift in Sources */,
 				45BFAEF01BDF02B8006D2193 /* Notification.swift in Sources */,
 				45B5ECA71B91D2D900C4247A /* FileTreeModel.swift in Sources */,

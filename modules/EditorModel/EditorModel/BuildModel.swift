@@ -33,6 +33,11 @@ public class BuildModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 	public let event = EventMulticast<Event>()
 
+	public var busy: Bool {
+		get {
+			return	owner!.cargo.state != .Ready
+		}
+	}
 
 
 
@@ -137,18 +142,14 @@ public class BuildModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 			return
 		}
 		switch n.event {
-		case .DidChangeState:
+		case .Subevent(_):
 			_applyCargoState()
-
-		case .DidComplete:
+		case .Reset:
+			_applyCargoState()
+		case .Output(_):
 			break
-
-		case .DidEmitErrorLogLine:
+		case .Error(_):
 			break
-
-		case .DidEmitOutputLogLine:
-			break
-
 		}
 	}
 
@@ -163,30 +164,31 @@ public class BuildModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 	private let	_runnableCommands	=	MutableValueStorage<Set<BuildCommand>>([])
 
 	private func _applyCargoState() {
-		if let state = workspace.cargo.state {
-			switch state {
+		Event.WillChangeRunnableCommand.dualcastAsNotificationWithSender(self)
+		_runnableCommands.value		=	{
+			switch workspace.cargo.state {
 			case .Ready:
-				runnableCommands	=	[]
+				return	[.Build, .Clean]
 			case .Running:
-				runnableCommands	=	[.Stop]
+				return	[.Stop]
+			case .Cleaning:
+				return	[]
 			case .Done:
-				//	Can do nothing at this state.
-				//	Wait for resetting...
-				runnableCommands	=	[]
-				break
-
-			case .Error:
-				//	Can do nothing at this state.
-				//	Wait for resetting...
-				runnableCommands	=	[]
-				break
+				return	[]
 			}
-		}
-		else {
-			runnableCommands	=	[.Build, .Clean]
-		}
+		}()
+		Event.DidChangeRunnableCommand.dualcastAsNotificationWithSender(self)
 	}
 }
+
+
+
+
+
+
+
+
+
 
 
 

@@ -59,8 +59,10 @@ class CocoaPlatformFileSystem: PlatformFileSystemProtocol {
 		return	try NSData(contentsOfURL: u, options: [NSDataReadingOptions.DataReadingUncached])
 	}
 
-	func replaceContentOfFileAtURLAtomically(u: NSURL, data: NSData) throws {
-		data.writeToURL(u, atomically: true)
+	func setContentOfFileAtURLAtomically(u: NSURL, data: NSData) throws {
+		let	u1	=	u.URLByDeletingLastPathComponent!
+		try createDirectoryAtURL(u1, recursively: true)
+		try data.writeToURL(u, options: NSDataWritingOptions.DataWritingAtomic)
 	}
 
 }

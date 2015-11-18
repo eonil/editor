@@ -29,12 +29,14 @@ import EditorCommon
 /// replacing the shell process itself.
 ///
 /// Interface is intentionally designed to be similar with `NSTask`.
+/// This is just a thin wrapper around NSTask, and does not try to abstract 
+/// anything.
 ///
 public class ShellTaskExecutionController {
 	public init() {
 		_remoteTask.terminationHandler	=	{ [weak self] _ in
 			assert(self != nil)
-			self?._handleTermination()
+			self!.terminationHandler?()
 		}
 		_remoteTask.standardInput	=	_stdinPipe
 		_remoteTask.standardOutput	=	_stdoutPipe
@@ -111,9 +113,6 @@ public class ShellTaskExecutionController {
 	private let	_stdoutPipe	=	NSPipe()
 	private let	_stderrPipe	=	NSPipe()
 
-	private func _handleTermination() {
-		terminationHandler?()
-	}
 }
 
 

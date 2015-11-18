@@ -293,8 +293,12 @@ private final class _Agent: NSObject, NSWindowDelegate {
 
 	@objc
 	private func window(window: NSWindow, willEncodeRestorableState state: NSCoder) {
-		let	data	=	try! owner!.model!.location!.bookmarkDataWithOptions([], includingResourceValuesForKeys: nil, relativeToURL: nil)
+		let	url	=	owner!.model!.location!
+		let	code	=	url.absoluteString
+		let	data	=	code.dataUsingEncoding(NSUTF8StringEncoding)!
 		state.encodeBytes(unsafeBitCast(data.bytes, UnsafePointer<UInt8>.self), length: data.length, forKey: _WINDOW_STATE_KEY_V0_MODEL_LOCATION)
+//		let	data	=	try! owner!.model!.location!.bookmarkDataWithOptions([], includingResourceValuesForKeys: nil, relativeToURL: nil)
+//		state.encodeBytes(unsafeBitCast(data.bytes, UnsafePointer<UInt8>.self), length: data.length, forKey: _WINDOW_STATE_KEY_V0_MODEL_LOCATION)
 	}
 
 }
@@ -360,7 +364,9 @@ private class _RestorationManager: NSObject, NSWindowRestoration {
 		let	ptr	=	state.decodeBytesForKey(_WINDOW_STATE_KEY_V0_MODEL_LOCATION, returnedLength: &len)
 		let	data	=	NSData(bytes: ptr, length: len)
 		do {
-			let	url	=	try NSURL(byResolvingBookmarkData: data, options: [], relativeToURL: nil, bookmarkDataIsStale: nil)
+			let	code	=	NSString(data: data, encoding: NSUTF8StringEncoding)! as String
+			let	url	=	NSURL(string: code)!
+//			let	url	=	try NSURL(byResolvingBookmarkData: data, options: [], relativeToURL: nil, bookmarkDataIsStale: nil)
 			ApplicationUIController.theApplicationUIController!.model!.openWorkspaceAtURL(url)
 			for workspace in ApplicationUIController.theApplicationUIController!.model!.workspaces {
 				if workspace.location! == url {

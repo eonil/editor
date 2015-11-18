@@ -15,3 +15,15 @@ public func dispatchToMainQueueAsynchronously(function: ()->()) {
 public func dispatchToMainQueueSynchronously(function: ()->()) {
 	dispatch_sync(dispatch_get_main_queue(), function)
 }
+
+public func dispatchToNonMainQueueAsynchronously(code: ()->()) {
+	dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0)) {
+		if NSThread.isMainThread() {
+			// Try again until we get a non-main thread...
+			dispatchToNonMainQueueAsynchronously(code)
+		}
+		else {
+			code()
+		}
+	}
+}

@@ -114,15 +114,19 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		get {
 			return	_dataTree
 		}
+		set {
+			_dataTree	=	newValue
+			Event.DidChangeTreeTopology.dualcastAsNotificationWithSender(self)
+		}
 	}
 
 	///
 
-	public func instantiateEmptyTree() {
-		_dataTree	=	WorkspaceItemTree()
-		_dataTree!.createRoot()
-		_installModelRoot()
-	}
+//	public func instantiateEmptyTree() {
+//		_dataTree	=	WorkspaceItemTree()
+//		_dataTree!.createRoot()
+//		_installModelRoot()
+//	}
 	public func restoreSnapshot() throws {
 		let u	=	_snapshotFileURL()
 		try _restoreSnapshotFromURL(u)
@@ -332,7 +336,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		Debug.log("Storing snapshot `\(s)`...")
 		let	d	=	s.dataUsingEncoding(NSUTF8StringEncoding)!
 		do {
-			try Platform.thePlatform.fileSystem.replaceContentOfFileAtURLAtomically(u, data: d)
+			try Platform.thePlatform.fileSystem.setContentOfFileAtURLAtomically(u, data: d)
 		}
 		catch let error as NSError {
 			assert(false, "Could not write to file `\(u)`. An error `\(error)` occured.")
