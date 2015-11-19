@@ -274,19 +274,23 @@ private class _FileOutputWaitingExecutor {
 	private func _runReadingStandardOutputOnNonMainThread() {
 		Debug.assertNonMainThread()
 		while true {
-			if let b = readOneByteFromFileHandle(_shell.standardOutput) {
-				let	s	=	_stdoutUTF8Decoder.push(b)
-				guard s != "" else {
-					continue
+			var	s	=	""
+			let	r	=	_readBytes(_BUFFER_SIZE_IN_BYTES, fromFileHandle: _shell.standardOutput)
+			switch r {
+			case .Bytes(let bs):
+				for b in bs {
+					s.appendContentsOf(_stdoutUTF8Decoder.push(b))
 				}
 				dispatchToMainQueueAsynchronously { [weak self] in
 					assert(self!.onStandardOutput != nil, "Expects programmer to set this.")
 					self!.onStandardOutput?(s)
 				}
-			}
-			else {
+				continue
+
+			case .EOF:
 				break
 			}
+			break
 		}
 		dispatchToMainQueueAsynchronously { [weak self] in
 			self!._stdoutEOF.state	=	true
@@ -296,19 +300,23 @@ private class _FileOutputWaitingExecutor {
 	private func _runReadingStandardErrorOnNonMainThread() {
 		Debug.assertNonMainThread()
 		while true {
-			if let b = readOneByteFromFileHandle(_shell.standardError) {
-				let	s	=	_stdoutUTF8Decoder.push(b)
-				guard s != "" else {
-					continue
+			var	s	=	""
+			let	r	=	_readBytes(_BUFFER_SIZE_IN_BYTES, fromFileHandle: _shell.standardError)
+			switch r {
+			case .Bytes(let bs):
+				for b in bs {
+					s.appendContentsOf(_stderrUTF8Decoder.push(b))
 				}
 				dispatchToMainQueueAsynchronously { [weak self] in
 					assert(self!.onStandardError != nil, "Expects programmer to set this.")
 					self!.onStandardError?(s)
 				}
-			}
-			else {
+				continue
+
+			case .EOF:
 				break
 			}
+			break
 		}
 		dispatchToMainQueueAsynchronously { [weak self] in
 			self!._stderrEOF.state	=	true
@@ -334,8 +342,9 @@ private class _FileOutputWaitingExecutor {
 			else {
 				// Wait more...
 				dispatchToNonMainQueueAsynchronously { [weak self] in
-					sleep(1)
-					self!._onShellTerminationOnNonMainThread()
+					dispatchToSleepAndContinueInNonMainQueue(0.1) { [weak self] in
+						self!._onShellTerminationOnNonMainThread()
+					}
 				}
 			}
 		}
@@ -382,15 +391,21 @@ private enum _ReadingResult {
 	case Bytes([UInt8])
 }
 
-/// Returns `nil` on EOF.
-private func readOneByteFromFileHandle(fileHandle: NSFileHandle) -> UInt8? {
-	let	d	=	fileHandle.readDataOfLength(1)
-	if d.length == 1 {
-		let	p	=	unsafeBitCast(d.bytes, UnsafePointer<UInt8>.self)
-		print(p.memory)
-		return	p.memory
+private func _readBytes(count: Int, fromFileHandle: NSFileHandle) -> _ReadingResult {
+	let	d	=	fromFileHandle.readDataOfLength(count)
+	if d.length == 0 {
+		return	.EOF
 	}
-	return	nil
+
+	var	buffer	=	[UInt8]()
+	var	p	=	unsafeBitCast(d.bytes, UnsafePointer<UInt8>.self)
+
+	buffer.reserveCapacity(d.length)
+	for _ in 0..<d.length {
+		buffer.append(p.memory)
+		p++
+	}
+	return	.Bytes(buffer)
 }
 
 
@@ -399,6 +414,11 @@ private func readOneByteFromFileHandle(fileHandle: NSFileHandle) -> UInt8? {
 
 
 
+
+
+
+
+private let	_BUFFER_SIZE_IN_BYTES	=	1024
 
 
 

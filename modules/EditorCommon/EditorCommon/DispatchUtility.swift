@@ -27,3 +27,13 @@ public func dispatchToNonMainQueueAsynchronously(code: ()->()) {
 		}
 	}
 }
+
+public func dispatchToSleepAndContinueInMainQueue(duration: NSTimeInterval, code: ()->()) {
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(duration * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_main_queue(), code)
+}
+
+public func dispatchToSleepAndContinueInNonMainQueue(duration: NSTimeInterval, code: ()->()) {
+	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(duration * NSTimeInterval(NSEC_PER_SEC))), dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), code)
+}
+
+
