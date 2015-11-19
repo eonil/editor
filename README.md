@@ -16,7 +16,7 @@
 
 To Do
 -----
-- Rework on shell / cargo handling. (now sometimes it emits output after remote task finished)
+- Fix to make cargo to work without `cc` error.
 - Pretty display of stacks and variables in debugging UI.
 - Drag & drop support in project file tree pane.
 - Cargo output parsing and display. (via Unix pipe)
@@ -25,6 +25,7 @@ To Do
 
 Done
 ----
+- Rework on shell / cargo handling. (now sometimes it emits output after remote task finished)
 - Creating a new workspace.
 - Project file list saving.
 
