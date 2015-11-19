@@ -26,8 +26,12 @@ To Do
 Done
 ----
 - Rework on shell / cargo handling. (now sometimes it emits output after remote task finished)
+- Adding/deleting files in workspace.
+- Opening an existing workspace.
 - Creating a new workspace.
 - Project file list saving.
+- LLDB integration.
+- Project file list format design.
 
 
 There're many more, but I'll think about them later after I finish these jobs.
