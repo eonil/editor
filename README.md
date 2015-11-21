@@ -16,15 +16,15 @@
 
 To Do
 -----
-- Fix to make cargo to work without `cc` error.
-- Pretty display of stacks and variables in debugging UI.
-- Drag & drop support in project file tree pane.
 - Cargo output parsing and display. (via Unix pipe)
 - Racer output parsing and display. (via Unix pipe)
 - Racer autocompletion GUI support.
+- Pretty display of stacks and variables in debugging UI.
+- Drag & drop support in project file tree pane.
 
 Done
 ----
+- Fix to make cargo to work without `cc` error. (it was a configuration problem that was caused by Homebrew)
 - Rework on shell / cargo handling. (now sometimes it emits output after remote task finished)
 - Adding/deleting files in workspace.
 - Opening an existing workspace.

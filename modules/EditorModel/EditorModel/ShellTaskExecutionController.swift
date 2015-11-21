@@ -82,11 +82,19 @@ public class ShellTaskExecutionController {
 	
 	public func launch(workingDirectoryPath workingDirectoryPath: String) {
 		assert(try! NSURL(fileURLWithPath: workingDirectoryPath).isExistingAsDirectoryFile())
-		
+
+		// Take care not to override `DYLD_LIBRARY_PATH` to somewhere else!
+		// http://stackoverflow.com/questions/33844079/rust-1-4-0-or-later-cargo-rustc-crashes-when-run-in-an-appkit-app-using-nstask
+//		var	envs	=	NSProcessInfo.processInfo().environment;
+//		envs["DYLD_LIBRARY_PATH"]	=	nil
+//		print(NSProcessInfo.processInfo().environment["DYLD_LIBRARY_PATH"])
+
+		// My approach is just setting minimal environment variables that are
+		// required to `cargo` execution.
+		_remoteTask.environment			=	["HOME":NSHomeDirectory()]
 		_remoteTask.currentDirectoryPath	=	workingDirectoryPath
 		_remoteTask.launchPath			=	"/bin/bash"			//	TODO:	Need to use `sh` for regularity. But `sh` doesn't work for `cargo`, so temporarily fallback to `bash`.
 		_remoteTask.arguments			=	["--login", "-s"]
-		
 		_remoteTask.launch()
 	}
 	public func waitUntilExit() {

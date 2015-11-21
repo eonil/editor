@@ -135,6 +135,22 @@ In other words, UI (session) lives shorter than models.
 
 Issue History
 -------------
+
+- `error: linking with `cc` failed: exit code: 11`.
+
+  This happens because `cc` couldn't find proper dynamic 
+  library for `rustc`. I installed Rust 1.4.0 using 
+  `multirust` that was installed using `brew`. I think
+  there's some configuration issue, and this can be fixed
+  by adding custom library path to 
+  `DYLD_FALLBACK_LIBRARY_PATH`
+
+    DYLD_FALLBACK_LIBRARY_PATH="$HOME/Unix/homebrew/lib"
+
+
+
+
+
 - `NSOpen/SavePanel` often trigger QuickLook C++ exception.
   This is due to lack of App Sandbox configuration. Turning 
   on sandboxing and give some read-write access to user-

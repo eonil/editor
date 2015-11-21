@@ -82,13 +82,13 @@ class CargoTool3 {
 	func runNew(path path: String, newDirectoryName: String, asExecutable: Bool) {
 		//	File system is always asynchronous, and no one can have truly exclusive access.
 		//	Then we cannot make any assume on file system. Just try and take the result.
-		_runCargoWithParameters(path, command: "cargo new -v \(newDirectoryName) \(asExecutable ? "--bin" : "")")
+		_runCargoWithParameters(path, command: "cargo new --verbose \(newDirectoryName) \(asExecutable ? "--bin" : "")")
 	}
 	func runBuild(path path: String) {
-		_runCargoWithParameters(path, command: "cargo build -v")
+		_runCargoWithParameters(path, command: "cargo build --verbose")
 	}
 	func runClean(path path: String) {
-		_runCargoWithParameters(path, command: "cargo clean -v")
+		_runCargoWithParameters(path, command: "cargo clean --verbose")
 	}
 	func runDoc(path path: String) {
 		markUnimplemented()
@@ -137,7 +137,26 @@ class CargoTool3 {
 	private func _runCargoWithParameters(workingDirectoryPath: String, command: String) {
 		// Single command execution is an intentional design to get a proper exit code.
 		_executor.launch(workingDirectoryPath)
+//		_executor.execute("export PATH=$PATH:~/.multirust/toolchains/stable/bin")
+//		_executor.execute("export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/.multirust/toolchains/stable/lib")
+//		_executor.execute("export DYLD_FRAMEWORK_PATH=$DYLD_FRAMEWORK_PATH:~/.multirust/toolchains/stable/lib")
+//		_executor.execute("export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:~/.multirust/toolchains/stable/lib")
+//		_executor.execute("export DYLD_FALLBACK_LIBRARY_PATH=$DYLD_FALLBACK_LIBRARY_PATH:~/.multirust/toolchains/stable/lib")
+
+//		_executor.execute("export PATH=$PATH:~/.multirust/toolchains/1.2.0/bin")
+//		_executor.execute("export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:~/.multirust/toolchains/1.2.0/lib")
+//		_executor.execute("export PATH=$PATH:~/Unix/multirust/bin")
+//		_executor.execute("export DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:~/Unix/multirust/lib")
+//		_executor.execute("cd \(workingDirectoryPath)")
+//		_executor.execute("export DYLD_FALLBACK_LIBRARY_PATH=\"$HOME/Unix/homebrew/lib\"")
+//		_executor.execute("cc --version")
+//		_executor.execute("env")
+//		_executor.execute("rustc --version")
 		_executor.execute(command)
+//		let	cmd	=	"\"cc\" \"-m64\" \"-L\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib\" \"/Users/Eonil/Documents/Editor2Test/a4/target/debug/a4.0.o\" \"-o\" \"/Users/Eonil/Documents/Editor2Test/a4/target/debug/a4\" \"-Wl,-dead_strip\" \"-nodefaultlibs\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib/libstd-1bf6e69c.rlib\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib/libcollections-1bf6e69c.rlib\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib/librustc_unicode-1bf6e69c.rlib\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib/librand-1bf6e69c.rlib\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib/liballoc-1bf6e69c.rlib\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib/liballoc_jemalloc-1bf6e69c.rlib\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib/liblibc-1bf6e69c.rlib\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib/libcore-1bf6e69c.rlib\" \"-L\" \"/Users/Eonil/Documents/Editor2Test/a4/target/debug\" \"-L\" \"/Users/Eonil/Documents/Editor2Test/a4/target/debug/deps\" \"-L\" \"/Users/Eonil/.multirust/toolchains/stable/lib/rustlib/x86_64-apple-darwin/lib\" \"-L\" \"/Users/Eonil/Documents/Editor2Test/a4/.rust/lib/x86_64-apple-darwin\" \"-L\" \"/Users/Eonil/Documents/Editor2Test/a4/lib/x86_64-apple-darwin\" \"-l\" \"System\" \"-l\" \"pthread\" \"-l\" \"c\" \"-l\" \"m\" \"-l\" \"compiler-rt\""
+//		_executor.execute(cmd)
+//		let	cmd	=	"rustc src/main.rs --crate-name a4 --crate-type bin -g --out-dir /Users/Eonil/Documents/Editor2Test/a4/target/debug --emit=dep-info,link -L dependency=/Users/Eonil/Documents/Editor2Test/a4/target/debug -L dependency=/Users/Eonil/Documents/Editor2Test/a4/target/debug/deps"
+//		_executor.execute(cmd)
 		_executor.execute("exit $?")
 	}
 
@@ -207,6 +226,7 @@ private class _FileOutputWaitingExecutor {
 	}
 
 	func launch(workingDirectoryPath: String) {
+		Debug.assertMainThread()
 		precondition(_transition.state == .Ready)
 		_transition.state	=	.Running
 		_shell.terminationHandler	=	{ [weak self] in
@@ -227,6 +247,7 @@ private class _FileOutputWaitingExecutor {
 	/// `isDone == true` when this function returns.
 	/// `onDone` will be called right after this function returned.
 	func wait() {
+		Debug.assertMainThread()
 		dispatch_semaphore_wait(_waitSema, DISPATCH_TIME_FOREVER)
 		if _shouldBeStateDone.state {
 			if _transition.state == .Running {
@@ -236,16 +257,19 @@ private class _FileOutputWaitingExecutor {
 		}
 	}
 	func execute(command: String) {
+		Debug.assertMainThread()
 		precondition(_transition.state == .Running, "You can execute only on a running executor.")
 		_shell.standardInput.writeUTF8String(command)
 		_shell.standardInput.writeUTF8String("\n")
 	}
 	func terminate() {
+		Debug.assertMainThread()
 		precondition(_transition.state == .Running)
 		_transition.state	=	.Cleaning
 		_shell.terminate()
 	}
 	func kill() {
+		Debug.assertMainThread()
 		precondition(_transition.state == .Running)
 		_transition.state	=	.Cleaning
 		_shell.kill()

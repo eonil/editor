@@ -11,6 +11,23 @@ import MulticastingStorage
 import EditorCommon
 
 public class ConsoleModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
+
+
+	public enum Span {
+		case BuildOutput(String)
+		case BuildError(String)
+		case ExecutionOutput(String)
+		case ExecutionError(String)
+	}
+
+
+
+
+
+
+
+	///
+
 	public var workspace: WorkspaceModel {
 		get {
 			assert(owner != nil)
@@ -27,10 +44,10 @@ public class ConsoleModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 	///
 
-	public private(set) var log: String = ""
+	public private(set) var log: [Span] = []
 
 	public func clear() {
-		log	=	""
+		log	=	[]
 		Event.DidClear.dualcastAsNotificationWithSender(self)
 	}
 
@@ -70,15 +87,15 @@ public class ConsoleModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 		switch n.event {
 		case .Subevent(_):	break
 		case .Reset:		break
-		case .Output(let s):	_appendString(s)
-		case .Error(let s):	_appendString(s)
+		case .Output(let s):	_appendSpan(Span.BuildOutput(s))
+		case .Error(let s):	_appendSpan(Span.BuildError(s))
 		}
 	}
 
 
-	private func _appendString(s: String) {
-		log.appendContentsOf(s)
-		Event.DidAppendString(s).dualcastAsNotificationWithSender(self)
+	private func _appendSpan(s: Span) {
+		log.append(s)
+		Event.DidAppendSpan(s).dualcastAsNotificationWithSender(self)
 	}
 }
 

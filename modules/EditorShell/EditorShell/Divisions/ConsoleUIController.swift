@@ -75,10 +75,22 @@ class ConsoleUIController: CommonViewController {
 			return
 		}
 		switch n.event {
-		case .DidAppendString(let s):
-//			let	line	=	n.sender.outputLines.last! +
-			let	s1	=	NSAttributedString(string: s, attributes: _textView.typingAttributes)
-			_textView.textStorage!.appendAttributedString(s1)
+		case .DidAppendSpan(let span):
+			switch span {
+			case .BuildOutput(let s):
+				let	s1	=	NSAttributedString(string: s, attributes: _outputTextAttributes(_textView.typingAttributes))
+				_textView.textStorage!.appendAttributedString(s1)
+
+			case .BuildError(let s):
+				let	s1	=	NSAttributedString(string: s, attributes: _errorTextAttributes(_textView.typingAttributes))
+				_textView.textStorage!.appendAttributedString(s1)
+
+			case .ExecutionOutput(_):
+				markUnimplemented()
+
+			case .ExecutionError(_):
+				markUnimplemented()
+			}
 
 		case .DidClear:
 			_textView.textStorage!.deleteCharactersInRange(NSRange(location: 0, length: _textView.textStorage!.length))
@@ -90,9 +102,16 @@ class ConsoleUIController: CommonViewController {
 
 
 
-
-
-
+private func _outputTextAttributes(typingAttributes: [String: AnyObject]) -> [String : AnyObject] {
+	var	attrs	=	typingAttributes
+	attrs[NSForegroundColorAttributeName]	=	NSColor.controlTextColor()
+	return	attrs
+}
+private func _errorTextAttributes(typingAttributes: [String: AnyObject]) -> [String : AnyObject] {
+	var	attrs	=	typingAttributes
+	attrs[NSForegroundColorAttributeName]	=	NSColor.magentaColor()
+	return	attrs
+}
 
 
 

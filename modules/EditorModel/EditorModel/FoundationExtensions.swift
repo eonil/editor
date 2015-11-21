@@ -49,3 +49,17 @@ extension NSFileHandle {
 		return	s1 as String
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

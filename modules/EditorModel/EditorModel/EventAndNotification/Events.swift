@@ -128,7 +128,7 @@ public extension ConsoleModel {
 	public enum Event: BroadcastableEventType {
 		public typealias	Sender	=	ConsoleModel
 		case DidClear
-		case DidAppendString(String)
+		case DidAppendSpan(ConsoleModel.Span)
 	}
 }
 
