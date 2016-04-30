@@ -27,7 +27,7 @@ private extension MainMenuItemTypeID {
 final class MainMenuItemController: DriverAccessible {
 
     private let type: MainMenuItemTypeID
-    private let item: NSMenuItem
+    let item: NSMenuItem
     private let delegate = MenuItemDelegate()
 
     var subcontrollers: [MainMenuItemController] {

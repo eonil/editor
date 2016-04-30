@@ -14,6 +14,8 @@ import Foundation.NSURL
 /// .
 
 enum Action {
+    /// The first action to activate driver.
+    case Reset
     case Menu(MainMenuAction)
     case Shell(ShellAction)
     case Workspace(id: WorkspaceID, command: WorkspaceAction)

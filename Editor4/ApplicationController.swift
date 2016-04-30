@@ -12,7 +12,9 @@ import Cocoa
 class ApplicationController: NSObject, NSApplicationDelegate, DriverAccessible {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-//        dispatch(Action.Shell(ShellAction.Quit))
+        // This is required and very important action dispatch.
+        // Otherwise, driver will not be activated.
+        dispatch(Action.Reset)
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

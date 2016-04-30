@@ -14,6 +14,9 @@ enum StateApplicationRollback: ErrorType {
 extension State {
     mutating func apply(action: Action) throws {
         switch action {
+        case .Reset:
+            self = State()
+
         case .Menu(let action):
             apply(action)
 
