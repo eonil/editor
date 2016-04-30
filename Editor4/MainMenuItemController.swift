@@ -1,5 +1,5 @@
 //
-//  MenuItemController.swift
+//  MainMenuItemController.swift
 //  Editor3
 //
 //  Created by Hoon H. on 2016/04/18.
@@ -9,19 +9,35 @@
 import Foundation
 import AppKit
 
-final class MenuItemController: DriverAccessible {
+enum MainMenuItemTypeID {
+    case Separator
+    case Submenu(MainMenuSubmenuID)
+    case MenuItem(action: MainMenuAction)
+}
+private extension MainMenuItemTypeID {
+    private func getTitle() -> String? {
+        switch self {
+        case .Separator:            return nil
+        case .Submenu(let id):      return id.getLabel()
+        case .MenuItem(let action): return action.getLabel()
+        }
+    }
+}
 
-    let id: MainMenuItemID
-    let item: NSMenuItem
+final class MainMenuItemController: DriverAccessible {
+
+    private let type: MainMenuItemTypeID
+    private let item: NSMenuItem
     private let delegate = MenuItemDelegate()
 
-    var subcontrollers: [MenuItemController] {
+    var subcontrollers: [MainMenuItemController] {
         willSet {
             item.submenu?.removeAllItems()
             item.submenu = nil
         }
         didSet {
-            let m = NSMenu(title: id.getLabel())
+            assert(type.getTitle() != nil)
+            let m = NSMenu(title: type.getTitle() ?? "")
             m.autoenablesItems = false
             for s in subcontrollers {
                 m.addItem(s.item)
@@ -30,20 +46,26 @@ final class MenuItemController: DriverAccessible {
         }
     }
 
-    init(code: MainMenuItemID) {
-        self.id = code
-        switch code {
+    init(type: MainMenuItemTypeID) {
+        self.type = type
+        switch type {
         case .Separator:
             item = NSMenuItem.separatorItem()
             subcontrollers = []
 
-        default:
+        case .Submenu(let id):
             item = NSMenuItem()
             subcontrollers = []
             item.enabled = false
-            item.title = code.getLabel()
-            item.keyEquivalentModifierMask = Int(bitPattern: code.getKeyModifiersAndEquivalentPair().keyModifier.rawValue)
-            item.keyEquivalent = code.getKeyModifiersAndEquivalentPair().keyEquivalent
+            item.title = id.getLabel()
+
+        case .MenuItem(let action):
+            item = NSMenuItem()
+            subcontrollers = []
+            item.enabled = false
+            item.title = action.getLabel()
+            item.keyEquivalentModifierMask = Int(bitPattern: action.getKeyModifiersAndEquivalentPair().keyModifier.rawValue)
+            item.keyEquivalent = action.getKeyModifiersAndEquivalentPair().keyEquivalent
             item.target = delegate
             item.action = #selector(MenuItemDelegate.EDITOR_onClick(_:))
         }
@@ -57,7 +79,7 @@ final class MenuItemController: DriverAccessible {
         }
     }
 }
-//private extension MainMenuItemID {
+//private extension MainMenuAction {
 //    private func makeItemController() -> MenuItemController {
 //        return MenuItemController(code: self)
 //    }
@@ -68,14 +90,14 @@ final class MenuItemController: DriverAccessible {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 private final class MenuItemDelegate: NSObject, DriverAccessible {
-    var mainMenuItemID: MainMenuItemID?
+    var action: MainMenuAction?
     @objc
     private func EDITOR_onClick(_: AnyObject?) {
-        guard let mainMenuItemID = mainMenuItemID else {
+        guard let action = action else {
             reportErrorToDevelopers("A menu item clicked but has not bound ID.")
             return
         }
-        dispatch(Action.Menu(mainMenuItemID))
+        dispatch(Action.Menu(action))
     }
 }
 

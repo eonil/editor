@@ -14,8 +14,8 @@ enum StateApplicationRollback: ErrorType {
 extension State {
     mutating func apply(action: Action) throws {
         switch action {
-        case .Menu(let mainMenuItemID):
-            MARK_unimplemented()
+        case .Menu(let action):
+            apply(action)
 
         case .Shell(let action):
             applyOnShell((), action: action)
@@ -34,3 +34,43 @@ extension State {
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

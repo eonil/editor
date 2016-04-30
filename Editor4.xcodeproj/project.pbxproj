@@ -27,9 +27,10 @@
 		459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459DB8D51CD487DB00C892D9 /* CoreVideo.framework */; };
 		45C3B3851CD4F3030001D0AF /* MainMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3841CD4F3030001D0AF /* MainMenuController.swift */; };
 		45C3B38F1CD4F3330001D0AF /* MainMenuPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B38E1CD4F3330001D0AF /* MainMenuPalette.swift */; };
-		45C3B3931CD4F3490001D0AF /* MenuItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3921CD4F3490001D0AF /* MenuItemController.swift */; };
-		45C3B3951CD4F35D0001D0AF /* MainMenuID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3941CD4F35D0001D0AF /* MainMenuID.swift */; };
-		45C3B3971CD4F82D0001D0AF /* ApplyMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3961CD4F82D0001D0AF /* ApplyMenuAction.swift */; };
+		45C3B3931CD4F3490001D0AF /* MainMenuItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3921CD4F3490001D0AF /* MainMenuItemController.swift */; };
+		45C3B3951CD4F35D0001D0AF /* MainMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3941CD4F35D0001D0AF /* MainMenuAction.swift */; };
+		45C3B3971CD4F82D0001D0AF /* ApplyMainMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3961CD4F82D0001D0AF /* ApplyMainMenuAction.swift */; };
+		45C3B3991CD501200001D0AF /* MainMenuSubmenuID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3981CD501200001D0AF /* MainMenuSubmenuID.swift */; };
 		45CD93961CC809F100083CEC /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CD93951CC809F100083CEC /* WorkspaceDocument.swift */; };
 /* End PBXBuildFile section */
 
@@ -149,9 +150,10 @@
 		459DB8D51CD487DB00C892D9 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		45C3B3841CD4F3030001D0AF /* MainMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuController.swift; sourceTree = "<group>"; };
 		45C3B38E1CD4F3330001D0AF /* MainMenuPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuPalette.swift; sourceTree = "<group>"; };
-		45C3B3921CD4F3490001D0AF /* MenuItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemController.swift; sourceTree = "<group>"; };
-		45C3B3941CD4F35D0001D0AF /* MainMenuID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuID.swift; sourceTree = "<group>"; };
-		45C3B3961CD4F82D0001D0AF /* ApplyMenuAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyMenuAction.swift; sourceTree = "<group>"; };
+		45C3B3921CD4F3490001D0AF /* MainMenuItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuItemController.swift; sourceTree = "<group>"; };
+		45C3B3941CD4F35D0001D0AF /* MainMenuAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuAction.swift; sourceTree = "<group>"; };
+		45C3B3961CD4F82D0001D0AF /* ApplyMainMenuAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyMainMenuAction.swift; sourceTree = "<group>"; };
+		45C3B3981CD501200001D0AF /* MainMenuSubmenuID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuSubmenuID.swift; sourceTree = "<group>"; };
 		45CD93951CC809F100083CEC /* WorkspaceDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocument.swift; sourceTree = "<group>"; };
 		45CD93971CC80F3700083CEC /* NOTE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = NOTE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,10 +176,11 @@
 			isa = PBXGroup;
 			children = (
 				451137581CD48094001A183A /* Shell.swift */,
-				45C3B3941CD4F35D0001D0AF /* MainMenuID.swift */,
+				45C3B3941CD4F35D0001D0AF /* MainMenuAction.swift */,
+				45C3B3981CD501200001D0AF /* MainMenuSubmenuID.swift */,
 				45C3B3841CD4F3030001D0AF /* MainMenuController.swift */,
 				45C3B38E1CD4F3330001D0AF /* MainMenuPalette.swift */,
-				45C3B3921CD4F3490001D0AF /* MenuItemController.swift */,
+				45C3B3921CD4F3490001D0AF /* MainMenuItemController.swift */,
 				45CD93951CC809F100083CEC /* WorkspaceDocument.swift */,
 				454AD8951CC694E8008A9BAC /* WorkspaceWindowController.swift */,
 				454AD8991CC6981A008A9BAC /* FileNavigatorViewController.swift */,
@@ -244,7 +247,7 @@
 				454AD8931CC69420008A9BAC /* Driver.swift */,
 				454AD87A1CC65326008A9BAC /* State.swift */,
 				451137951CD482D4001A183A /* Apply.swift */,
-				45C3B3961CD4F82D0001D0AF /* ApplyMenuAction.swift */,
+				45C3B3961CD4F82D0001D0AF /* ApplyMainMenuAction.swift */,
 				4511375C1CD48123001A183A /* Action.swift */,
 				4511375A1CD480E5001A183A /* (UI) */,
 				4511375B1CD480EB001A183A /* (IO) */,
@@ -404,6 +407,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45C3B3991CD501200001D0AF /* MainMenuSubmenuID.swift in Sources */,
 				45CD93961CC809F100083CEC /* WorkspaceDocument.swift in Sources */,
 				451137961CD482D4001A183A /* Apply.swift in Sources */,
 				454AD86B1CC6530D008A9BAC /* Document.swift in Sources */,
@@ -415,11 +419,11 @@
 				451137591CD48094001A183A /* Shell.swift in Sources */,
 				453FF5821CD4F17300F6344B /* main.swift in Sources */,
 				454AD8961CC694E8008A9BAC /* WorkspaceWindowController.swift in Sources */,
-				45C3B3971CD4F82D0001D0AF /* ApplyMenuAction.swift in Sources */,
-				45C3B3931CD4F3490001D0AF /* MenuItemController.swift in Sources */,
+				45C3B3971CD4F82D0001D0AF /* ApplyMainMenuAction.swift in Sources */,
+				45C3B3931CD4F3490001D0AF /* MainMenuItemController.swift in Sources */,
 				45C3B3851CD4F3030001D0AF /* MainMenuController.swift in Sources */,
 				4511375D1CD48123001A183A /* Action.swift in Sources */,
-				45C3B3951CD4F35D0001D0AF /* MainMenuID.swift in Sources */,
+				45C3B3951CD4F35D0001D0AF /* MainMenuAction.swift in Sources */,
 				454AD89A1CC6981A008A9BAC /* FileNavigatorViewController.swift in Sources */,
 				451137921CD4822D001A183A /* Marks.swift in Sources */,
 			);

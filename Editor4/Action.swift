@@ -14,12 +14,12 @@ import Foundation.NSURL
 /// .
 
 enum Action {
-    case Menu(MainMenuItemID)
+    case Menu(MainMenuAction)
     case Shell(ShellAction)
     case Workspace(id: WorkspaceID, command: WorkspaceAction)
 }
 enum MenuAction {
-    case RunMainMenuItem(MainMenuItemID)
+    case RunMainMenuItem(MainMenuAction)
 }
 enum ShellAction {
     case Quit
