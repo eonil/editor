@@ -10,8 +10,9 @@ import Foundation
 import AppKit
 import EonilToolbox
 
-final class WorkspaceWindowController: NSWindowController {
+final class WorkspaceWindowController: NSWindowController, DriverAccessible {
 
+    var workspaceID: WorkspaceID?
     private var installer = ViewInstaller()
 
     /// Designated initializer.
@@ -26,22 +27,44 @@ final class WorkspaceWindowController: NSWindowController {
 //        workspaceViewController = newWorkspaceViewController
 //        contentViewController = newWorkspaceViewController
         shouldCloseDocument = true
+
+        NotificationUtility.register(self, NSWindowWillCloseNotification, self.dynamicType.process)
     }
     @available(*,unavailable)
     required init?(coder: NSCoder) {
         fatalError("IB/SB are unsupported.")
     }
+    deinit {
+        NotificationUtility.deregister(self)
+    }
+
+    ////////////////////////////////////////////////////////////////
+
     override var shouldCloseDocument: Bool {
         willSet {
             assert(newValue == true)
         }
     }
 
+    func process(n: NSNotification) {
+        switch n.name {
+        case NSWindowWillCloseNotification:
+            assert(workspaceID != nil)
+            guard let workspaceID = workspaceID else { return }
+            dispatch(Action.Workspace(id: workspaceID, command: WorkspaceAction.Close))
+
+        default:
+            break
+        }
+    }
     func render() {
         installer.installIfNeeded { 
 
         }
     }
+
+    ////////////////////////////////////////////////////////////////
+    
 }
 extension WorkspaceWindowController {
 }

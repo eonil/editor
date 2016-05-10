@@ -38,6 +38,7 @@
 		45D6C3431CE210180016DB7A /* RenderableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C3421CE210180016DB7A /* RenderableViewController.swift */; };
 		45D6C3451CE2139C0016DB7A /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C3441CE2139C0016DB7A /* Renderable.swift */; };
 		45D6C34B1CE222880016DB7A /* WorkspaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C34A1CE222880016DB7A /* WorkspaceManager.swift */; };
+		45D6C34F1CE238620016DB7A /* NotificationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C34E1CE238620016DB7A /* NotificationUtility.swift */; };
 		45E730461CD602C900BA7550 /* StateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E730451CD602C900BA7550 /* StateError.swift */; };
 		45E7304F1CD78D3F00BA7550 /* StateQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E7304E1CD78D3F00BA7550 /* StateQuery.swift */; };
 		45E730511CD78D8F00BA7550 /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E730501CD78D8F00BA7550 /* Values.swift */; };
@@ -173,6 +174,7 @@
 		45D6C3421CE210180016DB7A /* RenderableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderableViewController.swift; sourceTree = "<group>"; };
 		45D6C3441CE2139C0016DB7A /* Renderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		45D6C34A1CE222880016DB7A /* WorkspaceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceManager.swift; sourceTree = "<group>"; };
+		45D6C34E1CE238620016DB7A /* NotificationUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationUtility.swift; sourceTree = "<group>"; };
 		45E730451CD602C900BA7550 /* StateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateError.swift; sourceTree = "<group>"; };
 		45E7304E1CD78D3F00BA7550 /* StateQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateQuery.swift; sourceTree = "<group>"; };
 		45E730501CD78D8F00BA7550 /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Values.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				4589320D1CDFED0000F924F5 /* Version.swift */,
 				458932021CDFE76000F924F5 /* KeysetVersioningDictionary.swift */,
 				451137911CD4822D001A183A /* Marks.swift */,
+				45D6C34E1CE238620016DB7A /* NotificationUtility.swift */,
 				454AD86F1CC6530D008A9BAC /* Assets.xcassets */,
 				454AD8741CC6530D008A9BAC /* Info.plist */,
 			);
@@ -440,6 +443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45C3B3991CD501200001D0AF /* MainMenuSubmenuID.swift in Sources */,
+				45D6C34F1CE238620016DB7A /* NotificationUtility.swift in Sources */,
 				45CD93961CC809F100083CEC /* WorkspaceDocument.swift in Sources */,
 				451137961CD482D4001A183A /* Apply.swift in Sources */,
 				45C3B38F1CD4F3330001D0AF /* MainMenuPalette.swift in Sources */,

@@ -13,8 +13,8 @@ import AppKit
 final class WorkspaceManager: DriverAccessible {
 
     private var latestWorkspaceKeysetVersion: Version?
-    private var workspaceToDocumentMapping = [WorkspaceID: WorkspaceDocument]()
     private var workspaceToWindowControllerMapping = [WorkspaceID: WorkspaceWindowController]()
+    private var workspaceToDocumentMapping = [WorkspaceID: WorkspaceDocument]()
 
     ////////////////////////////////////////////////////////////////
     
@@ -29,11 +29,10 @@ final class WorkspaceManager: DriverAccessible {
 
     private func render() {
         guard state.workspaces.version != latestWorkspaceKeysetVersion else { return }
-        let (insertions, removings) = diff(Set(state.workspaces.keys), from: Set(workspaceToDocumentMapping.keys))
+        let (insertions, removings) = diff(Set(state.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))
         insertions.forEach(openEmptyWorkspace)
         removings.forEach(closeWorkspace)
-        assert(Set(state.workspaces.keys) == Set(workspaceToDocumentMapping.keys))
-
+        assert(Set(state.workspaces.keys) == Set(workspaceToWindowControllerMapping.keys))
     }
 
     private func renderWorkspace(id: WorkspaceID, action: WorkspaceAction) {
@@ -64,6 +63,7 @@ final class WorkspaceManager: DriverAccessible {
 
     private func openEmptyWorkspace(id: WorkspaceID) {
         let wc = WorkspaceWindowController()
+        wc.workspaceID = id
         wc.showWindow(self)
         workspaceToWindowControllerMapping[id] = wc
     }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EonilToolbox
 
 // If copying cost becomes too big, consider using of COW objects.
 
@@ -17,12 +18,12 @@ struct State {
 }
 struct WorkspaceID: Hashable {
     var hashValue: Int {
-        get { return ObjectIdentifier(dummy).hashValue }
+        get { return oid.hashValue }
     }
-    private let dummy = NonObjectiveCBase()
+    private let oid = ObjectID()
 }
 func == (a: WorkspaceID, b: WorkspaceID) -> Bool {
-    return a.dummy === b.dummy
+    return a.oid == b.oid
 }
 struct WorkspaceState: VersionedStateType {
     var location: NSURL?
@@ -51,12 +52,12 @@ struct FileNavigatorState: VersionedStateType {
 }
 struct FileNodeID: Hashable {
     var hashValue: Int {
-        get { return ObjectIdentifier(dummy).hashValue }
+        get { return oid.hashValue }
     }
-    private let dummy = NonObjectiveCBase()
+    private let oid = ObjectID()
 }
 func == (a: FileNodeID, b: FileNodeID) -> Bool {
-    return a.dummy === b.dummy
+    return a.oid == b.oid
 }
 struct FileNodeState {
     private(set) var name: String

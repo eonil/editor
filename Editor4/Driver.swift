@@ -59,7 +59,9 @@ private final class Driver {
     init() {
         do {
             try DisplayLinkUtility.installMainScreenHandler(ObjectIdentifier(self)) { [weak self] in
-                self?.run()
+                dispatch_async(dispatch_get_main_queue()) { [weak self] in
+                    self?.run()
+                }
             }
         }
         catch let error {
@@ -71,27 +73,31 @@ private final class Driver {
     }
 
     func dispatch(action: Action) -> Task<()> {
+        assertMainThread()
         let schedule = Schedule(action: action, completion: TaskCompletionSource())
         schedules.append(schedule)
         return schedule.completion.task
     }
     func run() {
+        assertMainThread()
         while let s = schedules.tryRemoveFirst() {
-            step(s.action)
-            s.completion.trySetResult(())
+            step(s)
         }
     }
-    func step(action: Action) {
-        context = action
+    func step(schedule: Schedule) {
+        assertMainThread()
+        context = schedule.action
         do {
-            try state.apply(action)
+            try state.apply(schedule.action)
             shell.render()
+            schedule.completion.trySetResult(())
         }
         catch let error {
-            fatalError("\(error)") // No way to recover in this case...
+            schedule.completion.trySetError(error)
+//            fatalError("\(error)") // No way to recover in this case...
         }
         context = nil
-        debugPrint("Applied action: \(action)")
+        debugPrint("Applied action: \(schedule.action)")
     }
 }
 

@@ -68,6 +68,7 @@ final class MainMenuItemController: DriverAccessible {
             item.keyEquivalent = action.getKeyModifiersAndEquivalentPair().keyEquivalent
             item.target = delegate
             item.action = #selector(MenuItemDelegate.EDITOR_onClick(_:))
+            delegate.action = action
         }
     }
     var enabled: Bool {
@@ -94,7 +95,7 @@ private final class MenuItemDelegate: NSObject, DriverAccessible {
     @objc
     private func EDITOR_onClick(_: AnyObject?) {
         guard let action = action else {
-            reportErrorToDevelopers("A menu item clicked but has not bound ID.")
+            reportErrorToDevelopers("A menu item has been clicked but it has no bounded ID.")
             return
         }
         dispatch(Action.Menu(action))

@@ -95,13 +95,15 @@ extension Shell {
     /// So, it's limited to be used in main thread only.
     ///
     private static func broadcast() {
-        assert(NSThread.isMainThread())
+        assertMainThread()
         for (_, cast) in allObservers { cast() }
     }
     static func register<T: AnyObject where T: Renderable>(observer: T) {
+        assertMainThread()
         register(observer, observer.dynamicType.render)
     }
     static func register<T: AnyObject>(observer: T, _ handler: T -> () -> ()) {
+        assertMainThread()
         allObservers[ObjectIdentifier(observer)] = { [weak observer] in
             guard let observer = observer else {
                 reportErrorToDevelopers("An observer has been dead without deregistering it from shell broadcasting.")
@@ -111,6 +113,7 @@ extension Shell {
         }
     }
     static func deregister<T: AnyObject>(observer: T) {
+        assertMainThread()
         allObservers[ObjectIdentifier(observer)] = nil
     }
 

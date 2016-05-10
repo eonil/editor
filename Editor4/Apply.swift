@@ -37,10 +37,22 @@ extension State {
     /// Shell is currently single, so it doesn't have an actual ID,
     /// but an ID is required to be passed to shape interface consistent.
     private mutating func applyOnShell(id: (), action: ShellAction) {
-
+        MARK_unimplemented()
     }
     private mutating func applyOnWorkspace(id: WorkspaceID, action: WorkspaceAction) {
+        switch action {
+        case .Open:
+            workspaces[id] = WorkspaceState()
 
+        case .Reconfigure(let location):
+            workspaces[id]?.location = location
+
+        case .Close:
+            workspaces[id] = nil
+            
+        default:
+            MARK_unimplemented()
+        }
     }
 }
 
