@@ -59,10 +59,10 @@ struct MainMenuPalette {
         file.subcontrollers = ([
             fileNew,
             fileOpen,
-            MainMenuItemController(type: .Separator),
+            separator(),
             fileCloseFile,
             fileCloseWorkspace,
-            MainMenuItemController(type: .Separator),
+            separator(),
             fileDelete,
             fileShowInFinder,
             fileShowInTerminal,
@@ -81,14 +81,14 @@ struct MainMenuPalette {
             viewEditor,
             viewNavigators,
             viewConsole,
-            MainMenuItemController(type: .Separator),
+            separator(),
             viewFullScreen,
             ])
         viewNavigators.subcontrollers = ([
             viewShowProjectNavigator,
             viewShowIssueNavigator,
             viewShowDebugNavigator,
-            MainMenuItemController(type: .Separator),
+            separator(),
             viewHideNavigator,
             ])
 
@@ -100,7 +100,7 @@ struct MainMenuPalette {
             productRun,
             productBuild,
             productClean,
-            MainMenuItemController(type: .Separator),
+            separator(),
             productStop,
             ])
 
@@ -108,11 +108,11 @@ struct MainMenuPalette {
             debugPause,
             debugResume,
             debugHalt,
-            MainMenuItemController(type: .Separator),
+            separator(),
             debugStepInto,
             debugStepOut,
             debugStepOver,
-            MainMenuItemController(type: .Separator),
+            separator(),
             debugClearConsole,
             ])
     }
@@ -129,7 +129,7 @@ struct MainMenuPalette {
 // MARK: -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-private func seprator() -> MainMenuItemController {
+private func separator() -> MainMenuItemController {
     return MainMenuItemController(type: .Separator)
 }
 private func submenuContainerWithTitle(id: MainMenuSubmenuID) -> MainMenuItemController {

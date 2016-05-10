@@ -13,9 +13,15 @@ import EonilToolbox
 protocol DriverAccessible {
 }
 extension DriverAccessible {
-    var context: Action? {
+    /// Currently processing action.
+    /// Can be `nil` if you access this property out of
+    /// action processing.
+    var action: Action? {
         get { return Driver.theDriver.context }
     }
+    /// Current app state.
+    /// Driver guarantees no change in state while 
+    /// processing an action.
     var state: State {
         get { return Driver.theDriver.state }
     }
@@ -48,7 +54,7 @@ private final class Driver {
     private var schedules = [Schedule]()
     private var context: Action?
     private var state = State()
-    private var shell = Shell()
+    private let shell = Shell()
 
     init() {
         do {

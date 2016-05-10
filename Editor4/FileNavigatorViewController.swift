@@ -12,7 +12,7 @@ import AppKit
 final class FileNavigatorViewController: NSViewController, DriverAccessible {
         private var proxyMapping = [FileNodeID: FileNodeUIProxy]()
         private func render() {
-                guard let keyWorkspaceID = state.keyWorkspaceID else { return }
+                guard let keyWorkspaceID = state.currentWorkspaceID else { return }
                 guard let workspaceState = state.workspaces[keyWorkspaceID] else { return }
                 proxyMapping.syncFrom(workspaceState.fileNavigator.nodes) { k, v in
                         let p = FileNodeUIProxy(k)

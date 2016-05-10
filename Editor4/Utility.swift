@@ -12,10 +12,15 @@ func assertMainThread() {
     assert(NSThread.isMainThread())
 }
 func reportErrorToDevelopers(error: ErrorType) {
-
+    fatalError("\(error)")
 }
 func reportErrorToDevelopers(error: String) {
-
+    fatalError(error)
+}
+func checkAndReport(condition: Bool, _ message: String) {
+    if condition == false {
+        reportErrorToDevelopers("Check failed: \(message)")
+    }
 }
 
 extension Array {
@@ -24,18 +29,48 @@ extension Array {
         return removeFirst()
     }
 }
+
 extension Dictionary {
-        mutating func syncFrom<U>(anotherDictionary: Dictionary<Key,U>, instantiate: (Key,U)->Value) {
-                let (insertions, removings) = diff(Set(keys), from: Set(anotherDictionary.keys)) // TODO: Optimise this.
-                for k in removings {
-                        self[k] = nil
-                }
-                for k in insertions {
-                        let u = anotherDictionary[k]!
-                        self[k] = instantiate(k,u)
-                }
-                assert(Set(keys) == Set(anotherDictionary.keys))
+    mutating func syncFrom<U>(anotherDictionary: Dictionary<Key,U>, instantiate: (Key,U)->Value) {
+        let (insertions, removings) = diff(Set(keys), from: Set(anotherDictionary.keys)) // TODO: Optimise this.
+        for k in removings {
+            self[k] = nil
         }
+        for k in insertions {
+            let u = anotherDictionary[k]!
+            self[k] = instantiate(k,u)
+        }
+        assert(Set(keys) == Set(anotherDictionary.keys))
+    }
+    func findAny(predicate: ((key: Key, value: Value)) -> Bool) -> (key: Key, value: Value)? {
+        for (k,v) in self {
+            if predicate((k,v)) {
+                return (k,v)
+            }
+        }
+        return nil
+    }
+}
+extension KeysetVersioningDictionary {
+    mutating func syncFrom<U>(anotherDictionary: Dictionary<Key,U>, instantiate: (Key,U)->Value) {
+        let (insertions, removings) = diff(Set(keys), from: Set(anotherDictionary.keys)) // TODO: Optimise this.
+        for k in removings {
+            self[k] = nil
+        }
+        for k in insertions {
+            let u = anotherDictionary[k]!
+            self[k] = instantiate(k,u)
+        }
+        assert(Set(keys) == Set(anotherDictionary.keys))
+    }
+    func findAny(predicate: ((key: Key, value: Value)) -> Bool) -> (key: Key, value: Value)? {
+        for (k,v) in self {
+            if predicate((k,v)) {
+                return (k,v)
+            }
+        }
+        return nil
+    }
 }
 func diff<T: Hashable>(a: Set<T>, from b: Set<T>) -> (insertions: Set<T>, removings: Set<T>) {
         let insertions = a.subtract(b)
@@ -52,18 +87,3 @@ func diff<T: Hashable>(a: Set<T>, from b: Set<T>) -> (insertions: Set<T>, removi
 //        associatedtype KeySet: Hashable
 //        var keys: key
 //}
-
-/// Instantiation produces different version value.
-/// Copy produces equal version value.
-struct Version: Hashable {
-        var hashValue: Int {
-                get { return ObjectIdentifier(dummy).hashValue }
-        }
-        private var dummy = NonObjectiveCBase()
-}
-func == (a: Version, b: Version) -> Bool {
-        return a.dummy === b.dummy
-}
-protocol VersionedStateType {
-        var version: Version { get }
-}

@@ -9,7 +9,7 @@
 import Foundation
 import AppKit
 
-final class MainMenuController {
+final class MainMenuController: DriverAccessible {
 
     private let palette = MainMenuPalette()
 
@@ -30,6 +30,12 @@ final class MainMenuController {
         NSApplication.sharedApplication().mainMenu = mainMenu
     }
     func render() {
+        palette.file.enabled = true
+        palette.fileNew.enabled = true
+        palette.fileNewWorkspace.enabled = true
+        palette.fileOpen.enabled = true
+        palette.fileOpenWorkspace.enabled = true
+        palette.fileOpenClearWorkspaceHistory.enabled = true
     }
 }
 

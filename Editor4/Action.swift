@@ -16,9 +16,13 @@ import Foundation.NSURL
 enum Action {
     /// The first action to activate driver.
     case Reset
+    case Test(TestAction)
     case Menu(MainMenuAction)
     case Shell(ShellAction)
     case Workspace(id: WorkspaceID, command: WorkspaceAction)
+}
+enum TestAction {
+    case Test1
 }
 enum MenuAction {
     case RunMainMenuItem(MainMenuAction)
@@ -27,12 +31,21 @@ enum ShellAction {
     case Quit
     case RunCreatingWorkspaceDialogue
     case RunOpeningWorkspaceDialogue
-    case NewWorkspace(NSURL)
-    case OpenWorkspace(NSURL)
+//    case NewWorkspace(NSURL)
+//    case OpenWorkspace(NSURL)
 }
+/// Actions about a workspace.
+///
+/// - Note:
+///     "Creating a new workspace" is composed by three stages:
+///     1. Backend(Cargo) prepares the workspace in file-system.
+///     2. Opens an empty workspace.
+///     3. Relocate the workspace to the URL.
 enum WorkspaceAction {
-    case Close(WorkspaceID)
-    case MakeKey(WorkspaceID)
+    case Open
+    case Close
+    case Reconfigure(location: NSURL?)
+    case BecomeKey
     case File(FileAction)
     case Editor(EditorAction)
     //        case FileNode(path: WorkspaceItemPath, FileNodeAction)

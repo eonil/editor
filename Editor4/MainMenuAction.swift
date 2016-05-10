@@ -9,6 +9,8 @@
 import Foundation
 import AppKit
 
+/// Main menu action means literally what will be done when a main menu
+/// item hs been clicked.
 enum MainMenuAction {
 //        case File
 //        case FileNew

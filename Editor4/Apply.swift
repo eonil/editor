@@ -6,10 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-/// If the update result is equal4
-enum StateApplicationRollback: ErrorType {
-    case Cancel
-}
 
 extension State {
     mutating func apply(action: Action) throws {
@@ -17,14 +13,24 @@ extension State {
         case .Reset:
             self = State()
 
-        case .Menu(let action):
+        case .Test(let action):
             apply(action)
+
+        case .Menu(let action):
+            try apply(action)
 
         case .Shell(let action):
             applyOnShell((), action: action)
 
         case .Workspace(let id, let action):
             applyOnWorkspace(id , action: action)
+        }
+    }
+
+    private mutating func apply(action: TestAction) {
+        switch action {
+        case .Test1:
+            print("Test1")
         }
     }
 

@@ -14,11 +14,12 @@ object-oriented framework, and we need to optimise performance. But anyway, I do
 That is *immutable state stream*. Program state is completely represented in immutable state stream. 
 
 Rendering part can be a bit awkward. Because AppKit animation doesn't fit very well to FRP paradigm. 
-Sometimes AppKit views maintains their own states, and such internal state makes writing rendering part 
-completely in FRP manner. I had to deal with this, and compromised with reality. Which means "eventual
-rendeing". Regardless of how state is configured, view works independently from the state, and can be out-
-synced from state. Anyway view will try to be in-sync as quickly as possible.
+Sometimes AppKit views maintain their own states, and such internal states make impossible to write 
+rendering part fully in FRP manner. I had to deal with this, and compromised with reality. Which means 
+"eventual rendeing". Regardless of how state is configured, view works independently from the state, and 
+can be out-synced from state. Anyway view will try to be in-sync as quickly as possible.
 
+An example of FRMVC is [Elm](https://github.com/evancz/elm-architecture-tutorial).
 Another example of FRMVC is [Redux](https://www.google.com/search?client=safari&rls=en&q=redux&ie=UTF-8&oe=UTF-8).
 If you're familiar with concepts in Redux, you'll find similar stuffs in this program too.
 

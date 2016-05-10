@@ -9,10 +9,23 @@
 import Foundation
 
 extension State {
-    mutating func apply(action: MainMenuAction) {
+    mutating func apply(action: MainMenuAction) throws {
         switch action {
         case .FileNewFile:
             MARK_unimplemented()
+
+        case .FileNewWorkspace:
+            let id = WorkspaceID()
+            workspaces[id] = WorkspaceState()
+            currentWorkspaceID = id
+
+        case .FileOpenWorkspace:
+            MARK_unimplemented()
+
+        case .FileCloseWorkspace:
+            guard let id = currentWorkspaceID else { throw StateError.RollbackByMissingPrerequisites }
+            guard workspaces[id] != nil else { throw StateError.RollbackByMissingPrerequisites }
+            workspaces[id] = nil
 
         default:
             MARK_unimplemented()
