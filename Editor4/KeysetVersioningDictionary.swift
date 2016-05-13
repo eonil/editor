@@ -93,6 +93,32 @@ public extension KeysetVersioningDictionary {
     }
 }
 
+//public extension KeysetVersioningDictionary {
+//    public mutating func updateValue(value: Value, forKey key: Key) -> Value?
+//    /// Remove the key-value pair at `index`.
+//    ///
+//    /// Invalidates all indices with respect to `self`.
+//    ///
+//    /// - Complexity: O(`self.count`).
+//    public mutating func removeAtIndex(index: DictionaryIndex<Key, Value>) -> (Key, Value)
+//    /// Remove a given key and the associated value from the dictionary.
+//    /// Returns the value that was removed, or `nil` if the key was not present
+//    /// in the dictionary.
+//    public mutating func removeValueForKey(key: Key) -> Value?
+//    /// Removes all elements.
+//    ///
+//    /// - Postcondition: `capacity == 0` if `keepCapacity` is `false`, otherwise
+//    ///   the capacity will not be decreased.
+//    ///
+//    /// Invalidates all indices with respect to `self`.
+//    ///
+//    /// - parameter keepCapacity: If `true`, the operation preserves the
+//    ///   storage capacity that the collection has, otherwise the underlying
+//    ///   storage is released.  The default is `false`.
+//    ///
+//    /// Complexity: O(`self.count`).
+//    public mutating func removeAll(keepCapacity keepCapacity: Bool = default)
+//}
 
 
 

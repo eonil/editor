@@ -13,3 +13,11 @@ public protocol VersionType: Equatable {
     /// Creates a new version that is globally unique in current process scope.
     init()
 }
+public protocol RevisableVersionType: VersionType {
+    mutating func revise()
+    func revised() -> Self
+}
+
+public protocol VersioningStateType {
+    var version: Version { get }
+}

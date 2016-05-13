@@ -10,9 +10,13 @@ import Foundation
 import AppKit
 import EonilToolbox
 
-final class WorkspaceWindowController: NSWindowController, DriverAccessible {
+final class WorkspaceWindowController: RenderableWindowController, DriverAccessible {
 
     var workspaceID: WorkspaceID?
+    private let containerViewController = NSViewController()
+    private let columnSplitViewController = NSSplitViewController()
+    private let fileViewController = FileNavigatorViewController()
+    private let rowSplitViewController = NSSplitViewController()
     private var installer = ViewInstaller()
 
     /// Designated initializer.
@@ -26,13 +30,12 @@ final class WorkspaceWindowController: NSWindowController, DriverAccessible {
 //        let newWorkspaceViewController = WorkspaceViewController()
 //        workspaceViewController = newWorkspaceViewController
 //        contentViewController = newWorkspaceViewController
-        shouldCloseDocument = true
+        shouldCloseDocument = false
 
         NotificationUtility.register(self, NSWindowWillCloseNotification, self.dynamicType.process)
     }
-    @available(*,unavailable)
     required init?(coder: NSCoder) {
-        fatalError("IB/SB are unsupported.")
+        fatalError("init(coder:) has not been implemented")
     }
     deinit {
         NotificationUtility.deregister(self)
@@ -42,24 +45,28 @@ final class WorkspaceWindowController: NSWindowController, DriverAccessible {
 
     override var shouldCloseDocument: Bool {
         willSet {
-            assert(newValue == true)
+            assert(newValue == false)
         }
     }
 
-    func process(n: NSNotification) {
+    private func process(n: NSNotification) {
         switch n.name {
         case NSWindowWillCloseNotification:
             assert(workspaceID != nil)
             guard let workspaceID = workspaceID else { return }
-            dispatch(Action.Workspace(id: workspaceID, command: WorkspaceAction.Close))
+            dispatch(Action.Workspace(id: workspaceID, action: WorkspaceAction.Close))
 
         default:
             break
         }
     }
-    func render() {
+    override func render() {
         installer.installIfNeeded { 
-
+            contentViewController = columnSplitViewController
+            columnSplitViewController.splitViewItems = [
+                NSSplitViewItem(contentListWithViewController: fileViewController),
+                NSSplitViewItem(viewController: rowSplitViewController),
+            ]
         }
     }
 

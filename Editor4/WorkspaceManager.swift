@@ -18,21 +18,25 @@ final class WorkspaceManager: DriverAccessible {
 
     ////////////////////////////////////////////////////////////////
     
-    init() {
-        Shell.register(self, self.dynamicType.render)
-    }
-    deinit {
-        Shell.deregister(self)
-    }
+//    init() {
+//        Shell.register(self, self.dynamicType.render)
+//    }
+//    deinit {
+//        Shell.deregister(self)
+//    }
 
     ////////////////////////////////////////////////////////////////
 
-    private func render() {
+    func render() {
         guard state.workspaces.version != latestWorkspaceKeysetVersion else { return }
         let (insertions, removings) = diff(Set(state.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))
         insertions.forEach(openEmptyWorkspace)
         removings.forEach(closeWorkspace)
         assert(Set(state.workspaces.keys) == Set(workspaceToWindowControllerMapping.keys))
+
+        for (_, wc) in workspaceToWindowControllerMapping {
+            wc.renderRecursively()
+        }
     }
 
     private func renderWorkspace(id: WorkspaceID, action: WorkspaceAction) {

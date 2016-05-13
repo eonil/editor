@@ -20,12 +20,12 @@ struct WorkspaceID: Hashable {
     var hashValue: Int {
         get { return oid.hashValue }
     }
-    private let oid = ObjectID()
+    private let oid = ObjectAddressID()
 }
 func == (a: WorkspaceID, b: WorkspaceID) -> Bool {
     return a.oid == b.oid
 }
-struct WorkspaceState: VersionedStateType {
+struct WorkspaceState: VersioningStateType {
     var location: NSURL?
     var version = Version()
     var fileNavigator = FileNavigatorState()
@@ -42,29 +42,9 @@ enum WorkspacePaneState {
     case Open
     case Closed
 }
-struct WorkspaceItemPath {
-}
-struct FileNavigatorState: VersionedStateType {
-    private(set) var version = Version()
-    private(set) var root: FileNodeID? = nil
-    private(set) var nodes = [FileNodeID: FileNodeState]()
-    private(set) var selection = [FileNodeID]()
-}
-struct FileNodeID: Hashable {
-    var hashValue: Int {
-        get { return oid.hashValue }
-    }
-    private let oid = ObjectID()
-}
-func == (a: FileNodeID, b: FileNodeID) -> Bool {
-    return a.oid == b.oid
-}
-struct FileNodeState {
-    private(set) var name: String
-    private(set) var comment: String?
-    private(set) var isGroup: Bool
-    private(set) var subnodes = [FileNodeID]()
-}
+//struct WorkspaceItemPath {
+//}
+
 struct TextEditorState {
     private(set) var lines = [String]()
 }

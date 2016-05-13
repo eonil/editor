@@ -16,7 +16,7 @@ That is *immutable state stream*. Program state is completely represented in imm
 Rendering part can be a bit awkward. Because AppKit animation doesn't fit very well to FRP paradigm. 
 Sometimes AppKit views maintain their own states, and such internal states make impossible to write 
 rendering part fully in FRP manner. I had to deal with this, and compromised with reality. Which means 
-"eventual rendeing". Regardless of how state is configured, view works independently from the state, and 
+"eventual rendering". Regardless of how state is configured, view works independently from the state, and 
 can be out-synced from state. Anyway view will try to be in-sync as quickly as possible.
 
 An example of FRMVC is [Elm](https://github.com/evancz/elm-architecture-tutorial).

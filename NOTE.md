@@ -22,20 +22,17 @@ Try optimizing them to do less copying.
 
 
 
+Keep Number of View-Controllers as Small as Possible
+----------------------------------------------------
+`ViewController`s are unit of navigation, and in this app, they are also
+responsible to receive rendering heartbeat. `Shell` iterates all nested 
+`ViewController`s for each time of rendering. As rendering haertbeat can
+be fired up to 60 times in a second, it's pretty important to keep it 
+as small as possible.
 
-Use Smaller Number of Renderable Components
--------------------------------------------
-For view rendering, it's quiet important keeping number of renderable 
-components as small as possible. Because rendering heartbeat will be 
-broadcasted to **all** of interested components. Actions can be fired up 
-to 60 times per second, and it can be a problem if you have too many
-renderable components. Heartbeat delivering order is undefined, so a 
-view component should not depend on specific state of another component.
-
-Anyway, you can opt-out specific range of actions in a renderable 
-component, so having extra number of non-renderable subcomponent that 
-are controlled by the renderable component seems to be fine.
-
+In most cases, you don't need to employ a lot of `ViewController`s. 
+Instead, I recommend using `ViewController`s only for absolutely required
+points. And use `View`s for any other places. 
 
 
 

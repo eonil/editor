@@ -23,7 +23,7 @@ extension State {
             applyOnShell((), action: action)
 
         case .Workspace(let id, let action):
-            applyOnWorkspace(id , action: action)
+            try apply(id , action: action)
         }
     }
 
@@ -39,7 +39,7 @@ extension State {
     private mutating func applyOnShell(id: (), action: ShellAction) {
         MARK_unimplemented()
     }
-    private mutating func applyOnWorkspace(id: WorkspaceID, action: WorkspaceAction) {
+    private mutating func apply(id: WorkspaceID, action: WorkspaceAction) throws {
         switch action {
         case .Open:
             workspaces[id] = WorkspaceState()
@@ -49,7 +49,22 @@ extension State {
 
         case .Close:
             workspaces[id] = nil
-            
+
+        case .File(let action):
+            try applyOnWorkspace(&workspaces[id]!, action: action)
+
+        default:
+            MARK_unimplemented()
+        }
+    }
+    private mutating func applyOnWorkspace(inout workspace: WorkspaceState, action: FileAction) throws {
+        switch action {
+        case .CreateSubnode(let parent, let index, let state):
+            guard let parentIndex = workspace.fileNavigator.tree.findIndexForPath(parent) else { throw FileActionError.BadFileNodePath }
+            var child = FileNode()
+            child.state = state
+            workspace.fileNavigator.tree[parentIndex].subnodes.insert(child, atIndex: index)
+
         default:
             MARK_unimplemented()
         }

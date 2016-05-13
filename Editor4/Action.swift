@@ -19,7 +19,7 @@ enum Action {
     case Test(TestAction)
     case Menu(MainMenuAction)
     case Shell(ShellAction)
-    case Workspace(id: WorkspaceID, command: WorkspaceAction)
+    case Workspace(id: WorkspaceID, action: WorkspaceAction)
 }
 enum TestAction {
     case Test1
@@ -54,14 +54,23 @@ enum WorkspaceAction {
     case Debug(DebugAction)
 }
 enum FileAction {
-    case NewFolder
-    case NewFile
-    case SelectAll
-    case DeselectAll
-    case Delete
-    case Drop(from: [NSURL], onto: WorkspaceItemPath)
-    case Move(from: [WorkspaceItemPath], onto: WorkspaceItemPath)
+    case CreateSubnode(parent: FileNodePath, index: Int, state: FileNodeState)
+    case DeleteNode(FileNodePath)
+    case DeleteAllSelectedNodes
+    case SelectNodes([FileNodePath])
+    case SelectAllNodes
+    case DeselectNodes([FileNodePath])
+    case DeselectAllNodes
+    case Drop(from: [NSURL], onto: FileNodePath)
+    case Move(from: [FileNodePath], onto: FileNodePath)
+//    case EditTree(id: FileNodeID, action: FileTreeEditAction)
 }
+enum FileActionError: ErrorType {
+    case BadFileNodePath
+    case BadFileNodeIndex
+}
+//enum FileTreeEditAction {
+//}
 //enum FileNodeAction {
 //        case Select
 //        case Deselect

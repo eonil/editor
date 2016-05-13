@@ -17,20 +17,28 @@ import AppKit
 ///
 class RenderableViewController: NSViewController, Renderable {
 
-    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        Shell.register(self)
-    }
-    @available(*,unavailable)
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    deinit {
-        Shell.deregister(self)
-    }
+//    @available(*,unavailable)
+//    override init?(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+//        assert(nibNameOrNil == nil)
+//        assert(nibBundleOrNil == nil)
+//        checkAndReport(nibNameOrNil == nil, "Expected `nil` for `nibNameOrNil`, but it's `\(nibNameOrNil)`.")
+//        checkAndReport(nibBundleOrNil == nil, "Expected `nil` for `nibBundleOrNil`, but it's `\(nibBundleOrNil)`.")
+//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+//    }
+//    @available(*,unavailable)
+//    required init?(coder: NSCoder) {
+//        fatalError()
+//    }
+//    deinit {
+//        Shell.deregister(self)
+//    }
 
     ////////////////////////////////////////////////////////////////
 
+    override func loadView() {
+        let v = NSView()
+        self.view = v
+    }
     func render() {
         
     }
