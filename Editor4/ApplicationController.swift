@@ -19,8 +19,8 @@ class ApplicationController: NSObject, NSApplicationDelegate, DriverAccessible {
         let u = NSURL(string: "~/Temp/ws1")!
         dispatch(Action.Workspace(id: id, action: WorkspaceAction.Open))
         dispatch(Action.Workspace(id: id, action: WorkspaceAction.Reconfigure(location: u)))
-        dispatch(Action.Workspace(id: id, action: WorkspaceAction.File(FileAction.CreateSubnode(parent: FileNodePath([]), index: 0, state: FileNodeState(name: "file1", comment: nil, isGroup: false)))))
-        dispatch(Action.Workspace(id: id, action: WorkspaceAction.File(FileAction.CreateSubnode(parent: FileNodePath([]), index: 1, state: FileNodeState(name: "folder2", comment: nil, isGroup: true)))))
+        dispatch(Action.Workspace(id: id, action: WorkspaceAction.File(FileAction.CreateFile(containerFilePath: FileNodePath([]), index: 0, name: "file1"))))
+        dispatch(Action.Workspace(id: id, action: WorkspaceAction.File(FileAction.CreateFolder(containerFilePath: FileNodePath([]), index: 0, name: "folder2"))))
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

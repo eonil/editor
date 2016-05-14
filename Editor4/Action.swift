@@ -54,9 +54,12 @@ enum WorkspaceAction {
     case Debug(DebugAction)
 }
 enum FileAction {
-    case CreateSubnode(parent: FileNodePath, index: Int, state: FileNodeState)
+    //    case CreateSubnode(parent: FileID2, index: Int, state: FileState2)
+    case CreateFile(containerFilePath: FileNodePath, index: Int, name: String)
+    case CreateFolder(containerFilePath: FileNodePath, index: Int, name: String)
     case DeleteNode(FileNodePath)
     case DeleteAllSelectedNodes
+    case ADHOC_Test1
     case SelectNodes([FileNodePath])
     case SelectAllNodes
     case DeselectNodes([FileNodePath])
@@ -66,7 +69,7 @@ enum FileAction {
 //    case EditTree(id: FileNodeID, action: FileTreeEditAction)
 }
 enum FileActionError: ErrorType {
-    case BadFileNodePath
+    case BadFileNodePath(FileNodePath)
     case BadFileNodeIndex
 }
 //enum FileTreeEditAction {

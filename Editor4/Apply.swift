@@ -59,11 +59,25 @@ extension State {
     }
     private mutating func applyOnWorkspace(inout workspace: WorkspaceState, action: FileAction) throws {
         switch action {
-        case .CreateSubnode(let parent, let index, let state):
-            guard let parentIndex = workspace.file.findIndexForPath(parent) else { throw FileActionError.BadFileNodePath }
-            var child = FileNode()
-            child.state = state
-            workspace.file[parentIndex].subnodes.insert(child, atIndex: index)
+        case .CreateFolder(let containerFilePath, let index, let name):
+            guard let containerFileID = workspace.files.searchFileIDForPath(containerFilePath) else { throw FileActionError.BadFileNodePath(containerFilePath) }
+            try workspace.files.insert(FileState2(form: .Container, name: name), at: index, to: containerFileID)
+
+        case .CreateFile(let containerFilePath, let index, let name):
+            guard let containerFileID = workspace.files.searchFileIDForPath(containerFilePath) else { throw FileActionError.BadFileNodePath(containerFilePath) }
+            try workspace.files.insert(FileState2(form: .Data, name: name), at: index, to: containerFileID)
+
+        case .SelectNodes(let paths):
+            workspace.window.navigatorPane.file.selection = paths
+
+        case .ADHOC_Test1:
+//            let rootFileState = workspace.files[workspace.files.rootID]
+//            guard let last = rootFileState.subfileIDs.last else { return }
+//            workspace.files.remove(last)
+//            for (k,v) in workspace.files {
+//                debugLog(v)
+//            }
+            break
 
         default:
             MARK_unimplemented()

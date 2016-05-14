@@ -152,6 +152,12 @@ struct FileNodePath {
         let rest = keys[keys.startIndex..<keys.endIndex.predecessor()]
         return (FileNodePath(Array(rest)), last)
     }
+    func prependingFirst(key: String) -> FileNodePath {
+        return FileNodePath([key] + keys)
+    }
+    func appendingLast(key: String) -> FileNodePath {
+        return FileNodePath(keys + [key])
+    }
 }
 /// Index-based path to designate a file node.
 /// This path is very fast, but gets invalidated after any mutation has been 

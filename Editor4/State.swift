@@ -16,9 +16,7 @@ struct State {
     /// command to correct window.
     var currentWorkspaceID: WorkspaceID? = nil
     /// Workspaces.
-    /// Keep journal as many as possible becasue we need to track them precisely as much as possible.
-    /// Anyway, if you make mutations over the limit, view will remake all windows.  
-    var workspaces = KeyJournalingDictionary<WorkspaceID, WorkspaceState>(journalingCapacityLimit: Int.max)
+    var workspaces = KeyJournalingDictionary<WorkspaceID, WorkspaceState>()
 }
 extension State {
     var currentWorkspace: WorkspaceState? {

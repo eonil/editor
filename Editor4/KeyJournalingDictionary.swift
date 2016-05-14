@@ -94,43 +94,6 @@ extension KeyJournalingDictionary: SequenceType {
     }
 }
 
-/// A journal is a record of mutation
-/// performed by `operation` on state of `version`
-struct KeyJournal<Key: Hashable> {
-    typealias Log = (version: Version, operation: KeyMutation<Key>)
-    let capacityLimit: Int
-    /// All the log items must be sequential.
-    private(set) var logs = Array<Log>()
-    private init(capacityLimit: Int) {
-        self.capacityLimit = capacityLimit
-    }
-    private mutating func append(log: Log) {
-        while logs.count >= capacityLimit {
-            logs.tryRemoveFirst()
-        }
-        logs.append(log)
-    }
-    private mutating func removeAll() {
-        logs.removeAll()
-    }
-}
-
-enum KeyMutation<Key: Hashable> {
-    case Insert(Key)
-    case Update(Key)
-    case Delete(Key)
-
-    private func getKey() -> Key {
-        switch self {
-        case .Insert(let key):  return key
-        case .Update(let key):  return key
-        case .Delete(let key):  return key
-        }
-    }
-}
-
-
-
 
 
 
