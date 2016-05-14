@@ -58,6 +58,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
     }
     private func renderStates() {
         guard sourceFilesVersion != workspaceState?.files.version else { return }
+        // TODO: Not optimized. Do it later...
         if let workspaceState = workspaceState {
             let oldMappingCopy = proxyMapping
             proxyMapping = [:]
@@ -87,7 +88,8 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
 }
 extension FileNavigatorViewController: NSOutlineViewDataSource {
     func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
-        return true
+        guard let proxy = item as? FileUIProxy2 else { return false }
+        return proxy.sourceFileState.form == .Container
     }
     func outlineView(outlineView: NSOutlineView, numberOfChildrenOfItem item: AnyObject?) -> Int {
         if item == nil {

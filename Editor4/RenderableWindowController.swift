@@ -13,24 +13,9 @@ import AppKit
 ///
 /// This class is intended to be subclassed.
 /// `render` method will be called for every action signal.
-/// Subclass responsible to filter out unwanted signals.
+/// Subclasses are responsible to filter out unwanted signals.
 ///
 class RenderableWindowController: NSWindowController, Renderable {
-
-//    override init(window: NSWindow?) {
-//        super.init(window: window)
-//        Shell.register(self)
-//    }
-//    @available(*,unavailable)
-//    required init?(coder: NSCoder) {
-//        fatalError()
-//    }
-//    deinit {
-//        Shell.deregister(self)
-//    }
-
-    ////////////////////////////////////////////////////////////////
-
     func render() {
     }
 }

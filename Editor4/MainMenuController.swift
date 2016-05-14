@@ -30,10 +30,19 @@ final class MainMenuController: DriverAccessible {
         NSApplication.sharedApplication().mainMenu = mainMenu
     }
     func render() {
+        func getCurrentFile() -> (id: FileID2, state: FileState2)? {
+            guard let path = state.currentWorkspace?.window.navigatorPane.file.selection.last else { return nil }
+            guard let id = state.currentWorkspace?.files.searchFileIDForPath(path) else { return nil }
+            guard let state = state.currentWorkspace?.files[id] else { return nil }
+            return (id, state)
+        }
+        let maybeCurrentFile = getCurrentFile()
+
         palette.file.enabled = true
         palette.fileNew.enabled = true
         palette.fileNewWorkspace.enabled = true
-        palette.fileNewFile.enabled = state.currentWorkspace != nil
+        palette.fileNewFolder.enabled = maybeCurrentFile?.state.form == .Container
+        palette.fileNewFile.enabled = maybeCurrentFile?.state.form == .Container
         palette.fileOpen.enabled = true
         palette.fileOpenWorkspace.enabled = true
         palette.fileOpenClearWorkspaceHistory.enabled = true
