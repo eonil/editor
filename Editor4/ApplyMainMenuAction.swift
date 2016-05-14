@@ -12,7 +12,7 @@ extension State {
     mutating func apply(action: MainMenuAction) throws {
         switch action {
         case .FileNewFile:
-            MARK_unimplemented()
+            try currentWorkspace?.appendNewFileOnCurrentFile()
 
         case .FileNewWorkspace:
             let id = WorkspaceID()

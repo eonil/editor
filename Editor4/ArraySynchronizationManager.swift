@@ -70,13 +70,32 @@ Element.Identity == Element.SourceType.Identity {
             if journalAvailable {
                 switch log.operation {
                 case .Insert(let index):
-                    // Sync to latest version, and duplicated call will be ignored by version comparison.
+                    // Concept of this code block is *following array changes as-is*.
+                    // Because calculating final array only from index history is too hard...
+                    // Which means this is designed only for small amount of changes.
+                    // If you have massive amount of changes, you have to reload whole data
+                    // into view.
+                    //
+                    // Problems and Solutions
+                    // ----------------------
+                    // If the index is out-of-range, that means source element at the index
+                    // does not exist, so we don't need to make a view for the index.
+                    // So just ignore it.
+                    //
+                    // And also, always sync to latest version.
+                    // Duplicated sync can happen but
+                    // or elided by version check if you did it.
+
                     var newElement = Element()
-                    newElement.syncFrom(sourceArray[index])
+                    if sourceArray.entireRange.contains(index) {
+                        newElement.syncFrom(sourceArray[index])
+                    }
                     array.insert(newElement, atIndex: index)
 
                 case .Update(let index):
-                    array[index].syncFrom(sourceArray[index])
+                    if sourceArray.entireRange.contains(index) {
+                        array[index].syncFrom(sourceArray[index])
+                    }
 
                 case .Delete(let index):
                     array.removeAtIndex(index)

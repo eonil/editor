@@ -94,6 +94,7 @@ private final class Driver {
         }
         catch let error {
             schedule.completion.trySetError(error)
+            assert(false, "Error in stepping: \(error)")
 //            fatalError("\(error)") // No way to recover in this case...
         }
         context = nil

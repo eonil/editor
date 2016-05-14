@@ -26,11 +26,11 @@ struct IndexJournalingArray<Element>: IndexJournalingArrayType, ArrayLiteralConv
     private mutating func logAndRevise(operation: ArrayIndexMutation) {
         let log = IndexJournal.Log(version: version, operation: operation)
         journal.append(log)
-        version = Version()
+        version.revise()
     }
     private mutating func clearAllLogsAndRevise() {
         journal.removeAll()
-        version = Version()
+        version.revise()
     }
 
     ////////////////////////////////////////////////////////////////

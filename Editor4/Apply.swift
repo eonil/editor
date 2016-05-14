@@ -60,10 +60,10 @@ extension State {
     private mutating func applyOnWorkspace(inout workspace: WorkspaceState, action: FileAction) throws {
         switch action {
         case .CreateSubnode(let parent, let index, let state):
-            guard let parentIndex = workspace.fileNavigator.tree.findIndexForPath(parent) else { throw FileActionError.BadFileNodePath }
+            guard let parentIndex = workspace.file.findIndexForPath(parent) else { throw FileActionError.BadFileNodePath }
             var child = FileNode()
             child.state = state
-            workspace.fileNavigator.tree[parentIndex].subnodes.insert(child, atIndex: index)
+            workspace.file[parentIndex].subnodes.insert(child, atIndex: index)
 
         default:
             MARK_unimplemented()

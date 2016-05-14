@@ -7,7 +7,7 @@
 ////
 //
 //struct FileNavigatorState: VersionedStateType {
-//    private(set) var version = Version()
+//    private(set) var version.revise()
 //    private(set) var root = FileNodeID()
 //    private(set) var nodes = Dictionary<FileNodeID, FileNodeState>()
 //    private(set) var tree = FileNode(payload: FileNodeState())
@@ -104,7 +104,7 @@
 ////    }
 ////}
 //struct FileNodeState {
-//    private(set) var version = Version()
+//    private(set) var version.revise()
 //    private(set) var name = ""
 //    private(set) var comment: String?
 //    private(set) var isGroup = true

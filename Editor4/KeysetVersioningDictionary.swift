@@ -31,20 +31,18 @@ public struct KeysetVersioningDictionary<Key: Hashable,Value>: SequenceType, Dic
     private var internalDictionary: Dictionary<Key, Value>
     /// Current version.
     /// Becomes a different value after any mutation has been performed.
-    public private(set) var version: Version
+    public private(set) var version = Version()
 
     ////////////////////////////////////////////////////////////////
 
     public init() {
         internalDictionary = Dictionary()
-        version = Version()
     }
     public init(dictionaryLiteral elements: (Key, Value)...) {
         internalDictionary = Dictionary()
         for (k,v) in elements {
             internalDictionary[k] = v
         }
-        version = Version()
     }
 
     ////////////////////////////////////////////////////////////////
@@ -60,7 +58,7 @@ public struct KeysetVersioningDictionary<Key: Hashable,Value>: SequenceType, Dic
         set {
             // This must be an atomic operation.
             internalDictionary[key] = newValue
-            version = Version()
+            version.revise()
         }
     }
 
@@ -88,7 +86,7 @@ public struct KeysetVersioningDictionary<Key: Hashable,Value>: SequenceType, Dic
 public extension KeysetVersioningDictionary {
     public mutating func popFirst() -> (Key, Value)? {
         guard let popped = internalDictionary.popFirst() else { return nil }
-        version = Version()
+        version.revise()
         return popped
     }
 }

@@ -33,6 +33,7 @@ final class MainMenuController: DriverAccessible {
         palette.file.enabled = true
         palette.fileNew.enabled = true
         palette.fileNewWorkspace.enabled = true
+        palette.fileNewFile.enabled = state.currentWorkspace != nil
         palette.fileOpen.enabled = true
         palette.fileOpenWorkspace.enabled = true
         palette.fileOpenClearWorkspaceHistory.enabled = true

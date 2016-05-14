@@ -30,6 +30,11 @@ func checkAndReport(condition: Bool, _ message: String) {
     }
 }
 
+extension Indexable {
+    var entireRange: Range<Index> {
+        get { return startIndex..<endIndex }
+    }
+}
 extension Array {
     mutating func tryRemoveFirst() -> Element? {
         guard count > 0 else { return nil }
@@ -63,20 +68,14 @@ extension SynchronizableDictionaryType {
     }
 }
 extension Dictionary: SynchronizableDictionaryType {
-    func findAny(predicate: ((key: Key, value: Value)) -> Bool) -> (key: Key, value: Value)? {
-        for (k,v) in self {
-            if predicate((k,v)) {
-                return (k,v)
-            }
-        }
-        return nil
-    }
 }
-extension KeysetVersioningDictionary: SynchronizableDictionaryType {
-    func findAny(predicate: ((key: Key, value: Value)) -> Bool) -> (key: Key, value: Value)? {
-        for (k,v) in self {
-            if predicate((k,v)) {
-                return (k,v)
+extension KeyJournalingDictionary: SynchronizableDictionaryType {
+}
+extension SequenceType {
+    func findAny(predicate: (Generator.Element) -> Bool) -> Generator.Element? {
+        for e in self {
+            if predicate(e) {
+                return e
             }
         }
         return nil

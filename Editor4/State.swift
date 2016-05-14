@@ -6,99 +6,29 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
-import EonilToolbox
-
 // If copying cost becomes too big, consider using of COW objects.
 
 struct State {
+    /// Current key-window.
+    /// Window ordering and key-window state are managed
+    /// by AppKit and we don't care. Then why do we need
+    /// to track current key-window? To send main-menu
+    /// command to correct window.
     var currentWorkspaceID: WorkspaceID? = nil
-    var workspaces = KeysetVersioningDictionary<WorkspaceID, WorkspaceState>()
-//    var workspaces = [WorkspaceID: WorkspaceState]()
+    /// Workspaces.
+    /// Keep journal as many as possible becasue we need to track them precisely as much as possible.
+    /// Anyway, if you make mutations over the limit, view will remake all windows.  
+    var workspaces = KeyJournalingDictionary<WorkspaceID, WorkspaceState>(journalingCapacityLimit: Int.max)
 }
-struct WorkspaceID: Hashable {
-    var hashValue: Int {
-        get { return oid.hashValue }
+extension State {
+    var currentWorkspace: WorkspaceState? {
+        get {
+            guard let workspaceID = currentWorkspaceID else { return nil }
+            return workspaces[workspaceID]
+        }
+        set {
+            guard let workspaceID = currentWorkspaceID else { return }
+            workspaces[workspaceID] = newValue
+        }
     }
-    private let oid = ObjectAddressID()
 }
-func == (a: WorkspaceID, b: WorkspaceID) -> Bool {
-    return a.oid == b.oid
-}
-struct WorkspaceState: VersioningStateType {
-    var location: NSURL?
-    var version = Version()
-    var fileNavigator = FileNavigatorState()
-    var textEditor = TextEditorState()
-    var issues = [Issue]()
-    var panes = [WorkspacePaneID: WorkspacePaneState]()
-}
-enum WorkspacePaneID {
-    case Navigator
-    case Inspector
-    case Console
-}
-enum WorkspacePaneState {
-    case Open
-    case Closed
-}
-//struct WorkspaceItemPath {
-//}
-
-struct TextEditorState {
-    private(set) var lines = [String]()
-}
-struct AutocompletionState {
-    private(set) var candidates = [AutocompletionCandidateState]()
-}
-struct AutocompletionCandidateState {
-    private(set) var code: String
-}
-struct ConsoleState {
-    private(set) var logs = [String]()
-}
-enum Issue {
-    case ProjectConfigurationError
-    case ProjectConfigurationWarning
-    case CompileWarning
-    case CompileError
-}
-struct DebuggingState {
-    private(set) var processes = [DebuggingProcessState]()
-    private(set) var threads = [DebuggingThreadState]()
-    private(set) var stackFrames = [DebuggingStackFrameState]()
-    private(set) var slotValues = [DebuggingSlotValueState]()
-}
-//enum DebuggingProcessPhase {
-//        case NotLaunchedYet
-//        case Running
-//        case Paused
-//        case Exited
-//}
-struct DebuggingProcessState {
-    private(set) var name: String
-    private(set) var phase: String
-}
-struct DebuggingThreadState {
-    private(set) var name: String?
-}
-struct DebuggingStackFrameState {
-    private(set) var name: String?
-}
-struct DebuggingSlotValueState {
-    private(set) var name: String?
-    private(set) var value: String?
-}
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,12 +12,21 @@ import EonilToolbox
 
 final class WorkspaceWindowController: RenderableWindowController, DriverAccessible {
 
-    var workspaceID: WorkspaceID?
     private let containerViewController = NSViewController()
     private let columnSplitViewController = NSSplitViewController()
-    private let fileViewController = FileNavigatorViewController()
+    private let fileNavigatorViewController = FileNavigatorViewController()
     private let rowSplitViewController = NSSplitViewController()
     private var installer = ViewInstaller()
+
+    ////////////////////////////////////////////////////////////////
+
+    var workspaceID: WorkspaceID? {
+        didSet {
+            fileNavigatorViewController.workspaceID = workspaceID
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////
 
     /// Designated initializer.
     init() {
@@ -61,10 +70,10 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
         }
     }
     override func render() {
-        installer.installIfNeeded { 
+        installer.installIfNeeded {
             contentViewController = columnSplitViewController
             columnSplitViewController.splitViewItems = [
-                NSSplitViewItem(contentListWithViewController: fileViewController),
+                NSSplitViewItem(contentListWithViewController: fileNavigatorViewController),
                 NSSplitViewItem(viewController: rowSplitViewController),
             ]
         }

@@ -28,6 +28,13 @@
 		4550F9D41CE4D93D00B911C4 /* FileNode2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9D31CE4D93D00B911C4 /* FileNode2.swift */; };
 		4550F9D61CE4FE0200B911C4 /* ArraySynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9D51CE4FE0200B911C4 /* ArraySynchronizationManager.swift */; };
 		4550F9E61CE567A200B911C4 /* ArraySynchronizationManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9E51CE567A200B911C4 /* ArraySynchronizationManager2.swift */; };
+		4550F9EA1CE61CE600B911C4 /* KeyJournalingDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9E91CE61CE600B911C4 /* KeyJournalingDictionary.swift */; };
+		4550F9EE1CE6279D00B911C4 /* WorkspaceDatabaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9ED1CE6279D00B911C4 /* WorkspaceDatabaseState.swift */; };
+		4550F9F41CE6B65300B911C4 /* WorkspaceWindowState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9F31CE6B65300B911C4 /* WorkspaceWindowState.swift */; };
+		4550F9F81CE6C1FC00B911C4 /* WorkspaceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9F71CE6C1FC00B911C4 /* WorkspaceState.swift */; };
+		4550F9FA1CE6C23D00B911C4 /* DatabaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9F91CE6C23D00B911C4 /* DatabaseState.swift */; };
+		4550F9FC1CE6C29100B911C4 /* WorkspaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9FB1CE6C29100B911C4 /* WorkspaceID.swift */; };
+		4550F9FE1CE6E75700B911C4 /* WorkspaceAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */; };
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
 		458932031CDFE76000F924F5 /* KeysetVersioningDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458932021CDFE76000F924F5 /* KeysetVersioningDictionary.swift */; };
 		4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320B1CDFE78900F924F5 /* VersionType.swift */; };
@@ -170,6 +177,13 @@
 		4550F9D31CE4D93D00B911C4 /* FileNode2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNode2.swift; sourceTree = "<group>"; };
 		4550F9D51CE4FE0200B911C4 /* ArraySynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArraySynchronizationManager.swift; sourceTree = "<group>"; };
 		4550F9E51CE567A200B911C4 /* ArraySynchronizationManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArraySynchronizationManager2.swift; sourceTree = "<group>"; };
+		4550F9E91CE61CE600B911C4 /* KeyJournalingDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyJournalingDictionary.swift; sourceTree = "<group>"; };
+		4550F9ED1CE6279D00B911C4 /* WorkspaceDatabaseState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDatabaseState.swift; sourceTree = "<group>"; };
+		4550F9F31CE6B65300B911C4 /* WorkspaceWindowState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceWindowState.swift; sourceTree = "<group>"; };
+		4550F9F71CE6C1FC00B911C4 /* WorkspaceState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkspaceState.swift; path = ../../../../../../Applications/WorkspaceState.swift; sourceTree = "<group>"; };
+		4550F9F91CE6C23D00B911C4 /* DatabaseState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseState.swift; sourceTree = "<group>"; };
+		4550F9FB1CE6C29100B911C4 /* WorkspaceID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceID.swift; sourceTree = "<group>"; };
+		4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceAccessible.swift; sourceTree = "<group>"; };
 		45800F1F1CD5048F0000F621 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
 		458932021CDFE76000F924F5 /* KeysetVersioningDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeysetVersioningDictionary.swift; sourceTree = "<group>"; };
@@ -224,6 +238,7 @@
 				45800F211CD5141E0000F621 /* MainMenuUtility.swift */,
 				45D6C34A1CE222880016DB7A /* WorkspaceManager.swift */,
 				45CD93951CC809F100083CEC /* WorkspaceDocument.swift */,
+				4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */,
 				454AD8951CC694E8008A9BAC /* WorkspaceWindowController.swift */,
 				454AD8991CC6981A008A9BAC /* FileNavigatorViewController.swift */,
 				45D6C3541CE241490016DB7A /* RenderableWindowController.swift */,
@@ -291,6 +306,11 @@
 				453FF5811CD4F17300F6344B /* main.swift */,
 				454AD8931CC69420008A9BAC /* Driver.swift */,
 				454AD87A1CC65326008A9BAC /* State.swift */,
+				4550F9F91CE6C23D00B911C4 /* DatabaseState.swift */,
+				4550F9FB1CE6C29100B911C4 /* WorkspaceID.swift */,
+				4550F9F71CE6C1FC00B911C4 /* WorkspaceState.swift */,
+				4550F9ED1CE6279D00B911C4 /* WorkspaceDatabaseState.swift */,
+				4550F9F31CE6B65300B911C4 /* WorkspaceWindowState.swift */,
 				4550F9D11CE4D85900B911C4 /* FileNode.swift */,
 				4550F9D31CE4D93D00B911C4 /* FileNode2.swift */,
 				45E730451CD602C900BA7550 /* StateError.swift */,
@@ -322,6 +342,7 @@
 				4550F9C81CE4CE4600B911C4 /* IndexJournalingTree.swift */,
 				4550F9D51CE4FE0200B911C4 /* ArraySynchronizationManager.swift */,
 				4550F9E51CE567A200B911C4 /* ArraySynchronizationManager2.swift */,
+				4550F9E91CE61CE600B911C4 /* KeyJournalingDictionary.swift */,
 			);
 			name = "(functional style synchronization)";
 			sourceTree = "<group>";
@@ -486,26 +507,33 @@
 				45E730461CD602C900BA7550 /* StateError.swift in Sources */,
 				45E730531CD796D300BA7550 /* RenderingError.swift in Sources */,
 				454AD8981CC69559008A9BAC /* Utility.swift in Sources */,
+				4550F9FC1CE6C29100B911C4 /* WorkspaceID.swift in Sources */,
 				458932031CDFE76000F924F5 /* KeysetVersioningDictionary.swift in Sources */,
+				4550F9EE1CE6279D00B911C4 /* WorkspaceDatabaseState.swift in Sources */,
 				4550F9C91CE4CE4600B911C4 /* IndexJournalingTree.swift in Sources */,
 				454AD87B1CC65326008A9BAC /* State.swift in Sources */,
+				4550F9EA1CE61CE600B911C4 /* KeyJournalingDictionary.swift in Sources */,
 				451137591CD48094001A183A /* Shell.swift in Sources */,
 				45D6C3571CE3714B0016DB7A /* SwiftDictionaryExtensions.swift in Sources */,
+				4550F9FA1CE6C23D00B911C4 /* DatabaseState.swift in Sources */,
 				45D6C3451CE2139C0016DB7A /* Renderable.swift in Sources */,
 				453FF5821CD4F17300F6344B /* main.swift in Sources */,
 				454AD8961CC694E8008A9BAC /* WorkspaceWindowController.swift in Sources */,
 				45E7304F1CD78D3F00BA7550 /* StateQuery.swift in Sources */,
+				4550F9F41CE6B65300B911C4 /* WorkspaceWindowState.swift in Sources */,
 				45C3B3971CD4F82D0001D0AF /* ApplyMainMenuAction.swift in Sources */,
 				4550F9D61CE4FE0200B911C4 /* ArraySynchronizationManager.swift in Sources */,
 				45C3B3931CD4F3490001D0AF /* MainMenuItemController.swift in Sources */,
 				45C3B3851CD4F3030001D0AF /* MainMenuController.swift in Sources */,
 				45D6C3551CE241490016DB7A /* RenderableWindowController.swift in Sources */,
+				4550F9F81CE6C1FC00B911C4 /* WorkspaceState.swift in Sources */,
 				4589320E1CDFED0000F924F5 /* Version.swift in Sources */,
 				45D6C34B1CE222880016DB7A /* WorkspaceManager.swift in Sources */,
 				4550F9D41CE4D93D00B911C4 /* FileNode2.swift in Sources */,
 				45D6C3431CE210180016DB7A /* RenderableViewController.swift in Sources */,
 				4511375D1CD48123001A183A /* Action.swift in Sources */,
 				45C3B3951CD4F35D0001D0AF /* MainMenuAction.swift in Sources */,
+				4550F9FE1CE6E75700B911C4 /* WorkspaceAccessible.swift in Sources */,
 				454AD89A1CC6981A008A9BAC /* FileNavigatorViewController.swift in Sources */,
 				45D6C35D1CE4C6F00016DB7A /* IndexJournalingArray.swift in Sources */,
 				451137921CD4822D001A183A /* Marks.swift in Sources */,

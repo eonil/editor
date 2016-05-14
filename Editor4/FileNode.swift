@@ -1,27 +1,10 @@
 //
-//  FileNode.swift
+//  FileNavigatorState.swift
 //  Editor4
 //
 //  Created by Hoon H. on 2016/05/13.
 //  Copyright © 2016 Eonil. All rights reserved.
 //
-
-struct FileNavigatorState: VersioningStateType {
-    private(set) var version = Version()
-    var tree = FileNode() {
-        didSet { revise() }
-    }
-    var selection = [FileNodePath]() {
-        didSet { revise() }
-    }
-    private mutating func revise() {
-        version.revise()
-    }
-}
-enum FileNavigatorError: ErrorType {
-//    case BadFileNodeID
-    case BadFileNodePath
-}
 
 ////////////////////////////////////////////////////////////////
 //typealias FileNode = IndexJournalingTreeNode<FileNodeState>
@@ -69,6 +52,9 @@ struct FileNodeArray: IndexJournalingArrayType {
         return try internalArray.indexOf { (element: InternalArray.Element) throws -> Bool in
             return try predicate(FileNode(internalNode: element))
         }
+    }
+    mutating func append(newElement: FileNode) {
+        internalArray.append(newElement.internalNode)
     }
     mutating func insert(newElement: FileNode, atIndex: Int) {
         internalArray.insert(newElement.internalNode, atIndex: atIndex)
@@ -195,6 +181,7 @@ struct FileNodeState {
     var name = ""
     var comment: String?
     var isGroup = true
+//    var gitStatus: ()
 }
 
 

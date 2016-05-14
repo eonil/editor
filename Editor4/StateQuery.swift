@@ -9,7 +9,7 @@
 import Foundation
 
 extension State {
-    func getWorkspaceForURL(u: NSURL) -> WorkspaceID? {
-        return workspaces.findAny { (k, v) in v.location == u }?.key
-    }
+//    func getWorkspaceForURL(u: NSURL) -> WorkspaceID? {
+//        return workspaces.findAny { (k, v) in v.location == u }?.key
+//    }
 }
