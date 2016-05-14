@@ -36,6 +36,9 @@ final class Shell: DriverAccessible {
         }
         assertProperUIConfigurations()
     }
+    func alert(error: ErrorType) {
+        NSApplication.sharedApplication().presentError(error as NSError)
+    }
     private func renderAction(action: Action) {
         switch action {
         case .Shell(let action):

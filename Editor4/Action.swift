@@ -45,7 +45,7 @@ enum WorkspaceAction {
     case Open
     case Close
     case Reconfigure(location: NSURL?)
-    case BecomeKey
+    case SetCurrent
     case File(FileAction)
     case Editor(EditorAction)
     //        case FileNode(path: WorkspaceItemPath, FileNodeAction)
@@ -54,16 +54,12 @@ enum WorkspaceAction {
     case Debug(DebugAction)
 }
 enum FileAction {
-    //    case CreateSubnode(parent: FileID2, index: Int, state: FileState2)
-    case CreateFile(containerFilePath: FileNodePath, index: Int, name: String)
-    case CreateFolder(containerFilePath: FileNodePath, index: Int, name: String)
-    case DeleteNode(FileNodePath)
-    case DeleteAllSelectedNodes
-    case ADHOC_Test1
-    case SelectNodes([FileNodePath])
-    case SelectAllNodes
-    case DeselectNodes([FileNodePath])
-    case DeselectAllNodes
+    case Delete(FileNodePath)
+    case DeleteAllSelected
+    case Select([FileNodePath])
+    case SelectAll
+    case Deselect([FileNodePath])
+    case DeselectAll
     case Drop(from: [NSURL], onto: FileNodePath)
     case Move(from: [FileNodePath], onto: FileNodePath)
 //    case EditTree(id: FileNodeID, action: FileTreeEditAction)

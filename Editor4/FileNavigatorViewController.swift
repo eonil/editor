@@ -82,7 +82,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             let path = workspaceState.files.resolvePathFor(proxy.sourceFileID)
             selectedItemPaths.append(path)
         }
-        dispatch(.Workspace(id: workspaceID, action: .File(.SelectNodes(selectedItemPaths))))
+        dispatch(.Workspace(id: workspaceID, action: .File(.Select(selectedItemPaths))))
     }
 }
 extension FileNavigatorViewController: NSOutlineViewDataSource {
@@ -127,10 +127,15 @@ extension FileNavigatorViewController: NSOutlineViewDataSource {
         cell.addSubview(textField)
         cell.imageView = imageView
         cell.textField = textField
-//        imageView.image = NSWorkspace.sharedWorkspace().iconForFile(<#T##fullPath: String##String#>)
+
+        func getIcon() -> NSImage? {
+            guard let path = workspaceState?.files.resolvePathFor(proxy.sourceFileID) else { return nil }
+            guard let path1 = workspaceState?.location?.appending(path).path else { return nil }
+            return NSWorkspace.sharedWorkspace().iconForFile(path1)
+        }
+        imageView.image = getIcon()
         textField.bordered = false
         textField.drawsBackground = false
-//        textField.stringValue = proxy.sourceState?.name ?? ""
         textField.stringValue = proxy.sourceFileState.name
 
         return cell
@@ -141,7 +146,12 @@ extension FileNavigatorViewController: NSOutlineViewDelegate {
         scanSelection()
     }
 }
-
+extension NSURL {
+    func appending(path: FileNodePath) -> NSURL {
+        guard let (first, tail) = path.splitFirst() else { return self }
+        return URLByAppendingPathComponent(first).appending(tail)
+    }
+}
 
 
 
@@ -168,52 +178,6 @@ private final class FileUIProxy2 {
         return self
     }
 }
-
-//extension FileNode: IdentifiableType {
-//    func identify() -> String {
-//        return state.name
-//    }
-//}
-//private final class RootFileNodeUIProxy: FileNodeUIProxy {
-//    var changedProxies = [FileNodeUIProxy]()
-//    private override func notifyChangeOfNode(node: FileNodeUIProxy) {
-//        changedProxies.append(node)
-//    }
-//}
-//private class FileNodeUIProxy: SynchronizableElementType, IdentifiableType, DefaultInitializableType {
-//    typealias SourceType = FileNode
-//    weak var parentProxy: FileNodeUIProxy?
-//    var sourcePath: FileNodePath?
-//    var sourceVersion: Version?
-//    var sourceState: FileNodeState?
-//    var sourceSubnodesVersion: Version?
-//    var proxySubnodeManager = ArraySynchronizationManager<FileNodeUIProxy>()
-//
-//    private func identify() -> String {
-//        return sourceState?.name ?? ""
-//    }
-//    func syncFrom(source: FileNode) {
-//        guard sourceVersion != source.version else { return } //< No-op for same version.
-//        sourceState = source.state
-//        proxySubnodeManager.syncFrom(source.subnodes)
-//        for subproxy in proxySubnodeManager.array {
-//            subproxy.parentProxy = self
-//            if let subproxyName = subproxy.sourceState?.name {
-//                subproxy.sourcePath = sourcePath?.appendingLastPathComponent(subproxyName)
-//            }
-//            else {
-//                subproxy.sourcePath = nil
-//            }
-//        }
-//        sourceVersion = source.version
-//    }
-//    func notifyChangeOfNode(node: FileNodeUIProxy) {
-//        if parentProxy != nil {
-//            parentProxy?.notifyChangeOfNode(node)
-//        }
-//    }
-//}
-
 
 
 

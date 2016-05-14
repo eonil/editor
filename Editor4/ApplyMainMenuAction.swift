@@ -8,16 +8,20 @@
 
 import Foundation
 
-extension State {
+extension State: Dispatchable {
     mutating func apply(action: MainMenuAction) throws {
         switch action {
-        case .FileNewFile:
-            try currentWorkspace?.appendNewFileOnCurrentFile()
-
         case .FileNewWorkspace:
             let id = WorkspaceID()
             workspaces[id] = WorkspaceState()
-            currentWorkspaceID = id
+
+        case .FileNewFolder:
+            guard currentWorkspace != nil else { throw MainMenuActionError.MissingCurrentWorkspace }
+            try currentWorkspace?.appendNewFolderOnCurrentFolder()
+
+        case .FileNewFile:
+            guard currentWorkspace != nil else { throw MainMenuActionError.MissingCurrentWorkspace }
+            try currentWorkspace?.appendNewFileOnCurrentFolder()
 
         case .FileOpenWorkspace:
             MARK_unimplemented()

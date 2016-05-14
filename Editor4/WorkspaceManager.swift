@@ -22,14 +22,30 @@ final class WorkspaceManager: DriverAccessible {
 
     ////////////////////////////////////////////////////////////////
     
-//    init() {
-//        Shell.register(self, self.dynamicType.render)
-//    }
-//    deinit {
-//        Shell.deregister(self)
-//    }
+    init() {
+        NotificationUtility.register(self, NSWindowDidBecomeKeyNotification, self.dynamicType.process)
+    }
+    deinit {
+        NotificationUtility.deregister(self)
+    }
 
     ////////////////////////////////////////////////////////////////
+
+    private func process(n: NSNotification) {
+        switch n.name {
+        case NSWindowDidBecomeKeyNotification:
+//            guard let window = n.object as? NSWindow else { return }
+//            for (id, wc) in workspaceToWindowControllerMapping {
+//                if wc.window === window {
+//                    dispatch(.Workspace(id: id, action: .SetCurrent))
+//                }
+//            }
+            scanCurrentWorkspace()
+
+        default:
+            break
+        }
+    }
 
     func render() {
         guard state.workspaces.version != latestWorkspaceKeysetVersion else { return }
@@ -41,6 +57,8 @@ final class WorkspaceManager: DriverAccessible {
         for (_, wc) in workspaceToWindowControllerMapping {
             wc.renderRecursively()
         }
+
+        scanCurrentWorkspace()
     }
 
     private func renderWorkspace(id: WorkspaceID, action: WorkspaceAction) {
@@ -125,4 +143,20 @@ final class WorkspaceManager: DriverAccessible {
 //        NSDocumentController.sharedDocumentController().removeDocument(doc)
 //        workspaceToDocumentMapping[id] = nil
 //    }
+
+    private func scanCurrentWorkspace() {
+        for (id, wc) in workspaceToWindowControllerMapping {
+            if wc.window?.mainWindow == true {
+                if state.currentWorkspaceID != id {
+                    dispatch(.Workspace(id: id, action: .SetCurrent))
+                }
+            }
+        }
+    }
 }
+
+
+
+
+
+

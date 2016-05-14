@@ -9,16 +9,19 @@
 // If copying cost becomes too big, consider using of COW objects.
 
 struct State {
-    /// Current key-window.
-    /// Window ordering and key-window state are managed
+    /// Currently selected workspace.
+    ///
+    /// Window ordering and main-window state are managed
     /// by AppKit and we don't care. Then why do we need
-    /// to track current key-window? To send main-menu
+    /// to track current main-window? To send main-menu
     /// command to correct window.
     var currentWorkspaceID: WorkspaceID? = nil
     /// Workspaces.
     var workspaces = KeyJournalingDictionary<WorkspaceID, WorkspaceState>()
 }
 extension State {
+    /// Accesses current workspace state.
+    /// Settings back to this property will update `WorkspaceState` for `currentWorkspaceID`.
     var currentWorkspace: WorkspaceState? {
         get {
             guard let workspaceID = currentWorkspaceID else { return nil }

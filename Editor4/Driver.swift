@@ -10,7 +10,21 @@ import Foundation
 import BoltsSwift
 import EonilToolbox
 
-protocol DriverAccessible {
+protocol Dispatchable {
+}
+extension Dispatchable {
+    /// Returns a task which completes *eventually*
+    /// after the action has been processed completely.
+    /// - State is fully updated
+    /// - Rendering is done.
+    /// Calling of the completion is done in main thread,
+    /// and will be guarantted to happend in order as it
+    /// passed-in.
+    func dispatch(action: Action) -> Task<()> {
+        return Driver.theDriver.dispatch(action)
+    }
+}
+protocol DriverAccessible: Dispatchable {
 }
 extension DriverAccessible {
     /// Currently processing action.
@@ -25,16 +39,7 @@ extension DriverAccessible {
     var state: State {
         get { return Driver.theDriver.state }
     }
-    /// Returns a task which completes *eventually*
-    /// after the action has been processed completely.
-    /// - State is fully updated
-    /// - Rendering is done.
-    /// Calling of the completion is done in main thread,
-    /// and will be guarantted to happend in order as it
-    /// passed-in.
-    func dispatch(action: Action) -> Task<()> {
-        return Driver.theDriver.dispatch(action)
-    }
+
 }
 
 
@@ -93,8 +98,9 @@ private final class Driver {
             schedule.completion.trySetResult(())
         }
         catch let error {
+            shell.alert(error)
             schedule.completion.trySetError(error)
-            assert(false, "Error in stepping: \(error)")
+//            assert(false, "Error in stepping: \(error). This is only for information purpose, and you can safely ignore this assertion.")
 //            fatalError("\(error)") // No way to recover in this case...
         }
         context = nil

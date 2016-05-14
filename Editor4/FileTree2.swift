@@ -6,8 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
-
 private let DefaultJournalingLimit = 16
 
 struct FileID2: Hashable {
