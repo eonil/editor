@@ -11,6 +11,9 @@ import Foundation
 extension String: ErrorType {
 }
 
+func debugLog<T>(value: T) {
+    print("\(value)")
+}
 func assertMainThread() {
     assert(NSThread.isMainThread())
 }

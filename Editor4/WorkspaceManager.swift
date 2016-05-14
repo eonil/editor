@@ -16,6 +16,10 @@ final class WorkspaceManager: DriverAccessible {
     private var workspaceToWindowControllerMapping = [WorkspaceID: WorkspaceWindowController]()
     private var workspaceToDocumentMapping = [WorkspaceID: WorkspaceDocument]()
 
+    var ADHOC_allWindows: LazyMapCollection<[WorkspaceID : WorkspaceWindowController], WorkspaceWindowController> {
+        get { return workspaceToWindowControllerMapping.values }
+    }
+
     ////////////////////////////////////////////////////////////////
     
 //    init() {

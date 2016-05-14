@@ -43,9 +43,10 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
 
             view.addSubview(scrollView)
             scrollView.documentView = outlineView
-            outlineView.rowSizeStyle = .Small
             outlineView.addTableColumn(nameColumn)
             outlineView.outlineTableColumn = nameColumn
+            outlineView.headerView = nil
+            outlineView.rowSizeStyle = .Small
             outlineView.setDataSource(self)
             outlineView.setDelegate(self)
         }

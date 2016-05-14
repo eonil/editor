@@ -20,20 +20,21 @@ import AppKit
 final class Shell: DriverAccessible {
 
     private let mainMenu: MainMenuController
-    private let workspace: WorkspaceManager
+    private let workspaceManager: WorkspaceManager
 
     init() {
         NSAppearance.setCurrentAppearance(NSAppearance(named: NSAppearanceNameVibrantDark))
         mainMenu = MainMenuController()
-        workspace = WorkspaceManager()
+        workspaceManager = WorkspaceManager()
     }
     func render() {
 //        Shell.broadcast()
         mainMenu.render()
-        workspace.render()
+        workspaceManager.render()
         if let action = action {
             renderAction(action)
         }
+        assertProperUIConfigurations()
     }
     private func renderAction(action: Action) {
         switch action {
@@ -57,6 +58,100 @@ final class Shell: DriverAccessible {
 }
 
 
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MARK: -
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+private var discoveredViewIDsInAssertion = Set<ObjectIdentifier>()
+private extension Shell {
+    func assertProperUIConfigurations() {
+        discoveredViewIDsInAssertion = []
+        for document in NSDocumentController.sharedDocumentController().documents {
+            for windowController in document.windowControllers {
+                windowController.assertProperUIConfigurationsRecursively()
+            }
+        }
+        for workspaceWindowController in workspaceManager.ADHOC_allWindows {
+            workspaceWindowController.assertProperUIConfigurationsRecursively()
+        }
+        debugLog("Total view count: \(discoveredViewIDsInAssertion.count)")
+    }
+}
+
+private extension NSWindowController {
+    private func assertProperUIConfigurationsRecursively() {
+        assertProperUIConfigurations()
+        contentViewController?.assertProperUIConfigurationsRecursively()
+        window?.assertProperUIConfigurationsRecursively()
+    }
+}
+private extension NSViewController {
+    private func assertProperUIConfigurationsRecursively() {
+        assertProperUIConfigurations()
+        for child in childViewControllers {
+            child.assertProperUIConfigurationsRecursively()
+        }
+        view.assertProperUIConfigurationsRecursively()
+    }
+}
+private extension NSWindow {
+    private func assertProperUIConfigurationsRecursively() {
+        assertProperUIConfigurations()
+        contentViewController?.assertProperUIConfigurationsRecursively()
+        contentView?.assertProperUIConfigurationsRecursively()
+    }
+}
+private extension NSView {
+    private func assertProperUIConfigurationsRecursively() {
+        assertProperUIConfigurations()
+        for subview in subviews {
+            subview.assertProperUIConfigurationsRecursively()
+        }
+    }
+}
+
+private extension NSWindowController {
+    private func assertProperUIConfigurations() {
+    }
+}
+private extension NSViewController {
+    private func assertProperUIConfigurations() {
+    }
+}
+private extension NSWindow {
+    private func assertProperUIConfigurations() {
+    }
+}
+private extension NSView {
+    private func assertProperUIConfigurations() {
+        assert(allowsAutolayout() || constraints == [], "Auto-layout is not allowed.")
+        assert(allowsAutolayout() || translatesAutoresizingMaskIntoConstraints == false, "Auto-layout must be turned off.")
+        assert(allowsAutoresizing() || autoresizingMask == NSAutoresizingMaskOptions.ViewNotSizable, "Auto-resizing must be turned-off.")
+//        assert(autoresizingMask == NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]), "Auto-resizing must be turned-off.")
+        discoveredViewIDsInAssertion.insert(ObjectIdentifier(self))
+    }
+    private func allowsAutolayout() -> Bool {
+        if hasUnsubclassedAppKitViewInSuperviewChain() { return true }
+        if self.dynamicType == NSView.self { return false }
+        return false
+    }
+    private func allowsAutoresizing() -> Bool {
+        if hasUnsubclassedAppKitViewInSuperviewChain() { return true }
+        if self.dynamicType == NSView.self { return false }
+        return false
+    }
+    private func hasUnsubclassedAppKitViewInSuperviewChain() -> Bool {
+        guard let superview = superview else { return false }
+        if superview.isUnsubclassedAppKitView() { return true }
+        return superview.hasUnsubclassedAppKitViewInSuperviewChain()
+    }
+    private func isUnsubclassedAppKitView() -> Bool {
+        return NSBundle(forClass: self.dynamicType).bundleIdentifier == "com.apple.AppKit"
+    }
+}
 
 
 
