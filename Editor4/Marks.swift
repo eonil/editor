@@ -8,6 +8,7 @@
 
 import Foundation
 
+@noreturn
 func MARK_unimplemented() {
     fatalError()
 }

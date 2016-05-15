@@ -15,6 +15,12 @@
 		4511378D1CD4819E001A183A /* EonilToolbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4511377E1CD48176001A183A /* EonilToolbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		451137921CD4822D001A183A /* Marks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451137911CD4822D001A183A /* Marks.swift */; };
 		451137961CD482D4001A183A /* Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451137951CD482D4001A183A /* Apply.swift */; };
+		451216C91CE76EE3006E9207 /* BuildState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216C81CE76EE3006E9207 /* BuildState.swift */; };
+		451216D21CE76EF5006E9207 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D11CE76EF5006E9207 /* DebugState.swift */; };
+		451216D61CE77334006E9207 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D51CE77334006E9207 /* Services.swift */; };
+		451216D81CE77968006E9207 /* LLDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D71CE77968006E9207 /* LLDBService.swift */; };
+		451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D91CE77D02006E9207 /* SubprocessController.swift */; };
+		451216DE1CE77D94006E9207 /* IOAtion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216DD1CE77D94006E9207 /* IOAtion.swift */; };
 		453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3F21CE731820081DCDA /* KeyJournal.swift */; };
 		453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */; };
 		453FF5821CD4F17300F6344B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FF5811CD4F17300F6344B /* main.swift */; };
@@ -35,6 +41,10 @@
 		4550F9FC1CE6C29100B911C4 /* WorkspaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9FB1CE6C29100B911C4 /* WorkspaceID.swift */; };
 		4550F9FE1CE6E75700B911C4 /* WorkspaceAccessible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */; };
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
+		45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA01CE79193002FEA3D /* BashSubprocess.swift */; };
+		45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoSubprocess.swift */; };
+		45830AAC1CE811FC002FEA3D /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAB1CE811FC002FEA3D /* Operations.swift */; };
+		45830AAE1CE82DDA002FEA3D /* BoltsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */; };
 		4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320B1CDFE78900F924F5 /* VersionType.swift */; };
 		4589320E1CDFED0000F924F5 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320D1CDFED0000F924F5 /* Version.swift */; };
 		459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459DB8D51CD487DB00C892D9 /* CoreVideo.framework */; };
@@ -56,7 +66,6 @@
 		45D6C3551CE241490016DB7A /* RenderableWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C3541CE241490016DB7A /* RenderableWindowController.swift */; };
 		45D6C35D1CE4C6F00016DB7A /* IndexJournalingArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C35C1CE4C6F00016DB7A /* IndexJournalingArray.swift */; };
 		45E730461CD602C900BA7550 /* StateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E730451CD602C900BA7550 /* StateError.swift */; };
-		45E730511CD78D8F00BA7550 /* Values.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E730501CD78D8F00BA7550 /* Values.swift */; };
 		45E730531CD796D300BA7550 /* RenderingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E730521CD796D300BA7550 /* RenderingError.swift */; };
 /* End PBXBuildFile section */
 
@@ -162,6 +171,12 @@
 		451137611CD48176001A183A /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
 		451137911CD4822D001A183A /* Marks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marks.swift; sourceTree = "<group>"; };
 		451137951CD482D4001A183A /* Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Apply.swift; sourceTree = "<group>"; };
+		451216C81CE76EE3006E9207 /* BuildState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildState.swift; sourceTree = "<group>"; };
+		451216D11CE76EF5006E9207 /* DebugState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugState.swift; sourceTree = "<group>"; };
+		451216D51CE77334006E9207 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		451216D71CE77968006E9207 /* LLDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBService.swift; sourceTree = "<group>"; };
+		451216D91CE77D02006E9207 /* SubprocessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubprocessController.swift; sourceTree = "<group>"; };
+		451216DD1CE77D94006E9207 /* IOAtion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOAtion.swift; sourceTree = "<group>"; };
 		453FB3F21CE731820081DCDA /* KeyJournal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyJournal.swift; sourceTree = "<group>"; };
 		453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorViewController.swift; sourceTree = "<group>"; };
 		453FF5811CD4F17300F6344B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -185,6 +200,10 @@
 		4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceAccessible.swift; sourceTree = "<group>"; };
 		45800F1F1CD5048F0000F621 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
+		45830AA01CE79193002FEA3D /* BashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashSubprocess.swift; sourceTree = "<group>"; };
+		45830AA91CE79358002FEA3D /* CargoSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoSubprocess.swift; sourceTree = "<group>"; };
+		45830AAB1CE811FC002FEA3D /* Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoltsExtensions.swift; sourceTree = "<group>"; };
 		4589320B1CDFE78900F924F5 /* VersionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionType.swift; sourceTree = "<group>"; };
 		4589320D1CDFED0000F924F5 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		459DB8D51CD487DB00C892D9 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -207,7 +226,6 @@
 		45D6C3541CE241490016DB7A /* RenderableWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderableWindowController.swift; sourceTree = "<group>"; };
 		45D6C35C1CE4C6F00016DB7A /* IndexJournalingArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexJournalingArray.swift; sourceTree = "<group>"; };
 		45E730451CD602C900BA7550 /* StateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateError.swift; sourceTree = "<group>"; };
-		45E730501CD78D8F00BA7550 /* Values.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Values.swift; sourceTree = "<group>"; };
 		45E730521CD796D300BA7550 /* RenderingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderingError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,6 +271,12 @@
 		4511375B1CD480EB001A183A /* (IO) */ = {
 			isa = PBXGroup;
 			children = (
+				451216D51CE77334006E9207 /* Services.swift */,
+				451216D71CE77968006E9207 /* LLDBService.swift */,
+				45830AA91CE79358002FEA3D /* CargoSubprocess.swift */,
+				45830AA01CE79193002FEA3D /* BashSubprocess.swift */,
+				451216D91CE77D02006E9207 /* SubprocessController.swift */,
+				451216DD1CE77D94006E9207 /* IOAtion.swift */,
 			);
 			name = "(IO)";
 			sourceTree = "<group>";
@@ -314,14 +338,17 @@
 				4550F9F31CE6B65300B911C4 /* WorkspaceWindowState.swift */,
 				45B7854A1CE70C0300A40CF9 /* FileTree2.swift */,
 				45B5CDD41CE753FC0097AC0B /* FileNodePath.swift */,
+				451216C81CE76EE3006E9207 /* BuildState.swift */,
+				451216D11CE76EF5006E9207 /* DebugState.swift */,
 				45E730451CD602C900BA7550 /* StateError.swift */,
 				4511375C1CD48123001A183A /* Action.swift */,
 				451137951CD482D4001A183A /* Apply.swift */,
 				45C3B3961CD4F82D0001D0AF /* ApplyMainMenuAction.swift */,
-				45E730501CD78D8F00BA7550 /* Values.swift */,
+				45830AAB1CE811FC002FEA3D /* Operations.swift */,
 				4511375A1CD480E5001A183A /* (UI) */,
 				4511375B1CD480EB001A183A /* (IO) */,
 				454AD8971CC69559008A9BAC /* Utility.swift */,
+				45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */,
 				4550F9D91CE553A800B911C4 /* (functional style & synchronization) */,
 				451137911CD4822D001A183A /* Marks.swift */,
 				45D6C34E1CE238620016DB7A /* NotificationUtility.swift */,
@@ -510,9 +537,11 @@
 				4550F9EE1CE6279D00B911C4 /* WorkspaceDatabaseState.swift in Sources */,
 				4550F9C91CE4CE4600B911C4 /* IndexJournalingTree.swift in Sources */,
 				454AD87B1CC65326008A9BAC /* State.swift in Sources */,
+				451216DE1CE77D94006E9207 /* IOAtion.swift in Sources */,
 				45B7854B1CE70C0300A40CF9 /* FileTree2.swift in Sources */,
 				4550F9EA1CE61CE600B911C4 /* KeyJournalingDictionary.swift in Sources */,
 				451137591CD48094001A183A /* Shell.swift in Sources */,
+				45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */,
 				4550F9FA1CE6C23D00B911C4 /* DatabaseState.swift in Sources */,
 				45D6C3451CE2139C0016DB7A /* Renderable.swift in Sources */,
 				45B5CDD71CE75BE80097AC0B /* MainMenuActionError.swift in Sources */,
@@ -520,14 +549,18 @@
 				454AD8961CC694E8008A9BAC /* WorkspaceWindowController.swift in Sources */,
 				45B5CDD51CE753FC0097AC0B /* FileNodePath.swift in Sources */,
 				4550F9F41CE6B65300B911C4 /* WorkspaceWindowState.swift in Sources */,
+				45830AAC1CE811FC002FEA3D /* Operations.swift in Sources */,
 				45C3B3971CD4F82D0001D0AF /* ApplyMainMenuAction.swift in Sources */,
 				4550F9D61CE4FE0200B911C4 /* ArraySynchronizationManager.swift in Sources */,
 				45C3B3931CD4F3490001D0AF /* MainMenuItemController.swift in Sources */,
 				45C3B3851CD4F3030001D0AF /* MainMenuController.swift in Sources */,
 				45D6C3551CE241490016DB7A /* RenderableWindowController.swift in Sources */,
+				451216C91CE76EE3006E9207 /* BuildState.swift in Sources */,
 				4550F9F81CE6C1FC00B911C4 /* WorkspaceState.swift in Sources */,
+				451216D21CE76EF5006E9207 /* DebugState.swift in Sources */,
 				45B785541CE70F6E00A40CF9 /* ReferencingTable.swift in Sources */,
 				4589320E1CDFED0000F924F5 /* Version.swift in Sources */,
+				451216D81CE77968006E9207 /* LLDBService.swift in Sources */,
 				45D6C34B1CE222880016DB7A /* WorkspaceManager.swift in Sources */,
 				45D6C3431CE210180016DB7A /* RenderableViewController.swift in Sources */,
 				4511375D1CD48123001A183A /* Action.swift in Sources */,
@@ -535,10 +568,13 @@
 				4550F9FE1CE6E75700B911C4 /* WorkspaceAccessible.swift in Sources */,
 				45D6C35D1CE4C6F00016DB7A /* IndexJournalingArray.swift in Sources */,
 				453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */,
+				451216D61CE77334006E9207 /* Services.swift in Sources */,
 				451137921CD4822D001A183A /* Marks.swift in Sources */,
+				45830AAE1CE82DDA002FEA3D /* BoltsExtensions.swift in Sources */,
 				45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */,
 				4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */,
-				45E730511CD78D8F00BA7550 /* Values.swift in Sources */,
+				45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */,
+				451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */,
 				453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

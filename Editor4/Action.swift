@@ -23,6 +23,7 @@ enum Action {
 }
 enum TestAction {
     case Test1
+    case Test2CreateWorkspaceAt(NSURL)
 }
 enum MenuAction {
     case RunMainMenuItem(MainMenuAction)
@@ -52,6 +53,7 @@ enum WorkspaceAction {
     //        case FileNodeList(paths: [WorkspaceItemPath], FileNodeAction)
     case Build(BuildAction)
     case Debug(DebugAction)
+    case UpdateBuildState
 }
 enum FileAction {
     case Delete(FileNodePath)

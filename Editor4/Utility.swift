@@ -8,8 +8,24 @@
 
 import Foundation
 
+typealias NSURL = Foundation.NSURL
+
 extension String: ErrorType {
 }
+
+
+extension CollectionType {
+    /// - Returns:
+    ///     `nil` if this collection has no element.
+    ///     Otherwise, a tuple of `(first element, rest colelction)`.
+    func splitFirst() -> (first: Generator.Element, tail: SubSequence)? {
+        guard let first = first else { return nil }
+        let tail = self[startIndex.successor()..<endIndex]
+        return (first, tail)
+    }
+}
+
+
 
 func debugLog<T>(value: T) {
     print("\(value)")
