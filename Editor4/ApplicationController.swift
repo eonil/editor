@@ -12,19 +12,20 @@ import Cocoa
 class ApplicationController: NSObject, NSApplicationDelegate, DriverAccessible {
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        // This is required and very important action dispatch.
+        // This is required and very important transaction dispatch.
         // Otherwise, driver will not be activated.
-        dispatch(Action.Reset)
+        dispatch(Transaction.Reset)
         let id = WorkspaceID()
         let u = NSURL(string: "~/Temp/ws1")!
-        dispatch(Action.Workspace(id: id, action: WorkspaceAction.Open))
-        dispatch(Action.Workspace(id: id, action: WorkspaceAction.SetCurrent))
-        dispatch(Action.Workspace(id: id, action: WorkspaceAction.Reconfigure(location: u)))
-        dispatch(Action.Workspace(id: id, action: WorkspaceAction.File(FileAction.Select([FileNodePath([])]))))
-        dispatch(Action.Menu(MainMenuAction.FileNewFile))
-        dispatch(Action.Menu(MainMenuAction.FileNewFolder))
-//        dispatch(Action.Workspace(id: id, action: WorkspaceAction.File(FileAction.CreateFile(containerFilePath: FileNodePath([]), index: 0, name: "file1"))))
-//        dispatch(Action.Workspace(id: id, action: WorkspaceAction.File(FileAction.CreateFolder(containerFilePath: FileNodePath([]), index: 0, name: "folder2"))))
+        dispatch(Transaction.Workspace(id, WorkspaceTransaction.Open))
+        dispatch(Transaction.Workspace(id, WorkspaceTransaction.SetCurrent))
+        dispatch(Transaction.Workspace(id, WorkspaceTransaction.Reconfigure(location: u)))
+        dispatch(Transaction.Workspace(id, WorkspaceTransaction.File(FileTransaction.Select([FileNodePath([])]))))
+        dispatch(Command.MainMenu(MainMenuCommand.FileNewWorkspace))
+//        dispatch(Transaction.Menu(MainMenuTransaction.FileNewFile))
+//        dispatch(Transaction.Menu(MainMenuTransaction.FileNewFolder))
+//        dispatch(Transaction.Workspace(id: id, transaction: WorkspaceTransaction.File(FileTransaction.CreateFile(containerFilePath: FileNodePath([]), index: 0, name: "file1"))))
+//        dispatch(Transaction.Workspace(id: id, transaction: WorkspaceTransaction.File(FileTransaction.CreateFolder(containerFilePath: FileNodePath([]), index: 0, name: "folder2"))))
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {

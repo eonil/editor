@@ -31,25 +31,25 @@ final class Shell: DriverAccessible {
 //        Shell.broadcast()
         mainMenu.render()
         workspaceManager.render()
-        if let action = action {
-            renderAction(action)
+        if let transaction = transaction {
+            renderTransaction(transaction)
         }
         assertProperUIConfigurations()
     }
     func alert(error: ErrorType) {
         NSApplication.sharedApplication().presentError(error as NSError)
     }
-    private func renderAction(action: Action) {
-        switch action {
-        case .Shell(let action):
-            renderAction(action)
+    private func renderTransaction(transaction: Transaction) {
+        switch transaction {
+        case .Shell(let transaction):
+            renderTransaction(transaction)
 
         default:
             break
         }
     }
-    private func renderAction(action: ShellAction) {
-        switch action {
+    private func renderTransaction(transaction: ShellTransaction) {
+        switch transaction {
         case .Quit:
             NSApplication.sharedApplication().terminate(nil)
 
@@ -173,7 +173,7 @@ private extension NSView {
 //    /// Broadcasts rendering signal to all registered components.
 //    ///
 //    /// Why do we need this where we can call `render` method cascadely?
-//    /// *Cascade* means nesting. Cascaded action routing can be broken at
+//    /// *Cascade* means nesting. Cascaded transaction routing can be broken at
 //    /// anytime by missing routing link. This can happen easily because
 //    /// program changes over time. And for each time it happens, we need
 //    /// to search for them, and it's a huge cost. Flat is better than
@@ -181,7 +181,7 @@ private extension NSView {
 //    ///
 //    /// So, `Shell` broadcasts actions to interested parties. I mean,
 //    /// components. Each components must register themselves to shell to
-//    /// get guaranteed action notification without concerning intermediate
+//    /// get guaranteed transaction notification without concerning intermediate
 //    /// routing links, so they can trigger rendering themselves.
 //    ///
 //    /// Actually this is mainly because of nested structure of AppKit
@@ -189,8 +189,8 @@ private extension NSView {
 //    /// wouldn't need this kind of trick.
 //    ///
 //    /// Thankfully, we employ immutable state tree sequence architecture,
-//    /// the state is guaranteed not to be changed in broadcasting an action.
-//    /// You can dispatch another action in broadcasting, and they will be
+//    /// the state is guaranteed not to be changed in broadcasting an transaction.
+//    /// You can dispatch another transaction in broadcasting, and they will be
 //    /// processed just like dispatched another actions --- asynchronously.
 //    ///
 //    /// ## Design Intensions

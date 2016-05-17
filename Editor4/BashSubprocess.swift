@@ -16,9 +16,9 @@ enum BashSubprocessEvent {
     ///     Printed line. This does not contain ending new-line character. Only line content.
     case StandardErrorDidPrintLine(String)
     /// Process finished gracefully.
-    case DidExit(exitCode: Int32)
-    /// Process halted forcefully.
-    case DidTerminate
+    case DidExitGracefully(exitCode: Int32)
+    /// Process halted disgracefully by whatever reason.
+    case DidHaltAbnormally
 }
 enum BashSubprocessError: ErrorType {
     case CannotEncodeCommandUsingUTF8(command: String)
@@ -26,21 +26,31 @@ enum BashSubprocessError: ErrorType {
 final class BashSubprocess {
     var onEvent: (BashSubprocessEvent -> ())?
     private let subproc = SubprocessController()
-    init() {
+    init() throws {
         subproc.onEvent = { [weak self] in
+            guard let S = self else { return }
             switch $0 {
             case .DidReceiveStandardOutput(let data):
-                self?.pushStandardOutputData(data)
+                S.pushStandardOutputData(data)
             case .DidReceiveStandardError(let data):
-                self?.pushStandardErrorData(data)
+                S.pushStandardErrorData(data)
             case .DidTerminate:
-                self?.emitIncompleteLinesAndClear()
-                self?.onEvent?(.DidTerminate)
+                S.emitIncompleteLinesAndClear()
+                switch S.subproc.state {
+                case .Terminated(let exitCode):
+                    S.onEvent?(.DidExitGracefully(exitCode: exitCode))
+                default:
+                    fatalError("Bad state management in `Subprocess` class.")
+                }
             }
         }
+        try subproc.launchWithProgram(NSURL(fileURLWithPath: "/bin/bash"), arguments: ["--login", "-s"])
     }
     deinit {
-        if subproc.state != .Terminated {
+        switch subproc.state {
+        case .Terminated:
+            break
+        default:
             // Force quitting
             subproc.kill()
         }
@@ -99,7 +109,7 @@ private struct UTF8LineDecoder {
     var newLineBuffer = ""
     mutating func push(data: NSData) {
         // TODO: We can remove this copying with a clever generator.
-        guard let startPointer = data.bytes as? UnsafePointer<UInt8> else { fatalError() }
+        let startPointer = UnsafePointer<UInt8>(data.bytes)
         let endPointer = startPointer.advancedBy(data.length)
         var iteratingPointer = startPointer
         // We need to keep a strong reference to data to make it alive until generator dies.
@@ -123,6 +133,7 @@ private struct UTF8LineDecoder {
                         var copy = string
                         let endIndex = copy.endIndex
                         copy.removeRange((endIndex.predecessor())..<(endIndex))
+                        return copy
                     }
                     lines.append(getLastCharacterDeletedOf(newLineBuffer))
                     newLineBuffer = ""

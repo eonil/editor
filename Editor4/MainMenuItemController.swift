@@ -12,14 +12,14 @@ import AppKit
 enum MainMenuItemTypeID {
     case Separator
     case Submenu(MainMenuSubmenuID)
-    case MenuItem(action: MainMenuAction)
+    case MenuItem(MainMenuCommand)
 }
 private extension MainMenuItemTypeID {
     private func getTitle() -> String? {
         switch self {
         case .Separator:            return nil
         case .Submenu(let id):      return id.getLabel()
-        case .MenuItem(let action): return action.getLabel()
+        case .MenuItem(let transaction): return transaction.getLabel()
         }
     }
 }
@@ -59,16 +59,16 @@ final class MainMenuItemController: DriverAccessible {
             item.enabled = false
             item.title = id.getLabel()
 
-        case .MenuItem(let action):
+        case .MenuItem(let command):
             item = NSMenuItem()
             subcontrollers = []
             item.enabled = false
-            item.title = action.getLabel()
-            item.keyEquivalentModifierMask = Int(bitPattern: action.getKeyModifiersAndEquivalentPair().keyModifier.rawValue)
-            item.keyEquivalent = action.getKeyModifiersAndEquivalentPair().keyEquivalent
+            item.title = command.getLabel()
+            item.keyEquivalentModifierMask = Int(bitPattern: command.getKeyModifiersAndEquivalentPair().keyModifier.rawValue)
+            item.keyEquivalent = command.getKeyModifiersAndEquivalentPair().keyEquivalent
             item.target = delegate
             item.action = #selector(MenuItemDelegate.EDITOR_onClick(_:))
-            delegate.action = action
+            delegate.command = command
         }
     }
     var enabled: Bool {
@@ -80,7 +80,7 @@ final class MainMenuItemController: DriverAccessible {
         }
     }
 }
-//private extension MainMenuAction {
+//private extension MainMenuTransaction {
 //    private func makeItemController() -> MenuItemController {
 //        return MenuItemController(code: self)
 //    }
@@ -91,14 +91,14 @@ final class MainMenuItemController: DriverAccessible {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 private final class MenuItemDelegate: NSObject, DriverAccessible {
-    var action: MainMenuAction?
+    var command: MainMenuCommand?
     @objc
     private func EDITOR_onClick(_: AnyObject?) {
-        guard let action = action else {
+        guard let command = command else {
             reportErrorToDevelopers("A menu item has been clicked but it has no bounded ID.")
             return
         }
-        dispatch(Action.Menu(action))
+        dispatch(Command.MainMenu(command))
     }
 }
 

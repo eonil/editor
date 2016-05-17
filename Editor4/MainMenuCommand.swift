@@ -1,5 +1,5 @@
 //
-//  MainMenuAction.swift
+//  MainMenuCommand.swift
 //  Editor3
 //
 //  Created by Hoon H. on 2016/04/17.
@@ -9,9 +9,9 @@
 import Foundation
 import AppKit
 
-/// Main menu action means literally what will be done when a main menu
+/// Main menu command means literally what will be done when a main menu
 /// item hs been clicked.
-enum MainMenuAction {
+enum MainMenuCommand {
 //        case File
 //        case FileNew
         case FileNewWorkspace
@@ -50,8 +50,8 @@ enum MainMenuAction {
         case DebugStepOver
         case DebugClearConsole
 }
-extension MainMenuAction {
-//        static func topMainMenuAction() -> [MainMenuAction] {
+extension MainMenuCommand {
+//        static func topMainMenuTransaction() -> [MainMenuTransaction] {
 //                return [
 //                        .File,
 //                        .View,
@@ -167,7 +167,7 @@ extension MainMenuAction {
 // MARK: -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-private extension MainMenuAction {
+private extension MainMenuCommand {
         private func getShortcutKey() -> MenuItemShortcutKey? {
                 let Command     =       NSEventModifierFlags.CommandKeyMask
                 let Option      =       NSEventModifierFlags.AlternateKeyMask

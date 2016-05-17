@@ -37,7 +37,7 @@ final class WorkspaceManager: DriverAccessible {
 //            guard let window = n.object as? NSWindow else { return }
 //            for (id, wc) in workspaceToWindowControllerMapping {
 //                if wc.window === window {
-//                    dispatch(.Workspace(id: id, action: .SetCurrent))
+//                    dispatch(.Workspace(id: id, transaction: .SetCurrent))
 //                }
 //            }
             scanCurrentWorkspace()
@@ -61,8 +61,8 @@ final class WorkspaceManager: DriverAccessible {
         scanCurrentWorkspace()
     }
 
-    private func renderWorkspace(id: WorkspaceID, action: WorkspaceAction) {
-        switch action {
+    private func renderWorkspace(id: WorkspaceID, transaction: WorkspaceTransaction) {
+        switch transaction {
         case .Open:
             openEmptyWorkspace(id)
 //            guard let id = state.getWorkspaceForURL(u) else { return reportErrorToDevelopers("Cannot find newly added workspace for URL `\(u)`.") }
@@ -148,7 +148,7 @@ final class WorkspaceManager: DriverAccessible {
         for (id, wc) in workspaceToWindowControllerMapping {
             if wc.window?.mainWindow == true {
                 if state.currentWorkspaceID != id {
-                    dispatch(.Workspace(id: id, action: .SetCurrent))
+                    dispatch(.Workspace(id, .SetCurrent))
                 }
             }
         }

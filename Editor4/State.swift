@@ -16,8 +16,9 @@ struct State {
     /// to track current main-window? To send main-menu
     /// command to correct window.
     var currentWorkspaceID: WorkspaceID? = nil
-    /// Workspaces.
+//    var mainMenu = MainMenuState()
     var workspaces = KeyJournalingDictionary<WorkspaceID, WorkspaceState>()
+    var services = ServiceState()
 }
 extension State {
     /// Accesses current workspace state.
@@ -32,4 +33,13 @@ extension State {
             workspaces[workspaceID] = newValue
         }
     }
+}
+
+//struct MainMenuState {
+//    var runnableCommands = Set<MainMenuCommand>()
+//    var build
+//}
+
+struct ServiceState {
+    var cargo = CargoServiceState()
 }

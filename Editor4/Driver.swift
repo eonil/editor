@@ -14,28 +14,51 @@ protocol Dispatchable {
 }
 extension Dispatchable {
     /// Returns a task which completes *eventually*
-    /// after the action has been processed completely.
+    /// after the transaction has been processed completely.
     /// - State is fully updated
     /// - Rendering is done.
     /// Calling of the completion is done in main thread,
     /// and will be guarantted to happend in order as it
     /// passed-in.
-    func dispatch(action: Action) -> Task<()> {
-        return Driver.theDriver.dispatch(action)
+    func dispatch(transaction: Transaction) -> Task<()> {
+        return Driver.theDriver.dispatch(transaction)
+    }
+    /// Runs a command.
+    ///
+    /// - Returns:
+    ///     A task which completes when the operation 
+    ///     completes which has been triggered by this
+    ///     command.
+    func dispatch(command: Command) -> Task<()> {
+        do {
+            return try Driver.theDriver.operation.run(command).continueWithTask(continuation: { (task: Task<()>) -> Task<()> in
+                if task.faulted {
+                    Driver.theDriver.shell.alert(task.error ?? NSError(domain: "", code: -1, userInfo: [:])) // TODO: Configure error parameters properly.
+                }
+                return task
+            })
+        }
+        catch let error {
+            Driver.theDriver.shell.alert(error ?? NSError(domain: "", code: -1, userInfo: [:])) // TODO: Configure error parameters properly.
+            return Task(error: error)
+        }
     }
 }
 protocol DriverAccessible: Dispatchable {
 }
 extension DriverAccessible {
-    /// Currently processing action.
+//    var operation: Operation {
+//        get { return Driver.theDriver.operation }
+//    }
+    /// Currently processing transaction.
     /// Can be `nil` if you access this property out of
-    /// action processing.
-    var action: Action? {
+    /// transaction processing.
+    var transaction: Transaction? {
         get { return Driver.theDriver.context }
     }
     /// Current app state.
     /// Driver guarantees no change in state while 
-    /// processing an action.
+    /// processing an transaction.
     var state: State {
         get { return Driver.theDriver.state }
     }
@@ -49,18 +72,18 @@ extension DriverAccessible {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 struct Schedule {
-    var action: Action
+    var transaction: Transaction
     var completion: TaskCompletionSource<()>
 }
 private final class Driver {
 
     private static let theDriver = Driver()
 
-    private let services = Services()
     private var schedules = [Schedule]()
-    private var context: Action?
+    private var context: Transaction?
     private var state = State()
     private let shell = Shell()
+    private let operation = Operation()
 
     init() {
         do {
@@ -78,11 +101,16 @@ private final class Driver {
         DisplayLinkUtility.deinstallMainScreenHandler(ObjectIdentifier(self))
     }
 
-    func dispatch(action: Action) -> Task<()> {
+    func dispatch(transaction: Transaction) -> Task<()> {
         assertMainThread()
-        let schedule = Schedule(action: action, completion: TaskCompletionSource())
+        let schedule = Schedule(transaction: transaction, completion: TaskCompletionSource())
         schedules.append(schedule)
         return schedule.completion.task
+    }
+    func ADHOC_dispatchFromNonMainThread(transaction: Transaction) {
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            self?.dispatch(transaction)
+        }
     }
     func run() {
         assertMainThread()
@@ -92,9 +120,9 @@ private final class Driver {
     }
     func step(schedule: Schedule) {
         assertMainThread()
-        context = schedule.action
+        context = schedule.transaction
         do {
-            try state.apply(schedule.action)
+            try state.apply(schedule.transaction)
             shell.render()
             schedule.completion.trySetResult(())
         }
@@ -105,7 +133,7 @@ private final class Driver {
 //            fatalError("\(error)") // No way to recover in this case...
         }
         context = nil
-        debugPrint("Applied action: \(schedule.action)")
+        debugPrint("Applied transaction: \(schedule.transaction)")
     }
 }
 

@@ -1,5 +1,5 @@
 //
-//  Action.swift
+//  Transaction.swift
 //  Editor4
 //
 //  Created by Hoon H. on 2016/04/30.
@@ -8,54 +8,51 @@
 
 import Foundation.NSURL
 
-/// Action definitions can be nested to provide:
+/// Defineds atomic transaction for UI state.
+///
+/// Transaction definitions can be nested to provide:
 /// - Semantic locality
 /// - Common contextual parameter
-/// .
-
-enum Action {
-    /// The first action to activate driver.
+enum Transaction {
+    /// The first transaction to activate driver.
     case Reset
-    case Test(TestAction)
-    case Menu(MainMenuAction)
-    case Shell(ShellAction)
-    case Workspace(id: WorkspaceID, action: WorkspaceAction)
+    case Test(TestTransaction)
+    case Shell(ShellTransaction)
+    case Workspace(WorkspaceID, WorkspaceTransaction)
+    case ApplyCargoServiceState(CargoServiceState)
 }
-enum TestAction {
+enum TestTransaction {
     case Test1
     case Test2CreateWorkspaceAt(NSURL)
 }
-enum MenuAction {
-    case RunMainMenuItem(MainMenuAction)
-}
-enum ShellAction {
+enum ShellTransaction {
     case Quit
     case RunCreatingWorkspaceDialogue
     case RunOpeningWorkspaceDialogue
 //    case NewWorkspace(NSURL)
 //    case OpenWorkspace(NSURL)
 }
-/// Actions about a workspace.
+/// Transactions about a workspace.
 ///
 /// - Note:
 ///     "Creating a new workspace" is composed by three stages:
 ///     1. Backend(Cargo) prepares the workspace in file-system.
 ///     2. Opens an empty workspace.
 ///     3. Relocate the workspace to the URL.
-enum WorkspaceAction {
+enum WorkspaceTransaction {
     case Open
     case Close
     case Reconfigure(location: NSURL?)
     case SetCurrent
-    case File(FileAction)
-    case Editor(EditorAction)
-    //        case FileNode(path: WorkspaceItemPath, FileNodeAction)
-    //        case FileNodeList(paths: [WorkspaceItemPath], FileNodeAction)
-    case Build(BuildAction)
-    case Debug(DebugAction)
+    case File(FileTransaction)
+    case Editor(EditorTransaction)
+    //        case FileNode(path: WorkspaceItemPath, FileNodeTransaction)
+    //        case FileNodeList(paths: [WorkspaceItemPath], FileNodeTransaction)
+    case Build(BuildTransaction)
+    case Debug(DebugTransaction)
     case UpdateBuildState
 }
-enum FileAction {
+enum FileTransaction {
     case Delete(FileNodePath)
     case DeleteAllSelected
     case Select([FileNodePath])
@@ -64,37 +61,37 @@ enum FileAction {
     case DeselectAll
     case Drop(from: [NSURL], onto: FileNodePath)
     case Move(from: [FileNodePath], onto: FileNodePath)
-//    case EditTree(id: FileNodeID, action: FileTreeEditAction)
+//    case EditTree(id: FileNodeID, transaction: FileTreeEditTransaction)
 }
-enum FileActionError: ErrorType {
+enum FileTransactionError: ErrorType {
     case BadFileNodePath(FileNodePath)
     case BadFileNodeIndex
 }
-//enum FileTreeEditAction {
+//enum FileTreeEditTransaction {
 //}
-//enum FileNodeAction {
+//enum FileNodeTransaction {
 //        case Select
 //        case Deselect
 //        case Delete
 //}
-enum EditorAction {
+enum EditorTransaction {
     case Open(NSURL)
     case Save
     case Close
-    case TextEditor(TextEditorAction)
+    case TextEditor(TextEditorTransaction)
 }
-enum TextEditorAction {
+enum TextEditorTransaction {
 }
-enum AutocompletionAction {
+enum AutocompletionTransaction {
     case ShowCandidates
     case HideCandidates
     case ReconfigureCandidates(expression: String)
 }
-enum BuildAction {
+enum BuildTransaction {
     case Clean
     case Build
 }
-enum DebugAction {
+enum DebugTransaction {
     case Launch
     case Halt
     case Pause

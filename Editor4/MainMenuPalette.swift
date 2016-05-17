@@ -13,47 +13,47 @@ struct MainMenuPalette {
     // Keep menu item identifier length < 64.
     let file                            =	submenuContainerWithTitle(.File)
     let fileNew                         =	submenuContainerWithTitle(.FileNew)
-    let fileNewWorkspace                =	menuItemWithAction(.FileNewWorkspace)
-    let fileNewFolder                   =	menuItemWithAction(.FileNewFolder)
-    let fileNewFile                     =	menuItemWithAction(.FileNewFile)
+    let fileNewWorkspace                =	menuItemWithTransaction(.FileNewWorkspace)
+    let fileNewFolder                   =	menuItemWithTransaction(.FileNewFolder)
+    let fileNewFile                     =	menuItemWithTransaction(.FileNewFile)
     let fileOpen                        =	submenuContainerWithTitle(.FileOpen)
-    let fileOpenWorkspace               =	menuItemWithAction(.FileOpenWorkspace)
-    let fileOpenClearWorkspaceHistory	=	menuItemWithAction(.FileOpenClearWorkspaceHistory)
-    let fileCloseFile                   =	menuItemWithAction(.FileCloseFile)
-    let fileCloseWorkspace              =	menuItemWithAction(.FileCloseWorkspace)
-    let fileDelete                      =	menuItemWithAction(.FileDelete)
-    let fileShowInFinder                =	menuItemWithAction(.FileShowInFinder)
-    let fileShowInTerminal              =	menuItemWithAction(.FileShowInTerminal)
+    let fileOpenWorkspace               =	menuItemWithTransaction(.FileOpenWorkspace)
+    let fileOpenClearWorkspaceHistory	=	menuItemWithTransaction(.FileOpenClearWorkspaceHistory)
+    let fileCloseFile                   =	menuItemWithTransaction(.FileCloseFile)
+    let fileCloseWorkspace              =	menuItemWithTransaction(.FileCloseWorkspace)
+    let fileDelete                      =	menuItemWithTransaction(.FileDelete)
+    let fileShowInFinder                =	menuItemWithTransaction(.FileShowInFinder)
+    let fileShowInTerminal              =	menuItemWithTransaction(.FileShowInTerminal)
 
     let view                            =	submenuContainerWithTitle(.View)
-    let viewEditor                      =	menuItemWithAction(.ViewEditor)
+    let viewEditor                      =	menuItemWithTransaction(.ViewEditor)
     let viewNavigators                  =	submenuContainerWithTitle(.ViewShowNavigator)
-    let viewShowProjectNavigator        =	menuItemWithAction(.ViewShowProjectNavigator)
-    let viewShowIssueNavigator          =	menuItemWithAction(.ViewShowIssueNavigator)
-    let viewShowDebugNavigator          =	menuItemWithAction(.ViewShowDebugNavigator)
-    let viewHideNavigator               =	menuItemWithAction(.ViewHideNavigator)
-    let viewConsole                     =	menuItemWithAction(.ViewConsole)
-    let viewFullScreen                  =	menuItemWithAction(.ViewFullScreen)
+    let viewShowProjectNavigator        =	menuItemWithTransaction(.ViewShowProjectNavigator)
+    let viewShowIssueNavigator          =	menuItemWithTransaction(.ViewShowIssueNavigator)
+    let viewShowDebugNavigator          =	menuItemWithTransaction(.ViewShowDebugNavigator)
+    let viewHideNavigator               =	menuItemWithTransaction(.ViewHideNavigator)
+    let viewConsole                     =	menuItemWithTransaction(.ViewConsole)
+    let viewFullScreen                  =	menuItemWithTransaction(.ViewFullScreen)
 
     let editor                          =	submenuContainerWithTitle(.Editor)
-    let editorShowCompletions           =	menuItemWithAction(.EditorShowCompletions)
+    let editorShowCompletions           =	menuItemWithTransaction(.EditorShowCompletions)
 
     let product                         =	submenuContainerWithTitle(.Product)
-    let productRun                      =	menuItemWithAction(.ProductRun)
-    let productBuild                    =	menuItemWithAction(.ProductBuild)
-    let productClean                    =	menuItemWithAction(.ProductClean)
-    let productStop                     =	menuItemWithAction(.ProductStop)
+    let productRun                      =	menuItemWithTransaction(.ProductRun)
+    let productBuild                    =	menuItemWithTransaction(.ProductBuild)
+    let productClean                    =	menuItemWithTransaction(.ProductClean)
+    let productStop                     =	menuItemWithTransaction(.ProductStop)
 
     let debug                           =	submenuContainerWithTitle(.Debug)
-    let debugPause                      =	menuItemWithAction(.DebugPause)
-    let debugResume                     =	menuItemWithAction(.DebugResume)
-    let debugHalt                       =	menuItemWithAction(.DebugHalt)
+    let debugPause                      =	menuItemWithTransaction(.DebugPause)
+    let debugResume                     =	menuItemWithTransaction(.DebugResume)
+    let debugHalt                       =	menuItemWithTransaction(.DebugHalt)
 
-    let debugStepInto                   =	menuItemWithAction(.DebugStepInto)
-    let debugStepOut                    =	menuItemWithAction(.DebugStepOut)
-    let debugStepOver                   =	menuItemWithAction(.DebugStepOver)
+    let debugStepInto                   =	menuItemWithTransaction(.DebugStepInto)
+    let debugStepOut                    =	menuItemWithTransaction(.DebugStepOut)
+    let debugStepOver                   =	menuItemWithTransaction(.DebugStepOver)
 
-    let debugClearConsole               =	menuItemWithAction(.DebugClearConsole)
+    let debugClearConsole               =	menuItemWithTransaction(.DebugClearConsole)
 
     init() {
         file.subcontrollers = ([
@@ -135,8 +135,8 @@ private func separator() -> MainMenuItemController {
 private func submenuContainerWithTitle(id: MainMenuSubmenuID) -> MainMenuItemController {
     return MainMenuItemController(type: .Submenu(id))
 }
-private func menuItemWithAction(action: MainMenuAction) -> MainMenuItemController {
-    return MainMenuItemController(type: .MenuItem(action: action))
+private func menuItemWithTransaction(command: MainMenuCommand) -> MainMenuItemController {
+    return MainMenuItemController(type: .MenuItem(command))
 }
 
 

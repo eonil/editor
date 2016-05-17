@@ -83,7 +83,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             let path = workspaceState.files.resolvePathFor(proxy.sourceFileID)
             selectedItemPaths.append(path)
         }
-        dispatch(.Workspace(id: workspaceID, action: .File(.Select(selectedItemPaths))))
+        dispatch(.Workspace(workspaceID, .File(.Select(selectedItemPaths))))
     }
 }
 extension FileNavigatorViewController: NSOutlineViewDataSource {

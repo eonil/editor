@@ -8,43 +8,43 @@
 
 
 extension State {
-    mutating func apply(action: Action) throws {
-        switch action {
+    mutating func apply(transaction: Transaction) throws {
+        switch transaction {
         case .Reset:
             self = State()
 
-        case .Test(let action):
-            apply(action)
+        case .Test(let transaction):
+            apply(transaction)
 
-        case .Menu(let action):
-            try apply(action)
+        case .Shell(let transaction):
+            applyOnShell((), transaction: transaction)
 
-        case .Shell(let action):
-            applyOnShell((), action: action)
+        case .Workspace(let id, let transaction):
+            try apply(id , transaction: transaction)
 
-        case .Workspace(let id, let action):
-            try apply(id , action: action)
+        case .ApplyCargoServiceState(let state):
+            services.cargo = state
         }
     }
 
-    private mutating func apply(action: TestAction) {
-        switch action {
+    private mutating func apply(transaction: TestTransaction) {
+        switch transaction {
         case .Test1:
             print("Test1")
 
         case .Test2CreateWorkspaceAt(let u):
-            
-
+//            cargo
+            break
         }
     }
 
     /// Shell is currently single, so it doesn't have an actual ID,
     /// but an ID is required to be passed to shape interface consistent.
-    private mutating func applyOnShell(id: (), action: ShellAction) {
+    private mutating func applyOnShell(id: (), transaction: ShellTransaction) {
         MARK_unimplemented()
     }
-    private mutating func apply(id: WorkspaceID, action: WorkspaceAction) throws {
-        switch action {
+    private mutating func apply(id: WorkspaceID, transaction: WorkspaceTransaction) throws {
+        switch transaction {
         case .Open:
             workspaces[id] = WorkspaceState()
 
@@ -57,15 +57,15 @@ extension State {
         case .Close:
             workspaces[id] = nil
 
-        case .File(let action):
-            try applyOnWorkspace(&workspaces[id]!, action: action)
+        case .File(let transaction):
+            try applyOnWorkspace(&workspaces[id]!, transaction: transaction)
 
         default:
             MARK_unimplemented()
         }
     }
-    private mutating func applyOnWorkspace(inout workspace: WorkspaceState, action: FileAction) throws {
-        switch action {
+    private mutating func applyOnWorkspace(inout workspace: WorkspaceState, transaction: FileTransaction) throws {
+        switch transaction {
         case .Select(let paths):
             workspace.window.navigatorPane.file.selection = paths
 

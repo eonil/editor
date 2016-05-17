@@ -16,7 +16,7 @@ struct Services {
     let lldb = LLDBService()
 }
 extension Services: DriverAccessible {
-    func apply(action: Action) {
+    func apply(transaction: Transaction) {
         
     }
 }
@@ -39,29 +39,32 @@ final class RacerService {
 
 struct CargoServiceState {
     var isRunning = false
-    var isExecutableReady = false
-    var canBuild = false
-    var canClean = false
-    var canCancel = false
-    var buildErrors = [CargoError]()
+//    var isExecutableReady = false
+//    var canBuild = false
+//    var canClean = false
+//    var canCancel = false
+    var errors = [CargoError]()
 }
 enum CargoError: ErrorType {
+    case Unknown(String)
     case CompilerWarning(String)
     case CompilerError(String)
 }
 enum CargoOperation {
-    case New
+    /// - Parameter 0:
+    ///     Destination directory will be created by `cargo new`.
+    case New(NSURL)
     case Clean
     case Build
 }
 enum CargoServiceError: ErrorType {
     case AlreadyRunningAnotherOperation
     case BashDidExitWithNonZeroCode(exitCode: Int32)
-    case BashDidTerminateAbnormally
+    case BashDidHalt
 }
 /// You cannot run any operation while another operation is running.
 /// You can try:
-/// - Wait until the oepration finishes.
+/// - Wait until the opration finishes.
 /// - Cancel the operation first.
 final class CargoService {
     private init() {
@@ -77,60 +80,71 @@ final class CargoService {
     }
 
     ////////////////////////////////////////////////////////////////
+    private var compl = TaskCompletionSource<()>()
     private var bash: BashSubprocess?
     private func runBashSession(command: String) throws -> Task<()> {
         guard bash == nil else { throw CargoServiceError.AlreadyRunningAnotherOperation }
 
-        state.buildErrors = []
-        let compl = TaskCompletionSource<()>()
-        let newBash = BashSubprocess()
-        newBash.onEvent = { [weak self] in
-            switch $0 {
-            case .StandardOutputDidPrintLine(let line):
-                self?.pushStandardOutputLine(line)
-
-            case .StandardErrorDidPrintLine(let line):
-                self?.pushStandardErrorLine(line)
-
-            case .DidExit(let exitCode):
-                switch exitCode {
-                case 0:
-                    compl.trySetResult(())
-                default:
-                    compl.trySetError(CargoServiceError.BashDidExitWithNonZeroCode(exitCode: exitCode))
-                }
-
-            case .DidTerminate:
-                compl.trySetError(CargoServiceError.BashDidTerminateAbnormally)
-            }
-        }
+        state.errors = []
+        let newBash = try BashSubprocess()
+        newBash.onEvent = { [weak self] in self?.process($0) }
         try newBash.runCommand(command)
+        try newBash.runCommand("exit 0;")
         bash = newBash
+        return compl.task
+    }
+    private func process(event: BashSubprocessEvent) {
+        switch event {
+        case .StandardOutputDidPrintLine(let line):
+            pushStandardOutputLine(line)
+
+        case .StandardErrorDidPrintLine(let line):
+            pushStandardErrorLine(line)
+
+        case .DidExitGracefully(let exitCode):
+            switch exitCode {
+            case 0:
+                setNormalExit()
+                compl.trySetResult(())
+            default:
+                setAbnormalExit()
+                compl.trySetError(CargoServiceError.BashDidExitWithNonZeroCode(exitCode: exitCode))
+            }
+            bash = nil
+            compl = TaskCompletionSource()
+
+        case .DidHaltAbnormally:
+            setAbnormalExit()
+            compl.trySetError(CargoServiceError.BashDidHalt)
+            bash = nil
+            compl = TaskCompletionSource()
+        }
     }
     private func pushStandardOutputLine(line: String) {
-        MARK_unimplemented()
+        print(line)
     }
     private func pushStandardErrorLine(line: String) {
-        MARK_unimplemented()
+        guard line != "" else { return }
+        state.errors.append(.Unknown(line))
+    }
+    private func setNormalExit() {
+        state.isRunning = false
+    }
+    private func setAbnormalExit() {
+        state.isRunning = false
     }
 
     func run(operation: CargoOperation) throws -> Task<()> {
         switch operation {
-        case .New:
-            return try runBashSession("cargo new").continueWith(continuation: { [weak self] (task: Task<()>) -> () in
-                return self?.updateState()
-            })
+        case .New(let u):
+            let p = u.path ?? ""
+            return try runBashSession("cargo new " + p)
 
         case .Build:
-            return try runBashSession("cargo build").continueWith(continuation: { [weak self] (task: Task<()>) -> () in
-                return self?.updateState()
-            })
+            return try runBashSession("cargo build")
 
         case .Clean:
-            return try runBashSession("cargo clean").continueWith(continuation: { [weak self] (task: Task<()>) -> () in
-                return self?.updateState()
-            })
-
+            return try runBashSession("cargo clean")
         }
     }
     func cancelAnyOperation() {

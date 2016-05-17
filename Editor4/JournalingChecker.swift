@@ -1,0 +1,89 @@
+//
+//  JournalingChecker.swift
+//  Editor4
+//
+//  Created by Hoon H. on 2016/05/16.
+//  Copyright © 2016 Eonil. All rights reserved.
+//
+
+import Foundation.NSThread
+import EonilToolbox
+
+/// Checks journaling system for proper clearing.
+///
+/// ## TL;DR
+///
+/// See `KeyJournalingDictionary` or `IndexJournalingArray` 
+/// for usage.
+///
+/// ## How to Use This?
+///
+/// 1. Put an instance of this in a journal struct.
+/// 2. Call `markClearing()` when the journal gets clear command.
+/// 3. Call `resetAllOfClearingMarkingStates()` before state update.
+/// 4. Call `checkAllOfClearingMarkingStates()` after you cleared all journals.
+///
+/// ## Why We Need This?
+///
+/// Journaling-array can append logs infinitely, and this
+/// needs to be cleared periodically to keep memory foorprint
+/// smaller. Fortunately, we have perfect timing to do this 
+/// -- driver looop.
+///
+/// On driver loop, driver will erase all the existing journal
+/// after rendering. So renderer can use lossless logs from 
+/// last rendering and driver can keep reclaim memory for log
+/// completely.
+///
+/// But if programmer forget to call clear method on a journal,
+/// it will leak memory.  There must be a safety-check device,
+/// and this is the device.
+///
+/// By using this, we can ensure that *all the journals* are
+/// properly cleared.
+///
+/// ## How Does This Work?
+///
+/// Basically, this does one thing. Tells you whether the 
+/// clearing method has been called or not.
+///
+/// - Note:
+///     This presumes all journaling stuffs are running in main
+///     thread. Any attempt to use this in non-main thread will
+///     make a fatal-error.
+final class JournalingChecker {
+    private(set) static var allCheckers = WeakReferenceSet<JournalingChecker>()
+    static func resetAllOfClearingMarkingStates() {
+        precondition(NSThread.isMainThread())
+        for c in allCheckers {
+            c.hasCleared = false
+        }
+    }
+    static func checkAllOfClearingMarkingStates() {
+
+    }
+    init() {
+        precondition(NSThread.isMainThread())
+        JournalingChecker.allCheckers.insert(self)
+    }
+    deinit {
+        precondition(NSThread.isMainThread())
+        JournalingChecker.allCheckers.remove(self)
+    }
+    private(set) var hasCleared = false
+    func markClearing() {
+        precondition(NSThread.isMainThread())
+        hasCleared = true
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

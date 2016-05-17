@@ -63,7 +63,7 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
         case NSWindowWillCloseNotification:
             assert(workspaceID != nil)
             guard let workspaceID = workspaceID else { return }
-            dispatch(Action.Workspace(id: workspaceID, action: WorkspaceAction.Close))
+            dispatch(Transaction.Workspace(workspaceID, WorkspaceTransaction.Close))
 
         default:
             break

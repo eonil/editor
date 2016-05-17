@@ -65,14 +65,14 @@ struct DebugThreadState {
     var callStackFrames = [DebugCallStackFrameState]()
 }
 
-struct DebugCallStackID: Hashable {
-    var hashValue: Int {
-        get { MARK_unimplemented(); fatalError() }
-    }
-}
-func ==(a: DebugCallStackID, b: DebugCallStackID) -> Bool {
-
-}
+//struct DebugCallStackID: Hashable {
+//    var hashValue: Int {
+//        get { MARK_unimplemented(); fatalError() }
+//    }
+//}
+//func ==(a: DebugCallStackID, b: DebugCallStackID) -> Bool {
+//
+//}
 struct DebugCallStackFrameState {
     var functionName: String
 }

@@ -7,18 +7,36 @@
 //
 
 import Foundation
-import BoltsSwift
 
 enum SubprocessState {
     case NotLaunched
     case Running
-    case Terminated
-    case Exited
+    case Terminated(exitCode: Int32)
+
+    var isNotLaunched: Bool {
+        get {
+            switch self {
+            case .NotLaunched:  return true
+            default:            return false
+            }
+        }
+    }
+    var exitCode: Int32? {
+        get {
+            switch self {
+            case .Terminated(let exitCode): return exitCode
+            default:                        return nil
+            }
+        }
+    }
 }
 enum SubprocessEvent {
     case DidReceiveStandardOutput(NSData)
     case DidReceiveStandardError(NSData)
     case DidTerminate
+}
+enum SubprocessError: ErrorType {
+    case AlreadyDidLaunch
 }
 final class SubprocessController {
     private(set) var state = SubprocessState.NotLaunched
@@ -44,10 +62,15 @@ final class SubprocessController {
                 self?.onEvent?(.DidReceiveStandardError(data))
             }
         }
+        task.terminationHandler = { [weak self] _ in
+            guard let S = self else { return }
+            S.state = .Terminated(exitCode: S.task.terminationStatus)
+            S.onEvent?(.DidTerminate)
+        }
     }
-    func launchWithProgram(u: NSURL, arguments: [String]) {
-        assert(state == .NotLaunched)
-        guard state == .NotLaunched else { return }
+    func launchWithProgram(u: NSURL, arguments: [String]) throws {
+        assert(state.isNotLaunched)
+        guard state.isNotLaunched else { throw SubprocessError.AlreadyDidLaunch }
         task.standardInput = standardInputPipe
         task.standardOutput = standardOutputPipe
         task.standardError = standardErrorPipe
@@ -56,24 +79,25 @@ final class SubprocessController {
         task.launch()
         state = .Running
     }
-    /// Terminate the subprocess immediately.
-    func kill() {
-        MARK_unimplemented()
-    }
-    func terminate() -> Task<()> {
-        let compl = TaskCompletionSource<()>()
+
+    /// Sends `SIGTERM` to notify remote process to quit gracefully as soon as possible.
+    func terminate() {
         sendingDataQueue = []
         standardInputPipe.fileHandleForWriting.writeabilityHandler = nil
-        task.terminationHandler = { [weak self] _ in
-            self?.state = .Terminated
-            self?.onEvent?(.DidTerminate)
-            compl.trySetResult(())
-        }
         task.terminate()
-        return compl.task
     }
 
-    ////
+    /// Sends `SIGKILL` to forces remote process to quit immediately.
+    /// Remote process will be killed by kernel and cannot perform any cleanup.
+    func kill() {
+        sendingDataQueue = []
+        standardInputPipe.fileHandleForWriting.writeabilityHandler = nil
+        Darwin.kill(task.processIdentifier, SIGKILL)
+    }
+
+    
+
+    ////////////////////////////////////////////////////////////////
 
     func sendToStandardInput(data: NSData) {
         sendingDataQueue.append(data)
@@ -88,11 +112,13 @@ final class SubprocessController {
         let container = Container()
         sendingDataQueue.forEach(container.ship)
         sendingDataQueue = []
-        standardInputPipe.fileHandleForWriting.writeabilityHandler = { [weak self] h in
+        standardInputPipe.fileHandleForWriting.writeabilityHandler = { [weak self, container] h in
             if let availableData = container.payload.tryRemoveFirst() {
                 h.writeData(availableData)
             }
             else {
+                guard container.done == false else { return }
+                container.done = true
                 dispatch_async(dispatch_get_main_queue()) { [weak self] in
                     assertMainThread()
                     self?.standardInputPipe.fileHandleForWriting.writeabilityHandler = nil
@@ -105,6 +131,7 @@ final class SubprocessController {
 
 private final class Container {
     var payload = [NSData]()
+    var done = false
     func ship(data: NSData) {
         let (head, tail) = data.splitHead(64 * 1024)
         payload.append(head)

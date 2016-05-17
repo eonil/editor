@@ -24,7 +24,19 @@ struct KeyJournal<Key: Hashable> {
     }
     mutating func removeAll() {
         logs.removeAll()
+        markClearing()
     }
+
+    ////////////////////////////////////////////////////////////////
+    #if DEBUG
+    private let journalingCheck = JournalingChecker()
+    private func markClearing() {
+        journalingCheck.markClearing()
+    }
+    #else
+    private func markClearing() {
+    }
+    #endif
 }
 
 enum KeyMutation<Key: Hashable> {
