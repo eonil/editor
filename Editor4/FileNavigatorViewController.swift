@@ -130,12 +130,12 @@ extension FileNavigatorViewController: NSOutlineViewDataSource {
         cell.imageView = imageView
         cell.textField = textField
 
-        func getIcon() -> NSImage? {
-            guard let path = workspaceState?.files.resolvePathFor(proxy.sourceFileID) else { return nil }
-            guard let path1 = workspaceState?.location?.appending(path).path else { return nil }
-            return NSWorkspace.sharedWorkspace().iconForFile(path1)
-        }
-        imageView.image = getIcon()
+//        func getIcon() -> NSImage? {
+//            guard let path = workspaceState?.files.resolvePathFor(proxy.sourceFileID) else { return nil }
+//            guard let path1 = workspaceState?.location?.appending(path).path else { return nil }
+//            return NSWorkspace.sharedWorkspace().iconForFile(path1)
+//        }
+        imageView.image = nil
         textField.bordered = false
         textField.drawsBackground = false
         textField.stringValue = proxy.sourceFileState.name
