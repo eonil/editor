@@ -1,5 +1,5 @@
 //
-//  IOAtion.swift
+//  IOAction.swift
 //  Editor4
 //
 //  Created by Hoon H. on 2016/05/15.

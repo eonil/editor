@@ -18,23 +18,24 @@ struct KeyJournal<Key: Hashable> {
     }
     mutating func append(log: Log) {
         while logs.count >= capacityLimit {
-            logs.tryRemoveFirst()
+            logs.popFirst()
         }
         logs.append(log)
     }
     mutating func removeAll() {
         logs.removeAll()
-        markClearing()
+        setAsClean()
     }
 
     ////////////////////////////////////////////////////////////////
     #if DEBUG
-    private let journalingCheck = JournalingChecker()
-    private func markClearing() {
-        journalingCheck.markClearing()
+    private let journalingCheck = JournalingClearanceChecker()
+    private func setAsClean() {
+        journalingCheck.setAsClean()
     }
     #else
-    private func markClearing() {
+    private func setAsClean() {
+        // Does nothing.
     }
     #endif
 }

@@ -92,7 +92,7 @@ struct ReferencingTable<Element>: SequenceType {
         }
     }
     mutating func insert(newElement: Element) -> ReferencingKey {
-        if let emptySlotIndex = freeSlotIndexStack.tryRemoveLast() {
+        if let emptySlotIndex = freeSlotIndexStack.popLast() {
             assert(allSlots[emptySlotIndex] == nil)
             allSlots[emptySlotIndex] = newElement
             return ReferencingKey(internalIndex: emptySlotIndex)

@@ -12,7 +12,7 @@ private let DefaultJournalingCapacityLimit = 16
 ///     Interfaces are intentionally designed to be compatible with `Swift.Dictionary`.
 ///     Some members can be missing.
 ///
-struct KeyJournalingDictionary<Key: Hashable, Value>: DictionaryLiteralConvertible {
+struct KeyJournalingDictionary<Key: Hashable, Value>: DictionaryLiteralConvertible, JournalingClearance {
     private var internalDictionary: Dictionary<Key,Value>
     private(set) var journal: KeyJournal<Key>
     private(set) var version = Version()
@@ -86,6 +86,9 @@ struct KeyJournalingDictionary<Key: Hashable, Value>: DictionaryLiteralConvertib
                 }
             }
         }
+    }
+    mutating func clearJournal() {
+        journal.removeAll()
     }
 }
 extension KeyJournalingDictionary: SequenceType {

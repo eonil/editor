@@ -114,8 +114,14 @@ private final class Driver {
     }
     func run() {
         assertMainThread()
-        while let s = schedules.tryRemoveFirst() {
-            step(s)
+        if schedules.isEmpty == false {
+            JournalingClearanceChecker.resetClearanceOfAllCheckers()
+            while let s = schedules.popFirst() {
+                step(s)
+            }
+            shell.render()
+            state.clearJournals()
+            JournalingClearanceChecker.checkClearanceOfAllCheckers()
         }
     }
     func step(schedule: Schedule) {
@@ -123,7 +129,6 @@ private final class Driver {
         context = schedule.transaction
         do {
             try state.apply(schedule.transaction)
-            shell.render()
             schedule.completion.trySetResult(())
         }
         catch let error {

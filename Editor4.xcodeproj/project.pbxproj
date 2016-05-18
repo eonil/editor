@@ -20,7 +20,7 @@
 		451216D61CE77334006E9207 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D51CE77334006E9207 /* Services.swift */; };
 		451216D81CE77968006E9207 /* LLDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D71CE77968006E9207 /* LLDBService.swift */; };
 		451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D91CE77D02006E9207 /* SubprocessController.swift */; };
-		451216DE1CE77D94006E9207 /* IOAtion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216DD1CE77D94006E9207 /* IOAtion.swift */; };
+		451216DE1CE77D94006E9207 /* IOAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216DD1CE77D94006E9207 /* IOAction.swift */; };
 		453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3F21CE731820081DCDA /* KeyJournal.swift */; };
 		453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */; };
 		453FF5821CD4F17300F6344B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FF5811CD4F17300F6344B /* main.swift */; };
@@ -50,6 +50,8 @@
 		45830AB81CEA1605002FEA3D /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AB71CEA1605002FEA3D /* Command.swift */; };
 		45830AC01CEA8217002FEA3D /* Editor4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830ABF1CEA8217002FEA3D /* Editor4Tests.swift */; };
 		45830AC81CEA8245002FEA3D /* NSTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AC71CEA8245002FEA3D /* NSTaskTests.swift */; };
+		45830ACA1CEB8C79002FEA3D /* Clean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AC91CEB8C79002FEA3D /* Clean.swift */; };
+		45830ACC1CEB8D16002FEA3D /* JournalingClearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */; };
 		4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320B1CDFE78900F924F5 /* VersionType.swift */; };
 		4589320E1CDFED0000F924F5 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320D1CDFED0000F924F5 /* Version.swift */; };
 		459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459DB8D51CD487DB00C892D9 /* CoreVideo.framework */; };
@@ -188,7 +190,7 @@
 		451216D51CE77334006E9207 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		451216D71CE77968006E9207 /* LLDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBService.swift; sourceTree = "<group>"; };
 		451216D91CE77D02006E9207 /* SubprocessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubprocessController.swift; sourceTree = "<group>"; };
-		451216DD1CE77D94006E9207 /* IOAtion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOAtion.swift; sourceTree = "<group>"; };
+		451216DD1CE77D94006E9207 /* IOAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOAction.swift; sourceTree = "<group>"; };
 		453FB3F21CE731820081DCDA /* KeyJournal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyJournal.swift; sourceTree = "<group>"; };
 		453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorViewController.swift; sourceTree = "<group>"; };
 		453FF5811CD4F17300F6344B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -223,6 +225,8 @@
 		45830ABF1CEA8217002FEA3D /* Editor4Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor4Tests.swift; sourceTree = "<group>"; };
 		45830AC11CEA8217002FEA3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45830AC71CEA8245002FEA3D /* NSTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTaskTests.swift; sourceTree = "<group>"; };
+		45830AC91CEB8C79002FEA3D /* Clean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clean.swift; sourceTree = "<group>"; };
+		45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalingClearance.swift; sourceTree = "<group>"; };
 		4589320B1CDFE78900F924F5 /* VersionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionType.swift; sourceTree = "<group>"; };
 		4589320D1CDFED0000F924F5 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		459DB8D51CD487DB00C892D9 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -302,7 +306,7 @@
 				45830AA91CE79358002FEA3D /* CargoSubprocess.swift */,
 				45830AA01CE79193002FEA3D /* BashSubprocess.swift */,
 				451216D91CE77D02006E9207 /* SubprocessController.swift */,
-				451216DD1CE77D94006E9207 /* IOAtion.swift */,
+				451216DD1CE77D94006E9207 /* IOAction.swift */,
 			);
 			name = "(IO)";
 			sourceTree = "<group>";
@@ -371,6 +375,7 @@
 				45E730451CD602C900BA7550 /* StateError.swift */,
 				4511375C1CD48123001A183A /* Transaction.swift */,
 				451137951CD482D4001A183A /* Apply.swift */,
+				45830AC91CEB8C79002FEA3D /* Clean.swift */,
 				45830AB71CEA1605002FEA3D /* Command.swift */,
 				45830AAB1CE811FC002FEA3D /* Operations.swift */,
 				45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */,
@@ -401,6 +406,7 @@
 				4550F9E91CE61CE600B911C4 /* KeyJournalingDictionary.swift */,
 				45B785531CE70F6E00A40CF9 /* ReferencingTable.swift */,
 				45830AAF1CE951AB002FEA3D /* JournalingChecker.swift */,
+				45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */,
 			);
 			name = "(functional style & synchronization)";
 			sourceTree = "<group>";
@@ -604,11 +610,12 @@
 				45E730461CD602C900BA7550 /* StateError.swift in Sources */,
 				45E730531CD796D300BA7550 /* RenderingError.swift in Sources */,
 				454AD8981CC69559008A9BAC /* Utility.swift in Sources */,
+				45830ACA1CEB8C79002FEA3D /* Clean.swift in Sources */,
 				4550F9FC1CE6C29100B911C4 /* WorkspaceID.swift in Sources */,
 				4550F9EE1CE6279D00B911C4 /* WorkspaceDatabaseState.swift in Sources */,
 				4550F9C91CE4CE4600B911C4 /* IndexJournalingTree.swift in Sources */,
 				454AD87B1CC65326008A9BAC /* State.swift in Sources */,
-				451216DE1CE77D94006E9207 /* IOAtion.swift in Sources */,
+				451216DE1CE77D94006E9207 /* IOAction.swift in Sources */,
 				45B7854B1CE70C0300A40CF9 /* FileTree2.swift in Sources */,
 				4550F9EA1CE61CE600B911C4 /* KeyJournalingDictionary.swift in Sources */,
 				451137591CD48094001A183A /* Shell.swift in Sources */,
@@ -629,6 +636,7 @@
 				45D6C3551CE241490016DB7A /* RenderableWindowController.swift in Sources */,
 				451216C91CE76EE3006E9207 /* BuildState.swift in Sources */,
 				4550F9F81CE6C1FC00B911C4 /* WorkspaceState.swift in Sources */,
+				45830ACC1CEB8D16002FEA3D /* JournalingClearance.swift in Sources */,
 				451216D21CE76EF5006E9207 /* DebugState.swift in Sources */,
 				45B785541CE70F6E00A40CF9 /* ReferencingTable.swift in Sources */,
 				4589320E1CDFED0000F924F5 /* Version.swift in Sources */,
@@ -723,6 +731,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};

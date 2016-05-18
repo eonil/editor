@@ -208,13 +208,13 @@ private extension NSView {
 //        isBroadcasting = false
 //        // Observers deregistered in broadcasting will not be called
 //        // because they are already dead, so they cannot process anything.
-//        while let last = deregisteredObserversWhileBroadcasting.tryRemoveLast() {
+//        while let last = deregisteredObserversWhileBroadcasting.popLast() {
 //            allObservers[last] = nil
 //            allObserverDebuggingDescriptions[last] = nil
 //        }
 //        // Observers registered in broadcasting will not be called
 //        // because it may
-//        while let last = registeredObserversWhileBroadcasting.tryRemoveLast() {
+//        while let last = registeredObserversWhileBroadcasting.popLast() {
 //            allObservers[last.id] = last.cast
 //            allObserverDebuggingDescriptions[last.id] = last.debugInfo
 //        }

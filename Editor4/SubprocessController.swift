@@ -113,7 +113,7 @@ final class SubprocessController {
         sendingDataQueue.forEach(container.ship)
         sendingDataQueue = []
         standardInputPipe.fileHandleForWriting.writeabilityHandler = { [weak self, container] h in
-            if let availableData = container.payload.tryRemoveFirst() {
+            if let availableData = container.payload.popFirst() {
                 h.writeData(availableData)
             }
             else {

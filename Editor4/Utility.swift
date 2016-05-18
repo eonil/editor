@@ -14,6 +14,7 @@ extension String: ErrorType {
 }
 
 
+
 extension CollectionType {
     /// - Returns:
     ///     `nil` if this collection has no element.
@@ -55,13 +56,9 @@ extension Indexable {
     }
 }
 extension Array {
-    mutating func tryRemoveFirst() -> Element? {
+    mutating func popFirst() -> Element? {
         guard count > 0 else { return nil }
         return removeFirst()
-    }
-    mutating func tryRemoveLast() -> Element? {
-        guard count > 0 else { return nil }
-        return removeLast()
     }
 }
 

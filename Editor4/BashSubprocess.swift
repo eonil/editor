@@ -150,7 +150,7 @@ private struct UTF8LineDecoder {
     /// Gets first line and removes it from the buffer if available.
     /// Otherwise returns `nil`.
     mutating func popFirstLine() -> String? {
-        return lines.tryRemoveFirst()
+        return lines.popFirst()
     }
 }
 

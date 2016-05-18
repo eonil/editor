@@ -105,7 +105,7 @@ struct IndexJournal {
     }
     private mutating func append(log: Log) {
         while logs.count >= capacityLimit {
-            logs.tryRemoveFirst()
+            logs.popFirst()
         }
         logs.append(log)
     }

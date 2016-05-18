@@ -1,5 +1,5 @@
 //
-//  JournalingChecker.swift
+//  JournalingClearanceChecker.swift
 //  Editor4
 //
 //  Created by Hoon H. on 2016/05/16.
@@ -19,28 +19,27 @@ import EonilToolbox
 /// ## How to Use This?
 ///
 /// 1. Put an instance of this in a journal struct.
-/// 2. Call `markClearing()` when the journal gets clear command.
-/// 3. Call `resetAllOfClearingMarkingStates()` before state update.
-/// 4. Call `checkAllOfClearingMarkingStates()` after you cleared all journals.
+/// 2. Call `resetClearanceOfAllCheckers()` before state update.
+/// 3. Call `setAsClean()` when the journal got cleared.
+/// 4. Call `checkClearanceOfAllCheckers()` after you cleared all journals.
 ///
 /// ## Why We Need This?
 ///
 /// Journaling-array can append logs infinitely, and this
-/// needs to be cleared periodically to keep memory foorprint
-/// smaller. Fortunately, we have perfect timing to do this 
-/// -- driver looop.
+/// needs to be cleared at some point to prevent infinite growth.
+/// Fortunately, we have perfect timing to do this -- driver looop.
 ///
 /// On driver loop, driver will erase all the existing journal
-/// after rendering. So renderer can use lossless logs from 
+/// after rendering. So renderer can use lossless logs from
 /// last rendering and driver can keep reclaim memory for log
 /// completely.
 ///
 /// But if programmer forget to call clear method on a journal,
-/// it will leak memory.  There must be a safety-check device,
-/// and this is the device.
+/// it will leak memory.  There must be a checker for this situation.
+/// And this is the device.
 ///
 /// By using this, we can ensure that *all the journals* are
-/// properly cleared.
+/// properly cleared at some point.
 ///
 /// ## How Does This Work?
 ///
@@ -51,29 +50,38 @@ import EonilToolbox
 ///     This presumes all journaling stuffs are running in main
 ///     thread. Any attempt to use this in non-main thread will
 ///     make a fatal-error.
-final class JournalingChecker {
-    private(set) static var allCheckers = WeakReferenceSet<JournalingChecker>()
-    static func resetAllOfClearingMarkingStates() {
+///
+/// - Note:
+///     This does not provide the clearance magically. Programmers
+///     are still responsible to clear all the journals. This just
+///     helps to check leaking journals by programmer's mistake.
+///
+final class JournalingClearanceChecker {
+    private(set) static var allCheckers = WeakReferenceSet<JournalingClearanceChecker>()
+    static func resetClearanceOfAllCheckers() {
         precondition(NSThread.isMainThread())
         for c in allCheckers {
-            c.hasCleared = false
+            c.isClean = false
         }
     }
-    static func checkAllOfClearingMarkingStates() {
-
+    static func checkClearanceOfAllCheckers() -> Bool {
+        for c in allCheckers {
+            if c.isClean == false { return false }
+        }
+        return true
     }
     init() {
         precondition(NSThread.isMainThread())
-        JournalingChecker.allCheckers.insert(self)
+        JournalingClearanceChecker.allCheckers.insert(self)
     }
     deinit {
         precondition(NSThread.isMainThread())
-        JournalingChecker.allCheckers.remove(self)
+        JournalingClearanceChecker.allCheckers.remove(self)
     }
-    private(set) var hasCleared = false
-    func markClearing() {
+    private(set) var isClean = false
+    func setAsClean() {
         precondition(NSThread.isMainThread())
-        hasCleared = true
+        isClean = true
     }
 }
 
