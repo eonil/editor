@@ -13,56 +13,13 @@ import EonilToolbox
 protocol Dispatchable {
 }
 extension Dispatchable {
-    /// Returns a task which completes *eventually*
-    /// after the transaction has been processed completely.
-    /// - State is fully updated
-    /// - Rendering is done.
-    /// Calling of the completion is done in main thread,
-    /// and will be guarantted to happend in order as it
-    /// passed-in.
-    func dispatch(transaction: Transaction) -> Task<()> {
-        return Driver.theDriver.dispatch(transaction)
-    }
-    /// Runs a command.
-    ///
-    /// - Returns:
-    ///     A task which completes when the operation 
-    ///     completes which has been triggered by this
-    ///     command.
-    func dispatch(command: Command) -> Task<()> {
-        do {
-            return try Driver.theDriver.operation.run(command).continueWithTask(continuation: { (task: Task<()>) -> Task<()> in
-                if task.faulted {
-                    Driver.theDriver.shell.alert(task.error ?? NSError(domain: "", code: -1, userInfo: [:])) // TODO: Configure error parameters properly.
-                }
-                return task
-            })
-        }
-        catch let error {
-            Driver.theDriver.shell.alert(error ?? NSError(domain: "", code: -1, userInfo: [:])) // TODO: Configure error parameters properly.
-            return Task(error: error)
-        }
-    }
 }
 protocol DriverAccessible: Dispatchable {
 }
 extension DriverAccessible {
-//    var operation: Operation {
-//        get { return Driver.theDriver.operation }
-//    }
-    /// Currently processing transaction.
-    /// Can be `nil` if you access this property out of
-    /// transaction processing.
-    var transaction: Transaction? {
-        get { return Driver.theDriver.context }
+    var driver: Driver {
+        get { return Driver.theDriver }
     }
-    /// Current app state.
-    /// Driver guarantees no change in state while 
-    /// processing an transaction.
-    var state: State {
-        get { return Driver.theDriver.state }
-    }
-
 }
 
 
@@ -72,20 +29,21 @@ extension DriverAccessible {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 struct Schedule {
-    var transaction: Transaction
+    var action: Action
     var completion: TaskCompletionSource<()>
 }
-private final class Driver {
+final class Driver {
 
     private static let theDriver = Driver()
 
     private var schedules = [Schedule]()
-    private var context: Transaction?
-    private var state = State()
+    private var context: Action?
+    private(set) var state = State()
     private let shell = Shell()
-    private let operation = Operation()
+    private let operation = OperationService()
+    let query = QueryFlowService()
 
-    init() {
+    private init() {
         do {
             try DisplayLinkUtility.installMainScreenHandler(ObjectIdentifier(self)) { [weak self] in
                 dispatch_async(dispatch_get_main_queue()) { [weak self] in
@@ -101,34 +59,64 @@ private final class Driver {
         DisplayLinkUtility.deinstallMainScreenHandler(ObjectIdentifier(self))
     }
 
-    func dispatch(transaction: Transaction) -> Task<()> {
+    /// Returns a task which completes *eventually*
+    /// after the action has been processed completely.
+    /// - State is fully updated
+    /// - Rendering is done.
+    /// Calling of the completion is done in main thread,
+    /// and will be guarantted to happend in order as it
+    /// passed-in.
+    func dispatch(action: Action) -> Task<()> {
         assertMainThread()
-        let schedule = Schedule(transaction: transaction, completion: TaskCompletionSource())
+        let schedule = Schedule(action: action, completion: TaskCompletionSource())
         schedules.append(schedule)
         return schedule.completion.task
     }
-    func ADHOC_dispatchFromNonMainThread(transaction: Transaction) {
-        dispatch_async(dispatch_get_main_queue()) { [weak self] in
-            self?.dispatch(transaction)
+
+    /// Runs a command.
+    ///
+    /// - Returns:
+    ///     A task which completes when the operation
+    ///     completes which has been triggered by this
+    ///     command.
+    func run(command: Command) -> Task<()> {
+        do {
+            return try operation.run(command).continueWithTask(continuation: { [weak self] (task: Task<()>) -> Task<()> in
+                if task.faulted {
+                    self?.shell.alert(task.error ?? NSError(domain: "", code: -1, userInfo: [:])) // TODO: Configure error parameters properly.
+                }
+                return task
+            })
+        }
+        catch let error {
+            shell.alert(error ?? NSError(domain: "", code: -1, userInfo: [:])) // TODO: Configure error parameters properly.
+            return Task(error: error)
         }
     }
-    func run() {
+
+    func ADHOC_dispatchFromNonMainThread(action: Action) {
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            self?.dispatch(action)
+        }
+    }
+
+    private func run() {
         assertMainThread()
         if schedules.isEmpty == false {
             JournalingClearanceChecker.resetClearanceOfAllCheckers()
             while let s = schedules.popFirst() {
                 step(s)
             }
-            shell.render()
+            shell.render(state)
             state.clearJournals()
             JournalingClearanceChecker.checkClearanceOfAllCheckers()
         }
     }
-    func step(schedule: Schedule) {
+    private func step(schedule: Schedule) {
         assertMainThread()
-        context = schedule.transaction
+        context = schedule.action
         do {
-            try state.apply(schedule.transaction)
+            try state.apply(schedule.action)
             schedule.completion.trySetResult(())
         }
         catch let error {
@@ -138,7 +126,7 @@ private final class Driver {
 //            fatalError("\(error)") // No way to recover in this case...
         }
         context = nil
-        debugPrint("Applied transaction: \(schedule.transaction)")
+        debugPrint("Applied action: \(schedule.action)")
     }
 }
 

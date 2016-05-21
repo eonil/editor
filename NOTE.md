@@ -9,11 +9,11 @@ copy-elision and copy-on-write, soemtimes it doesn't work or not enough.
 Then, you can try these techniques.
 
 - Allow in-place update by making some `let` properties to `private(set)` 
-  and providing some well-written mutator code.
+    and providing some well-written mutator code.
 - Make big container object convert to immutable `final class` which means
-  all properties with `let`. 
+    all properties with `let`. 
 - Such reference-type objects may allow `var` property and employ copy-on-
-  write. 
+    write. 
 
 In my speculation, big container object likely to cause some performance 
 issues. Especially for dictionaries where they tend to cause more copy.
@@ -33,6 +33,42 @@ as small as possible.
 In most cases, you don't need to employ a lot of `ViewController`s. 
 Instead, I recommend using `ViewController`s only for absolutely required
 points. And use `View`s for any other places. 
+
+
+
+
+
+
+
+
+
+For Maintainers
+---------------
+- Do not make multiple continuation from single `Task<T>`. BoltsSwift is 
+    not intended for multiple branching.
+- Do not `import Foundation` unless you really need it. Some classes in 
+    the framework performs extenal I/O (e.g. file-system), and should be
+    used only in a specific context.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

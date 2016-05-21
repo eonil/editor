@@ -26,3 +26,23 @@ FRP is getting popular nowadays. You can find many FRP based architecutres. For 
 If you're familiar with one of those architectures, you'll find similar stuffs in this program too.
 
 
+Microservices
+-------------
+Program is divided into multiple independent parts called "services".
+Each service has their own execution context and internal state. This is practically an actor-model implementation.
+Services are all shaped differently, but all shares these attributes.
+
+- Receives messages asynchronously. 
+    Received messages will be processed eventually and mutate internal state.
+- Can dispatch message to another services.
+    By default, all services can access driver without any special treatment. 
+    So all services can send message to driver. This message is usually `Action` or `Command`.
+
+Driver owns and manages all services. We have these services now.
+
+- `UserInteractionService` (a.k.a. UI service)
+- `OperationExecutionService`
+- `QueryFlowService`
+  
+UI service is very important so it is integrated into driver implicitly. UI service state is publicly exposed, so you can access
+them directly from anywhere in main-thread. 

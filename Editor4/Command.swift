@@ -9,7 +9,7 @@
 /// Command defines a set of multi-stepping operations.
 /// Dispatching a command triggers execution of a multi-stepping 
 /// operation which might perform external I/O and dispatch
-/// multiple `Transaction`s.
+/// multiple `Action`s.
 enum Command {
-    case MainMenu(MainMenuCommand)
+    case RunMainMenuItem(MainMenuCommand)
 }

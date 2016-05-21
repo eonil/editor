@@ -29,7 +29,10 @@ extension State {
             return workspaces[workspaceID]
         }
         set {
-            guard let workspaceID = currentWorkspaceID else { return }
+            guard let workspaceID = currentWorkspaceID else {
+                reportErrorToDevelopers("Assigning back to this property is not a critical error, but this is not likely to be a proper mutation.")
+                return
+            }
             workspaces[workspaceID] = newValue
         }
     }

@@ -8,27 +8,27 @@
 
 
 extension State {
-    mutating func apply(transaction: Transaction) throws {
-        switch transaction {
+    mutating func apply(action: Action) throws {
+        switch action {
         case .Reset:
             self = State()
 
-        case .Test(let transaction):
-            apply(transaction)
+        case .Test(let action):
+            apply(action)
 
-        case .Shell(let transaction):
-            applyOnShell((), transaction: transaction)
+        case .Shell(let action):
+            applyOnShell((), action: action)
 
-        case .Workspace(let id, let transaction):
-            try apply(id , transaction: transaction)
+        case .Workspace(let id, let action):
+            try apply(id , action: action)
 
         case .ApplyCargoServiceState(let state):
             services.cargo = state
         }
     }
 
-    private mutating func apply(transaction: TestTransaction) {
-        switch transaction {
+    private mutating func apply(action: TestAction) {
+        switch action {
         case .Test1:
             print("Test1")
 
@@ -40,11 +40,11 @@ extension State {
 
     /// Shell is currently single, so it doesn't have an actual ID,
     /// but an ID is required to be passed to shape interface consistent.
-    private mutating func applyOnShell(id: (), transaction: ShellTransaction) {
+    private mutating func applyOnShell(id: (), action: ShellAction) {
         MARK_unimplemented()
     }
-    private mutating func apply(id: WorkspaceID, transaction: WorkspaceTransaction) throws {
-        switch transaction {
+    private mutating func apply(id: WorkspaceID, action: WorkspaceAction) throws {
+        switch action {
         case .Open:
             workspaces[id] = WorkspaceState()
 
@@ -57,17 +57,30 @@ extension State {
         case .Close:
             workspaces[id] = nil
 
-        case .File(let transaction):
-            try applyOnWorkspace(&workspaces[id]!, transaction: transaction)
+        case .File(let action):
+            try applyOnWorkspace(&workspaces[id]!, action: action)
 
         default:
             MARK_unimplemented()
         }
     }
-    private mutating func applyOnWorkspace(inout workspace: WorkspaceState, transaction: FileTransaction) throws {
-        switch transaction {
-        case .Select(let paths):
-            workspace.window.navigatorPane.file.selection = paths
+    private mutating func applyOnWorkspace(inout workspace: WorkspaceState, action: FileAction) throws {
+        switch action {
+        case .CreateFolder(let container, let index):
+            guard let newFolderName = (0..<128)
+                .map({ "(new folder" + $0.description + ")" })
+                .filter({ workspace.queryFile(container, containsSubfileWithName: $0) == false })
+                .first else { throw OperationError.File(FileOperationError.CannotMakeNameForNewFolder) }
+            let newFolderState = FileState2(form: FileForm.Container,
+                                            phase: FilePhase.Editing,
+                                            name: newFolderName)
+            try workspace.files.insert(newFolderState, at: index, to: container)
+
+        case .SetCurrent(let maybeNewFileID):
+            workspace.window.navigatorPane.file.current = maybeNewFileID
+
+        case .StartEditing(let fileID):
+            workspace.window.navigatorPane.file.editing = fileID
 
         default:
             MARK_unimplemented()
@@ -77,6 +90,17 @@ extension State {
 
 
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MARK: -
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+private extension WorkspaceState {
+    func queryFile(superfileID: FileID2, containsSubfileWithName subfileName: String) -> Bool {
+        return files[superfileID].subfileIDs.contains { files[$0].name == subfileName }
+    }
+}
 
 
 

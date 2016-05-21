@@ -16,7 +16,7 @@ struct Services {
     let lldb = LLDBService()
 }
 extension Services: DriverAccessible {
-    func apply(transaction: Transaction) {
+    func apply(action: Action) {
         
     }
 }

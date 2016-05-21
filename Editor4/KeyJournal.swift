@@ -53,4 +53,23 @@ enum KeyMutation<Key: Hashable> {
         }
     }
 }
+extension KeyMutation {
+    var isInsert: Bool {
+        get { switch self { case .Insert: return true; default: return false } }
+    }
+    var isUpdate: Bool {
+        get { switch self { case .Update: return true; default: return false } }
+    }
+    var isDelete: Bool {
+        get { switch self { case .Delete: return true; default: return false } }
+    }
+}
+
+
+
+
+
+
+
+
 

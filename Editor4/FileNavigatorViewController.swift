@@ -6,7 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
 import AppKit
 import EonilToolbox
 
@@ -76,14 +75,9 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
 
     private func scanSelection() {
         guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
-        guard let workspaceState = workspaceState else { return }
-        var selectedItemPaths = [FileNodePath]()
-        for rowIndex in outlineView.selectedRowIndexes {
-            guard let proxy = outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { continue }
-            let path = workspaceState.files.resolvePathFor(proxy.sourceFileID)
-            selectedItemPaths.append(path)
-        }
-        dispatch(.Workspace(workspaceID, .File(.Select(selectedItemPaths))))
+        let index = outlineView.selectedRow
+        let fileID = ((index == NSNotFound) ? nil : (outlineView.itemAtRow(index) as? FileUIProxy2))?.sourceFileID
+        driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetCurrent(fileID))))
     }
 }
 extension FileNavigatorViewController: NSOutlineViewDataSource {

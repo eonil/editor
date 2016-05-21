@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		451137591CD48094001A183A /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451137581CD48094001A183A /* Shell.swift */; };
-		4511375D1CD48123001A183A /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511375C1CD48123001A183A /* Transaction.swift */; };
+		4511375D1CD48123001A183A /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511375C1CD48123001A183A /* Action.swift */; };
 		451137881CD4819E001A183A /* BoltsSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451137701CD48176001A183A /* BoltsSwift.framework */; };
 		451137891CD4819E001A183A /* BoltsSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 451137701CD48176001A183A /* BoltsSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4511378C1CD4819E001A183A /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4511377E1CD48176001A183A /* EonilToolbox.framework */; };
@@ -43,7 +43,7 @@
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
 		45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA01CE79193002FEA3D /* BashSubprocess.swift */; };
 		45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoSubprocess.swift */; };
-		45830AAC1CE811FC002FEA3D /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAB1CE811FC002FEA3D /* Operations.swift */; };
+		45830AAC1CE811FC002FEA3D /* OperationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAB1CE811FC002FEA3D /* OperationService.swift */; };
 		45830AAE1CE82DDA002FEA3D /* BoltsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */; };
 		45830AB01CE951AB002FEA3D /* JournalingChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAF1CE951AB002FEA3D /* JournalingChecker.swift */; };
 		45830AB61CEA1126002FEA3D /* DialogueUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AB51CEA1126002FEA3D /* DialogueUtility.swift */; };
@@ -52,6 +52,10 @@
 		45830AC81CEA8245002FEA3D /* NSTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AC71CEA8245002FEA3D /* NSTaskTests.swift */; };
 		45830ACA1CEB8C79002FEA3D /* Clean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AC91CEB8C79002FEA3D /* Clean.swift */; };
 		45830ACC1CEB8D16002FEA3D /* JournalingClearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */; };
+		45830B141CF04D30002FEA3D /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B131CF04D30002FEA3D /* Stepper.swift */; };
+		45830B181CF075E7002FEA3D /* QueryFlowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B171CF075E7002FEA3D /* QueryFlowService.swift */; };
+		45830B1C1CF08858002FEA3D /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1B1CF08858002FEA3D /* ServiceType.swift */; };
+		45830B1E1CF08AE7002FEA3D /* UserInteractionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */; };
 		4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320B1CDFE78900F924F5 /* VersionType.swift */; };
 		4589320E1CDFED0000F924F5 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320D1CDFED0000F924F5 /* Version.swift */; };
 		459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459DB8D51CD487DB00C892D9 /* CoreVideo.framework */; };
@@ -180,7 +184,7 @@
 
 /* Begin PBXFileReference section */
 		451137581CD48094001A183A /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
-		4511375C1CD48123001A183A /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		4511375C1CD48123001A183A /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		4511375E1CD48176001A183A /* BoltsSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BoltsSwift.xcodeproj; path = "submodules/Bolts-Swift/BoltsSwift.xcodeproj"; sourceTree = "<group>"; };
 		451137611CD48176001A183A /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
 		451137911CD4822D001A183A /* Marks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marks.swift; sourceTree = "<group>"; };
@@ -216,7 +220,7 @@
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
 		45830AA01CE79193002FEA3D /* BashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashSubprocess.swift; sourceTree = "<group>"; };
 		45830AA91CE79358002FEA3D /* CargoSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoSubprocess.swift; sourceTree = "<group>"; };
-		45830AAB1CE811FC002FEA3D /* Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
+		45830AAB1CE811FC002FEA3D /* OperationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationService.swift; sourceTree = "<group>"; };
 		45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoltsExtensions.swift; sourceTree = "<group>"; };
 		45830AAF1CE951AB002FEA3D /* JournalingChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalingChecker.swift; sourceTree = "<group>"; };
 		45830AB51CEA1126002FEA3D /* DialogueUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogueUtility.swift; sourceTree = "<group>"; };
@@ -227,6 +231,10 @@
 		45830AC71CEA8245002FEA3D /* NSTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTaskTests.swift; sourceTree = "<group>"; };
 		45830AC91CEB8C79002FEA3D /* Clean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clean.swift; sourceTree = "<group>"; };
 		45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalingClearance.swift; sourceTree = "<group>"; };
+		45830B131CF04D30002FEA3D /* Stepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
+		45830B171CF075E7002FEA3D /* QueryFlowService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryFlowService.swift; sourceTree = "<group>"; };
+		45830B1B1CF08858002FEA3D /* ServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
+		45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInteractionService.swift; sourceTree = "<group>"; };
 		4589320B1CDFE78900F924F5 /* VersionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionType.swift; sourceTree = "<group>"; };
 		4589320D1CDFED0000F924F5 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		459DB8D51CD487DB00C892D9 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
@@ -276,6 +284,7 @@
 		4511375A1CD480E5001A183A /* (UI) */ = {
 			isa = PBXGroup;
 			children = (
+				45D6C3441CE2139C0016DB7A /* Renderable.swift */,
 				451137581CD48094001A183A /* Shell.swift */,
 				45E730521CD796D300BA7550 /* RenderingError.swift */,
 				45C3B3941CD4F35D0001D0AF /* MainMenuCommand.swift */,
@@ -292,7 +301,6 @@
 				453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */,
 				45D6C3541CE241490016DB7A /* RenderableWindowController.swift */,
 				45D6C3421CE210180016DB7A /* RenderableViewController.swift */,
-				45D6C3441CE2139C0016DB7A /* Renderable.swift */,
 				454AD8681CC6530D008A9BAC /* ApplicationController.swift */,
 			);
 			name = "(UI)";
@@ -373,13 +381,17 @@
 				451216C81CE76EE3006E9207 /* BuildState.swift */,
 				451216D11CE76EF5006E9207 /* DebugState.swift */,
 				45E730451CD602C900BA7550 /* StateError.swift */,
-				4511375C1CD48123001A183A /* Transaction.swift */,
+				4511375C1CD48123001A183A /* Action.swift */,
 				451137951CD482D4001A183A /* Apply.swift */,
 				45830AC91CEB8C79002FEA3D /* Clean.swift */,
 				45830AB71CEA1605002FEA3D /* Command.swift */,
-				45830AAB1CE811FC002FEA3D /* Operations.swift */,
+				45830B1B1CF08858002FEA3D /* ServiceType.swift */,
+				45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */,
+				45830AAB1CE811FC002FEA3D /* OperationService.swift */,
+				45830B171CF075E7002FEA3D /* QueryFlowService.swift */,
 				45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */,
 				45830AB51CEA1126002FEA3D /* DialogueUtility.swift */,
+				45830B131CF04D30002FEA3D /* Stepper.swift */,
 				4511375A1CD480E5001A183A /* (UI) */,
 				4511375B1CD480EB001A183A /* (IO) */,
 				454AD8971CC69559008A9BAC /* Utility.swift */,
@@ -611,6 +623,7 @@
 				45E730531CD796D300BA7550 /* RenderingError.swift in Sources */,
 				454AD8981CC69559008A9BAC /* Utility.swift in Sources */,
 				45830ACA1CEB8C79002FEA3D /* Clean.swift in Sources */,
+				45830B141CF04D30002FEA3D /* Stepper.swift in Sources */,
 				4550F9FC1CE6C29100B911C4 /* WorkspaceID.swift in Sources */,
 				4550F9EE1CE6279D00B911C4 /* WorkspaceDatabaseState.swift in Sources */,
 				4550F9C91CE4CE4600B911C4 /* IndexJournalingTree.swift in Sources */,
@@ -628,13 +641,15 @@
 				454AD8961CC694E8008A9BAC /* WorkspaceWindowController.swift in Sources */,
 				45B5CDD51CE753FC0097AC0B /* FileNodePath.swift in Sources */,
 				4550F9F41CE6B65300B911C4 /* WorkspaceWindowState.swift in Sources */,
-				45830AAC1CE811FC002FEA3D /* Operations.swift in Sources */,
+				45830AAC1CE811FC002FEA3D /* OperationService.swift in Sources */,
 				45C3B3971CD4F82D0001D0AF /* RunMainMenuAction.swift in Sources */,
+				45830B1E1CF08AE7002FEA3D /* UserInteractionService.swift in Sources */,
 				4550F9D61CE4FE0200B911C4 /* ArraySynchronizationManager.swift in Sources */,
 				45C3B3931CD4F3490001D0AF /* MainMenuItemController.swift in Sources */,
 				45C3B3851CD4F3030001D0AF /* MainMenuController.swift in Sources */,
 				45D6C3551CE241490016DB7A /* RenderableWindowController.swift in Sources */,
 				451216C91CE76EE3006E9207 /* BuildState.swift in Sources */,
+				45830B1C1CF08858002FEA3D /* ServiceType.swift in Sources */,
 				4550F9F81CE6C1FC00B911C4 /* WorkspaceState.swift in Sources */,
 				45830ACC1CEB8D16002FEA3D /* JournalingClearance.swift in Sources */,
 				451216D21CE76EF5006E9207 /* DebugState.swift in Sources */,
@@ -643,13 +658,14 @@
 				451216D81CE77968006E9207 /* LLDBService.swift in Sources */,
 				45D6C34B1CE222880016DB7A /* WorkspaceManager.swift in Sources */,
 				45D6C3431CE210180016DB7A /* RenderableViewController.swift in Sources */,
-				4511375D1CD48123001A183A /* Transaction.swift in Sources */,
+				4511375D1CD48123001A183A /* Action.swift in Sources */,
 				45C3B3951CD4F35D0001D0AF /* MainMenuCommand.swift in Sources */,
 				4550F9FE1CE6E75700B911C4 /* WorkspaceAccessible.swift in Sources */,
 				45D6C35D1CE4C6F00016DB7A /* IndexJournalingArray.swift in Sources */,
 				453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */,
 				451216D61CE77334006E9207 /* Services.swift in Sources */,
 				451137921CD4822D001A183A /* Marks.swift in Sources */,
+				45830B181CF075E7002FEA3D /* QueryFlowService.swift in Sources */,
 				45830AAE1CE82DDA002FEA3D /* BoltsExtensions.swift in Sources */,
 				45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */,
 				4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */,

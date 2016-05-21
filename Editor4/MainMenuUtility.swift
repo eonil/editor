@@ -6,7 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
 import AppKit
 
 struct MainMenuUtility {

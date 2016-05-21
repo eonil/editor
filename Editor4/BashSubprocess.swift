@@ -6,7 +6,8 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSData
+import Foundation.NSString
 
 enum BashSubprocessEvent {
     /// - Parameter 0:

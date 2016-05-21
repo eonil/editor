@@ -6,7 +6,7 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
+import Foundation.NSURL
 import AppKit
 import BoltsSwift
 

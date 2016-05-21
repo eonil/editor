@@ -37,7 +37,7 @@ final class WorkspaceManager: DriverAccessible {
 //            guard let window = n.object as? NSWindow else { return }
 //            for (id, wc) in workspaceToWindowControllerMapping {
 //                if wc.window === window {
-//                    dispatch(.Workspace(id: id, transaction: .SetCurrent))
+//                    dispatch(.Workspace(id: id, action: .SetCurrent))
 //                }
 //            }
             scanCurrentWorkspace()
@@ -47,12 +47,12 @@ final class WorkspaceManager: DriverAccessible {
         }
     }
 
-    func render() {
-        guard state.workspaces.version != latestWorkspaceKeysetVersion else { return }
-        let (insertions, removings) = diff(Set(state.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))
+    func render(state: State) {
+        guard driver.state.workspaces.version != latestWorkspaceKeysetVersion else { return }
+        let (insertions, removings) = diff(Set(driver.state.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))
         insertions.forEach(openEmptyWorkspace)
         removings.forEach(closeWorkspace)
-        assert(Set(state.workspaces.keys) == Set(workspaceToWindowControllerMapping.keys))
+        assert(Set(driver.state.workspaces.keys) == Set(workspaceToWindowControllerMapping.keys))
 
         for (_, wc) in workspaceToWindowControllerMapping {
             wc.renderRecursively()
@@ -61,8 +61,8 @@ final class WorkspaceManager: DriverAccessible {
         scanCurrentWorkspace()
     }
 
-    private func renderWorkspace(id: WorkspaceID, transaction: WorkspaceTransaction) {
-        switch transaction {
+    private func renderWorkspace(id: WorkspaceID, action: WorkspaceAction) {
+        switch action {
         case .Open:
             openEmptyWorkspace(id)
 //            guard let id = state.getWorkspaceForURL(u) else { return reportErrorToDevelopers("Cannot find newly added workspace for URL `\(u)`.") }
@@ -147,13 +147,28 @@ final class WorkspaceManager: DriverAccessible {
     private func scanCurrentWorkspace() {
         for (id, wc) in workspaceToWindowControllerMapping {
             if wc.window?.mainWindow == true {
-                if state.currentWorkspaceID != id {
-                    dispatch(.Workspace(id, .SetCurrent))
+                if driver.state.currentWorkspaceID != id {
+                    driver.dispatch(.Workspace(id, .SetCurrent))
                 }
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
 import AppKit
 
 final class MainMenuController: DriverAccessible {
@@ -31,9 +30,8 @@ final class MainMenuController: DriverAccessible {
     }
     func render() {
         func getCurrentFile() -> (id: FileID2, state: FileState2)? {
-            guard let path = state.currentWorkspace?.window.navigatorPane.file.selection.last else { return nil }
-            guard let id = state.currentWorkspace?.files.searchFileIDForPath(path) else { return nil }
-            guard let state = state.currentWorkspace?.files[id] else { return nil }
+            guard let id = driver.state.currentWorkspace?.window.navigatorPane.file.current else { return nil }
+            guard let state = driver.state.currentWorkspace?.files[id] else { return nil }
             return (id, state)
         }
         let maybeCurrentFile = getCurrentFile()
@@ -41,8 +39,8 @@ final class MainMenuController: DriverAccessible {
         palette.file.enabled = true
         palette.fileNew.enabled = true
         palette.fileNewWorkspace.enabled = true
-        palette.fileNewFolder.enabled = maybeCurrentFile?.state.form == .Container
-        palette.fileNewFile.enabled = maybeCurrentFile?.state.form == .Container
+        palette.fileNewFolder.enabled = (maybeCurrentFile?.state.form == .Container)
+        palette.fileNewFile.enabled = (maybeCurrentFile?.state.form == .Container)
         palette.fileOpen.enabled = true
         palette.fileOpenWorkspace.enabled = true
         palette.fileOpenClearWorkspaceHistory.enabled = true

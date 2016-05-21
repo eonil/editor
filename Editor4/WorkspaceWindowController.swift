@@ -50,6 +50,8 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
         NotificationUtility.deregister(self)
     }
 
+
+
     ////////////////////////////////////////////////////////////////
 
     override var shouldCloseDocument: Bool {
@@ -63,7 +65,7 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
         case NSWindowWillCloseNotification:
             assert(workspaceID != nil)
             guard let workspaceID = workspaceID else { return }
-            dispatch(Transaction.Workspace(workspaceID, WorkspaceTransaction.Close))
+            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.Close))
 
         default:
             break
@@ -78,10 +80,8 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
             ]
         }
     }
-
-    ////////////////////////////////////////////////////////////////
-    
 }
+
 extension WorkspaceWindowController {
 }
 

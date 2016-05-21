@@ -1,5 +1,5 @@
 //
-//  ApplyMainMenuTransaction.swift
+//  ApplyMainMenuAction.swift
 //  Editor4
 //
 //  Created by Hoon H. on 2016/04/30.
@@ -8,4 +8,4 @@
 
 import BoltsSwift
 
-extension Operation {}
+extension OperationService {}

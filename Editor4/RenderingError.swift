@@ -9,5 +9,5 @@
 //import Foundation
 //
 //enum RenderingError: ErrorType {
-//    case Transaction
+//    case Action
 //}

@@ -9,4 +9,5 @@
 /// If the update result is equal4
 enum StateError: ErrorType {
     case RollbackByMissingPrerequisites
+    case BadPath(FileNodePath)
 }

@@ -15,7 +15,7 @@ extension WorkspaceAccessible where Self: DriverAccessible {
     var workspaceState: WorkspaceState? {
         get {
             guard let workspaceID = workspaceID else { return nil }
-            return state.workspaces[workspaceID]
+            return driver.state.workspaces[workspaceID]
         }
     }
 }

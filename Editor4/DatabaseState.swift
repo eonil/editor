@@ -6,8 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
-
 /// A space to store states that are **shared in whole application scope**,
 /// and referenced from multiple places **using ID**. Anyway, you have to 
 /// accept amortized O(1) performance.

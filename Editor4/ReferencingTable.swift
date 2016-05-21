@@ -6,8 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
-
 struct ReferencingKey: Hashable {
     private var internalIndex: Int
     private init(internalIndex: Int) {

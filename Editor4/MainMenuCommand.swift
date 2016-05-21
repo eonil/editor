@@ -6,7 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
 import AppKit
 
 /// Main menu command means literally what will be done when a main menu
@@ -51,7 +50,7 @@ enum MainMenuCommand {
         case DebugClearConsole
 }
 extension MainMenuCommand {
-//        static func topMainMenuTransaction() -> [MainMenuTransaction] {
+//        static func topMainMenuAction() -> [MainMenuAction] {
 //                return [
 //                        .File,
 //                        .View,

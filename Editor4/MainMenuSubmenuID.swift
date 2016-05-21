@@ -6,8 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
-
 enum MainMenuSubmenuID {
     case File
     case FileNew

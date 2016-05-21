@@ -6,7 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
 import AppKit
 
 enum MainMenuItemTypeID {
@@ -19,7 +18,7 @@ private extension MainMenuItemTypeID {
         switch self {
         case .Separator:            return nil
         case .Submenu(let id):      return id.getLabel()
-        case .MenuItem(let transaction): return transaction.getLabel()
+        case .MenuItem(let action): return action.getLabel()
         }
     }
 }
@@ -80,7 +79,7 @@ final class MainMenuItemController: DriverAccessible {
         }
     }
 }
-//private extension MainMenuTransaction {
+//private extension MainMenuAction {
 //    private func makeItemController() -> MenuItemController {
 //        return MenuItemController(code: self)
 //    }
@@ -98,7 +97,7 @@ private final class MenuItemDelegate: NSObject, DriverAccessible {
             reportErrorToDevelopers("A menu item has been clicked but it has no bounded ID.")
             return
         }
-        dispatch(Command.MainMenu(command))
+        driver.run(Command.RunMainMenuItem(command))
     }
 }
 

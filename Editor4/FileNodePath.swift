@@ -17,12 +17,12 @@ struct FileNodePath {
     init(_ keys: [String]) {
         self.keys = keys
     }
-    func splitFirst() -> (String, FileNodePath)? {
+    func splitFirst() -> (first: String, tail: FileNodePath)? {
         guard let first = keys.first else { return nil }
         let rest = keys[keys.startIndex.successor()..<keys.endIndex]
         return (first, FileNodePath(Array(rest)))
     }
-    func splitLast() -> (FileNodePath, String)? {
+    func splitLast() -> (head: FileNodePath, last: String)? {
         guard let last = keys.last else { return nil }
         let rest = keys[keys.startIndex..<keys.endIndex.predecessor()]
         return (FileNodePath(Array(rest)), last)

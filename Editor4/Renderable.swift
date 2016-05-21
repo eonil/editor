@@ -6,8 +6,6 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
-
 /// Represents a renderable object.
 protocol Renderable {
     func render()
@@ -53,3 +51,18 @@ extension NSViewController {
         stat.viewControllerIterationCount += 1
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -6,6 +6,8 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
+/// We do not keep selection/editing informaiton in navigational state
+/// except it's really required because it affects performance too much.
 struct WorkspaceWindowState {
     var navigatorPane = NavigatorPaneState()
     var editorPane = EditorPaneState()
@@ -28,7 +30,13 @@ enum NavigatorPaneID {
     case Debug
 }
 struct FileNavigatorPaneState {
-    var selection = [FileNodePath]()
+    /// Path to a file-node that is currently in editing.
+    var editing: FileID2?
+    var current: FileID2?
+//    var selection: [FileID2] = []
+//    /// Sorted in selected time.
+//    /// Last selected item is at last.
+//    var selection = [FileNodePath]()
     var filterExpression: String?
 }
 struct IssueNavigatorPaneState {

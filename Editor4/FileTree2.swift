@@ -121,6 +121,10 @@ extension FileTree2: SequenceType {
         }
     }
 }
+enum FilePhase {
+    case Editing
+    case Normal
+}
 enum FileForm {
     case Container
     case Data
@@ -138,6 +142,7 @@ struct FileState2: VersioningStateType {
         }
     }
     let form: FileForm
+    var phase = FilePhase.Normal
     var name: String {
         didSet {
             version.revise()
@@ -148,8 +153,9 @@ struct FileState2: VersioningStateType {
             version.revise()
         }
     }
-    init(form: FileForm, name: String) {
+    init(form: FileForm, phase: FilePhase, name: String) {
         self.form = form
+        self.phase = phase
         self.name = name
     }
 }

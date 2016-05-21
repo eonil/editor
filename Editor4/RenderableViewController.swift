@@ -12,7 +12,7 @@ import AppKit
 /// Provides pre-configured to receive Shell rendering signals.
 /// 
 /// This class is intended to be subclassed.
-/// `render` method will be called for every transaction signal.
+/// `render` method will be called for every action signal.
 /// Subclass responsible to filter out unwanted signals.
 ///
 class RenderableViewController: NSViewController, Renderable {
