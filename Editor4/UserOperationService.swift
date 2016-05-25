@@ -114,7 +114,6 @@ extension UserOperationService {
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
             guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
             guard let currentFileID = workspace.window.navigatorPane.file.current else { throw UserOperationError.MissingCurrentFile }
-            workspace.files.resolvePathFor(currentFileID)
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolderAndStartEditingName(container: currentFileID, index: 0))))
 
         case .FileNewFile:
@@ -136,7 +135,10 @@ extension UserOperationService {
 
         case .FileDelete:
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
-            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteAllCurrentOrSelectedFiles)))
+            guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
+            let fileSequenceToDelete = workspace.window.navigatorPane.file.getCurrentOfSelections()
+            let uniqueFileIDs = Set(fileSequenceToDelete)
+            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteFiles(uniqueFileIDs))))
 
     //    case .ProductBuild:
     //        guard let workspaceID = state.currentWorkspaceID else { throw MainMenuActionError.MissingCurrentWorkspace }

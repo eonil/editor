@@ -43,13 +43,19 @@ struct FileNavigatorPaneState {
     var filterExpression: String?
 }
 extension FileNavigatorPaneState {
-    func getAllOfCurrentAndSelections() -> AnySequence<FileID2> {
-        let flatten = FlattenSequence([
-            AnySequence(CollectionOfOne(current).flatMap({$0})),
-            AnySequence(selection),
-            ])
-        return AnySequence<FileID2>(flatten)
+    func getCurrentOfSelections() -> AnySequence<FileID2> {
+        if let current = current {
+            return AnySequence(CollectionOfOne(current))
+        }
+        return AnySequence(selection)
     }
+//    func getAllOfCurrentAndSelections() -> AnySequence<FileID2> {
+//        let flatten = FlattenSequence([
+//            AnySequence(CollectionOfOne(current).flatMap({$0})),
+//            AnySequence(selection),
+//            ])
+//        return AnySequence<FileID2>(flatten)
+//    }
 }
 struct IssueNavigatorPaneState {
     var hideWarnings = false

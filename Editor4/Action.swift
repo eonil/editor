@@ -68,6 +68,7 @@ enum FileAction {
     case CreateFileAndStartEditingName(container: FileID2, index: Int)
     case StartEditingCurrentFileName
     case DeleteAllCurrentOrSelectedFiles
+    case DeleteFiles(Set<FileID2>)
     case Reconfigure(FileID2, FileState2)
     case Drop(from: [NSURL], onto: FileNodePath)
     case Move(from: [FileNodePath], onto: FileNodePath)

@@ -98,33 +98,13 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
         menuPalette.delete.enabled = isFileOperationAvailable
     }
 
-    private func scan() {
-        // This must be done first because it uses temporal lazy sequence,
-        // and that needs immediate synchronization.
-        scanSelectedFilesOnly()
-        scanCurrentFileOnly()
-    }
-    private func scanSelectedFilesOnly() {
-        guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
-        let rowIndexToOptionalFileID = { [weak self] (rowIndex: Int) -> FileID2? in
-            guard let S = self else { return nil }
-            guard let proxy = S.outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return nil }
-            return proxy.sourceFileID
-        }
-        let generatorMaker = { [weak self] () -> AnyGenerator<FileID2> in
-            guard let S = self else { return AnyGenerator { return nil } }
-            var rowIndexGenerator = S.outlineView.selectedRowIndexes.generate()
-            let convertingGenerator = AnyGenerator { () -> FileID2? in
-                while let rowIndex = rowIndexGenerator.next() {
-                    return rowIndexToOptionalFileID(rowIndex)
-                }
-                return nil
-            }
-            return convertingGenerator
-        }
-        selectionController.source = AnySequence<FileID2>(generatorMaker)
-        driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(selectionController.sequence))))
-    }
+//    private func scan() {
+//        // This must be done first because it uses temporal lazy sequence,
+//        // and that needs immediate synchronization.
+//        scanSelectedFilesOnly()
+//        scanCurrentFileOnly()
+//    }
+
     private func scanCurrentFileOnly() {
         guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
         if runningMenu {
@@ -145,7 +125,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             runningMenu = false
         }
         renderMenuStatesOnly()
-        scan()
+        scanCurrentFileOnly()
     }
 }
 extension FileNavigatorViewController: NSOutlineViewDataSource {
@@ -207,7 +187,32 @@ extension FileNavigatorViewController: NSOutlineViewDataSource {
 }
 extension FileNavigatorViewController: NSOutlineViewDelegate {
     func outlineViewSelectionDidChange(notification: NSNotification) {
-        scan()
+        /// Must be called only from  `SelectionDidChange` event.
+        /// Because we cannot determine version of `selectedRowIndexes`,
+        /// the only thing what we can do is just tracking event precisely.
+        /// Extra or redundant scanning of selected files will prevent access to lazy sequence.
+        func scanSelectedFilesOnly() {
+            guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
+            let rowIndexToOptionalFileID = { [weak self] (rowIndex: Int) -> FileID2? in
+                guard let S = self else { return nil }
+                guard let proxy = S.outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return nil }
+                return proxy.sourceFileID
+            }
+            let generatorMaker = { [weak self] () -> AnyGenerator<FileID2> in
+                guard let S = self else { return AnyGenerator { return nil } }
+                var rowIndexGenerator = S.outlineView.selectedRowIndexes.generate()
+                let convertingGenerator = AnyGenerator { () -> FileID2? in
+                    while let rowIndex = rowIndexGenerator.next() {
+                        return rowIndexToOptionalFileID(rowIndex)
+                    }
+                    return nil
+                }
+                return convertingGenerator
+            }
+            selectionController.source = AnySequence<FileID2>(generatorMaker)
+            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(selectionController.sequence))))
+        }
+        scanSelectedFilesOnly()
     }
 }
 
