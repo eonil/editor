@@ -48,6 +48,14 @@ final class UserInteractionService {
         DisplayLinkUtility.deinstallMainScreenHandler(ObjectIdentifier(self))
     }
 
+    /// Scans user-interaction state from AppKit scene-graph immediately.
+    func ADHOC_scanImmediately() {
+        shell.scan()
+    }
+    func ADHOC_renderImmediately() {
+        shell.render()
+    }
+
     /// Returns a task which completes *eventually*
     /// after the action has been processed completely.
     /// - State is fully updated

@@ -47,6 +47,11 @@ final class WorkspaceManager: DriverAccessible, Renderable {
         }
     }
 
+    func scan() {
+        for (_, wc) in workspaceToWindowControllerMapping {
+            wc.scanRecursively()
+        }
+    }
     func render() {
         guard driver.userInteractionState.workspaces.version != latestWorkspaceKeysetVersion else { return }
         let (insertions, removings) = diff(Set(driver.userInteractionState.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))

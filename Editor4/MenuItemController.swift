@@ -23,10 +23,19 @@ private extension MenuItemTypeID {
     }
 }
 
+///
+/// - Note:
+///     When you build a context-menu, take care not to make
+///     its owner menu-item disabled. A menu owned by a disalbed
+///     menu-item will be displayed, but no submenu item will
+///     fire proper event, so it will not work ultimately.
+///
 final class MenuItemController: DriverAccessible {
     private let type: MenuItemTypeID
     let item: NSMenuItem
     private let delegate = MenuItemDelegate()
+    /// `true` only between menu opening and closing.
+    private(set) var running = false
 
     var subcontrollers: [MenuItemController] {
         willSet {

@@ -16,9 +16,12 @@ private enum ColumnID: String {
 final class FileNavigatorViewController: RenderableViewController, DriverAccessible, WorkspaceAccessible {
 
     private let scrollView = NSScrollView()
-    private let outlineView = NSOutlineView()
+    private let outlineView = FileNavigatorOutlineView()
     private let nameColumn = NSTableColumn(identifier: ColumnID.Name.rawValue)
+    private let menuPalette = FileNavigatorMenuPalette()
+
     private var installer = ViewInstaller()
+    private var runningMenu = false
 
     private var sourceFilesVersion: Version?
     private var proxyMapping = [FileID2: FileUIProxy2]()
@@ -29,7 +32,6 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             render()
         }
     }
-
     override func viewDidLayout() {
         super.viewDidLayout()
         renderLayoutOnly()
@@ -45,9 +47,12 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             outlineView.allowsMultipleSelection = true
             outlineView.setDataSource(self)
             outlineView.setDelegate(self)
+            outlineView.menu = menuPalette.context.item.submenu
+            outlineView.onEvent = { [weak self] in self?.process($0) }
         }
         renderLayoutOnly()
         renderStatesOnly()
+        renderMenuStatesOnly()
     }
     private func renderLayoutOnly() {
         scrollView.frame = view.bounds
@@ -73,16 +78,41 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
     private func renderCurrentFileStateOnly() {
         guard let currentFileID = workspaceState?.window.navigatorPane.file.current else { return }
         guard let currentFileProxy = proxyMapping[currentFileID] else { return }
-        let rowIndex = outlineView.rowForItem(currentFileProxy)
-        guard rowIndex != NSNotFound else { return }
+        guard let rowIndex = outlineView.getRowIndexForItem(currentFileProxy) else { return }
         outlineView.selectRowIndexes(NSIndexSet(index: rowIndex), byExtendingSelection: false)
     }
-
-    private func scanSelection() {
+    private func renderMenuStatesOnly() {
+        let hasClickedFile = (outlineView.getClickedRowIndex() != nil)
+        let selectionContainsClickedFile = outlineView.isSelectedRowIndexesContainClickedRow()
+        let isFileOperationAvailable = hasClickedFile || selectionContainsClickedFile
+        menuPalette.context.enabled = true
+        menuPalette.showInFinder.enabled = isFileOperationAvailable
+        menuPalette.showInTerminal.enabled = isFileOperationAvailable
+        menuPalette.createNewFolder.enabled = isFileOperationAvailable
+        menuPalette.createNewFolder.enabled = isFileOperationAvailable
+        menuPalette.delete.enabled = isFileOperationAvailable
+    }
+    private func scanSelectionOnly() {
         guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
-        let index = outlineView.selectedRow
-        let fileID = ((index == NSNotFound) ? nil : (outlineView.itemAtRow(index) as? FileUIProxy2))?.sourceFileID
-        driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetCurrent(fileID))))
+        if runningMenu {
+            let optionalFileID = outlineView.getClickedFileID2() ?? outlineView.getSelectedFileID2()
+            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetCurrent(optionalFileID))))
+        }
+        else {
+            let optionalFileID = outlineView.getSelectedFileID2()
+            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetCurrent(optionalFileID))))
+        }
+    }
+
+    private func process(event: FileNavigatorOutlineViewEvent) {
+        switch event {
+        case .WillOpenMenu:
+            runningMenu = true
+        case .DidCloseMenu:
+            runningMenu = false
+        }
+        renderMenuStatesOnly()
+        scanSelectionOnly()
     }
 }
 extension FileNavigatorViewController: NSOutlineViewDataSource {
@@ -144,7 +174,34 @@ extension FileNavigatorViewController: NSOutlineViewDataSource {
 }
 extension FileNavigatorViewController: NSOutlineViewDelegate {
     func outlineViewSelectionDidChange(notification: NSNotification) {
-        scanSelection()
+        scanSelectionOnly()
+    }
+}
+
+private extension NSOutlineView {
+    private func getRowIndexForItem(proxy: FileUIProxy2?) -> Int? {
+        let legacyIndex = rowForItem(proxy)
+        guard legacyIndex != -1 else { return nil }
+        return legacyIndex
+    }
+    private func getClickedRowIndex() -> Int? {
+        return clickedRow == -1 ? nil : clickedRow
+    }
+    private func getClickedFileUIProxy2() -> FileUIProxy2? {
+        guard let index = getClickedRowIndex() else { return nil }
+        guard let proxy = itemAtRow(index) as? FileUIProxy2 else { return nil }
+        return proxy
+    }
+    private func getClickedFileID2() -> FileID2? {
+        return getClickedFileUIProxy2()?.sourceFileID
+    }
+    private func isSelectedRowIndexesContainClickedRow() -> Bool {
+        return selectedRowIndexes.containsIndex(clickedRow)
+    }
+    private func getSelectedFileID2() -> FileID2? {
+        guard selectedRow != -1 else { return nil }
+        guard let proxy = itemAtRow(selectedRow) as? FileUIProxy2 else { return nil }
+        return proxy.sourceFileID
     }
 }
 extension NSURL {
@@ -153,15 +210,6 @@ extension NSURL {
         return URLByAppendingPathComponent(first).appending(tail)
     }
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -179,6 +227,43 @@ private final class FileUIProxy2 {
         return self
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MARK: -
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+private enum FileNavigatorOutlineViewEvent {
+    case WillOpenMenu
+    case DidCloseMenu
+}
+private final class FileNavigatorOutlineView: NSOutlineView {
+    var onEvent: (FileNavigatorOutlineViewEvent -> ())?
+    private override func willOpenMenu(menu: NSMenu, withEvent event: NSEvent) {
+        super.willOpenMenu(menu, withEvent: event)
+        onEvent?(.WillOpenMenu)
+    }
+    private override func didCloseMenu(menu: NSMenu, withEvent event: NSEvent?) {
+        super.didCloseMenu(menu, withEvent: event)
+        onEvent?(.DidCloseMenu)
+    }
+}
+
+
+
 
 
 

@@ -46,6 +46,10 @@
 		455569081CF5871000F2BD4D /* MenuCommandShortcutKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569071CF5871000F2BD4D /* MenuCommandShortcutKeys.swift */; };
 		4555690A1CF587B200F2BD4D /* MenuSubmenuID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569091CF587B200F2BD4D /* MenuSubmenuID.swift */; };
 		4555690C1CF5895D00F2BD4D /* MenuCommandLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555690B1CF5895D00F2BD4D /* MenuCommandLabels.swift */; };
+		455569101CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555690F1CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift */; };
+		4555691D1CF5A47B00F2BD4D /* Scannable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555691C1CF5A47B00F2BD4D /* Scannable.swift */; };
+		4555691F1CF5B07100F2BD4D /* ShellNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555691E1CF5B07100F2BD4D /* ShellNotification.swift */; };
+		455569211CF5C1A500F2BD4D /* MenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569201CF5C1A500F2BD4D /* MenuUtility.swift */; };
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
 		45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA01CE79193002FEA3D /* BashSubprocess.swift */; };
 		45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoSubprocess.swift */; };
@@ -225,6 +229,10 @@
 		455569071CF5871000F2BD4D /* MenuCommandShortcutKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCommandShortcutKeys.swift; sourceTree = "<group>"; };
 		455569091CF587B200F2BD4D /* MenuSubmenuID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSubmenuID.swift; sourceTree = "<group>"; };
 		4555690B1CF5895D00F2BD4D /* MenuCommandLabels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCommandLabels.swift; sourceTree = "<group>"; };
+		4555690F1CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorMenuPalette.swift; sourceTree = "<group>"; };
+		4555691C1CF5A47B00F2BD4D /* Scannable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scannable.swift; sourceTree = "<group>"; };
+		4555691E1CF5B07100F2BD4D /* ShellNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellNotification.swift; sourceTree = "<group>"; };
+		455569201CF5C1A500F2BD4D /* MenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuUtility.swift; sourceTree = "<group>"; };
 		45800F1F1CD5048F0000F621 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
 		45830AA01CE79193002FEA3D /* BashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashSubprocess.swift; sourceTree = "<group>"; };
@@ -295,7 +303,9 @@
 				45830AAB1CE811FC002FEA3D /* UserOperationService.swift */,
 				45830AB51CEA1126002FEA3D /* DialogueUtility.swift */,
 				45D6C3441CE2139C0016DB7A /* Renderable.swift */,
+				4555691C1CF5A47B00F2BD4D /* Scannable.swift */,
 				451137581CD48094001A183A /* Shell.swift */,
+				4555691E1CF5B07100F2BD4D /* ShellNotification.swift */,
 				45E730521CD796D300BA7550 /* RenderingError.swift */,
 				4555690D1CF58B2800F2BD4D /* (menu definitions and components) */,
 				4555690E1CF58B2F00F2BD4D /* (main menu build-up) */,
@@ -304,6 +314,7 @@
 				4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */,
 				454AD8951CC694E8008A9BAC /* WorkspaceWindowController.swift */,
 				453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */,
+				4555690F1CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift */,
 				45D6C3541CE241490016DB7A /* RenderableWindowController.swift */,
 				45D6C3421CE210180016DB7A /* RenderableViewController.swift */,
 				454AD8681CC6530D008A9BAC /* ApplicationController.swift */,
@@ -434,6 +445,7 @@
 				455569071CF5871000F2BD4D /* MenuCommandShortcutKeys.swift */,
 				455569091CF587B200F2BD4D /* MenuSubmenuID.swift */,
 				455569051CF5864000F2BD4D /* MenuItemController.swift */,
+				455569201CF5C1A500F2BD4D /* MenuUtility.swift */,
 			);
 			name = "(menu definitions and components)";
 			sourceTree = "<group>";
@@ -650,6 +662,7 @@
 				45830ACA1CEB8C79002FEA3D /* Clean.swift in Sources */,
 				45830B141CF04D30002FEA3D /* Stepper.swift in Sources */,
 				4550F9FC1CE6C29100B911C4 /* WorkspaceID.swift in Sources */,
+				455569101CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift in Sources */,
 				4550F9EE1CE6279D00B911C4 /* WorkspaceDatabaseState.swift in Sources */,
 				4550F9C91CE4CE4600B911C4 /* IndexJournalingTree.swift in Sources */,
 				454AD87B1CC65326008A9BAC /* State.swift in Sources */,
@@ -688,11 +701,14 @@
 				45D6C3431CE210180016DB7A /* RenderableViewController.swift in Sources */,
 				4511375D1CD48123001A183A /* Action.swift in Sources */,
 				4550F9FE1CE6E75700B911C4 /* WorkspaceAccessible.swift in Sources */,
+				4555691D1CF5A47B00F2BD4D /* Scannable.swift in Sources */,
 				45D6C35D1CE4C6F00016DB7A /* IndexJournalingArray.swift in Sources */,
 				455569081CF5871000F2BD4D /* MenuCommandShortcutKeys.swift in Sources */,
 				453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */,
 				451216D61CE77334006E9207 /* Services.swift in Sources */,
 				451137921CD4822D001A183A /* Marks.swift in Sources */,
+				455569211CF5C1A500F2BD4D /* MenuUtility.swift in Sources */,
+				4555691F1CF5B07100F2BD4D /* ShellNotification.swift in Sources */,
 				45830B181CF075E7002FEA3D /* QueryService.swift in Sources */,
 				45830AAE1CE82DDA002FEA3D /* BoltsExtensions.swift in Sources */,
 				45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */,

@@ -35,6 +35,12 @@ final class Driver {
     var userInteractionState: UserInteractionState {
         get { return user.state }
     }
+    func ADHOC_scanImmediately() {
+        user.ADHOC_scanImmediately()
+    }
+    func ADHOC_renderImmediately() {
+        user.ADHOC_renderImmediately()
+    }
     func dispatch(action: Action) -> Task<()> {
         return user.dispatch(action)
     }

@@ -26,6 +26,15 @@ final class Shell: DriverAccessible {
         NSAppearance.setCurrentAppearance(NSAppearance(named: NSAppearanceNameVibrantDark))
         mainMenu = MainMenuController()
         workspaceManager = WorkspaceManager()
+
+        NotificationUtility.register(self, NSMenuDidSendActionNotification, self.dynamicType.processMenuItemDidSendAction)
+    }
+    deinit {
+        NotificationUtility.deregister(self)
+    }
+
+    func scan() {
+        workspaceManager.scan()
     }
     func render() {
         mainMenu.render()
@@ -35,6 +44,15 @@ final class Shell: DriverAccessible {
     func alert(error: ErrorType) {
 //        let error = error ?? NSError(domain: "", code: -1, userInfo: [:]) // TODO: Configure error parameters properly.
         NSApplication.sharedApplication().presentError(error as NSError)
+    }
+
+    private func processMenuItemDidSendAction(n: NSNotification) {
+        assert(n.name == NSMenuDidSendActionNotification)
+        guard let menuItem = n.userInfo?["MenuItem"] as? NSMenuItem else {
+            reportErrorToDevelopers("Missing `MenuItem` object in notification...")
+            return
+        }
+        debugLog(menuItem)
     }
 }
 
