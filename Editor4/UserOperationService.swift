@@ -59,7 +59,7 @@ final class UserOperationService: DriverAccessible {
 }
 
 enum OperationError: ErrorType {
-    case CannotRunTheCommandInCurrnetState
+//    case CannotRunTheCommandInCurrnetState
     case MissingCurrentWorkspace
     case MissingCurrentFile
     case File(FileOperationError)
@@ -103,55 +103,17 @@ extension UserOperationService {
             })
 
         case .FileNewFolder:
-            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw OperationError.CannotRunTheCommandInCurrnetState }
-            guard let workspace = driver.userInteractionState.currentWorkspace else { throw OperationError.MissingCurrentFile }
+            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw OperationError.MissingCurrentWorkspace }
+            guard let workspace = driver.userInteractionState.currentWorkspace else { throw OperationError.MissingCurrentWorkspace }
             guard let currentFileID = workspace.window.navigatorPane.file.current else { throw OperationError.MissingCurrentFile }
-            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolderAndStartEdit(container: currentFileID, index: 0))))
-//            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolder(container: currentFileID, index: 0, wait: queryID))))
-////            let queryID: QueryID<FileID2> = QueryID()
-//            let queryTask = driver.wait(queryID)
-//            let currentFileTreeVersion = workspace.files.version
-//            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolder(container: currentFileID, index: 0, wait: queryID))))
-//                .continueOnSuccessWithTask(continuation: { [weak self, driver] () throws -> Task<FileID2> in
-//                    return queryTask
-//                }).continueOnSuccessWith(Executor.MainThread, continuation: { (newFolderID: FileID2) -> () in
-//                    return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.StartEditing(newFolderID))))
-//                })
+            workspace.files.resolvePathFor(currentFileID)
+            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolderAndStartEditingName(container: currentFileID, index: 0))))
 
-//            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolder(container: currentFileID, index: 0))))
-//                .continueOnSuccessWith(Executor.MainThread, continuation: { [weak self, driver] () throws -> FileID2 in
-//                    // Expects a new node.
-//                    // Anyway, new node may not be be created for any reason, and
-//                    // just throw an error in that case.
-//
-////                    // Find a new node in journal.
-////                    guard let insertLog = S.userInteractionState.workspaces[workspaceID]?.files.journal.logs
-////                        .reverse()
-////                        .filter({ ($0.operation.isInsert) && ($0.version == currentFileTreeVersion) })
-////                        .first else {
-////                            throw OperationError.File(FileOperationError.CannotFindNewlyCreatedFolderID)
-////                        }
-////                    // Pick the inserted file.
-////                    switch insertLog.operation {
-////                    case .Insert(let newFolderID):
-////                        return newFolderID
-////                    default:
-////                        throw OperationError.File(FileOperationError.CannotFindNewlyCreatedFolderID)
-////                    }
-//
-//                    return driver.wait(queryID)
-//                    MARK_unimplemented()
-//                    fatalError()
-//
-//                }).continueOnSuccessWith(Executor.MainThread, continuation: { [driver] (newFolderID: FileID2) -> () in
-//                    driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.StartEditing(newFolderID))))
-//                })
-
-//        case .FileNewFolder:
-//            guard state.currentWorkspace != nil else { throw MainMenuActionError.MissingCurrentWorkspace }
-//            try state.currentWorkspace?.appendNewFolderOnCurrentFolder()
-//
-//        case .FileNewFile:
+        case .FileNewFile:
+            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw OperationError.MissingCurrentWorkspace }
+            guard let workspace = driver.userInteractionState.currentWorkspace else { throw OperationError.MissingCurrentWorkspace }
+            guard let currentFileID = workspace.window.navigatorPane.file.current else { throw OperationError.MissingCurrentFile }
+            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFileAndStartEditingName(container: currentFileID, index: 0))))
 //            guard state.currentWorkspace != nil else { throw MainMenuActionError.MissingCurrentWorkspace }
 //            try state.currentWorkspace?.appendNewFileOnCurrentFolder()
 //

@@ -79,7 +79,7 @@ extension State {
     }
     private mutating func applyOnWorkspace(inout workspace: WorkspaceState, action: FileAction) throws {
         switch action {
-        case .CreateFolderAndStartEdit(let container, let index):
+        case .CreateFolderAndStartEditingName(let container, let index):
             guard let newFolderName = (0..<128)
                 .map({ "(new folder" + $0.description + ")" })
                 .filter({ workspace.queryFile(container, containsSubfileWithName: $0) == false })
@@ -91,10 +91,22 @@ extension State {
             workspace.window.navigatorPane.file.current = newFolderID
             workspace.window.navigatorPane.file.editing = true
 
+        case .CreateFileAndStartEditingName(let container, let index):
+            guard let newFileName = (0..<128)
+                .map({ "(new file" + $0.description + ")" })
+                .filter({ workspace.queryFile(container, containsSubfileWithName: $0) == false })
+                .first else { throw OperationError.File(FileOperationError.CannotMakeNameForNewFolder) }
+            let newFolderState = FileState2(form: FileForm.Data,
+                                            phase: FilePhase.Editing,
+                                            name: newFileName)
+            let newFolderID = try workspace.files.insert(newFolderState, at: index, to: container)
+            workspace.window.navigatorPane.file.current = newFolderID
+            workspace.window.navigatorPane.file.editing = true
+
         case .SetCurrent(let maybeNewFileID):
             workspace.window.navigatorPane.file.current = maybeNewFileID
 
-        case .StartEditingCurrentFile:
+        case .StartEditingCurrentFileName:
             guard workspace.window.navigatorPane.file.current != nil else { throw UserInteractionError.MissingCurrentFile }
             workspace.window.navigatorPane.file.editing = true
 

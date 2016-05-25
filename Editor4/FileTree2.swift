@@ -20,6 +20,7 @@ func ==(a: FileID2, b: FileID2) -> Bool {
 
 enum FileTree2Error: ErrorType {
     case DuplicatedFileName
+    case BadFileID(FileID2)
 }
 
 /// Behaves like a `Dictionary<FileID2, FileState2>`.
@@ -75,6 +76,8 @@ struct FileTree2: VersioningStateType {
     }
 //    subscript(index: FileNodeIndex) -> FileState2? {
 //    }
+
+    /// O(N) where N is depth of the file node.
     func resolvePathFor(fileID: FileID2) -> FileNodePath {
         if fileID == rootID { return FileNodePath([]) }
         guard let superfileID = fileTable[fileID.internalRefkey].superfileID else { fatalError("Non root file ID `\(fileID)` must have a super-file ID.") }
@@ -121,6 +124,19 @@ extension FileTree2: SequenceType {
         }
     }
 }
+extension FileTree2 {
+    /// - Returns:
+    ///     `nil` if passed file ID is root.
+    ///     Throws `FileTree2Error.BadFileID` if the file ID does not exist in this tree.
+    ///     Otherwise, this should return a file ID.
+    func searchContainerFileIDOf(fileID: FileID2) throws -> FileID2? {
+        let path = resolvePathFor(fileID)
+        guard let parentPath = path.splitLast()?.head else { return nil }
+        guard let parentID = searchFileIDForPath(parentPath) else { throw FileTree2Error.BadFileID(fileID) }
+        return parentID
+    }
+}
+
 enum FilePhase {
     case Editing
     case Normal
