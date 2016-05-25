@@ -1,19 +1,19 @@
 //
-//  MainMenuItemController.swift
-//  Editor3
+//  MenuItemController.swift
+//  Editor4
 //
-//  Created by Hoon H. on 2016/04/18.
+//  Created by Hoon H. on 2016/05/25.
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
 import AppKit
 
-enum MainMenuItemTypeID {
+enum MenuItemTypeID {
     case Separator
-    case Submenu(MainMenuSubmenuID)
-    case MenuItem(MainMenuCommand)
+    case Submenu(MenuSubmenuID)
+    case MenuItem(MenuCommand)
 }
-private extension MainMenuItemTypeID {
+private extension MenuItemTypeID {
     private func getTitle() -> String? {
         switch self {
         case .Separator:            return nil
@@ -23,13 +23,12 @@ private extension MainMenuItemTypeID {
     }
 }
 
-final class MainMenuItemController: DriverAccessible {
-
-    private let type: MainMenuItemTypeID
+final class MenuItemController: DriverAccessible {
+    private let type: MenuItemTypeID
     let item: NSMenuItem
     private let delegate = MenuItemDelegate()
 
-    var subcontrollers: [MainMenuItemController] {
+    var subcontrollers: [MenuItemController] {
         willSet {
             item.submenu?.removeAllItems()
             item.submenu = nil
@@ -45,7 +44,7 @@ final class MainMenuItemController: DriverAccessible {
         }
     }
 
-    init(type: MainMenuItemTypeID) {
+    init(type: MenuItemTypeID) {
         self.type = type
         switch type {
         case .Separator:
@@ -63,8 +62,8 @@ final class MainMenuItemController: DriverAccessible {
             subcontrollers = []
             item.enabled = false
             item.title = command.getLabel()
-            item.keyEquivalentModifierMask = Int(bitPattern: command.getKeyModifiersAndEquivalentPair().keyModifier.rawValue)
-            item.keyEquivalent = command.getKeyModifiersAndEquivalentPair().keyEquivalent
+            item.keyEquivalentModifierMask = Int(bitPattern: command.getKeyModifiersAndKeyEquivalentPair().keyModifier.rawValue)
+            item.keyEquivalent = command.getKeyModifiersAndKeyEquivalentPair().keyEquivalent
             item.target = delegate
             item.action = #selector(MenuItemDelegate.EDITOR_onClick(_:))
             delegate.command = command
@@ -79,25 +78,22 @@ final class MainMenuItemController: DriverAccessible {
         }
     }
 }
-//private extension MainMenuAction {
-//    private func makeItemController() -> MenuItemController {
-//        return MenuItemController(code: self)
-//    }
-//}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MARK: -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 private final class MenuItemDelegate: NSObject, DriverAccessible {
-    var command: MainMenuCommand?
+    var command: MenuCommand?
     @objc
     private func EDITOR_onClick(_: AnyObject?) {
         guard let command = command else {
             reportErrorToDevelopers("A menu item has been clicked but it has no bounded ID.")
             return
         }
-        driver.run(UserOperationCommand.RunMainMenuItem(command))
+        driver.run(UserOperationCommand.RunMenuItem(command))
     }
 }
 

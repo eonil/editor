@@ -115,7 +115,7 @@ struct MainMenuPalette {
             debugClearConsole,
             ])
     }
-    func topLevelMenuItemControllers() -> [MainMenuItemController] {
+    func topLevelMenuItemControllers() -> [MenuItemController] {
         return [file, view, editor, product, debug]
     }
 }
@@ -128,14 +128,16 @@ struct MainMenuPalette {
 // MARK: -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-private func separator() -> MainMenuItemController {
-    return MainMenuItemController(type: .Separator)
+private func separator() -> MenuItemController {
+    return MenuItemController(type: .Separator)
 }
-private func submenuContainerWithTitle(id: MainMenuSubmenuID) -> MainMenuItemController {
-    return MainMenuItemController(type: .Submenu(id))
+private func submenuContainerWithTitle(mainMenuSubmenuID: MainMenuSubmenuID) -> MenuItemController {
+    let submenuID = MenuSubmenuID.Main(mainMenuSubmenuID)
+    return MenuItemController(type: .Submenu(submenuID))
 }
-private func menuItemWithAction(command: MainMenuCommand) -> MainMenuItemController {
-    return MainMenuItemController(type: .MenuItem(command))
+private func menuItemWithAction(mainMenuCommand: MainMenuCommand) -> MenuItemController {
+    let command = MenuCommand.Main(mainMenuCommand)
+    return MenuItemController(type: .MenuItem(command))
 }
 
 

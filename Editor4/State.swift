@@ -6,8 +6,17 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-// If copying cost becomes too big, consider using of COW objects.
-
+/// Root container of all user-interaction state.
+///
+/// This does not contain much things. Each workspaces contain most
+/// data.
+///
+/// Each workspaces has thier own databases.
+/// Workspace contains `window` which represents whole navigation stack.
+///
+/// - Note:
+///     If copying cost becomes too big, consider using of COW objects.
+///
 struct State {
     /// Currently selected workspace.
     ///

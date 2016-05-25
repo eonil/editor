@@ -11,5 +11,5 @@
 /// operation which might perform external I/O and dispatch
 /// multiple `Action`s.
 enum UserOperationCommand {
-    case RunMainMenuItem(MainMenuCommand)
+    case RunMenuItem(MenuCommand)
 }

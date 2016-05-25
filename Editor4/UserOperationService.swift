@@ -81,8 +81,13 @@ extension UserOperationService {
     ///
     private func run(command: UserOperationCommand) throws -> Task<()> {
         switch command {
-        case .RunMainMenuItem(let command):
-            return try run(command)
+        case .RunMenuItem(let command):
+            switch command {
+            case .Main(let command):
+                return try run(command)
+            case .FileNavigator(let command):
+                return try run(command)
+            }
         }
     }
     private func run(command: MainMenuCommand) throws -> Task<()> {
@@ -142,6 +147,25 @@ extension UserOperationService {
 
         default:
             MARK_unimplemented()
+        }
+    }
+    private func run(command: FileNavigatorMenuCommand) throws -> Task<()> {
+        switch command {
+        case .ShowInFinder:
+            MARK_unimplemented()
+
+        case .ShowInTerminal:
+            MARK_unimplemented()
+
+        case .CreateNewFolder:
+            MARK_unimplemented()
+
+        case .CreateNewFile:
+            MARK_unimplemented()
+
+        case .Delete:
+            MARK_unimplemented()
+
         }
     }
 }
