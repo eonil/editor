@@ -102,6 +102,17 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             let optionalFileID = outlineView.getSelectedFileID2()
             driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetCurrent(optionalFileID))))
         }
+        
+        let lazySelectedFileList = MemoizingLazyList<FileID2> { [weak self] in
+            guard let S = self else { return [] }
+            guard let currentWorkspace = S.driver.userInteractionState.currentWorkspace else { return [] }
+            func getFileID(rowIndex: Int) -> FileID2? {
+                guard let proxy = S.outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return nil }
+                return proxy.sourceFileID
+            }
+            return S.outlineView.selectedRowIndexes.flatMap(getFileID)
+        }
+        driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(lazySelectedFileList))))
     }
 
     private func process(event: FileNavigatorOutlineViewEvent) {

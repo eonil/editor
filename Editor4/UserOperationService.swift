@@ -52,19 +52,22 @@ final class UserOperationService: DriverAccessible {
             })
         }
         catch let error {
+            reportErrorToDevelopers(error)
             driver.dispatch(Action.Shell(ShellAction.Alert(error)))
             return Task(error: error)
         }
     }
 }
 
-enum OperationError: ErrorType {
+enum UserOperationError: ErrorType {
 //    case CannotRunTheCommandInCurrnetState
     case MissingCurrentWorkspace
+    case MissingCurrentWorkspaceLocation
     case MissingCurrentFile
-    case File(FileOperationError)
+    case NoSelectedFile
+    case File(FileUserOperationError)
 }
-enum FileOperationError {
+enum FileUserOperationError {
     case CannotMakeNameForNewFolder
     case CannotFindNewlyCreatedFolderID
     case BadPath(FileNodePath)
@@ -94,7 +97,7 @@ extension UserOperationService {
         let driver = self.driver
         switch command {
         case .FileNewWorkspace:
-//            guard services.cargo.state.isRunning == false else { throw OperationError.CannotRunTheCommandInCurrnetState }
+//            guard services.cargo.state.isRunning == false else { throw UserOperationError.CannotRunTheCommandInCurrnetState }
             var u1: NSURL?
             return DialogueUtility.runFolderSaveDialogue().continueOnSuccessWithTask(continuation: { [services] (u: NSURL) -> Task<()> in
                 u1 = u
@@ -108,16 +111,16 @@ extension UserOperationService {
             })
 
         case .FileNewFolder:
-            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw OperationError.MissingCurrentWorkspace }
-            guard let workspace = driver.userInteractionState.currentWorkspace else { throw OperationError.MissingCurrentWorkspace }
-            guard let currentFileID = workspace.window.navigatorPane.file.current else { throw OperationError.MissingCurrentFile }
+            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
+            guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
+            guard let currentFileID = workspace.window.navigatorPane.file.current else { throw UserOperationError.MissingCurrentFile }
             workspace.files.resolvePathFor(currentFileID)
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolderAndStartEditingName(container: currentFileID, index: 0))))
 
         case .FileNewFile:
-            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw OperationError.MissingCurrentWorkspace }
-            guard let workspace = driver.userInteractionState.currentWorkspace else { throw OperationError.MissingCurrentWorkspace }
-            guard let currentFileID = workspace.window.navigatorPane.file.current else { throw OperationError.MissingCurrentFile }
+            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
+            guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
+            guard let currentFileID = workspace.window.navigatorPane.file.current else { throw UserOperationError.MissingCurrentFile }
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFileAndStartEditingName(container: currentFileID, index: 0))))
 //            guard state.currentWorkspace != nil else { throw MainMenuActionError.MissingCurrentWorkspace }
 //            try state.currentWorkspace?.appendNewFileOnCurrentFolder()
@@ -152,20 +155,31 @@ extension UserOperationService {
     private func run(command: FileNavigatorMenuCommand) throws -> Task<()> {
         switch command {
         case .ShowInFinder:
-            MARK_unimplemented()
+            guard let currentWorkspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
+            guard let location = currentWorkspace.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            func getContainerFolderURL(fileID: FileID2) -> NSURL {
+                let path = currentWorkspace.files.resolvePathFor(fileID)
+                let url = location.appending(path)
+                return url
+            }
+            let currentFileID = [currentWorkspace.window.navigatorPane.file.current].flatMap({ $0 })
+            let selectedFileIDs = currentWorkspace.window.navigatorPane.file.selection.elements
+            let allFileIDsToShow = (currentFileID + selectedFileIDs)
+            guard allFileIDsToShow.isEmpty == false else { throw UserOperationError.NoSelectedFile }
+            let containerFolderURLs = allFileIDsToShow.map(getContainerFolderURL)
+            return driver.run(PlatformCommand.OpenFileInFinder(containerFolderURLs))
 
         case .ShowInTerminal:
             MARK_unimplemented()
 
         case .CreateNewFolder:
-            MARK_unimplemented()
+            return driver.run(UserOperationCommand.RunMenuItem(MenuCommand.Main(MainMenuCommand.FileNewFolder)))
 
         case .CreateNewFile:
-            MARK_unimplemented()
+            return driver.run(UserOperationCommand.RunMenuItem(MenuCommand.Main(MainMenuCommand.FileNewFile)))
 
         case .Delete:
-            MARK_unimplemented()
-
+            return driver.run(UserOperationCommand.RunMenuItem(MenuCommand.Main(MainMenuCommand.FileDelete)))
         }
     }
 }

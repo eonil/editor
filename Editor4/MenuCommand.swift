@@ -56,7 +56,11 @@ enum MainMenuCommand {
 }
 
 enum FileNavigatorMenuCommand {
+    /// Shows selected files in Finder.
+    /// A Finder window will be open for container folder of each file.
     case ShowInFinder
+    /// Shows selected files in Terminal.
+    /// A Terminal will be open for container folder of each file.
     case ShowInTerminal
     case CreateNewFolder
     case CreateNewFile

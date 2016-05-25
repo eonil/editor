@@ -77,7 +77,13 @@ struct FileTree2: VersioningStateType {
 //    subscript(index: FileNodeIndex) -> FileState2? {
 //    }
 
-    /// O(N) where N is depth of the file node.
+    /// - Returns:
+    ///     A path to the node for the ID.
+    ///     A path always exists if the node ID exists in this tree.
+    ///     Crashes if the ID is not a part of thie tree.
+    ///
+    /// - Note:
+    ///     O(N) where N is depth of the file node.
     func resolvePathFor(fileID: FileID2) -> FileNodePath {
         if fileID == rootID { return FileNodePath([]) }
         guard let superfileID = fileTable[fileID.internalRefkey].superfileID else { fatalError("Non root file ID `\(fileID)` must have a super-file ID.") }

@@ -83,7 +83,7 @@ extension State {
             guard let newFolderName = (0..<128)
                 .map({ "(new folder" + $0.description + ")" })
                 .filter({ workspace.queryFile(container, containsSubfileWithName: $0) == false })
-                .first else { throw OperationError.File(FileOperationError.CannotMakeNameForNewFolder) }
+                .first else { throw UserOperationError.File(FileUserOperationError.CannotMakeNameForNewFolder) }
             let newFolderState = FileState2(form: FileForm.Container,
                                             phase: FilePhase.Editing,
                                             name: newFolderName)
@@ -95,7 +95,7 @@ extension State {
             guard let newFileName = (0..<128)
                 .map({ "(new file" + $0.description + ")" })
                 .filter({ workspace.queryFile(container, containsSubfileWithName: $0) == false })
-                .first else { throw OperationError.File(FileOperationError.CannotMakeNameForNewFolder) }
+                .first else { throw UserOperationError.File(FileUserOperationError.CannotMakeNameForNewFolder) }
             let newFolderState = FileState2(form: FileForm.Data,
                                             phase: FilePhase.Editing,
                                             name: newFileName)
@@ -109,6 +109,9 @@ extension State {
         case .StartEditingCurrentFileName:
             guard workspace.window.navigatorPane.file.current != nil else { throw UserInteractionError.MissingCurrentFile }
             workspace.window.navigatorPane.file.editing = true
+
+        case .SetSelectedFiles(let fileIDList):
+            workspace.window.navigatorPane.file.selection = fileIDList
 
         default:
             MARK_unimplemented()

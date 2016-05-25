@@ -50,6 +50,8 @@
 		4555691D1CF5A47B00F2BD4D /* Scannable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555691C1CF5A47B00F2BD4D /* Scannable.swift */; };
 		4555691F1CF5B07100F2BD4D /* ShellNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555691E1CF5B07100F2BD4D /* ShellNotification.swift */; };
 		455569211CF5C1A500F2BD4D /* MenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569201CF5C1A500F2BD4D /* MenuUtility.swift */; };
+		455569231CF5C83800F2BD4D /* PlatformService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569221CF5C83800F2BD4D /* PlatformService.swift */; };
+		455569251CF5D03A00F2BD4D /* MemoizingLazyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569241CF5D03A00F2BD4D /* MemoizingLazyList.swift */; };
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
 		45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA01CE79193002FEA3D /* BashSubprocess.swift */; };
 		45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoSubprocess.swift */; };
@@ -233,6 +235,8 @@
 		4555691C1CF5A47B00F2BD4D /* Scannable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scannable.swift; sourceTree = "<group>"; };
 		4555691E1CF5B07100F2BD4D /* ShellNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShellNotification.swift; sourceTree = "<group>"; };
 		455569201CF5C1A500F2BD4D /* MenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuUtility.swift; sourceTree = "<group>"; };
+		455569221CF5C83800F2BD4D /* PlatformService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformService.swift; sourceTree = "<group>"; };
+		455569241CF5D03A00F2BD4D /* MemoizingLazyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoizingLazyList.swift; sourceTree = "<group>"; };
 		45800F1F1CD5048F0000F621 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
 		45830AA01CE79193002FEA3D /* BashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashSubprocess.swift; sourceTree = "<group>"; };
@@ -402,6 +406,7 @@
 				45830AC91CEB8C79002FEA3D /* Clean.swift */,
 				45830B1B1CF08858002FEA3D /* ServiceType.swift */,
 				45830B171CF075E7002FEA3D /* QueryService.swift */,
+				455569221CF5C83800F2BD4D /* PlatformService.swift */,
 				45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */,
 				45830B131CF04D30002FEA3D /* Stepper.swift */,
 				451232A11CF3376800181714 /* Promise.swift */,
@@ -433,6 +438,7 @@
 				45B785531CE70F6E00A40CF9 /* ReferencingTable.swift */,
 				45830AAF1CE951AB002FEA3D /* JournalingChecker.swift */,
 				45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */,
+				455569241CF5D03A00F2BD4D /* MemoizingLazyList.swift */,
 			);
 			name = "(functional style & synchronization)";
 			sourceTree = "<group>";
@@ -701,11 +707,13 @@
 				45D6C3431CE210180016DB7A /* RenderableViewController.swift in Sources */,
 				4511375D1CD48123001A183A /* Action.swift in Sources */,
 				4550F9FE1CE6E75700B911C4 /* WorkspaceAccessible.swift in Sources */,
+				455569251CF5D03A00F2BD4D /* MemoizingLazyList.swift in Sources */,
 				4555691D1CF5A47B00F2BD4D /* Scannable.swift in Sources */,
 				45D6C35D1CE4C6F00016DB7A /* IndexJournalingArray.swift in Sources */,
 				455569081CF5871000F2BD4D /* MenuCommandShortcutKeys.swift in Sources */,
 				453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */,
 				451216D61CE77334006E9207 /* Services.swift in Sources */,
+				455569231CF5C83800F2BD4D /* PlatformService.swift in Sources */,
 				451137921CD4822D001A183A /* Marks.swift in Sources */,
 				455569211CF5C1A500F2BD4D /* MenuUtility.swift in Sources */,
 				4555691F1CF5B07100F2BD4D /* ShellNotification.swift in Sources */,

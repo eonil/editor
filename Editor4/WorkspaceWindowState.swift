@@ -32,11 +32,13 @@ enum NavigatorPaneID {
 struct FileNavigatorPaneState {
     /// Path to a file-node that is currently in editing.
     var editing: Bool = false
+    /// Currently focused file node.
+    /// This is clicked file while context-menu is running.
+    /// Otherwise, last selected file.
     var current: FileID2? = nil
-//    var selection: [FileID2] = []
-//    /// Sorted in selected time.
-//    /// Last selected item is at last.
-//    var selection = [FileNodePath]()
+    /// List if selected `FileID2`.
+    /// Selection is lazy list for performance.
+    var selection = MemoizingLazyList<FileID2> { return [] }
     var filterExpression: String?
 }
 struct IssueNavigatorPaneState {

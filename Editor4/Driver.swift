@@ -28,6 +28,7 @@ final class Driver {
     private static let theDriver = Driver()
     private let user = UserInteractionService()
     private let operation = UserOperationService()
+    private let platform = PlatformService()
     private let query = QueryService()
 
     private init() {
@@ -46,6 +47,9 @@ final class Driver {
     }
     func run(command: UserOperationCommand) -> Task<()> {
         return operation.dispatch(command)
+    }
+    func run(command: PlatformCommand) -> Task<()> {
+        return platform.dispatch(command)
     }
     func wait<T>(id: QueryID<T>) -> Task<T> {
         return query.wait(id) 
