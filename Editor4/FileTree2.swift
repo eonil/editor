@@ -64,7 +64,7 @@ struct FileTree2: VersioningStateType {
         let subfileID = fileTable[fileID.internalRefkey].subfileIDs[first]
         return searchFileIDForIndex(tail, with: subfileID)
     }
-    subscript(key: FileID2) -> FileState2 {
+    private(set) subscript(key: FileID2) -> FileState2 {
         get { return fileTable[key.internalRefkey] }
         set { fileTable[key.internalRefkey] = newValue } // External code cannot update super/subfile ID links.
     }
@@ -109,11 +109,24 @@ struct FileTree2: VersioningStateType {
     }
     mutating func remove(fileID: FileID2) {
         assert(fileTable.contains(fileID.internalRefkey))
-        // Journaling will be overflown if there're too many updates.
+        // Remove subfiles first.
         while let lastSubfileID = fileTable[fileID.internalRefkey].subfileIDs.last {
-            remove(lastSubfileID)
-            fileTable[fileID.internalRefkey].subfileIDs.removeLast()
+            remove(lastSubfileID) // This will also remove itself from superfile's subfile list.
+            assert(fileTable[fileID.internalRefkey].subfileIDs.contains(lastSubfileID) == false)
             logAndRevise(.Update(fileID))
+        }
+        // Remove from superfile last.
+        if let superfileID = fileTable[fileID.internalRefkey].superfileID {
+            // Very likely to be removed from last.
+            REMOVE: do {
+                for i in fileTable[superfileID.internalRefkey].subfileIDs.entireRange.reverse() {
+                    if fileTable[superfileID.internalRefkey].subfileIDs[i] == fileID {
+                        fileTable[superfileID.internalRefkey].subfileIDs.removeAtIndex(i)
+                        break REMOVE
+                    }
+                }
+                fatalError("Superfile `\(superfileID)` is set in file `\(fileID)`. but cannot be found from this tree.")
+            }
         }
         fileTable.remove(fileID.internalRefkey)
         logAndRevise(.Delete(fileID))
