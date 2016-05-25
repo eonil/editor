@@ -27,12 +27,13 @@ final class Shell: DriverAccessible {
         mainMenu = MainMenuController()
         workspaceManager = WorkspaceManager()
     }
-    func render(state: State) {
+    func render() {
         mainMenu.render()
-        workspaceManager.render(state)
+        workspaceManager.render()
         assertProperUIConfigurations()
     }
     func alert(error: ErrorType) {
+//        let error = error ?? NSError(domain: "", code: -1, userInfo: [:]) // TODO: Configure error parameters properly.
         NSApplication.sharedApplication().presentError(error as NSError)
     }
 }

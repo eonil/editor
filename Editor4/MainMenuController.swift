@@ -8,7 +8,7 @@
 
 import AppKit
 
-final class MainMenuController: DriverAccessible {
+final class MainMenuController: DriverAccessible, Renderable {
 
     private let palette = MainMenuPalette()
 
@@ -30,8 +30,8 @@ final class MainMenuController: DriverAccessible {
     }
     func render() {
         func getCurrentFile() -> (id: FileID2, state: FileState2)? {
-            guard let id = driver.state.currentWorkspace?.window.navigatorPane.file.current else { return nil }
-            guard let state = driver.state.currentWorkspace?.files[id] else { return nil }
+            guard let id = driver.userInteractionState.currentWorkspace?.window.navigatorPane.file.current else { return nil }
+            guard let state = driver.userInteractionState.currentWorkspace?.files[id] else { return nil }
             return (id, state)
         }
         let maybeCurrentFile = getCurrentFile()

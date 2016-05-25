@@ -10,7 +10,7 @@ import Foundation
 import AppKit
 
 /// Manages workspaces and connected document and windows.
-final class WorkspaceManager: DriverAccessible {
+final class WorkspaceManager: DriverAccessible, Renderable {
 
     private var latestWorkspaceKeysetVersion: Version?
     private var workspaceToWindowControllerMapping = [WorkspaceID: WorkspaceWindowController]()
@@ -47,12 +47,12 @@ final class WorkspaceManager: DriverAccessible {
         }
     }
 
-    func render(state: State) {
-        guard driver.state.workspaces.version != latestWorkspaceKeysetVersion else { return }
-        let (insertions, removings) = diff(Set(driver.state.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))
+    func render() {
+        guard driver.userInteractionState.workspaces.version != latestWorkspaceKeysetVersion else { return }
+        let (insertions, removings) = diff(Set(driver.userInteractionState.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))
         insertions.forEach(openEmptyWorkspace)
         removings.forEach(closeWorkspace)
-        assert(Set(driver.state.workspaces.keys) == Set(workspaceToWindowControllerMapping.keys))
+        assert(Set(driver.userInteractionState.workspaces.keys) == Set(workspaceToWindowControllerMapping.keys))
 
         for (_, wc) in workspaceToWindowControllerMapping {
             wc.renderRecursively()
@@ -147,12 +147,16 @@ final class WorkspaceManager: DriverAccessible {
     private func scanCurrentWorkspace() {
         for (id, wc) in workspaceToWindowControllerMapping {
             if wc.window?.mainWindow == true {
-                if driver.state.currentWorkspaceID != id {
+                if driver.userInteractionState.currentWorkspaceID != id {
                     driver.dispatch(.Workspace(id, .SetCurrent))
                 }
             }
         }
     }
+}
+
+extension WorkspaceManager {
+    
 }
 
 

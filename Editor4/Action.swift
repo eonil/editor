@@ -27,6 +27,7 @@ enum TestAction {
 }
 enum ShellAction {
     case Quit
+    case Alert(ErrorType)
     case RunCreatingWorkspaceDialogue
     case RunOpeningWorkspaceDialogue
 //    case NewWorkspace(NSURL)
@@ -55,8 +56,8 @@ enum WorkspaceAction {
 
 enum FileAction {
     /// Creates a new folder at index in the specified container.
-    case CreateFolder(container: FileID2, index: Int)
-    case StartEditing(FileID2)
+    case CreateFolderAndStartEdit(container: FileID2, index: Int)
+    case StartEditingCurrentFile
     case Remove(FileID2)
     case Remvoe(FileID2)
     case Reconfigure(FileID2, FileState2)

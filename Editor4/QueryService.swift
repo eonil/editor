@@ -1,5 +1,5 @@
 //
-//  QueryFlowService.swift
+//  QueryService.swift
 //  Editor4
 //
 //  Created by Hoon H. on 2016/05/21.
@@ -11,6 +11,7 @@ import BoltsSwift
 import EonilToolbox
 
 struct QueryID<T>: Hashable {
+    private var _a: T?
     private let internalID = ObjectAddressID()
     init() {
     }
@@ -44,10 +45,10 @@ enum QueryError: ErrorType {
 /// continuation must be registered *before* the result comes out.
 /// If the result does not comes up, waiter will stay there eternally.
 ///
-final class QueryFlowService {
-    private let gcdq = dispatch_queue_create("QueryFlowService Serial GCD Queue", DISPATCH_QUEUE_SERIAL)
+final class QueryService {
+    private let gcdq = dispatch_queue_create("QueryService Serial GCD Queue", DISPATCH_QUEUE_SERIAL)
     private var allWaiters = [ObjectAddressID: [AnyObject]]()
-    func wait<T>(id: QueryID<T>) throws -> Task<T> {
+    func wait<T>(id: QueryID<T>) -> Task<T> {
         let waitCompletion = TaskCompletionSource<T>()
         dispatch_async(gcdq) { [weak self, waitCompletion] in
             guard let S = self else { return }
@@ -87,7 +88,7 @@ final class QueryFlowService {
     }
 }
 //extension Driver {
-//    let query = QueryFlowService()
+//    let query = QueryService()
 //}
 
 

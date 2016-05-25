@@ -31,8 +31,8 @@ enum NavigatorPaneID {
 }
 struct FileNavigatorPaneState {
     /// Path to a file-node that is currently in editing.
-    var editing: FileID2?
-    var current: FileID2?
+    var editing: Bool = false
+    var current: FileID2? = nil
 //    var selection: [FileID2] = []
 //    /// Sorted in selected time.
 //    /// Last selected item is at last.

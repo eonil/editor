@@ -6,6 +6,12 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
+private struct Dummy: DriverAccessible {}
+private extension State {
+    private var driver: Driver {
+        get { return Dummy().driver }
+    }
+}
 
 extension State {
     mutating func apply(action: Action) throws {
@@ -17,7 +23,7 @@ extension State {
             apply(action)
 
         case .Shell(let action):
-            applyOnShell((), action: action)
+            try applyOnShell((), action: action)
 
         case .Workspace(let id, let action):
             try apply(id , action: action)
@@ -40,8 +46,15 @@ extension State {
 
     /// Shell is currently single, so it doesn't have an actual ID,
     /// but an ID is required to be passed to shape interface consistent.
-    private mutating func applyOnShell(id: (), action: ShellAction) {
-        MARK_unimplemented()
+    private mutating func applyOnShell(id: (), action: ShellAction) throws {
+        switch action {
+        case .Alert(let error):
+            // This will trigger outer loop to render the error.
+            throw error
+
+        default:
+            MARK_unimplemented()
+        }
     }
     private mutating func apply(id: WorkspaceID, action: WorkspaceAction) throws {
         switch action {
@@ -66,7 +79,7 @@ extension State {
     }
     private mutating func applyOnWorkspace(inout workspace: WorkspaceState, action: FileAction) throws {
         switch action {
-        case .CreateFolder(let container, let index):
+        case .CreateFolderAndStartEdit(let container, let index):
             guard let newFolderName = (0..<128)
                 .map({ "(new folder" + $0.description + ")" })
                 .filter({ workspace.queryFile(container, containsSubfileWithName: $0) == false })
@@ -74,13 +87,16 @@ extension State {
             let newFolderState = FileState2(form: FileForm.Container,
                                             phase: FilePhase.Editing,
                                             name: newFolderName)
-            try workspace.files.insert(newFolderState, at: index, to: container)
+            let newFolderID = try workspace.files.insert(newFolderState, at: index, to: container)
+            workspace.window.navigatorPane.file.current = newFolderID
+            workspace.window.navigatorPane.file.editing = true
 
         case .SetCurrent(let maybeNewFileID):
             workspace.window.navigatorPane.file.current = maybeNewFileID
 
-        case .StartEditing(let fileID):
-            workspace.window.navigatorPane.file.editing = fileID
+        case .StartEditingCurrentFile:
+            guard workspace.window.navigatorPane.file.current != nil else { throw UserInteractionError.MissingCurrentFile }
+            workspace.window.navigatorPane.file.editing = true
 
         default:
             MARK_unimplemented()

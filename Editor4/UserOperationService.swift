@@ -1,5 +1,5 @@
 //
-//  OperationService.swift
+//  UserOperationService.swift
 //  Editor4
 //
 //  Created by Hoon H. on 2016/05/15.
@@ -10,7 +10,7 @@ import BoltsSwift
 
 /// Manages all long-running operations.
 ///
-struct OperationService: DriverAccessible {
+final class UserOperationService: DriverAccessible {
     private let services = Services()
 
     /// **NOT IMPLEMENTED YET!!!**
@@ -33,7 +33,31 @@ struct OperationService: DriverAccessible {
     /// 4. User finishes editing. Results to a file-ID if succeeded.
     ///
     private var EXPERIMENTAL_createNewFolder: TaskCompletionSource<FileID2>?
+
+    /// Runs a command.
+    ///
+    /// - Returns:
+    ///     A task which completes when the operation
+    ///     completes which has been triggered by this
+    ///     command.
+    func dispatch(command: UserOperationCommand) -> Task<()> {
+        do {
+            return try run(command).continueWithTask(continuation: { [weak self] (task: Task<()>) -> Task<()> in
+                if task.faulted {
+                    guard let error = task.error else { fatalError("`Task.faulted == true` with no error object.") }
+                    self?.driver.dispatch(Action.Shell(ShellAction.Alert(error)))
+                    reportErrorToDevelopers(error)
+                }
+                return task
+            })
+        }
+        catch let error {
+            driver.dispatch(Action.Shell(ShellAction.Alert(error)))
+            return Task(error: error)
+        }
+    }
 }
+
 enum OperationError: ErrorType {
     case CannotRunTheCommandInCurrnetState
     case MissingCurrentWorkspace
@@ -46,7 +70,7 @@ enum FileOperationError {
     case BadPath(FileNodePath)
 }
 
-extension OperationService {
+extension UserOperationService {
     /// Runs a long-running command.
     /// This method is also responsible to determine executability of the command.
     /// This is also responsible for concurrency management. Some command can be
@@ -55,7 +79,7 @@ extension OperationService {
     /// Whatever you run, running status must be dispatched to `State` using `dispatch(Action)`
     /// to be rendered to user.
     ///
-    func run(command: Command) throws -> Task<()> {
+    private func run(command: UserOperationCommand) throws -> Task<()> {
         switch command {
         case .RunMainMenuItem(let command):
             return try run(command)
@@ -79,34 +103,49 @@ extension OperationService {
             })
 
         case .FileNewFolder:
-            guard let workspaceID = driver.state.currentWorkspaceID else { throw OperationError.CannotRunTheCommandInCurrnetState }
-            guard let workspace = driver.state.currentWorkspace else { throw OperationError.MissingCurrentFile }
+            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw OperationError.CannotRunTheCommandInCurrnetState }
+            guard let workspace = driver.userInteractionState.currentWorkspace else { throw OperationError.MissingCurrentFile }
             guard let currentFileID = workspace.window.navigatorPane.file.current else { throw OperationError.MissingCurrentFile }
+            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolderAndStartEdit(container: currentFileID, index: 0))))
+//            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolder(container: currentFileID, index: 0, wait: queryID))))
+////            let queryID: QueryID<FileID2> = QueryID()
+//            let queryTask = driver.wait(queryID)
+//            let currentFileTreeVersion = workspace.files.version
+//            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolder(container: currentFileID, index: 0, wait: queryID))))
+//                .continueOnSuccessWithTask(continuation: { [weak self, driver] () throws -> Task<FileID2> in
+//                    return queryTask
+//                }).continueOnSuccessWith(Executor.MainThread, continuation: { (newFolderID: FileID2) -> () in
+//                    return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.StartEditing(newFolderID))))
+//                })
 
-            let currentFileTreeVersion = workspace.files.version
-            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolder(container: currentFileID, index: 0))))
-                .continueOnSuccessWith(Executor.MainThread, continuation: { [driver] () throws -> FileID2 in
-                    // Expects a new node.
-                    // Anyway, new node may not be be created for any reason, and
-                    // just throw an error in that case.
-
-                    // Find a new node in journal.
-                    guard let insertLog = driver.state.workspaces[workspaceID]?.files.journal.logs
-                        .reverse()
-                        .filter({ ($0.operation.isInsert) && ($0.version == currentFileTreeVersion) })
-                        .first else {
-                            throw OperationError.File(FileOperationError.CannotFindNewlyCreatedFolderID)
-                        }
-                    // Pick the inserted file.
-                    switch insertLog.operation {
-                    case .Insert(let newFolderID):
-                        return newFolderID
-                    default:
-                        throw OperationError.File(FileOperationError.CannotFindNewlyCreatedFolderID)
-                    }
-                }).continueOnSuccessWith(Executor.MainThread, continuation: { [driver] (newFolderID: FileID2) -> () in
-                    driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.StartEditing(newFolderID))))
-                })
+//            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolder(container: currentFileID, index: 0))))
+//                .continueOnSuccessWith(Executor.MainThread, continuation: { [weak self, driver] () throws -> FileID2 in
+//                    // Expects a new node.
+//                    // Anyway, new node may not be be created for any reason, and
+//                    // just throw an error in that case.
+//
+////                    // Find a new node in journal.
+////                    guard let insertLog = S.userInteractionState.workspaces[workspaceID]?.files.journal.logs
+////                        .reverse()
+////                        .filter({ ($0.operation.isInsert) && ($0.version == currentFileTreeVersion) })
+////                        .first else {
+////                            throw OperationError.File(FileOperationError.CannotFindNewlyCreatedFolderID)
+////                        }
+////                    // Pick the inserted file.
+////                    switch insertLog.operation {
+////                    case .Insert(let newFolderID):
+////                        return newFolderID
+////                    default:
+////                        throw OperationError.File(FileOperationError.CannotFindNewlyCreatedFolderID)
+////                    }
+//
+//                    return driver.wait(queryID)
+//                    MARK_unimplemented()
+//                    fatalError()
+//
+//                }).continueOnSuccessWith(Executor.MainThread, continuation: { [driver] (newFolderID: FileID2) -> () in
+//                    driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.StartEditing(newFolderID))))
+//                })
 
 //        case .FileNewFolder:
 //            guard state.currentWorkspace != nil else { throw MainMenuActionError.MissingCurrentWorkspace }

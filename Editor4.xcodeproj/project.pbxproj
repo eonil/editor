@@ -21,6 +21,7 @@
 		451216D81CE77968006E9207 /* LLDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D71CE77968006E9207 /* LLDBService.swift */; };
 		451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D91CE77D02006E9207 /* SubprocessController.swift */; };
 		451216DE1CE77D94006E9207 /* IOAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216DD1CE77D94006E9207 /* IOAction.swift */; };
+		451232A21CF3376800181714 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451232A11CF3376800181714 /* Promise.swift */; };
 		453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3F21CE731820081DCDA /* KeyJournal.swift */; };
 		453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */; };
 		453FF5821CD4F17300F6344B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FF5811CD4F17300F6344B /* main.swift */; };
@@ -43,17 +44,17 @@
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
 		45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA01CE79193002FEA3D /* BashSubprocess.swift */; };
 		45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoSubprocess.swift */; };
-		45830AAC1CE811FC002FEA3D /* OperationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAB1CE811FC002FEA3D /* OperationService.swift */; };
+		45830AAC1CE811FC002FEA3D /* UserOperationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAB1CE811FC002FEA3D /* UserOperationService.swift */; };
 		45830AAE1CE82DDA002FEA3D /* BoltsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */; };
 		45830AB01CE951AB002FEA3D /* JournalingChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAF1CE951AB002FEA3D /* JournalingChecker.swift */; };
 		45830AB61CEA1126002FEA3D /* DialogueUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AB51CEA1126002FEA3D /* DialogueUtility.swift */; };
-		45830AB81CEA1605002FEA3D /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AB71CEA1605002FEA3D /* Command.swift */; };
+		45830AB81CEA1605002FEA3D /* UserOperationCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AB71CEA1605002FEA3D /* UserOperationCommand.swift */; };
 		45830AC01CEA8217002FEA3D /* Editor4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830ABF1CEA8217002FEA3D /* Editor4Tests.swift */; };
 		45830AC81CEA8245002FEA3D /* NSTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AC71CEA8245002FEA3D /* NSTaskTests.swift */; };
 		45830ACA1CEB8C79002FEA3D /* Clean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AC91CEB8C79002FEA3D /* Clean.swift */; };
 		45830ACC1CEB8D16002FEA3D /* JournalingClearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */; };
 		45830B141CF04D30002FEA3D /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B131CF04D30002FEA3D /* Stepper.swift */; };
-		45830B181CF075E7002FEA3D /* QueryFlowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B171CF075E7002FEA3D /* QueryFlowService.swift */; };
+		45830B181CF075E7002FEA3D /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B171CF075E7002FEA3D /* QueryService.swift */; };
 		45830B1C1CF08858002FEA3D /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1B1CF08858002FEA3D /* ServiceType.swift */; };
 		45830B1E1CF08AE7002FEA3D /* UserInteractionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */; };
 		4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320B1CDFE78900F924F5 /* VersionType.swift */; };
@@ -70,6 +71,7 @@
 		45C3B3971CD4F82D0001D0AF /* RunMainMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */; };
 		45C3B3991CD501200001D0AF /* MainMenuSubmenuID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C3B3981CD501200001D0AF /* MainMenuSubmenuID.swift */; };
 		45CD93961CC809F100083CEC /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CD93951CC809F100083CEC /* WorkspaceDocument.swift */; };
+		45D0A5291CF13E8200731D6D /* Task2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0A5281CF13E8200731D6D /* Task2.swift */; };
 		45D6C3431CE210180016DB7A /* RenderableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C3421CE210180016DB7A /* RenderableViewController.swift */; };
 		45D6C3451CE2139C0016DB7A /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C3441CE2139C0016DB7A /* Renderable.swift */; };
 		45D6C34B1CE222880016DB7A /* WorkspaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C34A1CE222880016DB7A /* WorkspaceManager.swift */; };
@@ -195,6 +197,7 @@
 		451216D71CE77968006E9207 /* LLDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBService.swift; sourceTree = "<group>"; };
 		451216D91CE77D02006E9207 /* SubprocessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubprocessController.swift; sourceTree = "<group>"; };
 		451216DD1CE77D94006E9207 /* IOAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOAction.swift; sourceTree = "<group>"; };
+		451232A11CF3376800181714 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		453FB3F21CE731820081DCDA /* KeyJournal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyJournal.swift; sourceTree = "<group>"; };
 		453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorViewController.swift; sourceTree = "<group>"; };
 		453FF5811CD4F17300F6344B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -220,11 +223,11 @@
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
 		45830AA01CE79193002FEA3D /* BashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashSubprocess.swift; sourceTree = "<group>"; };
 		45830AA91CE79358002FEA3D /* CargoSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoSubprocess.swift; sourceTree = "<group>"; };
-		45830AAB1CE811FC002FEA3D /* OperationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationService.swift; sourceTree = "<group>"; };
+		45830AAB1CE811FC002FEA3D /* UserOperationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOperationService.swift; sourceTree = "<group>"; };
 		45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoltsExtensions.swift; sourceTree = "<group>"; };
 		45830AAF1CE951AB002FEA3D /* JournalingChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalingChecker.swift; sourceTree = "<group>"; };
 		45830AB51CEA1126002FEA3D /* DialogueUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogueUtility.swift; sourceTree = "<group>"; };
-		45830AB71CEA1605002FEA3D /* Command.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
+		45830AB71CEA1605002FEA3D /* UserOperationCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOperationCommand.swift; sourceTree = "<group>"; };
 		45830ABD1CEA8217002FEA3D /* Editor4Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Editor4Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45830ABF1CEA8217002FEA3D /* Editor4Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor4Tests.swift; sourceTree = "<group>"; };
 		45830AC11CEA8217002FEA3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -232,7 +235,7 @@
 		45830AC91CEB8C79002FEA3D /* Clean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clean.swift; sourceTree = "<group>"; };
 		45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalingClearance.swift; sourceTree = "<group>"; };
 		45830B131CF04D30002FEA3D /* Stepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
-		45830B171CF075E7002FEA3D /* QueryFlowService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryFlowService.swift; sourceTree = "<group>"; };
+		45830B171CF075E7002FEA3D /* QueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
 		45830B1B1CF08858002FEA3D /* ServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
 		45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInteractionService.swift; sourceTree = "<group>"; };
 		4589320B1CDFE78900F924F5 /* VersionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionType.swift; sourceTree = "<group>"; };
@@ -250,6 +253,7 @@
 		45C3B3981CD501200001D0AF /* MainMenuSubmenuID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuSubmenuID.swift; sourceTree = "<group>"; };
 		45CD93951CC809F100083CEC /* WorkspaceDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocument.swift; sourceTree = "<group>"; };
 		45CD93971CC80F3700083CEC /* NOTE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = NOTE.md; sourceTree = "<group>"; };
+		45D0A5281CF13E8200731D6D /* Task2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task2.swift; sourceTree = "<group>"; };
 		45D6C3421CE210180016DB7A /* RenderableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderableViewController.swift; sourceTree = "<group>"; };
 		45D6C3441CE2139C0016DB7A /* Renderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		45D6C34A1CE222880016DB7A /* WorkspaceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceManager.swift; sourceTree = "<group>"; };
@@ -284,6 +288,10 @@
 		4511375A1CD480E5001A183A /* (UI) */ = {
 			isa = PBXGroup;
 			children = (
+				45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */,
+				45830AB71CEA1605002FEA3D /* UserOperationCommand.swift */,
+				45830AAB1CE811FC002FEA3D /* UserOperationService.swift */,
+				45830AB51CEA1126002FEA3D /* DialogueUtility.swift */,
 				45D6C3441CE2139C0016DB7A /* Renderable.swift */,
 				451137581CD48094001A183A /* Shell.swift */,
 				45E730521CD796D300BA7550 /* RenderingError.swift */,
@@ -384,14 +392,11 @@
 				4511375C1CD48123001A183A /* Action.swift */,
 				451137951CD482D4001A183A /* Apply.swift */,
 				45830AC91CEB8C79002FEA3D /* Clean.swift */,
-				45830AB71CEA1605002FEA3D /* Command.swift */,
 				45830B1B1CF08858002FEA3D /* ServiceType.swift */,
-				45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */,
-				45830AAB1CE811FC002FEA3D /* OperationService.swift */,
-				45830B171CF075E7002FEA3D /* QueryFlowService.swift */,
+				45830B171CF075E7002FEA3D /* QueryService.swift */,
 				45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */,
-				45830AB51CEA1126002FEA3D /* DialogueUtility.swift */,
 				45830B131CF04D30002FEA3D /* Stepper.swift */,
+				451232A11CF3376800181714 /* Promise.swift */,
 				4511375A1CD480E5001A183A /* (UI) */,
 				4511375B1CD480EB001A183A /* (IO) */,
 				454AD8971CC69559008A9BAC /* Utility.swift */,
@@ -399,6 +404,7 @@
 				4550F9D91CE553A800B911C4 /* (functional style & synchronization) */,
 				451137911CD4822D001A183A /* Marks.swift */,
 				45D6C34E1CE238620016DB7A /* NotificationUtility.swift */,
+				45D0A5281CF13E8200731D6D /* Task2.swift */,
 				454AD86F1CC6530D008A9BAC /* Assets.xcassets */,
 				454AD8741CC6530D008A9BAC /* Info.plist */,
 			);
@@ -618,6 +624,7 @@
 				451137961CD482D4001A183A /* Apply.swift in Sources */,
 				45C3B38F1CD4F3330001D0AF /* MainMenuPalette.swift in Sources */,
 				454AD8691CC6530D008A9BAC /* ApplicationController.swift in Sources */,
+				451232A21CF3376800181714 /* Promise.swift in Sources */,
 				454AD8941CC69420008A9BAC /* Driver.swift in Sources */,
 				45E730461CD602C900BA7550 /* StateError.swift in Sources */,
 				45E730531CD796D300BA7550 /* RenderingError.swift in Sources */,
@@ -641,7 +648,7 @@
 				454AD8961CC694E8008A9BAC /* WorkspaceWindowController.swift in Sources */,
 				45B5CDD51CE753FC0097AC0B /* FileNodePath.swift in Sources */,
 				4550F9F41CE6B65300B911C4 /* WorkspaceWindowState.swift in Sources */,
-				45830AAC1CE811FC002FEA3D /* OperationService.swift in Sources */,
+				45830AAC1CE811FC002FEA3D /* UserOperationService.swift in Sources */,
 				45C3B3971CD4F82D0001D0AF /* RunMainMenuAction.swift in Sources */,
 				45830B1E1CF08AE7002FEA3D /* UserInteractionService.swift in Sources */,
 				4550F9D61CE4FE0200B911C4 /* ArraySynchronizationManager.swift in Sources */,
@@ -654,6 +661,7 @@
 				45830ACC1CEB8D16002FEA3D /* JournalingClearance.swift in Sources */,
 				451216D21CE76EF5006E9207 /* DebugState.swift in Sources */,
 				45B785541CE70F6E00A40CF9 /* ReferencingTable.swift in Sources */,
+				45D0A5291CF13E8200731D6D /* Task2.swift in Sources */,
 				4589320E1CDFED0000F924F5 /* Version.swift in Sources */,
 				451216D81CE77968006E9207 /* LLDBService.swift in Sources */,
 				45D6C34B1CE222880016DB7A /* WorkspaceManager.swift in Sources */,
@@ -665,12 +673,12 @@
 				453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */,
 				451216D61CE77334006E9207 /* Services.swift in Sources */,
 				451137921CD4822D001A183A /* Marks.swift in Sources */,
-				45830B181CF075E7002FEA3D /* QueryFlowService.swift in Sources */,
+				45830B181CF075E7002FEA3D /* QueryService.swift in Sources */,
 				45830AAE1CE82DDA002FEA3D /* BoltsExtensions.swift in Sources */,
 				45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */,
 				4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */,
 				45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */,
-				45830AB81CEA1605002FEA3D /* Command.swift in Sources */,
+				45830AB81CEA1605002FEA3D /* UserOperationCommand.swift in Sources */,
 				451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */,
 				45830AB61CEA1126002FEA3D /* DialogueUtility.swift in Sources */,
 				453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */,
@@ -870,6 +878,7 @@
 				45830AC61CEA8217002FEA3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

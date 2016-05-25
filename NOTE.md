@@ -60,6 +60,15 @@ For Maintainers
 
 
 
+Query -- Returning a Value from an Action Dispatch
+--------------------------------------------------
+This is **strongly** discouraged. You are requested to write logics without explicit returning value. 
+Especially for user-interaction service. If you really need to return something, consider using of a kind of *cursors*.
+For example, each workspace file navigator has `current` property which contains currently selected file. You make some slot
+like this to store some result value. Don't care about performance because most important point of UI service is synchronized
+and consistent state management and quick response, not throughput. This is unique requirement for UI service, and why 
+UI service has unique structure and interface like this.
+
 
 
 

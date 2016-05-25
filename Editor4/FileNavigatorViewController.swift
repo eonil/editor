@@ -32,30 +32,27 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
 
     override func viewDidLayout() {
         super.viewDidLayout()
-        renderLayout()
+        renderLayoutOnly()
     }
     override func render() {
-        renderLayout()
-        renderStates()
-    }
-    private func renderLayout() {
         installer.installIfNeeded {
-            view.wantsLayer = true
-            view.layer?.backgroundColor = NSColor.redColor().CGColor
-
             view.addSubview(scrollView)
             scrollView.documentView = outlineView
             outlineView.addTableColumn(nameColumn)
             outlineView.outlineTableColumn = nameColumn
             outlineView.headerView = nil
             outlineView.rowSizeStyle = .Small
+            outlineView.allowsMultipleSelection = true
             outlineView.setDataSource(self)
             outlineView.setDelegate(self)
         }
-        scrollView.frame = view.bounds
-
+        renderLayoutOnly()
+        renderStatesOnly()
     }
-    private func renderStates() {
+    private func renderLayoutOnly() {
+        scrollView.frame = view.bounds
+    }
+    private func renderStatesOnly() {
         guard sourceFilesVersion != workspaceState?.files.version else { return }
         // TODO: Not optimized. Do it later...
         if let workspaceState = workspaceState {
@@ -71,6 +68,14 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
         }
         sourceFilesVersion = workspaceState?.files.version
         outlineView.reloadData()
+        renderCurrentFileStateOnly()
+    }
+    private func renderCurrentFileStateOnly() {
+        guard let currentFileID = workspaceState?.window.navigatorPane.file.current else { return }
+        guard let currentFileProxy = proxyMapping[currentFileID] else { return }
+        let rowIndex = outlineView.rowForItem(currentFileProxy)
+        guard rowIndex != NSNotFound else { return }
+        outlineView.selectRowIndexes(NSIndexSet(index: rowIndex), byExtendingSelection: false)
     }
 
     private func scanSelection() {

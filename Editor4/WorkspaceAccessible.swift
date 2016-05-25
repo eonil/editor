@@ -9,13 +9,24 @@
 import AppKit
 
 protocol WorkspaceAccessible {
-    var workspaceID: WorkspaceID? { get }
 }
-extension WorkspaceAccessible where Self: DriverAccessible {
-    var workspaceState: WorkspaceState? {
+extension WorkspaceAccessible where Self: NSViewController {
+    /// Gets workspace ID bound to self.
+    var workspaceID: WorkspaceID? {
         get {
-            guard let workspaceID = workspaceID else { return nil }
-            return driver.state.workspaces[workspaceID]
+            guard let workspaceWindowController = view.window?.windowController as? WorkspaceWindowController else { return nil }
+            guard let workspaceID = workspaceWindowController.workspaceID else { return nil }
+            return workspaceID
         }
     }
 }
+extension WorkspaceAccessible where Self: DriverAccessible, Self: NSViewController {
+    var workspaceState: WorkspaceState? {
+        get {
+            guard let workspaceID = workspaceID else { return nil }
+            return driver.userInteractionState.workspaces[workspaceID]
+        }
+    }
+}
+
+
