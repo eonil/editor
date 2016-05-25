@@ -103,6 +103,15 @@ extension State {
             workspace.window.navigatorPane.file.current = newFolderID
             workspace.window.navigatorPane.file.editing = true
 
+        case .DeleteAllCurrentOrSelectedFiles:
+            let fileSequenceToDelete = workspace.window.navigatorPane.file.getAllOfCurrentAndSelections()
+            let uniqueFileIDs = Set(fileSequenceToDelete)
+            workspace.window.navigatorPane.file.current = nil
+            workspace.window.navigatorPane.file.selection = TemporalLazySequence()
+            for fileID in uniqueFileIDs {
+                workspace.files.remove(fileID)
+            }
+
         case .SetCurrent(let maybeNewFileID):
             workspace.window.navigatorPane.file.current = maybeNewFileID
 

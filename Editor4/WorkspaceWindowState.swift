@@ -15,7 +15,7 @@ struct WorkspaceWindowState {
     var commandPane = CommandPaneState()
 }
 
-//////////////////////////////////////////= //////////////////////
+////////////////////////////////////////////////////////////////
 
 struct NavigatorPaneState {
     /// Set `nil` to hide pane.
@@ -36,10 +36,20 @@ struct FileNavigatorPaneState {
     /// This is clicked file while context-menu is running.
     /// Otherwise, last selected file.
     var current: FileID2? = nil
-    /// List if selected `FileID2`.
-    /// Selection is lazy list for performance.
-    var selection = MemoizingLazyList<FileID2> { return [] }
+    /// Selected files.
+    /// This is work only in specific time-span. Which means
+    /// accessible only if `version == accessibleVerison`.
+    var selection = TemporalLazySequence<FileID2>()
     var filterExpression: String?
+}
+extension FileNavigatorPaneState {
+    func getAllOfCurrentAndSelections() -> AnySequence<FileID2> {
+        let flatten = FlattenSequence([
+            AnySequence(CollectionOfOne(current).flatMap({$0})),
+            AnySequence(selection),
+            ])
+        return AnySequence<FileID2>(flatten)
+    }
 }
 struct IssueNavigatorPaneState {
     var hideWarnings = false

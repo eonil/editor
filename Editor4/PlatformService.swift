@@ -18,6 +18,7 @@ enum PlatformError: ErrorType {
 }
 
 /// Provides a platform invoke service.
+///
 /// - Note:
 ///     Take care that some platform features need to be called from main-thread only.
 ///

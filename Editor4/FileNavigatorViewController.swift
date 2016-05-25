@@ -22,11 +22,16 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
 
     private var installer = ViewInstaller()
     private var runningMenu = false
+    private let selectionController = TemporalLazySequenceController<FileID2>()
 
     private var sourceFilesVersion: Version?
     private var proxyMapping = [FileID2: FileUIProxy2]()
     private var rootProxy: FileUIProxy2?
 
+    deinit {
+        // This is required to clean up temporal lazy sequence.
+        selectionController.source = AnySequence([])
+    }
     var workspaceID: WorkspaceID? {
         didSet {
             render()
@@ -92,7 +97,35 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
         menuPalette.createNewFolder.enabled = isFileOperationAvailable
         menuPalette.delete.enabled = isFileOperationAvailable
     }
-    private func scanSelectionOnly() {
+
+    private func scan() {
+        // This must be done first because it uses temporal lazy sequence,
+        // and that needs immediate synchronization.
+        scanSelectedFilesOnly()
+        scanCurrentFileOnly()
+    }
+    private func scanSelectedFilesOnly() {
+        guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
+        let rowIndexToOptionalFileID = { [weak self] (rowIndex: Int) -> FileID2? in
+            guard let S = self else { return nil }
+            guard let proxy = S.outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return nil }
+            return proxy.sourceFileID
+        }
+        let generatorMaker = { [weak self] () -> AnyGenerator<FileID2> in
+            guard let S = self else { return AnyGenerator { return nil } }
+            var rowIndexGenerator = S.outlineView.selectedRowIndexes.generate()
+            let convertingGenerator = AnyGenerator { () -> FileID2? in
+                while let rowIndex = rowIndexGenerator.next() {
+                    return rowIndexToOptionalFileID(rowIndex)
+                }
+                return nil
+            }
+            return convertingGenerator
+        }
+        selectionController.source = AnySequence<FileID2>(generatorMaker)
+        driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(selectionController.sequence))))
+    }
+    private func scanCurrentFileOnly() {
         guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
         if runningMenu {
             let optionalFileID = outlineView.getClickedFileID2() ?? outlineView.getSelectedFileID2()
@@ -102,17 +135,6 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             let optionalFileID = outlineView.getSelectedFileID2()
             driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetCurrent(optionalFileID))))
         }
-        
-        let lazySelectedFileList = MemoizingLazyList<FileID2> { [weak self] in
-            guard let S = self else { return [] }
-            guard let currentWorkspace = S.driver.userInteractionState.currentWorkspace else { return [] }
-            func getFileID(rowIndex: Int) -> FileID2? {
-                guard let proxy = S.outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return nil }
-                return proxy.sourceFileID
-            }
-            return S.outlineView.selectedRowIndexes.flatMap(getFileID)
-        }
-        driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(lazySelectedFileList))))
     }
 
     private func process(event: FileNavigatorOutlineViewEvent) {
@@ -123,7 +145,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             runningMenu = false
         }
         renderMenuStatesOnly()
-        scanSelectionOnly()
+        scan()
     }
 }
 extension FileNavigatorViewController: NSOutlineViewDataSource {
@@ -185,7 +207,7 @@ extension FileNavigatorViewController: NSOutlineViewDataSource {
 }
 extension FileNavigatorViewController: NSOutlineViewDelegate {
     func outlineViewSelectionDidChange(notification: NSNotification) {
-        scanSelectionOnly()
+        scan()
     }
 }
 

@@ -69,6 +69,12 @@ final class UserInteractionService {
         schedules.append(schedule)
         return schedule.completion.task
     }
+//    /// Performs atomic transactions.
+//    /// A transaction is series of multiple actions that
+//    /// must be done at once to make consistent state.
+//    func dispatch(transaction: [Action]) -> Task<()> {
+//
+//    }
 
     func ADHOC_dispatchFromNonMainThread(action: Action) {
         dispatch_async(dispatch_get_main_queue()) { [weak self] in
@@ -92,6 +98,7 @@ final class UserInteractionService {
         assertMainThread()
         do {
             try state.apply(schedule.action)
+            state.assertConsistency()
             schedule.completion.trySetResult(())
         }
         catch let error {

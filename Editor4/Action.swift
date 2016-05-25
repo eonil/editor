@@ -13,6 +13,11 @@ import Foundation.NSURL
 /// Action definitions can be nested to provide:
 /// - Semantic locality
 /// - Common contextual parameter
+///
+/// Each action must be atomically transactional.
+/// Which means final result after applying the action
+/// must produce consistent state.
+///
 enum Action {
     /// The first action to activate driver.
     case Reset
@@ -62,14 +67,13 @@ enum FileAction {
     /// and put it under editing state.
     case CreateFileAndStartEditingName(container: FileID2, index: Int)
     case StartEditingCurrentFileName
-    case Remove(FileID2)
-    case Remvoe(FileID2)
+    case DeleteAllCurrentOrSelectedFiles
     case Reconfigure(FileID2, FileState2)
     case Drop(from: [NSURL], onto: FileNodePath)
     case Move(from: [FileNodePath], onto: FileNodePath)
 //    case EditTree(id: FileNodeID, action: FileTreeEditAction)
     case SetCurrent(FileID2?)
-    case SetSelectedFiles(MemoizingLazyList<FileID2>)
+    case SetSelectedFiles(TemporalLazySequence<FileID2>)
 }
 
 enum FileActionError: ErrorType {

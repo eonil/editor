@@ -109,7 +109,7 @@ struct FileTree2: VersioningStateType {
     }
     mutating func remove(fileID: FileID2) {
         assert(fileTable.contains(fileID.internalRefkey))
-        // Journaling will be overflown if there's too many updates.
+        // Journaling will be overflown if there're too many updates.
         while let lastSubfileID = fileTable[fileID.internalRefkey].subfileIDs.last {
             remove(lastSubfileID)
             fileTable[fileID.internalRefkey].subfileIDs.removeLast()

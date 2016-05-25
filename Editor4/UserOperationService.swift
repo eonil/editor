@@ -133,6 +133,11 @@ extension UserOperationService {
 //            guard state.workspaces[id] != nil else { throw StateError.RollbackByMissingPrerequisites }
 //            state.workspaces[id] = nil
 //
+
+        case .FileDelete:
+            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
+            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteAllCurrentOrSelectedFiles)))
+
     //    case .ProductBuild:
     //        guard let workspaceID = state.currentWorkspaceID else { throw MainMenuActionError.MissingCurrentWorkspace }
     //        try services.cargo.run(.Build).continueWith(.MainThread, continuation: { (task: Task<()>) -> () in
@@ -163,9 +168,11 @@ extension UserOperationService {
                 return url
             }
             let currentFileID = [currentWorkspace.window.navigatorPane.file.current].flatMap({ $0 })
-            let selectedFileIDs = currentWorkspace.window.navigatorPane.file.selection.elements
-            let allFileIDsToShow = (currentFileID + selectedFileIDs)
-            guard allFileIDsToShow.isEmpty == false else { throw UserOperationError.NoSelectedFile }
+            let selectedFileIDs = currentWorkspace.window.navigatorPane.file.selection
+            let allFileIDsToShow = AnySequence(FlattenSequence([AnySequence(currentFileID), AnySequence(selectedFileIDs)]))
+
+            // All selections should be lazy collection, and evaluating for existence of first element must be O(1).
+            guard allFileIDsToShow.generate().next() != nil else { throw UserOperationError.NoSelectedFile }
             let containerFolderURLs = allFileIDsToShow.map(getContainerFolderURL)
             return driver.run(PlatformCommand.OpenFileInFinder(containerFolderURLs))
 
