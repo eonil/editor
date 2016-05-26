@@ -78,27 +78,19 @@ extension State {
     }
     private mutating func applyOnWorkspace(inout workspace: WorkspaceState, action: FileAction) throws {
         switch action {
-        case .CreateFolderAndStartEditingName(let container, let index):
-            guard let newFolderName = (0..<128)
-                .map({ "(new folder" + $0.description + ")" })
-                .filter({ workspace.queryFile(container, containsSubfileWithName: $0) == false })
-                .first else { throw UserOperationError.File(FileUserOperationError.CannotMakeNameForNewFolder) }
+        case .CreateFolderAndStartEditingName(let containerFileID, let newFileIndex, let newFolderName):
             let newFolderState = FileState2(form: FileForm.Container,
                                             phase: FilePhase.Editing,
                                             name: newFolderName)
-            let newFolderID = try workspace.files.insert(newFolderState, at: index, to: container)
+            let newFolderID = try workspace.files.insert(newFolderState, at: newFileIndex, to: containerFileID)
             workspace.window.navigatorPane.file.selection.reset(newFolderID)
             workspace.window.navigatorPane.file.editing = true
 
-        case .CreateFileAndStartEditingName(let container, let index):
-            guard let newFileName = (0..<128)
-                .map({ "(new file" + $0.description + ")" })
-                .filter({ workspace.queryFile(container, containsSubfileWithName: $0) == false })
-                .first else { throw UserOperationError.File(FileUserOperationError.CannotMakeNameForNewFolder) }
+        case .CreateFileAndStartEditingName(let containerFileID, let newFileIndex, let newFileName):
             let newFolderState = FileState2(form: FileForm.Data,
                                             phase: FilePhase.Editing,
                                             name: newFileName)
-            let newFolderID = try workspace.files.insert(newFolderState, at: index, to: container)
+            let newFolderID = try workspace.files.insert(newFolderState, at: newFileIndex, to: containerFileID)
             workspace.window.navigatorPane.file.selection.reset(newFolderID)
             workspace.window.navigatorPane.file.editing = true
 
@@ -143,18 +135,6 @@ extension State {
 }
 
 
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// MARK: -
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-private extension WorkspaceState {
-    func queryFile(superfileID: FileID2, containsSubfileWithName subfileName: String) -> Bool {
-        return files[superfileID].subfileIDs.contains { files[$0].name == subfileName }
-    }
-}
 
 
 

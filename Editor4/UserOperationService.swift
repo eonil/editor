@@ -116,13 +116,29 @@ extension UserOperationService {
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
             guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
             guard let currentFileID = workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw UserOperationError.MissingCurrentFile }
-            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolderAndStartEditingName(container: currentFileID, index: 0))))
+            let currentFilePath = workspace.files.resolvePathFor(currentFileID)
+            guard let newFolderName = (0..<128)
+                .map({ "(new folder" + $0.description + ")" })
+                .filter({ workspace.queryFile(currentFileID, containsSubfileWithName: $0) == false })
+                .first else { throw UserOperationError.File(FileUserOperationError.CannotMakeNameForNewFolder) }
+            guard let u = workspace.location?.appending(currentFilePath) else { throw UserOperationError.File(FileUserOperationError.BadPath(currentFilePath)) }
+            let u1 = u.URLByAppendingPathComponent(newFolderName)
+            return driver.run(PlatformCommand.CreateDirectoryWithIntermediateDirectories(u1)).continueOnSuccessWithTask(continuation: { () -> Task<()> in
+                return driver.dispatch(.Workspace(workspaceID, .File(.CreateFolderAndStartEditingName(container: currentFileID, index: 0, name: newFolderName))))
+            })
 
         case .FileNewFile:
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
             guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
             guard let currentFileID = workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw UserOperationError.MissingCurrentFile }
-            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFileAndStartEditingName(container: currentFileID, index: 0))))
+            let currentFilePath = workspace.files.resolvePathFor(currentFileID)
+            guard let newFileName = (0..<128)
+                .map({ "(new file" + $0.description + ")" })
+                .filter({ workspace.queryFile(currentFileID, containsSubfileWithName: $0) == false })
+                .first else { throw UserOperationError.File(FileUserOperationError.CannotMakeNameForNewFolder) }
+            guard let u = workspace.location?.appending(currentFilePath) else { throw UserOperationError.File(FileUserOperationError.BadPath(currentFilePath)) }
+            let u1 = u.URLByAppendingPathComponent(newFileName)
+            return driver.dispatch(.Workspace(workspaceID, .File(.CreateFileAndStartEditingName(container: currentFileID, index: 0, name: newFileName))))
 
         case .FileOpenWorkspace:
             var u1: NSURL?
@@ -209,6 +225,22 @@ extension UserOperationService {
 
 
 
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MARK: -
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+private extension WorkspaceState {
+    func queryFile(superfileID: FileID2, containsSubfileWithName subfileName: String) -> Bool {
+        return files[superfileID].subfileIDs.contains { files[$0].name == subfileName }
+    }
+}
 
 
 

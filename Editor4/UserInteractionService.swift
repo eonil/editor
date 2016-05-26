@@ -64,9 +64,14 @@ final class UserInteractionService {
     /// and will be guarantted to happend in order as it
     /// passed-in.
     func dispatch(action: Action) -> Task<()> {
-        assertMainThread()
         let schedule = Schedule(action: action, completion: TaskCompletionSource())
-        schedules.append(schedule)
+        // TODO: Review this design... It would be better if we can eliminte
+        //          asynchronous dispatch for dispatch from main thread.
+        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+            guard let S = self else { return }
+            assertMainThread()
+            S.schedules.append(schedule)
+        }
         return schedule.completion.task
     }
 //    /// Performs atomic transactions.
@@ -76,11 +81,11 @@ final class UserInteractionService {
 //
 //    }
 
-    func ADHOC_dispatchFromNonMainThread(action: Action) {
-        dispatch_async(dispatch_get_main_queue()) { [weak self] in
-            self?.dispatch(action)
-        }
-    }
+//    func ADHOC_dispatchFromNonMainThread(action: Action) {
+//        dispatch_async(dispatch_get_main_queue()) { [weak self] in
+//            self?.dispatch(action)
+//        }
+//    }
 
     private func run() {
         assertMainThread()

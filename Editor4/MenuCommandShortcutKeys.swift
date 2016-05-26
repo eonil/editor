@@ -36,7 +36,7 @@ private extension MainMenuCommand {
         case .FileNewWorkspace:                 return Command + Control + "N"
         case .FileNewFolder:                    return Command + Option + "N"
         case .FileNewFile:                      return Command + "N"
-        case .FileOpenWorkspace:                return Command + "O"
+        case .FileOpenWorkspace:                return Command + Control + "O"
         case .FileOpenClearWorkspaceHistory:    return nil
         case .FileCloseFile:                    return Command + Shift + "W"
         case .FileCloseWorkspace:               return Command + "W"

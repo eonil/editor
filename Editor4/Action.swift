@@ -61,10 +61,10 @@ enum WorkspaceAction {
 enum FileAction {
     /// Creates a new folder at index in the specified container
     /// and put it under editing state.
-    case CreateFolderAndStartEditingName(container: FileID2, index: Int)
+    case CreateFolderAndStartEditingName(container: FileID2, index: Int, name: String)
     /// Creates a new file at index in the specified container
     /// and put it under editing state.
-    case CreateFileAndStartEditingName(container: FileID2, index: Int)
+    case CreateFileAndStartEditingName(container: FileID2, index: Int, name: String)
     case StartEditingCurrentFileName
     case DeleteAllCurrentOrSelectedFiles
     case DeleteFiles(Set<FileID2>)

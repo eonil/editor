@@ -11,6 +11,9 @@ import BoltsSwift
 import AppKit
 
 enum PlatformCommand {
+    case CreateDirectoryWithIntermediateDirectories(NSURL)
+    case CreateDataFileWithIntermediateDirectories(NSURL)
+    case DeleteFileSubtree(NSURL)
     case OpenFileInFinder([NSURL])
 }
 enum PlatformError: ErrorType {
@@ -26,14 +29,29 @@ final class PlatformService {
     private let gcdq = dispatch_queue_create("\(PlatformService.self)", DISPATCH_QUEUE_SERIAL)
     func dispatch(command: PlatformCommand) -> Task<()> {
         return Task(()).continueWithTask(Executor.Queue(gcdq)) { [weak self] (task: Task<()>) throws -> Task<()> in
-            guard let S = self else { return task }
+            guard let S = self else { return Task.cancelledTask() }
             return try S.step(command)
         }
     }
     private func step(command: PlatformCommand) throws -> Task<()> {
         switch command {
+        case .CreateDirectoryWithIntermediateDirectories(let u):
+            assert(u.fileURL)
+            try NSFileManager.defaultManager().createDirectoryAtURL(u, withIntermediateDirectories: true, attributes: nil)
+            return Task(())
+
+        case .CreateDataFileWithIntermediateDirectories(let u):
+            assert(u.fileURL)
+            try NSData().writeToURL(u, options: NSDataWritingOptions.DataWritingWithoutOverwriting)
+            return Task(())
+
+        case .DeleteFileSubtree(let u):
+            assert(u.fileURL)
+            try NSFileManager.defaultManager().removeItemAtURL(u)
+            return Task(())
+
         case .OpenFileInFinder(let urls):
-            NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(urls)
+            NSWorkspace.sharedWorkspace().activateFileViewerSelectingURLs(urls) // This method is safe to be called from any thread.
             return Task(())
         }
     }
