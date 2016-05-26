@@ -36,16 +36,18 @@ final class MainMenuController: DriverAccessible, Renderable {
         let optionalWorkspace = driver.userInteractionState.currentWorkspace
         let optionalSelection = optionalWorkspace?.window.navigatorPane.file.selection
 
-        palette.file.enabled = true
-        palette.fileNew.enabled = true
-        palette.fileNewWorkspace.enabled = true
-        palette.fileNewFolder.enabled = (getOptionalFileStateOf(optionalSelection?.getHighlightOrCurrent())?.form == .Container)
-        palette.fileNewFile.enabled = (getOptionalFileStateOf(optionalSelection?.getHighlightOrCurrent())?.form == .Container)
-        palette.fileOpen.enabled = true
-        palette.fileOpenWorkspace.enabled = true
-        palette.fileOpenClearWorkspaceHistory.enabled = true
-        palette.fileCloseWorkspace.enabled = (optionalWorkspace != nil)
-        palette.fileDelete.enabled = (optionalSelection?.getHighlightOrItems().isEmpty == false)
+        palette.file.enabled                            =   true
+        palette.fileNew.enabled                         =   true
+        palette.fileNewWorkspace.enabled                =   true
+        palette.fileNewFolder.enabled                   =   (getOptionalFileStateOf(optionalSelection?.getHighlightOrCurrent())?.form == .Container)
+        palette.fileNewFile.enabled                     =   (getOptionalFileStateOf(optionalSelection?.getHighlightOrCurrent())?.form == .Container)
+        palette.fileOpen.enabled                        =   true
+        palette.fileOpenWorkspace.enabled               =   true
+        palette.fileOpenClearWorkspaceHistory.enabled   =   true
+        palette.fileCloseWorkspace.enabled              =   (optionalWorkspace != nil)
+        palette.fileDelete.enabled                      =   (optionalSelection?.getHighlightOrItems().isEmpty == false)
+        palette.fileShowInFinder.enabled                =   (optionalSelection?.getHighlightOrItems().isEmpty == false)
+        palette.fileShowInTerminal.enabled              =   (optionalSelection?.getHighlightOrItems().isEmpty == false)
     }
 }
 

@@ -121,17 +121,13 @@ extension UserOperationService {
             guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
             guard let currentFileID = workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw UserOperationError.MissingCurrentFile }
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFileAndStartEditingName(container: currentFileID, index: 0))))
-//            guard state.currentWorkspace != nil else { throw MainMenuActionError.MissingCurrentWorkspace }
-//            try state.currentWorkspace?.appendNewFileOnCurrentFolder()
-//
+
 //        case .FileOpenWorkspace:
 //            MARK_unimplemented()
 //
-//        case .FileCloseWorkspace:
-//            guard let id = state.currentWorkspaceID else { throw StateError.RollbackByMissingPrerequisites }
-//            guard state.workspaces[id] != nil else { throw StateError.RollbackByMissingPrerequisites }
-//            state.workspaces[id] = nil
-//
+        case .FileCloseWorkspace:
+            guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
+            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.Close))
 
         case .FileDelete:
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
@@ -139,6 +135,23 @@ extension UserOperationService {
             let fileSequenceToDelete = workspace.window.navigatorPane.file.selection.getHighlightOrItems()
             let uniqueFileIDs = Set(fileSequenceToDelete)
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteFiles(uniqueFileIDs))))
+
+        case .FileShowInFinder:
+            guard let currentWorkspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
+            guard let location = currentWorkspace.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            func getContainerFolderURL(fileID: FileID2) -> NSURL {
+                let path = currentWorkspace.files.resolvePathFor(fileID)
+                let url = location.appending(path)
+                return url
+            }
+            let allFileIDsToShow = currentWorkspace.window.navigatorPane.file.selection.getHighlightOrItems()
+            // All selections should be lazy collection, and evaluating for existence of first element must be O(1).
+            guard allFileIDsToShow.isEmpty == false else { throw UserOperationError.NoSelectedFile }
+            let containerFolderURLs = allFileIDsToShow.map(getContainerFolderURL)
+            return driver.run(PlatformCommand.OpenFileInFinder(containerFolderURLs))
+
+        case .FileShowInTerminal:
+            MARK_unimplemented()
 
     //    case .ProductBuild:
     //        guard let workspaceID = state.currentWorkspaceID else { throw MainMenuActionError.MissingCurrentWorkspace }
@@ -162,21 +175,10 @@ extension UserOperationService {
     private func run(command: FileNavigatorMenuCommand) throws -> Task<()> {
         switch command {
         case .ShowInFinder:
-            guard let currentWorkspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
-            guard let location = currentWorkspace.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
-            func getContainerFolderURL(fileID: FileID2) -> NSURL {
-                let path = currentWorkspace.files.resolvePathFor(fileID)
-                let url = location.appending(path)
-                return url
-            }
-            let allFileIDsToShow = currentWorkspace.window.navigatorPane.file.selection.getHighlightOrItems()
-            // All selections should be lazy collection, and evaluating for existence of first element must be O(1).
-            guard allFileIDsToShow.isEmpty else { throw UserOperationError.NoSelectedFile }
-            let containerFolderURLs = allFileIDsToShow.map(getContainerFolderURL)
-            return driver.run(PlatformCommand.OpenFileInFinder(containerFolderURLs))
+            return driver.run(UserOperationCommand.RunMenuItem(MenuCommand.Main(MainMenuCommand.FileShowInFinder)))
 
         case .ShowInTerminal:
-            MARK_unimplemented()
+            return driver.run(UserOperationCommand.RunMenuItem(MenuCommand.Main(MainMenuCommand.FileShowInTerminal)))
 
         case .CreateNewFolder:
             return driver.run(UserOperationCommand.RunMenuItem(MenuCommand.Main(MainMenuCommand.FileNewFolder)))
