@@ -87,15 +87,19 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
         outlineView.selectRowIndexes(NSIndexSet(index: rowIndex), byExtendingSelection: false)
     }
     private func renderMenuStatesOnly() {
-        let hasClickedFile = (outlineView.getClickedRowIndex() != nil)
-        let selectionContainsClickedFile = outlineView.isSelectedRowIndexesContainClickedRow()
-        let isFileOperationAvailable = hasClickedFile || selectionContainsClickedFile
-        menuPalette.context.enabled = true
-        menuPalette.showInFinder.enabled = isFileOperationAvailable
-        menuPalette.showInTerminal.enabled = isFileOperationAvailable
-        menuPalette.createNewFolder.enabled = isFileOperationAvailable
-        menuPalette.createNewFolder.enabled = isFileOperationAvailable
-        menuPalette.delete.enabled = isFileOperationAvailable
+//        let hasClickedFile = (outlineView.getClickedRowIndex() != nil)
+//        let selectionContainsClickedFile = outlineView.isSelectedRowIndexesContainClickedRow()
+//        let isFileOperationAvailable = hasClickedFile || selectionContainsClickedFile
+        let optionalHighlightOrCurrentFileID = workspaceState?.window.navigatorPane.file.selection.getHighlightOrCurrent()
+        let isFileOperationAvailable = (optionalHighlightOrCurrentFileID != nil)
+//        let isContainerFile = (optionalHighlightOrCurrentFileID == nil ? false : (workspaceState?.files[optionalHighlightOrCurrentFileID!].form == .Container))
+
+        menuPalette.context.enabled             =   true
+        menuPalette.showInFinder.enabled        =   isFileOperationAvailable
+        menuPalette.showInTerminal.enabled      =   isFileOperationAvailable
+        menuPalette.createNewFolder.enabled     =   isFileOperationAvailable // If selected file is non-container, new entry will be created beside of them.
+        menuPalette.createNewFile.enabled       =   isFileOperationAvailable // If selected file is non-container, new entry will be created beside of them.
+        menuPalette.delete.enabled              =   isFileOperationAvailable
     }
 
 //    private func scan() {
