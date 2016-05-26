@@ -113,13 +113,13 @@ extension UserOperationService {
         case .FileNewFolder:
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
             guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
-            guard let currentFileID = workspace.window.navigatorPane.file.current else { throw UserOperationError.MissingCurrentFile }
+            guard let currentFileID = workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw UserOperationError.MissingCurrentFile }
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFolderAndStartEditingName(container: currentFileID, index: 0))))
 
         case .FileNewFile:
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
             guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
-            guard let currentFileID = workspace.window.navigatorPane.file.current else { throw UserOperationError.MissingCurrentFile }
+            guard let currentFileID = workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw UserOperationError.MissingCurrentFile }
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFileAndStartEditingName(container: currentFileID, index: 0))))
 //            guard state.currentWorkspace != nil else { throw MainMenuActionError.MissingCurrentWorkspace }
 //            try state.currentWorkspace?.appendNewFileOnCurrentFolder()
@@ -136,7 +136,7 @@ extension UserOperationService {
         case .FileDelete:
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
             guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
-            let fileSequenceToDelete = workspace.window.navigatorPane.file.getCurrentOrSelections()
+            let fileSequenceToDelete = workspace.window.navigatorPane.file.selection.getHighlightOrItems()
             let uniqueFileIDs = Set(fileSequenceToDelete)
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteFiles(uniqueFileIDs))))
 
@@ -169,12 +169,9 @@ extension UserOperationService {
                 let url = location.appending(path)
                 return url
             }
-            let currentFileID = [currentWorkspace.window.navigatorPane.file.current].flatMap({ $0 })
-            let selectedFileIDs = currentWorkspace.window.navigatorPane.file.selection
-            let allFileIDsToShow = AnySequence(FlattenSequence([AnySequence(currentFileID), AnySequence(selectedFileIDs)]))
-
+            let allFileIDsToShow = currentWorkspace.window.navigatorPane.file.selection.getHighlightOrItems()
             // All selections should be lazy collection, and evaluating for existence of first element must be O(1).
-            guard allFileIDsToShow.generate().next() != nil else { throw UserOperationError.NoSelectedFile }
+            guard allFileIDsToShow.isEmpty else { throw UserOperationError.NoSelectedFile }
             let containerFolderURLs = allFileIDsToShow.map(getContainerFolderURL)
             return driver.run(PlatformCommand.OpenFileInFinder(containerFolderURLs))
 
@@ -192,3 +189,15 @@ extension UserOperationService {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+

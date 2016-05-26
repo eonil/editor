@@ -32,36 +32,58 @@ enum NavigatorPaneID {
 struct FileNavigatorPaneState {
     /// Path to a file-node that is currently in editing.
     var editing: Bool = false
+    var filterExpression: String?
+    var selection = FileNavigatorPaneSelectionState()
+}
+struct FileNavigatorPaneSelectionState {
     /// Currently focused file node.
     /// This is clicked file while context-menu is running.
-    /// Otherwise, last selected file.
-    var current: FileID2? = nil
-    /// Selected files.
+    private(set) var highlighting: FileID2?
+    /// User's most recent focused selection.
+    /// This is rarely required.
+    /// - Parameter current:
+    ///     This must be included in `all`.
+    private(set) var current: FileID2?
     /// This work only in specific time-span. Which means
     /// accessible only if `version == accessibleVerison`.
-    var selection = TemporalLazyCollection<FileID2>()
-    var filterExpression: String?
-}
-enum FileNavigatorSelectionState {
-    case Empty
-    case HighlightOverriding(FileID2)
-    case Plain(current: FileID2, all: TemporalLazyCollection<FileID2>)
-}
-extension FileNavigatorPaneState {
-    func getCurrentOrSelections() -> AnySequence<FileID2> {
-        /// Current indexis likely to be placed at last.
-        if let current = current where selection.reverse().contains(current) {
-            return AnySequence(CollectionOfOne(current))
-        }
-        return AnySequence(selection)
+    private(set) var items: TemporalLazyCollection<FileID2> = []
+
+    private init() {
     }
-//    func getAllOfCurrentAndSelections() -> AnySequence<FileID2> {
-//        let flatten = FlattenSequence([
-//            AnySequence(CollectionOfOne(current).flatMap({$0})),
-//            AnySequence(selection),
-//            ])
-//        return AnySequence<FileID2>(flatten)
-//    }
+    mutating func reset() {
+        highlighting = nil
+        current = nil
+        items = []
+    }
+    mutating func reset(newCurrent: FileID2?) {
+        reset()
+        if let newCurrent = newCurrent {
+            reset(newCurrent)
+        }
+    }
+    mutating func reset(newCurrent: FileID2) {
+        reset(newCurrent, [newCurrent])
+    }
+    mutating func reset(newCurrent: FileID2, _ newItems: TemporalLazyCollection<FileID2>) {
+        assert(newItems.contains(newCurrent))
+        highlighting = nil
+        current = newCurrent
+        items = newItems
+    }
+    mutating func highlight(newHighlight: FileID2) {
+        highlighting = newHighlight
+        current = nil
+        // Keeps current selection.
+    }
+}
+extension FileNavigatorPaneSelectionState {
+    func getHighlightOrCurrent() -> FileID2? {
+        return highlighting ?? current
+    }
+    func getHighlightOrItems() -> AnyRandomAccessCollection<FileID2> {
+        if let highlighting = highlighting { return AnyRandomAccessCollection(CollectionOfOne(highlighting).flatMap({$0})) }
+        return AnyRandomAccessCollection(items)
+    }
 }
 struct IssueNavigatorPaneState {
     var hideWarnings = false

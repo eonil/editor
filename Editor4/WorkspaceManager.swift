@@ -65,26 +65,6 @@ final class WorkspaceManager: DriverAccessible, Renderable {
 
         scanCurrentWorkspace()
     }
-
-    private func renderWorkspace(id: WorkspaceID, action: WorkspaceAction) {
-        switch action {
-        case .Open:
-            openEmptyWorkspace(id)
-//            guard let id = state.getWorkspaceForURL(u) else { return reportErrorToDevelopers("Cannot find newly added workspace for URL `\(u)`.") }
-//            addDocumentFor(id)
-
-        case .Close:
-            closeWorkspace(id)
-//            guard let id = state.getWorkspaceForURL(u) else { return reportErrorToDevelopers("Cannot find newly added workspace for URL `\(u)`.") }
-//            addDocumentFor(id)
-
-        case .Reconfigure(let location):
-            reconfigureWorkspace(id, location: location)
-
-        default:
-            MARK_unimplemented()
-        }
-    }
     private func alertRecoverableError(error: ErrorType) {
         let cocoaError = error as NSError
         NSApplication.sharedApplication().presentError(cocoaError)

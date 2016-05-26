@@ -29,25 +29,23 @@ final class MainMenuController: DriverAccessible, Renderable {
         NSApplication.sharedApplication().mainMenu = mainMenu
     }
     func render() {
-        func getCurrentFile() -> (id: FileID2, state: FileState2)? {
-            guard let id = driver.userInteractionState.currentWorkspace?.window.navigatorPane.file.current else { return nil }
-            guard let state = driver.userInteractionState.currentWorkspace?.files[id] else { return nil }
-            return (id, state)
+        func getOptionalFileStateOf(optionalID: FileID2?) -> FileState2? {
+            guard let id = optionalID else { return nil }
+            return driver.userInteractionState.currentWorkspace?.files[id]
         }
-        let maybeCurrentFile = getCurrentFile()
-        let hasCurrentWorkspace = driver.userInteractionState.currentWorkspaceID != nil
-        let hasAnyCurrentOrSelectedFile = driver.userInteractionState.currentWorkspace?.window.navigatorPane.file.getCurrentOrSelections().generate().next() != nil
+        let optionalWorkspace = driver.userInteractionState.currentWorkspace
+        let optionalSelection = optionalWorkspace?.window.navigatorPane.file.selection
 
         palette.file.enabled = true
         palette.fileNew.enabled = true
         palette.fileNewWorkspace.enabled = true
-        palette.fileNewFolder.enabled = (maybeCurrentFile?.state.form == .Container)
-        palette.fileNewFile.enabled = (maybeCurrentFile?.state.form == .Container)
+        palette.fileNewFolder.enabled = (getOptionalFileStateOf(optionalSelection?.getHighlightOrCurrent())?.form == .Container)
+        palette.fileNewFile.enabled = (getOptionalFileStateOf(optionalSelection?.getHighlightOrCurrent())?.form == .Container)
         palette.fileOpen.enabled = true
         palette.fileOpenWorkspace.enabled = true
         palette.fileOpenClearWorkspaceHistory.enabled = true
-        palette.fileCloseWorkspace.enabled = hasCurrentWorkspace
-        palette.fileDelete.enabled = hasAnyCurrentOrSelectedFile
+        palette.fileCloseWorkspace.enabled = (optionalWorkspace != nil)
+        palette.fileDelete.enabled = (optionalSelection?.getHighlightOrItems().isEmpty == false)
     }
 }
 

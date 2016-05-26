@@ -16,12 +16,11 @@ extension State {
             let uniqueFileIDs = Set(allFileIDs)
             assert(allFileIDs.count == uniqueFileIDs.count)
             let a = Array(workspaceState.files).map({ $0.0 })
-            if let currentFileID = workspaceState.window.navigatorPane.file.current {
+            if let currentFileID = workspaceState.window.navigatorPane.file.selection.current {
                 assert(a.contains(currentFileID) == true)
             }
-            workspaceState.window.navigatorPane.file.current
-            assert(workspaceState.window.navigatorPane.file.selection.version == workspaceState.window.navigatorPane.file.selection.accessibleVersion)
-            for selectedFileID in workspaceState.window.navigatorPane.file.selection {
+            assert(workspaceState.window.navigatorPane.file.selection.items.version == workspaceState.window.navigatorPane.file.selection.items.accessibleVersion)
+            for selectedFileID in workspaceState.window.navigatorPane.file.selection.items {
                 let a = Array(workspaceState.files).map({ $0.0 })
                 assert(a.contains(selectedFileID) == true)
             }
@@ -36,7 +35,7 @@ extension State {
                 assert(workspaceState.files[superfileID].subfileIDs.contains(fileID), "A superfile `\(superfileID)` does not contain subfile `\(fileID)`, but reverse does exist.")
             }
             /// Bottom-up link tests.
-            for (fileID, fileState) in workspaceState.files {
+            for (fileID, _) in workspaceState.files {
                 guard let superfileID = workspaceState.files[fileID].superfileID else { continue }
                 assert(workspaceState.files[superfileID].subfileIDs.contains(fileID), "A superfile `\(superfileID)` does not contain subfile `\(fileID)`.")
             }

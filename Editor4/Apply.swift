@@ -88,7 +88,7 @@ extension State {
                                             phase: FilePhase.Editing,
                                             name: newFolderName)
             let newFolderID = try workspace.files.insert(newFolderState, at: index, to: container)
-            workspace.window.navigatorPane.file.current = newFolderID
+            workspace.window.navigatorPane.file.selection.reset(newFolderID)
             workspace.window.navigatorPane.file.editing = true
 
         case .CreateFileAndStartEditingName(let container, let index):
@@ -100,34 +100,32 @@ extension State {
                                             phase: FilePhase.Editing,
                                             name: newFileName)
             let newFolderID = try workspace.files.insert(newFolderState, at: index, to: container)
-            workspace.window.navigatorPane.file.current = newFolderID
+            workspace.window.navigatorPane.file.selection.reset(newFolderID)
             workspace.window.navigatorPane.file.editing = true
 
         case .DeleteAllCurrentOrSelectedFiles:
-            let fileSequenceToDelete = workspace.window.navigatorPane.file.getCurrentOrSelections()
+            let fileSequenceToDelete = workspace.window.navigatorPane.file.selection.getHighlightOrItems()
             let uniqueFileIDs = Set(fileSequenceToDelete)
-            workspace.window.navigatorPane.file.current = nil
-            workspace.window.navigatorPane.file.selection = TemporalLazyCollection()
+            workspace.window.navigatorPane.file.selection.reset()
             for fileID in uniqueFileIDs {
                 workspace.files.remove(fileID)
             }
 
         case .DeleteFiles(let fileIDs):
-            workspace.window.navigatorPane.file.current = nil
-            workspace.window.navigatorPane.file.selection = TemporalLazyCollection()
+            workspace.window.navigatorPane.file.selection.reset()
             for fileID in fileIDs {
                 workspace.files.remove(fileID)
             }
 
         case .SetCurrent(let maybeNewFileID):
-            workspace.window.navigatorPane.file.current = maybeNewFileID
+            workspace.window.navigatorPane.file.selection.reset(maybeNewFileID)
 
         case .StartEditingCurrentFileName:
-            guard workspace.window.navigatorPane.file.current != nil else { throw UserInteractionError.MissingCurrentFile }
+            guard workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() != nil else { throw UserInteractionError.MissingCurrentFile }
             workspace.window.navigatorPane.file.editing = true
 
-        case .SetSelectedFiles(let fileIDList):
-            workspace.window.navigatorPane.file.selection = fileIDList
+        case .SetSelectedFiles(let currentFileID, let itemFileIDs):
+            workspace.window.navigatorPane.file.selection.reset(currentFileID, itemFileIDs)
 
         default:
             MARK_unimplemented()

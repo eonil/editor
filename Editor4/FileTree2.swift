@@ -110,6 +110,8 @@ struct FileTree2: VersioningStateType {
     mutating func remove(fileID: FileID2) {
         assert(fileID != rootID, "You cannot remove root `\(fileID)`.")
         assert(fileTable.contains(fileID.internalRefkey))
+        if fileID == rootID { return reportErrorToDevelopers("Tried to remove root file ID and ignored.") }
+
         // Remove subfiles first.
         while let lastSubfileID = fileTable[fileID.internalRefkey].subfileIDs.last {
             remove(lastSubfileID) // This will also remove itself from superfile's subfile list.

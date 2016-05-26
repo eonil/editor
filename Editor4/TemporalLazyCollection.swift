@@ -6,9 +6,9 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-/// A sequence that is valid only at specific time range. For optimization.
+/// A collection that is valid only at specific time range. For optimization.
 ///
-/// This GUARANTEES the content of the sequence is immutable and won't be
+/// This GUARANTEES the content of the collection is immutable and won't be
 /// changed later. Anyway, you can access elements only while
 /// `version == accessibleVersion`.
 ///
@@ -16,7 +16,7 @@ struct TemporalLazyCollection<Element>: CollectionType {
     typealias Index = AnyRandomAccessIndex
 //    typealias SubSequence = 
     private(set) var version: Version
-    private var controller: TemporalLazySequenceController<Element>?
+    private var controller: TemporalLazyCollectionController<Element>?
     var accessibleVersion: Version {
         get { return controller?.version ?? version }
     }
@@ -25,7 +25,12 @@ struct TemporalLazyCollection<Element>: CollectionType {
         self.version = emptySequenceVersion
         self.controller = nil
     }
-    private init(controller: TemporalLazySequenceController<Element>) {
+    init<C: CollectionType where C.Generator.Element == Element, C.Index: RandomAccessIndexType>(_ elements: C) {
+        let c = TemporalLazyCollectionController<Element>()
+        c.source = AnyRandomAccessCollection<Element>(elements)
+        self.init(controller: c)
+    }
+    private init(controller: TemporalLazyCollectionController<Element>) {
         self.version = controller.version
         self.controller = controller
     }
@@ -46,26 +51,24 @@ struct TemporalLazyCollection<Element>: CollectionType {
     }
 
     private func getSource() -> AnyRandomAccessCollection<Element> {
-        assert(controller != nil)
-//        guard let controller = controller else { fatalError(InvalidationErrorMessage) }
+        // Shouldn't be broken even the controller is missing.
+        assert(controller != nil, InvalidationErrorMessage)
+        assert(version == accessibleVersion, InvalidationErrorMessage)
         return controller?.source ?? AnyRandomAccessCollection([])
     }
 }
 private let InvalidationErrorMessage = "This sequence has been invalidated. You cannot access this now."
 
-//extension TemporalLazySequence: ArrayLiteralConvertible {
-//    init(arrayLiteral elements: Element...) {
-//        let c = TemporalLazySequenceController<Element>()
-//        self.version = c.version
-//        self.controller = c
-//        c.source = AnySequence(elements)
-//    }
-//}
+extension TemporalLazyCollection: ArrayLiteralConvertible {
+    init(arrayLiteral elements: Element...) {
+        self.init(elements)
+    }
+}
 
 /// Performs all mutations here.
 /// For each time you mutate, you'll get *conceptually* new sequence.
 /// And old sequence gets invalidated, and shouldn't be accessed anymore.
-final class TemporalLazySequenceController<T> {
+final class TemporalLazyCollectionController<T> {
     private(set) var sequence = TemporalLazyCollection<T>()
     var version = Version()
     /// Setting a new source will invalidate any existing copies.

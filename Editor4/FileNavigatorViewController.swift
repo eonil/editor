@@ -22,7 +22,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
 
     private var installer = ViewInstaller()
     private var runningMenu = false
-    private let selectionController = TemporalLazySequenceController<FileID2>()
+    private let selectionController = TemporalLazyCollectionController<FileID2>()
 
     private var sourceFilesVersion: Version?
     private var proxyMapping = [FileID2: FileUIProxy2]()
@@ -81,7 +81,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
         renderCurrentFileStateOnly()
     }
     private func renderCurrentFileStateOnly() {
-        guard let currentFileID = workspaceState?.window.navigatorPane.file.current else { return }
+        guard let currentFileID = workspaceState?.window.navigatorPane.file.selection.current else { return }
         guard let currentFileProxy = proxyMapping[currentFileID] else { return }
         guard let rowIndex = outlineView.getRowIndexForItem(currentFileProxy) else { return }
         outlineView.selectRowIndexes(NSIndexSet(index: rowIndex), byExtendingSelection: false)
@@ -187,20 +187,23 @@ extension FileNavigatorViewController: NSOutlineViewDataSource {
 }
 extension FileNavigatorViewController: NSOutlineViewDelegate {
     func outlineViewSelectionDidChange(notification: NSNotification) {
+        let rowIndexToOptionalFileID = { [weak self] (rowIndex: Int) -> FileID2? in
+            guard let S = self else { return nil }
+            guard rowIndex != -1 else { return nil }
+            guard let proxy = S.outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return nil }
+            return proxy.sourceFileID
+        }
         /// Must be called only from  `SelectionDidChange` event.
         /// Because we cannot determine version of `selectedRowIndexes`,
         /// the only thing what we can do is just tracking event precisely.
         /// Extra or redundant scanning of selected files will prevent access to lazy sequence.
         func scanSelectedFilesOnly() {
             guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
-            let rowIndexToOptionalFileID = { [weak self] (rowIndex: Int) -> FileID2? in
-                guard let S = self else { return nil }
-                guard let proxy = S.outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return nil }
-                return proxy.sourceFileID
-            }
+            guard let current = rowIndexToOptionalFileID(outlineView.selectedRow) else { return }
             let c = AnyRandomAccessCollection(outlineView.selectedRowIndexes.lazy.flatMap(rowIndexToOptionalFileID))
             selectionController.source = c
-            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(selectionController.sequence))))
+            let items = selectionController.sequence
+            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(current: current, items: items))))
         }
         // This must come first to keep state consistency.
         scanSelectedFilesOnly()
