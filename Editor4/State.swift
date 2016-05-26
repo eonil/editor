@@ -27,7 +27,7 @@ struct State {
     var currentWorkspaceID: WorkspaceID? = nil
 //    var mainMenu = MainMenuState()
     var workspaces = KeyJournalingDictionary<WorkspaceID, WorkspaceState>()
-    var services = ServiceState()
+    var toolset = ToolsetState()
 }
 extension State {
     /// Accesses current workspace state.
@@ -52,6 +52,6 @@ extension State {
 //    var build
 //}
 
-struct ServiceState {
+struct ToolsetState {
     var cargo = CargoServiceState()
 }

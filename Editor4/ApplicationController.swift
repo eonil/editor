@@ -15,11 +15,13 @@ class ApplicationController: NSObject, NSApplicationDelegate, DriverAccessible {
         // This is required and very important action dispatch.
         // Otherwise, driver will not be activated.
         driver.dispatch(Action.Reset)
-        let id = WorkspaceID()
-        let u = NSURL(string: "~/Temp/ws1")!
-        driver.dispatch(Action.Workspace(id, WorkspaceAction.Open))
-        driver.dispatch(Action.Workspace(id, WorkspaceAction.SetCurrent))
-        driver.dispatch(Action.Workspace(id, WorkspaceAction.Reconfigure(location: u)))
+        
+//        let id = WorkspaceID()
+//        let u = NSURL(fileURLWithPath: "/Users/Eonil/Temp/Editor4Test/ws1")
+//        driver.dispatch(Action.Workspace(id, WorkspaceAction.Open))
+//        driver.dispatch(Action.Workspace(id, WorkspaceAction.SetCurrent))
+//        driver.dispatch(Action.Workspace(id, WorkspaceAction.Reconfigure(location: u)))
+
 //        guard let rootID = driver.state.currentWorkspace?.files.rootID else { fatalError() }
 //        driver.dispatch(Action.Workspace(id, WorkspaceAction.File(FileAction.SelectAllOf([rootID]))))
 //        dispatch(Command.MainMenu(MainMenuCommand.FileNewWorkspace))

@@ -106,7 +106,6 @@ final class SubprocessController {
         }
     }
     private func runSending() {
-        assertMainThread()
         guard sendingDataQueue.count > 0 else { return }
         guard standardInputPipe.fileHandleForWriting.writeabilityHandler == nil else { return }
         let container = Container()

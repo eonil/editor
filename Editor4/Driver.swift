@@ -57,6 +57,9 @@ final class Driver {
     func dispatch<T>(value: T, to id: QueryID<T>) {
         query.dispatch(value, to: id)
     }
+    func notify(notification: Notification) -> Task<()> {
+        return user.dispatch(Action.Notify(notification))
+    }
 }
 extension Driver {
 //    /// `dispatch` and query the result.

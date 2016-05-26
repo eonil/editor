@@ -17,11 +17,10 @@
 		451137961CD482D4001A183A /* Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451137951CD482D4001A183A /* Apply.swift */; };
 		451216C91CE76EE3006E9207 /* BuildState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216C81CE76EE3006E9207 /* BuildState.swift */; };
 		451216D21CE76EF5006E9207 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D11CE76EF5006E9207 /* DebugState.swift */; };
-		451216D61CE77334006E9207 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D51CE77334006E9207 /* Services.swift */; };
+		451216D61CE77334006E9207 /* Toolset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D51CE77334006E9207 /* Toolset.swift */; };
 		451216D81CE77968006E9207 /* LLDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D71CE77968006E9207 /* LLDBService.swift */; };
 		451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D91CE77D02006E9207 /* SubprocessController.swift */; };
 		451216DE1CE77D94006E9207 /* IOAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216DD1CE77D94006E9207 /* IOAction.swift */; };
-		451232A21CF3376800181714 /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451232A11CF3376800181714 /* Promise.swift */; };
 		453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3F21CE731820081DCDA /* KeyJournal.swift */; };
 		453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */; };
 		453FF5821CD4F17300F6344B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FF5811CD4F17300F6344B /* main.swift */; };
@@ -56,9 +55,10 @@
 		455569291CF6004D00F2BD4D /* StateAssertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569281CF6004D00F2BD4D /* StateAssertions.swift */; };
 		4555692B1CF661F300F2BD4D /* FileTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555692A1CF661F300F2BD4D /* FileTreeTests.swift */; };
 		4555692D1CF6711300F2BD4D /* TemporalLazyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */; };
+		455569311CF698BE00F2BD4D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569301CF698BE00F2BD4D /* Notification.swift */; };
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
 		45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA01CE79193002FEA3D /* BashSubprocess.swift */; };
-		45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoSubprocess.swift */; };
+		45830AAA1CE79358002FEA3D /* CargoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoService.swift */; };
 		45830AAC1CE811FC002FEA3D /* UserOperationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAB1CE811FC002FEA3D /* UserOperationService.swift */; };
 		45830AAE1CE82DDA002FEA3D /* BoltsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */; };
 		45830AB01CE951AB002FEA3D /* JournalingChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AAF1CE951AB002FEA3D /* JournalingChecker.swift */; };
@@ -204,11 +204,10 @@
 		451137951CD482D4001A183A /* Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Apply.swift; sourceTree = "<group>"; };
 		451216C81CE76EE3006E9207 /* BuildState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildState.swift; sourceTree = "<group>"; };
 		451216D11CE76EF5006E9207 /* DebugState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugState.swift; sourceTree = "<group>"; };
-		451216D51CE77334006E9207 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		451216D51CE77334006E9207 /* Toolset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolset.swift; sourceTree = "<group>"; };
 		451216D71CE77968006E9207 /* LLDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBService.swift; sourceTree = "<group>"; };
 		451216D91CE77D02006E9207 /* SubprocessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubprocessController.swift; sourceTree = "<group>"; };
 		451216DD1CE77D94006E9207 /* IOAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOAction.swift; sourceTree = "<group>"; };
-		451232A11CF3376800181714 /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		453FB3F21CE731820081DCDA /* KeyJournal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyJournal.swift; sourceTree = "<group>"; };
 		453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorViewController.swift; sourceTree = "<group>"; };
 		453FF5811CD4F17300F6344B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -245,10 +244,11 @@
 		455569281CF6004D00F2BD4D /* StateAssertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateAssertions.swift; sourceTree = "<group>"; };
 		4555692A1CF661F300F2BD4D /* FileTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeTests.swift; sourceTree = "<group>"; };
 		4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporalLazyCollection.swift; sourceTree = "<group>"; };
+		455569301CF698BE00F2BD4D /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		45800F1F1CD5048F0000F621 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
 		45830AA01CE79193002FEA3D /* BashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashSubprocess.swift; sourceTree = "<group>"; };
-		45830AA91CE79358002FEA3D /* CargoSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoSubprocess.swift; sourceTree = "<group>"; };
+		45830AA91CE79358002FEA3D /* CargoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoService.swift; sourceTree = "<group>"; };
 		45830AAB1CE811FC002FEA3D /* UserOperationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOperationService.swift; sourceTree = "<group>"; };
 		45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoltsExtensions.swift; sourceTree = "<group>"; };
 		45830AAF1CE951AB002FEA3D /* JournalingChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalingChecker.swift; sourceTree = "<group>"; };
@@ -337,9 +337,9 @@
 		4511375B1CD480EB001A183A /* (IO) */ = {
 			isa = PBXGroup;
 			children = (
-				451216D51CE77334006E9207 /* Services.swift */,
+				451216D51CE77334006E9207 /* Toolset.swift */,
 				451216D71CE77968006E9207 /* LLDBService.swift */,
-				45830AA91CE79358002FEA3D /* CargoSubprocess.swift */,
+				45830AA91CE79358002FEA3D /* CargoService.swift */,
 				45830AA01CE79193002FEA3D /* BashSubprocess.swift */,
 				451216D91CE77D02006E9207 /* SubprocessController.swift */,
 				451216DD1CE77D94006E9207 /* IOAction.swift */,
@@ -418,7 +418,7 @@
 				455569221CF5C83800F2BD4D /* PlatformService.swift */,
 				45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */,
 				45830B131CF04D30002FEA3D /* Stepper.swift */,
-				451232A11CF3376800181714 /* Promise.swift */,
+				455569301CF698BE00F2BD4D /* Notification.swift */,
 				4511375A1CD480E5001A183A /* (UI) */,
 				4511375B1CD480EB001A183A /* (IO) */,
 				454AD8971CC69559008A9BAC /* Utility.swift */,
@@ -673,7 +673,6 @@
 				455569291CF6004D00F2BD4D /* StateAssertions.swift in Sources */,
 				45C3B38F1CD4F3330001D0AF /* MainMenuPalette.swift in Sources */,
 				454AD8691CC6530D008A9BAC /* ApplicationController.swift in Sources */,
-				451232A21CF3376800181714 /* Promise.swift in Sources */,
 				454AD8941CC69420008A9BAC /* Driver.swift in Sources */,
 				45E730461CD602C900BA7550 /* StateError.swift in Sources */,
 				45E730531CD796D300BA7550 /* RenderingError.swift in Sources */,
@@ -689,7 +688,7 @@
 				45B7854B1CE70C0300A40CF9 /* FileTree2.swift in Sources */,
 				4550F9EA1CE61CE600B911C4 /* KeyJournalingDictionary.swift in Sources */,
 				451137591CD48094001A183A /* Shell.swift in Sources */,
-				45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */,
+				45830AAA1CE79358002FEA3D /* CargoService.swift in Sources */,
 				45830AB01CE951AB002FEA3D /* JournalingChecker.swift in Sources */,
 				455569271CF5EE9200F2BD4D /* TemporalLazySequence.swift in Sources */,
 				4555692D1CF6711300F2BD4D /* TemporalLazyCollection.swift in Sources */,
@@ -708,6 +707,7 @@
 				45D6C3551CE241490016DB7A /* RenderableWindowController.swift in Sources */,
 				451216C91CE76EE3006E9207 /* BuildState.swift in Sources */,
 				45830B1C1CF08858002FEA3D /* ServiceType.swift in Sources */,
+				455569311CF698BE00F2BD4D /* Notification.swift in Sources */,
 				455569041CF5862B00F2BD4D /* MenuCommand.swift in Sources */,
 				4550F9F81CE6C1FC00B911C4 /* WorkspaceState.swift in Sources */,
 				45830ACC1CEB8D16002FEA3D /* JournalingClearance.swift in Sources */,
@@ -727,7 +727,7 @@
 				45D6C35D1CE4C6F00016DB7A /* IndexJournalingArray.swift in Sources */,
 				455569081CF5871000F2BD4D /* MenuCommandShortcutKeys.swift in Sources */,
 				453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */,
-				451216D61CE77334006E9207 /* Services.swift in Sources */,
+				451216D61CE77334006E9207 /* Toolset.swift in Sources */,
 				455569231CF5C83800F2BD4D /* PlatformService.swift in Sources */,
 				451137921CD4822D001A183A /* Marks.swift in Sources */,
 				455569211CF5C1A500F2BD4D /* MenuUtility.swift in Sources */,

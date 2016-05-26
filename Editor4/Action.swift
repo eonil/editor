@@ -24,7 +24,7 @@ enum Action {
     case Test(TestAction)
     case Shell(ShellAction)
     case Workspace(WorkspaceID, WorkspaceAction)
-    case ApplyCargoServiceState(CargoServiceState)
+    case Notify(Notification)
 }
 enum TestAction {
     case Test1
@@ -56,7 +56,6 @@ enum WorkspaceAction {
     //        case FileNodeList(paths: [WorkspaceItemPath], FileNodeAction)
     case Build(BuildAction)
     case Debug(DebugAction)
-    case UpdateBuildState
 }
 
 enum FileAction {

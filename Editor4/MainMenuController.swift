@@ -48,6 +48,12 @@ final class MainMenuController: DriverAccessible, Renderable {
         palette.fileDelete.enabled                      =   (optionalSelection?.getHighlightOrItems().isEmpty == false)
         palette.fileShowInFinder.enabled                =   (optionalSelection?.getHighlightOrItems().isEmpty == false)
         palette.fileShowInTerminal.enabled              =   (optionalSelection?.getHighlightOrItems().isEmpty == false)
+
+        palette.product.enabled                         =   true
+        palette.productRun.enabled                      =   (optionalWorkspace != nil)
+        palette.productStop.enabled                     =   (optionalWorkspace != nil)
+        palette.productBuild.enabled                    =   (optionalWorkspace != nil)
+        palette.productClean.enabled                    =   (optionalWorkspace != nil)
     }
 }
 

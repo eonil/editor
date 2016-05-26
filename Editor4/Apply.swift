@@ -28,11 +28,10 @@ extension State {
         case .Workspace(let id, let action):
             try apply(id , action: action)
 
-        case .ApplyCargoServiceState(let state):
-            services.cargo = state
+        case .Notify(let notification):
+            try apply(notification)
         }
     }
-
     private mutating func apply(action: TestAction) {
         switch action {
         case .Test1:
@@ -129,6 +128,16 @@ extension State {
 
         default:
             MARK_unimplemented()
+        }
+    }
+
+    private mutating func apply(notification: Notification) throws {
+        switch notification {
+        case .Cargo(let notification):
+            switch notification {
+            case .Step(let newState):
+                toolset.cargo = newState
+            }
         }
     }
 }

@@ -63,6 +63,7 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
     private func process(n: NSNotification) {
         switch n.name {
         case NSWindowWillCloseNotification:
+            guard n.object === window else { return }
             assert(workspaceID != nil)
             guard let workspaceID = workspaceID else { return }
             driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.Close))

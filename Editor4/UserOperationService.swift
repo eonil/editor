@@ -11,7 +11,7 @@ import BoltsSwift
 /// Manages all long-running operations.
 ///
 final class UserOperationService: DriverAccessible {
-    private let services = Services()
+    private let toolset = Toolset()
 
     /// **NOT IMPLEMENTED YET!!!**
     /// Abstracts user file name editing operation.
@@ -66,6 +66,7 @@ enum UserOperationError: ErrorType {
     case MissingCurrentFile
     case NoSelectedFile
     case File(FileUserOperationError)
+    case BadFileURL
 }
 enum FileUserOperationError {
     case CannotMakeNameForNewFolder
@@ -97,13 +98,14 @@ extension UserOperationService {
         let driver = self.driver
         switch command {
         case .FileNewWorkspace:
-//            guard services.cargo.state.isRunning == false else { throw UserOperationError.CannotRunTheCommandInCurrnetState }
             var u1: NSURL?
-            return DialogueUtility.runFolderSaveDialogue().continueOnSuccessWithTask(continuation: { [services] (u: NSURL) -> Task<()> in
+            return DialogueUtility.runFolderSaveDialogue().continueOnSuccessWithTask(continuation: { [toolset] (u: NSURL) -> Task<()> in
+                assert(u.fileURL)
+                guard u.fileURL else { return Task(error: UserOperationError.BadFileURL) }
                 u1 = u
-                return try services.cargo.run(.New(u))
-            }).continueWithTask(Executor.MainThread, continuation: { [services] (task: Task<()>) -> Task<()> in
-                driver.dispatch(.ApplyCargoServiceState(services.cargo.state))
+                return toolset.cargo.dispatch(CargoCommand.New(u))
+                
+            }).continueWithTask(Executor.MainThread, continuation: { [toolset] (task: Task<()>) -> Task<()> in
                 let workspaceID = WorkspaceID()
                 driver.dispatch(.Workspace(workspaceID, .Open))
                 driver.dispatch(.Workspace(workspaceID, .Reconfigure(location: u1)))
@@ -122,9 +124,21 @@ extension UserOperationService {
             guard let currentFileID = workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw UserOperationError.MissingCurrentFile }
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.CreateFileAndStartEditingName(container: currentFileID, index: 0))))
 
-//        case .FileOpenWorkspace:
-//            MARK_unimplemented()
-//
+        case .FileOpenWorkspace:
+            var u1: NSURL?
+            return DialogueUtility.runFolderOpenDialogue().continueOnSuccessWithTask(continuation: { [toolset] (u: NSURL) -> Task<()> in
+                assert(u.fileURL)
+                guard u.fileURL else { return Task(error: UserOperationError.BadFileURL) }
+                u1 = u
+                return Task(())
+            }).continueWithTask(Executor.MainThread, continuation: { [toolset] (task: Task<()>) -> Task<()> in
+                let workspaceID = WorkspaceID()
+                driver.dispatch(.Workspace(workspaceID, .Open))
+                driver.dispatch(.Workspace(workspaceID, .SetCurrent))
+                driver.dispatch(.Workspace(workspaceID, .Reconfigure(location: u1)))
+                return task
+            })
+
         case .FileCloseWorkspace:
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.Close))
@@ -153,11 +167,10 @@ extension UserOperationService {
         case .FileShowInTerminal:
             MARK_unimplemented()
 
-    //    case .ProductBuild:
-    //        guard let workspaceID = state.currentWorkspaceID else { throw MainMenuActionError.MissingCurrentWorkspace }
-    //        try services.cargo.run(.Build).continueWith(.MainThread, continuation: { (task: Task<()>) -> () in
-    //            services.dispatch(Action.Workspace(id: workspaceID, action: WorkspaceAction.UpdateBuildState))
-    //        })
+        case .ProductBuild:
+            guard let currentWorkspaceLocation = driver.userInteractionState.currentWorkspace?.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            return toolset.cargo.dispatch(CargoCommand.Build(currentWorkspaceLocation))
+
     //
     //    case .ProductClean:
     //        guard let workspaceID = state.currentWorkspaceID else { throw MainMenuActionError.MissingCurrentWorkspace }

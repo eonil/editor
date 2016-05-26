@@ -10,24 +10,32 @@ extension State {
     func assertConsistency() {
         runOnlyInUnoptimizedBuild {
             for (_, workspaceState) in workspaces {
-                let allFileIDs = workspaceState.files.map({ $0.0 })
-                let uniqueFileIDs = Set(allFileIDs)
-                assert(allFileIDs.count == uniqueFileIDs.count)
-                let a = Array(workspaceState.files).map({ $0.0 })
-                if let currentFileID = workspaceState.window.navigatorPane.file.selection.current {
-                    assert(a.contains(currentFileID) == true)
-                }
-                assert(workspaceState.window.navigatorPane.file.selection.items.version == workspaceState.window.navigatorPane.file.selection.items.accessibleVersion)
-                for selectedFileID in workspaceState.window.navigatorPane.file.selection.items {
-                    let a = Array(workspaceState.files).map({ $0.0 })
-                    assert(a.contains(selectedFileID) == true)
-                }
-                workspaceState.files.assertConsistency()
+                workspaceState.assertConsistency()
             }
         }
     }
 }
 
+private extension WorkspaceState {
+    private func assertConsistency() {
+        runOnlyInUnoptimizedBuild {
+            assert(location == nil || location!.fileURL)
+            let allFileIDs = files.map({ $0.0 })
+            let uniqueFileIDs = Set(allFileIDs)
+            assert(allFileIDs.count == uniqueFileIDs.count)
+            let a = Array(files).map({ $0.0 })
+            if let currentFileID = window.navigatorPane.file.selection.current {
+                assert(a.contains(currentFileID) == true)
+            }
+            assert(window.navigatorPane.file.selection.items.version == window.navigatorPane.file.selection.items.accessibleVersion)
+            for selectedFileID in window.navigatorPane.file.selection.items {
+                let a = Array(files).map({ $0.0 })
+                assert(a.contains(selectedFileID) == true)
+            }
+            files.assertConsistency()
+        }
+    }
+}
 private extension FileTree2 {
     private func assertConsistency() {
         runOnlyInUnoptimizedBuild {
