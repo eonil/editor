@@ -36,7 +36,7 @@ final class MainMenuController: DriverAccessible, Renderable {
         }
         let maybeCurrentFile = getCurrentFile()
         let hasCurrentWorkspace = driver.userInteractionState.currentWorkspaceID != nil
-        let hasAnyCurrentOrSelectedFile = driver.userInteractionState.currentWorkspace?.window.navigatorPane.file.current
+        let hasAnyCurrentOrSelectedFile = driver.userInteractionState.currentWorkspace?.window.navigatorPane.file.getCurrentOrSelections().generate().next() != nil
 
         palette.file.enabled = true
         palette.fileNew.enabled = true
@@ -47,7 +47,7 @@ final class MainMenuController: DriverAccessible, Renderable {
         palette.fileOpenWorkspace.enabled = true
         palette.fileOpenClearWorkspaceHistory.enabled = true
         palette.fileCloseWorkspace.enabled = hasCurrentWorkspace
-        palette.fileDelete.enabled = hasCurrentWorkspace
+        palette.fileDelete.enabled = hasAnyCurrentOrSelectedFile
     }
 }
 

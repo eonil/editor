@@ -37,14 +37,20 @@ struct FileNavigatorPaneState {
     /// Otherwise, last selected file.
     var current: FileID2? = nil
     /// Selected files.
-    /// This is work only in specific time-span. Which means
+    /// This work only in specific time-span. Which means
     /// accessible only if `version == accessibleVerison`.
-    var selection = TemporalLazySequence<FileID2>()
+    var selection = TemporalLazyCollection<FileID2>()
     var filterExpression: String?
 }
+enum FileNavigatorSelectionState {
+    case Empty
+    case HighlightOverriding(FileID2)
+    case Plain(current: FileID2, all: TemporalLazyCollection<FileID2>)
+}
 extension FileNavigatorPaneState {
-    func getCurrentOfSelections() -> AnySequence<FileID2> {
-        if let current = current {
+    func getCurrentOrSelections() -> AnySequence<FileID2> {
+        /// Current indexis likely to be placed at last.
+        if let current = current where selection.reverse().contains(current) {
             return AnySequence(CollectionOfOne(current))
         }
         return AnySequence(selection)

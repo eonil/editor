@@ -30,7 +30,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
 
     deinit {
         // This is required to clean up temporal lazy sequence.
-        selectionController.source = AnySequence([])
+        selectionController.source = AnyRandomAccessCollection([])
     }
     var workspaceID: WorkspaceID? {
         didSet {
@@ -198,21 +198,13 @@ extension FileNavigatorViewController: NSOutlineViewDelegate {
                 guard let proxy = S.outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return nil }
                 return proxy.sourceFileID
             }
-            let generatorMaker = { [weak self] () -> AnyGenerator<FileID2> in
-                guard let S = self else { return AnyGenerator { return nil } }
-                var rowIndexGenerator = S.outlineView.selectedRowIndexes.generate()
-                let convertingGenerator = AnyGenerator { () -> FileID2? in
-                    while let rowIndex = rowIndexGenerator.next() {
-                        return rowIndexToOptionalFileID(rowIndex)
-                    }
-                    return nil
-                }
-                return convertingGenerator
-            }
-            selectionController.source = AnySequence<FileID2>(generatorMaker)
+            let c = AnyRandomAccessCollection(outlineView.selectedRowIndexes.lazy.flatMap(rowIndexToOptionalFileID))
+            selectionController.source = c
             driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(selectionController.sequence))))
         }
+        // This must come first to keep state consistency.
         scanSelectedFilesOnly()
+        scanCurrentFileOnly()
     }
 }
 
@@ -248,7 +240,6 @@ extension NSURL {
         return URLByAppendingPathComponent(first).appending(tail)
     }
 }
-
 
 
 

@@ -55,6 +55,7 @@
 		455569271CF5EE9200F2BD4D /* TemporalLazySequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569261CF5EE9200F2BD4D /* TemporalLazySequence.swift */; };
 		455569291CF6004D00F2BD4D /* StateAssertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569281CF6004D00F2BD4D /* StateAssertions.swift */; };
 		4555692B1CF661F300F2BD4D /* FileTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555692A1CF661F300F2BD4D /* FileTreeTests.swift */; };
+		4555692D1CF6711300F2BD4D /* TemporalLazyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */; };
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
 		45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA01CE79193002FEA3D /* BashSubprocess.swift */; };
 		45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoSubprocess.swift */; };
@@ -243,6 +244,7 @@
 		455569261CF5EE9200F2BD4D /* TemporalLazySequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporalLazySequence.swift; sourceTree = "<group>"; };
 		455569281CF6004D00F2BD4D /* StateAssertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateAssertions.swift; sourceTree = "<group>"; };
 		4555692A1CF661F300F2BD4D /* FileTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeTests.swift; sourceTree = "<group>"; };
+		4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporalLazyCollection.swift; sourceTree = "<group>"; };
 		45800F1F1CD5048F0000F621 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
 		45830AA01CE79193002FEA3D /* BashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashSubprocess.swift; sourceTree = "<group>"; };
@@ -447,6 +449,7 @@
 				45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */,
 				455569241CF5D03A00F2BD4D /* MemoizingLazyList.swift */,
 				455569261CF5EE9200F2BD4D /* TemporalLazySequence.swift */,
+				4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */,
 			);
 			name = "(functional style & synchronization)";
 			sourceTree = "<group>";
@@ -689,6 +692,7 @@
 				45830AAA1CE79358002FEA3D /* CargoSubprocess.swift in Sources */,
 				45830AB01CE951AB002FEA3D /* JournalingChecker.swift in Sources */,
 				455569271CF5EE9200F2BD4D /* TemporalLazySequence.swift in Sources */,
+				4555692D1CF6711300F2BD4D /* TemporalLazyCollection.swift in Sources */,
 				4550F9FA1CE6C23D00B911C4 /* DatabaseState.swift in Sources */,
 				45D6C3451CE2139C0016DB7A /* Renderable.swift in Sources */,
 				453FF5821CD4F17300F6344B /* main.swift in Sources */,

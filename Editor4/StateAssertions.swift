@@ -20,7 +20,6 @@ extension State {
                 assert(a.contains(currentFileID) == true)
             }
             workspaceState.window.navigatorPane.file.current
-            debugLog(Array(workspaceState.window.navigatorPane.file.selection))
             assert(workspaceState.window.navigatorPane.file.selection.version == workspaceState.window.navigatorPane.file.selection.accessibleVersion)
             for selectedFileID in workspaceState.window.navigatorPane.file.selection {
                 let a = Array(workspaceState.files).map({ $0.0 })

@@ -74,7 +74,7 @@ enum FileAction {
     case Move(from: [FileNodePath], onto: FileNodePath)
 //    case EditTree(id: FileNodeID, action: FileTreeEditAction)
     case SetCurrent(FileID2?)
-    case SetSelectedFiles(TemporalLazySequence<FileID2>)
+    case SetSelectedFiles(TemporalLazyCollection<FileID2>)
 }
 
 enum FileActionError: ErrorType {

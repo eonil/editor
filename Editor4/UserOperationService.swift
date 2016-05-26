@@ -136,7 +136,7 @@ extension UserOperationService {
         case .FileDelete:
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
             guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
-            let fileSequenceToDelete = workspace.window.navigatorPane.file.getCurrentOfSelections()
+            let fileSequenceToDelete = workspace.window.navigatorPane.file.getCurrentOrSelections()
             let uniqueFileIDs = Set(fileSequenceToDelete)
             return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteFiles(uniqueFileIDs))))
 
