@@ -138,7 +138,10 @@ extension UserOperationService {
                 .first else { throw UserOperationError.File(FileUserOperationError.CannotMakeNameForNewFolder) }
             guard let u = workspace.location?.appending(currentFilePath) else { throw UserOperationError.File(FileUserOperationError.BadPath(currentFilePath)) }
             let u1 = u.URLByAppendingPathComponent(newFileName)
-            return driver.dispatch(.Workspace(workspaceID, .File(.CreateFileAndStartEditingName(container: currentFileID, index: 0, name: newFileName))))
+            return driver.run(PlatformCommand.CreateDataFileWithIntermediateDirectories(u1)).continueOnSuccessWithTask(continuation: { () -> Task<()> in
+                return driver.dispatch(.Workspace(workspaceID, .File(.CreateFileAndStartEditingName(container: currentFileID, index: 0, name: newFileName))))
+            })
+
 
         case .FileOpenWorkspace:
             var u1: NSURL?

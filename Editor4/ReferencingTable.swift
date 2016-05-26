@@ -46,9 +46,10 @@ func ==<Element>(a: ReferencingTableIndex<Element>, b: ReferencingTableIndex<Ele
     return a.internalIndex == b.internalIndex
 }
 
-/// A dictionary which provides O(1) referencing time, but you cannot use arbitrary key.
+/// A dictionary which provides strict O(1) referencing time, but you cannot use arbitrary key.
 ///
 /// Read by ref-key: strictly O(1).
+/// Write by ref-key: strictly O(1) in most cases.
 /// Write can take up to O(n) due to internal array reallocation.
 /// Anyway this reallocation happens only when `count` > `capacity`.
 ///
