@@ -103,12 +103,15 @@ extension State {
             }
 
         case .DeleteFiles(let fileIDs):
+            let unknownFileIDs = fileIDs.filter({ workspace.files.contains($0) == false })
+            guard unknownFileIDs.count == 0 else { throw UserInteractionError.UnknownFiles(Array(unknownFileIDs)) }
             workspace.window.navigatorPane.file.selection.reset()
             for fileID in fileIDs {
+                guard workspace.files.contains(fileID) else { continue } // A file node can be erased by prior deletion.
                 workspace.files.remove(fileID)
             }
 
-        case .SetCurrent(let maybeNewFileID):
+        case .SetHighlightedFile(let maybeNewFileID):
             workspace.window.navigatorPane.file.selection.reset(maybeNewFileID)
 
         case .StartEditingCurrentFileName:

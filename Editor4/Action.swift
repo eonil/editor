@@ -72,7 +72,7 @@ enum FileAction {
     case Drop(from: [NSURL], onto: FileNodePath)
     case Move(from: [FileNodePath], onto: FileNodePath)
 //    case EditTree(id: FileNodeID, action: FileTreeEditAction)
-    case SetCurrent(FileID2?)
+    case SetHighlightedFile(FileID2?)
     case SetSelectedFiles(current: FileID2, items: TemporalLazyCollection<FileID2>)
 }
 

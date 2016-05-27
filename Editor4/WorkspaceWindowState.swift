@@ -80,9 +80,22 @@ extension FileNavigatorPaneSelectionState {
     func getHighlightOrCurrent() -> FileID2? {
         return highlighting ?? current
     }
+    /// - Returns:
+    ///     A highlighted file ID if highlighted file ID is not a part of selected file IDs.
+    ///     All selected file IDs if the highlighted file ID is a part of selected file IDs
+    ///     or there's no highlighted file ID.
     func getHighlightOrItems() -> AnyRandomAccessCollection<FileID2> {
-        if let highlighting = highlighting { return AnyRandomAccessCollection(CollectionOfOne(highlighting).flatMap({$0})) }
-        return AnyRandomAccessCollection(items)
+        if let highlighting = highlighting {
+            if items.contains(highlighting) {
+                return AnyRandomAccessCollection(items)
+            }
+            else {
+                return AnyRandomAccessCollection(CollectionOfOne(highlighting).flatMap({$0}))
+            }
+        }
+        else {
+            return AnyRandomAccessCollection(items)
+        }
     }
 }
 struct IssueNavigatorPaneState {

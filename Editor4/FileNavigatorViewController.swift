@@ -109,16 +109,10 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
 //        scanCurrentFileOnly()
 //    }
 
-    private func scanCurrentFileOnly() {
+    private func scanHighlightedFileOnly() {
         guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
-        if runningMenu {
-            let optionalFileID = outlineView.getClickedFileID2() ?? outlineView.getSelectedFileID2()
-            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetCurrent(optionalFileID))))
-        }
-        else {
-            let optionalFileID = outlineView.getSelectedFileID2()
-            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetCurrent(optionalFileID))))
-        }
+        let optionalFileID = runningMenu ? outlineView.getClickedFileID2() : nil
+        driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetHighlightedFile(optionalFileID))))
     }
 
     private func process(event: FileNavigatorOutlineViewEvent) {
@@ -129,7 +123,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             runningMenu = false
         }
         renderMenuStatesOnly()
-        scanCurrentFileOnly()
+        scanHighlightedFileOnly()
     }
 }
 extension FileNavigatorViewController: NSOutlineViewDataSource {
@@ -204,6 +198,8 @@ extension FileNavigatorViewController: NSOutlineViewDelegate {
         func scanSelectedFilesOnly() {
             guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
             guard let current = rowIndexToOptionalFileID(outlineView.selectedRow) else { return }
+            debugLog(outlineView.selectedRowIndexes)
+            debugLog(outlineView.selectedRowIndexes.lazy.flatMap(rowIndexToOptionalFileID))
             let c = AnyRandomAccessCollection(outlineView.selectedRowIndexes.lazy.flatMap(rowIndexToOptionalFileID))
             selectionController.source = c
             let items = selectionController.sequence
@@ -211,7 +207,6 @@ extension FileNavigatorViewController: NSOutlineViewDelegate {
         }
         // This must come first to keep state consistency.
         scanSelectedFilesOnly()
-        scanCurrentFileOnly()
     }
 }
 

@@ -165,9 +165,17 @@ extension UserOperationService {
         case .FileDelete:
             guard let workspaceID = driver.userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
             guard let workspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
+            guard let location = workspace.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
             let fileSequenceToDelete = workspace.window.navigatorPane.file.selection.getHighlightOrItems()
             let uniqueFileIDs = Set(fileSequenceToDelete)
-            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteFiles(uniqueFileIDs))))
+            let us = uniqueFileIDs.map { (fileID: FileID2) -> NSURL in
+                let p = workspace.files.resolvePathFor(fileID)
+                let u = location.appending(p)
+                return u
+            }
+            return driver.run(PlatformCommand.DeleteFileSubtrees(us)).continueOnSuccessWithTask(continuation: { () -> Task<()> in
+                return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteFiles(uniqueFileIDs))))
+            })
 
         case .FileShowInFinder:
             guard let currentWorkspace = driver.userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }

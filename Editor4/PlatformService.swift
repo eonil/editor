@@ -13,7 +13,7 @@ import AppKit
 enum PlatformCommand {
     case CreateDirectoryWithIntermediateDirectories(NSURL)
     case CreateDataFileWithIntermediateDirectories(NSURL)
-    case DeleteFileSubtree(NSURL)
+    case DeleteFileSubtrees([NSURL])
     case OpenFileInFinder([NSURL])
 }
 enum PlatformError: ErrorType {
@@ -45,9 +45,12 @@ final class PlatformService {
             try NSData().writeToURL(u, options: NSDataWritingOptions.DataWritingWithoutOverwriting)
             return Task(())
 
-        case .DeleteFileSubtree(let u):
-            assert(u.fileURL)
-            try NSFileManager.defaultManager().removeItemAtURL(u)
+        case .DeleteFileSubtrees(let us):
+            assert(us.map { $0.fileURL }.reduce(true, combine: { $0 && $1 }))
+            us.forEach { u in
+                // Eat-up errors.
+                let _ = try? NSFileManager.defaultManager().removeItemAtURL(u)
+            }
             return Task(())
 
         case .OpenFileInFinder(let urls):
@@ -56,3 +59,20 @@ final class PlatformService {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

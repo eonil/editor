@@ -17,6 +17,7 @@ enum UserInteractionError: ErrorType {
     case ResultTypeMismatch
 
     case MissingCurrentFile
+    case UnknownFiles([FileID2])
 }
 
 /// User-interaction service is special because;

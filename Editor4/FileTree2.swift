@@ -147,6 +147,9 @@ extension FileTree2: SequenceType {
     }
 }
 extension FileTree2 {
+    func contains(fileID: FileID2) -> Bool {
+        return fileTable.contains(fileID.internalRefkey)
+    }
     /// - Returns:
     ///     `nil` if passed file ID is root.
     ///     Throws `FileTree2Error.BadFileID` if the file ID does not exist in this tree.
