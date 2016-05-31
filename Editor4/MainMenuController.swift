@@ -33,8 +33,8 @@ final class MainMenuController: DriverAccessible, Renderable {
             guard let id = optionalID else { return nil }
             return driver.userInteractionState.currentWorkspace?.files[id]
         }
-        let optionalWorkspace = driver.userInteractionState.currentWorkspace
-        let optionalSelection = optionalWorkspace?.window.navigatorPane.file.selection
+        let optionalCurrentWorkspace = driver.userInteractionState.currentWorkspace
+        let optionalSelection = optionalCurrentWorkspace?.window.navigatorPane.file.selection
 
         palette.file.enabled                            =   true
         palette.fileNew.enabled                         =   true
@@ -44,16 +44,16 @@ final class MainMenuController: DriverAccessible, Renderable {
         palette.fileOpen.enabled                        =   true
         palette.fileOpenWorkspace.enabled               =   true
         palette.fileOpenClearWorkspaceHistory.enabled   =   true
-        palette.fileCloseWorkspace.enabled              =   (optionalWorkspace != nil)
+        palette.fileCloseWorkspace.enabled              =   (optionalCurrentWorkspace != nil)
         palette.fileDelete.enabled                      =   (optionalSelection?.getHighlightOrItems().isEmpty == false)
         palette.fileShowInFinder.enabled                =   (optionalSelection?.getHighlightOrItems().isEmpty == false)
         palette.fileShowInTerminal.enabled              =   (optionalSelection?.getHighlightOrItems().isEmpty == false)
 
         palette.product.enabled                         =   true
-        palette.productRun.enabled                      =   (optionalWorkspace != nil)
-        palette.productStop.enabled                     =   (optionalWorkspace != nil)
-        palette.productBuild.enabled                    =   (optionalWorkspace != nil)
-        palette.productClean.enabled                    =   (optionalWorkspace != nil)
+        palette.productRun.enabled                      =   (optionalCurrentWorkspace != nil)
+        palette.productStop.enabled                     =   (optionalCurrentWorkspace != nil)
+        palette.productBuild.enabled                    =   (optionalCurrentWorkspace != nil)
+        palette.productClean.enabled                    =   (optionalCurrentWorkspace != nil)
     }
 }
 

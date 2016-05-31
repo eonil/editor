@@ -125,6 +125,9 @@ extension UserOperationService {
             let u1 = u.URLByAppendingPathComponent(newFolderName)
             return driver.run(PlatformCommand.CreateDirectoryWithIntermediateDirectories(u1)).continueOnSuccessWithTask(continuation: { () -> Task<()> in
                 return driver.dispatch(.Workspace(workspaceID, .File(.CreateFolderAndStartEditingName(container: currentFileID, index: 0, name: newFolderName))))
+            }).continueOnSuccessWithTask(continuation: { () -> Task<()> in
+                guard let newWorkspaceState = driver.userInteractionState.workspaces[workspaceID] else { throw UserOperationError.MissingCurrentWorkspace }
+                return driver.run(PlatformCommand.StoreWorkspace(newWorkspaceState))
             })
 
         case .FileNewFile:
@@ -140,6 +143,9 @@ extension UserOperationService {
             let u1 = u.URLByAppendingPathComponent(newFileName)
             return driver.run(PlatformCommand.CreateDataFileWithIntermediateDirectories(u1)).continueOnSuccessWithTask(continuation: { () -> Task<()> in
                 return driver.dispatch(.Workspace(workspaceID, .File(.CreateFileAndStartEditingName(container: currentFileID, index: 0, name: newFileName))))
+            }).continueOnSuccessWithTask(continuation: { () -> Task<()> in
+                guard let newWorkspaceState = driver.userInteractionState.workspaces[workspaceID] else { throw UserOperationError.MissingCurrentWorkspace }
+                return driver.run(PlatformCommand.StoreWorkspace(newWorkspaceState))
             })
 
 
@@ -150,12 +156,13 @@ extension UserOperationService {
                 guard u.fileURL else { return Task(error: UserOperationError.BadFileURL) }
                 u1 = u
                 return Task(())
-            }).continueWithTask(Executor.MainThread, continuation: { [toolset] (task: Task<()>) -> Task<()> in
+            }).continueOnSuccessWithTask(continuation: { () -> Task<()> in
+                guard let u1 = u1 else { return Task(()) }
                 let workspaceID = WorkspaceID()
                 driver.dispatch(.Workspace(workspaceID, .Open))
                 driver.dispatch(.Workspace(workspaceID, .SetCurrent))
                 driver.dispatch(.Workspace(workspaceID, .Reconfigure(location: u1)))
-                return task
+                return driver.run(PlatformCommand.RestoreWorkspace(workspaceID, location: u1))
             })
 
         case .FileCloseWorkspace:
@@ -175,6 +182,9 @@ extension UserOperationService {
             }
             return driver.run(PlatformCommand.DeleteFileSubtrees(us)).continueOnSuccessWithTask(continuation: { () -> Task<()> in
                 return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteFiles(uniqueFileIDs))))
+            }).continueOnSuccessWithTask(continuation: { () -> Task<()> in
+                guard let newWorkspaceState = driver.userInteractionState.workspaces[workspaceID] else { throw UserOperationError.MissingCurrentWorkspace }
+                return driver.run(PlatformCommand.StoreWorkspace(newWorkspaceState))
             })
 
         case .FileShowInFinder:

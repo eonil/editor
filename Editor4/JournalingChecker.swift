@@ -57,31 +57,38 @@ import EonilToolbox
 ///     helps to check leaking journals by programmer's mistake.
 ///
 final class JournalingClearanceChecker {
+    private static let lock = NSLock()
     private(set) static var allCheckers = WeakReferenceSet<JournalingClearanceChecker>()
     static func resetClearanceOfAllCheckers() {
-        precondition(NSThread.isMainThread())
+        JournalingClearanceChecker.lock.lock()
         for c in allCheckers {
             c.isClean = false
         }
+        JournalingClearanceChecker.lock.unlock()
     }
     static func checkClearanceOfAllCheckers() -> Bool {
+        JournalingClearanceChecker.lock.lock()
+        defer { JournalingClearanceChecker.lock.unlock() }
         for c in allCheckers {
             if c.isClean == false { return false }
         }
         return true
     }
     init() {
-        precondition(NSThread.isMainThread())
+        JournalingClearanceChecker.lock.lock()
         JournalingClearanceChecker.allCheckers.insert(self)
+        JournalingClearanceChecker.lock.unlock()
     }
     deinit {
-        precondition(NSThread.isMainThread())
+        JournalingClearanceChecker.lock.lock()
         JournalingClearanceChecker.allCheckers.remove(self)
+        JournalingClearanceChecker.lock.unlock()
     }
     private(set) var isClean = false
     func setAsClean() {
-        precondition(NSThread.isMainThread())
+        JournalingClearanceChecker.lock.lock()
         isClean = true
+        JournalingClearanceChecker.lock.unlock()
     }
 }
 

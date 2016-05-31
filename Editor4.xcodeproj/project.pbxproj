@@ -56,6 +56,7 @@
 		4555692B1CF661F300F2BD4D /* FileTreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555692A1CF661F300F2BD4D /* FileTreeTests.swift */; };
 		4555692D1CF6711300F2BD4D /* TemporalLazyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */; };
 		455569311CF698BE00F2BD4D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569301CF698BE00F2BD4D /* Notification.swift */; };
+		457519961CF88C8600F78BAD /* WorkspaceSerializationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457519951CF88C8600F78BAD /* WorkspaceSerializationUtility.swift */; };
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
 		45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA01CE79193002FEA3D /* BashSubprocess.swift */; };
 		45830AAA1CE79358002FEA3D /* CargoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoService.swift */; };
@@ -225,7 +226,7 @@
 		4550F9E91CE61CE600B911C4 /* KeyJournalingDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyJournalingDictionary.swift; sourceTree = "<group>"; };
 		4550F9ED1CE6279D00B911C4 /* WorkspaceDatabaseState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDatabaseState.swift; sourceTree = "<group>"; };
 		4550F9F31CE6B65300B911C4 /* WorkspaceWindowState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceWindowState.swift; sourceTree = "<group>"; };
-		4550F9F71CE6C1FC00B911C4 /* WorkspaceState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkspaceState.swift; path = ../../../../../../Applications/WorkspaceState.swift; sourceTree = "<group>"; };
+		4550F9F71CE6C1FC00B911C4 /* WorkspaceState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkspaceState.swift; path = /Applications/WorkspaceState.swift; sourceTree = "<absolute>"; };
 		4550F9F91CE6C23D00B911C4 /* DatabaseState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseState.swift; sourceTree = "<group>"; };
 		4550F9FB1CE6C29100B911C4 /* WorkspaceID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceID.swift; sourceTree = "<group>"; };
 		4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceAccessible.swift; sourceTree = "<group>"; };
@@ -245,6 +246,7 @@
 		4555692A1CF661F300F2BD4D /* FileTreeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeTests.swift; sourceTree = "<group>"; };
 		4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporalLazyCollection.swift; sourceTree = "<group>"; };
 		455569301CF698BE00F2BD4D /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		457519951CF88C8600F78BAD /* WorkspaceSerializationUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSerializationUtility.swift; sourceTree = "<group>"; };
 		45800F1F1CD5048F0000F621 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
 		45830AA01CE79193002FEA3D /* BashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashSubprocess.swift; sourceTree = "<group>"; };
@@ -307,31 +309,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4511375A1CD480E5001A183A /* (UI) */ = {
+		4511375A1CD480E5001A183A /* (UI control) */ = {
 			isa = PBXGroup;
 			children = (
 				45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */,
 				45830AB71CEA1605002FEA3D /* UserOperationCommand.swift */,
 				45830AAB1CE811FC002FEA3D /* UserOperationService.swift */,
-				45830AB51CEA1126002FEA3D /* DialogueUtility.swift */,
-				45D6C3441CE2139C0016DB7A /* Renderable.swift */,
-				4555691C1CF5A47B00F2BD4D /* Scannable.swift */,
-				451137581CD48094001A183A /* Shell.swift */,
-				4555691E1CF5B07100F2BD4D /* ShellNotification.swift */,
-				45E730521CD796D300BA7550 /* RenderingError.swift */,
-				4555690D1CF58B2800F2BD4D /* (menu definitions and components) */,
-				4555690E1CF58B2F00F2BD4D /* (main menu build-up) */,
-				45D6C34A1CE222880016DB7A /* WorkspaceManager.swift */,
-				45CD93951CC809F100083CEC /* WorkspaceDocument.swift */,
-				4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */,
-				454AD8951CC694E8008A9BAC /* WorkspaceWindowController.swift */,
-				453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */,
-				4555690F1CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift */,
-				45D6C3541CE241490016DB7A /* RenderableWindowController.swift */,
-				45D6C3421CE210180016DB7A /* RenderableViewController.swift */,
-				454AD8681CC6530D008A9BAC /* ApplicationController.swift */,
 			);
-			name = "(UI)";
+			name = "(UI control)";
 			sourceTree = "<group>";
 		};
 		4511375B1CD480EB001A183A /* (IO) */ = {
@@ -398,28 +383,16 @@
 			children = (
 				453FF5811CD4F17300F6344B /* main.swift */,
 				454AD8931CC69420008A9BAC /* Driver.swift */,
-				454AD87A1CC65326008A9BAC /* State.swift */,
-				455569281CF6004D00F2BD4D /* StateAssertions.swift */,
-				4550F9F91CE6C23D00B911C4 /* DatabaseState.swift */,
-				4550F9FB1CE6C29100B911C4 /* WorkspaceID.swift */,
-				4550F9F71CE6C1FC00B911C4 /* WorkspaceState.swift */,
-				4550F9ED1CE6279D00B911C4 /* WorkspaceDatabaseState.swift */,
-				4550F9F31CE6B65300B911C4 /* WorkspaceWindowState.swift */,
-				45B7854A1CE70C0300A40CF9 /* FileTree2.swift */,
-				45B5CDD41CE753FC0097AC0B /* FileNodePath.swift */,
-				451216C81CE76EE3006E9207 /* BuildState.swift */,
-				451216D11CE76EF5006E9207 /* DebugState.swift */,
-				45E730451CD602C900BA7550 /* StateError.swift */,
-				4511375C1CD48123001A183A /* Action.swift */,
-				451137951CD482D4001A183A /* Apply.swift */,
-				45830AC91CEB8C79002FEA3D /* Clean.swift */,
 				45830B1B1CF08858002FEA3D /* ServiceType.swift */,
 				45830B171CF075E7002FEA3D /* QueryService.swift */,
 				455569221CF5C83800F2BD4D /* PlatformService.swift */,
 				45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */,
 				45830B131CF04D30002FEA3D /* Stepper.swift */,
 				455569301CF698BE00F2BD4D /* Notification.swift */,
-				4511375A1CD480E5001A183A /* (UI) */,
+				4575198B1CF88BED00F78BAD /* (UI state) */,
+				457519941CF88C5700F78BAD /* (UI persistency) */,
+				4511375A1CD480E5001A183A /* (UI control) */,
+				457519931CF88C1900F78BAD /* (UI rendering) */,
 				4511375B1CD480EB001A183A /* (IO) */,
 				454AD8971CC69559008A9BAC /* Utility.swift */,
 				45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */,
@@ -475,6 +448,60 @@
 				45800F211CD5141E0000F621 /* MainMenuUtility.swift */,
 			);
 			name = "(main menu build-up)";
+			sourceTree = "<group>";
+		};
+		4575198B1CF88BED00F78BAD /* (UI state) */ = {
+			isa = PBXGroup;
+			children = (
+				454AD87A1CC65326008A9BAC /* State.swift */,
+				455569281CF6004D00F2BD4D /* StateAssertions.swift */,
+				4550F9F91CE6C23D00B911C4 /* DatabaseState.swift */,
+				4550F9FB1CE6C29100B911C4 /* WorkspaceID.swift */,
+				4550F9F71CE6C1FC00B911C4 /* WorkspaceState.swift */,
+				4550F9ED1CE6279D00B911C4 /* WorkspaceDatabaseState.swift */,
+				4550F9F31CE6B65300B911C4 /* WorkspaceWindowState.swift */,
+				45B7854A1CE70C0300A40CF9 /* FileTree2.swift */,
+				45B5CDD41CE753FC0097AC0B /* FileNodePath.swift */,
+				451216C81CE76EE3006E9207 /* BuildState.swift */,
+				451216D11CE76EF5006E9207 /* DebugState.swift */,
+				45E730451CD602C900BA7550 /* StateError.swift */,
+				4511375C1CD48123001A183A /* Action.swift */,
+				451137951CD482D4001A183A /* Apply.swift */,
+				45830AC91CEB8C79002FEA3D /* Clean.swift */,
+			);
+			name = "(UI state)";
+			sourceTree = "<group>";
+		};
+		457519931CF88C1900F78BAD /* (UI rendering) */ = {
+			isa = PBXGroup;
+			children = (
+				45830AB51CEA1126002FEA3D /* DialogueUtility.swift */,
+				45D6C3441CE2139C0016DB7A /* Renderable.swift */,
+				4555691C1CF5A47B00F2BD4D /* Scannable.swift */,
+				451137581CD48094001A183A /* Shell.swift */,
+				4555691E1CF5B07100F2BD4D /* ShellNotification.swift */,
+				45E730521CD796D300BA7550 /* RenderingError.swift */,
+				4555690D1CF58B2800F2BD4D /* (menu definitions and components) */,
+				4555690E1CF58B2F00F2BD4D /* (main menu build-up) */,
+				45D6C34A1CE222880016DB7A /* WorkspaceManager.swift */,
+				45CD93951CC809F100083CEC /* WorkspaceDocument.swift */,
+				4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */,
+				454AD8951CC694E8008A9BAC /* WorkspaceWindowController.swift */,
+				453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */,
+				4555690F1CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift */,
+				45D6C3541CE241490016DB7A /* RenderableWindowController.swift */,
+				45D6C3421CE210180016DB7A /* RenderableViewController.swift */,
+				454AD8681CC6530D008A9BAC /* ApplicationController.swift */,
+			);
+			name = "(UI rendering)";
+			sourceTree = "<group>";
+		};
+		457519941CF88C5700F78BAD /* (UI persistency) */ = {
+			isa = PBXGroup;
+			children = (
+				457519951CF88C8600F78BAD /* WorkspaceSerializationUtility.swift */,
+			);
+			name = "(UI persistency)";
 			sourceTree = "<group>";
 		};
 		45830ABE1CEA8217002FEA3D /* Editor4Tests */ = {
@@ -683,6 +710,7 @@
 				455569101CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift in Sources */,
 				4550F9EE1CE6279D00B911C4 /* WorkspaceDatabaseState.swift in Sources */,
 				4550F9C91CE4CE4600B911C4 /* IndexJournalingTree.swift in Sources */,
+				457519961CF88C8600F78BAD /* WorkspaceSerializationUtility.swift in Sources */,
 				454AD87B1CC65326008A9BAC /* State.swift in Sources */,
 				451216DE1CE77D94006E9207 /* IOAction.swift in Sources */,
 				45B7854B1CE70C0300A40CF9 /* FileTree2.swift in Sources */,

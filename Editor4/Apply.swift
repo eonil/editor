@@ -126,12 +126,18 @@ extension State {
         }
     }
 
-    private mutating func apply(notification: Notification) throws {
-        switch notification {
-        case .Cargo(let notification):
-            switch notification {
+    private mutating func apply(n: Notification) throws {
+        switch n {
+        case .Cargo(let n):
+            switch n {
             case .Step(let newState):
                 toolset.cargo = newState
+            }
+        case .Platform(let n):
+            switch n {
+            case .ReloadWorkspace(let workspaceID, let workspaceState):
+                assert(workspaceState.location != nil)
+                workspaces[workspaceID] = workspaceState
             }
         }
     }

@@ -34,6 +34,9 @@ struct FileTree2: VersioningStateType {
     init(rootState: FileState2) {
         rootID = fileTable.insert(rootState).toFileID()
     }
+    var count: Int {
+        get { return fileTable.count }
+    }
     private mutating func logAndRevise(mutation: KeyMutation<FileID2>) {
         journal.append((version, mutation))
         version.revise()
@@ -136,6 +139,7 @@ struct FileTree2: VersioningStateType {
     }
 }
 extension FileTree2: SequenceType {
+    /// Iterate all file nodes in random order, but fastest.
     func generate() -> AnyGenerator<(FileID2, FileState2)> {
         let g = fileTable.generate()
         return AnyGenerator {

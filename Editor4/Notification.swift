@@ -9,6 +9,7 @@
 /// Notification is usually notifies state mutation of a service
 /// to the driver.
 enum Notification {
+    case Platform(PlatformNotification)
     case Cargo(CargoNotification)
 }
 

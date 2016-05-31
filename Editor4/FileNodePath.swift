@@ -14,6 +14,7 @@ struct FileNodePath {
     /// `["folder1"]` is subnode of root node with name `folder`.
     /// `["folder1", "file2"]` is subnode of above node with name `file2`.
     var keys = [String]()
+    
     init(_ keys: [String]) {
         self.keys = keys
     }
