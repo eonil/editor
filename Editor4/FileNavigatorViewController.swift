@@ -7,6 +7,7 @@
 //
 
 import AppKit
+import BoltsSwift
 import EonilToolbox
 
 private enum ColumnID: String {
@@ -52,6 +53,8 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             outlineView.allowsMultipleSelection = true
             outlineView.setDataSource(self)
             outlineView.setDelegate(self)
+            outlineView.target = self
+            outlineView.action = #selector(EDITOR_action(_:)) // This prevents immediate rename editing. Mimics Xcode/Finder behaviour.
             outlineView.menu = menuPalette.context.item.submenu
             outlineView.onEvent = { [weak self] in self?.process($0) }
         }
@@ -126,6 +129,14 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
         scanHighlightedFileOnly()
     }
 }
+extension FileNavigatorViewController {
+    @objc
+    private func EDITOR_action(_: AnyObject?) {
+    }
+    @objc
+    private func EDITOR_doubleAction(_: AnyObject?) {
+    }
+}
 extension FileNavigatorViewController: NSOutlineViewDataSource {
     func outlineView(outlineView: NSOutlineView, isItemExpandable item: AnyObject) -> Bool {
         guard let proxy = item as? FileUIProxy2 else { return false }
@@ -179,6 +190,7 @@ extension FileNavigatorViewController: NSOutlineViewDataSource {
         textField.bordered = false
         textField.drawsBackground = false
         textField.stringValue = proxy.sourceFileState.name
+        textField.delegate = self
 
         return cell
     }
@@ -207,6 +219,45 @@ extension FileNavigatorViewController: NSOutlineViewDelegate {
         }
         // This must come first to keep state consistency.
         scanSelectedFilesOnly()
+    }
+}
+extension FileNavigatorViewController: NSTextFieldDelegate {
+
+//	func control(control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
+//		return	true
+//	}
+//	func control(control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
+//		return	true
+//	}
+//	override func controlTextDidBeginEditing(obj: NSNotification) {
+//
+//	}
+    func control(control: NSControl, isValidObject obj: AnyObject) -> Bool {
+        return	true
+    }
+    /// This it the only event that works. All above events won't be sent.
+    override func controlTextDidEndEditing(notification: NSNotification) {
+        // TODO: Improve this to a regular solution.
+        // Currently this is a bit hacky. I don't know better solution.
+        guard let textField = notification.object as? NSTextField else { return reportErrorToDevelopers("Cannot find sender of end-editing notification in file outline view.") }
+//        guard let cellView = textField.superview as? NSTableCellView else { return reportErrorToDevelopers("Cannot find cell that ended editing in file outline view.") }
+//        guard let rowView = cellView.superview as? NSTableRowView else { return reportErrorToDevelopers("Cannot find row that ended editing in file outline view.") }
+        let rowIndex = outlineView.rowForView(textField)
+        guard rowIndex != -1 else { return reportErrorToDevelopers("Cannot find row that ended editing in file outline view.") }
+        guard let proxy = outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return reportErrorToDevelopers("") }
+
+        guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Cannot determine workspace ID.") }
+        let fileID = proxy.sourceFileID
+        let newFileName = textField.stringValue
+        // Let the action processor to detect errors in the new name.
+        driver.run(UserOperationCommand.UserInteraction(UserInteractionCommand.Rename(workspaceID, fileID, newName: newFileName)))
+            .continueWithTask(Executor.MainThread, continuation: { [weak self] (task: Task<()>) -> Task<()> in
+                assertMainThread()
+                // Calling `render()` will be no-op because journal should be empty.
+                // Set text-field manually.
+                self?.outlineView.reloadData()
+                return task
+            })
     }
 }
 

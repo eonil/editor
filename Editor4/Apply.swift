@@ -121,6 +121,22 @@ extension State {
         case .SetSelectedFiles(let currentFileID, let itemFileIDs):
             workspace.window.navigatorPane.file.selection.reset(currentFileID, itemFileIDs)
 
+        case .Rename(let fileID, let newName):
+            let fileState = workspace.files[fileID]
+            if fileID == workspace.files.rootID {
+                // TODO: Support renaming of root node to rename the workspace...
+                MARK_unimplemented()
+            }
+            else {
+                let oldName = fileState.name
+                guard newName != oldName else { throw UserInteractionError.CannotRenameFileBecauseNewNameIsEqualToOldName }
+                guard workspace.files.queryAllSiblingFileStatesOf(fileID).contains({ $0.name == newName }) == false else { throw UserInteractionError.CannotRenameFileBecauseSameNameAlreadyExists }
+                try workspace.files.rename(fileID, to: newName)
+                assert(workspace.files.journal.logs.last != nil)
+                assert(workspace.files.journal.logs.last!.operation.isUpdate == true)
+                assert(workspace.files.journal.logs.last!.operation.key == fileID)
+            }
+
         default:
             MARK_unimplemented()
         }
@@ -144,7 +160,16 @@ extension State {
 }
 
 
-
+private extension FileTree2 {
+//    private func querySuperfileStateOf(fileID: FileID2) -> FileState2? {
+//        guard let superfileID = self[fileID].superfileID else { return nil }
+//        return self[superfileID]
+//    }
+    private func queryAllSiblingFileStatesOf(fileID: FileID2) -> AnySequence<FileState2> {
+        guard let superfileID = self[fileID].superfileID else { return AnySequence([]) }
+        return AnySequence(self[superfileID].subfileIDs.map({ self[$0] }))
+    }
+}
 
 
 

@@ -67,6 +67,9 @@ enum UserOperationError: ErrorType {
     case NoSelectedFile
     case File(FileUserOperationError)
     case BadFileURL
+    case MissingWorkspace(WorkspaceID)
+    case CannotResolvePathForWorkspaceFile((WorkspaceID, FileID2))
+    case CannotMakeNewURL(oldURL: NSURL, newName: String)
 }
 enum FileUserOperationError {
     case CannotMakeNameForNewFolder
@@ -92,6 +95,9 @@ extension UserOperationService {
             case .FileNavigator(let command):
                 return try run(command)
             }
+
+        case .UserInteraction(let command):
+            return try run(command)
         }
     }
     private func run(command: MainMenuCommand) throws -> Task<()> {
@@ -242,7 +248,38 @@ extension UserOperationService {
     }
 }
 
-
+extension UserOperationService {
+    private func run(command: UserInteractionCommand) throws -> Task<()> {
+        let driver = self.driver
+        switch command {
+        case .Rename(let workspaceID, let fileID, let newName):
+            guard let workspace = driver.userInteractionState.workspaces[workspaceID] else { throw UserOperationError.MissingWorkspace(workspaceID) }
+            let filePath = workspace.files.resolvePathFor(fileID)
+            guard let oldURL = workspace.location?.appending(filePath) else { throw UserOperationError.CannotResolvePathForWorkspaceFile(workspaceID, fileID) }
+            guard let newURL = oldURL.URLByDeletingLastPathComponent?.URLByAppendingPathComponent(newName) else { throw UserOperationError.CannotMakeNewURL(oldURL: oldURL, newName: newName) }
+            // Hope file-system operation to be fast enough.
+            return driver.run(PlatformCommand.RenameFile(from: oldURL, to: newURL)).continueOnSuccessWithTask(continuation: { () -> Task<()> in
+                // Update UI only if file-system operation is successful.
+                return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.Rename(fileID, newName: newName))))
+                    .continueWithTask(continuation: { (task: Task<()>) -> Task<()> in
+                        // Store workspace at last.
+                        guard let newWorkspaceState = driver.userInteractionState.workspaces[workspaceID] else { throw UserOperationError.MissingWorkspace(workspaceID) }
+                        return driver.run(PlatformCommand.StoreWorkspace(newWorkspaceState)).continueWithTask(continuation: { (task: Task<()>) -> Task<()> in
+                            if task.faulted {
+                                // If we couldn't store workspace, it's a serious issue.
+                                // For now, I have no idea how to deal with this, so
+                                // just crash.
+                                // TODO: Figure out better policy.
+                                reportErrorToDevelopers("`PlatformCommand.StoreWorkspace` failed with error `\(task.error)`.")
+                                fatalError("`PlatformCommand.StoreWorkspace` failed with error `\(task.error)`.")
+                            }
+                            return task
+                        })
+                    })
+            })
+        }
+    }
+}
 
 
 

@@ -18,6 +18,9 @@ enum UserInteractionError: ErrorType {
 
     case MissingCurrentFile
     case UnknownFiles([FileID2])
+
+    case CannotRenameFileBecauseNewNameIsEqualToOldName
+    case CannotRenameFileBecauseSameNameAlreadyExists
 }
 
 /// User-interaction service is special because;
@@ -108,6 +111,7 @@ final class UserInteractionService {
             schedule.completion.trySetResult(())
         }
         catch let error {
+            debugLog(error)
             shell.alert(error)
             schedule.completion.trySetError(error)
             //            assert(false, "Error in stepping: \(error). This is only for information purpose, and you can safely ignore this assertion.")

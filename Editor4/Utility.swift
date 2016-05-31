@@ -29,13 +29,14 @@ extension CollectionType {
 
 
 func debugLog<T>(value: T) {
-    print("\(value)")
+    debugPrint("\(value)")
 }
 func assertMainThread() {
     assert(NSThread.isMainThread())
 }
 func reportErrorToDevelopers(error: ErrorType) {
-    fatalError("\(error)")
+    debugLog(error)
+//    fatalError("\(error)")
 }
 func reportErrorToDevelopers(error: String) {
     fatalError(error)

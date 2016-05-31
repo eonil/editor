@@ -74,6 +74,7 @@ enum FileAction {
 //    case EditTree(id: FileNodeID, action: FileTreeEditAction)
     case SetHighlightedFile(FileID2?)
     case SetSelectedFiles(current: FileID2, items: TemporalLazyCollection<FileID2>)
+    case Rename(FileID2, newName: String)
 }
 
 enum FileActionError: ErrorType {

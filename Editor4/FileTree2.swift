@@ -20,8 +20,10 @@ func ==(a: FileID2, b: FileID2) -> Bool {
 
 enum FileTree2Error: ErrorType {
     case DuplicatedFileName
+    case EmptyStringFileName
     case BadFileID(FileID2)
 }
+
 
 /// Behaves like a `Dictionary<FileID2, FileState2>`.
 /// Intentionally abstracted to change internal implementation.
@@ -67,9 +69,14 @@ struct FileTree2: VersioningStateType {
         let subfileID = fileTable[fileID.internalRefkey].subfileIDs[first]
         return searchFileIDForIndex(tail, with: subfileID)
     }
-    private(set) subscript(key: FileID2) -> FileState2 {
+    /// Gets file-state for a file ID.
+    ///
+    /// - Note:
+    ///     Setter is intentionally removed because careless modification on `FileState` can result some
+    ///     inconsistent state. Instead, another mutator methods which provides proper consistency.
+    ///
+    subscript(key: FileID2) -> FileState2 {
         get { return fileTable[key.internalRefkey] }
-        set { fileTable[key.internalRefkey] = newValue } // External code cannot update super/subfile ID links.
     }
     subscript(path: FileNodePath) -> FileState2? {
         get {
@@ -98,10 +105,8 @@ struct FileTree2: VersioningStateType {
         return try insert(state, at: index, to: superfileID)
     }
     mutating func insert(state: FileState2, at index: Int, to superfileID: FileID2) throws -> FileID2 {
-        for subfileID in fileTable[superfileID.internalRefkey].subfileIDs {
-            guard fileTable[subfileID.internalRefkey].name != state.name else { throw FileTree2Error.DuplicatedFileName }
-        }
-
+        try validateName(state.name)
+        try validateUniqueName(state.name, forSubfilesOf: superfileID)
         var state1 = state
         state1.superfileID = superfileID
         let subfileID = fileTable.insert(state1).toFileID()
@@ -136,6 +141,35 @@ struct FileTree2: VersioningStateType {
         }
         fileTable.remove(fileID.internalRefkey)
         logAndRevise(.Delete(fileID))
+    }
+    mutating func rename(fileID: FileID2, to newName: String) throws {
+        try validateName(newName)
+        try validateUniqueName(newName, forSiblingsOf: fileID)
+        fileTable[fileID.internalRefkey].name = newName
+        logAndRevise(.Update(fileID))
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////
+
+    private func validateName(name: String) throws {
+        guard name != "" else { throw FileTree2Error.EmptyStringFileName }
+    }
+    private func validateUniqueName(name: String, forSubfilesOf superfileID: FileID2) throws {
+        for subfileID in fileTable[superfileID.internalRefkey].subfileIDs {
+            guard fileTable[subfileID.internalRefkey].name != name else { throw FileTree2Error.DuplicatedFileName }
+        }
+    }
+    private func validateUniqueName(name: String, forSiblingsOf fileID: FileID2) throws {
+        guard let superfileID = fileTable[fileID.internalRefkey].superfileID else {
+            precondition(fileID == rootID, "Inconsistent internal state. A node with no `superfileID`, but the file ID is not root ID.")
+            return
+        }
+        for subfileID in fileTable[superfileID.internalRefkey].subfileIDs {
+            guard subfileID != fileID else { continue } // Skip current file. Because its name is going to be changed.
+            guard fileTable[subfileID.internalRefkey].name != name else { throw FileTree2Error.DuplicatedFileName }
+        }
     }
 }
 extension FileTree2: SequenceType {
@@ -220,8 +254,6 @@ private extension Array where Element: Equatable {
         }
     }
 }
-
-
 
 
 

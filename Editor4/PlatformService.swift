@@ -17,6 +17,7 @@ enum PlatformCommand {
     case OpenFileInFinder([NSURL])
     case StoreWorkspace(WorkspaceState)
     case RestoreWorkspace(WorkspaceID, location: NSURL)
+    case RenameFile(from: NSURL, to: NSURL) 
 }
 enum PlatformNotification {
     case ReloadWorkspace(WorkspaceID, WorkspaceState)
@@ -85,6 +86,10 @@ final class PlatformService: DriverAccessible {
             var newWorkspaceState = try WorkspaceSerializationUtility.deserialize(s)
             newWorkspaceState.location = location
             return driver.notify(Notification.Platform(PlatformNotification.ReloadWorkspace(workspaceID, newWorkspaceState)))
+
+        case .RenameFile(let from, let to):
+            try NSFileManager.defaultManager().moveItemAtURL(from, toURL: to)
+            return Task(())
         }
     }
 }
