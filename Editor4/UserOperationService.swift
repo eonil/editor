@@ -214,12 +214,9 @@ extension UserOperationService {
             guard let currentWorkspaceLocation = driver.userInteractionState.currentWorkspace?.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
             return toolset.cargo.dispatch(CargoCommand.Build(currentWorkspaceLocation))
 
-    //
-    //    case .ProductClean:
-    //        guard let workspaceID = state.currentWorkspaceID else { throw MainMenuActionError.MissingCurrentWorkspace }
-    //        try services.cargo.run(.Clean).continueWith(.MainThread, continuation: { (task: Task<()>) -> () in
-    //            services.dispatch(Action.Workspace(id: workspaceID, action: WorkspaceAction.UpdateBuildState))
-    //        })
+        case .ProductClean:
+            guard let currentWorkspaceLocation = driver.userInteractionState.currentWorkspace?.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            return toolset.cargo.dispatch(CargoCommand.Clean(currentWorkspaceLocation))
 
     //        case .ProductRun:
     //        case .ProductStop:
