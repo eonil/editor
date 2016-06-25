@@ -76,8 +76,6 @@
 		45830B1E1CF08AE7002FEA3D /* UserInteractionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */; };
 		4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320B1CDFE78900F924F5 /* VersionType.swift */; };
 		4589320E1CDFED0000F924F5 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320D1CDFED0000F924F5 /* Version.swift */; };
-		459B5F5F1D01B1CA0081D8FF /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; };
-		459B5F601D01B1CA0081D8FF /* LLDBWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		459B5F771D01D7F20081D8FF /* GCDUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B5F761D01D7F20081D8FF /* GCDUtility.swift */; };
 		459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459DB8D51CD487DB00C892D9 /* CoreVideo.framework */; };
 		45B5CDD51CE753FC0097AC0B /* FileNodePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CDD41CE753FC0097AC0B /* FileNodePath.swift */; };
@@ -225,13 +223,6 @@
 			remoteGlobalIDString = 45E5EF211A7E6817009967D2;
 			remoteInfo = TestdriveApp;
 		};
-		459B5F611D01B1CA0081D8FF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 45A0FB75199FBA9C0020D59D;
-			remoteInfo = LLDBWrapper;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -241,7 +232,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				459B5F601D01B1CA0081D8FF /* LLDBWrapper.framework in Embed Frameworks */,
 				4511378D1CD4819E001A183A /* EonilToolbox.framework in Embed Frameworks */,
 				451137891CD4819E001A183A /* BoltsSwift.framework in Embed Frameworks */,
 			);
@@ -350,7 +340,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				459B5F5F1D01B1CA0081D8FF /* LLDBWrapper.framework in Frameworks */,
 				459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */,
 				4511378C1CD4819E001A183A /* EonilToolbox.framework in Frameworks */,
 				451137881CD4819E001A183A /* BoltsSwift.framework in Frameworks */,
@@ -606,7 +595,6 @@
 			dependencies = (
 				4511378B1CD4819E001A183A /* PBXTargetDependency */,
 				4511378F1CD4819E001A183A /* PBXTargetDependency */,
-				459B5F621D01B1CA0081D8FF /* PBXTargetDependency */,
 			);
 			name = Editor4;
 			productName = Editor4;
@@ -922,11 +910,6 @@
 			isa = PBXTargetDependency;
 			target = 454AD8641CC6530D008A9BAC /* Editor4 */;
 			targetProxy = 45830AC21CEA8217002FEA3D /* PBXContainerItemProxy */;
-		};
-		459B5F621D01B1CA0081D8FF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = LLDBWrapper;
-			targetProxy = 459B5F611D01B1CA0081D8FF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
