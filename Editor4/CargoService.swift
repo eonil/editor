@@ -23,6 +23,7 @@ enum CargoError: ErrorType {
     case CompilerWarning(String)
     case CompilerError(String)
 }
+
 enum CargoCommand {
     /// - Parameter 0:
     ///     Destination directory will be created by `cargo new`.

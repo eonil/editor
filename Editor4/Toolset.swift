@@ -13,7 +13,7 @@ typealias ADHOC_UndefinedType = ()
 struct Toolset {
     let racer = RacerService()
     let cargo = CargoService()
-    let lldb = LLDBService()
+//    let lldb = LLDBService()
 }
 
 

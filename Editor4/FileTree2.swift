@@ -27,6 +27,12 @@ enum FileTree2Error: ErrorType {
 
 /// Behaves like a `Dictionary<FileID2, FileState2>`.
 /// Intentionally abstracted to change internal implementation.
+///
+/// - Note:
+///     DO NOT expose any mutators that possibly result inonsistent state.
+///     Every mutator must conclude consistent state, and should append
+///     journal log what changed.
+///
 struct FileTree2: VersioningStateType {
     private var fileTable = ReferencingTable<FileState2>()
     private(set) var rootID: FileID2
@@ -72,7 +78,7 @@ struct FileTree2: VersioningStateType {
     /// Gets file-state for a file ID.
     ///
     /// - Note:
-    ///     Setter is intentionally removed because careless modification on `FileState` can result some
+    ///     Setter is intentionally removed because careless modification on `FileState` can result 
     ///     inconsistent state. Instead, another mutator methods which provides proper consistency.
     ///
     subscript(key: FileID2) -> FileState2 {

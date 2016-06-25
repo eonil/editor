@@ -7,22 +7,43 @@
 //
 
 import Foundation.NSURL
+import EonilToolbox
 
+/// Reprents state of all debugging sessions.
+///
+/// This state is managed by `DebugService`. And the service notifies
+/// its state to `Driver` by copy when it changes its state.
+///
+/// - Note:
+///     A workspace can contain multiple debugging sessions.
+///
 struct DebugState {
-    var sessions = [DebugSessionState]()
+    private(set) var targets = [DebugTargetID: DebugTargetState]()
 }
 
 ////////////////////////////////////////////////////////////////
 
-struct DebugSessionState {
+struct DebugTargetID: Hashable {
+    private let oid = ObjectAddressID()
+    var hashValue: Int {
+        get { return oid.hashValue }
+    }
+}
+func == (a: DebugTargetID, b: DebugTargetID) -> Bool {
+    return a.oid == b.oid
+}
+struct DebugTargetState {
     private(set) var executableURL: NSURL
-    var processID: DebugProcessID?
-    var phase: DebugSessionPhase = .NotStarted
+    var session: DebugProcessState?
+}
+struct DebugProcessState {
+    var processID: pid_t?
+//    var phase: DebugSessionPhase = .NotStarted
     var threads = [DebugThreadID: DebugThreadState]()
     var variables = [DebugVariableState]()
 }
 
-enum DebugSessionPhase {
+enum DebugProcessPhase {
     case NotStarted
     case Running
     case Paused(DebugSessionPauseReason)

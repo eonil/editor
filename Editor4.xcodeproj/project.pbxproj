@@ -57,6 +57,7 @@
 		4555692D1CF6711300F2BD4D /* TemporalLazyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */; };
 		455569311CF698BE00F2BD4D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569301CF698BE00F2BD4D /* Notification.swift */; };
 		457519961CF88C8600F78BAD /* WorkspaceSerializationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457519951CF88C8600F78BAD /* WorkspaceSerializationUtility.swift */; };
+		457F77FA1D005D1A00BE521C /* DebugService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F77F91D005D1A00BE521C /* DebugService.swift */; };
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
 		45830AA11CE79193002FEA3D /* BashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA01CE79193002FEA3D /* BashSubprocess.swift */; };
 		45830AAA1CE79358002FEA3D /* CargoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AA91CE79358002FEA3D /* CargoService.swift */; };
@@ -75,6 +76,9 @@
 		45830B1E1CF08AE7002FEA3D /* UserInteractionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */; };
 		4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320B1CDFE78900F924F5 /* VersionType.swift */; };
 		4589320E1CDFED0000F924F5 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320D1CDFED0000F924F5 /* Version.swift */; };
+		459B5F5F1D01B1CA0081D8FF /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; };
+		459B5F601D01B1CA0081D8FF /* LLDBWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		459B5F771D01D7F20081D8FF /* GCDUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B5F761D01D7F20081D8FF /* GCDUtility.swift */; };
 		459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459DB8D51CD487DB00C892D9 /* CoreVideo.framework */; };
 		45B5CDD51CE753FC0097AC0B /* FileNodePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B5CDD41CE753FC0097AC0B /* FileNodePath.swift */; };
 		45B7854B1CE70C0300A40CF9 /* FileTree2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B7854A1CE70C0300A40CF9 /* FileTree2.swift */; };
@@ -179,6 +183,55 @@
 			remoteGlobalIDString = 454AD8641CC6530D008A9BAC;
 			remoteInfo = Editor4;
 		};
+		459B5F531D01B1BD0081D8FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45A0FB76199FBA9C0020D59D;
+			remoteInfo = LLDBWrapper;
+		};
+		459B5F551D01B1BD0081D8FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C993271A6E5D4A00BA2BC4;
+			remoteInfo = Workbench1;
+		};
+		459B5F571D01B1BD0081D8FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C9934E1A6E5DF700BA2BC4;
+			remoteInfo = SampleProgram3;
+		};
+		459B5F591D01B1BD0081D8FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45AED2C51A751B35002F83AB;
+			remoteInfo = SampleProgram4;
+		};
+		459B5F5B1D01B1BD0081D8FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C511511A7954F20055DC1D;
+			remoteInfo = Workbench2;
+		};
+		459B5F5D1D01B1BD0081D8FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E5EF211A7E6817009967D2;
+			remoteInfo = TestdriveApp;
+		};
+		459B5F611D01B1CA0081D8FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45A0FB75199FBA9C0020D59D;
+			remoteInfo = LLDBWrapper;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -188,6 +241,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				459B5F601D01B1CA0081D8FF /* LLDBWrapper.framework in Embed Frameworks */,
 				4511378D1CD4819E001A183A /* EonilToolbox.framework in Embed Frameworks */,
 				451137891CD4819E001A183A /* BoltsSwift.framework in Embed Frameworks */,
 			);
@@ -247,6 +301,7 @@
 		4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporalLazyCollection.swift; sourceTree = "<group>"; };
 		455569301CF698BE00F2BD4D /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		457519951CF88C8600F78BAD /* WorkspaceSerializationUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSerializationUtility.swift; sourceTree = "<group>"; };
+		457F77F91D005D1A00BE521C /* DebugService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugService.swift; sourceTree = "<group>"; };
 		45800F1F1CD5048F0000F621 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45800F211CD5141E0000F621 /* MainMenuUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUtility.swift; sourceTree = "<group>"; };
 		45830AA01CE79193002FEA3D /* BashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashSubprocess.swift; sourceTree = "<group>"; };
@@ -268,6 +323,8 @@
 		45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInteractionService.swift; sourceTree = "<group>"; };
 		4589320B1CDFE78900F924F5 /* VersionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionType.swift; sourceTree = "<group>"; };
 		4589320D1CDFED0000F924F5 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
+		459B5F761D01D7F20081D8FF /* GCDUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDUtility.swift; sourceTree = "<group>"; };
 		459DB8D51CD487DB00C892D9 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		45B5CDD41CE753FC0097AC0B /* FileNodePath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNodePath.swift; sourceTree = "<group>"; };
 		45B7854A1CE70C0300A40CF9 /* FileTree2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTree2.swift; sourceTree = "<group>"; };
@@ -293,6 +350,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459B5F5F1D01B1CA0081D8FF /* LLDBWrapper.framework in Frameworks */,
 				459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */,
 				4511378C1CD4819E001A183A /* EonilToolbox.framework in Frameworks */,
 				451137881CD4819E001A183A /* BoltsSwift.framework in Frameworks */,
@@ -323,6 +381,8 @@
 			isa = PBXGroup;
 			children = (
 				451216D51CE77334006E9207 /* Toolset.swift */,
+				451216D11CE76EF5006E9207 /* DebugState.swift */,
+				457F77F91D005D1A00BE521C /* DebugService.swift */,
 				451216D71CE77968006E9207 /* LLDBService.swift */,
 				45830AA91CE79358002FEA3D /* CargoService.swift */,
 				45830AA01CE79193002FEA3D /* BashSubprocess.swift */,
@@ -363,6 +423,7 @@
 				454AD8671CC6530D008A9BAC /* Editor4 */,
 				4511375E1CD48176001A183A /* BoltsSwift.xcodeproj */,
 				451137611CD48176001A183A /* EonilToolbox.xcodeproj */,
+				459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */,
 				459DB8D51CD487DB00C892D9 /* CoreVideo.framework */,
 				45830ABE1CEA8217002FEA3D /* Editor4Tests */,
 				454AD8661CC6530D008A9BAC /* Products */,
@@ -399,6 +460,7 @@
 				4550F9D91CE553A800B911C4 /* (functional style & synchronization) */,
 				451137911CD4822D001A183A /* Marks.swift */,
 				45D6C34E1CE238620016DB7A /* NotificationUtility.swift */,
+				459B5F761D01D7F20081D8FF /* GCDUtility.swift */,
 				45D0A5281CF13E8200731D6D /* Task2.swift */,
 				454AD86F1CC6530D008A9BAC /* Assets.xcassets */,
 				454AD8741CC6530D008A9BAC /* Info.plist */,
@@ -463,7 +525,6 @@
 				45B7854A1CE70C0300A40CF9 /* FileTree2.swift */,
 				45B5CDD41CE753FC0097AC0B /* FileNodePath.swift */,
 				451216C81CE76EE3006E9207 /* BuildState.swift */,
-				451216D11CE76EF5006E9207 /* DebugState.swift */,
 				45E730451CD602C900BA7550 /* StateError.swift */,
 				4511375C1CD48123001A183A /* Action.swift */,
 				451137951CD482D4001A183A /* Apply.swift */,
@@ -515,6 +576,19 @@
 			path = Editor4Tests;
 			sourceTree = "<group>";
 		};
+		459B5F441D01B1BD0081D8FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */,
+				459B5F561D01B1BD0081D8FF /* Workbench1.app */,
+				459B5F581D01B1BD0081D8FF /* SampleProgram3 */,
+				459B5F5A1D01B1BD0081D8FF /* SampleProgram4.app */,
+				459B5F5C1D01B1BD0081D8FF /* Workbench2.app */,
+				459B5F5E1D01B1BD0081D8FF /* TestdriveApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -532,6 +606,7 @@
 			dependencies = (
 				4511378B1CD4819E001A183A /* PBXTargetDependency */,
 				4511378F1CD4819E001A183A /* PBXTargetDependency */,
+				459B5F621D01B1CA0081D8FF /* PBXTargetDependency */,
 			);
 			name = Editor4;
 			productName = Editor4;
@@ -594,6 +669,10 @@
 				{
 					ProductGroup = 451137621CD48176001A183A /* Products */;
 					ProjectRef = 451137611CD48176001A183A /* EonilToolbox.xcodeproj */;
+				},
+				{
+					ProductGroup = 459B5F441D01B1BD0081D8FF /* Products */;
+					ProjectRef = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -668,6 +747,48 @@
 			remoteRef = 4511377D1CD48176001A183A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LLDBWrapper.framework;
+			remoteRef = 459B5F531D01B1BD0081D8FF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459B5F561D01B1BD0081D8FF /* Workbench1.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench1.app;
+			remoteRef = 459B5F551D01B1BD0081D8FF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459B5F581D01B1BD0081D8FF /* SampleProgram3 */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SampleProgram3;
+			remoteRef = 459B5F571D01B1BD0081D8FF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459B5F5A1D01B1BD0081D8FF /* SampleProgram4.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SampleProgram4.app;
+			remoteRef = 459B5F591D01B1BD0081D8FF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459B5F5C1D01B1BD0081D8FF /* Workbench2.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench2.app;
+			remoteRef = 459B5F5B1D01B1BD0081D8FF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459B5F5E1D01B1BD0081D8FF /* TestdriveApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestdriveApp.app;
+			remoteRef = 459B5F5D1D01B1BD0081D8FF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -728,6 +849,7 @@
 				4550F9F41CE6B65300B911C4 /* WorkspaceWindowState.swift in Sources */,
 				45830AAC1CE811FC002FEA3D /* UserOperationService.swift in Sources */,
 				45C3B3971CD4F82D0001D0AF /* RunMainMenuAction.swift in Sources */,
+				457F77FA1D005D1A00BE521C /* DebugService.swift in Sources */,
 				45830B1E1CF08AE7002FEA3D /* UserInteractionService.swift in Sources */,
 				4550F9D61CE4FE0200B911C4 /* ArraySynchronizationManager.swift in Sources */,
 				45C3B3851CD4F3030001D0AF /* MainMenuController.swift in Sources */,
@@ -747,6 +869,7 @@
 				4555690C1CF5895D00F2BD4D /* MenuCommandLabels.swift in Sources */,
 				451216D81CE77968006E9207 /* LLDBService.swift in Sources */,
 				45D6C34B1CE222880016DB7A /* WorkspaceManager.swift in Sources */,
+				459B5F771D01D7F20081D8FF /* GCDUtility.swift in Sources */,
 				45D6C3431CE210180016DB7A /* RenderableViewController.swift in Sources */,
 				4511375D1CD48123001A183A /* Action.swift in Sources */,
 				4550F9FE1CE6E75700B911C4 /* WorkspaceAccessible.swift in Sources */,
@@ -799,6 +922,11 @@
 			isa = PBXTargetDependency;
 			target = 454AD8641CC6530D008A9BAC /* Editor4 */;
 			targetProxy = 45830AC21CEA8217002FEA3D /* PBXContainerItemProxy */;
+		};
+		459B5F621D01B1CA0081D8FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LLDBWrapper;
+			targetProxy = 459B5F611D01B1CA0081D8FF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
