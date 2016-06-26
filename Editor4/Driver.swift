@@ -36,12 +36,6 @@ final class Driver {
 
     private init() {
     }
-//    var userInteractionState: UserInteractionState {
-//        get {
-//            assertMainThread()
-//            return user.state
-//        }
-//    }
     func ADHOC_scanImmediately() {
         user.ADHOC_scanImmediately()
     }
