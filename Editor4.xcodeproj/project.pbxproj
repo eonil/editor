@@ -74,7 +74,6 @@
 		45830ACA1CEB8C79002FEA3D /* Clean.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830AC91CEB8C79002FEA3D /* Clean.swift */; };
 		45830ACC1CEB8D16002FEA3D /* JournalingClearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */; };
 		45830B141CF04D30002FEA3D /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B131CF04D30002FEA3D /* Stepper.swift */; };
-		45830B181CF075E7002FEA3D /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B171CF075E7002FEA3D /* QueryService.swift */; };
 		45830B1C1CF08858002FEA3D /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1B1CF08858002FEA3D /* ServiceType.swift */; };
 		45830B1E1CF08AE7002FEA3D /* UserInteractionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */; };
 		4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320B1CDFE78900F924F5 /* VersionType.swift */; };
@@ -314,7 +313,6 @@
 		45830AC91CEB8C79002FEA3D /* Clean.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clean.swift; sourceTree = "<group>"; };
 		45830ACB1CEB8D16002FEA3D /* JournalingClearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JournalingClearance.swift; sourceTree = "<group>"; };
 		45830B131CF04D30002FEA3D /* Stepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
-		45830B171CF075E7002FEA3D /* QueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
 		45830B1B1CF08858002FEA3D /* ServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
 		45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInteractionService.swift; sourceTree = "<group>"; };
 		4589320B1CDFE78900F924F5 /* VersionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionType.swift; sourceTree = "<group>"; };
@@ -440,7 +438,6 @@
 				454AD8931CC69420008A9BAC /* Driver.swift */,
 				455F88C41D2021DD00217ABC /* DriverCommand.swift */,
 				45830B1B1CF08858002FEA3D /* ServiceType.swift */,
-				45830B171CF075E7002FEA3D /* QueryService.swift */,
 				455569221CF5C83800F2BD4D /* PlatformService.swift */,
 				45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */,
 				45830B131CF04D30002FEA3D /* Stepper.swift */,
@@ -898,7 +895,6 @@
 				451137921CD4822D001A183A /* Marks.swift in Sources */,
 				455569211CF5C1A500F2BD4D /* MenuUtility.swift in Sources */,
 				4555691F1CF5B07100F2BD4D /* ShellNotification.swift in Sources */,
-				45830B181CF075E7002FEA3D /* QueryService.swift in Sources */,
 				45830AAE1CE82DDA002FEA3D /* BoltsExtensions.swift in Sources */,
 				45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */,
 				4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */,

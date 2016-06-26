@@ -29,7 +29,6 @@ final class Driver {
     private let user = UserInteractionService()
     private let operation = UserOperationService()
     private let platform = PlatformService()
-    private let query = QueryService()
 
     let menuExecution = MenuExecutionService()
     let racer = RacerService()
@@ -60,12 +59,6 @@ final class Driver {
     }
     func run(command: PlatformCommand) -> Task<()> {
         return platform.dispatch(command)
-    }
-    func wait<T>(id: QueryID<T>) -> Task<T> {
-        return query.wait(id) 
-    }
-    func dispatch<T>(value: T, to id: QueryID<T>) {
-        query.dispatch(value, to: id)
     }
     func notify(notification: Notification) -> Task<()> {
         return user.dispatch(Action.Notify(notification))
