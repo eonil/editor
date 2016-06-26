@@ -5,44 +5,13 @@ This is 4th rewriting of this app for better architecture...
 
 Architecture
 ------------
-This program is being written in *FRP (Functional Reactive Programming)* architecture. Which means state is represented
-in pure value tree, and each loop iteration creates whole new set of state for each time. And rendering
-of the state always produces same result for same state.
+TL;DR
 
-Honestly saying, this is not truly "purely" FRP. Because reality if not ideal. 
-- Cocoa is typical impure object-oriented framework. Sometimes does not play well with FRP.
-- External environment affects.
-- We need good-enough performance.
-But anyway, I do not cross the minimum line. That is *immutable state stream*. Program state is completely represented in 
-immutable state stream. Anyway due to above limitations, sometimes rendering can be a bit awkward. Because AppKit doesn't fit
-very well to FRP paradigm. Sometimes AppKit views maintain their own states, and such internal states make impossible rendering 
-fully in FRP manner. I had to deal with this, and compromised with reality. Which means "eventual rendering". Regardless of how
-state is configured, view works independently from the state, and can be out-synced from state. Anyway view will try to be
-in-sync as quickly as possible.
+    Data-Flow Architecture + Microservices
 
-FRP is getting popular nowadays. You can find many FRP based architecutres. For example, 
-[Elm](https://github.com/evancz/elm-architecture-tutorial) and 
-[Redux](https://www.google.com/search?client=safari&rls=en&q=redux&ie=UTF-8&oe=UTF-8).
-If you're familiar with one of those architectures, you'll find similar stuffs in this program too.
+Current architecture is mainly based on "Dataflow Architecture" with functional style flavours.
+If you're not familiar with data-flow architecture, just imagine Flux/Redux or Elm architecture. Which are most recent and 
+famous implementations of data-flow architecture.
 
-
-Microservices
--------------
-Program is divided into multiple independent parts called "services".
-Each service has their own execution context and internal state. This is practically an actor-model implementation.
-Services are all shaped differently, but all shares these attributes.
-
-- Receives messages asynchronously. 
-    Received messages will be processed eventually and mutate internal state.
-- Can dispatch message to another services.
-    By default, all services can access driver without any special treatment. 
-    So all services can send message to driver. This message is usually `Action` or `Command`.
-
-Driver owns and manages all services. We have these services now.
-
-- `UserInteractionService` (a.k.a. UI service)
-- `OperationExecutionService`
-- `QueryFlowService`
-  
-UI service is very important so it is integrated into driver implicitly. UI service state is publicly exposed, so you can access
-them directly from anywhere in main-thread. 
+Data-flow itself alone is not very useful with aynchronous nature of modern user-facing programs. So I use microservice 
+architecture to fill this gap. Microservices essentially actor-model which transfer messages asynchronously.
