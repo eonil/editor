@@ -30,6 +30,9 @@ extension State {
 
         case .Notify(let notification):
             try apply(notification)
+        case .ADHOC_invalidateRendering:
+            // Nothing to do.
+            break
         }
     }
     private mutating func apply(action: TestAction) {

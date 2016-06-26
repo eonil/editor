@@ -56,6 +56,10 @@ final class UserInteractionService {
     ///     A task which provide a copy of latest user-interaction state.
     ///     If will run in main thread (UI thread) if you continue from the returning task.
     ///     Take care.
+    ///     
+    /// - Note: 
+    ///     I am considering aligning completion timing of returing task to v-sync timing.
+    ///
     func query() -> Task<UserInteractionState> {
         return Task(()).continueWithTask(Executor.MainThread) { [state] _ in
             return Task(state)
@@ -90,7 +94,7 @@ final class UserInteractionService {
     }
 
     func ADHOC_dispatchRenderingInvalidation() {
-        MARK_unimplemented()
+        dispatch(.ADHOC_invalidateRendering)
     }
     func dispatch(transaction: (UserInteractionState throws -> UserInteractionState)) -> Task<()> {
         MARK_unimplemented()

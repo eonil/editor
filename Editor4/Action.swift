@@ -25,6 +25,7 @@ enum Action {
     case Shell(ShellAction)
     case Workspace(WorkspaceID, WorkspaceAction)
     case Notify(Notification)
+    case ADHOC_invalidateRendering
 }
 enum TestAction {
     case Test1

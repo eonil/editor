@@ -19,7 +19,7 @@ private struct LocalState {
     var ADHOC_workspaceState: WorkspaceState?
 }
 
-final class FileNavigatorViewController: NSViewController, DriverAccessible, WorkspaceAccessible, WorkspaceRenderable {
+final class FileNavigatorViewController: WorkspaceRenderableViewController, DriverAccessible, WorkspaceAccessible {
 
     private let scrollView = NSScrollView()
     private let outlineView = FileNavigatorOutlineView()
@@ -48,12 +48,11 @@ final class FileNavigatorViewController: NSViewController, DriverAccessible, Wor
         super.viewDidLayout()
         renderLayoutOnly()
     }
-    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)) {
+    override func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)) {
         // Download.
         localState.ADHOC_workspaceState = state.workspaces[workspace.id]
 
         // Render.
-
         installer.installIfNeeded {
             view.addSubview(scrollView)
             scrollView.documentView = outlineView

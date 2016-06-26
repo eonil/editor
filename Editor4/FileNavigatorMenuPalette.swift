@@ -38,6 +38,6 @@ private func separator() -> MenuItemController {
 //    return MenuItemController(type: .Submenu(submenuID))
 //}
 private func menuItemWithAction(mainMenuCommand: FileNavigatorMenuCommand) -> MenuItemController {
-    let command = MenuCommand.FileNavigator(mainMenuCommand)
+    let command = MenuCommand.fileNavigator(mainMenuCommand)
     return MenuItemController(type: .MenuItem(command))
 }

@@ -24,7 +24,7 @@ struct Toolset {
 
 
 final class RacerService {
-    private init() {
+    init() {
     }
     func queryCandidatesAt(fileURL: NSURL, line: Int, column: Int) -> Task<ADHOC_UndefinedType> {
         MARK_unimplemented()

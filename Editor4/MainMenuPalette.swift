@@ -136,7 +136,7 @@ private func submenuContainerWithTitle(mainMenuSubmenuID: MainMenuSubmenuID) -> 
     return MenuItemController(type: .Submenu(submenuID))
 }
 private func menuItemWithAction(mainMenuCommand: MainMenuCommand) -> MenuItemController {
-    let command = MenuCommand.Main(mainMenuCommand)
+    let command = MenuCommand.main(mainMenuCommand)
     return MenuItemController(type: .MenuItem(command))
 }
 

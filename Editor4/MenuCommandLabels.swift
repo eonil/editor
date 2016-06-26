@@ -9,8 +9,8 @@
 extension MenuCommand {
     func getLabel() -> String {
         switch self {
-        case .Main(let command):                return command.getLabel()
-        case .FileNavigator(let command):       return command.getLabel()
+        case .main(let command):                return command.getLabel()
+        case .fileNavigator(let command):       return command.getLabel()
         }
     }
 }

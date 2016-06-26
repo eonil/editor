@@ -9,8 +9,8 @@
 /// Every menu commands in the application are
 /// represented with this.
 enum MenuCommand {
-    case Main(MainMenuCommand)
-    case FileNavigator(FileNavigatorMenuCommand)
+    case main(MainMenuCommand)
+    case fileNavigator(FileNavigatorMenuCommand)
 }
 
 /// Main menu command means literally what will be done when a main menu

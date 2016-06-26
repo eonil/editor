@@ -11,8 +11,8 @@ import AppKit
 extension MenuCommand {
     func getShortcutKey() -> MenuItemShortcutKey? {
         switch self {
-        case .Main(let command):            return command.getShortcutKey()
-        case .FileNavigator(let command):   return command.getShortcutKey()
+        case .main(let command):            return command.getShortcutKey()
+        case .fileNavigator(let command):   return command.getShortcutKey()
         }
     }
     func getKeyModifiersAndKeyEquivalentPair() -> (keyModifier: NSEventModifierFlags, keyEquivalent: String) {

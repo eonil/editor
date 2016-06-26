@@ -57,6 +57,8 @@
 		4555692D1CF6711300F2BD4D /* TemporalLazyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */; };
 		455569311CF698BE00F2BD4D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455569301CF698BE00F2BD4D /* Notification.swift */; };
 		455F88B21D20188400217ABC /* UserInteractionScanning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455F88B11D20188400217ABC /* UserInteractionScanning.swift */; };
+		455F88C31D20216B00217ABC /* MenuExecutionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455F88C21D20216B00217ABC /* MenuExecutionService.swift */; };
+		455F88C51D2021DD00217ABC /* DriverCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455F88C41D2021DD00217ABC /* DriverCommand.swift */; };
 		457519961CF88C8600F78BAD /* WorkspaceSerializationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457519951CF88C8600F78BAD /* WorkspaceSerializationUtility.swift */; };
 		457F77FA1D005D1A00BE521C /* DebugService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457F77F91D005D1A00BE521C /* DebugService.swift */; };
 		45800F221CD5141E0000F621 /* MainMenuUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45800F211CD5141E0000F621 /* MainMenuUtility.swift */; };
@@ -292,6 +294,8 @@
 		4555692C1CF6711300F2BD4D /* TemporalLazyCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporalLazyCollection.swift; sourceTree = "<group>"; };
 		455569301CF698BE00F2BD4D /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		455F88B11D20188400217ABC /* UserInteractionScanning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInteractionScanning.swift; sourceTree = "<group>"; };
+		455F88C21D20216B00217ABC /* MenuExecutionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuExecutionService.swift; sourceTree = "<group>"; };
+		455F88C41D2021DD00217ABC /* DriverCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverCommand.swift; sourceTree = "<group>"; };
 		457519951CF88C8600F78BAD /* WorkspaceSerializationUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSerializationUtility.swift; sourceTree = "<group>"; };
 		457F77F91D005D1A00BE521C /* DebugService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugService.swift; sourceTree = "<group>"; };
 		45800F1F1CD5048F0000F621 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -435,12 +439,14 @@
 			children = (
 				453FF5811CD4F17300F6344B /* main.swift */,
 				454AD8931CC69420008A9BAC /* Driver.swift */,
+				455F88C41D2021DD00217ABC /* DriverCommand.swift */,
 				45830B1B1CF08858002FEA3D /* ServiceType.swift */,
 				45830B171CF075E7002FEA3D /* QueryService.swift */,
 				455569221CF5C83800F2BD4D /* PlatformService.swift */,
 				45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */,
 				45830B131CF04D30002FEA3D /* Stepper.swift */,
 				455569301CF698BE00F2BD4D /* Notification.swift */,
+				455F88C11D20212C00217ABC /* (operation services) */,
 				4575198B1CF88BED00F78BAD /* (UI state) */,
 				455F88C01D20188800217ABC /* (UI scanning) */,
 				457519941CF88C5700F78BAD /* (UI persistency) */,
@@ -510,6 +516,14 @@
 				455F88B11D20188400217ABC /* UserInteractionScanning.swift */,
 			);
 			name = "(UI scanning)";
+			sourceTree = "<group>";
+		};
+		455F88C11D20212C00217ABC /* (operation services) */ = {
+			isa = PBXGroup;
+			children = (
+				455F88C21D20216B00217ABC /* MenuExecutionService.swift */,
+			);
+			name = "(operation services)";
 			sourceTree = "<group>";
 		};
 		4575198B1CF88BED00F78BAD /* (UI state) */ = {
@@ -818,6 +832,7 @@
 				45CD93961CC809F100083CEC /* WorkspaceDocument.swift in Sources */,
 				451137961CD482D4001A183A /* Apply.swift in Sources */,
 				455569291CF6004D00F2BD4D /* StateAssertions.swift in Sources */,
+				455F88C51D2021DD00217ABC /* DriverCommand.swift in Sources */,
 				45C3B38F1CD4F3330001D0AF /* MainMenuPalette.swift in Sources */,
 				454AD8691CC6530D008A9BAC /* ApplicationController.swift in Sources */,
 				454AD8941CC69420008A9BAC /* Driver.swift in Sources */,
@@ -892,6 +907,7 @@
 				451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */,
 				45830AB61CEA1126002FEA3D /* DialogueUtility.swift in Sources */,
 				453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */,
+				455F88C31D20216B00217ABC /* MenuExecutionService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

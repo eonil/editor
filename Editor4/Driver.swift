@@ -31,6 +31,10 @@ final class Driver {
     private let platform = PlatformService()
     private let query = QueryService()
 
+    let menuExecution = MenuExecutionService()
+    let racer = RacerService()
+    let cargo = CargoService()
+
     private init() {
     }
 //    var userInteractionState: UserInteractionState {
@@ -87,6 +91,7 @@ extension Driver {
 //            return queryTask
 //        })
 //    }
+
 }
 
 
