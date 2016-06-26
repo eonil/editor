@@ -28,12 +28,12 @@ final class MainMenuController: DriverAccessible, Renderable {
 
         NSApplication.sharedApplication().mainMenu = mainMenu
     }
-    func render() {
+    func render(state: UserInteractionState) {
         func getOptionalFileStateOf(optionalID: FileID2?) -> FileState2? {
             guard let id = optionalID else { return nil }
-            return driver.userInteractionState.currentWorkspace?.files[id]
+            return state.currentWorkspace?.files[id]
         }
-        let optionalCurrentWorkspace = driver.userInteractionState.currentWorkspace
+        let optionalCurrentWorkspace = state.currentWorkspace
         let optionalSelection = optionalCurrentWorkspace?.window.navigatorPane.file.selection
 
         palette.file.enabled                            =   true

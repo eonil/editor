@@ -39,7 +39,7 @@ class RenderableViewController: NSViewController, Renderable {
         let v = NSView()
         self.view = v
     }
-    func render() {
+    func render(state: UserInteractionState) {
         
     }
 }

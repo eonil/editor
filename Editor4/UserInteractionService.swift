@@ -52,12 +52,22 @@ final class UserInteractionService {
         DisplayLinkUtility.deinstallMainScreenHandler(ObjectIdentifier(self))
     }
 
+    /// - Returns:
+    ///     A task which provide a copy of latest user-interaction state.
+    ///     If will run in main thread (UI thread) if you continue from the returning task.
+    ///     Take care.
+    func query() -> Task<UserInteractionState> {
+        return Task(()).continueWithTask(Executor.MainThread) { [state] _ in
+            return Task(state)
+        }
+    }
+
     /// Scans user-interaction state from AppKit scene-graph immediately.
     func ADHOC_scanImmediately() {
         shell.scan()
     }
     func ADHOC_renderImmediately() {
-        shell.render()
+        shell.render(state)
     }
 
     /// Returns a task which completes *eventually*
@@ -78,6 +88,14 @@ final class UserInteractionService {
         }
         return schedule.completion.task
     }
+
+    func ADHOC_dispatchRenderingInvalidation() {
+        MARK_unimplemented()
+    }
+    func dispatch(transaction: (UserInteractionState throws -> UserInteractionState)) -> Task<()> {
+        MARK_unimplemented()
+    }
+
 //    /// Performs atomic transactions.
 //    /// A transaction is series of multiple actions that
 //    /// must be done at once to make consistent state.
@@ -91,6 +109,7 @@ final class UserInteractionService {
 //        }
 //    }
 
+
     private func run() {
         assertMainThread()
         if schedules.isEmpty == false {
@@ -98,7 +117,7 @@ final class UserInteractionService {
             while let s = schedules.popFirst() {
                 step(s)
             }
-            shell.render()
+            shell.render(state)
             state.clearJournals()
             JournalingClearanceChecker.checkClearanceOfAllCheckers()
         }

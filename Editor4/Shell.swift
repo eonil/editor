@@ -31,9 +31,9 @@ final class Shell: DriverAccessible {
     func scan() {
         workspaceManager.scan()
     }
-    func render() {
-        mainMenu.render()
-        workspaceManager.render()
+    func render(state: UserInteractionState) {
+        mainMenu.render(state)
+        workspaceManager.render(state)
         assertProperUIConfigurations()
     }
     func alert(error: ErrorType) {

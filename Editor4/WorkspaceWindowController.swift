@@ -72,7 +72,7 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
             break
         }
     }
-    override func render() {
+    override func render(state: UserInteractionState) {
         installer.installIfNeeded {
             contentViewController = columnSplitViewController
             columnSplitViewController.splitViewItems = [

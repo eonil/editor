@@ -16,6 +16,6 @@ import AppKit
 /// Subclasses are responsible to filter out unwanted signals.
 ///
 class RenderableWindowController: NSWindowController, Renderable {
-    func render() {
+    func render(state: UserInteractionState) {
     }
 }

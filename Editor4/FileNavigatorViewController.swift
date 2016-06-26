@@ -14,7 +14,12 @@ private enum ColumnID: String {
     case Name
 }
 
-final class FileNavigatorViewController: RenderableViewController, DriverAccessible, WorkspaceAccessible {
+private struct LocalState {
+    /// TODO: Need to reduce to only required data.
+    var ADHOC_workspaceState: WorkspaceState?
+}
+
+final class FileNavigatorViewController: NSViewController, DriverAccessible, WorkspaceAccessible, WorkspaceRenderable {
 
     private let scrollView = NSScrollView()
     private let outlineView = FileNavigatorOutlineView()
@@ -22,6 +27,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
     private let menuPalette = FileNavigatorMenuPalette()
 
     private var installer = ViewInstaller()
+    private var localState = LocalState()
     private var runningMenu = false
     private let selectionController = TemporalLazyCollectionController<FileID2>()
 
@@ -35,14 +41,19 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
     }
     var workspaceID: WorkspaceID? {
         didSet {
-            render()
+            driver.ADHOC_dispatchRenderingInvalidation()
         }
     }
     override func viewDidLayout() {
         super.viewDidLayout()
         renderLayoutOnly()
     }
-    override func render() {
+    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)) {
+        // Download.
+        localState.ADHOC_workspaceState = state.workspaces[workspace.id]
+
+        // Render.
+
         installer.installIfNeeded {
             view.addSubview(scrollView)
             scrollView.documentView = outlineView
@@ -58,14 +69,15 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
             outlineView.menu = menuPalette.context.item.submenu
             outlineView.onEvent = { [weak self] in self?.process($0) }
         }
+
         renderLayoutOnly()
-        renderStatesOnly()
-        renderMenuStatesOnly()
+        renderStatesOnly(localState.ADHOC_workspaceState)
+        renderMenuStatesOnly(localState.ADHOC_workspaceState)
     }
     private func renderLayoutOnly() {
         scrollView.frame = view.bounds
     }
-    private func renderStatesOnly() {
+    private func renderStatesOnly(workspaceState: WorkspaceState?) {
         guard sourceFilesVersion != workspaceState?.files.version else { return }
         // TODO: Not optimized. Do it later...
         if let workspaceState = workspaceState {
@@ -81,15 +93,15 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
         }
         sourceFilesVersion = workspaceState?.files.version
         outlineView.reloadData()
-        renderCurrentFileStateOnly()
+        renderCurrentFileStateOnly(workspaceState)
     }
-    private func renderCurrentFileStateOnly() {
+    private func renderCurrentFileStateOnly(workspaceState: WorkspaceState?) {
         guard let currentFileID = workspaceState?.window.navigatorPane.file.selection.current else { return }
         guard let currentFileProxy = proxyMapping[currentFileID] else { return }
         guard let rowIndex = outlineView.getRowIndexForItem(currentFileProxy) else { return }
         outlineView.selectRowIndexes(NSIndexSet(index: rowIndex), byExtendingSelection: false)
     }
-    private func renderMenuStatesOnly() {
+    private func renderMenuStatesOnly(workspaceState: WorkspaceState?) {
 //        let hasClickedFile = (outlineView.getClickedRowIndex() != nil)
 //        let selectionContainsClickedFile = outlineView.isSelectedRowIndexesContainClickedRow()
 //        let isFileOperationAvailable = hasClickedFile || selectionContainsClickedFile
@@ -125,7 +137,7 @@ final class FileNavigatorViewController: RenderableViewController, DriverAccessi
         case .DidCloseMenu:
             runningMenu = false
         }
-        renderMenuStatesOnly()
+        renderMenuStatesOnly(localState.ADHOC_workspaceState)
         scanHighlightedFileOnly()
     }
 }

@@ -33,17 +33,20 @@ final class Driver {
 
     private init() {
     }
-    var userInteractionState: UserInteractionState {
-        get {
-            assertMainThread()
-            return user.state
-        }
-    }
+//    var userInteractionState: UserInteractionState {
+//        get {
+//            assertMainThread()
+//            return user.state
+//        }
+//    }
     func ADHOC_scanImmediately() {
         user.ADHOC_scanImmediately()
     }
     func ADHOC_renderImmediately() {
         user.ADHOC_renderImmediately()
+    }
+    func ADHOC_dispatchRenderingInvalidation() {
+        user.ADHOC_dispatchRenderingInvalidation()
     }
     func dispatch(action: Action) -> Task<()> {
         return user.dispatch(action)
@@ -62,6 +65,10 @@ final class Driver {
     }
     func notify(notification: Notification) -> Task<()> {
         return user.dispatch(Action.Notify(notification))
+    }
+
+    func ADHOC_queryUserInteractionState() -> Task<UserInteractionState> {
+        return user.query()
     }
 }
 extension Driver {

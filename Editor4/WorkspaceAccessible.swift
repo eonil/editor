@@ -20,13 +20,5 @@ extension WorkspaceAccessible where Self: NSViewController {
         }
     }
 }
-extension WorkspaceAccessible where Self: DriverAccessible, Self: NSViewController {
-    var workspaceState: WorkspaceState? {
-        get {
-            guard let workspaceID = workspaceID else { return nil }
-            return driver.userInteractionState.workspaces[workspaceID]
-        }
-    }
-}
 
 

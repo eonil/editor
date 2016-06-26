@@ -8,9 +8,11 @@
 
 /// Represents a renderable object.
 protocol Renderable {
-    func render()
+    func render(state: UserInteractionState)
 }
-
+protocol WorkspaceRenderable {
+    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState))
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -26,33 +28,64 @@ private struct RenderingStatistics {
 private var stat = RenderingStatistics()
 
 extension NSWindowController {
-    func renderRecursively() {
+    func renderRecursively(state: UserInteractionState) {
         // 1. Render first...
         if let renderable = self as? Renderable {
-            renderable.render()
+            renderable.render(state)
             stat.renderingCallCount += 1
         }
         // 2. ... and propagate next to reflect most recent state as early as possible.
-        contentViewController?.renderRecursively()
+        contentViewController?.renderRecursively(state)
         stat.viewControllerIterationCount += 1
         print("stat.viewControllerIterationCount: \(stat.viewControllerIterationCount)")
     }
 }
 extension NSViewController {
-    func renderRecursively() {
+    func renderRecursively(state: UserInteractionState) {
         stat.viewControllerIterationCount += 1
         // 1. Render first...
         if let renderable = self as? Renderable {
-            renderable.render()
+            renderable.render(state)
             stat.renderingCallCount += 1
         }
         // 2. ... and propagate next to reflect most recent state as early as possible.
         for child in childViewControllers {
-            child.renderRecursively()
+            child.renderRecursively(state)
         }
         stat.viewControllerIterationCount += 1
     }
 }
+
+
+extension NSWindowController {
+    func renderRecursively(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)) {
+        // 1. Render first...
+        if let renderable = self as? WorkspaceRenderable {
+            renderable.render(state, workspace: workspace)
+            stat.renderingCallCount += 1
+        }
+        // 2. ... and propagate next to reflect most recent state as early as possible.
+        contentViewController?.renderRecursively(state, workspace: workspace)
+        stat.viewControllerIterationCount += 1
+        print("stat.viewControllerIterationCount: \(stat.viewControllerIterationCount)")
+    }
+}
+extension NSViewController {
+    func renderRecursively(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)) {
+        stat.viewControllerIterationCount += 1
+        // 1. Render first...
+        if let renderable = self as? WorkspaceRenderable {
+            renderable.render(state, workspace: workspace)
+            stat.renderingCallCount += 1
+        }
+        // 2. ... and propagate next to reflect most recent state as early as possible.
+        for child in childViewControllers {
+            child.renderRecursively(state, workspace: workspace)
+        }
+        stat.viewControllerIterationCount += 1
+    }
+}
+
 
 
 

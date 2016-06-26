@@ -9,12 +9,17 @@
 import Foundation
 import AppKit
 
+private struct LocalState {
+    var currentWorkspaceID: WorkspaceID?
+}
+
 /// Manages workspaces and connected document and windows.
 final class WorkspaceManager: DriverAccessible, Renderable {
 
     private var latestWorkspaceKeysetVersion: Version?
     private var workspaceToWindowControllerMapping = [WorkspaceID: WorkspaceWindowController]()
     private var workspaceToDocumentMapping = [WorkspaceID: WorkspaceDocument]()
+    private var localState = LocalState()
 
     var ADHOC_allWindows: LazyMapCollection<[WorkspaceID : WorkspaceWindowController], WorkspaceWindowController> {
         get { return workspaceToWindowControllerMapping.values }
@@ -52,15 +57,21 @@ final class WorkspaceManager: DriverAccessible, Renderable {
             wc.scanRecursively()
         }
     }
-    func render() {
-        guard driver.userInteractionState.workspaces.version != latestWorkspaceKeysetVersion else { return }
-        let (insertions, removings) = diff(Set(driver.userInteractionState.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))
+    func render(state: UserInteractionState) {
+        guard state.workspaces.version != latestWorkspaceKeysetVersion else { return }
+
+        // Download local state.
+        localState.currentWorkspaceID = state.currentWorkspaceID
+
+        // Render.
+
+        let (insertions, removings) = diff(Set(state.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))
         insertions.forEach(openEmptyWorkspace)
         removings.forEach(closeWorkspace)
-        assert(Set(driver.userInteractionState.workspaces.keys) == Set(workspaceToWindowControllerMapping.keys))
+        assert(Set(state.workspaces.keys) == Set(workspaceToWindowControllerMapping.keys))
 
         for (_, wc) in workspaceToWindowControllerMapping {
-            wc.renderRecursively()
+            wc.renderRecursively(state)
         }
 
         scanCurrentWorkspace()
@@ -132,7 +143,7 @@ final class WorkspaceManager: DriverAccessible, Renderable {
     private func scanCurrentWorkspace() {
         for (id, wc) in workspaceToWindowControllerMapping {
             if wc.window?.mainWindow == true {
-                if driver.userInteractionState.currentWorkspaceID != id {
+                if localState.currentWorkspaceID != id {
                     driver.dispatch(.Workspace(id, .SetCurrent))
                 }
             }

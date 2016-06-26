@@ -23,7 +23,7 @@ final class WorkspaceDocument: NSDocument, DriverAccessible {
 
     var workspaceID: WorkspaceID? {
         didSet {
-            render()
+            driver.ADHOC_dispatchRenderingInvalidation()
         }
     }
 
@@ -41,7 +41,7 @@ final class WorkspaceDocument: NSDocument, DriverAccessible {
         // Don't call super-class implementation.
         debugPrint("READ FROM: \(url)")
     }
-    func render() {
+    func render(state: UserInteractionState) {
 
     }
 }
