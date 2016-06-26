@@ -367,7 +367,6 @@
 			children = (
 				45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */,
 				45830AB71CEA1605002FEA3D /* UserOperationCommand.swift */,
-				45830AAB1CE811FC002FEA3D /* UserOperationService.swift */,
 			);
 			name = "(UI control)";
 			sourceTree = "<group>";
@@ -522,6 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				455F88C21D20216B00217ABC /* MenuExecutionService.swift */,
+				45830AAB1CE811FC002FEA3D /* UserOperationService.swift */,
 			);
 			name = "(operation services)";
 			sourceTree = "<group>";
