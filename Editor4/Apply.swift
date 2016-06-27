@@ -14,7 +14,7 @@ private extension State {
 }
 
 extension State {
-    mutating func apply(action: Action) throws {
+    mutating func apply(action: UserAction) throws {
         switch action {
         case .Reset:
             self = State()
@@ -30,9 +30,6 @@ extension State {
 
         case .Notify(let notification):
             try apply(notification)
-        case .ADHOC_invalidateRendering:
-            // Nothing to do.
-            break
         }
     }
     private mutating func apply(action: TestAction) {

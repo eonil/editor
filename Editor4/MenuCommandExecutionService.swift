@@ -1,5 +1,5 @@
 //
-//  MenuExecutionService.swift
+//  MenuCommandExecutionService.swift
 //  Editor4
 //
 //  Created by Hoon H. on 2016/06/26.
@@ -9,7 +9,7 @@
 import BoltsSwift
 
 /// Executes menu commands.
-final class MenuExecutionService: DriverAccessible {
+final class MenuCommandExecutionService: DriverAccessible {
     /// - Returns:
     ///     A task completes when the command execution completes.
     ///     Completion timing of a command is defined differently 
@@ -18,7 +18,7 @@ final class MenuExecutionService: DriverAccessible {
     /// Almost every menu command need to read from
     func dispatch(command: MenuCommand) -> Task<()> {
         // TODO: Consider using v-sync.
-        return driver.ADHOC_queryUserInteractionState().continueOnSuccessWithTask { [weak self] state in
+        return driver.userInteraction.query().continueOnSuccessWithTask { [weak self] state in
             guard let S = self else { return Task.cancelledTask() }
             return S.dispatchWithUserInteractionState(state, command: command)
         }
@@ -40,7 +40,7 @@ final class MenuExecutionService: DriverAccessible {
     }
 }
 
-extension MenuExecutionService {
+extension MenuCommandExecutionService {
     private func run(state state: UserInteractionState, command: MainMenuCommand) throws -> Task<()> {
         assertMainThread()
         switch command {
@@ -54,8 +54,8 @@ extension MenuExecutionService {
 
             }).continueWithTask(Executor.MainThread, continuation: { [driver] (task: Task<()>) -> Task<()> in
                 let workspaceID = WorkspaceID()
-                driver.dispatch(.Workspace(workspaceID, .Open))
-                driver.dispatch(.Workspace(workspaceID, .Reconfigure(location: u1)))
+                driver.userInteraction.dispatch(.Workspace(workspaceID, .Open))
+                driver.userInteraction.dispatch(.Workspace(workspaceID, .Reconfigure(location: u1)))
                 return task
             })
 
@@ -71,7 +71,7 @@ extension MenuExecutionService {
             guard let u = workspace.location?.appending(currentFilePath) else { throw UserOperationError.File(FileUserOperationError.BadPath(currentFilePath)) }
             let u1 = u.URLByAppendingPathComponent(newFolderName)
             return driver.run(PlatformCommand.CreateDirectoryWithIntermediateDirectories(u1)).continueOnSuccessWithTask { [driver] () -> Task<()> in
-                return driver.dispatch(.Workspace(workspaceID, .File(.CreateFolderAndStartEditingName(container: currentFileID, index: 0, name: newFolderName))))
+                return driver.userInteraction.dispatch(.Workspace(workspaceID, .File(.CreateFolderAndStartEditingName(container: currentFileID, index: 0, name: newFolderName))))
             }.continueOnSuccessWithTask { [driver] () -> Task<()> in
                 guard let newWorkspaceState = state.workspaces[workspaceID] else { throw UserOperationError.MissingCurrentWorkspace }
                 return driver.run(PlatformCommand.StoreWorkspace(newWorkspaceState))
@@ -89,7 +89,7 @@ extension MenuExecutionService {
             guard let u = workspace.location?.appending(currentFilePath) else { throw UserOperationError.File(FileUserOperationError.BadPath(currentFilePath)) }
             let u1 = u.URLByAppendingPathComponent(newFileName)
             return driver.run(PlatformCommand.CreateDataFileWithIntermediateDirectories(u1)).continueOnSuccessWithTask { [driver] () -> Task<()> in
-                return driver.dispatch(.Workspace(workspaceID, .File(.CreateFileAndStartEditingName(container: currentFileID, index: 0, name: newFileName))))
+                return driver.userInteraction.dispatch(.Workspace(workspaceID, .File(.CreateFileAndStartEditingName(container: currentFileID, index: 0, name: newFileName))))
             }.continueOnSuccessWithTask { [driver] () -> Task<()> in
                 guard let newWorkspaceState = state.workspaces[workspaceID] else { throw UserOperationError.MissingCurrentWorkspace }
                 return driver.run(PlatformCommand.StoreWorkspace(newWorkspaceState))
@@ -106,15 +106,15 @@ extension MenuExecutionService {
                 }.continueOnSuccessWithTask { [driver] () -> Task<()> in
                     guard let u1 = u1 else { return Task(()) }
                     let workspaceID = WorkspaceID()
-                    driver.dispatch(.Workspace(workspaceID, .Open))
-                    driver.dispatch(.Workspace(workspaceID, .SetCurrent))
-                    driver.dispatch(.Workspace(workspaceID, .Reconfigure(location: u1)))
+                    driver.userInteraction.dispatch(.Workspace(workspaceID, .Open))
+                    driver.userInteraction.dispatch(.Workspace(workspaceID, .SetCurrent))
+                    driver.userInteraction.dispatch(.Workspace(workspaceID, .Reconfigure(location: u1)))
                     return driver.run(PlatformCommand.RestoreWorkspace(workspaceID, location: u1))
                 }
 
         case .FileCloseWorkspace:
             guard let workspaceID = state.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
-            return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.Close))
+            return driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.Close))
 
         case .FileDelete:
             guard let workspaceID = state.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
@@ -128,7 +128,7 @@ extension MenuExecutionService {
                 return u
             }
             return driver.run(PlatformCommand.DeleteFileSubtrees(us)).continueOnSuccessWithTask { [driver] () -> Task<()> in
-                return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteFiles(uniqueFileIDs))))
+                return driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.File(FileAction.DeleteFiles(uniqueFileIDs))))
             }.continueOnSuccessWithTask { [driver] () -> Task<()> in
                 guard let newWorkspaceState = state.workspaces[workspaceID] else { throw UserOperationError.MissingCurrentWorkspace }
                 return driver.run(PlatformCommand.StoreWorkspace(newWorkspaceState))
@@ -169,19 +169,19 @@ extension MenuExecutionService {
     private func run(state state: UserInteractionState, command: FileNavigatorMenuCommand) throws -> Task<()> {
         assertMainThread()
         switch command {
-        case .ShowInFinder:
+        case .showInFinder:
             return driver.menuExecution.dispatch(.main(.FileShowInFinder))
 
-        case .ShowInTerminal:
+        case .showInTerminal:
             return driver.menuExecution.dispatch(.main(.FileShowInTerminal))
 
-        case .CreateNewFolder:
+        case .createNewFolder:
             return driver.menuExecution.dispatch(.main(.FileNewFolder))
 
-        case .CreateNewFile:
+        case .createNewFile:
             return driver.menuExecution.dispatch(.main(.FileNewFile))
             
-        case .Delete:
+        case .delete:
             return driver.menuExecution.dispatch(.main(.FileDelete))
         }
     }

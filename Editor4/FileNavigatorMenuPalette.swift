@@ -10,11 +10,11 @@ import AppKit
 
 struct FileNavigatorMenuPalette {
     let context                         =   MenuItemController(type: MenuItemTypeID.Submenu(.FileNavigator(.ContextMenuRoot)))
-    let showInFinder                    =   menuItemWithAction(.ShowInFinder)
-    let showInTerminal                  =   menuItemWithAction(.ShowInTerminal)
-    let createNewFolder                 =   menuItemWithAction(.CreateNewFolder)
-    let createNewFile                   =   menuItemWithAction(.CreateNewFile)
-    let delete                          =   menuItemWithAction(.Delete)
+    let showInFinder                    =   menuItemWithAction(.showInFinder)
+    let showInTerminal                  =   menuItemWithAction(.showInTerminal)
+    let createNewFolder                 =   menuItemWithAction(.createNewFolder)
+    let createNewFile                   =   menuItemWithAction(.createNewFile)
+    let delete                          =   menuItemWithAction(.delete)
 
     init() {
         // Configure hierarchy here if needed.

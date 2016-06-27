@@ -52,11 +52,11 @@ private extension MainMenuCommand {
 private extension FileNavigatorMenuCommand {
     private func getLabel() -> String {
         switch self {
-        case .ShowInFinder:     return "Show in Finder"
-        case .ShowInTerminal:   return "Show in Terminal"
-        case .CreateNewFolder:  return "Create New Folder"
-        case .CreateNewFile:    return "Create New File"
-        case .Delete:           return "Delete"
+        case .showInFinder:     return "Show in Finder"
+        case .showInTerminal:   return "Show in Terminal"
+        case .createNewFolder:  return "Create New Folder"
+        case .createNewFile:    return "Create New File"
+        case .delete:           return "Delete"
         }
     }
 }

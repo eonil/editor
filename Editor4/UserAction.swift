@@ -8,7 +8,7 @@
 
 import Foundation.NSURL
 
-/// Defineds atomic action for UI state.
+/// Declares atomic action for UI state.
 ///
 /// Action definitions can be nested to provide:
 /// - Semantic locality
@@ -18,14 +18,13 @@ import Foundation.NSURL
 /// Which means final result after applying the action
 /// must produce consistent state.
 ///
-enum Action {
+enum UserAction {
     /// The first action to activate driver.
     case Reset
     case Test(TestAction)
     case Shell(ShellAction)
     case Workspace(WorkspaceID, WorkspaceAction)
     case Notify(Notification)
-    case ADHOC_invalidateRendering
 }
 enum TestAction {
     case Test1

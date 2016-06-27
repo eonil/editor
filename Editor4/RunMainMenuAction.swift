@@ -8,4 +8,4 @@
 
 import BoltsSwift
 
-extension UserOperationService {}
+extension UserCommandExecutionService {}

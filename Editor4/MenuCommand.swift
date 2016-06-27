@@ -55,16 +55,17 @@ enum MainMenuCommand {
     case DebugClearConsole
 }
 
+/// A context menu commands that will be shown when user click on file navigator pane.
 enum FileNavigatorMenuCommand {
     /// Shows selected files in Finder.
     /// A Finder window will be open for container folder of each file.
-    case ShowInFinder
+    case showInFinder
     /// Shows selected files in Terminal.
     /// A Terminal will be open for container folder of each file.
-    case ShowInTerminal
-    case CreateNewFolder
-    case CreateNewFile
-    case Delete
+    case showInTerminal
+    case createNewFolder
+    case createNewFile
+    case delete
 }
 
 

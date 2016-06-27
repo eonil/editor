@@ -23,7 +23,7 @@ final class WorkspaceDocument: NSDocument, DriverAccessible {
 
     var workspaceID: WorkspaceID? {
         didSet {
-            driver.ADHOC_dispatchRenderingInvalidation()
+            driver.userInteraction.ADHOC_dispatchRenderingInvalidation()
         }
     }
 

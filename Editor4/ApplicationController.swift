@@ -14,7 +14,7 @@ class ApplicationController: NSObject, NSApplicationDelegate, DriverAccessible {
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // This is required and very important action dispatch.
         // Otherwise, driver will not be activated.
-        driver.dispatch(Action.Reset)
+        driver.userInteraction.dispatch(UserAction.Reset)
         
 //        let id = WorkspaceID()
 //        let u = NSURL(fileURLWithPath: "/Users/Eonil/Temp/Editor4Test/ws1")

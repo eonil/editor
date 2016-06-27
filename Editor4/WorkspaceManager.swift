@@ -144,7 +144,7 @@ final class WorkspaceManager: DriverAccessible, Renderable {
         for (id, wc) in workspaceToWindowControllerMapping {
             if wc.window?.mainWindow == true {
                 if localState.currentWorkspaceID != id {
-                    driver.dispatch(.Workspace(id, .SetCurrent))
+                    driver.userInteraction.dispatch(.Workspace(id, .SetCurrent))
                 }
             }
         }

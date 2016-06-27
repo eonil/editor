@@ -8,9 +8,13 @@
 
 import BoltsSwift
 
-/// Manages all long-running operations.
+/// Executes user-commands. (which means terminal commands)
 ///
-final class UserOperationService: DriverAccessible {
+/// "Terminal commands" means the command doesn't need to bo continued,
+/// so doesn't need to return any value. In this case, all commands can
+/// be declared with only pure values.
+///
+final class UserCommandExecutionService: DriverAccessible {
     private let toolset = Toolset()
 
     /// **NOT IMPLEMENTED YET!!!**
@@ -40,15 +44,15 @@ final class UserOperationService: DriverAccessible {
     ///     A task which completes when the operation
     ///     completes which has been triggered by this
     ///     command.
-    func dispatch(command: UserOperationCommand) -> Task<()> {
-        return driver.ADHOC_queryUserInteractionState().continueWithTask { [driver, weak self] task in
+    func dispatch(command: UserCommand) -> Task<()> {
+        return driver.userInteraction.query().continueWithTask { [driver, weak self] task in
             guard let S = self else { return Task.cancelledTask() }
             guard let state = task.result else { return Task.cancelledTask() }
             do {
                 return try S.run(state: state, command: command).continueWithTask(continuation: { [weak self] (task: Task<()>) -> Task<()> in
                     if task.faulted {
                         guard let error = task.error else { fatalError("`Task.faulted == true` with no error object.") }
-                        self?.driver.dispatch(Action.Shell(ShellAction.Alert(error)))
+                        self?.driver.userInteraction.dispatch(UserAction.Shell(ShellAction.Alert(error)))
                         reportErrorToDevelopers(error)
                     }
                     return task
@@ -56,7 +60,7 @@ final class UserOperationService: DriverAccessible {
             }
             catch let error {
                 reportErrorToDevelopers(error)
-                driver.dispatch(Action.Shell(ShellAction.Alert(error)))
+                driver.userInteraction.dispatch(UserAction.Shell(ShellAction.Alert(error)))
                 return Task(error: error)
             }
         }
@@ -81,7 +85,7 @@ enum FileUserOperationError {
     case BadPath(FileNodePath)
 }
 
-extension UserOperationService {
+extension UserCommandExecutionService {
     /// Runs a long-running command.
     /// This method is also responsible to determine executability of the command.
     /// This is also responsible for concurrency management. Some command can be
@@ -90,7 +94,7 @@ extension UserOperationService {
     /// Whatever you run, running status must be dispatched to `State` using `dispatch(Action)`
     /// to be rendered to user.
     ///
-    private func run(state state: UserInteractionState, command: UserOperationCommand) throws -> Task<()> {
+    private func run(state state: UserInteractionState, command: UserCommand) throws -> Task<()> {
         assertMainThread()
         switch command {
         case .UserInteraction(let command):
@@ -99,7 +103,7 @@ extension UserOperationService {
     }
 }
 
-extension UserOperationService {
+extension UserCommandExecutionService {
     private func run(state state: UserInteractionState, command: UserInteractionCommand) throws -> Task<()> {
         assertMainThread()
         let driver = self.driver
@@ -112,7 +116,7 @@ extension UserOperationService {
             // Hope file-system operation to be fast enough.
             return driver.run(PlatformCommand.RenameFile(from: oldURL, to: newURL)).continueOnSuccessWithTask(continuation: { () -> Task<()> in
                 // Update UI only if file-system operation is successful.
-                return driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.Rename(fileID, newName: newName))))
+                return driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.File(FileAction.Rename(fileID, newName: newName))))
                     .continueWithTask(continuation: { (task: Task<()>) -> Task<()> in
                         // Store workspace at last.
                         guard let newWorkspaceState = state.workspaces[workspaceID] else { throw UserOperationError.MissingWorkspace(workspaceID) }

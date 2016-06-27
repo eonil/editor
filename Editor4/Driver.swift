@@ -26,40 +26,21 @@ extension DriverAccessible {
 
 final class Driver {
     private static let theDriver = Driver()
-    private let user = UserInteractionService()
-    private let operation = UserOperationService()
     private let platform = PlatformService()
 
-    let menuExecution = MenuExecutionService()
+    let userInteraction = UserInteractionService()
+    let userCommandExecution = UserCommandExecutionService()
+    let menuExecution = MenuCommandExecutionService()
     let racer = RacerService()
     let cargo = CargoService()
 
     private init() {
     }
-    func ADHOC_scanImmediately() {
-        user.ADHOC_scanImmediately()
-    }
-    func ADHOC_renderImmediately() {
-        user.ADHOC_renderImmediately()
-    }
-    func ADHOC_dispatchRenderingInvalidation() {
-        user.ADHOC_dispatchRenderingInvalidation()
-    }
-    func dispatch(action: Action) -> Task<()> {
-        return user.dispatch(action)
-    }
-    func run(command: UserOperationCommand) -> Task<()> {
-        return operation.dispatch(command)
-    }
     func run(command: PlatformCommand) -> Task<()> {
         return platform.dispatch(command)
     }
     func notify(notification: Notification) -> Task<()> {
-        return user.dispatch(Action.Notify(notification))
-    }
-
-    func ADHOC_queryUserInteractionState() -> Task<UserInteractionState> {
-        return user.query()
+        return userInteraction.dispatch(UserAction.Notify(notification))
     }
 }
 extension Driver {

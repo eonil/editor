@@ -41,7 +41,7 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
     }
     var workspaceID: WorkspaceID? {
         didSet {
-            driver.ADHOC_dispatchRenderingInvalidation()
+            driver.userInteraction.ADHOC_dispatchRenderingInvalidation()
         }
     }
     override func viewDidLayout() {
@@ -126,7 +126,7 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
     private func scanHighlightedFileOnly() {
         guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
         let optionalFileID = runningMenu ? outlineView.getClickedFileID2() : nil
-        driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetHighlightedFile(optionalFileID))))
+        driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetHighlightedFile(optionalFileID))))
     }
 
     private func process(event: FileNavigatorOutlineViewEvent) {
@@ -226,7 +226,7 @@ extension FileNavigatorViewController: NSOutlineViewDelegate {
             let c = AnyRandomAccessCollection(outlineView.selectedRowIndexes.lazy.flatMap(rowIndexToOptionalFileID))
             selectionController.source = c
             let items = selectionController.sequence
-            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(current: current, items: items))))
+            driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(current: current, items: items))))
         }
         // This must come first to keep state consistency.
         scanSelectedFilesOnly()
@@ -261,7 +261,7 @@ extension FileNavigatorViewController: NSTextFieldDelegate {
         let fileID = proxy.sourceFileID
         let newFileName = textField.stringValue
         // Let the action processor to detect errors in the new name.
-        driver.run(UserOperationCommand.UserInteraction(UserInteractionCommand.Rename(workspaceID, fileID, newName: newFileName)))
+        driver.userCommandExecution.dispatch(.UserInteraction(.Rename(workspaceID, fileID, newName: newFileName)))
             .continueWithTask(Executor.MainThread, continuation: { [weak self] (task: Task<()>) -> Task<()> in
                 assertMainThread()
                 // Calling `render()` will be no-op because journal should be empty.

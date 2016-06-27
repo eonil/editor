@@ -31,6 +31,10 @@ enum UserInteractionError: ErrorType {
 /// To archive this goal, user-interaction service exposes its state 
 /// publicly so it can be accessed from anywhere in main thread.
 ///
+/// - Note:
+///     There's no way to dispatch a transaction aynchronously.
+///     This is intentional design choice.
+///
 final class UserInteractionService {
     private(set) var state = UserInteractionState()
     private var schedules = [Schedule]()
@@ -70,9 +74,6 @@ final class UserInteractionService {
     func ADHOC_scanImmediately() {
         shell.scan()
     }
-    func ADHOC_renderImmediately() {
-        shell.render(state)
-    }
 
     /// Returns a task which completes *eventually*
     /// after the action has been processed completely.
@@ -81,8 +82,21 @@ final class UserInteractionService {
     /// Calling of the completion is done in main thread,
     /// and will be guarantted to happend in order as it
     /// passed-in.
-    func dispatch(action: Action) -> Task<()> {
-        let schedule = Schedule(action: action, completion: TaskCompletionSource())
+    func dispatch(action: UserAction) -> Task<()> {
+        return dispatch { (state: UserInteractionState) throws -> (UserInteractionState) in
+            var copy = state
+            try copy.apply(action)
+            debugPrint("Applied action: \(action)")
+            return copy
+        }
+    }
+
+    func ADHOC_dispatchRenderingInvalidation() {
+        dispatch({ $0 })
+    }
+
+    func dispatch(transaction: ((UserInteractionState) throws -> (UserInteractionState))) -> Task<()> {
+        let schedule = Schedule(transaction: transaction, completion: TaskCompletionSource())
         // TODO: Review this design... It would be better if we can eliminte
         //          asynchronous dispatch for dispatch from main thread.
         dispatch_async(dispatch_get_main_queue()) { [weak self] in
@@ -92,28 +106,13 @@ final class UserInteractionService {
         }
         return schedule.completion.task
     }
-
-    func ADHOC_dispatchRenderingInvalidation() {
-        dispatch(.ADHOC_invalidateRendering)
+    func dispatch(transaction: ((inout UserInteractionState) throws -> ())) -> Task<()> {
+        return dispatch({ (state: UserInteractionState) throws -> (UserInteractionState) in
+            var state1 = state
+            try transaction(&state1)
+            return state1
+        })
     }
-    func dispatch(transaction: (UserInteractionState throws -> UserInteractionState)) -> Task<()> {
-        MARK_unimplemented()
-    }
-
-//    /// Performs atomic transactions.
-//    /// A transaction is series of multiple actions that
-//    /// must be done at once to make consistent state.
-//    func dispatch(transaction: [Action]) -> Task<()> {
-//
-//    }
-
-//    func ADHOC_dispatchFromNonMainThread(action: Action) {
-//        dispatch_async(dispatch_get_main_queue()) { [weak self] in
-//            self?.dispatch(action)
-//        }
-//    }
-
-
     private func run() {
         assertMainThread()
         if schedules.isEmpty == false {
@@ -129,7 +128,7 @@ final class UserInteractionService {
     private func step(schedule: Schedule) {
         assertMainThread()
         do {
-            try state.apply(schedule.action)
+            state = try schedule.transaction(state)
             state.assertConsistency()
             schedule.completion.trySetResult(())
         }
@@ -137,15 +136,13 @@ final class UserInteractionService {
             debugLog(error)
             shell.alert(error)
             schedule.completion.trySetError(error)
-            //            assert(false, "Error in stepping: \(error). This is only for information purpose, and you can safely ignore this assertion.")
-            //            fatalError("\(error)") // No way to recover in this case...
         }
-        debugPrint("Applied action: \(schedule.action)")
     }
 }
 
+private typealias UserInteractionStateTransaction = UserInteractionState throws -> UserInteractionState
 private struct Schedule {
-    var action: Action
+    var transaction: UserInteractionStateTransaction
     var completion: TaskCompletionSource<()>
 }
 

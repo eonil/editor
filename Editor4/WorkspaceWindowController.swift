@@ -66,7 +66,7 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
             guard n.object === window else { return }
             assert(workspaceID != nil)
             guard let workspaceID = workspaceID else { return }
-            driver.dispatch(Action.Workspace(workspaceID, WorkspaceAction.Close))
+            driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.Close))
 
         default:
             break
