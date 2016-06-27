@@ -11,7 +11,7 @@ protocol Renderable {
     func render(state: UserInteractionState)
 }
 protocol WorkspaceRenderable {
-    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState))
+    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?)
 }
 
 
@@ -58,7 +58,7 @@ extension NSViewController {
 
 
 extension NSWindowController {
-    func renderRecursively(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)) {
+    func renderRecursively(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
         // 1. Render first...
         if let renderable = self as? WorkspaceRenderable {
             renderable.render(state, workspace: workspace)
@@ -71,7 +71,7 @@ extension NSWindowController {
     }
 }
 extension NSViewController {
-    func renderRecursively(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)) {
+    func renderRecursively(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
         stat.viewControllerIterationCount += 1
         // 1. Render first...
         if let renderable = self as? WorkspaceRenderable {

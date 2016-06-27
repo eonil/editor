@@ -50,8 +50,21 @@ class WorkspaceRenderableViewController: NSViewController, WorkspaceRenderable {
         let v = NSView()
         self.view = v
     }
-    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)) {
+    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 

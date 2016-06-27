@@ -16,7 +16,7 @@ private enum ColumnID: String {
 
 private struct LocalState {
     /// TODO: Need to reduce to only required data.
-    var ADHOC_workspaceState: WorkspaceState?
+    var workspace: (id: WorkspaceID, state: WorkspaceState)?
 }
 
 final class FileNavigatorViewController: WorkspaceRenderableViewController, DriverAccessible, WorkspaceAccessible {
@@ -39,18 +39,13 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
         // This is required to clean up temporal lazy sequence.
         selectionController.source = AnyRandomAccessCollection([])
     }
-    var workspaceID: WorkspaceID? {
-        didSet {
-            driver.userInteraction.ADHOC_dispatchRenderingInvalidation()
-        }
-    }
     override func viewDidLayout() {
         super.viewDidLayout()
         renderLayoutOnly()
     }
-    override func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)) {
+    override func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
         // Download.
-        localState.ADHOC_workspaceState = state.workspaces[workspace.id]
+        localState.workspace = workspace
 
         // Render.
         installer.installIfNeeded {
@@ -70,16 +65,16 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
         }
 
         renderLayoutOnly()
-        renderStatesOnly(localState.ADHOC_workspaceState)
-        renderMenuStatesOnly(localState.ADHOC_workspaceState)
+        renderStatesOnly(localState.workspace)
+        renderMenuStatesOnly(localState.workspace?.state)
     }
     private func renderLayoutOnly() {
         scrollView.frame = view.bounds
     }
-    private func renderStatesOnly(workspaceState: WorkspaceState?) {
-        guard sourceFilesVersion != workspaceState?.files.version else { return }
+    private func renderStatesOnly(workspace: (id: WorkspaceID, state: WorkspaceState)?) {
+        guard sourceFilesVersion != workspace?.state.files.version else { return }
         // TODO: Not optimized. Do it later...
-        if let workspaceState = workspaceState {
+        if let workspaceState = workspace?.state {
             let oldMappingCopy = proxyMapping
             proxyMapping = [:]
             for (fileID, fileState) in workspaceState.files {
@@ -90,9 +85,9 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
         else {
             proxyMapping = [:]
         }
-        sourceFilesVersion = workspaceState?.files.version
+        sourceFilesVersion = workspace?.state.files.version
         outlineView.reloadData()
-        renderCurrentFileStateOnly(workspaceState)
+        renderCurrentFileStateOnly(workspace?.state)
     }
     private func renderCurrentFileStateOnly(workspaceState: WorkspaceState?) {
         guard let currentFileID = workspaceState?.window.navigatorPane.file.selection.current else { return }
@@ -136,7 +131,7 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
         case .DidCloseMenu:
             runningMenu = false
         }
-        renderMenuStatesOnly(localState.ADHOC_workspaceState)
+        renderMenuStatesOnly(localState.workspace?.state)
         scanHighlightedFileOnly()
     }
 }
@@ -262,13 +257,13 @@ extension FileNavigatorViewController: NSTextFieldDelegate {
         let newFileName = textField.stringValue
         // Let the action processor to detect errors in the new name.
         driver.userCommandExecution.dispatch(.UserInteraction(.Rename(workspaceID, fileID, newName: newFileName)))
-            .continueWithTask(Executor.MainThread, continuation: { [weak self] (task: Task<()>) -> Task<()> in
+            .continueWithTask(Executor.MainThread) { [weak self] (task: Task<()>) -> Task<()> in
                 assertMainThread()
                 // Calling `render()` will be no-op because journal should be empty.
                 // Set text-field manually.
                 self?.outlineView.reloadData()
                 return task
-            })
+            }
     }
 }
 

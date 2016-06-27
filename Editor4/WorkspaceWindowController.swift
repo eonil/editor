@@ -22,7 +22,7 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
 
     var workspaceID: WorkspaceID? {
         didSet {
-            fileNavigatorViewController.workspaceID = workspaceID
+            driver.userInteraction.ADHOC_dispatchRenderingInvalidation()
         }
     }
 
@@ -80,6 +80,13 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
                 NSSplitViewItem(viewController: rowSplitViewController),
             ]
         }
+
+        func getWorkspace() -> (id: WorkspaceID, state: WorkspaceState)? {
+            guard let workspaceID = workspaceID else { return nil }
+            guard let workspaceState = state.workspaces[workspaceID] else { return nil }
+            return (workspaceID, workspaceState)
+        }
+        contentViewController?.renderRecursively(state, workspace: getWorkspace())
     }
 }
 
