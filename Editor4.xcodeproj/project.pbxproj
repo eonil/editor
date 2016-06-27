@@ -17,13 +17,15 @@
 		451137961CD482D4001A183A /* Apply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451137951CD482D4001A183A /* Apply.swift */; };
 		451216C91CE76EE3006E9207 /* BuildState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216C81CE76EE3006E9207 /* BuildState.swift */; };
 		451216D21CE76EF5006E9207 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D11CE76EF5006E9207 /* DebugState.swift */; };
-		451216D61CE77334006E9207 /* Toolset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D51CE77334006E9207 /* Toolset.swift */; };
 		451216D81CE77968006E9207 /* LLDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D71CE77968006E9207 /* LLDBService.swift */; };
 		451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D91CE77D02006E9207 /* SubprocessController.swift */; };
 		451216DE1CE77D94006E9207 /* IOAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216DD1CE77D94006E9207 /* IOAction.swift */; };
 		453463CA1D203F4100256B46 /* ErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463C91D203F4100256B46 /* ErrorReporting.swift */; };
 		453463CB1D215AC500256B46 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; };
 		453463CC1D215AC500256B46 /* LLDBWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		453463D01D215B6600256B46 /* RacerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463CF1D215B6600256B46 /* RacerService.swift */; };
+		453463D21D215B9900256B46 /* ADHOC_UndefinedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463D11D215B9900256B46 /* ADHOC_UndefinedType.swift */; };
+		453463D41D215BDD00256B46 /* LLDBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463D31D215BDD00256B46 /* LLDBState.swift */; };
 		453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3F21CE731820081DCDA /* KeyJournal.swift */; };
 		453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */; };
 		453FF5821CD4F17300F6344B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FF5811CD4F17300F6344B /* main.swift */; };
@@ -261,11 +263,13 @@
 		451137951CD482D4001A183A /* Apply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Apply.swift; sourceTree = "<group>"; };
 		451216C81CE76EE3006E9207 /* BuildState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildState.swift; sourceTree = "<group>"; };
 		451216D11CE76EF5006E9207 /* DebugState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugState.swift; sourceTree = "<group>"; };
-		451216D51CE77334006E9207 /* Toolset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toolset.swift; sourceTree = "<group>"; };
 		451216D71CE77968006E9207 /* LLDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBService.swift; sourceTree = "<group>"; };
 		451216D91CE77D02006E9207 /* SubprocessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubprocessController.swift; sourceTree = "<group>"; };
 		451216DD1CE77D94006E9207 /* IOAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOAction.swift; sourceTree = "<group>"; };
 		453463C91D203F4100256B46 /* ErrorReporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorReporting.swift; sourceTree = "<group>"; };
+		453463CF1D215B6600256B46 /* RacerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacerService.swift; sourceTree = "<group>"; };
+		453463D11D215B9900256B46 /* ADHOC_UndefinedType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADHOC_UndefinedType.swift; sourceTree = "<group>"; };
+		453463D31D215BDD00256B46 /* LLDBState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBState.swift; sourceTree = "<group>"; };
 		453FB3F21CE731820081DCDA /* KeyJournal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyJournal.swift; sourceTree = "<group>"; };
 		453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorViewController.swift; sourceTree = "<group>"; };
 		453FF5811CD4F17300F6344B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -382,14 +386,16 @@
 		4511375B1CD480EB001A183A /* (IO) */ = {
 			isa = PBXGroup;
 			children = (
-				451216D51CE77334006E9207 /* Toolset.swift */,
 				451216D11CE76EF5006E9207 /* DebugState.swift */,
 				457F77F91D005D1A00BE521C /* DebugService.swift */,
+				453463CF1D215B6600256B46 /* RacerService.swift */,
+				453463D31D215BDD00256B46 /* LLDBState.swift */,
 				451216D71CE77968006E9207 /* LLDBService.swift */,
 				45830AA91CE79358002FEA3D /* CargoService.swift */,
 				45830AA01CE79193002FEA3D /* BashSubprocess.swift */,
 				451216D91CE77D02006E9207 /* SubprocessController.swift */,
 				451216DD1CE77D94006E9207 /* IOAction.swift */,
+				453463D11D215B9900256B46 /* ADHOC_UndefinedType.swift */,
 			);
 			name = "(IO)";
 			sourceTree = "<group>";
@@ -855,6 +861,7 @@
 				454AD8941CC69420008A9BAC /* Driver.swift in Sources */,
 				45E730461CD602C900BA7550 /* StateError.swift in Sources */,
 				45E730531CD796D300BA7550 /* RenderingError.swift in Sources */,
+				453463D41D215BDD00256B46 /* LLDBState.swift in Sources */,
 				454AD8981CC69559008A9BAC /* Utility.swift in Sources */,
 				453463CA1D203F4100256B46 /* ErrorReporting.swift in Sources */,
 				45830ACA1CEB8C79002FEA3D /* Clean.swift in Sources */,
@@ -901,6 +908,7 @@
 				4589320E1CDFED0000F924F5 /* Version.swift in Sources */,
 				4555690C1CF5895D00F2BD4D /* MenuCommandLabelExtensions.swift in Sources */,
 				451216D81CE77968006E9207 /* LLDBService.swift in Sources */,
+				453463D21D215B9900256B46 /* ADHOC_UndefinedType.swift in Sources */,
 				45D6C34B1CE222880016DB7A /* WorkspaceManager.swift in Sources */,
 				459B5F771D01D7F20081D8FF /* GCDUtility.swift in Sources */,
 				45D6C3431CE210180016DB7A /* RenderableViewController.swift in Sources */,
@@ -911,7 +919,6 @@
 				45D6C35D1CE4C6F00016DB7A /* IndexJournalingArray.swift in Sources */,
 				455569081CF5871000F2BD4D /* MenuCommandShortcutKeyExtensions.swift in Sources */,
 				453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */,
-				451216D61CE77334006E9207 /* Toolset.swift in Sources */,
 				455569231CF5C83800F2BD4D /* PlatformService.swift in Sources */,
 				451137921CD4822D001A183A /* Marks.swift in Sources */,
 				4555691F1CF5B07100F2BD4D /* ShellNotification.swift in Sources */,
@@ -922,6 +929,7 @@
 				45830AB81CEA1605002FEA3D /* UserCommand.swift in Sources */,
 				451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */,
 				45830AB61CEA1126002FEA3D /* DialogueUtility.swift in Sources */,
+				453463D01D215B6600256B46 /* RacerService.swift in Sources */,
 				453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */,
 				455F88C31D20216B00217ABC /* MenuCommandExecutionService.swift in Sources */,
 			);

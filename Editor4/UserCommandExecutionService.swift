@@ -15,8 +15,6 @@ import BoltsSwift
 /// be declared with only pure values.
 ///
 final class UserCommandExecutionService: DriverAccessible {
-    private let toolset = Toolset()
-
     /// **NOT IMPLEMENTED YET!!!**
     /// Abstracts user file name editing operation.
     ///

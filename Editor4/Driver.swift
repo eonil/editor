@@ -31,7 +31,7 @@ final class Driver {
     let userInteraction = UserInteractionService()
     let userCommandExecution = UserCommandExecutionService()
     let menuExecution = MenuCommandExecutionService()
-    let racer = RacerService()
+//    let racer = RacerService()
     let cargo = CargoService()
 
     private init() {

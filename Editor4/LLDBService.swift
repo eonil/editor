@@ -8,58 +8,55 @@
 
 import Darwin
 import BoltsSwift
-//import LLDBWrapper
+import LLDBWrapper
 
-struct LLDBServiceState {
-
-}
-/// LLDB commands.
-///
-/// In many cases, executable URL serves as an ID for an LLDB session and process.
-///
-enum LLDBCommand {
-    /// Launches a new debug session for process which runs program at URL.
-    case Launch(NSURL)
-
-    /// Pauses all thread in the process in debugging.
-    case Pause(pid_t)
-
-    /// Launches a new debug session for process which runs program at URL.
-    case Resume(NSURL)
-
-    /// Halts debug session for process that executing program at URL.
-    case Halt(NSURL)
-}
+///// LLDB commands.
+/////
+///// In many cases, executable URL serves as an ID for an LLDB session and process.
+/////
+//enum LLDBCommand {
+//    /// Launches a new debug session for process which runs program at URL.
+//    case Launch(NSURL)
+//
+//    /// Pauses all thread in the process in debugging.
+//    case Pause(pid_t)
+//
+//    /// Launches a new debug session for process which runs program at URL.
+//    case Resume(NSURL)
+//
+//    /// Halts debug session for process that executing program at URL.
+//    case Halt(NSURL)
+//}
 enum LLDBError: ErrorType {
 
 }
 enum LLDBNotification {
-    case Step(LLDBServiceState)
+    case Step(LLDBState)
 }
 
 final class LLDBService {
     private var sessionIDMapping = ReferencingTable<ADHOC_UndefinedType>()
 
-    /// Dispatches LLDB command.
-    ///
-    /// The command will be executed eventually in dedicated serial queue.
-    ///
-    /// - Note:
-    ///     Can be called from any thread.
-    ///
-    func dispatch(command: LLDBCommand) {
-
-    }
-
-    private func execute(command: LLDBCommand) {
-        MARK_unimplemented()
-//        switch command {
-//        case .Launch(let u):
-//            
-//        case .Halt(let u):
+//    /// Dispatches LLDB command.
+//    ///
+//    /// The command will be executed eventually in dedicated serial queue.
+//    ///
+//    /// - Note:
+//    ///     Can be called from any thread.
+//    ///
+//    func dispatch(command: LLDBCommand) {
 //
-//        }
-    }
+//    }
+//
+//    private func execute(command: LLDBCommand) {
+//        MARK_unimplemented()
+////        switch command {
+////        case .Launch(let u):
+////            
+////        case .Halt(let u):
+////
+////        }
+//    }
 
 
 
