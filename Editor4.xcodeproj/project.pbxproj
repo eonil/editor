@@ -22,6 +22,8 @@
 		451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D91CE77D02006E9207 /* SubprocessController.swift */; };
 		451216DE1CE77D94006E9207 /* IOAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216DD1CE77D94006E9207 /* IOAction.swift */; };
 		453463CA1D203F4100256B46 /* ErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463C91D203F4100256B46 /* ErrorReporting.swift */; };
+		453463CB1D215AC500256B46 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; };
+		453463CC1D215AC500256B46 /* LLDBWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3F21CE731820081DCDA /* KeyJournal.swift */; };
 		453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */; };
 		453FF5821CD4F17300F6344B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FF5811CD4F17300F6344B /* main.swift */; };
@@ -176,6 +178,13 @@
 			remoteGlobalIDString = 45771B0F1CD0EAE10096947A;
 			remoteInfo = "EonilToolbox-OSX";
 		};
+		453463CD1D215AC500256B46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45A0FB75199FBA9C0020D59D;
+			remoteInfo = LLDBWrapper;
+		};
 		45830AC21CEA8217002FEA3D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 454AD85D1CC6530D008A9BAC /* Project object */;
@@ -234,6 +243,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				453463CC1D215AC500256B46 /* LLDBWrapper.framework in Embed Frameworks */,
 				4511378D1CD4819E001A183A /* EonilToolbox.framework in Embed Frameworks */,
 				451137891CD4819E001A183A /* BoltsSwift.framework in Embed Frameworks */,
 			);
@@ -344,6 +354,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				453463CB1D215AC500256B46 /* LLDBWrapper.framework in Frameworks */,
 				459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */,
 				4511378C1CD4819E001A183A /* EonilToolbox.framework in Frameworks */,
 				451137881CD4819E001A183A /* BoltsSwift.framework in Frameworks */,
@@ -625,6 +636,7 @@
 			dependencies = (
 				4511378B1CD4819E001A183A /* PBXTargetDependency */,
 				4511378F1CD4819E001A183A /* PBXTargetDependency */,
+				453463CE1D215AC500256B46 /* PBXTargetDependency */,
 			);
 			name = Editor4;
 			productName = Editor4;
@@ -937,6 +949,11 @@
 			isa = PBXTargetDependency;
 			name = "EonilToolbox-OSX";
 			targetProxy = 4511378E1CD4819E001A183A /* PBXContainerItemProxy */;
+		};
+		453463CE1D215AC500256B46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LLDBWrapper;
+			targetProxy = 453463CD1D215AC500256B46 /* PBXContainerItemProxy */;
 		};
 		45830AC31CEA8217002FEA3D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
