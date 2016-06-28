@@ -18,7 +18,7 @@ import EonilToolbox
 ///     A workspace can contain multiple debugging sessions.
 ///
 struct DebugState {
-    private(set) var targets = [DebugTargetID: DebugTargetState]()
+    var targets = [DebugTargetID: DebugTargetState]()
 }
 
 ////////////////////////////////////////////////////////////////
@@ -39,25 +39,25 @@ struct DebugTargetState {
 struct DebugProcessState {
     var processID: pid_t?
 //    var phase: DebugSessionPhase = .NotStarted
-    var threads = [DebugThreadID: DebugThreadState]()
-    var variables = [DebugVariableState]()
+    var threads = Transmissive<[DebugThreadState]>.none
+    var variables = Transmissive<DebugVariableState>.none
 }
 
 enum DebugProcessPhase {
-    case NotStarted
-    case Running
-    case Paused(DebugSessionPauseReason)
-    case Exited(DebugSessionExitReason)
+    case notStarted
+    case running
+    case paused(DebugSessionPauseReason)
+    case exited(DebugSessionExitReason)
 }
 enum DebugSessionPauseReason {
-    case Breakpoint
-    case Crash
-    case UserCommand
+    case breakpoint
+    case crash
+    case userCommand
 }
 enum DebugSessionExitReason {
-    case End(code: Int)
-    case Crash
-    case UserCommand
+    case end(code: Int)
+    case crash
+    case userCommand
 }
 
 ////////////////////////////////////////////////////////////////
@@ -72,15 +72,15 @@ func ==(a: DebugProcessID, b: DebugProcessID) -> Bool {
     return false
 }
 
-struct DebugThreadID: Hashable {
-    var hashValue: Int {
-        get { MARK_unimplemented(); fatalError() }
-    }
-}
-func ==(a: DebugThreadID, b: DebugThreadID) -> Bool {
-    MARK_unimplemented()
-    return false
-}
+//struct DebugThreadID: Hashable {
+//    var hashValue: Int {
+//        get { MARK_unimplemented(); fatalError() }
+//    }
+//}
+//func ==(a: DebugThreadID, b: DebugThreadID) -> Bool {
+//    MARK_unimplemented()
+//    return false
+//}
 
 struct DebugThreadState {
     var callStackFrames = [DebugCallStackFrameState]()
@@ -104,13 +104,13 @@ struct DebugVariableState {
     var name: String
     var type: String
     var value: String
-    var subvariables = DebugVariableLazySubvariables.Unresolved
+    var subvariables = Progressive<(), [DebugVariableState]>.none
 }
 
-enum DebugVariableLazySubvariables {
-    case Unresolved
-    case Resolved([DebugVariableState])
-}
+//enum DebugVariableLazySubvariables {
+//    case Unresolved
+//    case Resolved([DebugVariableState])
+//}
 //enum DebugVariableType {
 //
 //}

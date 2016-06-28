@@ -6,10 +6,19 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
+
+//protocol Renderable {
+//    func render(state: UserInteractionState)
+//}
+
 /// Represents a renderable object.
-protocol Renderable {
-    func render(state: UserInteractionState)
-}
+///
+/// A workspace window enumerate all descendant view-controllers to find
+/// view-controlls which conforms this protocol, and calls `render` method.
+/// 
+/// - Note:
+///     Programmers need to manually route rendering call up to workspace
+///     window controller.
 protocol WorkspaceRenderable {
     func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?)
 }
@@ -27,34 +36,34 @@ private struct RenderingStatistics {
 }
 private var stat = RenderingStatistics()
 
-extension NSWindowController {
-    func renderRecursively(state: UserInteractionState) {
-        // 1. Render first...
-        if let renderable = self as? Renderable {
-            renderable.render(state)
-            stat.renderingCallCount += 1
-        }
-        // 2. ... and propagate next to reflect most recent state as early as possible.
-        contentViewController?.renderRecursively(state)
-        stat.viewControllerIterationCount += 1
-        print("stat.viewControllerIterationCount: \(stat.viewControllerIterationCount)")
-    }
-}
-extension NSViewController {
-    func renderRecursively(state: UserInteractionState) {
-        stat.viewControllerIterationCount += 1
-        // 1. Render first...
-        if let renderable = self as? Renderable {
-            renderable.render(state)
-            stat.renderingCallCount += 1
-        }
-        // 2. ... and propagate next to reflect most recent state as early as possible.
-        for child in childViewControllers {
-            child.renderRecursively(state)
-        }
-        stat.viewControllerIterationCount += 1
-    }
-}
+//extension NSWindowController {
+//    func renderRecursively(state: UserInteractionState) {
+//        // 1. Render first...
+//        if let renderable = self as? Renderable {
+//            renderable.render(state)
+//            stat.renderingCallCount += 1
+//        }
+//        // 2. ... and propagate next to reflect most recent state as early as possible.
+//        contentViewController?.renderRecursively(state)
+//        stat.viewControllerIterationCount += 1
+//        print("stat.viewControllerIterationCount: \(stat.viewControllerIterationCount)")
+//    }
+//}
+//extension NSViewController {
+//    func renderRecursively(state: UserInteractionState) {
+//        stat.viewControllerIterationCount += 1
+//        // 1. Render first...
+//        if let renderable = self as? Renderable {
+//            renderable.render(state)
+//            stat.renderingCallCount += 1
+//        }
+//        // 2. ... and propagate next to reflect most recent state as early as possible.
+//        for child in childViewControllers {
+//            child.renderRecursively(state)
+//        }
+//        stat.viewControllerIterationCount += 1
+//    }
+//}
 
 
 extension NSWindowController {

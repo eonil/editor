@@ -77,6 +77,15 @@ UI service has unique structure and interface like this.
 
 
 
+Data Flow
+---------
+
+message ->  debugging message?  -> debug service process    -> dispatch debug state to  -> UI service -> UI state -> render
+            UI command?         -> UI execution service     -> dispatch action to       -> UI service -> UI state -> render
+        
+
+
+
 
 
 

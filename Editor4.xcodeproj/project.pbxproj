@@ -26,6 +26,7 @@
 		453463D01D215B6600256B46 /* RacerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463CF1D215B6600256B46 /* RacerService.swift */; };
 		453463D21D215B9900256B46 /* ADHOC_UndefinedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463D11D215B9900256B46 /* ADHOC_UndefinedType.swift */; };
 		453463D41D215BDD00256B46 /* LLDBState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463D31D215BDD00256B46 /* LLDBState.swift */; };
+		453463DB1D2170BC00256B46 /* Transmissive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463DA1D2170BC00256B46 /* Transmissive.swift */; };
 		453FB3F31CE731820081DCDA /* KeyJournal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3F21CE731820081DCDA /* KeyJournal.swift */; };
 		453FB3FC1CE7382D0081DCDA /* FileNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */; };
 		453FF5821CD4F17300F6344B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FF5811CD4F17300F6344B /* main.swift */; };
@@ -96,7 +97,6 @@
 		45D6C3451CE2139C0016DB7A /* Renderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C3441CE2139C0016DB7A /* Renderable.swift */; };
 		45D6C34B1CE222880016DB7A /* WorkspaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C34A1CE222880016DB7A /* WorkspaceManager.swift */; };
 		45D6C34F1CE238620016DB7A /* NotificationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C34E1CE238620016DB7A /* NotificationUtility.swift */; };
-		45D6C3551CE241490016DB7A /* RenderableWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C3541CE241490016DB7A /* RenderableWindowController.swift */; };
 		45D6C35D1CE4C6F00016DB7A /* IndexJournalingArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6C35C1CE4C6F00016DB7A /* IndexJournalingArray.swift */; };
 		45E730461CD602C900BA7550 /* StateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E730451CD602C900BA7550 /* StateError.swift */; };
 		45E730531CD796D300BA7550 /* RenderingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E730521CD796D300BA7550 /* RenderingError.swift */; };
@@ -187,6 +187,13 @@
 			remoteGlobalIDString = 45A0FB75199FBA9C0020D59D;
 			remoteInfo = LLDBWrapper;
 		};
+		453463D81D2170A700256B46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 451137611CD48176001A183A /* EonilToolbox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D1B98E1D16CF0300B9F7C3;
+			remoteInfo = "EonilToolboxTests-macOS";
+		};
 		45830AC21CEA8217002FEA3D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 454AD85D1CC6530D008A9BAC /* Project object */;
@@ -270,6 +277,7 @@
 		453463CF1D215B6600256B46 /* RacerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacerService.swift; sourceTree = "<group>"; };
 		453463D11D215B9900256B46 /* ADHOC_UndefinedType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADHOC_UndefinedType.swift; sourceTree = "<group>"; };
 		453463D31D215BDD00256B46 /* LLDBState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBState.swift; sourceTree = "<group>"; };
+		453463DA1D2170BC00256B46 /* Transmissive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transmissive.swift; sourceTree = "<group>"; };
 		453FB3F21CE731820081DCDA /* KeyJournal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyJournal.swift; sourceTree = "<group>"; };
 		453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorViewController.swift; sourceTree = "<group>"; };
 		453FF5811CD4F17300F6344B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -347,7 +355,6 @@
 		45D6C3441CE2139C0016DB7A /* Renderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderable.swift; sourceTree = "<group>"; };
 		45D6C34A1CE222880016DB7A /* WorkspaceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceManager.swift; sourceTree = "<group>"; };
 		45D6C34E1CE238620016DB7A /* NotificationUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationUtility.swift; sourceTree = "<group>"; };
-		45D6C3541CE241490016DB7A /* RenderableWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderableWindowController.swift; sourceTree = "<group>"; };
 		45D6C35C1CE4C6F00016DB7A /* IndexJournalingArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexJournalingArray.swift; sourceTree = "<group>"; };
 		45E730451CD602C900BA7550 /* StateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateError.swift; sourceTree = "<group>"; };
 		45E730521CD796D300BA7550 /* RenderingError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderingError.swift; sourceTree = "<group>"; };
@@ -419,6 +426,7 @@
 			children = (
 				4511377C1CD48176001A183A /* EonilToolbox.framework */,
 				4511377E1CD48176001A183A /* EonilToolbox.framework */,
+				453463D91D2170A700256B46 /* EonilToolboxTests-macOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -429,6 +437,14 @@
 				453463C91D203F4100256B46 /* ErrorReporting.swift */,
 			);
 			name = "(error reporting)";
+			sourceTree = "<group>";
+		};
+		453463D61D2170A700256B46 /* (utility structures) */ = {
+			isa = PBXGroup;
+			children = (
+				453463DA1D2170BC00256B46 /* Transmissive.swift */,
+			);
+			name = "(utility structures)";
 			sourceTree = "<group>";
 		};
 		454AD85C1CC6530D008A9BAC = {
@@ -476,6 +492,7 @@
 				454AD8971CC69559008A9BAC /* Utility.swift */,
 				45830AAD1CE82DDA002FEA3D /* BoltsExtensions.swift */,
 				4550F9D91CE553A800B911C4 /* (functional style & synchronization) */,
+				453463D61D2170A700256B46 /* (utility structures) */,
 				453463C81D203F3300256B46 /* (error reporting) */,
 				451137911CD4822D001A183A /* Marks.swift */,
 				45D6C34E1CE238620016DB7A /* NotificationUtility.swift */,
@@ -586,7 +603,6 @@
 				454AD8951CC694E8008A9BAC /* WorkspaceWindowController.swift */,
 				453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */,
 				4555690F1CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift */,
-				45D6C3541CE241490016DB7A /* RenderableWindowController.swift */,
 				45D6C3421CE210180016DB7A /* RenderableViewController.swift */,
 				454AD8681CC6530D008A9BAC /* ApplicationController.swift */,
 			);
@@ -783,6 +799,13 @@
 			remoteRef = 4511377D1CD48176001A183A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		453463D91D2170A700256B46 /* EonilToolboxTests-macOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilToolboxTests-macOS.xctest";
+			remoteRef = 453463D81D2170A700256B46 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -859,6 +882,7 @@
 				45C3B38F1CD4F3330001D0AF /* MainMenuPalette.swift in Sources */,
 				454AD8691CC6530D008A9BAC /* ApplicationController.swift in Sources */,
 				454AD8941CC69420008A9BAC /* Driver.swift in Sources */,
+				453463DB1D2170BC00256B46 /* Transmissive.swift in Sources */,
 				45E730461CD602C900BA7550 /* StateError.swift in Sources */,
 				45E730531CD796D300BA7550 /* RenderingError.swift in Sources */,
 				453463D41D215BDD00256B46 /* LLDBState.swift in Sources */,
@@ -894,7 +918,6 @@
 				4550F9D61CE4FE0200B911C4 /* ArraySynchronizationManager.swift in Sources */,
 				45C3B3851CD4F3030001D0AF /* MainMenuController.swift in Sources */,
 				455569061CF5864000F2BD4D /* MenuItemController.swift in Sources */,
-				45D6C3551CE241490016DB7A /* RenderableWindowController.swift in Sources */,
 				451216C91CE76EE3006E9207 /* BuildState.swift in Sources */,
 				45830B1C1CF08858002FEA3D /* ServiceType.swift in Sources */,
 				455569311CF698BE00F2BD4D /* Notification.swift in Sources */,
@@ -1061,7 +1084,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Editor4/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1074,7 +1097,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = Editor4/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

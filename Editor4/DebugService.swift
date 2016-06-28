@@ -1,59 +1,128 @@
-////
-////  DebugService.swift
-////  Editor4
-////
-////  Created by Hoon H. on 2016/06/02.
-////  Copyright © 2016 Eonil. All rights reserved.
-////
 //
-//import Dispatch
-//import LLDBWrapper
-//import BoltsSwift
+//  DebugService.swift
+//  Editor4
 //
+//  Created by Hoon H. on 2016/06/02.
+//  Copyright © 2016 Eonil. All rights reserved.
+//
+
+import Dispatch
+import LLDBWrapper
+import BoltsSwift
+
 //enum DebugCommand {
 //    case AddTarget(DebugTargetID, executable: NSURL)
 //    case RemoveTarget(DebugTargetID)
 //    case LaunchTarget(DebugTargetID)
 //    case HaltSession(DebugSessionID)
 //}
-//enum DebugError: ErrorType {
+
+typealias DebugThreadID = (targetID: DebugTargetID, threadIndex: UInt)
+typealias DebugFrameID = (threadID: DebugThreadID, frameIndex: UInt32)
+
+enum DebugError: ErrorType {
+    case serviceUnavailable
+    case missingTargetStateFor(DebugTargetID)
+    case missingTargetMappingFor(DebugTargetID)
+    case missingThreadFor(DebugThreadID)
+    case missingFrameFor(DebugFrameID)
+    case badURL(NSURL)
 //    case BadParameter(Any, message: String)
 //    case InconsistenctState(message: String)
 //    case OperationFailure(message: String)
 //    case MissingSession(DebugSessionID)
+}
+
+//enum DebugNotification {
+//    case Step(DebugState)
+//    case StepThread(DebugThreadID, DebugThreadState)
+//    case StepStackFrame(DebugCallStackFrameState)
 //}
-//
-////enum DebugNotification {
-////    case Step(DebugState)
-////    case StepThread(DebugThreadID, DebugThreadState)
-////    case StepStackFrame(DebugCallStackFrameState)
-////}
-//
-///// Manages debugging.
-/////
-///// This abstracts any underlying specific debugging service.
-///// For now, I use LLDB via `LLDBService`.
-///// This service keeps its own state internally, and UI need to query
-///// debugging state from here.
-///// This manages LLDB under the hood, and update and expose current 
-///// debugging state.
-/////
-///// This is a service, so a separated actor. The state is hidden and
-///// the only way to get the state is taking driver stepping notification.
-/////
-//final class DebugService {
-//    private let gcdq = dispatch_queue_create("\(DebugService.self)/GCDQ", DISPATCH_QUEUE_SERIAL)
-//    private let semaw = dispatch_semaphore_create(0)!
-//    private var state = DebugState()
-//    private let lldb = LLDBDebugger()
-//    private let qchk: QueueChecker
-//
-//    private var targetMapping = [DebugTargetID: LLDBTarget]()
-//
-//    init() {
-//        qchk = QueueChecker(gcdq)
+
+private struct LocalState {
+    var targetMapping = [DebugTargetID: LLDBTarget]()
+    var proxyState = DebugState()
+}
+
+/// Manages debugging.
+///
+/// This abstracts any underlying specific debugging service.
+/// For now, I use LLDB.
+/// This service keeps internal local copy of debugging state,
+/// and dispatches to driver whenever it changes. The debugging
+/// state can be changed by external signal or program execution.
+/// Many part of debugging states are available only when the 
+/// target process is being paused. For example, there will be
+/// no stack frame information while process is running.
+/// Also, states are resolved lazily. For example, pausing 
+/// target process won't make stack frame's local variables 
+/// to be available. You have to dispatch "query local variables
+/// of some stack frame" command explicitly to make it available.
+///
+final class DebugService {
+    private let mutationGCDQ = dispatch_queue_create("\(DebugService.self)/mutationGCDQ", DISPATCH_QUEUE_SERIAL)!
+    private let continuationGCDQ = dispatch_queue_create("\(DebugService.self)/continuationGCDQ", DISPATCH_QUEUE_SERIAL)!
+    private let semaw = dispatch_semaphore_create(0)!
+    private let lldb = LLDBDebugger()
+    private let qchk: GCDQueueChecker
+
+    private var localState = LocalState()
+
+    init() {
+        qchk = GCDQueueChecker(mutationGCDQ)
+    }
+
+    /// - Returns:
+    ///     Completes when the target is
+    func addTarget(executableURL u: NSURL) -> Task<DebugTargetID> {
+        return process { state in
+            let debugTargetID = DebugTargetID()
+            state.proxyState.targets[debugTargetID] = DebugTargetState(executableURL: u, session: nil)
+            return debugTargetID
+        }
+    }
+
+    func removeTarget(debugTargetID: DebugTargetID) -> Task<()> {
+        return process { state in
+            guard state.proxyState.targets.removeValueForKey(debugTargetID) != nil else { throw DebugError.missingTargetStateFor(debugTargetID) }
+            state.proxyState.targets[debugTargetID] = nil
+            return ()
+        }
+    }
+
+    func launchTarget(debugTargetID: DebugTargetID, workingDirectoryURL: NSURL) -> Task<()> {
+        return process { state in
+            guard let debugTargetState = state.proxyState.targets[debugTargetID] else { throw DebugError.missingTargetStateFor(debugTargetID) }
+            guard let lldbTarget = state.targetMapping[debugTargetID] else { throw DebugError.missingTargetMappingFor(debugTargetID) }
+            guard let workingDirectoryPath = workingDirectoryURL.path else { throw DebugError.badURL(workingDirectoryURL) }
+            lldbTarget.launchProcessSimplyWithWorkingDirectory(workingDirectoryPath)
+            state.proxyState.targets[debugTargetID]?.session
+        }
+    }
+
+//    /// Fetches local variable tree of a stack frame.
+//    /// - Returns:
+//    ///     A task which completes when the data is ready.
+//    func fetchLocalVariablesOfStackFrame(debugFrameID: DebugFrameID) -> Task<()> {
+//        return process { state in
+//            guard let lldbTarget = state.targetMapping[debugFrameID.threadID.targetID] else { throw DebugError.missingTargetMappingFor(debugFrameID.threadID.targetID) }
+//            guard let lldbThread = lldbTarget.process.threadAtIndex(debugFrameID.threadID.threadIndex) else { throw DebugError.missingThreadFor(debugFrameID.threadID) }
+//            guard let lldbFrame = lldbThread.frameAtIndex(debugFrameID.frameIndex) else { throw DebugError.missingFrameFor(debugFrameID) }
+//            lldbFrame.variablesWithArguments(true, locals: true, statics: true, inScopeOnly: false, useDynamic: LLDBDynamicValueType.NoDynamicValues)
+//        }
 //    }
+//    func clearLocalVariables() -> Task<()> {
 //
+//    }
+
+
+    private func process<T>(transaction transaction: (inout state: LocalState) throws -> T) -> Task<T> {
+        return Task(()).continueIn(mutationGCDQ) { [weak self] () throws -> T in
+            guard let s = self else { throw DebugError.serviceUnavailable }
+            return try transaction(state: &s.localState)
+        }.continueIn(continuationGCDQ)
+    }
+
 //    /// Gets service state asynchonously.
 //    ///
 //    /// - Returns:
@@ -134,20 +203,30 @@
 //            state.sessions[sessionID] = nil
 //        }
 //    }
-//}
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+}
+
+
+
+private func scanProxyFrom(lldbProcess: LLDBProcess) -> DebugProcessState {
+    var proxy = DebugProcessState()
+    proxy.variables = .some
+    proxy.threads = .some
+    return proxy
+}
+
+private func scanProxyFrom(lldbThread: LLDBThread) -> DebugThreadState {
+    lldbThread.threadID
+    var thread = DebugThreadState(callStackFrames: [])
+    return thread
+}
+
+
+
+
+
+
+
+
+
+
+

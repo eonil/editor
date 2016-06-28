@@ -7,6 +7,7 @@
 //
 
 import BoltsSwift
+import Dispatch
 
 enum TaskState<TResult> {
     case Pending
@@ -33,4 +34,28 @@ extension Task {
         if let result = result { return .Success(result) }
         fatalError("Invalidate state... Cannot determine current state.")
     }
+
+    func continueIn(gcdq: dispatch_queue_t) -> Task<TResult> {
+        return continueWithTask(.Queue(gcdq)) { $0 }
+    }
+    func continueIn<U>(gcdq: dispatch_queue_t, _ process: TResult throws -> U) -> Task<U> {
+        return continueOnSuccessWith(.Queue(gcdq)) { try process($0) }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
