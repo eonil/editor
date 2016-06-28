@@ -151,6 +151,17 @@ extension MenuCommandExecutionService {
         case .FileShowInTerminal:
             MARK_unimplemented()
 
+        case .ProductRun:
+            guard let workspaceID = state.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
+            guard let workspaceLocationURL = state.workspaces[workspaceID]?.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            let executableURL = workspaceLocationURL
+                .URLByAppendingPathComponent("target", isDirectory: true)
+                .URLByAppendingPathComponent("debug", isDirectory: true)
+                .URLByAppendingPathComponent("exec1", isDirectory: false)
+            return driver.debug.addTarget(executableURL: executableURL).continueOnSuccessWith { [driver] (debugTargetID: DebugTargetID) -> () in
+                return driver.debug.launchTarget(debugTargetID, workingDirectoryURL: workspaceLocationURL)
+            }
+
         case .ProductBuild:
             guard let currentWorkspaceLocation = state.currentWorkspace?.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
             return driver.cargo.dispatch(CargoCommand.Build(currentWorkspaceLocation))

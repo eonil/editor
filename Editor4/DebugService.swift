@@ -27,6 +27,7 @@ enum DebugError: ErrorType {
     case missingThreadFor(DebugThreadID)
     case missingFrameFor(DebugFrameID)
     case badURL(NSURL)
+    case cannotLaunchProcessFor(DebugTargetID)
 //    case BadParameter(Any, message: String)
 //    case InconsistenctState(message: String)
 //    case OperationFailure(message: String)
@@ -59,44 +60,57 @@ private struct LocalState {
 /// to be available. You have to dispatch "query local variables
 /// of some stack frame" command explicitly to make it available.
 ///
-final class DebugService {
+final class DebugService: DriverAccessible {
     private let mutationGCDQ = dispatch_queue_create("\(DebugService.self)/mutationGCDQ", DISPATCH_QUEUE_SERIAL)!
     private let continuationGCDQ = dispatch_queue_create("\(DebugService.self)/continuationGCDQ", DISPATCH_QUEUE_SERIAL)!
-    private let semaw = dispatch_semaphore_create(0)!
-    private let lldb = LLDBDebugger()
+    private let lldb: LLDBDebugger
     private let qchk: GCDQueueChecker
 
     private var localState = LocalState()
 
     init() {
         qchk = GCDQueueChecker(mutationGCDQ)
+        LLDBGlobals.initializeLLDBWrapper()
+        lldb = LLDBDebugger()
+    }
+    deinit {
+        LLDBGlobals.terminateLLDBWrapper()
     }
 
     /// - Returns:
     ///     Completes when the target is
     func addTarget(executableURL u: NSURL) -> Task<DebugTargetID> {
-        return process { state in
+        return process { [weak self] state in
+            guard let s = self else { throw DebugError.serviceUnavailable }
+            guard let p = u.path else { throw DebugError.badURL(u) }
             let debugTargetID = DebugTargetID()
+            let lldbTarget = s.lldb.createTargetWithFilename(p, andArchname: LLDBArchDefault)
+            state.targetMapping[debugTargetID] = lldbTarget
             state.proxyState.targets[debugTargetID] = DebugTargetState(executableURL: u, session: nil)
             return debugTargetID
         }
     }
 
     func removeTarget(debugTargetID: DebugTargetID) -> Task<()> {
-        return process { state in
+        return process { [weak self] state in
+            guard let s = self else { throw DebugError.serviceUnavailable }
             guard state.proxyState.targets.removeValueForKey(debugTargetID) != nil else { throw DebugError.missingTargetStateFor(debugTargetID) }
-            state.proxyState.targets[debugTargetID] = nil
+            guard let lldbTarget = state.targetMapping[debugTargetID] else { throw DebugError.missingTargetMappingFor(debugTargetID) }
+            s.lldb.deleteTarget(lldbTarget)
             return ()
         }
     }
 
+    /// Launches a new process for the target.
     func launchTarget(debugTargetID: DebugTargetID, workingDirectoryURL: NSURL) -> Task<()> {
         return process { state in
             guard let debugTargetState = state.proxyState.targets[debugTargetID] else { throw DebugError.missingTargetStateFor(debugTargetID) }
             guard let lldbTarget = state.targetMapping[debugTargetID] else { throw DebugError.missingTargetMappingFor(debugTargetID) }
             guard let workingDirectoryPath = workingDirectoryURL.path else { throw DebugError.badURL(workingDirectoryURL) }
             lldbTarget.launchProcessSimplyWithWorkingDirectory(workingDirectoryPath)
-            state.proxyState.targets[debugTargetID]?.session
+            guard let lldbProcess = lldbTarget.process else { throw DebugError.cannotLaunchProcessFor(debugTargetID) }
+            let debugProcessState = scanProxyFrom(lldbTarget.process)
+            state.proxyState.targets[debugTargetID]?.session = debugProcessState
         }
     }
 
@@ -119,7 +133,11 @@ final class DebugService {
     private func process<T>(transaction transaction: (inout state: LocalState) throws -> T) -> Task<T> {
         return Task(()).continueIn(mutationGCDQ) { [weak self] () throws -> T in
             guard let s = self else { throw DebugError.serviceUnavailable }
-            return try transaction(state: &s.localState)
+            let s1 = try transaction(state: &s.localState)
+            s.driver.userInteraction.dispatch { (inout userInteractionState: UserInteractionState) -> () in
+                userInteractionState.debug = s.localState.proxyState
+            }
+            return s1
         }.continueIn(continuationGCDQ)
     }
 

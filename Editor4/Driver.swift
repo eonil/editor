@@ -8,6 +8,7 @@
 
 import Foundation
 import BoltsSwift
+import LLDBWrapper
 import EonilToolbox
 
 protocol DriverAccessible {
@@ -31,8 +32,10 @@ final class Driver {
     let userInteraction = UserInteractionService()
     let userCommandExecution = UserCommandExecutionService()
     let menuExecution = MenuCommandExecutionService()
+
 //    let racer = RacerService()
     let cargo = CargoService()
+    let debug = DebugService()
 
     private init() {
     }

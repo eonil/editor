@@ -28,6 +28,9 @@ struct State {
 //    var mainMenu = MainMenuState()
     var workspaces = KeyJournalingDictionary<WorkspaceID, WorkspaceState>()
     var toolset = ToolsetState()
+
+    /// Will be dispatched from `DebugService`.
+    var debug = DebugState()
 }
 extension State {
     /// Accesses current workspace state.

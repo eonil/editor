@@ -76,6 +76,7 @@ enum UserOperationError: ErrorType {
     case MissingWorkspace(WorkspaceID)
     case CannotResolvePathForWorkspaceFile((WorkspaceID, FileID2))
     case CannotMakeNewURL(oldURL: NSURL, newName: String)
+    case cannotResolveExecutableURLFor(WorkspaceID)
 }
 enum FileUserOperationError {
     case CannotMakeNameForNewFolder

@@ -119,7 +119,7 @@ final class CargoService: DriverAccessible {
             assert(u.fileURL)
             let cd = getChangeDirectoryCommandTo(u)
             debugLog(cd)
-            return try runBashSession([cd, "pwd", "cargo build"])
+            return try runBashSession([cd, "cargo build"])
 
         case .Clean(let u):
             assert(u.fileURL)

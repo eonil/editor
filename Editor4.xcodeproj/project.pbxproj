@@ -385,7 +385,6 @@
 		4511375A1CD480E5001A183A /* (UI control) */ = {
 			isa = PBXGroup;
 			children = (
-				45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */,
 			);
 			name = "(UI control)";
 			sourceTree = "<group>";
@@ -447,6 +446,27 @@
 			name = "(utility structures)";
 			sourceTree = "<group>";
 		};
+		453463DC1D22AE9F00256B46 /* (UI state) */ = {
+			isa = PBXGroup;
+			children = (
+				454AD87A1CC65326008A9BAC /* State.swift */,
+				455569281CF6004D00F2BD4D /* StateAssertions.swift */,
+				4550F9F91CE6C23D00B911C4 /* DatabaseState.swift */,
+				4550F9FB1CE6C29100B911C4 /* WorkspaceID.swift */,
+				4550F9F71CE6C1FC00B911C4 /* WorkspaceState.swift */,
+				4550F9ED1CE6279D00B911C4 /* WorkspaceDatabaseState.swift */,
+				4550F9F31CE6B65300B911C4 /* WorkspaceWindowState.swift */,
+				45B7854A1CE70C0300A40CF9 /* FileTree2.swift */,
+				45B5CDD41CE753FC0097AC0B /* FileNodePath.swift */,
+				451216C81CE76EE3006E9207 /* BuildState.swift */,
+				45E730451CD602C900BA7550 /* StateError.swift */,
+				4511375C1CD48123001A183A /* UserAction.swift */,
+				451137951CD482D4001A183A /* Apply.swift */,
+				45830AC91CEB8C79002FEA3D /* Clean.swift */,
+			);
+			name = "(UI state)";
+			sourceTree = "<group>";
+		};
 		454AD85C1CC6530D008A9BAC = {
 			isa = PBXGroup;
 			children = (
@@ -482,8 +502,9 @@
 				45C3B3961CD4F82D0001D0AF /* RunMainMenuAction.swift */,
 				45830B131CF04D30002FEA3D /* Stepper.swift */,
 				455569301CF698BE00F2BD4D /* Notification.swift */,
-				455F88C11D20212C00217ABC /* (operation services) */,
-				4575198B1CF88BED00F78BAD /* (UI state) */,
+				455F88C11D20212C00217ABC /* (command execution) */,
+				4575198B1CF88BED00F78BAD /* (UI) */,
+				453463DC1D22AE9F00256B46 /* (UI state) */,
 				455F88C01D20188800217ABC /* (UI scanning) */,
 				457519941CF88C5700F78BAD /* (UI persistency) */,
 				4511375A1CD480E5001A183A /* (UI control) */,
@@ -554,7 +575,7 @@
 			name = "(UI scanning)";
 			sourceTree = "<group>";
 		};
-		455F88C11D20212C00217ABC /* (operation services) */ = {
+		455F88C11D20212C00217ABC /* (command execution) */ = {
 			isa = PBXGroup;
 			children = (
 				45830AB71CEA1605002FEA3D /* UserCommand.swift */,
@@ -562,28 +583,15 @@
 				455569031CF5862B00F2BD4D /* MenuCommand.swift */,
 				455F88C21D20216B00217ABC /* MenuCommandExecutionService.swift */,
 			);
-			name = "(operation services)";
+			name = "(command execution)";
 			sourceTree = "<group>";
 		};
-		4575198B1CF88BED00F78BAD /* (UI state) */ = {
+		4575198B1CF88BED00F78BAD /* (UI) */ = {
 			isa = PBXGroup;
 			children = (
-				454AD87A1CC65326008A9BAC /* State.swift */,
-				455569281CF6004D00F2BD4D /* StateAssertions.swift */,
-				4550F9F91CE6C23D00B911C4 /* DatabaseState.swift */,
-				4550F9FB1CE6C29100B911C4 /* WorkspaceID.swift */,
-				4550F9F71CE6C1FC00B911C4 /* WorkspaceState.swift */,
-				4550F9ED1CE6279D00B911C4 /* WorkspaceDatabaseState.swift */,
-				4550F9F31CE6B65300B911C4 /* WorkspaceWindowState.swift */,
-				45B7854A1CE70C0300A40CF9 /* FileTree2.swift */,
-				45B5CDD41CE753FC0097AC0B /* FileNodePath.swift */,
-				451216C81CE76EE3006E9207 /* BuildState.swift */,
-				45E730451CD602C900BA7550 /* StateError.swift */,
-				4511375C1CD48123001A183A /* UserAction.swift */,
-				451137951CD482D4001A183A /* Apply.swift */,
-				45830AC91CEB8C79002FEA3D /* Clean.swift */,
+				45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */,
 			);
-			name = "(UI state)";
+			name = "(UI)";
 			sourceTree = "<group>";
 		};
 		457519931CF88C1900F78BAD /* (UI rendering) */ = {
