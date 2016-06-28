@@ -10,21 +10,18 @@ import Foundation
 import AppKit
 import EonilToolbox
 
-final class WorkspaceWindowController: RenderableWindowController, DriverAccessible {
+private struct LocalState {
+    var workspaceID: WorkspaceID?
+}
+
+final class WorkspaceWindowController: NSWindowController, DriverAccessible, WorkspaceRenderable {
 
     private let containerViewController = NSViewController()
     private let columnSplitViewController = NSSplitViewController()
     private let fileNavigatorViewController = FileNavigatorViewController()
     private let rowSplitViewController = NSSplitViewController()
     private var installer = ViewInstaller()
-
-    ////////////////////////////////////////////////////////////////
-
-    var workspaceID: WorkspaceID? {
-        didSet {
-            driver.userInteraction.ADHOC_dispatchRenderingInvalidation()
-        }
-    }
+    private var localState = LocalState()
 
     ////////////////////////////////////////////////////////////////
 
@@ -64,15 +61,15 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
         switch n.name {
         case NSWindowWillCloseNotification:
             guard n.object === window else { return }
-            assert(workspaceID != nil)
-            guard let workspaceID = workspaceID else { return }
+            assert(localState.workspaceID != nil)
+            guard let workspaceID = localState.workspaceID else { return }
             driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.Close))
 
         default:
             break
         }
     }
-    override func render(state: UserInteractionState) {
+    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
         installer.installIfNeeded {
             contentViewController = columnSplitViewController
             columnSplitViewController.splitViewItems = [
@@ -81,12 +78,8 @@ final class WorkspaceWindowController: RenderableWindowController, DriverAccessi
             ]
         }
 
-        func getWorkspace() -> (id: WorkspaceID, state: WorkspaceState)? {
-            guard let workspaceID = workspaceID else { return nil }
-            guard let workspaceState = state.workspaces[workspaceID] else { return nil }
-            return (workspaceID, workspaceState)
-        }
-        contentViewController?.renderRecursively(state, workspace: getWorkspace())
+        localState.workspaceID = workspace?.id
+        contentViewController?.renderRecursively(state, workspace: workspace)
     }
 }
 

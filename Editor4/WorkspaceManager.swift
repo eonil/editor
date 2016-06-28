@@ -14,15 +14,15 @@ private struct LocalState {
 }
 
 /// Manages workspaces and connected document and windows.
-final class WorkspaceManager: DriverAccessible, Renderable {
+final class WorkspaceManager: DriverAccessible {
 
     private var latestWorkspaceKeysetVersion: Version?
-    private var workspaceToWindowControllerMapping = [WorkspaceID: WorkspaceWindowController]()
-    private var workspaceToDocumentMapping = [WorkspaceID: WorkspaceDocument]()
+    private var workspaceWindowControllerMapping = [WorkspaceID: WorkspaceWindowController]()
+    private var workspaceDocumentMapping = [WorkspaceID: WorkspaceDocument]()
     private var localState = LocalState()
 
     var ADHOC_allWindows: LazyMapCollection<[WorkspaceID : WorkspaceWindowController], WorkspaceWindowController> {
-        get { return workspaceToWindowControllerMapping.values }
+        get { return workspaceWindowControllerMapping.values }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ final class WorkspaceManager: DriverAccessible, Renderable {
         switch n.name {
         case NSWindowDidBecomeKeyNotification:
 //            guard let window = n.object as? NSWindow else { return }
-//            for (id, wc) in workspaceToWindowControllerMapping {
+//            for (id, wc) in workspaceWindowControllerMapping {
 //                if wc.window === window {
 //                    dispatch(.Workspace(id: id, action: .SetCurrent))
 //                }
@@ -53,7 +53,7 @@ final class WorkspaceManager: DriverAccessible, Renderable {
     }
 
     func scan() {
-        for (_, wc) in workspaceToWindowControllerMapping {
+        for (_, wc) in workspaceWindowControllerMapping {
             wc.scanRecursively()
         }
     }
@@ -65,13 +65,18 @@ final class WorkspaceManager: DriverAccessible, Renderable {
 
         // Render.
 
-        let (insertions, removings) = diff(Set(state.workspaces.keys), from: Set(workspaceToWindowControllerMapping.keys))
+        let (insertions, removings) = diff(Set(state.workspaces.keys), from: Set(workspaceWindowControllerMapping.keys))
         insertions.forEach(openEmptyWorkspace)
         removings.forEach(closeWorkspace)
-        assert(Set(state.workspaces.keys) == Set(workspaceToWindowControllerMapping.keys))
+        assert(Set(state.workspaces.keys) == Set(workspaceWindowControllerMapping.keys))
 
-        for (_, wc) in workspaceToWindowControllerMapping {
-            wc.renderRecursively(state)
+        for (workspaceID, workspaceController) in workspaceWindowControllerMapping {
+            func getWorkspace() -> (id: WorkspaceID, state: WorkspaceState)? {
+                guard let workspaceState = state.workspaces[workspaceID] else { return nil }
+                return (workspaceID, workspaceState)
+            }
+            let workspace = getWorkspace()
+            workspaceController.render(state, workspace: workspace)
         }
 
         scanCurrentWorkspace()
@@ -85,20 +90,19 @@ final class WorkspaceManager: DriverAccessible, Renderable {
 
     private func openEmptyWorkspace(id: WorkspaceID) {
         let wc = WorkspaceWindowController()
-        wc.workspaceID = id
         wc.showWindow(self)
-        workspaceToWindowControllerMapping[id] = wc
+        workspaceWindowControllerMapping[id] = wc
     }
     private func closeWorkspace(id: WorkspaceID) {
-        workspaceToWindowControllerMapping[id] = nil
-        if let doc = workspaceToDocumentMapping.removeValueForKey(id) {
+        workspaceWindowControllerMapping[id] = nil
+        if let doc = workspaceDocumentMapping.removeValueForKey(id) {
             doc.saveDocument(self)
             NSDocumentController.sharedDocumentController().removeDocument(doc)
         }
     }
     private func reconfigureWorkspace(id: WorkspaceID, location: NSURL?) {
-        assert(workspaceToWindowControllerMapping[id] != nil)
-        guard let wc = workspaceToWindowControllerMapping[id] else { return }
+        assert(workspaceWindowControllerMapping[id] != nil)
+        guard let wc = workspaceWindowControllerMapping[id] else { return }
         if let doc = wc.document as? NSDocument {
             checkAndReport(doc is WorkspaceDocument, "`WorkspaceWindowController.document` must be bound only to `WorkspaceDocument`.")
             assert(doc is WorkspaceDocument)
@@ -135,13 +139,13 @@ final class WorkspaceManager: DriverAccessible, Renderable {
 //        }
 //    }
 //    private func removeDocumentFor(id: WorkspaceID) {
-//        guard let doc = workspaceToDocumentMapping[id] else { return }
+//        guard let doc = workspaceDocumentMapping[id] else { return }
 //        NSDocumentController.sharedDocumentController().removeDocument(doc)
-//        workspaceToDocumentMapping[id] = nil
+//        workspaceDocumentMapping[id] = nil
 //    }
 
     private func scanCurrentWorkspace() {
-        for (id, wc) in workspaceToWindowControllerMapping {
+        for (id, wc) in workspaceWindowControllerMapping {
             if wc.window?.mainWindow == true {
                 if localState.currentWorkspaceID != id {
                     driver.userInteraction.dispatch(.Workspace(id, .SetCurrent))

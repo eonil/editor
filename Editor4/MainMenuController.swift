@@ -8,7 +8,7 @@
 
 import AppKit
 
-final class MainMenuController: DriverAccessible, Renderable {
+final class MainMenuController: DriverAccessible {
 
     private let palette = MainMenuPalette()
 

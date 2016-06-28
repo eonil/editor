@@ -19,7 +19,7 @@ private struct LocalState {
     var workspace: (id: WorkspaceID, state: WorkspaceState)?
 }
 
-final class FileNavigatorViewController: WorkspaceRenderableViewController, DriverAccessible, WorkspaceAccessible {
+final class FileNavigatorViewController: WorkspaceRenderableViewController, DriverAccessible {
 
     private let scrollView = NSScrollView()
     private let outlineView = FileNavigatorOutlineView()
@@ -119,7 +119,7 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
 //    }
 
     private func scanHighlightedFileOnly() {
-        guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
+        guard let workspaceID = localState.workspace?.id else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
         let optionalFileID = runningMenu ? outlineView.getClickedFileID2() : nil
         driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetHighlightedFile(optionalFileID))))
     }
@@ -214,7 +214,7 @@ extension FileNavigatorViewController: NSOutlineViewDelegate {
         /// the only thing what we can do is just tracking event precisely.
         /// Extra or redundant scanning of selected files will prevent access to lazy sequence.
         func scanSelectedFilesOnly() {
-            guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
+            guard let workspaceID = localState.workspace?.id else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
             guard let current = rowIndexToOptionalFileID(outlineView.selectedRow) else { return }
             debugLog(outlineView.selectedRowIndexes)
             debugLog(outlineView.selectedRowIndexes.lazy.flatMap(rowIndexToOptionalFileID))
@@ -252,7 +252,7 @@ extension FileNavigatorViewController: NSTextFieldDelegate {
         guard rowIndex != -1 else { return reportErrorToDevelopers("Cannot find row that ended editing in file outline view.") }
         guard let proxy = outlineView.itemAtRow(rowIndex) as? FileUIProxy2 else { return reportErrorToDevelopers("") }
 
-        guard let workspaceID = workspaceID else { return reportErrorToDevelopers("Cannot determine workspace ID.") }
+        guard let workspaceID = localState.workspace?.id else { return reportErrorToDevelopers("Cannot determine workspace ID.") }
         let fileID = proxy.sourceFileID
         let newFileName = textField.stringValue
         // Let the action processor to detect errors in the new name.

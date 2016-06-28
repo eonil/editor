@@ -6,19 +6,5 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import AppKit
-
-protocol WorkspaceAccessible {
-}
-extension WorkspaceAccessible where Self: NSViewController {
-    /// Gets workspace ID bound to self.
-    var workspaceID: WorkspaceID? {
-        get {
-            guard let workspaceWindowController = view.window?.windowController as? WorkspaceWindowController else { return nil }
-            guard let workspaceID = workspaceWindowController.workspaceID else { return nil }
-            return workspaceID
-        }
-    }
-}
 
 
