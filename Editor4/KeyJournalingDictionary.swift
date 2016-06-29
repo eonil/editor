@@ -87,6 +87,11 @@ struct KeyJournalingDictionary<Key: Hashable, Value>: DictionaryLiteralConvertib
             }
         }
     }
+    mutating func removeValueForKey(key: Key) -> Value? {
+        let r = internalDictionary.removeValueForKey(key)
+        logAndRevise(KeyMutation<Key>.Delete(key))
+        return r
+    }
     mutating func clearJournal() {
         journal.removeAll()
     }

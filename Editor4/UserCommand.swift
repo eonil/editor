@@ -12,6 +12,7 @@
 /// multiple `UserAction`s.
 enum UserCommand {
     case UserInteraction(UserInteractionCommand)
+    case closeWorkspace(WorkspaceID)
 }
 
 enum UserInteractionCommand {

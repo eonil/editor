@@ -134,9 +134,7 @@ final class DebugService: DriverAccessible {
         return Task(()).continueIn(mutationGCDQ) { [weak self] () throws -> T in
             guard let s = self else { throw DebugError.serviceUnavailable }
             let s1 = try transaction(state: &s.localState)
-            s.driver.userInteraction.dispatch { (inout userInteractionState: UserInteractionState) -> () in
-                userInteractionState.debug = s.localState.proxyState
-            }
+            s.driver.operation.revise(s.localState.proxyState)
             return s1
         }.continueIn(continuationGCDQ)
     }

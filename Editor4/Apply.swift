@@ -57,21 +57,10 @@ extension State {
     }
     private mutating func apply(id: WorkspaceID, action: WorkspaceAction) throws {
         switch action {
-        case .Open:
-            workspaces[id] = WorkspaceState()
-
-        case .SetCurrent:
-            currentWorkspaceID = id
-
-        case .Reconfigure(let location):
-            workspaces[id]?.location = location
-
-        case .Close:
-            workspaces[id] = nil
-
         case .File(let action):
-            try applyOnWorkspace(&workspaces[id]!, action: action)
-
+            try process(id) { workspaceState in
+                try applyOnWorkspace(&workspaceState, action: action)
+            }
         default:
             MARK_unimplemented()
         }
@@ -79,12 +68,7 @@ extension State {
     private mutating func applyOnWorkspace(inout workspace: WorkspaceState, action: FileAction) throws {
         switch action {
         case .CreateFolderAndStartEditingName(let containerFileID, let newFileIndex, let newFolderName):
-            let newFolderState = FileState2(form: FileForm.Container,
-                                            phase: FilePhase.Editing,
-                                            name: newFolderName)
-            let newFolderID = try workspace.files.insert(newFolderState, at: newFileIndex, to: containerFileID)
-            workspace.window.navigatorPane.file.selection.reset(newFolderID)
-            workspace.window.navigatorPane.file.editing = true
+            try workspace.createFolder(in: containerFileID, at: newFileIndex, with: newFolderName)
 
         case .CreateFileAndStartEditingName(let containerFileID, let newFileIndex, let newFileName):
             let newFolderState = FileState2(form: FileForm.Data,
@@ -103,13 +87,7 @@ extension State {
             }
 
         case .DeleteFiles(let fileIDs):
-            let unknownFileIDs = fileIDs.filter({ workspace.files.contains($0) == false })
-            guard unknownFileIDs.count == 0 else { throw UserInteractionError.UnknownFiles(Array(unknownFileIDs)) }
-            workspace.window.navigatorPane.file.selection.reset()
-            for fileID in fileIDs {
-                guard workspace.files.contains(fileID) else { continue } // A file node can be erased by prior deletion.
-                workspace.files.remove(fileID)
-            }
+            try workspace.deleteFiles(fileIDs)
 
         case .SetHighlightedFile(let maybeNewFileID):
             workspace.window.navigatorPane.file.selection.reset(maybeNewFileID)
@@ -147,13 +125,15 @@ extension State {
         case .Cargo(let n):
             switch n {
             case .Step(let newState):
-                toolset.cargo = newState
+                cargo = newState
             }
         case .Platform(let n):
             switch n {
-            case .ReloadWorkspace(let workspaceID, let workspaceState):
-                assert(workspaceState.location != nil)
-                workspaces[workspaceID] = workspaceState
+            case .ReloadWorkspace(let workspaceID, let newWorkspaceState):
+                assert(newWorkspaceState.location != nil)
+                try process(workspaceID) { workspaceState in
+                    workspaceState = newWorkspaceState
+                }
             }
         }
     }

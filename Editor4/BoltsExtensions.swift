@@ -41,6 +41,9 @@ extension Task {
     func continueIn<U>(gcdq: dispatch_queue_t, _ process: TResult throws -> U) -> Task<U> {
         return continueOnSuccessWith(.Queue(gcdq)) { try process($0) }
     }
+    func continueInMainQueue<U>(process: TResult throws -> U) -> Task<U> {
+        return continueIn(dispatch_get_main_queue(), process)
+    }
 }
 
 

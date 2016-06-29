@@ -63,7 +63,7 @@ final class WorkspaceWindowController: NSWindowController, DriverAccessible, Wor
             guard n.object === window else { return }
             assert(localState.workspaceID != nil)
             guard let workspaceID = localState.workspaceID else { return }
-            driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.Close))
+            driver.operation.closeWorkspace(workspaceID)
 
         default:
             break

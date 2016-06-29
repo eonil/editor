@@ -194,7 +194,7 @@ final class CargoService: DriverAccessible {
 
     private func apply(@noescape transaction: ()->()) {
         transaction()
-        driver.notify(Notification.Cargo(CargoNotification.Step(state)))
+        driver.operation.revise(state)
     }
 }
 

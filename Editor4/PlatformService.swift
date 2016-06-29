@@ -20,6 +20,7 @@ enum PlatformCommand {
     case RenameFile(from: NSURL, to: NSURL) 
 }
 enum PlatformNotification {
+    @available(*,deprecated=0)
     case ReloadWorkspace(WorkspaceID, WorkspaceState)
 }
 enum PlatformError: ErrorType {
@@ -85,7 +86,7 @@ final class PlatformService: DriverAccessible {
             guard let s = (NSString(data: d, encoding: NSUTF8StringEncoding) as String?) else { throw PlatformError.BadFileListFileContent }
             var newWorkspaceState = try WorkspaceSerializationUtility.deserialize(s)
             newWorkspaceState.location = location
-            return driver.notify(Notification.Platform(PlatformNotification.ReloadWorkspace(workspaceID, newWorkspaceState)))
+            return driver.operation.reloadWorkspace(workspaceID, workspaceState: newWorkspaceState)
 
         case .RenameFile(let from, let to):
             try NSFileManager.defaultManager().moveItemAtURL(from, toURL: to)

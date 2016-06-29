@@ -64,6 +64,7 @@ struct FileNavigatorPaneSelectionState {
     mutating func reset(newCurrent: FileID2) {
         reset(newCurrent, [newCurrent])
     }
+    /// You must have a "current" file when you set to a new files.
     mutating func reset(newCurrent: FileID2, _ newItems: TemporalLazyCollection<FileID2>) {
         assert(newItems.contains(newCurrent))
         highlighting = nil

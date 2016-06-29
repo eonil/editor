@@ -10,4 +10,6 @@
 enum StateError: ErrorType {
     case RollbackByMissingPrerequisites
     case BadPath(FileNodePath)
+
+    case missingWorkspaceStateFor(WorkspaceID)
 }

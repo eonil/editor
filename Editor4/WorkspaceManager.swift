@@ -148,7 +148,8 @@ final class WorkspaceManager: DriverAccessible {
         for (id, wc) in workspaceWindowControllerMapping {
             if wc.window?.mainWindow == true {
                 if localState.currentWorkspaceID != id {
-                    driver.userInteraction.dispatch(.Workspace(id, .SetCurrent))
+                    driver.operation.setCurrentWorkspace(id)
+                    break
                 }
             }
         }

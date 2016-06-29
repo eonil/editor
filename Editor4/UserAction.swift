@@ -40,16 +40,7 @@ enum ShellAction {
 }
 /// Actions about a workspace.
 ///
-/// - Note:
-///     "Creating a new workspace" is composed by three stages:
-///     1. Backend(Cargo) prepares the workspace in file-system.
-///     2. Opens an empty workspace.
-///     3. Relocate the workspace to the URL.
 enum WorkspaceAction {
-    case Open
-    case Close
-    case Reconfigure(location: NSURL?)
-    case SetCurrent
     case File(FileAction)
     case Editor(EditorAction)
     //        case FileNode(path: WorkspaceItemPath, FileNodeAction)

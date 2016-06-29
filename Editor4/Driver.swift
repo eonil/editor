@@ -29,22 +29,16 @@ final class Driver {
     private static let theDriver = Driver()
     private let platform = PlatformService()
 
-    let userInteraction = UserInteractionService()
-    let userCommandExecution = UserCommandExecutionService()
-    let menuExecution = MenuCommandExecutionService()
-
-//    let racer = RacerService()
-    let cargo = CargoService()
-    let debug = DebugService()
+    let operation = OperationService()
 
     private init() {
     }
     func run(command: PlatformCommand) -> Task<()> {
         return platform.dispatch(command)
     }
-    func notify(notification: Notification) -> Task<()> {
-        return userInteraction.dispatch(UserAction.Notify(notification))
-    }
+//    func notify(notification: Notification) -> Task<()> {
+//        return userInteraction.dispatch(UserAction.Notify(notification))
+//    }
 }
 extension Driver {
 //    /// `dispatch` and query the result.

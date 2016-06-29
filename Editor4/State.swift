@@ -18,19 +18,34 @@
 ///     If copying cost becomes too big, consider using of COW objects.
 ///
 struct State {
+    private(set) var version = Version()
+
     /// Currently selected workspace.
     ///
     /// Window ordering and main-window state are managed
     /// by AppKit and we don't care. Then why do we need
     /// to track current main-window? To send main-menu
     /// command to correct window.
-    var currentWorkspaceID: WorkspaceID? = nil
+    var currentWorkspaceID: WorkspaceID? = nil {
+        didSet { version.revise() }
+    }
 //    var mainMenu = MainMenuState()
-    var workspaces = KeyJournalingDictionary<WorkspaceID, WorkspaceState>()
-    var toolset = ToolsetState()
+    private(set) var workspaces = KeyJournalingDictionary<WorkspaceID, WorkspaceState>() {
+        didSet { version.revise() }
+    }
 
+    var cargo = CargoServiceState() {
+        didSet { version.revise() }
+    }
+    
     /// Will be dispatched from `DebugService`.
-    var debug = DebugState()
+    var debug = DebugState() {
+        didSet { version.revise() }
+    }
+
+    mutating func revise() {
+        version.revise()
+    }
 }
 extension State {
     /// Accesses current workspace state.
@@ -50,11 +65,55 @@ extension State {
     }
 }
 
-//struct MainMenuState {
-//    var runnableCommands = Set<MainMenuCommand>()
-//    var build
+extension State {
+    mutating func process<T>(workspaceID: WorkspaceID, @noescape _ transaction: (inout WorkspaceState) throws -> T) throws -> T {
+        guard let workspaceState = workspaces[workspaceID] else { throw StateError.missingWorkspaceStateFor(workspaceID) }
+        var workspaceState1 = workspaceState
+        let result = try transaction(&workspaceState1)
+        workspaces[workspaceID] = workspaceState1
+        return result
+    }
+    mutating func addWorkspace() -> WorkspaceID {
+        let workspaceID = WorkspaceID()
+        workspaces[workspaceID] = WorkspaceState()
+        return workspaceID
+    }
+    mutating func removeWorkspace(workspaceID: WorkspaceID) throws {
+        if currentWorkspaceID == workspaceID {
+            currentWorkspaceID = nil
+        }
+        guard workspaces[workspaceID] != nil else { throw StateError.missingWorkspaceStateFor(workspaceID) }
+        precondition(workspaces.removeValueForKey(workspaceID) != nil)
+    }
+    mutating func reloadWorkspace(workspaceID: WorkspaceID, workspaceState: WorkspaceState) throws {
+        guard workspaces[workspaceID] != nil else { throw StateError.missingWorkspaceStateFor(workspaceID) }
+        workspaces[workspaceID] = workspaceState
+    }
+}
+
+extension State {
+    mutating func clearJournals() {
+        workspaces.clearJournal()
+    }
+}
+
+//struct ToolsetState {
+//    var cargo = CargoServiceState()
 //}
 
-struct ToolsetState {
-    var cargo = CargoServiceState()
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

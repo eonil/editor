@@ -121,7 +121,7 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
     private func scanHighlightedFileOnly() {
         guard let workspaceID = localState.workspace?.id else { return reportErrorToDevelopers("Missing `FileNavigatorViewController.workspaceID`.") }
         let optionalFileID = runningMenu ? outlineView.getClickedFileID2() : nil
-        driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetHighlightedFile(optionalFileID))))
+        driver.operation.workspace(workspaceID, setHighlightedFile: optionalFileID)
     }
 
     private func process(event: FileNavigatorOutlineViewEvent) {
@@ -221,7 +221,7 @@ extension FileNavigatorViewController: NSOutlineViewDelegate {
             let c = AnyRandomAccessCollection(outlineView.selectedRowIndexes.lazy.flatMap(rowIndexToOptionalFileID))
             selectionController.source = c
             let items = selectionController.sequence
-            driver.userInteraction.dispatch(UserAction.Workspace(workspaceID, WorkspaceAction.File(FileAction.SetSelectedFiles(current: current, items: items))))
+            driver.operation.workspace(workspaceID, resetSelection: (current, items))
         }
         // This must come first to keep state consistency.
         scanSelectedFilesOnly()
@@ -256,14 +256,10 @@ extension FileNavigatorViewController: NSTextFieldDelegate {
         let fileID = proxy.sourceFileID
         let newFileName = textField.stringValue
         // Let the action processor to detect errors in the new name.
-        driver.userCommandExecution.dispatch(.UserInteraction(.Rename(workspaceID, fileID, newName: newFileName)))
-            .continueWithTask(Executor.MainThread) { [weak self] (task: Task<()>) -> Task<()> in
-                assertMainThread()
-                // Calling `render()` will be no-op because journal should be empty.
-                // Set text-field manually.
-                self?.outlineView.reloadData()
-                return task
-            }
+        driver.operation.workspace(workspaceID, file: fileID, renameTo: newFileName)
+        // Calling `render()` will be no-op because journal should be empty.
+        // Set text-field manually.
+        driver.operation.invalidateRendering()
     }
 }
 

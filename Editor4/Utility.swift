@@ -32,7 +32,10 @@ func debugLog<T>(value: T) {
     debugPrint("\(value)")
 }
 func assertMainThread() {
-    assert(NSThread.isMainThread())
+    assert(NSThread.isMainThread() == true)
+}
+func assertNonMainThread() {
+    assert(NSThread.isMainThread() == false)
 }
 func reportErrorToDevelopers(error: ErrorType) {
     debugLog(error)

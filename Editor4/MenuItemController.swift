@@ -102,7 +102,7 @@ private final class MenuItemDelegate: NSObject, DriverAccessible {
             reportErrorToDevelopers("A menu item has been clicked but it has no bounded ID.")
             return
         }
-        driver.menuExecution.dispatch(command)
+        driver.operation.executeMenuCommand(command)
     }
 }
 

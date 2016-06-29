@@ -21,6 +21,9 @@ enum UserInteractionError: ErrorType {
 
     case CannotRenameFileBecauseNewNameIsEqualToOldName
     case CannotRenameFileBecauseSameNameAlreadyExists
+
+    case missingCurrentWorkspace
+    case missingWorkspaceStateFor(WorkspaceID)
 }
 
 /// User-interaction service is special because;
@@ -36,6 +39,9 @@ enum UserInteractionError: ErrorType {
 ///     This is intentional design choice.
 ///
 final class UserInteractionService {
+    private let processingGCDQ = dispatch_get_main_queue()
+    private let continuationGCDQ = dispatch_queue_create("UserInteractionService/continuationGCDQ", DISPATCH_QUEUE_SERIAL)!
+
     private(set) var state = UserInteractionState()
     private var schedules = [Schedule]()
     private let shell = Shell()
@@ -75,27 +81,23 @@ final class UserInteractionService {
         shell.scan()
     }
 
-    /// Returns a task which completes *eventually*
-    /// after the action has been processed completely.
-    /// - State is fully updated
-    /// - Rendering is done.
-    /// Calling of the completion is done in main thread,
-    /// and will be guarantted to happend in order as it
-    /// passed-in.
-    func dispatch(action: UserAction) -> Task<()> {
-        return dispatch { (state: UserInteractionState) throws -> (UserInteractionState) in
-            var copy = state
-            try copy.apply(action)
-            debugPrint("Applied action: \(action)")
-            return copy
-        }
-    }
+//    /// Returns a task which completes *eventually*
+//    /// after the action has been processed completely.
+//    /// - State is fully updated
+//    /// - Rendering is done.
+//    /// Calling of the completion is done in main thread,
+//    /// and will be guarantted to happend in order as it
+//    /// passed-in.
+//    func dispatch(action: UserAction) -> Task<()> {
+//        return dispatch { (state: UserInteractionState) throws -> (UserInteractionState) in
+//            var copy = state
+//            try copy.apply(action)
+//            debugPrint("Applied action: \(action)")
+//            return copy
+//        }
+//    }
 
-    func ADHOC_dispatchRenderingInvalidation() {
-        dispatch({ $0 })
-    }
-
-    func dispatch(transaction: ((UserInteractionState) throws -> (UserInteractionState))) -> Task<()> {
+    private func dispatch(transaction: ((UserInteractionState) throws -> (UserInteractionState))) -> Task<()> {
         let schedule = Schedule(transaction: transaction, completion: TaskCompletionSource())
         // TODO: Review this design... It would be better if we can eliminte
         //          asynchronous dispatch for dispatch from main thread.
@@ -106,12 +108,32 @@ final class UserInteractionService {
         }
         return schedule.completion.task
     }
-    func dispatch(transaction: ((inout UserInteractionState) throws -> ())) -> Task<()> {
-        return dispatch({ (state: UserInteractionState) throws -> (UserInteractionState) in
+    func dispatch<T>(transaction: ((inout UserInteractionState) throws -> T)) -> Task<T> {
+        let tcs = TaskCompletionSource<T>()
+        return dispatch { (state: UserInteractionState) throws -> (UserInteractionState) in
             var state1 = state
-            try transaction(&state1)
+            let result = try transaction(&state1)
+            assert(tcs.task.completed == false)
+            tcs.trySetResult(result)
             return state1
-        })
+        }.continueWithTask { _ in
+            return tcs.task
+        }.continueIn(processingGCDQ)
+    }
+    func dispatch<T>(workspaceID: WorkspaceID, process transaction: ((inout WorkspaceState) throws -> T)) -> Task<T> {
+        return dispatch { (inout state: UserInteractionState) -> T in
+            return try state.process(workspaceID, transaction)
+        }
+    }
+    func dispatchToCurrentWorkspace<T>(process transaction: ((inout WorkspaceState) throws -> T)) -> Task<T> {
+        return dispatch { (inout state: UserInteractionState) -> T in
+            guard let currentWorkspaceID = state.currentWorkspaceID else { throw UserInteractionError.missingCurrentWorkspace }
+            guard let currentWorkspaceState = state.workspaces[currentWorkspaceID] else { throw UserInteractionError.missingWorkspaceStateFor(currentWorkspaceID) }
+            var copy = currentWorkspaceState
+            let result = try transaction(&copy)
+            try state.reloadWorkspace(currentWorkspaceID, workspaceState: copy)
+            return result
+        }
     }
     private func run() {
         assertMainThread()
