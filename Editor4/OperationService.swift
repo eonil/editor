@@ -20,16 +20,12 @@ final class OperationService: DriverAccessible {
     private let platform = PlatformService()
     private let userInteraction = UserInteractionService()
     private let dialogue = DialogueService()
-    private let userCommandExecution = UserCommandExecutionService()
+//    private let userCommandExecution = UserCommandExecutionService()
 
     //    let racer = RacerService()
     private let cargo = CargoService()
     private let debug = DebugService()
 
-}
-
-enum OperationError: ErrorType {
-    case missingWorkspaceStateFor(WorkspaceID)
 }
 
 extension OperationService {
@@ -67,7 +63,7 @@ extension OperationService {
     func openWorkspace(location u: NSURL) -> Task<WorkspaceID> {
         return runWithUserInteraction { [driver] _ in
             assert(u.fileURL)
-            guard u.fileURL else { throw UserOperationError.BadFileURL }
+            guard u.fileURL else { throw OperationError.badFileURL(u) }
             return driver.operation.userInteraction.dispatch { (inout userInteractionState: UserInteractionState) throws -> WorkspaceID in
                 let workspaceID = userInteractionState.addWorkspace()
                 try userInteractionState.process(workspaceID) { workspaceState in
@@ -100,10 +96,10 @@ extension OperationService {
     }
     func workspace(workspaceID: WorkspaceID, file fileID: FileID2, renameTo newName: String) -> Task<()> {
         return runWithUserInteraction { [driver] state in
-            guard let workspace = state.workspaces[workspaceID] else { throw UserOperationError.MissingWorkspace(workspaceID) }
+            guard let workspace = state.workspaces[workspaceID] else { throw OperationError.badUserInteractionState(.missingWorkspaceStateFor(workspaceID)) }
             let filePath = workspace.files.resolvePathFor(fileID)
-            guard let oldURL = workspace.location?.appending(filePath) else { throw UserOperationError.CannotResolvePathForWorkspaceFile(workspaceID, fileID) }
-            guard let newURL = oldURL.URLByDeletingLastPathComponent?.URLByAppendingPathComponent(newName) else { throw UserOperationError.CannotMakeNewURL(oldURL: oldURL, newName: newName) }
+            guard let oldURL = workspace.location?.appending(filePath) else { throw OperationError.cannotResolveURLForWorkspaceFile(workspaceID, fileID) }
+            guard let newURL = oldURL.URLByDeletingLastPathComponent?.URLByAppendingPathComponent(newName) else { throw OperationError.cannotResolveURLForWorkspaceFile(workspaceID, fileID) }
             // Hope file-system operation to be fast enough.
             return driver.run(PlatformCommand.RenameFile(from: oldURL, to: newURL)).continueOnSuccessWithTask { () -> Task<()> in
                 // Update UI only if file-system operation is successful.
@@ -112,7 +108,7 @@ extension OperationService {
                     return ()
                 }.continueWithTask { (task: Task<()>) -> Task<()> in
                     // Store workspace at last.
-                    guard let newWorkspaceState = state.workspaces[workspaceID] else { throw UserOperationError.MissingWorkspace(workspaceID) }
+                    guard let newWorkspaceState = state.workspaces[workspaceID] else { throw OperationError.badUserInteractionState(UserInteractionError.missingWorkspaceStateFor(workspaceID)) }
                     return driver.run(PlatformCommand.StoreWorkspace(newWorkspaceState)).continueWithTask(continuation: { (task: Task<()>) -> Task<()> in
                         if task.faulted {
                             // If we couldn't store workspace, it's a serious issue.
@@ -188,31 +184,31 @@ private extension OperationService {
             /// 2. Opens an empty workspace.
             /// 3. Relocate the workspace to the URL.
             var u1: NSURL?
-            return dialogue.runFolderSaveDialogue().continueOnSuccessWithTask(continuation: { [driver] (u: NSURL) -> Task<()> in
+            return dialogue.runFolderSaveDialogue().continueOnSuccessWithTask { [driver] (u: NSURL) -> Task<()> in
                 assert(u.fileURL)
-                guard u.fileURL else { return Task(error: UserOperationError.BadFileURL) }
+                guard u.fileURL else { return Task(error: OperationError.badFileURL(u)) }
                 u1 = u
                 return driver.operation.cargo.dispatch(CargoCommand.New(u))
 
-            }).continueWithTask(Executor.MainThread, continuation: { [driver] (task: Task<()>) -> Task<()> in
+            }.continueWithTask { [driver] (task: Task<()>) -> Task<()> in
                 return driver.operation.userInteraction.dispatch { state in
                     let workspaceID = state.addWorkspace()
                     try state.process(workspaceID) { workspaceState in
                         workspaceState.location = u1
                     }
                 }
-            })
+            }
 
         case .FileNewFolder:
-            guard let workspaceID = userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
-            guard let workspace = userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
-            guard let currentFileID = workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw UserOperationError.MissingCurrentFile }
+            guard let workspaceID = userInteractionState.currentWorkspaceID else { throw OperationError.badUserInteractionState(.missingCurrentWorkspace) }
+            guard let workspace = userInteractionState.currentWorkspace else { throw OperationError.badUserInteractionState(.missingCurrentWorkspace) }
+            guard let currentFileID = workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw OperationError.badUserInteractionState(.missingCurrentFile) }
             let currentFilePath = workspace.files.resolvePathFor(currentFileID)
             guard let newFolderName = (0..<128)
                 .map({ "(new folder" + $0.description + ")" })
                 .filter({ workspace.queryFile(currentFileID, containsSubfileWithName: $0) == false })
-                .first else { throw UserOperationError.File(FileUserOperationError.CannotMakeNameForNewFolder) }
-            guard let u = workspace.location?.appending(currentFilePath) else { throw UserOperationError.File(FileUserOperationError.BadPath(currentFilePath)) }
+                .first else { throw OperationError.cannotMakeNameForNewFolder(workspaceID, container: currentFileID) }
+            guard let u = workspace.location?.appending(currentFilePath) else { throw OperationError.cannotResolveURLForWorkspaceFile(workspaceID, currentFileID) }
             let u1 = u.URLByAppendingPathComponent(newFolderName)
             return driver.run(PlatformCommand.CreateDirectoryWithIntermediateDirectories(u1)).continueOnSuccessWithTask { [driver] () -> Task<WorkspaceState> in
                 return driver.operation.userInteraction.dispatch(workspaceID) { workspaceState in
@@ -225,14 +221,15 @@ private extension OperationService {
             }
 
         case .FileNewFile:
+            guard let workspaceID = userInteractionState.currentWorkspaceID else { throw OperationError.badUserInteractionState(.missingCurrentWorkspace) }
             return driver.operation.userInteraction.dispatchToCurrentWorkspace { [driver] workspaceState in
-                guard let currentFileID = workspaceState.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw UserOperationError.MissingCurrentFile }
+                guard let currentFileID = workspaceState.window.navigatorPane.file.selection.getHighlightOrCurrent() else { throw OperationError.badUserInteractionState(.missingCurrentFile) }
                 let currentFilePath = workspaceState.files.resolvePathFor(currentFileID)
                 guard let newFileName = (0..<128)
                     .map({ "(new file" + $0.description + ")" })
                     .filter({ workspaceState.queryFile(currentFileID, containsSubfileWithName: $0) == false })
-                    .first else { throw UserOperationError.File(FileUserOperationError.CannotMakeNameForNewFolder) }
-                guard let u = workspaceState.location?.appending(currentFilePath) else { throw UserOperationError.File(FileUserOperationError.BadPath(currentFilePath)) }
+                    .first else { throw OperationError.cannotMakeNameForNewFolder(workspaceID, container: currentFileID) }
+                guard let u = workspaceState.location?.appending(currentFilePath) else { throw OperationError.cannotResolveURLForWorkspaceFile(workspaceID, currentFileID) }
                 let u1 = u.URLByAppendingPathComponent(newFileName)
                 return (u1, currentFileID, newFileName)
             }.continueOnSuccessWithTask { [driver] (u: NSURL, currentFileID: FileID2, newFileName: String) in
@@ -250,19 +247,19 @@ private extension OperationService {
             return Task(()).continueWithTask { [driver] _ in
                 return driver.operation.dialogue.runFolderOpenDialogue().continueOnSuccessWithTask { [driver] (u: NSURL) -> Task<()> in
                     assert(u.fileURL)
-                    guard u.fileURL else { return Task(error: UserOperationError.BadFileURL) }
+                    guard u.fileURL else { return Task(error: OperationError.badFileURL(u)) }
                     return driver.operation.openWorkspace(location: u).continueOnSuccessWith { _ in () }
                 }
             }
 
         case .FileCloseWorkspace:
-            guard let workspaceID = userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
+            guard let workspaceID = userInteractionState.currentWorkspaceID else { throw OperationError.badUserInteractionState(.missingCurrentWorkspace) }
             return driver.operation.closeWorkspace(workspaceID)
 
         case .FileDelete:
-            guard let workspaceID = userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
-            guard let workspace = userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
-            guard let location = workspace.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            guard let workspaceID = userInteractionState.currentWorkspaceID else { throw OperationError.badUserInteractionState(.missingCurrentWorkspace) }
+            guard let workspace = userInteractionState.currentWorkspace else { throw OperationError.badUserInteractionState(.missingCurrentWorkspace) }
+            guard let location = workspace.location else { throw OperationError.badUserInteractionState(.missingCurrentWorkspaceLocation) }
             let fileSequenceToDelete = workspace.window.navigatorPane.file.selection.getHighlightOrItems()
             let uniqueFileIDs = Set(fileSequenceToDelete)
             let us = uniqueFileIDs.map { (fileID: FileID2) -> NSURL in
@@ -280,8 +277,8 @@ private extension OperationService {
             }
 
         case .FileShowInFinder:
-            guard let currentWorkspace = userInteractionState.currentWorkspace else { throw UserOperationError.MissingCurrentWorkspace }
-            guard let location = currentWorkspace.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            guard let currentWorkspace = userInteractionState.currentWorkspace else { throw OperationError.badUserInteractionState(.missingCurrentWorkspace) }
+            guard let location = currentWorkspace.location else { throw OperationError.badUserInteractionState(.missingCurrentWorkspaceLocation) }
             func getContainerFolderURL(fileID: FileID2) -> NSURL {
                 let path = currentWorkspace.files.resolvePathFor(fileID)
                 let url = location.appending(path)
@@ -289,7 +286,7 @@ private extension OperationService {
             }
             let allFileIDsToShow = currentWorkspace.window.navigatorPane.file.selection.getHighlightOrItems()
             // All selections should be lazy collection, and evaluating for existence of first element must be O(1).
-            guard allFileIDsToShow.isEmpty == false else { throw UserOperationError.NoSelectedFile }
+            guard allFileIDsToShow.isEmpty == false else { throw OperationError.badUserInteractionState(.missingCurrentWorkspaceSelection) }
             let containerFolderURLs = allFileIDsToShow.map(getContainerFolderURL)
             return driver.run(PlatformCommand.OpenFileInFinder(containerFolderURLs))
 
@@ -297,8 +294,8 @@ private extension OperationService {
             MARK_unimplemented()
 
         case .ProductRun:
-            guard let workspaceID = userInteractionState.currentWorkspaceID else { throw UserOperationError.MissingCurrentWorkspace }
-            guard let workspaceLocationURL = userInteractionState.workspaces[workspaceID]?.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            guard let workspaceID = userInteractionState.currentWorkspaceID else { throw OperationError.badUserInteractionState(.missingCurrentWorkspace) }
+            guard let workspaceLocationURL = userInteractionState.workspaces[workspaceID]?.location else { throw OperationError.badUserInteractionState(.missingCurrentWorkspaceLocation) }
             let executableURL = workspaceLocationURL
                 .URLByAppendingPathComponent("target", isDirectory: true)
                 .URLByAppendingPathComponent("debug", isDirectory: true)
@@ -308,11 +305,11 @@ private extension OperationService {
             }
 
         case .ProductBuild:
-            guard let currentWorkspaceLocation = userInteractionState.currentWorkspace?.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            guard let currentWorkspaceLocation = userInteractionState.currentWorkspace?.location else { throw OperationError.badUserInteractionState(.missingCurrentWorkspaceLocation) }
             return driver.operation.cargo.dispatch(CargoCommand.Build(currentWorkspaceLocation))
 
         case .ProductClean:
-            guard let currentWorkspaceLocation = userInteractionState.currentWorkspace?.location else { throw UserOperationError.MissingCurrentWorkspaceLocation }
+            guard let currentWorkspaceLocation = userInteractionState.currentWorkspace?.location else { throw OperationError.badUserInteractionState(.missingCurrentWorkspaceLocation) }
             return driver.operation.cargo.dispatch(CargoCommand.Clean(currentWorkspaceLocation))
 
             //        case .ProductRun:

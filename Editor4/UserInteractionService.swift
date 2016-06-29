@@ -16,14 +16,16 @@ enum UserInteractionError: ErrorType {
     case MissingResult
     case ResultTypeMismatch
 
-    case MissingCurrentFile
     case UnknownFiles([FileID2])
 
     case CannotRenameFileBecauseNewNameIsEqualToOldName
     case CannotRenameFileBecauseSameNameAlreadyExists
 
     case missingCurrentWorkspace
+    case missingCurrentWorkspaceLocation
     case missingWorkspaceStateFor(WorkspaceID)
+    case missingCurrentFile
+    case missingCurrentWorkspaceSelection
 }
 
 /// User-interaction service is special because;

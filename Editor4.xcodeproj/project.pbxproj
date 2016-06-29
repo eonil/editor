@@ -10,6 +10,7 @@
 		4505ADBF1D22E68A00BF3F22 /* OperationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505ADBE1D22E68A00BF3F22 /* OperationService.swift */; };
 		4505ADC41D232AED00BF3F22 /* OperationServiceMenuExecutionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505ADC31D232AED00BF3F22 /* OperationServiceMenuExecutionExtension.swift */; };
 		4505ADD41D23458C00BF3F22 /* DialogueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505ADD31D23458C00BF3F22 /* DialogueService.swift */; };
+		4505ADD61D23489000BF3F22 /* OperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505ADD51D23489000BF3F22 /* OperationError.swift */; };
 		451137591CD48094001A183A /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451137581CD48094001A183A /* Shell.swift */; };
 		4511375D1CD48123001A183A /* UserAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511375C1CD48123001A183A /* UserAction.swift */; };
 		451137881CD4819E001A183A /* BoltsSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451137701CD48176001A183A /* BoltsSwift.framework */; };
@@ -274,6 +275,7 @@
 		4505ADBE1D22E68A00BF3F22 /* OperationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationService.swift; sourceTree = "<group>"; };
 		4505ADC31D232AED00BF3F22 /* OperationServiceMenuExecutionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationServiceMenuExecutionExtension.swift; sourceTree = "<group>"; };
 		4505ADD31D23458C00BF3F22 /* DialogueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogueService.swift; sourceTree = "<group>"; };
+		4505ADD51D23489000BF3F22 /* OperationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationError.swift; sourceTree = "<group>"; };
 		451137581CD48094001A183A /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		4511375C1CD48123001A183A /* UserAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAction.swift; sourceTree = "<group>"; };
 		4511375E1CD48176001A183A /* BoltsSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BoltsSwift.xcodeproj; path = "submodules/Bolts-Swift/BoltsSwift.xcodeproj"; sourceTree = "<group>"; };
@@ -403,6 +405,7 @@
 		4505ADBD1D22E67C00BF3F22 /* (operation) */ = {
 			isa = PBXGroup;
 			children = (
+				4505ADD51D23489000BF3F22 /* OperationError.swift */,
 				4505ADBE1D22E68A00BF3F22 /* OperationService.swift */,
 				4505ADC31D232AED00BF3F22 /* OperationServiceMenuExecutionExtension.swift */,
 				4505ADD31D23458C00BF3F22 /* DialogueService.swift */,
@@ -938,6 +941,7 @@
 				454AD8941CC69420008A9BAC /* Driver.swift in Sources */,
 				453463DB1D2170BC00256B46 /* Transmissive.swift in Sources */,
 				45E730461CD602C900BA7550 /* StateError.swift in Sources */,
+				4505ADD61D23489000BF3F22 /* OperationError.swift in Sources */,
 				453463F51D22C4EC00256B46 /* CommonView.swift in Sources */,
 				45E730531CD796D300BA7550 /* RenderingError.swift in Sources */,
 				453463D41D215BDD00256B46 /* LLDBState.swift in Sources */,
