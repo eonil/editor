@@ -113,6 +113,15 @@ final class DebugService: DriverAccessible {
             state.proxyState.targets[debugTargetID]?.session = debugProcessState
         }
     }
+    /// - Returns:
+    ///     A task completes when the target has been halted.
+    func haltTarget(debugTargetID: DebugTargetID) -> Task<()> {
+        return process { state in
+            guard let lldbTarget = state.targetMapping[debugTargetID] else { throw DebugError.missingTargetMappingFor(debugTargetID) }
+            // - TODO: error check.
+            lldbTarget.process.stop()
+        }
+    }
 
 //    /// Fetches local variable tree of a stack frame.
 //    /// - Returns:

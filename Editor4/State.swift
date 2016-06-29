@@ -39,7 +39,7 @@ struct State {
     }
     
     /// Will be dispatched from `DebugService`.
-    var debug = DebugState() {
+    private(set) var debug = DebugState() {
         didSet { version.revise() }
     }
 
@@ -88,6 +88,9 @@ extension State {
     mutating func reloadWorkspace(workspaceID: WorkspaceID, workspaceState: WorkspaceState) throws {
         guard workspaces[workspaceID] != nil else { throw StateError.missingWorkspaceStateFor(workspaceID) }
         workspaces[workspaceID] = workspaceState
+    }
+    mutating func reviseDebugState(newDebugState: DebugState) {
+        debug = newDebugState
     }
 }
 

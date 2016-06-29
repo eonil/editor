@@ -143,7 +143,7 @@ extension OperationService {
     /// Updates whole debug state.
     func revise(debugState: DebugState) -> Task<()> {
         return userInteraction.dispatch { userInteractionState in
-            userInteractionState.debug = debugState
+            userInteractionState.reviseDebugState(debugState)
         }
     }
 }
@@ -300,8 +300,13 @@ private extension OperationService {
                 .URLByAppendingPathComponent("target", isDirectory: true)
                 .URLByAppendingPathComponent("debug", isDirectory: true)
                 .URLByAppendingPathComponent("exec1", isDirectory: false)
-            return driver.operation.debug.addTarget(executableURL: executableURL).continueOnSuccessWith { [driver] (debugTargetID: DebugTargetID) -> () in
-                return driver.operation.debug.launchTarget(debugTargetID, workingDirectoryURL: workspaceLocationURL)
+            // TODO: add target somewhere else.
+            return driver.operation.debug.addTarget(executableURL: executableURL).continueOnSuccessWithTask { [driver] debugTargetID in
+                return driver.operation.userInteraction.dispatch(workspaceID) { workspaceState in
+                    workspaceState.currentDebugTarget = debugTargetID
+                }.continueOnSuccessWithTask {
+                    return driver.operation.debug.launchTarget(debugTargetID, workingDirectoryURL: workspaceLocationURL)
+                }
             }
 
         case .ProductBuild:
@@ -314,6 +319,14 @@ private extension OperationService {
 
             //        case .ProductRun:
             //        case .ProductStop:
+
+        case .ProductStop:
+            return driver.operation.userInteraction.dispatchToCurrentWorkspace { workspaceState in
+                guard let debugTargetID = workspaceState.currentDebugTarget else { throw OperationError.badUserInteractionState(.missingCurrentDebugTarget) }
+                return debugTargetID
+                }.continueOnSuccessWithTask { [driver] debugTargetID in
+                    return driver.operation.debug.haltTarget(debugTargetID)
+            }
 
         default:
             MARK_unimplemented()

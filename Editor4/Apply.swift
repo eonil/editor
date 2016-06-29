@@ -93,7 +93,7 @@ extension State {
             workspace.window.navigatorPane.file.selection.reset(maybeNewFileID)
 
         case .StartEditingCurrentFileName:
-            guard workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() != nil else { throw UserInteractionError.MissingCurrentFile }
+            guard workspace.window.navigatorPane.file.selection.getHighlightOrCurrent() != nil else { throw UserInteractionError.missingCurrentFile }
             workspace.window.navigatorPane.file.editing = true
 
         case .SetSelectedFiles(let currentFileID, let itemFileIDs):

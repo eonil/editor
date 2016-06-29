@@ -26,6 +26,8 @@ enum UserInteractionError: ErrorType {
     case missingWorkspaceStateFor(WorkspaceID)
     case missingCurrentFile
     case missingCurrentWorkspaceSelection
+
+    case missingCurrentDebugTarget
 }
 
 /// User-interaction service is special because;
