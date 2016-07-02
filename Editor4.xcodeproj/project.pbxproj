@@ -24,6 +24,7 @@
 		451216D81CE77968006E9207 /* LLDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D71CE77968006E9207 /* LLDBService.swift */; };
 		451216DA1CE77D02006E9207 /* SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216D91CE77D02006E9207 /* SubprocessController.swift */; };
 		451216DE1CE77D94006E9207 /* IOAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451216DD1CE77D94006E9207 /* IOAction.swift */; };
+		451E59E51D27C7F0008EB0D4 /* NavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451E59E41D27C7F0008EB0D4 /* NavigatorViewController.swift */; };
 		453463CA1D203F4100256B46 /* ErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453463C91D203F4100256B46 /* ErrorReporting.swift */; };
 		453463CB1D215AC500256B46 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; };
 		453463CC1D215AC500256B46 /* LLDBWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -287,6 +288,7 @@
 		451216D71CE77968006E9207 /* LLDBService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBService.swift; sourceTree = "<group>"; };
 		451216D91CE77D02006E9207 /* SubprocessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubprocessController.swift; sourceTree = "<group>"; };
 		451216DD1CE77D94006E9207 /* IOAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOAction.swift; sourceTree = "<group>"; };
+		451E59E41D27C7F0008EB0D4 /* NavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorViewController.swift; sourceTree = "<group>"; };
 		453463C91D203F4100256B46 /* ErrorReporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorReporting.swift; sourceTree = "<group>"; };
 		453463CF1D215B6600256B46 /* RacerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacerService.swift; sourceTree = "<group>"; };
 		453463D11D215B9900256B46 /* ADHOC_UndefinedType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADHOC_UndefinedType.swift; sourceTree = "<group>"; };
@@ -654,6 +656,7 @@
 				45CD93951CC809F100083CEC /* WorkspaceDocument.swift */,
 				4550F9FD1CE6E75700B911C4 /* WorkspaceAccessible.swift */,
 				454AD8951CC694E8008A9BAC /* WorkspaceWindowController.swift */,
+				451E59E41D27C7F0008EB0D4 /* NavigatorViewController.swift */,
 				453FB3FB1CE7382D0081DCDA /* FileNavigatorViewController.swift */,
 				4555690F1CF58E3600F2BD4D /* FileNavigatorMenuPalette.swift */,
 				45D6C3421CE210180016DB7A /* RenderableViewController.swift */,
@@ -954,6 +957,7 @@
 				4550F9EE1CE6279D00B911C4 /* WorkspaceDatabaseState.swift in Sources */,
 				4550F9C91CE4CE4600B911C4 /* IndexJournalingTree.swift in Sources */,
 				453463F91D22C5FD00256B46 /* AppKitExtensions.swift in Sources */,
+				451E59E51D27C7F0008EB0D4 /* NavigatorViewController.swift in Sources */,
 				455F88B21D20188400217ABC /* UserInteractionScanning.swift in Sources */,
 				457519961CF88C8600F78BAD /* WorkspaceSerializationUtility.swift in Sources */,
 				454AD87B1CC65326008A9BAC /* State.swift in Sources */,

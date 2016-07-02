@@ -296,6 +296,7 @@ private extension OperationService {
         case .ProductRun:
             guard let workspaceID = userInteractionState.currentWorkspaceID else { throw OperationError.badUserInteractionState(.missingCurrentWorkspace) }
             guard let workspaceLocationURL = userInteractionState.workspaces[workspaceID]?.location else { throw OperationError.badUserInteractionState(.missingCurrentWorkspaceLocation) }
+            // FIXME: Use proper path resolution.
             let executableURL = workspaceLocationURL
                 .URLByAppendingPathComponent("target", isDirectory: true)
                 .URLByAppendingPathComponent("debug", isDirectory: true)

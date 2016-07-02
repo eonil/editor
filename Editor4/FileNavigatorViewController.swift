@@ -39,18 +39,20 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
         // This is required to clean up temporal lazy sequence.
         selectionController.source = AnyRandomAccessCollection([])
     }
-    override func viewDidLayout() {
-        super.viewDidLayout()
-        renderLayoutOnly()
-    }
     override func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
         // Download.
         localState.workspace = workspace
 
         // Render.
         installer.installIfNeeded {
+            view.autoresizingMask = []
+            view.autoresizesSubviews = false
+            view.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(scrollView)
             scrollView.documentView = outlineView
+            outlineView.autoresizingMask = []
+            outlineView.autoresizesSubviews = false
+            outlineView.translatesAutoresizingMaskIntoConstraints = true
             outlineView.addTableColumn(nameColumn)
             outlineView.outlineTableColumn = nameColumn
             outlineView.headerView = nil
@@ -133,6 +135,12 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
         }
         renderMenuStatesOnly(localState.workspace?.state)
         scanHighlightedFileOnly()
+    }
+}
+extension FileNavigatorViewController {
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        renderLayoutOnly()
     }
 }
 extension FileNavigatorViewController {
@@ -345,7 +353,8 @@ private final class FileNavigatorOutlineView: NSOutlineView {
         onEvent?(.DidCloseMenu)
     }
 }
-
+extension FileNavigatorOutlineView: TreatLikeAppKitClassMadeByApplyCode {
+}
 
 
 

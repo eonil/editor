@@ -24,10 +24,10 @@ struct NavigatorPaneState {
     var issue = IssueNavigatorPaneState()
 }
 enum NavigatorPaneID {
-    case File
-    case Issue
-    case Breakpoints
-    case Debug
+    case files
+    case issues
+    case breakpoints
+    case debug
 }
 struct FileNavigatorPaneState {
     /// Path to a file-node that is currently in editing.

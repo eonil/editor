@@ -23,6 +23,7 @@ final class ToolButtonStripView: NSView {
 //        }
 //    }
 
+
 	var toolButtons: [CommonView] = [] {
 		willSet {
 			deinstallToolButtons()
@@ -37,6 +38,24 @@ final class ToolButtonStripView: NSView {
 			render()
 		}
 	}
+
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
+        autoresizesSubviews = false
+//        autoresizingMask = []
+        translatesAutoresizingMaskIntoConstraints = true
+    }
+    @available(*,unavailable)
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        assert(false, "IB/SB are not supported.")
+    }
+
+    override var autoresizesSubviews: Bool {
+        willSet {
+            assert(newValue == false, "Auto-resizing is not supported.")
+        }
+    }
 	var idealSize: CGSize {
 		get {
 			let buttonSZs = toolButtons.map { $0.sizeThatFits(CGSize.zero) }
@@ -49,6 +68,7 @@ final class ToolButtonStripView: NSView {
 	override func resizeSubviewsWithOldSize(oldSize: NSSize) {
 		super.resizeSubviewsWithOldSize(oldSize)
 		render()
+        assert(autoresizingMask == [])
 	}
 
 }
@@ -74,8 +94,10 @@ private extension ToolButtonStripView {
 		for i in 0..<toolButtons.count {
 			let button = toolButtons[i]
 			let y = bounds.midY - (button.frame.size.height / 2)
-			toolButtons[i].frame.origin = CGPoint(x: round(x), y: round(y))
+			button.frame.origin = CGPoint(x: round(x), y: round(y))
 
+            assert(button.autoresizesSubviews == false)
+            assert(button.translatesAutoresizingMaskIntoConstraints == true)
 			assert(button.frame.width != 0, "Expects non-zero width.")
 			x += button.frame.width
 			x += interButtonGap

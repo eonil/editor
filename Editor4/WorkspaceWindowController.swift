@@ -16,10 +16,10 @@ private struct LocalState {
 
 final class WorkspaceWindowController: NSWindowController, DriverAccessible, WorkspaceRenderable {
 
-    private let containerViewController = NSViewController()
     private let columnSplitViewController = NSSplitViewController()
-    private let fileNavigatorViewController = FileNavigatorViewController()
+    private let navigatorViewController = NavigatorViewController()
     private let rowSplitViewController = NSSplitViewController()
+    private let dummy1ViewController = WorkspaceRenderableViewController()
     private var installer = ViewInstaller()
     private var localState = LocalState()
 
@@ -47,21 +47,34 @@ final class WorkspaceWindowController: NSWindowController, DriverAccessible, Wor
         NotificationUtility.deregister(self)
     }
 
-
-
     ////////////////////////////////////////////////////////////////
 
-    override var shouldCloseDocument: Bool {
-        willSet {
-            assert(newValue == false)
-        }
+    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
+        renderLocalState()
+        contentViewController?.renderRecursively(state, workspace: workspace)
     }
+    private func renderLocalState() {
+        installer.installIfNeeded {
+//            assert(columnSplitViewController.view.autoresizesSubviews == false)
+//            assert(rowSplitViewController.view.autoresizesSubviews == false)
+            contentViewController = columnSplitViewController
+            columnSplitViewController.view.autoresizesSubviews = false
+            columnSplitViewController.splitViewItems = [
+                NSSplitViewItem(contentListWithViewController: navigatorViewController),
+                NSSplitViewItem(viewController: rowSplitViewController),
+            ]
+            rowSplitViewController.view.autoresizesSubviews = false
+            rowSplitViewController.splitViewItems = [
+                NSSplitViewItem(viewController: dummy1ViewController),
+            ]
+        }
 
+        localState.workspaceID = localState.workspaceID
+    }
     private func process(n: NSNotification) {
         switch n.name {
         case NSWindowWillCloseNotification:
             guard n.object === window else { return }
-            assert(localState.workspaceID != nil)
             guard let workspaceID = localState.workspaceID else { return }
             driver.operation.closeWorkspace(workspaceID)
 
@@ -69,21 +82,14 @@ final class WorkspaceWindowController: NSWindowController, DriverAccessible, Wor
             break
         }
     }
-    func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
-        installer.installIfNeeded {
-            contentViewController = columnSplitViewController
-            columnSplitViewController.splitViewItems = [
-                NSSplitViewItem(contentListWithViewController: fileNavigatorViewController),
-                NSSplitViewItem(viewController: rowSplitViewController),
-            ]
-        }
-
-        localState.workspaceID = workspace?.id
-        contentViewController?.renderRecursively(state, workspace: workspace)
-    }
 }
 
 extension WorkspaceWindowController {
+    override var shouldCloseDocument: Bool {
+        willSet {
+            assert(newValue == false)
+        }
+    }
 }
 
 
