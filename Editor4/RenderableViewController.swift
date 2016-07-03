@@ -18,15 +18,37 @@ import AppKit
 ///
 class WorkspaceRenderableViewController: NSViewController, WorkspaceRenderable {
     override func loadView() {
-        let v = NSView()
-        self.view = v
+        let v = LayoutEventRoutingView()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        v.onResizeEvent = { [weak self] in
+            self?.viewDidLayoutSubviews()
+        }
+        super.view = v
     }
     func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
         // No-op.
     }
+    /// Do not use this method. This method get called on bad timing
+    /// such as `NSView.resizeWithOldSuperviewSize()`. If we layout something
+    /// in the method, the method will loop infinitely due to unknown reason...
+    /// I don't know why, but it just happen.
+    @available(*,unavailable)
+    override func viewDidLayout() {
+        super.viewDidLayout()
+    }
+    func viewDidLayoutSubviews() {
+        // No-op.
+    }
 }
 
-
+private final class LayoutEventRoutingView: NSView {
+    var onResizeEvent: (()->())?
+    @objc
+    override func resizeSubviewsWithOldSize(oldSize: NSSize) {
+        super.resizeSubviewsWithOldSize(oldSize)
+        onResizeEvent?()
+    }
+}
 
 
 

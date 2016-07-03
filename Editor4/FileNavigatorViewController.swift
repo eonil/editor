@@ -45,17 +45,10 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
 
         // Render.
         installer.installIfNeeded {
-//            view.autoresizingMask = []
-//            view.autoresizesSubviews = false
             view.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(scrollView)
-//            scrollView.autoresizingMask = []
-//            scrollView.autoresizesSubviews = false
             scrollView.translatesAutoresizingMaskIntoConstraints = false
             scrollView.documentView = outlineView
-//            outlineView.autoresizingMask = []
-//            outlineView.autoresizesSubviews = false
-            outlineView.translatesAutoresizingMaskIntoConstraints = false
             outlineView.addTableColumn(nameColumn)
             outlineView.outlineTableColumn = nameColumn
             outlineView.headerView = nil
@@ -139,13 +132,17 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
         renderMenuStatesOnly(localState.workspace?.state)
         scanHighlightedFileOnly()
     }
-}
-extension FileNavigatorViewController {
-    override func viewDidLayout() {
-        super.viewDidLayout()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         renderLayoutOnly()
     }
 }
+//extension FileNavigatorViewController {
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        renderLayoutOnly()
+//    }
+//}
 extension FileNavigatorViewController {
     @objc
     private func EDITOR_action(_: AnyObject?) {
@@ -345,6 +342,10 @@ private enum FileNavigatorOutlineViewEvent {
     case WillOpenMenu
     case DidCloseMenu
 }
+/// - Note:
+///     Take care that we should not touch Auto Layout stuffs of this class
+///     to make it work properly.
+///
 private final class FileNavigatorOutlineView: NSOutlineView {
     var onEvent: (FileNavigatorOutlineViewEvent -> ())?
     private override func willOpenMenu(menu: NSMenu, withEvent event: NSEvent) {
@@ -355,8 +356,6 @@ private final class FileNavigatorOutlineView: NSOutlineView {
         super.didCloseMenu(menu, withEvent: event)
         onEvent?(.DidCloseMenu)
     }
-}
-extension FileNavigatorOutlineView: TreatLikeAppKitClassMadeByApplyCode {
 }
 
 

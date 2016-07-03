@@ -43,7 +43,7 @@ final class ToolButtonStripView: NSView {
         super.init(frame: frameRect)
         autoresizesSubviews = false
 //        autoresizingMask = []
-        translatesAutoresizingMaskIntoConstraints = true
+        translatesAutoresizingMaskIntoConstraints = false
     }
     @available(*,unavailable)
     required init?(coder: NSCoder) {

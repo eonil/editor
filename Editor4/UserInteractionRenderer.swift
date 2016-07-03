@@ -42,14 +42,11 @@ final class UserInteractionRenderer: DriverAccessible {
     }
 }
 
-protocol TreatLikeAppKitClassMadeByApplyCode {
-}
-
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MARK: -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+import ObjectiveC
 
 private var discoveredViewIDsInAssertion = Set<ObjectIdentifier>()
 private extension UserInteractionRenderer {
@@ -132,16 +129,22 @@ private extension NSView {
         return  isWindowContentView()
         ||      isKVOSubclassOfAppKitViewMadeByAppleCode()
         ||      isAppKitViewMadeByAppleCode()
+        ||      hasAnySkippableAncestorClass()
     }
     private func isWindowContentView() -> Bool {
         return window?.contentView === self
     }
-//    private func shouldTreatLikeAppKitViewMadeByAppleCode() -> Bool {
-//        if self is TreatLikeAppKitClassMadeByApplyCode { return true }
-//        if isAppKitViewMadeByAppleCode() { return true }
-//        if isKVOSubclassOfAppKitViewMadeByAppleCode() { return true }
-//        return false
-//    }
+    private func hasAnySkippableAncestorClass() -> Bool {
+        let skippableAncestorClasses = [
+            NSOutlineView.self,
+        ]
+        var c: AnyClass? = self.dynamicType
+        while let c1 = c {
+            if skippableAncestorClasses.contains({ c1 == $0 }) { return true }
+            c = class_getSuperclass(c1)
+        }
+        return false
+    }
     private func isKVOSubclassOfAppKitViewMadeByAppleCode() -> Bool {
         let PREFIX = "NSKVONotifying_"
         let n = NSStringFromClass(self.dynamicType)
@@ -158,6 +161,12 @@ private extension NSView {
 }
 
 
+private enum SuperClassKind {
+    case exactlyNSView
+    case exactlyNSOutlineView
+    case exactlyNSSplitView
+    case directSubclassOfNSView
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// MARK: -
