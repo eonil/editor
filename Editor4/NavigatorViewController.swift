@@ -11,10 +11,11 @@ import EonilToolbox
 
 private struct LocalState {
     var currentPaneID = NavigatorPaneID.files
+    var lastSize = CGSize.zero
 }
 
 final class NavigatorViewController: WorkspaceRenderableViewController {
-    private let modeSelector = ToolButtonStripView()
+//    private let modeSelector = ToolButtonStripView()
     private let file = FileNavigatorViewController()
     private var local = LocalState()
     private var installer = ViewInstaller()
@@ -29,21 +30,33 @@ final class NavigatorViewController: WorkspaceRenderableViewController {
             view.layer?.backgroundColor = NSColor.redColor().CGColor
 
             addChildViewController(file)
-            view.addSubview(modeSelector)
+//            view.addSubview(modeSelector)
             view.addSubview(file.view)
         }
+        if view.bounds.size != local.lastSize {
+
         let box = view.bounds.toBox().toSilentBox()
         let (contentBox, selectorBox) = box.splitInY(100%, 44)
-        modeSelector.frame = selectorBox.toCGRect()
+//        modeSelector.frame = selectorBox.toCGRect()
         file.view.frame = contentBox.toCGRect()
-        print(file.view.constraints)
-//        print(contentBox.toCGRect())
+        assert(file.view.constraints == [])
+        print(contentBox.toCGRect())
 //        file.view.frame = CGRect(x: 0, y: 0, width: 900, height: 900)
+
+        local.lastSize = view.bounds.size
+        }
     }
 }
 extension NavigatorViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        renderLocalState()
+    }
     override func viewDidLayout() {
         super.viewDidLayout()
         renderLocalState()
     }
 }
+
+
+

@@ -48,7 +48,7 @@ final class UserInteractionService {
 
     private(set) var state = UserInteractionState()
     private var schedules = [Schedule]()
-    private let shell = Shell()
+    private let renderer = UserInteractionRenderer()
 
     init() {
         do {
@@ -82,7 +82,7 @@ final class UserInteractionService {
 
     /// Scans user-interaction state from AppKit scene-graph immediately.
     func ADHOC_scanImmediately() {
-        shell.scan()
+        renderer.scan()
     }
 
 //    /// Returns a task which completes *eventually*
@@ -146,7 +146,7 @@ final class UserInteractionService {
             while let s = schedules.popFirst() {
                 step(s)
             }
-            shell.render(state)
+            renderer.render(state)
             state.clearJournals()
             JournalingClearanceChecker.checkClearanceOfAllCheckers()
         }
@@ -160,7 +160,7 @@ final class UserInteractionService {
         }
         catch let error {
             debugLog(error)
-            shell.alert(error)
+            renderer.alert(error)
             schedule.completion.trySetError(error)
         }
     }

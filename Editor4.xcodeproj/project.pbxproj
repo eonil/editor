@@ -11,7 +11,7 @@
 		4505ADC41D232AED00BF3F22 /* OperationServiceMenuExecutionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505ADC31D232AED00BF3F22 /* OperationServiceMenuExecutionExtension.swift */; };
 		4505ADD41D23458C00BF3F22 /* DialogueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505ADD31D23458C00BF3F22 /* DialogueService.swift */; };
 		4505ADD61D23489000BF3F22 /* OperationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505ADD51D23489000BF3F22 /* OperationError.swift */; };
-		451137591CD48094001A183A /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451137581CD48094001A183A /* Shell.swift */; };
+		451137591CD48094001A183A /* UserInteractionRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451137581CD48094001A183A /* UserInteractionRenderer.swift */; };
 		4511375D1CD48123001A183A /* UserAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511375C1CD48123001A183A /* UserAction.swift */; };
 		451137881CD4819E001A183A /* BoltsSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451137701CD48176001A183A /* BoltsSwift.framework */; };
 		451137891CD4819E001A183A /* BoltsSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 451137701CD48176001A183A /* BoltsSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -277,7 +277,7 @@
 		4505ADC31D232AED00BF3F22 /* OperationServiceMenuExecutionExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationServiceMenuExecutionExtension.swift; sourceTree = "<group>"; };
 		4505ADD31D23458C00BF3F22 /* DialogueService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogueService.swift; sourceTree = "<group>"; };
 		4505ADD51D23489000BF3F22 /* OperationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationError.swift; sourceTree = "<group>"; };
-		451137581CD48094001A183A /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
+		451137581CD48094001A183A /* UserInteractionRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInteractionRenderer.swift; sourceTree = "<group>"; };
 		4511375C1CD48123001A183A /* UserAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAction.swift; sourceTree = "<group>"; };
 		4511375E1CD48176001A183A /* BoltsSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BoltsSwift.xcodeproj; path = "submodules/Bolts-Swift/BoltsSwift.xcodeproj"; sourceTree = "<group>"; };
 		451137611CD48176001A183A /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
@@ -647,7 +647,7 @@
 				45830AB51CEA1126002FEA3D /* DialogueUtility.swift */,
 				45D6C3441CE2139C0016DB7A /* Renderable.swift */,
 				4555691C1CF5A47B00F2BD4D /* Scannable.swift */,
-				451137581CD48094001A183A /* Shell.swift */,
+				451137581CD48094001A183A /* UserInteractionRenderer.swift */,
 				4555691E1CF5B07100F2BD4D /* ShellNotification.swift */,
 				45E730521CD796D300BA7550 /* RenderingError.swift */,
 				4555690D1CF58B2800F2BD4D /* (menu definitions and components) */,
@@ -964,7 +964,7 @@
 				451216DE1CE77D94006E9207 /* IOAction.swift in Sources */,
 				45B7854B1CE70C0300A40CF9 /* FileTree2.swift in Sources */,
 				4550F9EA1CE61CE600B911C4 /* KeyJournalingDictionary.swift in Sources */,
-				451137591CD48094001A183A /* Shell.swift in Sources */,
+				451137591CD48094001A183A /* UserInteractionRenderer.swift in Sources */,
 				45830AAA1CE79358002FEA3D /* CargoService.swift in Sources */,
 				453463F31D22C47E00256B46 /* ScopeButton.swift in Sources */,
 				45830AB01CE951AB002FEA3D /* JournalingChecker.swift in Sources */,

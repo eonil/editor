@@ -1,5 +1,5 @@
 //
-//  Shell.swift
+//  UserInteractionRenderer.swift
 //  Editor4
 //
 //  Created by Hoon H. on 2016/04/30.
@@ -17,7 +17,7 @@ import AppKit
 /// So, all view components are guaranteed to access same state in
 /// a rendering session.
 ///
-final class Shell: DriverAccessible {
+final class UserInteractionRenderer: DriverAccessible {
 
     private let mainMenu: MainMenuController
     private let workspaceManager: WorkspaceManager
@@ -52,7 +52,7 @@ protocol TreatLikeAppKitClassMadeByApplyCode {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 private var discoveredViewIDsInAssertion = Set<ObjectIdentifier>()
-private extension Shell {
+private extension UserInteractionRenderer {
     func assertProperUIConfigurations() {
         discoveredViewIDsInAssertion = []
         for document in NSDocumentController.sharedDocumentController().documents {
@@ -113,34 +113,35 @@ private extension NSWindow {
 }
 private extension NSView {
     private func assertProperUIConfigurations() {
-        assert(shouldTreatLikeAppKitViewMadeByAppleCode() || autoresizesSubviews == false, "Auto-resizing is not allowed.")
-        assert(shouldTreatLikeAppKitViewMadeByAppleCode() || autoresizingMask == [], "Auto-resizing must be turned-off.")
-        assert(shouldTreatLikeAppKitViewMadeByAppleCode() || translatesAutoresizingMaskIntoConstraints == true, "Auto-layout must be turned off.")
-        assert(shouldTreatLikeAppKitViewMadeByAppleCode() || constraints == [], "Auto-layout is not allowed.")
-//        assert(autoresizingMask == NSAutoresizingMaskOptions([.ViewWidthSizable, .ViewHeightSizable]), "Auto-resizing must be turned-off.")
+//        assert(shouldSkipCheck() || autoresizesSubviews == false, "Auto-resizing is not allowed.")
+//        assert(shouldSkipCheck() || autoresizingMask == [], "Auto-resizing must be turned-off.")
+        assert(shouldSkipCheck() || translatesAutoresizingMaskIntoConstraints == false, "Auto-layout must be turned off.")
+        assert(shouldSkipCheck() || containsAnyNonSystemContraint() == false, "Auto-layout constraint is not allowed.")
         discoveredViewIDsInAssertion.insert(ObjectIdentifier(self))
     }
-//    private func allowsAutolayout() -> Bool {
-//        if hasAppKitViewMadeByAppleCodeInSuperviewChain() { return true }
-//        if self.dynamicType == NSView.self { return false }
-//        return false
-//    }
-//    private func allowsAutoresizing() -> Bool {
-//        if hasAppKitViewMadeByAppleCodeInSuperviewChain() { return true }
-//        if self.dynamicType == NSView.self { return false }
-//        return false
-//    }
-//    private func hasAppKitViewMadeByAppleCodeInSuperviewChain() -> Bool {
-//        guard let superview = superview else { return false }
-//        if superview.isAppKitViewMadeByAppleCode() { return true }
-//        return superview.hasAppKitViewMadeByAppleCodeInSuperviewChain()
-//    }
-    private func shouldTreatLikeAppKitViewMadeByAppleCode() -> Bool {
-        if self is TreatLikeAppKitClassMadeByApplyCode { return true }
-        if isAppKitViewMadeByAppleCode() { return true }
-        if isKVOSubclassOfAppKitViewMadeByAppleCode() { return true }
+    private func containsAnyNonSystemContraint() -> Bool {
+        for c in constraints {
+            if NSStringFromClass(c.dynamicType) == "NSContentSizeLayoutConstraint" {
+                continue
+            }
+            return true
+        }
         return false
     }
+    private func shouldSkipCheck() -> Bool {
+        return  isWindowContentView()
+        ||      isKVOSubclassOfAppKitViewMadeByAppleCode()
+        ||      isAppKitViewMadeByAppleCode()
+    }
+    private func isWindowContentView() -> Bool {
+        return window?.contentView === self
+    }
+//    private func shouldTreatLikeAppKitViewMadeByAppleCode() -> Bool {
+//        if self is TreatLikeAppKitClassMadeByApplyCode { return true }
+//        if isAppKitViewMadeByAppleCode() { return true }
+//        if isKVOSubclassOfAppKitViewMadeByAppleCode() { return true }
+//        return false
+//    }
     private func isKVOSubclassOfAppKitViewMadeByAppleCode() -> Bool {
         let PREFIX = "NSKVONotifying_"
         let n = NSStringFromClass(self.dynamicType)

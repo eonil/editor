@@ -45,14 +45,17 @@ final class FileNavigatorViewController: WorkspaceRenderableViewController, Driv
 
         // Render.
         installer.installIfNeeded {
-            view.autoresizingMask = []
-            view.autoresizesSubviews = false
+//            view.autoresizingMask = []
+//            view.autoresizesSubviews = false
             view.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(scrollView)
+//            scrollView.autoresizingMask = []
+//            scrollView.autoresizesSubviews = false
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
             scrollView.documentView = outlineView
-            outlineView.autoresizingMask = []
-            outlineView.autoresizesSubviews = false
-            outlineView.translatesAutoresizingMaskIntoConstraints = true
+//            outlineView.autoresizingMask = []
+//            outlineView.autoresizesSubviews = false
+            outlineView.translatesAutoresizingMaskIntoConstraints = false
             outlineView.addTableColumn(nameColumn)
             outlineView.outlineTableColumn = nameColumn
             outlineView.headerView = nil
