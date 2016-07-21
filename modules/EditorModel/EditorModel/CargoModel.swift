@@ -19,7 +19,7 @@ import EditorCommon
 ///
 /// This serializes access to cargo tool to prevent acceidental conflict.
 ///
-class CargoModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
+final class CargoModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType {
 
 	typealias	State	=	CargoTool3.State
 

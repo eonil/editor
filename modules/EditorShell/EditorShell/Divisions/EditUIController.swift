@@ -111,11 +111,11 @@ class EditUIController: CommonViewController {
 		guard n.sender === model! else {
 			return
 		}
-		_applyStateToOutput()
+		render()
 	}
 
 
-	private func _applyStateToOutput() {
+	private func render() {
 		let	s	=	model!.overallUIState
 
 		_editTextFileUIC.string		=	nil

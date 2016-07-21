@@ -18,6 +18,9 @@
 		45250B0F1BEA5943003A862A /* ModelNodeVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45250B0E1BEA5942003A862A /* ModelNodeVersion.swift */; };
 		4526B11B1B8501EB0023C626 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4526B10D1B8501DF0023C626 /* LLDBWrapper.framework */; };
 		4526B1251B8503370023C626 /* LLDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526B1241B8503370023C626 /* LLDBModel.swift */; };
+		45296CAA1C3594EE00AB0A51 /* RacerTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45296CA91C3594EE00AB0A51 /* RacerTool.swift */; };
+		45296CBB1C35FF1F00AB0A51 /* TextEditingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45296CBA1C35FF1F00AB0A51 /* TextEditingModel.swift */; };
+		45296CBD1C3601EF00AB0A51 /* TextFileEditorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45296CBC1C3601EF00AB0A51 /* TextFileEditorModel.swift */; };
 		452B915B1B8556E600EAB775 /* EonilFileSystemEvents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452B914B1B8556E000EAB775 /* EonilFileSystemEvents.framework */; };
 		452B91751B855D5100EAB775 /* TOMLQueryTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B91741B855D5100EAB775 /* TOMLQueryTool.swift */; };
 		452B91C81B8611E500EAB775 /* LLDBSupports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B91C71B8611E500EAB775 /* LLDBSupports.swift */; };
@@ -222,6 +225,9 @@
 		45250B0E1BEA5942003A862A /* ModelNodeVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelNodeVersion.swift; sourceTree = "<group>"; };
 		4526B1011B8501DE0023C626 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		4526B1241B8503370023C626 /* LLDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBModel.swift; sourceTree = "<group>"; };
+		45296CA91C3594EE00AB0A51 /* RacerTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacerTool.swift; sourceTree = "<group>"; };
+		45296CBA1C35FF1F00AB0A51 /* TextEditingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditingModel.swift; sourceTree = "<group>"; };
+		45296CBC1C3601EF00AB0A51 /* TextFileEditorModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFileEditorModel.swift; sourceTree = "<group>"; };
 		452B91411B8556E000EAB775 /* EonilFileSystemEvents.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilFileSystemEvents.xcodeproj; path = ../../submodules/FileSystemEvents/Project/EonilFileSystemEvents.xcodeproj; sourceTree = "<group>"; };
 		452B91741B855D5100EAB775 /* TOMLQueryTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TOMLQueryTool.swift; sourceTree = "<group>"; };
 		452B91C71B8611E500EAB775 /* LLDBSupports.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LLDBSupports.swift; sourceTree = "<group>"; };
@@ -372,6 +378,7 @@
 				45B185631B804833004E3B28 /* ShellTaskExecutionController.swift */,
 				45B185651B8048CA004E3B28 /* StringStreamProcessing.swift */,
 				452B91741B855D5100EAB775 /* TOMLQueryTool.swift */,
+				45296CA91C3594EE00AB0A51 /* RacerTool.swift */,
 			);
 			name = "(command line tools)";
 			sourceTree = "<group>";
@@ -382,6 +389,7 @@
 				45B185671B804B2B004E3B28 /* CargoModel.swift */,
 				4526B1241B8503370023C626 /* LLDBModel.swift */,
 				452B91C71B8611E500EAB775 /* LLDBSupports.swift */,
+				45296CBA1C35FF1F00AB0A51 /* TextEditingModel.swift */,
 			);
 			name = "(specific tool models)";
 			sourceTree = "<group>";
@@ -442,6 +450,7 @@
 				4554CAB51B7DCE05004987CC /* ProjectModel.swift */,
 				45B185231B7F7626004E3B28 /* BuildModel.swift */,
 				451373401B7ED91000ED9829 /* SearchModel.swift */,
+				45296CBC1C3601EF00AB0A51 /* TextFileEditorModel.swift */,
 				45692BE61B86992B002ADB2A /* (debugging) */,
 				455EE2091B7EDBF800D5AA56 /* ConsoleModel.swift */,
 				455EE20F1B7EDC1E00D5AA56 /* ReportingModel.swift */,
@@ -779,8 +788,10 @@
 			files = (
 				45B1852D1B7F7ADC004E3B28 /* ModelNode.swift in Sources */,
 				45C3793E1B90B28A00F5B984 /* ExecutionStateSelectionModel.swift in Sources */,
+				45296CBD1C3601EF00AB0A51 /* TextFileEditorModel.swift in Sources */,
 				4554C9C01B7DC106004987CC /* WorkspaceModel.swift in Sources */,
 				450C0FBC1B7F69DD0048E7A1 /* CargoTool.swift in Sources */,
+				45296CAA1C3594EE00AB0A51 /* RacerTool.swift in Sources */,
 				45250B0D1BEA584D003A862A /* xEvents.swift in Sources */,
 				45BFAED71BDE5F29006D2193 /* ModelType.swift in Sources */,
 				45B1855C1B802458004E3B28 /* WorkspaceModelExtensions.swift in Sources */,
@@ -821,6 +832,7 @@
 				456497FB1BE2E42500F9163F /* xCommand.swift in Sources */,
 				4564980D1BE2E45600F9163F /* Command.swift in Sources */,
 				45B185241B7F7626004E3B28 /* BuildModel.swift in Sources */,
+				45296CBB1C35FF1F00AB0A51 /* TextEditingModel.swift in Sources */,
 				45250B0B1BEA576B003A862A /* StateVersion.swift in Sources */,
 				45B185661B8048CA004E3B28 /* StringStreamProcessing.swift in Sources */,
 				45B5EC571B91C66400C4247A /* WorkspaceItemSerialization.swift in Sources */,

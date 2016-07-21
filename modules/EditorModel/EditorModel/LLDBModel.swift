@@ -10,7 +10,7 @@ import Foundation
 import MulticastingStorage
 import LLDBWrapper
 
-class LLDBModel: ModelSubnode<WorkspaceModel> {
+final class LLDBModel: ModelSubnode<WorkspaceModel> {
 
 	var workspace: WorkspaceModel {
 		get {

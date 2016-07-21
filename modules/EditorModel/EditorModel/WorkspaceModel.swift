@@ -83,6 +83,8 @@ public class WorkspaceModel: ModelSubnode<ApplicationModel>, BroadcastingModelTy
 	public let	report		=	ReportingModel()
 	public let	console		=	ConsoleModel()
 
+        public let	textFileEditor	=	TextFileEditorModel()
+
 	internal let	cargo		=	CargoModel()
 
 	///

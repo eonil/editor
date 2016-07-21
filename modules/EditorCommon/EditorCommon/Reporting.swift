@@ -45,6 +45,12 @@ public func assertAndReportFailure(@autoclosure condition: ()->Bool, _ message: 
 	assert(condition(), message)
 }
 
+@noreturn
+public func fatalErrorBecauseOfInconsistentInternalStateWithReportingToDevelopers(@autoclosure file: ()->String = __FILE__, line: Int = __LINE__, column: Int = __COLUMN__, function: String = __FUNCTION__) {
+        let message = "fatalErrorBecauseOfInconsistentInternalState (\(line), \(column)): \(function){}: \(file())"
+        reportToDevelopers(message)
+	fatalError(message)
+}
 public func fatalErrorBecauseUnimplementedYet() {
 	fatalError("Unimplemented yet!")
 }

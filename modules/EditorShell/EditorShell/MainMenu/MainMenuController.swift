@@ -46,6 +46,9 @@ class MainMenuController {
 	let	viewConsole			=	_instantiateCommandMenuItem("Logs", 			Command+Shift+"C"		)
 	let	viewFullscreen			=	_instantiateCommandMenuItem("Toggle Full Screen",	Command+Control+"F"		)
 
+        let	editor				=	_instantiateGroupMenuItem("Editor")
+        let	editorShowCompletions		=	_instantiateCommandMenuItem("Show Completions", 	Command+" ")
+
 	let	product				=	_instantiateGroupMenuItem("Product")
 	let	productRun			=	_instantiateCommandMenuItem("Run",			Command+"R"			)
 	let	productBuild			=	_instantiateCommandMenuItem("Build",			Command+"B"			)
@@ -62,6 +65,9 @@ class MainMenuController {
 	let	debugStepOver			=	_instantiateCommandMenuItem("Step Over",		_legacyFunctionKeyShortcut(NSF8FunctionKey))
 
 	let	debugClearConsole		=	_instantiateCommandMenuItem("Clear Console", 		Command+"K"			)
+
+        let	DEV				=	_instantiateGroupMenuItem("__DEV__")
+        let	DEV_test1			=	_instantiateCommandMenuItem("Test1",			Command+Shift+"R")
 
 	init() {
 		file.addSubmenuItems([
@@ -98,6 +104,10 @@ class MainMenuController {
 			viewHideNavigator,
 			])
 
+                editor.addSubmenuItems([
+                        editorShowCompletions,
+                        ])
+
 		product.addSubmenuItems([
 			productRun,
 			productBuild,
@@ -117,6 +127,9 @@ class MainMenuController {
 			_instantiateSeparatorMenuItem(),
 			debugClearConsole,
 			])
+                DEV.addSubmenuItems([
+                        DEV_test1,
+                        ])
 	}
 	deinit {
 		assert(isRunning == false)
@@ -177,10 +190,12 @@ extension MainMenuController {
 
 		mainMenu.addItem(file.menuItem)
 		mainMenu.addItem(view.menuItem)
+                mainMenu.addItem(editor.menuItem)
 		mainMenu.addItem(product.menuItem)
 		mainMenu.addItem(debug.menuItem)
+                mainMenu.addItem(DEV.menuItem)
 
-		NSApplication.sharedApplication().mainMenu		=	mainMenu
+		NSApplication.sharedApplication().mainMenu = mainMenu
 	}
 }
 

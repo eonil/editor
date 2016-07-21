@@ -229,7 +229,7 @@ public class FileTreeUI: CommonView, NSTextFieldDelegate {
 		}
 
 
-		model!.projectUIState.sustainingFileSelection	=	{ [weak self] in
+		model!.projectUIState.sustainingFileSelection = { [weak self] in
 			guard self != nil else {
 				return	[]
 			}

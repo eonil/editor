@@ -13,6 +13,7 @@ import EditorUICommon
 
 
 class MainMenuAvailabilityManager {
+        private typealias Myself = MainMenuAvailabilityManager
 
 	init() {
 	}
@@ -54,14 +55,15 @@ class MainMenuAvailabilityManager {
 		_applyDebuggingStateChange()
 		_applyApplicationUIStateChange()
 		_applyWorkspaceUIStateChange()
-		ApplicationModel.Event.Notification.register			(self, MainMenuAvailabilityManager._process)
-		WorkspaceModel.Event.Notification.register			(self, MainMenuAvailabilityManager._process)
-		BuildModel.Event.Notification.register				(self, MainMenuAvailabilityManager._process)
-		DebuggingModel.Event.Notification.register			(self, MainMenuAvailabilityManager._process)
-		DebuggingTargetModel.Event.Notification.register		(self, MainMenuAvailabilityManager._process)
-		DebuggingTargetExecutionModel.Event.Notification.register	(self, MainMenuAvailabilityManager._process)
-		UIState.ForApplicationModel.Notification.register		(self, MainMenuAvailabilityManager._process)
-		UIState.ForWorkspaceModel.Notification.register			(self, MainMenuAvailabilityManager._process)
+		ApplicationModel.Event.Notification.register			(self, Myself._process)
+		WorkspaceModel.Event.Notification.register			(self, Myself._process)
+                TextFileEditorModel.Event.Notification.register			(self, Myself._process)
+		BuildModel.Event.Notification.register				(self, Myself._process)
+		DebuggingModel.Event.Notification.register			(self, Myself._process)
+		DebuggingTargetModel.Event.Notification.register		(self, Myself._process)
+		DebuggingTargetExecutionModel.Event.Notification.register	(self, Myself._process)
+		UIState.ForApplicationModel.Notification.register		(self, Myself._process)
+		UIState.ForWorkspaceModel.Notification.register			(self, Myself._process)
 	}
 	private func _deinstall() {
 		assert(model != nil)
@@ -84,11 +86,15 @@ class MainMenuAvailabilityManager {
 	private func _process(n: ApplicationModel.Event.Notification) {
 		_applyFileStateChange()
 		_applyBuildStateChange()
-	}
-	private func _process(n: WorkspaceModel.Event.Notification) {
-		_applyFileStateChange()
-		_applyBuildStateChange()
-	}
+        }
+        private func _process(n: WorkspaceModel.Event.Notification) {
+                _applyFileStateChange()
+                _applyBuildStateChange()
+        }
+        private func _process(n: TextFileEditorModel.Event.Notification) {
+                _applyFileStateChange()
+                _applyEditorStateChange()
+        }
 	private func _process(n: BuildModel.Event.Notification) {
 		_applyFileStateChange()
 		_applyBuildStateChange()
@@ -135,27 +141,35 @@ class MainMenuAvailabilityManager {
 
 	///
 
-	private func _applyFileStateChange() {
-		_updateFileMenuAvailability()
-	}
+        private func _applyFileStateChange() {
+                _updateFileMenuAvailability()
+                _updateDEVMenuAvailability()
+        }
+        private func _applyEditorStateChange() {
+                _updateEditorMenuAvailability()
+                _updateDEVMenuAvailability()
+        }
 	private func _applyBuildStateChange() {
-		_updateProductMenuAvailability()
+                _updateProductMenuAvailability()
+                _updateDEVMenuAvailability()
 	}
 	private func _applyDebuggingStateChange() {
 		_updateDebuggingMenuAvailability()
-		_updateProductMenuAvailability()
+                _updateProductMenuAvailability()
+                _updateDEVMenuAvailability()
 	}
 	private func _applyApplicationUIStateChange() {
 		_updateFileMenuAvailability()
 		_updateViewMenuAvailability()
 		_updateDebuggingMenuAvailability()
-		_updateProductMenuAvailability()
+                _updateProductMenuAvailability()
+                _updateDEVMenuAvailability()
 	}
 	private func _applyWorkspaceUIStateChange() {
 		_updateFileMenuAvailability()
-		_updateViewMenuAvailability()
+                _updateViewMenuAvailability()
+                _updateDEVMenuAvailability()
 	}
-
 
 
 
@@ -197,6 +211,10 @@ class MainMenuAvailabilityManager {
 		mainMenuController!.viewConsole.enabled			=	hasCurrentWorkspace
 		mainMenuController!.viewFullscreen.enabled		=	hasCurrentWorkspace
 	}
+        private func _updateEditorMenuAvailability() {
+                let hasTextFileModel = model!.currentWorkspace?.textFileEditor != nil
+                mainMenuController!.editorShowCompletions.enabled	=	hasTextFileModel
+        }
 
 	private func _updateProductMenuAvailability() {
 		mainMenuController!.productRun.enabled			=	model!.currentWorkspace?.build.busy == Optional(false)
@@ -220,7 +238,10 @@ class MainMenuAvailabilityManager {
 		mainMenuController!.debugStepOver.enabled		=	cmds.contains(.StepOver)
 		mainMenuController!.debugClearConsole.enabled		=	true
 
-	}
+        }
+        private func _updateDEVMenuAvailability() {
+		mainMenuController!.DEV_test1.enabled			=	true
+        }
 }
 
 

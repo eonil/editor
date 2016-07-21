@@ -8,7 +8,6 @@
 
 import Foundation
 import AppKit
-import EditorModel
 
 /// Fixes some bugs in AppKit.
 /// Provides automatic shell propagations through view and view-controllers.

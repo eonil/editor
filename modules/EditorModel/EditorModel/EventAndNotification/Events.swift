@@ -43,16 +43,6 @@ public extension WorkspaceModel {
 	}
 }
 
-public extension FileTreeModel {
-	public enum Event: BroadcastableEventType {
-		public typealias	Sender	=	FileTreeModel
-//		case DidCreateRoot
-//		case WillDeleteRoot
-		case DidChangeTreeTopology
-		case DidChangeNodeAttribute
-//		case NodeEvent(sender: FileNodeModel, event: FileNodeModel.Event)
-	}
-}
 
 //public extension FileNodeModel {
 //	public enum Event: BroadcastableEventType {

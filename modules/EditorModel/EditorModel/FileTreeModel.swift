@@ -40,6 +40,12 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		var code	:	Code
 		var message	:	String
 	}
+        public enum Event: BroadcastableEventType {
+                public typealias	Sender	=	FileTreeModel
+                case DidChangeTreeTopology
+                case DidChangeNodeAttribute
+//                case DidChangeSelection
+        }
 
 
 
@@ -47,9 +53,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 
 
 
-
-	///
-
+        // MARK: -
 	override init() {
 		super.init()
 	}
@@ -57,13 +61,7 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		assert(_isInstalled == false)
 	}
 
-
-
-
-
-
-	///
-
+        // MARK: -
 	public var workspace: WorkspaceModel {
 		get {
 			assert(owner != nil)
@@ -71,16 +69,40 @@ public class FileTreeModel: ModelSubnode<WorkspaceModel>, BroadcastingModelType 
 		}
 	}
 
-
-
-
-
-
-
-	///
-
-	public let event	=	EventMulticast<Event>()
-
+        // MARK: -
+	public let event = EventMulticast<Event>()
+//        public var selection: [WorkspaceItemNode] = [] {
+//                willSet {
+//                        func validityOf(nodes: [WorkspaceItemNode]) -> Bool {
+//                                func validityOf(node: WorkspaceItemNode) -> Bool {
+//                                        func rootOf(node: WorkspaceItemNode) -> WorkspaceItemNode? {
+//                                                if node.supernode === nil { return node }
+//                                                return rootOf(node)
+//                                        }
+//                                        guard let nodeRoot = rootOf(node) else { return false }
+//                                        guard let treeRoot = tree?.root else { return false }
+//                                        return nodeRoot === treeRoot
+//                                }
+//                                return nodes.map(validityOf).reduce(true) { $0 && $1 }
+//                        }
+//                        assert(validityOf(newValue))
+//                }
+//                didSet {
+//                        /// Performs inequality comparison as qucikly as possible.
+//                        /// This just treats many items as inequal.
+//                        func quickInequalityOf(a: [WorkspaceItemNode], b: [WorkspaceItemNode]) -> Bool {
+//                                let (ac,bc) = (a.count, b.count)
+//                                switch (ac,bc) {
+//                                case (0,0): 	return false
+//                                case (1,1):	return a.first !== b.first
+//				default:	return true
+//                                }
+//                        }
+//                        // Do not fire event for surely equal pair.
+//                        guard quickInequalityOf(selection, b: oldValue) else { return }
+//                        Event.Notification(sender: self, event: .DidChangeSelection).broadcast()
+//                }
+//        }
 
 
 

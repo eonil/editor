@@ -16,6 +16,7 @@
 
 To Do
 -----
+- Save edited source file on closing it.
 - Cargo output parsing and display. (via Unix pipe)
 - Racer output parsing and display. (via Unix pipe)
 - Racer autocompletion GUI support.

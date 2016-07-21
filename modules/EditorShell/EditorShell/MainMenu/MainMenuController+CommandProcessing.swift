@@ -181,6 +181,9 @@ extension MainMenuController {
 			model!.currentWorkspace!.console.clear()
 			}
 
+                case ~~DEV_test1: do {
+
+                        }
 
 		default:
 			fatalError("A menu command `\(n.sender)` has not been implemented.")
