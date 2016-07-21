@@ -41,6 +41,13 @@ Optimized for faster code writing.
     Pure-value-only dispatch sounds cool, but it take too much time to "design" such actions.
     
 
+Legacy
+------
+R3 (legacy) has been [archived](https://github.com/eonil/editor/tree/7b858e22697e109d9f5cf84314fdbe1cb04307fb).
+
+License
+-------
+MIT license.
 
 
 
