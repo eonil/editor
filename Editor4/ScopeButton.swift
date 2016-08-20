@@ -10,6 +10,11 @@ import Foundation
 import AppKit
 
 final class ScopeButton: CommonView {
+    convenience init(title: String, onClick: ()->() = {}) {
+        self.init()
+        self.title = title
+        self.onClick = onClick
+    }
 	var title: String? {
 		didSet {
 			_triggerRedrawing()
@@ -54,7 +59,7 @@ final class ScopeButton: CommonView {
 	}
 	override func sizeThatFits(size: CGSize) -> CGSize {
 		guard let title = title else {
-			return	size
+			return size
 		}
 		let f	= _measureRectOfText(title, _textAttributes(NSColor.clearColor()))
 		let f1	= (-_PADDING).insetting(f)
@@ -124,16 +129,16 @@ final class ScopeButton: CommonView {
 		func determineRenderingState() -> RenderingState {
 			if _state.mouseGrabbing {
 				switch (_state.mouseHovering, _state.selected) {
-				case (true, _):	return	.AsMouseHoveringWhileSelected
-				case (false, true):	return .AsMouseHoveringWhileSelected
+				case (true, _):         return	.AsMouseHoveringWhileSelected
+				case (false, true):     return .AsMouseHoveringWhileSelected
 				case (false, false):	return .AsMouseHoveringWhileUnselected
 				}
 			}
 			else {
 				switch (_state.mouseHovering, _state.selected) {
-				case (true, true):	return .AsMouseHoveringWhileSelected
-				case (true, false):	return .AsMouseHoveringWhileUnselected
-				case (false, true):	return .AsSelected
+				case (true, true):      return .AsMouseHoveringWhileSelected
+				case (true, false):     return .AsMouseHoveringWhileUnselected
+				case (false, true):     return .AsSelected
 				case (false, false):	return .AsUnselected
 				}
 			}
@@ -156,23 +161,25 @@ final class ScopeButton: CommonView {
 			guard let title = title else {
 				return
 			}
-
-			let	aa		= _textAttributes(c)
-			let	dim		= _measureRectOfText(title, aa)
-			let	box		= CGRect(x: bounds.midX - (dim.width / 2), y: bounds.midY - (dim.height / 2), width: dim.width, height: dim.height)
-			(title as NSString).drawInRect(box, withAttributes: aa)
+			let	aa		=   _textAttributes(c)
+			let	dim		=   _measureRectOfText(title, aa)
+			let	box		=   CGRect(x: bounds.midX - (dim.width / 2), y: bounds.midY - (dim.height / 2), width: dim.width, height: dim.height)
+            let opts    =   NSStringDrawingOptions([.UsesLineFragmentOrigin, .UsesFontLeading])
+            (title as NSString).drawWithRect(box, options: opts, attributes: aa, context: nil)
 		}
 		func useShadow(c: NSColor) {
-			layer!.shadowColor	= c.CGColor
-			layer!.shadowOpacity	= 0.5
-			layer!.shadowRadius	= 1
-			layer!.shadowOffset	= CGSize.zero
+            guard let layer = layer else { return }
+			layer.shadowColor   = c.CGColor
+			layer.shadowOpacity	= 0.5
+			layer.shadowRadius  = 1
+			layer.shadowOffset  = CGSize.zero
 		}
-		func unuseShadow() {
-			layer!.shadowColor	= NSColor.clearColor().CGColor
-			layer!.shadowOpacity	= 0
-			layer!.shadowRadius	= 0
-			layer!.shadowOffset	= CGSize.zero
+        func unuseShadow() {
+            guard let layer = layer else { return }
+			layer.shadowColor   = NSColor.clearColor().CGColor
+			layer.shadowOpacity	= 0
+			layer.shadowRadius  = 0
+			layer.shadowOffset  = CGSize.zero
 		}
 		//
 		switch determineRenderingState() {
@@ -200,13 +207,14 @@ final class ScopeButton: CommonView {
 		let para = NSMutableParagraphStyle()
 		para.alignment = .Center
 		return [
-			NSFontAttributeName		: titleFont,
+			NSFontAttributeName             : titleFont,
 			NSForegroundColorAttributeName	: c,
 			NSParagraphStyleAttributeName	: para,
 			] as [String: AnyObject]
 	}
 	private func _measureRectOfText(text: String, _ attributes: [String: AnyObject]) -> CGRect {
-		return text.boundingRectWithSize(bounds.size, options: [], attributes: attributes)
+        let opts = NSStringDrawingOptions([.UsesLineFragmentOrigin, .UsesFontLeading])
+		return text.boundingRectWithSize(bounds.size, options: opts, attributes: attributes)
 	}
 }
 

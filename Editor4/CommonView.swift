@@ -16,14 +16,23 @@ class CommonView: NSView {
 	override init(frame frameRect: NSRect) {
 		super.init(frame: frameRect)
 		super.wantsLayer = true
+        super.autoresizesSubviews = false
+        super.translatesAutoresizingMaskIntoConstraints = false
 		assert(layer is TransparentLayer)
 	}
 	required init?(coder: NSCoder) {
 		super.init(coder: coder)
-		super.wantsLayer = true
+        super.wantsLayer = true
+        super.autoresizesSubviews = false
+        super.translatesAutoresizingMaskIntoConstraints = false
 		assert(layer is TransparentLayer)
 	}
 
+    override var autoresizesSubviews: Bool {
+        willSet {
+            assert(newValue == false)
+        }
+    }
 	func sizeThatFits(size: CGSize) -> CGSize {
 		return size
 	}
@@ -74,65 +83,33 @@ class CommonView: NSView {
 		guard let layer = layer else { return }
 		layer.setNeedsDisplayInRect(invalidRect)
 	}
-//	override func resizeSubviewsWithOldSize(oldSize: NSSize) {
-//		super.resizeSubviewsWithOldSize(oldSize)
-//		_layout()
-//	}
-	override func resizeWithOldSuperviewSize(oldSize: NSSize) {
-		super.resizeWithOldSuperviewSize(oldSize)
+	override func resizeSubviewsWithOldSize(oldSize: NSSize) {
+		super.resizeSubviewsWithOldSize(oldSize)
         supercallChecked = false
         layoutSubviews()
-		assert(supercallChecked == true)
+        assert(supercallChecked == true)
 	}
-
-	override func didAddSubview(subview: NSView) {
-		super.didAddSubview(subview)
-	}
-	override func willRemoveSubview(subview: NSView) {
-		super.willRemoveSubview(subview)
-	}
+//	override func resizeWithOldSuperviewSize(oldSize: NSSize) {
+//		super.resizeWithOldSuperviewSize(oldSize)
+//        supercallChecked = false
+//        layoutSubviews()
+//		assert(supercallChecked == true)
+//	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+extension CommonView {
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        if window === nil {
+            layer?.contentsScale = 1
+        }
+    }
+    override func viewWillMoveToWindow(newWindow: NSWindow?) {
+        super.viewWillMoveToWindow(newWindow)
+        if newWindow !== nil {
+            layer?.contentsScale = newWindow?.backingScaleFactor ?? 1
+        }
+    }
+}
 
 
 

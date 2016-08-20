@@ -25,18 +25,24 @@ final class NavigatorViewController: WorkspaceRenderableViewController {
     }
     private func renderLocalState() {
         installer.installIfNeeded {
-            view.wantsLayer = true
-            view.layer?.backgroundColor = NSColor.redColor().CGColor
-            file.view.wantsLayer = true
-
-
             addChildViewController(file)
             view.addSubview(modeSelector)
             view.addSubview(file.view)
+            func makeScopeButton(label: String) -> ScopeButton {
+                let newButton = ScopeButton(title: label)
+                newButton.titleFont = NSFont.systemFontOfSize(NSFont.systemFontSizeForControlSize(.SmallControlSize))
+                return newButton
+            }
+            modeSelector.toolButtons = [
+                makeScopeButton("File"),
+                makeScopeButton("Issues"),
+                makeScopeButton("Debug"),
+                makeScopeButton("Logs"),
+            ]
         }
 
         let box = view.bounds.toBox().toSilentBox()
-        let (contentBox, selectorBox) = box.splitInY(100%, 44)
+        let (contentBox, selectorBox) = box.splitInY(100%, 32)
         modeSelector.frame = selectorBox.toCGRect()
         file.view.frame = contentBox.toCGRect()
     }

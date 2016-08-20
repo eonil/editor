@@ -10,116 +10,58 @@ import Foundation
 import AppKit
 import EonilToolbox
 
-//class ToolButton: NSButton, IdeallySizableType {
-//	var idealSize: CGSize = CGSize.zero
-//}
-final class ToolButtonStripView: NSView {
-//    private var installer = ViewInstaller()
-//
-//    @nonobjc
-//    private func render() {
-//        installer.installIfNeeded {
-//
-//        }
-//    }
-
-
+final class ToolButtonStripView: CommonView {
 	var toolButtons: [CommonView] = [] {
 		willSet {
-			deinstallToolButtons()
+            toolButtons.forEach({  $0.removeFromSuperview() })
 		}
 		didSet {
-			installToolButtons()
-			render()
+            toolButtons.forEach({ addSubview($0) })
+            renderLayout()
 		}
 	}
 	var interButtonGap: CGFloat = 0 {
-		didSet {
-			render()
+        didSet {
+            renderLayout()
 		}
 	}
 
-    override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
-        autoresizesSubviews = false
-//        autoresizingMask = []
-        translatesAutoresizingMaskIntoConstraints = false
+    override func sizeThatFits(size: CGSize) -> CGSize {
+        return getButtonMinimalSizes().minimalEnclosingSize(interButtonGap)
     }
-    @available(*,unavailable)
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        assert(false, "IB/SB are not supported.")
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        renderLayout()
     }
-
-    override var autoresizesSubviews: Bool {
-        willSet {
-            assert(newValue == false, "Auto-resizing is not supported.")
-        }
-    }
-	var idealSize: CGSize {
-		get {
-			let buttonSZs = toolButtons.map { $0.sizeThatFits(CGSize.zero) }
-			let totalW = buttonSZs.map { $0.width }.reduce(0, combine: +) + (interButtonGap * CGFloat(buttonSZs.count - 1))
-			let maxH = buttonSZs.map { $0.height }.reduce(0, combine: max)
-			return CGSize(width: totalW, height: maxH).rounding
-		}
-	}
-
-	override func resizeSubviewsWithOldSize(oldSize: NSSize) {
-		super.resizeSubviewsWithOldSize(oldSize)
-		render()
-        assert(autoresizingMask == [])
-	}
-
 }
 
 private extension ToolButtonStripView {
     @nonobjc
-	private func installToolButtons() {
-		for b in toolButtons {
-			addSubview(b)
-		}
+    private func renderLayout() {
+        let buttonSizes = getButtonMinimalSizes()
+        let enclosingSize = buttonSizes.minimalEnclosingSize(interButtonGap)
+        var p = bounds.midPoint - (enclosingSize / 2)
+        for (buttonSize, button) in zip(buttonSizes, toolButtons) {
+            let buttonFrame = CGRect(origin: p, size: buttonSize)
+            button.frame = buttonFrame
+            p.x += buttonSize.width
+        }
 	}
     @nonobjc
-    private func deinstallToolButtons() {
-		for b in toolButtons {
-			b.removeFromSuperview()
-		}
-	}
-    @nonobjc
-    private func render() {
-		let idealSZ = idealSize
-		let startingX =	bounds.midX - (idealSZ.width / 2)
-		var x =	startingX
-		for i in 0..<toolButtons.count {
-			let button = toolButtons[i]
-			let y = bounds.midY - (button.frame.size.height / 2)
-			button.frame.origin = CGPoint(x: round(x), y: round(y))
-
-            assert(button.autoresizesSubviews == false)
-            assert(button.translatesAutoresizingMaskIntoConstraints == true)
-			assert(button.frame.width != 0, "Expects non-zero width.")
-			x += button.frame.width
-			x += interButtonGap
-		}
-	}
+    private func getButtonMinimalSizes() -> [CGSize] {
+        return toolButtons
+            .map({ b in b.sizeThatFits(CGSize.zero) })
+    }
 }
 
+private extension CollectionType where Generator.Element == CGSize {
+    func minimalEnclosingSize(interButtonGap: CGFloat) -> CGSize {
+        return reduce(CGSize.zero, combine: { a, b in
+            CGSize(width: (a.width + interButtonGap + b.width), height: max(a.height, b.height))
+        })
+    }
+}
 
-
-//extension NSView {
-//	/// Movement from parent's bounds center.
-//	var translation: CGPoint {
-//		get {
-//
-//		}
-//	}
-//}
-
-
-//protocol IdeallySizableType {
-//	var idealSize: CGSize { get }
-//}
 
 
 

@@ -24,7 +24,7 @@ Optimized for faster code writing.
 
 - Driver exposes each services directly.
     Tried to hide them and expose only dispatch methods, but I think that just brings one more extra layers to code.
-    Anyway, I can convert to hidden service easily. No worries.
+    Anyway, I can hide them again easily if needed. No worries.
 
 - Many services now accepts dispatching of functions.
     Here're some points.

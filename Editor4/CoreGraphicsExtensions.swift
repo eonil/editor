@@ -8,6 +8,11 @@
 
 import CoreGraphics
 
+extension CGPoint {
+    func toTuple() -> (CGFloat, CGFloat) {
+        return (x, y)
+    }
+}
 extension CGSize {
     var rounding: CGSize {
         get {
@@ -18,6 +23,54 @@ extension CGSize {
         get {
             return CGSize(width: _ceil(width), height: _ceil(height))
         }
+    }
+    func toTuple() -> (CGFloat, CGFloat) {
+        return (width, height)
+    }
+}
+extension CGVector {
+    func toTuple() -> (CGFloat, CGFloat) {
+        return (dx, dy)
+    }
+}
+func + (a: CGSize, b: CGSize) -> CGSize {
+    return CGSize(width: a.width + b.width,
+                  height: a.height + b.height)
+}
+func - (a: CGSize, b: CGSize) -> CGSize {
+    return CGSize(width: a.width - b.width,
+                  height: a.height - b.height)
+}
+func - (a: CGPoint, b: CGSize) -> CGPoint {
+    return CGPoint(x: a.x - b.width,
+                   y: a.y - b.height)
+}
+func * (a: CGSize, b: CGFloat) -> CGSize {
+    return CGSize(width: a.width * b,
+                  height: a.height * b)
+}
+func / (a: CGSize, b: CGFloat) -> CGSize {
+    return CGSize(width: a.width / b,
+                  height: a.height / b)
+}
+
+prefix func - (a: CGPoint) -> CGPoint {
+    return CGPoint(x: -a.x,
+                   y: -a.y)
+}
+
+extension CGRect {
+    var minPoint: CGPoint {
+        return CGPoint(x: minX,
+                       y: minY)
+    }
+    var midPoint: CGPoint {
+        return CGPoint(x: midX,
+                       y: midY)
+    }
+    var maxPoint: CGPoint {
+        return CGPoint(x: maxX,
+                       y: maxY)
     }
 }
 
