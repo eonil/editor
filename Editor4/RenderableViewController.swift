@@ -26,7 +26,7 @@ class WorkspaceRenderableViewController: NSViewController, WorkspaceRenderable {
         super.view = v
     }
     func render(state: UserInteractionState, workspace: (id: WorkspaceID, state: WorkspaceState)?) {
-        // No-op.
+        // No-op in this class.
     }
     /// Do not use this method. This method get called on bad timing
     /// such as `NSView.resizeWithOldSuperviewSize()`. If we layout something

@@ -92,8 +92,6 @@
 		45830B141CF04D30002FEA3D /* Stepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B131CF04D30002FEA3D /* Stepper.swift */; };
 		45830B1C1CF08858002FEA3D /* ServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1B1CF08858002FEA3D /* ServiceType.swift */; };
 		45830B1E1CF08AE7002FEA3D /* UserInteractionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */; };
-		4586F4081D4A2573007FCD44 /* ManualLayoutUtility.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4586F4051D4A2565007FCD44 /* ManualLayoutUtility.framework */; };
-		4586F4091D4A2573007FCD44 /* ManualLayoutUtility.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4586F4051D4A2565007FCD44 /* ManualLayoutUtility.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4589320C1CDFE78900F924F5 /* VersionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320B1CDFE78900F924F5 /* VersionType.swift */; };
 		4589320E1CDFED0000F924F5 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4589320D1CDFED0000F924F5 /* Version.swift */; };
 		459B5F771D01D7F20081D8FF /* GCDUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459B5F761D01D7F20081D8FF /* GCDUtility.swift */; };
@@ -207,41 +205,6 @@
 			remoteGlobalIDString = 454AD8641CC6530D008A9BAC;
 			remoteInfo = Editor4;
 		};
-		4586F4001D4A2565007FCD44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4586F3F91D4A2565007FCD44 /* ManualLayoutUtility.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45CDE79A1D43748300D4FB67;
-			remoteInfo = "ManualLayoutUtility-iOS";
-		};
-		4586F4021D4A2565007FCD44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4586F3F91D4A2565007FCD44 /* ManualLayoutUtility.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45CDE7A31D43748300D4FB67;
-			remoteInfo = "ManualLayoutUtility-iOSTests";
-		};
-		4586F4041D4A2565007FCD44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4586F3F91D4A2565007FCD44 /* ManualLayoutUtility.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45CDE7B61D43749000D4FB67;
-			remoteInfo = "ManualLayoutUtility-macOS";
-		};
-		4586F4061D4A2565007FCD44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4586F3F91D4A2565007FCD44 /* ManualLayoutUtility.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45CDE7BF1D43749000D4FB67;
-			remoteInfo = "ManualLayoutUtility-macOSTests";
-		};
-		4586F40A1D4A2573007FCD44 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4586F3F91D4A2565007FCD44 /* ManualLayoutUtility.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 45CDE7B51D43749000D4FB67;
-			remoteInfo = "ManualLayoutUtility-macOS";
-		};
 		459B5F531D01B1BD0081D8FF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
@@ -294,7 +257,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				453463CC1D215AC500256B46 /* LLDBWrapper.framework in Embed Frameworks */,
-				4586F4091D4A2573007FCD44 /* ManualLayoutUtility.framework in Embed Frameworks */,
 				4511378D1CD4819E001A183A /* EonilToolbox.framework in Embed Frameworks */,
 				451137891CD4819E001A183A /* BoltsSwift.framework in Embed Frameworks */,
 			);
@@ -390,7 +352,6 @@
 		45830B131CF04D30002FEA3D /* Stepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stepper.swift; sourceTree = "<group>"; };
 		45830B1B1CF08858002FEA3D /* ServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceType.swift; sourceTree = "<group>"; };
 		45830B1D1CF08AE7002FEA3D /* UserInteractionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInteractionService.swift; sourceTree = "<group>"; };
-		4586F3F91D4A2565007FCD44 /* ManualLayoutUtility.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ManualLayoutUtility.xcodeproj; path = "submodules/manual-layout-utility.swift/ManualLayoutUtility.xcodeproj"; sourceTree = "<group>"; };
 		4589320B1CDFE78900F924F5 /* VersionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersionType.swift; sourceTree = "<group>"; };
 		4589320D1CDFED0000F924F5 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
@@ -420,7 +381,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				453463CB1D215AC500256B46 /* LLDBWrapper.framework in Frameworks */,
-				4586F4081D4A2573007FCD44 /* ManualLayoutUtility.framework in Frameworks */,
 				459DB8D61CD487DB00C892D9 /* CoreVideo.framework in Frameworks */,
 				4511378C1CD4819E001A183A /* EonilToolbox.framework in Frameworks */,
 				451137881CD4819E001A183A /* BoltsSwift.framework in Frameworks */,
@@ -547,7 +507,6 @@
 				454AD8671CC6530D008A9BAC /* Editor4 */,
 				4511375E1CD48176001A183A /* BoltsSwift.xcodeproj */,
 				451137611CD48176001A183A /* EonilToolbox.xcodeproj */,
-				4586F3F91D4A2565007FCD44 /* ManualLayoutUtility.xcodeproj */,
 				459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */,
 				459DB8D51CD487DB00C892D9 /* CoreVideo.framework */,
 				45830ABE1CEA8217002FEA3D /* Editor4Tests */,
@@ -711,17 +670,6 @@
 			path = Editor4Tests;
 			sourceTree = "<group>";
 		};
-		4586F3FA1D4A2565007FCD44 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4586F4011D4A2565007FCD44 /* ManualLayoutUtility.framework */,
-				4586F4031D4A2565007FCD44 /* ManualLayoutUtility-iOSTests.xctest */,
-				4586F4051D4A2565007FCD44 /* ManualLayoutUtility.framework */,
-				4586F4071D4A2565007FCD44 /* ManualLayoutUtility-macOSTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		459B5F441D01B1BD0081D8FF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -752,7 +700,6 @@
 			dependencies = (
 				4511378B1CD4819E001A183A /* PBXTargetDependency */,
 				453463CE1D215AC500256B46 /* PBXTargetDependency */,
-				4586F40B1D4A2573007FCD44 /* PBXTargetDependency */,
 			);
 			name = Editor4;
 			productName = Editor4;
@@ -819,10 +766,6 @@
 				{
 					ProductGroup = 459B5F441D01B1BD0081D8FF /* Products */;
 					ProjectRef = 459B5F431D01B1BD0081D8FF /* LLDBWrapper.xcodeproj */;
-				},
-				{
-					ProductGroup = 4586F3FA1D4A2565007FCD44 /* Products */;
-					ProjectRef = 4586F3F91D4A2565007FCD44 /* ManualLayoutUtility.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -902,34 +845,6 @@
 			fileType = wrapper.cfbundle;
 			path = "EonilToolboxTests-macOS.xctest";
 			remoteRef = 453463D81D2170A700256B46 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4586F4011D4A2565007FCD44 /* ManualLayoutUtility.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ManualLayoutUtility.framework;
-			remoteRef = 4586F4001D4A2565007FCD44 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4586F4031D4A2565007FCD44 /* ManualLayoutUtility-iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "ManualLayoutUtility-iOSTests.xctest";
-			remoteRef = 4586F4021D4A2565007FCD44 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4586F4051D4A2565007FCD44 /* ManualLayoutUtility.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ManualLayoutUtility.framework;
-			remoteRef = 4586F4041D4A2565007FCD44 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4586F4071D4A2565007FCD44 /* ManualLayoutUtility-macOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "ManualLayoutUtility-macOSTests.xctest";
-			remoteRef = 4586F4061D4A2565007FCD44 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		459B5F541D01B1BD0081D8FF /* LLDBWrapper.framework */ = {
@@ -1122,11 +1037,6 @@
 			isa = PBXTargetDependency;
 			target = 454AD8641CC6530D008A9BAC /* Editor4 */;
 			targetProxy = 45830AC21CEA8217002FEA3D /* PBXContainerItemProxy */;
-		};
-		4586F40B1D4A2573007FCD44 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "ManualLayoutUtility-macOS";
-			targetProxy = 4586F40A1D4A2573007FCD44 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
