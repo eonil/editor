@@ -1,9 +1,0 @@
-[submodule "submodules/toolbox.swift"]
-	path = submodules/toolbox.swift
-	url = https://github.com/eonil/toolbox.swift
-[submodule "submodules/Bolts-Swift"]
-	path = submodules/Bolts-Swift
-	url = https://github.com/BoltsFramework/Bolts-Swift
-[submodule "submodules/LLDBWrapper"]
-	path = submodules/LLDBWrapper
-	url = https://github.com/eonil/LLDBWrapper
