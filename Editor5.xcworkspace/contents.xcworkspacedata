@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "container:"
+      name = "modules">
+      <FileRef
+         location = "group:modules/Editor5/Editor5.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:modules/Editor5FileTreeUI/Editor5FileTreeUI.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:modules/Editor5Common/Editor5Common.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "submodules">
+   </Group>
+   <Group
+      location = "container:"
+      name = "packages">
+      <FileRef
+         location = "group:packages/Editor5DepPack/Editor5DepPack.xcodeproj">
+      </FileRef>
+   </Group>
+</Workspace>
