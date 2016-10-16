@@ -42,3 +42,52 @@ struct DriverState {
         }
     }
 }
+
+typealias Workspace = (id: WorkspaceID, state: WorkspaceState)
+
+struct WorkspaceID: Hashable {
+    private var oid: ObjectIdentifier
+    static func from(document: WorkspaceDocument) -> WorkspaceID {
+        return WorkspaceID(oid: ObjectIdentifier(document))
+    }
+    var hashValue: Int {
+        return oid.hashValue
+    }
+
+    static func == (_ a: WorkspaceID, _ b: WorkspaceID) -> Bool {
+        return a.oid == b.oid
+    }
+}
+
+struct WorkspaceState {
+    var files = [URL]()
+    var issues = [String]()
+    var debug = DebugState()
+}
+
+struct DebugState {
+    var processes = [DebugProcessState]()
+}
+typealias DebugProcess = (id: DebugProcessID, state: DebugProcessState)
+typealias DebugProcessID = pid_t
+struct DebugProcessState {
+    var threads = [DebugThreadState]()
+    var processName = ""
+}
+typealias DebugThread = (id: DebugThreadID, state: DebugThreadState)
+typealias DebugThreadID = thread_t
+struct DebugThreadState {
+    var threadName = ""
+}
+typealias DebugFrame = (id: DebugFrameID, state: DebugFrameState)
+typealias DebugFrameID = Int32
+struct DebugFrameState {
+    var functionName = ""
+}
+
+
+
+
+
+
+

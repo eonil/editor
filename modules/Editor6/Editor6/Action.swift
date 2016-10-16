@@ -7,7 +7,7 @@
 //
 
 enum Action {
-    case operation(OperationAction)
+//    case operation(OperationAction)
     case workspace(WorkspaceDocumentEvent)
 }
 //

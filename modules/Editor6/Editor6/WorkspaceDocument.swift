@@ -13,6 +13,7 @@ import AppKit
 @objc
 final class WorkspaceDocument: NSDocument {
     private let main = WorkspaceUIWindowController()
+//    private let service = WorkspaceService()
     private var localState = WorkspaceState()
 
     override init() {
@@ -39,9 +40,9 @@ final class WorkspaceDocument: NSDocument {
 //        }
     }
 
-    func process(command: WorkspaceCommand) {
-
-    }
+//    func process(command: WorkspaceCommand) {
+//
+//    }
 
     override func read(from url: URL, ofType typeName: String) throws {
         Swift.print(#function)

@@ -4,15 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Editor6.xcscheme</key>
+		<key>Editor6WorkspaceModel.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>45185E3E1DA8E8EA00C4D86D</key>
+		<key>45441ED51DB3EA0F00158711</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -16,10 +16,9 @@
 		45185E811DA8F85A00C4D86D /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45185E801DA8F85A00C4D86D /* WorkspaceDocument.swift */; };
 		45185E851DA8FA6F00C4D86D /* WorkspaceDocumentEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45185E841DA8FA6F00C4D86D /* WorkspaceDocumentEvent.swift */; };
 		452049A71DAF0A44002297EC /* AsyncMessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452049A61DAF0A44002297EC /* AsyncMessageDispatcher.swift */; };
-		452049AB1DAFE017002297EC /* WorkspaceDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452049AA1DAFE017002297EC /* WorkspaceDriver.swift */; };
 		452049AD1DAFE2BA002297EC /* DebuggingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452049AC1DAFE2BA002297EC /* DebuggingService.swift */; };
 		452049AF1DAFE39C002297EC /* MainMenuDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452049AE1DAFE39C002297EC /* MainMenuDriver.swift */; };
-		452049B31DB06262002297EC /* WorkspaceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452049B21DB06262002297EC /* WorkspaceStore.swift */; };
+		45441EC71DB3E7B900158711 /* WorkspaceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EC61DB3E7B900158711 /* WorkspaceService.swift */; };
 		4566CEAF1DADAAC700EA2A0C /* Editor6Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEAE1DADAAB400EA2A0C /* Editor6Common.framework */; };
 		4566CEB01DADAAC700EA2A0C /* Editor6Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEAE1DADAAB400EA2A0C /* Editor6Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4566CEB31DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEA61DADAAB200EA2A0C /* Editor6FileTreeUI.framework */; };
@@ -30,16 +29,9 @@
 		456FDD741DAA395100F8003A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD731DAA395100F8003A /* Report.swift */; };
 		456FDD761DAA3AAB00F8003A /* WorkspaceUIAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD751DAA3AAB00F8003A /* WorkspaceUIAction.swift */; };
 		456FDD781DAA3B2900F8003A /* WorkspaceUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD771DAA3B2900F8003A /* WorkspaceUIViewController.swift */; };
-		456FDD981DAA3C5100F8003A /* FileNavigatorUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD971DAA3C5100F8003A /* FileNavigatorUIViewController.swift */; };
-		456FDD9E1DAA3D5100F8003A /* InspectorUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD9D1DAA3D5100F8003A /* InspectorUIViewController.swift */; };
-		456FDDA01DAA3DB600F8003A /* NavigatorUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD9F1DAA3DB600F8003A /* NavigatorUIViewController.swift */; };
-		456FDDB01DAA4BA000F8003A /* NavigatorUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDAF1DAA4BA000F8003A /* NavigatorUIView.swift */; };
 		456FDDB61DAA583E00F8003A /* WorkspaceCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDB51DAA583E00F8003A /* WorkspaceCommand.swift */; };
 		456FDDB81DAA5BC600F8003A /* DriverCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDB71DAA5BC600F8003A /* DriverCommand.swift */; };
-		456FDDCE1DAA5E1400F8003A /* WorkspaceUIRenderable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDCD1DAA5E1400F8003A /* WorkspaceUIRenderable.swift */; };
 		456FDDD01DAA602A00F8003A /* ApplicationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDCF1DAA602A00F8003A /* ApplicationState.swift */; };
-		456FDDD21DAA607F00F8003A /* WorkspaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDD11DAA607F00F8003A /* WorkspaceID.swift */; };
-		456FDDD41DAA773800F8003A /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDD31DAA773800F8003A /* Workspace.swift */; };
 		456FDDD61DAA78B900F8003A /* DriverState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDD51DAA78B900F8003A /* DriverState.swift */; };
 		456FDDD81DAA79F100F8003A /* MainMenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDD71DAA79F100F8003A /* MainMenuManager.swift */; };
 		456FDE131DAA871900F8003A /* MainMenuAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE121DAA871900F8003A /* MainMenuAction.swift */; };
@@ -50,6 +42,8 @@
 		456FDE211DAA952F00F8003A /* TreeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE201DAA952F00F8003A /* TreeEvent.swift */; };
 		456FDE231DAA95AE00F8003A /* Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE221DAA95AE00F8003A /* Broadcast.swift */; };
 		456FDE271DABDB4900F8003A /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE261DABDB4900F8003A /* Store.swift */; };
+		45E0851E1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */; };
+		45E0851F1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +131,27 @@
 			remoteGlobalIDString = "______Target_Editor6DepPack";
 			remoteInfo = Editor6DepPack;
 		};
+		45E0851A1DB3D1D500C5428D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45EF84DB1DB21A4000B320B5;
+			remoteInfo = Editor6WorkspaceUI;
+		};
+		45E0851C1DB3D1D500C5428D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45EF84C91DB21A1800B320B5;
+			remoteInfo = Editor6WorkspaceUITestdrive;
+		};
+		45E085201DB3D1DC00C5428D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45EF84DA1DB21A4000B320B5;
+			remoteInfo = Editor6WorkspaceUI;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -148,6 +163,7 @@
 			files = (
 				4566CEB01DADAAC700EA2A0C /* Editor6Common.framework in Embed Frameworks */,
 				4566CEE41DADABC100EA2A0C /* Editor6DepPack.framework in Embed Frameworks */,
+				45E0851F1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Embed Frameworks */,
 				4566CEB41DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -167,10 +183,9 @@
 		45185E801DA8F85A00C4D86D /* WorkspaceDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocument.swift; sourceTree = "<group>"; };
 		45185E841DA8FA6F00C4D86D /* WorkspaceDocumentEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocumentEvent.swift; sourceTree = "<group>"; };
 		452049A61DAF0A44002297EC /* AsyncMessageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncMessageDispatcher.swift; sourceTree = "<group>"; };
-		452049AA1DAFE017002297EC /* WorkspaceDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDriver.swift; sourceTree = "<group>"; };
 		452049AC1DAFE2BA002297EC /* DebuggingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingService.swift; sourceTree = "<group>"; };
 		452049AE1DAFE39C002297EC /* MainMenuDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuDriver.swift; sourceTree = "<group>"; };
-		452049B21DB06262002297EC /* WorkspaceStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceStore.swift; sourceTree = "<group>"; };
+		45441EC61DB3E7B900158711 /* WorkspaceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceService.swift; sourceTree = "<group>"; };
 		4566CEA01DADAAB100EA2A0C /* Editor6FileTreeUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6FileTreeUI.xcodeproj; path = ../Editor6FileTreeUI/Editor6FileTreeUI.xcodeproj; sourceTree = "<group>"; };
 		4566CEA91DADAAB400EA2A0C /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
 		4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
@@ -178,16 +193,9 @@
 		456FDD731DAA395100F8003A /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		456FDD751DAA3AAB00F8003A /* WorkspaceUIAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIAction.swift; sourceTree = "<group>"; };
 		456FDD771DAA3B2900F8003A /* WorkspaceUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIViewController.swift; sourceTree = "<group>"; };
-		456FDD971DAA3C5100F8003A /* FileNavigatorUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorUIViewController.swift; sourceTree = "<group>"; };
-		456FDD9D1DAA3D5100F8003A /* InspectorUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InspectorUIViewController.swift; sourceTree = "<group>"; };
-		456FDD9F1DAA3DB600F8003A /* NavigatorUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorUIViewController.swift; sourceTree = "<group>"; };
-		456FDDAF1DAA4BA000F8003A /* NavigatorUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorUIView.swift; sourceTree = "<group>"; };
 		456FDDB51DAA583E00F8003A /* WorkspaceCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceCommand.swift; sourceTree = "<group>"; };
 		456FDDB71DAA5BC600F8003A /* DriverCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverCommand.swift; sourceTree = "<group>"; };
-		456FDDCD1DAA5E1400F8003A /* WorkspaceUIRenderable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIRenderable.swift; sourceTree = "<group>"; };
 		456FDDCF1DAA602A00F8003A /* ApplicationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationState.swift; sourceTree = "<group>"; };
-		456FDDD11DAA607F00F8003A /* WorkspaceID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceID.swift; sourceTree = "<group>"; };
-		456FDDD31DAA773800F8003A /* Workspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
 		456FDDD51DAA78B900F8003A /* DriverState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverState.swift; sourceTree = "<group>"; };
 		456FDDD71DAA79F100F8003A /* MainMenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuManager.swift; sourceTree = "<group>"; };
 		456FDE121DAA871900F8003A /* MainMenuAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuAction.swift; sourceTree = "<group>"; };
@@ -198,6 +206,7 @@
 		456FDE201DAA952F00F8003A /* TreeEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeEvent.swift; sourceTree = "<group>"; };
 		456FDE221DAA95AE00F8003A /* Broadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broadcast.swift; sourceTree = "<group>"; };
 		456FDE261DABDB4900F8003A /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6WorkspaceUI.xcodeproj; path = ../Editor6WorkspaceUI/Editor6WorkspaceUI.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +216,7 @@
 			files = (
 				4566CEAF1DADAAC700EA2A0C /* Editor6Common.framework in Frameworks */,
 				4566CEE31DADABC100EA2A0C /* Editor6DepPack.framework in Frameworks */,
+				45E0851E1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Frameworks */,
 				4566CEB31DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,24 +261,16 @@
 				456FDE181DAA874900F8003A /* MainMenuActionItem.swift */,
 				456FDE201DAA952F00F8003A /* TreeEvent.swift */,
 				456FDE221DAA95AE00F8003A /* Broadcast.swift */,
-				452049AA1DAFE017002297EC /* WorkspaceDriver.swift */,
-				452049B21DB06262002297EC /* WorkspaceStore.swift */,
-				456FDDD31DAA773800F8003A /* Workspace.swift */,
-				452049A61DAF0A44002297EC /* AsyncMessageDispatcher.swift */,
-				456FDDD11DAA607F00F8003A /* WorkspaceID.swift */,
 				456FDDB51DAA583E00F8003A /* WorkspaceCommand.swift */,
 				45185E801DA8F85A00C4D86D /* WorkspaceDocument.swift */,
 				45185E841DA8FA6F00C4D86D /* WorkspaceDocumentEvent.swift */,
-				456FDDCD1DAA5E1400F8003A /* WorkspaceUIRenderable.swift */,
 				456FDD6B1DAA327400F8003A /* WorkspaceUIWindowController.swift */,
 				456FDD771DAA3B2900F8003A /* WorkspaceUIViewController.swift */,
 				456FDD751DAA3AAB00F8003A /* WorkspaceUIAction.swift */,
+				45441EC61DB3E7B900158711 /* WorkspaceService.swift */,
 				452049AC1DAFE2BA002297EC /* DebuggingService.swift */,
-				456FDD9F1DAA3DB600F8003A /* NavigatorUIViewController.swift */,
-				456FDD971DAA3C5100F8003A /* FileNavigatorUIViewController.swift */,
-				456FDD9D1DAA3D5100F8003A /* InspectorUIViewController.swift */,
-				456FDDAF1DAA4BA000F8003A /* NavigatorUIView.swift */,
 				45185E441DA8E8EA00C4D86D /* Document.swift */,
+				452049A61DAF0A44002297EC /* AsyncMessageDispatcher.swift */,
 				456FDD731DAA395100F8003A /* Report.swift */,
 				45185E491DA8E8EA00C4D86D /* Assets.xcassets */,
 				45185E4E1DA8E8EA00C4D86D /* Info.plist */,
@@ -279,6 +281,7 @@
 		45185E681DA8F0A700C4D86D /* (deps) */ = {
 			isa = PBXGroup;
 			children = (
+				45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */,
 				4566CEA01DADAAB100EA2A0C /* Editor6FileTreeUI.xcodeproj */,
 				4566CEA91DADAAB400EA2A0C /* Editor6Common.xcodeproj */,
 				4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */,
@@ -316,6 +319,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		45E085161DB3D1D500C5428D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */,
+				45E0851D1DB3D1D500C5428D /* Editor6WorkspaceUITestdrive.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -334,6 +346,7 @@
 				4566CEB21DADAAC700EA2A0C /* PBXTargetDependency */,
 				4566CEB61DADAACD00EA2A0C /* PBXTargetDependency */,
 				4566CEE61DADABC100EA2A0C /* PBXTargetDependency */,
+				45E085211DB3D1DC00C5428D /* PBXTargetDependency */,
 			);
 			name = Editor6;
 			productName = Editor6;
@@ -380,6 +393,10 @@
 				{
 					ProductGroup = 4566CEA11DADAAB100EA2A0C /* Products */;
 					ProjectRef = 4566CEA01DADAAB100EA2A0C /* Editor6FileTreeUI.xcodeproj */;
+				},
+				{
+					ProductGroup = 45E085161DB3D1D500C5428D /* Products */;
+					ProjectRef = 45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -453,6 +470,20 @@
 			remoteRef = 4566CEE01DADAB9F00EA2A0C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Editor6WorkspaceUI.framework;
+			remoteRef = 45E0851A1DB3D1D500C5428D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45E0851D1DB3D1D500C5428D /* Editor6WorkspaceUITestdrive.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Editor6WorkspaceUITestdrive.app;
+			remoteRef = 45E0851C1DB3D1D500C5428D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -471,11 +502,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				456FDD981DAA3C5100F8003A /* FileNavigatorUIViewController.swift in Sources */,
 				45185E7F1DA8F74500C4D86D /* Query.swift in Sources */,
-				456FDDA01DAA3DB600F8003A /* NavigatorUIViewController.swift in Sources */,
 				456FDD741DAA395100F8003A /* Report.swift in Sources */,
-				456FDDB01DAA4BA000F8003A /* NavigatorUIView.swift in Sources */,
 				456FDE1B1DAA8D5400F8003A /* MainMenuState.swift in Sources */,
 				456FDE191DAA874900F8003A /* MainMenuActionItem.swift in Sources */,
 				456FDD781DAA3B2900F8003A /* WorkspaceUIViewController.swift in Sources */,
@@ -484,29 +512,24 @@
 				456FDDD61DAA78B900F8003A /* DriverState.swift in Sources */,
 				456FDDB81DAA5BC600F8003A /* DriverCommand.swift in Sources */,
 				45185E431DA8E8EA00C4D86D /* Driver.swift in Sources */,
-				456FDD9E1DAA3D5100F8003A /* InspectorUIViewController.swift in Sources */,
 				456FDE131DAA871900F8003A /* MainMenuAction.swift in Sources */,
-				456FDDD41DAA773800F8003A /* Workspace.swift in Sources */,
 				452049A71DAF0A44002297EC /* AsyncMessageDispatcher.swift in Sources */,
 				456FDE1F1DAA941200F8003A /* OperationAction.swift in Sources */,
 				456FDDD81DAA79F100F8003A /* MainMenuManager.swift in Sources */,
-				452049B31DB06262002297EC /* WorkspaceStore.swift in Sources */,
-				456FDDD21DAA607F00F8003A /* WorkspaceID.swift in Sources */,
 				456FDD6C1DAA327400F8003A /* WorkspaceUIWindowController.swift in Sources */,
 				45185E791DA8F44300C4D86D /* main.swift in Sources */,
 				452049AD1DAFE2BA002297EC /* DebuggingService.swift in Sources */,
+				45441EC71DB3E7B900158711 /* WorkspaceService.swift in Sources */,
 				452049AF1DAFE39C002297EC /* MainMenuDriver.swift in Sources */,
 				45185E851DA8FA6F00C4D86D /* WorkspaceDocumentEvent.swift in Sources */,
 				456FDD761DAA3AAB00F8003A /* WorkspaceUIAction.swift in Sources */,
 				456FDE1D1DAA92CE00F8003A /* OperationManager.swift in Sources */,
 				456FDE211DAA952F00F8003A /* TreeEvent.swift in Sources */,
-				452049AB1DAFE017002297EC /* WorkspaceDriver.swift in Sources */,
 				456FDE271DABDB4900F8003A /* Store.swift in Sources */,
 				45185E7B1DA8F58B00C4D86D /* Action.swift in Sources */,
 				456FDDB61DAA583E00F8003A /* WorkspaceCommand.swift in Sources */,
 				456FDE231DAA95AE00F8003A /* Broadcast.swift in Sources */,
 				45185E811DA8F85A00C4D86D /* WorkspaceDocument.swift in Sources */,
-				456FDDCE1DAA5E1400F8003A /* WorkspaceUIRenderable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +550,11 @@
 			isa = PBXTargetDependency;
 			name = Editor6DepPack;
 			targetProxy = 4566CEE51DADABC100EA2A0C /* PBXContainerItemProxy */;
+		};
+		45E085211DB3D1DC00C5428D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Editor6WorkspaceUI;
+			targetProxy = 45E085201DB3D1DC00C5428D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -629,7 +657,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = SYA75M63MP;
 				INFOPLIST_FILE = Editor6/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -644,7 +672,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = SYA75M63MP;
 				INFOPLIST_FILE = Editor6/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;

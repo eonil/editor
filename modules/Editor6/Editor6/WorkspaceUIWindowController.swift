@@ -10,6 +10,7 @@ import Foundation
 import AppKit
 import EonilToolbox
 import Editor6Common
+import Editor6WorkspaceUI
 
 final class WorkspaceUIWindowController: NSWindowController, NSWindowDelegate {
     var dispatch: ((WorkspaceUIAction) -> ())?
@@ -30,7 +31,7 @@ final class WorkspaceUIWindowController: NSWindowController, NSWindowDelegate {
     }
 
     func reload(_ newState: WorkspaceUIState) {
-        contentViewController?.reload(newState, recursively: true)
+        workspaceViewController.reload(newState)
     }
 
     private func render() {
@@ -59,18 +60,5 @@ final class WorkspaceUIWindowController: NSWindowController, NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
         guard let d = document as? WorkspaceDocument else { reportFatalError() }
         d.close()
-    }
-}
-
-fileprivate extension NSViewController {
-    func reload(_ newState: WorkspaceUIState, recursively: Bool) {
-        if let r = self as? WorkspaceUIRenderable {
-            r.reload(newState)
-        }
-        if recursively {
-            childViewControllers.forEach { cvc in
-                cvc.reload(newState, recursively: true)
-            }
-        }
     }
 }
