@@ -19,7 +19,7 @@ final class WorkspaceUINavigatorViewController: Editor6CommonViewController {
     private let divider = ManualView()
     private let container = ManualView()
     private let fileTree = FileNavigatorUIView()
-    private let issueList = Editor6CommonOutlineUIView()
+    private let issueList = WorkspaceUIBasicOutlineView()
     private let debugTree = ManualView()
 
     func reload(_ newState: WorkspaceUIState) {

@@ -1,48 +1,31 @@
 //
-//  Editor6CommonOutlineController.swift
+//  WorkspaceUIBasicOutlineView.swift
 //  Editor6WorkspaceUI
 //
-//  Created by Hoon H. on 2016/10/16.
+//  Created by Hoon H. on 2016/10/17.
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
 import Foundation
 import AppKit
-import EonilToolbox
 import ManualView
 import Editor6Common
 
-public struct Editor6CommonOutlineUIState {
-    public typealias Node = Editor6CommonOutlineUINode
-    /// Allows multiple trees.
-    public var tree = Tree<Node>(state: Node())
-    public var showsRootNode = true
-    public var showsNodeIcons = true
-    public var showsNodeLabels = true
-    public init() {}
-}
-
-public struct Editor6CommonOutlineUINode {
-    public var isExpandable = true
-//    public var isExpanded = false
-    public var icon = NSImage?.none
-    public var label = String?.none
-    public init() {}
-}
-
-public final class Editor6CommonOutlineUIView: ManualView, NSOutlineViewDataSource, NSOutlineViewDelegate {
+public final class WorkspaceUIBasicOutlineView: ManualView, NSOutlineViewDataSource, NSOutlineViewDelegate {
+    private typealias NodeID = WorkspaceUIBasicOutlineNodeID
+    private typealias NodeState = WorkspaceUIBasicOutlineNodeState
     private let scroll = NSScrollView()
     private let outline = NSOutlineView()
-    private var localState = Editor6CommonOutlineUIState()
-    private var idMapping = [TreeNodeKey: MappedID]()
+    private var localState = WorkspaceUIBasicOutlineState()
+    private var idMapping = [NodeID: MappedID]()
 
-    public func reload(_ newState: Editor6CommonOutlineUIState) {
+    public func reload(_ newState: WorkspaceUIBasicOutlineState) {
         localState = newState
         remapAllIDs()
         outline.reloadData()
     }
     private func remapAllIDs() {
-        var newIDMapping = [TreeNodeKey: MappedID]()
+        var newIDMapping = [NodeID: MappedID]()
         for (k, _) in localState.tree {
             newIDMapping[k] = idMapping[k] ?? MappedID(sourceID: k)
         }
@@ -68,7 +51,7 @@ public final class Editor6CommonOutlineUIView: ManualView, NSOutlineViewDataSour
         scroll.frame = bounds
     }
 
-    private func getSourceID(from item: Any) -> TreeNodeKey {
+    private func getSourceID(from item: Any) -> NodeID {
         guard let mappedID = item as? MappedID else { fatalError("Unexpected item in `NSOutlineView`.") }
         let id = mappedID.sourceID
         return id
@@ -90,21 +73,21 @@ public final class Editor6CommonOutlineUIView: ManualView, NSOutlineViewDataSour
         let id = getSourceID(from: item)
         return localState.tree[id].isExpandable
     }
-//    @objc
-//    @available(*,unavailable)
-//    public func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
-//        let id = getSourceID(from: item)
-//        return localState.tree[id].isExpandable
-//    }
+    //    @objc
+    //    @available(*,unavailable)
+    //    public func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
+    //        let id = getSourceID(from: item)
+    //        return localState.tree[id].isExpandable
+    //    }
     @objc
     @available(*,unavailable)
     public func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        func getRootNodeIDs() -> [TreeNodeKey] {
+        func getRootNodeIDs() -> [NodeID] {
             return localState.showsRootNode
                 ? [localState.tree.root.id]
                 : localState.tree.children(of: localState.tree.root.id)
         }
-        func getChildrenIDs() -> [TreeNodeKey] {
+        func getChildrenIDs() -> [NodeID] {
             guard let item = item else { return getRootNodeIDs() }
             let id = getSourceID(from: item)
             return localState.tree.children(of: id)
@@ -113,13 +96,13 @@ public final class Editor6CommonOutlineUIView: ManualView, NSOutlineViewDataSour
         guard let mappedChildID = idMapping[childID] else { fatalError("Cannot find mapped-ID from child ID `\(childID)`.") }
         return mappedChildID
     }
-//    @objc
-//    @available(*,unavailable)
-//    public func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
-//        guard let mappedID = item as? MappedID else { return false }
-//        let id = mappedID.sourceID
-//        return localState.tree[id]
-//    }
+    //    @objc
+    //    @available(*,unavailable)
+    //    public func outlineView(_ outlineView: NSOutlineView, objectValueFor tableColumn: NSTableColumn?, byItem item: Any?) -> Any? {
+    //        guard let mappedID = item as? MappedID else { return false }
+    //        let id = mappedID.sourceID
+    //        return localState.tree[id]
+    //    }
     @objc
     @available(*,unavailable)
     public func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
@@ -155,7 +138,7 @@ fileprivate final class CellView: NSTableCellView {
         label.isEditable = false
     }
 
-    func reload(_ newState: Editor6CommonOutlineUINode) {
+    func reload(_ newState: WorkspaceUIBasicOutlineNodeState) {
         icon.image = newState.icon
         label.stringValue = newState.label ?? ""
     }
@@ -168,8 +151,8 @@ fileprivate final class CellView: NSTableCellView {
 }
 
 private final class MappedID: NSObject {
-    var sourceID: TreeNodeKey
-    init(sourceID: TreeNodeKey) {
+    var sourceID: WorkspaceUIBasicOutlineNodeID
+    init(sourceID: WorkspaceUIBasicOutlineNodeID) {
         self.sourceID = sourceID
     }
     override var hashValue: Int {

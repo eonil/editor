@@ -16,6 +16,6 @@ public struct WorkspaceUIState {
 
 public struct WorkspaceUINavigatorState {
     public var files = FileNavigatorUIState()
-    public var issues = Editor6CommonOutlineUIState()
-    public var debug = Editor6CommonOutlineUIState()
+    public var issues = WorkspaceUIBasicOutlineState()
+    public var debug = WorkspaceUIBasicOutlineState()
 }

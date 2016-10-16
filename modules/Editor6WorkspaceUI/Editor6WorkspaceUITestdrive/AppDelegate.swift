@@ -25,9 +25,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         s.navigator.files.tree[newFileID].name = "(file 1)"
 
         do {
-            var n = Editor6CommonOutlineUINode()
+            var n = WorkspaceUIBasicOutlineNodeState()
             n.label = "AAAAA"
-            var t = Tree<Editor6CommonOutlineUINode>(state: n)
+            var t = WorkspaceUIBasicOutlineState.Tree(state: n)
             t.insert(n, at: 0, in: t.root.id)
 //            let id1 = t.insert(n, at: 1, in: t.root.id)
             t.insert(n, at: 1, in: t.root.id)
