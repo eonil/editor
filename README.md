@@ -1,10 +1,10 @@
-Editor5
+Editor6
 =======
 Hoon H.
 
 Directory Layout
 ----------------
-I will use this layout ntil SwiftPM to be fully supported by Xcode.
+I will use this layout until SwiftPM to be fully supported by Xcode.
 No further plan has been made.
 
     /                   Root
@@ -12,7 +12,7 @@ No further plan has been made.
     /submodules         Xcode projects linked by Git submodule.
     /packages           Swift Packages.
 
-All Swift Packages are packed in `Editor5DepPack`.
+All Swift Packages are packed in `Editor6DepPack`.
 This package is just an aggregation package which collects every dependencies.
 
 
@@ -37,6 +37,55 @@ operation with current state snapshot. Operation executes long running
 interactive flow. For each steps in operation, operation flow can send
 some commands to any components. For instance, it can send file-add command
 to workspace.
+
+
+
+
+Architecture
+------------
+Follows looping data-flow architecture.
+In other words, FRP.
+In other words, message-pump.
+In other words, Redux.
+Whatever.
+
+    Driver
+    - MainMenuManager
+    - WorkspaceDocument...
+
+MainMenuManager and WorkspaceDocument acts like independent servers.
+They *own* thier own states, and updates them themselves. WorkspaceDocument
+dispatches any changes back to Driver. Driver owns its state, and propagates
+it to main menu.
+
+
+
+View shares states that are only required to be known to other components.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

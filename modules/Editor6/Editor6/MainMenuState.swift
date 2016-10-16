@@ -24,19 +24,6 @@ struct MainMenuState {
     }
 }
 
-private func makeGroupItem(_ title: String) -> NSMenuItem {
-    let m = NSMenuItem()
-    m.title = title
-    m.submenu = NSMenu()
-    return m
-}
-private func makeActionItem(_ action: MainMenuAction, _ title: String) -> MainMenuActionItem {
-    let m = MainMenuActionItem()
-    m.title = title
-    m.actionToDispatch = action
-    return m
-}
-
 private let command = NSEventModifierFlags.command
 private let shift = NSEventModifierFlags.shift
 private let option = NSEventModifierFlags.option

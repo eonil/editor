@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import Editor6Common
 
 final class MainMenuManager {
     var dispatch: ((MainMenuAction) -> ())?
@@ -56,3 +57,23 @@ private struct MainMenuPalette {
     let debugStepInto       =   makeActionItem(.debugStepInto, "Step Into")
     let debugStepOut        =   makeActionItem(.debugStepOut, "Step Out")
 }
+
+private func makeGroupItem(_ title: String) -> NSMenuItem {
+    let m = NSMenuItem()
+    m.title = title
+    m.submenu = NSMenu()
+    return m
+}
+private func makeActionItem(_ action: MainMenuAction, _ title: String) -> MainMenuActionItem {
+    let m = MainMenuActionItem()
+    m.title = title
+    m.actionToDispatch = action
+    return m
+}
+
+
+
+
+
+
+

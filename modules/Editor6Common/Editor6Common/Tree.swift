@@ -10,6 +10,8 @@ import Foundation
 import BTree
 import EonilToolbox
 
+@available(*, deprecated: 0.0)
+//@available(*, unavailable)
 public struct Tree<Element>: Sequence {
     public typealias TreeNode = (id: TreeNodeKey, state: Element)
 
@@ -60,6 +62,10 @@ public struct Tree<Element>: Sequence {
             precondition(states[id] != nil)
             states[id] = newValue
         }
+    }
+    public func children(of id: TreeNodeKey) -> [TreeNodeKey] {
+        guard let linkage = linkages[id] else { fatalError("Cannot find node for ID `\(id)`.") }
+        return linkage.children
     }
 
     /// Inserts a new node at index under parent.

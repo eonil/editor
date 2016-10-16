@@ -15,6 +15,7 @@ final class Driver {
     private var localState = DriverState()
 
     init() {
+        assert(Thread.isMainThread)
         precondition(Driver.instanceCount == 0)
         Driver.instanceCount += 1
         appdel.owner = self
@@ -22,9 +23,11 @@ final class Driver {
         Driver.dispatch = { [weak self] in self?.schedule(.handle($0)) }
     }
     func run() -> Int32 {
+        assert(Thread.isMainThread)
         return NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
     }
     deinit {
+        assert(Thread.isMainThread)
         Driver.dispatch = noop
         NSApplication.shared().delegate = nil
         appdel.owner = nil

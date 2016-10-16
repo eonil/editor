@@ -19,7 +19,8 @@ struct WorkspaceID: Hashable {
     var hashValue: Int {
         return ObjectIdentifier(document!).hashValue
     }
-}
-func == (_ a: WorkspaceID, _ b: WorkspaceID) -> Bool {
-    return a.getDocument() === b.getDocument()
+
+    static func == (_ a: WorkspaceID, _ b: WorkspaceID) -> Bool {
+        return a.getDocument() === b.getDocument()
+    }
 }

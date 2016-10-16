@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "group:NOTE.md">
+   </FileRef>
+   <Group
+      location = "container:"
+      name = "modules">
+      <FileRef
+         location = "group:modules/Editor6/Editor6.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:modules/Editor6WorkspaceUI/Editor6WorkspaceUI.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:modules/Editor6FileTreeUI/Editor6FileTreeUI.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:modules/Editor6Common/Editor6Common.xcodeproj">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "submodules">
+   </Group>
+   <Group
+      location = "container:"
+      name = "packages">
+   </Group>
+</Workspace>
