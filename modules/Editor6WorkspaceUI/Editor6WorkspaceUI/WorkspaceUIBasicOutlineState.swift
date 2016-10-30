@@ -37,7 +37,7 @@ public struct WorkspaceUIBasicOutlineNodeID: Tree1NodeKey {
 
 public struct WorkspaceUIBasicOutlineNodeState {
     public var isExpandable = true
-    //    public var isExpanded = false
+//    public var isExpanded = false
     public var icon = NSImage?.none
     public var label = String?.none
     public init() {}

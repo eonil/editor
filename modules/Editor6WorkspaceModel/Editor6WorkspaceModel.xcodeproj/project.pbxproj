@@ -7,14 +7,101 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4507B8351DB410B4006A5871 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45441EF31DB3EB4E00158711 /* LLDBWrapper.framework */; };
+		4507B8581DB45D42006A5871 /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */; };
+		4507B85A1DB501F2006A5871 /* UNUSED_SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4507B8591DB501F2006A5871 /* UNUSED_SubprocessController.swift */; };
 		45441EDB1DB3EA0F00158711 /* Editor6WorkspaceModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45441EE21DB3EA3200158711 /* Editor6WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE11DB3EA3200158711 /* Editor6WorkspaceModel.swift */; };
 		45441EE41DB3EA4A00158711 /* WorkspaceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE31DB3EA4A00158711 /* WorkspaceState.swift */; };
 		45441EE61DB3EA5100158711 /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE51DB3EA5100158711 /* WorkspaceModel.swift */; };
-		45441EE81DB3EA8E00158711 /* DebuggingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE71DB3EA8E00158711 /* DebuggingModel.swift */; };
+		45441EE81DB3EA8E00158711 /* DebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE71DB3EA8E00158711 /* DebugModel.swift */; };
+		456276111DBA739600F68C84 /* MARK_unimplemented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456276101DBA739600F68C84 /* MARK_unimplemented.swift */; };
+		459EE2B51DBAE17E00A98670 /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459EE2A81DBAE17400A98670 /* EonilToolbox.framework */; };
+		459EE2B61DBAE18400A98670 /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459EE2A81DBAE17400A98670 /* EonilToolbox.framework */; };
+		459EE2B71DBAE18400A98670 /* EonilToolbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459EE2A81DBAE17400A98670 /* EonilToolbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45A77E4C1DBB1474004437C0 /* DeferredFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E4B1DBB1474004437C0 /* DeferredFlow.swift */; };
+		45A77E5C1DBB173F004437C0 /* ThreadChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E5B1DBB173F004437C0 /* ThreadChecker.swift */; };
+		45A77E5F1DBB1B42004437C0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E5E1DBB1B42004437C0 /* Model.swift */; };
+		45A77E611DBB1C4B004437C0 /* Swift.Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E601DBB1C4B004437C0 /* Swift.Array+.swift */; };
+		45A77E631DBB292D004437C0 /* DeferableStateContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E621DBB292D004437C0 /* DeferableStateContainer.swift */; };
+		45BBCF751DB5306900F83573 /* UNUSED_BashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBCF741DB5306900F83573 /* UNUSED_BashController.swift */; };
+		45BBCF891DB5489F00F83573 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBCF881DB5489F00F83573 /* AppDelegate.swift */; };
+		45BBCF8B1DB5489F00F83573 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BBCF8A1DB5489F00F83573 /* Assets.xcassets */; };
+		45BBCF8E1DB5489F00F83573 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BBCF8C1DB5489F00F83573 /* MainMenu.xib */; };
+		45BBCF931DB548AA00F83573 /* Editor6WorkspaceModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */; };
+		45BBCF941DB548AA00F83573 /* Editor6WorkspaceModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45BBCF981DB548C100F83573 /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */; };
+		45BBCF991DB548C100F83573 /* Editor6DepPack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45C0E5641DB5A659001D23C0 /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5631DB5A659001D23C0 /* Delegate.swift */; };
+		45C0E5BB1DB90343001D23C0 /* WorkspaceCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5BA1DB90343001D23C0 /* WorkspaceCommand.swift */; };
+		45C0E5BD1DB90374001D23C0 /* WorkspaceNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5BC1DB90374001D23C0 /* WorkspaceNotification.swift */; };
+		45C0E5C71DB92082001D23C0 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5C61DB92082001D23C0 /* Action.swift */; };
+		45C0E5CD1DBA4F01001D23C0 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5CC1DBA4F01001D23C0 /* DebugState.swift */; };
+		45C0E6821DBA5C5F001D23C0 /* Bash1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6771DBA5C5F001D23C0 /* Bash1.swift */; };
+		45C0E6831DBA5C5F001D23C0 /* Cargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6791DBA5C5F001D23C0 /* Cargo.swift */; };
+		45C0E6841DBA5C5F001D23C0 /* RustLanguageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E67C1DBA5C5F001D23C0 /* RustLanguageServer.swift */; };
+		45C0E6861DBA5C5F001D23C0 /* IOQueuePair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E67F1DBA5C5F001D23C0 /* IOQueuePair.swift */; };
+		45C0E6871DBA5C5F001D23C0 /* LineReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6801DBA5C5F001D23C0 /* LineReader.swift */; };
+		45C0E6881DBA5C5F001D23C0 /* Subprocess1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6811DBA5C5F001D23C0 /* Subprocess1.swift */; };
+		45C0E6961DBA5DC1001D23C0 /* TrackableCommandQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6951DBA5DC0001D23C0 /* TrackableCommandQueue.swift */; };
+		45C0E6981DBA672F001D23C0 /* Bash2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6971DBA672F001D23C0 /* Bash2.swift */; };
+		45C0E69A1DBA69CA001D23C0 /* Cargo1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6991DBA69CA001D23C0 /* Cargo1.swift */; };
+		45F951A01DC3A16200A260B1 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9519F1DC3A16200A260B1 /* Future.swift */; };
+		45F951B01DC4233B00A260B1 /* Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951AF1DC4233B00A260B1 /* Broadcast.swift */; };
+		45F951B21DC42C6200A260B1 /* ModelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B11DC42C6200A260B1 /* ModelTypes.swift */; };
+		45F951B41DC464BF00A260B1 /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B31DC464BF00A260B1 /* Mutation.swift */; };
+		45F951B61DC4677600A260B1 /* DebugMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B51DC4677600A260B1 /* DebugMutation.swift */; };
+		45F951B81DC593C600A260B1 /* Model2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B71DC593C600A260B1 /* Model2.swift */; };
+		45F951BA1DC5BE7400A260B1 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B91DC5BE7400A260B1 /* Driver.swift */; };
+		45F951BC1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951BB1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift */; };
+		45F951C41DC5F2C000A260B1 /* ModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951C31DC5F2C000A260B1 /* ModelAction.swift */; };
+		45F951C61DC5F2E700A260B1 /* ModelMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951C51DC5F2E700A260B1 /* ModelMutation.swift */; };
+		45F951CC1DC60E2900A260B1 /* IssueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951CB1DC60E2900A260B1 /* IssueModel.swift */; };
+		45F951CE1DC6186E00A260B1 /* BuildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951CD1DC6186E00A260B1 /* BuildModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4507B8471DB45D3B006A5871 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "_____Product_Flow";
+			remoteInfo = Flow;
+		};
+		4507B8491DB45D3B006A5871 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "_____Product_FSEventsUnofficialWrapper";
+			remoteInfo = FSEventsUnofficialWrapper;
+		};
+		4507B84B1DB45D3B006A5871 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "_____Product_Reftable";
+			remoteInfo = Reftable;
+		};
+		4507B84D1DB45D3B006A5871 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "_____Product_BTree";
+			remoteInfo = BTree;
+		};
+		4507B84F1DB45D3B006A5871 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "_____Product_Editor6DepPack";
+			remoteInfo = Editor6DepPack;
+		};
+		4507B8511DB45D3B006A5871 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "_____Product_Editor6DepPackTests";
+			remoteInfo = Editor6DepPackTests;
+		};
 		45441EF21DB3EB4E00158711 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */;
@@ -57,17 +144,124 @@
 			remoteGlobalIDString = 45E5EF211A7E6817009967D2;
 			remoteInfo = TestdriveApp;
 		};
+		459EE2A71DBAE17400A98670 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45771A9D1CD0E1A30096947A;
+			remoteInfo = "EonilToolbox-iOS";
+		};
+		459EE2A91DBAE17400A98670 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45771B101CD0EAE10096947A;
+			remoteInfo = "EonilToolbox-OSX";
+		};
+		459EE2AB1DBAE17400A98670 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D1B98E1D16CF0300B9F7C3;
+			remoteInfo = "EonilToolboxTests-macOS";
+		};
+		459EE2AD1DBAE17400A98670 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452A006B1D943811007DF8F3;
+			remoteInfo = "EonilToolboxTests-iOS";
+		};
+		459EE2B81DBAE18400A98670 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45771A9C1CD0E1A30096947A;
+			remoteInfo = "EonilToolbox-iOS";
+		};
+		45BBCF951DB548AA00F83573 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45441ECD1DB3EA0F00158711 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45441ED51DB3EA0F00158711;
+			remoteInfo = Editor6WorkspaceModel;
+		};
+		45BBCF9A1DB548C100F83573 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = "______Target_Editor6DepPack";
+			remoteInfo = Editor6DepPack;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		45BBCF971DB548AA00F83573 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				45BBCF941DB548AA00F83573 /* Editor6WorkspaceModel.framework in Embed Frameworks */,
+				459EE2B71DBAE18400A98670 /* EonilToolbox.framework in Embed Frameworks */,
+				45BBCF991DB548C100F83573 /* Editor6DepPack.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
+		4507B8591DB501F2006A5871 /* UNUSED_SubprocessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_SubprocessController.swift; sourceTree = "<group>"; };
 		45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6WorkspaceModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6WorkspaceModel.h; sourceTree = "<group>"; };
 		45441EDA1DB3EA0F00158711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45441EE11DB3EA3200158711 /* Editor6WorkspaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6WorkspaceModel.swift; sourceTree = "<group>"; };
 		45441EE31DB3EA4A00158711 /* WorkspaceState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceState.swift; sourceTree = "<group>"; };
 		45441EE51DB3EA5100158711 /* WorkspaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
-		45441EE71DB3EA8E00158711 /* DebuggingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingModel.swift; sourceTree = "<group>"; };
+		45441EE71DB3EA8E00158711 /* DebugModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugModel.swift; sourceTree = "<group>"; };
 		45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
+		456276101DBA739600F68C84 /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
+		459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = ../../submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
+		45A77E4B1DBB1474004437C0 /* DeferredFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeferredFlow.swift; sourceTree = "<group>"; };
+		45A77E5B1DBB173F004437C0 /* ThreadChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadChecker.swift; sourceTree = "<group>"; };
+		45A77E5D1DBB17DA004437C0 /* Test1.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Test1.playground; sourceTree = "<group>"; };
+		45A77E5E1DBB1B42004437C0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		45A77E601DBB1C4B004437C0 /* Swift.Array+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift.Array+.swift"; sourceTree = "<group>"; };
+		45A77E621DBB292D004437C0 /* DeferableStateContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeferableStateContainer.swift; sourceTree = "<group>"; };
+		45BBCF741DB5306900F83573 /* UNUSED_BashController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_BashController.swift; sourceTree = "<group>"; };
+		45BBCF861DB5489F00F83573 /* Editor6WorkspaceModelTestdrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor6WorkspaceModelTestdrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45BBCF881DB5489F00F83573 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		45BBCF8A1DB5489F00F83573 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		45BBCF8D1DB5489F00F83573 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		45BBCF8F1DB5489F00F83573 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45C0E5631DB5A659001D23C0 /* Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
+		45C0E5BA1DB90343001D23C0 /* WorkspaceCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceCommand.swift; sourceTree = "<group>"; };
+		45C0E5BC1DB90374001D23C0 /* WorkspaceNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceNotification.swift; sourceTree = "<group>"; };
+		45C0E5C01DB90DAE001D23C0 /* WorkspaceModelREADME.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = WorkspaceModelREADME.md; sourceTree = "<group>"; };
+		45C0E5C61DB92082001D23C0 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		45C0E5CC1DBA4F01001D23C0 /* DebugState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugState.swift; sourceTree = "<group>"; };
+		45C0E6771DBA5C5F001D23C0 /* Bash1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash1.swift; sourceTree = "<group>"; };
+		45C0E6791DBA5C5F001D23C0 /* Cargo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo.swift; sourceTree = "<group>"; };
+		45C0E67C1DBA5C5F001D23C0 /* RustLanguageServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustLanguageServer.swift; sourceTree = "<group>"; };
+		45C0E67F1DBA5C5F001D23C0 /* IOQueuePair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOQueuePair.swift; sourceTree = "<group>"; };
+		45C0E6801DBA5C5F001D23C0 /* LineReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineReader.swift; sourceTree = "<group>"; };
+		45C0E6811DBA5C5F001D23C0 /* Subprocess1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess1.swift; sourceTree = "<group>"; };
+		45C0E6951DBA5DC0001D23C0 /* TrackableCommandQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackableCommandQueue.swift; sourceTree = "<group>"; };
+		45C0E6971DBA672F001D23C0 /* Bash2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash2.swift; sourceTree = "<group>"; };
+		45C0E6991DBA69CA001D23C0 /* Cargo1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo1.swift; sourceTree = "<group>"; };
+		45F9519F1DC3A16200A260B1 /* Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		45F951AF1DC4233B00A260B1 /* Broadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broadcast.swift; sourceTree = "<group>"; };
+		45F951B11DC42C6200A260B1 /* ModelTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTypes.swift; sourceTree = "<group>"; };
+		45F951B31DC464BF00A260B1 /* Mutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
+		45F951B51DC4677600A260B1 /* DebugMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMutation.swift; sourceTree = "<group>"; };
+		45F951B71DC593C600A260B1 /* Model2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model2.swift; sourceTree = "<group>"; };
+		45F951B91DC5BE7400A260B1 /* Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
+		45F951BB1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSingleSteppingActor.swift; sourceTree = "<group>"; };
+		45F951C31DC5F2C000A260B1 /* ModelAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelAction.swift; sourceTree = "<group>"; };
+		45F951C51DC5F2E700A260B1 /* ModelMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMutation.swift; sourceTree = "<group>"; };
+		45F951CB1DC60E2900A260B1 /* IssueModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueModel.swift; sourceTree = "<group>"; };
+		45F951CD1DC6186E00A260B1 /* BuildModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,17 +269,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459EE2B51DBAE17E00A98670 /* EonilToolbox.framework in Frameworks */,
+				4507B8581DB45D42006A5871 /* Editor6DepPack.framework in Frameworks */,
+				4507B8351DB410B4006A5871 /* LLDBWrapper.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45BBCF831DB5489F00F83573 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45BBCF931DB548AA00F83573 /* Editor6WorkspaceModel.framework in Frameworks */,
+				459EE2B61DBAE18400A98670 /* EonilToolbox.framework in Frameworks */,
+				45BBCF981DB548C100F83573 /* Editor6DepPack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4507B83F1DB45D3B006A5871 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4507B8481DB45D3B006A5871 /* Flow.framework */,
+				4507B84A1DB45D3B006A5871 /* FSEventsUnofficialWrapper.framework */,
+				4507B84C1DB45D3B006A5871 /* Reftable.framework */,
+				4507B84E1DB45D3B006A5871 /* BTree.framework */,
+				4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */,
+				4507B8521DB45D3B006A5871 /* Editor6DepPackTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45441ECC1DB3EA0F00158711 = {
 			isa = PBXGroup;
 			children = (
+				459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */,
+				4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */,
 				45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */,
 				45441ED81DB3EA0F00158711 /* Editor6WorkspaceModel */,
+				45BBCF871DB5489F00F83573 /* Editor6WorkspaceModelTestdrive */,
 				45441ED71DB3EA0F00158711 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -94,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */,
+				45BBCF861DB5489F00F83573 /* Editor6WorkspaceModelTestdrive.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,11 +326,29 @@
 			isa = PBXGroup;
 			children = (
 				45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */,
+				45C0E5C01DB90DAE001D23C0 /* WorkspaceModelREADME.md */,
+				45A77E5D1DBB17DA004437C0 /* Test1.playground */,
 				45441EDA1DB3EA0F00158711 /* Info.plist */,
-				45441EE11DB3EA3200158711 /* Editor6WorkspaceModel.swift */,
+				45A77E5E1DBB1B42004437C0 /* Model.swift */,
+				45F951B71DC593C600A260B1 /* Model2.swift */,
+				45F951B11DC42C6200A260B1 /* ModelTypes.swift */,
+				45F951C31DC5F2C000A260B1 /* ModelAction.swift */,
+				45F951C51DC5F2E700A260B1 /* ModelMutation.swift */,
+				45C0E5BA1DB90343001D23C0 /* WorkspaceCommand.swift */,
 				45441EE31DB3EA4A00158711 /* WorkspaceState.swift */,
+				45C0E5BC1DB90374001D23C0 /* WorkspaceNotification.swift */,
 				45441EE51DB3EA5100158711 /* WorkspaceModel.swift */,
-				45441EE71DB3EA8E00158711 /* DebuggingModel.swift */,
+				45F951CD1DC6186E00A260B1 /* BuildModel.swift */,
+				45C0E5CC1DBA4F01001D23C0 /* DebugState.swift */,
+				45F951B51DC4677600A260B1 /* DebugMutation.swift */,
+				45441EE71DB3EA8E00158711 /* DebugModel.swift */,
+				45F951CB1DC60E2900A260B1 /* IssueModel.swift */,
+				45F951AF1DC4233B00A260B1 /* Broadcast.swift */,
+				45C0E6941DBA5DB0001D23C0 /* Utility */,
+				45C0E5631DB5A659001D23C0 /* Delegate.swift */,
+				45C0E5C61DB92082001D23C0 /* Action.swift */,
+				45C0E6751DBA5C5F001D23C0 /* Service */,
+				45C0E5B91DB7C38D001D23C0 /* unused */,
 			);
 			path = Editor6WorkspaceModel;
 			sourceTree = "<group>";
@@ -122,6 +364,109 @@
 				45441EFD1DB3EB4E00158711 /* TestdriveApp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		459EE29C1DBAE17400A98670 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				459EE2A81DBAE17400A98670 /* EonilToolbox.framework */,
+				459EE2AA1DBAE17400A98670 /* EonilToolbox.framework */,
+				459EE2AC1DBAE17400A98670 /* EonilToolboxTests-macOS.xctest */,
+				459EE2AE1DBAE17400A98670 /* EonilToolboxTests-iOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45BBCF871DB5489F00F83573 /* Editor6WorkspaceModelTestdrive */ = {
+			isa = PBXGroup;
+			children = (
+				45BBCF881DB5489F00F83573 /* AppDelegate.swift */,
+				45F951B91DC5BE7400A260B1 /* Driver.swift */,
+				45BBCF8A1DB5489F00F83573 /* Assets.xcassets */,
+				45BBCF8C1DB5489F00F83573 /* MainMenu.xib */,
+				45BBCF8F1DB5489F00F83573 /* Info.plist */,
+			);
+			path = Editor6WorkspaceModelTestdrive;
+			sourceTree = "<group>";
+		};
+		45C0E5B91DB7C38D001D23C0 /* unused */ = {
+			isa = PBXGroup;
+			children = (
+				45BBCF741DB5306900F83573 /* UNUSED_BashController.swift */,
+				4507B8591DB501F2006A5871 /* UNUSED_SubprocessController.swift */,
+			);
+			name = unused;
+			sourceTree = "<group>";
+		};
+		45C0E6751DBA5C5F001D23C0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				45C0E6761DBA5C5F001D23C0 /* Bash */,
+				45C0E6781DBA5C5F001D23C0 /* Cargo */,
+				45C0E67A1DBA5C5F001D23C0 /* LLDB */,
+				45C0E67B1DBA5C5F001D23C0 /* RustLanguageServer */,
+				45C0E67E1DBA5C5F001D23C0 /* Utility */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		45C0E6761DBA5C5F001D23C0 /* Bash */ = {
+			isa = PBXGroup;
+			children = (
+				45C0E6771DBA5C5F001D23C0 /* Bash1.swift */,
+				45C0E6971DBA672F001D23C0 /* Bash2.swift */,
+			);
+			path = Bash;
+			sourceTree = "<group>";
+		};
+		45C0E6781DBA5C5F001D23C0 /* Cargo */ = {
+			isa = PBXGroup;
+			children = (
+				45C0E6791DBA5C5F001D23C0 /* Cargo.swift */,
+				45C0E6991DBA69CA001D23C0 /* Cargo1.swift */,
+			);
+			path = Cargo;
+			sourceTree = "<group>";
+		};
+		45C0E67A1DBA5C5F001D23C0 /* LLDB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LLDB;
+			sourceTree = "<group>";
+		};
+		45C0E67B1DBA5C5F001D23C0 /* RustLanguageServer */ = {
+			isa = PBXGroup;
+			children = (
+				45C0E67C1DBA5C5F001D23C0 /* RustLanguageServer.swift */,
+			);
+			path = RustLanguageServer;
+			sourceTree = "<group>";
+		};
+		45C0E67E1DBA5C5F001D23C0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				45C0E67F1DBA5C5F001D23C0 /* IOQueuePair.swift */,
+				45C0E6801DBA5C5F001D23C0 /* LineReader.swift */,
+				45C0E6811DBA5C5F001D23C0 /* Subprocess1.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		45C0E6941DBA5DB0001D23C0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				45C0E6951DBA5DC0001D23C0 /* TrackableCommandQueue.swift */,
+				456276101DBA739600F68C84 /* MARK_unimplemented.swift */,
+				45A77E5B1DBB173F004437C0 /* ThreadChecker.swift */,
+				45A77E601DBB1C4B004437C0 /* Swift.Array+.swift */,
+				45A77E4B1DBB1474004437C0 /* DeferredFlow.swift */,
+				45A77E621DBB292D004437C0 /* DeferableStateContainer.swift */,
+				45F9519F1DC3A16200A260B1 /* Future.swift */,
+				45F951B31DC464BF00A260B1 /* Mutation.swift */,
+				45F951BB1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,12 +501,34 @@
 			productReference = 45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		45BBCF851DB5489F00F83573 /* Editor6WorkspaceModelTestdrive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45BBCF901DB5489F00F83573 /* Build configuration list for PBXNativeTarget "Editor6WorkspaceModelTestdrive" */;
+			buildPhases = (
+				45BBCF821DB5489F00F83573 /* Sources */,
+				45BBCF831DB5489F00F83573 /* Frameworks */,
+				45BBCF841DB5489F00F83573 /* Resources */,
+				45BBCF971DB548AA00F83573 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				45BBCF961DB548AA00F83573 /* PBXTargetDependency */,
+				45BBCF9B1DB548C100F83573 /* PBXTargetDependency */,
+				459EE2B91DBAE18400A98670 /* PBXTargetDependency */,
+			);
+			name = Editor6WorkspaceModelTestdrive;
+			productName = Editor6WorkspaceModelTestdrive;
+			productReference = 45BBCF861DB5489F00F83573 /* Editor6WorkspaceModelTestdrive.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		45441ECD1DB3EA0F00158711 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Eonil;
 				TargetAttributes = {
@@ -169,6 +536,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = SYA75M63MP;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+					};
+					45BBCF851DB5489F00F83573 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = SYA75M63MP;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -179,11 +551,20 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 45441ECC1DB3EA0F00158711;
 			productRefGroup = 45441ED71DB3EA0F00158711 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 4507B83F1DB45D3B006A5871 /* Products */;
+					ProjectRef = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
+				},
+				{
+					ProductGroup = 459EE29C1DBAE17400A98670 /* Products */;
+					ProjectRef = 459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */;
+				},
 				{
 					ProductGroup = 45441EEA1DB3EB4E00158711 /* Products */;
 					ProjectRef = 45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */;
@@ -192,11 +573,54 @@
 			projectRoot = "";
 			targets = (
 				45441ED51DB3EA0F00158711 /* Editor6WorkspaceModel */,
+				45BBCF851DB5489F00F83573 /* Editor6WorkspaceModelTestdrive */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4507B8481DB45D3B006A5871 /* Flow.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Flow.framework;
+			remoteRef = 4507B8471DB45D3B006A5871 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4507B84A1DB45D3B006A5871 /* FSEventsUnofficialWrapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FSEventsUnofficialWrapper.framework;
+			remoteRef = 4507B8491DB45D3B006A5871 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4507B84C1DB45D3B006A5871 /* Reftable.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Reftable.framework;
+			remoteRef = 4507B84B1DB45D3B006A5871 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4507B84E1DB45D3B006A5871 /* BTree.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BTree.framework;
+			remoteRef = 4507B84D1DB45D3B006A5871 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Editor6DepPack.framework;
+			remoteRef = 4507B84F1DB45D3B006A5871 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4507B8521DB45D3B006A5871 /* Editor6DepPackTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = file;
+			path = Editor6DepPackTests.xctest;
+			remoteRef = 4507B8511DB45D3B006A5871 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45441EF31DB3EB4E00158711 /* LLDBWrapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -239,6 +663,34 @@
 			remoteRef = 45441EFC1DB3EB4E00158711 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		459EE2A81DBAE17400A98670 /* EonilToolbox.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilToolbox.framework;
+			remoteRef = 459EE2A71DBAE17400A98670 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459EE2AA1DBAE17400A98670 /* EonilToolbox.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilToolbox.framework;
+			remoteRef = 459EE2A91DBAE17400A98670 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459EE2AC1DBAE17400A98670 /* EonilToolboxTests-macOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilToolboxTests-macOS.xctest";
+			remoteRef = 459EE2AB1DBAE17400A98670 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459EE2AE1DBAE17400A98670 /* EonilToolboxTests-iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilToolboxTests-iOS.xctest";
+			remoteRef = 459EE2AD1DBAE17400A98670 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -249,6 +701,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45BBCF841DB5489F00F83573 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45BBCF8B1DB5489F00F83573 /* Assets.xcassets in Resources */,
+				45BBCF8E1DB5489F00F83573 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -256,14 +717,84 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45441EE81DB3EA8E00158711 /* DebuggingModel.swift in Sources */,
+				45C0E5BD1DB90374001D23C0 /* WorkspaceNotification.swift in Sources */,
+				45C0E6861DBA5C5F001D23C0 /* IOQueuePair.swift in Sources */,
+				45C0E5641DB5A659001D23C0 /* Delegate.swift in Sources */,
+				45C0E5BB1DB90343001D23C0 /* WorkspaceCommand.swift in Sources */,
+				45F951B41DC464BF00A260B1 /* Mutation.swift in Sources */,
+				45441EE81DB3EA8E00158711 /* DebugModel.swift in Sources */,
+				45C0E6871DBA5C5F001D23C0 /* LineReader.swift in Sources */,
+				45F951B21DC42C6200A260B1 /* ModelTypes.swift in Sources */,
+				45A77E631DBB292D004437C0 /* DeferableStateContainer.swift in Sources */,
+				45C0E6981DBA672F001D23C0 /* Bash2.swift in Sources */,
+				45F951C61DC5F2E700A260B1 /* ModelMutation.swift in Sources */,
+				45F951B81DC593C600A260B1 /* Model2.swift in Sources */,
+				45F951CE1DC6186E00A260B1 /* BuildModel.swift in Sources */,
+				45C0E5CD1DBA4F01001D23C0 /* DebugState.swift in Sources */,
+				45C0E6831DBA5C5F001D23C0 /* Cargo.swift in Sources */,
+				45C0E6821DBA5C5F001D23C0 /* Bash1.swift in Sources */,
+				45F951B61DC4677600A260B1 /* DebugMutation.swift in Sources */,
+				45A77E5F1DBB1B42004437C0 /* Model.swift in Sources */,
 				45441EE61DB3EA5100158711 /* WorkspaceModel.swift in Sources */,
-				45441EE21DB3EA3200158711 /* Editor6WorkspaceModel.swift in Sources */,
+				45F951CC1DC60E2900A260B1 /* IssueModel.swift in Sources */,
+				45A77E611DBB1C4B004437C0 /* Swift.Array+.swift in Sources */,
+				45A77E5C1DBB173F004437C0 /* ThreadChecker.swift in Sources */,
+				45C0E5C71DB92082001D23C0 /* Action.swift in Sources */,
+				45A77E4C1DBB1474004437C0 /* DeferredFlow.swift in Sources */,
+				45F951B01DC4233B00A260B1 /* Broadcast.swift in Sources */,
+				45F951A01DC3A16200A260B1 /* Future.swift in Sources */,
+				456276111DBA739600F68C84 /* MARK_unimplemented.swift in Sources */,
+				45F951C41DC5F2C000A260B1 /* ModelAction.swift in Sources */,
+				45C0E6961DBA5DC1001D23C0 /* TrackableCommandQueue.swift in Sources */,
+				45C0E6881DBA5C5F001D23C0 /* Subprocess1.swift in Sources */,
+				45F951BC1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift in Sources */,
+				4507B85A1DB501F2006A5871 /* UNUSED_SubprocessController.swift in Sources */,
+				45C0E69A1DBA69CA001D23C0 /* Cargo1.swift in Sources */,
+				45C0E6841DBA5C5F001D23C0 /* RustLanguageServer.swift in Sources */,
+				45BBCF751DB5306900F83573 /* UNUSED_BashController.swift in Sources */,
 				45441EE41DB3EA4A00158711 /* WorkspaceState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		45BBCF821DB5489F00F83573 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45BBCF891DB5489F00F83573 /* AppDelegate.swift in Sources */,
+				45F951BA1DC5BE7400A260B1 /* Driver.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		459EE2B91DBAE18400A98670 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "EonilToolbox-iOS";
+			targetProxy = 459EE2B81DBAE18400A98670 /* PBXContainerItemProxy */;
+		};
+		45BBCF961DB548AA00F83573 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45441ED51DB3EA0F00158711 /* Editor6WorkspaceModel */;
+			targetProxy = 45BBCF951DB548AA00F83573 /* PBXContainerItemProxy */;
+		};
+		45BBCF9B1DB548C100F83573 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Editor6DepPack;
+			targetProxy = 45BBCF9A1DB548C100F83573 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		45BBCF8C1DB5489F00F83573 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				45BBCF8D1DB5489F00F83573 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		45441EDC1DB3EA0F00158711 /* Debug */ = {
@@ -407,6 +938,36 @@
 			};
 			name = Release;
 		};
+		45BBCF911DB5489F00F83573 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = SYA75M63MP;
+				INFOPLIST_FILE = Editor6WorkspaceModelTestdrive/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor6WorkspaceModelTestdrive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		45BBCF921DB5489F00F83573 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = SYA75M63MP;
+				INFOPLIST_FILE = Editor6WorkspaceModelTestdrive/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor6WorkspaceModelTestdrive;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -424,6 +985,15 @@
 			buildConfigurations = (
 				45441EDF1DB3EA0F00158711 /* Debug */,
 				45441EE01DB3EA0F00158711 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45BBCF901DB5489F00F83573 /* Build configuration list for PBXNativeTarget "Editor6WorkspaceModelTestdrive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45BBCF911DB5489F00F83573 /* Debug */,
+				45BBCF921DB5489F00F83573 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
