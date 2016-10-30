@@ -1,5 +1,5 @@
 //
-//  IssueModel.swift
+//  ProjectMutation.swift
 //  Editor6WorkspaceModel
 //
 //  Created by Hoon H. on 2016/10/30.
@@ -8,10 +8,6 @@
 
 import Foundation
 
-public struct IssueState {
-    
-}
-
-public final class IssueModel {
-    
+public enum ProjectMutation {
+    case items(DictionaryMutation<ProjectItemID, ProjectItemState>)
 }

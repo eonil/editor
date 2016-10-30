@@ -12,6 +12,7 @@ public struct WorkspaceState: ModelState {
     public typealias Mutation = WorkspaceMutation
 
     public var location = URL?.none
+    public var project = ProjectState()
     public var build = BuildState()
     public var debug = DebugState()
     public var issues = [Issue]()
@@ -24,6 +25,8 @@ public struct WorkspaceState: ModelState {
             self = newState
         case .location(let newLocation):
             location = newLocation
+        case .project(let projectMutation):
+            project.apply(mutation: projectMutation)
         case .build(let newBuild):
             build = newBuild
         case .debug(let debugMutation):
@@ -66,6 +69,7 @@ public enum WorkspaceMutation {
     case none
     case all(WorkspaceState)
     case location(URL)
+    case project(ProjectMutation)
     case build(BuildState)
     case debug(DebugMutation)
     case issues([Issue])

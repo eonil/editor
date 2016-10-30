@@ -18,11 +18,10 @@
 		459EE2B51DBAE17E00A98670 /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459EE2A81DBAE17400A98670 /* EonilToolbox.framework */; };
 		459EE2B61DBAE18400A98670 /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459EE2A81DBAE17400A98670 /* EonilToolbox.framework */; };
 		459EE2B71DBAE18400A98670 /* EonilToolbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459EE2A81DBAE17400A98670 /* EonilToolbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45A77E4C1DBB1474004437C0 /* DeferredFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E4B1DBB1474004437C0 /* DeferredFlow.swift */; };
+		45A77E4C1DBB1474004437C0 /* UNUSED_DeferredFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E4B1DBB1474004437C0 /* UNUSED_DeferredFlow.swift */; };
 		45A77E5C1DBB173F004437C0 /* ThreadChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E5B1DBB173F004437C0 /* ThreadChecker.swift */; };
-		45A77E5F1DBB1B42004437C0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E5E1DBB1B42004437C0 /* Model.swift */; };
 		45A77E611DBB1C4B004437C0 /* Swift.Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E601DBB1C4B004437C0 /* Swift.Array+.swift */; };
-		45A77E631DBB292D004437C0 /* DeferableStateContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E621DBB292D004437C0 /* DeferableStateContainer.swift */; };
+		45A77E631DBB292D004437C0 /* UNUSED_DeferableStateContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A77E621DBB292D004437C0 /* UNUSED_DeferableStateContainer.swift */; };
 		45BBCF751DB5306900F83573 /* UNUSED_BashController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBCF741DB5306900F83573 /* UNUSED_BashController.swift */; };
 		45BBCF891DB5489F00F83573 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BBCF881DB5489F00F83573 /* AppDelegate.swift */; };
 		45BBCF8B1DB5489F00F83573 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45BBCF8A1DB5489F00F83573 /* Assets.xcassets */; };
@@ -31,10 +30,7 @@
 		45BBCF941DB548AA00F83573 /* Editor6WorkspaceModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45BBCF981DB548C100F83573 /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */; };
 		45BBCF991DB548C100F83573 /* Editor6DepPack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45C0E5641DB5A659001D23C0 /* Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5631DB5A659001D23C0 /* Delegate.swift */; };
-		45C0E5BB1DB90343001D23C0 /* WorkspaceCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5BA1DB90343001D23C0 /* WorkspaceCommand.swift */; };
 		45C0E5BD1DB90374001D23C0 /* WorkspaceNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5BC1DB90374001D23C0 /* WorkspaceNotification.swift */; };
-		45C0E5C71DB92082001D23C0 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5C61DB92082001D23C0 /* Action.swift */; };
 		45C0E5CD1DBA4F01001D23C0 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5CC1DBA4F01001D23C0 /* DebugState.swift */; };
 		45C0E6821DBA5C5F001D23C0 /* Bash1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6771DBA5C5F001D23C0 /* Bash1.swift */; };
 		45C0E6831DBA5C5F001D23C0 /* Cargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6791DBA5C5F001D23C0 /* Cargo.swift */; };
@@ -46,17 +42,14 @@
 		45C0E6981DBA672F001D23C0 /* Bash2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6971DBA672F001D23C0 /* Bash2.swift */; };
 		45C0E69A1DBA69CA001D23C0 /* Cargo1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6991DBA69CA001D23C0 /* Cargo1.swift */; };
 		45F951A01DC3A16200A260B1 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9519F1DC3A16200A260B1 /* Future.swift */; };
-		45F951B01DC4233B00A260B1 /* Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951AF1DC4233B00A260B1 /* Broadcast.swift */; };
 		45F951B21DC42C6200A260B1 /* ModelTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B11DC42C6200A260B1 /* ModelTypes.swift */; };
 		45F951B41DC464BF00A260B1 /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B31DC464BF00A260B1 /* Mutation.swift */; };
 		45F951B61DC4677600A260B1 /* DebugMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B51DC4677600A260B1 /* DebugMutation.swift */; };
-		45F951B81DC593C600A260B1 /* Model2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B71DC593C600A260B1 /* Model2.swift */; };
 		45F951BA1DC5BE7400A260B1 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951B91DC5BE7400A260B1 /* Driver.swift */; };
-		45F951BC1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951BB1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift */; };
-		45F951C41DC5F2C000A260B1 /* ModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951C31DC5F2C000A260B1 /* ModelAction.swift */; };
-		45F951C61DC5F2E700A260B1 /* ModelMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951C51DC5F2E700A260B1 /* ModelMutation.swift */; };
-		45F951CC1DC60E2900A260B1 /* IssueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951CB1DC60E2900A260B1 /* IssueModel.swift */; };
 		45F951CE1DC6186E00A260B1 /* BuildModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951CD1DC6186E00A260B1 /* BuildModel.swift */; };
+		45F951D01DC61E1700A260B1 /* ProjectState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951CF1DC61E1700A260B1 /* ProjectState.swift */; };
+		45F951D21DC6219500A260B1 /* ProjectMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951D11DC6219500A260B1 /* ProjectMutation.swift */; };
+		45F951D61DC628AE00A260B1 /* ModelMessageLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951D51DC628AE00A260B1 /* ModelMessageLoop.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,23 +216,18 @@
 		45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		456276101DBA739600F68C84 /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
 		459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = ../../submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
-		45A77E4B1DBB1474004437C0 /* DeferredFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeferredFlow.swift; sourceTree = "<group>"; };
+		45A77E4B1DBB1474004437C0 /* UNUSED_DeferredFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNUSED_DeferredFlow.swift; path = Utility/UNUSED_DeferredFlow.swift; sourceTree = "<group>"; };
 		45A77E5B1DBB173F004437C0 /* ThreadChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadChecker.swift; sourceTree = "<group>"; };
-		45A77E5D1DBB17DA004437C0 /* Test1.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Test1.playground; sourceTree = "<group>"; };
-		45A77E5E1DBB1B42004437C0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		45A77E601DBB1C4B004437C0 /* Swift.Array+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift.Array+.swift"; sourceTree = "<group>"; };
-		45A77E621DBB292D004437C0 /* DeferableStateContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeferableStateContainer.swift; sourceTree = "<group>"; };
+		45A77E621DBB292D004437C0 /* UNUSED_DeferableStateContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNUSED_DeferableStateContainer.swift; path = Utility/UNUSED_DeferableStateContainer.swift; sourceTree = "<group>"; };
 		45BBCF741DB5306900F83573 /* UNUSED_BashController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_BashController.swift; sourceTree = "<group>"; };
 		45BBCF861DB5489F00F83573 /* Editor6WorkspaceModelTestdrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor6WorkspaceModelTestdrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BBCF881DB5489F00F83573 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45BBCF8A1DB5489F00F83573 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45BBCF8D1DB5489F00F83573 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		45BBCF8F1DB5489F00F83573 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45C0E5631DB5A659001D23C0 /* Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
-		45C0E5BA1DB90343001D23C0 /* WorkspaceCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceCommand.swift; sourceTree = "<group>"; };
 		45C0E5BC1DB90374001D23C0 /* WorkspaceNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceNotification.swift; sourceTree = "<group>"; };
 		45C0E5C01DB90DAE001D23C0 /* WorkspaceModelREADME.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = WorkspaceModelREADME.md; sourceTree = "<group>"; };
-		45C0E5C61DB92082001D23C0 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		45C0E5CC1DBA4F01001D23C0 /* DebugState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugState.swift; sourceTree = "<group>"; };
 		45C0E6771DBA5C5F001D23C0 /* Bash1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash1.swift; sourceTree = "<group>"; };
 		45C0E6791DBA5C5F001D23C0 /* Cargo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo.swift; sourceTree = "<group>"; };
@@ -251,17 +239,14 @@
 		45C0E6971DBA672F001D23C0 /* Bash2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash2.swift; sourceTree = "<group>"; };
 		45C0E6991DBA69CA001D23C0 /* Cargo1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo1.swift; sourceTree = "<group>"; };
 		45F9519F1DC3A16200A260B1 /* Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
-		45F951AF1DC4233B00A260B1 /* Broadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broadcast.swift; sourceTree = "<group>"; };
 		45F951B11DC42C6200A260B1 /* ModelTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTypes.swift; sourceTree = "<group>"; };
 		45F951B31DC464BF00A260B1 /* Mutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
 		45F951B51DC4677600A260B1 /* DebugMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugMutation.swift; sourceTree = "<group>"; };
-		45F951B71DC593C600A260B1 /* Model2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model2.swift; sourceTree = "<group>"; };
 		45F951B91DC5BE7400A260B1 /* Driver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
-		45F951BB1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicSingleSteppingActor.swift; sourceTree = "<group>"; };
-		45F951C31DC5F2C000A260B1 /* ModelAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelAction.swift; sourceTree = "<group>"; };
-		45F951C51DC5F2E700A260B1 /* ModelMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMutation.swift; sourceTree = "<group>"; };
-		45F951CB1DC60E2900A260B1 /* IssueModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueModel.swift; sourceTree = "<group>"; };
 		45F951CD1DC6186E00A260B1 /* BuildModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildModel.swift; sourceTree = "<group>"; };
+		45F951CF1DC61E1700A260B1 /* ProjectState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectState.swift; sourceTree = "<group>"; };
+		45F951D11DC6219500A260B1 /* ProjectMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectMutation.swift; sourceTree = "<group>"; };
+		45F951D51DC628AE00A260B1 /* ModelMessageLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMessageLoop.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,28 +310,20 @@
 		45441ED81DB3EA0F00158711 /* Editor6WorkspaceModel */ = {
 			isa = PBXGroup;
 			children = (
-				45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */,
 				45C0E5C01DB90DAE001D23C0 /* WorkspaceModelREADME.md */,
-				45A77E5D1DBB17DA004437C0 /* Test1.playground */,
 				45441EDA1DB3EA0F00158711 /* Info.plist */,
-				45A77E5E1DBB1B42004437C0 /* Model.swift */,
-				45F951B71DC593C600A260B1 /* Model2.swift */,
+				45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */,
 				45F951B11DC42C6200A260B1 /* ModelTypes.swift */,
-				45F951C31DC5F2C000A260B1 /* ModelAction.swift */,
-				45F951C51DC5F2E700A260B1 /* ModelMutation.swift */,
-				45C0E5BA1DB90343001D23C0 /* WorkspaceCommand.swift */,
 				45441EE31DB3EA4A00158711 /* WorkspaceState.swift */,
 				45C0E5BC1DB90374001D23C0 /* WorkspaceNotification.swift */,
 				45441EE51DB3EA5100158711 /* WorkspaceModel.swift */,
+				45F951CF1DC61E1700A260B1 /* ProjectState.swift */,
+				45F951D11DC6219500A260B1 /* ProjectMutation.swift */,
 				45F951CD1DC6186E00A260B1 /* BuildModel.swift */,
 				45C0E5CC1DBA4F01001D23C0 /* DebugState.swift */,
 				45F951B51DC4677600A260B1 /* DebugMutation.swift */,
 				45441EE71DB3EA8E00158711 /* DebugModel.swift */,
-				45F951CB1DC60E2900A260B1 /* IssueModel.swift */,
-				45F951AF1DC4233B00A260B1 /* Broadcast.swift */,
 				45C0E6941DBA5DB0001D23C0 /* Utility */,
-				45C0E5631DB5A659001D23C0 /* Delegate.swift */,
-				45C0E5C61DB92082001D23C0 /* Action.swift */,
 				45C0E6751DBA5C5F001D23C0 /* Service */,
 				45C0E5B91DB7C38D001D23C0 /* unused */,
 			);
@@ -392,6 +369,8 @@
 		45C0E5B91DB7C38D001D23C0 /* unused */ = {
 			isa = PBXGroup;
 			children = (
+				45A77E4B1DBB1474004437C0 /* UNUSED_DeferredFlow.swift */,
+				45A77E621DBB292D004437C0 /* UNUSED_DeferableStateContainer.swift */,
 				45BBCF741DB5306900F83573 /* UNUSED_BashController.swift */,
 				4507B8591DB501F2006A5871 /* UNUSED_SubprocessController.swift */,
 			);
@@ -460,11 +439,9 @@
 				456276101DBA739600F68C84 /* MARK_unimplemented.swift */,
 				45A77E5B1DBB173F004437C0 /* ThreadChecker.swift */,
 				45A77E601DBB1C4B004437C0 /* Swift.Array+.swift */,
-				45A77E4B1DBB1474004437C0 /* DeferredFlow.swift */,
-				45A77E621DBB292D004437C0 /* DeferableStateContainer.swift */,
 				45F9519F1DC3A16200A260B1 /* Future.swift */,
 				45F951B31DC464BF00A260B1 /* Mutation.swift */,
-				45F951BB1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift */,
+				45F951D51DC628AE00A260B1 /* ModelMessageLoop.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -719,35 +696,28 @@
 			files = (
 				45C0E5BD1DB90374001D23C0 /* WorkspaceNotification.swift in Sources */,
 				45C0E6861DBA5C5F001D23C0 /* IOQueuePair.swift in Sources */,
-				45C0E5641DB5A659001D23C0 /* Delegate.swift in Sources */,
-				45C0E5BB1DB90343001D23C0 /* WorkspaceCommand.swift in Sources */,
 				45F951B41DC464BF00A260B1 /* Mutation.swift in Sources */,
 				45441EE81DB3EA8E00158711 /* DebugModel.swift in Sources */,
 				45C0E6871DBA5C5F001D23C0 /* LineReader.swift in Sources */,
 				45F951B21DC42C6200A260B1 /* ModelTypes.swift in Sources */,
-				45A77E631DBB292D004437C0 /* DeferableStateContainer.swift in Sources */,
+				45A77E631DBB292D004437C0 /* UNUSED_DeferableStateContainer.swift in Sources */,
 				45C0E6981DBA672F001D23C0 /* Bash2.swift in Sources */,
-				45F951C61DC5F2E700A260B1 /* ModelMutation.swift in Sources */,
-				45F951B81DC593C600A260B1 /* Model2.swift in Sources */,
 				45F951CE1DC6186E00A260B1 /* BuildModel.swift in Sources */,
 				45C0E5CD1DBA4F01001D23C0 /* DebugState.swift in Sources */,
 				45C0E6831DBA5C5F001D23C0 /* Cargo.swift in Sources */,
 				45C0E6821DBA5C5F001D23C0 /* Bash1.swift in Sources */,
+				45F951D21DC6219500A260B1 /* ProjectMutation.swift in Sources */,
 				45F951B61DC4677600A260B1 /* DebugMutation.swift in Sources */,
-				45A77E5F1DBB1B42004437C0 /* Model.swift in Sources */,
 				45441EE61DB3EA5100158711 /* WorkspaceModel.swift in Sources */,
-				45F951CC1DC60E2900A260B1 /* IssueModel.swift in Sources */,
+				45F951D61DC628AE00A260B1 /* ModelMessageLoop.swift in Sources */,
+				45F951D01DC61E1700A260B1 /* ProjectState.swift in Sources */,
 				45A77E611DBB1C4B004437C0 /* Swift.Array+.swift in Sources */,
 				45A77E5C1DBB173F004437C0 /* ThreadChecker.swift in Sources */,
-				45C0E5C71DB92082001D23C0 /* Action.swift in Sources */,
-				45A77E4C1DBB1474004437C0 /* DeferredFlow.swift in Sources */,
-				45F951B01DC4233B00A260B1 /* Broadcast.swift in Sources */,
+				45A77E4C1DBB1474004437C0 /* UNUSED_DeferredFlow.swift in Sources */,
 				45F951A01DC3A16200A260B1 /* Future.swift in Sources */,
 				456276111DBA739600F68C84 /* MARK_unimplemented.swift in Sources */,
-				45F951C41DC5F2C000A260B1 /* ModelAction.swift in Sources */,
 				45C0E6961DBA5DC1001D23C0 /* TrackableCommandQueue.swift in Sources */,
 				45C0E6881DBA5C5F001D23C0 /* Subprocess1.swift in Sources */,
-				45F951BC1DC5C7E300A260B1 /* AtomicSingleSteppingActor.swift in Sources */,
 				4507B85A1DB501F2006A5871 /* UNUSED_SubprocessController.swift in Sources */,
 				45C0E69A1DBA69CA001D23C0 /* Cargo1.swift in Sources */,
 				45C0E6841DBA5C5F001D23C0 /* RustLanguageServer.swift in Sources */,
