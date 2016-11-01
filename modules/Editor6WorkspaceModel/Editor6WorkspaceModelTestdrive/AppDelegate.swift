@@ -15,7 +15,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var window: NSWindow!
     private let bashcon = Bash1()
 
+    private let driver = Driver()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        
+
 //        // Insert code here to initialize your application
 //        bashcon.writeInputLines(lines: [
 //            "echo AAA",

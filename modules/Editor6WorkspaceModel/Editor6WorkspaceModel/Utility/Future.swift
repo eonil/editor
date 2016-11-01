@@ -13,25 +13,29 @@ public enum Result<T> {
 }
 
 public final class Future<T> {
-    fileprivate private(set) var state = FutureState<T>.immature
+    private var DEBUG_info = [String: String]()
+
+    fileprivate private(set) var state: FutureState<T>
     private let lock = NSLock()
 
-    init() {
-    }
-    init(result: Result<T>) {
-        state = .presignaled(result)
+    fileprivate init(state: FutureState<T>) {
+        DEBUG_info["init"] = Thread.callStackSymbols.joined(separator: "\n")
+        DEBUG_info["init/state"] = "\(state)"
+        self.state = state
     }
     deinit {
         assert({
             if case .consumed = state { return true }
             return false
-        }())
+        }(), "A future must finish with `.consumed` state. You use terminal `.step(...)` function, or `.cleanse(...)` at last of a flow.")
     }
-    public func setContinuation(_ f: @escaping (Result<T>) -> ()) {
+    internal func setContinuation(_ f: @escaping (Result<T>) -> ()) {
         lock.lock()
+        DEBUG_info["setContinuation"] = Thread.callStackSymbols.joined(separator: "\n")
         switch state {
         case .immature:
-            state = .scheduled(f)
+//            let f1 = { [self] f($0) }
+            state = .scheduled({ [s = self] in f($0); print(s) })
         case .presignaled(let r):
             f(r)
             state = .consumed
@@ -44,6 +48,7 @@ public final class Future<T> {
     }
     internal func signal(_ r: Result<T>) {
         lock.lock()
+        DEBUG_info["signal"] = Thread.callStackSymbols.joined(separator: "\n")
         switch state {
         case .immature:
             state = .presignaled(r)
@@ -60,11 +65,47 @@ public final class Future<T> {
 }
 
 extension Future {
+    /// Creates a unsignaled, unscheduled future.
+    convenience init() {
+        self.init(state: .immature)
+    }
+    /// Creates a pre-signaled future with a result.
+    convenience init(result: Result<T>) {
+        self.init(state: .presignaled(result))
+    }
+    /// Creates a pre-signaled future with an OK result.
     convenience init(ok: T) {
         self.init(result: .ok(ok))
     }
+    /// Creates a pre-signaled future with an error result.
     convenience init(error: Error) {
         self.init(result: .error(error))
+    }
+    /// Creates a pre-signaled Future with result of supplied function.
+    /// - Parameter f:
+    ///     Produces an OK signal. If this function throws, 
+    ///     it is treated like a error signal.
+    convenience init(step f: () throws -> (T)) {
+        do {
+            let v = try f()
+            self.init(ok: v)
+        }
+        catch let e {
+            self.init(error: e)
+        }
+    }
+    /// Explicitly handle possible error.
+    public func cleanse(_ f: @escaping (Error) -> ()) {
+        setContinuation { (r: Result<T>) in
+            switch r {
+            case .ok(_):
+                break
+            case .cancel:
+                break
+            case .error(let e):
+                f(e)
+            }
+        }
     }
     public func step(_ f: @escaping (Result<T>) -> ()) {
         setContinuation(f)
@@ -75,71 +116,6 @@ extension Future {
             f1.signal(f(r))
         })
         return f1
-    }
-//    public func step<U>(_ f: @escaping (T) throws -> (U?)) -> Future<U> {
-//        let f1 = Future<U>()
-//        setContinuation { (r: Result<T>) in
-//            switch r {
-//            case .ok(let v):
-//                do {
-//                    let v1 = try f(v)
-//                    if let v2 = v1 {
-//                        f1.signal(.ok(v2))
-//                    }
-//                    else {
-//                        f1.signal(.cancel)
-//                    }
-//                }
-//                catch let e1 {
-//                    f1.signal(.error(e1))
-//                }
-//            case .cancel:
-//                f1.signal(.cancel)
-//            case .error(let e):
-//                f1.signal(.error(e))
-//            }
-//        }
-//        return f1
-//    }
-    /// Available only if current future is already been signaled.
-//    public func stepImmediately<U>(_ f: (T) throws -> (U)) -> Future<U> {
-//        precondition({
-//            if case .presignaled = state { return true }
-//            return false
-//        }())
-//        switch state {
-//        case .immature:
-//            fatalError()
-//        case .presignaled(let r):
-//            switch r {
-//            case .ok(let v):
-//                do {
-//                    let v1 = try f(v)
-//                    return Future<U>(ok: v1)
-//                }
-//                catch let e {
-//                    return Future<U>(error: e)
-//                }
-//            case .cancel:
-//                return Future<U>(result: .cancel)
-//            case .error(let e):
-//                return Future<U>(error: e)
-//            }
-//        case .scheduled(_):
-//            fatalError()
-//        case .consumed:
-//            fatalError()
-//        }
-//    }
-
-    convenience init(step f: () throws -> (T)) {
-        do {
-            let v = try f()
-            self.init(ok: v)
-        }
-        catch let e {
-            self.init(error: e)
-        }
     }
     public func step<U>(_ f: @escaping (T) throws -> (U)) -> Future<U> {
         let f1 = Future<U>()

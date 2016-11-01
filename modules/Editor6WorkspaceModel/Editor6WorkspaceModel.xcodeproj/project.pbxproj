@@ -50,6 +50,7 @@
 		45F951D01DC61E1700A260B1 /* ProjectState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951CF1DC61E1700A260B1 /* ProjectState.swift */; };
 		45F951D21DC6219500A260B1 /* ProjectMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951D11DC6219500A260B1 /* ProjectMutation.swift */; };
 		45F951D61DC628AE00A260B1 /* ModelMessageLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951D51DC628AE00A260B1 /* ModelMessageLoop.swift */; };
+		45F951D81DC653ED00A260B1 /* WorkspaceModelGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951D71DC653ED00A260B1 /* WorkspaceModelGlobals.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,6 +248,7 @@
 		45F951CF1DC61E1700A260B1 /* ProjectState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectState.swift; sourceTree = "<group>"; };
 		45F951D11DC6219500A260B1 /* ProjectMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectMutation.swift; sourceTree = "<group>"; };
 		45F951D51DC628AE00A260B1 /* ModelMessageLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMessageLoop.swift; sourceTree = "<group>"; };
+		45F951D71DC653ED00A260B1 /* WorkspaceModelGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModelGlobals.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +325,7 @@
 				45C0E5CC1DBA4F01001D23C0 /* DebugState.swift */,
 				45F951B51DC4677600A260B1 /* DebugMutation.swift */,
 				45441EE71DB3EA8E00158711 /* DebugModel.swift */,
+				45F951D71DC653ED00A260B1 /* WorkspaceModelGlobals.swift */,
 				45C0E6941DBA5DB0001D23C0 /* Utility */,
 				45C0E6751DBA5C5F001D23C0 /* Service */,
 				45C0E5B91DB7C38D001D23C0 /* unused */,
@@ -694,6 +697,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F951D81DC653ED00A260B1 /* WorkspaceModelGlobals.swift in Sources */,
 				45C0E5BD1DB90374001D23C0 /* WorkspaceNotification.swift in Sources */,
 				45C0E6861DBA5C5F001D23C0 /* IOQueuePair.swift in Sources */,
 				45F951B41DC464BF00A260B1 /* Mutation.swift in Sources */,

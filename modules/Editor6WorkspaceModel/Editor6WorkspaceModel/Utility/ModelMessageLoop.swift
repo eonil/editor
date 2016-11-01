@@ -18,6 +18,8 @@ public final class WorkspaceModelMessageLoop {
     private var transactionQueue = [(DispatchTransaction) -> ()]()
     private var operationQuque = [ModelContinuation]()
 
+    public init() {
+    }
     public func process(_ f: (ModelTransaction<WorkspaceState>) -> ()) {
         assert(Thread.isMainThread)
         assert(phase == .none)
@@ -36,13 +38,12 @@ public final class WorkspaceModelMessageLoop {
 
     fileprivate func process(_ n: WorkspaceNotification) {
         assert(Thread.isMainThread)
-        assert(phase == .none)
         switch n {
         case .queue(let operation):
             assert(phase != .processingTransactions)
             operationQuque.append(operation)
         case .apply(let transaction):
-            // Intentional closure wrapping to get trapped in LLDB.
+            // Intentional wrapping by a closure to get trapped in LLDB.
             transactionQueue.append({ dispatch in dispatch(transaction) })
         }
     }

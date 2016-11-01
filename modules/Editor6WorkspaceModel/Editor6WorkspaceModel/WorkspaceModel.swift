@@ -97,7 +97,7 @@ public extension WorkspaceModel {
             return s.reloadProjectItems()
         })
     }
-    public func addFile(name: String, group: Bool, note: String, data: Data, at index: Int, in parent: ProjectItemID) -> Future<ProjectItemID> {
+    public func addFile(name: String, group: Bool, note: String?, data: Data, at index: Int, in parent: ProjectItemID) -> Future<ProjectItemID> {
         return queueOperation { local, note, complete in
             let newProjectItemPath = parent.appending(last: name)
             Future {
@@ -105,7 +105,7 @@ public extension WorkspaceModel {
                 guard let newFileURL = local.state.getFileSystemURL(forFileAt: newProjectItemPath) else { throw WorkspaceError("Cannot resolve file-system URL for path `\(newProjectItemPath)`.") }
                 let newProjectItemState = ProjectItemState()
                 local.state.project.items[newProjectItemPath] = newProjectItemState
-                try data.write(to: newFileURL, options: [.atomic, .withoutOverwriting])
+                try data.write(to: newFileURL, options: [.atomic])
                 note(.project(.items(.insert([newProjectItemPath: newProjectItemState]))))
                 return newProjectItemPath
             }.step(complete)
