@@ -21,6 +21,7 @@ final class Driver {
         precondition(Driver.instanceCount == 0)
         LLDBGlobals.initializeLLDBWrapper()
         Driver.instanceCount += 1
+        mmc.delegate { [weak self] in self?.process($0) }
         mmc.reload(localState.mainMenu)
         appcon.owner = self
         NSApplication.shared().mainMenu = mmc.menu
@@ -57,7 +58,7 @@ final class Driver {
     /// will be enqueued and trigger async event consumption function.
     /// The consumption function is this.
     ///
-    private func execute(_ command: Command) {
+    private func process(_ command: Command) {
         switch command {
         case .ADHOC_test:
             for doc in NSDocumentController.shared().documents {
@@ -68,12 +69,12 @@ final class Driver {
             localState.apply(event: workspaceMessage)
         }
 
+        mmc.reload(localState.mainMenu)
         let m = DriverMessage.change(localState)
         NSDocumentController.shared().documents
             .flatMap { $0 as? WorkspaceDocument }
             .forEach { $0.process(message: m) }
     }
-
     fileprivate func schedule(_ command: Command) {
         assert(Thread.isMainThread)
         // Restart if needed.
@@ -90,7 +91,26 @@ final class Driver {
             // Then it becomes infinite loop.
             // And it's very hard to prevent such loop because they are
             // sent from terminal view components.
-            DispatchQueue.main.async { [weak self] in self?.execute(command) }
+            DispatchQueue.main.async { [weak self] in self?.process(command) }
+        }
+    }
+
+    private func process(_ action: MainMenuUI2Action) {
+        do {
+            switch action {
+            case .click(let menuItemID):
+                switch menuItemID {
+                case .applicationQuit:
+                    NSApplication.shared().terminate(self)
+                case .fileNewWorkspace:
+                    try NSDocumentController.shared().makeUntitledDocument(ofType: "EonilEditor6Workspace")
+                default:
+                    MARK_unimplemented()
+                }
+            }
+        }
+        catch let error {
+            NSApplication.shared().presentError(error)
         }
     }
 }

@@ -31,6 +31,12 @@ struct DriverState {
     fileprivate(set) var workspaceUIs = [WorkspaceID: (model: WorkspaceState, view: WorkspaceUIState)]()
     fileprivate(set) var currentWorkspaceID = WorkspaceID?.none
 
+    init() {
+        mainMenu.availableItems = [
+            .applicationQuit,
+            .fileNewWorkspace,
+        ]
+    }
 }
 
 extension DriverState {
