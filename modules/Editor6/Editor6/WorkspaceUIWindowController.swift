@@ -13,9 +13,9 @@ import Editor6Common
 import Editor6WorkspaceUI
 
 final class WorkspaceUIWindowController: NSWindowController, NSWindowDelegate {
-    var dispatch: ((WorkspaceUIAction) -> ())?
     private let workspaceViewController = WorkspaceUIViewController()
     private var installer = ViewInstaller()
+    private var delegate = ((WorkspaceUIAction) -> ())?.none
 
     convenience init() {
         self.init(window: nil)
@@ -30,6 +30,9 @@ final class WorkspaceUIWindowController: NSWindowController, NSWindowDelegate {
         windowDidLoad()
     }
 
+    func delegate(to newDelegate: @escaping (WorkspaceUIAction) -> ()) {
+         delegate = newDelegate
+    }
     func reload(_ newState: WorkspaceUIState) {
         workspaceViewController.reload(newState)
     }

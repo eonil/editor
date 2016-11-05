@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import Editor6MainMenuUI2
+import Editor6WorkspaceModel
+import Editor6WorkspaceUI
 
 /// Application central state repository.
 ///
@@ -18,76 +21,44 @@ import Foundation
 ///
 /// Main concern of driver state is managing main menu.
 struct DriverState {
+
+    fileprivate(set) var mainMenu = MainMenuUI2State()
+
     /// `WorkspaceDocument` owns and manages the workspace state.
     /// And workspace document dispatches its state back to `Driver` when
     /// changed. These aggregated workspaces states works as parameters
     /// to update driver local state.
-    private(set) var workspaces = [WorkspaceID: WorkspaceState]()
-    private(set) var currentWorkspaceID = WorkspaceID?.none
-    private(set) var mainMenu = MainMenuState()
+    fileprivate(set) var workspaceUIs = [WorkspaceID: (model: WorkspaceState, view: WorkspaceUIState)]()
+    fileprivate(set) var currentWorkspaceID = WorkspaceID?.none
 
-    mutating func apply(event: WorkspaceDocumentEvent) {
+}
+
+extension DriverState {
+    mutating func apply(event: WorkspaceMessage) {
         switch event {
-        case .initiate(let workspace):
-            workspaces[workspace.id] = workspace.state
-        case .renew(let workspace):
-            workspaces[workspace.id] = workspace.state
-        case .terminate(let workspace):
-            workspaces[workspace.id] = nil
-        case .becomeCurrent(let workspaceID):
-            currentWorkspaceID = workspaceID
-        case .resignCurrent(let workspaceID):
-            guard currentWorkspaceID == workspaceID else { reportFatalError() }
+        case .initiate(let id):
+            workspaceUIs[id] = (WorkspaceState(), WorkspaceUIState())
+        case .renew(let id, let modelState, let viewState):
+            workspaceUIs[id] = (modelState, viewState)
+        case .terminate(let id):
+            workspaceUIs[id] = nil
+        case .becomeCurrent(let id):
+            currentWorkspaceID = id
+        case .resignCurrent(let id):
+            guard currentWorkspaceID == id else { reportFatalError() }
             currentWorkspaceID = nil
         }
     }
 }
 
-typealias Workspace = (id: WorkspaceID, state: WorkspaceState)
+//private extension WorkspaceNotification {
+//    func toDriverMutation() -> DriverMutation {
+//        
+//    }
+//}
 
-struct WorkspaceID: Hashable {
-    private var oid: ObjectIdentifier
-    static func from(document: WorkspaceDocument) -> WorkspaceID {
-        return WorkspaceID(oid: ObjectIdentifier(document))
-    }
-    var hashValue: Int {
-        return oid.hashValue
-    }
-
-    static func == (_ a: WorkspaceID, _ b: WorkspaceID) -> Bool {
-        return a.oid == b.oid
-    }
+enum DriverMutation {
+    case workspaceUI(DictionaryMutation<WorkspaceID, (model: WorkspaceState, view: WorkspaceUIState)>)
+    case currentWorkspaceID(WorkspaceID?)
+    case mainMenu(MainMenuUI2State)
 }
-
-struct WorkspaceState {
-    var files = [URL]()
-    var issues = [String]()
-    var debug = DebugState()
-}
-
-struct DebugState {
-    var processes = [DebugProcessState]()
-}
-typealias DebugProcess = (id: DebugProcessID, state: DebugProcessState)
-typealias DebugProcessID = pid_t
-struct DebugProcessState {
-    var threads = [DebugThreadState]()
-    var processName = ""
-}
-typealias DebugThread = (id: DebugThreadID, state: DebugThreadState)
-typealias DebugThreadID = thread_t
-struct DebugThreadState {
-    var threadName = ""
-}
-typealias DebugFrame = (id: DebugFrameID, state: DebugFrameState)
-typealias DebugFrameID = Int32
-struct DebugFrameState {
-    var functionName = ""
-}
-
-
-
-
-
-
-

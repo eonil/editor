@@ -8,21 +8,27 @@
 
 import Foundation
 import AppKit
+import Editor6WorkspaceModel
+import Editor6WorkspaceUI
 
 /// Treat `NSDocument` methods and events as user input.
 @objc
 final class WorkspaceDocument: NSDocument {
+    private let model = WorkspaceModel()
     private let main = WorkspaceUIWindowController()
-//    private let service = WorkspaceService()
-    private var localState = WorkspaceState()
+    private var localState = WorkspaceUIState()
 
     override init() {
         super.init()
-        Driver.dispatch(.initiate((getID(), localState)))
+        Driver.dispatch(.initiate(getID()))
     }
     deinit {
-        Driver.dispatch(.terminate((getID(), localState)))
+        Driver.dispatch(.terminate(getID()))
         Swift.print("closed")
+    }
+
+    func process(message: DriverMessage) {
+        
     }
 
     private func getID() -> WorkspaceID {
@@ -32,7 +38,9 @@ final class WorkspaceDocument: NSDocument {
     override func makeWindowControllers() {
         super.makeWindowControllers()
         addWindowController(main)
-        main.dispatch = { [weak self] in self?.process($0) }
+        main.delegate { [weak self] in
+            self?.process($0)
+        }
     }
 
     private func process(_ workspaceAction: WorkspaceUIAction) {

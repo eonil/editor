@@ -7,19 +7,22 @@
 //
 
 import Cocoa
+import Editor6MainMenuUI2
 
 final class Driver {
     private static var instanceCount = 0
-    private let appdel = ApplicationDelegate()
-    private let mmm = MainMenuManager()
+    private let mmc = MainMenuUI2Controller()
+    private let appcon = ApplicationController()
     private var localState = DriverState()
 
     init() {
         assert(Thread.isMainThread)
         precondition(Driver.instanceCount == 0)
         Driver.instanceCount += 1
-        appdel.owner = self
-        NSApplication.shared().delegate = appdel
+        mmc.reload(localState.mainMenu)
+        appcon.owner = self
+        NSApplication.shared().mainMenu = mmc.menu
+        NSApplication.shared().delegate = appcon
         Driver.dispatch = { [weak self] in self?.schedule(.handle($0)) }
     }
     func run() -> Int32 {
@@ -30,7 +33,8 @@ final class Driver {
         assert(Thread.isMainThread)
         Driver.dispatch = noop
         NSApplication.shared().delegate = nil
-        appdel.owner = nil
+        NSApplication.shared().mainMenu = nil
+        appcon.owner = nil
         Driver.instanceCount -= 1
     }
 
@@ -39,8 +43,10 @@ final class Driver {
     /// In AppKit, each `NSDocument`s are independently created and destroyed
     /// and there's no existing facility to track thier creation and destruction
     /// from other place. They seem to be intended to be independent islands.
-    /// I had to create a message channel, and this is that channel.    
-    static private(set) var dispatch: (_ event: WorkspaceDocumentEvent) -> () = noop
+    /// I had to create a message channel, and this is that channel.
+    ///
+    /// Named as `dispatch` because this will not
+    static private(set) var dispatch: (WorkspaceMessage) -> () = noop
 
     /// Steps single iteration of loop.
     /// There's no explicit loop.
@@ -55,9 +61,14 @@ final class Driver {
                 doc.close()
             }
             NSDocumentController.shared().newDocument(self)
-        case .handle(let workspaceEvent):
-            localState.apply(event: workspaceEvent)
+        case .handle(let workspaceMessage):
+            localState.apply(event: workspaceMessage)
         }
+
+        let m = DriverMessage.change(localState)
+        NSDocumentController.shared().documents
+            .flatMap { $0 as? WorkspaceDocument }
+            .forEach { $0.process(message: m) }
     }
 
     fileprivate func schedule(_ command: Command) {
@@ -83,11 +94,11 @@ final class Driver {
 
 private enum Command {
     case ADHOC_test
-    case handle(WorkspaceDocumentEvent)
+    case handle(WorkspaceMessage)
 }
 
 
-private final class ApplicationDelegate: NSObject, NSApplicationDelegate {
+private final class ApplicationController: NSObject, NSApplicationDelegate {
     weak var owner: Driver?
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         owner?.schedule(.ADHOC_test)

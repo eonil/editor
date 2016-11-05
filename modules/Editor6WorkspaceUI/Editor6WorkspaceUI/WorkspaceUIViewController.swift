@@ -48,8 +48,8 @@ public final class WorkspaceUIViewController: Editor6CommonViewController, NSSpl
                                   currentSize: 100,
                                   minSize: 100)
         outerSplit.state = SplitState(isVertical: true,
-                                 centerPaneViewController: innerSplit,
-                                 sidePanes: (leftPane, rightPane))
+                                      centerPaneViewController: innerSplit,
+                                      sidePanes: (leftPane, rightPane))
         innerSplit.state = SplitState(isVertical: false,
                                       centerPaneViewController: document,
                                       sidePanes: (nil, bottomPane))

@@ -4,40 +4,30 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Editor6DepPack.xcscheme_^#shared#^_</key>
+		<key>Editor6MainMenuUI2.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>4</integer>
+		</dict>
+		<key>Editor6MainMenuUI2Testdrive.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>______Target_BTree</key>
+		<key>4583C16D1DCAA86F001EA107</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Editor6DepPack</key>
+		<key>45ABC13F1DCD8580006EFE1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_Editor6DepPackTests</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_FSEventsUnofficialWrapper</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_Flow</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_Reftable</key>
+		<key>45ABC14D1DCD8581006EFE1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

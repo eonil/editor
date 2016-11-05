@@ -17,6 +17,7 @@ public struct WorkspaceState: ModelState {
     public var debug = DebugState()
     public var issues = [Issue]()
 
+    public init() {}
     public mutating func apply(mutation: WorkspaceMutation) {
         switch mutation {
         case .none:

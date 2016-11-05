@@ -1,5 +1,5 @@
 //
-//  ApplicationUIState.swift
+//  MainMenuUI2Item.swift
 //  Editor6
 //
 //  Created by Hoon H. on 2016/10/09.
@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import AppKit
 
-struct ApplicationState {
-    
+final class MainMenuUI2Item: NSMenuItem {
+    var id = MainMenuUI2ItemID?.none
 }

@@ -8,10 +8,6 @@
 
 import Foundation
 
-func report() {
-
-}
-
 func reportFatalError() -> Never  {
     fatalError()
 }

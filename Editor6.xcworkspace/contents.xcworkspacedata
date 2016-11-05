@@ -14,6 +14,9 @@
          location = "group:modules/Editor6/Editor6.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:modules/Editor6MainMenuUI2/Editor6MainMenuUI2.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:modules/Editor6WorkspaceModel/Editor6WorkspaceModel.xcodeproj">
       </FileRef>
       <FileRef
@@ -21,9 +24,6 @@
       </FileRef>
       <FileRef
          location = "group:modules/Editor6FileTreeUI/Editor6FileTreeUI.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:modules/Editor6Service/Editor6Service.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:modules/Editor6Common/Editor6Common.xcodeproj">
