@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import LLDBWrapper
 import Editor6MainMenuUI2
 
 final class Driver {
@@ -18,6 +19,7 @@ final class Driver {
     init() {
         assert(Thread.isMainThread)
         precondition(Driver.instanceCount == 0)
+        LLDBGlobals.initializeLLDBWrapper()
         Driver.instanceCount += 1
         mmc.reload(localState.mainMenu)
         appcon.owner = self
@@ -36,6 +38,7 @@ final class Driver {
         NSApplication.shared().mainMenu = nil
         appcon.owner = nil
         Driver.instanceCount -= 1
+        LLDBGlobals.terminateLLDBWrapper()
     }
 
     // MARK: -
