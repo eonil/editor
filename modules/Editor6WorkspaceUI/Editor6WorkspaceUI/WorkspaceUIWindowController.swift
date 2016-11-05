@@ -1,8 +1,8 @@
 //
 //  WorkspaceUIWindowController.swift
-//  Editor6
+//  Editor6WorkspaceUI
 //
-//  Created by Hoon H. on 2016/10/09.
+//  Created by Hoon H. on 2016/11/05.
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
@@ -10,30 +10,31 @@ import Foundation
 import AppKit
 import EonilToolbox
 import Editor6Common
-import Editor6WorkspaceUI
 
-final class WorkspaceUIWindowController: NSWindowController, NSWindowDelegate {
+public final class WorkspaceUIWindowController: NSWindowController, NSWindowDelegate {
     private let workspaceViewController = WorkspaceUIViewController()
     private var installer = ViewInstaller()
     private var delegate = ((WorkspaceUIAction) -> ())?.none
 
-    convenience init() {
+    public convenience init() {
         self.init(window: nil)
     }
-    required init?(coder: NSCoder) {
+    @available(*,unavailable)
+    public required init?(coder: NSCoder) {
         fatalError("IB/SB are not supported.")
     }
-    override init(window: NSWindow?) {
+    internal override init(window: NSWindow?) {
         super.init(window: window)
         self.window = window
-        loadWindow()
-        windowDidLoad()
+        self.loadWindow()
+        self.windowDidLoad()
     }
 
-    func delegate(to newDelegate: @escaping (WorkspaceUIAction) -> ()) {
+    public func delegate(to newDelegate: @escaping (WorkspaceUIAction) -> ()) {
          delegate = newDelegate
     }
-    func reload(_ newState: WorkspaceUIState) {
+    public func reload(_ newState: WorkspaceUIState) {
+        assert(delegate != nil)
         workspaceViewController.reload(newState)
     }
 
@@ -47,21 +48,23 @@ final class WorkspaceUIWindowController: NSWindowController, NSWindowDelegate {
         }
     }
 
-    override func loadWindow() {
+    public override func loadWindow() {
         window = NSWindow()
     }
-    override func windowDidLoad() {
+    public override func windowDidLoad() {
         super.windowDidLoad()
         render()
     }
-    func windowDidResize(_ notification: Notification) {
+    @available(*,unavailable)
+    public func windowDidResize(_ notification: Notification) {
         render()
     }
 
     // MARK: -
 
-    func windowWillClose(_ notification: Notification) {
-        guard let d = document as? WorkspaceDocument else { reportFatalError() }
-        d.close()
+    @available(*,unavailable)
+    public func windowWillClose(_ notification: Notification) {
+        assert(delegate != nil)
+        delegate?(.close)
     }
 }

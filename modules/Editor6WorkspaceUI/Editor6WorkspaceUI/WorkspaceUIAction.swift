@@ -9,4 +9,5 @@
 import Foundation
 
 public enum WorkspaceUIAction {
+    case close
 }

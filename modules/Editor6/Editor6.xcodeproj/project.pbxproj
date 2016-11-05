@@ -20,8 +20,6 @@
 		4566CEB41DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEA61DADAAB200EA2A0C /* Editor6FileTreeUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4566CEE31DADABC100EA2A0C /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEDF1DADAB9F00EA2A0C /* Editor6DepPack.framework */; };
 		4566CEE41DADABC100EA2A0C /* Editor6DepPack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEDF1DADAB9F00EA2A0C /* Editor6DepPack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		456FDD6C1DAA327400F8003A /* WorkspaceUIWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD6B1DAA327400F8003A /* WorkspaceUIWindowController.swift */; };
-		456FDD741DAA395100F8003A /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD731DAA395100F8003A /* Report.swift */; };
 		456FDDD61DAA78B900F8003A /* DriverState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDD51DAA78B900F8003A /* DriverState.swift */; };
 		456FDE211DAA952F00F8003A /* UNUSED_TreeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE201DAA952F00F8003A /* UNUSED_TreeEvent.swift */; };
 		456FDE231DAA95AE00F8003A /* Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE221DAA95AE00F8003A /* Broadcast.swift */; };
@@ -30,6 +28,7 @@
 		45ABC1B11DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45ABC1AB1DCDAD61006EFE1F /* Editor6MainMenuUI2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45ABC1B51DCDAEB1006EFE1F /* WorkspaceDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1B41DCDAEB1006EFE1F /* WorkspaceDriver.swift */; };
 		45ABC1C61DCDB62E006EFE1F /* MARK_unimplemented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */; };
+		45ABC1D51DCDB90A006EFE1F /* ignore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D41DCDB90A006EFE1F /* ignore.swift */; };
 		45CE5CCE1DC9266700C0B9B3 /* Editor6WorkspaceModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CE5CC71DC9264C00C0B9B3 /* Editor6WorkspaceModel.framework */; };
 		45CE5CCF1DC9266700C0B9B3 /* Editor6WorkspaceModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45CE5CC71DC9264C00C0B9B3 /* Editor6WorkspaceModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45D940381DCA914B00B65876 /* DriverMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D940371DCA914B00B65876 /* DriverMessage.swift */; };
@@ -226,8 +225,6 @@
 		4566CEA01DADAAB100EA2A0C /* Editor6FileTreeUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6FileTreeUI.xcodeproj; path = ../Editor6FileTreeUI/Editor6FileTreeUI.xcodeproj; sourceTree = "<group>"; };
 		4566CEA91DADAAB400EA2A0C /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
 		4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
-		456FDD6B1DAA327400F8003A /* WorkspaceUIWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIWindowController.swift; sourceTree = "<group>"; };
-		456FDD731DAA395100F8003A /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		456FDDD51DAA78B900F8003A /* DriverState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverState.swift; sourceTree = "<group>"; };
 		456FDE201DAA952F00F8003A /* UNUSED_TreeEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_TreeEvent.swift; sourceTree = "<group>"; };
 		456FDE221DAA95AE00F8003A /* Broadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Broadcast.swift; sourceTree = "<group>"; };
@@ -235,6 +232,7 @@
 		45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6MainMenuUI2.xcodeproj; path = ../Editor6MainMenuUI2/Editor6MainMenuUI2.xcodeproj; sourceTree = "<group>"; };
 		45ABC1B41DCDAEB1006EFE1F /* WorkspaceDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDriver.swift; sourceTree = "<group>"; };
 		45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
+		45ABC1D41DCDB90A006EFE1F /* ignore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ignore.swift; sourceTree = "<group>"; };
 		45CE5CC11DC9264C00C0B9B3 /* Editor6WorkspaceModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6WorkspaceModel.xcodeproj; path = ../Editor6WorkspaceModel/Editor6WorkspaceModel.xcodeproj; sourceTree = "<group>"; };
 		45D940371DCA914B00B65876 /* DriverMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverMessage.swift; sourceTree = "<group>"; };
 		45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6WorkspaceUI.xcodeproj; path = ../Editor6WorkspaceUI/Editor6WorkspaceUI.xcodeproj; sourceTree = "<group>"; };
@@ -286,9 +284,8 @@
 				45ABC1B41DCDAEB1006EFE1F /* WorkspaceDriver.swift */,
 				4583C1611DCAA48A001EA107 /* WorkspaceID.swift */,
 				45185E841DA8FA6F00C4D86D /* WorkspaceMessage.swift */,
-				456FDD6B1DAA327400F8003A /* WorkspaceUIWindowController.swift */,
-				456FDD731DAA395100F8003A /* Report.swift */,
 				45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */,
+				45ABC1D41DCDB90A006EFE1F /* ignore.swift */,
 				45185E491DA8E8EA00C4D86D /* Assets.xcassets */,
 				45185E4E1DA8E8EA00C4D86D /* Info.plist */,
 				45ABC1B61DCDAED3006EFE1F /* (unused) */,
@@ -597,16 +594,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				45185E7F1DA8F74500C4D86D /* UNUSED_Query.swift in Sources */,
-				456FDD741DAA395100F8003A /* Report.swift in Sources */,
 				45ABC1B51DCDAEB1006EFE1F /* WorkspaceDriver.swift in Sources */,
 				456FDDD61DAA78B900F8003A /* DriverState.swift in Sources */,
 				45185E431DA8E8EA00C4D86D /* Driver.swift in Sources */,
 				452049A71DAF0A44002297EC /* UNUSED_AsyncMessageDispatcher.swift in Sources */,
 				45ABC1C61DCDB62E006EFE1F /* MARK_unimplemented.swift in Sources */,
-				456FDD6C1DAA327400F8003A /* WorkspaceUIWindowController.swift in Sources */,
 				4583C1621DCAA48A001EA107 /* WorkspaceID.swift in Sources */,
 				45185E791DA8F44300C4D86D /* main.swift in Sources */,
 				45185E851DA8FA6F00C4D86D /* WorkspaceMessage.swift in Sources */,
+				45ABC1D51DCDB90A006EFE1F /* ignore.swift in Sources */,
 				456FDE211DAA952F00F8003A /* UNUSED_TreeEvent.swift in Sources */,
 				45D940381DCA914B00B65876 /* DriverMessage.swift in Sources */,
 				456FDE231DAA95AE00F8003A /* Broadcast.swift in Sources */,

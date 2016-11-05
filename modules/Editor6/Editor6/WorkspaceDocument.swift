@@ -20,37 +20,32 @@ final class WorkspaceDocument: NSDocument {
 
     override init() {
         super.init()
-        Driver.dispatch(.initiate(getID()))
+        main.delegate { [weak self] in self?.process($0) }
+        Driver.queue(.initiate(getID()))
     }
     deinit {
-        Driver.dispatch(.terminate(getID()))
+        Driver.queue(.terminate(getID()))
+        main.delegate(to: ignore)
         Swift.print("closed")
     }
 
     func process(message: DriverMessage) {
         
     }
-
     private func getID() -> WorkspaceID {
         return WorkspaceID.from(document: self)
+    }
+    private func process(_ workspaceAction: WorkspaceUIAction) {
+        switch workspaceAction {
+        case .close:
+            close()
+        }
     }
 
     override func makeWindowControllers() {
         super.makeWindowControllers()
         addWindowController(main)
-        main.delegate { [weak self] in
-            self?.process($0)
-        }
     }
-
-    private func process(_ workspaceAction: WorkspaceUIAction) {
-//        switch workspaceAction {
-//        }
-    }
-
-//    func process(command: WorkspaceCommand) {
-//
-//    }
 
     override func read(from url: URL, ofType typeName: String) throws {
         Swift.print(#function)

@@ -16,6 +16,8 @@
 		4583C1D61DCAAB63001EA107 /* Tree1Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583C1D51DCAAB63001EA107 /* Tree1Mutation.swift */; };
 		45ABC12F1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */; };
 		45ABC1BA1DCDB5DA006EFE1F /* MARK_unimplemented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */; };
+		45ABC1D11DCDB788006EFE1F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D01DCDB788006EFE1F /* Report.swift */; };
+		45ABC1D31DCDB8BD006EFE1F /* noop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D21DCDB8BD006EFE1F /* noop.swift */; };
 		45E084E81DB3C87300C5428D /* Tree1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E084E71DB3C87300C5428D /* Tree1.swift */; };
 		45EF85331DB22DCB00B320B5 /* Editor6CommonControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF85321DB22DCB00B320B5 /* Editor6CommonControl.swift */; };
 		45EF85411DB236CE00B320B5 /* Editor6CommonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF85401DB236CE00B320B5 /* Editor6CommonStackView.swift */; };
@@ -107,6 +109,8 @@
 		4583C1D51DCAAB63001EA107 /* Tree1Mutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree1Mutation.swift; sourceTree = "<group>"; };
 		45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppKit.NSMenuItem+TargetActionUtility.swift"; sourceTree = "<group>"; };
 		45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
+		45ABC1D01DCDB788006EFE1F /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		45ABC1D21DCDB8BD006EFE1F /* noop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noop.swift; sourceTree = "<group>"; };
 		45E084E71DB3C87300C5428D /* Tree1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree1.swift; sourceTree = "<group>"; };
 		45EF85321DB22DCB00B320B5 /* Editor6CommonControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6CommonControl.swift; sourceTree = "<group>"; };
 		45EF85401DB236CE00B320B5 /* Editor6CommonStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6CommonStackView.swift; sourceTree = "<group>"; };
@@ -155,7 +159,9 @@
 				456FDDAD1DAA47EC00F8003A /* Editor6CommonViewController.swift */,
 				45EF85401DB236CE00B320B5 /* Editor6CommonStackView.swift */,
 				45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */,
+				45ABC1D01DCDB788006EFE1F /* Report.swift */,
 				45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */,
+				45ABC1D21DCDB8BD006EFE1F /* noop.swift */,
 			);
 			path = Editor6Common;
 			sourceTree = "<group>";
@@ -356,6 +362,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45ABC1D11DCDB788006EFE1F /* Report.swift in Sources */,
+				45ABC1D31DCDB8BD006EFE1F /* noop.swift in Sources */,
 				45ABC1BA1DCDB5DA006EFE1F /* MARK_unimplemented.swift in Sources */,
 				4583C1D61DCAAB63001EA107 /* Tree1Mutation.swift in Sources */,
 				45E084E81DB3C87300C5428D /* Tree1.swift in Sources */,

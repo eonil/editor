@@ -26,7 +26,7 @@ final class Driver {
         appcon.owner = self
         NSApplication.shared().mainMenu = mmc.menu
         NSApplication.shared().delegate = appcon
-        Driver.dispatch = { [weak self] in self?.schedule(.handle($0)) }
+        Driver.queue = { [weak self] in self?.schedule(.handle($0)) }
     }
     func run() -> Int32 {
         assert(Thread.isMainThread)
@@ -34,7 +34,7 @@ final class Driver {
     }
     deinit {
         assert(Thread.isMainThread)
-        Driver.dispatch = noop
+        Driver.queue = ignore
         NSApplication.shared().delegate = nil
         NSApplication.shared().mainMenu = nil
         appcon.owner = nil
@@ -50,7 +50,7 @@ final class Driver {
     /// I had to create a message channel, and this is that channel.
     ///
     /// Named as `dispatch` because this will not
-    static private(set) var dispatch: (WorkspaceMessage) -> () = noop
+    static private(set) var queue: (WorkspaceMessage) -> () = ignore
 
     /// Steps single iteration of loop.
     /// There's no explicit loop.
@@ -128,7 +128,4 @@ private final class ApplicationController: NSObject, NSApplicationDelegate {
     }
     func applicationWillTerminate(_ aNotification: Notification) {
     }
-}
-
-private func noop<T>(_: T) {
 }

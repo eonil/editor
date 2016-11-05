@@ -6,12 +6,10 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-import Foundation
-
-func reportFatalError() -> Never  {
+public func reportFatalError() -> Never  {
     fatalError()
 }
-func reportFatalError(_ message: String) -> Never  {
+public func reportFatalError(_ message: String) -> Never  {
     fatalError(message)
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45ABC1C81DCDB743006EFE1F /* WorkspaceUIWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */; };
 		45E084091DB28CE900C5428D /* WorkspaceUINonAutolayoutStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E084081DB28CE900C5428D /* WorkspaceUINonAutolayoutStackView.swift */; };
 		45E084751DB36B6700C5428D /* ManualView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E084721DB36B5F00C5428D /* ManualView.framework */; };
 		45E084761DB36B6700C5428D /* ManualView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45E084721DB36B5F00C5428D /* ManualView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -249,6 +250,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIWindowController.swift; sourceTree = "<group>"; };
 		45E084081DB28CE900C5428D /* WorkspaceUINonAutolayoutStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUINonAutolayoutStackView.swift; sourceTree = "<group>"; };
 		45E0846C1DB36B5F00C5428D /* ManualView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ManualView.xcodeproj; path = ../ManualView/ManualView.xcodeproj; sourceTree = "<group>"; };
 		45E084A11DB3842700C5428D /* WorkspaceUIState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIState.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				45EF847C1DB2198700B320B5 /* Info.plist */,
 				45E084A11DB3842700C5428D /* WorkspaceUIState.swift */,
 				45E084D41DB3864300C5428D /* WorkspaceUIAction.swift */,
+				45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */,
 				45EF84851DB219A900B320B5 /* WorkspaceUIViewController.swift */,
 				45EF85121DB223F200B320B5 /* WorkspaceUINavigatorViewController.swift */,
 				45EF85141DB223FD00B320B5 /* WorkspaceUIInspectorViewController.swift */,
@@ -718,6 +721,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45ABC1C81DCDB743006EFE1F /* WorkspaceUIWindowController.swift in Sources */,
 				45EF85311DB2288400B320B5 /* WorkspaceUINavigatorTabBarView.swift in Sources */,
 				45E084F81DB3CE1900C5428D /* WorkspaceUIBasicOutlineView.swift in Sources */,
 				45EF859D1DB2492F00B320B5 /* WorkspaceUICommonSplitViewController.swift in Sources */,
