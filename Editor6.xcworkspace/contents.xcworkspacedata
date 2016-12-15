@@ -7,6 +7,9 @@
    <FileRef
       location = "group:NOTE.md">
    </FileRef>
+   <FileRef
+      location = "group:CodingConvention.md">
+   </FileRef>
    <Group
       location = "container:"
       name = "modules">
@@ -32,6 +35,12 @@
    <Group
       location = "container:"
       name = "submodules">
+      <FileRef
+         location = "group:submodules/LLDBWrapper/LLDBWrapper.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:submodules/toolbox.swift/EonilToolbox.xcodeproj">
+      </FileRef>
    </Group>
    <Group
       location = "container:"

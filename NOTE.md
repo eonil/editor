@@ -1,10 +1,3 @@
-Debugging on Device
--------------------
-
-- https://github.com/samdmarshall/SDMMobileDevice
-
-
-
 
 
 

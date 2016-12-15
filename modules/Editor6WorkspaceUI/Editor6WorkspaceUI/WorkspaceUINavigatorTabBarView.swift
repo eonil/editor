@@ -58,7 +58,7 @@ fileprivate final class WorkspaceUINavigatorTabBarButton: ManualView, ManualFitt
         self.init()
         let a = label.attributed()
             .fontedWithSystemFontOf(size: .smallSystem)
-            .foregroundColored(NSAttributedString.Color.black)
+            .foregroundColored(.black)
         text.reload(a)
     }
     fileprivate override func manual_installSubviews() {

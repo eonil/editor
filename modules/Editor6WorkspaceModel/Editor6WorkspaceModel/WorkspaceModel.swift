@@ -84,7 +84,13 @@ public final class WorkspaceModel {
 }
 
 public extension WorkspaceModel {
-    /// Purge workspace data and reload all from a new location.
+    /// Initialze a new workspace directory and open it.
+    public func ADHOC_make(at location: URL) -> Future<()> {
+        return queueOperation { local, note, complete in
+            local.cargo.queue(CargoCommand.new(location))
+        }
+    }
+    /// Purge in-memory workspace data and reload all from a new location.
     /// This method is no-op if new location is same with old location.
     public func relocate(_ newLocation: URL) -> Future<()> {
         return queueOperation { local, note, complete in

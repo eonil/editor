@@ -35,8 +35,8 @@ final class Subprocess1Controller {
     private let stderrPipe = Pipe()
 
     init(path: String, arguments: [String], ioQueuePair: IOQueuePair = .main) {
-        writeGCDQ = ioQueuePair.writeQueue
-        readGCDQ = ioQueuePair.readQueue
+        writeGCDQ = ioQueuePair.outgoing
+        readGCDQ = ioQueuePair.incoming
         let dispatchToDelegate = { [weak self] (action: Subprocess1Action) in
             self?.readGCDQ.async { [weak self] in
                 guard let s = self else { return }

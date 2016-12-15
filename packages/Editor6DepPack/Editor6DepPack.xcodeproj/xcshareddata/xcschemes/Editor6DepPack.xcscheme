@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_Flow"
+               BlueprintIdentifier = "OBJ_63"
                BuildableName = "Flow.framework"
                BlueprintName = "Flow"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -28,7 +28,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_FSEventsUnofficialWrapper"
+               BlueprintIdentifier = "OBJ_75"
+               BuildableName = "EonilFlow4.framework"
+               BlueprintName = "EonilFlow4"
+               ReferencedContainer = "container:Editor6DepPack.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_87"
                BuildableName = "FSEventsUnofficialWrapper.framework"
                BlueprintName = "FSEventsUnofficialWrapper"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -42,7 +56,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_Reftable"
+               BlueprintIdentifier = "OBJ_101"
                BuildableName = "Reftable.framework"
                BlueprintName = "Reftable"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -56,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_BTree"
+               BlueprintIdentifier = "OBJ_108"
                BuildableName = "BTree.framework"
                BlueprintName = "BTree"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -70,7 +84,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_Editor6DepPack"
+               BlueprintIdentifier = "OBJ_130"
                BuildableName = "Editor6DepPack.framework"
                BlueprintName = "Editor6DepPack"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -88,7 +102,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "______Target_Editor6DepPackTests"
+               BlueprintIdentifier = "OBJ_147"
                BuildableName = "Editor6DepPackTests.xctest"
                BlueprintName = "Editor6DepPackTests"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -111,7 +125,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "______Target_Flow"
+            BlueprintIdentifier = "OBJ_63"
             BuildableName = "Flow.framework"
             BlueprintName = "Flow"
             ReferencedContainer = "container:Editor6DepPack.xcodeproj">

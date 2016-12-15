@@ -9,21 +9,27 @@
 import Foundation
 
 struct IOQueuePair {
-    var readQueue: DispatchQueue
-    var writeQueue: DispatchQueue
+    var incoming: DispatchQueue
+    var outgoing: DispatchQueue
 
+    static func makeSingleSerialBackground() -> IOQueuePair {
+        let serialQueue = makeSerialBackgroundGCDQ(label: "IOQueuePair.incoming")
+        return IOQueuePair(incoming: serialQueue,
+                           outgoing: serialQueue)
+    }
     static func makeDualSerialBackground() -> IOQueuePair {
-        func makeSerialBackgroundGCDQ(label: String) -> DispatchQueue {
-            return DispatchQueue(label: label,
-                                 qos: .background,
-                                 attributes: [],
-                                 autoreleaseFrequency: .workItem,
-                                 target: nil)
-        }
-        return IOQueuePair(readQueue: makeSerialBackgroundGCDQ(label: "IOQueuePair/ReadGCDQ"),
-                           writeQueue: makeSerialBackgroundGCDQ(label: "IOQueuePair/WriteGCDQ"))
+        return IOQueuePair(incoming: makeSerialBackgroundGCDQ(label: "IOQueuePair.incoming"),
+                           outgoing: makeSerialBackgroundGCDQ(label: "IOQueuePair.outgoing"))
     }
     static var main: IOQueuePair {
-        return IOQueuePair(readQueue: .main, writeQueue: .main)
+        return IOQueuePair(incoming: .main, outgoing: .main)
     }
+}
+
+private func makeSerialBackgroundGCDQ(label: String) -> DispatchQueue {
+    return DispatchQueue(label: label,
+                         qos: .background,
+                         attributes: [],
+                         autoreleaseFrequency: .workItem,
+                         target: nil)
 }

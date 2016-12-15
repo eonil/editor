@@ -1,764 +1,1091 @@
 // !$*UTF8*$!
 {
-    archiveVersion = 1;
-    classes = {};
-    objectVersion = 46;
-    rootObject = __RootObject_;
-    objects = {
-        __RootObject_ = {
-            isa = PBXProject;
-            attributes = {LastUpgradeCheck = 9999;};
-            buildConfigurationList = ___RootConfs_;
-            compatibilityVersion = 'Xcode 3.2';
-            developmentRegion = English;
-            hasScannedForEncodings = 0;
-            knownRegions = (en);
-            mainGroup = ___RootGroup_;
-            productRefGroup = ____Products_;
-            projectDirPath = '';
-            projectRoot = '';
-            targets = (______Target_Flow, ______Target_FSEventsUnofficialWrapper, ______Target_Reftable, ______Target_BTree, ______Target_Editor6DepPack, ______Target_Editor6DepPackTests);
-        };
-        '__PBXFileRef_Package.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'Package.swift';
-            sourceTree = '<group>';
-        };
-        ___RootGroup_ = {
-            isa = PBXGroup;
-            children = ('__PBXFileRef_Package.swift', _____Configs_, _____Sources_,  Dependencies_, _______Tests_, ____Products_);
-            sourceTree = '<group>';
-        };
-        _______Group_Flow = {
-            isa = PBXGroup;
-            name = 'Flow';
-            path = 'Packages/Flow-0.0.3/Sources';
-            sourceTree = '<group>';
-            children = ('__PBXFileRef_Packages/Flow-0.0.3/Sources/Flow.swift', '__PBXFileRef_Packages/Flow-0.0.3/Sources/Step.swift', '__PBXFileRef_Packages/Flow-0.0.3/Sources/StepExtensions.swift', '__PBXFileRef_Packages/Flow-0.0.3/Sources/SteppingErrorReporting.swift', '__PBXFileRef_Packages/Flow-0.0.3/Sources/SteppingState.swift', '__PBXFileRef_Packages/Flow-0.0.3/Sources/SteppingStateMachine.swift');
-        };
-        '__PBXFileRef_Packages/Flow-0.0.3/Sources/Flow.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'Flow.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/Flow-0.0.3/Sources/Step.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'Step.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/Flow-0.0.3/Sources/StepExtensions.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'StepExtensions.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/Flow-0.0.3/Sources/SteppingErrorReporting.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'SteppingErrorReporting.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/Flow-0.0.3/Sources/SteppingState.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'SteppingState.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/Flow-0.0.3/Sources/SteppingStateMachine.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'SteppingStateMachine.swift';
-            sourceTree = '<group>';
-        };
-        ______Target_Flow = {
-            isa = PBXNativeTarget;
-            buildConfigurationList = _______Confs_Flow;
-            buildPhases = (CompilePhase_Flow, ___LinkPhase_Flow);
-            buildRules = ();
-            dependencies = ();
-            name = 'Flow';
-            productName = Flow;
-            productReference = _____Product_Flow;
-            productType = 'com.apple.product-type.framework';
-        };
-        _____Product_Flow = {
-            isa = PBXFileReference;
-            explicitFileType = 'wrapper.framework';
-            path = 'Flow.framework';
-            sourceTree = BUILT_PRODUCTS_DIR;
-        };
-        CompilePhase_Flow = {
-            isa = PBXSourcesBuildPhase;
-            files = ('__src_cc_ref_Packages/Flow-0.0.3/Sources/Flow.swift', '__src_cc_ref_Packages/Flow-0.0.3/Sources/Step.swift', '__src_cc_ref_Packages/Flow-0.0.3/Sources/StepExtensions.swift', '__src_cc_ref_Packages/Flow-0.0.3/Sources/SteppingErrorReporting.swift', '__src_cc_ref_Packages/Flow-0.0.3/Sources/SteppingState.swift', '__src_cc_ref_Packages/Flow-0.0.3/Sources/SteppingStateMachine.swift');
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        '__src_cc_ref_Packages/Flow-0.0.3/Sources/Flow.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/Flow-0.0.3/Sources/Flow.swift';
-        };
-        '__src_cc_ref_Packages/Flow-0.0.3/Sources/Step.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/Flow-0.0.3/Sources/Step.swift';
-        };
-        '__src_cc_ref_Packages/Flow-0.0.3/Sources/StepExtensions.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/Flow-0.0.3/Sources/StepExtensions.swift';
-        };
-        '__src_cc_ref_Packages/Flow-0.0.3/Sources/SteppingErrorReporting.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/Flow-0.0.3/Sources/SteppingErrorReporting.swift';
-        };
-        '__src_cc_ref_Packages/Flow-0.0.3/Sources/SteppingState.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/Flow-0.0.3/Sources/SteppingState.swift';
-        };
-        '__src_cc_ref_Packages/Flow-0.0.3/Sources/SteppingStateMachine.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/Flow-0.0.3/Sources/SteppingStateMachine.swift';
-        };
-        ___LinkPhase_Flow = {
-            isa = PBXFrameworksBuildPhase;
-            files = ();
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        _______Confs_Flow = {
-            isa = XCConfigurationList;
-            buildConfigurations = (___DebugConf_Flow, _ReleaseConf_Flow);
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Debug;
-        };
-        ___DebugConf_Flow = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/Flow_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; SWIFT_OPTIMIZATION_LEVEL = '-Onone'; PRODUCT_BUNDLE_IDENTIFIER = 'Flow'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Debug;
-        };
-        _ReleaseConf_Flow = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/Flow_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; PRODUCT_BUNDLE_IDENTIFIER = 'Flow'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Release;
-        };
-        __Dependency_Flow = {
-            isa = PBXTargetDependency;
-            target = ______Target_Flow;
-        };
-        _______Group_FSEventsUnofficialWrapper = {
-            isa = PBXGroup;
-            name = 'FSEventsUnofficialWrapper';
-            path = 'Packages/FSEventsUnofficialWrapper-0.0.0/Sources';
-            sourceTree = '<group>';
-            children = ('__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FileSystemWatcher.swift', '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStream.swift', '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamCreateFlags.swift', '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamError.swift', '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEvent.swift', '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventFlags.swift', '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventID.swift', '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamIllogicalErrorLog.swift');
-        };
-        '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FileSystemWatcher.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'FileSystemWatcher.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStream.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'FSEventUnofficialWrapperStream.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamCreateFlags.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'FSEventUnofficialWrapperStreamCreateFlags.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamError.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'FSEventUnofficialWrapperStreamError.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEvent.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'FSEventUnofficialWrapperStreamEvent.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventFlags.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'FSEventUnofficialWrapperStreamEventFlags.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventID.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'FSEventUnofficialWrapperStreamEventID.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamIllogicalErrorLog.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'FSEventUnofficialWrapperStreamIllogicalErrorLog.swift';
-            sourceTree = '<group>';
-        };
-        ______Target_FSEventsUnofficialWrapper = {
-            isa = PBXNativeTarget;
-            buildConfigurationList = _______Confs_FSEventsUnofficialWrapper;
-            buildPhases = (CompilePhase_FSEventsUnofficialWrapper, ___LinkPhase_FSEventsUnofficialWrapper);
-            buildRules = ();
-            dependencies = ();
-            name = 'FSEventsUnofficialWrapper';
-            productName = FSEventsUnofficialWrapper;
-            productReference = _____Product_FSEventsUnofficialWrapper;
-            productType = 'com.apple.product-type.framework';
-        };
-        _____Product_FSEventsUnofficialWrapper = {
-            isa = PBXFileReference;
-            explicitFileType = 'wrapper.framework';
-            path = 'FSEventsUnofficialWrapper.framework';
-            sourceTree = BUILT_PRODUCTS_DIR;
-        };
-        CompilePhase_FSEventsUnofficialWrapper = {
-            isa = PBXSourcesBuildPhase;
-            files = ('__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FileSystemWatcher.swift', '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStream.swift', '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamCreateFlags.swift', '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamError.swift', '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEvent.swift', '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventFlags.swift', '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventID.swift', '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamIllogicalErrorLog.swift');
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FileSystemWatcher.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FileSystemWatcher.swift';
-        };
-        '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStream.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStream.swift';
-        };
-        '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamCreateFlags.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamCreateFlags.swift';
-        };
-        '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamError.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamError.swift';
-        };
-        '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEvent.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEvent.swift';
-        };
-        '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventFlags.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventFlags.swift';
-        };
-        '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventID.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamEventID.swift';
-        };
-        '__src_cc_ref_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamIllogicalErrorLog.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/FSEventsUnofficialWrapper-0.0.0/Sources/FSEventUnofficialWrapperStreamIllogicalErrorLog.swift';
-        };
-        ___LinkPhase_FSEventsUnofficialWrapper = {
-            isa = PBXFrameworksBuildPhase;
-            files = ();
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        _______Confs_FSEventsUnofficialWrapper = {
-            isa = XCConfigurationList;
-            buildConfigurations = (___DebugConf_FSEventsUnofficialWrapper, _ReleaseConf_FSEventsUnofficialWrapper);
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Debug;
-        };
-        ___DebugConf_FSEventsUnofficialWrapper = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/FSEventsUnofficialWrapper_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; SWIFT_OPTIMIZATION_LEVEL = '-Onone'; PRODUCT_BUNDLE_IDENTIFIER = 'FSEventsUnofficialWrapper'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Debug;
-        };
-        _ReleaseConf_FSEventsUnofficialWrapper = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/FSEventsUnofficialWrapper_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; PRODUCT_BUNDLE_IDENTIFIER = 'FSEventsUnofficialWrapper'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Release;
-        };
-        __Dependency_FSEventsUnofficialWrapper = {
-            isa = PBXTargetDependency;
-            target = ______Target_FSEventsUnofficialWrapper;
-        };
-        _______Group_Reftable = {
-            isa = PBXGroup;
-            name = 'Reftable';
-            path = 'Packages/Reftable-0.0.0/Sources';
-            sourceTree = '<group>';
-            children = ('__PBXFileRef_Packages/Reftable-0.0.0/Sources/Reftable.swift');
-        };
-        '__PBXFileRef_Packages/Reftable-0.0.0/Sources/Reftable.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'Reftable.swift';
-            sourceTree = '<group>';
-        };
-        ______Target_Reftable = {
-            isa = PBXNativeTarget;
-            buildConfigurationList = _______Confs_Reftable;
-            buildPhases = (CompilePhase_Reftable, ___LinkPhase_Reftable);
-            buildRules = ();
-            dependencies = ();
-            name = 'Reftable';
-            productName = Reftable;
-            productReference = _____Product_Reftable;
-            productType = 'com.apple.product-type.framework';
-        };
-        _____Product_Reftable = {
-            isa = PBXFileReference;
-            explicitFileType = 'wrapper.framework';
-            path = 'Reftable.framework';
-            sourceTree = BUILT_PRODUCTS_DIR;
-        };
-        CompilePhase_Reftable = {
-            isa = PBXSourcesBuildPhase;
-            files = ('__src_cc_ref_Packages/Reftable-0.0.0/Sources/Reftable.swift');
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        '__src_cc_ref_Packages/Reftable-0.0.0/Sources/Reftable.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/Reftable-0.0.0/Sources/Reftable.swift';
-        };
-        ___LinkPhase_Reftable = {
-            isa = PBXFrameworksBuildPhase;
-            files = ();
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        _______Confs_Reftable = {
-            isa = XCConfigurationList;
-            buildConfigurations = (___DebugConf_Reftable, _ReleaseConf_Reftable);
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Debug;
-        };
-        ___DebugConf_Reftable = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/Reftable_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; SWIFT_OPTIMIZATION_LEVEL = '-Onone'; PRODUCT_BUNDLE_IDENTIFIER = 'Reftable'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Debug;
-        };
-        _ReleaseConf_Reftable = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/Reftable_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; PRODUCT_BUNDLE_IDENTIFIER = 'Reftable'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Release;
-        };
-        __Dependency_Reftable = {
-            isa = PBXTargetDependency;
-            target = ______Target_Reftable;
-        };
-        _______Group_BTree = {
-            isa = PBXGroup;
-            name = 'BTree';
-            path = 'Packages/BTree-3.1.0/Sources';
-            sourceTree = '<group>';
-            children = ('__PBXFileRef_Packages/BTree-3.1.0/Sources/BridgedList.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTree.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeBuilder.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeComparisons.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeCursor.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeIndex.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeIterator.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeMerger.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeNode.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreePath.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/List.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/Map.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/SortedSet.swift', '__PBXFileRef_Packages/BTree-3.1.0/Sources/Weak.swift');
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BridgedList.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BridgedList.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTree.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BTree.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeBuilder.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BTreeBuilder.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeComparisons.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BTreeComparisons.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeCursor.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BTreeCursor.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeIndex.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BTreeIndex.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeIterator.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BTreeIterator.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeMerger.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BTreeMerger.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeNode.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BTreeNode.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreePath.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'BTreePath.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/List.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'List.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/Map.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'Map.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/SortedSet.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'SortedSet.swift';
-            sourceTree = '<group>';
-        };
-        '__PBXFileRef_Packages/BTree-3.1.0/Sources/Weak.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'Weak.swift';
-            sourceTree = '<group>';
-        };
-        ______Target_BTree = {
-            isa = PBXNativeTarget;
-            buildConfigurationList = _______Confs_BTree;
-            buildPhases = (CompilePhase_BTree, ___LinkPhase_BTree);
-            buildRules = ();
-            dependencies = ();
-            name = 'BTree';
-            productName = BTree;
-            productReference = _____Product_BTree;
-            productType = 'com.apple.product-type.framework';
-        };
-        _____Product_BTree = {
-            isa = PBXFileReference;
-            explicitFileType = 'wrapper.framework';
-            path = 'BTree.framework';
-            sourceTree = BUILT_PRODUCTS_DIR;
-        };
-        CompilePhase_BTree = {
-            isa = PBXSourcesBuildPhase;
-            files = ('__src_cc_ref_Packages/BTree-3.1.0/Sources/BridgedList.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTree.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeBuilder.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeComparisons.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeCursor.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeIndex.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeIterator.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeMerger.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeNode.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreePath.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/List.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/Map.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/SortedSet.swift', '__src_cc_ref_Packages/BTree-3.1.0/Sources/Weak.swift');
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BridgedList.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BridgedList.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTree.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTree.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeBuilder.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeBuilder.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeComparisons.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeComparisons.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeCursor.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeCursor.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeIndex.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeIndex.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeIterator.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeIterator.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeMerger.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeMerger.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreeNode.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreeNode.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/BTreePath.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/BTreePath.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/List.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/List.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/Map.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/Map.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/SortedSet.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/SortedSet.swift';
-        };
-        '__src_cc_ref_Packages/BTree-3.1.0/Sources/Weak.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Packages/BTree-3.1.0/Sources/Weak.swift';
-        };
-        ___LinkPhase_BTree = {
-            isa = PBXFrameworksBuildPhase;
-            files = ();
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        _______Confs_BTree = {
-            isa = XCConfigurationList;
-            buildConfigurations = (___DebugConf_BTree, _ReleaseConf_BTree);
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Debug;
-        };
-        ___DebugConf_BTree = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/BTree_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; SWIFT_OPTIMIZATION_LEVEL = '-Onone'; PRODUCT_BUNDLE_IDENTIFIER = 'BTree'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Debug;
-        };
-        _ReleaseConf_BTree = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/BTree_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; PRODUCT_BUNDLE_IDENTIFIER = 'BTree'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Release;
-        };
-        __Dependency_BTree = {
-            isa = PBXTargetDependency;
-            target = ______Target_BTree;
-        };
-        _______Group_Editor6DepPack = {
-            isa = PBXGroup;
-            name = 'Editor6DepPack';
-            path = 'Sources';
-            sourceTree = '<group>';
-            children = ('__PBXFileRef_Sources/Editor6DepPack.swift');
-        };
-        '__PBXFileRef_Sources/Editor6DepPack.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'Editor6DepPack.swift';
-            sourceTree = '<group>';
-        };
-        ______Target_Editor6DepPack = {
-            isa = PBXNativeTarget;
-            buildConfigurationList = _______Confs_Editor6DepPack;
-            buildPhases = (CompilePhase_Editor6DepPack, ___LinkPhase_Editor6DepPack);
-            buildRules = ();
-            dependencies = (__Dependency_Flow, __Dependency_FSEventsUnofficialWrapper, __Dependency_Reftable, __Dependency_BTree);
-            name = 'Editor6DepPack';
-            productName = Editor6DepPack;
-            productReference = _____Product_Editor6DepPack;
-            productType = 'com.apple.product-type.framework';
-        };
-        _____Product_Editor6DepPack = {
-            isa = PBXFileReference;
-            explicitFileType = 'wrapper.framework';
-            path = 'Editor6DepPack.framework';
-            sourceTree = BUILT_PRODUCTS_DIR;
-        };
-        CompilePhase_Editor6DepPack = {
-            isa = PBXSourcesBuildPhase;
-            files = ('__src_cc_ref_Sources/Editor6DepPack.swift');
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        '__src_cc_ref_Sources/Editor6DepPack.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Sources/Editor6DepPack.swift';
-        };
-        ___LinkPhase_Editor6DepPack = {
-            isa = PBXFrameworksBuildPhase;
-            files = (_LinkFileRef_Flow_via_Editor6DepPack, _LinkFileRef_FSEventsUnofficialWrapper_via_Editor6DepPack, _LinkFileRef_Reftable_via_Editor6DepPack, _LinkFileRef_BTree_via_Editor6DepPack);
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        _LinkFileRef_Flow_via_Editor6DepPack = {
-            isa = PBXBuildFile;
-            fileRef = _____Product_Flow;
-        };
-        _LinkFileRef_FSEventsUnofficialWrapper_via_Editor6DepPack = {
-            isa = PBXBuildFile;
-            fileRef = _____Product_FSEventsUnofficialWrapper;
-        };
-        _LinkFileRef_Reftable_via_Editor6DepPack = {
-            isa = PBXBuildFile;
-            fileRef = _____Product_Reftable;
-        };
-        _LinkFileRef_BTree_via_Editor6DepPack = {
-            isa = PBXBuildFile;
-            fileRef = _____Product_BTree;
-        };
-        _______Confs_Editor6DepPack = {
-            isa = XCConfigurationList;
-            buildConfigurations = (___DebugConf_Editor6DepPack, _ReleaseConf_Editor6DepPack);
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Debug;
-        };
-        ___DebugConf_Editor6DepPack = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/Editor6DepPack_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; SWIFT_OPTIMIZATION_LEVEL = '-Onone'; PRODUCT_BUNDLE_IDENTIFIER = 'Editor6DepPack'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Debug;
-        };
-        _ReleaseConf_Editor6DepPack = {
-            isa = XCBuildConfiguration;
-            buildSettings = { SWIFT_VERSION = '3.0'; LD_RUNPATH_SEARCH_PATHS = '$(TOOLCHAIN_DIR)/usr/lib/swift/macosx'; PRODUCT_MODULE_NAME = '$(TARGET_NAME:c99extidentifier)'; ENABLE_TESTABILITY = 'YES'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/Editor6DepPack_Info.plist'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; PRODUCT_BUNDLE_IDENTIFIER = 'Editor6DepPack'; PRODUCT_NAME = '$(TARGET_NAME:c99extidentifier)'; OTHER_LDFLAGS = '$(inherited)'; };
-            name = Release;
-        };
-        __Dependency_Editor6DepPack = {
-            isa = PBXTargetDependency;
-            target = ______Target_Editor6DepPack;
-        };
-        _______Group_Editor6DepPackTests = {
-            isa = PBXGroup;
-            name = 'Editor6DepPackTests';
-            path = 'Tests/Editor6DepPackTests';
-            sourceTree = '<group>';
-            children = ('__PBXFileRef_Tests/Editor6DepPackTests/Editor6DepPackTests.swift');
-        };
-        '__PBXFileRef_Tests/Editor6DepPackTests/Editor6DepPackTests.swift' = {
-            isa = PBXFileReference;
-            lastKnownFileType = sourcecode.swift;
-            path = 'Editor6DepPackTests.swift';
-            sourceTree = '<group>';
-        };
-        ______Target_Editor6DepPackTests = {
-            isa = PBXNativeTarget;
-            buildConfigurationList = _______Confs_Editor6DepPackTests;
-            buildPhases = (CompilePhase_Editor6DepPackTests, ___LinkPhase_Editor6DepPackTests);
-            buildRules = ();
-            dependencies = (__Dependency_Flow, __Dependency_FSEventsUnofficialWrapper, __Dependency_Reftable, __Dependency_BTree, __Dependency_Editor6DepPack);
-            name = 'Editor6DepPackTests';
-            productName = Editor6DepPackTests;
-            productReference = _____Product_Editor6DepPackTests;
-            productType = 'com.apple.product-type.bundle.unit-test';
-        };
-        _____Product_Editor6DepPackTests = {
-            isa = PBXFileReference;
-            explicitFileType = 'compiled.mach-o.wrapper.cfbundle';
-            path = 'Editor6DepPackTests.xctest';
-            sourceTree = BUILT_PRODUCTS_DIR;
-        };
-        CompilePhase_Editor6DepPackTests = {
-            isa = PBXSourcesBuildPhase;
-            files = ('__src_cc_ref_Tests/Editor6DepPackTests/Editor6DepPackTests.swift');
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        '__src_cc_ref_Tests/Editor6DepPackTests/Editor6DepPackTests.swift' = {
-            isa = PBXBuildFile;
-            fileRef = '__PBXFileRef_Tests/Editor6DepPackTests/Editor6DepPackTests.swift';
-        };
-        ___LinkPhase_Editor6DepPackTests = {
-            isa = PBXFrameworksBuildPhase;
-            files = (_LinkFileRef_Flow_via_Editor6DepPackTests, _LinkFileRef_FSEventsUnofficialWrapper_via_Editor6DepPackTests, _LinkFileRef_Reftable_via_Editor6DepPackTests, _LinkFileRef_BTree_via_Editor6DepPackTests, _LinkFileRef_Editor6DepPack_via_Editor6DepPackTests);
-            runOnlyForDeploymentPostprocessing = 0;
-        };
-        _LinkFileRef_Flow_via_Editor6DepPackTests = {
-            isa = PBXBuildFile;
-            fileRef = _____Product_Flow;
-        };
-        _LinkFileRef_FSEventsUnofficialWrapper_via_Editor6DepPackTests = {
-            isa = PBXBuildFile;
-            fileRef = _____Product_FSEventsUnofficialWrapper;
-        };
-        _LinkFileRef_Reftable_via_Editor6DepPackTests = {
-            isa = PBXBuildFile;
-            fileRef = _____Product_Reftable;
-        };
-        _LinkFileRef_BTree_via_Editor6DepPackTests = {
-            isa = PBXBuildFile;
-            fileRef = _____Product_BTree;
-        };
-        _LinkFileRef_Editor6DepPack_via_Editor6DepPackTests = {
-            isa = PBXBuildFile;
-            fileRef = _____Product_Editor6DepPack;
-        };
-        _______Confs_Editor6DepPackTests = {
-            isa = XCConfigurationList;
-            buildConfigurations = (___DebugConf_Editor6DepPackTests, _ReleaseConf_Editor6DepPackTests);
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Debug;
-        };
-        ___DebugConf_Editor6DepPackTests = {
-            isa = XCBuildConfiguration;
-            buildSettings = { LD_RUNPATH_SEARCH_PATHS = '@loader_path/../Frameworks'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/Editor6DepPackTests_Info.plist'; SWIFT_OPTIMIZATION_LEVEL = '-Onone'; EMBEDDED_CONTENT_CONTAINS_SWIFT = 'YES'; OTHER_LDFLAGS = '$(inherited)'; SWIFT_VERSION = '3.0'; };
-            name = Debug;
-        };
-        _ReleaseConf_Editor6DepPackTests = {
-            isa = XCBuildConfiguration;
-            buildSettings = { LD_RUNPATH_SEARCH_PATHS = '@loader_path/../Frameworks'; FRAMEWORK_SEARCH_PATHS = '$(PLATFORM_DIR)/Developer/Library/Frameworks'; OTHER_SWIFT_FLAGS = '$(inherited)'; INFOPLIST_FILE = 'Editor6DepPack.xcodeproj/Editor6DepPackTests_Info.plist'; EMBEDDED_CONTENT_CONTAINS_SWIFT = 'YES'; OTHER_LDFLAGS = '$(inherited)'; SWIFT_VERSION = '3.0'; };
-            name = Release;
-        };
-        __Dependency_Editor6DepPackTests = {
-            isa = PBXTargetDependency;
-            target = ______Target_Editor6DepPackTests;
-        };
-        '__PBXFileRef_Editor6DepPack.xcodeproj/Configs/Project.xcconfig' = {
-            isa = PBXFileReference;
-            lastKnownFileType = text.xcconfig;
-            path = 'Editor6DepPack.xcodeproj/Configs/Project.xcconfig';
-            sourceTree = '<group>';
-        };
-        _____Configs_ = {
-            isa = PBXGroup;
-            children = ('__PBXFileRef_Editor6DepPack.xcodeproj/Configs/Project.xcconfig');
-            name = Configs;
-            sourceTree = '<group>';
-        };
-        _____Sources_ = {
-            isa = PBXGroup;
-            children = (_______Group_Flow, _______Group_FSEventsUnofficialWrapper, _______Group_Reftable, _______Group_BTree, _______Group_Editor6DepPack);
-            name = Sources;
-            sourceTree = '<group>';
-        };
-        Dependencies_ = {
-            isa = PBXGroup;
-            children = (_______Group_Flow, _______Group_FSEventsUnofficialWrapper, _______Group_Reftable, _______Group_BTree);
-            name = Dependencies;
-            sourceTree = '<group>';
-        };
-        _______Tests_ = {
-            isa = PBXGroup;
-            children = (_______Group_Editor6DepPackTests);
-            name = Tests;
-            sourceTree = '<group>';
-        };
-       TestProducts_ = {
-            isa = PBXGroup;
-            children = (_____Product_Editor6DepPackTests);
-            name = Tests;
-            sourceTree = '<group>';
-        };
-        ____Products_ = {
-            isa = PBXGroup;
-            children = (TestProducts_, _____Product_Flow, _____Product_FSEventsUnofficialWrapper, _____Product_Reftable, _____Product_BTree, _____Product_Editor6DepPack);
-            name = Products;
-            sourceTree = '<group>';
-        };
-        _______Debug_ = {
-            isa = XCBuildConfiguration;
-            baseConfigurationReference = '__PBXFileRef_Editor6DepPack.xcodeproj/Configs/Project.xcconfig';
-            buildSettings = {};
-            name = Debug;
-        };
-        _____Release_ = {
-            isa = XCBuildConfiguration;
-            baseConfigurationReference = '__PBXFileRef_Editor6DepPack.xcodeproj/Configs/Project.xcconfig';
-            buildSettings = {};
-            name = Release;
-        };
-        ___RootConfs_ = {
-            isa = XCConfigurationList;
-            buildConfigurations = (_______Debug_, _____Release_);
-            defaultConfigurationIsVisible = 0;
-            defaultConfigurationName = Debug;
-        };
-    };
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		OBJ_106 /* Reftable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* Reftable.swift */; };
+		OBJ_113 /* BridgedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* BridgedList.swift */; };
+		OBJ_114 /* BTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* BTree.swift */; };
+		OBJ_115 /* BTreeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* BTreeBuilder.swift */; };
+		OBJ_116 /* BTreeComparisons.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* BTreeComparisons.swift */; };
+		OBJ_117 /* BTreeCursor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* BTreeCursor.swift */; };
+		OBJ_118 /* BTreeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* BTreeIndex.swift */; };
+		OBJ_119 /* BTreeIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* BTreeIterator.swift */; };
+		OBJ_120 /* BTreeMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* BTreeMerger.swift */; };
+		OBJ_121 /* BTreeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* BTreeNode.swift */; };
+		OBJ_122 /* BTreePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* BTreePath.swift */; };
+		OBJ_123 /* Compatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* Compatibility.swift */; };
+		OBJ_124 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* List.swift */; };
+		OBJ_125 /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* Map.swift */; };
+		OBJ_126 /* SortedBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* SortedBag.swift */; };
+		OBJ_127 /* SortedSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* SortedSet.swift */; };
+		OBJ_128 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* Weak.swift */; };
+		OBJ_135 /* Editor6DepPack.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* Editor6DepPack.swift */; };
+		OBJ_137 /* Flow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* Flow.framework */; };
+		OBJ_138 /* EonilFlow4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* EonilFlow4.framework */; };
+		OBJ_139 /* FSEventsUnofficialWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* FSEventsUnofficialWrapper.framework */; };
+		OBJ_140 /* Reftable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* Reftable.framework */; };
+		OBJ_141 /* BTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* BTree.framework */; };
+		OBJ_152 /* Editor6DepPackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_54 /* Editor6DepPackTests.swift */; };
+		OBJ_154 /* Flow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* Flow.framework */; };
+		OBJ_155 /* EonilFlow4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* EonilFlow4.framework */; };
+		OBJ_156 /* FSEventsUnofficialWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* FSEventsUnofficialWrapper.framework */; };
+		OBJ_157 /* Reftable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* Reftable.framework */; };
+		OBJ_158 /* BTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* BTree.framework */; };
+		OBJ_159 /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* Editor6DepPack.framework */; };
+		OBJ_68 /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Flow.swift */; };
+		OBJ_69 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Step.swift */; };
+		OBJ_70 /* StepExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* StepExtensions.swift */; };
+		OBJ_71 /* SteppingErrorReporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* SteppingErrorReporting.swift */; };
+		OBJ_72 /* SteppingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* SteppingState.swift */; };
+		OBJ_73 /* SteppingStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* SteppingStateMachine.swift */; };
+		OBJ_80 /* Flow4.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* Flow4.swift */; };
+		OBJ_81 /* Flow4Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_17 /* Flow4Log.swift */; };
+		OBJ_82 /* Flow4Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_18 /* Flow4Result.swift */; };
+		OBJ_83 /* Flow4State.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* Flow4State.swift */; };
+		OBJ_84 /* Flow4SteppingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* Flow4SteppingError.swift */; };
+		OBJ_85 /* Flow4ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* Flow4ValidationError.swift */; };
+		OBJ_92 /* FileSystemWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_23 /* FileSystemWatcher.swift */; };
+		OBJ_93 /* FSEventUnofficialWrapperStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_24 /* FSEventUnofficialWrapperStream.swift */; };
+		OBJ_94 /* FSEventUnofficialWrapperStreamCreateFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* FSEventUnofficialWrapperStreamCreateFlags.swift */; };
+		OBJ_95 /* FSEventUnofficialWrapperStreamError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_26 /* FSEventUnofficialWrapperStreamError.swift */; };
+		OBJ_96 /* FSEventUnofficialWrapperStreamEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* FSEventUnofficialWrapperStreamEvent.swift */; };
+		OBJ_97 /* FSEventUnofficialWrapperStreamEventFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* FSEventUnofficialWrapperStreamEventFlags.swift */; };
+		OBJ_98 /* FSEventUnofficialWrapperStreamEventID.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* FSEventUnofficialWrapperStreamEventID.swift */; };
+		OBJ_99 /* FSEventUnofficialWrapperStreamIllogicalErrorLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* FSEventUnofficialWrapperStreamIllogicalErrorLog.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		451D759C1DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_63;
+			remoteInfo = Flow;
+		};
+		451D759D1DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_75;
+			remoteInfo = EonilFlow4;
+		};
+		451D759E1DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_87;
+			remoteInfo = FSEventsUnofficialWrapper;
+		};
+		451D759F1DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_101;
+			remoteInfo = Reftable;
+		};
+		451D75A01DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_108;
+			remoteInfo = BTree;
+		};
+		451D75A11DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_63;
+			remoteInfo = Flow;
+		};
+		451D75A21DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_75;
+			remoteInfo = EonilFlow4;
+		};
+		451D75A31DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_87;
+			remoteInfo = FSEventsUnofficialWrapper;
+		};
+		451D75A41DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_101;
+			remoteInfo = Reftable;
+		};
+		451D75A51DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_108;
+			remoteInfo = BTree;
+		};
+		451D75A61DF874EA008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = OBJ_1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_130;
+			remoteInfo = Editor6DepPack;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		OBJ_10 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
+		OBJ_11 /* StepExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepExtensions.swift; sourceTree = "<group>"; };
+		OBJ_12 /* SteppingErrorReporting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteppingErrorReporting.swift; sourceTree = "<group>"; };
+		OBJ_13 /* SteppingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteppingState.swift; sourceTree = "<group>"; };
+		OBJ_14 /* SteppingStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SteppingStateMachine.swift; sourceTree = "<group>"; };
+		OBJ_16 /* Flow4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow4.swift; sourceTree = "<group>"; };
+		OBJ_17 /* Flow4Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow4Log.swift; sourceTree = "<group>"; };
+		OBJ_18 /* Flow4Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow4Result.swift; sourceTree = "<group>"; };
+		OBJ_19 /* Flow4State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow4State.swift; sourceTree = "<group>"; };
+		OBJ_20 /* Flow4SteppingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow4SteppingError.swift; sourceTree = "<group>"; };
+		OBJ_21 /* Flow4ValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow4ValidationError.swift; sourceTree = "<group>"; };
+		OBJ_23 /* FileSystemWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemWatcher.swift; sourceTree = "<group>"; };
+		OBJ_24 /* FSEventUnofficialWrapperStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSEventUnofficialWrapperStream.swift; sourceTree = "<group>"; };
+		OBJ_25 /* FSEventUnofficialWrapperStreamCreateFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSEventUnofficialWrapperStreamCreateFlags.swift; sourceTree = "<group>"; };
+		OBJ_26 /* FSEventUnofficialWrapperStreamError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSEventUnofficialWrapperStreamError.swift; sourceTree = "<group>"; };
+		OBJ_27 /* FSEventUnofficialWrapperStreamEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSEventUnofficialWrapperStreamEvent.swift; sourceTree = "<group>"; };
+		OBJ_28 /* FSEventUnofficialWrapperStreamEventFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSEventUnofficialWrapperStreamEventFlags.swift; sourceTree = "<group>"; };
+		OBJ_29 /* FSEventUnofficialWrapperStreamEventID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSEventUnofficialWrapperStreamEventID.swift; sourceTree = "<group>"; };
+		OBJ_30 /* FSEventUnofficialWrapperStreamIllogicalErrorLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSEventUnofficialWrapperStreamIllogicalErrorLog.swift; sourceTree = "<group>"; };
+		OBJ_32 /* Reftable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reftable.swift; sourceTree = "<group>"; };
+		OBJ_34 /* BridgedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgedList.swift; sourceTree = "<group>"; };
+		OBJ_35 /* BTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTree.swift; sourceTree = "<group>"; };
+		OBJ_36 /* BTreeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTreeBuilder.swift; sourceTree = "<group>"; };
+		OBJ_37 /* BTreeComparisons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTreeComparisons.swift; sourceTree = "<group>"; };
+		OBJ_38 /* BTreeCursor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTreeCursor.swift; sourceTree = "<group>"; };
+		OBJ_39 /* BTreeIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTreeIndex.swift; sourceTree = "<group>"; };
+		OBJ_40 /* BTreeIterator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTreeIterator.swift; sourceTree = "<group>"; };
+		OBJ_41 /* BTreeMerger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTreeMerger.swift; sourceTree = "<group>"; };
+		OBJ_42 /* BTreeNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTreeNode.swift; sourceTree = "<group>"; };
+		OBJ_43 /* BTreePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTreePath.swift; sourceTree = "<group>"; };
+		OBJ_44 /* Compatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compatibility.swift; sourceTree = "<group>"; };
+		OBJ_45 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		OBJ_46 /* Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
+		OBJ_47 /* SortedBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedBag.swift; sourceTree = "<group>"; };
+		OBJ_48 /* SortedSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortedSet.swift; sourceTree = "<group>"; };
+		OBJ_49 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
+		OBJ_51 /* Editor6DepPack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor6DepPack.swift; sourceTree = "<group>"; };
+		OBJ_54 /* Editor6DepPackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor6DepPackTests.swift; sourceTree = "<group>"; };
+		OBJ_56 /* Flow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Flow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_57 /* EonilFlow4.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EonilFlow4.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_58 /* FSEventsUnofficialWrapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FSEventsUnofficialWrapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_59 /* Reftable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Reftable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		OBJ_60 /* BTree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BTree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_61 /* Editor6DepPack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Editor6DepPack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_62 /* Editor6DepPackTests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; path = Editor6DepPackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		OBJ_9 /* Flow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		OBJ_100 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_107 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_129 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_136 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_137 /* Flow.framework in Frameworks */,
+				OBJ_138 /* EonilFlow4.framework in Frameworks */,
+				OBJ_139 /* FSEventsUnofficialWrapper.framework in Frameworks */,
+				OBJ_140 /* Reftable.framework in Frameworks */,
+				OBJ_141 /* BTree.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_153 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_154 /* Flow.framework in Frameworks */,
+				OBJ_155 /* EonilFlow4.framework in Frameworks */,
+				OBJ_156 /* FSEventsUnofficialWrapper.framework in Frameworks */,
+				OBJ_157 /* Reftable.framework in Frameworks */,
+				OBJ_158 /* BTree.framework in Frameworks */,
+				OBJ_159 /* Editor6DepPack.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		OBJ_15 /* EonilFlow4 */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_16 /* Flow4.swift */,
+				OBJ_17 /* Flow4Log.swift */,
+				OBJ_18 /* Flow4Result.swift */,
+				OBJ_19 /* Flow4State.swift */,
+				OBJ_20 /* Flow4SteppingError.swift */,
+				OBJ_21 /* Flow4ValidationError.swift */,
+			);
+			name = EonilFlow4;
+			path = "Packages/EonilFlow4-0.0.4/Sources";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_22 /* FSEventsUnofficialWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_23 /* FileSystemWatcher.swift */,
+				OBJ_24 /* FSEventUnofficialWrapperStream.swift */,
+				OBJ_25 /* FSEventUnofficialWrapperStreamCreateFlags.swift */,
+				OBJ_26 /* FSEventUnofficialWrapperStreamError.swift */,
+				OBJ_27 /* FSEventUnofficialWrapperStreamEvent.swift */,
+				OBJ_28 /* FSEventUnofficialWrapperStreamEventFlags.swift */,
+				OBJ_29 /* FSEventUnofficialWrapperStreamEventID.swift */,
+				OBJ_30 /* FSEventUnofficialWrapperStreamIllogicalErrorLog.swift */,
+			);
+			name = FSEventsUnofficialWrapper;
+			path = "Packages/FSEventsUnofficialWrapper-0.0.0/Sources";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_31 /* Reftable */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_32 /* Reftable.swift */,
+			);
+			name = Reftable;
+			path = "Packages/Reftable-0.0.0/Sources";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_33 /* BTree */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_34 /* BridgedList.swift */,
+				OBJ_35 /* BTree.swift */,
+				OBJ_36 /* BTreeBuilder.swift */,
+				OBJ_37 /* BTreeComparisons.swift */,
+				OBJ_38 /* BTreeCursor.swift */,
+				OBJ_39 /* BTreeIndex.swift */,
+				OBJ_40 /* BTreeIterator.swift */,
+				OBJ_41 /* BTreeMerger.swift */,
+				OBJ_42 /* BTreeNode.swift */,
+				OBJ_43 /* BTreePath.swift */,
+				OBJ_44 /* Compatibility.swift */,
+				OBJ_45 /* List.swift */,
+				OBJ_46 /* Map.swift */,
+				OBJ_47 /* SortedBag.swift */,
+				OBJ_48 /* SortedSet.swift */,
+				OBJ_49 /* Weak.swift */,
+			);
+			name = BTree;
+			path = "Packages/BTree-4.0.1/Sources";
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_5 = {
+			isa = PBXGroup;
+			children = (
+				OBJ_6 /* Package.swift */,
+				OBJ_7 /* Sources */,
+				OBJ_52 /* Tests */,
+				OBJ_55 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		OBJ_50 /* Editor6DepPack */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_51 /* Editor6DepPack.swift */,
+			);
+			name = Editor6DepPack;
+			path = Sources;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_52 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_53 /* Editor6DepPackTests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		OBJ_53 /* Editor6DepPackTests */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_54 /* Editor6DepPackTests.swift */,
+			);
+			name = Editor6DepPackTests;
+			path = Tests/Editor6DepPackTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		OBJ_55 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_56 /* Flow.framework */,
+				OBJ_57 /* EonilFlow4.framework */,
+				OBJ_58 /* FSEventsUnofficialWrapper.framework */,
+				OBJ_59 /* Reftable.framework */,
+				OBJ_60 /* BTree.framework */,
+				OBJ_61 /* Editor6DepPack.framework */,
+				OBJ_62 /* Editor6DepPackTests.xctest */,
+			);
+			name = Products;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		OBJ_7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_8 /* Flow */,
+				OBJ_15 /* EonilFlow4 */,
+				OBJ_22 /* FSEventsUnofficialWrapper */,
+				OBJ_31 /* Reftable */,
+				OBJ_33 /* BTree */,
+				OBJ_50 /* Editor6DepPack */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		OBJ_8 /* Flow */ = {
+			isa = PBXGroup;
+			children = (
+				OBJ_9 /* Flow.swift */,
+				OBJ_10 /* Step.swift */,
+				OBJ_11 /* StepExtensions.swift */,
+				OBJ_12 /* SteppingErrorReporting.swift */,
+				OBJ_13 /* SteppingState.swift */,
+				OBJ_14 /* SteppingStateMachine.swift */,
+			);
+			name = Flow;
+			path = "Packages/Flow-0.0.3/Sources";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		OBJ_101 /* Reftable */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_102 /* Build configuration list for PBXNativeTarget "Reftable" */;
+			buildPhases = (
+				OBJ_105 /* Sources */,
+				OBJ_107 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Reftable;
+			productName = Reftable;
+			productReference = OBJ_59 /* Reftable.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		OBJ_108 /* BTree */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_109 /* Build configuration list for PBXNativeTarget "BTree" */;
+			buildPhases = (
+				OBJ_112 /* Sources */,
+				OBJ_129 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BTree;
+			productName = BTree;
+			productReference = OBJ_60 /* BTree.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		OBJ_130 /* Editor6DepPack */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_131 /* Build configuration list for PBXNativeTarget "Editor6DepPack" */;
+			buildPhases = (
+				OBJ_134 /* Sources */,
+				OBJ_136 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_142 /* PBXTargetDependency */,
+				OBJ_143 /* PBXTargetDependency */,
+				OBJ_144 /* PBXTargetDependency */,
+				OBJ_145 /* PBXTargetDependency */,
+				OBJ_146 /* PBXTargetDependency */,
+			);
+			name = Editor6DepPack;
+			productName = Editor6DepPack;
+			productReference = OBJ_61 /* Editor6DepPack.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		OBJ_147 /* Editor6DepPackTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_148 /* Build configuration list for PBXNativeTarget "Editor6DepPackTests" */;
+			buildPhases = (
+				OBJ_151 /* Sources */,
+				OBJ_153 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				OBJ_160 /* PBXTargetDependency */,
+				OBJ_161 /* PBXTargetDependency */,
+				OBJ_162 /* PBXTargetDependency */,
+				OBJ_163 /* PBXTargetDependency */,
+				OBJ_164 /* PBXTargetDependency */,
+				OBJ_165 /* PBXTargetDependency */,
+			);
+			name = Editor6DepPackTests;
+			productName = Editor6DepPackTests;
+			productReference = OBJ_62 /* Editor6DepPackTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		OBJ_63 /* Flow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_64 /* Build configuration list for PBXNativeTarget "Flow" */;
+			buildPhases = (
+				OBJ_67 /* Sources */,
+				OBJ_74 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Flow;
+			productName = Flow;
+			productReference = OBJ_56 /* Flow.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		OBJ_75 /* EonilFlow4 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_76 /* Build configuration list for PBXNativeTarget "EonilFlow4" */;
+			buildPhases = (
+				OBJ_79 /* Sources */,
+				OBJ_86 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EonilFlow4;
+			productName = EonilFlow4;
+			productReference = OBJ_57 /* EonilFlow4.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		OBJ_87 /* FSEventsUnofficialWrapper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = OBJ_88 /* Build configuration list for PBXNativeTarget "FSEventsUnofficialWrapper" */;
+			buildPhases = (
+				OBJ_91 /* Sources */,
+				OBJ_100 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FSEventsUnofficialWrapper;
+			productName = FSEventsUnofficialWrapper;
+			productReference = OBJ_58 /* FSEventsUnofficialWrapper.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		OBJ_1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 9999;
+			};
+			buildConfigurationList = OBJ_2 /* Build configuration list for PBXProject "Editor6DepPack" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = OBJ_5;
+			productRefGroup = OBJ_55 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				OBJ_63 /* Flow */,
+				OBJ_75 /* EonilFlow4 */,
+				OBJ_87 /* FSEventsUnofficialWrapper */,
+				OBJ_101 /* Reftable */,
+				OBJ_108 /* BTree */,
+				OBJ_130 /* Editor6DepPack */,
+				OBJ_147 /* Editor6DepPackTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		OBJ_105 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_106 /* Reftable.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_112 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_113 /* BridgedList.swift in Sources */,
+				OBJ_114 /* BTree.swift in Sources */,
+				OBJ_115 /* BTreeBuilder.swift in Sources */,
+				OBJ_116 /* BTreeComparisons.swift in Sources */,
+				OBJ_117 /* BTreeCursor.swift in Sources */,
+				OBJ_118 /* BTreeIndex.swift in Sources */,
+				OBJ_119 /* BTreeIterator.swift in Sources */,
+				OBJ_120 /* BTreeMerger.swift in Sources */,
+				OBJ_121 /* BTreeNode.swift in Sources */,
+				OBJ_122 /* BTreePath.swift in Sources */,
+				OBJ_123 /* Compatibility.swift in Sources */,
+				OBJ_124 /* List.swift in Sources */,
+				OBJ_125 /* Map.swift in Sources */,
+				OBJ_126 /* SortedBag.swift in Sources */,
+				OBJ_127 /* SortedSet.swift in Sources */,
+				OBJ_128 /* Weak.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_134 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_135 /* Editor6DepPack.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_151 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_152 /* Editor6DepPackTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_68 /* Flow.swift in Sources */,
+				OBJ_69 /* Step.swift in Sources */,
+				OBJ_70 /* StepExtensions.swift in Sources */,
+				OBJ_71 /* SteppingErrorReporting.swift in Sources */,
+				OBJ_72 /* SteppingState.swift in Sources */,
+				OBJ_73 /* SteppingStateMachine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_79 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_80 /* Flow4.swift in Sources */,
+				OBJ_81 /* Flow4Log.swift in Sources */,
+				OBJ_82 /* Flow4Result.swift in Sources */,
+				OBJ_83 /* Flow4State.swift in Sources */,
+				OBJ_84 /* Flow4SteppingError.swift in Sources */,
+				OBJ_85 /* Flow4ValidationError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		OBJ_91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 0;
+			files = (
+				OBJ_92 /* FileSystemWatcher.swift in Sources */,
+				OBJ_93 /* FSEventUnofficialWrapperStream.swift in Sources */,
+				OBJ_94 /* FSEventUnofficialWrapperStreamCreateFlags.swift in Sources */,
+				OBJ_95 /* FSEventUnofficialWrapperStreamError.swift in Sources */,
+				OBJ_96 /* FSEventUnofficialWrapperStreamEvent.swift in Sources */,
+				OBJ_97 /* FSEventUnofficialWrapperStreamEventFlags.swift in Sources */,
+				OBJ_98 /* FSEventUnofficialWrapperStreamEventID.swift in Sources */,
+				OBJ_99 /* FSEventUnofficialWrapperStreamIllogicalErrorLog.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		OBJ_142 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_63 /* Flow */;
+			targetProxy = 451D759C1DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_143 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_75 /* EonilFlow4 */;
+			targetProxy = 451D759D1DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_144 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_87 /* FSEventsUnofficialWrapper */;
+			targetProxy = 451D759E1DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_145 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_101 /* Reftable */;
+			targetProxy = 451D759F1DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_146 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_108 /* BTree */;
+			targetProxy = 451D75A01DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_160 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_63 /* Flow */;
+			targetProxy = 451D75A11DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_161 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_75 /* EonilFlow4 */;
+			targetProxy = 451D75A21DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_162 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_87 /* FSEventsUnofficialWrapper */;
+			targetProxy = 451D75A31DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_163 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_101 /* Reftable */;
+			targetProxy = 451D75A41DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_164 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_108 /* BTree */;
+			targetProxy = 451D75A51DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+		OBJ_165 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = OBJ_130 /* Editor6DepPack */;
+			targetProxy = 451D75A61DF874EA008CFEC9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		OBJ_103 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/Reftable_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Reftable;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = Reftable;
+			};
+			name = Debug;
+		};
+		OBJ_104 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/Reftable_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Reftable;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = Reftable;
+			};
+			name = Release;
+		};
+		OBJ_110 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/BTree_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = BTree;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = BTree;
+			};
+			name = Debug;
+		};
+		OBJ_111 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/BTree_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = BTree;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = BTree;
+			};
+			name = Release;
+		};
+		OBJ_132 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/Editor6DepPack_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Editor6DepPack;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = Editor6DepPack;
+			};
+			name = Debug;
+		};
+		OBJ_133 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/Editor6DepPack_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Editor6DepPack;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = Editor6DepPack;
+			};
+			name = Release;
+		};
+		OBJ_149 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/Editor6DepPackTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = Editor6DepPackTests;
+			};
+			name = Debug;
+		};
+		OBJ_150 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/Editor6DepPackTests_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = Editor6DepPackTests;
+			};
+			name = Release;
+		};
+		OBJ_3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USE_HEADERMAP = NO;
+			};
+			name = Debug;
+		};
+		OBJ_4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_OPTIMIZATION_LEVEL = s;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				OTHER_SWIFT_FLAGS = "-DXcode";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator appletvos appletvsimulator watchos watchsimulator";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				USE_HEADERMAP = NO;
+			};
+			name = Release;
+		};
+		OBJ_65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/Flow_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Flow;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = Flow;
+			};
+			name = Debug;
+		};
+		OBJ_66 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/Flow_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = Flow;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = Flow;
+			};
+			name = Release;
+		};
+		OBJ_77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/EonilFlow4_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = EonilFlow4;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = EonilFlow4;
+			};
+			name = Debug;
+		};
+		OBJ_78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/EonilFlow4_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = EonilFlow4;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = EonilFlow4;
+			};
+			name = Release;
+		};
+		OBJ_89 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/FSEventsUnofficialWrapper_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = FSEventsUnofficialWrapper;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = FSEventsUnofficialWrapper;
+			};
+			name = Debug;
+		};
+		OBJ_90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks";
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Editor6DepPack.xcodeproj/FSEventsUnofficialWrapper_Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(TOOLCHAIN_DIR)/usr/lib/swift/macosx";
+				OTHER_LDFLAGS = "$(inherited)";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = FSEventsUnofficialWrapper;
+				PRODUCT_MODULE_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = SWIFT_PACKAGE;
+				SWIFT_VERSION = 3.0;
+				TARGET_NAME = FSEventsUnofficialWrapper;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		OBJ_102 /* Build configuration list for PBXNativeTarget "Reftable" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_103 /* Debug */,
+				OBJ_104 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_109 /* Build configuration list for PBXNativeTarget "BTree" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_110 /* Debug */,
+				OBJ_111 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_131 /* Build configuration list for PBXNativeTarget "Editor6DepPack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_132 /* Debug */,
+				OBJ_133 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_148 /* Build configuration list for PBXNativeTarget "Editor6DepPackTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_149 /* Debug */,
+				OBJ_150 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_2 /* Build configuration list for PBXProject "Editor6DepPack" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_3 /* Debug */,
+				OBJ_4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_64 /* Build configuration list for PBXNativeTarget "Flow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_65 /* Debug */,
+				OBJ_66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_76 /* Build configuration list for PBXNativeTarget "EonilFlow4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_77 /* Debug */,
+				OBJ_78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		OBJ_88 /* Build configuration list for PBXNativeTarget "FSEventsUnofficialWrapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				OBJ_89 /* Debug */,
+				OBJ_90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = OBJ_1 /* Project object */;
 }

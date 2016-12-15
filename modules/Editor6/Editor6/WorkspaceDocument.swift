@@ -12,6 +12,10 @@ import Editor6WorkspaceModel
 import Editor6WorkspaceUI
 
 /// Treat `NSDocument` methods and events as user input.
+///
+/// `WorkspaceDocument` actually serves as driver (or controller)
+/// for a workspace.
+///
 @objc
 final class WorkspaceDocument: NSDocument {
     private let model = WorkspaceModel()
@@ -49,6 +53,13 @@ final class WorkspaceDocument: NSDocument {
 
     override func read(from url: URL, ofType typeName: String) throws {
         Swift.print(#function)
+    }
+    override func write(to url: URL, ofType typeName: String) throws {
+        Swift.print(#function)
+    }
+    override func data(ofType typeName: String) throws -> Data {
+        Swift.print(#function)
+        return Data()
     }
 
     @objc

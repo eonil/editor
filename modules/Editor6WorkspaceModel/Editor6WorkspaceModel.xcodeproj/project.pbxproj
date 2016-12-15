@@ -10,10 +10,14 @@
 		4507B8351DB410B4006A5871 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45441EF31DB3EB4E00158711 /* LLDBWrapper.framework */; };
 		4507B8581DB45D42006A5871 /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */; };
 		4507B85A1DB501F2006A5871 /* UNUSED_SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4507B8591DB501F2006A5871 /* UNUSED_SubprocessController.swift */; };
+		451D74FA1DEC603B008CFEC9 /* ProcessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D74F91DEC603B008CFEC9 /* ProcessController.swift */; };
+		451D75301DEDD0A7008CFEC9 /* Bash4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D752F1DEDD0A7008CFEC9 /* Bash4.swift */; };
+		451D758D1DF86757008CFEC9 /* Subprocess2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D758C1DF86757008CFEC9 /* Subprocess2.swift */; };
 		45441EDB1DB3EA0F00158711 /* Editor6WorkspaceModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45441EE41DB3EA4A00158711 /* WorkspaceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE31DB3EA4A00158711 /* WorkspaceState.swift */; };
 		45441EE61DB3EA5100158711 /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE51DB3EA5100158711 /* WorkspaceModel.swift */; };
 		45441EE81DB3EA8E00158711 /* DebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE71DB3EA8E00158711 /* DebugModel.swift */; };
+		454CD9311DCF6D5500D8F46B /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454CD9301DCF6D5500D8F46B /* ProjectModel.swift */; };
 		456276111DBA739600F68C84 /* MARK_unimplemented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456276101DBA739600F68C84 /* MARK_unimplemented.swift */; };
 		459EE2B51DBAE17E00A98670 /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459EE2A81DBAE17400A98670 /* EonilToolbox.framework */; };
 		459EE2B61DBAE18400A98670 /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459EE2A81DBAE17400A98670 /* EonilToolbox.framework */; };
@@ -51,6 +55,7 @@
 		45F951D21DC6219500A260B1 /* ProjectMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951D11DC6219500A260B1 /* ProjectMutation.swift */; };
 		45F951D61DC628AE00A260B1 /* ModelMessageLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951D51DC628AE00A260B1 /* ModelMessageLoop.swift */; };
 		45F951D81DC653ED00A260B1 /* WorkspaceModelGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F951D71DC653ED00A260B1 /* WorkspaceModelGlobals.swift */; };
+		45FF8F751DD211000071E058 /* Bash3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FF8F741DD211000071E058 /* Bash3.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +100,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = "_____Product_Editor6DepPackTests";
 			remoteInfo = Editor6DepPackTests;
+		};
+		451D75C61DF87556008CFEC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_57;
+			remoteInfo = EonilFlow4;
 		};
 		45441EF21DB3EB4E00158711 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -184,7 +196,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = "______Target_Editor6DepPack";
+			remoteGlobalIDString = OBJ_130;
 			remoteInfo = Editor6DepPack;
 		};
 /* End PBXContainerItemProxy section */
@@ -208,6 +220,9 @@
 /* Begin PBXFileReference section */
 		4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
 		4507B8591DB501F2006A5871 /* UNUSED_SubprocessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_SubprocessController.swift; sourceTree = "<group>"; };
+		451D74F91DEC603B008CFEC9 /* ProcessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessController.swift; sourceTree = "<group>"; };
+		451D752F1DEDD0A7008CFEC9 /* Bash4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash4.swift; sourceTree = "<group>"; };
+		451D758C1DF86757008CFEC9 /* Subprocess2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess2.swift; sourceTree = "<group>"; };
 		45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6WorkspaceModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6WorkspaceModel.h; sourceTree = "<group>"; };
 		45441EDA1DB3EA0F00158711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -215,6 +230,7 @@
 		45441EE51DB3EA5100158711 /* WorkspaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
 		45441EE71DB3EA8E00158711 /* DebugModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugModel.swift; sourceTree = "<group>"; };
 		45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
+		454CD9301DCF6D5500D8F46B /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		456276101DBA739600F68C84 /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
 		459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = ../../submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
 		45A77E4B1DBB1474004437C0 /* UNUSED_DeferredFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UNUSED_DeferredFlow.swift; path = Utility/UNUSED_DeferredFlow.swift; sourceTree = "<group>"; };
@@ -249,6 +265,7 @@
 		45F951D11DC6219500A260B1 /* ProjectMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectMutation.swift; sourceTree = "<group>"; };
 		45F951D51DC628AE00A260B1 /* ModelMessageLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelMessageLoop.swift; sourceTree = "<group>"; };
 		45F951D71DC653ED00A260B1 /* WorkspaceModelGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModelGlobals.swift; sourceTree = "<group>"; };
+		45FF8F741DD211000071E058 /* Bash3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash3.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				4507B8481DB45D3B006A5871 /* Flow.framework */,
+				451D75C71DF87556008CFEC9 /* EonilFlow4.framework */,
 				4507B84A1DB45D3B006A5871 /* FSEventsUnofficialWrapper.framework */,
 				4507B84C1DB45D3B006A5871 /* Reftable.framework */,
 				4507B84E1DB45D3B006A5871 /* BTree.framework */,
@@ -321,11 +339,13 @@
 				45441EE51DB3EA5100158711 /* WorkspaceModel.swift */,
 				45F951CF1DC61E1700A260B1 /* ProjectState.swift */,
 				45F951D11DC6219500A260B1 /* ProjectMutation.swift */,
+				454CD9301DCF6D5500D8F46B /* ProjectModel.swift */,
 				45F951CD1DC6186E00A260B1 /* BuildModel.swift */,
 				45C0E5CC1DBA4F01001D23C0 /* DebugState.swift */,
 				45F951B51DC4677600A260B1 /* DebugMutation.swift */,
 				45441EE71DB3EA8E00158711 /* DebugModel.swift */,
 				45F951D71DC653ED00A260B1 /* WorkspaceModelGlobals.swift */,
+				451D74F91DEC603B008CFEC9 /* ProcessController.swift */,
 				45C0E6941DBA5DB0001D23C0 /* Utility */,
 				45C0E6751DBA5C5F001D23C0 /* Service */,
 				45C0E5B91DB7C38D001D23C0 /* unused */,
@@ -397,6 +417,8 @@
 			children = (
 				45C0E6771DBA5C5F001D23C0 /* Bash1.swift */,
 				45C0E6971DBA672F001D23C0 /* Bash2.swift */,
+				45FF8F741DD211000071E058 /* Bash3.swift */,
+				451D752F1DEDD0A7008CFEC9 /* Bash4.swift */,
 			);
 			path = Bash;
 			sourceTree = "<group>";
@@ -431,6 +453,7 @@
 				45C0E67F1DBA5C5F001D23C0 /* IOQueuePair.swift */,
 				45C0E6801DBA5C5F001D23C0 /* LineReader.swift */,
 				45C0E6811DBA5C5F001D23C0 /* Subprocess1.swift */,
+				451D758C1DF86757008CFEC9 /* Subprocess2.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -601,6 +624,13 @@
 			remoteRef = 4507B8511DB45D3B006A5871 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		451D75C71DF87556008CFEC9 /* EonilFlow4.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilFlow4.framework;
+			remoteRef = 451D75C61DF87556008CFEC9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45441EF31DB3EB4E00158711 /* LLDBWrapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -697,6 +727,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451D74FA1DEC603B008CFEC9 /* ProcessController.swift in Sources */,
 				45F951D81DC653ED00A260B1 /* WorkspaceModelGlobals.swift in Sources */,
 				45C0E5BD1DB90374001D23C0 /* WorkspaceNotification.swift in Sources */,
 				45C0E6861DBA5C5F001D23C0 /* IOQueuePair.swift in Sources */,
@@ -704,6 +735,7 @@
 				45441EE81DB3EA8E00158711 /* DebugModel.swift in Sources */,
 				45C0E6871DBA5C5F001D23C0 /* LineReader.swift in Sources */,
 				45F951B21DC42C6200A260B1 /* ModelTypes.swift in Sources */,
+				451D75301DEDD0A7008CFEC9 /* Bash4.swift in Sources */,
 				45A77E631DBB292D004437C0 /* UNUSED_DeferableStateContainer.swift in Sources */,
 				45C0E6981DBA672F001D23C0 /* Bash2.swift in Sources */,
 				45F951CE1DC6186E00A260B1 /* BuildModel.swift in Sources */,
@@ -711,6 +743,7 @@
 				45C0E6831DBA5C5F001D23C0 /* Cargo.swift in Sources */,
 				45C0E6821DBA5C5F001D23C0 /* Bash1.swift in Sources */,
 				45F951D21DC6219500A260B1 /* ProjectMutation.swift in Sources */,
+				454CD9311DCF6D5500D8F46B /* ProjectModel.swift in Sources */,
 				45F951B61DC4677600A260B1 /* DebugMutation.swift in Sources */,
 				45441EE61DB3EA5100158711 /* WorkspaceModel.swift in Sources */,
 				45F951D61DC628AE00A260B1 /* ModelMessageLoop.swift in Sources */,
@@ -719,9 +752,11 @@
 				45A77E5C1DBB173F004437C0 /* ThreadChecker.swift in Sources */,
 				45A77E4C1DBB1474004437C0 /* UNUSED_DeferredFlow.swift in Sources */,
 				45F951A01DC3A16200A260B1 /* Future.swift in Sources */,
+				45FF8F751DD211000071E058 /* Bash3.swift in Sources */,
 				456276111DBA739600F68C84 /* MARK_unimplemented.swift in Sources */,
 				45C0E6961DBA5DC1001D23C0 /* TrackableCommandQueue.swift in Sources */,
 				45C0E6881DBA5C5F001D23C0 /* Subprocess1.swift in Sources */,
+				451D758D1DF86757008CFEC9 /* Subprocess2.swift in Sources */,
 				4507B85A1DB501F2006A5871 /* UNUSED_SubprocessController.swift in Sources */,
 				45C0E69A1DBA69CA001D23C0 /* Cargo1.swift in Sources */,
 				45C0E6841DBA5C5F001D23C0 /* RustLanguageServer.swift in Sources */,

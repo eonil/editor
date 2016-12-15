@@ -60,11 +60,6 @@ final class Driver {
     ///
     private func process(_ command: Command) {
         switch command {
-        case .ADHOC_test:
-            for doc in NSDocumentController.shared().documents {
-                doc.close()
-            }
-            NSDocumentController.shared().newDocument(self)
         case .handle(let workspaceMessage):
             localState.apply(event: workspaceMessage)
         }
@@ -85,7 +80,7 @@ final class Driver {
             // 
             // Why Do We Need This?
             // --------------------
-            // To avoid re-entering.
+            // To avoid immediate re-entering.
             // Action processing can ultimately trigger another action.
             // And the second action can trigger first action again.
             // Then it becomes infinite loop.
@@ -116,7 +111,7 @@ final class Driver {
 }
 
 private enum Command {
-    case ADHOC_test
+//    case ADHOC_test
     case handle(WorkspaceMessage)
 }
 
@@ -124,7 +119,7 @@ private enum Command {
 private final class ApplicationController: NSObject, NSApplicationDelegate {
     weak var owner: Driver?
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        owner?.schedule(.ADHOC_test)
+//        owner?.schedule(.ADHOC_test)
     }
     func applicationWillTerminate(_ aNotification: Notification) {
     }

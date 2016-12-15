@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Flow
+import EonilFlow4
 
 struct CargoState {
     var location = URL?.none
@@ -48,7 +48,7 @@ public final class Cargo {
     private var delegate = ((CargoNotification) -> ())?.none
     private(set) var state = CargoState()
     private var commandQueue = TrackableCommandQueue<CargoCommand>()
-    private var bash = Bash1()
+    private var bash = Bash4()
 
     internal init() {}
     func delegate(to newDelegate: @escaping (CargoNotification) -> ()) {
@@ -75,21 +75,21 @@ public final class Cargo {
             halt()
         }
     }
-    private func new(at url: URL) {
+    private func new(at url: URL) -> Future<()> {
         assert(bash.isRunning == false)
         let parentURL = url.deletingLastPathComponent()
         let name = url.lastPathComponent
         let parentPath = parentURL.path
         guard FileManager.default.fileExists(atPath: parentPath) else {
-            state.errors.append(.cannotFindParentDirectory)
-            return
+            let e = CargoError.cannotFindParentDirectory
+            state.errors.append(e)
+            return Future(error: e)
         }
         let cmds = [
             "cd \(parentPath)",
             "cargo new \(name)",
         ]
-        remakeBash()
-        bash.dispatch(cmds)
+        return Bash4.run(commands: cmds)
     }
     private func build(at url: URL) {
         assert(bash.isRunning == false)
@@ -122,7 +122,7 @@ public final class Cargo {
         /// https://en.wikipedia.org/wiki/End-of-Text_character
         bash.dispatch(["\u{0003}"])
     }
-    private func process(_ action: Bash1.Action) {
+    private func process(_ action: Bash4Event) {
         switch action {
         case .output(let lines):
             lines.forEach(processBashSTDOUT)
@@ -142,10 +142,9 @@ public final class Cargo {
         }
     }
     private func remakeBash() {
-        bash = Bash1(ioQueuePair: .makeDualSerialBackground())
+        bash = Bash4(ioQueuePair: .makeDualSerialBackground())
         bash.delegate { [weak self] in self?.process($1) }
     }
-
 }
 
 private extension String {
