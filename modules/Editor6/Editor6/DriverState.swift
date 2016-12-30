@@ -9,7 +9,6 @@
 import Foundation
 import Editor6Common
 import Editor6MainMenuUI2
-import Editor6WorkspaceModel
 import Editor6WorkspaceUI
 
 /// Application central state repository.

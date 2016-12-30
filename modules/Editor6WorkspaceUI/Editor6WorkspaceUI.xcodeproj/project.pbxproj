@@ -21,7 +21,6 @@
 		45EF84CC1DB21A1800B320B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF84CB1DB21A1800B320B5 /* AppDelegate.swift */; };
 		45EF84CE1DB21A1800B320B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45EF84CD1DB21A1800B320B5 /* Assets.xcassets */; };
 		45EF84D11DB21A1800B320B5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45EF84CF1DB21A1800B320B5 /* MainMenu.xib */; };
-		45EF84DF1DB21A4000B320B5 /* Editor6WorkspaceUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 45EF84DD1DB21A4000B320B5 /* Editor6WorkspaceUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45EF84E21DB21A4000B320B5 /* Editor6WorkspaceUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF84DB1DB21A4000B320B5 /* Editor6WorkspaceUI.framework */; };
 		45EF84E31DB21A4000B320B5 /* Editor6WorkspaceUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF84DB1DB21A4000B320B5 /* Editor6WorkspaceUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45EF84E81DB21A5E00B320B5 /* BTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF849F1DB219E600B320B5 /* BTree.framework */; };
@@ -57,6 +56,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		452A45301E0741F700D91EDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45EF848F1DB219E600B320B5 /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_57;
+			remoteInfo = EonilFlow4;
+		};
 		45E084711DB36B5F00C5428D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45E0846C1DB36B5F00C5428D /* ManualView.xcodeproj */;
@@ -152,28 +158,28 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 45EF848F1DB219E600B320B5 /* Editor6DepPack.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = "______Target_Flow";
+			remoteGlobalIDString = OBJ_63;
 			remoteInfo = Flow;
 		};
 		45EF84F71DB21A8700B320B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45EF848F1DB219E600B320B5 /* Editor6DepPack.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = "______Target_Reftable";
+			remoteGlobalIDString = OBJ_101;
 			remoteInfo = Reftable;
 		};
 		45EF84FB1DB21A8700B320B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45EF848F1DB219E600B320B5 /* Editor6DepPack.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = "______Target_BTree";
+			remoteGlobalIDString = OBJ_108;
 			remoteInfo = BTree;
 		};
 		45EF84FF1DB21A8700B320B5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45EF848F1DB219E600B320B5 /* Editor6DepPack.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = "______Target_Editor6DepPack";
+			remoteGlobalIDString = OBJ_130;
 			remoteInfo = Editor6DepPack;
 		};
 		45EF85061DB21A8700B320B5 /* PBXContainerItemProxy */ = {
@@ -271,8 +277,6 @@
 		45EF84D01DB21A1800B320B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		45EF84D21DB21A1800B320B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45EF84DB1DB21A4000B320B5 /* Editor6WorkspaceUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6WorkspaceUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		45EF84DD1DB21A4000B320B5 /* Editor6WorkspaceUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6WorkspaceUI.h; sourceTree = "<group>"; };
-		45EF84DE1DB21A4000B320B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45EF84EF1DB21A5E00B320B5 /* EonilToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EonilToolbox.framework; path = ../../submodules/toolbox.swift/build/Debug/EonilToolbox.framework; sourceTree = "<group>"; };
 		45EF850C1DB21AC800B320B5 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		45EF85101DB21D5400B320B5 /* WindowContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowContentViewController.swift; sourceTree = "<group>"; };
@@ -336,7 +340,6 @@
 				45EF84871DB219CE00B320B5 /* (deps) */,
 				45EF847A1DB2198700B320B5 /* Editor6WorkspaceUI */,
 				45EF84CA1DB21A1800B320B5 /* Editor6WorkspaceUITestdrive */,
-				45EF84DC1DB21A4000B320B5 /* Editor6WorkspaceUI */,
 				45EF84791DB2198700B320B5 /* Products */,
 				45EF84EE1DB21A5E00B320B5 /* Frameworks */,
 			);
@@ -354,8 +357,8 @@
 		45EF847A1DB2198700B320B5 /* Editor6WorkspaceUI */ = {
 			isa = PBXGroup;
 			children = (
-				45EF847B1DB2198700B320B5 /* Editor6WorkspaceUI.h */,
 				45EF847C1DB2198700B320B5 /* Info.plist */,
+				45EF847B1DB2198700B320B5 /* Editor6WorkspaceUI.h */,
 				45E084A11DB3842700C5428D /* WorkspaceUIState.swift */,
 				45E084D41DB3864300C5428D /* WorkspaceUIAction.swift */,
 				45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */,
@@ -399,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				45EF84991DB219E600B320B5 /* Flow.framework */,
+				452A45311E0741F700D91EDD /* EonilFlow4.framework */,
 				45EF849B1DB219E600B320B5 /* FSEventsUnofficialWrapper.framework */,
 				45EF849D1DB219E600B320B5 /* Reftable.framework */,
 				45EF849F1DB219E600B320B5 /* BTree.framework */,
@@ -429,15 +433,6 @@
 			path = Editor6WorkspaceUITestdrive;
 			sourceTree = "<group>";
 		};
-		45EF84DC1DB21A4000B320B5 /* Editor6WorkspaceUI */ = {
-			isa = PBXGroup;
-			children = (
-				45EF84DD1DB21A4000B320B5 /* Editor6WorkspaceUI.h */,
-				45EF84DE1DB21A4000B320B5 /* Info.plist */,
-			);
-			path = Editor6WorkspaceUI;
-			sourceTree = "<group>";
-		};
 		45EF84EE1DB21A5E00B320B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,7 +460,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45EF84DF1DB21A4000B320B5 /* Editor6WorkspaceUI.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,6 +575,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		452A45311E0741F700D91EDD /* EonilFlow4.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilFlow4.framework;
+			remoteRef = 452A45301E0741F700D91EDD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45E084721DB36B5F00C5428D /* ManualView.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

@@ -1,6 +1,47 @@
 
 
 
+Naming Conventions
+------------------
+
+- `...Controller` is a state maintainer. It has some internal state
+  and manages it by providing limited mutator methods.
+
+- `...Service` is a gateway to lower level features that are 
+  available to all higher level components.
+  A service is just a gateway interface. It usuallt backed by one or
+  more controllers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

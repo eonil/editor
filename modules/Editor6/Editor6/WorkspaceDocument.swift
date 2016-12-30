@@ -8,7 +8,6 @@
 
 import Foundation
 import AppKit
-import Editor6WorkspaceModel
 import Editor6WorkspaceUI
 
 /// Treat `NSDocument` methods and events as user input.
@@ -20,7 +19,7 @@ import Editor6WorkspaceUI
 final class WorkspaceDocument: NSDocument {
     private let model = WorkspaceModel()
     private let main = WorkspaceUIWindowController()
-    private var localState = WorkspaceUIState()
+    private var viewState = WorkspaceUIState()
 
     override init() {
         super.init()

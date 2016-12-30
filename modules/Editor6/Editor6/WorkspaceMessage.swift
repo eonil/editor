@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Editor6WorkspaceModel
 import Editor6WorkspaceUI
 
 /// Message will be sent from a workspace.

@@ -2,6 +2,68 @@ Editor6
 =======
 Hoon H.
 
+Architecture
+------------
+This app is built with 3 major pieces.
+
+- Views.
+- Controllers.
+- Services. (models)
+
+Views are responsible to render UI and accepting user input.
+User input will be dispatched back to controllers.
+
+Controllers takes user input and generates UI states. UI states
+will be delivered to views to render UI.
+
+Controllers may execute some operation and query some information
+from services by user input.
+
+Services are globally available components which provides access
+to various independent features. Services are actually gateway
+interfaces to alien features. This plays rols of "models" in
+traditional MVC architecture.
+
+*Services* are named differently, becuase I think this is a bit 
+different with traditional models. 
+
+- Services are one level lower than controllers, and available
+  on all controllers.
+- Services are collection of objects which provides data access.
+  This is not a collection of data-types.
+
+
+
+
+
+Available Services
+------------------
+These are list of available services and its internal dependencies.
+
+- Project service
+  - File system
+
+- Build Service
+  - Cargo
+
+- Debug Service
+  - LLDB
+
+- Code completion Service
+  - Rust Langauge Server
+
+
+
+
+
+
+
+
+
+
+
+
+
 Directory Layout
 ----------------
 I will use this layout until SwiftPM to be fully supported by Xcode.
