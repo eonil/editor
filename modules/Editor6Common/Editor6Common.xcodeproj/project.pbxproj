@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		45185EDA1DA93A0D00C4D86D /* Editor6Common.h in Headers */ = {isa = PBXBuildFile; fileRef = 45185ED81DA93A0D00C4D86D /* Editor6Common.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		455D79831DADAE9D003411C1 /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458103B91DADADFD00B0717C /* Editor6DepPack.framework */; };
 		456B81C91DAA0D3B006D7C49 /* WorkspaceTreeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B81C81DAA0D3B006D7C49 /* WorkspaceTreeState.swift */; };
 		456FDD5C1DAA2DD500F8003A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD5B1DAA2DD500F8003A /* Tree.swift */; };
 		456FDDA21DAA461300F8003A /* Editor6CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDA11DAA461300F8003A /* Editor6CommonView.swift */; };
@@ -18,54 +17,13 @@
 		45ABC1BA1DCDB5DA006EFE1F /* MARK_unimplemented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */; };
 		45ABC1D11DCDB788006EFE1F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D01DCDB788006EFE1F /* Report.swift */; };
 		45ABC1D31DCDB8BD006EFE1F /* noop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D21DCDB8BD006EFE1F /* noop.swift */; };
+		45B69F781E16C2F4005D072B /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458103DB1DADADFD00B0717C /* EonilToolbox.framework */; };
 		45E084E81DB3C87300C5428D /* Tree1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E084E71DB3C87300C5428D /* Tree1.swift */; };
 		45EF85331DB22DCB00B320B5 /* Editor6CommonControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF85321DB22DCB00B320B5 /* Editor6CommonControl.swift */; };
 		45EF85411DB236CE00B320B5 /* Editor6CommonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF85401DB236CE00B320B5 /* Editor6CommonStackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		458103B01DADADFD00B0717C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 456FDD371DAA150E00F8003A /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Flow";
-			remoteInfo = Flow;
-		};
-		458103B21DADADFD00B0717C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 456FDD371DAA150E00F8003A /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_FSEventsUnofficialWrapper";
-			remoteInfo = FSEventsUnofficialWrapper;
-		};
-		458103B41DADADFD00B0717C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 456FDD371DAA150E00F8003A /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Reftable";
-			remoteInfo = Reftable;
-		};
-		458103B61DADADFD00B0717C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 456FDD371DAA150E00F8003A /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_BTree";
-			remoteInfo = BTree;
-		};
-		458103B81DADADFD00B0717C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 456FDD371DAA150E00F8003A /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Editor6DepPack";
-			remoteInfo = Editor6DepPack;
-		};
-		458103BA1DADADFD00B0717C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 456FDD371DAA150E00F8003A /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Editor6DepPackTests";
-			remoteInfo = Editor6DepPackTests;
-		};
 		458103D81DADADFD00B0717C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 456FDD261DAA14EB00F8003A /* EonilToolbox.xcodeproj */;
@@ -102,7 +60,6 @@
 		45185ED91DA93A0D00C4D86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		456B81C81DAA0D3B006D7C49 /* WorkspaceTreeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTreeState.swift; sourceTree = "<group>"; };
 		456FDD261DAA14EB00F8003A /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = ../../submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
-		456FDD371DAA150E00F8003A /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
 		456FDD5B1DAA2DD500F8003A /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		456FDDA11DAA461300F8003A /* Editor6CommonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6CommonView.swift; sourceTree = "<group>"; };
 		456FDDAD1DAA47EC00F8003A /* Editor6CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6CommonViewController.swift; sourceTree = "<group>"; };
@@ -121,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				455D79831DADAE9D003411C1 /* Editor6DepPack.framework in Frameworks */,
+				45B69F781E16C2F4005D072B /* EonilToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,23 +126,9 @@
 		456FDD351DAA14ED00F8003A /* (deps) */ = {
 			isa = PBXGroup;
 			children = (
-				456FDD371DAA150E00F8003A /* Editor6DepPack.xcodeproj */,
 				456FDD261DAA14EB00F8003A /* EonilToolbox.xcodeproj */,
 			);
 			name = "(deps)";
-			sourceTree = "<group>";
-		};
-		458103A61DADADFD00B0717C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				458103B11DADADFD00B0717C /* Flow.framework */,
-				458103B31DADADFD00B0717C /* FSEventsUnofficialWrapper.framework */,
-				458103B51DADADFD00B0717C /* Reftable.framework */,
-				458103B71DADADFD00B0717C /* BTree.framework */,
-				458103B91DADADFD00B0717C /* Editor6DepPack.framework */,
-				458103BB1DADADFD00B0717C /* Editor6DepPackTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		458103D21DADADFD00B0717C /* Products */ = {
@@ -259,10 +202,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 458103A61DADADFD00B0717C /* Products */;
-					ProjectRef = 456FDD371DAA150E00F8003A /* Editor6DepPack.xcodeproj */;
-				},
-				{
 					ProductGroup = 458103D21DADADFD00B0717C /* Products */;
 					ProjectRef = 456FDD261DAA14EB00F8003A /* EonilToolbox.xcodeproj */;
 				},
@@ -275,48 +214,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		458103B11DADADFD00B0717C /* Flow.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Flow.framework;
-			remoteRef = 458103B01DADADFD00B0717C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		458103B31DADADFD00B0717C /* FSEventsUnofficialWrapper.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FSEventsUnofficialWrapper.framework;
-			remoteRef = 458103B21DADADFD00B0717C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		458103B51DADADFD00B0717C /* Reftable.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Reftable.framework;
-			remoteRef = 458103B41DADADFD00B0717C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		458103B71DADADFD00B0717C /* BTree.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BTree.framework;
-			remoteRef = 458103B61DADADFD00B0717C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		458103B91DADADFD00B0717C /* Editor6DepPack.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Editor6DepPack.framework;
-			remoteRef = 458103B81DADADFD00B0717C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		458103BB1DADADFD00B0717C /* Editor6DepPackTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = file;
-			path = Editor6DepPackTests.xctest;
-			remoteRef = 458103BA1DADADFD00B0717C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		458103D91DADADFD00B0717C /* EonilToolbox.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

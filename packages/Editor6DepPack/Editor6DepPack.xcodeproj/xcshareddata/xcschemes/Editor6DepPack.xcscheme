@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_63"
+               BlueprintIdentifier = "OBJ_67"
                BuildableName = "Flow.framework"
                BlueprintName = "Flow"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_75"
+               BlueprintIdentifier = "OBJ_79"
                BuildableName = "EonilFlow4.framework"
                BlueprintName = "EonilFlow4"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_87"
+               BlueprintIdentifier = "OBJ_91"
                BuildableName = "FSEventsUnofficialWrapper.framework"
                BlueprintName = "FSEventsUnofficialWrapper"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -56,7 +56,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_101"
+               BlueprintIdentifier = "OBJ_105"
                BuildableName = "Reftable.framework"
                BlueprintName = "Reftable"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -70,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_108"
+               BlueprintIdentifier = "OBJ_112"
                BuildableName = "BTree.framework"
                BlueprintName = "BTree"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -84,7 +84,21 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_130"
+               BlueprintIdentifier = "OBJ_134"
+               BuildableName = "EonilGCDActor.framework"
+               BlueprintName = "EonilGCDActor"
+               ReferencedContainer = "container:Editor6DepPack.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "OBJ_142"
                BuildableName = "Editor6DepPack.framework"
                BlueprintName = "Editor6DepPack"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -102,7 +116,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "OBJ_147"
+               BlueprintIdentifier = "OBJ_161"
                BuildableName = "Editor6DepPackTests.xctest"
                BlueprintName = "Editor6DepPackTests"
                ReferencedContainer = "container:Editor6DepPack.xcodeproj">
@@ -125,7 +139,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "OBJ_63"
+            BlueprintIdentifier = "OBJ_67"
             BuildableName = "Flow.framework"
             BlueprintName = "Flow"
             ReferencedContainer = "container:Editor6DepPack.xcodeproj">

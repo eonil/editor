@@ -17,18 +17,18 @@ import Editor6WorkspaceUI
 ///
 @objc
 final class WorkspaceDocument: NSDocument {
-    private let model = WorkspaceModel()
-    private let main = WorkspaceUIWindowController()
+    private let workspaceController = WorkspaceController()
+    private let workspaceView = WorkspaceUIWindowController()
     private var viewState = WorkspaceUIState()
 
     override init() {
         super.init()
-        main.delegate { [weak self] in self?.process($0) }
+        workspaceView.delegate { [weak self] in self?.process($0) }
         Driver.queue(.initiate(getID()))
     }
     deinit {
         Driver.queue(.terminate(getID()))
-        main.delegate(to: ignore)
+        workspaceView.delegate(to: ignore)
         Swift.print("closed")
     }
 
@@ -47,7 +47,7 @@ final class WorkspaceDocument: NSDocument {
 
     override func makeWindowControllers() {
         super.makeWindowControllers()
-        addWindowController(main)
+        addWindowController(workspaceView)
     }
 
     override func read(from url: URL, ofType typeName: String) throws {

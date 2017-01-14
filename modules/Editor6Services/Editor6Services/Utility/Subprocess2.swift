@@ -25,6 +25,7 @@ enum Subprocess2Phase {
 struct Subprocess2State {
     var phase = Subprocess2Phase.notLaunched
 }
+
 final class Subprocess2Controller {
     typealias Delegate = ((Subprocess2Event) -> ())
 

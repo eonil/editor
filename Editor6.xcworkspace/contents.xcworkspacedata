@@ -10,6 +10,9 @@
    <FileRef
       location = "group:CodingConvention.md">
    </FileRef>
+   <FileRef
+      location = "group:ARCHITECTURE.md">
+   </FileRef>
    <Group
       location = "container:"
       name = "modules">

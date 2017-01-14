@@ -45,8 +45,16 @@ struct LineReader {
             }
         }
     }
+}
+
+extension LineReader {
+    ///
+    /// Produced lines without ending `\n` characters.
+    ///
     /// - Returns:
-    ///     Produced lines without ending `\n` characters.
+    ///     Array of string that are separated by new-line character.
+    ///     These string are guaranteed to have no NL character.
+    ///
     mutating func push(data: Data) -> [String] {
         var lines = [String]()
         push(data: data) { line in

@@ -1,0 +1,827 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		456F8B711E2A7FBF00F7EC4C /* CargoOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */; };
+		456F8B801E2A85F800F7EC4C /* RustCompilerDataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */; };
+		456F8B821E2A861200F7EC4C /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B811E2A861200F7EC4C /* Box.swift */; };
+		456F8B841E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B831E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift */; };
+		456F8B8C1E2A867A00F7EC4C /* Editor6ServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */; };
+		456F8B8E1E2A867A00F7EC4C /* Editor6Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C2828F1E103C1300BE84AF /* Editor6Services.framework */; };
+		456F8B941E2A86B800F7EC4C /* EonilGCDActor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B6A02A1E29FC59005D072B /* EonilGCDActor.framework */; };
+		456F8B961E2A8A7D00F7EC4C /* PcoReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B951E2A8A7D00F7EC4C /* PcoReport.swift */; };
+		459CCC321E2A6F97005903BF /* CargoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CCC311E2A6F97005903BF /* CargoProcess.swift */; };
+		45B6A0321E29FC7C005D072B /* LineBashProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0311E29FC7C005D072B /* LineBashProcess.swift */; };
+		45B6A0341E29FC9C005D072B /* PcoIOChannels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0331E29FC9C005D072B /* PcoIOChannels.swift */; };
+		45B6A0511E2A20B4005D072B /* Pco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0501E2A20B4005D072B /* Pco.swift */; };
+		45B6A0531E2A2191005D072B /* Subprocess3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0521E2A2191005D072B /* Subprocess3.swift */; };
+		45B6A0551E2A25DF005D072B /* AtomicBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0541E2A25DF005D072B /* AtomicBool.swift */; };
+		45B6A0671E2A6044005D072B /* PcoChannel+map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0661E2A6044005D072B /* PcoChannel+map.swift */; };
+		45B6A0761E2A627F005D072B /* PcoChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0751E2A627F005D072B /* PcoChannel.swift */; };
+		45B6A0781E2A6501005D072B /* PcoAnyChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0771E2A6501005D072B /* PcoAnyChannel.swift */; };
+		45B6A07A1E2A6517005D072B /* PcoGCDChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0791E2A6517005D072B /* PcoGCDChannel.swift */; };
+		45B6A07C1E2A671D005D072B /* PcoChannel+bufferedMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A07B1E2A671D005D072B /* PcoChannel+bufferedMap.swift */; };
+		45C282941E103C1300BE84AF /* Editor6Services.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C282921E103C1300BE84AF /* Editor6Services.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45C282D81E103C7800BE84AF /* Bash1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282C91E103C7800BE84AF /* Bash1.swift */; };
+		45C282D91E103C7800BE84AF /* Bash2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CA1E103C7800BE84AF /* Bash2.swift */; };
+		45C282DA1E103C7800BE84AF /* Bash3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CB1E103C7800BE84AF /* Bash3.swift */; };
+		45C282DB1E103C7800BE84AF /* Bash4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CC1E103C7800BE84AF /* Bash4.swift */; };
+		45C282DC1E103C7800BE84AF /* Cargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CE1E103C7800BE84AF /* Cargo.swift */; };
+		45C282DD1E103C7800BE84AF /* Cargo1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CF1E103C7800BE84AF /* Cargo1.swift */; };
+		45C282DE1E103C7800BE84AF /* RustLanguageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D21E103C7800BE84AF /* RustLanguageServer.swift */; };
+		45C282DF1E103C7800BE84AF /* IOQueuePair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D41E103C7800BE84AF /* IOQueuePair.swift */; };
+		45C282E01E103C7800BE84AF /* LineReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D51E103C7800BE84AF /* LineReader.swift */; };
+		45C282E11E103C7800BE84AF /* Subprocess1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D61E103C7800BE84AF /* Subprocess1.swift */; };
+		45C282E21E103C7800BE84AF /* Subprocess2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D71E103C7800BE84AF /* Subprocess2.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		456F8B8F1E2A867A00F7EC4C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45C282861E103C1300BE84AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45C2828E1E103C1300BE84AF;
+			remoteInfo = Editor6Services;
+		};
+		45B6A01F1E29FC59005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_59;
+			remoteInfo = Flow;
+		};
+		45B6A0211E29FC59005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_60;
+			remoteInfo = EonilFlow4;
+		};
+		45B6A0231E29FC59005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_61;
+			remoteInfo = FSEventsUnofficialWrapper;
+		};
+		45B6A0251E29FC59005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_62;
+			remoteInfo = Reftable;
+		};
+		45B6A0271E29FC59005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_63;
+			remoteInfo = BTree;
+		};
+		45B6A0291E29FC59005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_64;
+			remoteInfo = EonilGCDActor;
+		};
+		45B6A02B1E29FC59005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_65;
+			remoteInfo = Editor6DepPack;
+		};
+		45B6A02D1E29FC59005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_66;
+			remoteInfo = Editor6DepPackTests;
+		};
+		45C2829F1E103C3100BE84AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45185ED51DA93A0D00C4D86D;
+			remoteInfo = Editor6Common;
+		};
+		45C282A81E103C3A00BE84AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45771A9D1CD0E1A30096947A;
+			remoteInfo = "EonilToolbox-iOS";
+		};
+		45C282AA1E103C3A00BE84AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45771B101CD0EAE10096947A;
+			remoteInfo = "EonilToolbox-OSX";
+		};
+		45C282AC1E103C3A00BE84AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45D1B98E1D16CF0300B9F7C3;
+			remoteInfo = "EonilToolboxTests-macOS";
+		};
+		45C282AE1E103C3A00BE84AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452A006B1D943811007DF8F3;
+			remoteInfo = "EonilToolboxTests-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoOutputParser.swift; sourceTree = "<group>"; };
+		456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerDataStructures.swift; sourceTree = "<group>"; };
+		456F8B811E2A861200F7EC4C /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		456F8B831E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RustCompilerDataStructures+JSON.swift"; sourceTree = "<group>"; };
+		456F8B891E2A867A00F7EC4C /* Editor6ServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Editor6ServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor6ServicesTests.swift; sourceTree = "<group>"; };
+		456F8B8D1E2A867A00F7EC4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		456F8B951E2A8A7D00F7EC4C /* PcoReport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PcoReport.swift; sourceTree = "<group>"; };
+		459CCC311E2A6F97005903BF /* CargoProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoProcess.swift; sourceTree = "<group>"; };
+		45B6A00D1E29FC2C005D072B /* EonilGCDActor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EonilGCDActor.framework; path = "../../../../Temp/Xcode/Derivations/Editor6-bxvqrxpvvdnoslfclhjasudjnkut/Build/Products/Debug/EonilGCDActor.framework"; sourceTree = "<group>"; };
+		45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
+		45B6A0311E29FC7C005D072B /* LineBashProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineBashProcess.swift; sourceTree = "<group>"; };
+		45B6A0331E29FC9C005D072B /* PcoIOChannels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PcoIOChannels.swift; sourceTree = "<group>"; };
+		45B6A0501E2A20B4005D072B /* Pco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pco.swift; sourceTree = "<group>"; };
+		45B6A0521E2A2191005D072B /* Subprocess3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess3.swift; sourceTree = "<group>"; };
+		45B6A0541E2A25DF005D072B /* AtomicBool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtomicBool.swift; sourceTree = "<group>"; };
+		45B6A0661E2A6044005D072B /* PcoChannel+map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PcoChannel+map.swift"; sourceTree = "<group>"; };
+		45B6A0751E2A627F005D072B /* PcoChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PcoChannel.swift; sourceTree = "<group>"; };
+		45B6A0771E2A6501005D072B /* PcoAnyChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PcoAnyChannel.swift; sourceTree = "<group>"; };
+		45B6A0791E2A6517005D072B /* PcoGCDChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PcoGCDChannel.swift; sourceTree = "<group>"; };
+		45B6A07B1E2A671D005D072B /* PcoChannel+bufferedMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PcoChannel+bufferedMap.swift"; sourceTree = "<group>"; };
+		45C2828F1E103C1300BE84AF /* Editor6Services.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6Services.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45C282921E103C1300BE84AF /* Editor6Services.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6Services.h; sourceTree = "<group>"; };
+		45C282931E103C1300BE84AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
+		45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = "/Users/Eonil/Workshop/Playground/editor6-trial/modules/Editor6FileTreeUI/../../submodules/toolbox.swift/EonilToolbox.xcodeproj"; sourceTree = "<absolute>"; };
+		45C282C91E103C7800BE84AF /* Bash1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash1.swift; sourceTree = "<group>"; };
+		45C282CA1E103C7800BE84AF /* Bash2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash2.swift; sourceTree = "<group>"; };
+		45C282CB1E103C7800BE84AF /* Bash3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash3.swift; sourceTree = "<group>"; };
+		45C282CC1E103C7800BE84AF /* Bash4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash4.swift; sourceTree = "<group>"; };
+		45C282CE1E103C7800BE84AF /* Cargo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo.swift; sourceTree = "<group>"; };
+		45C282CF1E103C7800BE84AF /* Cargo1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo1.swift; sourceTree = "<group>"; };
+		45C282D21E103C7800BE84AF /* RustLanguageServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustLanguageServer.swift; sourceTree = "<group>"; };
+		45C282D41E103C7800BE84AF /* IOQueuePair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOQueuePair.swift; sourceTree = "<group>"; };
+		45C282D51E103C7800BE84AF /* LineReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineReader.swift; sourceTree = "<group>"; };
+		45C282D61E103C7800BE84AF /* Subprocess1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess1.swift; sourceTree = "<group>"; };
+		45C282D71E103C7800BE84AF /* Subprocess2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess2.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		456F8B861E2A867A00F7EC4C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				456F8B8E1E2A867A00F7EC4C /* Editor6Services.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C2828B1E103C1300BE84AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				456F8B941E2A86B800F7EC4C /* EonilGCDActor.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		456F8B8A1E2A867A00F7EC4C /* Editor6ServicesTests */ = {
+			isa = PBXGroup;
+			children = (
+				456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */,
+				456F8B8D1E2A867A00F7EC4C /* Info.plist */,
+			);
+			path = Editor6ServicesTests;
+			sourceTree = "<group>";
+		};
+		45B6A00C1E29FC2C005D072B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				45B6A00D1E29FC2C005D072B /* EonilGCDActor.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		45B6A0151E29FC58005D072B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45B6A0201E29FC59005D072B /* Flow.framework */,
+				45B6A0221E29FC59005D072B /* EonilFlow4.framework */,
+				45B6A0241E29FC59005D072B /* FSEventsUnofficialWrapper.framework */,
+				45B6A0261E29FC59005D072B /* Reftable.framework */,
+				45B6A0281E29FC59005D072B /* BTree.framework */,
+				45B6A02A1E29FC59005D072B /* EonilGCDActor.framework */,
+				45B6A02C1E29FC59005D072B /* Editor6DepPack.framework */,
+				45B6A02E1E29FC59005D072B /* Editor6DepPackTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45C282851E103C1300BE84AF = {
+			isa = PBXGroup;
+			children = (
+				45C2829A1E103C2900BE84AF /* (deps) */,
+				45C282911E103C1300BE84AF /* Editor6Services */,
+				456F8B8A1E2A867A00F7EC4C /* Editor6ServicesTests */,
+				45C282901E103C1300BE84AF /* Products */,
+				45B6A00C1E29FC2C005D072B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		45C282901E103C1300BE84AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45C2828F1E103C1300BE84AF /* Editor6Services.framework */,
+				456F8B891E2A867A00F7EC4C /* Editor6ServicesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45C282911E103C1300BE84AF /* Editor6Services */ = {
+			isa = PBXGroup;
+			children = (
+				45C282931E103C1300BE84AF /* Info.plist */,
+				45C282921E103C1300BE84AF /* Editor6Services.h */,
+				459CCC311E2A6F97005903BF /* CargoProcess.swift */,
+				456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */,
+				456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */,
+				456F8B831E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift */,
+				45B6A0311E29FC7C005D072B /* LineBashProcess.swift */,
+				45B6A0521E2A2191005D072B /* Subprocess3.swift */,
+				45B6A0501E2A20B4005D072B /* Pco.swift */,
+				45B6A0331E29FC9C005D072B /* PcoIOChannels.swift */,
+				45B6A0751E2A627F005D072B /* PcoChannel.swift */,
+				45B6A0771E2A6501005D072B /* PcoAnyChannel.swift */,
+				45B6A0791E2A6517005D072B /* PcoGCDChannel.swift */,
+				45B6A0661E2A6044005D072B /* PcoChannel+map.swift */,
+				45B6A07B1E2A671D005D072B /* PcoChannel+bufferedMap.swift */,
+				456F8B951E2A8A7D00F7EC4C /* PcoReport.swift */,
+				45B6A0541E2A25DF005D072B /* AtomicBool.swift */,
+				456F8B811E2A861200F7EC4C /* Box.swift */,
+				45C282C81E103C7800BE84AF /* Bash */,
+				45C282CD1E103C7800BE84AF /* Cargo */,
+				45C282D01E103C7800BE84AF /* LLDB */,
+				45C282D11E103C7800BE84AF /* RustLanguageServer */,
+				45C282D31E103C7800BE84AF /* Utility */,
+			);
+			path = Editor6Services;
+			sourceTree = "<group>";
+		};
+		45C2829A1E103C2900BE84AF /* (deps) */ = {
+			isa = PBXGroup;
+			children = (
+				45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */,
+				45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */,
+				45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */,
+			);
+			name = "(deps)";
+			sourceTree = "<group>";
+		};
+		45C2829C1E103C3100BE84AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45C282A01E103C3100BE84AF /* Editor6Common.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45C282A21E103C3900BE84AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45C282A91E103C3A00BE84AF /* EonilToolbox.framework */,
+				45C282AB1E103C3A00BE84AF /* EonilToolbox.framework */,
+				45C282AD1E103C3A00BE84AF /* EonilToolboxTests-macOS.xctest */,
+				45C282AF1E103C3A00BE84AF /* EonilToolboxTests-iOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45C282C81E103C7800BE84AF /* Bash */ = {
+			isa = PBXGroup;
+			children = (
+				45C282C91E103C7800BE84AF /* Bash1.swift */,
+				45C282CA1E103C7800BE84AF /* Bash2.swift */,
+				45C282CB1E103C7800BE84AF /* Bash3.swift */,
+				45C282CC1E103C7800BE84AF /* Bash4.swift */,
+			);
+			path = Bash;
+			sourceTree = "<group>";
+		};
+		45C282CD1E103C7800BE84AF /* Cargo */ = {
+			isa = PBXGroup;
+			children = (
+				45C282CE1E103C7800BE84AF /* Cargo.swift */,
+				45C282CF1E103C7800BE84AF /* Cargo1.swift */,
+			);
+			path = Cargo;
+			sourceTree = "<group>";
+		};
+		45C282D01E103C7800BE84AF /* LLDB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LLDB;
+			sourceTree = "<group>";
+		};
+		45C282D11E103C7800BE84AF /* RustLanguageServer */ = {
+			isa = PBXGroup;
+			children = (
+				45C282D21E103C7800BE84AF /* RustLanguageServer.swift */,
+			);
+			path = RustLanguageServer;
+			sourceTree = "<group>";
+		};
+		45C282D31E103C7800BE84AF /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				45C282D41E103C7800BE84AF /* IOQueuePair.swift */,
+				45C282D51E103C7800BE84AF /* LineReader.swift */,
+				45C282D61E103C7800BE84AF /* Subprocess1.swift */,
+				45C282D71E103C7800BE84AF /* Subprocess2.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		45C2828C1E103C1300BE84AF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45C282941E103C1300BE84AF /* Editor6Services.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		456F8B881E2A867A00F7EC4C /* Editor6ServicesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 456F8B911E2A867A00F7EC4C /* Build configuration list for PBXNativeTarget "Editor6ServicesTests" */;
+			buildPhases = (
+				456F8B851E2A867A00F7EC4C /* Sources */,
+				456F8B861E2A867A00F7EC4C /* Frameworks */,
+				456F8B871E2A867A00F7EC4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				456F8B901E2A867A00F7EC4C /* PBXTargetDependency */,
+			);
+			name = Editor6ServicesTests;
+			productName = Editor6ServicesTests;
+			productReference = 456F8B891E2A867A00F7EC4C /* Editor6ServicesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		45C2828E1E103C1300BE84AF /* Editor6Services */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 45C282971E103C1300BE84AF /* Build configuration list for PBXNativeTarget "Editor6Services" */;
+			buildPhases = (
+				45C2828A1E103C1300BE84AF /* Sources */,
+				45C2828B1E103C1300BE84AF /* Frameworks */,
+				45C2828C1E103C1300BE84AF /* Headers */,
+				45C2828D1E103C1300BE84AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Editor6Services;
+			productName = Editor6Services;
+			productReference = 45C2828F1E103C1300BE84AF /* Editor6Services.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		45C282861E103C1300BE84AF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = Eonil;
+				TargetAttributes = {
+					456F8B881E2A867A00F7EC4C = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = SYA75M63MP;
+						ProvisioningStyle = Automatic;
+					};
+					45C2828E1E103C1300BE84AF = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = SYA75M63MP;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 45C282891E103C1300BE84AF /* Build configuration list for PBXProject "Editor6Services" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 45C282851E103C1300BE84AF;
+			productRefGroup = 45C282901E103C1300BE84AF /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 45C2829C1E103C3100BE84AF /* Products */;
+					ProjectRef = 45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */;
+				},
+				{
+					ProductGroup = 45B6A0151E29FC58005D072B /* Products */;
+					ProjectRef = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
+				},
+				{
+					ProductGroup = 45C282A21E103C3900BE84AF /* Products */;
+					ProjectRef = 45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				45C2828E1E103C1300BE84AF /* Editor6Services */,
+				456F8B881E2A867A00F7EC4C /* Editor6ServicesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		45B6A0201E29FC59005D072B /* Flow.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Flow.framework;
+			remoteRef = 45B6A01F1E29FC59005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B6A0221E29FC59005D072B /* EonilFlow4.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilFlow4.framework;
+			remoteRef = 45B6A0211E29FC59005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B6A0241E29FC59005D072B /* FSEventsUnofficialWrapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FSEventsUnofficialWrapper.framework;
+			remoteRef = 45B6A0231E29FC59005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B6A0261E29FC59005D072B /* Reftable.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Reftable.framework;
+			remoteRef = 45B6A0251E29FC59005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B6A0281E29FC59005D072B /* BTree.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BTree.framework;
+			remoteRef = 45B6A0271E29FC59005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B6A02A1E29FC59005D072B /* EonilGCDActor.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilGCDActor.framework;
+			remoteRef = 45B6A0291E29FC59005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B6A02C1E29FC59005D072B /* Editor6DepPack.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Editor6DepPack.framework;
+			remoteRef = 45B6A02B1E29FC59005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B6A02E1E29FC59005D072B /* Editor6DepPackTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = file;
+			path = Editor6DepPackTests.xctest;
+			remoteRef = 45B6A02D1E29FC59005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45C282A01E103C3100BE84AF /* Editor6Common.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Editor6Common.framework;
+			remoteRef = 45C2829F1E103C3100BE84AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45C282A91E103C3A00BE84AF /* EonilToolbox.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilToolbox.framework;
+			remoteRef = 45C282A81E103C3A00BE84AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45C282AB1E103C3A00BE84AF /* EonilToolbox.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilToolbox.framework;
+			remoteRef = 45C282AA1E103C3A00BE84AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45C282AD1E103C3A00BE84AF /* EonilToolboxTests-macOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilToolboxTests-macOS.xctest";
+			remoteRef = 45C282AC1E103C3A00BE84AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45C282AF1E103C3A00BE84AF /* EonilToolboxTests-iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilToolboxTests-iOS.xctest";
+			remoteRef = 45C282AE1E103C3A00BE84AF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		456F8B871E2A867A00F7EC4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C2828D1E103C1300BE84AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		456F8B851E2A867A00F7EC4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				456F8B8C1E2A867A00F7EC4C /* Editor6ServicesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		45C2828A1E103C1300BE84AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45C282DE1E103C7800BE84AF /* RustLanguageServer.swift in Sources */,
+				45C282E21E103C7800BE84AF /* Subprocess2.swift in Sources */,
+				45C282DD1E103C7800BE84AF /* Cargo1.swift in Sources */,
+				45C282DC1E103C7800BE84AF /* Cargo.swift in Sources */,
+				459CCC321E2A6F97005903BF /* CargoProcess.swift in Sources */,
+				456F8B711E2A7FBF00F7EC4C /* CargoOutputParser.swift in Sources */,
+				45B6A0781E2A6501005D072B /* PcoAnyChannel.swift in Sources */,
+				45B6A07C1E2A671D005D072B /* PcoChannel+bufferedMap.swift in Sources */,
+				45B6A0551E2A25DF005D072B /* AtomicBool.swift in Sources */,
+				45B6A0671E2A6044005D072B /* PcoChannel+map.swift in Sources */,
+				45B6A07A1E2A6517005D072B /* PcoGCDChannel.swift in Sources */,
+				45B6A0531E2A2191005D072B /* Subprocess3.swift in Sources */,
+				45C282DB1E103C7800BE84AF /* Bash4.swift in Sources */,
+				45B6A0341E29FC9C005D072B /* PcoIOChannels.swift in Sources */,
+				456F8B821E2A861200F7EC4C /* Box.swift in Sources */,
+				45C282E11E103C7800BE84AF /* Subprocess1.swift in Sources */,
+				456F8B801E2A85F800F7EC4C /* RustCompilerDataStructures.swift in Sources */,
+				45C282E01E103C7800BE84AF /* LineReader.swift in Sources */,
+				45B6A0761E2A627F005D072B /* PcoChannel.swift in Sources */,
+				45C282D91E103C7800BE84AF /* Bash2.swift in Sources */,
+				45C282DF1E103C7800BE84AF /* IOQueuePair.swift in Sources */,
+				45C282DA1E103C7800BE84AF /* Bash3.swift in Sources */,
+				45B6A0321E29FC7C005D072B /* LineBashProcess.swift in Sources */,
+				456F8B961E2A8A7D00F7EC4C /* PcoReport.swift in Sources */,
+				45C282D81E103C7800BE84AF /* Bash1.swift in Sources */,
+				456F8B841E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift in Sources */,
+				45B6A0511E2A20B4005D072B /* Pco.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		456F8B901E2A867A00F7EC4C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45C2828E1E103C1300BE84AF /* Editor6Services */;
+			targetProxy = 456F8B8F1E2A867A00F7EC4C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		456F8B921E2A867A00F7EC4C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = SYA75M63MP;
+				INFOPLIST_FILE = Editor6ServicesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor6ServicesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		456F8B931E2A867A00F7EC4C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = SYA75M63MP;
+				INFOPLIST_FILE = Editor6ServicesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor6ServicesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		45C282951E103C1300BE84AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		45C282961E103C1300BE84AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		45C282981E103C1300BE84AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SYA75M63MP;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Editor6Services/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor6Services;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		45C282991E103C1300BE84AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = SYA75M63MP;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = Editor6Services/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor6Services;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		456F8B911E2A867A00F7EC4C /* Build configuration list for PBXNativeTarget "Editor6ServicesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				456F8B921E2A867A00F7EC4C /* Debug */,
+				456F8B931E2A867A00F7EC4C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45C282891E103C1300BE84AF /* Build configuration list for PBXProject "Editor6Services" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45C282951E103C1300BE84AF /* Debug */,
+				45C282961E103C1300BE84AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		45C282971E103C1300BE84AF /* Build configuration list for PBXNativeTarget "Editor6Services" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				45C282981E103C1300BE84AF /* Debug */,
+				45C282991E103C1300BE84AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 45C282861E103C1300BE84AF /* Project object */;
+}

@@ -18,8 +18,6 @@
 		4566CEB01DADAAC700EA2A0C /* Editor6Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEAE1DADAAB400EA2A0C /* Editor6Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4566CEB31DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEA61DADAAB200EA2A0C /* Editor6FileTreeUI.framework */; };
 		4566CEB41DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEA61DADAAB200EA2A0C /* Editor6FileTreeUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4566CEE31DADABC100EA2A0C /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEDF1DADAB9F00EA2A0C /* Editor6DepPack.framework */; };
-		4566CEE41DADABC100EA2A0C /* Editor6DepPack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEDF1DADAB9F00EA2A0C /* Editor6DepPack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		456FDDD61DAA78B900F8003A /* DriverState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDD51DAA78B900F8003A /* DriverState.swift */; };
 		456FDE211DAA952F00F8003A /* UNUSED_TreeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE201DAA952F00F8003A /* UNUSED_TreeEvent.swift */; };
 		456FDE231DAA95AE00F8003A /* UNUSED_Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE221DAA95AE00F8003A /* UNUSED_Broadcast.swift */; };
@@ -29,9 +27,15 @@
 		45ABC1B51DCDAEB1006EFE1F /* UNUSED_WorkspaceDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1B41DCDAEB1006EFE1F /* UNUSED_WorkspaceDriver.swift */; };
 		45ABC1C61DCDB62E006EFE1F /* MARK_unimplemented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */; };
 		45ABC1D51DCDB90A006EFE1F /* ignore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D41DCDB90A006EFE1F /* ignore.swift */; };
+		45B69FA51E16C31F005D072B /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B69F911E16C318005D072B /* Editor6DepPack.framework */; };
+		45B69FA61E16C31F005D072B /* Editor6DepPack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45B69F911E16C318005D072B /* Editor6DepPack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45B69FDF1E29F8F7005D072B /* BuildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B69FDE1E29F8F7005D072B /* BuildController.swift */; };
+		45B6A03B1E29FD05005D072B /* Editor6Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B6A03A1E29FCFD005D072B /* Editor6Services.framework */; };
+		45B6A03C1E29FD05005D072B /* Editor6Services.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45B6A03A1E29FCFD005D072B /* Editor6Services.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45C282E81E103FF000BE84AF /* WorkspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282E71E103FF000BE84AF /* WorkspaceController.swift */; };
 		45C282F71E11964800BE84AF /* FileTreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282F61E11964800BE84AF /* FileTreeController.swift */; };
 		45C282F91E1197BA00BE84AF /* DebugTreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282F81E1197BA00BE84AF /* DebugTreeController.swift */; };
+		45C282FF1E16BC9800BE84AF /* WorkspaceProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282FE1E16BC9800BE84AF /* WorkspaceProcess.swift */; };
 		45D940381DCA914B00B65876 /* DriverMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D940371DCA914B00B65876 /* DriverMessage.swift */; };
 		45E0851E1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */; };
 		45E0851F1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -73,55 +77,6 @@
 			remoteGlobalIDString = 45185E901DA9240B00C4D86D;
 			remoteInfo = Editor6FileTreeUI;
 		};
-		4566CED61DADAB9F00EA2A0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Flow";
-			remoteInfo = Flow;
-		};
-		4566CED81DADAB9F00EA2A0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_FSEventsUnofficialWrapper";
-			remoteInfo = FSEventsUnofficialWrapper;
-		};
-		4566CEDA1DADAB9F00EA2A0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Reftable";
-			remoteInfo = Reftable;
-		};
-		4566CEDC1DADAB9F00EA2A0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_BTree";
-			remoteInfo = BTree;
-		};
-		4566CEDE1DADAB9F00EA2A0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Editor6DepPack";
-			remoteInfo = Editor6DepPack;
-		};
-		4566CEE01DADAB9F00EA2A0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Editor6DepPackTests";
-			remoteInfo = Editor6DepPackTests;
-		};
-		4566CEE51DADABC100EA2A0C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_130;
-			remoteInfo = Editor6DepPack;
-		};
 		45ABC1AA1DCDAD61006EFE1F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */;
@@ -150,12 +105,82 @@
 			remoteGlobalIDString = 4583C16D1DCAA86F001EA107;
 			remoteInfo = Editor6MainMenuUI2;
 		};
-		45C282EF1E103FF100BE84AF /* PBXContainerItemProxy */ = {
+		45B69F841E16C318005D072B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */;
+			containerPortal = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = OBJ_57;
+			remoteGlobalIDString = OBJ_59;
+			remoteInfo = Flow;
+		};
+		45B69F861E16C318005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_60;
 			remoteInfo = EonilFlow4;
+		};
+		45B69F881E16C318005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_61;
+			remoteInfo = FSEventsUnofficialWrapper;
+		};
+		45B69F8A1E16C318005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_62;
+			remoteInfo = Reftable;
+		};
+		45B69F8C1E16C318005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_63;
+			remoteInfo = BTree;
+		};
+		45B69F8E1E16C318005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_64;
+			remoteInfo = EonilGCDActor;
+		};
+		45B69F901E16C318005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_65;
+			remoteInfo = Editor6DepPack;
+		};
+		45B69F921E16C318005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_66;
+			remoteInfo = Editor6DepPackTests;
+		};
+		45B69FA71E16C31F005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_142;
+			remoteInfo = Editor6DepPack;
+		};
+		45B6A0391E29FCFD005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C2828F1E103C1300BE84AF;
+			remoteInfo = Editor6Services;
+		};
+		45B6A03D1E29FD05005D072B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45C2828E1E103C1300BE84AF;
+			remoteInfo = Editor6Services;
 		};
 		45E0851A1DB3D1D500C5428D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -188,7 +213,8 @@
 			dstSubfolderSpec = 10;
 			files = (
 				4566CEB01DADAAC700EA2A0C /* Editor6Common.framework in Embed Frameworks */,
-				4566CEE41DADABC100EA2A0C /* Editor6DepPack.framework in Embed Frameworks */,
+				45B69FA61E16C31F005D072B /* Editor6DepPack.framework in Embed Frameworks */,
+				45B6A03C1E29FD05005D072B /* Editor6Services.framework in Embed Frameworks */,
 				45E0851F1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Embed Frameworks */,
 				45ABC1B11DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Embed Frameworks */,
 				4566CEB41DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Embed Frameworks */,
@@ -210,7 +236,6 @@
 		452049A61DAF0A44002297EC /* UNUSED_AsyncMessageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_AsyncMessageDispatcher.swift; sourceTree = "<group>"; };
 		4566CEA01DADAAB100EA2A0C /* Editor6FileTreeUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6FileTreeUI.xcodeproj; path = ../Editor6FileTreeUI/Editor6FileTreeUI.xcodeproj; sourceTree = "<group>"; };
 		4566CEA91DADAAB400EA2A0C /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
-		4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
 		456FDDD51DAA78B900F8003A /* DriverState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverState.swift; sourceTree = "<group>"; };
 		456FDE201DAA952F00F8003A /* UNUSED_TreeEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_TreeEvent.swift; sourceTree = "<group>"; };
 		456FDE221DAA95AE00F8003A /* UNUSED_Broadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_Broadcast.swift; sourceTree = "<group>"; };
@@ -219,9 +244,13 @@
 		45ABC1B41DCDAEB1006EFE1F /* UNUSED_WorkspaceDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_WorkspaceDriver.swift; sourceTree = "<group>"; };
 		45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
 		45ABC1D41DCDB90A006EFE1F /* ignore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ignore.swift; sourceTree = "<group>"; };
+		45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
+		45B69FDE1E29F8F7005D072B /* BuildController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildController.swift; sourceTree = "<group>"; };
+		45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Services.xcodeproj; path = ../Editor6Services/Editor6Services.xcodeproj; sourceTree = "<group>"; };
 		45C282E71E103FF000BE84AF /* WorkspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceController.swift; sourceTree = "<group>"; };
 		45C282F61E11964800BE84AF /* FileTreeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeController.swift; sourceTree = "<group>"; };
 		45C282F81E1197BA00BE84AF /* DebugTreeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugTreeController.swift; sourceTree = "<group>"; };
+		45C282FE1E16BC9800BE84AF /* WorkspaceProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceProcess.swift; sourceTree = "<group>"; };
 		45D940371DCA914B00B65876 /* DriverMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverMessage.swift; sourceTree = "<group>"; };
 		45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6WorkspaceUI.xcodeproj; path = ../Editor6WorkspaceUI/Editor6WorkspaceUI.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -232,7 +261,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4566CEAF1DADAAC700EA2A0C /* Editor6Common.framework in Frameworks */,
-				4566CEE31DADABC100EA2A0C /* Editor6DepPack.framework in Frameworks */,
+				45B69FA51E16C31F005D072B /* Editor6DepPack.framework in Frameworks */,
+				45B6A03B1E29FD05005D072B /* Editor6Services.framework in Frameworks */,
 				45E0851E1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Frameworks */,
 				45ABC1B01DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Frameworks */,
 				4566CEB31DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Frameworks */,
@@ -269,8 +299,10 @@
 				45185E801DA8F85A00C4D86D /* WorkspaceDocument.swift */,
 				4583C1611DCAA48A001EA107 /* WorkspaceID.swift */,
 				45185E841DA8FA6F00C4D86D /* WorkspaceMessage.swift */,
+				45C282FE1E16BC9800BE84AF /* WorkspaceProcess.swift */,
 				45C282E71E103FF000BE84AF /* WorkspaceController.swift */,
 				45C282F61E11964800BE84AF /* FileTreeController.swift */,
+				45B69FDE1E29F8F7005D072B /* BuildController.swift */,
 				45C282F81E1197BA00BE84AF /* DebugTreeController.swift */,
 				45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */,
 				45ABC1D41DCDB90A006EFE1F /* ignore.swift */,
@@ -284,11 +316,12 @@
 		45185E681DA8F0A700C4D86D /* (deps) */ = {
 			isa = PBXGroup;
 			children = (
+				45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */,
+				45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */,
 				45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */,
 				45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */,
 				4566CEA01DADAAB100EA2A0C /* Editor6FileTreeUI.xcodeproj */,
 				4566CEA91DADAAB400EA2A0C /* Editor6Common.xcodeproj */,
-				4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */,
 			);
 			name = "(deps)";
 			sourceTree = "<group>";
@@ -306,20 +339,6 @@
 			isa = PBXGroup;
 			children = (
 				4566CEAE1DADAAB400EA2A0C /* Editor6Common.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4566CECE1DADAB9F00EA2A0C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4566CED71DADAB9F00EA2A0C /* Flow.framework */,
-				45C282F01E103FF100BE84AF /* EonilFlow4.framework */,
-				4566CED91DADAB9F00EA2A0C /* FSEventsUnofficialWrapper.framework */,
-				4566CEDB1DADAB9F00EA2A0C /* Reftable.framework */,
-				4566CEDD1DADAB9F00EA2A0C /* BTree.framework */,
-				4566CEDF1DADAB9F00EA2A0C /* Editor6DepPack.framework */,
-				4566CEE11DADAB9F00EA2A0C /* Editor6DepPackTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -344,6 +363,29 @@
 				452049A61DAF0A44002297EC /* UNUSED_AsyncMessageDispatcher.swift */,
 			);
 			name = "(unused)";
+			sourceTree = "<group>";
+		};
+		45B69F7A1E16C318005D072B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45B69F851E16C318005D072B /* Flow.framework */,
+				45B69F871E16C318005D072B /* EonilFlow4.framework */,
+				45B69F891E16C318005D072B /* FSEventsUnofficialWrapper.framework */,
+				45B69F8B1E16C318005D072B /* Reftable.framework */,
+				45B69F8D1E16C318005D072B /* BTree.framework */,
+				45B69F8F1E16C318005D072B /* EonilGCDActor.framework */,
+				45B69F911E16C318005D072B /* Editor6DepPack.framework */,
+				45B69F931E16C318005D072B /* Editor6DepPackTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		45B6A0361E29FCFD005D072B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45B6A03A1E29FCFD005D072B /* Editor6Services.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		45E085161DB3D1D500C5428D /* Products */ = {
@@ -372,9 +414,10 @@
 			dependencies = (
 				4566CEB21DADAAC700EA2A0C /* PBXTargetDependency */,
 				4566CEB61DADAACD00EA2A0C /* PBXTargetDependency */,
-				4566CEE61DADABC100EA2A0C /* PBXTargetDependency */,
 				45E085211DB3D1DC00C5428D /* PBXTargetDependency */,
 				45ABC1B31DCDAD68006EFE1F /* PBXTargetDependency */,
+				45B69FA81E16C31F005D072B /* PBXTargetDependency */,
+				45B6A03E1E29FD05005D072B /* PBXTargetDependency */,
 			);
 			name = Editor6;
 			productName = Editor6;
@@ -415,8 +458,8 @@
 					ProjectRef = 4566CEA91DADAAB400EA2A0C /* Editor6Common.xcodeproj */;
 				},
 				{
-					ProductGroup = 4566CECE1DADAB9F00EA2A0C /* Products */;
-					ProjectRef = 4566CECD1DADAB9F00EA2A0C /* Editor6DepPack.xcodeproj */;
+					ProductGroup = 45B69F7A1E16C318005D072B /* Products */;
+					ProjectRef = 45B69F791E16C318005D072B /* Editor6DepPack.xcodeproj */;
 				},
 				{
 					ProductGroup = 4566CEA11DADAAB100EA2A0C /* Products */;
@@ -425,6 +468,10 @@
 				{
 					ProductGroup = 45ABC1A51DCDAD61006EFE1F /* Products */;
 					ProjectRef = 45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */;
+				},
+				{
+					ProductGroup = 45B6A0361E29FCFD005D072B /* Products */;
+					ProjectRef = 45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */;
 				},
 				{
 					ProductGroup = 45E085161DB3D1D500C5428D /* Products */;
@@ -460,48 +507,6 @@
 			remoteRef = 4566CEAD1DADAAB400EA2A0C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		4566CED71DADAB9F00EA2A0C /* Flow.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Flow.framework;
-			remoteRef = 4566CED61DADAB9F00EA2A0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4566CED91DADAB9F00EA2A0C /* FSEventsUnofficialWrapper.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FSEventsUnofficialWrapper.framework;
-			remoteRef = 4566CED81DADAB9F00EA2A0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4566CEDB1DADAB9F00EA2A0C /* Reftable.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Reftable.framework;
-			remoteRef = 4566CEDA1DADAB9F00EA2A0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4566CEDD1DADAB9F00EA2A0C /* BTree.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BTree.framework;
-			remoteRef = 4566CEDC1DADAB9F00EA2A0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4566CEDF1DADAB9F00EA2A0C /* Editor6DepPack.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Editor6DepPack.framework;
-			remoteRef = 4566CEDE1DADAB9F00EA2A0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4566CEE11DADAB9F00EA2A0C /* Editor6DepPackTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = file;
-			path = Editor6DepPackTests.xctest;
-			remoteRef = 4566CEE01DADAB9F00EA2A0C /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		45ABC1AB1DCDAD61006EFE1F /* Editor6MainMenuUI2.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -523,11 +528,67 @@
 			remoteRef = 45ABC1AE1DCDAD61006EFE1F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		45C282F01E103FF100BE84AF /* EonilFlow4.framework */ = {
+		45B69F851E16C318005D072B /* Flow.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Flow.framework;
+			remoteRef = 45B69F841E16C318005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B69F871E16C318005D072B /* EonilFlow4.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = EonilFlow4.framework;
-			remoteRef = 45C282EF1E103FF100BE84AF /* PBXContainerItemProxy */;
+			remoteRef = 45B69F861E16C318005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B69F891E16C318005D072B /* FSEventsUnofficialWrapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FSEventsUnofficialWrapper.framework;
+			remoteRef = 45B69F881E16C318005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B69F8B1E16C318005D072B /* Reftable.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Reftable.framework;
+			remoteRef = 45B69F8A1E16C318005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B69F8D1E16C318005D072B /* BTree.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BTree.framework;
+			remoteRef = 45B69F8C1E16C318005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B69F8F1E16C318005D072B /* EonilGCDActor.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilGCDActor.framework;
+			remoteRef = 45B69F8E1E16C318005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B69F911E16C318005D072B /* Editor6DepPack.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Editor6DepPack.framework;
+			remoteRef = 45B69F901E16C318005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B69F931E16C318005D072B /* Editor6DepPackTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = file;
+			path = Editor6DepPackTests.xctest;
+			remoteRef = 45B69F921E16C318005D072B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45B6A03A1E29FCFD005D072B /* Editor6Services.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Editor6Services.framework;
+			remoteRef = 45B6A0391E29FCFD005D072B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */ = {
@@ -563,6 +624,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45185E7F1DA8F74500C4D86D /* UNUSED_Query.swift in Sources */,
+				45B69FDF1E29F8F7005D072B /* BuildController.swift in Sources */,
 				45ABC1B51DCDAEB1006EFE1F /* UNUSED_WorkspaceDriver.swift in Sources */,
 				456FDDD61DAA78B900F8003A /* DriverState.swift in Sources */,
 				45C282F91E1197BA00BE84AF /* DebugTreeController.swift in Sources */,
@@ -571,6 +633,7 @@
 				45ABC1C61DCDB62E006EFE1F /* MARK_unimplemented.swift in Sources */,
 				4583C1621DCAA48A001EA107 /* WorkspaceID.swift in Sources */,
 				45C282F71E11964800BE84AF /* FileTreeController.swift in Sources */,
+				45C282FF1E16BC9800BE84AF /* WorkspaceProcess.swift in Sources */,
 				45185E791DA8F44300C4D86D /* main.swift in Sources */,
 				45185E851DA8FA6F00C4D86D /* WorkspaceMessage.swift in Sources */,
 				45ABC1D51DCDB90A006EFE1F /* ignore.swift in Sources */,
@@ -595,15 +658,20 @@
 			name = Editor6FileTreeUI;
 			targetProxy = 4566CEB51DADAACD00EA2A0C /* PBXContainerItemProxy */;
 		};
-		4566CEE61DADABC100EA2A0C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Editor6DepPack;
-			targetProxy = 4566CEE51DADABC100EA2A0C /* PBXContainerItemProxy */;
-		};
 		45ABC1B31DCDAD68006EFE1F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Editor6MainMenuUI2;
 			targetProxy = 45ABC1B21DCDAD68006EFE1F /* PBXContainerItemProxy */;
+		};
+		45B69FA81E16C31F005D072B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Editor6DepPack;
+			targetProxy = 45B69FA71E16C31F005D072B /* PBXContainerItemProxy */;
+		};
+		45B6A03E1E29FD05005D072B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Editor6Services;
+			targetProxy = 45B6A03D1E29FD05005D072B /* PBXContainerItemProxy */;
 		};
 		45E085211DB3D1DC00C5428D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

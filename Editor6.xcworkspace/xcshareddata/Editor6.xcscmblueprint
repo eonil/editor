@@ -4,6 +4,7 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "82C337F498EF75A9D09358BE1EEADDF1DB1884F2" : 9223372036854775807,
     "C0E0E625FC77B9C174CCD9E6FF0E1E2295CAA407" : 9223372036854775807,
     "4635F48624E6C9FA8E74FC196050F32737C9F216" : 9223372036854775807,
     "48B9C1DE76C8BEA5F768021CB65ADA820F587B93" : 9223372036854775807,
@@ -14,6 +15,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "074E7F0B-1F98-4ED2-89E5-E1B8B8D04E0A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "82C337F498EF75A9D09358BE1EEADDF1DB1884F2" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/EonilGCDActor-0.0.1\/",
     "C0E0E625FC77B9C174CCD9E6FF0E1E2295CAA407" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/Reftable-0.0.0\/",
     "4635F48624E6C9FA8E74FC196050F32737C9F216" : "editor6-trial\/",
     "48B9C1DE76C8BEA5F768021CB65ADA820F587B93" : "editor6-trial\/submodules\/LLDBWrapper\/",
@@ -40,6 +42,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/fsevents-unofficial-wrapper.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6C7471C92E88044E76FD4030CC9A053817FA9390"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/gcd-actor.swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "82C337F498EF75A9D09358BE1EEADDF1DB1884F2"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/toolbox.swift",

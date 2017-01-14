@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4507B8351DB410B4006A5871 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45441EF31DB3EB4E00158711 /* LLDBWrapper.framework */; };
-		4507B8581DB45D42006A5871 /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */; };
 		4507B85A1DB501F2006A5871 /* UNUSED_SubprocessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4507B8591DB501F2006A5871 /* UNUSED_SubprocessController.swift */; };
 		451D74FA1DEC603B008CFEC9 /* ProcessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D74F91DEC603B008CFEC9 /* ProcessController.swift */; };
 		451D75301DEDD0A7008CFEC9 /* Bash4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D752F1DEDD0A7008CFEC9 /* Bash4.swift */; };
@@ -32,8 +31,6 @@
 		45BBCF8E1DB5489F00F83573 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45BBCF8C1DB5489F00F83573 /* MainMenu.xib */; };
 		45BBCF931DB548AA00F83573 /* Editor6WorkspaceModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */; };
 		45BBCF941DB548AA00F83573 /* Editor6WorkspaceModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45BBCF981DB548C100F83573 /* Editor6DepPack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */; };
-		45BBCF991DB548C100F83573 /* Editor6DepPack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45C0E5BD1DB90374001D23C0 /* WorkspaceNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5BC1DB90374001D23C0 /* WorkspaceNotification.swift */; };
 		45C0E5CD1DBA4F01001D23C0 /* DebugState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E5CC1DBA4F01001D23C0 /* DebugState.swift */; };
 		45C0E6821DBA5C5F001D23C0 /* Bash1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0E6771DBA5C5F001D23C0 /* Bash1.swift */; };
@@ -59,55 +56,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4507B8471DB45D3B006A5871 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Flow";
-			remoteInfo = Flow;
-		};
-		4507B8491DB45D3B006A5871 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_FSEventsUnofficialWrapper";
-			remoteInfo = FSEventsUnofficialWrapper;
-		};
-		4507B84B1DB45D3B006A5871 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Reftable";
-			remoteInfo = Reftable;
-		};
-		4507B84D1DB45D3B006A5871 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_BTree";
-			remoteInfo = BTree;
-		};
-		4507B84F1DB45D3B006A5871 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Editor6DepPack";
-			remoteInfo = Editor6DepPack;
-		};
-		4507B8511DB45D3B006A5871 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = "_____Product_Editor6DepPackTests";
-			remoteInfo = Editor6DepPackTests;
-		};
-		451D75C61DF87556008CFEC9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_57;
-			remoteInfo = EonilFlow4;
-		};
 		45441EF21DB3EB4E00158711 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */;
@@ -192,13 +140,6 @@
 			remoteGlobalIDString = 45441ED51DB3EA0F00158711;
 			remoteInfo = Editor6WorkspaceModel;
 		};
-		45BBCF9A1DB548C100F83573 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_130;
-			remoteInfo = Editor6DepPack;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -210,7 +151,6 @@
 			files = (
 				45BBCF941DB548AA00F83573 /* Editor6WorkspaceModel.framework in Embed Frameworks */,
 				459EE2B71DBAE18400A98670 /* EonilToolbox.framework in Embed Frameworks */,
-				45BBCF991DB548C100F83573 /* Editor6DepPack.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,7 +158,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
 		4507B8591DB501F2006A5871 /* UNUSED_SubprocessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_SubprocessController.swift; sourceTree = "<group>"; };
 		451D74F91DEC603B008CFEC9 /* ProcessController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProcessController.swift; sourceTree = "<group>"; };
 		451D752F1DEDD0A7008CFEC9 /* Bash4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash4.swift; sourceTree = "<group>"; };
@@ -274,7 +213,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				459EE2B51DBAE17E00A98670 /* EonilToolbox.framework in Frameworks */,
-				4507B8581DB45D42006A5871 /* Editor6DepPack.framework in Frameworks */,
 				4507B8351DB410B4006A5871 /* LLDBWrapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,32 +223,16 @@
 			files = (
 				45BBCF931DB548AA00F83573 /* Editor6WorkspaceModel.framework in Frameworks */,
 				459EE2B61DBAE18400A98670 /* EonilToolbox.framework in Frameworks */,
-				45BBCF981DB548C100F83573 /* Editor6DepPack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4507B83F1DB45D3B006A5871 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4507B8481DB45D3B006A5871 /* Flow.framework */,
-				451D75C71DF87556008CFEC9 /* EonilFlow4.framework */,
-				4507B84A1DB45D3B006A5871 /* FSEventsUnofficialWrapper.framework */,
-				4507B84C1DB45D3B006A5871 /* Reftable.framework */,
-				4507B84E1DB45D3B006A5871 /* BTree.framework */,
-				4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */,
-				4507B8521DB45D3B006A5871 /* Editor6DepPackTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		45441ECC1DB3EA0F00158711 = {
 			isa = PBXGroup;
 			children = (
 				459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */,
-				4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */,
 				45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */,
 				45441ED81DB3EA0F00158711 /* Editor6WorkspaceModel */,
 				45BBCF871DB5489F00F83573 /* Editor6WorkspaceModelTestdrive */,
@@ -517,7 +439,6 @@
 			);
 			dependencies = (
 				45BBCF961DB548AA00F83573 /* PBXTargetDependency */,
-				45BBCF9B1DB548C100F83573 /* PBXTargetDependency */,
 				459EE2B91DBAE18400A98670 /* PBXTargetDependency */,
 			);
 			name = Editor6WorkspaceModelTestdrive;
@@ -561,10 +482,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 4507B83F1DB45D3B006A5871 /* Products */;
-					ProjectRef = 4507B83E1DB45D3B006A5871 /* Editor6DepPack.xcodeproj */;
-				},
-				{
 					ProductGroup = 459EE29C1DBAE17400A98670 /* Products */;
 					ProjectRef = 459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */;
 				},
@@ -582,55 +499,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		4507B8481DB45D3B006A5871 /* Flow.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Flow.framework;
-			remoteRef = 4507B8471DB45D3B006A5871 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4507B84A1DB45D3B006A5871 /* FSEventsUnofficialWrapper.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FSEventsUnofficialWrapper.framework;
-			remoteRef = 4507B8491DB45D3B006A5871 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4507B84C1DB45D3B006A5871 /* Reftable.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Reftable.framework;
-			remoteRef = 4507B84B1DB45D3B006A5871 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4507B84E1DB45D3B006A5871 /* BTree.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BTree.framework;
-			remoteRef = 4507B84D1DB45D3B006A5871 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4507B8501DB45D3B006A5871 /* Editor6DepPack.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Editor6DepPack.framework;
-			remoteRef = 4507B84F1DB45D3B006A5871 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4507B8521DB45D3B006A5871 /* Editor6DepPackTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = file;
-			path = Editor6DepPackTests.xctest;
-			remoteRef = 4507B8511DB45D3B006A5871 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		451D75C71DF87556008CFEC9 /* EonilFlow4.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EonilFlow4.framework;
-			remoteRef = 451D75C61DF87556008CFEC9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		45441EF31DB3EB4E00158711 /* LLDBWrapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -786,11 +654,6 @@
 			isa = PBXTargetDependency;
 			target = 45441ED51DB3EA0F00158711 /* Editor6WorkspaceModel */;
 			targetProxy = 45BBCF951DB548AA00F83573 /* PBXContainerItemProxy */;
-		};
-		45BBCF9B1DB548C100F83573 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Editor6DepPack;
-			targetProxy = 45BBCF9A1DB548C100F83573 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

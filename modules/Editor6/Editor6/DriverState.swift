@@ -64,7 +64,7 @@ extension DriverState {
 //}
 
 enum DriverMutation {
-    case workspaceUI(DictionaryMutation<WorkspaceID, (model: WorkspaceState, view: WorkspaceUIState)>)
+//    case workspaceUI(DictionaryMutation<WorkspaceID, (model: WorkspaceState, view: WorkspaceUIState)>)
     case currentWorkspaceID(WorkspaceID?)
     case mainMenu(MainMenuUI2State)
 }

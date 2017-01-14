@@ -7,72 +7,47 @@
 		<key>Editor6DepPack.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>OBJ_101</key>
+		<key>OBJ_105</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>OBJ_108</key>
+		<key>OBJ_112</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>OBJ_130</key>
+		<key>OBJ_134</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>OBJ_147</key>
+		<key>OBJ_142</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>OBJ_63</key>
+		<key>OBJ_161</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>OBJ_75</key>
+		<key>OBJ_67</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>OBJ_87</key>
+		<key>OBJ_79</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>______Target_BTree</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_Editor6DepPack</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_Editor6DepPackTests</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_FSEventsUnofficialWrapper</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_Flow</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>______Target_Reftable</key>
+		<key>OBJ_91</key>
 		<dict>
 			<key>primary</key>
 			<true/>
