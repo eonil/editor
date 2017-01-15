@@ -34,30 +34,25 @@ extension PcoOutgoingChannel {
 }
 
 private struct PcoMappedIncomingChannel<T>: PcoIncomingChannel {
-    private let recvImpl: (_ f: (T) -> ()) -> ()
-    init<CH>(underlyingChannel: CH, _ map: @escaping (CH.Signal) -> T) where CH: PcoIncomingChannel {
-        recvImpl = { f in
-            underlyingChannel.receive(with: { (s: CH.Signal) in
-                let derivedSignal = map(s)
-                f(derivedSignal)
-            })
-        }
+    private let recvImpl: () -> (T?)
+    private let mkitImpl: () -> AnyIterator<T>
+    init<CH>(underlyingChannel: CH, _ map: @escaping (CH.Signal) -> (T)) where CH: PcoIncomingChannel {
+        recvImpl = { underlyingChannel.receive().flatMap(map) }
+        mkitImpl = { AnyIterator { underlyingChannel.makeIterator().next().flatMap(map) } }
     }
-    func receive(with handler: (T) -> ()) {
-        recvImpl(handler)
+    func receive() -> T? {
+        return recvImpl()
+    }
+    func makeIterator() -> AnyIterator<T> {
+        return mkitImpl()
     }
 }
 private struct PcoMappedOutgoingChannel<T>: PcoOutgoingChannel {
-    private let sendImpl: (T) -> ()
-    private let closeImpl: () -> ()
-    init<CH>(underlyingChannel: CH, _ map: @escaping (T) -> CH.Signal) where CH: PcoOutgoingChannel {
-        sendImpl = { underlyingChannel.send(map($0)) }
-        closeImpl = { underlyingChannel.close() }
+    private let sendImpl: (T?) -> ()
+    init<CH>(underlyingChannel: CH, _ map: @escaping (T) -> (CH.Signal)) where CH: PcoOutgoingChannel {
+        sendImpl = { underlyingChannel.send($0.flatMap(map)) }
     }
-    func send(_ signal: T) {
+    func send(_ signal: T?) {
         sendImpl(signal)
-    }
-    func close() {
-        closeImpl()
     }
 }

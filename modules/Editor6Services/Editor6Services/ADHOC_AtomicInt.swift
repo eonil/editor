@@ -1,24 +1,24 @@
 //
-//  AtomicBool.swift
+//  ADHOC_AtomicInt.swift
 //  Editor6Services
 //
-//  Created by Hoon H. on 2017/01/14.
+//  Created by Hoon H. on 2017/01/15.
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
 import Foundation
 
-final class ADHOC_AtomicBool {
+final class ADHOC_AtomicInt {
     private let lock = NSLock()
-    private var value = false
+    private var value = Int(0)
     init() {
     }
-    init(_ newState: Bool) {
+    init(_ newState: Int) {
         state = newState
     }
-    var state: Bool {
+    var state: Int {
         get {
-            let returningValue: Bool
+            let returningValue: Int
             lock.lock()
             returningValue = value
             lock.unlock()

@@ -36,39 +36,44 @@ extension PcoOutgoingChannel {
 }
 
 private final class PcoBufferedIncomingChannel<T>: PcoIncomingChannel {
-    private let recvImpl: ((T) -> ()) -> ()
+    private let recvImpl: () -> (T?)
+    private let mkitImpl: () -> AnyIterator<T>
     init<CH>(underlyingChannel: CH, _ bufferedMap: @escaping (CH.Signal) -> ([T])) where CH: PcoIncomingChannel {
-        typealias S = CH.Signal
-        recvImpl = { f in
-            underlyingChannel.receive { (_ s: CH.Signal) in
-                for d in bufferedMap(s) {
-                    f(d)
-                }
+        var buf = [T]()
+        let process = { (_ f: () -> CH.Signal?) -> T? in
+            while buf.count == 0 {
+                guard let s = f() else { return nil } // End of stream.
+                let ds = bufferedMap(s)
+                buf.append(contentsOf: ds)
             }
+            return buf.removeFirst()
         }
+        recvImpl = { process(underlyingChannel.receive) }
+        mkitImpl = { AnyIterator { process(underlyingChannel.makeIterator().next) } }
     }
-    func receive(with handler: (T) -> ()) {
-        recvImpl(handler)
+    func receive() -> T? {
+        return recvImpl()
+    }
+    func makeIterator() -> AnyIterator<T> {
+        return mkitImpl()
     }
 }
 
 private final class PcoBufferedOutgoingChannel<T>: PcoOutgoingChannel {
-    private let sendImpl: (T) -> ()
-    private let closeImpl: () -> ()
+    private let sendImpl: (T?) -> ()
     init<CH>(underlyingChannel: CH, _ bufferedMap: @escaping (T) -> ([CH.Signal])) where CH: PcoOutgoingChannel {
         sendImpl = { s in
-            for d in bufferedMap(s) {
-                underlyingChannel.send(d)
+            if let s = s {
+                for d in bufferedMap(s) {
+                    underlyingChannel.send(d)
+                }
+            }
+            else {
+                underlyingChannel.send(nil)
             }
         }
-        closeImpl = {
-            underlyingChannel.close()
-        }
     }
-    func send(_ s: T) {
+    func send(_ s: T?) {
         sendImpl(s)
-    }
-    func close() {
-        closeImpl()
     }
 }

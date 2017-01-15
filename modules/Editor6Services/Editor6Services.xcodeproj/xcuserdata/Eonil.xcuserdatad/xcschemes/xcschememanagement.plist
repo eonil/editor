@@ -14,9 +14,19 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>Editor6UnitTestdrive.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>4517CF2E1E2AECA600C43464</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>456F8B881E2A867A00F7EC4C</key>
 		<dict>
 			<key>primary</key>

@@ -44,7 +44,7 @@ enum CargoProcess {
                 return .kill
             }
         }
-        let event1 = event.bufferedMap { (s: LineBashProcess.Event) -> [Event] in
+        let event1 = event.bufferedMap { (s: LineBashProcess.Event) -> ([Event]) in
             switch s {
             case .stdout(let line):
                 return [.ADHOC_stdoutLine(line)]

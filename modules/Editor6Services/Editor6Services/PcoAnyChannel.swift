@@ -7,52 +7,44 @@
 //
 
 public struct PcoAnyChannel<T>: PcoChannel {
-    private let sendImpl: (T) -> ()
-    private let recvImpl: ((T) -> ()) -> ()
-    private let closeImpl: () -> ()
+    private let sendImpl: (T?) -> ()
+    private let recvImpl: () -> (T?)
+    private let mkitImpl: () -> AnyIterator<T>
     public init<CH>(_ source: CH) where CH: PcoChannel, CH.Signal == T, CH.Signal == T {
         sendImpl = { source.send($0) }
-        recvImpl = { f in
-            source.receive { s in
-                f(s)
-            }
-        }
-        closeImpl = { source.close() }
+        recvImpl = { source.receive() }
+        mkitImpl = { source.makeIterator() }
     }
-    public func receive(with handler: (T) -> ()) {
-        recvImpl(handler)
+    public func receive() -> T? {
+        return recvImpl()
     }
-    public func send(_ signal: T) {
+    public func send(_ signal: T?) {
         sendImpl(signal)
     }
-    public func close() {
-        closeImpl()
+    public func makeIterator() -> AnyIterator<T> {
+        return mkitImpl()
     }
 }
 public struct PcoAnyIncomingChannel<T>: PcoIncomingChannel {
-    private let recvImpl: ((T) -> ()) -> ()
+    private let recvImpl: () -> (T?)
+    private let mkitImpl: () -> AnyIterator<T>
     public init<CH>(_ source: CH) where CH: PcoIncomingChannel, CH.Signal == T {
-        recvImpl = { f in
-            source.receive { s in
-                f(s)
-            }
-        }
+        recvImpl = { source.receive() }
+        mkitImpl = { source.makeIterator() }
     }
-    public func receive(with handler: (T) -> ()) {
-        recvImpl(handler)
+    public func receive() -> T? {
+        return recvImpl()
+    }
+    public func makeIterator() -> AnyIterator<T> {
+        return mkitImpl()
     }
 }
 public struct PcoAnyOutgoingChannel<T>: PcoOutgoingChannel {
-    private let sendImpl: (T) -> ()
-    private let closeImpl: () -> ()
+    private let sendImpl: (T?) -> ()
     public init<CH>(_ source: CH) where CH: PcoOutgoingChannel, CH.Signal == T {
         sendImpl = { source.send($0) }
-        closeImpl = { source.close() }
     }
-    public func send(_ signal: T) {
+    public func send(_ signal: T?) {
         sendImpl(signal)
-    }
-    public func close() {
-        closeImpl()
     }
 }

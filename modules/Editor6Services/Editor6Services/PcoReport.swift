@@ -9,7 +9,7 @@
 import Foundation
 
 enum PcoReport {
-    case unclosedChannelOnDeinit(AnyObject)
+//    case unclosedChannelOnDeinit(AnyObject)
 
     static var delegate: (PcoReport) -> () = handlePcoReportDefault
     static func dispatch(_ r: PcoReport) {
@@ -18,8 +18,8 @@ enum PcoReport {
 }
 
 private func handlePcoReportDefault(_ r: PcoReport) {
-    switch r {
-    case .unclosedChannelOnDeinit(let ch):
-        fatalError("Unclosed channel discovered: \(ch)")
-    }
+//    switch r {
+////    case .unclosedChannelOnDeinit(let ch):
+////        fatalError("Unclosed channel discovered: \(ch)")
+//    }
 }

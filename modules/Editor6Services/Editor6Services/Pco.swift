@@ -46,7 +46,7 @@ enum Pco {
     static func spawn<I,O>(panic: @escaping (Panic) -> (), _ body: @escaping (_ incoming: PcoAnyIncomingChannel<I>, _ outgoing: PcoAnyOutgoingChannel<O>) throws -> ()) -> PcoIOChannelSet<I,O> {
         let incoming = PcoGCDChannel<I>()
         let outgoing = PcoGCDChannel<O>()
-        GCDActor.spawn({ (_ ss: GCDActorSelf) in
+        Thread.detachNewThread {
             do {
                 try body(PcoAnyIncomingChannel(incoming), PcoAnyOutgoingChannel(outgoing))
             }
@@ -55,7 +55,17 @@ enum Pco {
             }
 //            assert(incoming.isClosed == true, "Function `body` SHOULD NEVER be returned before `incoming` channel to be closed.")
 //            assert(outgoing.isClosed == true, "Function `body` MUST close `outgoing` channel before return.")
-        })
+        }
+//        GCDActor.spawn({ (_ ss: GCDActorSelf) in
+//            do {
+//                try body(PcoAnyIncomingChannel(incoming), PcoAnyOutgoingChannel(outgoing))
+//            }
+//            catch let e {
+//                panic(.error(e))
+//            }
+//            assert(incoming.isClosed == true, "Function `body` SHOULD NEVER be returned before `incoming` channel to be closed.")
+//            assert(outgoing.isClosed == true, "Function `body` MUST close `outgoing` channel before return.")
+//        })
         return PcoIOChannelSet(PcoAnyOutgoingChannel(incoming), PcoAnyIncomingChannel(outgoing))
     }
     ///

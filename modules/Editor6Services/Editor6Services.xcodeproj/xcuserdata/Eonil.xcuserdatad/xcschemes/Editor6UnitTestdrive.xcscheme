@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45C2828E1E103C1300BE84AF"
-               BuildableName = "Editor6Services.framework"
-               BlueprintName = "Editor6Services"
+               BlueprintIdentifier = "4517CF2E1E2AECA600C43464"
+               BuildableName = "Editor6UnitTestdrive"
+               BlueprintName = "Editor6UnitTestdrive"
                ReferencedContainer = "container:Editor6Services.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,27 +26,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES"
-      enableThreadSanitizer = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "456F8B881E2A867A00F7EC4C"
-               BuildableName = "Editor6ServicesTests.xctest"
-               BlueprintName = "Editor6ServicesTests"
-               ReferencedContainer = "container:Editor6Services.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45C2828E1E103C1300BE84AF"
-            BuildableName = "Editor6Services.framework"
-            BlueprintName = "Editor6Services"
+            BlueprintIdentifier = "4517CF2E1E2AECA600C43464"
+            BuildableName = "Editor6UnitTestdrive"
+            BlueprintName = "Editor6UnitTestdrive"
             ReferencedContainer = "container:Editor6Services.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -61,18 +49,18 @@
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      stopOnEveryThreadSanitizerIssue = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45C2828E1E103C1300BE84AF"
-            BuildableName = "Editor6Services.framework"
-            BlueprintName = "Editor6Services"
+            BlueprintIdentifier = "4517CF2E1E2AECA600C43464"
+            BuildableName = "Editor6UnitTestdrive"
+            BlueprintName = "Editor6UnitTestdrive"
             ReferencedContainer = "container:Editor6Services.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -82,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45C2828E1E103C1300BE84AF"
-            BuildableName = "Editor6Services.framework"
-            BlueprintName = "Editor6Services"
+            BlueprintIdentifier = "4517CF2E1E2AECA600C43464"
+            BuildableName = "Editor6UnitTestdrive"
+            BlueprintName = "Editor6UnitTestdrive"
             ReferencedContainer = "container:Editor6Services.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

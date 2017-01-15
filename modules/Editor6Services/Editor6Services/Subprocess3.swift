@@ -66,8 +66,8 @@ enum Subprocess3 {
             }
             proc.launch()
 
-            command.receive {
-                switch $0 {
+            for s in command {
+                switch s {
                 case .stdin(let data):
                     stdinPipe.fileHandleForWriting.write(data)
                 case .terminate:
@@ -79,8 +79,7 @@ enum Subprocess3 {
                     // NOSHIP: Confirm whether this to make a termination event.
                 }
             }
-
-            event.close()
+            event.send(nil)
         }
     }
 }
@@ -129,14 +128,14 @@ extension Subprocess3 {
         var output = Data()
         var error = Data()
         command.send(.stdin(input))
-        event.receive {
-            switch $0 {
+        for s in event {
+            switch s {
             case .stdout(let data):
                 output.append(data)
             case .stderr(let data):
                 error.append(data)
             case .quit(_):
-                command.close()
+                command.send(nil)
             }
         }
         return (output, error)
