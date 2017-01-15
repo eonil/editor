@@ -8,7 +8,7 @@
 
 import Dispatch
 import XCTest
-import EonilGCDActor
+import EonilPco
 @testable import Editor6Services
 
 class Editor6ServicesTests: XCTestCase {
@@ -22,7 +22,42 @@ class Editor6ServicesTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+
+    func testCargoInit() {
+        let DIR_NAME = "____test_project1"
+        print(LineBashProcess.run("pwd"))
+        print(LineBashProcess.run("rmdir ./\(DIR_NAME)"))
+        print(LineBashProcess.run("mkdir ./\(DIR_NAME)"))
+        print(LineBashProcess.run(
+            "cd ./\(DIR_NAME)",
+            "pwd",
+            "cargo init",
+            "cargo build",
+            "open ."
+            ))
+    }
+    func testLineBash1() {
+        let exp = expectation(description: "done")
+        let (cch, ech) = LineBashProcess.spawn()
+        Thread.detachNewThread {
+            cch.send(.stdin("pwd"))
+            cch.send(LineBashProcess.Command.stdin("echo AAA"))
+            cch.send(LineBashProcess.Command.stdin("exit"))
+            let pwd = ech.receive()!
+            print(pwd)
+            for e in ech {
+                switch e {
+                case .stdout(let line):
+                    XCTAssert(line == "AAA")
+                default:
+                    break
+                }
+            }
+            cch.send(nil)
+            exp.fulfill()
+        }
+        waitForExpectations(timeout: 10)
+    }
 }
 
 extension Editor6ServicesTests {

@@ -8,6 +8,7 @@
 
 import Foundation
 
+///
 /// View controller for main menu.
 ///
 /// This is a simple view-controller, and does not
@@ -64,7 +65,7 @@ public final class MainMenuUI2Controller {
             m.keyEquivalent = ""
             guard let id = m.id else { return }
             guard let comb = localState.keyEquivalentMappings[id] else { return }
-            m.keyEquivalent = comb.keyEquivelent
+            m.keyEquivalent = String(comb.keyEquivelent)
             m.keyEquivalentModifierMask = comb.keyEquivalentModifierMask
         }
     }

@@ -10,6 +10,7 @@
     "843C63D4373CDFCC6DD00FE91A96228349AFB08E" : 9223372036854775807,
     "EF756C69F254CD0C22918CA6EACA0E6F835DB0F5" : 9223372036854775807,
     "6C7471C92E88044E76FD4030CC9A053817FA9390" : 9223372036854775807,
+    "540A6E0D17A72ABE15696C5C0C4812192B593E57" : 9223372036854775807,
     "D14DA015EEC74DE9B8B93F09005745F7B4080000" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "B6AAC48E-3D4A-4C66-98E4-989B4E4CEE65",
@@ -20,6 +21,7 @@
     "843C63D4373CDFCC6DD00FE91A96228349AFB08E" : "editor6-trial\/submodules\/toolbox.swift\/",
     "EF756C69F254CD0C22918CA6EACA0E6F835DB0F5" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/Flow-0.0.3\/",
     "6C7471C92E88044E76FD4030CC9A053817FA9390" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/FSEventsUnofficialWrapper-0.0.0\/",
+    "540A6E0D17A72ABE15696C5C0C4812192B593E57" : "editor6-trial\/submodules\/pco.swift\/",
     "D14DA015EEC74DE9B8B93F09005745F7B4080000" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/EonilFlow4-0.0.4\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "Editor6Services",
@@ -30,6 +32,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/editor",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4635F48624E6C9FA8E74FC196050F32737C9F216"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/pco.swift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "540A6E0D17A72ABE15696C5C0C4812192B593E57"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/fsevents-unofficial-wrapper.git",

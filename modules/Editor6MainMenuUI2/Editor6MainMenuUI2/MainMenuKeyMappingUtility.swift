@@ -31,6 +31,6 @@ private let control = NSEventModifierFlags.control
 private func + (_ a: NSEventModifierFlags, _ b: NSEventModifierFlags) -> NSEventModifierFlags {
     return NSEventModifierFlags([a, b])
 }
-private func + (_ a: NSEventModifierFlags, _ b: String) -> MainMenuUI2State.KeyEquivalentCombination {
+private func + (_ a: NSEventModifierFlags, _ b: Character) -> MainMenuUI2State.KeyEquivalentCombination {
     return (a, b)
 }

@@ -8,6 +8,7 @@
 
 import Foundation
 import AppKit
+import Editor6Common
 import Editor6WorkspaceUI
 
 /// Treat `NSDocument` methods and events as user input.
@@ -29,7 +30,7 @@ final class WorkspaceDocument: NSDocument {
     deinit {
         Driver.queue(.terminate(getID()))
         workspaceView.delegate(to: ignore)
-        Swift.print("closed")
+        debugLog("closed")
     }
 
     func process(message: DriverMessage) {

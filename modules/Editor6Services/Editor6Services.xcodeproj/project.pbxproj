@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4517CF9C1E2B999000C43464 /* EonilPco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4517CF951E2B998A00C43464 /* EonilPco.framework */; };
 		456F8B711E2A7FBF00F7EC4C /* CargoOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */; };
 		456F8B801E2A85F800F7EC4C /* RustCompilerDataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */; };
 		456F8B821E2A861200F7EC4C /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B811E2A861200F7EC4C /* Box.swift */; };
@@ -32,6 +33,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4517CF941E2B998A00C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CF861E2B998900C43464 /* EonilPco.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_18;
+			remoteInfo = EonilPco;
+		};
+		4517CF961E2B998A00C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CF861E2B998900C43464 /* EonilPco.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_20;
+			remoteInfo = EonilPcoTests;
+		};
 		456F8B8F1E2A867A00F7EC4C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45C282861E103C1300BE84AF /* Project object */;
@@ -133,6 +148,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4517CF861E2B998900C43464 /* EonilPco.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilPco.xcodeproj; path = ../../submodules/pco.swift/EonilPco.xcodeproj; sourceTree = "<group>"; };
 		456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoOutputParser.swift; sourceTree = "<group>"; };
 		456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerDataStructures.swift; sourceTree = "<group>"; };
 		456F8B811E2A861200F7EC4C /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
@@ -176,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4517CF9C1E2B999000C43464 /* EonilPco.framework in Frameworks */,
 				456F8B941E2A86B800F7EC4C /* EonilGCDActor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,6 +200,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4517CF871E2B998900C43464 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4517CF951E2B998A00C43464 /* EonilPco.framework */,
+				4517CF971E2B998A00C43464 /* pco.swiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		456F8B8A1E2A867A00F7EC4C /* Editor6ServicesTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -259,6 +285,7 @@
 		45C2829A1E103C2900BE84AF /* (deps) */ = {
 			isa = PBXGroup;
 			children = (
+				4517CF861E2B998900C43464 /* EonilPco.xcodeproj */,
 				45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */,
 				45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */,
 				45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */,
@@ -423,6 +450,10 @@
 					ProjectRef = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
 				},
 				{
+					ProductGroup = 4517CF871E2B998900C43464 /* Products */;
+					ProjectRef = 4517CF861E2B998900C43464 /* EonilPco.xcodeproj */;
+				},
+				{
 					ProductGroup = 45C282A21E103C3900BE84AF /* Products */;
 					ProjectRef = 45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */;
 				},
@@ -436,6 +467,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4517CF951E2B998A00C43464 /* EonilPco.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilPco.framework;
+			remoteRef = 4517CF941E2B998A00C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4517CF971E2B998A00C43464 /* pco.swiftTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = pco.swiftTests.xctest;
+			remoteRef = 4517CF961E2B998A00C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45B6A0201E29FC59005D072B /* Flow.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4517CFCA1E2BAEB500C43464 /* EonilPco.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4517CFC71E2BAEA200C43464 /* EonilPco.framework */; };
+		4517CFCB1E2BAEB500C43464 /* EonilPco.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4517CFC71E2BAEA200C43464 /* EonilPco.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4517CFE31E2BAED200C43464 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4517CFD81E2BAECC00C43464 /* LLDBWrapper.framework */; };
+		4517CFE41E2BAED200C43464 /* LLDBWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4517CFD81E2BAECC00C43464 /* LLDBWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45185E431DA8E8EA00C4D86D /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45185E421DA8E8EA00C4D86D /* Driver.swift */; };
 		45185E4A1DA8E8EA00C4D86D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45185E491DA8E8EA00C4D86D /* Assets.xcassets */; };
 		45185E791DA8F44300C4D86D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45185E781DA8F44300C4D86D /* main.swift */; };
@@ -42,6 +46,83 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4517CFC11E2BAEA200C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 456F8B891E2A867A00F7EC4C;
+			remoteInfo = Editor6ServicesTests;
+		};
+		4517CFC61E2BAEA200C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFB31E2BAEA200C43464 /* EonilPco.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_18;
+			remoteInfo = EonilPco;
+		};
+		4517CFC81E2BAEA200C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFB31E2BAEA200C43464 /* EonilPco.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_20;
+			remoteInfo = EonilPcoTests;
+		};
+		4517CFCC1E2BAEB500C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFB31E2BAEA200C43464 /* EonilPco.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_21;
+			remoteInfo = EonilPco;
+		};
+		4517CFD71E2BAECC00C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45A0FB76199FBA9C0020D59D;
+			remoteInfo = LLDBWrapper;
+		};
+		4517CFD91E2BAECC00C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C993271A6E5D4A00BA2BC4;
+			remoteInfo = Workbench1;
+		};
+		4517CFDB1E2BAECC00C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C9934E1A6E5DF700BA2BC4;
+			remoteInfo = SampleProgram3;
+		};
+		4517CFDD1E2BAECC00C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45AED2C51A751B35002F83AB;
+			remoteInfo = SampleProgram4;
+		};
+		4517CFDF1E2BAECC00C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45C511511A7954F20055DC1D;
+			remoteInfo = Workbench2;
+		};
+		4517CFE11E2BAECC00C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45E5EF211A7E6817009967D2;
+			remoteInfo = TestdriveApp;
+		};
+		4517CFE51E2BAED200C43464 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45A0FB75199FBA9C0020D59D;
+			remoteInfo = LLDBWrapper;
+		};
 		4566CEA51DADAAB200EA2A0C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4566CEA01DADAAB100EA2A0C /* Editor6FileTreeUI.xcodeproj */;
@@ -212,7 +293,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4517CFE41E2BAED200C43464 /* LLDBWrapper.framework in Embed Frameworks */,
 				4566CEB01DADAAC700EA2A0C /* Editor6Common.framework in Embed Frameworks */,
+				4517CFCB1E2BAEB500C43464 /* EonilPco.framework in Embed Frameworks */,
 				45B69FA61E16C31F005D072B /* Editor6DepPack.framework in Embed Frameworks */,
 				45B6A03C1E29FD05005D072B /* Editor6Services.framework in Embed Frameworks */,
 				45E0851F1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Embed Frameworks */,
@@ -225,6 +308,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4517CFB31E2BAEA200C43464 /* EonilPco.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilPco.xcodeproj; path = ../../submodules/pco.swift/EonilPco.xcodeproj; sourceTree = "<group>"; };
+		4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
 		45185E3F1DA8E8EA00C4D86D /* Editor6.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor6.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45185E421DA8E8EA00C4D86D /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		45185E491DA8E8EA00C4D86D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -260,7 +345,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4517CFE31E2BAED200C43464 /* LLDBWrapper.framework in Frameworks */,
 				4566CEAF1DADAAC700EA2A0C /* Editor6Common.framework in Frameworks */,
+				4517CFCA1E2BAEB500C43464 /* EonilPco.framework in Frameworks */,
 				45B69FA51E16C31F005D072B /* Editor6DepPack.framework in Frameworks */,
 				45B6A03B1E29FD05005D072B /* Editor6Services.framework in Frameworks */,
 				45E0851E1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Frameworks */,
@@ -272,6 +359,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4517CFB41E2BAEA200C43464 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4517CFC71E2BAEA200C43464 /* EonilPco.framework */,
+				4517CFC91E2BAEA200C43464 /* pco.swiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4517CFCF1E2BAECC00C43464 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4517CFD81E2BAECC00C43464 /* LLDBWrapper.framework */,
+				4517CFDA1E2BAECC00C43464 /* Workbench1.app */,
+				4517CFDC1E2BAECC00C43464 /* SampleProgram3 */,
+				4517CFDE1E2BAECC00C43464 /* SampleProgram4.app */,
+				4517CFE01E2BAECC00C43464 /* Workbench2.app */,
+				4517CFE21E2BAECC00C43464 /* TestdriveApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45185E361DA8E8EA00C4D86D = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +431,8 @@
 				45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */,
 				4566CEA01DADAAB100EA2A0C /* Editor6FileTreeUI.xcodeproj */,
 				4566CEA91DADAAB400EA2A0C /* Editor6Common.xcodeproj */,
+				4517CFB31E2BAEA200C43464 /* EonilPco.xcodeproj */,
+				4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */,
 			);
 			name = "(deps)";
 			sourceTree = "<group>";
@@ -384,6 +495,7 @@
 			isa = PBXGroup;
 			children = (
 				45B6A03A1E29FCFD005D072B /* Editor6Services.framework */,
+				4517CFC21E2BAEA200C43464 /* Editor6ServicesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -418,6 +530,8 @@
 				45ABC1B31DCDAD68006EFE1F /* PBXTargetDependency */,
 				45B69FA81E16C31F005D072B /* PBXTargetDependency */,
 				45B6A03E1E29FD05005D072B /* PBXTargetDependency */,
+				4517CFCD1E2BAEB500C43464 /* PBXTargetDependency */,
+				4517CFE61E2BAED200C43464 /* PBXTargetDependency */,
 			);
 			name = Editor6;
 			productName = Editor6;
@@ -477,6 +591,14 @@
 					ProductGroup = 45E085161DB3D1D500C5428D /* Products */;
 					ProjectRef = 45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */;
 				},
+				{
+					ProductGroup = 4517CFB41E2BAEA200C43464 /* Products */;
+					ProjectRef = 4517CFB31E2BAEA200C43464 /* EonilPco.xcodeproj */;
+				},
+				{
+					ProductGroup = 4517CFCF1E2BAECC00C43464 /* Products */;
+					ProjectRef = 4517CFCE1E2BAECC00C43464 /* LLDBWrapper.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -486,6 +608,69 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4517CFC21E2BAEA200C43464 /* Editor6ServicesTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Editor6ServicesTests.xctest;
+			remoteRef = 4517CFC11E2BAEA200C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4517CFC71E2BAEA200C43464 /* EonilPco.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilPco.framework;
+			remoteRef = 4517CFC61E2BAEA200C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4517CFC91E2BAEA200C43464 /* pco.swiftTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = pco.swiftTests.xctest;
+			remoteRef = 4517CFC81E2BAEA200C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4517CFD81E2BAECC00C43464 /* LLDBWrapper.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LLDBWrapper.framework;
+			remoteRef = 4517CFD71E2BAECC00C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4517CFDA1E2BAECC00C43464 /* Workbench1.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench1.app;
+			remoteRef = 4517CFD91E2BAECC00C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4517CFDC1E2BAECC00C43464 /* SampleProgram3 */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = SampleProgram3;
+			remoteRef = 4517CFDB1E2BAECC00C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4517CFDE1E2BAECC00C43464 /* SampleProgram4.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = SampleProgram4.app;
+			remoteRef = 4517CFDD1E2BAECC00C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4517CFE01E2BAECC00C43464 /* Workbench2.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Workbench2.app;
+			remoteRef = 4517CFDF1E2BAECC00C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4517CFE21E2BAECC00C43464 /* TestdriveApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = TestdriveApp.app;
+			remoteRef = 4517CFE11E2BAECC00C43464 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4566CEA61DADAAB200EA2A0C /* Editor6FileTreeUI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -648,6 +833,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4517CFCD1E2BAEB500C43464 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EonilPco;
+			targetProxy = 4517CFCC1E2BAEB500C43464 /* PBXContainerItemProxy */;
+		};
+		4517CFE61E2BAED200C43464 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LLDBWrapper;
+			targetProxy = 4517CFE51E2BAED200C43464 /* PBXContainerItemProxy */;
+		};
 		4566CEB21DADAAC700EA2A0C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Editor6Common;

@@ -12,6 +12,5 @@ struct CargoOutputParser {
     init() {
     }
     func push(_ line: String) {
-
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4517CFE81E2BB15F00C43464 /* debugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4517CFE71E2BB15F00C43464 /* debugLog.swift */; };
 		45185EDA1DA93A0D00C4D86D /* Editor6Common.h in Headers */ = {isa = PBXBuildFile; fileRef = 45185ED81DA93A0D00C4D86D /* Editor6Common.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		456B81C91DAA0D3B006D7C49 /* WorkspaceTreeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B81C81DAA0D3B006D7C49 /* WorkspaceTreeState.swift */; };
 		456FDD5C1DAA2DD500F8003A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD5B1DAA2DD500F8003A /* Tree.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4517CFE71E2BB15F00C43464 /* debugLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = debugLog.swift; sourceTree = "<group>"; };
 		45185ED51DA93A0D00C4D86D /* Editor6Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45185ED81DA93A0D00C4D86D /* Editor6Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6Common.h; sourceTree = "<group>"; };
 		45185ED91DA93A0D00C4D86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */,
 				45ABC1D01DCDB788006EFE1F /* Report.swift */,
 				45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */,
+				4517CFE71E2BB15F00C43464 /* debugLog.swift */,
 				45ABC1D21DCDB8BD006EFE1F /* noop.swift */,
 			);
 			path = Editor6Common;
@@ -270,6 +273,7 @@
 				456B81C91DAA0D3B006D7C49 /* WorkspaceTreeState.swift in Sources */,
 				456FDDA21DAA461300F8003A /* Editor6CommonView.swift in Sources */,
 				45EF85331DB22DCB00B320B5 /* Editor6CommonControl.swift in Sources */,
+				4517CFE81E2BB15F00C43464 /* debugLog.swift in Sources */,
 				456FDD5C1DAA2DD500F8003A /* Tree.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

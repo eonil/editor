@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EonilPco
 
 enum Subprocess3 {
     enum Command {
@@ -63,9 +64,11 @@ enum Subprocess3 {
             proc.terminationHandler = { proc in
                 let c = proc.terminationStatus
                 event.send(.quit(.terminate(exitCode: c)))
+                event.send(nil)
             }
             proc.launch()
 
+            LOOP:
             for s in command {
                 switch s {
                 case .stdin(let data):
@@ -73,10 +76,12 @@ enum Subprocess3 {
                 case .terminate:
                     proc.terminate()
                     // NOSHIP: Confirm whether this to make a termination event.
+                    break LOOP
                 case .kill:
                     let pid = proc.processIdentifier
                     kill(pid, SIGKILL)
                     // NOSHIP: Confirm whether this to make a termination event.
+                    break LOOP
                 }
             }
             event.send(nil)

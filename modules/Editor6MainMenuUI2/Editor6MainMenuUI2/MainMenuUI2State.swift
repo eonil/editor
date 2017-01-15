@@ -11,7 +11,7 @@ import EonilToolbox
 import Editor6Common
 
 public struct MainMenuUI2State {
-    public typealias KeyEquivalentCombination = (keyEquivalentModifierMask: NSEventModifierFlags, keyEquivelent: String)
+    public typealias KeyEquivalentCombination = (keyEquivalentModifierMask: NSEventModifierFlags, keyEquivelent: Character)
     public typealias KeyEquivalentMappings = [MainMenuUI2ItemID: KeyEquivalentCombination]
 
     public var keyEquivalentMappings = MainMenuKeyMappingUtility.makeDefaultKeyMapping()

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EonilPco
 
 ///
 /// Runs a Bash by line unit in a subprocess.
@@ -72,40 +73,30 @@ enum LineBashProcess {
         return (command1, event1)
     }
 
-//    /// Runs a Bash session synchronously.
-//    ///
-//    /// This function performs these operations synchronously;
-//    /// 1. Spawn a subprocess which runs Bash.
-//    /// 2. Push supplied `input` into the Bash subprocess' STDIN.
-//    /// 3. Wait until the Bash exits.
-//    /// 4. Collect STDOUT and STDERR and return.
-//    ///
-//    /// - Warning:
-//    ///     Configure your `input` to guarantee the Bash to exit eventually.
-//    ///     Otherwise, this function won't return forever.
-//    ///
-//    /// - Parameter input:
-//    ///     A byte array which will be passed to Bash's STDIN.
-//    ///     This supposed to be a command lines with ending new-line
-//    ///     characters. This also can be a true binary data if your
-//    ///     Bash session is expecting binary data.
-//    ///
-//    /// - Returns:
-//    ///     A tuple of STDOUT and STDERR collected during running of Bash.
-//    ///
-//    static func run(_ input: Data) -> (output: Data, error: Data) {
-//        let (command, event) = spawn()
-//        var output = Data()
-//        command.send(.stdin(input))
-//        event.receive {
-//            switch $0 {
-//            case .stdout(let data):
-//                output.append(data)
-//            case .terminate:
-//                command.close()
-//            }
-//        }
-//        error.receive(with: <#T##(Error) -> ()#>)
-//        return output
-//    }
+    ///
+    /// Executes a command as a line.
+    ///
+    @discardableResult
+    static func run(_ inputLines: String...) -> (exitReason: Subprocess3.ExitReason?, outputLines: [String], errorLines: [String]) {
+        let (cch, ech) = spawn()
+        for line in inputLines {
+            cch.send(.stdin(line))
+        }
+        cch.send(.stdin("exit;"))
+        var outputLines = [String]()
+        var errorLines = [String]()
+        var exitReason = Optional<Subprocess3.ExitReason>.none
+        for e in ech {
+            switch e {
+            case .stdout(let line):
+                outputLines.append(line)
+            case .stderr(let line):
+                errorLines.append(line)
+            case .quit(let reason):
+                exitReason = reason
+            }
+        }
+        return (exitReason, outputLines, errorLines)
+        // Subprocess event channel has been closed unexpectedly.
+    }
 }

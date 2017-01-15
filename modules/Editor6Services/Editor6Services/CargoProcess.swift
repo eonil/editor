@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EonilPco
 
 enum CargoProcess {
     enum Command {
@@ -26,7 +27,7 @@ enum CargoProcess {
         case complete
     }
     static func spawnInit(location: String) -> PcoIOChannelSet<Command,Event> {
-        return spawn(commands: ["cd \(location)", "cargo new"])
+        return spawn(commands: ["cd \(location)", "cargo init"])
     }
     static func spawnBuild(location: String) -> PcoIOChannelSet<Command,Event> {
         return spawn(commands: ["cd \(location)", "cargo build"])
