@@ -14,7 +14,6 @@
 		456F8B841E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B831E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift */; };
 		456F8B8C1E2A867A00F7EC4C /* Editor6ServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */; };
 		456F8B8E1E2A867A00F7EC4C /* Editor6Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C2828F1E103C1300BE84AF /* Editor6Services.framework */; };
-		456F8B941E2A86B800F7EC4C /* EonilGCDActor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B6A02A1E29FC59005D072B /* EonilGCDActor.framework */; };
 		459CCC321E2A6F97005903BF /* CargoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CCC311E2A6F97005903BF /* CargoProcess.swift */; };
 		45B6A0321E29FC7C005D072B /* LineBashProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0311E29FC7C005D072B /* LineBashProcess.swift */; };
 		45B6A0531E2A2191005D072B /* Subprocess3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0521E2A2191005D072B /* Subprocess3.swift */; };
@@ -53,62 +52,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 45C2828E1E103C1300BE84AF;
 			remoteInfo = Editor6Services;
-		};
-		45B6A01F1E29FC59005D072B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_59;
-			remoteInfo = Flow;
-		};
-		45B6A0211E29FC59005D072B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_60;
-			remoteInfo = EonilFlow4;
-		};
-		45B6A0231E29FC59005D072B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_61;
-			remoteInfo = FSEventsUnofficialWrapper;
-		};
-		45B6A0251E29FC59005D072B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_62;
-			remoteInfo = Reftable;
-		};
-		45B6A0271E29FC59005D072B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_63;
-			remoteInfo = BTree;
-		};
-		45B6A0291E29FC59005D072B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_64;
-			remoteInfo = EonilGCDActor;
-		};
-		45B6A02B1E29FC59005D072B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_65;
-			remoteInfo = Editor6DepPack;
-		};
-		45B6A02D1E29FC59005D072B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_66;
-			remoteInfo = Editor6DepPackTests;
 		};
 		45C2829F1E103C3100BE84AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -158,7 +101,6 @@
 		456F8B8D1E2A867A00F7EC4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		459CCC311E2A6F97005903BF /* CargoProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoProcess.swift; sourceTree = "<group>"; };
 		45B6A00D1E29FC2C005D072B /* EonilGCDActor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EonilGCDActor.framework; path = "../../../../Temp/Xcode/Derivations/Editor6-bxvqrxpvvdnoslfclhjasudjnkut/Build/Products/Debug/EonilGCDActor.framework"; sourceTree = "<group>"; };
-		45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6DepPack.xcodeproj; path = ../../packages/Editor6DepPack/Editor6DepPack.xcodeproj; sourceTree = "<group>"; };
 		45B6A0311E29FC7C005D072B /* LineBashProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineBashProcess.swift; sourceTree = "<group>"; };
 		45B6A0521E2A2191005D072B /* Subprocess3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess3.swift; sourceTree = "<group>"; };
 		45C2828F1E103C1300BE84AF /* Editor6Services.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6Services.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,7 +135,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4517CF9C1E2B999000C43464 /* EonilPco.framework in Frameworks */,
-				456F8B941E2A86B800F7EC4C /* EonilGCDActor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,21 +165,6 @@
 				45B6A00D1E29FC2C005D072B /* EonilGCDActor.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		45B6A0151E29FC58005D072B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45B6A0201E29FC59005D072B /* Flow.framework */,
-				45B6A0221E29FC59005D072B /* EonilFlow4.framework */,
-				45B6A0241E29FC59005D072B /* FSEventsUnofficialWrapper.framework */,
-				45B6A0261E29FC59005D072B /* Reftable.framework */,
-				45B6A0281E29FC59005D072B /* BTree.framework */,
-				45B6A02A1E29FC59005D072B /* EonilGCDActor.framework */,
-				45B6A02C1E29FC59005D072B /* Editor6DepPack.framework */,
-				45B6A02E1E29FC59005D072B /* Editor6DepPackTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		45C282851E103C1300BE84AF = {
@@ -286,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				4517CF861E2B998900C43464 /* EonilPco.xcodeproj */,
-				45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */,
 				45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */,
 				45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */,
 			);
@@ -446,10 +371,6 @@
 					ProjectRef = 45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */;
 				},
 				{
-					ProductGroup = 45B6A0151E29FC58005D072B /* Products */;
-					ProjectRef = 45B6A0141E29FC58005D072B /* Editor6DepPack.xcodeproj */;
-				},
-				{
 					ProductGroup = 4517CF871E2B998900C43464 /* Products */;
 					ProjectRef = 4517CF861E2B998900C43464 /* EonilPco.xcodeproj */;
 				},
@@ -479,62 +400,6 @@
 			fileType = wrapper.cfbundle;
 			path = pco.swiftTests.xctest;
 			remoteRef = 4517CF961E2B998A00C43464 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B6A0201E29FC59005D072B /* Flow.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Flow.framework;
-			remoteRef = 45B6A01F1E29FC59005D072B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B6A0221E29FC59005D072B /* EonilFlow4.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EonilFlow4.framework;
-			remoteRef = 45B6A0211E29FC59005D072B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B6A0241E29FC59005D072B /* FSEventsUnofficialWrapper.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = FSEventsUnofficialWrapper.framework;
-			remoteRef = 45B6A0231E29FC59005D072B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B6A0261E29FC59005D072B /* Reftable.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Reftable.framework;
-			remoteRef = 45B6A0251E29FC59005D072B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B6A0281E29FC59005D072B /* BTree.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BTree.framework;
-			remoteRef = 45B6A0271E29FC59005D072B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B6A02A1E29FC59005D072B /* EonilGCDActor.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EonilGCDActor.framework;
-			remoteRef = 45B6A0291E29FC59005D072B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B6A02C1E29FC59005D072B /* Editor6DepPack.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Editor6DepPack.framework;
-			remoteRef = 45B6A02B1E29FC59005D072B /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45B6A02E1E29FC59005D072B /* Editor6DepPackTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = file;
-			path = Editor6DepPackTests.xctest;
-			remoteRef = 45B6A02D1E29FC59005D072B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45C282A01E103C3100BE84AF /* Editor6Common.framework */ = {
