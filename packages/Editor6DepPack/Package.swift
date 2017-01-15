@@ -9,6 +9,6 @@ let package = Package(
         .Package(url: "https://github.com/eonil/fsevents-unofficial-wrapper.git", majorVersion: 0),
         .Package(url: "https://github.com/eonil/reftable.swift.git", majorVersion: 0),
         .Package(url: "https://github.com/lorentey/BTree", Version(4, 0, 1)),
-        .Package(url: "https://github.com/eonil/gcd-actor.swift.git", Version(0, 0, 5)),
+//        .Package(url: "https://github.com/eonil/gcd-actor.swift.git", Version(0, 0, 5)),
     ]
 )
