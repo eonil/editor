@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4517CF321E2AECA600C43464 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4517CF311E2AECA600C43464 /* main.swift */; };
-		4517CF361E2AECEA00C43464 /* Editor6Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C2828F1E103C1300BE84AF /* Editor6Services.framework */; };
 		456F8B711E2A7FBF00F7EC4C /* CargoOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */; };
 		456F8B801E2A85F800F7EC4C /* RustCompilerDataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */; };
 		456F8B821E2A861200F7EC4C /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B811E2A861200F7EC4C /* Box.swift */; };
@@ -31,7 +29,6 @@
 		45C282E01E103C7800BE84AF /* LineReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D51E103C7800BE84AF /* LineReader.swift */; };
 		45C282E11E103C7800BE84AF /* Subprocess1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D61E103C7800BE84AF /* Subprocess1.swift */; };
 		45C282E21E103C7800BE84AF /* Subprocess2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D71E103C7800BE84AF /* Subprocess2.swift */; };
-		45E651AC1E2AE704001AD484 /* Editor6ServicesPcoThreadChannelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E651AB1E2AE704001AD484 /* Editor6ServicesPcoThreadChannelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,21 +132,7 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		4517CF2D1E2AECA600C43464 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		4517CF2F1E2AECA600C43464 /* Editor6UnitTestdrive */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Editor6UnitTestdrive; sourceTree = BUILT_PRODUCTS_DIR; };
-		4517CF311E2AECA600C43464 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoOutputParser.swift; sourceTree = "<group>"; };
 		456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerDataStructures.swift; sourceTree = "<group>"; };
 		456F8B811E2A861200F7EC4C /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
@@ -178,18 +161,9 @@
 		45C282D51E103C7800BE84AF /* LineReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineReader.swift; sourceTree = "<group>"; };
 		45C282D61E103C7800BE84AF /* Subprocess1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess1.swift; sourceTree = "<group>"; };
 		45C282D71E103C7800BE84AF /* Subprocess2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess2.swift; sourceTree = "<group>"; };
-		45E651AB1E2AE704001AD484 /* Editor6ServicesPcoThreadChannelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6ServicesPcoThreadChannelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4517CF2C1E2AECA600C43464 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4517CF361E2AECEA00C43464 /* Editor6Services.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		456F8B861E2A867A00F7EC4C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,19 +183,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4517CF301E2AECA600C43464 /* Editor6UnitTestdrive */ = {
-			isa = PBXGroup;
-			children = (
-				4517CF311E2AECA600C43464 /* main.swift */,
-			);
-			path = Editor6UnitTestdrive;
-			sourceTree = "<group>";
-		};
 		456F8B8A1E2A867A00F7EC4C /* Editor6ServicesTests */ = {
 			isa = PBXGroup;
 			children = (
 				456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */,
-				45E651AB1E2AE704001AD484 /* Editor6ServicesPcoThreadChannelTests.swift */,
 				456F8B8D1E2A867A00F7EC4C /* Info.plist */,
 			);
 			path = Editor6ServicesTests;
@@ -256,7 +221,6 @@
 				45C2829A1E103C2900BE84AF /* (deps) */,
 				45C282911E103C1300BE84AF /* Editor6Services */,
 				456F8B8A1E2A867A00F7EC4C /* Editor6ServicesTests */,
-				4517CF301E2AECA600C43464 /* Editor6UnitTestdrive */,
 				45C282901E103C1300BE84AF /* Products */,
 				45B6A00C1E29FC2C005D072B /* Frameworks */,
 			);
@@ -267,7 +231,6 @@
 			children = (
 				45C2828F1E103C1300BE84AF /* Editor6Services.framework */,
 				456F8B891E2A867A00F7EC4C /* Editor6ServicesTests.xctest */,
-				4517CF2F1E2AECA600C43464 /* Editor6UnitTestdrive */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,23 +345,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4517CF2E1E2AECA600C43464 /* Editor6UnitTestdrive */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4517CF331E2AECA600C43464 /* Build configuration list for PBXNativeTarget "Editor6UnitTestdrive" */;
-			buildPhases = (
-				4517CF2B1E2AECA600C43464 /* Sources */,
-				4517CF2C1E2AECA600C43464 /* Frameworks */,
-				4517CF2D1E2AECA600C43464 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Editor6UnitTestdrive;
-			productName = Editor6UnitTestdrive;
-			productReference = 4517CF2F1E2AECA600C43464 /* Editor6UnitTestdrive */;
-			productType = "com.apple.product-type.tool";
-		};
 		456F8B881E2A867A00F7EC4C /* Editor6ServicesTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 456F8B911E2A867A00F7EC4C /* Build configuration list for PBXNativeTarget "Editor6ServicesTests" */;
@@ -445,11 +391,6 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Eonil;
 				TargetAttributes = {
-					4517CF2E1E2AECA600C43464 = {
-						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = SYA75M63MP;
-						ProvisioningStyle = Automatic;
-					};
 					456F8B881E2A867A00F7EC4C = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = SYA75M63MP;
@@ -490,7 +431,6 @@
 			targets = (
 				45C2828E1E103C1300BE84AF /* Editor6Services */,
 				456F8B881E2A867A00F7EC4C /* Editor6ServicesTests */,
-				4517CF2E1E2AECA600C43464 /* Editor6UnitTestdrive */,
 			);
 		};
 /* End PBXProject section */
@@ -607,19 +547,10 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4517CF2B1E2AECA600C43464 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4517CF321E2AECA600C43464 /* main.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		456F8B851E2A867A00F7EC4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45E651AC1E2AE704001AD484 /* Editor6ServicesPcoThreadChannelTests.swift in Sources */,
 				456F8B8C1E2A867A00F7EC4C /* Editor6ServicesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -660,24 +591,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		4517CF341E2AECA600C43464 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = SYA75M63MP;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		4517CF351E2AECA600C43464 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = SYA75M63MP;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
 		456F8B921E2A867A00F7EC4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -845,14 +758,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4517CF331E2AECA600C43464 /* Build configuration list for PBXNativeTarget "Editor6UnitTestdrive" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4517CF341E2AECA600C43464 /* Debug */,
-				4517CF351E2AECA600C43464 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
 		456F8B911E2A867A00F7EC4C /* Build configuration list for PBXNativeTarget "Editor6ServicesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
