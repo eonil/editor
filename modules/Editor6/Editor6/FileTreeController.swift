@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import EonilGCDActor
+import EonilPco
 import Editor6WorkspaceUI
 
 final class FileTreeController {
@@ -26,32 +26,76 @@ enum FileTreeProcessID {
     case addNewFile
 }
 
+///
+/// Collection of file tree management processes.
+///
+/// File management runs single process, and performs
+/// everything sequentially. This is by-design
+/// because human user cannot do multiple operations
+/// at once. No one can create and delete files at once
+/// simultaneously.
+///
+/// - File management process performs one operation
+///   at once.
+/// - Some operations can be cancelled, halted.
+/// - Some operations uninterruptible. Case by case.
+///
+/// If you need to build a concurrent execution flow,
+///
+private enum FileManagement {
+    enum Job {
+        case addNewFile
+        case deleteSelectedFile
+//        case
+    }
+    enum Action {
+//        case addNewFile(AddNewFileAction)
+    }
+}
+
 private enum AddNewFileProcess {
-    enum InputSignal {
+    enum Action {
         case pickNewFileType(String)
         case submitNewFileName(String)
     }
-    enum OutputSignal {
+    enum Control {
         case beginNewFileTypePickingSheet
         case endNewFileTypePickingSheet
         case selectNewFileNodeInTree
         case startEditingName(String)
         case endEditingName
     }
-    enum ErrorSignal: Error {
-        case unexpectedInputSignal
+    enum Result {
+        case ok
+        case cancel
     }
-    static func spawn(input: GCDChannel<InputSignal>, output: GCDChannel<OutputSignal>, error: GCDChannel<ErrorSignal>) {
-        GCDActor.spawn { (_ ss: GCDActorSelf) in
-            output.send(.beginNewFileTypePickingSheet)
-            let s1 = input.receive()
-            guard case .pickNewFileType(let newFileType) = s1 else { return error.send(.unexpectedInputSignal) }
-            output.send(.endNewFileTypePickingSheet)
-            /// Create a new file actually.
-            output.send(.startEditingName("")) // NOSHIP: Use actual proper name generated and created.
-            guard case .submitNewFileName(let newFileName) = input.receive() else { return error.send(.unexpectedInputSignal) }
-            output.send(.endEditingName)
+    enum Trouble: Error {
+        case unexpectedHalt
+        case unexpectedAction
+    }
+    static func spawn() -> PcoIOChannelSet<Action,Control> {
+        return Pco.spawn { incoming, outgoing in
+
+            func addNewFile() throws {
+                try chooseNewFileType()
+                try editFileName()
+            }
+            try addNewFile()
+
+            func chooseNewFileType() throws {
+                outgoing.send(.beginNewFileTypePickingSheet)
+                guard let s1 = incoming.receive() else { throw Trouble.unexpectedHalt }
+                guard case .pickNewFileType(let newFileType) = s1 else { throw Trouble.unexpectedAction }
+                outgoing.send(.endNewFileTypePickingSheet)
+            }
+            func editFileName() throws {
+                /// Create a new file actually.
+                outgoing.send(.startEditingName("")) // NOSHIP: Use actual proper name generated and created.
+                guard let action = incoming.receive() else { throw Trouble.unexpectedHalt }
+                guard case .submitNewFileName(let newFileName) = action else { throw Trouble.unexpectedAction }
+                outgoing.send(.endEditingName)
+            }
         }
     }
-}
 
+}

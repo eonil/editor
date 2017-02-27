@@ -11,7 +11,7 @@ Program at large;
 Processes at small;
 - Processes access feature services to perform operations.
 - Processes makes and manages multiple execution contexts.
-- Processes are now implemented using `EonilGCDActor`, but can be changed if needed.
+- Processes are now implemented using `EonilPco`, but can be changed if needed.
 
 Interfaces at small;
 - Interfaces serves dual duties of input and output. (This is because `AppKit` is designed to be like that.)

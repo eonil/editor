@@ -14,6 +14,7 @@
 		456FDDA21DAA461300F8003A /* Editor6CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDA11DAA461300F8003A /* Editor6CommonView.swift */; };
 		456FDDAE1DAA47EC00F8003A /* Editor6CommonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDAD1DAA47EC00F8003A /* Editor6CommonViewController.swift */; };
 		4583C1D61DCAAB63001EA107 /* Tree1Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583C1D51DCAAB63001EA107 /* Tree1Mutation.swift */; };
+		459813C81E2BBE9D00871FB6 /* BTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459813B91E2BBE9000871FB6 /* BTree.framework */; };
 		45ABC12F1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */; };
 		45ABC1BA1DCDB5DA006EFE1F /* MARK_unimplemented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */; };
 		45ABC1D11DCDB788006EFE1F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D01DCDB788006EFE1F /* Report.swift */; };
@@ -53,6 +54,55 @@
 			remoteGlobalIDString = 452A006B1D943811007DF8F3;
 			remoteInfo = "EonilToolboxTests-iOS";
 		};
+		459813B61E2BBE9000871FB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB54D0AF1C1F0357008A462B;
+			remoteInfo = iOS;
+		};
+		459813B81E2BBE9000871FB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB9AE43B1C1FCC35002C5D63;
+			remoteInfo = Mac;
+		};
+		459813BA1E2BBE9000871FB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB8FE9991C7C8CDC0051268F;
+			remoteInfo = watchOS;
+		};
+		459813BC1E2BBE9000871FB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB8FE9B01C7C8E0E0051268F;
+			remoteInfo = tvOS;
+		};
+		459813BE1E2BBE9000871FB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB54D0B91C1F0357008A462B;
+			remoteInfo = "Tests-iOS";
+		};
+		459813C01E2BBE9000871FB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB9AE44C1C1FCE0B002C5D63;
+			remoteInfo = "Tests-Mac";
+		};
+		459813C21E2BBE9000871FB6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB8FE9B91C7C8E0E0051268F;
+			remoteInfo = "Tests-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +116,7 @@
 		456FDDA11DAA461300F8003A /* Editor6CommonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6CommonView.swift; sourceTree = "<group>"; };
 		456FDDAD1DAA47EC00F8003A /* Editor6CommonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6CommonViewController.swift; sourceTree = "<group>"; };
 		4583C1D51DCAAB63001EA107 /* Tree1Mutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree1Mutation.swift; sourceTree = "<group>"; };
+		459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BTree.xcodeproj; path = ../../submodules/BTree/BTree.xcodeproj; sourceTree = "<group>"; };
 		45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppKit.NSMenuItem+TargetActionUtility.swift"; sourceTree = "<group>"; };
 		45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
 		45ABC1D01DCDB788006EFE1F /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
@@ -80,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459813C81E2BBE9D00871FB6 /* BTree.framework in Frameworks */,
 				45B69F781E16C2F4005D072B /* EonilToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				456FDD261DAA14EB00F8003A /* EonilToolbox.xcodeproj */,
+				459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */,
 			);
 			name = "(deps)";
 			sourceTree = "<group>";
@@ -141,6 +194,20 @@
 				458103DB1DADADFD00B0717C /* EonilToolbox.framework */,
 				458103DD1DADADFD00B0717C /* EonilToolboxTests-macOS.xctest */,
 				458103DF1DADADFD00B0717C /* EonilToolboxTests-iOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		459813AD1E2BBE9000871FB6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				459813B71E2BBE9000871FB6 /* BTree.framework */,
+				459813B91E2BBE9000871FB6 /* BTree.framework */,
+				459813BB1E2BBE9000871FB6 /* BTree.framework */,
+				459813BD1E2BBE9000871FB6 /* BTree.framework */,
+				459813BF1E2BBE9000871FB6 /* BTreeTests.xctest */,
+				459813C11E2BBE9000871FB6 /* BTreeTests.xctest */,
+				459813C31E2BBE9000871FB6 /* BTreeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -205,6 +272,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 459813AD1E2BBE9000871FB6 /* Products */;
+					ProjectRef = 459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */;
+				},
+				{
 					ProductGroup = 458103D21DADADFD00B0717C /* Products */;
 					ProjectRef = 456FDD261DAA14EB00F8003A /* EonilToolbox.xcodeproj */;
 				},
@@ -243,6 +314,55 @@
 			fileType = wrapper.cfbundle;
 			path = "EonilToolboxTests-iOS.xctest";
 			remoteRef = 458103DE1DADADFD00B0717C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459813B71E2BBE9000871FB6 /* BTree.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BTree.framework;
+			remoteRef = 459813B61E2BBE9000871FB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459813B91E2BBE9000871FB6 /* BTree.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BTree.framework;
+			remoteRef = 459813B81E2BBE9000871FB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459813BB1E2BBE9000871FB6 /* BTree.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BTree.framework;
+			remoteRef = 459813BA1E2BBE9000871FB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459813BD1E2BBE9000871FB6 /* BTree.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BTree.framework;
+			remoteRef = 459813BC1E2BBE9000871FB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459813BF1E2BBE9000871FB6 /* BTreeTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BTreeTests.xctest;
+			remoteRef = 459813BE1E2BBE9000871FB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459813C11E2BBE9000871FB6 /* BTreeTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BTreeTests.xctest;
+			remoteRef = 459813C01E2BBE9000871FB6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459813C31E2BBE9000871FB6 /* BTreeTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = BTreeTests.xctest;
+			remoteRef = 459813C21E2BBE9000871FB6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

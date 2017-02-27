@@ -7,43 +7,42 @@
 //
 
 import Foundation
-import EonilGCDActor
+import EonilPco
+import Editor6Services
 
 final class BuildController {
     
 }
-
-enum BuildProcess {
-    enum Command {
-        case run
-        case halt
-    }
-    enum Event {
-        case complete
-        case error(Error)
-    }
-    enum Problem: Error {
-        case inappropriateCommand(Command)
-    }
-    static func spawn(command: CommandChannel<Command>, event: EventChannel<Event>, error: ErrorChannel) {
-        GCDActor.spawn { (_ ss: GCDActorSelf) in
-            do {
-                let cmd = command.receive()
-                guard case .run = cmd else { throw Problem.inappropriateCommand(cmd) }
-                
-            }
-            catch let e {
-                error.send(e)
-            }
-        }
-    }
-}
-
-
-
-
-
-
+//
+//private enum BuildProcess {
+//    enum Command {
+//        case run
+//        case halt
+//    }
+//    enum Event {
+//        case complete
+//        case error(Error)
+//    }
+//    enum Problem: Error {
+//        case inappropriateCommand(Command)
+//    }
+//    ///
+//    /// Spawns a long-running build service.
+//    ///
+//    static func spawn() -> PcoIOChannelSet<Command,Event> {
+//        let (cch, ech) = CargoProcess.spawnBuild(location: "./")
+//        let cch1 = cch.map { cmd in
+//            switch cmd {
+//            case .run:
+//
+//            case .halt:
+//                CargoProcess.Command.terminate
+//            }
+//        }
+//
+//    }
+//}
+//
 
 
 
@@ -52,30 +51,7 @@ enum BuildProcess {
 
 
 
-struct CommandChannel<T> {
-    private let gcdch = GCDChannel<T>()
-    fileprivate func receive() -> T {
-        return gcdch.receive()
-    }
-    func send(_ signal: T) {
-        gcdch.send(signal)
-    }
-}
-struct EventChannel<T> {
-    private let gcdch = GCDChannel<T>()
-    fileprivate func send(_ signal: T) {
-        gcdch.send(signal)
-    }
-    func receive() -> T {
-        return gcdch.receive()
-    }
-}
-struct ErrorChannel {
-    private let gcdch = GCDChannel<Error>()
-    fileprivate func send(_ signal: Error) {
-        gcdch.send(signal)
-    }
-    func receive() -> Error {
-        return gcdch.receive()
-    }
-}
+
+
+
+

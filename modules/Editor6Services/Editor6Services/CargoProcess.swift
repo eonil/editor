@@ -9,12 +9,12 @@
 import Foundation
 import EonilPco
 
-enum CargoProcess {
-    enum Command {
+public enum CargoProcess {
+    public enum Command {
         case terminate
         case kill
     }
-    enum Event {
+    public enum Event {
         /// NOSHIP: Use a proper event.
         case ADHOC_stdoutLine(String)
         /// NOSHIP: Use a proper event.
@@ -26,15 +26,16 @@ enum CargoProcess {
         case cancelByKillCommand
         case complete
     }
-    static func spawnInit(location: String) -> PcoIOChannelSet<Command,Event> {
+    public static func spawnInit(location: String) -> PcoIOChannelSet<Command,Event> {
         return spawn(commands: ["cd \(location)", "cargo init"])
     }
-    static func spawnBuild(location: String) -> PcoIOChannelSet<Command,Event> {
+    public static func spawnBuild(location: String) -> PcoIOChannelSet<Command,Event> {
         return spawn(commands: ["cd \(location)", "cargo build"])
     }
-    static func spawnClean(location: String) -> PcoIOChannelSet<Command,Event> {
+    public static func spawnClean(location: String) -> PcoIOChannelSet<Command,Event> {
         return spawn(commands: ["cd \(location)", "cargo clean"])
     }
+
     private static func spawn(commands: [String]) -> PcoIOChannelSet<Command,Event> {
         let (command, event) = LineBashProcess.spawn()
         let command1 = command.map { (s: Command) -> LineBashProcess.Command in
