@@ -16,13 +16,16 @@ public final class WorkspaceUIWindowController: NSWindowController, NSWindowDele
     private var installer = ViewInstaller()
     private var delegate = ((WorkspaceUIAction) -> ())?.none
 
+    @objc
     public convenience init() {
         self.init(window: nil)
     }
+    @objc
     @available(*,unavailable)
     public required init?(coder: NSCoder) {
         fatalError("IB/SB are not supported.")
     }
+    @objc
     internal override init(window: NSWindow?) {
         super.init(window: window)
         self.window = window
