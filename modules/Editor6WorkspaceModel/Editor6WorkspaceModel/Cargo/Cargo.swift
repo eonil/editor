@@ -15,12 +15,12 @@ struct CargoState {
     var issues = [CargoIssue]()
     var errors = [CargoError]()
 }
-enum CargoCommand {
+public enum CargoCommand {
     case `init`(URL)
     case build(URL)
     case clean(URL)
 }
-enum CargoPhase {
+public enum CargoPhase {
     case idle
     case busy
 }
@@ -31,7 +31,14 @@ enum CargoIssue {
 }
 enum CargoEvent {
     case phase
+    ///
+    /// Problems of user content (source code and etc.).
+    ///
     case issue(CargoIssue)
+    /// 
+    /// Errors of Cargo tool itself.
+    /// These are not from user content (source code and etc.).
+    ///
     case error(CargoError)
 }
 enum CargoError: Error {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WorkspaceState: ModelState {
+public struct WorkspaceState {
     public typealias Mutation = WorkspaceMutation
 
     public var location = URL?.none

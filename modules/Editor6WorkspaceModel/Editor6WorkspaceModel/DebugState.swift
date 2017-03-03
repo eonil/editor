@@ -9,7 +9,7 @@
 import EonilToolbox
 import LLDBWrapper
 
-public struct DebugState: ModelState {
+public struct DebugState {
     public typealias Mutation = DebugMutation
     public var targets = [DebugTargetID: DebugTargetState]()
     public var processes = [DebugProcessID: DebugProcessState]()

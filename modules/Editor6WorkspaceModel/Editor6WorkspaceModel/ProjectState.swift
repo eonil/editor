@@ -6,7 +6,7 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
-public struct ProjectState: ModelState {
+public struct ProjectState {
     public typealias Mutation = ProjectMutation
     
     public var items = [ProjectItemID: ProjectItemState]()
