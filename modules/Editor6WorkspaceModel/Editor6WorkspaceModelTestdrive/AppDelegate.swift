@@ -1,4 +1,4 @@
-//
+.//
 //  AppDelegate.swift
 //  Editor6WorkspaceModelTestdrive
 //
@@ -13,24 +13,56 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
-    private let bashcon = Bash1()
 
-    private let driver = Driver()
+    private let flow = Flow2<AppDelegate>()
+    private let bash = ADHOC_TextLineBashSubprocess()
+    private let cargo = CargoModel()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
-
-//        // Insert code here to initialize your application
-//        bashcon.writeInputLines(lines: [
-//            "echo AAA",
-//            ])
-//        do {
-//            check1()
-//        }
-        bashcon.delegate { (sender: Bash1, action: Bash1.Action) in
-            print(action)
+        flow.context = self
+        flow.execute { ss in
+            ss.bash.queue(.launch)
+            ss.bash.queue(.stdin(lines: [
+                "set -e",
+                "echo CHK",
+                "cd ~/",
+                "rm -rf ~/Workshop/Temp/a2",
+                "mkdir ~/Workshop/Temp/a2",
+                "exit",
+                ]))
+            ss.bash.delegate { e in
+                switch e {
+                case .stdout(let lines):
+                    print(lines)
+                case .stderr(let lines):
+                    print(lines)
+                    fatalError()
+                case .term(let exitCode):
+                    precondition(exitCode == 0)
+                    ss.flow.signal()
+                }
+            }
         }
-        bashcon.dispatch(["cargo"])
+        flow.wait { ss in
+            return ss.bash.phase == .terminated
+        }
+        flow.execute { ss in
+
+        }
+        flow.execute { ss in
+            let u = URL(fileURLWithPath: "/Users/Eonil/Workshop/Temp/a2")
+            ss.cargo.queue(.init(u))
+            ss.cargo.delegate { e in
+                switch e {
+                case .phase:
+                    print(ss.cargo.state)
+                case .issue(let i):
+                    print(i)
+                case .error(let e):
+                    print(e)
+                }
+            }
+        }
     }
 
 //    private func check1() {

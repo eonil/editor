@@ -28,7 +28,14 @@ with overall architecture of this program.
 
 
 
+Terms
+-----
 
+- `func queue(_)` means dispatched command will be 
+    processed eventually at unknown future point.
+
+- `func process(_)` means a signal is being processed
+    right now.
 
 
 

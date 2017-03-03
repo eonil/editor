@@ -12,11 +12,21 @@
 		<key>Editor6WorkspaceModelTestdrive.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>10</integer>
+		</dict>
+		<key>Editor6WorkspaceModelUnitTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>452278D91E67424A0076A851</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>45441ED51DB3EA0F00158711</key>
 		<dict>
 			<key>primary</key>

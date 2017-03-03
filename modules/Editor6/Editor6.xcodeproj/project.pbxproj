@@ -24,8 +24,6 @@
 		456FDE211DAA952F00F8003A /* UNUSED_TreeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE201DAA952F00F8003A /* UNUSED_TreeEvent.swift */; };
 		456FDE231DAA95AE00F8003A /* UNUSED_Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE221DAA95AE00F8003A /* UNUSED_Broadcast.swift */; };
 		4583C1621DCAA48A001EA107 /* WorkspaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583C1611DCAA48A001EA107 /* WorkspaceID.swift */; };
-		4594EB781E647D040028DBC8 /* Space.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EB771E647D040028DBC8 /* Space.swift */; };
-		4594EB7A1E647E240028DBC8 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EB791E647E240028DBC8 /* State.swift */; };
 		4594EB7D1E6487DE0028DBC8 /* ThreadChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EB7B1E6487DE0028DBC8 /* ThreadChannel.swift */; };
 		4594EB7E1E6487DE0028DBC8 /* ThreadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EB7C1E6487DE0028DBC8 /* ThreadUtility.swift */; };
 		45ABC1B01DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45ABC1AB1DCDAD61006EFE1F /* Editor6MainMenuUI2.framework */; };
@@ -238,8 +236,6 @@
 		456FDE201DAA952F00F8003A /* UNUSED_TreeEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_TreeEvent.swift; sourceTree = "<group>"; };
 		456FDE221DAA95AE00F8003A /* UNUSED_Broadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_Broadcast.swift; sourceTree = "<group>"; };
 		4583C1611DCAA48A001EA107 /* WorkspaceID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceID.swift; sourceTree = "<group>"; };
-		4594EB771E647D040028DBC8 /* Space.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Space.swift; sourceTree = "<group>"; };
-		4594EB791E647E240028DBC8 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		4594EB7B1E6487DE0028DBC8 /* ThreadChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadChannel.swift; sourceTree = "<group>"; };
 		4594EB7C1E6487DE0028DBC8 /* ThreadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadUtility.swift; sourceTree = "<group>"; };
 		45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6MainMenuUI2.xcodeproj; path = ../Editor6MainMenuUI2/Editor6MainMenuUI2.xcodeproj; sourceTree = "<group>"; };
@@ -307,11 +303,20 @@
 			isa = PBXGroup;
 			children = (
 				45185E781DA8F44300C4D86D /* main.swift */,
-				4594EB7B1E6487DE0028DBC8 /* ThreadChannel.swift */,
-				4594EB7C1E6487DE0028DBC8 /* ThreadUtility.swift */,
-				4594EB771E647D040028DBC8 /* Space.swift */,
-				4594EB791E647E240028DBC8 /* State.swift */,
-				4594EB6A1E647CF30028DBC8 /* (old impl) */,
+				45185E421DA8E8EA00C4D86D /* Driver.swift */,
+				456FDDD51DAA78B900F8003A /* DriverState.swift */,
+				45D940371DCA914B00B65876 /* DriverMessage.swift */,
+				45185E801DA8F85A00C4D86D /* WorkspaceDocument.swift */,
+				4583C1611DCAA48A001EA107 /* WorkspaceID.swift */,
+				45185E841DA8FA6F00C4D86D /* WorkspaceMessage.swift */,
+				45C282FE1E16BC9800BE84AF /* WorkspaceProcess.swift */,
+				45C282E71E103FF000BE84AF /* WorkspaceController.swift */,
+				45C282F61E11964800BE84AF /* FileTreeController.swift */,
+				45B69FDE1E29F8F7005D072B /* BuildController.swift */,
+				45C282F81E1197BA00BE84AF /* DebugTreeController.swift */,
+				45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */,
+				45ABC1D41DCDB90A006EFE1F /* ignore.swift */,
+				4594EB7F1E64FCFF0028DBC8 /* (archived) */,
 				45185E491DA8E8EA00C4D86D /* Assets.xcassets */,
 				45185E4E1DA8E8EA00C4D86D /* Info.plist */,
 				45ABC1B61DCDAED3006EFE1F /* (unused) */,
@@ -349,24 +354,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4594EB6A1E647CF30028DBC8 /* (old impl) */ = {
+		4594EB7F1E64FCFF0028DBC8 /* (archived) */ = {
 			isa = PBXGroup;
 			children = (
-				45185E421DA8E8EA00C4D86D /* Driver.swift */,
-				456FDDD51DAA78B900F8003A /* DriverState.swift */,
-				45D940371DCA914B00B65876 /* DriverMessage.swift */,
-				45185E801DA8F85A00C4D86D /* WorkspaceDocument.swift */,
-				4583C1611DCAA48A001EA107 /* WorkspaceID.swift */,
-				45185E841DA8FA6F00C4D86D /* WorkspaceMessage.swift */,
-				45C282FE1E16BC9800BE84AF /* WorkspaceProcess.swift */,
-				45C282E71E103FF000BE84AF /* WorkspaceController.swift */,
-				45C282F61E11964800BE84AF /* FileTreeController.swift */,
-				45B69FDE1E29F8F7005D072B /* BuildController.swift */,
-				45C282F81E1197BA00BE84AF /* DebugTreeController.swift */,
-				45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */,
-				45ABC1D41DCDB90A006EFE1F /* ignore.swift */,
+				4594EB7B1E6487DE0028DBC8 /* ThreadChannel.swift */,
+				4594EB7C1E6487DE0028DBC8 /* ThreadUtility.swift */,
 			);
-			name = "(old impl)";
+			name = "(archived)";
 			sourceTree = "<group>";
 		};
 		45ABC1A51DCDAD61006EFE1F /* Products */ = {
@@ -630,8 +624,6 @@
 			files = (
 				45185E7F1DA8F74500C4D86D /* UNUSED_Query.swift in Sources */,
 				45B69FDF1E29F8F7005D072B /* BuildController.swift in Sources */,
-				4594EB781E647D040028DBC8 /* Space.swift in Sources */,
-				4594EB7A1E647E240028DBC8 /* State.swift in Sources */,
 				45ABC1B51DCDAEB1006EFE1F /* UNUSED_WorkspaceDriver.swift in Sources */,
 				4594EB7D1E6487DE0028DBC8 /* ThreadChannel.swift in Sources */,
 				456FDDD61DAA78B900F8003A /* DriverState.swift in Sources */,

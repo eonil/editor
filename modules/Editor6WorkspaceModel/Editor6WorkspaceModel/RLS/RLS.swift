@@ -1,13 +1,12 @@
 //
-//  RustLanguageServer.swift
+//  RLS.swift
 //  Editor6WorkspaceModel
 //
-//  Created by Hoon H. on 2016/10/20.
-//  Copyright © 2016 Eonil. All rights reserved.
+//  Created by Hoon H. on 2017/03/02.
+//  Copyright © 2017 Eonil. All rights reserved.
 //
 
 import Foundation
-import Flow
 
 struct RLSState {
 }
