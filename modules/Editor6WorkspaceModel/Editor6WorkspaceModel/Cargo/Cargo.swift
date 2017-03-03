@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import EonilToolbox
+import EonilJSON
 
 struct CargoState {
     var phase = CargoPhase.idle
@@ -22,11 +24,10 @@ enum CargoPhase {
     case idle
     case busy
 }
-struct CargoIssue {
-//    var sourcePath = ""
-//    var line = Int?.none
-//    var column = Int?.none
-    var description = ""
+enum CargoIssue {
+    case ADHOC_dtoFromCompiler(CargoDTO.FromCompiler)
+    case ADHOC_unknown(JSONValue)
+    case ADHOC_unknownUndecodable(String)
 }
 enum CargoEvent {
     case phase
@@ -39,7 +40,12 @@ enum CargoError: Error {
     case nonZeroExit(code: Int32)
 }
 
+///
 /// Cargo commands will be executed serially in a `Cargo` instance.
+///
+/// - TODO: No error check for `cargo init` and `cargo clean` for now.
+///     Implement it.
+///
 public final class CargoModel {
     ///
     /// All command executions in one cargo model 
@@ -57,8 +63,6 @@ public final class CargoModel {
     ///
     private var haltImpl = {}
 
-
-
     internal init() {
         flow.context = self
     }
@@ -67,29 +71,23 @@ public final class CargoModel {
         delegate = newDelegate
     }
     func queue(_ command: CargoCommand) {
-        process(command)
-    }
-    func halt() {
-        haltImpl()
-    }
-    private func process(_ command: CargoCommand) {
         switch command {
         case .init(let u):
-            runBash(commandLines: [
+            queueBashExecution(commandLines: [
                 "set -e",
                 "cd \(u.path)",
-                "cargo init",
+                "cargo init --bin",
                 "exit",
                 ])
         case .build(let u):
-            runBash(commandLines: [
+            queueBashExecution(commandLines: [
                 "set -e",
                 "cd \(u.path)",
-                "cargo build",
+                "cargo build --message-format=json",
                 "exit",
                 ])
         case .clean(let u):
-            runBash(commandLines: [
+            queueBashExecution(commandLines: [
                 "set -e",
                 "cd \(u.path)",
                 "cargo clean",
@@ -97,13 +95,17 @@ public final class CargoModel {
                 ])
         }
     }
+    func halt() {
+        haltImpl()
+    }
+
     ///
     /// - Parameter commandLines:
     ///     Array of strings without ending `\n` characters.
     ///     These strings will be written to Bash process'es
     ///     std-in.
     ///
-    private func runBash(commandLines: [String]) {
+    private func queueBashExecution(commandLines: [String]) {
         let bashsp = ADHOC_TextLineBashSubprocess()
         bashsp.delegate { [weak self] in
             guard let ss = self else { return }
@@ -117,6 +119,7 @@ public final class CargoModel {
             bashsp.queue(.stdin(lines: commandLines))
         }
         flow.wait { f -> Bool in
+            debugLog(withAddressOf: bashsp, message: "BASH phase = \(bashsp.phase)")
             return bashsp.phase != .terminated
         }
         flow.execute { ss in
@@ -148,13 +151,31 @@ public final class CargoModel {
         }
     }
     func process(stdout lines: [String]) {
-
+        let s = lines.joined(separator: "\n")
+        let i = makeCargoIssue(from: s)
+        print(i)
+        state.issues.append(i)
     }
     func process(stderr lines: [String]) {
-
+        print(lines)
     }
 }
 
-private extension CargoState {
-
+private func makeCargoIssue(from s: String) -> CargoIssue {
+    let d = s.data(using: .utf8) ?? Data()
+    guard let j = try? JSON.deserialize(d) else { return .ADHOC_unknownUndecodable(s) }
+    return (try? makeCargoIssue(from: j)) ?? .ADHOC_unknownUndecodable(s)
+}
+private func makeCargoIssue(from json: JSONValue) throws -> CargoIssue {
+    switch try? json.ed6_getField("reason") as String {
+    case .none:
+        return .ADHOC_unknown(json)
+    case .some(let c):
+        switch c {
+        case "compiler-message":
+            return .ADHOC_dtoFromCompiler(try CargoDTO.FromCompiler(json: json))
+        default:
+            return .ADHOC_unknown(json)
+        }
+    }
 }

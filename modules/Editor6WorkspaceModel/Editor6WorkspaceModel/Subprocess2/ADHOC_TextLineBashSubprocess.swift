@@ -40,6 +40,10 @@ final class ADHOC_TextLineBashSubprocess {
     init() {
         subproc = Subprocess2Controller(path: "/bin/bash", arguments: ["--login", "-s"])
         subproc.delegate { [weak self] in self?.process($0) }
+        debugLog("init")
+    }
+    deinit {
+        debugLog("deinit")
     }
 
     var phase: Subprocess2Phase {
@@ -55,6 +59,7 @@ final class ADHOC_TextLineBashSubprocess {
     /// - Parameter newLines:
     ///     Exclude ending `\n` character.
     func queue(_ c: Command) {
+        debugLog("queue \(c)")
         switch c {
         case .launch:
             subproc.queue(.launch)
@@ -66,6 +71,7 @@ final class ADHOC_TextLineBashSubprocess {
     }
 
     private func process(_ e: Subprocess2Event) {
+        debugLog("event \(e)")
         switch e {
         case .stdout(let data):
             let newLines = stdoutReader.push(data: data)
@@ -74,46 +80,22 @@ final class ADHOC_TextLineBashSubprocess {
             let newLines = stderrReader.push(data: data)
             delegate?(.stderr(lines: newLines))
         case .terminate(let exitCode):
+            if stdoutReader.decodedString != "" {
+                delegate?(.stdout(lines: [stdoutReader.decodedString]))
+                stdoutReader = LineReader()
+            }
+            if stderrReader.decodedString != "" {
+                delegate?(.stderr(lines: [stderrReader.decodedString]))
+                stderrReader = LineReader()
+            }
             delegate?(.term(exitCode: exitCode))
         }
     }
+
+    private func debugLog(_ message: String) {
+        Editor6WorkspaceModel.debugLog(withAddressOf: self, message: "BASH \(message)")
+    }
 }
-
-//extension ADHOC_TextLineBashSubprocess {
-//    static func run(input: String) -> (output: String, error: String, exit: Int32) {
-//        let ch = Editor6ThreadChannel<ADHOC_TextLineBashSubprocess.Event>()
-//        Thread.detachNewThread {
-//            let w = Editor6ThreadChannel<()>()
-//            let bashsp = ADHOC_TextLineBashSubprocess()
-//            bashsp.queue(.launch)
-//            bashsp.queue(.stdin(lines: [input]))
-////            bashsp.delegate(to: ch.signal)
-//            bashsp.delegate { e in
-//                ch.signal(e)
-//
-//            }
-//            w.wait()
-//        }
-//        var out = ""
-//        var err = ""
-//        var ec = Int32(0)
-//        while let e = ch.wait() {
-//            switch e {
-//            case .stdout(let lines):
-//                out.append(lines.map { $0 + "\n" }.joined())
-//            case .stderr(let lines):
-//                err.append(lines.map { $0 + "\n" }.joined())
-//            case .term(let exitCode):
-//                ec = exitCode
-//            }
-//        }
-//        return (out, err, ec)
-//    }
-//}
-
-
-
-
 
 
 

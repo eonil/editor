@@ -10,3 +10,6 @@
 [submodule "submodules/BTree"]
 	path = submodules/BTree
 	url = https://github.com/lorentey/BTree
+[submodule "submodules/json.swift"]
+	path = submodules/json.swift
+	url = https://github.com/eonil/json.swift

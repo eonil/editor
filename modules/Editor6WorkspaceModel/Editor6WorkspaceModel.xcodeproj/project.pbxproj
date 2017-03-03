@@ -23,6 +23,11 @@
 		452278DD1E67424A0076A851 /* Editor6WorkspaceModelUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452278DC1E67424A0076A851 /* Editor6WorkspaceModelUnitTests.swift */; };
 		452279081E6874B80076A851 /* Editor6ThreadSemaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452279071E6874B80076A851 /* Editor6ThreadSemaphore.swift */; };
 		452279251E68750E0076A851 /* Editor6ThreadChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452279241E68750E0076A851 /* Editor6ThreadChannel.swift */; };
+		452279311E69C6BB0076A851 /* debugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452279301E69C6BB0076A851 /* debugLog.swift */; };
+		452279411E69D5430076A851 /* EonilJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4522793E1E69D5370076A851 /* EonilJSON.framework */; };
+		452279431E69D5C40076A851 /* CargoJSONCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452279421E69D5C40076A851 /* CargoJSONCoding.swift */; };
+		452279451E69DF410076A851 /* JSONCodingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452279441E69DF410076A851 /* JSONCodingSupport.swift */; };
+		452279471E69DF9A0076A851 /* SemverJSONCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452279461E69DF9A0076A851 /* SemverJSONCoding.swift */; };
 		45441EDB1DB3EA0F00158711 /* Editor6WorkspaceModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45441EE41DB3EA4A00158711 /* WorkspaceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE31DB3EA4A00158711 /* WorkspaceState.swift */; };
 		45441EE61DB3EA5100158711 /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE51DB3EA5100158711 /* WorkspaceModel.swift */; };
@@ -62,6 +67,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		452279391E69D5370076A851 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452279321E69D5370076A851 /* EonilJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451C94541D044ABD00C5F640;
+			remoteInfo = "EonilJSON-iOS";
+		};
+		4522793B1E69D5370076A851 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452279321E69D5370076A851 /* EonilJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451C946D1D0451D800C5F640;
+			remoteInfo = "EonilJSON-iOS-Tests";
+		};
+		4522793D1E69D5370076A851 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452279321E69D5370076A851 /* EonilJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451C947F1D0457F300C5F640;
+			remoteInfo = "EonilJSON-OSX";
+		};
+		4522793F1E69D5370076A851 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 452279321E69D5370076A851 /* EonilJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451C94901D04595400C5F640;
+			remoteInfo = "EonilJSON-OSX-Tests";
+		};
 		45441EF21DB3EB4E00158711 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */;
@@ -188,6 +221,11 @@
 		452278DE1E67424A0076A851 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		452279071E6874B80076A851 /* Editor6ThreadSemaphore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6ThreadSemaphore.swift; sourceTree = "<group>"; };
 		452279241E68750E0076A851 /* Editor6ThreadChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6ThreadChannel.swift; sourceTree = "<group>"; };
+		452279301E69C6BB0076A851 /* debugLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = debugLog.swift; sourceTree = "<group>"; };
+		452279321E69D5370076A851 /* EonilJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilJSON.xcodeproj; path = ../../submodules/json.swift/EonilJSON.xcodeproj; sourceTree = "<group>"; };
+		452279421E69D5C40076A851 /* CargoJSONCoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoJSONCoding.swift; sourceTree = "<group>"; };
+		452279441E69DF410076A851 /* JSONCodingSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCodingSupport.swift; sourceTree = "<group>"; };
+		452279461E69DF9A0076A851 /* SemverJSONCoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverJSONCoding.swift; sourceTree = "<group>"; };
 		45441ED61DB3EA0F00158711 /* Editor6WorkspaceModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6WorkspaceModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6WorkspaceModel.h; sourceTree = "<group>"; };
 		45441EDA1DB3EA0F00158711 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -240,6 +278,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				452279411E69D5430076A851 /* EonilJSON.framework in Frameworks */,
 				4594EC311E666B220028DBC8 /* Editor6Common.framework in Frameworks */,
 				459EE2B51DBAE17E00A98670 /* EonilToolbox.framework in Frameworks */,
 				4507B8351DB410B4006A5871 /* LLDBWrapper.framework in Frameworks */,
@@ -284,8 +323,8 @@
 		452278B31E671CC70076A851 /* Subprocess2 */ = {
 			isa = PBXGroup;
 			children = (
-				452278B41E671CD00076A851 /* Subprocess2.swift */,
 				452278BF1E6720AF0076A851 /* ADHOC_TextLineBashSubprocess.swift */,
+				452278B41E671CD00076A851 /* Subprocess2.swift */,
 			);
 			path = Subprocess2;
 			sourceTree = "<group>";
@@ -306,9 +345,21 @@
 			path = Editor6WorkspaceModelUnitTests;
 			sourceTree = "<group>";
 		};
+		452279331E69D5370076A851 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4522793A1E69D5370076A851 /* EonilJSON.framework */,
+				4522793C1E69D5370076A851 /* EonilJSON-iOS-Tests.xctest */,
+				4522793E1E69D5370076A851 /* EonilJSON.framework */,
+				452279401E69D5370076A851 /* EonilJSON-OSX-Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45441ECC1DB3EA0F00158711 = {
 			isa = PBXGroup;
 			children = (
+				452279321E69D5370076A851 /* EonilJSON.xcodeproj */,
 				4594EC291E666B090028DBC8 /* Editor6Common.xcodeproj */,
 				459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */,
 				45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */,
@@ -376,9 +427,12 @@
 		4594EC221E66654F0028DBC8 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				452279441E69DF410076A851 /* JSONCodingSupport.swift */,
 				4594EC231E66654F0028DBC8 /* CargoDTO.swift */,
+				452279421E69D5C40076A851 /* CargoJSONCoding.swift */,
 				4594EC241E66654F0028DBC8 /* RustCompilerDTO.swift */,
 				4594EC271E6665660028DBC8 /* SemverDTO.swift */,
+				452279461E69DF9A0076A851 /* SemverJSONCoding.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -457,6 +511,7 @@
 				452278C31E67225C0076A851 /* Flow.swift */,
 				452278CA1E67315A0076A851 /* Flow2.swift */,
 				452278BD1E671E290076A851 /* assert.swift */,
+				452279301E69C6BB0076A851 /* debugLog.swift */,
 				452279241E68750E0076A851 /* Editor6ThreadChannel.swift */,
 				452279071E6874B80076A851 /* Editor6ThreadSemaphore.swift */,
 			);
@@ -577,6 +632,10 @@
 					ProjectRef = 4594EC291E666B090028DBC8 /* Editor6Common.xcodeproj */;
 				},
 				{
+					ProductGroup = 452279331E69D5370076A851 /* Products */;
+					ProjectRef = 452279321E69D5370076A851 /* EonilJSON.xcodeproj */;
+				},
+				{
 					ProductGroup = 459EE29C1DBAE17400A98670 /* Products */;
 					ProjectRef = 459EE29B1DBAE17400A98670 /* EonilToolbox.xcodeproj */;
 				},
@@ -595,6 +654,34 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		4522793A1E69D5370076A851 /* EonilJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilJSON.framework;
+			remoteRef = 452279391E69D5370076A851 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4522793C1E69D5370076A851 /* EonilJSON-iOS-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilJSON-iOS-Tests.xctest";
+			remoteRef = 4522793B1E69D5370076A851 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4522793E1E69D5370076A851 /* EonilJSON.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EonilJSON.framework;
+			remoteRef = 4522793D1E69D5370076A851 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		452279401E69D5370076A851 /* EonilJSON-OSX-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilJSON-OSX-Tests.xctest";
+			remoteRef = 4522793F1E69D5370076A851 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45441EF31DB3EB4E00158711 /* LLDBWrapper.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -718,11 +805,14 @@
 				45C0E5BD1DB90374001D23C0 /* WorkspaceNotification.swift in Sources */,
 				4594EC281E6665660028DBC8 /* SemverDTO.swift in Sources */,
 				452279081E6874B80076A851 /* Editor6ThreadSemaphore.swift in Sources */,
+				452279431E69D5C40076A851 /* CargoJSONCoding.swift in Sources */,
+				452279471E69DF9A0076A851 /* SemverJSONCoding.swift in Sources */,
 				45F951B41DC464BF00A260B1 /* Mutation.swift in Sources */,
 				45441EE81DB3EA8E00158711 /* DebugModel.swift in Sources */,
 				45F951B21DC42C6200A260B1 /* ModelTypes.swift in Sources */,
 				45A77E631DBB292D004437C0 /* UNUSED_DeferableStateContainer.swift in Sources */,
 				452279251E68750E0076A851 /* Editor6ThreadChannel.swift in Sources */,
+				452279311E69C6BB0076A851 /* debugLog.swift in Sources */,
 				452278B21E671C880076A851 /* RLS.swift in Sources */,
 				45F951CE1DC6186E00A260B1 /* BuildModel.swift in Sources */,
 				45C0E5CD1DBA4F01001D23C0 /* DebugState.swift in Sources */,
@@ -746,6 +836,7 @@
 				452278B01E671C640076A851 /* Cargo.swift in Sources */,
 				456276111DBA739600F68C84 /* MARK_unimplemented.swift in Sources */,
 				45C0E6961DBA5DC1001D23C0 /* TrackableCommandQueue.swift in Sources */,
+				452279451E69DF410076A851 /* JSONCodingSupport.swift in Sources */,
 				452278B51E671CD00076A851 /* Subprocess2.swift in Sources */,
 				4507B85A1DB501F2006A5871 /* UNUSED_SubprocessController.swift in Sources */,
 				4594EC251E66654F0028DBC8 /* CargoDTO.swift in Sources */,

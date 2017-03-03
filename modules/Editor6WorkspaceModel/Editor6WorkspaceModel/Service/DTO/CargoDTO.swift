@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EonilJSON
 
 protocol CargoDTOMessage {
     ///
@@ -24,7 +25,8 @@ enum CargoDTO {
     ///
     struct FromCompiler: CargoDTOMessage {
         var reason: String
-        var package_id: PackageId
+//        var package_id: PackageId
+        var package_id: String // Hotfixed. Unexpecte
         var target: Target
         var message: JSON
     }
@@ -76,12 +78,12 @@ enum CargoDTO {
         var name: String
         /// This was `PathBuf`, but I couldn't find the definition...
         var src_path: String
-        var tested: Bool
-        var benched: Bool
-        var doc: Bool
-        var doctest: Bool
-        var harness: Bool
-        var for_host: Bool
+        var tested: Bool? // Hotfix due to missing field with no good reason.
+        var benched: Bool? // Hotfix due to missing field with no good reason.
+        var doc: Bool? // Hotfix due to missing field with no good reason.
+        var doctest: Bool? // Hotfix due to missing field with no good reason.
+        var harness: Bool? // Hotfix due to missing field with no good reason.
+        var for_host: Bool? // Hotfix due to missing field with no good reason.
     }
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/manifest.rs#L102
@@ -156,5 +158,5 @@ enum CargoDTO {
 
     typealias Version = SemverDTO.Version
     typealias Diagnostic = RustCompilerDTO.Diagnostic
-    typealias JSON = () // FIXME:...
+    typealias JSON = JSONValue
 }

@@ -96,7 +96,8 @@ final class Flow2<T: AnyObject> {
             cancel()
             return
         }
-        while waiter?(ctx) ?? true {
+        while true {
+            if let w = waiter, w(ctx) { break }
             guard let s = stepq.dequeue() else { break }
             switch s {
             case .execute(let f):

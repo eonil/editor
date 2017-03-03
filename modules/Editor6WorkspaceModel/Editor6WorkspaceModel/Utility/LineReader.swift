@@ -54,4 +54,9 @@ struct LineReader {
         }
         return lines
     }
+    mutating func takeout() -> String {
+        let s = decodedString
+        decodedString = ""
+        return s
+    }
 }

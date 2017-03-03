@@ -1,4 +1,4 @@
-.//
+//
 //  AppDelegate.swift
 //  Editor6WorkspaceModelTestdrive
 //
@@ -28,6 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 "cd ~/",
                 "rm -rf ~/Workshop/Temp/a2",
                 "mkdir ~/Workshop/Temp/a2",
+                "mkdir ~/Workshop/Temp/a2/src",
+                "echo TEST1 > ~/Workshop/Temp/a2/src/main.rs",
                 "exit",
                 ]))
             ss.bash.delegate { e in
@@ -44,7 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         flow.wait { ss in
-            return ss.bash.phase == .terminated
+            return ss.bash.phase != .terminated
         }
         flow.execute { ss in
 
@@ -52,6 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         flow.execute { ss in
             let u = URL(fileURLWithPath: "/Users/Eonil/Workshop/Temp/a2")
             ss.cargo.queue(.init(u))
+            ss.cargo.queue(.build(u))
             ss.cargo.delegate { e in
                 switch e {
                 case .phase:

@@ -6,6 +6,7 @@
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "C0E0E625FC77B9C174CCD9E6FF0E1E2295CAA407" : 9223372036854775807,
     "4635F48624E6C9FA8E74FC196050F32737C9F216" : 9223372036854775807,
+    "4CCC0B5B1BA8B36127027EA53C2A4498B9432F32" : 9223372036854775807,
     "48B9C1DE76C8BEA5F768021CB65ADA820F587B93" : 9223372036854775807,
     "EF756C69F254CD0C22918CA6EACA0E6F835DB0F5" : 9223372036854775807,
     "843C63D4373CDFCC6DD00FE91A96228349AFB08E" : 9223372036854775807,
@@ -16,6 +17,7 @@
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "C0E0E625FC77B9C174CCD9E6FF0E1E2295CAA407" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/Reftable-0.0.0\/",
     "4635F48624E6C9FA8E74FC196050F32737C9F216" : "editor6-trial\/",
+    "4CCC0B5B1BA8B36127027EA53C2A4498B9432F32" : "editor6-trial\/submodules\/json.swift\/",
     "48B9C1DE76C8BEA5F768021CB65ADA820F587B93" : "editor6-trial\/submodules\/LLDBWrapper\/",
     "EF756C69F254CD0C22918CA6EACA0E6F835DB0F5" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/Flow-0.0.3\/",
     "843C63D4373CDFCC6DD00FE91A96228349AFB08E" : "editor6-trial\/submodules\/toolbox.swift\/",
@@ -40,6 +42,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/LLDBWrapper",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "48B9C1DE76C8BEA5F768021CB65ADA820F587B93"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/json.swift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4CCC0B5B1BA8B36127027EA53C2A4498B9432F32"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/fsevents-unofficial-wrapper.git",
