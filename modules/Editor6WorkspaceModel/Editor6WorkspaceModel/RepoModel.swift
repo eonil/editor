@@ -34,7 +34,9 @@ public enum RepoProductCommand {
 }
 public enum RepoEvent {
     case ADHOC_changeAny
+    case mutateIssues(ArrayMutation<Issue>)
 }
+
 
 public final class RepoModel {
     private let cargo = CargoModel()
@@ -74,8 +76,10 @@ public final class RepoModel {
             state.build.isRunningBuild = (cargo.state.phase == .busy)
             delegate?(.ADHOC_changeAny)
         case .issue(let i):
-            state.issues.append(i.toRepoIssue())
-            delegate?(.ADHOC_changeAny)
+            let eidx = state.issues.endIndex
+            let newIssue = i.toRepoIssue()
+            state.issues.append(newIssue)
+            delegate?(.mutateIssues(.insert(eidx..<(eidx+1), [newIssue])))
         case .error(let e):
             debugLog(e)
             MARK_unimplementedButSkipForNow()

@@ -15,6 +15,7 @@ import Editor6WorkspaceUI
 final class RepoController {
     private let model = RepoModel()
     private let view = WorkspaceUIWindowController()
+    private var viewState = WorkspaceUIState()
     var delegate: ((Event) -> ())?
 
     enum Command {
@@ -30,7 +31,7 @@ final class RepoController {
     }
 
     init() {
-
+        model.delegate = { [weak self] in self?.process(modelEvent: $0) }
     }
     deinit {
 
@@ -53,6 +54,29 @@ final class RepoController {
             MARK_unimplemented()
         case .halt:
             MARK_unimplemented()
+        }
+    }
+    private func process(modelEvent e: RepoEvent) {
+        switch e {
+        case .mutateIssues(let m):
+            switch m {
+            case .insert(let r, let es):
+                // FIXME: Implement this properly.
+                MARK_poorlyImplemented()
+                for i in 0..<r.count {
+                    let insertingIndex = r.lowerBound + i
+                    let insertingElement = es[i]
+                    let id = WorkspaceUIBasicOutlineNodeID()
+                    var s = WorkspaceUIBasicOutlineNodeState()
+                    s.label = "\(insertingElement)"
+                    viewState.navigator.issues.tree//.insert((id, s), at: insertingIndex, in: viewState.navigator.issues.tree.root)
+                }
+
+            case .update(let r, let es):
+                viewState
+            case .delete(let r, let es):
+                viewState
+            }
         }
     }
 }

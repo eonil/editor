@@ -8,35 +8,35 @@
 
 import Foundation
 
-public struct WorkspaceState {
-    public typealias Mutation = WorkspaceMutation
-
-    public var location = URL?.none
-    public var project = ProjectState()
-    public var build = BuildState()
-    public var debug = DebugState()
-    public var issues = [Issue]()
-
-    public init() {}
-    public mutating func apply(mutation: WorkspaceMutation) {
-        switch mutation {
-        case .none:
-            break
-        case .all(let newState):
-            self = newState
-        case .location(let newLocation):
-            location = newLocation
-        case .project(let projectMutation):
-            project.apply(mutation: projectMutation)
-        case .build(let newBuild):
-            build = newBuild
-        case .debug(let debugMutation):
-            debug.apply(mutation: debugMutation)
-        case .issues(let newIssues):
-            issues = newIssues
-        }
-    }
-}
+//public struct WorkspaceState {
+//    public typealias Mutation = WorkspaceMutation
+//
+//    public var location = URL?.none
+//    public var project = ProjectState()
+//    public var build = BuildState()
+//    public var debug = DebugState()
+//    public var issues = [Issue]()
+//
+//    public init() {}
+//    public mutating func apply(mutation: WorkspaceMutation) {
+//        switch mutation {
+//        case .none:
+//            break
+//        case .all(let newState):
+//            self = newState
+//        case .location(let newLocation):
+//            location = newLocation
+//        case .project(let projectMutation):
+//            project.apply(mutation: projectMutation)
+//        case .build(let newBuild):
+//            build = newBuild
+//        case .debug(let debugMutation):
+//            debug.apply(mutation: debugMutation)
+//        case .issues(let newIssues):
+//            issues = newIssues
+//        }
+//    }
+//}
 
 public struct BuildState {
     public var isRunningBuild = false
@@ -66,15 +66,15 @@ public enum IssueSourceID {
 // MARK: -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-public enum WorkspaceMutation {
-    case none
-    case all(WorkspaceState)
-    case location(URL)
-    case project(ProjectMutation)
-    case build(BuildState)
-    case debug(DebugMutation)
-    case issues([Issue])
-}
+//public enum WorkspaceMutation {
+//    case none
+//    case all(WorkspaceState)
+//    case location(URL)
+//    case project(ProjectMutation)
+//    case build(BuildState)
+//    case debug(DebugMutation)
+//    case issues([Issue])
+//}
 
 //public extension WorkspaceState {
 //    func apply(transaction: ModelTransaction<WorkspaceState>) {
