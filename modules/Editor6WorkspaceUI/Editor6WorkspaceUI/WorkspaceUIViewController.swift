@@ -17,7 +17,8 @@ public final class WorkspaceUIViewController: Editor6CommonViewController, NSSpl
     public var delegate: ((WorkspaceUIAction) -> ())?
     private let outerSplit = WorkspaceUICommonSplitViewController()
     private let innerSplit = WorkspaceUICommonSplitViewController()
-    private let navigator = WorkspaceUINavigatorViewController()
+//    private let navigator = WorkspaceUINavigatorViewController()
+    private let navigator = NavigatorViewController()
     private let inspector = WorkspaceUIInspectorViewController()
     private let console = Editor6CommonViewController()
     private let document = Editor6CommonViewController()

@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private let wc = WorkspaceUIWindowController()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        wc.delegate { (action: WorkspaceUIAction) in
+        wc.delegate = { (action: WorkspaceUIAction) in
             Swift.print(action)
         }
 

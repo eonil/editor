@@ -43,6 +43,7 @@ public final class WorkspaceUIWindowController: NSWindowController, NSWindowDele
     private func render() {
         installer.installIfNeeded {
             guard let window = window else { reportFatalError() }
+//            window.appearance = NSAppearance(named: NSAppearanceNameVibrantDark)
             window.styleMask.formUnion([.resizable, .miniaturizable, .closable, .titled])
             window.contentViewController = workspaceViewController
             window.setContentSize(NSSize(width: 500, height: 500))

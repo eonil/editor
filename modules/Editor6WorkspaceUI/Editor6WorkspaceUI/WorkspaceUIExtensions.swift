@@ -11,9 +11,17 @@ import AppKit
 import EonilToolbox
 
 extension NSLayoutConstraint {
-    func activateIgnorably() {
-        isActive = true
+//    func activateRequired() {
+//        priority = NSLayoutPriorityRequired
+//        isActive = true
+//    }
+    func activateAlmostRequired() {
         priority = NSLayoutPriorityRequired - 1
+        isActive = true
+    }
+    @available(*, deprecated: 0)
+    func activateIgnorably() {
+        activateAlmostRequired()
     }
 }
 
