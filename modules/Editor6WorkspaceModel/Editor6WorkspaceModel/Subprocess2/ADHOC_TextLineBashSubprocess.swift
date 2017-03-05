@@ -39,7 +39,8 @@ final class ADHOC_TextLineBashSubprocess {
     }
 
     init() {
-        subproc = Subprocess2Controller(path: "/bin/bash", arguments: ["--login", "--posix", "-i", "-s"])
+//        subproc = Subprocess2Controller(path: "/bin/bash", arguments: ["--login", "--posix", "-i", "-s"])
+        subproc = Subprocess2Controller(path: "/bin/bash", arguments: ["--login", "-s"])
         subproc.delegate { [weak self] in self?.process($0) }
         debugLog("init")
     }

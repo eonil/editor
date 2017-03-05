@@ -32,6 +32,7 @@ final class RepoController {
 
     init() {
         model.delegate = { [weak self] in self?.process(modelEvent: $0) }
+        view.delegate = {  [weak self] in self?.process(viewEvent: $0) }
     }
     deinit {
 
@@ -66,17 +67,23 @@ final class RepoController {
                 for i in 0..<r.count {
                     let insertingIndex = r.lowerBound + i
                     let insertingElement = es[i]
-                    let id = WorkspaceUIBasicOutlineNodeID()
                     var s = WorkspaceUIBasicOutlineNodeState()
                     s.label = "\(insertingElement)"
-                    viewState.navigator.issues.tree//.insert((id, s), at: insertingIndex, in: viewState.navigator.issues.tree.root)
+                    let parentNodeID = viewState.navigator.issues.tree.root.id
+                    viewState.navigator.issues.tree.insert(s, at: insertingIndex, in: parentNodeID)
                 }
+                view.reload(viewState)
 
             case .update(let r, let es):
-                viewState
+                MARK_unimplemented()
             case .delete(let r, let es):
-                viewState
+                MARK_unimplemented()
             }
+        case .ADHOC_changeAny:
+            MARK_unimplementedButSkipForNow()
         }
+    }
+    private func process(viewEvent e: WorkspaceUIAction) {
+        MARK_unimplementedButSkipForNow()
     }
 }

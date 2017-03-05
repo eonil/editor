@@ -29,8 +29,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             var n = WorkspaceUIBasicOutlineNodeState()
             n.label = "AAAAA"
             var t = WorkspaceUIBasicOutlineState.Tree(state: n)
+            n.label = "BBBB"
             t.insert(n, at: 0, in: t.root.id)
+
             //            let id1 = t.insert(n, at: 1, in: t.root.id)
+            n.label = "cccc"
             t.insert(n, at: 1, in: t.root.id)
             //            t.insert(n, at: 0, in: id1)
             s.navigator.issues.tree = t

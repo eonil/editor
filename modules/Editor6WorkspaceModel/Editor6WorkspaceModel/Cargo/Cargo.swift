@@ -13,8 +13,8 @@ import Editor6Common
 
 struct CargoState {
     var phase = CargoPhase.idle
-    var issues = [CargoIssue]()
-    var errors = [CargoError]()
+//    var issues = [CargoIssue]()
+//    var errors = [CargoError]()
 }
 public enum CargoCommand {
     case `init`(URL)
@@ -27,17 +27,20 @@ public enum CargoPhase {
 }
 enum CargoIssue {
     case ADHOC_dtoFromCompiler(CargoDTO.FromCompiler)
+    case ADHOC_dtoCompilerArtifact(CargoDTO.Artifact)
     case ADHOC_unknown(JSONValue)
     case ADHOC_unknownUndecodable(String)
 }
 enum CargoEvent {
     case phase
     ///
-    /// Problems of user content (source code and etc.).
+    /// A new issue discovered.
+    /// *Issue* means problem of user content such as source code and etc.
     ///
     case issue(CargoIssue)
     /// 
-    /// Errors of Cargo tool itself.
+    /// A new error discovered.
+    /// *Error* means problems of Cargo tool or in Cargo tool execution itself.
     /// These are not from user content (source code and etc.).
     ///
     case error(CargoError)
@@ -155,7 +158,6 @@ public final class CargoModel {
         case .term(let exitCode):
             if exitCode != 0 {
                 let err = CargoError.nonZeroExit(code: exitCode)
-                state.errors.append(err)
                 delegate?(.error(err))
             }
             state.phase = .idle
@@ -163,14 +165,16 @@ public final class CargoModel {
         }
     }
     private func process(stdout lines: [String]) {
+        guard lines.count > 0 else { return }
         let s = lines.joined(separator: "\n")
         let i = makeCargoIssue(from: s)
         debugLog(i)
-        state.issues.append(i)
+        delegate?(.issue(i))
     }
     private func process(stderr lines: [String]) {
+        guard lines.count > 0 else { return }
         debugLog(lines)
-        state.errors.append(.ADHOC_unknownErrorOutput(lines))
+        delegate?(.error(.ADHOC_unknownErrorOutput(lines)))
     }
 }
 
@@ -187,6 +191,8 @@ private func makeCargoIssue(from json: JSONValue) throws -> CargoIssue {
         switch c {
         case "compiler-message":
             return .ADHOC_dtoFromCompiler(try CargoDTO.FromCompiler(json: json))
+//        case "compiler-artifact":
+//            return .ADHOC_dtoCompilerArtifact(try CargoDTO.Artifact(json: json))
         default:
             return .ADHOC_unknown(json)
         }

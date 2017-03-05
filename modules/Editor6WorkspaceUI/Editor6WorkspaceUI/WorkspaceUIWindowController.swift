@@ -36,6 +36,7 @@ public final class WorkspaceUIWindowController: NSWindowController, NSWindowDele
     }
 
     public func reload(_ newState: WorkspaceUIState) {
+        assertMainThread()
         assert(delegate != nil)
         workspaceViewController.reload(newState)
     }

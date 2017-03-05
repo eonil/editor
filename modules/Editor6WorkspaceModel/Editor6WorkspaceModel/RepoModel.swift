@@ -53,6 +53,7 @@ public final class RepoModel {
         switch command {
         case .relocate(let u):
             state.location = u
+            delegate?(.ADHOC_changeAny)
         case .init:
             guard let u = state.location else { MARK_resultUndefined() }
             cargo.queue(.init(u))

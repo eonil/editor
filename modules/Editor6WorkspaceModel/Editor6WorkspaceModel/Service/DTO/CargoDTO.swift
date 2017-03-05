@@ -26,7 +26,7 @@ enum CargoDTO {
     struct FromCompiler: CargoDTOMessage {
         var reason: String
 //        var package_id: PackageId
-        var package_id: String // Hotfixed. Unexpecte
+        var package_id: String // Hotfixed. Unexpected string type.
         var target: Target
         var message: JSON
     }
@@ -36,7 +36,8 @@ enum CargoDTO {
     ///
     struct Artifact: CargoDTOMessage {
         var reason: String
-        var package_id: PackageId
+//        var package_id: PackageId
+        var package_id: String // Hotfixed. Unexpected string type.
         var target: Target
         var profile: Profile
         var feature: [String]
@@ -48,7 +49,8 @@ enum CargoDTO {
     ///
     struct BuildScript: CargoDTOMessage {
         var reason: String
-        var package_id: PackageId
+//        var package_id: PackageId
+        var package_id: String // Hotfixed. Unexpected string type.
         var linked_libs: [String]
         var linked_paths: [String]
         var cfgs: [String]

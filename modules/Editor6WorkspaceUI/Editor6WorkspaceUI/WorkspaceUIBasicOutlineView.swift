@@ -65,7 +65,8 @@ public final class WorkspaceUIBasicOutlineView: ManualView, NSOutlineViewDataSou
         }
         guard let item = item else { return getRootNodeCount() }
         let id = getSourceID(from: item)
-        return localState.tree.children(of: id).count
+        let c = localState.tree.children(of: id).count
+        return c
     }
     @objc
     @available(*,unavailable)
@@ -82,17 +83,17 @@ public final class WorkspaceUIBasicOutlineView: ManualView, NSOutlineViewDataSou
     @objc
     @available(*,unavailable)
     public func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        func getRootNodeIDs() -> [NodeID] {
+        func getRootNodeIDAtIndex() -> NodeID {
             return localState.showsRootNode
-                ? [localState.tree.root.id]
-                : localState.tree.children(of: localState.tree.root.id)
+                ? localState.tree.root.id
+                : localState.tree.children(of: localState.tree.root.id)[index]
         }
-        func getChildrenIDs() -> [NodeID] {
-            guard let item = item else { return getRootNodeIDs() }
+        func getChildIDAtIndex() -> NodeID {
+            guard let item = item else { return getRootNodeIDAtIndex() }
             let id = getSourceID(from: item)
-            return localState.tree.children(of: id)
+            return localState.tree.children(of: id)[index]
         }
-        let childID = getChildrenIDs()[index]
+        let childID = getChildIDAtIndex()
         guard let mappedChildID = idMapping[childID] else { fatalError("Cannot find mapped-ID from child ID `\(childID)`.") }
         return mappedChildID
     }
