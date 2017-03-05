@@ -86,8 +86,13 @@ private struct MainMenuPalette {
     let applicationQuit     =   makeClickableItem(.applicationQuit, "Quit")
     let file                =   makeGroupItem("File")
     let fileNew             =   makeGroupItem("New")
-    let fileNewWorkspace    =   makeClickableItem(.fileNewWorkspace, "Workspace...")
+    let fileNewRepo         =   makeClickableItem(.fileNewRepo, "Repository...")
+    let fileNewWorkspace    =   makeClickableItem(.fileNewWorkspace, "Workspace")
+    let fileOpen            =   makeClickableItem(.fileOpen, "Open...")
+    let fileSave            =   makeClickableItem(.fileSave, "Save")
+    let fileSaveAs          =   makeClickableItem(.fileSaveAs, "Save As...")
     let fileClose           =   makeClickableItem(.fileClose, "Close")
+    let fileCloseRepo       =   makeClickableItem(.fileCloseRepo, "Close Repository")
     let product             =   makeGroupItem("Product")
     let productRun          =   makeClickableItem(.productRun, "Run")
     let productStop         =   makeClickableItem(.productStop, "Stop")
@@ -104,15 +109,25 @@ private struct MainMenuPalette {
         ]
         file.subitems = [
             fileNew,
+            makeSeparatorItem(),
+            fileOpen,
+            makeSeparatorItem(),
+            fileSave,
+            fileSaveAs,
+            makeSeparatorItem(),
+            fileClose,
+            fileCloseRepo,
         ]
         fileNew.subitems = [
+            fileNewRepo,
             fileNewWorkspace,
         ]
         product.subitems = [
             productRun,
-            productStop,
+            makeSeparatorItem(),
             productBuild,
             productClean,
+            productStop,
         ]
         debug.subitems = [
             debugStepOver,
@@ -140,6 +155,9 @@ private func makeClickableItem(_ id: MainMenuUI2ItemID, _ title: String) -> Main
     m.title = title
     m.id = id
     return m
+}
+private func makeSeparatorItem() -> NSMenuItem {
+    return NSMenuItem.separator()
 }
 
 private extension NSMenu {

@@ -1,8 +1,8 @@
 //
-//  Steppintg.swift
-//  Editor6WorkspaceModel
+//  Flow2.swift
+//  Editor6Common
 //
-//  Created by Hoon H. on 2017/03/02.
+//  Created by Hoon H. on 2017/03/05.
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import Foundation
 
 ///
 /// Provides asynchronous execution context.
-/// 
+///
 /// - `queue` some stepping function,
 /// - and `signal` when you completed.
 ///
@@ -18,15 +18,15 @@ import Foundation
 /// signal. Flow will continue executing next queued
 /// function and wait. Repeat.
 ///
-/// "Waiting" is indefinite by default. You MUST 
+/// "Waiting" is indefinite by default. You MUST
 /// signal at some future point. You can implement
 /// "pause/resume" concept using this waiting stuff.
 ///
-final class Flow2<T: AnyObject> {
+public final class Flow2<T: AnyObject> {
     private typealias ExecuteFunction = (_ context: T) -> ()
     private typealias WaiterWhileCondition = (_ context: T) -> Bool
     private var tmr = Timer?.none
-    private var stepq = Queue<Flow2Step<T>>()
+    private var stepq = Flow2Queue<Flow2Step<T>>()
     private var waiter = WaiterWhileCondition?.none
 
     ///
@@ -41,14 +41,14 @@ final class Flow2<T: AnyObject> {
     ///     `init` completed to allow you can
     ///     use arbitrary `self` as context.
     ///
-    weak var context = T?.none {
+    public weak var context = T?.none {
         willSet { assertMainThread() }
     }
 
     ///
     /// Creates a manually signaled flow.
     ///
-    init() {
+    public init() {
         assertMainThread()
     }
     ///
@@ -56,20 +56,20 @@ final class Flow2<T: AnyObject> {
     /// Created flow will be signaled automatically
     /// periodically by a timer.
     ///
-    init(autosignal: TimeInterval) {
+    public init(autosignal: TimeInterval) {
         assertMainThread()
         remakeTimer(with: autosignal)
     }
     deinit {
         assertMainThread()
-        assert(stepq.isEmpty, "There're some unexcuted steps...")
+        assert(stepq.isEmpty, "There're some unexecuted steps...")
         killTimer()
     }
 
     ///
     /// Queues a new stepping.
     ///
-    func queue(_ step: Flow2Step<T>) {
+    public func queue(_ step: Flow2Step<T>) {
         assertMainThread()
         stepq.enqueue(step)
         processAllIfPossible()
@@ -78,7 +78,7 @@ final class Flow2<T: AnyObject> {
     /// Signals flow to check current waiting is expired or not.
     /// No-op if this flow is not under waiting currently.
     ///
-    func signal() {
+    public func signal() {
         assertMainThread()
         processAllIfPossible()
     }
@@ -88,7 +88,7 @@ final class Flow2<T: AnyObject> {
     ///
     func cancel() {
         assertMainThread()
-        stepq = Queue()
+        stepq = Flow2Queue()
     }
     private func processAllIfPossible() {
         assertMainThread()
@@ -118,16 +118,16 @@ final class Flow2<T: AnyObject> {
     }
 }
 
-extension Flow2 {
-    func execute(_ f: @escaping (_ context: T) -> ()) {
+public extension Flow2 {
+    public func execute(_ f: @escaping (_ context: T) -> ()) {
         queue(.execute(f))
     }
-    func wait(_ c: @escaping (_ context: T) -> Bool) {
+    public func wait(_ c: @escaping (_ context: T) -> Bool) {
         queue(.wait(while: c))
     }
 }
 
-enum Flow2Step<T> {
+public enum Flow2Step<T> {
     case execute((_ context: T) -> ())
     ///
     /// You can put any function as condition.
@@ -137,3 +137,16 @@ enum Flow2Step<T> {
     case wait(while: (_ context: T) -> Bool)
 }
 
+private struct Flow2Queue<T> {
+    private var buf = [T]()
+    var isEmpty: Bool {
+        return buf.isEmpty
+    }
+    mutating func enqueue(_ v: T) {
+        buf.append(v)
+    }
+    mutating func dequeue() -> T? {
+        if buf.isEmpty { return nil }
+        return buf.removeFirst()
+    }
+}

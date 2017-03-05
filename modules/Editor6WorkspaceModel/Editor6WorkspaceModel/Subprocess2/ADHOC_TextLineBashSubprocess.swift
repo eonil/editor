@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Editor6Common
 
 /// Create a subprocess and executes Bash in there.
 ///
@@ -38,7 +39,7 @@ final class ADHOC_TextLineBashSubprocess {
     }
 
     init() {
-        subproc = Subprocess2Controller(path: "/bin/bash", arguments: ["--login", "-s"])
+        subproc = Subprocess2Controller(path: "/bin/bash", arguments: ["--login", "--posix", "-i", "-s"])
         subproc.delegate { [weak self] in self?.process($0) }
         debugLog("init")
     }
@@ -50,14 +51,14 @@ final class ADHOC_TextLineBashSubprocess {
         return subproc.state.phase
     }
 
-    /// - Note:
-    ///     Will bw called from another GCDQ.
     func delegate(to newDelegate: @escaping (Event) -> ()) {
         delegate = newDelegate
     }
 
+    ///
     /// - Parameter newLines:
     ///     Exclude ending `\n` character.
+    ///
     func queue(_ c: Command) {
         debugLog("queue \(c)")
         switch c {
@@ -92,8 +93,8 @@ final class ADHOC_TextLineBashSubprocess {
         }
     }
 
-    private func debugLog(_ message: String) {
-        Editor6WorkspaceModel.debugLog(withAddressOf: self, message: "BASH \(message)")
+    private func debugLog(_ message: @autoclosure () -> String) {
+        Editor6Common.debugLog(withAddressOf: self, message: "BASH \(message())")
     }
 }
 

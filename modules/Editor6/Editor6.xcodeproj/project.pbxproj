@@ -13,8 +13,9 @@
 		45185E4A1DA8E8EA00C4D86D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45185E491DA8E8EA00C4D86D /* Assets.xcassets */; };
 		45185E791DA8F44300C4D86D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45185E781DA8F44300C4D86D /* main.swift */; };
 		45185E7F1DA8F74500C4D86D /* UNUSED_Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45185E7E1DA8F74500C4D86D /* UNUSED_Query.swift */; };
-		45185E811DA8F85A00C4D86D /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45185E801DA8F85A00C4D86D /* WorkspaceDocument.swift */; };
+		45185E811DA8F85A00C4D86D /* RepoDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45185E801DA8F85A00C4D86D /* RepoDocument.swift */; };
 		45185E851DA8FA6F00C4D86D /* WorkspaceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45185E841DA8FA6F00C4D86D /* WorkspaceMessage.swift */; };
+		4519BB1A1E6BE9E800AB6C75 /* URLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519BB191E6BE9E800AB6C75 /* URLExtensions.swift */; };
 		452049A71DAF0A44002297EC /* UNUSED_AsyncMessageDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452049A61DAF0A44002297EC /* UNUSED_AsyncMessageDispatcher.swift */; };
 		4566CEAF1DADAAC700EA2A0C /* Editor6Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEAE1DADAAB400EA2A0C /* Editor6Common.framework */; };
 		4566CEB01DADAAC700EA2A0C /* Editor6Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CEAE1DADAAB400EA2A0C /* Editor6Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -29,15 +30,22 @@
 		45ABC1B01DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45ABC1AB1DCDAD61006EFE1F /* Editor6MainMenuUI2.framework */; };
 		45ABC1B11DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45ABC1AB1DCDAD61006EFE1F /* Editor6MainMenuUI2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45ABC1B51DCDAEB1006EFE1F /* UNUSED_WorkspaceDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1B41DCDAEB1006EFE1F /* UNUSED_WorkspaceDriver.swift */; };
-		45ABC1C61DCDB62E006EFE1F /* MARK_unimplemented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */; };
 		45ABC1D51DCDB90A006EFE1F /* ignore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D41DCDB90A006EFE1F /* ignore.swift */; };
-		45B69FDF1E29F8F7005D072B /* BuildController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B69FDE1E29F8F7005D072B /* BuildController.swift */; };
 		45B6A03B1E29FD05005D072B /* Editor6Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45B6A03A1E29FCFD005D072B /* Editor6Services.framework */; };
 		45B6A03C1E29FD05005D072B /* Editor6Services.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45B6A03A1E29FCFD005D072B /* Editor6Services.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45C282E81E103FF000BE84AF /* WorkspaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282E71E103FF000BE84AF /* WorkspaceController.swift */; };
 		45C282F71E11964800BE84AF /* FileTreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282F61E11964800BE84AF /* FileTreeController.swift */; };
-		45C282F91E1197BA00BE84AF /* DebugTreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282F81E1197BA00BE84AF /* DebugTreeController.swift */; };
 		45C282FF1E16BC9800BE84AF /* WorkspaceProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282FE1E16BC9800BE84AF /* WorkspaceProcess.swift */; };
+		45CCF0201E6A0B9600068A03 /* RepoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF01F1E6A0B9600068A03 /* RepoController.swift */; };
+		45CCF0361E6A0D9F00068A03 /* Editor6WorkspaceModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CCF0281E6A0BD600068A03 /* Editor6WorkspaceModel.framework */; };
+		45CCF0371E6A0D9F00068A03 /* Editor6WorkspaceModel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45CCF0281E6A0BD600068A03 /* Editor6WorkspaceModel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		45CCF03D1E6A6B1100068A03 /* NotificationCenterExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF03C1E6A6B1100068A03 /* NotificationCenterExtensions.swift */; };
+		45CCF03F1E6A893500068A03 /* NotificationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF03E1E6A893500068A03 /* NotificationExtensions.swift */; };
+		45CCF0411E6A89E600068A03 /* NotificationWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF0401E6A89E600068A03 /* NotificationWatch.swift */; };
+		45CCF0431E6B0BDD00068A03 /* SwiftArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF0421E6B0BDD00068A03 /* SwiftArrayExtensions.swift */; };
+		45CCF0451E6B131E00068A03 /* BroadcastWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF0441E6B131E00068A03 /* BroadcastWatch.swift */; };
+		45CCF0471E6B194F00068A03 /* RepoDocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF0461E6B194F00068A03 /* RepoDocumentManager.swift */; };
+		45CCF0751E6B283600068A03 /* reportBug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF0741E6B283600068A03 /* reportBug.swift */; };
+		45CCF0851E6B314400068A03 /* Flow2Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF0841E6B314400068A03 /* Flow2Extensions.swift */; };
 		45D940381DCA914B00B65876 /* DriverMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D940371DCA914B00B65876 /* DriverMessage.swift */; };
 		45E0851E1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */; };
 		45E0851F1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -177,6 +185,34 @@
 			remoteGlobalIDString = 45C2828E1E103C1300BE84AF;
 			remoteInfo = Editor6Services;
 		};
+		45CCF0271E6A0BD600068A03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45CCF0211E6A0BD600068A03 /* Editor6WorkspaceModel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45441ED61DB3EA0F00158711;
+			remoteInfo = Editor6WorkspaceModel;
+		};
+		45CCF0291E6A0BD600068A03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45CCF0211E6A0BD600068A03 /* Editor6WorkspaceModel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 452278DA1E67424A0076A851;
+			remoteInfo = Editor6WorkspaceModelUnitTests;
+		};
+		45CCF02B1E6A0BD600068A03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45CCF0211E6A0BD600068A03 /* Editor6WorkspaceModel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45BBCF861DB5489F00F83573;
+			remoteInfo = Editor6WorkspaceModelTestdrive;
+		};
+		45CCF0381E6A0D9F00068A03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45CCF0211E6A0BD600068A03 /* Editor6WorkspaceModel.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 45441ED51DB3EA0F00158711;
+			remoteInfo = Editor6WorkspaceModel;
+		};
 		45E0851A1DB3D1D500C5428D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */;
@@ -210,6 +246,7 @@
 				4517CFE41E2BAED200C43464 /* LLDBWrapper.framework in Embed Frameworks */,
 				4566CEB01DADAAC700EA2A0C /* Editor6Common.framework in Embed Frameworks */,
 				45B6A03C1E29FD05005D072B /* Editor6Services.framework in Embed Frameworks */,
+				45CCF0371E6A0D9F00068A03 /* Editor6WorkspaceModel.framework in Embed Frameworks */,
 				45E0851F1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Embed Frameworks */,
 				45ABC1B11DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Embed Frameworks */,
 				4566CEB41DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Embed Frameworks */,
@@ -227,8 +264,9 @@
 		45185E4E1DA8E8EA00C4D86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45185E781DA8F44300C4D86D /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		45185E7E1DA8F74500C4D86D /* UNUSED_Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_Query.swift; sourceTree = "<group>"; };
-		45185E801DA8F85A00C4D86D /* WorkspaceDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocument.swift; sourceTree = "<group>"; };
+		45185E801DA8F85A00C4D86D /* RepoDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoDocument.swift; sourceTree = "<group>"; };
 		45185E841DA8FA6F00C4D86D /* WorkspaceMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceMessage.swift; sourceTree = "<group>"; };
+		4519BB191E6BE9E800AB6C75 /* URLExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLExtensions.swift; sourceTree = "<group>"; };
 		452049A61DAF0A44002297EC /* UNUSED_AsyncMessageDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_AsyncMessageDispatcher.swift; sourceTree = "<group>"; };
 		4566CEA01DADAAB100EA2A0C /* Editor6FileTreeUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6FileTreeUI.xcodeproj; path = ../Editor6FileTreeUI/Editor6FileTreeUI.xcodeproj; sourceTree = "<group>"; };
 		4566CEA91DADAAB400EA2A0C /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
@@ -240,14 +278,20 @@
 		4594EB7C1E6487DE0028DBC8 /* ThreadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadUtility.swift; sourceTree = "<group>"; };
 		45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6MainMenuUI2.xcodeproj; path = ../Editor6MainMenuUI2/Editor6MainMenuUI2.xcodeproj; sourceTree = "<group>"; };
 		45ABC1B41DCDAEB1006EFE1F /* UNUSED_WorkspaceDriver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_WorkspaceDriver.swift; sourceTree = "<group>"; };
-		45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
 		45ABC1D41DCDB90A006EFE1F /* ignore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ignore.swift; sourceTree = "<group>"; };
-		45B69FDE1E29F8F7005D072B /* BuildController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildController.swift; sourceTree = "<group>"; };
 		45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Services.xcodeproj; path = ../Editor6Services/Editor6Services.xcodeproj; sourceTree = "<group>"; };
-		45C282E71E103FF000BE84AF /* WorkspaceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceController.swift; sourceTree = "<group>"; };
 		45C282F61E11964800BE84AF /* FileTreeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeController.swift; sourceTree = "<group>"; };
-		45C282F81E1197BA00BE84AF /* DebugTreeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugTreeController.swift; sourceTree = "<group>"; };
 		45C282FE1E16BC9800BE84AF /* WorkspaceProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceProcess.swift; sourceTree = "<group>"; };
+		45CCF01F1E6A0B9600068A03 /* RepoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoController.swift; sourceTree = "<group>"; };
+		45CCF0211E6A0BD600068A03 /* Editor6WorkspaceModel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6WorkspaceModel.xcodeproj; path = ../Editor6WorkspaceModel/Editor6WorkspaceModel.xcodeproj; sourceTree = "<group>"; };
+		45CCF03C1E6A6B1100068A03 /* NotificationCenterExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCenterExtensions.swift; sourceTree = "<group>"; };
+		45CCF03E1E6A893500068A03 /* NotificationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationExtensions.swift; sourceTree = "<group>"; };
+		45CCF0401E6A89E600068A03 /* NotificationWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationWatch.swift; sourceTree = "<group>"; };
+		45CCF0421E6B0BDD00068A03 /* SwiftArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftArrayExtensions.swift; sourceTree = "<group>"; };
+		45CCF0441E6B131E00068A03 /* BroadcastWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastWatch.swift; sourceTree = "<group>"; };
+		45CCF0461E6B194F00068A03 /* RepoDocumentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoDocumentManager.swift; sourceTree = "<group>"; };
+		45CCF0741E6B283600068A03 /* reportBug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = reportBug.swift; sourceTree = "<group>"; };
+		45CCF0841E6B314400068A03 /* Flow2Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flow2Extensions.swift; sourceTree = "<group>"; };
 		45D940371DCA914B00B65876 /* DriverMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverMessage.swift; sourceTree = "<group>"; };
 		45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6WorkspaceUI.xcodeproj; path = ../Editor6WorkspaceUI/Editor6WorkspaceUI.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -260,6 +304,7 @@
 				4517CFE31E2BAED200C43464 /* LLDBWrapper.framework in Frameworks */,
 				4566CEAF1DADAAC700EA2A0C /* Editor6Common.framework in Frameworks */,
 				45B6A03B1E29FD05005D072B /* Editor6Services.framework in Frameworks */,
+				45CCF0361E6A0D9F00068A03 /* Editor6WorkspaceModel.framework in Frameworks */,
 				45E0851E1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Frameworks */,
 				45ABC1B01DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Frameworks */,
 				4566CEB31DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Frameworks */,
@@ -306,16 +351,22 @@
 				45185E421DA8E8EA00C4D86D /* Driver.swift */,
 				456FDDD51DAA78B900F8003A /* DriverState.swift */,
 				45D940371DCA914B00B65876 /* DriverMessage.swift */,
-				45185E801DA8F85A00C4D86D /* WorkspaceDocument.swift */,
+				45CCF0461E6B194F00068A03 /* RepoDocumentManager.swift */,
+				45185E801DA8F85A00C4D86D /* RepoDocument.swift */,
+				45CCF01F1E6A0B9600068A03 /* RepoController.swift */,
 				4583C1611DCAA48A001EA107 /* WorkspaceID.swift */,
 				45185E841DA8FA6F00C4D86D /* WorkspaceMessage.swift */,
 				45C282FE1E16BC9800BE84AF /* WorkspaceProcess.swift */,
-				45C282E71E103FF000BE84AF /* WorkspaceController.swift */,
 				45C282F61E11964800BE84AF /* FileTreeController.swift */,
-				45B69FDE1E29F8F7005D072B /* BuildController.swift */,
-				45C282F81E1197BA00BE84AF /* DebugTreeController.swift */,
-				45ABC1C51DCDB62E006EFE1F /* MARK_unimplemented.swift */,
 				45ABC1D41DCDB90A006EFE1F /* ignore.swift */,
+				45CCF03C1E6A6B1100068A03 /* NotificationCenterExtensions.swift */,
+				45CCF0401E6A89E600068A03 /* NotificationWatch.swift */,
+				45CCF0441E6B131E00068A03 /* BroadcastWatch.swift */,
+				45CCF03E1E6A893500068A03 /* NotificationExtensions.swift */,
+				45CCF0421E6B0BDD00068A03 /* SwiftArrayExtensions.swift */,
+				45CCF0741E6B283600068A03 /* reportBug.swift */,
+				45CCF0841E6B314400068A03 /* Flow2Extensions.swift */,
+				4519BB191E6BE9E800AB6C75 /* URLExtensions.swift */,
 				4594EB7F1E64FCFF0028DBC8 /* (archived) */,
 				45185E491DA8E8EA00C4D86D /* Assets.xcassets */,
 				45185E4E1DA8E8EA00C4D86D /* Info.plist */,
@@ -327,6 +378,7 @@
 		45185E681DA8F0A700C4D86D /* (deps) */ = {
 			isa = PBXGroup;
 			children = (
+				45CCF0211E6A0BD600068A03 /* Editor6WorkspaceModel.xcodeproj */,
 				45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */,
 				45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */,
 				45E085151DB3D1D500C5428D /* Editor6WorkspaceUI.xcodeproj */,
@@ -394,6 +446,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		45CCF0221E6A0BD600068A03 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45CCF0281E6A0BD600068A03 /* Editor6WorkspaceModel.framework */,
+				45CCF02C1E6A0BD600068A03 /* Editor6WorkspaceModelTestdrive.app */,
+				45CCF02A1E6A0BD600068A03 /* Editor6WorkspaceModelUnitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		45E085161DB3D1D500C5428D /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -424,6 +486,7 @@
 				45ABC1B31DCDAD68006EFE1F /* PBXTargetDependency */,
 				45B6A03E1E29FD05005D072B /* PBXTargetDependency */,
 				4517CFE61E2BAED200C43464 /* PBXTargetDependency */,
+				45CCF0391E6A0D9F00068A03 /* PBXTargetDependency */,
 			);
 			name = Editor6;
 			productName = Editor6;
@@ -474,6 +537,10 @@
 				{
 					ProductGroup = 45B6A0361E29FCFD005D072B /* Products */;
 					ProjectRef = 45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */;
+				},
+				{
+					ProductGroup = 45CCF0221E6A0BD600068A03 /* Products */;
+					ProjectRef = 45CCF0211E6A0BD600068A03 /* Editor6WorkspaceModel.xcodeproj */;
 				},
 				{
 					ProductGroup = 45E085161DB3D1D500C5428D /* Products */;
@@ -590,6 +657,27 @@
 			remoteRef = 45B6A0391E29FCFD005D072B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45CCF0281E6A0BD600068A03 /* Editor6WorkspaceModel.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Editor6WorkspaceModel.framework;
+			remoteRef = 45CCF0271E6A0BD600068A03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45CCF02A1E6A0BD600068A03 /* Editor6WorkspaceModelUnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Editor6WorkspaceModelUnitTests.xctest;
+			remoteRef = 45CCF0291E6A0BD600068A03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45CCF02C1E6A0BD600068A03 /* Editor6WorkspaceModelTestdrive.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = Editor6WorkspaceModelTestdrive.app;
+			remoteRef = 45CCF02B1E6A0BD600068A03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45E0851B1DB3D1D500C5428D /* Editor6WorkspaceUI.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -623,26 +711,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				45185E7F1DA8F74500C4D86D /* UNUSED_Query.swift in Sources */,
-				45B69FDF1E29F8F7005D072B /* BuildController.swift in Sources */,
+				45CCF0201E6A0B9600068A03 /* RepoController.swift in Sources */,
 				45ABC1B51DCDAEB1006EFE1F /* UNUSED_WorkspaceDriver.swift in Sources */,
 				4594EB7D1E6487DE0028DBC8 /* ThreadChannel.swift in Sources */,
+				4519BB1A1E6BE9E800AB6C75 /* URLExtensions.swift in Sources */,
+				45CCF0431E6B0BDD00068A03 /* SwiftArrayExtensions.swift in Sources */,
 				456FDDD61DAA78B900F8003A /* DriverState.swift in Sources */,
-				45C282F91E1197BA00BE84AF /* DebugTreeController.swift in Sources */,
 				45185E431DA8E8EA00C4D86D /* Driver.swift in Sources */,
 				452049A71DAF0A44002297EC /* UNUSED_AsyncMessageDispatcher.swift in Sources */,
-				45ABC1C61DCDB62E006EFE1F /* MARK_unimplemented.swift in Sources */,
 				4583C1621DCAA48A001EA107 /* WorkspaceID.swift in Sources */,
+				45CCF0411E6A89E600068A03 /* NotificationWatch.swift in Sources */,
 				45C282F71E11964800BE84AF /* FileTreeController.swift in Sources */,
 				45C282FF1E16BC9800BE84AF /* WorkspaceProcess.swift in Sources */,
+				45CCF0751E6B283600068A03 /* reportBug.swift in Sources */,
+				45CCF0451E6B131E00068A03 /* BroadcastWatch.swift in Sources */,
+				45CCF03F1E6A893500068A03 /* NotificationExtensions.swift in Sources */,
 				4594EB7E1E6487DE0028DBC8 /* ThreadUtility.swift in Sources */,
+				45CCF03D1E6A6B1100068A03 /* NotificationCenterExtensions.swift in Sources */,
 				45185E791DA8F44300C4D86D /* main.swift in Sources */,
 				45185E851DA8FA6F00C4D86D /* WorkspaceMessage.swift in Sources */,
+				45CCF0471E6B194F00068A03 /* RepoDocumentManager.swift in Sources */,
 				45ABC1D51DCDB90A006EFE1F /* ignore.swift in Sources */,
-				45C282E81E103FF000BE84AF /* WorkspaceController.swift in Sources */,
 				456FDE211DAA952F00F8003A /* UNUSED_TreeEvent.swift in Sources */,
 				45D940381DCA914B00B65876 /* DriverMessage.swift in Sources */,
 				456FDE231DAA95AE00F8003A /* UNUSED_Broadcast.swift in Sources */,
-				45185E811DA8F85A00C4D86D /* WorkspaceDocument.swift in Sources */,
+				45CCF0851E6B314400068A03 /* Flow2Extensions.swift in Sources */,
+				45185E811DA8F85A00C4D86D /* RepoDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,6 +767,11 @@
 			isa = PBXTargetDependency;
 			name = Editor6Services;
 			targetProxy = 45B6A03D1E29FD05005D072B /* PBXContainerItemProxy */;
+		};
+		45CCF0391E6A0D9F00068A03 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Editor6WorkspaceModel;
+			targetProxy = 45CCF0381E6A0D9F00068A03 /* PBXContainerItemProxy */;
 		};
 		45E085211DB3D1DC00C5428D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

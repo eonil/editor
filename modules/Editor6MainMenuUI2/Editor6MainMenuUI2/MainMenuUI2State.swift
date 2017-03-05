@@ -17,7 +17,7 @@ public struct MainMenuUI2State {
     public var keyEquivalentMappings = MainMenuKeyMappingUtility.makeDefaultKeyMapping()
 
     /// Only items in this set will become enabled.
-    public var availableItems = [MainMenuUI2ItemID]()
+    public var availableItems = Set<MainMenuUI2ItemID>()
 
     public init() {}
 }

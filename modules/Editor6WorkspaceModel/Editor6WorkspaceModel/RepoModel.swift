@@ -7,10 +7,19 @@
 //
 
 import Foundation
+import Editor6Common
 
-public typealias RepoState = WorkspaceState
+public struct RepoState {
+    public var location = URL?.none
+    public var project = ProjectState()
+    public var build = BuildState()
+    public var debug = DebugState()
+    public var issues = [Issue]()
+}
 
 public enum RepoCommand {
+    case relocate(URL)
+    case `init`
     case product(RepoProductCommand)
 }
 public enum RepoFileCommand {
@@ -24,29 +33,58 @@ public enum RepoProductCommand {
     case run
 }
 public enum RepoEvent {
-    case changeState
+    case ADHOC_changeAny
 }
 
 public final class RepoModel {
     private let cargo = CargoModel()
+    public private(set) var state = RepoState()
+    public var delegate = ((RepoEvent) -> ())?.none
 
-    private(set) var state = RepoState()
-    private var delegate = ((CargoEvent) -> ())?.none
-
-    init() {
+    public init() {
         cargo.delegate { [weak self] in self?.process(cargoEvent: $0) }
     }
     deinit {
     }
 
+    public func queue(_ command: RepoCommand) {
+        switch command {
+        case .relocate(let u):
+            state.location = u
+        case .init:
+            guard let u = state.location else { MARK_resultUndefined() }
+            cargo.queue(.init(u))
+        case .product(let c):
+            switch c {
+            case .build:
+                guard let u = state.location else { MARK_resultUndefined() }
+                cargo.queue(.build(u))
+            case .clean:
+                guard let u = state.location else { MARK_resultUndefined() }
+                cargo.queue(.clean(u))
+            case .run:
+                MARK_unimplemented()
+            }
+        }
+    }
+
     private func process(cargoEvent e: CargoEvent) {
         switch e {
         case .phase:
-            break
+            state.build.isRunningBuild = (cargo.state.phase == .busy)
+            delegate?(.ADHOC_changeAny)
         case .issue(let i):
-            break
+            state.issues.append(i.toRepoIssue())
+            delegate?(.ADHOC_changeAny)
         case .error(let e):
-            break
+            debugLog(e)
+            MARK_unimplementedButSkipForNow()
         }
+    }
+}
+
+private extension CargoIssue {
+    func toRepoIssue() -> Issue {
+        return Issue(source: .cargo, description: "\(self)")
     }
 }

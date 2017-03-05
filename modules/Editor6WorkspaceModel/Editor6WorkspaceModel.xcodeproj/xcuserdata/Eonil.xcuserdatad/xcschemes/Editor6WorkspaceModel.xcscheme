@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "452278D91E67424A0076A851"
+               BuildableName = "Editor6WorkspaceModelUnitTests.xctest"
+               BlueprintName = "Editor6WorkspaceModelUnitTests"
+               ReferencedContainer = "container:Editor6WorkspaceModel.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "45441ED51DB3EA0F00158711"
+            BuildableName = "Editor6WorkspaceModel.framework"
+            BlueprintName = "Editor6WorkspaceModel"
+            ReferencedContainer = "container:Editor6WorkspaceModel.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

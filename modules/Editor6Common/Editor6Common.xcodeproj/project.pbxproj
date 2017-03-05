@@ -20,6 +20,8 @@
 		45ABC1D11DCDB788006EFE1F /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D01DCDB788006EFE1F /* Report.swift */; };
 		45ABC1D31DCDB8BD006EFE1F /* noop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1D21DCDB8BD006EFE1F /* noop.swift */; };
 		45B69F781E16C2F4005D072B /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458103DB1DADADFD00B0717C /* EonilToolbox.framework */; };
+		45CCF0871E6B31E400068A03 /* Flow2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF0861E6B31E400068A03 /* Flow2.swift */; };
+		45CCF0A51E6B326700068A03 /* assertMainThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CCF0A41E6B326700068A03 /* assertMainThread.swift */; };
 		45E084E81DB3C87300C5428D /* Tree1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E084E71DB3C87300C5428D /* Tree1.swift */; };
 		45EF85331DB22DCB00B320B5 /* Editor6CommonControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF85321DB22DCB00B320B5 /* Editor6CommonControl.swift */; };
 		45EF85411DB236CE00B320B5 /* Editor6CommonStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF85401DB236CE00B320B5 /* Editor6CommonStackView.swift */; };
@@ -103,6 +105,13 @@
 			remoteGlobalIDString = BB8FE9B91C7C8E0E0051268F;
 			remoteInfo = "Tests-tvOS";
 		};
+		45CCF0901E6B31E500068A03 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BB338C851DD27D2F00BB401D;
+			remoteInfo = PerformanceTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +130,8 @@
 		45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
 		45ABC1D01DCDB788006EFE1F /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		45ABC1D21DCDB8BD006EFE1F /* noop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = noop.swift; sourceTree = "<group>"; };
+		45CCF0861E6B31E400068A03 /* Flow2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flow2.swift; sourceTree = "<group>"; };
+		45CCF0A41E6B326700068A03 /* assertMainThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assertMainThread.swift; sourceTree = "<group>"; };
 		45E084E71DB3C87300C5428D /* Tree1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree1.swift; sourceTree = "<group>"; };
 		45EF85321DB22DCB00B320B5 /* Editor6CommonControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6CommonControl.swift; sourceTree = "<group>"; };
 		45EF85401DB236CE00B320B5 /* Editor6CommonStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6CommonStackView.swift; sourceTree = "<group>"; };
@@ -160,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				45185ED81DA93A0D00C4D86D /* Editor6Common.h */,
+				45CCF0861E6B31E400068A03 /* Flow2.swift */,
 				456B81C81DAA0D3B006D7C49 /* WorkspaceTreeState.swift */,
 				456FDD5B1DAA2DD500F8003A /* Tree.swift */,
 				45E084E71DB3C87300C5428D /* Tree1.swift */,
@@ -173,6 +185,7 @@
 				45ABC1D01DCDB788006EFE1F /* Report.swift */,
 				45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */,
 				4517CFE71E2BB15F00C43464 /* debugLog.swift */,
+				45CCF0A41E6B326700068A03 /* assertMainThread.swift */,
 				45ABC1D21DCDB8BD006EFE1F /* noop.swift */,
 			);
 			path = Editor6Common;
@@ -208,6 +221,7 @@
 				459813BF1E2BBE9000871FB6 /* BTreeTests.xctest */,
 				459813C11E2BBE9000871FB6 /* BTreeTests.xctest */,
 				459813C31E2BBE9000871FB6 /* BTreeTests.xctest */,
+				45CCF0911E6B31E500068A03 /* PerformanceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -365,6 +379,13 @@
 			remoteRef = 459813C21E2BBE9000871FB6 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45CCF0911E6B31E500068A03 /* PerformanceTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = PerformanceTests.xctest;
+			remoteRef = 45CCF0901E6B31E500068A03 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -392,6 +413,8 @@
 				45ABC12F1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift in Sources */,
 				456B81C91DAA0D3B006D7C49 /* WorkspaceTreeState.swift in Sources */,
 				456FDDA21DAA461300F8003A /* Editor6CommonView.swift in Sources */,
+				45CCF0871E6B31E400068A03 /* Flow2.swift in Sources */,
+				45CCF0A51E6B326700068A03 /* assertMainThread.swift in Sources */,
 				45EF85331DB22DCB00B320B5 /* Editor6CommonControl.swift in Sources */,
 				4517CFE81E2BB15F00C43464 /* debugLog.swift in Sources */,
 				456FDD5C1DAA2DD500F8003A /* Tree.swift in Sources */,

@@ -8,25 +8,33 @@
 
 import Cocoa
 import LLDBWrapper
+import Editor6Common
 import Editor6MainMenuUI2
 
 final class Driver {
     private static var instanceCount = 0
-    private let mmc = MainMenuUI2Controller()
+    private let mmcon = MainMenuUI2Controller()
     private let appcon = ApplicationController()
+    private let repoDocMan = RepoDocumentManager()
     private var localState = DriverState()
+
+    private let fileSaveAsFlow = Flow2<Driver>()
 
     init() {
         assert(Thread.isMainThread)
         precondition(Driver.instanceCount == 0)
         LLDBGlobals.initializeLLDBWrapper()
         Driver.instanceCount += 1
-        mmc.delegate { [weak self] in self?.process($0) }
-        mmc.reload(localState.mainMenu)
-        appcon.owner = self
-        NSApplication.shared().mainMenu = mmc.menu
+
+        NSApplication.shared().mainMenu = mmcon.menu
         NSApplication.shared().delegate = appcon
-        Driver.queue = { [weak self] in self?.schedule(.handle($0)) }
+        mmcon.reload(localState.mainMenuUIState)
+
+        appcon.delegate = { [weak self] in self?.process(applicationControllerEvent: $0) }
+        mmcon.delegate { [weak self] in self?.process(mainMenuUI2Event: $0) }
+        repoDocMan.delegate = { [weak self] in self?.process(repoDocManEvent: $0) }
+
+        fileSaveAsFlow.context = self
     }
     func run() -> Int32 {
         assert(Thread.isMainThread)
@@ -34,93 +42,155 @@ final class Driver {
     }
     deinit {
         assert(Thread.isMainThread)
-        Driver.queue = ignore
         NSApplication.shared().delegate = nil
         NSApplication.shared().mainMenu = nil
-        appcon.owner = nil
         Driver.instanceCount -= 1
         LLDBGlobals.terminateLLDBWrapper()
     }
 
-    // MARK: -
-
-    /// In AppKit, each `NSDocument`s are independently created and destroyed
-    /// and there's no existing facility to track thier creation and destruction
-    /// from other place. They seem to be intended to be independent islands.
-    /// I had to create a message channel, and this is that channel.
-    ///
-    /// Named as `dispatch` because this will not
-    static private(set) var queue: (WorkspaceMessage) -> () = ignore
-
-    /// Steps single iteration of loop.
-    /// There's no explicit loop.
-    /// Dispatched actions from each terminal view components
-    /// will be enqueued and trigger async event consumption function.
-    /// The consumption function is this.
-    ///
-    private func process(_ command: Command) {
-        switch command {
-        case .handle(let workspaceMessage):
-            localState.apply(event: workspaceMessage)
-        }
-
-        mmc.reload(localState.mainMenu)
-        let m = DriverMessage.change(localState)
-        NSDocumentController.shared().documents
-            .flatMap { $0 as? WorkspaceDocument }
-            .forEach { $0.process(message: m) }
-    }
-    fileprivate func schedule(_ command: Command) {
-        assert(Thread.isMainThread)
-        // Restart if needed.
-        do {
-            // An action is output of processing.
-            // It becomes input command of next iteration.
-            // Async dispatch triggers loop iteration.
-            // 
-            // Why Do We Need This?
-            // --------------------
-            // To avoid immediate re-entering.
-            // Action processing can ultimately trigger another action.
-            // And the second action can trigger first action again.
-            // Then it becomes infinite loop.
-            // And it's very hard to prevent such loop because they are
-            // sent from terminal view components.
-            DispatchQueue.main.async { [weak self] in self?.process(command) }
+    private func process(applicationControllerEvent e: ApplicationController.Event) {
+        switch e {
+        case .didFinishLaunch:
+            // Nothing to do for now.
+            ()
+        case .willTerminate:
+            // Nothing to do for now.
+            ()
         }
     }
-
-    private func process(_ action: MainMenuUI2Action) {
-        do {
-            switch action {
+    private func process(repoDocManEvent e: RepoDocumentManager.Event) {
+        localState.apply(repoDocumentManagerEvent: e)
+        localState.apply(currentRepoState: repoDocMan.findCurrentRepoDocument()?.repoController.state)
+        mmcon.reload(localState.mainMenuUIState)
+    }
+    private func process(mainMenuUI2Event e: MainMenuUI2Action) {
+        enum Cancel: Error {
+            case byPotentialBug(PotentialBug)
+        }
+        func runWithDefaultErrorHandling(_ f: () throws -> ()) {
+            do {
+                try f()
+            }
+            catch let c as Cancel {
+                switch c {
+                case .byPotentialBug(let pb):
+                    reportBugAndContinue(pb)
+                }
+            }
+            catch let e {
+                NSApplication.shared().presentError(e)
+            }
+        }
+        func runAsyncWithDefaultErrorHandling(_ f: @escaping () throws -> ()) {
+            do {
+                try f()
+            }
+            catch let c as Cancel {
+                switch c {
+                case .byPotentialBug(let pb):
+                    reportBugAndContinue(pb)
+                }
+            }
+            catch let e {
+                NSApplication.shared().presentError(e)
+            }
+        }
+        runWithDefaultErrorHandling {
+            func getCurrentDocumentIfAvailable() throws -> RepoDocument {
+                guard let curdoc = repoDocMan.findCurrentRepoDocument() else { throw Cancel.byPotentialBug(.mainMenuClickedWithNoCurrentRepoDocument) }
+                return curdoc
+            }
+            switch e {
             case .click(let menuItemID):
                 switch menuItemID {
                 case .applicationQuit:
                     NSApplication.shared().terminate(self)
-                case .fileNewWorkspace:
-                    try NSDocumentController.shared().makeUntitledDocument(ofType: "EonilEditor6Workspace")
+                case .fileNewRepo:
+                    try NSDocumentController.shared().openUntitledDocumentAndDisplay(true)
+
+//                case .fileNewWorkspace:
+//                    let newDoc = try NSDocumentController.shared().makeUntitledDocument(ofType: "EonilEditor6Repo")
+//                    let newdoc = try NSDocumentController.shared().openUntitledDocumentAndDisplay(true)
+//                    guard let newdoc1 = newdoc as? RepoDocument else { throw Cancel.byPotentialBug(.defaultNewDocumentIsNotRepoDocument) }
+
+                case .fileOpen:
+                    NSDocumentController.shared().beginOpenPanel(completionHandler: { us in
+                        guard let us = us else { return }
+                        debugLog(us)
+                    })
+
+                case .fileSave:
+                    process(mainMenuUI2Event: .click(.fileSaveAs))
+
+                case .fileSaveAs:
+                    guard let curdoc = repoDocMan.findCurrentRepoDocument() else { throw Cancel.byPotentialBug(.missingCurrentRepoDocumentForRequiredContext) }
+                    fileSaveAsFlow.runSavePanelUI { u in
+                        runWithDefaultErrorHandling {
+                            curdoc.repoController.process(.relocate(u))
+                            try FileManager.default.createDirectory(at: u, withIntermediateDirectories: true, attributes: nil)
+                            guard let repoName = u.editor6_makeRepoName() else { throw Cancel.byPotentialBug(.badRepoNameWhichHasNoVisibleNamePart) }
+                            let repoSpecFileURL = u.appendingPathComponent(repoName).appendingPathExtension("ee6repo1spec1")
+                            try Data().write(to: repoSpecFileURL)
+                            curdoc.repoController.process(.init)
+                        }
+                    }
+
+                case .fileCloseRepo:
+                    guard let curdoc = repoDocMan.findCurrentRepoDocument() else { throw Cancel.byPotentialBug(PotentialBug.mainMenuClickedWithNoCurrentRepoDocument) }
+                    curdoc.close()
+
+                case .productClean:
+                    let curdoc = try getCurrentDocumentIfAvailable()
+                    curdoc.repoController.process(.clean)
+                case .productBuild:
+                    let curdoc = try getCurrentDocumentIfAvailable()
+                    curdoc.repoController.process(.build)
+//                case .productRun:
                 default:
                     MARK_unimplemented()
                 }
             }
         }
-        catch let error {
-            NSApplication.shared().presentError(error)
-        }
     }
 }
 
-private enum Command {
-//    case ADHOC_test
-    case handle(WorkspaceMessage)
-}
 
 
+
+
+
+///
+/// I don't trust `NSDocumentController`'s synchronization timing.
+/// That's why this manager exists.
+///
+@objc
 private final class ApplicationController: NSObject, NSApplicationDelegate {
-    weak var owner: Driver?
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-//        owner?.schedule(.ADHOC_test)
+    var delegate: ((Event) -> ())?
+    enum Event {
+        case didFinishLaunch
+        case willTerminate
     }
+
+    @objc
+    @available(*, unavailable)
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        delegate?(.didFinishLaunch)
+    }
+    @objc
+    @available(*, unavailable)
     func applicationWillTerminate(_ aNotification: Notification) {
+        delegate?(.willTerminate)
+    }
+
+    @objc
+    @available(*, unavailable)
+    func applicationShouldOpenUntitledFile(_ sender: NSApplication) -> Bool {
+        // Allows to make only-in-memory repo.
+        return true
     }
 }
+
+
+
+
+

@@ -14,7 +14,9 @@ import Editor6Common
 public final class WorkspaceUIWindowController: NSWindowController, NSWindowDelegate {
     private let workspaceViewController = WorkspaceUIViewController()
     private var installer = ViewInstaller()
-    private var delegate = ((WorkspaceUIAction) -> ())?.none
+    public var delegate: ((Event) -> ())?
+
+    public typealias Event = WorkspaceUIAction
 
     @objc
     public convenience init() {
@@ -33,9 +35,6 @@ public final class WorkspaceUIWindowController: NSWindowController, NSWindowDele
         self.windowDidLoad()
     }
 
-    public func delegate(to newDelegate: @escaping (WorkspaceUIAction) -> ()) {
-         delegate = newDelegate
-    }
     public func reload(_ newState: WorkspaceUIState) {
         assert(delegate != nil)
         workspaceViewController.reload(newState)
@@ -63,11 +62,8 @@ public final class WorkspaceUIWindowController: NSWindowController, NSWindowDele
         render()
     }
 
-    // MARK: -
-
     @available(*,unavailable)
     public func windowWillClose(_ notification: Notification) {
-        assert(delegate != nil)
         delegate?(.close)
     }
 }

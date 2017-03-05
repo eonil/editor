@@ -9,6 +9,7 @@
 import Foundation
 import EonilToolbox
 import EonilJSON
+import Editor6Common
 
 struct CargoState {
     var phase = CargoPhase.idle
@@ -42,8 +43,8 @@ enum CargoEvent {
     case error(CargoError)
 }
 enum CargoError: Error {
-    case cannotFindParentDirectory
-    case cannotFindDirectory
+    case badCrateName
+    case ADHOC_unknownErrorOutput([String])
     case nonZeroExit(code: Int32)
 }
 
@@ -80,17 +81,21 @@ public final class CargoModel {
     func queue(_ command: CargoCommand) {
         switch command {
         case .init(let u):
+            guard let crateName = u.lastPathComponent.components(separatedBy: ".").first else {
+                delegate?(.error(.badCrateName))
+                return
+            }
             queueBashExecution(commandLines: [
                 "set -e",
                 "cd \(u.path)",
-                "cargo init --bin",
+                "cargo init --bin --name \(crateName)",
                 "exit",
                 ])
         case .build(let u):
             queueBashExecution(commandLines: [
                 "set -e",
                 "cd \(u.path)",
-                "cargo build --message-format=json",
+                "cargo build --verbose --message-format json",
                 "exit",
                 ])
         case .clean(let u):
@@ -141,7 +146,7 @@ public final class CargoModel {
             bashsp?.queue(.stdin(lines: ["\u{0003}"]))
         }
     }
-    func process(bash e: ADHOC_TextLineBashSubprocess.Event) {
+    private func process(bash e: ADHOC_TextLineBashSubprocess.Event) {
         switch e {
         case .stdout(let lines):
             process(stdout: lines)
@@ -157,14 +162,15 @@ public final class CargoModel {
             delegate?(.phase)
         }
     }
-    func process(stdout lines: [String]) {
+    private func process(stdout lines: [String]) {
         let s = lines.joined(separator: "\n")
         let i = makeCargoIssue(from: s)
-        print(i)
+        debugLog(i)
         state.issues.append(i)
     }
-    func process(stderr lines: [String]) {
-        print(lines)
+    private func process(stderr lines: [String]) {
+        debugLog(lines)
+        state.errors.append(.ADHOC_unknownErrorOutput(lines))
     }
 }
 

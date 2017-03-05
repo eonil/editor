@@ -7,13 +7,13 @@
 //
 
 public struct ProjectState {
-    public typealias Mutation = ProjectMutation
-    
     public var items = [ProjectItemID: ProjectItemState]()
+
+    public typealias Mutation = ProjectMutation
+
     public init() {
         items[ProjectItemID([])] = ProjectItemState(linkage: .group(subitems: []), note: nil)
     }
-
     public mutating func apply(mutation: ProjectMutation) {
         switch mutation {
         case .items(let itemsMutation):

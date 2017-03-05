@@ -7,27 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		456F8B711E2A7FBF00F7EC4C /* CargoOutputParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */; };
 		456F8B801E2A85F800F7EC4C /* RustCompilerDataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */; };
-		456F8B821E2A861200F7EC4C /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B811E2A861200F7EC4C /* Box.swift */; };
-		456F8B841E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B831E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift */; };
 		456F8B8C1E2A867A00F7EC4C /* Editor6ServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */; };
 		456F8B8E1E2A867A00F7EC4C /* Editor6Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C2828F1E103C1300BE84AF /* Editor6Services.framework */; };
-		459CCC321E2A6F97005903BF /* CargoProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CCC311E2A6F97005903BF /* CargoProcess.swift */; };
-		45B6A0321E29FC7C005D072B /* LineBashProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0311E29FC7C005D072B /* LineBashProcess.swift */; };
-		45B6A0531E2A2191005D072B /* Subprocess3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B6A0521E2A2191005D072B /* Subprocess3.swift */; };
 		45C282941E103C1300BE84AF /* Editor6Services.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C282921E103C1300BE84AF /* Editor6Services.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45C282D81E103C7800BE84AF /* Bash1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282C91E103C7800BE84AF /* Bash1.swift */; };
-		45C282D91E103C7800BE84AF /* Bash2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CA1E103C7800BE84AF /* Bash2.swift */; };
-		45C282DA1E103C7800BE84AF /* Bash3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CB1E103C7800BE84AF /* Bash3.swift */; };
-		45C282DB1E103C7800BE84AF /* Bash4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CC1E103C7800BE84AF /* Bash4.swift */; };
-		45C282DC1E103C7800BE84AF /* Cargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CE1E103C7800BE84AF /* Cargo.swift */; };
-		45C282DD1E103C7800BE84AF /* Cargo1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282CF1E103C7800BE84AF /* Cargo1.swift */; };
 		45C282DE1E103C7800BE84AF /* RustLanguageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D21E103C7800BE84AF /* RustLanguageServer.swift */; };
-		45C282DF1E103C7800BE84AF /* IOQueuePair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D41E103C7800BE84AF /* IOQueuePair.swift */; };
-		45C282E01E103C7800BE84AF /* LineReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D51E103C7800BE84AF /* LineReader.swift */; };
-		45C282E11E103C7800BE84AF /* Subprocess1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D61E103C7800BE84AF /* Subprocess1.swift */; };
-		45C282E21E103C7800BE84AF /* Subprocess2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D71E103C7800BE84AF /* Subprocess2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,33 +60,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoOutputParser.swift; sourceTree = "<group>"; };
 		456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerDataStructures.swift; sourceTree = "<group>"; };
-		456F8B811E2A861200F7EC4C /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
-		456F8B831E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RustCompilerDataStructures+JSON.swift"; sourceTree = "<group>"; };
 		456F8B891E2A867A00F7EC4C /* Editor6ServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Editor6ServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor6ServicesTests.swift; sourceTree = "<group>"; };
 		456F8B8D1E2A867A00F7EC4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		459CCC311E2A6F97005903BF /* CargoProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoProcess.swift; sourceTree = "<group>"; };
 		45B6A00D1E29FC2C005D072B /* EonilGCDActor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EonilGCDActor.framework; path = "../../../../Temp/Xcode/Derivations/Editor6-bxvqrxpvvdnoslfclhjasudjnkut/Build/Products/Debug/EonilGCDActor.framework"; sourceTree = "<group>"; };
-		45B6A0311E29FC7C005D072B /* LineBashProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineBashProcess.swift; sourceTree = "<group>"; };
-		45B6A0521E2A2191005D072B /* Subprocess3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess3.swift; sourceTree = "<group>"; };
 		45C2828F1E103C1300BE84AF /* Editor6Services.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6Services.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C282921E103C1300BE84AF /* Editor6Services.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6Services.h; sourceTree = "<group>"; };
 		45C282931E103C1300BE84AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
 		45C282A11E103C3900BE84AF /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = "/Users/Eonil/Workshop/Playground/editor6-trial/modules/Editor6FileTreeUI/../../submodules/toolbox.swift/EonilToolbox.xcodeproj"; sourceTree = "<absolute>"; };
-		45C282C91E103C7800BE84AF /* Bash1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash1.swift; sourceTree = "<group>"; };
-		45C282CA1E103C7800BE84AF /* Bash2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash2.swift; sourceTree = "<group>"; };
-		45C282CB1E103C7800BE84AF /* Bash3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash3.swift; sourceTree = "<group>"; };
-		45C282CC1E103C7800BE84AF /* Bash4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash4.swift; sourceTree = "<group>"; };
-		45C282CE1E103C7800BE84AF /* Cargo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo.swift; sourceTree = "<group>"; };
-		45C282CF1E103C7800BE84AF /* Cargo1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo1.swift; sourceTree = "<group>"; };
 		45C282D21E103C7800BE84AF /* RustLanguageServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustLanguageServer.swift; sourceTree = "<group>"; };
-		45C282D41E103C7800BE84AF /* IOQueuePair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOQueuePair.swift; sourceTree = "<group>"; };
-		45C282D51E103C7800BE84AF /* LineReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineReader.swift; sourceTree = "<group>"; };
-		45C282D61E103C7800BE84AF /* Subprocess1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess1.swift; sourceTree = "<group>"; };
-		45C282D71E103C7800BE84AF /* Subprocess2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,16 +134,7 @@
 			children = (
 				45C282931E103C1300BE84AF /* Info.plist */,
 				45C282921E103C1300BE84AF /* Editor6Services.h */,
-				459CCC311E2A6F97005903BF /* CargoProcess.swift */,
-				456F8B701E2A7FBF00F7EC4C /* CargoOutputParser.swift */,
 				456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */,
-				456F8B831E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift */,
-				45B6A0311E29FC7C005D072B /* LineBashProcess.swift */,
-				45B6A0521E2A2191005D072B /* Subprocess3.swift */,
-				456F8B811E2A861200F7EC4C /* Box.swift */,
-				45C282C81E103C7800BE84AF /* Bash */,
-				45C282CD1E103C7800BE84AF /* Cargo */,
-				45C282D01E103C7800BE84AF /* LLDB */,
 				45C282D11E103C7800BE84AF /* RustLanguageServer */,
 				45C282D31E103C7800BE84AF /* Utility */,
 			);
@@ -210,33 +169,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		45C282C81E103C7800BE84AF /* Bash */ = {
-			isa = PBXGroup;
-			children = (
-				45C282C91E103C7800BE84AF /* Bash1.swift */,
-				45C282CA1E103C7800BE84AF /* Bash2.swift */,
-				45C282CB1E103C7800BE84AF /* Bash3.swift */,
-				45C282CC1E103C7800BE84AF /* Bash4.swift */,
-			);
-			path = Bash;
-			sourceTree = "<group>";
-		};
-		45C282CD1E103C7800BE84AF /* Cargo */ = {
-			isa = PBXGroup;
-			children = (
-				45C282CE1E103C7800BE84AF /* Cargo.swift */,
-				45C282CF1E103C7800BE84AF /* Cargo1.swift */,
-			);
-			path = Cargo;
-			sourceTree = "<group>";
-		};
-		45C282D01E103C7800BE84AF /* LLDB */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LLDB;
-			sourceTree = "<group>";
-		};
 		45C282D11E103C7800BE84AF /* RustLanguageServer */ = {
 			isa = PBXGroup;
 			children = (
@@ -248,10 +180,6 @@
 		45C282D31E103C7800BE84AF /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				45C282D41E103C7800BE84AF /* IOQueuePair.swift */,
-				45C282D51E103C7800BE84AF /* LineReader.swift */,
-				45C282D61E103C7800BE84AF /* Subprocess1.swift */,
-				45C282D71E103C7800BE84AF /* Subprocess2.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -425,23 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45C282DE1E103C7800BE84AF /* RustLanguageServer.swift in Sources */,
-				45C282E21E103C7800BE84AF /* Subprocess2.swift in Sources */,
-				45C282DD1E103C7800BE84AF /* Cargo1.swift in Sources */,
-				45C282DC1E103C7800BE84AF /* Cargo.swift in Sources */,
-				459CCC321E2A6F97005903BF /* CargoProcess.swift in Sources */,
-				456F8B711E2A7FBF00F7EC4C /* CargoOutputParser.swift in Sources */,
-				45B6A0531E2A2191005D072B /* Subprocess3.swift in Sources */,
-				45C282DB1E103C7800BE84AF /* Bash4.swift in Sources */,
-				456F8B821E2A861200F7EC4C /* Box.swift in Sources */,
-				45C282E11E103C7800BE84AF /* Subprocess1.swift in Sources */,
 				456F8B801E2A85F800F7EC4C /* RustCompilerDataStructures.swift in Sources */,
-				45C282E01E103C7800BE84AF /* LineReader.swift in Sources */,
-				45C282D91E103C7800BE84AF /* Bash2.swift in Sources */,
-				45C282DF1E103C7800BE84AF /* IOQueuePair.swift in Sources */,
-				45C282DA1E103C7800BE84AF /* Bash3.swift in Sources */,
-				45B6A0321E29FC7C005D072B /* LineBashProcess.swift in Sources */,
-				45C282D81E103C7800BE84AF /* Bash1.swift in Sources */,
-				456F8B841E2A862B00F7EC4C /* RustCompilerDataStructures+JSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
