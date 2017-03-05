@@ -9,8 +9,10 @@
 import Foundation
 import AppKit
 
+///
 /// - Note:
 ///     Supports both of manual and auto layout.
+///
 open class Editor6CommonView: NSView {
     private var lastSize = CGSize.zero
 
@@ -56,17 +58,22 @@ open class Editor6CommonView: NSView {
         }
     }
 
+    ///
     /// - Note:
     ///     Intended to be overriden for manual layout.
+    ///
     ///
     open func editor6_installSubviews() {
     }
 
+    ///
     /// - Note:
     ///     Intended to be overriden for manual layout.
     ///
+    ///
     open func editor6_layoutSubviews() {
     }
+    ///
     /// - Note:
     ///     Intended to be overriden for auto layout.
     ///
