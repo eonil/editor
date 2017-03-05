@@ -67,27 +67,29 @@ public struct Tree1<TKey, TValue>: Sequence where TKey: Tree1NodeKey {
         return linkage.children
     }
 
+    ///
     /// Inserts a new node at index under parent.
+    ///
     /// - Parameter index:
     ///     MUST be a proper index to insert a new node in the parent node.
     /// - Parameter parentID:
     ///     MUST be an ID to an existing node.
     /// - Returns:
     ///     ID to newrly inserted node.
+    ///
     @discardableResult
-    public mutating func insert(_ newNode: Tree1Node, at index: Int, in parentID: TKey) -> TKey {
+    public mutating func insert(_ newChildNode: Tree1Node, at index: Int, in parentID: TKey) -> TKey {
         // Read only.
-        precondition(linkages[newNode.id] == nil, "Bad new node ID `\(newNode.id)`. The key is already exists in this tree.")
+        precondition(linkages[newChildNode.id] == nil, "Bad new node ID `\(newChildNode.id)`. The key is already exists in this tree.")
         guard let parentLinkage = linkages[parentID] else { fatalError("Bad parent ID `\(parentID)`. No such node exists") }
         guard parentLinkage.children.count >= index else { fatalError("Bad insertion position index `\(index)`. Out of range.") }
         var newParentLinkage = parentLinkage
-        let newChildID = TKey()
-        newParentLinkage.children.insert(newChildID, at: index)
+        newParentLinkage.children.insert(newChildNode.id, at: index)
         // Read/write.
         linkages[parentID] = newParentLinkage
-        linkages[newChildID] = Tree1NodeLinkage()
-        states[newChildID] = newNode.state
-        return newChildID
+        linkages[newChildNode.id] = Tree1NodeLinkage()
+        states[newChildNode.id] = newChildNode.state
+        return newChildNode.id
     }
     @discardableResult
     public mutating func insert(_ newState: TState, at index: Int, in parentID: TKey) -> TKey {
