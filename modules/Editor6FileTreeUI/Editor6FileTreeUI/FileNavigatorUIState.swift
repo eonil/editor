@@ -26,12 +26,12 @@ public struct FileNavigatorUINodeID: Hashable, Comparable {
     public var hashValue: Int {
         return oid.hashValue
     }
-}
-public func == (_ a: FileNavigatorUINodeID, _ b: FileNavigatorUINodeID) -> Bool {
-    return a.oid == b.oid
-}
-public func < (_ a: FileNavigatorUINodeID, _ b: FileNavigatorUINodeID) -> Bool {
-    return a.oid < b.oid
+    public static func == (_ a: FileNavigatorUINodeID, _ b: FileNavigatorUINodeID) -> Bool {
+        return a.oid == b.oid
+    }
+    public static func < (_ a: FileNavigatorUINodeID, _ b: FileNavigatorUINodeID) -> Bool {
+        return a.oid < b.oid
+    }
 }
 
 internal struct FileNavigatorUINodeLinkage {
