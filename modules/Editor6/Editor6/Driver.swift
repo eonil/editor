@@ -114,10 +114,20 @@ final class Driver {
 //                    guard let newdoc1 = newdoc as? RepoDocument else { throw Cancel.byPotentialBug(.defaultNewDocumentIsNotRepoDocument) }
 
                 case .fileOpen:
-                    NSDocumentController.shared().beginOpenPanel(completionHandler: { us in
-                        guard let us = us else { return }
-                        debugLog(us)
-                    })
+                    NSDocumentController.shared().openDocument(nil)
+//                    NSDocumentController.shared().beginOpenPanel(completionHandler: { us in
+//                        guard let us = us else { return }
+//                        for u in us {
+//                            NSDocumentController.shared().openDocument(withContentsOf: u, display: true, completionHandler: { (_ d: NSDocument?, _: Bool, _ e: Error?) in
+//                                runWithDefaultErrorHandling {
+//                                    guard e == nil else { MARK_unimplemented() }
+//                                    guard let newrlyOpenDoc = d as? RepoDocument else { MARK_unimplemented() }
+//                                    newrlyOpenDoc.repoController.process(RepoController.Command.relocate(u))
+//                                }
+//                            })
+//                            debugLog(us)
+//                        }
+//                    })
 
                 case .fileSave:
                     process(mainMenuUI2Event: .click(.fileSaveAs))

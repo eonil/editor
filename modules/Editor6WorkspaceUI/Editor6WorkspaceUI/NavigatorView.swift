@@ -74,7 +74,7 @@ final class NavigatorView: NSView {
         let selidx = headSegmentedControl.selectedSegment
         let vs = [filePaneView, issuePaneView, debugPaneView]
         for i in 0..<vs.count {
-            vs[i].isHidden = i != selidx
+            vs[i].isHidden = (i != selidx)
         }
     }
 

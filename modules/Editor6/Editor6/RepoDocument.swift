@@ -23,13 +23,10 @@ final class RepoDocument: NSDocument {
     @nonobjc
     let repoController = RepoController()
     @nonobjc
-    private let wswc = WorkspaceUIWindowController()
-    @nonobjc
     private var viewState = WorkspaceUIState()
 
     override init() {
         super.init()
-        wswc.delegate = { [weak self] in self?.process(workspaceUIEvent: $0) }
         RepoDocumentNotification.didInit(self).broadcast()
     }
     deinit {
@@ -45,29 +42,20 @@ final class RepoDocument: NSDocument {
     ///     `false` otherwise.
     ///
     func editor6_isCurrentDocument() -> Bool {
-        return wswc.window?.isMainWindow ?? false
+        return repoController.windowController.window?.isMainWindow ?? false
     }
 
     func process(message: DriverMessage) {
         
     }
-//    private func getID() -> WorkspaceID {
-//        return WorkspaceID.from(document: self)
-//    }
-    private func process(workspaceUIEvent e: WorkspaceUIAction) {
-        switch e {
-        case .close:
-            close()
-        }
-    }
 
     override func makeWindowControllers() {
         super.makeWindowControllers()
-        addWindowController(wswc)
+        addWindowController(repoController.windowController)
     }
 
     override func read(from url: URL, ofType typeName: String) throws {
-        Swift.print(#function)
+        repoController.process(.relocate(url))
     }
     override func write(to url: URL, ofType typeName: String) throws {
         Swift.print(#function)

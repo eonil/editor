@@ -29,6 +29,7 @@ struct DriverState {
         mainMenuUIState.availableItems = [
             .applicationQuit,
             .fileNewRepo,
+            .fileOpen,
         ]
     }
 }

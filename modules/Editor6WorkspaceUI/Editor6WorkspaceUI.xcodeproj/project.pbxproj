@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		45ABC1C81DCDB743006EFE1F /* WorkspaceUIWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */; };
-		45B0F7EB1E6C4E1400B713AA /* aaaa.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B0F7EA1E6C4E1400B713AA /* aaaa.xib */; };
 		45B0F7F21E6C521100B713AA /* NavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0F7F11E6C521100B713AA /* NavigatorView.swift */; };
 		45B0F7F41E6C539100B713AA /* NavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0F7F31E6C539100B713AA /* NavigatorViewController.swift */; };
 		45E084091DB28CE900C5428D /* WorkspaceUINonAutolayoutStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E084081DB28CE900C5428D /* WorkspaceUINonAutolayoutStackView.swift */; };
@@ -46,6 +45,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		459108231E6DCACE0034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45EF84881DB219D500B320B5 /* Editor6Common.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459107801E6C8CC60034E61F;
+			remoteInfo = Editor6CommonUnitTests;
+		};
 		45E084711DB36B5F00C5428D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45E0846C1DB36B5F00C5428D /* ManualView.xcodeproj */;
@@ -166,7 +172,6 @@
 
 /* Begin PBXFileReference section */
 		45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIWindowController.swift; sourceTree = "<group>"; };
-		45B0F7EA1E6C4E1400B713AA /* aaaa.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = aaaa.xib; sourceTree = "<group>"; };
 		45B0F7F11E6C521100B713AA /* NavigatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorView.swift; sourceTree = "<group>"; };
 		45B0F7F31E6C539100B713AA /* NavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorViewController.swift; sourceTree = "<group>"; };
 		45E084081DB28CE900C5428D /* WorkspaceUINonAutolayoutStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUINonAutolayoutStackView.swift; sourceTree = "<group>"; };
@@ -277,7 +282,6 @@
 				45EF853E1DB2354C00B320B5 /* WorkspaceUIExtensions.swift */,
 				45E084E51DB3B2E300C5428D /* WorkspaceUIBasicOutlineState.swift */,
 				45E084F71DB3CE1900C5428D /* WorkspaceUIBasicOutlineView.swift */,
-				45B0F7EA1E6C4E1400B713AA /* aaaa.xib */,
 			);
 			path = Editor6WorkspaceUI;
 			sourceTree = "<group>";
@@ -297,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				45EF848D1DB219D600B320B5 /* Editor6Common.framework */,
+				459108241E6DCACE0034E61F /* Editor6CommonUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -456,6 +461,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		459108241E6DCACE0034E61F /* Editor6CommonUnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Editor6CommonUnitTests.xctest;
+			remoteRef = 459108231E6DCACE0034E61F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		45E084721DB36B5F00C5428D /* ManualView.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -535,7 +547,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45B0F7EB1E6C4E1400B713AA /* aaaa.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

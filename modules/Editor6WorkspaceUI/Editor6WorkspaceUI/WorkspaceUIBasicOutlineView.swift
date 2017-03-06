@@ -31,6 +31,13 @@ public final class WorkspaceUIBasicOutlineView: ManualView, NSOutlineViewDataSou
         }
         idMapping = newIDMapping
     }
+    private func assertStateConsistency() {
+        assert({
+            let rootID = localState.tree.root.id
+            assert(idMapping[rootID] != nil)
+            return true
+            }())
+    }
 
     public override func manual_installSubviews() {
         super.manual_installSubviews()
@@ -60,19 +67,22 @@ public final class WorkspaceUIBasicOutlineView: ManualView, NSOutlineViewDataSou
     @objc
     @available(*,unavailable)
     public func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        func getRootNodeCount() -> Int {
-            return localState.showsRootNode ? 1 : localState.tree.children(of: localState.tree.root.id).count
+        switch item {
+        case .none:
+            let c = localState.showsRootNode ? 1 : localState.tree.children(of: localState.tree.root.id).count
+            return c
+        case .some(let item):
+            let id = getSourceID(from: item)
+            let c = localState.tree.children(of: id).count
+            return c
         }
-        guard let item = item else { return getRootNodeCount() }
-        let id = getSourceID(from: item)
-        let c = localState.tree.children(of: id).count
-        return c
     }
     @objc
     @available(*,unavailable)
     public func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         let id = getSourceID(from: item)
-        return localState.tree[id].isExpandable
+        let b = localState.tree[id].isExpandable
+        return b
     }
     //    @objc
     //    @available(*,unavailable)
@@ -83,15 +93,18 @@ public final class WorkspaceUIBasicOutlineView: ManualView, NSOutlineViewDataSou
     @objc
     @available(*,unavailable)
     public func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        func getRootNodeIDAtIndex() -> NodeID {
-            return localState.showsRootNode
-                ? localState.tree.root.id
-                : localState.tree.children(of: localState.tree.root.id)[index]
-        }
         func getChildIDAtIndex() -> NodeID {
-            guard let item = item else { return getRootNodeIDAtIndex() }
-            let id = getSourceID(from: item)
-            return localState.tree.children(of: id)[index]
+            switch item {
+            case .none:
+                let id = localState.showsRootNode
+                    ? localState.tree.root.id
+                    : localState.tree.children(of: localState.tree.root.id)[index]
+                return id
+            case .some(let item):
+                let parentID = getSourceID(from: item)
+                let childID = localState.tree.children(of: parentID)[index]
+                return childID
+            }
         }
         let childID = getChildIDAtIndex()
         guard let mappedChildID = idMapping[childID] else { fatalError("Cannot find mapped-ID from child ID `\(childID)`.") }

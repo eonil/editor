@@ -41,6 +41,9 @@ final class RepoController {
     var state: RepoState {
         return model.state
     }
+    var windowController: NSWindowController {
+        return view
+    }
     func process(_ command: Command) {
         switch command {
         case .relocate(let u):

@@ -46,7 +46,8 @@ public func debugLog<T: AnyObject>(withAddressOf object: @autoclosure () -> T, m
 private func debugLogImpl(_ values: @autoclosure () -> [String], _ file: String, _ line: Int, _ fuction: String) {
     let a = values().joined(separator: ", ")
 //    NSLog("%@", a)
-    NSLog("\(file) (\(line)): %@", a)
+    let n = URL(fileURLWithPath: file).lastPathComponent
+    NSLog("\(n) (\(line)): %@", a)
 }
 
 
