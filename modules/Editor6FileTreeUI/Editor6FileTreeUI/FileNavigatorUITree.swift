@@ -9,15 +9,6 @@
 import Foundation
 import BTree
 
-/// ...
-///
-/// Mutation is try-and-error. Because checking input validity outside
-/// is usually far harder then checking inside. So all mutators checks
-/// input validity, and throws an error if it's invalid.
-///
-/// All mutators work transactionally.
-/// Which means if it throws an error, it does not mutate anything.
-///
 public struct FileNavigatorUITree: Sequence {
     public let root: FileNavigatorUINode
     internal private(set) var linkages = Map<FileNavigatorUINodeID, FileNavigatorUINodeLinkage>()
