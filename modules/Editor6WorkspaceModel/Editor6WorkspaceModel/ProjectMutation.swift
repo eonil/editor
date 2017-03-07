@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import Editor6Common
 
 public enum ProjectMutation {
-    case items(DictionaryMutation<ProjectItemID, ProjectItemState>)
+    case items(Tree1Mutation<ProjectItemID, ProjectItemState>)
 }

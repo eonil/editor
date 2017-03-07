@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		459108C11E6F4FEC0034E61F /* WorkspaceUITransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459108C01E6F4FEC0034E61F /* WorkspaceUITransaction.swift */; };
 		45ABC1C81DCDB743006EFE1F /* WorkspaceUIWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */; };
 		45B0F7F21E6C521100B713AA /* NavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0F7F11E6C521100B713AA /* NavigatorView.swift */; };
 		45B0F7F41E6C539100B713AA /* NavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B0F7F31E6C539100B713AA /* NavigatorViewController.swift */; };
@@ -171,6 +172,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		459108C01E6F4FEC0034E61F /* WorkspaceUITransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUITransaction.swift; sourceTree = "<group>"; };
 		45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIWindowController.swift; sourceTree = "<group>"; };
 		45B0F7F11E6C521100B713AA /* NavigatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorView.swift; sourceTree = "<group>"; };
 		45B0F7F31E6C539100B713AA /* NavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorViewController.swift; sourceTree = "<group>"; };
@@ -267,6 +269,7 @@
 				45EF847C1DB2198700B320B5 /* Info.plist */,
 				45EF847B1DB2198700B320B5 /* Editor6WorkspaceUI.h */,
 				45E084A11DB3842700C5428D /* WorkspaceUIState.swift */,
+				459108C01E6F4FEC0034E61F /* WorkspaceUITransaction.swift */,
 				45E084D41DB3864300C5428D /* WorkspaceUIAction.swift */,
 				45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */,
 				45EF84851DB219A900B320B5 /* WorkspaceUIViewController.swift */,
@@ -573,6 +576,7 @@
 				45EF859D1DB2492F00B320B5 /* WorkspaceUICommonSplitViewController.swift in Sources */,
 				45B0F7F21E6C521100B713AA /* NavigatorView.swift in Sources */,
 				45EF852D1DB2279A00B320B5 /* DebugContextUIViewController.swift in Sources */,
+				459108C11E6F4FEC0034E61F /* WorkspaceUITransaction.swift in Sources */,
 				45E084091DB28CE900C5428D /* WorkspaceUINonAutolayoutStackView.swift in Sources */,
 				45E084D51DB3864300C5428D /* WorkspaceUIAction.swift in Sources */,
 				45E084E41DB3B15700C5428D /* DebugContextUIView.swift in Sources */,

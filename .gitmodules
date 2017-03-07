@@ -13,3 +13,6 @@
 [submodule "submodules/json.swift"]
 	path = submodules/json.swift
 	url = https://github.com/eonil/json.swift
+[submodule "submodules/Buckets-Swift"]
+	path = submodules/Buckets-Swift
+	url = https://github.com/mauriciosantos/Buckets-Swift

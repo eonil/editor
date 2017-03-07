@@ -14,14 +14,15 @@ public struct ProjectState {
     public init() {
         items[ProjectItemID([])] = ProjectItemState(linkage: .group(subitems: []), note: nil)
     }
-    public mutating func apply(mutation: ProjectMutation) {
-        switch mutation {
-        case .items(let itemsMutation):
-            items.apply(mutation: itemsMutation)
-        }
-    }
+//    public mutating func apply(mutation: ProjectMutation) {
+//        switch mutation {
+//        case .items(let itemsMutation):
+//            items.apply(mutation: itemsMutation)
+//        }
+//    }
 }
 
+public typealias ProjectItem = (id: ProjectItemID, state: ProjectItemState)
 public typealias ProjectItemID = ProjectItemPath
 
 public struct ProjectItemPath: Hashable {

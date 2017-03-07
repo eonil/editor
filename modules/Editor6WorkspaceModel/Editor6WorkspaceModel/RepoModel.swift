@@ -34,7 +34,7 @@ public enum RepoProductCommand {
     case run
 }
 public enum RepoEvent {
-    case mutateProject(DictionaryMutation<ProjectItemID, ProjectItemState>)
+    case mutateProject(Tree1Mutation<ProjectItemID, ProjectItemState>)
     case mutateIssues(ArrayMutation<Issue>)
     case ADHOC_changeAnythingElse
 }

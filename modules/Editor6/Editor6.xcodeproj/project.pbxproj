@@ -26,6 +26,8 @@
 		456FDE231DAA95AE00F8003A /* UNUSED_Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDE221DAA95AE00F8003A /* UNUSED_Broadcast.swift */; };
 		4583C1621DCAA48A001EA107 /* WorkspaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583C1611DCAA48A001EA107 /* WorkspaceID.swift */; };
 		4591083E1E6F067C0034E61F /* RepoProjectTreeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4591083D1E6F067C0034E61F /* RepoProjectTreeController.swift */; };
+		459108F11E6F54200034E61F /* Buckets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459108D71E6F53F00034E61F /* Buckets.framework */; };
+		459108F21E6F54200034E61F /* Buckets.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 459108D71E6F53F00034E61F /* Buckets.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4594EB7D1E6487DE0028DBC8 /* ThreadChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EB7B1E6487DE0028DBC8 /* ThreadChannel.swift */; };
 		4594EB7E1E6487DE0028DBC8 /* ThreadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EB7C1E6487DE0028DBC8 /* ThreadUtility.swift */; };
 		45ABC1B01DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45ABC1AB1DCDAD61006EFE1F /* Editor6MainMenuUI2.framework */; };
@@ -151,6 +153,62 @@
 			remoteGlobalIDString = 459107801E6C8CC60034E61F;
 			remoteInfo = Editor6CommonUnitTests;
 		};
+		459108D21E6F53F00034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459108C81E6F53F00034E61F /* Buckets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22A142DA1AB4D40900E70376;
+			remoteInfo = "Buckets iOS";
+		};
+		459108D41E6F53F00034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459108C81E6F53F00034E61F /* Buckets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22A142E51AB4D40900E70376;
+			remoteInfo = "Buckets iOS Tests";
+		};
+		459108D61E6F53F00034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459108C81E6F53F00034E61F /* Buckets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22DD3CBC1AB5062D0083B4AB;
+			remoteInfo = "Buckets OSX";
+		};
+		459108D81E6F53F00034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459108C81E6F53F00034E61F /* Buckets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 22DD3CC61AB5062D0083B4AB;
+			remoteInfo = "Buckets OSX Tests";
+		};
+		459108DA1E6F53F00034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459108C81E6F53F00034E61F /* Buckets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 226F22941C633F5100D5F862;
+			remoteInfo = "Buckets watchOS";
+		};
+		459108DC1E6F53F00034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459108C81E6F53F00034E61F /* Buckets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 226F22B61C63423300D5F862;
+			remoteInfo = "Buckets tvOS";
+		};
+		459108DE1E6F53F00034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459108C81E6F53F00034E61F /* Buckets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 226F22D61C63441900D5F862;
+			remoteInfo = "Buckets tvOS Tests";
+		};
+		459108F31E6F54200034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 459108C81E6F53F00034E61F /* Buckets.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 22DD3CBB1AB5062D0083B4AB;
+			remoteInfo = "Buckets OSX";
+		};
 		45ABC1AA1DCDAD61006EFE1F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */;
@@ -257,6 +315,7 @@
 				45CCF0371E6A0D9F00068A03 /* Editor6WorkspaceModel.framework in Embed Frameworks */,
 				45E0851F1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Embed Frameworks */,
 				45ABC1B11DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Embed Frameworks */,
+				459108F21E6F54200034E61F /* Buckets.framework in Embed Frameworks */,
 				4566CEB41DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -283,6 +342,7 @@
 		456FDE221DAA95AE00F8003A /* UNUSED_Broadcast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_Broadcast.swift; sourceTree = "<group>"; };
 		4583C1611DCAA48A001EA107 /* WorkspaceID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceID.swift; sourceTree = "<group>"; };
 		4591083D1E6F067C0034E61F /* RepoProjectTreeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoProjectTreeController.swift; sourceTree = "<group>"; };
+		459108C81E6F53F00034E61F /* Buckets.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Buckets.xcodeproj; path = "../../submodules/Buckets-Swift/Buckets.xcodeproj"; sourceTree = "<group>"; };
 		4594EB7B1E6487DE0028DBC8 /* ThreadChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadChannel.swift; sourceTree = "<group>"; };
 		4594EB7C1E6487DE0028DBC8 /* ThreadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadUtility.swift; sourceTree = "<group>"; };
 		45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6MainMenuUI2.xcodeproj; path = ../Editor6MainMenuUI2/Editor6MainMenuUI2.xcodeproj; sourceTree = "<group>"; };
@@ -316,6 +376,7 @@
 				45CCF0361E6A0D9F00068A03 /* Editor6WorkspaceModel.framework in Frameworks */,
 				45E0851E1DB3D1DC00C5428D /* Editor6WorkspaceUI.framework in Frameworks */,
 				45ABC1B01DCDAD68006EFE1F /* Editor6MainMenuUI2.framework in Frameworks */,
+				459108F11E6F54200034E61F /* Buckets.framework in Frameworks */,
 				4566CEB31DADAACD00EA2A0C /* Editor6FileTreeUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -388,6 +449,7 @@
 		45185E681DA8F0A700C4D86D /* (deps) */ = {
 			isa = PBXGroup;
 			children = (
+				459108C81E6F53F00034E61F /* Buckets.xcodeproj */,
 				45CCF0211E6A0BD600068A03 /* Editor6WorkspaceModel.xcodeproj */,
 				45B6A0351E29FCFD005D072B /* Editor6Services.xcodeproj */,
 				45ABC1A41DCDAD61006EFE1F /* Editor6MainMenuUI2.xcodeproj */,
@@ -413,6 +475,20 @@
 			children = (
 				4566CEAE1DADAAB400EA2A0C /* Editor6Common.framework */,
 				459108411E6F067D0034E61F /* Editor6CommonUnitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		459108C91E6F53F00034E61F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				459108D31E6F53F00034E61F /* Buckets.framework */,
+				459108D51E6F53F00034E61F /* Buckets iOS Tests.xctest */,
+				459108D71E6F53F00034E61F /* Buckets.framework */,
+				459108D91E6F53F00034E61F /* Buckets OSX Tests.xctest */,
+				459108DB1E6F53F00034E61F /* Buckets.framework */,
+				459108DD1E6F53F00034E61F /* Buckets.framework */,
+				459108DF1E6F53F00034E61F /* Buckets tvOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -498,6 +574,7 @@
 				45B6A03E1E29FD05005D072B /* PBXTargetDependency */,
 				4517CFE61E2BAED200C43464 /* PBXTargetDependency */,
 				45CCF0391E6A0D9F00068A03 /* PBXTargetDependency */,
+				459108F41E6F54200034E61F /* PBXTargetDependency */,
 			);
 			name = Editor6;
 			productName = Editor6;
@@ -533,6 +610,10 @@
 			productRefGroup = 45185E401DA8E8EA00C4D86D /* Products */;
 			projectDirPath = "";
 			projectReferences = (
+				{
+					ProductGroup = 459108C91E6F53F00034E61F /* Products */;
+					ProjectRef = 459108C81E6F53F00034E61F /* Buckets.xcodeproj */;
+				},
 				{
 					ProductGroup = 4566CEAA1DADAAB400EA2A0C /* Products */;
 					ProjectRef = 4566CEA91DADAAB400EA2A0C /* Editor6Common.xcodeproj */;
@@ -645,6 +726,55 @@
 			fileType = wrapper.cfbundle;
 			path = Editor6CommonUnitTests.xctest;
 			remoteRef = 459108401E6F067D0034E61F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459108D31E6F53F00034E61F /* Buckets.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Buckets.framework;
+			remoteRef = 459108D21E6F53F00034E61F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459108D51E6F53F00034E61F /* Buckets iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Buckets iOS Tests.xctest";
+			remoteRef = 459108D41E6F53F00034E61F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459108D71E6F53F00034E61F /* Buckets.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Buckets.framework;
+			remoteRef = 459108D61E6F53F00034E61F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459108D91E6F53F00034E61F /* Buckets OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Buckets OSX Tests.xctest";
+			remoteRef = 459108D81E6F53F00034E61F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459108DB1E6F53F00034E61F /* Buckets.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Buckets.framework;
+			remoteRef = 459108DA1E6F53F00034E61F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459108DD1E6F53F00034E61F /* Buckets.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Buckets.framework;
+			remoteRef = 459108DC1E6F53F00034E61F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		459108DF1E6F53F00034E61F /* Buckets tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Buckets tvOS Tests.xctest";
+			remoteRef = 459108DE1E6F53F00034E61F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45ABC1AB1DCDAD61006EFE1F /* Editor6MainMenuUI2.framework */ = {
@@ -776,6 +906,11 @@
 			isa = PBXTargetDependency;
 			name = Editor6FileTreeUI;
 			targetProxy = 4566CEB51DADAACD00EA2A0C /* PBXContainerItemProxy */;
+		};
+		459108F41E6F54200034E61F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Buckets OSX";
+			targetProxy = 459108F31E6F54200034E61F /* PBXContainerItemProxy */;
 		};
 		45ABC1B31DCDAD68006EFE1F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
