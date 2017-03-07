@@ -14,6 +14,7 @@ import Editor6WorkspaceUI
 
 final class RepoController {
     private let model = RepoModel()
+    private let projectTreeController = RepoProjectTreeController()
     private let view = WorkspaceUIWindowController()
     private var viewState = WorkspaceUIState()
     var delegate: ((Event) -> ())?
@@ -82,7 +83,9 @@ final class RepoController {
             case .delete(let r, let es):
                 MARK_unimplemented()
             }
-        case .ADHOC_changeAny:
+        case .mutateProject(let m):
+            projectTreeController.apply(m)
+        case .ADHOC_changeAnythingElse:
             MARK_unimplementedButSkipForNow()
         }
     }

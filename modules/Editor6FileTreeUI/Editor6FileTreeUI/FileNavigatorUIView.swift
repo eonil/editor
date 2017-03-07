@@ -80,6 +80,7 @@ public final class FileNavigatorUIView: ManualView, NSOutlineViewDataSource, NSO
         super.manual_installSubviews()
         addSubview(scroll)
         scroll.documentView = outline
+        outline.headerView = nil
         outline.addTableColumn(nameColumn)
         outline.outlineTableColumn = nameColumn
         outline.rowSizeStyle = .small

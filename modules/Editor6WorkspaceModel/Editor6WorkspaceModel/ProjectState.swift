@@ -35,6 +35,11 @@ public struct ProjectItemPath: Hashable {
             segments.append(segment)
         }
     }
+    public func removingLastSegment() -> ProjectItemPath {
+        return segmentEdited { segments in
+            segments.removeLast()
+        }
+    }
     private func segmentEdited(_ edit: (inout [String]) -> ()) -> ProjectItemPath {
         var copy = self
         edit(&copy.segments)

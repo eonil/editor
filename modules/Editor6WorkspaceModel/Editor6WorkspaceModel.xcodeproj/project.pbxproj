@@ -28,6 +28,7 @@
 		45441EE41DB3EA4A00158711 /* WorkspaceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE31DB3EA4A00158711 /* WorkspaceState.swift */; };
 		45441EE61DB3EA5100158711 /* WorkspaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE51DB3EA5100158711 /* WorkspaceModel.swift */; };
 		45441EE81DB3EA8E00158711 /* DebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45441EE71DB3EA8E00158711 /* DebugModel.swift */; };
+		4591082B1E6DEED50034E61F /* RepoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4591082A1E6DEED50034E61F /* RepoError.swift */; };
 		4594EC251E66654F0028DBC8 /* CargoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EC231E66654F0028DBC8 /* CargoDTO.swift */; };
 		4594EC261E66654F0028DBC8 /* RustCompilerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EC241E66654F0028DBC8 /* RustCompilerDTO.swift */; };
 		4594EC281E6665660028DBC8 /* SemverDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594EC271E6665660028DBC8 /* SemverDTO.swift */; };
@@ -128,6 +129,13 @@
 			remoteGlobalIDString = 45E5EF211A7E6817009967D2;
 			remoteInfo = TestdriveApp;
 		};
+		4591082E1E6DEED50034E61F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4594EC291E666B090028DBC8 /* Editor6Common.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459107801E6C8CC60034E61F;
+			remoteInfo = Editor6CommonUnitTests;
+		};
 		4594EC2F1E666B090028DBC8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4594EC291E666B090028DBC8 /* Editor6Common.xcodeproj */;
@@ -225,6 +233,7 @@
 		45441EE51DB3EA5100158711 /* WorkspaceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceModel.swift; sourceTree = "<group>"; };
 		45441EE71DB3EA8E00158711 /* DebugModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugModel.swift; sourceTree = "<group>"; };
 		45441EE91DB3EB4E00158711 /* LLDBWrapper.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LLDBWrapper.xcodeproj; path = ../../submodules/LLDBWrapper/LLDBWrapper.xcodeproj; sourceTree = "<group>"; };
+		4591082A1E6DEED50034E61F /* RepoError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoError.swift; sourceTree = "<group>"; };
 		4594EC231E66654F0028DBC8 /* CargoDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoDTO.swift; sourceTree = "<group>"; };
 		4594EC241E66654F0028DBC8 /* RustCompilerDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerDTO.swift; sourceTree = "<group>"; };
 		4594EC271E6665660028DBC8 /* SemverDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverDTO.swift; sourceTree = "<group>"; };
@@ -368,6 +377,7 @@
 				45441EDA1DB3EA0F00158711 /* Info.plist */,
 				45441ED91DB3EA0F00158711 /* Editor6WorkspaceModel.h */,
 				452279481E69E8990076A851 /* RepoModel.swift */,
+				4591082A1E6DEED50034E61F /* RepoError.swift */,
 				45441EE31DB3EA4A00158711 /* WorkspaceState.swift */,
 				45441EE51DB3EA5100158711 /* WorkspaceModel.swift */,
 				45F951CF1DC61E1700A260B1 /* ProjectState.swift */,
@@ -417,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				4594EC301E666B090028DBC8 /* Editor6Common.framework */,
+				4591082F1E6DEED50034E61F /* Editor6CommonUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -704,6 +715,13 @@
 			remoteRef = 45441EFC1DB3EB4E00158711 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		4591082F1E6DEED50034E61F /* Editor6CommonUnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Editor6CommonUnitTests.xctest;
+			remoteRef = 4591082E1E6DEED50034E61F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4594EC301E666B090028DBC8 /* Editor6Common.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -776,6 +794,7 @@
 				4594EC281E6665660028DBC8 /* SemverDTO.swift in Sources */,
 				452279081E6874B80076A851 /* Editor6ThreadSemaphore.swift in Sources */,
 				452279431E69D5C40076A851 /* CargoJSONCoding.swift in Sources */,
+				4591082B1E6DEED50034E61F /* RepoError.swift in Sources */,
 				452279471E69DF9A0076A851 /* SemverJSONCoding.swift in Sources */,
 				45F951B41DC464BF00A260B1 /* Mutation.swift in Sources */,
 				45441EE81DB3EA8E00158711 /* DebugModel.swift in Sources */,

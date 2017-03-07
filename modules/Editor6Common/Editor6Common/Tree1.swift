@@ -30,6 +30,7 @@ public struct Tree1<TKey, TValue>: Sequence where TKey: Tree1NodeKey {
     }
 
     private func validate() {
+        MARK_unimplemented()
     }
 
     public var count: Int {
@@ -40,7 +41,7 @@ public struct Tree1<TKey, TValue>: Sequence where TKey: Tree1NodeKey {
     public func contains(_ id: TKey) -> Bool {
         return states[id] != nil
     }
-    private func contains(ids: Set<TKey>) -> Bool {
+    private func containsAll(ids: Set<TKey>) -> Bool {
         return ids.map({ states[$0] != nil }).reduce(true, { $0 && $1})
     }
     private func collectAllIDsInSubtree(id: TKey) -> Set<TKey> {
