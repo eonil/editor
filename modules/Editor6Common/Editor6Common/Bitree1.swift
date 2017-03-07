@@ -1,5 +1,5 @@
 //
-//  Tree1.swift
+//  Bitree1.swift
 //  Editor6Common
 //
 //  Created by Hoon H. on 2016/10/09.
@@ -10,22 +10,27 @@ import Foundation
 import BTree
 import EonilToolbox
 
-public struct Tree1<TKey, TValue>: Sequence where TKey: Tree1NodeKey {
+///
+/// Bidirectional tree.
+///
+/// "Bidirectional" means you can navigate between parent-child in freely.
+///
+public struct Bitree1<TKey, TValue>: Sequence where TKey: Bitree1NodeKey {
     public typealias TState = TValue
-    public typealias Tree1Node = (id: TKey, state: TState)
-    typealias TLinkage = Tree1NodeLinkage<TKey>
+    public typealias Bitree1Node = (id: TKey, state: TState)
+    typealias TLinkage = Bitree1NodeLinkage<TKey>
 
-    public let root: Tree1Node
+    public let root: Bitree1Node
     internal private(set) var linkages = Map<TKey, TLinkage>()
     private var states = Map<TKey, TState>()
 
     public init(state: TState) {
         let id = TKey()
-        self = Tree1(root: (id, state))
+        self = Bitree1(root: (id, state))
     }
-    internal init(root: Tree1Node) {
+    internal init(root: Bitree1Node) {
         self.root = root
-        self.linkages[root.id] = Tree1NodeLinkage()
+        self.linkages[root.id] = Bitree1NodeLinkage()
         self.states[root.id] = root.state
     }
 
@@ -63,6 +68,10 @@ public struct Tree1<TKey, TValue>: Sequence where TKey: Tree1NodeKey {
             states[id] = newValue
         }
     }
+    public func parent(of id: TKey) -> TKey? {
+        guard let linkage = linkages[id] else { fatalError("Cannot find node for ID `\(id)`.") }
+        return linkage.parent
+    }
     public func children(of id: TKey) -> [TKey] {
         guard let linkage = linkages[id] else { fatalError("Cannot find node for ID `\(id)`.") }
         return linkage.children
@@ -79,7 +88,7 @@ public struct Tree1<TKey, TValue>: Sequence where TKey: Tree1NodeKey {
     ///     ID to newrly inserted node.
     ///
     @discardableResult
-    public mutating func insert(_ newChildNode: Tree1Node, at index: Int, in parentID: TKey) -> TKey {
+    public mutating func insert(_ newChildNode: Bitree1Node, at index: Int, in parentID: TKey) -> TKey {
         // Read only.
         precondition(linkages[newChildNode.id] == nil, "Bad new node ID `\(newChildNode.id)`. The key is already exists in this tree.")
         guard let parentLinkage = linkages[parentID] else { fatalError("Bad parent ID `\(parentID)`. No such node exists") }
@@ -88,7 +97,9 @@ public struct Tree1<TKey, TValue>: Sequence where TKey: Tree1NodeKey {
         newParentLinkage.children.insert(newChildNode.id, at: index)
         // Read/write.
         linkages[parentID] = newParentLinkage
-        linkages[newChildNode.id] = Tree1NodeLinkage()
+        var newChildLinkage = Bitree1NodeLinkage<TKey>()
+        newChildLinkage.parent = parentID
+        linkages[newChildNode.id] = newChildLinkage
         states[newChildNode.id] = newChildNode.state
         return newChildNode.id
     }
@@ -123,18 +134,18 @@ public struct Tree1<TKey, TValue>: Sequence where TKey: Tree1NodeKey {
 
     // MARK: -
 
-    public func makeIterator() -> AnyIterator<Tree1Node> {
+    public func makeIterator() -> AnyIterator<Bitree1Node> {
         var it = states.makeIterator()
         return AnyIterator { return it.next() }
     }
 }
 
-public protocol Tree1NodeKey: Hashable, Comparable {
+public protocol Bitree1NodeKey: Hashable, Comparable {
     init()
 }
 
-internal struct Tree1NodeLinkage<TKey: Tree1NodeKey> {
-//    var parent = Tree1NodeKey?.none
+internal struct Bitree1NodeLinkage<TKey: Bitree1NodeKey> {
+    internal var parent = TKey?.none
     internal var children = [TKey]()
 }
 

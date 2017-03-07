@@ -18,6 +18,8 @@
 		459107831E6C8CC60034E61F /* Editor6CommonUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459107821E6C8CC60034E61F /* Editor6CommonUnitTests.swift */; };
 		459107851E6C8CC60034E61F /* Editor6Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45185ED51DA93A0D00C4D86D /* Editor6Common.framework */; };
 		459107981E6C8CFF0034E61F /* Tree1UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459107971E6C8CFF0034E61F /* Tree1UnitTests.swift */; };
+		4591084F1E6F4B740034E61F /* Bitree1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4591084E1E6F4B740034E61F /* Bitree1.swift */; };
+		459108751E6F4DF50034E61F /* Bitree1UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459108741E6F4DF50034E61F /* Bitree1UnitTests.swift */; };
 		459813C81E2BBE9D00871FB6 /* BTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 459813B91E2BBE9000871FB6 /* BTree.framework */; };
 		45ABC12F1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */; };
 		45ABC1BA1DCDB5DA006EFE1F /* MARK_unimplemented.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */; };
@@ -141,6 +143,8 @@
 		459107821E6C8CC60034E61F /* Editor6CommonUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor6CommonUnitTests.swift; sourceTree = "<group>"; };
 		459107841E6C8CC60034E61F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		459107971E6C8CFF0034E61F /* Tree1UnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree1UnitTests.swift; sourceTree = "<group>"; };
+		4591084E1E6F4B740034E61F /* Bitree1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bitree1.swift; sourceTree = "<group>"; };
+		459108741E6F4DF50034E61F /* Bitree1UnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bitree1UnitTests.swift; sourceTree = "<group>"; };
 		459813AC1E2BBE9000871FB6 /* BTree.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BTree.xcodeproj; path = ../../submodules/BTree/BTree.xcodeproj; sourceTree = "<group>"; };
 		45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppKit.NSMenuItem+TargetActionUtility.swift"; sourceTree = "<group>"; };
 		45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_unimplemented.swift; sourceTree = "<group>"; };
@@ -201,6 +205,7 @@
 				456B81C81DAA0D3B006D7C49 /* WorkspaceTreeState.swift */,
 				456FDD5B1DAA2DD500F8003A /* Tree.swift */,
 				45E084E71DB3C87300C5428D /* Tree1.swift */,
+				4591084E1E6F4B740034E61F /* Bitree1.swift */,
 				4583C1D51DCAAB63001EA107 /* Tree1Mutation.swift */,
 				45185ED91DA93A0D00C4D86D /* Info.plist */,
 				456FDDA11DAA461300F8003A /* Editor6CommonView.swift */,
@@ -243,6 +248,7 @@
 			children = (
 				459107821E6C8CC60034E61F /* Editor6CommonUnitTests.swift */,
 				459107971E6C8CFF0034E61F /* Tree1UnitTests.swift */,
+				459108741E6F4DF50034E61F /* Bitree1UnitTests.swift */,
 				459107841E6C8CC60034E61F /* Info.plist */,
 			);
 			path = Editor6CommonUnitTests;
@@ -484,6 +490,7 @@
 				456FDDA21DAA461300F8003A /* Editor6CommonView.swift in Sources */,
 				45CCF0871E6B31E400068A03 /* Flow2.swift in Sources */,
 				45CCF0A51E6B326700068A03 /* assertMainThread.swift in Sources */,
+				4591084F1E6F4B740034E61F /* Bitree1.swift in Sources */,
 				45EF85331DB22DCB00B320B5 /* Editor6CommonControl.swift in Sources */,
 				4591076D1E6C8B540034E61F /* MARK_poorlyImplemented().swift in Sources */,
 				4517CFE81E2BB15F00C43464 /* debugLog.swift in Sources */,
@@ -496,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				459107831E6C8CC60034E61F /* Editor6CommonUnitTests.swift in Sources */,
+				459108751E6F4DF50034E61F /* Bitree1UnitTests.swift in Sources */,
 				459107981E6C8CFF0034E61F /* Tree1UnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
