@@ -8,6 +8,6 @@
 
 public enum Tree1Mutation<TKey, TValue> {
     case insert([(id: TKey, state: TValue, at: Int, in: TKey)])
-    case update([(id: TKey, state: TValue)])
+    case update([(id: TKey, state: TValue, at: Int, in: TKey)])
     case delete([(id: TKey, state: TValue, at: Int, in: TKey)])
 }

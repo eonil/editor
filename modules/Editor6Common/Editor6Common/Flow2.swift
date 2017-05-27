@@ -131,7 +131,7 @@ public enum Flow2Step<T> {
     case execute((_ context: T) -> ())
     ///
     /// You can put any function as condition.
-    /// `Flow` calls `while` on `signal` and
+    /// `Flow` calls this function on `signal` and
     /// resumes if it returns `false`.
     ///
     case wait(while: (_ context: T) -> Bool)

@@ -22,6 +22,8 @@
 		45204A031DB1F061002297EC /* FileNavigatorUISelectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45204A021DB1F061002297EC /* FileNavigatorUISelectionState.swift */; };
 		45204A051DB1F1A0002297EC /* FileNavigatorUIMappedID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45204A041DB1F1A0002297EC /* FileNavigatorUIMappedID.swift */; };
 		45204A071DB1F711002297EC /* FileNavigatorUITree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45204A061DB1F711002297EC /* FileNavigatorUITree.swift */; };
+		455DF8B21E7079530010E3D7 /* FileNavgatorUIMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455DF8B11E7079530010E3D7 /* FileNavgatorUIMenuController.swift */; };
+		455DF8BC1E7079B80010E3D7 /* FileNavigatorUIMenuState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455DF8BB1E7079B80010E3D7 /* FileNavigatorUIMenuState.swift */; };
 		4566CE9F1DADAAAB00EA2A0C /* Editor6Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4566CE9B1DADAAA500EA2A0C /* Editor6Common.framework */; };
 		456B81CB1DAA1277006D7C49 /* TestdriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B81CA1DAA1277006D7C49 /* TestdriveViewController.swift */; };
 		456FDD4E1DAA1C4C00F8003A /* FileNavigatorUINodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD4D1DAA1C4C00F8003A /* FileNavigatorUINodeCell.swift */; };
@@ -76,6 +78,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 45771B0F1CD0EAE10096947A;
 			remoteInfo = "EonilToolbox-OSX";
+		};
+		455DF8B51E7079540010E3D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4566CE911DADAAA500EA2A0C /* Editor6Common.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459107801E6C8CC60034E61F;
+			remoteInfo = Editor6CommonUnitTests;
 		};
 		4566CE9A1DADAAA500EA2A0C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -140,6 +149,8 @@
 		45204A021DB1F061002297EC /* FileNavigatorUISelectionState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorUISelectionState.swift; sourceTree = "<group>"; };
 		45204A041DB1F1A0002297EC /* FileNavigatorUIMappedID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorUIMappedID.swift; sourceTree = "<group>"; };
 		45204A061DB1F711002297EC /* FileNavigatorUITree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorUITree.swift; sourceTree = "<group>"; };
+		455DF8B11E7079530010E3D7 /* FileNavgatorUIMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavgatorUIMenuController.swift; sourceTree = "<group>"; };
+		455DF8BB1E7079B80010E3D7 /* FileNavigatorUIMenuState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorUIMenuState.swift; sourceTree = "<group>"; };
 		4566CE911DADAAA500EA2A0C /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
 		456B81CA1DAA1277006D7C49 /* TestdriveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestdriveViewController.swift; sourceTree = "<group>"; };
 		456FDD4D1DAA1C4C00F8003A /* FileNavigatorUINodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorUINodeCell.swift; sourceTree = "<group>"; };
@@ -199,11 +210,13 @@
 			children = (
 				45185E941DA9240B00C4D86D /* Editor6FileTreeUI.h */,
 				456FDD571DAA1D6700F8003A /* FileNavigatorUIState.swift */,
+				455DF8BB1E7079B80010E3D7 /* FileNavigatorUIMenuState.swift */,
 				45204A061DB1F711002297EC /* FileNavigatorUITree.swift */,
 				45204A021DB1F061002297EC /* FileNavigatorUISelectionState.swift */,
 				456FDD5D1DAA310F00F8003A /* FileNavigatorUIAction.swift */,
 				45EF84301DB1FF6300B320B5 /* FileNavigatorUIEvent.swift */,
 				45185F021DA9403F00C4D86D /* FileNavigatorUIView.swift */,
+				455DF8B11E7079530010E3D7 /* FileNavgatorUIMenuController.swift */,
 				45204A041DB1F1A0002297EC /* FileNavigatorUIMappedID.swift */,
 				456FDD591DAA2C4400F8003A /* FileNavigatorUIViewError.swift */,
 				456FDD4D1DAA1C4C00F8003A /* FileNavigatorUINodeCell.swift */,
@@ -251,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				4566CE9B1DADAAA500EA2A0C /* Editor6Common.framework */,
+				455DF8B61E7079540010E3D7 /* Editor6CommonUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -402,6 +416,13 @@
 			remoteRef = 45185EF91DA93A6B00C4D86D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		455DF8B61E7079540010E3D7 /* Editor6CommonUnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Editor6CommonUnitTests.xctest;
+			remoteRef = 455DF8B51E7079540010E3D7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4566CE9B1DADAAA500EA2A0C /* Editor6Common.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -449,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455DF8BC1E7079B80010E3D7 /* FileNavigatorUIMenuState.swift in Sources */,
 				45185F031DA9403F00C4D86D /* FileNavigatorUIView.swift in Sources */,
 				45185EC61DA930FF00C4D86D /* WorkspacePath.swift in Sources */,
 				456FDD581DAA1D6700F8003A /* FileNavigatorUIState.swift in Sources */,
@@ -459,6 +481,7 @@
 				456FDD5E1DAA310F00F8003A /* FileNavigatorUIAction.swift in Sources */,
 				45204A071DB1F711002297EC /* FileNavigatorUITree.swift in Sources */,
 				456FDD5A1DAA2C4400F8003A /* FileNavigatorUIViewError.swift in Sources */,
+				455DF8B21E7079530010E3D7 /* FileNavgatorUIMenuController.swift in Sources */,
 				45204A051DB1F1A0002297EC /* FileNavigatorUIMappedID.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,7 @@
 //
 
 public enum FileNavigatorUIAction {
+    case clickMenu(FileNavigatorUIMenuItemID)
     case node(FileNavigatorUINodeID, FileNavigatorUINodeAction)
 }
 

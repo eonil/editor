@@ -20,6 +20,7 @@ public final class FileNavigatorUIView: ManualView, NSOutlineViewDataSource, NSO
     private let scroll = NSScrollView()
     private let outline = NSOutlineView()
     private let nameColumn = NSTableColumn()
+    private let menucon = FileNavigatorUIMenuController()
 
     private var localCopy = FileNavigatorUIState()
     private var idMapping = [FileNavigatorUINodeID: MappedID]()
@@ -51,10 +52,11 @@ public final class FileNavigatorUIView: ManualView, NSOutlineViewDataSource, NSO
                                              idMapping: idMapping,
                                              selectionIndices: outline.selectedRowIndexes)
     }
-    public func reload(state newState: FileNavigatorUIState) {
+    public func reload(_ newState: FileNavigatorUIState) {
         localCopy = newState
         remapAllIDs()
         outline.reloadData()
+        menucon.apply(newState)
     }
     public func addChildItems(_ newChildState: FileNavigatorUINodeState, at index: Int, in parentID: FileNavigatorUINodeID) throws -> FileNavigatorUINodeID {
         guard let children = localCopy.tree.linkages[parentID]?.children else { throw FileNavigatorUIViewError.badID }
@@ -87,6 +89,7 @@ public final class FileNavigatorUIView: ManualView, NSOutlineViewDataSource, NSO
         outline.allowsMultipleSelection = true
         outline.dataSource = self
         outline.delegate = self
+        outline.menu = menucon.menu
     }
     public override func manual_layoutSubviews() {
         super.manual_layoutSubviews()

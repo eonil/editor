@@ -29,7 +29,7 @@ final class NavigatorView: NSView {
         install()
     }
     func reload(_ newState: WorkspaceUIState) {
-        filePaneView.reload(state: newState.navigator.files)
+        filePaneView.reload(newState.navigator.files)
         issuePaneView.reload(newState.navigator.issues)
     }
 

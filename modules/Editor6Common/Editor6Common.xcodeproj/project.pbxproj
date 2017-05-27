@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		4517CFE81E2BB15F00C43464 /* debugLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4517CFE71E2BB15F00C43464 /* debugLog.swift */; };
 		45185EDA1DA93A0D00C4D86D /* Editor6Common.h in Headers */ = {isa = PBXBuildFile; fileRef = 45185ED81DA93A0D00C4D86D /* Editor6Common.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		455DF8C01E71C15B0010E3D7 /* TreeMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455DF8BF1E71C15B0010E3D7 /* TreeMutation.swift */; };
+		455DF8CE1E71C1630010E3D7 /* TreeIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455DF8CD1E71C1630010E3D7 /* TreeIndex.swift */; };
+		455DF8E41E71C8420010E3D7 /* TransactionFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455DF8E31E71C8420010E3D7 /* TransactionFramework.swift */; };
+		455DF8E61E71CD0E0010E3D7 /* MutationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455DF8E51E71CD0E0010E3D7 /* MutationProtocol.swift */; };
 		456B81C91DAA0D3B006D7C49 /* WorkspaceTreeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B81C81DAA0D3B006D7C49 /* WorkspaceTreeState.swift */; };
 		456FDD5C1DAA2DD500F8003A /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDD5B1DAA2DD500F8003A /* Tree.swift */; };
 		456FDDA21DAA461300F8003A /* Editor6CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456FDDA11DAA461300F8003A /* Editor6CommonView.swift */; };
@@ -132,6 +136,10 @@
 		45185ED51DA93A0D00C4D86D /* Editor6Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45185ED81DA93A0D00C4D86D /* Editor6Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6Common.h; sourceTree = "<group>"; };
 		45185ED91DA93A0D00C4D86D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		455DF8BF1E71C15B0010E3D7 /* TreeMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeMutation.swift; sourceTree = "<group>"; };
+		455DF8CD1E71C1630010E3D7 /* TreeIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeIndex.swift; sourceTree = "<group>"; };
+		455DF8E31E71C8420010E3D7 /* TransactionFramework.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionFramework.swift; sourceTree = "<group>"; };
+		455DF8E51E71CD0E0010E3D7 /* MutationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutationProtocol.swift; sourceTree = "<group>"; };
 		456B81C81DAA0D3B006D7C49 /* WorkspaceTreeState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceTreeState.swift; sourceTree = "<group>"; };
 		456FDD261DAA14EB00F8003A /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = ../../submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
 		456FDD5B1DAA2DD500F8003A /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
@@ -206,6 +214,8 @@
 				456FDD5B1DAA2DD500F8003A /* Tree.swift */,
 				45E084E71DB3C87300C5428D /* Tree1.swift */,
 				4583C1D51DCAAB63001EA107 /* Tree1Mutation.swift */,
+				455DF8CD1E71C1630010E3D7 /* TreeIndex.swift */,
+				455DF8BF1E71C15B0010E3D7 /* TreeMutation.swift */,
 				4591084E1E6F4B740034E61F /* Bitree1.swift */,
 				45185ED91DA93A0D00C4D86D /* Info.plist */,
 				456FDDA11DAA461300F8003A /* Editor6CommonView.swift */,
@@ -213,6 +223,7 @@
 				456FDDAD1DAA47EC00F8003A /* Editor6CommonViewController.swift */,
 				45EF85401DB236CE00B320B5 /* Editor6CommonStackView.swift */,
 				45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */,
+				455DF8E21E71C8380010E3D7 /* TransactionFramework */,
 				45ABC1D01DCDB788006EFE1F /* Report.swift */,
 				45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */,
 				4591076C1E6C8B540034E61F /* MARK_poorlyImplemented().swift */,
@@ -221,6 +232,15 @@
 				45ABC1D21DCDB8BD006EFE1F /* noop.swift */,
 			);
 			path = Editor6Common;
+			sourceTree = "<group>";
+		};
+		455DF8E21E71C8380010E3D7 /* TransactionFramework */ = {
+			isa = PBXGroup;
+			children = (
+				455DF8E31E71C8420010E3D7 /* TransactionFramework.swift */,
+				455DF8E51E71CD0E0010E3D7 /* MutationProtocol.swift */,
+			);
+			path = TransactionFramework;
 			sourceTree = "<group>";
 		};
 		456FDD351DAA14ED00F8003A /* (deps) */ = {
@@ -488,11 +508,15 @@
 				45ABC12F1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift in Sources */,
 				456B81C91DAA0D3B006D7C49 /* WorkspaceTreeState.swift in Sources */,
 				456FDDA21DAA461300F8003A /* Editor6CommonView.swift in Sources */,
+				455DF8E61E71CD0E0010E3D7 /* MutationProtocol.swift in Sources */,
+				455DF8CE1E71C1630010E3D7 /* TreeIndex.swift in Sources */,
 				45CCF0871E6B31E400068A03 /* Flow2.swift in Sources */,
+				455DF8C01E71C15B0010E3D7 /* TreeMutation.swift in Sources */,
 				45CCF0A51E6B326700068A03 /* assertMainThread.swift in Sources */,
 				4591084F1E6F4B740034E61F /* Bitree1.swift in Sources */,
 				45EF85331DB22DCB00B320B5 /* Editor6CommonControl.swift in Sources */,
 				4591076D1E6C8B540034E61F /* MARK_poorlyImplemented().swift in Sources */,
+				455DF8E41E71C8420010E3D7 /* TransactionFramework.swift in Sources */,
 				4517CFE81E2BB15F00C43464 /* debugLog.swift in Sources */,
 				456FDD5C1DAA2DD500F8003A /* Tree.swift in Sources */,
 			);

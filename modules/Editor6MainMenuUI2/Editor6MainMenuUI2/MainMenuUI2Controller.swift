@@ -137,7 +137,10 @@ private struct MainMenuPalette {
     }
     func getAllTopMenuItems() -> [NSMenuItem] {
         return [
-            application, file, product, debug,
+            application,
+            file, 
+            product,
+            debug,
         ]
     }
 }

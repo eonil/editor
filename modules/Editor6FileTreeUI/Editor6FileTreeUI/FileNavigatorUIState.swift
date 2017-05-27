@@ -16,8 +16,6 @@ public struct FileNavigatorUIState {
     public init() {}
 }
 
-
-
 public typealias FileNavigatorUINode = (id: FileNavigatorUINodeID, state: FileNavigatorUINodeState)
 public struct FileNavigatorUINodeID: Hashable, Comparable {
     fileprivate let oid = ObjectAddressID()
@@ -44,6 +42,7 @@ public struct FileNavigatorUINodeState {
     public var name = String?.none
     public var type = FileNavigatorUINodeType.folder
     public var isExpanded = false
+    public var availableMenuItemIDs = FileNavigatorUIMenuItemID([])
 
     public init() {}
 }

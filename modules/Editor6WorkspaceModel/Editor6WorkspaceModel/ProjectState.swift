@@ -6,8 +6,11 @@
 //  Copyright © 2016 Eonil. All rights reserved.
 //
 
+import EonilToolbox
+
 public struct ProjectState {
-    public var items = [ProjectItemID: ProjectItemState]()
+    public private(set) var version = Version()
+    public var items = [ProjectItemID: ProjectItemState]() { didSet { revise() } }
 
     public typealias Mutation = ProjectMutation
 
@@ -20,6 +23,9 @@ public struct ProjectState {
 //            items.apply(mutation: itemsMutation)
 //        }
 //    }
+    private mutating func revise() {
+        version.revise()
+    }
 }
 
 public typealias ProjectItem = (id: ProjectItemID, state: ProjectItemState)
