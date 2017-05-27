@@ -63,11 +63,5 @@
    <Group
       location = "container:"
       name = "submodules">
-      <FileRef
-         location = "group:submodules/LLDBWrapper/LLDBWrapper.xcodeproj">
-      </FileRef>
-      <FileRef
-         location = "group:submodules/toolbox.swift/EonilToolbox.xcodeproj">
-      </FileRef>
    </Group>
 </Workspace>
