@@ -54,6 +54,9 @@
          location = "group:Editor6FileTreeUI/Editor6FileTreeUI.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Editor6Features/Editor6Features.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Editor6Services/Editor6Services.xcodeproj">
       </FileRef>
       <FileRef

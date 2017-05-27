@@ -2,6 +2,7 @@ WorkspaceModel
 ==============
 Hoon H.
 
+**DEPRECATED:** Features are moving to `Editor6Features` module.
 
 
 

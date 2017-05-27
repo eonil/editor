@@ -1,5 +1,6 @@
 github "eonil/LLDBWrapper" "0.0.1"
 github "eonil/json.swift" "ead164d50c7c1ed3086350bc70504ba711e4d8e4"
+github "eonil/prototype-signet.swift" "0.0.0"
 github "eonil/toolbox.swift" "2c98bd8b081202ebb5ab42c2399b557b7f2a1a41"
 github "lorentey/BTree" "v4.0.0"
 github "mauriciosantos/Buckets-Swift" "2.0.0"

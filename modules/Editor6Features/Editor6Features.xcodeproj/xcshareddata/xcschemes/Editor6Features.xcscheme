@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45185ED41DA93A0D00C4D86D"
-               BuildableName = "Editor6Common.framework"
-               BlueprintName = "Editor6Common"
-               ReferencedContainer = "container:Editor6Common.xcodeproj">
+               BlueprintIdentifier = "45D62CDE1EDA018A009C0E69"
+               BuildableName = "Editor6Features.framework"
+               BlueprintName = "Editor6Features"
+               ReferencedContainer = "container:Editor6Features.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "452E95701EDAFF9700AAE250"
-               BuildableName = "Editor6CommonUnitTests.xctest"
-               BlueprintName = "Editor6CommonUnitTests"
-               ReferencedContainer = "container:Editor6Common.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45185ED41DA93A0D00C4D86D"
-            BuildableName = "Editor6Common.framework"
-            BlueprintName = "Editor6Common"
-            ReferencedContainer = "container:Editor6Common.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45185ED41DA93A0D00C4D86D"
-            BuildableName = "Editor6Common.framework"
-            BlueprintName = "Editor6Common"
-            ReferencedContainer = "container:Editor6Common.xcodeproj">
+            BlueprintIdentifier = "45D62CDE1EDA018A009C0E69"
+            BuildableName = "Editor6Features.framework"
+            BlueprintName = "Editor6Features"
+            ReferencedContainer = "container:Editor6Features.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -82,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "45185ED41DA93A0D00C4D86D"
-            BuildableName = "Editor6Common.framework"
-            BlueprintName = "Editor6Common"
-            ReferencedContainer = "container:Editor6Common.xcodeproj">
+            BlueprintIdentifier = "45D62CDE1EDA018A009C0E69"
+            BuildableName = "Editor6Features.framework"
+            BlueprintName = "Editor6Features"
+            ReferencedContainer = "container:Editor6Features.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

@@ -4,3 +4,4 @@ github "lorentey/BTree" == 4.0
 
 github "eonil/json.swift" "ead164d"
 github "eonil/toolbox.swift" "2c98bd8"
+github "eonil/prototype-signet.swift" "0.0.0"

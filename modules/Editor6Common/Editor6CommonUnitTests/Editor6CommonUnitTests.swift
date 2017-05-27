@@ -2,7 +2,7 @@
 //  Editor6CommonUnitTests.swift
 //  Editor6CommonUnitTests
 //
-//  Created by Hoon H. on 2017/03/06.
+//  Created by Hoon H. on 2017/05/28.
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
