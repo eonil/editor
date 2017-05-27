@@ -8,6 +8,7 @@
 
 import Foundation
 import Editor6Common
+import LLDBWrapper
 
 public struct RepoState {
     public var location = URL?.none

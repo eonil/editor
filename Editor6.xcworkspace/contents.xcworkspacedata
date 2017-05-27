@@ -14,6 +14,28 @@
       location = "group:ARCHITECTURE.md">
    </FileRef>
    <Group
+      location = "group:Configurations"
+      name = "Configurations">
+      <FileRef
+         location = "group:ExecutableCommon.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:ExecutableDebug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:ExecutableRelease.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:FrameworkCommon.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:FrameworkDebug.xcconfig">
+      </FileRef>
+      <FileRef
+         location = "group:FrameworkRelease.xcconfig">
+      </FileRef>
+   </Group>
+   <Group
       location = "container:"
       name = "modules">
       <FileRef
@@ -47,9 +69,5 @@
       <FileRef
          location = "group:submodules/toolbox.swift/EonilToolbox.xcodeproj">
       </FileRef>
-   </Group>
-   <Group
-      location = "container:"
-      name = "packages">
    </Group>
 </Workspace>

@@ -23,45 +23,22 @@
 		45ABC15C1DCD8B6B006EFE1F /* Editor6MainMenuUI2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4583C16E1DCAA86F001EA107 /* Editor6MainMenuUI2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45ABC1601DCD8B78006EFE1F /* Editor6Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4583C1AA1DCAA9C3001EA107 /* Editor6Common.framework */; };
 		45ABC1611DCD8B78006EFE1F /* Editor6Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4583C1AA1DCAA9C3001EA107 /* Editor6Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45ABC1681DCD8B89006EFE1F /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4583C1BA1DCAA9D5001EA107 /* EonilToolbox.framework */; };
-		45ABC1691DCD8B89006EFE1F /* EonilToolbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4583C1BA1DCAA9D5001EA107 /* EonilToolbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		450CF0A31ED9F39000B8995A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4583C1A31DCAA9C3001EA107 /* Editor6Common.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 459107801E6C8CC60034E61F;
+			remoteInfo = Editor6CommonUnitTests;
+		};
 		4583C1A91DCAA9C3001EA107 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4583C1A31DCAA9C3001EA107 /* Editor6Common.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 45185ED51DA93A0D00C4D86D;
 			remoteInfo = Editor6Common;
-		};
-		4583C1B71DCAA9D5001EA107 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4583C1B01DCAA9D5001EA107 /* EonilToolbox.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45771A9D1CD0E1A30096947A;
-			remoteInfo = "EonilToolbox-iOS";
-		};
-		4583C1B91DCAA9D5001EA107 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4583C1B01DCAA9D5001EA107 /* EonilToolbox.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45771B101CD0EAE10096947A;
-			remoteInfo = "EonilToolbox-OSX";
-		};
-		4583C1BB1DCAA9D5001EA107 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4583C1B01DCAA9D5001EA107 /* EonilToolbox.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45D1B98E1D16CF0300B9F7C3;
-			remoteInfo = "EonilToolboxTests-macOS";
-		};
-		4583C1BD1DCAA9D5001EA107 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4583C1B01DCAA9D5001EA107 /* EonilToolbox.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 452A006B1D943811007DF8F3;
-			remoteInfo = "EonilToolboxTests-iOS";
 		};
 		45ABC14F1DCD8581006EFE1F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -84,13 +61,6 @@
 			remoteGlobalIDString = 45185ED41DA93A0D00C4D86D;
 			remoteInfo = Editor6Common;
 		};
-		45ABC16A1DCD8B89006EFE1F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4583C1B01DCAA9D5001EA107 /* EonilToolbox.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 45771B0F1CD0EAE10096947A;
-			remoteInfo = "EonilToolbox-OSX";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -100,7 +70,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				45ABC1691DCD8B89006EFE1F /* EonilToolbox.framework in Embed Frameworks */,
 				45ABC15C1DCD8B6B006EFE1F /* Editor6MainMenuUI2.framework in Embed Frameworks */,
 				45ABC1611DCD8B78006EFE1F /* Editor6Common.framework in Embed Frameworks */,
 			);
@@ -121,7 +90,6 @@
 		4583C1861DCAA8F6001EA107 /* MainMenuKeyMappingUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuKeyMappingUtility.swift; sourceTree = "<group>"; };
 		4583C1881DCAA926001EA107 /* MainMenuUI2ItemID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUI2ItemID.swift; sourceTree = "<group>"; };
 		4583C1A31DCAA9C3001EA107 /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
-		4583C1B01DCAA9D5001EA107 /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = ../../submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
 		45ABC11E1DCD7C22006EFE1F /* MainMenuUI2Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuUI2Action.swift; sourceTree = "<group>"; };
 		45ABC1401DCD8580006EFE1F /* Editor6MainMenuUI2Testdrive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor6MainMenuUI2Testdrive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45ABC1421DCD8581006EFE1F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -130,6 +98,8 @@
 		45ABC14E1DCD8581006EFE1F /* Editor6MainMenuUI2TestdriveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Editor6MainMenuUI2TestdriveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		45ABC1521DCD8581006EFE1F /* Editor6MainMenuUI2TestdriveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor6MainMenuUI2TestdriveUITests.swift; sourceTree = "<group>"; };
 		45ABC1541DCD8581006EFE1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45B3B8CB1ED9FD970067D36B /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		45B3B8CC1ED9FD970067D36B /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +116,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45ABC1681DCD8B89006EFE1F /* EonilToolbox.framework in Frameworks */,
 				45ABC15B1DCD8B6B006EFE1F /* Editor6MainMenuUI2.framework in Frameworks */,
 				45ABC1601DCD8B78006EFE1F /* Editor6Common.framework in Frameworks */,
 			);
@@ -166,7 +135,9 @@
 			isa = PBXGroup;
 			children = (
 				453323A41DCD75C2000E05A8 /* README.md */,
-				4583C1A21DCAA9AE001EA107 /* (dependencies) */,
+				45B3B8CB1ED9FD970067D36B /* Debug.xcconfig */,
+				45B3B8CC1ED9FD970067D36B /* Release.xcconfig */,
+				4583C1A21DCAA9AE001EA107 /* (deps) */,
 				4583C1701DCAA86F001EA107 /* Editor6MainMenuUI2 */,
 				45ABC1411DCD8581006EFE1F /* Editor6MainMenuUI2Testdrive */,
 				45ABC1511DCD8581006EFE1F /* Editor6MainMenuUI2TestdriveUITests */,
@@ -208,30 +179,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4583C1A21DCAA9AE001EA107 /* (dependencies) */ = {
+		4583C1A21DCAA9AE001EA107 /* (deps) */ = {
 			isa = PBXGroup;
 			children = (
-				4583C1B01DCAA9D5001EA107 /* EonilToolbox.xcodeproj */,
 				4583C1A31DCAA9C3001EA107 /* Editor6Common.xcodeproj */,
 			);
-			name = "(dependencies)";
+			name = "(deps)";
 			sourceTree = "<group>";
 		};
 		4583C1A41DCAA9C3001EA107 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				4583C1AA1DCAA9C3001EA107 /* Editor6Common.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4583C1B11DCAA9D5001EA107 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4583C1B81DCAA9D5001EA107 /* EonilToolbox.framework */,
-				4583C1BA1DCAA9D5001EA107 /* EonilToolbox.framework */,
-				4583C1BC1DCAA9D5001EA107 /* EonilToolboxTests-macOS.xctest */,
-				4583C1BE1DCAA9D5001EA107 /* EonilToolboxTests-iOS.xctest */,
+				450CF0A41ED9F39000B8995A /* Editor6CommonUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -301,7 +261,6 @@
 			dependencies = (
 				45ABC15E1DCD8B6B006EFE1F /* PBXTargetDependency */,
 				45ABC1631DCD8B78006EFE1F /* PBXTargetDependency */,
-				45ABC16B1DCD8B89006EFE1F /* PBXTargetDependency */,
 			);
 			name = Editor6MainMenuUI2Testdrive;
 			productName = Editor6MainMenuUI2Testdrive;
@@ -371,10 +330,6 @@
 					ProductGroup = 4583C1A41DCAA9C3001EA107 /* Products */;
 					ProjectRef = 4583C1A31DCAA9C3001EA107 /* Editor6Common.xcodeproj */;
 				},
-				{
-					ProductGroup = 4583C1B11DCAA9D5001EA107 /* Products */;
-					ProjectRef = 4583C1B01DCAA9D5001EA107 /* EonilToolbox.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -386,39 +341,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		450CF0A41ED9F39000B8995A /* Editor6CommonUnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = Editor6CommonUnitTests.xctest;
+			remoteRef = 450CF0A31ED9F39000B8995A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		4583C1AA1DCAA9C3001EA107 /* Editor6Common.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Editor6Common.framework;
 			remoteRef = 4583C1A91DCAA9C3001EA107 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4583C1B81DCAA9D5001EA107 /* EonilToolbox.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EonilToolbox.framework;
-			remoteRef = 4583C1B71DCAA9D5001EA107 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4583C1BA1DCAA9D5001EA107 /* EonilToolbox.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EonilToolbox.framework;
-			remoteRef = 4583C1B91DCAA9D5001EA107 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4583C1BC1DCAA9D5001EA107 /* EonilToolboxTests-macOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "EonilToolboxTests-macOS.xctest";
-			remoteRef = 4583C1BB1DCAA9D5001EA107 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4583C1BE1DCAA9D5001EA107 /* EonilToolboxTests-iOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "EonilToolboxTests-iOS.xctest";
-			remoteRef = 4583C1BD1DCAA9D5001EA107 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -496,16 +430,12 @@
 			name = Editor6Common;
 			targetProxy = 45ABC1621DCD8B78006EFE1F /* PBXContainerItemProxy */;
 		};
-		45ABC16B1DCD8B89006EFE1F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "EonilToolbox-OSX";
-			targetProxy = 45ABC16A1DCD8B89006EFE1F /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4583C1741DCAA86F001EA107 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45B3B8CB1ED9FD970067D36B /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -558,6 +488,7 @@
 		};
 		4583C1751DCAA86F001EA107 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45B3B8CC1ED9FD970067D36B /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

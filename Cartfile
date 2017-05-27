@@ -1,0 +1,6 @@
+github "eonil/LLDBWrapper" "0.0.1"
+github "mauriciosantos/Buckets-Swift" == 2.0
+github "lorentey/BTree" == 4.0
+
+github "eonil/json.swift" "ead164d"
+github "eonil/toolbox.swift" "2c98bd8"

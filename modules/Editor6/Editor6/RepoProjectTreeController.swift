@@ -28,21 +28,22 @@ final class RepoProjectTreeController {
         idMapping[key: ProjectItemID([])] = vs.tree.root.id
     }
     func apply(_ t: ProjectTransaction) {
-        switch t {
-        case let .insert(p, r, cs):
-            precondition(r.count == cs.count)
-            guard let vpid = idMapping[key: mpid] else { MARK_unimplemented() }
-            for (i, c) in zip(r, cs) {
-                let vpid =
-                vs.tree.insert(at: i, in: p)
-            }
-            for i in r {
-
-            }
-        case let .update(p, r, cs):
-
-        case let .delete(p, r, cs):
-        }
+        MARK_unimplemented()
+//        switch t {
+//        case let .insert(p, r, cs):
+//            precondition(r.count == cs.count)
+//            guard let vpid = idMapping[key: mpid] else { MARK_unimplemented() }
+//            for (i, c) in zip(r, cs) {
+//                let vpid =
+//                vs.tree.insert(at: i, in: p)
+//            }
+//            for i in r {
+//
+//            }
+//        case let .update(p, r, cs):
+//
+//        case let .delete(p, r, cs):
+//        }
     }
     func apply(_ m: Tree1Mutation<ProjectItemID, ProjectItemState>) {
         func makeFileName(_ m: ProjectItemID) -> String {

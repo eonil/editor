@@ -12,7 +12,7 @@ public struct ProjectState {
     public private(set) var version = Version()
     public var items = [ProjectItemID: ProjectItemState]() { didSet { revise() } }
 
-    public typealias Mutation = ProjectMutation
+//    public typealias Mutation = ProjectMutation
 
     public init() {
         items[ProjectItemID([])] = ProjectItemState(linkage: .group(subitems: []), note: nil)

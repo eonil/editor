@@ -1,0 +1,2 @@
+
+FRAMEWORK_SEARCH_PATHS = $(SRCROOT)/../../Carthage/Build/Mac

@@ -36,9 +36,6 @@
 		45EF850E1DB21B0D00B320B5 /* WorkspaceUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF84851DB219A900B320B5 /* WorkspaceUIViewController.swift */; };
 		45EF85111DB21D5400B320B5 /* WindowContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF85101DB21D5400B320B5 /* WindowContentViewController.swift */; };
 		45EF85151DB223FD00B320B5 /* WorkspaceUIInspectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF85141DB223FD00B320B5 /* WorkspaceUIInspectorViewController.swift */; };
-		45EF85251DB2246A00B320B5 /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF85201DB2245F00B320B5 /* EonilToolbox.framework */; };
-		45EF85261DB2247000B320B5 /* EonilToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF85201DB2245F00B320B5 /* EonilToolbox.framework */; };
-		45EF85271DB2247000B320B5 /* EonilToolbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45EF85201DB2245F00B320B5 /* EonilToolbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		45EF852D1DB2279A00B320B5 /* DebugContextUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF852C1DB2279A00B320B5 /* DebugContextUIViewController.swift */; };
 		45EF85311DB2288400B320B5 /* WorkspaceUINavigatorTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF85301DB2288400B320B5 /* WorkspaceUINavigatorTabBarView.swift */; };
 		45EF853F1DB2354C00B320B5 /* WorkspaceUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EF853E1DB2354C00B320B5 /* WorkspaceUIExtensions.swift */; };
@@ -116,41 +113,6 @@
 			remoteGlobalIDString = 45185E901DA9240B00C4D86D;
 			remoteInfo = Editor6FileTreeUI;
 		};
-		45EF851D1DB2245F00B320B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF85161DB2245F00B320B5 /* EonilToolbox.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45771A9D1CD0E1A30096947A;
-			remoteInfo = "EonilToolbox-iOS";
-		};
-		45EF851F1DB2245F00B320B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF85161DB2245F00B320B5 /* EonilToolbox.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45771B101CD0EAE10096947A;
-			remoteInfo = "EonilToolbox-OSX";
-		};
-		45EF85211DB2245F00B320B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF85161DB2245F00B320B5 /* EonilToolbox.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 45D1B98E1D16CF0300B9F7C3;
-			remoteInfo = "EonilToolboxTests-macOS";
-		};
-		45EF85231DB2245F00B320B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF85161DB2245F00B320B5 /* EonilToolbox.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 452A006B1D943811007DF8F3;
-			remoteInfo = "EonilToolboxTests-iOS";
-		};
-		45EF85281DB2247000B320B5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45EF85161DB2245F00B320B5 /* EonilToolbox.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 45771B0F1CD0EAE10096947A;
-			remoteInfo = "EonilToolbox-OSX";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -160,7 +122,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				45EF85271DB2247000B320B5 /* EonilToolbox.framework in Embed Frameworks */,
 				45EF85091DB21A8700B320B5 /* Editor6FileTreeUI.framework in Embed Frameworks */,
 				45EF85051DB21A8700B320B5 /* Editor6Common.framework in Embed Frameworks */,
 				45E084761DB36B6700C5428D /* ManualView.framework in Embed Frameworks */,
@@ -176,6 +137,8 @@
 		45ABC1C71DCDB743006EFE1F /* WorkspaceUIWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIWindowController.swift; sourceTree = "<group>"; };
 		45B0F7F11E6C521100B713AA /* NavigatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorView.swift; sourceTree = "<group>"; };
 		45B0F7F31E6C539100B713AA /* NavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorViewController.swift; sourceTree = "<group>"; };
+		45B3B8CE1ED9FDC50067D36B /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		45B3B8CF1ED9FDC50067D36B /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		45E084081DB28CE900C5428D /* WorkspaceUINonAutolayoutStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUINonAutolayoutStackView.swift; sourceTree = "<group>"; };
 		45E0846C1DB36B5F00C5428D /* ManualView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ManualView.xcodeproj; path = ../ManualView/ManualView.xcodeproj; sourceTree = "<group>"; };
 		45E084A11DB3842700C5428D /* WorkspaceUIState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIState.swift; sourceTree = "<group>"; };
@@ -199,7 +162,6 @@
 		45EF850C1DB21AC800B320B5 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AppKit.framework; sourceTree = DEVELOPER_DIR; };
 		45EF85101DB21D5400B320B5 /* WindowContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowContentViewController.swift; sourceTree = "<group>"; };
 		45EF85141DB223FD00B320B5 /* WorkspaceUIInspectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIInspectorViewController.swift; sourceTree = "<group>"; };
-		45EF85161DB2245F00B320B5 /* EonilToolbox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilToolbox.xcodeproj; path = ../../submodules/toolbox.swift/EonilToolbox.xcodeproj; sourceTree = "<group>"; };
 		45EF852C1DB2279A00B320B5 /* DebugContextUIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugContextUIViewController.swift; sourceTree = "<group>"; };
 		45EF85301DB2288400B320B5 /* WorkspaceUINavigatorTabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUINavigatorTabBarView.swift; sourceTree = "<group>"; };
 		45EF853E1DB2354C00B320B5 /* WorkspaceUIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceUIExtensions.swift; sourceTree = "<group>"; };
@@ -215,7 +177,6 @@
 				45E084751DB36B6700C5428D /* ManualView.framework in Frameworks */,
 				45EF85081DB21A8700B320B5 /* Editor6FileTreeUI.framework in Frameworks */,
 				45EF85041DB21A8700B320B5 /* Editor6Common.framework in Frameworks */,
-				45EF85261DB2247000B320B5 /* EonilToolbox.framework in Frameworks */,
 				45EF84E21DB21A4000B320B5 /* Editor6WorkspaceUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,7 +186,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				45E084791DB36B6C00C5428D /* ManualView.framework in Frameworks */,
-				45EF85251DB2246A00B320B5 /* EonilToolbox.framework in Frameworks */,
 				45EF84E91DB21A5E00B320B5 /* Editor6Common.framework in Frameworks */,
 				45EF84EB1DB21A5E00B320B5 /* Editor6FileTreeUI.framework in Frameworks */,
 			);
@@ -246,6 +206,8 @@
 		45EF846E1DB2198700B320B5 = {
 			isa = PBXGroup;
 			children = (
+				45B3B8CE1ED9FDC50067D36B /* Debug.xcconfig */,
+				45B3B8CF1ED9FDC50067D36B /* Release.xcconfig */,
 				45EF84871DB219CE00B320B5 /* (deps) */,
 				45EF847A1DB2198700B320B5 /* Editor6WorkspaceUI */,
 				45EF84CA1DB21A1800B320B5 /* Editor6WorkspaceUITestdrive */,
@@ -292,7 +254,6 @@
 		45EF84871DB219CE00B320B5 /* (deps) */ = {
 			isa = PBXGroup;
 			children = (
-				45EF85161DB2245F00B320B5 /* EonilToolbox.xcodeproj */,
 				45EF84A41DB219E900B320B5 /* Editor6FileTreeUI.xcodeproj */,
 				45EF84881DB219D500B320B5 /* Editor6Common.xcodeproj */,
 				45E0846C1DB36B5F00C5428D /* ManualView.xcodeproj */,
@@ -339,17 +300,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		45EF85171DB2245F00B320B5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				45EF851E1DB2245F00B320B5 /* EonilToolbox.framework */,
-				45EF85201DB2245F00B320B5 /* EonilToolbox.framework */,
-				45EF85221DB2245F00B320B5 /* EonilToolboxTests-macOS.xctest */,
-				45EF85241DB2245F00B320B5 /* EonilToolboxTests-iOS.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -378,7 +328,6 @@
 				45EF84E11DB21A4000B320B5 /* PBXTargetDependency */,
 				45EF85071DB21A8700B320B5 /* PBXTargetDependency */,
 				45EF850B1DB21A8700B320B5 /* PBXTargetDependency */,
-				45EF85291DB2247000B320B5 /* PBXTargetDependency */,
 				45E084781DB36B6700C5428D /* PBXTargetDependency */,
 			);
 			name = Editor6WorkspaceUITestdrive;
@@ -447,10 +396,6 @@
 					ProjectRef = 45EF84A41DB219E900B320B5 /* Editor6FileTreeUI.xcodeproj */;
 				},
 				{
-					ProductGroup = 45EF85171DB2245F00B320B5 /* Products */;
-					ProjectRef = 45EF85161DB2245F00B320B5 /* EonilToolbox.xcodeproj */;
-				},
-				{
 					ProductGroup = 45E0846D1DB36B5F00C5428D /* Products */;
 					ProjectRef = 45E0846C1DB36B5F00C5428D /* ManualView.xcodeproj */;
 				},
@@ -504,34 +449,6 @@
 			fileType = wrapper.application;
 			path = Editor6FileTreeUITestdrive.app;
 			remoteRef = 45EF84AB1DB219E900B320B5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45EF851E1DB2245F00B320B5 /* EonilToolbox.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EonilToolbox.framework;
-			remoteRef = 45EF851D1DB2245F00B320B5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45EF85201DB2245F00B320B5 /* EonilToolbox.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = EonilToolbox.framework;
-			remoteRef = 45EF851F1DB2245F00B320B5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45EF85221DB2245F00B320B5 /* EonilToolboxTests-macOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "EonilToolboxTests-macOS.xctest";
-			remoteRef = 45EF85211DB2245F00B320B5 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		45EF85241DB2245F00B320B5 /* EonilToolboxTests-iOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "EonilToolboxTests-iOS.xctest";
-			remoteRef = 45EF85231DB2245F00B320B5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -612,11 +529,6 @@
 			name = Editor6FileTreeUI;
 			targetProxy = 45EF850A1DB21A8700B320B5 /* PBXContainerItemProxy */;
 		};
-		45EF85291DB2247000B320B5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "EonilToolbox-OSX";
-			targetProxy = 45EF85281DB2247000B320B5 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -633,6 +545,7 @@
 /* Begin XCBuildConfiguration section */
 		45EF847E1DB2198700B320B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45B3B8CE1ED9FDC50067D36B /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -686,6 +599,7 @@
 		};
 		45EF847F1DB2198700B320B5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45B3B8CF1ED9FDC50067D36B /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
