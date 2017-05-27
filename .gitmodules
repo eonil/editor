@@ -4,9 +4,6 @@
 [submodule "submodules/LLDBWrapper"]
 	path = submodules/LLDBWrapper
 	url = https://github.com/eonil/LLDBWrapper
-[submodule "submodules/pco.swift"]
-	path = submodules/pco.swift
-	url = https://github.com/eonil/pco.swift
 [submodule "submodules/BTree"]
 	path = submodules/BTree
 	url = https://github.com/lorentey/BTree
