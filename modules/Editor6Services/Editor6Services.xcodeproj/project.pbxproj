@@ -49,6 +49,8 @@
 		45C282931E103C1300BE84AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
 		45C282D21E103C7800BE84AF /* RustLanguageServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustLanguageServer.swift; sourceTree = "<group>"; };
+		45D64CE31ED9FFE2008E608E /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		45D64CE41ED9FFE2008E608E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,8 @@
 		45C282851E103C1300BE84AF = {
 			isa = PBXGroup;
 			children = (
+				45D64CE31ED9FFE2008E608E /* Debug.xcconfig */,
+				45D64CE41ED9FFE2008E608E /* Release.xcconfig */,
 				45C2829A1E103C2900BE84AF /* (deps) */,
 				45C282911E103C1300BE84AF /* Editor6Services */,
 				456F8B8A1E2A867A00F7EC4C /* Editor6ServicesTests */,
@@ -338,6 +342,7 @@
 		};
 		45C282951E103C1300BE84AF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45D64CE31ED9FFE2008E608E /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -390,6 +395,7 @@
 		};
 		45C282961E103C1300BE84AF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45D64CE41ED9FFE2008E608E /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
