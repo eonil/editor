@@ -7,11 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		456F8B801E2A85F800F7EC4C /* RustCompilerDataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */; };
+		456F8B801E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B7F1E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift */; };
 		456F8B8C1E2A867A00F7EC4C /* Editor6ServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */; };
 		456F8B8E1E2A867A00F7EC4C /* Editor6Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C2828F1E103C1300BE84AF /* Editor6Services.framework */; };
 		45C282941E103C1300BE84AF /* Editor6Services.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C282921E103C1300BE84AF /* Editor6Services.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45C282DE1E103C7800BE84AF /* RustLanguageServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C282D21E103C7800BE84AF /* RustLanguageServer.swift */; };
+		45D5F2C61EDE0FD3009691ED /* Cargo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2A61EDE0FD3009691ED /* Cargo.swift */; };
+		45D5F2C71EDE0FD3009691ED /* RLS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2A91EDE0FD3009691ED /* RLS.swift */; };
+		45D5F2C81EDE0FD3009691ED /* CargoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2AD1EDE0FD3009691ED /* CargoDTO.swift */; };
+		45D5F2C91EDE0FD3009691ED /* CargoJSONCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2AE1EDE0FD3009691ED /* CargoJSONCoding.swift */; };
+		45D5F2CA1EDE0FD3009691ED /* JSONCodingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2AF1EDE0FD3009691ED /* JSONCodingSupport.swift */; };
+		45D5F2CB1EDE0FD3009691ED /* RustCompilerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2B01EDE0FD3009691ED /* RustCompilerDTO.swift */; };
+		45D5F2CC1EDE0FD3009691ED /* SemverDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2B11EDE0FD3009691ED /* SemverDTO.swift */; };
+		45D5F2CD1EDE0FD3009691ED /* SemverJSONCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2B21EDE0FD3009691ED /* SemverJSONCoding.swift */; };
+		45D5F2CE1EDE0FD3009691ED /* ADHOC_TextLineBashSubprocess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2B71EDE0FD3009691ED /* ADHOC_TextLineBashSubprocess.swift */; };
+		45D5F2CF1EDE0FD3009691ED /* Subprocess2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2B81EDE0FD3009691ED /* Subprocess2.swift */; };
+		45D5F2D01EDE0FD3009691ED /* Editor6ThreadChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2BA1EDE0FD3009691ED /* Editor6ThreadChannel.swift */; };
+		45D5F2D11EDE0FD3009691ED /* Editor6ThreadSemaphore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2BB1EDE0FD3009691ED /* Editor6ThreadSemaphore.swift */; };
+		45D5F2D21EDE0FD3009691ED /* Flow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2BC1EDE0FD3009691ED /* Flow.swift */; };
+		45D5F2D31EDE0FD3009691ED /* LineReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2BD1EDE0FD3009691ED /* LineReader.swift */; };
+		45D5F2D41EDE0FD3009691ED /* LineWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2BE1EDE0FD3009691ED /* LineWriter.swift */; };
+		45D5F2D51EDE0FD3009691ED /* MARK_resultUndefined.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2BF1EDE0FD3009691ED /* MARK_resultUndefined.swift */; };
+		45D5F2D61EDE0FD3009691ED /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2C01EDE0FD3009691ED /* Mutation.swift */; };
+		45D5F2D71EDE0FD3009691ED /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2C11EDE0FD3009691ED /* Queue.swift */; };
+		45D5F2D81EDE0FD3009691ED /* Swift.Array+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2C21EDE0FD3009691ED /* Swift.Array+.swift */; };
+		45D5F2D91EDE0FD3009691ED /* ThreadChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2C31EDE0FD3009691ED /* ThreadChecker.swift */; };
+		45D5F2DA1EDE0FD3009691ED /* UNUSED_DeferableStateContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2C41EDE0FD3009691ED /* UNUSED_DeferableStateContainer.swift */; };
+		45D5F2DB1EDE0FD3009691ED /* UNUSED_DeferredFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2C51EDE0FD3009691ED /* UNUSED_DeferredFlow.swift */; };
 		45D62D0A1EDA03A7009C0E69 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D62D091EDA03A7009C0E69 /* Services.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,7 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerDataStructures.swift; sourceTree = "<group>"; };
+		456F8B7F1E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_RustCompilerDataStructures.swift; sourceTree = "<group>"; };
 		456F8B891E2A867A00F7EC4C /* Editor6ServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Editor6ServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor6ServicesTests.swift; sourceTree = "<group>"; };
 		456F8B8D1E2A867A00F7EC4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,7 +70,28 @@
 		45C282921E103C1300BE84AF /* Editor6Services.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6Services.h; sourceTree = "<group>"; };
 		45C282931E103C1300BE84AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
-		45C282D21E103C7800BE84AF /* RustLanguageServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustLanguageServer.swift; sourceTree = "<group>"; };
+		45D5F2A61EDE0FD3009691ED /* Cargo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cargo.swift; sourceTree = "<group>"; };
+		45D5F2A91EDE0FD3009691ED /* RLS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLS.swift; sourceTree = "<group>"; };
+		45D5F2AD1EDE0FD3009691ED /* CargoDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoDTO.swift; sourceTree = "<group>"; };
+		45D5F2AE1EDE0FD3009691ED /* CargoJSONCoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoJSONCoding.swift; sourceTree = "<group>"; };
+		45D5F2AF1EDE0FD3009691ED /* JSONCodingSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONCodingSupport.swift; sourceTree = "<group>"; };
+		45D5F2B01EDE0FD3009691ED /* RustCompilerDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustCompilerDTO.swift; sourceTree = "<group>"; };
+		45D5F2B11EDE0FD3009691ED /* SemverDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverDTO.swift; sourceTree = "<group>"; };
+		45D5F2B21EDE0FD3009691ED /* SemverJSONCoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SemverJSONCoding.swift; sourceTree = "<group>"; };
+		45D5F2B71EDE0FD3009691ED /* ADHOC_TextLineBashSubprocess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADHOC_TextLineBashSubprocess.swift; sourceTree = "<group>"; };
+		45D5F2B81EDE0FD3009691ED /* Subprocess2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subprocess2.swift; sourceTree = "<group>"; };
+		45D5F2BA1EDE0FD3009691ED /* Editor6ThreadChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6ThreadChannel.swift; sourceTree = "<group>"; };
+		45D5F2BB1EDE0FD3009691ED /* Editor6ThreadSemaphore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Editor6ThreadSemaphore.swift; sourceTree = "<group>"; };
+		45D5F2BC1EDE0FD3009691ED /* Flow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flow.swift; sourceTree = "<group>"; };
+		45D5F2BD1EDE0FD3009691ED /* LineReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineReader.swift; sourceTree = "<group>"; };
+		45D5F2BE1EDE0FD3009691ED /* LineWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineWriter.swift; sourceTree = "<group>"; };
+		45D5F2BF1EDE0FD3009691ED /* MARK_resultUndefined.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MARK_resultUndefined.swift; sourceTree = "<group>"; };
+		45D5F2C01EDE0FD3009691ED /* Mutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
+		45D5F2C11EDE0FD3009691ED /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		45D5F2C21EDE0FD3009691ED /* Swift.Array+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Swift.Array+.swift"; sourceTree = "<group>"; };
+		45D5F2C31EDE0FD3009691ED /* ThreadChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadChecker.swift; sourceTree = "<group>"; };
+		45D5F2C41EDE0FD3009691ED /* UNUSED_DeferableStateContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_DeferableStateContainer.swift; sourceTree = "<group>"; };
+		45D5F2C51EDE0FD3009691ED /* UNUSED_DeferredFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_DeferredFlow.swift; sourceTree = "<group>"; };
 		45D62D091EDA03A7009C0E69 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		45D64CE31ED9FFE2008E608E /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		45D64CE41ED9FFE2008E608E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -119,9 +161,13 @@
 				45C282931E103C1300BE84AF /* Info.plist */,
 				45C282921E103C1300BE84AF /* Editor6Services.h */,
 				45D62D091EDA03A7009C0E69 /* Services.swift */,
-				456F8B7F1E2A85F800F7EC4C /* RustCompilerDataStructures.swift */,
-				45C282D11E103C7800BE84AF /* RustLanguageServer */,
-				45C282D31E103C7800BE84AF /* Utility */,
+				456F8B7F1E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift */,
+				45D5F2A51EDE0FD3009691ED /* Cargo */,
+				45D5F2A71EDE0FD3009691ED /* LLDB */,
+				45D5F2A81EDE0FD3009691ED /* RLS */,
+				45D5F2AA1EDE0FD3009691ED /* Service */,
+				45D5F2B61EDE0FD3009691ED /* Subprocess2 */,
+				45D5F2B91EDE0FD3009691ED /* Utility */,
 			);
 			path = Editor6Services;
 			sourceTree = "<group>";
@@ -143,17 +189,106 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		45C282D11E103C7800BE84AF /* RustLanguageServer */ = {
+		45D5F2A51EDE0FD3009691ED /* Cargo */ = {
 			isa = PBXGroup;
 			children = (
-				45C282D21E103C7800BE84AF /* RustLanguageServer.swift */,
+				45D5F2A61EDE0FD3009691ED /* Cargo.swift */,
 			);
-			path = RustLanguageServer;
+			path = Cargo;
 			sourceTree = "<group>";
 		};
-		45C282D31E103C7800BE84AF /* Utility */ = {
+		45D5F2A71EDE0FD3009691ED /* LLDB */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = LLDB;
+			sourceTree = "<group>";
+		};
+		45D5F2A81EDE0FD3009691ED /* RLS */ = {
+			isa = PBXGroup;
+			children = (
+				45D5F2A91EDE0FD3009691ED /* RLS.swift */,
+			);
+			path = RLS;
+			sourceTree = "<group>";
+		};
+		45D5F2AA1EDE0FD3009691ED /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				45D5F2AB1EDE0FD3009691ED /* Bash */,
+				45D5F2AC1EDE0FD3009691ED /* DTO */,
+				45D5F2B31EDE0FD3009691ED /* LLDB */,
+				45D5F2B41EDE0FD3009691ED /* RustCompiler */,
+				45D5F2B51EDE0FD3009691ED /* Utility */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		45D5F2AB1EDE0FD3009691ED /* Bash */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Bash;
+			sourceTree = "<group>";
+		};
+		45D5F2AC1EDE0FD3009691ED /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				45D5F2AD1EDE0FD3009691ED /* CargoDTO.swift */,
+				45D5F2AE1EDE0FD3009691ED /* CargoJSONCoding.swift */,
+				45D5F2AF1EDE0FD3009691ED /* JSONCodingSupport.swift */,
+				45D5F2B01EDE0FD3009691ED /* RustCompilerDTO.swift */,
+				45D5F2B11EDE0FD3009691ED /* SemverDTO.swift */,
+				45D5F2B21EDE0FD3009691ED /* SemverJSONCoding.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		45D5F2B31EDE0FD3009691ED /* LLDB */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LLDB;
+			sourceTree = "<group>";
+		};
+		45D5F2B41EDE0FD3009691ED /* RustCompiler */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RustCompiler;
+			sourceTree = "<group>";
+		};
+		45D5F2B51EDE0FD3009691ED /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		45D5F2B61EDE0FD3009691ED /* Subprocess2 */ = {
+			isa = PBXGroup;
+			children = (
+				45D5F2B71EDE0FD3009691ED /* ADHOC_TextLineBashSubprocess.swift */,
+				45D5F2B81EDE0FD3009691ED /* Subprocess2.swift */,
+			);
+			path = Subprocess2;
+			sourceTree = "<group>";
+		};
+		45D5F2B91EDE0FD3009691ED /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				45D5F2BA1EDE0FD3009691ED /* Editor6ThreadChannel.swift */,
+				45D5F2BB1EDE0FD3009691ED /* Editor6ThreadSemaphore.swift */,
+				45D5F2BC1EDE0FD3009691ED /* Flow.swift */,
+				45D5F2BD1EDE0FD3009691ED /* LineReader.swift */,
+				45D5F2BE1EDE0FD3009691ED /* LineWriter.swift */,
+				45D5F2BF1EDE0FD3009691ED /* MARK_resultUndefined.swift */,
+				45D5F2C01EDE0FD3009691ED /* Mutation.swift */,
+				45D5F2C11EDE0FD3009691ED /* Queue.swift */,
+				45D5F2C21EDE0FD3009691ED /* Swift.Array+.swift */,
+				45D5F2C31EDE0FD3009691ED /* ThreadChecker.swift */,
+				45D5F2C41EDE0FD3009691ED /* UNUSED_DeferableStateContainer.swift */,
+				45D5F2C51EDE0FD3009691ED /* UNUSED_DeferredFlow.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -301,9 +436,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45C282DE1E103C7800BE84AF /* RustLanguageServer.swift in Sources */,
+				45D5F2CB1EDE0FD3009691ED /* RustCompilerDTO.swift in Sources */,
+				45D5F2CC1EDE0FD3009691ED /* SemverDTO.swift in Sources */,
+				45D5F2D51EDE0FD3009691ED /* MARK_resultUndefined.swift in Sources */,
 				45D62D0A1EDA03A7009C0E69 /* Services.swift in Sources */,
-				456F8B801E2A85F800F7EC4C /* RustCompilerDataStructures.swift in Sources */,
+				45D5F2CA1EDE0FD3009691ED /* JSONCodingSupport.swift in Sources */,
+				45D5F2C71EDE0FD3009691ED /* RLS.swift in Sources */,
+				45D5F2C91EDE0FD3009691ED /* CargoJSONCoding.swift in Sources */,
+				45D5F2D81EDE0FD3009691ED /* Swift.Array+.swift in Sources */,
+				45D5F2DB1EDE0FD3009691ED /* UNUSED_DeferredFlow.swift in Sources */,
+				45D5F2D31EDE0FD3009691ED /* LineReader.swift in Sources */,
+				45D5F2D21EDE0FD3009691ED /* Flow.swift in Sources */,
+				45D5F2D11EDE0FD3009691ED /* Editor6ThreadSemaphore.swift in Sources */,
+				456F8B801E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift in Sources */,
+				45D5F2CF1EDE0FD3009691ED /* Subprocess2.swift in Sources */,
+				45D5F2D91EDE0FD3009691ED /* ThreadChecker.swift in Sources */,
+				45D5F2CE1EDE0FD3009691ED /* ADHOC_TextLineBashSubprocess.swift in Sources */,
+				45D5F2D61EDE0FD3009691ED /* Mutation.swift in Sources */,
+				45D5F2D01EDE0FD3009691ED /* Editor6ThreadChannel.swift in Sources */,
+				45D5F2DA1EDE0FD3009691ED /* UNUSED_DeferableStateContainer.swift in Sources */,
+				45D5F2D71EDE0FD3009691ED /* Queue.swift in Sources */,
+				45D5F2D41EDE0FD3009691ED /* LineWriter.swift in Sources */,
+				45D5F2C61EDE0FD3009691ED /* Cargo.swift in Sources */,
+				45D5F2C81EDE0FD3009691ED /* CargoDTO.swift in Sources */,
+				45D5F2CD1EDE0FD3009691ED /* SemverJSONCoding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

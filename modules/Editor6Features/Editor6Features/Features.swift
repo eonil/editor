@@ -18,10 +18,13 @@ public final class AppFeatures: Features {
 public class Features {
     public let fileTree = FileTreeFeature2()
     public let build = BuildFeature()
+    public let debug = DebugFeature()
+
     weak var services: Services? {
         didSet {
             fileTree.services = services
             build.services = services
+            debug.services = services
         }
     }
 
