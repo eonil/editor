@@ -33,6 +33,7 @@
 		45D5F2D91EDE0FD3009691ED /* ThreadChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2C31EDE0FD3009691ED /* ThreadChecker.swift */; };
 		45D5F2DA1EDE0FD3009691ED /* UNUSED_DeferableStateContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2C41EDE0FD3009691ED /* UNUSED_DeferableStateContainer.swift */; };
 		45D5F2DB1EDE0FD3009691ED /* UNUSED_DeferredFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2C51EDE0FD3009691ED /* UNUSED_DeferredFlow.swift */; };
+		45D5F3171EDEDEC1009691ED /* Editor6Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C282A01E103C3100BE84AF /* Editor6Common.framework */; };
 		45D62D0A1EDA03A7009C0E69 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D62D091EDA03A7009C0E69 /* Services.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +66,6 @@
 		456F8B891E2A867A00F7EC4C /* Editor6ServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Editor6ServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor6ServicesTests.swift; sourceTree = "<group>"; };
 		456F8B8D1E2A867A00F7EC4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		45B6A00D1E29FC2C005D072B /* EonilGCDActor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EonilGCDActor.framework; path = "../../../../Temp/Xcode/Derivations/Editor6-bxvqrxpvvdnoslfclhjasudjnkut/Build/Products/Debug/EonilGCDActor.framework"; sourceTree = "<group>"; };
 		45C2828F1E103C1300BE84AF /* Editor6Services.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6Services.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C282921E103C1300BE84AF /* Editor6Services.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6Services.h; sourceTree = "<group>"; };
 		45C282931E103C1300BE84AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45D5F3171EDEDEC1009691ED /* Editor6Common.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +129,7 @@
 		45B6A00C1E29FC2C005D072B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				45B6A00D1E29FC2C005D072B /* EonilGCDActor.framework */,
+				45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -138,7 +139,6 @@
 			children = (
 				45D64CE31ED9FFE2008E608E /* Debug.xcconfig */,
 				45D64CE41ED9FFE2008E608E /* Release.xcconfig */,
-				45C2829A1E103C2900BE84AF /* (deps) */,
 				45C282911E103C1300BE84AF /* Editor6Services */,
 				456F8B8A1E2A867A00F7EC4C /* Editor6ServicesTests */,
 				45C282901E103C1300BE84AF /* Products */,
@@ -163,21 +163,12 @@
 				45D62D091EDA03A7009C0E69 /* Services.swift */,
 				456F8B7F1E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift */,
 				45D5F2A51EDE0FD3009691ED /* Cargo */,
-				45D5F2A71EDE0FD3009691ED /* LLDB */,
 				45D5F2A81EDE0FD3009691ED /* RLS */,
 				45D5F2AA1EDE0FD3009691ED /* Service */,
 				45D5F2B61EDE0FD3009691ED /* Subprocess2 */,
 				45D5F2B91EDE0FD3009691ED /* Utility */,
 			);
 			path = Editor6Services;
-			sourceTree = "<group>";
-		};
-		45C2829A1E103C2900BE84AF /* (deps) */ = {
-			isa = PBXGroup;
-			children = (
-				45C2829B1E103C3100BE84AF /* Editor6Common.xcodeproj */,
-			);
-			name = "(deps)";
 			sourceTree = "<group>";
 		};
 		45C2829C1E103C3100BE84AF /* Products */ = {
@@ -195,13 +186,6 @@
 				45D5F2A61EDE0FD3009691ED /* Cargo.swift */,
 			);
 			path = Cargo;
-			sourceTree = "<group>";
-		};
-		45D5F2A71EDE0FD3009691ED /* LLDB */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LLDB;
 			sourceTree = "<group>";
 		};
 		45D5F2A81EDE0FD3009691ED /* RLS */ = {

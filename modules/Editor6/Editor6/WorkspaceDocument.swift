@@ -9,53 +9,56 @@
 import Foundation
 import AppKit
 import Editor6Common
+import Editor6Services
+import Editor6Features
 import Editor6WorkspaceUI
+import Editor6Shell
 
 /// Treat `NSDocument` methods and events as user input.
 ///
-/// `RepoDocument` actually serves as driver (or controller)
+/// `WorkspaceDocument` actually serves as driver (or controller)
 /// for a repository.
 ///
-@objc
-final class RepoDocument: NSDocument {
-    @nonobjc
+final class WorkspaceDocument: NSDocument {
     static let filePathExtension = "ee6repo1"
-    @nonobjc
-    let repoController = RepoController()
-    @nonobjc
+
+    weak var services: Services? {
+        didSet {
+            (services != nil ? startServices() : endServices())
+        }
+    }
+
+    private let workspaceFeatures = AppWorkspaceFeatures()
+    private let workspaceShell = AppWorkspaceShell()
     private var viewState = WorkspaceUIState()
 
     override init() {
         super.init()
-        RepoDocumentNotification.didInit(self).broadcast()
+        WorkspaceDocumentNotification.didInit(self).broadcast()
     }
     deinit {
-        RepoDocumentNotification.willDeinit(self).broadcast()
+        WorkspaceDocumentNotification.willDeinit(self).broadcast()
         debugLog("closed")
     }
 
-    ///
-    /// Check whether this document is current or not.
-    ///
-    /// - Returns:
-    ///     `true` if this document owns current main `NSWindow`.
-    ///     `false` otherwise.
-    ///
-    func editor6_isCurrentDocument() -> Bool {
-        return repoController.windowController.window?.isMainWindow ?? false
+    var isCurrentDocument: Bool {
+        return workspaceShell.windowController.window?.isMainWindow ?? false
     }
 
-    func process(message: DriverMessage) {
+    private func startServices() {
+
+    }
+    private func endServices() {
         
     }
 
     override func makeWindowControllers() {
         super.makeWindowControllers()
-        addWindowController(repoController.windowController)
+        addWindowController(workspaceShell.windowController)
     }
 
     override func read(from url: URL, ofType typeName: String) throws {
-        repoController.process(.relocate(url))
+        workspaceFeatures.meta.setLocation(url)
     }
     override func write(to url: URL, ofType typeName: String) throws {
         Swift.print(#function)
@@ -72,7 +75,7 @@ final class RepoDocument: NSDocument {
     }
 }
 
-enum RepoDocumentNotification: Broadcastable {
-    case didInit(RepoDocument)
-    case willDeinit(RepoDocument)
+enum WorkspaceDocumentNotification: Broadcastable {
+    case didInit(WorkspaceDocument)
+    case willDeinit(WorkspaceDocument)
 }

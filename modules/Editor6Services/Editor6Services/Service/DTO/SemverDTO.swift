@@ -8,21 +8,21 @@
 
 import Foundation
 
-struct SemverDTO {
+public struct SemverDTO {
     ///
     /// https://github.com/steveklabnik/semver/blob/master/src/version.rs#L57
     ///
-    struct Version {
-        var major: UInt64
-        var minor: UInt64
-        var patch: UInt64
-        var pre: [Identifier]
-        var build: [Identifier]
+    public struct Version {
+        public var major: UInt64
+        public var minor: UInt64
+        public var patch: UInt64
+        public var pre: [Identifier]
+        public var build: [Identifier]
     }
     ///
     /// https://github.com/steveklabnik/semver/blob/master/src/version.rs#L29
     ///
-    enum Identifier {
+    public enum Identifier {
         case Numeric(UInt64)
         case AlphaNumeric(String)
     }

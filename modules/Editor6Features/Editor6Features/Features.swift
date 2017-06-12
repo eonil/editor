@@ -1,33 +1,53 @@
+////
+////  Features.swift
+////  Editor6Features
+////
+////  Created by Hoon H. on 2017/06/11.
+////  Copyright © 2017 Eonil. All rights reserved.
+////
 //
-//  Features.swift
-//  Editor6Features
+//import Foundation
+//import EonilSignet
+//import Editor6Services
 //
-//  Created by Hoon H. on 2017/05/28.
-//  Copyright © 2017 Eonil. All rights reserved.
+//public class Features {
+//    public let event = Relay<Event>()
+//    public private(set) var workspaces = [WorkspaceID: WorkspaceFeatures]()
+//    fileprivate weak var services: Services? {
+//        didSet {
+//            (services != nil ? startServices() : endServices())
+//        }
+//    }
 //
-
-import Editor6Services
-
-public final class AppFeatures: Features {
-    public override weak var services: Services? { didSet {} }
-    public override init() {
-        super.init()
-    }
-}
-
-public class Features {
-    public let fileTree = FileTreeFeature2()
-    public let build = BuildFeature()
-    public let debug = DebugFeature()
-
-    weak var services: Services? {
-        didSet {
-            fileTree.services = services
-            build.services = services
-            debug.services = services
-        }
-    }
-
-    init() {
-    }
-}
+//    func openWorkspace(_ location: URL) {
+//        let id = WorkspaceID()
+//        let f = WorkspaceFeatures()
+//        workspaces[id] = f
+//        event.cast(.addWorkspace(id))
+//    }
+//    func closeWorkspace(_ id: WorkspaceID) {
+//        guard workspaces[id] != nil else { return }
+//        workspaces[id] = nil
+//        event.cast(.removeWorkspace(id))
+//    }
+//
+//    private func startServices() {
+//        
+//    }
+//    private func endServices() {
+//
+//    }
+//}
+//public extension Features {
+//    public enum Event {
+//        case addWorkspace(WorkspaceID)
+//        case removeWorkspace(WorkspaceID)
+//    }
+//}
+//public extension Features {
+//    public static func make(services: Services) -> Features {
+//        let f = Features()
+//        f.services = services
+//        return f
+//    }
+//}

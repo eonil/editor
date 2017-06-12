@@ -1,5 +1,5 @@
 //
-//  RepoDocumentManager.swift
+//  WorkspaceDocumentManager.swift
 //  Editor6
 //
 //  Created by Hoon H. on 2017/03/05.
@@ -17,18 +17,18 @@ import AppKit
 /// This object is designed to track such creation and destruction of
 /// those documents. This also tracks *current* document state.
 ///
-final class RepoDocumentManager {
-    private let repoDocNotiWatch = BroadcastWatch<RepoDocumentNotification>()
+final class WorkspaceDocumentManager {
+    private let repoDocNotiWatch = BroadcastWatch<WorkspaceDocumentNotification>()
     private let watchForNSWindowDidBecomeMain = NotificationWatch(.NSWindowDidBecomeMain)
     private let watchForNSWindowDidResignMain = NotificationWatch(.NSWindowDidResignMain)
-    private var knownOpenDocs = [RepoDocument]()
-    private weak var lastKnownCurrentDocument = RepoDocument?.none
+    private var knownOpenDocs = [WorkspaceDocument]()
+    private weak var lastKnownCurrentDocument = WorkspaceDocument?.none
     var delegate: ((Event) -> ())?
 
     enum Event {
-        case didAddDocument(RepoDocument)
-        case willRemoveDocument(RepoDocument)
-        case changeState(of: RepoDocument)
+        case didAddDocument(WorkspaceDocument)
+        case willRemoveDocument(WorkspaceDocument)
+        case changeState(of: WorkspaceDocument)
         case changeCurrentDocument
     }
 
@@ -38,32 +38,23 @@ final class RepoDocumentManager {
         watchForNSWindowDidResignMain.delegate = { [weak self] in self?.process(appKitNotification: $0) }
     }
 
-    private func process(repoDocNoti e: RepoDocumentNotification) {
+    private func process(repoDocNoti e: WorkspaceDocumentNotification) {
         switch e {
         case .didInit(let doc):
             knownOpenDocs.append(doc)
-            doc.repoController.delegate = { [weak self] in self?.process(repoControllerEvent: $0) }
             delegate?(.didAddDocument(doc))
         case .willDeinit(let doc):
             delegate?(.willRemoveDocument(doc))
-            doc.repoController.delegate = nil
             knownOpenDocs.remove(doc)
         }
     }
 
-    private func process(repoControllerEvent e: RepoController.Event) {
-        switch e {
-        case .stateChange:
-            guard let w = NSApplication.shared().mainWindow else { return }
-            NSDocumentController.shared().document(for: w)
-        }
-    }
     private func process(appKitNotification n: Notification) {
         switch n.name {
         case Notification.Name.NSWindowDidBecomeMain:
-            scanCurrentRepoDocument()
+            scanCurrentWorkspaceDocument()
         case Notification.Name.NSWindowDidResignMain:
-            scanCurrentRepoDocument()
+            scanCurrentWorkspaceDocument()
         default:
             break
         }
@@ -74,26 +65,26 @@ final class RepoDocumentManager {
     /// Current document can be missing if there's no open document.
     ///
     /// - Returns:
-    ///     `RepoDocument` object has current main window.
+    ///     `WorkspaceDocument` object has current main window.
     ///     `nil` if there's no current document.
     ///
     /// - Time Complexity:
     ///     O(1) at best.
     ///     O(n) at worst.
     ///
-    func findCurrentRepoDocument() -> RepoDocument? {
-        scanCurrentRepoDocument()
+    func findCurrentWorkspaceDocument() -> WorkspaceDocument? {
+        scanCurrentWorkspaceDocument()
         return lastKnownCurrentDocument
     }
-    private func scanCurrentRepoDocument() {
+    private func scanCurrentWorkspaceDocument() {
         let oldCurDoc = lastKnownCurrentDocument
         if let doc1 = lastKnownCurrentDocument {
-            if doc1.editor6_isCurrentDocument() == false {
+            if doc1.isCurrentDocument == false {
                 lastKnownCurrentDocument = nil
             }
         }
         for doc2 in knownOpenDocs {
-            if doc2.editor6_isCurrentDocument() {
+            if doc2.isCurrentDocument {
                 lastKnownCurrentDocument = doc2
             }
         }

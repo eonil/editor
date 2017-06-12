@@ -9,7 +9,7 @@
 import Foundation
 import EonilJSON
 
-protocol CargoDTOMessage {
+public protocol CargoDTOMessage {
     ///
     /// Says type of this message.
     ///
@@ -19,29 +19,29 @@ protocol CargoDTOMessage {
 /// Uses 0.16.0 source code.
 /// https://github.com/rust-lang/cargo/tree/6e0c18cccc8b0c06fba8a8d76486f81a792fb420
 ///
-enum CargoDTO {
+public enum CargoDTO {
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/util/machine_message.rs#L21
     ///
-    struct FromCompiler: CargoDTOMessage {
-        var reason: String
-//        var package_id: PackageId
-        var package_id: String // Hotfixed. Unexpected string type.
-        var target: Target
-        var message: JSON
+    public struct FromCompiler: CargoDTOMessage {
+        public var reason: String
+//        public var package_id: PackageId
+        public var package_id: String // Hotfixed. Unexpected string type.
+        public var target: Target
+        public var message: JSON
     }
 
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/util/machine_message.rs#L34
     ///
-    struct Artifact: CargoDTOMessage {
-        var reason: String
+    public struct Artifact: CargoDTOMessage {
+        public var reason: String
 //        var package_id: PackageId
-        var package_id: String // Hotfixed. Unexpected string type.
-        var target: Target
-        var profile: Profile
-        var feature: [String]
-        var filenames: [String]
+        public var package_id: String // Hotfixed. Unexpected string type.
+        public var target: Target
+        public var profile: Profile
+        public var feature: [String]
+        public var filenames: [String]
     }
 
     ///
@@ -75,22 +75,22 @@ enum CargoDTO {
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/manifest.rs#L178
     ///
-    struct Target {
-        var kind: TargetKind
-        var name: String
+    public struct Target {
+        public var kind: TargetKind
+        public var name: String
         /// This was `PathBuf`, but I couldn't find the definition...
-        var src_path: String
-        var tested: Bool? // Hotfix due to missing field with no good reason.
-        var benched: Bool? // Hotfix due to missing field with no good reason.
-        var doc: Bool? // Hotfix due to missing field with no good reason.
-        var doctest: Bool? // Hotfix due to missing field with no good reason.
-        var harness: Bool? // Hotfix due to missing field with no good reason.
-        var for_host: Bool? // Hotfix due to missing field with no good reason.
+        public var src_path: String
+        public var tested: Bool? // Hotfix due to missing field with no good reason.
+        public var benched: Bool? // Hotfix due to missing field with no good reason.
+        public var doc: Bool? // Hotfix due to missing field with no good reason.
+        public var doctest: Bool? // Hotfix due to missing field with no good reason.
+        public var harness: Bool? // Hotfix due to missing field with no good reason.
+        public var for_host: Bool? // Hotfix due to missing field with no good reason.
     }
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/manifest.rs#L102
     ///
-    enum TargetKind {
+    public enum TargetKind {
         case Lib([LibKind])
         case Bin
         case Test
@@ -101,7 +101,7 @@ enum CargoDTO {
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/manifest.rs#L60
     ///
-    enum LibKind {
+    public enum LibKind {
         case Lib
         case Rlib
         case Dylib
@@ -112,32 +112,32 @@ enum CargoDTO {
     ///
     /// https://github.com/rust-lang/cargo/blob/be0b4992aa6c25a58720f28f48c4fa3a34e5790d/src/cargo/core/manifest.rs#L153
     ///
-    struct Profile {
-        var opt_level: String
-        var debuginfo: UInt32
-        var debug_assertions: Bool
-        var test: Bool
+    public struct Profile {
+        public var opt_level: String
+        public var debuginfo: UInt32
+        public var debug_assertions: Bool
+        public var test: Bool
     }
 
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/source.rs#L102
     ///
-    struct SourceId {
-        var inner: SourceIdInner
+    public struct SourceId {
+        public var inner: SourceIdInner
     }
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/source.rs#L107
     ///
-    struct SourceIdInner {
-        var url: URL
-        var canonical_url: URL
-        var kind: Kind
-        var precise: String?
+    public struct SourceIdInner {
+        public var url: URL
+        public var canonical_url: URL
+        public var kind: Kind
+        public var precise: String?
     }
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/source.rs#L80
     ///
-    enum Kind {
+    public enum Kind {
         case Git(GitReference)
         case Path
         case Registry
@@ -147,18 +147,18 @@ enum CargoDTO {
     ///
     /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/source.rs#L94
     ///
-    enum GitReference {
+    public enum GitReference {
         case Tag(String)
         case Branch(String)
         case Rev(String)
     }
 
-    enum Message {
+    public enum Message {
         case compilerMessage
         case rust(Diagnostic)
     }
 
-    typealias Version = SemverDTO.Version
-    typealias Diagnostic = RustCompilerDTO.Diagnostic
-    typealias JSON = JSONValue
+    public typealias Version = SemverDTO.Version
+    public typealias Diagnostic = RustCompilerDTO.Diagnostic
+    public typealias JSON = JSONValue
 }

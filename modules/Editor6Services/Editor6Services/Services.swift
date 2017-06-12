@@ -6,12 +6,7 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-public final class AppServices: Services {
-    public override init() {
-        super.init()
+public final class Services {
+    public init() {
     }
-}
-
-public class Services {
-    init() {}
 }

@@ -22,8 +22,8 @@ func reportBugAndContinue(_ bug: PotentialBug) {
 }
 
 enum PotentialBug {
-    case defaultNewDocumentIsNotRepoDocument
-    case mainMenuClickedWithNoCurrentRepoDocument
-    case missingCurrentRepoDocumentForRequiredContext
+    case defaultNewDocumentIsNotWorkspaceDocument
+    case mainMenuClickedWithNoCurrentWorkspaceDocument
+    case missingCurrentWorkspaceDocumentForRequiredContext
     case badRepoNameWhichHasNoVisibleNamePart
 }

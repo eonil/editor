@@ -8,6 +8,6 @@
 
 import Foundation
 
-func MARK_resultUndefined() -> Never {
+public func MARK_resultUndefined() -> Never {
     fatalError("Behavior in this scenario has not yet defined.")
 }

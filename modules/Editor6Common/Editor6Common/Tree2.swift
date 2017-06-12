@@ -32,7 +32,7 @@ public protocol Tree2Protocol {
 ///
 /// Single-rooted means this tree can have only one root node.
 ///
-/// One-way means tree is designed to traverse from root to leaf.
+/// One-way means tree is designed to traverse from root to leaf only.
 /// So walking root to leaf is easy, reverse is very hard. You'd
 /// be better to keep separated mapping index if you have to.
 ///

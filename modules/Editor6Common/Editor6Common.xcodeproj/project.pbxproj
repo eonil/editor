@@ -162,6 +162,7 @@
 				456FDDAD1DAA47EC00F8003A /* Editor6CommonViewController.swift */,
 				45EF85401DB236CE00B320B5 /* Editor6CommonStackView.swift */,
 				45ABC12E1DCD82DB006EFE1F /* AppKit.NSMenuItem+TargetActionUtility.swift */,
+				45975CAF1EECCD9A006339E7 /* DataTypes */,
 				455DF8E21E71C8380010E3D7 /* TransactionFramework */,
 				45ABC1D01DCDB788006EFE1F /* Report.swift */,
 				45ABC1B91DCDB5DA006EFE1F /* MARK_unimplemented.swift */,
@@ -219,6 +220,13 @@
 				459108741E6F4DF50034E61F /* Bitree1UnitTests.swift */,
 			);
 			path = Editor6CommonUnitTests;
+			sourceTree = "<group>";
+		};
+		45975CAF1EECCD9A006339E7 /* DataTypes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataTypes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

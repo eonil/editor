@@ -42,6 +42,9 @@
          location = "group:Editor6/Editor6.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Editor6Shell/Editor6Shell.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Editor6MainMenuUI2/Editor6MainMenuUI2.xcodeproj">
       </FileRef>
       <FileRef

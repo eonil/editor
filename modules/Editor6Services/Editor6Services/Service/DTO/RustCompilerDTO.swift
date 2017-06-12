@@ -8,51 +8,51 @@
 
 import Foundation
 
-enum RustCompilerDTO {
-    struct Diagnostic {
-        var level: Level
-        var message: [(String, Style)]
-        var code: String?
-        var span: MultiSpan
-        var children: [SubDiagnostic]
+public enum RustCompilerDTO {
+    public struct Diagnostic {
+        public var level: Level
+        public var message: [(String, Style)]
+        public var code: String?
+        public var span: MultiSpan
+        public var children: [SubDiagnostic]
     }
 
-    struct SubDiagnostic {
-        var level: Level
-        var message: [(String, Style)]
-        var span: MultiSpan
-        var render_span: RenderSpan?
+    public struct SubDiagnostic {
+        public var level: Level
+        public var message: [(String, Style)]
+        public var span: MultiSpan
+        public var render_span: RenderSpan?
     }
 
-    enum Level {
+    public enum Level {
         // Unknown...
     }
 
-    enum Style {
+    public enum Style {
         // Unknown...
     }
 
     ///
     /// https://github.com/rust-lang/rust/blob/e4eea733065ec39ba6031d856ace002c70035c44/src/libsyntax_pos/lib.rs#L70
     ///
-    struct MultiSpan {
-        var primary_spans: [Span]
-        var span_labels: [(Span, String)]
+    public struct MultiSpan {
+        public var primary_spans: [Span]
+        public var span_labels: [(Span, String)]
     }
 
     ///
     /// https://github.com/rust-lang/rust/blob/e4eea733065ec39ba6031d856ace002c70035c44/src/libsyntax_pos/lib.rs#L55
     ///
-    struct Span {
-        var lo: BytePos
-        var hi: BytePos
-        var expn_id: ExpnId
+    public struct Span {
+        public var lo: BytePos
+        public var hi: BytePos
+        public var expn_id: ExpnId
     }
 
     ///
     /// https://github.com/rust-lang/rust/blob/e4eea733065ec39ba6031d856ace002c70035c44/src/librustc_errors/lib.rs#L54
     ///
-    enum RenderSpan {
+    public enum RenderSpan {
         case FullSpan(MultiSpan)
         case Suggestion(CodeSuggestion)
     }
@@ -60,17 +60,17 @@ enum RustCompilerDTO {
     ///
     /// https://github.com/rust-lang/rust/blob/e4eea733065ec39ba6031d856ace002c70035c44/src/librustc_errors/lib.rs#L68
     ///
-    struct CodeSuggestion {
+    public struct CodeSuggestion {
         var msp: MultiSpan
         var substitutes: [String]
     }
 
     /// Must be newtype later.
-    typealias BytePos = UInt32
+    public typealias BytePos = UInt32
 
     /// Must be newtype later.
-    typealias CharPos = UInt
+    public typealias CharPos = UInt
 
     /// Must be newtype later.
-    typealias ExpnId = UInt32
+    public typealias ExpnId = UInt32
 }

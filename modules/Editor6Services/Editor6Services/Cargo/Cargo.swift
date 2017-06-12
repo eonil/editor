@@ -11,8 +11,8 @@ import EonilToolbox
 import EonilJSON
 import Editor6Common
 
-struct CargoState {
-    var phase = CargoPhase.idle
+public struct CargoState {
+    public var phase = CargoPhase.idle
 //    var issues = [CargoIssue]()
 //    var errors = [CargoError]()
 }
@@ -25,13 +25,13 @@ public enum CargoPhase {
     case idle
     case busy
 }
-enum CargoIssue {
+public enum CargoIssue {
     case ADHOC_dtoFromCompiler(CargoDTO.FromCompiler)
     case ADHOC_dtoCompilerArtifact(CargoDTO.Artifact)
     case ADHOC_unknown(JSONValue)
     case ADHOC_unknownUndecodable(String)
 }
-enum CargoEvent {
+public enum CargoEvent {
     case phase
     ///
     /// A new issue discovered.
@@ -45,7 +45,7 @@ enum CargoEvent {
     ///
     case error(CargoError)
 }
-enum CargoError: Error {
+public enum CargoError: Error {
     case badCrateName
     case ADHOC_unknownErrorOutput([String])
     case nonZeroExit(code: Int32)
@@ -64,7 +64,7 @@ public final class CargoModel {
     /// serially.
     ///
     private let flow = Flow2<CargoModel>()
-    private(set) var state = CargoState()
+    public private(set) var state = CargoState()
     private var delegate = ((CargoEvent) -> ())?.none
     ///
     /// All of each command executions defines
@@ -74,14 +74,14 @@ public final class CargoModel {
     ///
     private var haltImpl = {}
 
-    internal init() {
+    public init() {
         flow.context = self
     }
 
-    func delegate(to newDelegate: @escaping (CargoEvent) -> ()) {
+    public func delegate(to newDelegate: @escaping (CargoEvent) -> ()) {
         delegate = newDelegate
     }
-    func queue(_ command: CargoCommand) {
+    public func queue(_ command: CargoCommand) {
         switch command {
         case .init(let u):
             guard let crateName = u.lastPathComponent.components(separatedBy: ".").first else {
@@ -110,7 +110,7 @@ public final class CargoModel {
                 ])
         }
     }
-    func halt() {
+    public func halt() {
         haltImpl()
     }
 

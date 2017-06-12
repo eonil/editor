@@ -10,7 +10,7 @@ import Darwin
 
 var exitCode = Int32?.none
 do {
-    let driver = Driver()
+    let driver = Driver2()
     exitCode = driver.run()
 }
 guard let exitCode = exitCode else { fatalError("Could not resolve exit-code.") }
