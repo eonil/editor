@@ -2,6 +2,72 @@ Editor6
 =======
 Hoon H.
 
+
+
+Architecture
+------------
+
+- This is a multi-document app.
+- This treats each document as a separated app. (or process) 
+  A document cannot acces other document directly.
+  Communicate only by copiable message.
+- Driver is also a separated app.
+  It cannot access or be accessed by any document.
+- So there's no centralized concept of "app". 
+  Driver is a bootstrapper and overall manager, 
+  but it doesn't do many jobs. It's literally just
+  a driver, and most works are done by documents
+  themselves.
+- Driver and each documents are configured to be an
+  independent app. Which means they have thier own
+  set of services, features and shells.
+
+Each app divided into four tiers.
+
+- Services (unorganized individual functionalities, can perform external I/O)
+- Features (defines each feature of the app, also communicate to each other)
+- Shell (provides human interface)
+- App (holds and manage inter-tier operations)
+
+Some app can lack some tiers if they don't need it or
+small enough.
+
+Driver is not a singleton. You can make many drivers.
+But anyway, due to architecture of AppKit which forces
+to have only one document-controller, all drivers share
+and see same set of documents. So making many driver is
+effectively meaningless.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Architecture
 ------------
 This app is built with 3 major pieces.

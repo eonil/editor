@@ -10,7 +10,6 @@ import EonilToolbox
 import Editor6Services
 
 public final class AppWorkspaceFeatures: WorkspaceFeatures {
-    public override weak var services: Services? { didSet {} }
     public override init() {
         super.init()
     }
@@ -21,7 +20,7 @@ public class WorkspaceFeatures {
     public let build = BuildFeature()
     public let debug = DebugFeature()
 
-    weak var services: Services? {
+    public weak var services: Services? {
         didSet {
             (services != nil ? startServices() : endServices())
         }

@@ -22,15 +22,25 @@ import Editor6Shell
 final class WorkspaceDocument: NSDocument {
     static let filePathExtension = "ee6repo1"
 
+    private let features = AppWorkspaceFeatures()
+    private let shell = AppWorkspaceShell()
+    private var viewState = WorkspaceUIState()
+
     weak var services: Services? {
         didSet {
-            (services != nil ? startServices() : endServices())
+            features.services = services
         }
     }
-
-    private let workspaceFeatures = AppWorkspaceFeatures()
-    private let workspaceShell = AppWorkspaceShell()
-    private var viewState = WorkspaceUIState()
+//    weak var features: WorkspaceFeatures? {
+//        willSet {
+//            features?.meta.setLocation(nil)
+//            shell.features = nil
+//        }
+//        didSet {
+//            shell.features = features
+//            features?.meta.setLocation(fileURL)
+//        }
+//    }
 
     override init() {
         super.init()
@@ -38,27 +48,20 @@ final class WorkspaceDocument: NSDocument {
     }
     deinit {
         WorkspaceDocumentNotification.willDeinit(self).broadcast()
-        debugLog("closed")
+        debugLog("a document closed")
     }
 
     var isCurrentDocument: Bool {
-        return workspaceShell.windowController.window?.isMainWindow ?? false
-    }
-
-    private func startServices() {
-
-    }
-    private func endServices() {
-        
+        return shell.windowController.window?.isMainWindow ?? false
     }
 
     override func makeWindowControllers() {
         super.makeWindowControllers()
-        addWindowController(workspaceShell.windowController)
+        addWindowController(shell.windowController)
     }
 
     override func read(from url: URL, ofType typeName: String) throws {
-        workspaceFeatures.meta.setLocation(url)
+        features.meta.setLocation(url)
     }
     override func write(to url: URL, ofType typeName: String) throws {
         Swift.print(#function)

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4529BF3C1EF20F80006A9A39 /* DocumentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529BF3B1EF20F80006A9A39 /* DocumentService.swift */; };
+		4529BF411EF20FD5006A9A39 /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529BF401EF20FD5006A9A39 /* WorkspaceDocument.swift */; };
+		4529BF431EF213AD006A9A39 /* NotificationWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529BF421EF213AD006A9A39 /* NotificationWatch.swift */; };
 		456F8B801E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B7F1E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift */; };
 		456F8B8C1E2A867A00F7EC4C /* Editor6ServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */; };
 		456F8B8E1E2A867A00F7EC4C /* Editor6Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C2828F1E103C1300BE84AF /* Editor6Services.framework */; };
@@ -62,6 +65,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4529BF3B1EF20F80006A9A39 /* DocumentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentService.swift; sourceTree = "<group>"; };
+		4529BF401EF20FD5006A9A39 /* WorkspaceDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceDocument.swift; sourceTree = "<group>"; };
+		4529BF421EF213AD006A9A39 /* NotificationWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationWatch.swift; sourceTree = "<group>"; };
 		456F8B7F1E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UNUSED_RustCompilerDataStructures.swift; sourceTree = "<group>"; };
 		456F8B891E2A867A00F7EC4C /* Editor6ServicesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Editor6ServicesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		456F8B8B1E2A867A00F7EC4C /* Editor6ServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editor6ServicesTests.swift; sourceTree = "<group>"; };
@@ -117,6 +123,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4529BF3F1EF20FCF006A9A39 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				4529BF401EF20FD5006A9A39 /* WorkspaceDocument.swift */,
+			);
+			path = Documents;
+			sourceTree = "<group>";
+		};
 		456F8B8A1E2A867A00F7EC4C /* Editor6ServicesTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +176,9 @@
 				45C282921E103C1300BE84AF /* Editor6Services.h */,
 				45D62D091EDA03A7009C0E69 /* Services.swift */,
 				456F8B7F1E2A85F800F7EC4C /* UNUSED_RustCompilerDataStructures.swift */,
+				4529BF3B1EF20F80006A9A39 /* DocumentService.swift */,
+				4529BF421EF213AD006A9A39 /* NotificationWatch.swift */,
+				4529BF3F1EF20FCF006A9A39 /* Documents */,
 				45D5F2A51EDE0FD3009691ED /* Cargo */,
 				45D5F2A81EDE0FD3009691ED /* RLS */,
 				45D5F2AA1EDE0FD3009691ED /* Service */,
@@ -424,6 +441,7 @@
 				45D5F2CC1EDE0FD3009691ED /* SemverDTO.swift in Sources */,
 				45D5F2D51EDE0FD3009691ED /* MARK_resultUndefined.swift in Sources */,
 				45D62D0A1EDA03A7009C0E69 /* Services.swift in Sources */,
+				4529BF411EF20FD5006A9A39 /* WorkspaceDocument.swift in Sources */,
 				45D5F2CA1EDE0FD3009691ED /* JSONCodingSupport.swift in Sources */,
 				45D5F2C71EDE0FD3009691ED /* RLS.swift in Sources */,
 				45D5F2C91EDE0FD3009691ED /* CargoJSONCoding.swift in Sources */,
@@ -436,6 +454,7 @@
 				45D5F2CF1EDE0FD3009691ED /* Subprocess2.swift in Sources */,
 				45D5F2D91EDE0FD3009691ED /* ThreadChecker.swift in Sources */,
 				45D5F2CE1EDE0FD3009691ED /* ADHOC_TextLineBashSubprocess.swift in Sources */,
+				4529BF3C1EF20F80006A9A39 /* DocumentService.swift in Sources */,
 				45D5F2D61EDE0FD3009691ED /* Mutation.swift in Sources */,
 				45D5F2D01EDE0FD3009691ED /* Editor6ThreadChannel.swift in Sources */,
 				45D5F2DA1EDE0FD3009691ED /* UNUSED_DeferableStateContainer.swift in Sources */,
@@ -443,6 +462,7 @@
 				45D5F2D41EDE0FD3009691ED /* LineWriter.swift in Sources */,
 				45D5F2C61EDE0FD3009691ED /* Cargo.swift in Sources */,
 				45D5F2C81EDE0FD3009691ED /* CargoDTO.swift in Sources */,
+				4529BF431EF213AD006A9A39 /* NotificationWatch.swift in Sources */,
 				45D5F2CD1EDE0FD3009691ED /* SemverJSONCoding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

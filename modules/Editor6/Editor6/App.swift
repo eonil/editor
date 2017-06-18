@@ -1,5 +1,5 @@
 //
-//  Driver2.swift
+//  App.swift
 //  Editor6
 //
 //  Created by Hoon H. on 2017/06/11.
@@ -10,20 +10,21 @@ import Editor6Services
 import Editor6Features
 import Editor6Shell
 
-final class Driver2 {
+final class App {
     private let appDelegateProxy: AppDelegateProxy
     private let workspaceDocumentManager: WorkspaceDocumentManager
 
-    private let services: Services
-    private let features: AppDriverFeatures
-    private let shell: AppDriverShell
+    private let masterControl = MasterControlFeatures()
+    private let services: AppServices
+    private let features: AppFeatures
+    private let shell: AppShell
 
     init() {
         appDelegateProxy = AppDelegateProxy()
         workspaceDocumentManager = WorkspaceDocumentManager()
-        services = Services()
-        shell = AppDriverShell()
-        features = AppDriverFeatures()
+        services = AppServices()
+        shell = AppShell()
+        features = AppFeatures()
 
         features.services = services
         shell.features = features
@@ -69,7 +70,7 @@ final class Driver2 {
 
 
 import AppKit
-private extension Driver2 {
+private extension App {
     enum ApplicationEvent {
         case didFinishLaunching
     }

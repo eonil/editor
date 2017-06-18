@@ -14,7 +14,7 @@ enum MainMenuKeyMappingUtility {
         // Creates default mappings.
         var m = MainMenuUI2State.KeyEquivalentMappings()
         m[.applicationQuit]     =   .command + "q"
-        m[.fileNewRepo]         =   .command + .shift + "n"
+        m[.fileNewWorkspace]    =   .command + .shift + "n"
         m[.fileOpen]            =   .command + "o"
         m[.fileSave]            =   .command + "s"
         m[.fileCloseRepo]       =   .command + "w"

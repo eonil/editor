@@ -12,9 +12,8 @@
 		455057CC1EEC960A0005037D /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 455057CA1EEC960A0005037D /* Debug.xcconfig */; };
 		455057CD1EEC960A0005037D /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 455057CB1EEC960A0005037D /* Release.xcconfig */; };
 		455057CF1EEC96380005037D /* WorkspaceShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455057CE1EEC96380005037D /* WorkspaceShell.swift */; };
-		455057D11EEC96400005037D /* DriverShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455057D01EEC96400005037D /* DriverShell.swift */; };
+		455057D11EEC96400005037D /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455057D01EEC96400005037D /* Shell.swift */; };
 		455057D81EEC980C0005037D /* Editor6Features.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 455057D71EEC98040005037D /* Editor6Features.framework */; };
-		45975C911EECAFA1006339E7 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45975C901EECAFA1006339E7 /* Shell.swift */; };
 		45BA9AB71EEC8C620088E428 /* Editor6Shell.h in Headers */ = {isa = PBXBuildFile; fileRef = 45BA9AB51EEC8C620088E428 /* Editor6Shell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -69,9 +68,8 @@
 		455057CA1EEC960A0005037D /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		455057CB1EEC960A0005037D /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		455057CE1EEC96380005037D /* WorkspaceShell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceShell.swift; sourceTree = "<group>"; };
-		455057D01EEC96400005037D /* DriverShell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverShell.swift; sourceTree = "<group>"; };
+		455057D01EEC96400005037D /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		455057D21EEC98030005037D /* Editor6Features.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Features.xcodeproj; path = ../Editor6Features/Editor6Features.xcodeproj; sourceTree = "<group>"; };
-		45975C901EECAFA1006339E7 /* Shell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		45BA9AB21EEC8C620088E428 /* Editor6Shell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Editor6Shell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45BA9AB51EEC8C620088E428 /* Editor6Shell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Editor6Shell.h; sourceTree = "<group>"; };
 		45BA9AB61EEC8C620088E428 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -142,8 +140,7 @@
 			children = (
 				45BA9AB51EEC8C620088E428 /* Editor6Shell.h */,
 				45BA9AB61EEC8C620088E428 /* Info.plist */,
-				45975C901EECAFA1006339E7 /* Shell.swift */,
-				455057D01EEC96400005037D /* DriverShell.swift */,
+				455057D01EEC96400005037D /* Shell.swift */,
 				455057CE1EEC96380005037D /* WorkspaceShell.swift */,
 			);
 			path = Editor6Shell;
@@ -301,8 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45975C911EECAFA1006339E7 /* Shell.swift in Sources */,
-				455057D11EEC96400005037D /* DriverShell.swift in Sources */,
+				455057D11EEC96400005037D /* Shell.swift in Sources */,
 				455057CF1EEC96380005037D /* WorkspaceShell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

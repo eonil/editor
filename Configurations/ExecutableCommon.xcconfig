@@ -1,2 +1,3 @@
 
 FRAMEWORK_SEARCH_PATHS = $(SRCROOT)/../../Carthage/Build/Mac
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks

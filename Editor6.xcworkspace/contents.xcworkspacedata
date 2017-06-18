@@ -39,6 +39,9 @@
       location = "container:modules"
       name = "modules">
       <FileRef
+         location = "group:Editor/Editor.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Editor6/Editor6.xcodeproj">
       </FileRef>
       <FileRef

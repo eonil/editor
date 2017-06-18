@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4529BF3A1EF20E5A006A9A39 /* MasterControlFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529BF391EF20E5A006A9A39 /* MasterControlFeatures.swift */; };
 		45383F8C1EDB153300010160 /* FileTreeFeature2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45383F8B1EDB153300010160 /* FileTreeFeature2.swift */; };
 		4541AD611EEE102D007163FF /* MetaFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4541AD601EEE102D007163FF /* MetaFeature.swift */; };
 		457FFA641EDA90CD00FBF7F9 /* Editor6Services.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457FFA611EDA90C600FBF7F9 /* Editor6Services.framework */; };
 		457FFA6E1EDA90E800FBF7F9 /* Editor6Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 457FFA6B1EDA90DD00FBF7F9 /* Editor6Common.framework */; };
 		457FFA731EDA91DB00FBF7F9 /* SignalQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457FFA721EDA91DB00FBF7F9 /* SignalQueue.swift */; };
-		45975CAA1EECCD01006339E7 /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45975CA91EECCD01006339E7 /* Features.swift */; };
 		45975CB31EECCED3006339E7 /* WorkspaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45975CB21EECCED3006339E7 /* WorkspaceID.swift */; };
 		45975CB51EECD6C8006339E7 /* FileTreeFeature3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45975CB41EECD6C8006339E7 /* FileTreeFeature3.swift */; };
-		45AC74811EECE1A30029C5D0 /* DriverFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC74801EECE1A30029C5D0 /* DriverFeatures.swift */; };
+		45AC74811EECE1A30029C5D0 /* Features.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AC74801EECE1A30029C5D0 /* Features.swift */; };
 		45D28DFC1EDAE2830070BA51 /* <>.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D28DFB1EDAE2830070BA51 /* <>.swift */; };
 		45D28DFE1EDAE4C50070BA51 /* REPORT_unrecoverableIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D28DFD1EDAE4C50070BA51 /* REPORT_unrecoverableIssue.swift */; };
 		45D5F2FE1EDEDE1B009691ED /* DebugModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D5F2F41EDEDE1B009691ED /* DebugModel.swift */; };
@@ -69,15 +69,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4529BF391EF20E5A006A9A39 /* MasterControlFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterControlFeatures.swift; sourceTree = "<group>"; };
 		45383F8B1EDB153300010160 /* FileTreeFeature2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeFeature2.swift; sourceTree = "<group>"; };
 		4541AD601EEE102D007163FF /* MetaFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetaFeature.swift; sourceTree = "<group>"; };
 		457FFA5B1EDA90C600FBF7F9 /* Editor6Services.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Services.xcodeproj; path = ../Editor6Services/Editor6Services.xcodeproj; sourceTree = "<group>"; };
 		457FFA651EDA90DD00FBF7F9 /* Editor6Common.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Editor6Common.xcodeproj; path = ../Editor6Common/Editor6Common.xcodeproj; sourceTree = "<group>"; };
 		457FFA721EDA91DB00FBF7F9 /* SignalQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalQueue.swift; sourceTree = "<group>"; };
-		45975CA91EECCD01006339E7 /* Features.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
 		45975CB21EECCED3006339E7 /* WorkspaceID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceID.swift; sourceTree = "<group>"; };
 		45975CB41EECD6C8006339E7 /* FileTreeFeature3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTreeFeature3.swift; sourceTree = "<group>"; };
-		45AC74801EECE1A30029C5D0 /* DriverFeatures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverFeatures.swift; sourceTree = "<group>"; };
+		45AC74801EECE1A30029C5D0 /* Features.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Features.swift; sourceTree = "<group>"; };
 		45D28DF81EDAC5660070BA51 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45D28DFB1EDAE2830070BA51 /* <>.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "<>.swift"; sourceTree = "<group>"; };
 		45D28DFD1EDAE4C50070BA51 /* REPORT_unrecoverableIssue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = REPORT_unrecoverableIssue.swift; sourceTree = "<group>"; };
@@ -179,8 +179,8 @@
 			children = (
 				45D62CE21EDA018A009C0E69 /* Editor6Features.h */,
 				45D62CE31EDA018B009C0E69 /* Info.plist */,
-				45AC74801EECE1A30029C5D0 /* DriverFeatures.swift */,
-				45975CA91EECCD01006339E7 /* Features.swift */,
+				45AC74801EECE1A30029C5D0 /* Features.swift */,
+				4529BF391EF20E5A006A9A39 /* MasterControlFeatures.swift */,
 				45975CB21EECCED3006339E7 /* WorkspaceID.swift */,
 				45D62CEE1EDA0299009C0E69 /* WorkspaceFeatures.swift */,
 				4541AD601EEE102D007163FF /* MetaFeature.swift */,
@@ -334,8 +334,7 @@
 				457FFA731EDA91DB00FBF7F9 /* SignalQueue.swift in Sources */,
 				45975CB51EECD6C8006339E7 /* FileTreeFeature3.swift in Sources */,
 				4541AD611EEE102D007163FF /* MetaFeature.swift in Sources */,
-				45975CAA1EECCD01006339E7 /* Features.swift in Sources */,
-				45AC74811EECE1A30029C5D0 /* DriverFeatures.swift in Sources */,
+				45AC74811EECE1A30029C5D0 /* Features.swift in Sources */,
 				45D62D121EDA0455009C0E69 /* BuildFeature.swift in Sources */,
 				45D5F3031EDEDE1B009691ED /* RepoError.swift in Sources */,
 				45D5F3011EDEDE1B009691ED /* ProjectMutation.swift in Sources */,
@@ -347,6 +346,7 @@
 				45D5F3051EDEDE1B009691ED /* WorkspaceModel.swift in Sources */,
 				45D5F3071EDEDE1B009691ED /* WorkspaceState.swift in Sources */,
 				45D62D101EDA044E009C0E69 /* DebugFeature.swift in Sources */,
+				4529BF3A1EF20E5A006A9A39 /* MasterControlFeatures.swift in Sources */,
 				45D28DFC1EDAE2830070BA51 /* <>.swift in Sources */,
 				45D62D321EDA07C8009C0E69 /* MutableChannel.extension.swift in Sources */,
 				45D5F3021EDEDE1B009691ED /* ProjectState.swift in Sources */,

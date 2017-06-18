@@ -9,6 +9,9 @@
 import EonilSignet
 
 extension Relay {
+    ///
+    /// Accepts optional source only if it is non-nil.
+    ///
     func watch(_ source: Relay<T>?) {
         guard let source = source else { return }
         watch(source)

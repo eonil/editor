@@ -22,7 +22,6 @@ import Foundation
 ///
 public enum MainMenuUI2ItemID {
     case applicationQuit
-    case fileNewRepo
     case fileNewWorkspace
     case fileNewFile
     case fileOpen

@@ -12,13 +12,13 @@
 				<string>ee6repo1</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>EonilEditor6Repo1</string>
+			<string>EonilEditor6Workspace</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSTypeIsPackage</key>
 			<integer>1</integer>
 			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).WorkspaceDocument</string>
+			<string>WorkspaceDocument</string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>

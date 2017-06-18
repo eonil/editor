@@ -14,7 +14,7 @@ public final class MetaFeature {
 //            state.location = u
 //        }
 //    }
-    public func setLocation(_ newLocation: URL) {
+    public func setLocation(_ newLocation: URL?) {
         state.location = newLocation
     }
 }

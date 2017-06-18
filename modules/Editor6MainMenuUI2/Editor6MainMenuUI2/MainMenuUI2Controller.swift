@@ -86,8 +86,7 @@ private struct MainMenuPalette {
     let applicationQuit     =   makeClickableItem(.applicationQuit, "Quit")
     let file                =   makeGroupItem("File")
     let fileNew             =   makeGroupItem("New")
-    let fileNewRepo         =   makeClickableItem(.fileNewRepo, "Repository...")
-    let fileNewWorkspace    =   makeClickableItem(.fileNewWorkspace, "Workspace")
+    let fileNewWorkspace    =   makeClickableItem(.fileNewWorkspace, "Workspace...")
     let fileOpen            =   makeClickableItem(.fileOpen, "Open...")
     let fileSave            =   makeClickableItem(.fileSave, "Save")
     let fileSaveAs          =   makeClickableItem(.fileSaveAs, "Save As...")
@@ -119,7 +118,6 @@ private struct MainMenuPalette {
             fileCloseRepo,
         ]
         fileNew.subitems = [
-            fileNewRepo,
             fileNewWorkspace,
         ]
         product.subitems = [

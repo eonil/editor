@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
-extension Notification.Name {
-    static let ed6_workspaceDocumentDidInit = Notification.Name("ed6_workspaceDidInit")
-    static let ed6_workspaceDocumentWillDeinit = Notification.Name("ed6_workspaceDidInit")
-}
+//
+//extension Notification.Name {
+//    static let ed6_workspaceDocumentDidInit = Notification.Name("ed6_workspaceDidInit")
+//    static let ed6_workspaceDocumentWillDeinit = Notification.Name("ed6_workspaceDidInit")
+//}
