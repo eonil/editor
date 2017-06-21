@@ -22,7 +22,8 @@ open class ManualView: NSView {
         init2()
     }
     public required init?(coder: NSCoder) {
-        fatalError("IB/SB shit.")
+        super.init(coder: coder)
+        init2()
     }
     private final func init2() {
         super.wantsLayer = true

@@ -74,14 +74,14 @@ final class ProjectFeature {
     /// Imports a subtree from an external file-system location.
     ///
     func importNode(at: FileTree.IndexPath, from externalFileLocation: URL) {
-        guard let services = services else { REPORT_missingServiceAndFatalError() }
+        guard let services = services else { REPORT_missingServicesAndFatalError() }
         MARK_unimplemented()
     }
     ///
     /// Exports a subtree to an external file-system location.
     ///
     func exportNode(at: FileTree.IndexPath, to externalFileLocation: URL) {
-        guard let services = services else { REPORT_missingServiceAndFatalError() }
+        guard let services = services else { REPORT_missingServicesAndFatalError() }
         MARK_unimplemented()
     }
     func moveNode(from: Path, to: Path) {
@@ -213,7 +213,7 @@ extension ProjectFeature.Path {
     }
 }
 
-private extension Tree2 where Key == ProjectFeature.Path {
+extension Tree2 where Key == ProjectFeature.Path {
     func index(of path: Key) -> Tree2.IndexPath? {
         if path == .root { return .root }
         let parentPathResult = path.deletingLastComponent()

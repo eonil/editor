@@ -6,7 +6,7 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-func REPORT_missingServiceAndFatalError() -> Never {
+func REPORT_missingServicesAndFatalError() -> Never {
     let msg = "`services` is missing. Anyway, operation becomes no-op."
     DEBUG_log(msg)
     fatalError(msg)

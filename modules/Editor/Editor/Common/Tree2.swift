@@ -64,12 +64,15 @@ public protocol Tree2Protocol {
 ///     for example.
 ///
 public struct Tree2<Key, Value>: Tree2Protocol where Key: Hashable {
-    private var nodes = [NodeID: NodeState]()
-    private var rootID: NodeID?
+    fileprivate var nodes = [NodeID: NodeState]()
+    fileprivate var rootID: NodeID?
 
     public init() {}
     public var count: Int {
         return nodes.count
+    }
+    public var keys: AnyCollection<Key> {
+        return AnyCollection(nodes.keys)
     }
     public subscript(_ indexPath: IndexPath) -> (Key, Value)? {
         get {
@@ -88,6 +91,9 @@ public struct Tree2<Key, Value>: Tree2Protocol where Key: Hashable {
                 delete(at: indexPath)
             }
         }
+    }
+    public subscript(_ key: Key) -> Value? {
+        return nodes[key]?.content
     }
     public func children(of parent: Key) -> [Key]? {
         return nodes[parent]?.childNodeIDs
@@ -210,3 +216,30 @@ fileprivate extension Tree2 {
 private func AUDIT_unwrapConsistentState<T>(_ v: T?) -> T {
     return AUDIT_unwrap(v, "Inconsistent tree state.")
 }
+
+//extension Tree2 where Value: Equatable {
+//    ///
+//    /// This performs semantic equality comparison.
+//    ///
+//    public static func == (_ a: Tree2, _ b: Tree2) -> Bool {
+//        func f1() -> Bool {
+//            return (a.rootID == b.rootID)
+//        }
+//        func f2() -> Bool {
+//            return (Set(a.nodes.keys) == Set(b.nodes.keys))
+//        }
+//        func f3() -> Bool {
+//            for k in a.nodes.keys {
+//                let v1 = a.nodes[k]!
+//                let v2 = b.nodes[k]!
+//                guard v1 == v2 else { return false }
+//            }
+//            return true
+//        }
+//        return f1() && f2() && f3()
+//    }
+//}
+//
+//private func == <K,V> (_ a: Tree2<K,V>.NodeState, _ b: Tree2<K,V>.NodeState) -> Bool where K: Hashable, V: Equatable {
+//    return a.content == b.content && a.childNodeIDs == b.childNodeIDs
+//}

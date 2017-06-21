@@ -14,23 +14,67 @@ import EonilToolbox
 final class DebugFeature {
     let transaction = Relay<Transaction>()
     private(set) var targetProps = [TargetRef: Relay<TargetRef.Transaction>]()
+
+    ///
+    /// Designate feature to provides actual functionalities.
+    /// Settings this to `nil` makes every user interaction
+    /// no-op.
+    ///
     weak var services: WorkspaceServices? {
         willSet {
-            guard services != nil else { return }
-            killAllTargets()
+            disconnectFromServices()
         }
         didSet {
-            guard services != nil else { return }
-            spawnAllTargets()
+            connectToServices()
         }
     }
 
+    init() {
+    }
     deinit {
         assert(services == nil, "`services` should already been removed at this point.")
     }
     @discardableResult
     func spawnTarget(_ executable: URL) -> TargetRef {
-        guard let dbg = services?.lldb.debugger else { REPORT_missingServiceAndFatalError() }
+        return spawnTargetImpl(executable)
+    }
+
+
+    ///
+    /// Idempotent.
+    /// No-op if there's no feature.
+    ///
+    private func connectToServices() {
+        guard services != nil else { return }
+        spawnAllTargets()
+    }
+
+    ///
+    /// Idempotent.
+    /// No-op if there's no feature.
+    ///
+    private func disconnectFromServices() {
+        guard services != nil else { return }
+        killAllTargets()
+    }
+
+    private func spawnAllTargets() {
+        assert(targetProps.isEmpty)
+        guard let services = services else { REPORT_missingServicesAndFatalError() }
+        for t in services.lldb.debugger.allTargets {
+            let id = TargetRef(origin: self, lldbTarget: t)
+            targetProps[id] = Relay()
+        }
+    }
+    private func killAllTargets() {
+        guard let services = services else { REPORT_missingServicesAndFatalError() }
+        for (k, _) in targetProps {
+            services.lldb.debugger.delete(k.lldbTarget)
+        }
+        targetProps.removeAll()
+    }
+    private func spawnTargetImpl(_ executable: URL) -> TargetRef {
+        guard let dbg = services?.lldb.debugger else { REPORT_missingServicesAndFatalError() }
         precondition(executable.isFileURL)
         guard let lldbTarget = dbg.createTarget(withFilename: executable.path) else { REPORT_fatalError("Cannot create an LLDB target.") }
         let ref = TargetRef(origin: self, lldbTarget: lldbTarget)
@@ -38,36 +82,12 @@ final class DebugFeature {
         targetProps[ref] = r
         return ref
     }
+
     private func killTarget(_ ref: TargetRef) {
-        guard let dbg = services?.lldb.debugger else { REPORT_missingServiceAndFatalError() }
+        guard let dbg = services?.lldb.debugger else { REPORT_missingServicesAndFatalError() }
         let lldbTarget = ref.lldbTarget
         dbg.delete(lldbTarget)
         targetProps[ref] = nil
-    }
-    private func reset() {
-        targetProps.removeAll()
-        guard let dbg = services?.lldb.debugger else { return }
-        for i in 0..<dbg.numberOfTargets {
-            let t = dbg.target(at: i)
-            guard let p = t?.executableFileSpec().filename else { REPORT_fatalError("Missing or bad executable path. Cannot process a LLDBTarget.") }
-            let u = URL(fileURLWithPath: p)
-            spawnTarget(u)
-        }
-    }
-    private func spawnAllTargets() {
-        assert(targetProps.isEmpty)
-        guard let services = services else { REPORT_missingServiceAndFatalError() }
-        for t in services.lldb.debugger.allTargets {
-            let id = TargetRef(origin: self, lldbTarget: t)
-            targetProps[id] = Relay()
-        }
-    }
-    private func killAllTargets() {
-        guard let services = services else { REPORT_missingServiceAndFatalError() }
-        for (k, _) in targetProps {
-            services.lldb.debugger.delete(k.lldbTarget)
-        }
-        targetProps.removeAll()
     }
 }
 extension DebugFeature {

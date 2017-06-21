@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WorkspaceWindowController" customModule="Editor" customModuleProvider="target">
             <connections>
+                <outlet property="navigationPaneView" destination="l2T-N9-gsU" id="FJL-7F-EIW"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="ir8-iQ-ktd"/>
             </connections>
         </customObject>
@@ -30,11 +31,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </customView>
                             <customView fixedFrame="YES" id="iwf-nj-azQ">
-                                <rect key="frame" x="164" y="0.0" width="308.5" height="337"/>
+                                <rect key="frame" x="164" y="0.0" width="309" height="337"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </customView>
                             <customView fixedFrame="YES" id="3Zb-zQ-WB5">
-                                <rect key="frame" x="473.5" y="0.0" width="111.5" height="337"/>
+                                <rect key="frame" x="474" y="0.0" width="111" height="337"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </customView>
                         </subviews>
@@ -54,5 +55,6 @@
             </view>
             <point key="canvasLocation" x="-143.5" y="-122.5"/>
         </window>
+        <viewController nibName="WorkspaceView" id="Z7u-cb-mOK"/>
     </objects>
 </document>
