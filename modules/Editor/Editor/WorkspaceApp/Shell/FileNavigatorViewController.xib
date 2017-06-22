@@ -17,6 +17,7 @@
         <customView id="MH8-wc-oWn" customClass="FileNavigatorUIView" customModule="Editor6FileTreeUI">
             <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <point key="canvasLocation" x="-153" y="-120"/>
         </customView>
     </objects>
 </document>

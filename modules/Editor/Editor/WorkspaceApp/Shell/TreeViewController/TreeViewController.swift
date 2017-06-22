@@ -1,16 +1,16 @@
+////
+////  TreeViewController.swift
+////  Editor
+////
+////  Created by Hoon H. on 2017/06/19.
+////  Copyright © 2017 Eonil. All rights reserved.
+////
 //
-//  TreeViewController.swift
-//  Editor
+//import AppKit
 //
-//  Created by Hoon H. on 2017/06/19.
-//  Copyright © 2017 Eonil. All rights reserved.
+//final class TreeViewController: NSViewController {
 //
-
-import AppKit
-
-final class TreeViewController: NSViewController {
-
-}
-extension TreeViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
-    
-}
+//}
+//extension TreeViewController: NSOutlineViewDataSource, NSOutlineViewDelegate {
+//    
+//}

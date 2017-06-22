@@ -1,5 +1,5 @@
 //
-//  TreeAdapter.swift
+//  TreeOutlineAdapter.swift
 //  Editor
 //
 //  Created by Hoon H. on 2017/06/21.
@@ -9,7 +9,7 @@
 import Buckets
 
 ///
-/// Convert value/state based tree into object/reference based tree.
+/// Convert value/state based tree to object/reference based tree.
 ///
 /// This is designed for `NSOutlineView`.
 ///
@@ -20,20 +20,31 @@ import Buckets
 /// - You can obtain subnode object by calling subscript with an index.
 ///   Number of subnodes is equal with number of children.
 /// - Identity of returning subnode is equal for same key until it gets deleted.
-///   `NSOutlineView` try to keep same reference at its position, so this 
-///   should play well with that behavior.
+///   `NSOutlineView` provides better UX if same reference if used for
+///   same node, and this should play well with that.
 ///
 /// Mutating `NSOutlineView`
 /// ------------------------
 /// - Input data by calling `process` function.
 /// - The method returns a command for outline-view.
 /// - Apply the command to outline-view.
+/// - Note that `NSOutlineView` does not support "update" operation.
+///   You are supposed to implement it yourself. Especially in view-
+///   based outline view.
 ///
-final class TreeAdapter<K,V> where K: Hashable {
+/// Though you can use this with cell-based outline-view, this isn't
+/// designed for cell-based outline-view and does not provide 
+/// expected features.
+///
+final class TreeOutlineAdapter<K,V> where K: Hashable {
     private(set) var snapshot = Snapshot()
     fileprivate var idToNodeMapping = [K: OutlineViewNode]()
     private(set) var rootNode: OutlineViewNode?
 
+    ///
+    /// This assumes the value `V` in the tree contains expansion state
+    /// and gets copied together.
+    ///
     func makeSelection(selectedRowIndices: IndexSet, isExpanded: @escaping (V) -> Bool) -> Selection {
         return Selection(snapshot: snapshot, selectedRowIndices: selectedRowIndices, isExpanded: isExpanded)
     }
@@ -135,7 +146,7 @@ final class TreeAdapter<K,V> where K: Hashable {
         }
     }
 }
-extension TreeAdapter {
+extension TreeOutlineAdapter {
     typealias Snapshot = Tree2<K,V>
     typealias Mutation = Tree2Mutation<K,V>
 
@@ -144,7 +155,7 @@ extension TreeAdapter {
         case apply(Snapshot, Tree2Mutation<K,V>)
     }
 }
-extension TreeAdapter {
+extension TreeOutlineAdapter {
     enum OutlineViewCommand {
         case reload
         case insertItems(children: IndexSet, parent: Any?)
@@ -156,7 +167,7 @@ extension TreeAdapter {
         case deleteItems(children: IndexSet, parent: Any?)
     }
     class OutlineViewNode {
-        weak var adapter: TreeAdapter?
+        weak var adapter: TreeOutlineAdapter?
         fileprivate(set) var key: K
         fileprivate(set) var value: V
         fileprivate(set) var children: [K]
@@ -173,7 +184,7 @@ extension TreeAdapter {
         }
     }
 }
-extension TreeAdapter {
+extension TreeOutlineAdapter {
     ///
     /// Lazily resolving selection.
     ///

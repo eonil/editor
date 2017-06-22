@@ -22,7 +22,7 @@
 		4529BFB01EF2290D006A9A39 /* Tree2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529BFAF1EF2290D006A9A39 /* Tree2.swift */; };
 		4529BFCF1EF2296D006A9A39 /* EonilSignet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4529BFCD1EF22968006A9A39 /* EonilSignet.framework */; };
 		4529BFD01EF2296D006A9A39 /* EonilSignet.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4529BFCD1EF22968006A9A39 /* EonilSignet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		457C240B1EF9E2C50050203B /* TreeAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C240A1EF9E2C50050203B /* TreeAdapter.swift */; };
+		4552B7F31EFB8B7F00E529EE /* TreeOutlineAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */; };
 		457C240E1EF9F2190050203B /* OutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C240D1EF9F2190050203B /* OutlineViewController.swift */; };
 		457C24101EF9F5720050203B /* OutlineViewNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C240F1EF9F5720050203B /* OutlineViewNodeProtocol.swift */; };
 		45C901BA1EF5E50B00F10BF4 /* xTransmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C901B91EF5E50B00F10BF4 /* xTransmitter.swift */; };
@@ -147,7 +147,7 @@
 		4529BFAF1EF2290D006A9A39 /* Tree2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree2.swift; sourceTree = "<group>"; };
 		4529BFCB1EF22963006A9A39 /* EonilToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EonilToolbox.framework; path = ../../Carthage/Build/Mac/EonilToolbox.framework; sourceTree = "<group>"; };
 		4529BFCD1EF22968006A9A39 /* EonilSignet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EonilSignet.framework; path = ../../Carthage/Build/Mac/EonilSignet.framework; sourceTree = "<group>"; };
-		457C240A1EF9E2C50050203B /* TreeAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeAdapter.swift; sourceTree = "<group>"; };
+		4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeOutlineAdapter.swift; sourceTree = "<group>"; };
 		457C240D1EF9F2190050203B /* OutlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineViewController.swift; sourceTree = "<group>"; };
 		457C240F1EF9F5720050203B /* OutlineViewNodeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineViewNodeProtocol.swift; sourceTree = "<group>"; };
 		45C901B91EF5E50B00F10BF4 /* xTransmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = xTransmitter.swift; sourceTree = "<group>"; };
@@ -298,6 +298,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		4552B7F11EFB8B7F00E529EE /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		45EA45661EF22A7F0024D3B1 /* WorkspaceApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,6 +368,7 @@
 				45EA45A61EF22E6A0024D3B1 /* WorkspaceWindowController.xib */,
 				45FB54521EF6784A00522E83 /* FileNavigatorViewController.swift */,
 				45FB545A1EF67A6900522E83 /* FileNavigatorViewController.xib */,
+				4552B7F11EFB8B7F00E529EE /* Utility */,
 				45FB54631EF7104900522E83 /* TreeViewController */,
 				45FB54601EF70FEC00522E83 /* TreeView */,
 			);
@@ -421,7 +430,6 @@
 			isa = PBXGroup;
 			children = (
 				45FB54641EF7104F00522E83 /* TreeViewController.swift */,
-				457C240A1EF9E2C50050203B /* TreeAdapter.swift */,
 				457C240F1EF9F5720050203B /* OutlineViewNodeProtocol.swift */,
 				457C240D1EF9F2190050203B /* OutlineViewController.swift */,
 			);
@@ -545,7 +553,6 @@
 				45EA45BB1EF2303B0024D3B1 /* StackFrameSnapshot.swift in Sources */,
 				45EA45EA1EF343490024D3B1 /* PseudoTerminal.swift in Sources */,
 				45EA45A11EF22E450024D3B1 /* ProjectFeature.swift in Sources */,
-				457C240B1EF9E2C50050203B /* TreeAdapter.swift in Sources */,
 				45C901BA1EF5E50B00F10BF4 /* xTransmitter.swift in Sources */,
 				457C240E1EF9F2190050203B /* OutlineViewController.swift in Sources */,
 				45FB545D1EF680DA00522E83 /* Mutation.swift in Sources */,
@@ -597,6 +604,7 @@
 				45EA45611EF22A2E0024D3B1 /* AUDIT_unwrap.swift in Sources */,
 				45EA459C1EF22E450024D3B1 /* AutoCompletionFeature.swift in Sources */,
 				45EA45DD1EF32D500024D3B1 /* Bash.swift in Sources */,
+				4552B7F31EFB8B7F00E529EE /* TreeOutlineAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
