@@ -13,6 +13,9 @@ final class DriverShell {
     private let mainMenuController = MainMenu2Controller()
     private let mainMenuWatch = Relay<MainMenu2Controller.Event>()
     private var mainMenuState = MainMenu2State()
+
+    private let dialogueWatch = Relay<Void>()
+
     ///
     /// Designate feature to provides actual functionalities.
     /// Settings this to `nil` makes every user interaction
@@ -30,11 +33,14 @@ final class DriverShell {
     init() {
         mainMenuState.availableItems.insert(.appQuit)
         mainMenuState.availableItems.formUnion([
+            .testdriveMakeRandomFiles,
+            .testdriveMakeWorkspace,
             .appQuit,
             .fileNewWorkspace,
             .fileNewFolder,
             .fileNewFile,
-            .fileClose,
+            .fileOpen,
+            .fileCloseWorkspace,
             ])
         mainMenuController.reload(mainMenuState)
         NSApplication.shared().mainMenu = mainMenuController.menu
@@ -43,21 +49,40 @@ final class DriverShell {
     }
 
     private func processMainMenuEvent(_ e: MainMenu2Controller.Event) {
+        guard let features = features else { return }
         switch e {
         case .click(let id):
             switch id {
+            case .testdriveMakeWorkspace:
+                let u = URL(fileURLWithPath: "/Users/Eonil/Temp/t3/t111")
+                features.makeWorkspaceDirectiry(at: u)
+
             case .appQuit:
                 NSApplication.shared().terminate(self)
+
             case .fileNewWorkspace:
-                NSDocumentController.shared().newDocument(self)
+//                NSDocumentController.shared().newDocument(self)
+                let sp = NSSavePanel()
+                let r = sp.runModal()
+                guard r == NSFileHandlingPanelOKButton else { return }
+                if let u = sp.url {
+                    let u1 = features.fixWorkspaceDirectoryURL(u)
+                    features.makeWorkspaceDirectiry(at: u1)
+                    NSDocumentController.shared().openDocument(withContentsOf: u1, display: true, completionHandler: { _ in })
+                }
+
+
+            case .fileOpen:
+                NSDocumentController.shared().openDocument(nil)
+
+            case .fileCloseWorkspace:
+                AUDIT_check(WorkspaceDocument.current != nil)
+                WorkspaceDocument.current?.close()
+
             default:
                 break
             }
 
-            AUDIT_check(WorkspaceDocument.current != nil,
-                        ["Bad main-menu management.",
-                         "No current workspace document ",
-                         "for dispatched main menu command."].joined())
             WorkspaceDocument.current?.process(id)
         }
     }
@@ -68,6 +93,7 @@ final class DriverShell {
     ///
     private func connectToFeatures() {
         guard let features = features else { return }
+        features
     }
 
     ///

@@ -38,11 +38,10 @@
 		454843D41EFE59C200D53763 /* MainMenu2Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843CE1EFE59C200D53763 /* MainMenu2Item.swift */; };
 		454843D61EFE59C200D53763 /* MainMenu2State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843D01EFE59C200D53763 /* MainMenu2State.swift */; };
 		454843D81EFE5B1400D53763 /* Relay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843D71EFE5B1400D53763 /* Relay.swift */; };
+		454843DA1EFE689000D53763 /* Dialogue.extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843D91EFE689000D53763 /* Dialogue.extensions.swift */; };
 		4552B7F31EFB8B7F00E529EE /* TreeOutlineAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */; };
 		4552B7F51EFB91F900E529EE /* MainMenuItemID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */; };
 		4552B7F71EFB94E400E529EE /* App.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4552B7F61EFB94E400E529EE /* App.xib */; };
-		4552B8111EFBA3B500E529EE /* FileCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4552B8101EFBA3B500E529EE /* FileCellView.xib */; };
-		4552B8141EFBA4CF00E529EE /* a.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4552B8131EFBA4CF00E529EE /* a.storyboard */; };
 		4552B8161EFBAC0200E529EE /* ProjectItemPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B8151EFBAC0200E529EE /* ProjectItemPath.swift */; };
 		457C240E1EF9F2190050203B /* OutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C240D1EF9F2190050203B /* OutlineViewController.swift */; };
 		457C24101EF9F5720050203B /* OutlineViewNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C240F1EF9F5720050203B /* OutlineViewNodeProtocol.swift */; };
@@ -175,11 +174,10 @@
 		454843CE1EFE59C200D53763 /* MainMenu2Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu2Item.swift; sourceTree = "<group>"; };
 		454843D01EFE59C200D53763 /* MainMenu2State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu2State.swift; sourceTree = "<group>"; };
 		454843D71EFE5B1400D53763 /* Relay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relay.swift; sourceTree = "<group>"; };
+		454843D91EFE689000D53763 /* Dialogue.extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialogue.extensions.swift; sourceTree = "<group>"; };
 		4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeOutlineAdapter.swift; sourceTree = "<group>"; };
 		4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuItemID.swift; sourceTree = "<group>"; };
 		4552B7F61EFB94E400E529EE /* App.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = App.xib; sourceTree = "<group>"; };
-		4552B8101EFBA3B500E529EE /* FileCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileCellView.xib; sourceTree = "<group>"; };
-		4552B8131EFBA4CF00E529EE /* a.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = a.storyboard; sourceTree = "<group>"; };
 		4552B8151EFBAC0200E529EE /* ProjectItemPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectItemPath.swift; sourceTree = "<group>"; };
 		457C240D1EF9F2190050203B /* OutlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineViewController.swift; sourceTree = "<group>"; };
 		457C240F1EF9F5720050203B /* OutlineViewNodeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineViewNodeProtocol.swift; sourceTree = "<group>"; };
@@ -330,8 +328,8 @@
 			children = (
 				454843B31EFE3F9900D53763 /* Services.swift */,
 				454843B51EFE401C00D53763 /* Bash.swift */,
-				454843B61EFE401C00D53763 /* CargoExecution.swift */,
 				454843B71EFE401C00D53763 /* CargoService.swift */,
+				454843B61EFE401C00D53763 /* CargoExecution.swift */,
 				454843B81EFE401C00D53763 /* LLDBService.swift */,
 				454843B91EFE401C00D53763 /* PseudoTerminal.swift */,
 				454843BA1EFE401C00D53763 /* RustLanguageService.swift */,
@@ -400,10 +398,9 @@
 				45EA45A51EF22E6A0024D3B1 /* WorkspaceShell.swift */,
 				45EA45A71EF22E6A0024D3B1 /* WorkspaceWindowController.swift */,
 				45EA45A61EF22E6A0024D3B1 /* WorkspaceWindowController.xib */,
+				454843D91EFE689000D53763 /* Dialogue.extensions.swift */,
 				45FB54521EF6784A00522E83 /* FileNavigatorViewController.swift */,
 				45FB545A1EF67A6900522E83 /* FileNavigatorViewController.xib */,
-				4552B8131EFBA4CF00E529EE /* a.storyboard */,
-				4552B8101EFBA3B500E529EE /* FileCellView.xib */,
 				4552B7F11EFB8B7F00E529EE /* Utility */,
 				45FB54631EF7104900522E83 /* TreeViewController */,
 				45FB54601EF70FEC00522E83 /* TreeView */,
@@ -562,12 +559,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4552B8141EFBA4CF00E529EE /* a.storyboard in Resources */,
 				45EA455C1EF229E60024D3B1 /* Debug.xcconfig in Resources */,
 				4529BF6C1EF21859006A9A39 /* Assets.xcassets in Resources */,
 				45EA455D1EF229E60024D3B1 /* Release.xcconfig in Resources */,
 				45EA458D1EF22B720024D3B1 /* MainMenu.xib in Resources */,
-				4552B8111EFBA3B500E529EE /* FileCellView.xib in Resources */,
 				45EA45A91EF22E6A0024D3B1 /* WorkspaceWindowController.xib in Resources */,
 				4552B7F71EFB94E400E529EE /* App.xib in Resources */,
 				45FB545B1EF67A6900522E83 /* FileNavigatorViewController.xib in Resources */,
@@ -612,6 +607,7 @@
 				4529BF681EF21859006A9A39 /* ViewController.swift in Sources */,
 				45EA45631EF22A380024D3B1 /* AUDIT_check.swift in Sources */,
 				454843C11EFE401C00D53763 /* RustLanguageService.swift in Sources */,
+				454843DA1EFE689000D53763 /* Dialogue.extensions.swift in Sources */,
 				451CE1B61EF6630F004721A3 /* assertMainThread.swift in Sources */,
 				45EA45651EF22A4A0024D3B1 /* REPORT_fatalError.swift in Sources */,
 				45EA458F1EF22B830024D3B1 /* MainMenuController.swift in Sources */,

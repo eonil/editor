@@ -20,6 +20,7 @@
 ///
 public enum MainMenuItemID {
     case testdriveMakeRandomFiles
+    case testdriveMakeWorkspace
 
     case appQuit
     case fileNewWorkspace
@@ -29,7 +30,7 @@ public enum MainMenuItemID {
     case fileSave
     case fileSaveAs
     case fileClose
-    case fileCloseRepo
+    case fileCloseWorkspace
     case productClean
     case productBuild
     case productRun

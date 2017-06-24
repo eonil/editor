@@ -76,6 +76,9 @@ final class WorkspaceFeatures: ServiceDependent {
                 try? makeEmptyData().write(to: u)
             }
 
+        case .fileOpen:
+            break
+            
         default:
             MARK_unimplemented()
         }

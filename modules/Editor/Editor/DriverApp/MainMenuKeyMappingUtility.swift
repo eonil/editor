@@ -13,23 +13,27 @@ enum MainMenuKeyMappingUtility {
     static func makeDefaultKeyMapping() -> MainMenu2State.KeyEquivalentMappings {
         // Creates default mappings.
         var m = MainMenu2State.KeyEquivalentMappings()
+
+        m[.testdriveMakeRandomFiles]    =   .command + "1"
+        m[.testdriveMakeWorkspace]      =   .command + "2"
+
         m[.appQuit]             =   .command + "q"
         m[.fileNewWorkspace]    =   .command + .shift + "n"
-//        m[.fileOpen]            =   .command + "o"
-//        m[.fileSave]            =   .command + "s"
-//        m[.fileCloseRepo]       =   .command + "w"
-//        m[.productRun]          =   .command + "r"
-//        m[.productStop]         =   .command + "."
-//        m[.productBuild]        =   .command + "b"
-//        m[.productClean]        =   .command + .shift + "k"
+        m[.fileOpen]            =   .command + "o"
+        m[.fileSave]            =   .command + "s"
+        m[.fileCloseWorkspace]  =   .command + "w"
+        m[.productRun]          =   .command + "r"
+        m[.productStop]         =   .command + "."
+        m[.productBuild]        =   .command + "b"
+        m[.productClean]        =   .command + .shift + "k"
         return m
     }
 }
 
-private let command = NSEventModifierFlags.command
-private let shift   = NSEventModifierFlags.shift
-private let option  = NSEventModifierFlags.option
-private let control = NSEventModifierFlags.control
+//private let command = NSEventModifierFlags.command
+//private let shift   = NSEventModifierFlags.shift
+//private let option  = NSEventModifierFlags.option
+//private let control = NSEventModifierFlags.control
 
 private func + (_ a: NSEventModifierFlags, _ b: NSEventModifierFlags) -> NSEventModifierFlags {
     return NSEventModifierFlags([a, b])

@@ -19,14 +19,6 @@ final class DialogueFeature {
         state.queue.removeFirstIfAvailable()
         transaction.cast()
     }
-}
-extension DialogueFeature {
-    struct State {
-        var queue = [Alert]()
-        var current: Alert? {
-            return queue.first
-        }
-    }
     enum Alert {
         ///
         /// Just an information.
@@ -41,6 +33,15 @@ extension DialogueFeature {
         case warning(Warning)
         case error(Error)
     }
+}
+extension DialogueFeature {
+    struct State {
+        var queue = [Alert]()
+        var current: Alert? {
+            return queue.first
+        }
+    }
+
     enum Note {
 
     }

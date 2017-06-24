@@ -9,7 +9,7 @@
 import AppKit
 
 final class WorkspaceApp {
-    private let features = WorkspaceFeatures()
+    let features = WorkspaceFeatures()
     private let shell = WorkspaceShell()
 
     init() {

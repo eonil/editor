@@ -33,6 +33,7 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         super.viewDidLoad()
         outlineView?.dataSource = self
         outlineView?.delegate = self
+        outlineView?.reloadData()
     }
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -62,7 +63,7 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
 
     private func processProjectTransaction(_ tx: ProjectFeature.Transaction) {
         guard let features = features else { REPORT_missingFeaturesAndFatalError() }
-        guard let outlineView = outlineView else { MARK_unimplemented() }
+        guard let outlineView = outlineView else { return }
 
         switch tx {
         case .location:

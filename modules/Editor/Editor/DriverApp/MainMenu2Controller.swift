@@ -87,16 +87,20 @@ extension MainMenu2Controller {
 ///     DO NOT fear symbolic duplication. It just happens.
 ///
 private struct MainMenuPalette {
+    let testdrive1          =   makeClickableItem(.testdriveMakeRandomFiles, "Make Random Files")
+    let testdrive2          =   makeClickableItem(.testdriveMakeWorkspace, "Make Workspace")
     let app                 =   makeGroupItem("Application")
     let appQuit             =   makeClickableItem(.appQuit, "Quit")
     let file                =   makeGroupItem("File")
     let fileNew             =   makeGroupItem("New")
     let fileNewWorkspace    =   makeClickableItem(.fileNewWorkspace, "Workspace...")
+    let fileNewFolder       =   makeClickableItem(.fileNewFolder, "Folder")
+    let fileNewFile         =   makeClickableItem(.fileNewFile, "File")
     let fileOpen            =   makeClickableItem(.fileOpen, "Open...")
     let fileSave            =   makeClickableItem(.fileSave, "Save")
     let fileSaveAs          =   makeClickableItem(.fileSaveAs, "Save As...")
     let fileClose           =   makeClickableItem(.fileClose, "Close")
-    let fileCloseRepo       =   makeClickableItem(.fileCloseRepo, "Close Repository")
+    let fileCloseWorkspace  =   makeClickableItem(.fileCloseWorkspace, "Close Workspace")
     let product             =   makeGroupItem("Product")
     let productRun          =   makeClickableItem(.productRun, "Run")
     let productStop         =   makeClickableItem(.productStop, "Stop")
@@ -109,6 +113,8 @@ private struct MainMenuPalette {
 
     init() {
         app.subitems = [
+            testdrive1,
+            testdrive2,
             appQuit,
         ]
         file.subitems = [
@@ -120,10 +126,12 @@ private struct MainMenuPalette {
             fileSaveAs,
             makeSeparatorItem(),
             fileClose,
-            fileCloseRepo,
+            fileCloseWorkspace,
         ]
         fileNew.subitems = [
             fileNewWorkspace,
+            fileNewFolder,
+            fileNewFile,
         ]
         product.subitems = [
             productRun,
