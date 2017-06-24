@@ -8,6 +8,7 @@
 
 final class WorkspaceFeatures: ServiceDependent {
     let navigation = NavigationFeature()
+    let dialogue = DialogueFeature()
     let project = ProjectFeature()
     let autoCompletion = AutoCompletionFeature()
     let scene = SceneFeature()
@@ -28,6 +29,60 @@ final class WorkspaceFeatures: ServiceDependent {
             project.makeNode(at: r.appendingLastComponent(1), content: .folder)
             project.makeNode(at: r.appendingLastComponent(2), content: .folder)
             project.makeNode(at: r.appendingLastComponent(3), content: .folder)
+
+        case .appQuit:
+            break
+
+        case .fileNewWorkspace:
+            break
+
+        case .fileNewFolder:
+            // Make a new node right under the current selection.
+            switch project.findInsertionPointForNewNode() {
+            case .failure(let reason):
+                let underlyingReason = [
+                    "Received menu command `\(c)`,",
+                    "and could not find an insertion point.",
+                    "Ignored.",
+                ].joined(separator: " ")
+                let allReason = [underlyingReason, reason,].joined(separator: "\n")
+                REPORT_recoverableWarning(allReason)
+            case .success(let insertionPointIndexPath):
+                let idxp = insertionPointIndexPath
+                project.makeNode(at: idxp, content: .folder)
+                let (path, _) = project.state.files[idxp]!
+                // Make actual directory.
+                let u = project.makeFileURL(for: path)!
+                try? services.file.createDirectory(at: u, withIntermediateDirectories: true, attributes: nil)
+            }
+
+        case .fileNewFile:
+            // Make a new node right under the current selection.
+            switch project.findInsertionPointForNewNode() {
+            case .failure(let reason):
+                let underlyingReason = [
+                    "Received menu command `\(c)`,",
+                    "and could not find an insertion point.",
+                    "Ignored.",
+                    ].joined(separator: " ")
+                let allReason = [underlyingReason, reason,].joined(separator: "\n")
+                REPORT_recoverableWarning(allReason)
+            case .success(let insertionPointIndexPath):
+                let idxp = insertionPointIndexPath
+                project.makeNode(at: idxp, content: .file)
+                let (path, _) = project.state.files[idxp]!
+                // Make actual directory.
+                let u = project.makeFileURL(for: path)!
+                try? makeEmptyData().write(to: u)
+            }
+
+        default:
+            MARK_unimplemented()
         }
     }
+}
+
+import Foundation
+private func makeEmptyData() -> Data {
+    return Data()
 }

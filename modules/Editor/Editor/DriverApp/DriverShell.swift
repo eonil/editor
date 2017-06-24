@@ -10,8 +10,9 @@ import AppKit
 import EonilSignet
 
 final class DriverShell {
-    private let mainMenuController = MainMenuController()
-    private let mainMenuWatch = Relay<MainMenuController.Event>()
+    private let mainMenuController = MainMenu2Controller()
+    private let mainMenuWatch = Relay<MainMenu2Controller.Event>()
+    private var mainMenuState = MainMenu2State()
     ///
     /// Designate feature to provides actual functionalities.
     /// Settings this to `nil` makes every user interaction
@@ -27,13 +28,32 @@ final class DriverShell {
     }
 
     init() {
+        mainMenuState.availableItems.insert(.appQuit)
+        mainMenuState.availableItems.formUnion([
+            .appQuit,
+            .fileNewWorkspace,
+            .fileNewFolder,
+            .fileNewFile,
+            .fileClose,
+            ])
+        mainMenuController.reload(mainMenuState)
+        NSApplication.shared().mainMenu = mainMenuController.menu
         mainMenuWatch.delegate = { [weak self] in self?.processMainMenuEvent($0) }
         mainMenuWatch.watch(mainMenuController.event)
     }
 
-    private func processMainMenuEvent(_ e: MainMenuController.Event) {
+    private func processMainMenuEvent(_ e: MainMenu2Controller.Event) {
         switch e {
         case .click(let id):
+            switch id {
+            case .appQuit:
+                NSApplication.shared().terminate(self)
+            case .fileNewWorkspace:
+                NSDocumentController.shared().newDocument(self)
+            default:
+                break
+            }
+
             AUDIT_check(WorkspaceDocument.current != nil,
                         ["Bad main-menu management.",
                          "No current workspace document ",

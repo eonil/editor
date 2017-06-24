@@ -115,6 +115,17 @@ final class ProjectFeature: ServiceDependent {
         }
     }
 
+
+
+
+    func setSelection(_ newSelection: AnySequence<Path>) {
+        
+    }
+
+
+
+
+
     private func makeNewNodeName(at: FileTree.IndexPath, kind: NodeKind) -> String {
         func makeKindText() -> String {
             switch kind {
@@ -153,6 +164,10 @@ extension ProjectFeature {
         ///
         var targets = [Target]()
         var issues = [Issue]()
+        ///
+        /// This MSUT guarantee sorted in row-index order.
+        ///
+        var selection = AnyProjectSelection.none
     }
     public typealias FileTree = Tree2<Path, NodeKind>
     typealias Node = (id: Path, state: NodeKind)
@@ -167,42 +182,6 @@ extension ProjectFeature {
         let state: String
     }
 }
-extension ProjectFeature.Path {
-    enum ConversionError: Error {
-        case nonFileURLUnsupported
-        case hasNoRelativeFilePath
-    }
-    init(relativeFileURLFromWorkspaceRoot u: URL) throws {
-        guard u.isFileURL else { throw ConversionError.nonFileURLUnsupported }
-        guard u.path.hasPrefix("./") else { throw ConversionError.hasNoRelativeFilePath }
-        self = ProjectFeature.Path(components: u.pathComponents)
-    }
-    func makeRelativeFileURLFromWorkspaceRoot() -> URL {
-        var u = URL(fileURLWithPath: "./")
-        for c in components {
-            u = u.appendingPathComponent(c)
-        }
-        return u
-    }
-}
-
-extension Tree2 where Key == ProjectFeature.Path {
-    func index(of path: Key) -> Tree2.IndexPath? {
-        if path == .root { return .root }
-        let parentPathResult = path.deletingLastComponent()
-        switch parentPathResult {
-        case .failure(_):
-            return nil
-        case .success(let parentPath):
-            guard let cs = children(of: parentPath) else { return nil }
-            guard let lastIndexComp = cs.index(of: path) else { return nil }
-            guard let parentIndex = index(of: parentPath) else { return nil }
-            let finalIndex = parentIndex.appendingLastComponent(lastIndexComp)
-            return finalIndex
-        }
-    }
-}
-
 extension ProjectFeature {
     ///
     /// - Returns:
@@ -216,5 +195,29 @@ extension ProjectFeature {
             u1 = u1.appendingPathComponent(c)
         }
         return u1
+    }
+}
+extension ProjectFeature {
+    func findInsertionPointForNewNode() -> Result<FileTree.IndexPath, String> {
+        guard let last = state.selection.items.last else {
+            // No item. Unexpected situation. Ignore.
+            return .failure([
+                "Tried to find an insertion point when no file node is selected.",
+                "This is unsupported."
+                ].joined(separator: " "))
+        }
+        let insertionPoint: FileTree.IndexPath
+        if last == .root {
+            // Make a new child node at last.
+            let cs = state.files.children(of: last)!
+            insertionPoint = FileTree.IndexPath.root.appendingLastComponent(cs.count)
+        }
+        else {
+            // Make a new sibling node at next index.
+            let idxp = state.files.index(of: last)!
+            let pidxp = idxp.deletingLastComponent()
+            insertionPoint = pidxp.appendingLastComponent(idxp.components.last! + 1)
+        }
+        return .success(insertionPoint)
     }
 }

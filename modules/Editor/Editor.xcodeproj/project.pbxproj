@@ -30,6 +30,14 @@
 		454843C01EFE401C00D53763 /* PseudoTerminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843B91EFE401C00D53763 /* PseudoTerminal.swift */; };
 		454843C11EFE401C00D53763 /* RustLanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843BA1EFE401C00D53763 /* RustLanguageService.swift */; };
 		454843C21EFE401C00D53763 /* RustMIRInterpreterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843BB1EFE401C00D53763 /* RustMIRInterpreterService.swift */; };
+		454843C41EFE4B5900D53763 /* ProjectSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843C31EFE4B5900D53763 /* ProjectSelection.swift */; };
+		454843C81EFE554B00D53763 /* REPORT_recoverableWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843C71EFE554B00D53763 /* REPORT_recoverableWarning.swift */; };
+		454843CA1EFE56C200D53763 /* DialogueFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843C91EFE56C200D53763 /* DialogueFeature.swift */; };
+		454843D11EFE59C200D53763 /* MainMenuKeyMappingUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843CB1EFE59C200D53763 /* MainMenuKeyMappingUtility.swift */; };
+		454843D31EFE59C200D53763 /* MainMenu2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843CD1EFE59C200D53763 /* MainMenu2Controller.swift */; };
+		454843D41EFE59C200D53763 /* MainMenu2Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843CE1EFE59C200D53763 /* MainMenu2Item.swift */; };
+		454843D61EFE59C200D53763 /* MainMenu2State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843D01EFE59C200D53763 /* MainMenu2State.swift */; };
+		454843D81EFE5B1400D53763 /* Relay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843D71EFE5B1400D53763 /* Relay.swift */; };
 		4552B7F31EFB8B7F00E529EE /* TreeOutlineAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */; };
 		4552B7F51EFB91F900E529EE /* MainMenuItemID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */; };
 		4552B7F71EFB94E400E529EE /* App.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4552B7F61EFB94E400E529EE /* App.xib */; };
@@ -159,6 +167,14 @@
 		454843B91EFE401C00D53763 /* PseudoTerminal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PseudoTerminal.swift; sourceTree = "<group>"; };
 		454843BA1EFE401C00D53763 /* RustLanguageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustLanguageService.swift; sourceTree = "<group>"; };
 		454843BB1EFE401C00D53763 /* RustMIRInterpreterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RustMIRInterpreterService.swift; sourceTree = "<group>"; };
+		454843C31EFE4B5900D53763 /* ProjectSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSelection.swift; sourceTree = "<group>"; };
+		454843C71EFE554B00D53763 /* REPORT_recoverableWarning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = REPORT_recoverableWarning.swift; sourceTree = "<group>"; };
+		454843C91EFE56C200D53763 /* DialogueFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogueFeature.swift; sourceTree = "<group>"; };
+		454843CB1EFE59C200D53763 /* MainMenuKeyMappingUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuKeyMappingUtility.swift; sourceTree = "<group>"; };
+		454843CD1EFE59C200D53763 /* MainMenu2Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu2Controller.swift; sourceTree = "<group>"; };
+		454843CE1EFE59C200D53763 /* MainMenu2Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu2Item.swift; sourceTree = "<group>"; };
+		454843D01EFE59C200D53763 /* MainMenu2State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenu2State.swift; sourceTree = "<group>"; };
+		454843D71EFE5B1400D53763 /* Relay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Relay.swift; sourceTree = "<group>"; };
 		4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeOutlineAdapter.swift; sourceTree = "<group>"; };
 		4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuItemID.swift; sourceTree = "<group>"; };
 		4552B7F61EFB94E400E529EE /* App.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = App.xib; sourceTree = "<group>"; };
@@ -278,6 +294,7 @@
 			children = (
 				45EA45B51EF22F6F0024D3B1 /* DataTypes */,
 				4529BFAF1EF2290D006A9A39 /* Tree2.swift */,
+				454843D71EFE5B1400D53763 /* Relay.swift */,
 				45EA45EB1EF3A9720024D3B1 /* Version.swift */,
 				451CE1B71EF66ABD004721A3 /* Progress.swift */,
 				45EA45ED1EF3B0A20024D3B1 /* RationalInt.swift */,
@@ -290,6 +307,7 @@
 				451CE1B11EF63D4B004721A3 /* REPORT_missingServicesAndFatalError.swift */,
 				45EA45C21EF232170024D3B1 /* REPORT_unimplementedAndContinue.swift */,
 				45EA45641EF22A4A0024D3B1 /* REPORT_fatalError.swift */,
+				454843C71EFE554B00D53763 /* REPORT_recoverableWarning.swift */,
 				45EA45BE1EF231F00024D3B1 /* MARK_poorlyImplemented().swift */,
 				45EA45BF1EF231F00024D3B1 /* MARK_unimplemented.swift */,
 				45EA45C41EF232470024D3B1 /* debugLog.swift */,
@@ -346,9 +364,13 @@
 				45EA45841EF22B520024D3B1 /* DriverApp.swift */,
 				45EA45851EF22B520024D3B1 /* DriverFeatures.swift */,
 				45EA45871EF22B520024D3B1 /* DriverShell.swift */,
+				4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */,
+				454843CB1EFE59C200D53763 /* MainMenuKeyMappingUtility.swift */,
+				454843CD1EFE59C200D53763 /* MainMenu2Controller.swift */,
+				454843CE1EFE59C200D53763 /* MainMenu2Item.swift */,
+				454843D01EFE59C200D53763 /* MainMenu2State.swift */,
 				45EA458E1EF22B830024D3B1 /* MainMenuController.swift */,
 				45EA458C1EF22B720024D3B1 /* MainMenu.xib */,
-				4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */,
 			);
 			path = DriverApp;
 			sourceTree = "<group>";
@@ -358,7 +380,9 @@
 			children = (
 				45EA459B1EF22E450024D3B1 /* WorkspaceFeatures.swift */,
 				45EA45981EF22E450024D3B1 /* NavigationFeature.swift */,
+				454843C91EFE56C200D53763 /* DialogueFeature.swift */,
 				45EA45991EF22E450024D3B1 /* ProjectFeature.swift */,
+				454843C31EFE4B5900D53763 /* ProjectSelection.swift */,
 				4552B8151EFBAC0200E529EE /* ProjectItemPath.swift */,
 				45EA45941EF22E450024D3B1 /* AutoCompletionFeature.swift */,
 				45EA459A1EF22E450024D3B1 /* SceneFeature.swift */,
@@ -580,8 +604,11 @@
 				45FB545F1EF6A08B00522E83 /* REPORT_missingFeaturesAndFatalError.swift in Sources */,
 				451CE1B81EF66ABD004721A3 /* Progress.swift in Sources */,
 				45EA45E21EF32FB60024D3B1 /* MutableChannel.extension.swift in Sources */,
+				454843D41EFE59C200D53763 /* MainMenu2Item.swift in Sources */,
 				454843B41EFE3F9900D53763 /* Services.swift in Sources */,
 				454843BE1EFE401C00D53763 /* CargoService.swift in Sources */,
+				454843D11EFE59C200D53763 /* MainMenuKeyMappingUtility.swift in Sources */,
+				454843C41EFE4B5900D53763 /* ProjectSelection.swift in Sources */,
 				4529BF681EF21859006A9A39 /* ViewController.swift in Sources */,
 				45EA45631EF22A380024D3B1 /* AUDIT_check.swift in Sources */,
 				454843C11EFE401C00D53763 /* RustLanguageService.swift in Sources */,
@@ -598,18 +625,22 @@
 				45EA45B91EF22F910024D3B1 /* ProcessSnapshot.swift in Sources */,
 				45EA45791EF22A7F0024D3B1 /* WorkspaceApp.swift in Sources */,
 				45FB54591EF679BB00522E83 /* REPORT_missingIBOutletViewAndFatalError.swift in Sources */,
+				454843CA1EFE56C200D53763 /* DialogueFeature.swift in Sources */,
 				45EA45A01EF22E450024D3B1 /* NavigationFeature.swift in Sources */,
 				4529BF6A1EF21859006A9A39 /* WorkspaceDocument.swift in Sources */,
 				454843C01EFE401C00D53763 /* PseudoTerminal.swift in Sources */,
 				45EA45C01EF231F00024D3B1 /* MARK_poorlyImplemented().swift in Sources */,
+				454843D61EFE59C200D53763 /* MainMenu2State.swift in Sources */,
 				45EA45A31EF22E450024D3B1 /* WorkspaceFeatures.swift in Sources */,
 				45FB54651EF7104F00522E83 /* TreeViewController.swift in Sources */,
 				4552B7F51EFB91F900E529EE /* MainMenuItemID.swift in Sources */,
 				451CE1B41EF648B7004721A3 /* Tree2Mutation.swift in Sources */,
 				45EA45AA1EF22E6A0024D3B1 /* WorkspaceWindowController.swift in Sources */,
+				454843C81EFE554B00D53763 /* REPORT_recoverableWarning.swift in Sources */,
 				45EA45891EF22B520024D3B1 /* DriverFeatures.swift in Sources */,
 				45EA45F61EF3B8730024D3B1 /* ArrayMutation.swift in Sources */,
 				45EA45F41EF3B7650024D3B1 /* Array.extension.swift in Sources */,
+				454843D31EFE59C200D53763 /* MainMenu2Controller.swift in Sources */,
 				45EA45E81EF33CFD0024D3B1 /* Weak.swift in Sources */,
 				45EA45881EF22B520024D3B1 /* DriverApp.swift in Sources */,
 				457C24101EF9F5720050203B /* OutlineViewNodeProtocol.swift in Sources */,
@@ -617,6 +648,7 @@
 				45C901C01EF6270200F10BF4 /* Transmitter.swift in Sources */,
 				454843BF1EFE401C00D53763 /* LLDBService.swift in Sources */,
 				45EA455F1EF22A1D0024D3B1 /* >>>.swift in Sources */,
+				454843D81EFE5B1400D53763 /* Relay.swift in Sources */,
 				45EA45611EF22A2E0024D3B1 /* AUDIT_unwrap.swift in Sources */,
 				45EA459C1EF22E450024D3B1 /* AutoCompletionFeature.swift in Sources */,
 				4552B7F31EFB8B7F00E529EE /* TreeOutlineAdapter.swift in Sources */,

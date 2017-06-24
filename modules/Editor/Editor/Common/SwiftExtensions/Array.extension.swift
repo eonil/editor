@@ -7,6 +7,7 @@
 //
 
 extension Array {
+    @discardableResult
     mutating func removeFirstIfAvailable() -> Element? {
         guard isEmpty == false else { return nil }
         return removeFirst()
