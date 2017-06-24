@@ -16,10 +16,11 @@ final class WorkspaceShell {
     ///
     weak var features: WorkspaceFeatures? {
         willSet {
-            disconnectFromFeatures()
+//            disconnectFromFeatures()
         }
         didSet {
-            connectToFeatures()
+//            connectToFeatures()
+            windowController.features = features
         }
     }
 

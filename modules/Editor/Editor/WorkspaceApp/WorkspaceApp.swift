@@ -9,19 +9,19 @@
 import AppKit
 
 final class WorkspaceApp {
-    private let services = WorkspaceServices()
     private let features = WorkspaceFeatures()
     private let shell = WorkspaceShell()
 
     init() {
-        features.services = services
         shell.features = features
     }
     deinit {
-        features.services = nil
         shell.features = nil
     }
     var rootWindowController: NSWindowController {
         return shell.windowController
+    }
+    func process(_ c: MainMenuItemID) {
+        features.process(c)
     }
 }

@@ -6,8 +6,7 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-final class BuildFeature {
-    weak var services: WorkspaceServices?
+final class BuildFeature: ServiceDependent {
     func process(_ command: Command) {
         REPORT_unimplementedAndContinue()
     }

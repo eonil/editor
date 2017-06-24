@@ -6,7 +6,7 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-func REPORT_missingFeaturesAndFatalError() {
+func REPORT_missingFeaturesAndFatalError() -> Never {
     let msg = "`features` is missing. Anyway, operation becomes no-op."
     DEBUG_log(msg)
     fatalError(msg)

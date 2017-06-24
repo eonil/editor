@@ -10,12 +10,9 @@
 /// Provides read-only weak value.
 ///
 struct Weak<T> where T: AnyObject {
-    private weak var o: T?
-    var object: T? {
-        return o
-    }
-    init(_ object: T) {
-        o = object
+    private(set) weak var deref: T?
+    init(_ ref: T) {
+        deref = ref
     }
 }
 

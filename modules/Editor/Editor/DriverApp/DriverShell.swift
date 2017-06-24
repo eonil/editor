@@ -7,10 +7,11 @@
 //
 
 import AppKit
+import EonilSignet
 
 final class DriverShell {
     private let mainMenuController = MainMenuController()
-
+    private let mainMenuWatch = Relay<MainMenuController.Event>()
     ///
     /// Designate feature to provides actual functionalities.
     /// Settings this to `nil` makes every user interaction
@@ -22,6 +23,22 @@ final class DriverShell {
         }
         didSet {
             connectToFeatures()
+        }
+    }
+
+    init() {
+        mainMenuWatch.delegate = { [weak self] in self?.processMainMenuEvent($0) }
+        mainMenuWatch.watch(mainMenuController.event)
+    }
+
+    private func processMainMenuEvent(_ e: MainMenuController.Event) {
+        switch e {
+        case .click(let id):
+            AUDIT_check(WorkspaceDocument.current != nil,
+                        ["Bad main-menu management.",
+                         "No current workspace document ",
+                         "for dispatched main menu command."].joined())
+            WorkspaceDocument.current?.process(id)
         }
     }
 

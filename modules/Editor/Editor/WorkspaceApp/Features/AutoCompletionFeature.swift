@@ -6,6 +6,6 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-final class AutoCompletionFeature {
+final class AutoCompletionFeature: ServiceDependent {
     
 }

@@ -7,24 +7,4 @@
 //
 
 final class DriverFeatures {
-    weak var services: DriverServices? {
-        willSet { disconnectFromServices() }
-        didSet { connectToServices() }
-    }
-
-    ///
-    /// Idempotent.
-    /// No-op if `services == nil`.
-    ///
-    private func connectToServices() {
-        guard let services = services else { return }
-    }
-
-    ///
-    /// Idempotent.
-    /// No-op if `services == nil`.
-    ///
-    private func disconnectFromServices() {
-        guard let services = services else { return }
-    }
 }

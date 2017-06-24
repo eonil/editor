@@ -13,7 +13,7 @@ final class WorkspaceWindowController: NSWindowController {
     @IBOutlet weak var navigationPaneView: NSView?
     weak var features: WorkspaceFeatures? {
         didSet {
-
+            fileNavigatorVC.features = features
         }
     }
 
@@ -43,5 +43,12 @@ final class WorkspaceWindowController: NSWindowController {
         super.windowDidLoad()
         guard let navigationPaneView = navigationPaneView else { REPORT_missingServicesAndFatalError() }
         navigationPaneView.addSubview(fileNavigatorVC.view)
+        let a = fileNavigatorVC.view
+        let b = navigationPaneView
+        a.translatesAutoresizingMaskIntoConstraints = false
+        a.leftAnchor    .constraint(equalTo: b.leftAnchor)  .isActive = true
+        a.rightAnchor   .constraint(equalTo: b.rightAnchor) .isActive = true
+        a.topAnchor     .constraint(equalTo: b.topAnchor)   .isActive = true
+        a.bottomAnchor  .constraint(equalTo: b.bottomAnchor).isActive = true
     }
 }

@@ -115,7 +115,7 @@ final class BashExecution {
             let e = Weak(event)
             func setPipeOnRead(_ pipe: Pipe, toCast make: @escaping (Data) -> Event) {
                 pipe.fileHandleForReading.readabilityHandler = { fileHandle in
-                    e.object?.cast(make(fileHandle.availableData))
+                    e.deref?.cast(make(fileHandle.availableData))
                 }
             }
             setPipeOnRead(stdout, toCast: Event.standardOutput)

@@ -16,6 +16,10 @@ class WorkspaceDocument: NSDocument {
         // Add your subclass-specific initialization here.
     }
 
+    func process(_ id: MainMenuItemID) {
+        app.process(id)
+    }
+
     override class func autosavesInPlace() -> Bool {
         return true
     }
@@ -43,4 +47,9 @@ class WorkspaceDocument: NSDocument {
 
 
 }
-
+extension WorkspaceDocument {
+    static var current: WorkspaceDocument? {
+        let cdoc = NSDocumentController.shared().currentDocument
+        return cdoc as? WorkspaceDocument
+    }
+}

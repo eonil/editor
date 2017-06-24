@@ -10,15 +10,12 @@
 /// Bootstrap and manage overall operations.
 ///
 final class DriverApp {
-    private let services = DriverServices()
     private let features = DriverFeatures()
     private let shell = DriverShell()
     init() {
-        features.services = services
         shell.features = features
     }
     deinit {
-        features.services = nil
         shell.features = nil
     }
 }

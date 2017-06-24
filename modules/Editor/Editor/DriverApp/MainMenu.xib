@@ -59,6 +59,18 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Testdrive" id="S6H-aP-m5R">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Testdrive" id="nOG-Q0-SwU">
+                        <items>
+                            <menuItem title="Make Random Files" keyEquivalent="1" id="nqn-wV-v1k">
+                                <connections>
+                                    <action selector="makeRandomFiles:" target="-2" id="mLr-P8-fSy"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="File" id="Oir-8i-cA8">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="File" id="WFT-KJ-Vxr">
@@ -653,6 +665,7 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="73" y="36"/>
         </menu>
     </objects>
 </document>

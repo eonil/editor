@@ -16,11 +16,17 @@ import EonilToolbox
 /// A project allows no-location state.
 /// See `relocate` method for details.
 ///
-final class ProjectFeature {
+final class ProjectFeature: ServiceDependent {
+    enum Transaction {
+        case location
+        case files(Tree2Mutation<Path, NodeKind>)
+        case issues(ArrayMutation<Issue>)
+    }
+
     let transaction = Relay<Transaction>()
-    weak var services: WorkspaceServices?
 
     private(set) var state = State()
+
     ///
     /// Sets a new location.
     ///
@@ -46,7 +52,13 @@ final class ProjectFeature {
     ///
     func makeNode(at: FileTree.IndexPath, content: NodeKind) {
         assertMainThread()
-        precondition(at != FileTree.IndexPath.root)
+        guard at != .root else {
+            // Make a root node.
+            state.files[.root] = (Path.root, .folder)
+            let m = Tree2Mutation.insert(at)
+            transaction.cast(.files(m))
+            return
+        }
         let parentIndex = at.deletingLastComponent()
         guard let (k, v) = state.files[parentIndex] else {
             reportIssue("Cannot find parent node.")
@@ -74,14 +86,12 @@ final class ProjectFeature {
     /// Imports a subtree from an external file-system location.
     ///
     func importNode(at: FileTree.IndexPath, from externalFileLocation: URL) {
-        guard let services = services else { REPORT_missingServicesAndFatalError() }
         MARK_unimplemented()
     }
     ///
     /// Exports a subtree to an external file-system location.
     ///
     func exportNode(at: FileTree.IndexPath, to externalFileLocation: URL) {
-        guard let services = services else { REPORT_missingServicesAndFatalError() }
         MARK_unimplemented()
     }
     func moveNode(from: Path, to: Path) {
@@ -144,46 +154,9 @@ extension ProjectFeature {
         var targets = [Target]()
         var issues = [Issue]()
     }
-    enum Transaction {
-        case location
-        case files(Tree2Mutation<Path, NodeKind>)
-        case issues(ArrayMutation<Issue>)
-    }
     public typealias FileTree = Tree2<Path, NodeKind>
     typealias Node = (id: Path, state: NodeKind)
-    struct Path: Hashable {
-        private var core = URL(fileURLWithPath: "./")
-        init(components initialCompoenents: [String]) {
-            var u = URL(fileURLWithPath: "./")
-            for c in initialCompoenents {
-                u = u.appendingPathComponent(c)
-            }
-            core = u
-        }
-        var components: [String] {
-            get { return core.pathComponents }
-            set { self = Path(components: components) }
-        }
-        var hashValue: Int {
-            return core.hashValue
-        }
-        var isRoot: Bool {
-            return components.isEmpty
-        }
-        func appendingComponent(_ component: String) -> Path {
-            return Path(components: components + [component])
-        }
-        func deletingLastComponent() -> Result<Path, String> {
-            guard components.isEmpty == false else { return .failure("This is root path(`/`). Cannot delete more.") }
-            return .success(Path(components: Array(components.dropLast())))
-        }
-        static func == (_ a: Path, _ b: Path) -> Bool {
-            return a.components == b.components
-        }
-        static var root: Path {
-            return Path(components: [])
-        }
-    }
+    typealias Path = ProjectItemPath
     enum NodeKind {
         case file
         case folder
@@ -230,3 +203,18 @@ extension Tree2 where Key == ProjectFeature.Path {
     }
 }
 
+extension ProjectFeature {
+    ///
+    /// - Returns:
+    ///     `nil` if location is unclear.
+    ///     A URL otherwise.
+    ///
+    func makeFileURL(for path: Path) -> URL? {
+        guard let u = state.location else { return nil }
+        var u1 = u
+        for c in path.components {
+            u1 = u1.appendingPathComponent(c)
+        }
+        return u1
+    }
+}

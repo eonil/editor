@@ -6,7 +6,7 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-final class WorkspaceFeatures {
+final class WorkspaceFeatures: ServiceDependent {
     let navigation = NavigationFeature()
     let project = ProjectFeature()
     let autoCompletion = AutoCompletionFeature()
@@ -14,33 +14,20 @@ final class WorkspaceFeatures {
     let build = BuildFeature()
     let debug = DebugFeature()
     let log = LogFeature()
-    
-    weak var services: WorkspaceServices? {
-        didSet { connectToServices() }
-        willSet { disconnectFromServices() }
-    }
 
-    ///
-    /// Idempotent.
-    /// No-op if `services == nil`.
-    ///
-    private func connectToServices() {
-        guard let services = services else { return }
-        project.services = services
-        build.services = services
-        debug.services = services
-        log.services = services
-    }
-
-    ///
-    /// Idempotent.
-    /// No-op if `services == nil`.
-    ///
-    private func disconnectFromServices() {
-//        guard let services = services else { return }
-        project.services = nil
-        build.services = nil
-        debug.services = nil
-        log.services = nil
+    func process(_ c: MainMenuItemID) {
+        switch c {
+        case .testdriveMakeRandomFiles:
+            if project.state.files.count > 0 {
+                project.deleteNode(at: .root)
+            }
+            typealias IndexPath = ProjectFeature.FileTree.IndexPath
+            let r = IndexPath.root
+            project.makeNode(at: r, content: .folder)
+            project.makeNode(at: r.appendingLastComponent(0), content: .folder)
+            project.makeNode(at: r.appendingLastComponent(1), content: .folder)
+            project.makeNode(at: r.appendingLastComponent(2), content: .folder)
+            project.makeNode(at: r.appendingLastComponent(3), content: .folder)
+        }
     }
 }

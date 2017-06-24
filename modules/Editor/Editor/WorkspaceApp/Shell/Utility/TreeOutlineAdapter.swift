@@ -92,7 +92,7 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
             return .reload
 
         case .apply(let newSnapshot, let mutation):
-            func makePositionInOutlineView(indexPath: Snapshot.IndexPath) -> (children: IndexSet, parent: Any?) {
+            func makePositionInOutlineView(indexPath: Snapshot.IndexPath) -> (children: IndexSet, parent: OutlineViewNode?) {
                 if indexPath == .root {
                     let idxs = IndexSet(integer: 0)
                     return (idxs, nil)
@@ -111,6 +111,14 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
                     }
                 }
             }
+            func updateParentNodeIfPossible(at indexPath: Snapshot.IndexPath) {
+                guard indexPath != .root else { return }
+                let pidxp = indexPath.deletingLastComponent()
+                let (pk, _) = newSnapshot[pidxp]!
+                let pcs = newSnapshot.children(of: pk)!
+                let pn = idToNodeMapping[pk]!
+                pn.children = pcs
+            }
             switch mutation {
             case .insert(let idxp):
                 let (k, v) = newSnapshot[idxp]!
@@ -120,6 +128,11 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
                 n.adapter = self
                 idToNodeMapping[k] = n
                 let (c, p) = makePositionInOutlineView(indexPath: idxp)
+                if idxp == .root {
+                    rootNode = n
+                }
+                // Also update parent node.
+                updateParentNodeIfPossible(at: idxp)
                 return .insertItems(children: c, parent: p)
                 
             case .update(let idxp):
@@ -130,17 +143,23 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
                 n.key = k
                 n.value = v
                 n.children = cs
-                let (c, p) = makePositionInOutlineView(indexPath: idxp)
-                return .updateItems(children: c, parent: p)
+//                let (c, p) = makePositionInOutlineView(indexPath: idxp)
+//                return .updateItems(children: c, parent: p)
+                return .updateItem(n)
 
             case .delete(let idxp):
                 // New snapshot does not have 
                 // node information for the index path.
                 let (k, _) = snapshot[idxp]!
                 snapshot[idxp] = nil
-                let n = idToNodeMapping[k]!
+//                let n = idToNodeMapping[k]!
                 idToNodeMapping[k] = nil
                 let (c, p) = makePositionInOutlineView(indexPath: idxp)
+                if idxp == .root {
+                    rootNode = nil
+                }
+                // Also update parent node.
+                updateParentNodeIfPossible(at: idxp)
                 return .deleteItems(children: c, parent: p)
             }
         }
@@ -163,7 +182,7 @@ extension TreeOutlineAdapter {
         /// `NSOutlineView` does not have update-items method.
         /// So you're supposed to implement it yourself.
         ///
-        case updateItems(children: IndexSet, parent: Any?)
+        case updateItem(Any?)
         case deleteItems(children: IndexSet, parent: Any?)
     }
     class OutlineViewNode {
@@ -254,4 +273,22 @@ extension TreeOutlineAdapter {
         }
     }
 }
-
+extension TreeOutlineAdapter: CustomStringConvertible {
+    var description: String {
+        return "\(String(describing: rootNode))"
+    }
+}
+extension TreeOutlineAdapter.OutlineViewNode: CustomStringConvertible {
+    var description: String {
+        func linewiseIndent(_ s: String) -> String {
+            let lns = s.components(separatedBy: "\n")
+            return lns.map({ "- " + $0 }).joined(separator: "\n")
+        }
+        let s = "\(key): \(value)"
+        let ss = (0..<children.count)
+            .map({ self[subnode: $0] })
+            .map({ "\($0)" })
+            .map(linewiseIndent)
+        return s + "\n" + ss.joined(separator: "\n")
+    }
+}

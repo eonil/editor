@@ -6,8 +6,7 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-final class LogFeature {
-    weak var services: WorkspaceServices?
+final class LogFeature: ServiceDependent {
     private(set) var state = State()
 }
 extension LogFeature {
