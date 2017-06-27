@@ -9,20 +9,12 @@
 import Foundation
 
 struct ProjectItemPath: Hashable {
-    private var core = URL(fileURLWithPath: "./")
-    init(components initialCompoenents: [String]) {
-        var u = URL(fileURLWithPath: "./")
-        for c in initialCompoenents {
-            u = u.appendingPathComponent(c)
-        }
-        core = u
-    }
-    var components: [String] {
-        get { return core.pathComponents }
-        set { self = ProjectItemPath(components: components) }
+    var components = [String]()
+    init(components initialComponents: [String]) {
+        components = initialComponents
     }
     var hashValue: Int {
-        return core.hashValue
+        return components.last?.hashValue ?? 0
     }
     var isRoot: Bool {
         return components.isEmpty
@@ -47,18 +39,18 @@ extension ProjectItemPath {
         case nonFileURLUnsupported
         case hasNoRelativeFilePath
     }
-    init(relativeFileURLFromWorkspaceRoot u: URL) throws {
-        guard u.isFileURL else { throw ConversionError.nonFileURLUnsupported }
-        guard u.path.hasPrefix("./") else { throw ConversionError.hasNoRelativeFilePath }
-        self = ProjectFeature.Path(components: u.pathComponents)
-    }
-    func makeRelativeFileURLFromWorkspaceRoot() -> URL {
-        var u = URL(fileURLWithPath: "./")
-        for c in components {
-            u = u.appendingPathComponent(c)
-        }
-        return u
-    }
+//    init(relativeFileURLFromWorkspaceRoot u: URL) throws {
+//        guard u.isFileURL else { throw ConversionError.nonFileURLUnsupported }
+//        guard u.path.hasPrefix("./") else { throw ConversionError.hasNoRelativeFilePath }
+//        self = ProjectFeature.Path(components: u.pathComponents)
+//    }
+//    func makeRelativeFileURLFromWorkspaceRoot() -> URL {
+//        var u = URL(fileURLWithPath: "./")
+//        for c in components {
+//            u = u.appendingPathComponent(c)
+//        }
+//        return u
+//    }
 }
 
 extension Tree2 where Key == ProjectItemPath {

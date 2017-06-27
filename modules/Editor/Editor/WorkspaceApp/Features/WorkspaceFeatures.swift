@@ -20,15 +20,18 @@ final class WorkspaceFeatures: ServiceDependent {
         switch c {
         case .testdriveMakeRandomFiles:
             if project.state.files.count > 0 {
-                project.deleteNode(at: .root)
+                project.deleteFile(at: .root)
             }
             typealias IndexPath = ProjectFeature.FileTree.IndexPath
             let r = IndexPath.root
-            project.makeNode(at: r, content: .folder)
-            project.makeNode(at: r.appendingLastComponent(0), content: .folder)
-            project.makeNode(at: r.appendingLastComponent(1), content: .folder)
-            project.makeNode(at: r.appendingLastComponent(2), content: .folder)
-            project.makeNode(at: r.appendingLastComponent(3), content: .folder)
+            project.makeFile(at: r, content: .folder)
+            project.makeFile(at: r.appendingLastComponent(0), content: .folder)
+            project.makeFile(at: r.appendingLastComponent(1), content: .folder)
+            project.makeFile(at: r.appendingLastComponent(2), content: .folder)
+            project.makeFile(at: r.appendingLastComponent(3), content: .folder)
+
+        case .testdriveMakeWorkspace:
+            break
 
         case .appQuit:
             break
@@ -49,7 +52,7 @@ final class WorkspaceFeatures: ServiceDependent {
                 REPORT_recoverableWarning(allReason)
             case .success(let insertionPointIndexPath):
                 let idxp = insertionPointIndexPath
-                project.makeNode(at: idxp, content: .folder)
+                project.makeFile(at: idxp, content: .folder)
                 let (path, _) = project.state.files[idxp]!
                 // Make actual directory.
                 let u = project.makeFileURL(for: path)!
@@ -69,7 +72,7 @@ final class WorkspaceFeatures: ServiceDependent {
                 REPORT_recoverableWarning(allReason)
             case .success(let insertionPointIndexPath):
                 let idxp = insertionPointIndexPath
-                project.makeNode(at: idxp, content: .file)
+                project.makeFile(at: idxp, content: .file)
                 let (path, _) = project.state.files[idxp]!
                 // Make actual directory.
                 let u = project.makeFileURL(for: path)!
@@ -80,7 +83,8 @@ final class WorkspaceFeatures: ServiceDependent {
             break
             
         default:
-            MARK_unimplemented()
+            REPORT_recoverableWarning("Processing unimplemented menu command... `\(c)`.")
+            MARK_unimplementedButSkipForNow()
         }
     }
 }

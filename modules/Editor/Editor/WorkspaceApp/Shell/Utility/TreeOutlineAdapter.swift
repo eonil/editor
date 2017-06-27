@@ -45,10 +45,11 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
     /// This assumes the value `V` in the tree contains expansion state
     /// and gets copied together.
     ///
-    func makeSelection(selectedRowIndices: IndexSet, isExpanded: @escaping (V) -> Bool) -> Selection {
+    func makeSelection(selectedRowIndices: IndexSet, isExpanded: @escaping (K, V) -> Bool) -> Selection {
         return Selection(snapshot: snapshot, selectedRowIndices: selectedRowIndices, isExpanded: isExpanded)
     }
 
+    @discardableResult
     func process(_ c: Command) -> OutlineViewCommand {
         switch c {
         case .reload(let newSnapshot):
@@ -222,20 +223,20 @@ extension TreeOutlineAdapter {
     /// This implementation assumes `IndexSet` from `NSOutlineView.selectedRows` 
     /// is very efficient to copy. It should...
     ///
-    struct Selection: Sequence {
+    struct Selection {
         private let impl: Impl
-        init(snapshot: Snapshot, selectedRowIndices: IndexSet, isExpanded: @escaping (V) -> Bool) {
+        init(snapshot: Snapshot, selectedRowIndices: IndexSet, isExpanded: @escaping (K, V) -> Bool) {
             impl = Impl(snapshot, selectedRowIndices, isExpanded)
         }
-        func makeIterator() -> AnyIterator<K> {
-            return AnyIterator(impl.result.makeIterator())
+        var items: [K] {
+            return impl.result
         }
         final class Impl {
             let snapshot: Snapshot
             let selectedRowIndices: IndexSet
-            let isExpanded: (V) -> Bool
+            let isExpanded: (K, V) -> Bool
             private var cachedResult: [K]?
-            init(_ ss: Snapshot, _ ridxs: IndexSet, _ expdet: @escaping (V) -> Bool) {
+            init(_ ss: Snapshot, _ ridxs: IndexSet, _ expdet: @escaping (K, V) -> Bool) {
                 snapshot = ss
                 selectedRowIndices = ridxs
                 isExpanded = expdet
@@ -248,7 +249,9 @@ extension TreeOutlineAdapter {
                     // Has root.
                     var visibleRowKeys = [K]()
                     collectVisibleKeys(at: k, &visibleRowKeys)
+                    DEBUG_log("\(visibleRowKeys)")
                     let selectedRowKeys = selectedRowIndices.map({ visibleRowKeys[$0] })
+                    DEBUG_log("\(selectedRowKeys)")
                     return selectedRowKeys
                 }
                 else {
@@ -261,7 +264,7 @@ extension TreeOutlineAdapter {
             ///
             private func collectVisibleKeys(at k: K, _ bucket: inout [K]) {
                 let v = snapshot[k]!
-                let exp = isExpanded(v)
+                let exp = isExpanded(k, v)
                 if exp {
                     bucket.append(k)
                     let cs = snapshot.children(of: k)!

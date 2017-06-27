@@ -9,7 +9,7 @@
 ///
 /// Marks unimplemented area and crash.
 ///
-public func MARK_unimplemented(_: @autoclosure () -> () = ()) -> Never  {
+public func MARK_unimplemented() -> Never  {
     fatalError("Unimplemented.")
 }
 
@@ -17,6 +17,6 @@ public func MARK_unimplemented(_: @autoclosure () -> () = ()) -> Never  {
 /// Marks unimplemented area but continue.
 ///
 public func MARK_unimplementedButSkipForNow(_: @autoclosure () -> () = (), file: String = #file, line: Int = #line, function: String = #function) {
-    DEBUG_log("Unimplemented, but skipped for now. (\(file) (\(line)))", file, line, function)
+    DEBUG_log("Unimplemented, but skipped for now.", file, line, function)
 //    report
 }

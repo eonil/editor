@@ -21,6 +21,7 @@ final class WorkspaceApp {
     var rootWindowController: NSWindowController {
         return shell.windowController
     }
+
     func process(_ c: MainMenuItemID) {
         features.process(c)
     }

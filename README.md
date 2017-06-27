@@ -40,6 +40,18 @@ effectively meaningless.
 
 
 
+Timing Oriented Design
+----------------------
+Overall architeture is oriented to precise timing rather than
+precise result. 
+
+- At the user interaction level, errors are just daily event, 
+    and usually harmless.
+- Precise timing is more important to provide better UX. 
+- Most importantly, this reduces things to think.
+
+Change this later if this doesn't work well.
+
 
 
 

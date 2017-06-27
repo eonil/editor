@@ -45,7 +45,7 @@ final class DriverShell {
         mainMenuController.reload(mainMenuState)
         NSApplication.shared().mainMenu = mainMenuController.menu
         mainMenuWatch.delegate = { [weak self] in self?.processMainMenuEvent($0) }
-        mainMenuWatch.watch(mainMenuController.event)
+        mainMenuController.event += mainMenuWatch
     }
 
     private func processMainMenuEvent(_ e: MainMenu2Controller.Event) {
@@ -55,7 +55,7 @@ final class DriverShell {
             switch id {
             case .testdriveMakeWorkspace:
                 let u = URL(fileURLWithPath: "/Users/Eonil/Temp/t3/t111")
-                features.makeWorkspaceDirectiry(at: u)
+//                features.makeWorkspaceDirectiry(at: u)
 
             case .appQuit:
                 NSApplication.shared().terminate(self)
@@ -65,11 +65,13 @@ final class DriverShell {
                 let sp = NSSavePanel()
                 let r = sp.runModal()
                 guard r == NSFileHandlingPanelOKButton else { return }
-                if let u = sp.url {
-                    let u1 = features.fixWorkspaceDirectoryURL(u)
-                    features.makeWorkspaceDirectiry(at: u1)
-                    NSDocumentController.shared().openDocument(withContentsOf: u1, display: true, completionHandler: { _ in })
-                }
+                guard let u = sp.url else { return }
+                let u1 = features.fixWorkspaceDirectoryURL(u)
+                features.makeWorkspaceDirectory(at: u1)
+                NSDocumentController.shared().openDocument(
+                    withContentsOf: u1,
+                    display: true,
+                    completionHandler: toVoid)
 
 
             case .fileOpen:

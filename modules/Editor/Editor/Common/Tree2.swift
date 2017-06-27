@@ -68,6 +68,9 @@ public struct Tree2<Key, Value>: Tree2Protocol where Key: Hashable {
     fileprivate var rootID: NodeID?
 
     public init() {}
+    public var isEmpty: Bool {
+        return nodes.isEmpty
+    }
     public var count: Int {
         return nodes.count
     }

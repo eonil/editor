@@ -11,3 +11,7 @@ infix operator >>>
 func >>> <T,U> (_ a: T, _ b: (T) -> (U)) -> U {
     return b(a)
 }
+
+func | <A,B,C> (_ f: @escaping (A) -> B, _ g: @escaping (B) -> (C)) -> ((A) -> C) {
+    return { a in g(f(a)) }
+}

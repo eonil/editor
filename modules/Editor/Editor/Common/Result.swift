@@ -6,7 +6,7 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-enum Result<Value,Error> {
-    case failure(Error)
+enum Result<Value,Issue> {
+    case failure(Issue)
     case success(Value)
 }

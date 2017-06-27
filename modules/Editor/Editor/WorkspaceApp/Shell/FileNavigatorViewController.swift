@@ -12,8 +12,9 @@ import Editor6FileTreeUI
 
 final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
     private typealias TOA = TreeOutlineAdapter<ProjectFeature.Path, ProjectFeature.NodeKind>
-    private let projectTransactionWatch = Relay<ProjectFeature.Transaction>()
+    private let projectTransactionWatch = Relay<ProjectFeature.Change>()
     private let toa = TOA()
+    private var exps = Set<ProjectItemPath>() //< Set of keys to expanded nodes.
     @IBOutlet private weak var outlineView: NSOutlineView?
     ///
     /// Designate feature to provides actual functionalities.
@@ -49,7 +50,10 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
     private func connectToFeatures() {
         guard let features = features else { return }
         projectTransactionWatch.delegate = { [weak self] in self?.processProjectTransaction($0) }
-        projectTransactionWatch.watch(features.project.transaction)
+        // Reset TOA.
+        toa.process(.reload(features.project.state.files))
+        features.project.changes += projectTransactionWatch
+        outlineView?.reloadData()
     }
     ///
     /// Idempotent.
@@ -57,39 +61,41 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
     ///
     private func disconnectFromFeatures() {
         guard let features = features else { return }
-        projectTransactionWatch.unwatch()
+        features.project.changes -= projectTransactionWatch
         projectTransactionWatch.delegate = nil
     }
 
-    private func processProjectTransaction(_ tx: ProjectFeature.Transaction) {
+    private func processProjectTransaction(_ cx: ProjectFeature.Change) {
         guard let features = features else { REPORT_missingFeaturesAndFatalError() }
-        guard let outlineView = outlineView else { return }
-
-        switch tx {
+        switch cx {
         case .location:
             break
+
         case .files(let m):
             let c = TOA.Command.apply(features.project.state.files, m)
             let c1 = toa.process(c)
             switch c1 {
             case .reload:
-                outlineView.reloadData()
+                outlineView?.reloadData()
             case .insertItems(let children, let parent):
                 DEBUG_log("\(children) \(parent)")
 //                DEBUG_log("\(toa.rootNode)")
-                outlineView.insertItems(at: children, inParent: parent, withAnimation: [])
+                outlineView?.insertItems(at: children, inParent: parent, withAnimation: [])
 //                outlineView.reloadItem(parent, reloadChildren: true)
             case .updateItem(let item):
-                outlineView.reloadItem(item, reloadChildren: true)
+                outlineView?.reloadItem(item, reloadChildren: true)
             case .deleteItems(let children, let parent):
 //                outlineView.reloadItem(parent, reloadChildren: true)
-                outlineView.removeItems(at: children, inParent: parent, withAnimation: [])
+                outlineView?.removeItems(at: children, inParent: parent, withAnimation: [])
             }
+            
+        case .selection:
+            break
+
         case .issues(_):
             break
         }
     }
-
 
 
 
@@ -122,12 +128,47 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         }
     }
 
+    func outlineViewItemDidCollapse(_ notification: Notification) {
+        // https://developer.apple.com/documentation/appkit/nsoutlineview/1526467-itemdidcollapsenotification?changes=latest_beta
+        assert(notification.object as? NSObject === outlineView)
+        assert(notification.name == Notification.Name.NSOutlineViewItemDidCollapse)
+        let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
+        let node = item as! TOA.OutlineViewNode
+        assert(exps.contains(node.key))
+        exps.remove(node.key)
+    }
+    func outlineViewItemDidExpand(_ notification: Notification) {
+        // https://developer.apple.com/documentation/appkit/nsoutlineview/1526467-itemdidcollapsenotification?changes=latest_beta
+        assert(notification.object as? NSObject === outlineView)
+        assert(notification.name == Notification.Name.NSOutlineViewItemDidExpand)
+        let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
+        let node = item as! TOA.OutlineViewNode
+        assert(exps.contains(node.key) == false)
+        exps.insert(node.key)
+    }
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let v = outlineView.make(withIdentifier: "FileItem", owner: self) as! NSTableCellView
         let node = item as! TOA.OutlineViewNode
         v.imageView?.image = makeIconForNode(node)
-        v.textField?.stringValue = node.key.components.last ?? ""
+        let u = features?.project.makeFileURL(for: node.key)
+        v.textField?.stringValue = u?.path ?? ""
+//        v.textField?.stringValue = node.key.components.last ?? ""
         return v
+    }
+
+    func outlineViewSelectionDidChange(_ notification: Notification) {
+        guard let ov = outlineView else { return }
+        let sel = toa.makeSelection(
+            selectedRowIndices: ov.selectedRowIndexes,
+            isExpanded: { [exps] k, v in
+                return exps.contains(k)
+            })
+        struct PS: ProjectSelection {
+            var toasel: TOA.Selection
+            var items: [ProjectItemPath] { return toasel.items }
+        }
+        let ps = PS(toasel: sel)
+        features?.project.setSelection(AnyProjectSelection(ps))
     }
 
     private func makeIconForNode(_ n: TOA.OutlineViewNode) -> NSImage? {
@@ -138,12 +179,8 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
     }
 }
 
+private extension FileNavigatorViewController {
 
-
-
-
-
-
-
+}
 
 

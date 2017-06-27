@@ -15,7 +15,7 @@ final class Services {
     fileprivate static let shared = Services()
 
     let file = FileManager()
-    let cargo = CargoService()
+    let cargo = CargoService2()
     let rustLanguage = RustLanguageService()
     let rustMIRInterpreter = RustMIRInterpreterService()
     let lldb = LLDBService()

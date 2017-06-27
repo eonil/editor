@@ -17,14 +17,35 @@ import EonilToolbox
 /// See `relocate` method for details.
 ///
 final class ProjectFeature: ServiceDependent {
-    enum Transaction {
-        case location
-        case files(Tree2Mutation<Path, NodeKind>)
-        case issues(ArrayMutation<Issue>)
-    }
-
-    let transaction = Relay<Transaction>()
-
+    ///
+    /// Notifies change of something.
+    /// This guarantees state consistency at
+    /// the point of casting.
+    ///
+    let signal = Relay<()>()
+    ///
+    /// Notifies a detailed information of where 
+    /// has been changed in state.
+    /// This provides precise timing. You get the
+    /// signals at exactly when the change happen.
+    /// This DOES NOT provide state consistency.
+    /// State can be inconsistent between changes.
+    /// If you want to access state only at 
+    /// consistent point, do it with `signal` 
+    /// relay.
+    ///
+    /// This is an intentional design because
+    /// "signal" is notification of "timing",
+    /// not data. If you want data-based 
+    /// signaling it must be asynchronous, and
+    /// that is not how this app is architected.
+    /// FRP has been avoided intentionally because
+    /// it requires forgetting precise resource
+    /// life-time management, and that is not 
+    /// something I can accept for soft-realtime 
+    /// human-facing application.
+    ///
+    let changes = Relay<Change>()
     private(set) var state = State()
 
     ///
@@ -38,8 +59,20 @@ final class ProjectFeature: ServiceDependent {
     func relocate(_ newLocation: URL?) {
         guard state.location != newLocation else { return }
         guard newLocation != nil else { MARK_unimplemented() }
+
+        if state.location != nil {
+            assert(state.files.isEmpty == false)
+            state.files[.root] = nil
+            changes.cast(.files(.delete(.root)))
+        }
         state.location = newLocation
-        transaction.cast(.location)
+        if state.location != nil {
+            let k = Path.root
+            let v = NodeKind.folder
+            state.files[.root] = (k, v)
+            changes.cast(.files(.insert(.root)))
+        }
+        signal.cast()
     }
 
     ///
@@ -50,13 +83,13 @@ final class ProjectFeature: ServiceDependent {
     ///     Intermediate nodes MUST exists. Otherwise this fails.
     ///     Empty index (index to root node) is not allowed.
     ///
-    func makeNode(at: FileTree.IndexPath, content: NodeKind) {
+    func makeFile(at: FileTree.IndexPath, content: NodeKind) {
         assertMainThread()
         guard at != .root else {
             // Make a root node.
             state.files[.root] = (Path.root, .folder)
             let m = Tree2Mutation.insert(at)
-            transaction.cast(.files(m))
+            changes.cast(.files(m))
             return
         }
         let parentIndex = at.deletingLastComponent()
@@ -80,25 +113,26 @@ final class ProjectFeature: ServiceDependent {
         }
         state.files[at] = (ck, content)
         let m = Tree2Mutation.insert(at)
-        transaction.cast(.files(m))
+        changes.cast(.files(m))
+        signal.cast()
     }
     ///
     /// Imports a subtree from an external file-system location.
     ///
-    func importNode(at: FileTree.IndexPath, from externalFileLocation: URL) {
+    func importFile(at: FileTree.IndexPath, from externalFileLocation: URL) {
         MARK_unimplemented()
     }
     ///
     /// Exports a subtree to an external file-system location.
     ///
-    func exportNode(at: FileTree.IndexPath, to externalFileLocation: URL) {
+    func exportFile(at: FileTree.IndexPath, to externalFileLocation: URL) {
         MARK_unimplemented()
     }
-    func moveNode(from: Path, to: Path) {
+    func moveFile(from: Path, to: Path) {
         assertMainThread()
         MARK_unimplemented()
     }
-    func deleteNode(at: FileTree.IndexPath) {
+    func deleteFile(at: FileTree.IndexPath) {
         assertMainThread()
         guard state.files[at] != nil else {
             reportIssue("Cannot find a file or folder at location `\(at)`.")
@@ -106,20 +140,23 @@ final class ProjectFeature: ServiceDependent {
         }
         state.files[at] = nil
         let m = Tree2Mutation.delete(at)
-        transaction.cast(.files(m))
+        changes.cast(.files(m))
+        signal.cast()
     }
-    func deleteNodes(at locations: [FileTree.IndexPath]) {
+    func deleteFiles(at locations: [FileTree.IndexPath]) {
         assertMainThread()
         for location in locations {
-            deleteNode(at: location)
+            deleteFile(at: location)
         }
     }
 
 
 
 
-    func setSelection(_ newSelection: AnySequence<Path>) {
-        
+    func setSelection(_ newSelection: AnyProjectSelection) {
+        state.selection = newSelection
+        changes.cast(.location)
+        signal.cast()
     }
 
 
@@ -143,7 +180,7 @@ final class ProjectFeature: ServiceDependent {
         let issue = Issue(state: message)
         state.issues.append(issue)
         let m = ArrayMutation<Issue>.insert(b..<e)
-        transaction.cast(.issues(m))
+        changes.cast(.issues(m))
     }
 }
 extension ProjectFeature {
@@ -176,7 +213,18 @@ extension ProjectFeature {
         case file
         case folder
     }
-
+    enum Change {
+        case location
+        case files(Tree2Mutation<Path, NodeKind>)
+        /// 
+        /// Selection snapshot has been changed.
+        /// Selection change does not provide mutation details
+        /// because there's no such source data and it's
+        /// expensive to produce from snapshots.
+        ///
+        case selection
+        case issues(ArrayMutation<Issue>)
+    }
     struct Issue {
         let id = ObjectAddressID()
         let state: String
