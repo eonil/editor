@@ -10,7 +10,7 @@ import AppKit
 import EonilSignet
 import Editor6FileTreeUI
 
-final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate {
+final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate {
     private typealias TOA = TreeOutlineAdapter<ProjectFeature.Path, ProjectFeature.NodeKind>
     private let projectTransactionWatch = Relay<ProjectFeature.Change>()
     private let toa = TOA()
@@ -39,6 +39,7 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         outlineView?.delegate = self
         outlineView?.reloadData()
         outlineView?.menu = ctxm
+        ctxm.delegate = self
         ctxm.setDelegateToAllNodes { [weak self] in self?.processContextMenuSignal($0) }
     }
     override func viewWillAppear() {
@@ -102,17 +103,27 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         }
     }
     private func processContextMenuSignal(_ s: FileNavigatorMenuCommand) {
+        guard let features = features else { return }
+        guard let path = getClickedFilePath() else { return }
+        guard let idxp = features.project.state.files.index(of: path) else { return }
+
         switch s {
         case .newFolder:
-            break
+            let idxp1 = idxp.appendingLastComponent(0)
+            features.project.makeFile(at: idxp1, content: .folder)
+
         case .newFolderWithSelection:
-            break
+            MARK_unimplemented()
+
         case .newFile:
-            break
+            let idxp1 = idxp.appendingLastComponent(0)
+            features.project.makeFile(at: idxp1, content: .file)
+
         case .showInFinder:
-            break
+            MARK_unimplemented()
+
         case .delete:
-            break
+            features.project.deleteFile(at: idxp)
         }
     }
 
@@ -190,6 +201,33 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         features?.project.setSelection(AnyProjectSelection(ps))
     }
 
+    func menuWillOpen(_ menu: NSMenu) {
+        setMenuAttributes()
+    }
+
+
+
+
+
+
+    private func setMenuAttributes() {
+        let maybePath = getClickedFilePath()
+        let hasPath = maybePath != nil
+        ctxm.setCommandEnabled(.newFolder, hasPath)
+        ctxm.setCommandEnabled(.newFolderWithSelection, false)
+        ctxm.setCommandEnabled(.newFile, hasPath)
+        ctxm.setCommandEnabled(.showInFinder, false)
+        ctxm.setCommandEnabled(.delete, hasPath)
+    }
+
+    private func getClickedFilePath() -> ProjectItemPath? {
+        guard let row = outlineView?.clickedRow else { return nil }
+        guard row != -1 else { return nil }
+        guard let item = outlineView?.item(atRow: row) else { return nil }
+        guard let node = item as? TOA.OutlineViewNode else { return nil }
+        let path = node.key
+        return path
+    }
     private func makeIconForNode(_ n: TOA.OutlineViewNode) -> NSImage? {
         guard let features = features else { return nil }
         guard let u = features.project.makeFileURL(for: n.key) else { return nil }
