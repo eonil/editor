@@ -102,30 +102,6 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
             break
         }
     }
-    private func processContextMenuSignal(_ s: FileNavigatorMenuCommand) {
-        guard let features = features else { return }
-        guard let path = getClickedFilePath() else { return }
-        guard let idxp = features.project.state.files.index(of: path) else { return }
-
-        switch s {
-        case .newFolder:
-            let idxp1 = idxp.appendingLastComponent(0)
-            features.project.makeFile(at: idxp1, content: .folder)
-
-        case .newFolderWithSelection:
-            MARK_unimplemented()
-
-        case .newFile:
-            let idxp1 = idxp.appendingLastComponent(0)
-            features.project.makeFile(at: idxp1, content: .file)
-
-        case .showInFinder:
-            MARK_unimplemented()
-
-        case .delete:
-            features.project.deleteFile(at: idxp)
-        }
-    }
 
 
 
@@ -181,8 +157,7 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         let node = item as! TOA.OutlineViewNode
         v.imageView?.image = makeIconForNode(node)
         let u = features?.project.makeFileURL(for: node.key)
-        v.textField?.stringValue = u?.path ?? ""
-//        v.textField?.stringValue = node.key.components.last ?? ""
+        v.textField?.stringValue = u?.lastPathComponent ?? ""
         return v
     }
 
@@ -202,9 +177,39 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
     }
 
     func menuWillOpen(_ menu: NSMenu) {
+        DEBUG_log("Clicked row: \(outlineView!.clickedRow)")
         setMenuAttributes()
     }
+    private func processContextMenuSignal(_ s: FileNavigatorMenuCommand) {
+        DEBUG_log("Clicked row: \(outlineView!.clickedRow)")
+        DEBUG_log("Menu command: \(s)")
+        guard let features = features else { return }
+        guard let path = getClickedFilePath() else { return }
+        guard let idxp = features.project.state.files.index(of: path) else { return }
 
+        switch s {
+        case .newFolder:
+            let idxp1 = idxp.appendingLastComponent(0)
+            features.project.makeFile(at: idxp1, content: .folder)
+            let (k, _) = AUDIT_unwrap(
+                features.project.state.files[idxp],
+                "Parent of new node at `\(idxp)` is missing")
+            expandNode(at: k)
+
+        case .newFolderWithSelection:
+            MARK_unimplemented()
+
+        case .newFile:
+            let idxp1 = idxp.appendingLastComponent(0)
+            features.project.makeFile(at: idxp1, content: .file)
+
+        case .showInFinder:
+            MARK_unimplemented()
+
+        case .delete:
+            features.project.deleteFile(at: idxp)
+        }
+    }
 
 
 
@@ -220,6 +225,14 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         ctxm.setCommandEnabled(.delete, hasPath)
     }
 
+    private func expandNode(at path: ProjectItemPath) {
+        let n = toa.node(for: path)
+        outlineView?.expandItem(n, expandChildren: false)
+    }
+    private func collapseNode(at path: ProjectItemPath) {
+        let n = toa.node(for: path)
+        outlineView?.collapseItem(n, collapseChildren: false)
+    }
     private func getClickedFilePath() -> ProjectItemPath? {
         guard let row = outlineView?.clickedRow else { return nil }
         guard row != -1 else { return nil }

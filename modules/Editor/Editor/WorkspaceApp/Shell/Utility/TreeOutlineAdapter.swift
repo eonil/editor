@@ -48,6 +48,9 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
     func makeSelection(selectedRowIndices: IndexSet, isExpanded: @escaping (K, V) -> Bool) -> Selection {
         return Selection(snapshot: snapshot, selectedRowIndices: selectedRowIndices, isExpanded: isExpanded)
     }
+    func node(for k: K) -> OutlineViewNode? {
+        return idToNodeMapping[k]
+    }
 
     @discardableResult
     func process(_ c: Command) -> OutlineViewCommand {

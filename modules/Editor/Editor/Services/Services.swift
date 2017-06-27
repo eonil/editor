@@ -14,7 +14,7 @@ import Foundation
 final class Services {
     fileprivate static let shared = Services()
 
-    let file = FileManager()
+    let fileSystem = FileManager()
     let cargo = CargoService2()
     let rustLanguage = RustLanguageService()
     let rustMIRInterpreter = RustMIRInterpreterService()

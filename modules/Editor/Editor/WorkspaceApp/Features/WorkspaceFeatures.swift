@@ -53,10 +53,6 @@ final class WorkspaceFeatures: ServiceDependent {
             case .success(let insertionPointIndexPath):
                 let idxp = insertionPointIndexPath
                 project.makeFile(at: idxp, content: .folder)
-                let (path, _) = project.state.files[idxp]!
-                // Make actual directory.
-                let u = project.makeFileURL(for: path)!
-                try? services.file.createDirectory(at: u, withIntermediateDirectories: true, attributes: nil)
             }
 
         case .fileNewFile:

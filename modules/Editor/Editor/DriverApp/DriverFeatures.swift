@@ -38,7 +38,7 @@ final class DriverFeatures: ServiceDependent {
         return u
     }
     func makeWorkspaceDirectory(at u: URL) {
-        try! services.file.createDirectory(at: u,
+        try! services.fileSystem.createDirectory(at: u,
                                            withIntermediateDirectories: true,
                                            attributes: nil)
         let n = u.deletingPathExtension().lastPathComponent

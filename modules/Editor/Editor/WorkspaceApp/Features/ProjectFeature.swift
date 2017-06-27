@@ -111,7 +111,12 @@ final class ProjectFeature: ServiceDependent {
             reportIssue("A same named file or folder already exists in the folder.")
             return
         }
+
+        // Do the job.
         state.files[at] = (ck, content)
+        createActualFileImpl(at: ck, as: content)
+
+        // Cast events.
         let m = Tree2Mutation.insert(at)
         changes.cast(.files(m))
         signal.cast()
@@ -134,11 +139,16 @@ final class ProjectFeature: ServiceDependent {
     }
     func deleteFile(at: FileTree.IndexPath) {
         assertMainThread()
-        guard state.files[at] != nil else {
+        guard let (k, _) = state.files[at] else {
             reportIssue("Cannot find a file or folder at location `\(at)`.")
             return
         }
+
+        // Do the job.
         state.files[at] = nil
+        deleteActualFileImpl(at: k)
+
+        // Cast events.
         let m = Tree2Mutation.delete(at)
         changes.cast(.files(m))
         signal.cast()
@@ -163,6 +173,37 @@ final class ProjectFeature: ServiceDependent {
 
 
 
+
+    ///
+    /// Make actual file node on disk.
+    /// Failure on disk I/O will be ignored and
+    /// lead the node to be an invalid node.
+    /// That's an acceptable and intentional decision.
+    ///
+    private func createActualFileImpl(at path: ProjectItemPath, as kind: NodeKind) {
+        guard let u = makeFileURL(for: path) else { return }
+        do {
+            switch kind {
+            case .folder:
+                try services.fileSystem.createDirectory(at: u, withIntermediateDirectories: true, attributes: nil)
+            case .file:
+                try! Data().write(to: u, options: [.atomicWrite])
+            }
+        }
+        catch let err {
+            reportIssue("File I/O error: \(err)")
+        }
+    }
+    private func deleteActualFileImpl(at path: ProjectItemPath) {
+        guard let u = makeFileURL(for: path) else { return }
+        do {
+            try services.fileSystem.removeItem(at: u)
+        }
+        catch let err {
+            reportIssue("File I/O error: \(err)")
+        }
+    }
+
     private func makeNewNodeName(at: FileTree.IndexPath, kind: NodeKind) -> String {
         func makeKindText() -> String {
             switch kind {
@@ -175,6 +216,7 @@ final class ProjectFeature: ServiceDependent {
         return "(new \(s) \(n))"
     }
     private func reportIssue(_ message: String) {
+        DEBUG_log("Issue: \(message)")
         let b = state.issues.endIndex
         let e = b + 1
         let issue = Issue(state: message)
