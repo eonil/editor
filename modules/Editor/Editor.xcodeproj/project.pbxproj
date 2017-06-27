@@ -20,6 +20,10 @@
 		4529BF6A1EF21859006A9A39 /* WorkspaceDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529BF691EF21859006A9A39 /* WorkspaceDocument.swift */; };
 		4529BF6C1EF21859006A9A39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4529BF6B1EF21859006A9A39 /* Assets.xcassets */; };
 		4529BFB01EF2290D006A9A39 /* Tree2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529BFAF1EF2290D006A9A39 /* Tree2.swift */; };
+		4531E1EA1F02834500A6DB2A /* FileNavigatorMenuCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531E1E91F02834500A6DB2A /* FileNavigatorMenuCommand.swift */; };
+		4531E1EC1F02835A00A6DB2A /* ContextMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531E1EB1F02835A00A6DB2A /* ContextMenuController.swift */; };
+		4531E1EE1F02886600A6DB2A /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531E1ED1F02886600A6DB2A /* MenuItem.swift */; };
+		4531E1F01F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531E1EF1F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift */; };
 		4548439B1EFE32D800D53763 /* FeatureSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548439A1EFE32D800D53763 /* FeatureSessionProtocol.swift */; };
 		454843B41EFE3F9900D53763 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843B31EFE3F9900D53763 /* Services.swift */; };
 		454843BC1EFE401C00D53763 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843B51EFE401C00D53763 /* Bash.swift */; };
@@ -168,6 +172,10 @@
 		4529BF701EF21859006A9A39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4529BFAF1EF2290D006A9A39 /* Tree2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree2.swift; sourceTree = "<group>"; };
 		4529BFCB1EF22963006A9A39 /* EonilToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EonilToolbox.framework; path = ../../Carthage/Build/Mac/EonilToolbox.framework; sourceTree = "<group>"; };
+		4531E1E91F02834500A6DB2A /* FileNavigatorMenuCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorMenuCommand.swift; sourceTree = "<group>"; };
+		4531E1EB1F02835A00A6DB2A /* ContextMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextMenuController.swift; sourceTree = "<group>"; };
+		4531E1ED1F02886600A6DB2A /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		4531E1EF1F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorMenuCommand.extension.swift; sourceTree = "<group>"; };
 		4548439A1EFE32D800D53763 /* FeatureSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureSessionProtocol.swift; sourceTree = "<group>"; };
 		454843B31EFE3F9900D53763 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		454843B51EFE401C00D53763 /* Bash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
@@ -443,8 +451,12 @@
 				45EA45A71EF22E6A0024D3B1 /* WorkspaceWindowController.swift */,
 				45EA45A61EF22E6A0024D3B1 /* WorkspaceWindowController.xib */,
 				454843D91EFE689000D53763 /* Dialogue.extensions.swift */,
-				45FB54521EF6784A00522E83 /* FileNavigatorViewController.swift */,
 				45FB545A1EF67A6900522E83 /* FileNavigatorViewController.xib */,
+				45FB54521EF6784A00522E83 /* FileNavigatorViewController.swift */,
+				4531E1E91F02834500A6DB2A /* FileNavigatorMenuCommand.swift */,
+				4531E1EF1F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift */,
+				4531E1EB1F02835A00A6DB2A /* ContextMenuController.swift */,
+				4531E1ED1F02886600A6DB2A /* MenuItem.swift */,
 				4552B7F11EFB8B7F00E529EE /* Utility */,
 				45FB54631EF7104900522E83 /* TreeViewController */,
 				45FB54601EF70FEC00522E83 /* TreeView */,
@@ -626,6 +638,7 @@
 				45FB54531EF6784A00522E83 /* FileNavigatorViewController.swift in Sources */,
 				4529BFB01EF2290D006A9A39 /* Tree2.swift in Sources */,
 				45EA459F1EF22E450024D3B1 /* LogFeature.swift in Sources */,
+				4531E1EC1F02835A00A6DB2A /* ContextMenuController.swift in Sources */,
 				45EA45BB1EF2303B0024D3B1 /* StackFrameSnapshot.swift in Sources */,
 				454843C21EFE401C00D53763 /* RustMIRInterpreterService.swift in Sources */,
 				452683801EFF8BB8006B12BC /* CargoService2.swift in Sources */,
@@ -649,6 +662,7 @@
 				454843B41EFE3F9900D53763 /* Services.swift in Sources */,
 				4555A4031EFFBF1B00FCB88E /* functions.swift in Sources */,
 				454843BE1EFE401C00D53763 /* CargoService.swift in Sources */,
+				4531E1F01F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift in Sources */,
 				454843D11EFE59C200D53763 /* MainMenuKeyMappingUtility.swift in Sources */,
 				454843C41EFE4B5900D53763 /* ProjectSelection.swift in Sources */,
 				4529BF681EF21859006A9A39 /* ViewController.swift in Sources */,
@@ -680,6 +694,7 @@
 				4529BF6A1EF21859006A9A39 /* WorkspaceDocument.swift in Sources */,
 				454843C01EFE401C00D53763 /* PseudoTerminal.swift in Sources */,
 				45EA45C01EF231F00024D3B1 /* MARK_poorlyImplemented().swift in Sources */,
+				4531E1EA1F02834500A6DB2A /* FileNavigatorMenuCommand.swift in Sources */,
 				454843D61EFE59C200D53763 /* MainMenu2State.swift in Sources */,
 				45EA45A31EF22E450024D3B1 /* WorkspaceFeatures.swift in Sources */,
 				45FB54651EF7104F00522E83 /* TreeViewController.swift in Sources */,
@@ -687,6 +702,7 @@
 				4552B7F51EFB91F900E529EE /* MainMenuItemID.swift in Sources */,
 				451CE1B41EF648B7004721A3 /* Tree2Mutation.swift in Sources */,
 				45EA45AA1EF22E6A0024D3B1 /* WorkspaceWindowController.swift in Sources */,
+				4531E1EE1F02886600A6DB2A /* MenuItem.swift in Sources */,
 				454843C81EFE554B00D53763 /* REPORT_recoverableWarning.swift in Sources */,
 				45EA45891EF22B520024D3B1 /* DriverFeatures.swift in Sources */,
 				45EA45F61EF3B8730024D3B1 /* ArrayMutation.swift in Sources */,

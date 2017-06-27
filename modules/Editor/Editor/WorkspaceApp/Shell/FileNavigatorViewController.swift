@@ -16,6 +16,9 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
     private let toa = TOA()
     private var exps = Set<ProjectItemPath>() //< Set of keys to expanded nodes.
     @IBOutlet private weak var outlineView: NSOutlineView?
+
+    private let ctxm = FileNavigatorMenuCommand.makeMenu()
+
     ///
     /// Designate feature to provides actual functionalities.
     /// Settings this to `nil` makes every user interaction
@@ -35,6 +38,8 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         outlineView?.dataSource = self
         outlineView?.delegate = self
         outlineView?.reloadData()
+        outlineView?.menu = ctxm
+        ctxm.setDelegateToAllNodes { [weak self] in self?.processContextMenuSignal($0) }
     }
     override func viewWillAppear() {
         super.viewWillAppear()
@@ -93,6 +98,20 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
             break
 
         case .issues(_):
+            break
+        }
+    }
+    private func processContextMenuSignal(_ s: FileNavigatorMenuCommand) {
+        switch s {
+        case .newFolder:
+            break
+        case .newFolderWithSelection:
+            break
+        case .newFile:
+            break
+        case .showInFinder:
+            break
+        case .delete:
             break
         }
     }
