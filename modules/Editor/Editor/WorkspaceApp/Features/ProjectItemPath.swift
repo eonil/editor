@@ -30,6 +30,10 @@ struct ProjectItemPath: Hashable {
         precondition(components.isEmpty == false)
         return ProjectItemPath(components: Array(components.dropLast()))
     }
+    func splitLastComponent() -> (ProjectItemPath, lastComponent: String) {
+        let (a, b) = components.splitLast()
+        return (ProjectItemPath(components: Array(a)), b)
+    }
     static func == (_ a: ProjectItemPath, _ b: ProjectItemPath) -> Bool {
         return a.components == b.components
     }

@@ -95,7 +95,7 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
                 snapshot = newSnapshot
                 for k in keysToInsert {
                     assert(idToNodeMapping[k] == nil)
-                    let v = newSnapshot[k]!
+                    let v = newSnapshot[k]
                     let cs = newSnapshot.children(of: k)!
                     let n = OutlineViewNode(k, v, cs)
                     n.adapter = self
@@ -104,7 +104,7 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
                 for k in keysToUpdate {
                     assert(idToNodeMapping[k] != nil)
                     let n = idToNodeMapping[k]!
-                    let v = newSnapshot[k]!
+                    let v = newSnapshot[k]
                     let cs = newSnapshot.children(of: k)!
                     n.key = k
                     n.value = v
@@ -126,7 +126,7 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
 
             case .insert(let idxp):
                 let (k, v) = newSnapshot[idxp]!
-                snapshot[idxp] = (k, v)
+                snapshot.insert(at: idxp, (k, v))
                 let cs = newSnapshot.children(of: k)!
                 let n = OutlineViewNode(k, v, cs)
                 n.adapter = self
@@ -141,7 +141,7 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
                 
             case .update(let idxp):
                 let (k, v) = newSnapshot[idxp]!
-                snapshot[idxp] = (k, v)
+                snapshot.update(at: idxp, (k, v))
                 let n = idToNodeMapping[k]!
                 let cs = newSnapshot.children(of: k)!
                 n.key = k
@@ -155,7 +155,7 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
                 // New snapshot does not have 
                 // node information for the index path.
                 let (k, _) = snapshot[idxp]!
-                snapshot[idxp] = nil
+                snapshot.delete(at: idxp)
 //                let n = idToNodeMapping[k]!
                 idToNodeMapping[k] = nil
                 let (c, p) = makePositionInOutlineView(indexPath: idxp)
@@ -267,7 +267,7 @@ extension TreeOutlineAdapter {
             ///
             private func collectVisibleKeys(at k: K, _ bucket: inout [K]) {
                 bucket.append(k)
-                let v = snapshot[k]!
+                let v = snapshot[k]
                 let exp = isExpanded(k, v)
                 if exp {
                     let cs = snapshot.children(of: k)!

@@ -9,26 +9,26 @@
 import EonilToolbox
 
 public protocol Tree2Protocol {
-    associatedtype Key
-    associatedtype Value
-    associatedtype IndexPath
-    var count: Int { get }
-    ///
-    /// - Parameter indexPath:
-    ///     Location of target node.
-    ///     Use `.root` to access root node.
-    ///
-    subscript(_ indexPath: IndexPath) -> (Key, Value)? { get set }
-    ///
-    /// - Returns:
-    ///     `nil` if the key does not exist in this tree.
-    ///     Keys of children otherwise.
-    ///
-    func children(of parent: Key) -> [Key]?
+//    associatedtype Key
+//    associatedtype Value
+//    associatedtype IndexPath
+//    var count: Int { get }
+//    ///
+//    /// - Parameter indexPath:
+//    ///     Location of target node.
+//    ///     Use `.root` to access root node.
+//    ///
+//    subscript(_ indexPath: IndexPath) -> (Key, Value)? { get set }
+//    ///
+//    /// - Returns:
+//    ///     `nil` if the key does not exist in this tree.
+//    ///     Keys of children otherwise.
+//    ///
+//    func children(of parent: Key) -> [Key]?
 }
 
 ///
-/// Single-rooted one-way stable tree.
+/// Single-rooted one-way stable ordered tree.
 ///
 /// Single-rooted means this tree can have only one root node.
 ///
@@ -49,6 +49,10 @@ public protocol Tree2Protocol {
 ///
 /// - d is depth of target node.
 /// - n is number of descendants.
+///
+/// Operation costs by key.
+///
+/// - Select: amortized O(1)
 ///
 /// Operations using keys can introduce a few of extra dictionary-select 
 /// cost, but should be neglictable.
@@ -81,25 +85,36 @@ public struct Tree2<Key, Value>: Tree2Protocol where Key: Hashable {
         get {
             return select(at: indexPath)
         }
+        // These two operations are ambiguous for setter.
+        // - Updating key
+        // - Inserting at the middle of siblings.
+    }
+    public subscript(_ key: Key) -> Value {
+        get {
+            return nodes[key]!.content
+        }
         set {
-            if let newValue = newValue {
-                if select(at: indexPath) == nil {
-                    insert(newValue.0, newValue.1, at: indexPath)
-                }
-                else {
-                    update(newValue.0, newValue.1, at: indexPath)
-                }
-            }
-            else {
-                delete(at: indexPath)
-            }
+            var (s, cs) = nodes[key]!
+            s = newValue
+            nodes[key] = (s, cs)
         }
     }
-    public subscript(_ key: Key) -> Value? {
-        return nodes[key]?.content
+    public func contains(_ key: Key) -> Bool {
+        return nodes[key] != nil
     }
     public func children(of parent: Key) -> [Key]? {
         return nodes[parent]?.childNodeIDs
+    }
+    public mutating func insert(at: IndexPath, _ node: (Key, Value)) {
+        let (k, v) = node
+        insertImpl(k, v, at: at)
+    }
+    public mutating func update(at: IndexPath, _ node: (Key, Value)) {
+        let (k, v) = node
+        updateImpl(k, v, at: at)
+    }
+    public mutating func delete(at idxp: IndexPath) {
+        deleteImpl(at: idxp)
     }
 
     private func getNode(at indexPath: IndexPath) -> Node? {
@@ -124,7 +139,7 @@ public struct Tree2<Key, Value>: Tree2Protocol where Key: Hashable {
         let nodeValue = nodeState.content
         return (nodeID, nodeValue)
     }
-    private mutating func insert(_ key: Key, _ value: Value, at indexPath: IndexPath) {
+    private mutating func insertImpl(_ key: Key, _ value: Value, at indexPath: IndexPath) {
         AUDIT_check(nodes[key] == nil, "You cannot insert an existing key.")
         if indexPath == .root {
             rootID = key
@@ -139,7 +154,7 @@ public struct Tree2<Key, Value>: Tree2Protocol where Key: Hashable {
             nodes[parentNodeID] = parentNodeState1
         }
     }
-    private mutating func update(_ key: Key, _ value: Value, at indexPath: IndexPath) {
+    private mutating func updateImpl(_ key: Key, _ value: Value, at indexPath: IndexPath) {
         let (id, state) = AUDIT_unwrapConsistentState(getNode(at: indexPath))
         AUDIT_check(id == key, "Supplied key doesn't match key at the path.")
         AUDIT_check(nodes[id] != nil, "State for key obtained by index-path is missing.")
@@ -149,7 +164,7 @@ public struct Tree2<Key, Value>: Tree2Protocol where Key: Hashable {
     ///
     /// This also deletes all subnodes recursively.
     ///
-    private mutating func delete(at indexPath: IndexPath) {
+    private mutating func deleteImpl(at indexPath: IndexPath) {
         guard indexPath != .root else { return deleteAll() }
         let node = AUDIT_unwrapConsistentState(getNode(at: indexPath))
         let id = node.id

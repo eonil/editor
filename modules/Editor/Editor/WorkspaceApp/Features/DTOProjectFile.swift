@@ -77,7 +77,7 @@ extension Tree2 where Key == ProjectItemPath {
     mutating func append(_ p: ProjectItemPath, _ c: Value) {
         if p == .root {
             precondition(isEmpty)
-            self[.root] = (p, c)
+            insert(at: .root, (p, c))
         }
         else {
             let pp = p.deletingLastComponent1()
@@ -85,7 +85,7 @@ extension Tree2 where Key == ProjectItemPath {
             let pcs = children(of: pp)!
             let i = pcs.count
             let idxp = pidxp.appendingLastComponent(i)
-            self[idxp] = (p, c)
+            insert(at: idxp, (p, c))
         }
     }
 }

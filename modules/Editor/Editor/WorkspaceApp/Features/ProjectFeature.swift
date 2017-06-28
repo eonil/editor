@@ -62,14 +62,14 @@ final class ProjectFeature: ServiceDependent {
 
         if state.location != nil {
             assert(state.files.isEmpty == false)
-            state.files[.root] = nil
+            state.files.delete(at: .root)
             changes.cast(.files(.delete(.root)))
         }
         state.location = newLocation
         if state.location != nil {
             let k = Path.root
             let v = NodeKind.folder
-            state.files[.root] = (k, v)
+            state.files.insert(at: .root, (k, v))
             changes.cast(.files(.insert(.root)))
         }
         signal.cast()
@@ -84,16 +84,16 @@ final class ProjectFeature: ServiceDependent {
     ///     Intermediate nodes MUST exists. Otherwise this fails.
     ///     Empty index (index to root node) is not allowed.
     ///
-    func makeFile(at: FileTree.IndexPath, content: NodeKind) {
+    func makeFile(at idx: FileTree.IndexPath, content: NodeKind) {
         assertMainThread()
-        guard at != .root else {
+        guard idx != .root else {
             // Make a root node.
-            state.files[.root] = (Path.root, .folder)
-            let m = Tree2Mutation.insert(at)
+            state.files.insert(at: .root, (.root, .folder))
+            let m = Tree2Mutation.insert(idx)
             changes.cast(.files(m))
             return
         }
-        let parentIndex = at.deletingLastComponent()
+        let parentIndex = idx.deletingLastComponent()
         guard let (k, v) = state.files[parentIndex] else {
             reportIssue("Cannot find parent node.")
             return
@@ -106,7 +106,7 @@ final class ProjectFeature: ServiceDependent {
             reportIssue("Bad parent key `\(k)`.")
             return
         }
-        let n = makeNewNodeName(at: at, kind: content)
+        let n = makeNewNodeName(at: idx, kind: content)
         let ck = k.appendingComponent(n)
         guard cs.contains(ck) == false else {
             reportIssue("A same named file or folder already exists in the folder.")
@@ -114,11 +114,11 @@ final class ProjectFeature: ServiceDependent {
         }
 
         // Do the job.
-        state.files[at] = (ck, content)
+        state.files.insert(at: idx, (ck, content))
         createActualFileImpl(at: ck, as: content)
 
         // Cast events.
-        let m = Tree2Mutation.insert(at)
+        let m = Tree2Mutation.insert(idx)
         changes.cast(.files(m))
         signal.cast()
         storeProjectFileList()
@@ -173,24 +173,21 @@ final class ProjectFeature: ServiceDependent {
         signal.cast()
         storeProjectFileList()
     }
-    private func deleteOneFileImpl(at: FileTree.IndexPath) {
+    private func deleteOneFileImpl(at idx: FileTree.IndexPath) {
         assertMainThread()
-        guard let (k, _) = state.files[at] else {
-            reportIssue("Cannot find a file or folder at location `\(at)`.")
+        guard let (k, _) = state.files[idx] else {
+            reportIssue("Cannot find a file or folder at location `\(idx)`.")
             return
         }
 
         // Do the job.
-        state.files[at] = nil
+        state.files.delete(at: idx)
         deleteActualFileImpl(at: k)
 
         // Cast events.
-        let m = Tree2Mutation.delete(at)
+        let m = Tree2Mutation.delete(idx)
         changes.cast(.files(m))
     }
-
-
-
 
     func setSelection(_ newSelection: AnyProjectSelection) {
         state.selection = newSelection
@@ -310,6 +307,10 @@ extension ProjectFeature {
         /// a long running operation.
         ///
         var busy = false
+        ///
+        /// - ToDo:
+        ///     Consider migration to `FileTree2` type.
+        ///
         var files = FileTree()
         ///
         /// All discovered targets.

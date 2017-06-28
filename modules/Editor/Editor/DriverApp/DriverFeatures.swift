@@ -64,10 +64,10 @@ final class DriverFeatures: ServiceDependent {
         func path(_ comps: [String]) -> ProjectItemPath {
             return ProjectItemPath(components: comps)
         }
-        fs[idx([])] = (path([]), .folder)
-        fs[idx([0])] = (path(["Cargo.toml"]), .file)
-        fs[idx([1])] = (path(["src"]), .folder)
-        fs[idx([1,0])] = (path(["src", "main.rs"]), .file)
+        fs.insert(at: idx([]),      (path([]), .folder))
+        fs.insert(at: idx([0]),     (path(["Cargo.toml"]), .file))
+        fs.insert(at: idx([1]),     (path(["src"]), .folder))
+        fs.insert(at: idx([1,0]),   (path(["src", "main.rs"]), .file))
 
         let dto = DTOProjectFile(files: fs)
         let dtou = u.appendingPathComponent(".eews")

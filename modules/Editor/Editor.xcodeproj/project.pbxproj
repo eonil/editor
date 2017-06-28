@@ -63,6 +63,9 @@
 		456ABC231F0364DD00928B4B /* ProjectSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC221F0364DD00928B4B /* ProjectSerialization.swift */; };
 		456ABC261F03770100928B4B /* Tree2.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC251F03770100928B4B /* Tree2.extension.swift */; };
 		456ABC401F03B78F00928B4B /* DTOProjectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */; };
+		456ABC431F03BEAC00928B4B /* OrderedTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC421F03BEAC00928B4B /* OrderedTree.swift */; };
+		456ABC471F03C97F00928B4B /* OrderedTree2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC461F03C97F00928B4B /* OrderedTree2.swift */; };
+		456ABC491F03CD6C00928B4B /* FileTree2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC481F03CD6C00928B4B /* FileTree2.swift */; };
 		457C240E1EF9F2190050203B /* OutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C240D1EF9F2190050203B /* OutlineViewController.swift */; };
 		457C24101EF9F5720050203B /* OutlineViewNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C240F1EF9F5720050203B /* OutlineViewNodeProtocol.swift */; };
 		45D59DD61EFF99EB00408881 /* ReactiveLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D59DD51EFF99EB00408881 /* ReactiveLoop.swift */; };
@@ -217,6 +220,9 @@
 		456ABC221F0364DD00928B4B /* ProjectSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSerialization.swift; sourceTree = "<group>"; };
 		456ABC251F03770100928B4B /* Tree2.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree2.extension.swift; sourceTree = "<group>"; };
 		456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTOProjectFile.swift; sourceTree = "<group>"; };
+		456ABC421F03BEAC00928B4B /* OrderedTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedTree.swift; sourceTree = "<group>"; };
+		456ABC461F03C97F00928B4B /* OrderedTree2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedTree2.swift; sourceTree = "<group>"; };
+		456ABC481F03CD6C00928B4B /* FileTree2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTree2.swift; sourceTree = "<group>"; };
 		457C240D1EF9F2190050203B /* OutlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineViewController.swift; sourceTree = "<group>"; };
 		457C240F1EF9F5720050203B /* OutlineViewNodeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineViewNodeProtocol.swift; sourceTree = "<group>"; };
 		45D59DD51EFF99EB00408881 /* ReactiveLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveLoop.swift; sourceTree = "<group>"; };
@@ -330,6 +336,9 @@
 				45EA45B51EF22F6F0024D3B1 /* DataTypes */,
 				4529BFAF1EF2290D006A9A39 /* Tree2.swift */,
 				456ABC251F03770100928B4B /* Tree2.extension.swift */,
+				456ABC421F03BEAC00928B4B /* OrderedTree.swift */,
+				456ABC461F03C97F00928B4B /* OrderedTree2.swift */,
+				456ABC481F03CD6C00928B4B /* FileTree2.swift */,
 				45D59DD51EFF99EB00408881 /* ReactiveLoop.swift */,
 				454F77A41EFE964300317763 /* ManualLoop.swift */,
 				454843D71EFE5B1400D53763 /* Relay.swift */,
@@ -647,6 +656,7 @@
 				45EA45BB1EF2303B0024D3B1 /* StackFrameSnapshot.swift in Sources */,
 				454843C21EFE401C00D53763 /* RustMIRInterpreterService.swift in Sources */,
 				452683801EFF8BB8006B12BC /* CargoService2.swift in Sources */,
+				456ABC431F03BEAC00928B4B /* OrderedTree.swift in Sources */,
 				45EA45A11EF22E450024D3B1 /* ProjectFeature.swift in Sources */,
 				457C240E1EF9F2190050203B /* OutlineViewController.swift in Sources */,
 				45FB545D1EF680DA00522E83 /* Mutation.swift in Sources */,
@@ -689,12 +699,14 @@
 				45641EAF1EFF258500D4C0D1 /* LineBuilder.swift in Sources */,
 				45EA45C51EF232470024D3B1 /* debugLog.swift in Sources */,
 				451CE1B21EF63D4B004721A3 /* REPORT_missingServicesAndFatalError.swift in Sources */,
+				456ABC471F03C97F00928B4B /* OrderedTree2.swift in Sources */,
 				45EA458B1EF22B520024D3B1 /* DriverShell.swift in Sources */,
 				45EA45B91EF22F910024D3B1 /* ProcessSnapshot.swift in Sources */,
 				45EA45791EF22A7F0024D3B1 /* WorkspaceApp.swift in Sources */,
 				4555A41A1F01AFCF00FCB88E /* TransactionalRelay.swift in Sources */,
 				45FB54591EF679BB00522E83 /* REPORT_missingIBOutletViewAndFatalError.swift in Sources */,
 				456ABC261F03770100928B4B /* Tree2.extension.swift in Sources */,
+				456ABC491F03CD6C00928B4B /* FileTree2.swift in Sources */,
 				4555A4011EFFBAEB00FCB88E /* Function.swift in Sources */,
 				454843CA1EFE56C200D53763 /* DialogueFeature.swift in Sources */,
 				45EA45A01EF22E450024D3B1 /* NavigationFeature.swift in Sources */,

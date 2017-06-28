@@ -41,6 +41,10 @@ final class DriverShell {
             .fileNewFile,
             .fileOpen,
             .fileCloseWorkspace,
+            .productClean,
+            .productBuild,
+            .productRun,
+            .productStop,
             ])
         mainMenuController.reload(mainMenuState)
         NSApplication.shared().mainMenu = mainMenuController.menu

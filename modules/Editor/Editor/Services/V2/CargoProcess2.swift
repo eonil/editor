@@ -76,10 +76,15 @@ final class CargoProcess2 {
                         props.reports.append(.cargoErr(msg))
                         signal.cast()
                         transaction.cast(.reports(.insert(c..<c+1)))
+
                     case .clean:
-                        MARK_unimplemented()
+                        DEBUG_log("Receive STDERR: \(lines)")
+                        MARK_unimplementedButSkipForNow()
+                        
                     case .build:
-                        MARK_unimplemented()
+                        DEBUG_log("Receive STDERR: \(lines)")
+                        MARK_unimplementedButSkipForNow()
+
                     case .run:
                         MARK_unimplemented()
                     }

@@ -22,7 +22,7 @@ extension Tree2 {
         walkDFS(from: k, f)
     }
     private func walkDFS(from k: Key, _ f: (Key, Value) -> Void) {
-        let v = self[k]!
+        let v = self[k]
         f(k, v)
         let cks = children(of: k)
         for ck in (cks ?? []) {

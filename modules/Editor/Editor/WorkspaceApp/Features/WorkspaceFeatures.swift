@@ -7,6 +7,8 @@
 //
 
 final class WorkspaceFeatures: ServiceDependent {
+    private let loop = ManualLoop()
+    private let watch = Relay<()>()
     let navigation = NavigationFeature()
     let dialogue = DialogueFeature()
     let project = ProjectFeature()
@@ -15,6 +17,20 @@ final class WorkspaceFeatures: ServiceDependent {
     let build = BuildFeature()
     let debug = DebugFeature()
     let log = LogFeature()
+
+    override init() {
+        super.init()
+        loop.step = { [weak self] in self?.step() }
+        watch.delegate = { [weak self] in self?.loop.signal() }
+        project.signal += watch
+    }
+    private func step() {
+        build.setProjectState(project.state)
+    }
+
+    private func processProjectSignal() {
+
+    }
 
     func process(_ c: MainMenuItemID) {
         switch c {
@@ -77,7 +93,13 @@ final class WorkspaceFeatures: ServiceDependent {
 
         case .fileOpen:
             break
-            
+
+        case .productClean:
+            build.process(.cleanAll)
+
+        case .productBuild:
+            build.process(.build)
+
         default:
             REPORT_recoverableWarning("Processing unimplemented menu command... `\(c)`.")
             MARK_unimplementedButSkipForNow()
