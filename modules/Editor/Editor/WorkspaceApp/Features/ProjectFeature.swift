@@ -153,9 +153,34 @@ final class ProjectFeature: ServiceDependent {
         changes.cast(.files(m))
         signal.cast()
     }
+    ///
+    /// Delete multiple file nodes at once.
+    ///
+    /// When you deleting multiple file nodes, nested nodes
+    /// in the target list MUST be removed. Because the node
+    /// won't be available at the point of deletion time.
+    /// Otherwise, you can just ignore such situation, but
+    /// I don't think it's a good practice.
+    ///
+    /// - Todo: Implementation is currently O(n^2). Optimize this.
+    ///
     func deleteFiles(at locations: [FileTree.IndexPath]) {
         assertMainThread()
-        for location in locations {
+        typealias IDXP = FileTree.IndexPath
+        var tops = Set<IDXP>()
+        func isNested(_ p: IDXP) -> Bool {
+            if p == .root { return false }
+            for t in tops {
+                if p.hasPrefix(t) { return true }
+            }
+            tops.insert(p)
+            return false
+        }
+        
+        let topLocations = locations.filter(isNested | not)
+        DEBUG_log("Input locations: \(locations)")
+        DEBUG_log("Filtered locations: \(topLocations)")
+        for location in topLocations {
             deleteFile(at: location)
         }
     }

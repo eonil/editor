@@ -55,7 +55,7 @@ final class BashProcess2 {
                 let errFile = stderr.fileHandleForReading
                 outFile.readabilityHandler = read | toMainGCDQ(qout | sig)
                 errFile.readabilityHandler = read | toMainGCDQ(qerr | sig)
-                proc.terminationHandler = ignore | toMainGCDQ(sig)
+                proc.terminationHandler = ignoreParameter | toMainGCDQ(sig)
             }
         }
         proc.launchPath = "/bin/bash"

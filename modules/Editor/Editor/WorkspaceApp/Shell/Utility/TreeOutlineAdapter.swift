@@ -266,10 +266,10 @@ extension TreeOutlineAdapter {
             /// Perform DFS to collect keys to visible rows in order.
             ///
             private func collectVisibleKeys(at k: K, _ bucket: inout [K]) {
+                bucket.append(k)
                 let v = snapshot[k]!
                 let exp = isExpanded(k, v)
                 if exp {
-                    bucket.append(k)
                     let cs = snapshot.children(of: k)!
                     for c in cs {
                         collectVisibleKeys(at: c, &bucket)

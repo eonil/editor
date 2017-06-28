@@ -140,8 +140,9 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         assert(notification.name == Notification.Name.NSOutlineViewItemDidCollapse)
         let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
         let node = item as! TOA.OutlineViewNode
-        assert(exps.contains(node.key))
+//        assert(exps.contains(node.key))
         exps.remove(node.key)
+        DEBUG_log("End-user did collapse: \(node.key), exps = \(exps)")
     }
     func outlineViewItemDidExpand(_ notification: Notification) {
         // https://developer.apple.com/documentation/appkit/nsoutlineview/1526467-itemdidcollapsenotification?changes=latest_beta
@@ -149,8 +150,9 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         assert(notification.name == Notification.Name.NSOutlineViewItemDidExpand)
         let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
         let node = item as! TOA.OutlineViewNode
-        assert(exps.contains(node.key) == false)
+//        assert(exps.contains(node.key) == false)
         exps.insert(node.key)
+        DEBUG_log("End-user did expand: \(node.key), exps = \(exps)")
     }
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let v = outlineView.make(withIdentifier: "FileItem", owner: self) as! NSTableCellView
@@ -162,12 +164,7 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
     }
 
     func outlineViewSelectionDidChange(_ notification: Notification) {
-        guard let ov = outlineView else { return }
-        let sel = toa.makeSelection(
-            selectedRowIndices: ov.selectedRowIndexes,
-            isExpanded: { [exps] k, v in
-                return exps.contains(k)
-            })
+        guard let sel = makeSelection() else { return }
         struct PS: ProjectSelection {
             var toasel: TOA.Selection
             var items: [ProjectItemPath] { return toasel.items }
@@ -194,7 +191,7 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
             let (k, _) = AUDIT_unwrap(
                 features.project.state.files[idxp],
                 "Parent of new node at `\(idxp)` is missing")
-            expandNode(at: k)
+            expandNodeImpl(at: k)
 
         case .newFolderWithSelection:
             MARK_unimplemented()
@@ -204,10 +201,14 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
             features.project.makeFile(at: idxp1, content: .file)
 
         case .showInFinder:
-            MARK_unimplemented()
+            let ps = (makeSelection()?.items ?? []) + [getClickedFilePath()].flatMap({$0})
+            let us = ps.flatMap({ features.project.makeFileURL(for: $0) })
+            NSWorkspace.shared().activateFileViewerSelecting(us)
 
         case .delete:
-            features.project.deleteFile(at: idxp)
+            let ps = (makeSelection()?.items ?? []) + [getClickedFilePath()].flatMap({$0})
+            let idxps = ps.flatMap({ features.project.state.files.index(of: $0) })
+            features.project.deleteFiles(at: idxps)
         }
     }
 
@@ -216,22 +217,39 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
 
 
     private func setMenuAttributes() {
-        let maybePath = getClickedFilePath()
-        let hasPath = maybePath != nil
-        ctxm.setCommandEnabled(.newFolder, hasPath)
-        ctxm.setCommandEnabled(.newFolderWithSelection, false)
-        ctxm.setCommandEnabled(.newFile, hasPath)
-        ctxm.setCommandEnabled(.showInFinder, false)
-        ctxm.setCommandEnabled(.delete, hasPath)
+        guard let features = features else { return }
+        var ops = Set<FileNavigatorMenuCommand>()
+        if let path = getClickedFilePath() {
+            ops.formUnion([
+                .showInFinder,
+                ])
+            if path != .root {
+                ops.formUnion([
+                    .delete
+                    ])
+            }
+            if features.project.state.files[path] == .folder {
+                ops.formUnion([
+                    .newFolder,
+                    .newFolderWithSelection,
+                    .newFile,
+                    ])
+            }
+        }
+        ctxm.resetEnabledCommands(ops)
     }
 
-    private func expandNode(at path: ProjectItemPath) {
-        let n = toa.node(for: path)
+    private func expandNodeImpl(at path: ProjectItemPath) {
+        guard let n = toa.node(for: path) else { return }
         outlineView?.expandItem(n, expandChildren: false)
+        exps.insert(n.key)
+        DEBUG_log("Expanded: \(n.key), exps = \(exps)")
     }
-    private func collapseNode(at path: ProjectItemPath) {
-        let n = toa.node(for: path)
+    private func collapseNodeImpl(at path: ProjectItemPath) {
+        guard let n = toa.node(for: path) else { return }
         outlineView?.collapseItem(n, collapseChildren: false)
+        exps.remove(n.key)
+        DEBUG_log("Collapsed: \(n.key), exps = \(exps)")
     }
     private func getClickedFilePath() -> ProjectItemPath? {
         guard let row = outlineView?.clickedRow else { return nil }
@@ -240,6 +258,12 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         guard let node = item as? TOA.OutlineViewNode else { return nil }
         let path = node.key
         return path
+    }
+    private func makeSelection() -> TOA.Selection? {
+        guard let ov = outlineView else { return nil }
+        return toa.makeSelection(
+            selectedRowIndices: ov.selectedRowIndexes,
+            isExpanded: { [exps] k, v in exps.contains(k) })
     }
     private func makeIconForNode(_ n: TOA.OutlineViewNode) -> NSImage? {
         guard let features = features else { return nil }

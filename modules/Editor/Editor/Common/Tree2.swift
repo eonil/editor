@@ -184,10 +184,17 @@ public extension Tree2 {
     /// so it's the root node. `[1]` means first child of the root
     /// node.
     ///
-    public struct IndexPath: Equatable {
+    public struct IndexPath: Hashable {
         public var components = [Int]()
         public init(components newComponents: [Int]) {
             components = newComponents
+        }
+        public func hasPrefix(_ idxp: IndexPath) -> Bool {
+            guard idxp.components.count <= components.count else { return false }
+            let range = 0..<idxp.components.count
+            return range
+                .map({ components[$0] == idxp.components[$0] })
+                .reduce(true) { $0 && $1 }
         }
         public func appendingLastComponent(_ component: Int) -> IndexPath {
             return IndexPath(components: components + [component])
@@ -204,6 +211,9 @@ public extension Tree2 {
         ///
         public static var root: IndexPath {
             return IndexPath(components: [])
+        }
+        public var hashValue: Int {
+            return components.count + (components.last ?? 0)
         }
         public static func == (_ a: IndexPath, _ b: IndexPath) -> Bool {
             return a.components == b.components

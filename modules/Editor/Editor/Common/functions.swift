@@ -2,11 +2,15 @@
 //  functions.swift
 //  Editor
 //
-//  Created by Hoon H. on 2017/06/25.
+//  Created by Hoon H. on 2017/06/28.
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-func ignore<T>(_: T) -> Void {
+func not(_ b: Bool) -> Bool {
+    return !b
+}
+
+func ignoreParameter<T>(_: T) -> Void {
 }
 func toVoid<T>(_: T) -> Void {
 }
