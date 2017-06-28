@@ -8,6 +8,7 @@
 
 final class BuildFeature: ServiceDependent {
     private let loop = ManualLoop()
+    private let watch = Relay<()>()
     private var project = ProjectFeature.State()
     private var cmdq = [Command]()
     private var exec: CargoProcess2?
@@ -15,8 +16,11 @@ final class BuildFeature: ServiceDependent {
     override init() {
         super.init()
         loop.step = { [weak self] in self?.step() }
+        watch.delegate = { [weak self] in self?.loop.signal() }
     }
     private func step() {
+        exec = (exec?.state == .complete) ? nil : exec
+
         guard exec == nil else { return } // Wait until done.
         while let cmd = cmdq.removeFirstIfAvailable() {
             switch cmd {
@@ -35,7 +39,10 @@ final class BuildFeature: ServiceDependent {
                 let ps = CargoProcess2.Parameters(
                     location: loc,
                     command: .build)
-                exec = services.cargo.spawn(ps)
+                let proc = services.cargo.spawn(ps)
+                loop.signal()
+                proc.signal += watch
+                exec = proc
 
             case .buildTarget(let t):
                 MARK_unimplemented()
