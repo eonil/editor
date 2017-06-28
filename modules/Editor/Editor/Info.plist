@@ -9,7 +9,7 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>edws</string>
+				<string>eews</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string></string>

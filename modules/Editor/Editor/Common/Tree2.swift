@@ -226,6 +226,24 @@ fileprivate extension Tree2 {
     typealias NodeState = (content: Value, childNodeIDs: [NodeID])
 }
 
+extension Tree2: Sequence {
+    public func makeIterator() -> AnyIterator<(Key, Value)> {
+        var it = nodes.makeIterator()
+        return AnyIterator { () -> (Key, Value)? in
+            guard let (k, (s, _)) = it.next() else { return nil }
+            return (k, s)
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 private func AUDIT_unwrapConsistentState<T>(_ v: T?) -> T {
     return AUDIT_unwrap(v, "Inconsistent tree state.")
 }

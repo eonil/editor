@@ -57,7 +57,7 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         guard let features = features else { return }
         projectTransactionWatch.delegate = { [weak self] in self?.processProjectTransaction($0) }
         // Reset TOA.
-        toa.process(.reload(features.project.state.files))
+        toa.process(.apply(features.project.state.files, .reset))
         features.project.changes += projectTransactionWatch
         outlineView?.reloadData()
     }
@@ -201,12 +201,13 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
             features.project.makeFile(at: idxp1, content: .file)
 
         case .showInFinder:
-            let ps = (makeSelection()?.items ?? []) + [getClickedFilePath()].flatMap({$0})
+            let ps = getGrabbedFilePathsForContextMenuOperation() ?? []
             let us = ps.flatMap({ features.project.makeFileURL(for: $0) })
             NSWorkspace.shared().activateFileViewerSelecting(us)
 
         case .delete:
-            let ps = (makeSelection()?.items ?? []) + [getClickedFilePath()].flatMap({$0})
+            let ps = getGrabbedFilePathsForContextMenuOperation() ?? []
+//            let ps = (makeSelection()?.items ?? []) + [getClickedFilePath()].flatMap({$0})
             let idxps = ps.flatMap({ features.project.state.files.index(of: $0) })
             features.project.deleteFiles(at: idxps)
         }
@@ -250,6 +251,20 @@ final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSour
         outlineView?.collapseItem(n, collapseChildren: false)
         exps.remove(n.key)
         DEBUG_log("Collapsed: \(n.key), exps = \(exps)")
+    }
+    private func getGrabbedFilePathsForContextMenuOperation() -> [ProjectItemPath]? {
+        if let p = getClickedFilePath() {
+            let selps = makeSelection()?.items ?? []
+            if selps.contains(p) {
+                return selps
+            }
+            else {
+                return [p]
+            }
+        }
+        else {
+            return makeSelection()?.items
+        }
     }
     private func getClickedFilePath() -> ProjectItemPath? {
         guard let row = outlineView?.clickedRow else { return nil }

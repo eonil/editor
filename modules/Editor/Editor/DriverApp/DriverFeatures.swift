@@ -33,7 +33,7 @@ final class DriverFeatures: ServiceDependent {
     }
     func fixWorkspaceDirectoryURL(_ u: URL) -> URL {
         if u.pathExtension == "" {
-            return u.appendingPathExtension("edws")
+            return u.appendingPathExtension("eews")
         }
         return u
     }
@@ -42,6 +42,8 @@ final class DriverFeatures: ServiceDependent {
                                            withIntermediateDirectories: true,
                                            attributes: nil)
         let n = u.deletingPathExtension().lastPathComponent
+
+        // Init Cargo.
         let ps = CargoProcess2.Parameters(
             location: u,
             command: .initialize(.init(
@@ -51,5 +53,33 @@ final class DriverFeatures: ServiceDependent {
         p.signal += loop
 //        p.transaction += cargoWatch
         cargoProc = p
+
+        // Init project file. (`.eews`)
+        var fs = ProjectFeature.FileTree()
+        let rtidx = ProjectFeature.FileTree.IndexPath.root
+        let rtpath = ProjectItemPath.root
+        func idx(_ comps: [Int]) -> ProjectFeature.FileTree.IndexPath {
+            return ProjectFeature.FileTree.IndexPath(components: comps)
+        }
+        func path(_ comps: [String]) -> ProjectItemPath {
+            return ProjectItemPath(components: comps)
+        }
+        fs[idx([])] = (path([]), .folder)
+        fs[idx([0])] = (path(["Cargo.toml"]), .file)
+        fs[idx([1])] = (path(["src"]), .folder)
+        fs[idx([1,0])] = (path(["src", "main.rs"]), .file)
+
+        let dto = DTOProjectFile(files: fs)
+        let dtou = u.appendingPathComponent(".eews")
+        do {
+            try dto.write(to: dtou)
+        }
+        catch let err {
+            reportIssue("Could not write a project file to a new workspace at `\(u)` due to error `\(err)`.")
+        }
+    }
+
+    private func reportIssue(_ message: String) {
+        REPORT_recoverableWarning(message)
     }
 }

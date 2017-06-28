@@ -73,6 +73,7 @@ final class ProjectFeature: ServiceDependent {
             changes.cast(.files(.insert(.root)))
         }
         signal.cast()
+        restoreProjectFileList()
     }
 
     ///
@@ -120,6 +121,7 @@ final class ProjectFeature: ServiceDependent {
         let m = Tree2Mutation.insert(at)
         changes.cast(.files(m))
         signal.cast()
+        storeProjectFileList()
     }
     ///
     /// Imports a subtree from an external file-system location.
@@ -137,22 +139,7 @@ final class ProjectFeature: ServiceDependent {
         assertMainThread()
         MARK_unimplemented()
     }
-    func deleteFile(at: FileTree.IndexPath) {
-        assertMainThread()
-        guard let (k, _) = state.files[at] else {
-            reportIssue("Cannot find a file or folder at location `\(at)`.")
-            return
-        }
 
-        // Do the job.
-        state.files[at] = nil
-        deleteActualFileImpl(at: k)
-
-        // Cast events.
-        let m = Tree2Mutation.delete(at)
-        changes.cast(.files(m))
-        signal.cast()
-    }
     ///
     /// Delete multiple file nodes at once.
     ///
@@ -181,8 +168,25 @@ final class ProjectFeature: ServiceDependent {
         DEBUG_log("Input locations: \(locations)")
         DEBUG_log("Filtered locations: \(topLocations)")
         for location in topLocations {
-            deleteFile(at: location)
+            deleteOneFileImpl(at: location)
         }
+        signal.cast()
+        storeProjectFileList()
+    }
+    private func deleteOneFileImpl(at: FileTree.IndexPath) {
+        assertMainThread()
+        guard let (k, _) = state.files[at] else {
+            reportIssue("Cannot find a file or folder at location `\(at)`.")
+            return
+        }
+
+        // Do the job.
+        state.files[at] = nil
+        deleteActualFileImpl(at: k)
+
+        // Cast events.
+        let m = Tree2Mutation.delete(at)
+        changes.cast(.files(m))
     }
 
 
@@ -198,6 +202,50 @@ final class ProjectFeature: ServiceDependent {
 
 
 
+
+
+
+
+
+
+    private func storeProjectFileList() {
+        do {
+            guard let loc = state.location?.appendingPathComponent(".eews") else {
+                reportIssue("Cannot locate project.")
+                return
+            }
+            let dto = DTOProjectFile(files: state.files)
+            try dto.write(to: loc)
+        }
+        catch let err {
+            reportIssue("File I/O error: \(err)")
+        }
+    }
+    private func restoreProjectFileList() {
+        do {
+            guard let loc = state.location?.appendingPathComponent(".eews") else {
+                reportIssue("Cannot locate project.")
+                return
+            }
+            let d = try Data(contentsOf: loc)
+            let s = String(data: d, encoding: .utf8) ?? ""
+            let r = DTOProjectFile.decode(s)
+            let dto: DTOProjectFile
+            switch r {
+            case .failure(let issue):
+                reportIssue(issue)
+                return
+            case .success(let newDTO):
+                dto = newDTO
+            }
+            state.files = dto.files
+            changes.cast(.files(.reset))
+            signal.cast()
+        }
+        catch let err {
+            reportIssue("File I/O error: \(err)")
+        }
+    }
 
     ///
     /// Make actual file node on disk.

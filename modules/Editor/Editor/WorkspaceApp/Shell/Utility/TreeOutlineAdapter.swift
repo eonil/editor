@@ -55,46 +55,6 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
     @discardableResult
     func process(_ c: Command) -> OutlineViewCommand {
         switch c {
-        case .reload(let newSnapshot):
-            // Prepare.
-            let oldKeys = Set(idToNodeMapping.keys)
-            let newKeys = Set(newSnapshot.keys)
-            let keysToInsert = newKeys.subtracting(oldKeys)
-            let keysToUpdate = oldKeys.intersection(newKeys)
-            let keysToDelete = oldKeys.subtracting(newKeys)
-            // Update.
-            snapshot = newSnapshot
-            for k in keysToInsert {
-                assert(idToNodeMapping[k] == nil)
-                let v = newSnapshot[k]!
-                let cs = newSnapshot.children(of: k)!
-                let n = OutlineViewNode(k, v, cs)
-                n.adapter = self
-                idToNodeMapping[k] = n
-            }
-            for k in keysToUpdate {
-                assert(idToNodeMapping[k] != nil)
-                let n = idToNodeMapping[k]!
-                let v = newSnapshot[k]!
-                let cs = newSnapshot.children(of: k)!
-                n.key = k
-                n.value = v
-                n.children = cs
-            }
-            for k in keysToDelete {
-                assert(idToNodeMapping[k] != nil)
-                idToNodeMapping[k] = nil
-            }
-            if let root = newSnapshot[Snapshot.IndexPath.root] {
-                let (k, v) = root
-                let n = idToNodeMapping[k]!
-                rootNode = n
-            }
-            else {
-                rootNode = nil
-            }
-            return .reload
-
         case .apply(let newSnapshot, let mutation):
             func makePositionInOutlineView(indexPath: Snapshot.IndexPath) -> (children: IndexSet, parent: OutlineViewNode?) {
                 if indexPath == .root {
@@ -124,6 +84,46 @@ final class TreeOutlineAdapter<K,V> where K: Hashable {
                 pn.children = pcs
             }
             switch mutation {
+            case .reset:
+                // Prepare.
+                let oldKeys = Set(idToNodeMapping.keys)
+                let newKeys = Set(newSnapshot.keys)
+                let keysToInsert = newKeys.subtracting(oldKeys)
+                let keysToUpdate = oldKeys.intersection(newKeys)
+                let keysToDelete = oldKeys.subtracting(newKeys)
+                // Update.
+                snapshot = newSnapshot
+                for k in keysToInsert {
+                    assert(idToNodeMapping[k] == nil)
+                    let v = newSnapshot[k]!
+                    let cs = newSnapshot.children(of: k)!
+                    let n = OutlineViewNode(k, v, cs)
+                    n.adapter = self
+                    idToNodeMapping[k] = n
+                }
+                for k in keysToUpdate {
+                    assert(idToNodeMapping[k] != nil)
+                    let n = idToNodeMapping[k]!
+                    let v = newSnapshot[k]!
+                    let cs = newSnapshot.children(of: k)!
+                    n.key = k
+                    n.value = v
+                    n.children = cs
+                }
+                for k in keysToDelete {
+                    assert(idToNodeMapping[k] != nil)
+                    idToNodeMapping[k] = nil
+                }
+                if let root = newSnapshot[Snapshot.IndexPath.root] {
+                    let (k, v) = root
+                    let n = idToNodeMapping[k]!
+                    rootNode = n
+                }
+                else {
+                    rootNode = nil
+                }
+                return .reload
+
             case .insert(let idxp):
                 let (k, v) = newSnapshot[idxp]!
                 snapshot[idxp] = (k, v)
@@ -174,7 +174,7 @@ extension TreeOutlineAdapter {
     typealias Mutation = Tree2Mutation<K,V>
 
     enum Command {
-        case reload(Snapshot)
+//        case reload(Snapshot)
         case apply(Snapshot, Tree2Mutation<K,V>)
     }
 }

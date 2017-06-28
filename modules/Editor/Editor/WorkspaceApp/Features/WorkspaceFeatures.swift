@@ -20,7 +20,7 @@ final class WorkspaceFeatures: ServiceDependent {
         switch c {
         case .testdriveMakeRandomFiles:
             if project.state.files.count > 0 {
-                project.deleteFile(at: .root)
+                project.deleteFiles(at: [.root])
             }
             typealias IndexPath = ProjectFeature.FileTree.IndexPath
             let r = IndexPath.root

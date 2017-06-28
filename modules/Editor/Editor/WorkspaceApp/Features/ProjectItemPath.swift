@@ -26,6 +26,10 @@ struct ProjectItemPath: Hashable {
         guard components.isEmpty == false else { return .failure("This is root path(`/`). Cannot delete more.") }
         return .success(ProjectItemPath(components: Array(components.dropLast())))
     }
+    func deletingLastComponent1() -> ProjectItemPath {
+        precondition(components.isEmpty == false)
+        return ProjectItemPath(components: Array(components.dropLast()))
+    }
     static func == (_ a: ProjectItemPath, _ b: ProjectItemPath) -> Bool {
         return a.components == b.components
     }

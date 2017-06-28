@@ -60,6 +60,9 @@
 		45641ED21EFF7F9500D4C0D1 /* BashProcess2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45641ED11EFF7F9500D4C0D1 /* BashProcess2.swift */; };
 		45641ED41EFF857E00D4C0D1 /* CargoProcess2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45641ED31EFF857E00D4C0D1 /* CargoProcess2.swift */; };
 		456ABC091F032FD500928B4B /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC081F032FD500928B4B /* functions.swift */; };
+		456ABC231F0364DD00928B4B /* ProjectSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC221F0364DD00928B4B /* ProjectSerialization.swift */; };
+		456ABC261F03770100928B4B /* Tree2.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC251F03770100928B4B /* Tree2.extension.swift */; };
+		456ABC401F03B78F00928B4B /* DTOProjectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */; };
 		457C240E1EF9F2190050203B /* OutlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C240D1EF9F2190050203B /* OutlineViewController.swift */; };
 		457C24101EF9F5720050203B /* OutlineViewNodeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C240F1EF9F5720050203B /* OutlineViewNodeProtocol.swift */; };
 		45D59DD61EFF99EB00408881 /* ReactiveLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D59DD51EFF99EB00408881 /* ReactiveLoop.swift */; };
@@ -211,6 +214,9 @@
 		45641ED11EFF7F9500D4C0D1 /* BashProcess2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashProcess2.swift; sourceTree = "<group>"; };
 		45641ED31EFF857E00D4C0D1 /* CargoProcess2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoProcess2.swift; sourceTree = "<group>"; };
 		456ABC081F032FD500928B4B /* functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
+		456ABC221F0364DD00928B4B /* ProjectSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSerialization.swift; sourceTree = "<group>"; };
+		456ABC251F03770100928B4B /* Tree2.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree2.extension.swift; sourceTree = "<group>"; };
+		456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTOProjectFile.swift; sourceTree = "<group>"; };
 		457C240D1EF9F2190050203B /* OutlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineViewController.swift; sourceTree = "<group>"; };
 		457C240F1EF9F5720050203B /* OutlineViewNodeProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineViewNodeProtocol.swift; sourceTree = "<group>"; };
 		45D59DD51EFF99EB00408881 /* ReactiveLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveLoop.swift; sourceTree = "<group>"; };
@@ -323,6 +329,7 @@
 				45641EC61EFF420200D4C0D1 /* FSM.swift */,
 				45EA45B51EF22F6F0024D3B1 /* DataTypes */,
 				4529BFAF1EF2290D006A9A39 /* Tree2.swift */,
+				456ABC251F03770100928B4B /* Tree2.extension.swift */,
 				45D59DD51EFF99EB00408881 /* ReactiveLoop.swift */,
 				454F77A41EFE964300317763 /* ManualLoop.swift */,
 				454843D71EFE5B1400D53763 /* Relay.swift */,
@@ -431,6 +438,8 @@
 				454843C91EFE56C200D53763 /* DialogueFeature.swift */,
 				45EA45991EF22E450024D3B1 /* ProjectFeature.swift */,
 				454843C31EFE4B5900D53763 /* ProjectSelection.swift */,
+				456ABC221F0364DD00928B4B /* ProjectSerialization.swift */,
+				456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */,
 				4552B8151EFBAC0200E529EE /* ProjectItemPath.swift */,
 				45EA45941EF22E450024D3B1 /* AutoCompletionFeature.swift */,
 				45EA459A1EF22E450024D3B1 /* SceneFeature.swift */,
@@ -644,6 +653,7 @@
 				4555A4051EFFC33400FCB88E /* MutableBox.swift in Sources */,
 				45FB54621EF70FF700522E83 /* TreeView.swift in Sources */,
 				45EA45C11EF231F00024D3B1 /* MARK_unimplemented.swift in Sources */,
+				456ABC231F0364DD00928B4B /* ProjectSerialization.swift in Sources */,
 				45EA459D1EF22E450024D3B1 /* BuildFeature.swift in Sources */,
 				45EA45A21EF22E450024D3B1 /* SceneFeature.swift in Sources */,
 				45EA45EE1EF3B0A20024D3B1 /* RationalInt.swift in Sources */,
@@ -684,6 +694,7 @@
 				45EA45791EF22A7F0024D3B1 /* WorkspaceApp.swift in Sources */,
 				4555A41A1F01AFCF00FCB88E /* TransactionalRelay.swift in Sources */,
 				45FB54591EF679BB00522E83 /* REPORT_missingIBOutletViewAndFatalError.swift in Sources */,
+				456ABC261F03770100928B4B /* Tree2.extension.swift in Sources */,
 				4555A4011EFFBAEB00FCB88E /* Function.swift in Sources */,
 				454843CA1EFE56C200D53763 /* DialogueFeature.swift in Sources */,
 				45EA45A01EF22E450024D3B1 /* NavigationFeature.swift in Sources */,
@@ -692,6 +703,7 @@
 				45EA45C01EF231F00024D3B1 /* MARK_poorlyImplemented().swift in Sources */,
 				4531E1EA1F02834500A6DB2A /* FileNavigatorMenuCommand.swift in Sources */,
 				454843D61EFE59C200D53763 /* MainMenu2State.swift in Sources */,
+				456ABC401F03B78F00928B4B /* DTOProjectFile.swift in Sources */,
 				45EA45A31EF22E450024D3B1 /* WorkspaceFeatures.swift in Sources */,
 				45FB54651EF7104F00522E83 /* TreeViewController.swift in Sources */,
 				454F77A51EFE964300317763 /* ManualLoop.swift in Sources */,
