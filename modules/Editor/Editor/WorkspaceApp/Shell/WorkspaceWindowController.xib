@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="WorkspaceWindowController" customModule="Editor" customModuleProvider="target">
             <connections>
+                <outlet property="consolePaneView" destination="LrW-kH-ZoZ" id="Rgl-Hc-GQY"/>
                 <outlet property="navigationPaneView" destination="l2T-N9-gsU" id="FJL-7F-EIW"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="ir8-iQ-ktd"/>
             </connections>
@@ -27,15 +28,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="585" height="337"/>
                         <subviews>
                             <customView fixedFrame="YES" id="l2T-N9-gsU">
-                                <rect key="frame" x="0.0" y="0.0" width="163" height="337"/>
+                                <rect key="frame" x="0.0" y="0.0" width="217.5" height="337"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </customView>
-                            <customView fixedFrame="YES" id="iwf-nj-azQ">
-                                <rect key="frame" x="164" y="0.0" width="309" height="337"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                            </customView>
+                            <splitView fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="thin" id="xa1-XV-KDK">
+                                <rect key="frame" x="218.5" y="0.0" width="217.5" height="337"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <customView fixedFrame="YES" id="Bv9-Wc-8Lv">
+                                        <rect key="frame" x="0.0" y="0.0" width="217.5" height="251.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </customView>
+                                    <customView fixedFrame="YES" id="LrW-kH-ZoZ">
+                                        <rect key="frame" x="0.0" y="252.5" width="217.5" height="84.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </customView>
+                                </subviews>
+                                <holdingPriorities>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                </holdingPriorities>
+                            </splitView>
                             <customView fixedFrame="YES" id="3Zb-zQ-WB5">
-                                <rect key="frame" x="474" y="0.0" width="111" height="337"/>
+                                <rect key="frame" x="437" y="0.0" width="148" height="337"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </customView>
                         </subviews>

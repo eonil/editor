@@ -24,8 +24,9 @@ final class ProjectFeature: ServiceDependent {
     ///
     let signal = Relay<()>()
     ///
-    /// Notifies a detailed information of where 
-    /// has been changed in state.
+    /// Notifies a detailed information of "what"
+    /// has been changed in state. Optionally
+    /// can contain "how" it's been changed.
     /// This provides precise timing. You get the
     /// signals at exactly when the change happen.
     /// This DOES NOT provide state consistency.
@@ -37,7 +38,7 @@ final class ProjectFeature: ServiceDependent {
     /// This is an intentional design because
     /// "signal" is notification of "timing",
     /// not data. If you want data-based 
-    /// signaling it must be asynchronous, and
+    /// signaling, it must be asynchronous, and
     /// that is not how this app is architected.
     /// FRP has been avoided intentionally because
     /// it requires forgetting precise resource

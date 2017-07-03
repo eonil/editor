@@ -24,19 +24,19 @@ final class WorkspaceShell {
         }
     }
 
-    ///
-    /// Idempotent.
-    /// No-op if there's no feature.
-    ///
-    private func connectToFeatures() {
-        guard let features = features else { return }
-    }
-
-    ///
-    /// Idempotent.
-    /// No-op if there's no feature.
-    ///
-    private func disconnectFromFeatures() {
-        guard let features = features else { return }
-    }
+//    ///
+//    /// Idempotent.
+//    /// No-op if there's no feature.
+//    ///
+//    private func connectToFeatures() {
+//        guard let features = features else { return }
+//    }
+//
+//    ///
+//    /// Idempotent.
+//    /// No-op if there's no feature.
+//    ///
+//    private func disconnectFromFeatures() {
+//        guard let features = features else { return }
+//    }
 }

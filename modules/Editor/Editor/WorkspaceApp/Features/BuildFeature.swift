@@ -7,7 +7,9 @@
 //
 
 final class BuildFeature: ServiceDependent {
-    private let loop = ManualLoop()
+    let signal = Relay<()>()
+    private(set) var production = Product()
+    private let loop = ReactiveLoop()
     private let watch = Relay<()>()
     private var project = ProjectFeature.State()
     private var cmdq = [Command]()
@@ -15,11 +17,20 @@ final class BuildFeature: ServiceDependent {
 
     override init() {
         super.init()
+        watch += loop
         loop.step = { [weak self] in self?.step() }
-        watch.delegate = { [weak self] in self?.loop.signal() }
     }
     private func step() {
-        exec = (exec?.state == .complete) ? nil : exec
+        if let exec = exec {
+            production.reports.append(contentsOf: exec.production.reports)
+            production.issues.append(contentsOf: exec.production.issues)
+            exec.clear()
+            signal.cast()
+        }
+        if exec?.state == .complete {
+            exec = nil
+            signal.cast()
+        }
 
         guard exec == nil else { return } // Wait until done.
         while let cmd = cmdq.removeFirstIfAvailable() {
@@ -30,6 +41,7 @@ final class BuildFeature: ServiceDependent {
                     location: loc,
                     command: .clean)
                 exec = services.cargo.spawn(ps)
+                signal.cast()
 
             case .cleanTarget(let t):
                 MARK_unimplemented()
@@ -43,6 +55,7 @@ final class BuildFeature: ServiceDependent {
                 loop.signal()
                 proc.signal += watch
                 exec = proc
+                signal.cast()
 
             case .buildTarget(let t):
                 MARK_unimplemented()
@@ -52,17 +65,20 @@ final class BuildFeature: ServiceDependent {
             }
         }
     }
-
-
+    func process(_ command: Command) {
+        cmdq.append(command)
+        loop.signal()
+    }
 
     func setProjectState(_ newProjectState: ProjectFeature.State) {
         project = newProjectState
         loop.signal()
     }
-
-
-    func process(_ command: Command) {
-        cmdq.append(command)
+    ///
+    /// Clears any production.
+    ///
+    func clear() {
+        production = Product()
         loop.signal()
     }
 }
@@ -74,4 +90,5 @@ extension BuildFeature {
         case cleanTarget(Target)
         case cancel
     }
+    typealias Product = CargoProcess2.Product
 }

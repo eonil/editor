@@ -1,0 +1,100 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4635F48624E6C9FA8E74FC196050F32737C9F216",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "843C63D4373CDFCC6DD00FE91A96228349AFB08E" : 9223372036854775807,
+    "F23EFC616C2E89058D8C79A9E50E60A8CED264EB" : 9223372036854775807,
+    "05D6826B0162543BD57EFC4EE6354EB49FD59438" : 9223372036854775807,
+    "EF756C69F254CD0C22918CA6EACA0E6F835DB0F5" : 9223372036854775807,
+    "4635F48624E6C9FA8E74FC196050F32737C9F216" : 9223372036854775807,
+    "540A6E0D17A72ABE15696C5C0C4812192B593E57" : 9223372036854775807,
+    "48B9C1DE76C8BEA5F768021CB65ADA820F587B93" : 9223372036854775807,
+    "6C7471C92E88044E76FD4030CC9A053817FA9390" : 9223372036854775807,
+    "C0E0E625FC77B9C174CCD9E6FF0E1E2295CAA407" : 9223372036854775807,
+    "82C337F498EF75A9D09358BE1EEADDF1DB1884F2" : 9223372036854775807,
+    "4CCC0B5B1BA8B36127027EA53C2A4498B9432F32" : 9223372036854775807,
+    "D14DA015EEC74DE9B8B93F09005745F7B4080000" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "074E7F0B-1F98-4ED2-89E5-E1B8B8D04E0A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "843C63D4373CDFCC6DD00FE91A96228349AFB08E" : "editor6-trial\/submodules\/toolbox.swift\/",
+    "F23EFC616C2E89058D8C79A9E50E60A8CED264EB" : "editor6-trial\/submodules\/Buckets-Swift\/",
+    "05D6826B0162543BD57EFC4EE6354EB49FD59438" : "editor6-trial\/submodules\/BTree\/",
+    "EF756C69F254CD0C22918CA6EACA0E6F835DB0F5" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/Flow-0.0.3\/",
+    "4635F48624E6C9FA8E74FC196050F32737C9F216" : "editor6-trial\/",
+    "540A6E0D17A72ABE15696C5C0C4812192B593E57" : "editor6-trial\/submodules\/pco.swift\/",
+    "48B9C1DE76C8BEA5F768021CB65ADA820F587B93" : "editor6-trial\/submodules\/LLDBWrapper\/",
+    "6C7471C92E88044E76FD4030CC9A053817FA9390" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/FSEventsUnofficialWrapper-0.0.0\/",
+    "C0E0E625FC77B9C174CCD9E6FF0E1E2295CAA407" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/Reftable-0.0.0\/",
+    "82C337F498EF75A9D09358BE1EEADDF1DB1884F2" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/EonilGCDActor-0.0.5\/",
+    "4CCC0B5B1BA8B36127027EA53C2A4498B9432F32" : "editor6-trial\/submodules\/json.swift\/",
+    "D14DA015EEC74DE9B8B93F09005745F7B4080000" : "editor6-trial\/packages\/Editor6DepPack\/Packages\/EonilFlow4-0.0.4\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Editor6",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Editor6.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/lorentey\/BTree",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "05D6826B0162543BD57EFC4EE6354EB49FD59438"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/editor",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4635F48624E6C9FA8E74FC196050F32737C9F216"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/LLDBWrapper",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "48B9C1DE76C8BEA5F768021CB65ADA820F587B93"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/json.swift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4CCC0B5B1BA8B36127027EA53C2A4498B9432F32"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/pco.swift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "540A6E0D17A72ABE15696C5C0C4812192B593E57"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/fsevents-unofficial-wrapper.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6C7471C92E88044E76FD4030CC9A053817FA9390"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/gcd-actor.swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "82C337F498EF75A9D09358BE1EEADDF1DB1884F2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/toolbox.swift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "843C63D4373CDFCC6DD00FE91A96228349AFB08E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/reftable.swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C0E0E625FC77B9C174CCD9E6FF0E1E2295CAA407"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/flow4.swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D14DA015EEC74DE9B8B93F09005745F7B4080000"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/eonil\/flow.swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EF756C69F254CD0C22918CA6EACA0E6F835DB0F5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mauriciosantos\/Buckets-Swift",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F23EFC616C2E89058D8C79A9E50E60A8CED264EB"
+    }
+  ]
+}

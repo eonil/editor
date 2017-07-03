@@ -12,11 +12,12 @@ final class CargoProcess2 {
     let parameters: Parameters
     let signal = Relay<()>()
     /// Provides detailed information of what's been changed.
-    let transaction = Relay<Transaction>()
+    let changes = Relay<Change>()
     private let loop = ReactiveLoop()
     private let bash = BashProcess2(login: true)
     private(set) var state = State.running
     private(set) var props = Props()
+    private(set) var production = Product()
     private var outlb = LineBuilder()
     private var errlb = LineBuilder()
 
@@ -47,47 +48,56 @@ final class CargoProcess2 {
             for d in bash.takeOutStandardOutput() {
                 switch outlb.process(d) {
                 case .failure(let issue):
-                    let c = props.issues.count
-                    props.issues.append(.cannotDecodeStandardOutput(issue))
+                    let c = production.issues.count
+                    production.issues.append(.cannotDecodeStandardOutput(issue))
+                    changes.cast(.issues(.insert(c..<c+1)))
                     signal.cast()
-                    transaction.cast(.issues(.insert(c..<c+1)))
+
                 case .success(let lines):
                     DEBUG_log("Bash STDOUT:\n\(lines)")
-                    let c = props.issues.count
-                    props.issues.append(.unexpectedStandardOutput(lines.joined()))
+                    let c = production.issues.count
+                    production.issues.append(.unexpectedStandardOutput(lines.joined()))
+                    changes.cast(.issues(.insert(c..<c+1)))
                     signal.cast()
-                    transaction.cast(.issues(.insert(c..<c+1)))
                 }
             }
             for d in bash.takeOutStandardError() {
                 switch errlb.process(d) {
                 case .failure(let issue):
-                    let c = props.issues.count
-                    props.issues.append(.cannotDecodeStandardError(issue))
+                    let c = production.issues.count
+                    production.issues.append(.cannotDecodeStandardError(issue))
+                    changes.cast(.issues(.insert(c..<c+1)))
                     signal.cast()
-                    transaction.cast(.issues(.insert(c..<c+1)))
+
                 case .success(let lines):
                     DEBUG_log("Bash STDERR:\n\(lines)")
-                    switch parameters.command {
-                    case .initialize:
-                        // For any output, it's an error.
-                        let msg = lines.joined(separator: "\n")
-                        let c = props.reports.count
-                        props.reports.append(.cargoErr(msg))
-                        signal.cast()
-                        transaction.cast(.reports(.insert(c..<c+1)))
+                    // For any output, it's an error.
+                    let msg = lines.joined(separator: "\n")
+                    let c = production.reports.count
+                    production.reports.append(.cargoErr(msg))
+                    changes.cast(.reports(.insert(c..<c+1)))
+                    signal.cast()
 
-                    case .clean:
-                        DEBUG_log("Receive STDERR: \(lines)")
-                        MARK_unimplementedButSkipForNow()
-                        
-                    case .build:
-                        DEBUG_log("Receive STDERR: \(lines)")
-                        MARK_unimplementedButSkipForNow()
-
-                    case .run:
-                        MARK_unimplemented()
-                    }
+//                    switch parameters.command {
+//                    case .initialize:
+//                        // For any output, it's an error.
+//                        let msg = lines.joined(separator: "\n")
+//                        let c = production.reports.count
+//                        production.reports.append(.cargoErr(msg))
+//                        changes.cast(.reports(.insert(c..<c+1)))
+//                        signal.cast()
+//
+//                    case .clean:
+//                        DEBUG_log("Receive STDERR: \(lines)")
+//                        MARK_unimplementedButSkipForNow()
+//                        
+//                    case .build:
+//                        DEBUG_log("Receive STDERR: \(lines)")
+//                        MARK_unimplementedButSkipForNow()
+//
+//                    case .run:
+//                        MARK_unimplemented()
+//                    }
                 }
             }
             bash.clearStandardError()
@@ -95,9 +105,12 @@ final class CargoProcess2 {
             case .running: break
             case .complete(let exitCode):
                 state = .complete
+                changes.cast(.state)
                 signal.cast()
-                transaction.cast(.state)
-                guard exitCode == 0 else { return props.issues.append(.bsahSubprocessExitWithNonZeroCode(exitCode)) }
+                guard exitCode == 0 else {
+                    production.issues.append(.bsahSubprocessExitWithNonZeroCode(exitCode))
+                    return
+                }
             }
 
         case .complete:
@@ -112,8 +125,14 @@ final class CargoProcess2 {
         case .secondary:
             bash.queue(.setSecondary)
         }
+        changes.cast(.priority)
         signal.cast()
-        transaction.cast(.priority)
+    }
+    ///
+    /// Clears productions.
+    ///
+    func clear() {
+        production = Product()
     }
 }
 extension CargoProcess2 {
@@ -141,6 +160,8 @@ extension CargoProcess2 {
     }
     struct Props {
         var priority = Priority.secondary
+    }
+    struct Product {
         var reports = [Report]()
         var issues = [Issue]()
     }
@@ -159,7 +180,7 @@ extension CargoProcess2 {
         case rustCompWarn
         case rustCompErr
     }
-    enum Transaction {
+    enum Change {
         case state
         case priority
         case reports(ArrayMutation<Report>)

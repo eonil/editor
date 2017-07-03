@@ -8,7 +8,6 @@
 
 import AppKit
 import EonilSignet
-import Editor6FileTreeUI
 
 final class FileNavigatorViewController: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate {
     private typealias TOA = TreeOutlineAdapter<ProjectFeature.Path, ProjectFeature.NodeKind>

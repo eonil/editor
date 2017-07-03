@@ -7,8 +7,8 @@
 //
 
 import Foundation
+import AppKit
 import EonilToolbox
-import Editor6Common
 
 public struct MainMenu2State {
     public typealias KeyEquivalentCombination = (keyEquivalentModifierMask: NSEventModifierFlags, keyEquivelent: Character)

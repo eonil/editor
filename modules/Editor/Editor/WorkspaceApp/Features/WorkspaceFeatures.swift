@@ -23,13 +23,12 @@ final class WorkspaceFeatures: ServiceDependent {
         loop.step = { [weak self] in self?.step() }
         watch.delegate = { [weak self] in self?.loop.signal() }
         project.signal += watch
+        build.signal += watch
     }
     private func step() {
+        log.process(build.production)
+        build.clear()
         build.setProjectState(project.state)
-    }
-
-    private func processProjectSignal() {
-
     }
 
     func process(_ c: MainMenuItemID) {
