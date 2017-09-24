@@ -6,7 +6,7 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-final class NavigationFeature: ServiceDependent {
+final class NavigationFeature: ServicesDependent {
     private(set) var state = State()
 }
 extension NavigationFeature {

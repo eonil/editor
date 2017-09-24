@@ -54,9 +54,21 @@ final class CargoProcess2 {
                     signal.cast()
 
                 case .success(let lines):
+                    guard lines.isEmpty == false else { break }
                     DEBUG_log("Bash STDOUT:\n\(lines)")
                     let c = production.issues.count
-                    production.issues.append(.unexpectedStandardOutput(lines.joined()))
+
+                    do {
+                        let s = lines.joined()
+                        let m = try CargoDTO.Message.from(jsonCode: s)
+                        production.reports.append(.cargoMessage(m))
+                    }
+                    catch let err {
+                        assert(false)
+                        REPORT_recoverableWarning("\(err)")
+                    }
+
+//                    production.issues.append(.unexpectedStandardOutput(lines.joined()))
                     changes.cast(.issues(.insert(c..<c+1)))
                     signal.cast()
                 }
@@ -176,6 +188,7 @@ extension CargoProcess2 {
     ///
     enum Report {
         case info(String)
+        case cargoMessage(CargoDTO.Message)
         case cargoErr(String)
         case rustCompWarn
         case rustCompErr

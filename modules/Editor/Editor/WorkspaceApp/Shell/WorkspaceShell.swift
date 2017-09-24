@@ -6,22 +6,28 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-final class WorkspaceShell {
-    let windowController = WorkspaceWindowController()
+import AppKit
 
+final class WorkspaceShell {
+    private typealias RS = Resources.Storyboard
+
+    let main = NSWindowController(window: makeWindow())
+    private let division = RS.division.instantiate()
+    
     ///
     /// Designate feature to provides actual functionalities.
     /// Settings this to `nil` makes every user interaction
     /// no-op.
     ///
     weak var features: WorkspaceFeatures? {
-        willSet {
-//            disconnectFromFeatures()
-        }
         didSet {
-//            connectToFeatures()
-            windowController.features = features
+            division.features = features
         }
+    }
+
+    init() {
+        main.contentViewController = division
+        main.window?.makeKeyAndOrderFront(self)
     }
 
 //    ///
@@ -39,4 +45,10 @@ final class WorkspaceShell {
 //    private func disconnectFromFeatures() {
 //        guard let features = features else { return }
 //    }
+}
+
+private func makeWindow() -> NSWindow {
+    let w = NSWindow()
+    w.styleMask.formUnion(.resizable)
+    return w
 }

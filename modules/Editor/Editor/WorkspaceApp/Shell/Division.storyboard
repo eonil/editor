@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="sjR-e9-Azf">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--DivisionVC-->
+        <scene sceneID="pr5-5l-TE9">
+            <objects>
+                <customObject id="mq7-Zg-6Bl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController id="sjR-e9-Azf" customClass="DivisionVC" customModule="Editor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="01X-6d-f7o">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="363"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <splitView arrangesAllSubviews="NO" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B66-gZ-Rtf">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="363"/>
+                                <subviews>
+                                    <customView fixedFrame="YES" id="Wi5-6I-SW9">
+                                        <rect key="frame" x="0.0" y="0.0" width="179" height="363"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    </customView>
+                                    <splitView fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="thin" id="V7t-eo-d2H">
+                                        <rect key="frame" x="180" y="0.0" width="178" height="363"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <customView id="D0M-ey-2uO">
+                                                <rect key="frame" x="0.0" y="0.0" width="178" height="181"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="o2c-nf-UmO"/>
+                                                </constraints>
+                                            </customView>
+                                            <customView id="ysH-5Y-3BJ">
+                                                <rect key="frame" x="0.0" y="182" width="178" height="181"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="JFQ-zk-oud"/>
+                                                </constraints>
+                                            </customView>
+                                        </subviews>
+                                        <holdingPriorities>
+                                            <real value="250"/>
+                                            <real value="250"/>
+                                        </holdingPriorities>
+                                    </splitView>
+                                    <customView fixedFrame="YES" id="PgI-27-e0l">
+                                        <rect key="frame" x="359" y="0.0" width="121" height="363"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </customView>
+                                </subviews>
+                                <holdingPriorities>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                    <real value="250"/>
+                                </holdingPriorities>
+                            </splitView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="B66-gZ-Rtf" secondAttribute="trailing" id="3Kp-eh-wft"/>
+                            <constraint firstItem="B66-gZ-Rtf" firstAttribute="leading" secondItem="01X-6d-f7o" secondAttribute="leading" id="Gux-sF-Gdz"/>
+                            <constraint firstItem="B66-gZ-Rtf" firstAttribute="top" secondItem="01X-6d-f7o" secondAttribute="top" id="M9E-M2-6rl"/>
+                            <constraint firstAttribute="bottom" secondItem="B66-gZ-Rtf" secondAttribute="bottom" id="nZM-uL-6rk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="centerBottomPaneContainer" destination="ysH-5Y-3BJ" id="Teq-S6-aRg"/>
+                        <outlet property="centerTopPaneContainer" destination="D0M-ey-2uO" id="XyU-4b-ncB"/>
+                        <outlet property="leftPaneContainer" destination="Wi5-6I-SW9" id="40Y-0i-g4W"/>
+                        <outlet property="rightPaneContainer" destination="PgI-27-e0l" id="vr8-vz-9vo"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-330" y="625.5"/>
+        </scene>
+    </scenes>
+</document>

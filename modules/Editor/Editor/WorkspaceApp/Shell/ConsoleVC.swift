@@ -1,19 +1,15 @@
 //
-//  Console.swift
+//  ConsoleVC.swift
 //  Editor
 //
-//  Created by Hoon H. on 2017/06/29.
-//  Copyright © 2017 Eonil. All rights reserved.
+//  Created by Hoon H. on 2017/09/24.
+//Copyright © 2017 Eonil. All rights reserved.
 //
 
 import AppKit
 
-///
-/// For now, this VC provides only output, no input.
-///
-final class ConsoleViewController: NSViewController {
+final class ConsoleVC: NSViewController, WorkspaceFeatureDependent {
     private let logChangeWatch = Relay<LogFeature.Change>()
-    @IBOutlet weak var textView: NSTextView?
 
     weak var features: WorkspaceFeatures? {
         didSet {
@@ -36,7 +32,7 @@ final class ConsoleViewController: NSViewController {
             case .insert(let r):
                 let items = features.log.production.items[r]
                 let addition = items.map({ "\($0)\n" }).joined()
-                textView?.string = (textView?.string ?? "") + addition
+                codeTextView?.string = (codeTextView?.string ?? "") + addition
             case .update(_):
                 MARK_unimplemented()
             case .delete(_):
@@ -48,6 +44,10 @@ final class ConsoleViewController: NSViewController {
     private func resetRendering() {
         DEBUG_log("Reset logs: \(features?.log.production.items ?? [])")
         let newText = features?.log.production.items.map({ "\($0)\n" }).joined()
-        textView?.string = newText
+        codeTextView?.string = newText ?? "" // `NSTextView` does not accept nil for valid input. Bullshit.
     }
+
+
+
+    @IBOutlet private weak var codeTextView: CodeTextView2?
 }

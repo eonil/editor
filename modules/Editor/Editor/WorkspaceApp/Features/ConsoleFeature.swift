@@ -14,7 +14,7 @@
 ///
 ///
 ///
-final class ConsoleFeature: ServiceDependent {
+final class ConsoleFeature: ServicesDependent {
     let signal = Relay<()>()
     private(set) var state = State()
 }

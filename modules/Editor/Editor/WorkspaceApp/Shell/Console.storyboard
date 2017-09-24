@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="z3z-zi-NRd">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ConsoleVC-->
+        <scene sceneID="hxz-ew-9lb">
+            <objects>
+                <viewController id="z3z-zi-NRd" customClass="ConsoleVC" customModule="Editor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="enm-Kd-oGd">
+                        <rect key="frame" x="0.0" y="0.0" width="236" height="247"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="F2L-jc-vzI" customClass="CodeTextView2" customModule="Editor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="236" height="247"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="F2L-jc-vzI" firstAttribute="top" secondItem="enm-Kd-oGd" secondAttribute="top" id="56E-Da-ynB"/>
+                            <constraint firstAttribute="bottom" secondItem="F2L-jc-vzI" secondAttribute="bottom" id="Wbu-8v-KYe"/>
+                            <constraint firstItem="F2L-jc-vzI" firstAttribute="leading" secondItem="enm-Kd-oGd" secondAttribute="leading" id="dmV-Eo-vWj"/>
+                            <constraint firstAttribute="trailing" secondItem="F2L-jc-vzI" secondAttribute="trailing" id="yMx-5J-iS2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="codeTextView" destination="F2L-jc-vzI" id="WEZ-ud-Deb"/>
+                    </connections>
+                </viewController>
+                <customObject id="gaO-1E-Rjp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="19" y="-161.5"/>
+        </scene>
+    </scenes>
+</document>

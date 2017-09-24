@@ -9,156 +9,228 @@
 import Foundation
 import EonilJSON
 
-public protocol CargoDTOMessage {
+protocol CargoDTOMessageProtocol {
     ///
     /// Says type of this message.
     ///
-    var reason: String { get set }
+    var reason: CargoDTO.Reason { get set }
 }
 ///
-/// Uses 0.16.0 source code.
-/// https://github.com/rust-lang/cargo/tree/6e0c18cccc8b0c06fba8a8d76486f81a792fb420
+/// Uses 0.21.1 source code.
+/// https://github.com/rust-lang/cargo/tree/6084a2ba03aaa73794e6b86199e463ea6df290fe
 ///
-public enum CargoDTO {
-    ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/util/machine_message.rs#L21
-    ///
-    public struct FromCompiler: CargoDTOMessage {
-        public var reason: String
-//        public var package_id: PackageId
-        public var package_id: String // Hotfixed. Unexpected string type.
-        public var target: Target
-        public var message: JSON
+enum CargoDTO {
+    enum Message: Decodable {
+        case compilerMessage(FromCompiler)
+        case compilerArtifact(Artifact)
+        case buildScript(BuildScript)
+
+        init(from decoder: Decoder) throws {
+            enum Field: String, CodingKey {
+                case reason
+            }
+            let container = try decoder.container(keyedBy: Field.self)
+            let rawReason = try container.decode(String.self, forKey: Field.reason)
+            guard let reason = Reason(rawValue: rawReason) else {
+                throw DecodingError.dataCorruptedError(forKey: Field.reason, in: container, debugDescription: "Unknown `reason` value: \(rawReason)")
+            }
+            switch reason {
+            case .compiler_message:
+                self = .compilerMessage(try FromCompiler(from: decoder))
+            case .compiler_artifact:
+                self = .compilerArtifact(try Artifact(from: decoder))
+            case .build_script_executed:
+                self = .buildScript(try BuildScript(from: decoder))
+            }
+        }
+    }
+
+    enum Reason: String, Decodable {
+        case compiler_message = "compiler-message"
+        case compiler_artifact = "compiler-artifact"
+        case build_script_executed = "build-script-executed"
     }
 
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/util/machine_message.rs#L34
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/util/machine_message.rs#L17
     ///
-    public struct Artifact: CargoDTOMessage {
-        public var reason: String
-//        var package_id: PackageId
-        public var package_id: String // Hotfixed. Unexpected string type.
-        public var target: Target
-        public var profile: Profile
-        public var feature: [String]
-        public var filenames: [String]
+    struct FromCompiler: CargoDTOMessageProtocol, Decodable {
+        var reason: Reason
+        var package_id: PackageId
+        var target: Target
+        var message: RustCompilerDTO.Diagnostic
     }
 
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/util/machine_message.rs#L49
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/util/machine_message.rs#L30
     ///
-    struct BuildScript: CargoDTOMessage {
-        var reason: String
-//        var package_id: PackageId
-        var package_id: String // Hotfixed. Unexpected string type.
+    struct Artifact: CargoDTOMessageProtocol, Decodable {
+        var reason: Reason
+        var package_id: PackageId
+        var target: Target
+        var profile: Profile
+        var features: [String]
+        var filenames: [String]
+        var fresh: Bool
+    }
+
+    ///
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/util/machine_message.rs#L49
+    ///
+    struct BuildScript: CargoDTOMessageProtocol, Decodable {
+        var reason: Reason
+        var package_id: PackageId
         var linked_libs: [String]
         var linked_paths: [String]
         var cfgs: [String]
     }
 
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/package_id.rs#L17
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/package_id.rs#L17
     ///
-    struct PackageId {
-        var inner: PackageIdInner
-    }
+    typealias PackageId = String
+//    struct PackageId {
+//        var inner: PackageIdInner
+//    }
 
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/package_id.rs#L22
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/package_id.rs#L22
     ///
-    struct PackageIdInner {
+    struct PackageIdInner: Decodable {
         var name: String
         var version: Version
         var source_id: SourceId
     }
 
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/manifest.rs#L178
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/manifest.rs#L178
     ///
-    public struct Target {
-        public var kind: TargetKind
-        public var name: String
+    public struct Target: Decodable {
+        var kind: TargetKind
+        var name: String
         /// This was `PathBuf`, but I couldn't find the definition...
-        public var src_path: String
-        public var tested: Bool? // Hotfix due to missing field with no good reason.
-        public var benched: Bool? // Hotfix due to missing field with no good reason.
-        public var doc: Bool? // Hotfix due to missing field with no good reason.
-        public var doctest: Bool? // Hotfix due to missing field with no good reason.
-        public var harness: Bool? // Hotfix due to missing field with no good reason.
-        public var for_host: Bool? // Hotfix due to missing field with no good reason.
+        var src_path: String
+        var tested: Bool? // Hotfix due to missing field with no good reason.
+        var benched: Bool? // Hotfix due to missing field with no good reason.
+        var doc: Bool? // Hotfix due to missing field with no good reason.
+        var doctest: Bool? // Hotfix due to missing field with no good reason.
+        var harness: Bool? // Hotfix due to missing field with no good reason.
+        var for_host: Bool? // Hotfix due to missing field with no good reason.
     }
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/manifest.rs#L102
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/manifest.rs#L102
     ///
-    public enum TargetKind {
-        case Lib([LibKind])
-        case Bin
-        case Test
-        case Bench
-        case Example
-        case CustomBuild
+    public enum TargetKind: Decodable {
+        case lib([LibKind])
+        case bin
+        case test
+        case bench
+        case example
+        case customBuild
+
+        public init(from decoder: Decoder) throws {
+            var c = try decoder.unkeyedContainer()
+            let v = try c.decode(String.self)
+            self = try {
+                switch v {
+                case "lib":
+                    var ks = [LibKind]()
+                    while c.isAtEnd == false {
+                        let k = try c.decode(LibKind.self)
+                        ks.append(k)
+                    }
+                    return .lib(ks)
+                case "bin":         return .bin
+                case "test":        return .test
+                case "bench":       return .bench
+                case "example":     return .example
+                case "customBuild": return .customBuild
+                default:
+                    throw DecodingError.dataCorruptedError(in: c, debugDescription: "Unknown enum case: \(v)")
+                }
+            }()
+        }
     }
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/manifest.rs#L60
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/manifest.rs#L75
     ///
-    public enum LibKind {
+    public enum LibKind: Decodable {
         case Lib
         case Rlib
         case Dylib
         case ProcMacro
         case Other(String)
+
+        public init(from decoder: Decoder) throws {
+            MARK_unimplemented()
+        }
     }
 
     ///
-    /// https://github.com/rust-lang/cargo/blob/be0b4992aa6c25a58720f28f48c4fa3a34e5790d/src/cargo/core/manifest.rs#L153
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/manifest.rs#L153
     ///
-    public struct Profile {
-        public var opt_level: String
-        public var debuginfo: UInt32
-        public var debug_assertions: Bool
-        public var test: Bool
+    public struct Profile: Decodable {
+        var opt_level: String
+        var debuginfo: UInt32
+        var debug_assertions: Bool
+        var test: Bool
     }
 
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/source.rs#L102
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/source.rs#L102
     ///
-    public struct SourceId {
-        public var inner: SourceIdInner
+    public struct SourceId: Decodable {
+        var inner: SourceIdInner
     }
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/source.rs#L107
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/source.rs#L107
     ///
-    public struct SourceIdInner {
-        public var url: URL
-        public var canonical_url: URL
-        public var kind: Kind
-        public var precise: String?
+    public struct SourceIdInner: Decodable {
+        var url: URL
+        var canonical_url: URL
+        var kind: Kind
+        var precise: String?
     }
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/source.rs#L80
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/source.rs#L80
     ///
-    public enum Kind {
+    enum Kind: Decodable {
         case Git(GitReference)
         case Path
         case Registry
         case LocalRegistry
         case Directory
+
+        init(from decoder: Decoder) throws {
+            MARK_unimplemented()
+        }
     }
     ///
-    /// https://github.com/rust-lang/cargo/blob/6e0c18cccc8b0c06fba8a8d76486f81a792fb420/src/cargo/core/source.rs#L94
+    /// https://github.com/rust-lang/cargo/blob/6084a2ba03aaa73794e6b86199e463ea6df290fe/src/cargo/core/source.rs#L94
     ///
-    public enum GitReference {
+    enum GitReference: Decodable {
         case Tag(String)
         case Branch(String)
         case Rev(String)
+
+        init(from decoder: Decoder) throws {
+            MARK_unimplemented()
+        }
     }
 
-    public enum Message {
-        case compilerMessage
-        case rust(Diagnostic)
-    }
+//    enum Message: Codable {
+//        case compilerMessage
+//        case rust(Diagnostic)
+//
+//        init(from decoder: Decoder) throws {
+//            MARK_unimplemented()
+//        }
+//        func encode(to encoder: Encoder) throws {
+//            MARK_unimplemented()
+//        }
+//    }
 
-    public typealias Version = SemverDTO.Version
-    public typealias Diagnostic = RustCompilerDTO.Diagnostic
-    public typealias JSON = JSONValue
+    typealias Version = SemverDTO.Version
+    typealias Diagnostic = RustCompilerDTO.Diagnostic
+    typealias JSON = JSONValue
 }

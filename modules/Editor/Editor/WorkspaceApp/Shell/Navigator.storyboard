@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="Jap-iR-he0">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--NavigatorVC-->
+        <scene sceneID="iwX-F5-Bu6">
+            <objects>
+                <tabViewController id="Jap-iR-he0" customClass="NavigatorVC" customModule="Editor" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabView key="tabView" type="noTabsNoBorder" id="xsW-zn-eYG">
+                        <rect key="frame" x="0.0" y="0.0" width="254" height="439"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <tabViewItems/>
+                        <connections>
+                            <outlet property="delegate" destination="Jap-iR-he0" id="8FE-df-cvO"/>
+                        </connections>
+                    </tabView>
+                    <connections>
+                        <outlet property="tabView" destination="xsW-zn-eYG" id="sQd-Sn-dRZ"/>
+                    </connections>
+                </tabViewController>
+                <customObject id="jLh-BN-8Z7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-177" y="758.5"/>
+        </scene>
+    </scenes>
+</document>

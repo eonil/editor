@@ -8,13 +8,12 @@
 
 import Foundation
 
-final class DriverFeatures: ServiceDependent {
+final class DriverFeatures: ServicesDependent {
     private let loop = ReactiveLoop()
 //    private let cargoWatch = Relay<CargoProcess2.Transaction>()
     private var cargoProc: CargoProcess2?
 
-    override init() {
-        super.init()
+    init() {
         loop.step = { [weak self] in self?.step() }
 //        cargoWatch.delegate = { [weak self] in self?.processCargoTransaction($0) }
     }

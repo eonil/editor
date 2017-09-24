@@ -6,7 +6,7 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-final class WorkspaceFeatures: ServiceDependent {
+final class WorkspaceFeatures: ServicesDependent {
     private let loop = ManualLoop()
     private let watch = Relay<()>()
     let navigation = NavigationFeature()
@@ -18,16 +18,16 @@ final class WorkspaceFeatures: ServiceDependent {
     let debug = DebugFeature()
     let log = LogFeature()
 
-    override init() {
-        super.init()
+    init() {
         loop.step = { [weak self] in self?.step() }
         watch.delegate = { [weak self] in self?.loop.signal() }
         project.signal += watch
-        build.signal += watch
+        build.change += watch
     }
+    
     private func step() {
         log.process(build.production)
-        build.clear()
+//        build.clear()
         build.setProjectState(project.state)
     }
 

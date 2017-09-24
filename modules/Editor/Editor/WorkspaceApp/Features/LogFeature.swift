@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class LogFeature: ServiceDependent {
+final class LogFeature: ServicesDependent {
     let signal = Relay<()>()
     let changes = Relay<Change>()
     private(set) var production = Production()

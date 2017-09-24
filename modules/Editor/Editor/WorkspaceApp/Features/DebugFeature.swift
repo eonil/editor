@@ -11,12 +11,11 @@ import LLDBWrapper
 import EonilSignet
 import EonilToolbox
 
-final class DebugFeature: ServiceDependent {
+final class DebugFeature: ServicesDependent {
     let transaction = Relay<Transaction>()
     private(set) var targetProps = [TargetRef: Relay<TargetRef.Transaction>]()
 
-    override init() {
-        super.init()
+    init() {
         spawnAllTargets()
     }
     deinit {

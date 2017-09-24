@@ -6,8 +6,8 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-final class BuildFeature: ServiceDependent {
-    let signal = Relay<()>()
+final class BuildFeature: ServicesDependent {
+    let change = Relay<()>()
     private(set) var production = Product()
     private let loop = ReactiveLoop()
     private let watch = Relay<()>()
@@ -15,8 +15,7 @@ final class BuildFeature: ServiceDependent {
     private var cmdq = [Command]()
     private var exec: CargoProcess2?
 
-    override init() {
-        super.init()
+    init() {
         watch += loop
         loop.step = { [weak self] in self?.step() }
     }
@@ -25,11 +24,11 @@ final class BuildFeature: ServiceDependent {
             production.reports.append(contentsOf: exec.production.reports)
             production.issues.append(contentsOf: exec.production.issues)
             exec.clear()
-            signal.cast()
+            change.cast()
         }
         if exec?.state == .complete {
             exec = nil
-            signal.cast()
+            change.cast()
         }
 
         guard exec == nil else { return } // Wait until done.
@@ -41,7 +40,7 @@ final class BuildFeature: ServiceDependent {
                     location: loc,
                     command: .clean)
                 exec = services.cargo.spawn(ps)
-                signal.cast()
+                change.cast()
 
             case .cleanTarget(let t):
                 MARK_unimplemented()
@@ -55,7 +54,7 @@ final class BuildFeature: ServiceDependent {
                 loop.signal()
                 proc.signal += watch
                 exec = proc
-                signal.cast()
+                change.cast()
 
             case .buildTarget(let t):
                 MARK_unimplemented()
@@ -91,4 +90,5 @@ extension BuildFeature {
         case cancel
     }
     typealias Product = CargoProcess2.Product
+    typealias Issue = CargoProcess2.Issue
 }

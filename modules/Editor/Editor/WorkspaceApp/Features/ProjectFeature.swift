@@ -16,7 +16,7 @@ import EonilToolbox
 /// A project allows no-location state.
 /// See `relocate` method for details.
 ///
-final class ProjectFeature: ServiceDependent {
+final class ProjectFeature: ServicesDependent {
     ///
     /// Notifies change of something.
     /// This guarantees state consistency at

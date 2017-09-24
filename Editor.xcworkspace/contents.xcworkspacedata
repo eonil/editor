@@ -42,8 +42,4 @@
          location = "group:Editor/Editor.xcodeproj">
       </FileRef>
    </Group>
-   <Group
-      location = "container:"
-      name = "submodules">
-   </Group>
 </Workspace>

@@ -8,23 +8,29 @@
 
 import Foundation
 
-public struct SemverDTO {
+struct SemverDTO {
     ///
     /// https://github.com/steveklabnik/semver/blob/master/src/version.rs#L57
     ///
-    public struct Version {
-        public var major: UInt64
-        public var minor: UInt64
-        public var patch: UInt64
-        public var pre: [Identifier]
-        public var build: [Identifier]
+    struct Version: Codable {
+        var major: UInt64
+        var minor: UInt64
+        var patch: UInt64
+        var pre: [Identifier]
+        var build: [Identifier]
     }
     ///
     /// https://github.com/steveklabnik/semver/blob/master/src/version.rs#L29
     ///
-    public enum Identifier {
+    enum Identifier: Codable {
         case Numeric(UInt64)
         case AlphaNumeric(String)
-    }
 
+        init(from decoder: Decoder) throws {
+            MARK_unimplemented()
+        }
+        func encode(to encoder: Encoder) throws {
+            MARK_unimplemented()
+        }
+    }
 }

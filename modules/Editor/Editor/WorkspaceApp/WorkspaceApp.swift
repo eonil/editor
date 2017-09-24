@@ -19,7 +19,7 @@ final class WorkspaceApp {
         shell.features = nil
     }
     var rootWindowController: NSWindowController {
-        return shell.windowController
+        return shell.main
     }
 
     func process(_ c: MainMenuItemID) {

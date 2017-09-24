@@ -10,6 +10,6 @@
 /// A sort of preview.
 /// Not yet designed well.
 ///
-final class SceneFeature: ServiceDependent {
+final class SceneFeature: ServicesDependent {
     
 }

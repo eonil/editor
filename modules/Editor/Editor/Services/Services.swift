@@ -24,7 +24,9 @@ final class Services {
     }
 }
 
-class ServiceDependent {
+protocol ServicesDependent {
+}
+extension ServicesDependent {
     var services: Services {
         return Services.shared
     }
