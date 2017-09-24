@@ -73,7 +73,7 @@ final class ProjectFeature: ServicesDependent {
             state.files.insert(at: .root, (k, v))
             changes.cast(.files(.insert(.root)))
         }
-        signal.cast()
+        signal.cast(())
         restoreProjectFileList()
     }
 
@@ -121,7 +121,7 @@ final class ProjectFeature: ServicesDependent {
         // Cast events.
         let m = Tree2Mutation.insert(idx)
         changes.cast(.files(m))
-        signal.cast()
+        signal.cast(())
         storeProjectFileList()
     }
     ///
@@ -171,7 +171,7 @@ final class ProjectFeature: ServicesDependent {
         for location in topLocations {
             deleteOneFileImpl(at: location)
         }
-        signal.cast()
+        signal.cast(())
         storeProjectFileList()
     }
     private func deleteOneFileImpl(at idx: FileTree.IndexPath) {
@@ -193,7 +193,7 @@ final class ProjectFeature: ServicesDependent {
     func setSelection(_ newSelection: AnyProjectSelection) {
         state.selection = newSelection
         changes.cast(.location)
-        signal.cast()
+        signal.cast(())
     }
 
 
@@ -238,7 +238,7 @@ final class ProjectFeature: ServicesDependent {
             }
             state.files = dto.files
             changes.cast(.files(.reset))
-            signal.cast()
+            signal.cast(())
         }
         catch let err {
             reportIssue("File I/O error: \(err)")

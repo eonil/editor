@@ -24,11 +24,11 @@ final class BuildFeature: ServicesDependent {
             production.reports.append(contentsOf: exec.production.reports)
             production.issues.append(contentsOf: exec.production.issues)
             exec.clear()
-            change.cast()
+            change.cast(())
         }
         if exec?.state == .complete {
             exec = nil
-            change.cast()
+            change.cast(())
         }
 
         guard exec == nil else { return } // Wait until done.
@@ -40,7 +40,7 @@ final class BuildFeature: ServicesDependent {
                     location: loc,
                     command: .clean)
                 exec = services.cargo.spawn(ps)
-                change.cast()
+                change.cast(())
 
             case .cleanTarget(let t):
                 MARK_unimplemented()
@@ -54,7 +54,7 @@ final class BuildFeature: ServicesDependent {
                 loop.signal()
                 proc.signal += watch
                 exec = proc
-                change.cast()
+                change.cast(())
 
             case .buildTarget(let t):
                 MARK_unimplemented()

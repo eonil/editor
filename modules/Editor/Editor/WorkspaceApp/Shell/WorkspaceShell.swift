@@ -49,6 +49,6 @@ final class WorkspaceShell {
 
 private func makeWindow() -> NSWindow {
     let w = NSWindow()
-    w.styleMask.formUnion(.resizable)
+    w.styleMask.formUnion(NSWindow.StyleMask.resizable)
     return w
 }

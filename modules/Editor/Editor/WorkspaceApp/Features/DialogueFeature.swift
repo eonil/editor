@@ -13,11 +13,11 @@ final class DialogueFeature {
     private(set) var state = State()
     func queue(_ a: Alert) {
         state.queue.append(a)
-        transaction.cast()
+        transaction.cast(())
     }
     func killCurrent() {
         state.queue.removeFirstIfAvailable()
-        transaction.cast()
+        transaction.cast(())
     }
     enum Alert {
         ///

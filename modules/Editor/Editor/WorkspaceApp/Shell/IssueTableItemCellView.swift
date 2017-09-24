@@ -12,7 +12,7 @@ final class IssueTableItemCellView: NSTableCellView {
     @IBOutlet weak var messageLabel: NSTextField?
     @IBOutlet weak var locationLabel: NSTextField?
 
-    override var backgroundStyle: NSBackgroundStyle {
+    override var backgroundStyle: NSView.BackgroundStyle {
         didSet {
             switch backgroundStyle {
             case .dark:

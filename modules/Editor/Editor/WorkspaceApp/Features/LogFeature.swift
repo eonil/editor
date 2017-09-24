@@ -26,7 +26,7 @@ final class LogFeature: ServicesDependent {
         let c = production.items.endIndex
         production.items.append(item)
         changes.cast(.items(.insert(c..<c+1)))
-        signal.cast()
+        signal.cast(())
     }
     func process(_ p: BuildFeature.Product) {
         let c = production.items.count
@@ -35,7 +35,7 @@ final class LogFeature: ServicesDependent {
         let c1 = production.items.count
         guard c1 > c else { return }
         changes.cast(.items(.insert(c..<c1)))
-        signal.cast()
+        signal.cast(())
     }
     ///
     /// Clears any productions.

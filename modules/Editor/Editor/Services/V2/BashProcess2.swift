@@ -91,7 +91,7 @@ final class BashProcess2 {
         case false:
             REPORT_recoverableWarning("Stepping triggered after subprocess terminated.")
         }
-        signal.cast()
+        signal.cast(())
         DEBUG_log("Bash subprocess isrunning: \(proc.isRunning)")
         DEBUG_log("Bash state: \(state)")
     }

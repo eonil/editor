@@ -55,10 +55,10 @@ final class CodeTextView2: NSView {
 
     var string = "" {
         didSet {
-            let f = NSFont.userFixedPitchFont(ofSize: NSFont.systemFontSize()) ?? .default
+            let f = NSFont.userFixedPitchFont(ofSize: NSFont.systemFontSize) ?? .default
 //            let f = NSFont(name: "Menlo", size: NSFont.systemFontSize()) ?? .default
             let s = NSAttributedString(string: string, attributes: [
-                NSFontAttributeName: f,
+                NSAttributedStringKey.font: f,
                 ])
             guard let r = textView.textStorage?.wholeRange else { return }
             textView.textStorage?.deleteCharacters(in: r)
@@ -76,6 +76,6 @@ private extension NSTextStorage {
 
 private extension NSFont {
     static var `default`: NSFont {
-        return NSFont.systemFont(ofSize: NSFont.systemFontSize())
+        return NSFont.systemFont(ofSize: NSFont.systemFontSize)
     }
 }

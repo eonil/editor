@@ -20,7 +20,7 @@ final class WorkspaceFeatures: ServicesDependent {
 
     init() {
         loop.step = { [weak self] in self?.step() }
-        watch.delegate = { [weak self] in self?.loop.signal() }
+        watch.delegate = { [weak self] _ in self?.loop.signal() }
         project.signal += watch
         build.change += watch
     }

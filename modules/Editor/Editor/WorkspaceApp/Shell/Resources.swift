@@ -22,7 +22,7 @@ struct Resources {
 extension Resources.Storyboard {
     func instantiate() -> NSViewController & WorkspaceFeatureDependent {
         let n = makeFileName()
-        let sb = NSStoryboard(name: n, bundle: .shell)
+        let sb = NSStoryboard(name: NSStoryboard.Name(rawValue: n), bundle: .shell)
         let vc = sb.instantiateInitialController()
         return vc as! NSViewController & WorkspaceFeatureDependent
     }

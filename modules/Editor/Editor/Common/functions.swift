@@ -12,8 +12,8 @@ func not(_ b: Bool) -> Bool {
 
 func ignoreParameter<T>(_: T) -> Void {
 }
-func toVoid<T>(_: T) -> Void {
-}
+//func toVoid<T>(_: T) -> Void {
+//}
 
 import Dispatch
 func toMainGCDQ<T>(_ f: @escaping (T) -> Void) -> ((T) -> Void) {

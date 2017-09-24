@@ -51,7 +51,7 @@ final class CargoProcess2 {
                     let c = production.issues.count
                     production.issues.append(.cannotDecodeStandardOutput(issue))
                     changes.cast(.issues(.insert(c..<c+1)))
-                    signal.cast()
+                    signal.cast(())
 
                 case .success(let lines):
                     guard lines.isEmpty == false else { break }
@@ -70,7 +70,7 @@ final class CargoProcess2 {
 
 //                    production.issues.append(.unexpectedStandardOutput(lines.joined()))
                     changes.cast(.issues(.insert(c..<c+1)))
-                    signal.cast()
+                    signal.cast(())
                 }
             }
             for d in bash.takeOutStandardError() {
@@ -79,7 +79,7 @@ final class CargoProcess2 {
                     let c = production.issues.count
                     production.issues.append(.cannotDecodeStandardError(issue))
                     changes.cast(.issues(.insert(c..<c+1)))
-                    signal.cast()
+                    signal.cast(())
 
                 case .success(let lines):
                     DEBUG_log("Bash STDERR:\n\(lines)")
@@ -88,7 +88,7 @@ final class CargoProcess2 {
                     let c = production.reports.count
                     production.reports.append(.cargoErr(msg))
                     changes.cast(.reports(.insert(c..<c+1)))
-                    signal.cast()
+                    signal.cast(())
 
 //                    switch parameters.command {
 //                    case .initialize:
@@ -118,7 +118,7 @@ final class CargoProcess2 {
             case .complete(let exitCode):
                 state = .complete
                 changes.cast(.state)
-                signal.cast()
+                signal.cast(())
                 guard exitCode == 0 else {
                     production.issues.append(.bsahSubprocessExitWithNonZeroCode(exitCode))
                     return
@@ -138,7 +138,7 @@ final class CargoProcess2 {
             bash.queue(.setSecondary)
         }
         changes.cast(.priority)
-        signal.cast()
+        signal.cast(())
     }
     ///
     /// Clears productions.

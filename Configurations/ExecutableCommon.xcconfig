@@ -1,3 +1,9 @@
 
+SDKROOT = macosx
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+MACOSX_DEPLOYMENT_TARGET = 10.12
+
 FRAMEWORK_SEARCH_PATHS = $(SRCROOT)/../../Carthage/Build/Mac
 LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/../Frameworks $(SYSTEM_APPS_DIR)/Xcode.app/Contents/SharedFrameworks
+SWIFT_VERSION = 4.0
+

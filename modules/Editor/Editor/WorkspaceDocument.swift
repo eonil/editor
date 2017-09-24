@@ -20,7 +20,7 @@ class WorkspaceDocument: NSDocument {
         app.process(id)
     }
 
-    override class func autosavesInPlace() -> Bool {
+    override class var autosavesInPlace: Bool {
         return true
     }
 
@@ -39,7 +39,7 @@ class WorkspaceDocument: NSDocument {
 }
 extension WorkspaceDocument {
     static var current: WorkspaceDocument? {
-        let cdoc = NSDocumentController.shared().currentDocument
+        let cdoc = NSDocumentController.shared.currentDocument
         return cdoc as? WorkspaceDocument
     }
 }

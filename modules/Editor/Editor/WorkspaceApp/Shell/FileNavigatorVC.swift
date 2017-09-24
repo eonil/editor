@@ -136,7 +136,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     func outlineViewItemDidCollapse(_ notification: Notification) {
         // https://developer.apple.com/documentation/appkit/nsoutlineview/1526467-itemdidcollapsenotification?changes=latest_beta
         assert(notification.object as? NSObject === outlineView)
-        assert(notification.name == Notification.Name.NSOutlineViewItemDidCollapse)
+        assert(notification.name == NSOutlineView.itemDidCollapseNotification)
         let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
         let node = item as! TOA.OutlineViewNode
         //        assert(exps.contains(node.key))
@@ -146,7 +146,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     func outlineViewItemDidExpand(_ notification: Notification) {
         // https://developer.apple.com/documentation/appkit/nsoutlineview/1526467-itemdidcollapsenotification?changes=latest_beta
         assert(notification.object as? NSObject === outlineView)
-        assert(notification.name == Notification.Name.NSOutlineViewItemDidExpand)
+        assert(notification.name == NSOutlineView.itemDidExpandNotification)
         let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
         let node = item as! TOA.OutlineViewNode
         //        assert(exps.contains(node.key) == false)
@@ -154,7 +154,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         DEBUG_log("End-user did expand: \(node.key), exps = \(exps)")
     }
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        let v = outlineView.make(withIdentifier: "FileItem", owner: self) as! NSTableCellView
+        let v = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "FileItem"), owner: self) as! NSTableCellView
         let node = item as! TOA.OutlineViewNode
         v.imageView?.image = makeIconForNode(node)
         let u = features?.project.makeFileURL(for: node.key)
@@ -202,7 +202,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         case .showInFinder:
             let ps = getGrabbedFilePathsForContextMenuOperation() ?? []
             let us = ps.flatMap({ features.project.makeFileURL(for: $0) })
-            NSWorkspace.shared().activateFileViewerSelecting(us)
+            NSWorkspace.shared.activateFileViewerSelecting(us)
 
         case .delete:
             let ps = getGrabbedFilePathsForContextMenuOperation() ?? []

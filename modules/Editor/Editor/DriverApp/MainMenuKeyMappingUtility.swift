@@ -30,14 +30,9 @@ enum MainMenuKeyMappingUtility {
     }
 }
 
-//private let command = NSEventModifierFlags.command
-//private let shift   = NSEventModifierFlags.shift
-//private let option  = NSEventModifierFlags.option
-//private let control = NSEventModifierFlags.control
-
-private func + (_ a: NSEventModifierFlags, _ b: NSEventModifierFlags) -> NSEventModifierFlags {
-    return NSEventModifierFlags([a, b])
+private func + (_ a: NSEvent.ModifierFlags, _ b: NSEvent.ModifierFlags) -> NSEvent.ModifierFlags {
+    return NSEvent.ModifierFlags([a, b])
 }
-private func + (_ a: NSEventModifierFlags, _ b: Character) -> MainMenu2State.KeyEquivalentCombination {
+private func + (_ a: NSEvent.ModifierFlags, _ b: Character) -> MainMenu2State.KeyEquivalentCombination {
     return (a, b)
 }

@@ -13,7 +13,7 @@ final class ReactiveLoop {
     private let impl = ManualLoop()
     fileprivate let watch = Relay<()>()
     init() {
-        watch.delegate = { [weak self] in self?.signal() }
+        watch.delegate = { [weak self] _ in self?.signal() }
     }
     var step: (() -> Void)? {
         get { return impl.step }

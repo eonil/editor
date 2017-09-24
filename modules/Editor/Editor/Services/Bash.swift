@@ -38,7 +38,7 @@ struct Bash {
         let sema = DispatchSemaphore(value: 0)
         let buffer = MutableBox<Data>(Data())
         var ret = Int32(0)
-        exec.signal.delegate = { [exec, buffer] in
+        exec.signal.delegate = { [exec, buffer] _ in
             switch exec.state {
             case .complete(let exitCode):
                 exec.props.stdout.forEach({ buffer.value.append($0) })

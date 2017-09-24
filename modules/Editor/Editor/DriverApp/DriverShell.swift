@@ -47,7 +47,7 @@ final class DriverShell {
             .productStop,
             ])
         mainMenuController.reload(mainMenuState)
-        NSApplication.shared().mainMenu = mainMenuController.menu
+        NSApplication.shared.mainMenu = mainMenuController.menu
         mainMenuWatch.delegate = { [weak self] in self?.processMainMenuEvent($0) }
         mainMenuController.event += mainMenuWatch
     }
@@ -62,24 +62,24 @@ final class DriverShell {
 //                features.makeWorkspaceDirectiry(at: u)
 
             case .appQuit:
-                NSApplication.shared().terminate(self)
+                NSApplication.shared.terminate(self)
 
             case .fileNewWorkspace:
 //                NSDocumentController.shared().newDocument(self)
                 let sp = NSSavePanel()
                 let r = sp.runModal()
-                guard r == NSFileHandlingPanelOKButton else { return }
+                guard r == NSApplication.ModalResponse.OK else { return }
                 guard let u = sp.url else { return }
                 let u1 = features.fixWorkspaceDirectoryURL(u)
                 features.makeWorkspaceDirectory(at: u1)
-                NSDocumentController.shared().openDocument(
+                NSDocumentController.shared.openDocument(
                     withContentsOf: u1,
                     display: true,
-                    completionHandler: toVoid)
+                    completionHandler: { _, _, _ in })
 
 
             case .fileOpen:
-                NSDocumentController.shared().openDocument(nil)
+                NSDocumentController.shared.openDocument(nil)
 
             case .fileCloseWorkspace:
                 AUDIT_check(WorkspaceDocument.current != nil)
@@ -99,7 +99,6 @@ final class DriverShell {
     ///
     private func connectToFeatures() {
         guard let features = features else { return }
-        features
     }
 
     ///

@@ -52,7 +52,7 @@ extension IssueNavigatorVC: NSTableViewDataSource {
         case .cargoMessage(let m):
             switch m {
             case .compilerMessage(let m):
-                let v = tableView.make(withIdentifier: "CompilerMessageItem", owner: self) as! IssueTableItemCellView
+                let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CompilerMessageItem"), owner: self) as! IssueTableItemCellView
                 v.messageLabel?.stringValue = m.message.message
                 var fns = [String]()
                 for span in m.message.spans {
@@ -70,7 +70,7 @@ extension IssueNavigatorVC: NSTableViewDataSource {
         default:
             break
         }
-        let v = tableView.make(withIdentifier: "UnknownItem", owner: self) as! NSTableCellView
+        let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "UnknownItem"), owner: self) as! NSTableCellView
         v.textField?.stringValue = "\(report)"
         return v
     }
