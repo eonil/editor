@@ -41,9 +41,6 @@ extension IssueNavigatorVC: NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 60
     }
-//    func tableView(_ tableView: NSTableView, rowViewForRow row: Int) -> NSTableRowView? {
-//        return IssueTableRowView()
-//    }
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let features = features else { return nil }
         let report = features.build.production.reports[row]
@@ -52,17 +49,8 @@ extension IssueNavigatorVC: NSTableViewDataSource {
         case .cargoMessage(let m):
             switch m {
             case .compilerMessage(let m):
-                let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "CompilerMessageItem"), owner: self) as! IssueTableItemCellView
-                v.messageLabel?.stringValue = m.message.message
-                var fns = [String]()
-                for span in m.message.spans {
-                    let fn = span.file_name
-                    if fns.contains(fn) == false {
-                        fns.append(fn)
-                    }
-                }
-                let loc = fns.joined(separator: ", ")
-                v.locationLabel?.stringValue = loc
+                let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueItem"), owner: self) as! IssueItemTableCellView
+                v.messageTextField?.stringValue = m.message.message
                 return v
             default:
                 break
@@ -70,8 +58,8 @@ extension IssueNavigatorVC: NSTableViewDataSource {
         default:
             break
         }
-        let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "UnknownItem"), owner: self) as! NSTableCellView
-        v.textField?.stringValue = "\(report)"
+        let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueItem"), owner: self) as! IssueItemTableCellView
+        v.messageTextField?.stringValue = "\(report)"
         return v
     }
 }
