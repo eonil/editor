@@ -9,7 +9,7 @@
 import AppKit
 import SnapKit
 
-final class CodeTextView2: NSView {
+final class CodeView: NSView {
     private let scrollView = NSScrollView()
     private let textView = NSTextView()
 
@@ -24,7 +24,6 @@ final class CodeTextView2: NSView {
             make.bottom.equalToSuperview()
         }
         scrollView.documentView = textView
-        textView.isEditable = false
         textView.isAutomaticDataDetectionEnabled = false
         textView.isAutomaticDashSubstitutionEnabled = false
         textView.isAutomaticTextReplacementEnabled = false
@@ -36,12 +35,13 @@ final class CodeTextView2: NSView {
         textView.isHorizontallyResizable = true
         textView.isVerticallyResizable = true
 
-
         textView.textContainer?.widthTracksTextView = false
         textView.textContainer?.heightTracksTextView = false
         textView.textContainer?.containerSize = CGSize(
             width: CGFloat.greatestFiniteMagnitude,
             height: CGFloat.greatestFiniteMagnitude)
+
+        reconfigure()
     }
 
     override init(frame frameRect: NSRect) {
@@ -65,6 +65,17 @@ final class CodeTextView2: NSView {
             textView.textStorage?.append(s)
             textView.string = string
         }
+    }
+    var isEnabled = false {
+        didSet { reconfigure() }
+    }
+    var isEditable = false {
+        didSet { reconfigure() }
+    }
+
+    private func reconfigure() {
+        textView.backgroundColor = isEnabled ? .controlBackgroundColor : .windowBackgroundColor
+        textView.isEditable = isEnabled && isEditable
     }
 }
 

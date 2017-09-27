@@ -9,29 +9,63 @@
 final class WorkspaceFeatures: ServicesDependent {
     private let loop = ManualLoop()
     private let watch = Relay<()>()
+    private let buildWatch = Relay<[BuildFeature.Change]>()
+    let plan = PlanFeature()
     let navigation = NavigationFeature()
     let dialogue = DialogueFeature()
     let project = ProjectFeature()
+    let codeEditing = CodeEditingFeature()
     let autoCompletion = AutoCompletionFeature()
     let scene = SceneFeature()
     let build = BuildFeature()
     let debug = DebugFeature()
     let log = LogFeature()
+    private var cmdq = [WorkspaceCommand]()
 
     init() {
         loop.step = { [weak self] in self?.step() }
         watch.delegate = { [weak self] _ in self?.loop.signal() }
+        buildWatch.delegate = { [weak self] _ in self?.loop.signal()  }
         project.signal += watch
-        build.change += watch
-    }
-    
-    private func step() {
-        log.process(build.production)
-//        build.clear()
-        build.setProjectState(project.state)
+        build.changes += buildWatch
     }
 
-    func process(_ c: MainMenuItemID) {
+    func process(_ cmd: WorkspaceCommand) {
+        processSequence([cmd])
+    }
+    func processSequence(_ cmds: [WorkspaceCommand]) {
+        cmdq.append(contentsOf: cmds)
+        step()
+    }
+    private func step() {
+        build.setProjectState(project.state)
+        log.process(.setBuildState(build.state))
+
+        while let cmd = cmdq.removeFirstIfAvailable() {
+            switch cmd {
+            case .menu(let id):
+                processMenuMenuItem(id)
+
+            case .plan(let cmd):
+                let cmds = plan.process(cmd)
+                cmdq.append(contentsOf: cmds)
+
+            case .dialogue(let cmd):
+                let cmds = dialogue.process(cmd)
+                cmdq.append(contentsOf: cmds)
+
+            case .codeEditing(let cmd):
+                let cmds = codeEditing.process(cmd)
+                cmdq.append(contentsOf: cmds)
+
+            case .build(let cmd):
+                let cmds = build.process(cmd)
+                cmdq.append(contentsOf: cmds)
+            }
+        }
+    }
+
+    private func processMenuMenuItem(_ c: MainMenuItemID) {
         switch c {
         case .testdriveMakeRandomFiles:
             if project.state.files.count > 0 {
@@ -93,11 +127,21 @@ final class WorkspaceFeatures: ServicesDependent {
         case .fileOpen:
             break
 
+        case .fileClose:
+            codeEditing.process(.close)
+
         case .productClean:
             build.process(.cleanAll)
 
         case .productBuild:
             build.process(.build)
+
+        case .productRun:
+            processSequence([
+                .plan(.queueTask(.buildLaunch)),
+                .plan(.queueTask(.buildWaitForCompletion)),
+                .plan(.queueTask(.debugLaunch))
+                ])
 
         default:
             REPORT_recoverableWarning("Processing unimplemented menu command... `\(c)`.")

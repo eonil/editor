@@ -9,10 +9,10 @@
 import AppKit
 
 final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
-    private let buildWatch = Relay<()>()
+    private let buildWatch = Relay<[BuildFeature.Change]>()
     weak var features: WorkspaceFeatures? {
         didSet {
-            features?.build.change += buildWatch
+            features?.build.changes += buildWatch
             render()
         }
     }
@@ -25,7 +25,8 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
     override func viewDidLayout() {
         super.viewDidLayout()
         tableView?.sizeLastColumnToFit()
-        tableView?.rowHeight = tableView?.frame.height ?? 1_000
+        tableView?.rowHeight = tableView?.frame.height ?? 1_000 // Trick to remove unwanted grid lines.
+        tableView?.doubleAction = #selector(userDidDoubleClickOnTableView)
     }
 
     private func render() {
@@ -33,17 +34,48 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
     }
 
     @IBOutlet private weak var tableView: NSTableView?
+
+    @IBAction
+    private func userDidDoubleClickOnTableView(_: NSObject) {
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
+        let i = tableView?.clickedRow ?? -1
+        guard i >= 0 else { return }
+        guard i < tableView?.numberOfRows ?? 0 else { return }
+        let report = reports[i]
+        switch report {
+        case .cargoMessage(let m):
+            switch m {
+            case .compilerMessage(let m):
+                guard let span = m.message.spans.first else { break }
+                DEBUG_log(span.file_name)
+                let p = ProjectFeature.Path.fromUnixFilePathFromProjectRoot(span.file_name) 
+                guard let u = features.project.makeFileURL(for: p) else {
+                    REPORT_ignoredSignal(report)
+                    break
+                }
+                features.process(.codeEditing(.open(u)))
+            case .compilerArtifact(let m):
+                REPORT_unimplementedAndContinue()
+            case .buildScript(let m):
+                REPORT_unimplementedAndContinue()
+            }
+        default:
+            MARK_unimplemented()
+        }
+    }
 }
 extension IssueNavigatorVC: NSTableViewDataSource {
+    private var reports: [BuildFeature.State.Report] {
+        return features?.build.state.session.production.reports ?? []
+    }
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return features?.build.production.reports.count ?? 0
+        return reports.count
     }
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 60
     }
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let features = features else { return nil }
-        let report = features.build.production.reports[row]
+        let report = reports[row]
         // TODO: Generate proper message.
         switch report {
         case .cargoMessage(let m):
@@ -58,6 +90,7 @@ extension IssueNavigatorVC: NSTableViewDataSource {
         default:
             break
         }
+
         let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueItem"), owner: self) as! IssueItemTableCellView
         v.messageTextField?.stringValue = "\(report)"
         return v

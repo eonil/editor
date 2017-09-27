@@ -11,13 +11,27 @@
             <objects>
                 <viewController id="ppr-Vp-ny2" customClass="EditorVC" customModule="Editor" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="9Ff-LQ-IbV">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="284" height="131"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="6zJ-4b-6GE" customClass="CodeView" customModule="Editor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="284" height="131"/>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="6zJ-4b-6GE" secondAttribute="bottom" id="11U-N5-bhf"/>
+                            <constraint firstItem="6zJ-4b-6GE" firstAttribute="top" secondItem="9Ff-LQ-IbV" secondAttribute="top" id="PUk-iM-aMF"/>
+                            <constraint firstItem="6zJ-4b-6GE" firstAttribute="leading" secondItem="9Ff-LQ-IbV" secondAttribute="leading" id="Z5F-mX-Wzp"/>
+                            <constraint firstAttribute="trailing" secondItem="6zJ-4b-6GE" secondAttribute="trailing" id="nWv-oU-1cr"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="codeView" destination="6zJ-4b-6GE" id="E0y-1v-U0R"/>
+                    </connections>
                 </viewController>
                 <customObject id="B2Z-mI-Vd7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="203" y="43"/>
+            <point key="canvasLocation" x="120" y="-41.5"/>
         </scene>
     </scenes>
 </document>

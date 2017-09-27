@@ -11,9 +11,20 @@ Hoon H.
 
 Communications between each layers are done soley by passing messages.
 
-
-
-
+Impure & Pure Layers
+----------------------------
+Each components of Services and Features are all *actors*. I tried to replicate some Erlang
+semantics. Actors have identity, and can perform I/O by themselves. An actor is also
+a unit of encapsulation. You don't know what's happening in actors. Though most
+components expose their own state, for UI rendering, but not all of the states are exposed.
+As actors are impure, you cannot predict actors' state change, and such changes must be
+queried explicitly. Some actors may provide notifications, and in that case, you can use
+the notifications to track time to poll on target actors. (on-demand polling) This is not a push
+because such notifications SHOULD NOT contain the state data itself. Notifications can
+contain some temporal parameters to help optimization, but not the state itself.
+Though internal implementation of an actor is intended to be pure, but it doesn't have to be.
+An actor can have another network actors inside of them, and actors' internal
+implementations are up to the actors.
 
 "No"s & Why
 -----------

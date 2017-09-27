@@ -21,6 +21,7 @@ enum MainMenuKeyMappingUtility {
         m[.fileNewWorkspace]    =   .command + .shift + "n"
         m[.fileOpen]            =   .command + "o"
         m[.fileSave]            =   .command + "s"
+        m[.fileClose]           =   .command + .shift + "w"
         m[.fileCloseWorkspace]  =   .command + "w"
         m[.productRun]          =   .command + "r"
         m[.productStop]         =   .command + "."

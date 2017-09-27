@@ -41,6 +41,12 @@ struct ProjectItemPath: Hashable {
         return ProjectItemPath(components: [])
     }
 }
+extension ProjectItemPath {
+    static func fromUnixFilePathFromProjectRoot(_ p: String) -> ProjectItemPath {
+        let ps = p.split(separator: "/").map({String($0)})
+        return ProjectItemPath(components: ps)
+    }
+}
 
 extension ProjectItemPath {
     enum ConversionError: Error {

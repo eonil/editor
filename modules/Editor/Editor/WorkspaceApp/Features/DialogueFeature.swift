@@ -7,17 +7,69 @@
 //
 
 import EonilSignet
+import EonilToolbox
 
-final class DialogueFeature {
+final class DialogueFeature: WorkspaceFeatureComponent {
     let transaction = Relay<Void>()
     private(set) var state = State()
-    func queue(_ a: Alert) {
-        state.queue.append(a)
-        transaction.cast(())
+    private var queue = [Command]()
+
+    func process(_ cmd: Command) -> [WorkspaceCommand] {
+        queue.append(cmd)
+        step()
+        return []
     }
-    func killCurrent() {
-        state.queue.removeFirstIfAvailable()
-        transaction.cast(())
+    private func step() {
+        if state.running == nil {
+            stepIdle()
+        }
+        else {
+            stepRunning()
+        }
+    }
+    private func stepIdle() {
+        while let cmd = queue.removeFirstIfAvailable() {
+            switch cmd {
+            case .spawn(let content):
+                let id = ID()
+                state.running = (id, content)
+                return
+            case .kill(let id):
+                REPORT_ignoredSignal(cmd)
+            }
+        }
+    }
+    private func stepRunning() {
+        while let cmd = queue.removeFirstIfAvailable() {
+            switch cmd {
+            case .spawn(let content):
+                queue.insert(cmd, at: 0) // Restore command.
+                return
+            case .kill(let id):
+                guard id == state.running?.id else {
+                    REPORT_ignoredSignal(cmd)
+                    break
+                }
+                state.running = nil
+            }
+        }
+    }
+
+
+}
+extension DialogueFeature {
+    struct State {
+        var running: (id: ID, alert: Alert)?
+    }
+    enum Command {
+        case spawn(Alert)
+        case kill(ID)
+    }
+    struct ID: Equatable {
+        private let oid = ObjectAddressID()
+        static func == (_ a: ID, _ b: ID) -> Bool {
+            return a.oid == b.oid
+        }
     }
     enum Alert {
         ///
@@ -33,17 +85,8 @@ final class DialogueFeature {
         case warning(Warning)
         case error(Error)
     }
-}
-extension DialogueFeature {
-    struct State {
-        var queue = [Alert]()
-        var current: Alert? {
-            return queue.first
-        }
-    }
-
     enum Note {
-
+        case DEV_any(String)
     }
     enum Query {
         case selectFileURLForWorkspaceSave
@@ -55,6 +98,6 @@ extension DialogueFeature {
 
     }
     enum Error {
-
+        case cannotSaveCurrentlyEditingCodeIntoFile
     }
 }

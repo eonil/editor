@@ -10,46 +10,49 @@ import Foundation
 
 final class LogFeature: ServicesDependent {
     let signal = Relay<()>()
-    let changes = Relay<Change>()
-    private(set) var production = Production()
+    let changes = Relay<[Change]>()
+    private(set) var state = State()
 
-//    func appendInfo(_ message: String) {
-//        let item = Item(
-//            timestamp: Date(),
-//            severity: .info,
-//            message: message,
-//            subsystem: "",
-//            category: "")
-//        append(item)
-//    }
-    func append(_ item: Item) {
-        let c = production.items.endIndex
-        production.items.append(item)
-        changes.cast(.items(.insert(c..<c+1)))
-        signal.cast(())
-    }
-    func process(_ p: BuildFeature.Product) {
-        let c = production.items.count
-        p.reports.forEach({ production.items.append(.cargoReport($0)) })
-        p.issues.forEach({ production.items.append(.cargoIssue($0)) })
-        let c1 = production.items.count
-        guard c1 > c else { return }
-        changes.cast(.items(.insert(c..<c1)))
-        signal.cast(())
-    }
-    ///
-    /// Clears any productions.
-    /// This erases all log items.
-    ///
-    func clear() {
-
+    func process(_ cmd: InternalCommand) {
+        switch cmd {
+        case .startBuildSession:
+            guard state.currentBuildSession == nil else {
+                REPORT_ignoredSignal(cmd)
+                break
+            }
+            state.currentBuildSession = State.BuildSession()
+            changes.cast([.currentBuildSession])
+        case .endBuildSession:
+            guard let bs = state.currentBuildSession else {
+                REPORT_ignoredSignal(cmd)
+                break
+            }
+            state.archivedBuildSessions.append(bs)
+            state.currentBuildSession = nil
+            changes.cast([.currentBuildSession, .archivedBuildSessions])
+        case .setBuildState(let s):
+            guard var bs = state.currentBuildSession else {
+                REPORT_ignoredSignal(cmd)
+                break
+            }
+            let items = [
+                s.session.production.reports.map(Item.cargoReport),
+                s.session.production.issues.map(Item.cargoIssue),
+            ].joined()
+            bs.items = Array(items)
+            state.currentBuildSession = bs
+            changes.cast([.currentBuildSession])
+        }
     }
 }
 extension LogFeature {
-//    struct State {
-//    }
-    struct Production {
-        var items = [Item]()
+    struct State {
+        var currentBuildSession: BuildSession?
+        var archivedBuildSessions = [BuildSession]()
+
+        struct BuildSession {
+            var items = [Item]()
+        }
     }
     enum Item {
         case cargoReport(CargoProcess2.Report)
@@ -74,7 +77,14 @@ extension LogFeature {
 //        /// System-wide failure.
 //        case fault
 //    }
+
+    enum InternalCommand {
+        case startBuildSession
+        case endBuildSession
+        case setBuildState(BuildFeature.State)
+    }
     enum Change {
-        case items(ArrayMutation<Item>)
+        case currentBuildSession
+        case archivedBuildSessions
     }
 }

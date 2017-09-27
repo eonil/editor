@@ -53,7 +53,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     /// No-op if there's no feature.
     ///
     private func connectToFeatures() {
-        guard let features = features else { return }
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         projectTransactionWatch.delegate = { [weak self] in self?.processProjectTransaction($0) }
         // Reset TOA.
         toa.process(.apply(features.project.state.files, .reset))
@@ -65,13 +65,13 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     /// No-op if there's no feature.
     ///
     private func disconnectFromFeatures() {
-        guard let features = features else { return }
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         features.project.changes -= projectTransactionWatch
         projectTransactionWatch.delegate = nil
     }
 
     private func processProjectTransaction(_ cx: ProjectFeature.Change) {
-        guard let features = features else { REPORT_missingFeaturesAndFatalError() }
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         switch cx {
         case .location:
             break
@@ -179,7 +179,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     private func processContextMenuSignal(_ s: FileNavigatorMenuCommand) {
         DEBUG_log("Clicked row: \(outlineView!.clickedRow)")
         DEBUG_log("Menu command: \(s)")
-        guard let features = features else { return }
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         guard let path = getClickedFilePath() else { return }
         guard let idxp = features.project.state.files.index(of: path) else { return }
 
@@ -217,7 +217,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
 
 
     private func setMenuAttributes() {
-        guard let features = features else { return }
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         var ops = Set<FileNavigatorMenuCommand>()
         if let path = getClickedFilePath() {
             ops.formUnion([

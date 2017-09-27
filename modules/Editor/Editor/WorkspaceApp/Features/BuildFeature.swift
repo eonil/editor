@@ -6,9 +6,11 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-final class BuildFeature: ServicesDependent {
-    let change = Relay<()>()
-    private(set) var production = Product()
+import EonilToolbox
+
+final class BuildFeature: WorkspaceFeatureComponent {
+    let changes = Relay<[Change]>()
+    private(set) var state = State()
     private let loop = ReactiveLoop()
     private let watch = Relay<()>()
     private var project = ProjectFeature.State()
@@ -21,14 +23,14 @@ final class BuildFeature: ServicesDependent {
     }
     private func step() {
         if let exec = exec {
-            production.reports.append(contentsOf: exec.production.reports)
-            production.issues.append(contentsOf: exec.production.issues)
+            state.session.production.reports.append(contentsOf: exec.production.reports)
+            state.session.production.issues.append(contentsOf: exec.production.issues)
             exec.clear()
-            change.cast(())
+            changes.cast([.sessionProduction])
         }
         if exec?.state == .complete {
             exec = nil
-            change.cast(())
+//            changes.cast([.phase])
         }
 
         guard exec == nil else { return } // Wait until done.
@@ -36,17 +38,21 @@ final class BuildFeature: ServicesDependent {
             switch cmd {
             case .cleanAll:
                 guard let loc = project.location else { MARK_unimplemented() }
+                state.session.id = .init()
+                changes.cast([.sessionID])
                 let ps = CargoProcess2.Parameters(
                     location: loc,
                     command: .clean)
                 exec = services.cargo.spawn(ps)
-                change.cast(())
+
 
             case .cleanTarget(let t):
                 MARK_unimplemented()
 
             case .build:
                 guard let loc = project.location else { MARK_unimplemented() }
+                state.session.id = .init()
+                changes.cast([.sessionID])
                 let ps = CargoProcess2.Parameters(
                     location: loc,
                     command: .build)
@@ -54,7 +60,6 @@ final class BuildFeature: ServicesDependent {
                 loop.signal()
                 proc.signal += watch
                 exec = proc
-                change.cast(())
 
             case .buildTarget(let t):
                 MARK_unimplemented()
@@ -64,24 +69,38 @@ final class BuildFeature: ServicesDependent {
             }
         }
     }
-    func process(_ command: Command) {
+    func process(_ command: Command) -> [WorkspaceCommand] {
         cmdq.append(command)
         loop.signal()
+        return []
     }
-
     func setProjectState(_ newProjectState: ProjectFeature.State) {
         project = newProjectState
         loop.signal()
     }
-    ///
-    /// Clears any production.
-    ///
-    func clear() {
-        production = Product()
-        loop.signal()
-    }
 }
 extension BuildFeature {
+    struct State {
+        var phase = Phase.idle
+        var session = Session()
+        
+        enum Phase {
+            case idle
+            case running
+        }
+        struct Session {
+            var id = ID()
+            var production = Production()
+        }
+        struct ID: Equatable {
+            private let oid = ObjectAddressID()
+            static func == (_ a: ID, _ b: ID) -> Bool {
+                return a.oid == b.oid
+            }
+        }
+
+        typealias Report = CargoProcess2.Report
+    }
     enum Command {
         case build
         case buildTarget(Target)
@@ -89,6 +108,16 @@ extension BuildFeature {
         case cleanTarget(Target)
         case cancel
     }
-    typealias Product = CargoProcess2.Product
+    typealias Production = CargoProcess2.Product
     typealias Issue = CargoProcess2.Issue
+
+    enum Change {
+        case phase
+        ///
+        /// `session.id` has been changed.
+        /// This means a new session has been started.
+        ///
+        case sessionID
+        case sessionProduction
+    }
 }

@@ -28,6 +28,7 @@ final class WorkspaceShell {
     init() {
         main.contentViewController = division
         main.window?.makeKeyAndOrderFront(self)
+//        main.window?.appearance = NSAppearance(named: .vibrantDark)
     }
 
 //    ///
@@ -35,7 +36,7 @@ final class WorkspaceShell {
 //    /// No-op if there's no feature.
 //    ///
 //    private func connectToFeatures() {
-//        guard let features = features else { return }
+//        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
 //    }
 //
 //    ///
@@ -43,7 +44,7 @@ final class WorkspaceShell {
 //    /// No-op if there's no feature.
 //    ///
 //    private func disconnectFromFeatures() {
-//        guard let features = features else { return }
+//        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
 //    }
 }
 

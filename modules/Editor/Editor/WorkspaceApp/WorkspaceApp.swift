@@ -22,7 +22,7 @@ final class WorkspaceApp {
         return shell.main
     }
 
-    func process(_ c: MainMenuItemID) {
-        features.process(c)
+    func process(_ id: MainMenuItemID) {
+        features.process(.menu(id))
     }
 }

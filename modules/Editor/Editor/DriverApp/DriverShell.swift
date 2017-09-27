@@ -40,6 +40,7 @@ final class DriverShell {
             .fileNewFolder,
             .fileNewFile,
             .fileOpen,
+            .fileClose,
             .fileCloseWorkspace,
             .productClean,
             .productBuild,
@@ -53,7 +54,7 @@ final class DriverShell {
     }
 
     private func processMainMenuEvent(_ e: MainMenu2Controller.Event) {
-        guard let features = features else { return }
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         switch e {
         case .click(let id):
             switch id {
@@ -98,7 +99,7 @@ final class DriverShell {
     /// No-op if there's no feature.
     ///
     private func connectToFeatures() {
-        guard let features = features else { return }
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
     }
 
     ///
@@ -106,6 +107,6 @@ final class DriverShell {
     /// No-op if there's no feature.
     ///
     private func disconnectFromFeatures() {
-        guard let features = features else { return }
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
     }
 }
