@@ -36,8 +36,8 @@ final class LogFeature: ServicesDependent {
                 break
             }
             let items = [
-                s.session.production.reports.map(Item.cargoReport),
-                s.session.production.issues.map(Item.cargoIssue),
+                s.session.logs.reports.map(Item.cargoReport),
+                s.session.logs.issues.map(Item.cargoIssue),
             ].joined()
             bs.items = Array(items)
             state.currentBuildSession = bs
@@ -58,26 +58,6 @@ extension LogFeature {
         case cargoReport(CargoProcess2.Report)
         case cargoIssue(CargoProcess2.Issue)
     }
-//    struct Item {
-//        var timestamp: Date
-//        var severity: Severity
-//        var message: String
-//        var subsystem: String
-//        var category: String
-//    }
-//    enum Severity {
-//        /// Verbose messages for debugging.
-//        case debug
-//        /// Informative message.
-//        case info
-//        /// Recoverable issue.
-//        case warning
-//        /// Process-wide failure.
-//        case error
-//        /// System-wide failure.
-//        case fault
-//    }
-
     enum InternalCommand {
         case startBuildSession
         case endBuildSession

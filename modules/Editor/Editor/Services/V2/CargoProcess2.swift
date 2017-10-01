@@ -17,7 +17,7 @@ final class CargoProcess2 {
     private let bash = BashProcess2(login: true)
     private(set) var state = State.running
     private(set) var props = Props()
-    private(set) var production = Product()
+    private(set) var logs = Logs()
     private var outlb = LineBuilder()
     private var errlb = LineBuilder()
 
@@ -48,20 +48,20 @@ final class CargoProcess2 {
             for d in bash.takeOutStandardOutput() {
                 switch outlb.process(d) {
                 case .failure(let issue):
-                    let c = production.issues.count
-                    production.issues.append(.cannotDecodeStandardOutput(issue))
+                    let c = logs.issues.count
+                    logs.issues.append(.cannotDecodeStandardOutput(issue))
                     changes.cast(.issues(.insert(c..<c+1)))
                     signal.cast(())
 
                 case .success(let lines):
                     guard lines.isEmpty == false else { break }
                     DEBUG_log("Bash STDOUT:\n\(lines)")
-                    let c = production.issues.count
+                    let c = logs.issues.count
 
                     do {
                         let s = lines.joined()
                         let m = try CargoDTO.Message.from(jsonCode: s)
-                        production.reports.append(.cargoMessage(m))
+                        logs.reports.append(.stdout(m))
                     }
                     catch let err {
                         assert(false)
@@ -76,8 +76,8 @@ final class CargoProcess2 {
             for d in bash.takeOutStandardError() {
                 switch errlb.process(d) {
                 case .failure(let issue):
-                    let c = production.issues.count
-                    production.issues.append(.cannotDecodeStandardError(issue))
+                    let c = logs.issues.count
+                    logs.issues.append(.cannotDecodeStandardError(issue))
                     changes.cast(.issues(.insert(c..<c+1)))
                     signal.cast(())
 
@@ -85,8 +85,8 @@ final class CargoProcess2 {
                     DEBUG_log("Bash STDERR:\n\(lines)")
                     // For any output, it's an error.
                     let msg = lines.joined(separator: "\n")
-                    let c = production.reports.count
-                    production.reports.append(.cargoErr(msg))
+                    let c = logs.reports.count
+                    logs.reports.append(.stderr(msg))
                     changes.cast(.reports(.insert(c..<c+1)))
                     signal.cast(())
 
@@ -120,7 +120,7 @@ final class CargoProcess2 {
                 changes.cast(.state)
                 signal.cast(())
                 guard exitCode == 0 else {
-                    production.issues.append(.bsahSubprocessExitWithNonZeroCode(exitCode))
+                    logs.issues.append(.bsahSubprocessExitWithNonZeroCode(exitCode))
                     return
                 }
             }
@@ -144,7 +144,7 @@ final class CargoProcess2 {
     /// Clears productions.
     ///
     func clear() {
-        production = Product()
+        logs = Logs()
     }
 }
 extension CargoProcess2 {
@@ -173,7 +173,7 @@ extension CargoProcess2 {
     struct Props {
         var priority = Priority.secondary
     }
-    struct Product {
+    struct Logs {
         var reports = [Report]()
         var issues = [Issue]()
     }
@@ -187,11 +187,8 @@ extension CargoProcess2 {
     /// Cargo execution itself is OK.
     ///
     enum Report {
-        case info(String)
-        case cargoMessage(CargoDTO.Message)
-        case cargoErr(String)
-        case rustCompWarn
-        case rustCompErr
+        case stdout(CargoDTO.Message)
+        case stderr(String)
     }
     enum Change {
         case state

@@ -1,0 +1,3 @@
+[submodule "submodules/weakly-persistent-array.swift"]
+	path = submodules/weakly-persistent-array.swift
+	url = https://github.com/eonil/weakly-persistent-array.swift

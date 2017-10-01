@@ -23,10 +23,10 @@ final class BuildFeature: WorkspaceFeatureComponent {
     }
     private func step() {
         if let exec = exec {
-            state.session.production.reports.append(contentsOf: exec.production.reports)
-            state.session.production.issues.append(contentsOf: exec.production.issues)
+            state.session.logs.reports.append(contentsOf: exec.logs.reports)
+            state.session.logs.issues.append(contentsOf: exec.logs.issues)
             exec.clear()
-            changes.cast([.sessionProduction])
+            changes.cast([.session(.logs)])
         }
         if exec?.state == .complete {
             exec = nil
@@ -39,12 +39,11 @@ final class BuildFeature: WorkspaceFeatureComponent {
             case .cleanAll:
                 guard let loc = project.location else { MARK_unimplemented() }
                 state.session.id = .init()
-                changes.cast([.sessionID])
+                changes.cast([.session(.id)])
                 let ps = CargoProcess2.Parameters(
                     location: loc,
                     command: .clean)
                 exec = services.cargo.spawn(ps)
-
 
             case .cleanTarget(let t):
                 MARK_unimplemented()
@@ -52,7 +51,7 @@ final class BuildFeature: WorkspaceFeatureComponent {
             case .build:
                 guard let loc = project.location else { MARK_unimplemented() }
                 state.session.id = .init()
-                changes.cast([.sessionID])
+                changes.cast([.session(.id)])
                 let ps = CargoProcess2.Parameters(
                     location: loc,
                     command: .build)
@@ -90,7 +89,7 @@ extension BuildFeature {
         }
         struct Session {
             var id = ID()
-            var production = Production()
+            var logs = Logs()
         }
         struct ID: Equatable {
             private let oid = ObjectAddressID()
@@ -98,8 +97,6 @@ extension BuildFeature {
                 return a.oid == b.oid
             }
         }
-
-        typealias Report = CargoProcess2.Report
     }
     enum Command {
         case build
@@ -108,16 +105,21 @@ extension BuildFeature {
         case cleanTarget(Target)
         case cancel
     }
-    typealias Production = CargoProcess2.Product
+    typealias Logs = CargoProcess2.Logs
+    typealias Report = CargoProcess2.Report
     typealias Issue = CargoProcess2.Issue
 
     enum Change {
         case phase
-        ///
-        /// `session.id` has been changed.
-        /// This means a new session has been started.
-        ///
-        case sessionID
-        case sessionProduction
+        case session(Session)
+
+        enum Session {
+            ///
+            /// `session.id` has been changed.
+            /// This means a new session has been started.
+            ///
+            case id
+            case logs
+        }
     }
 }

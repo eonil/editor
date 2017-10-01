@@ -1,5 +1,5 @@
 //
-//  Table.swift
+//  IncrementalTable.swift
 //  Editor
 //
 //  Created by Hoon H. on 2017/09/27.
@@ -20,7 +20,7 @@
 /// Deleting does not reclaim the freed memory.
 /// The memory will remain there.
 ///
-struct Table<Value> {
+struct IncrementalTable<Value> {
     typealias Key = Int
     private var offset = 0
     private var rows = [Value?]()

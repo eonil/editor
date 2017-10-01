@@ -43,7 +43,7 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
         guard i < tableView?.numberOfRows ?? 0 else { return }
         let report = reports[i]
         switch report {
-        case .cargoMessage(let m):
+        case .stdout(let m):
             switch m {
             case .compilerMessage(let m):
                 guard let span = m.message.spans.first else { break }
@@ -65,8 +65,8 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
     }
 }
 extension IssueNavigatorVC: NSTableViewDataSource {
-    private var reports: [BuildFeature.State.Report] {
-        return features?.build.state.session.production.reports ?? []
+    private var reports: [BuildFeature.Report] {
+        return features?.build.state.session.logs.reports ?? []
     }
     func numberOfRows(in tableView: NSTableView) -> Int {
         return reports.count
@@ -78,7 +78,7 @@ extension IssueNavigatorVC: NSTableViewDataSource {
         let report = reports[row]
         // TODO: Generate proper message.
         switch report {
-        case .cargoMessage(let m):
+        case .stdout(let m):
             switch m {
             case .compilerMessage(let m):
                 let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueItem"), owner: self) as! IssueItemTableCellView

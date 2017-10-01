@@ -42,4 +42,11 @@
          location = "group:Editor/Editor.xcodeproj">
       </FileRef>
    </Group>
+   <Group
+      location = "container:submodules"
+      name = "submodules">
+      <FileRef
+         location = "group:weakly-persistent-array.swift/EonilWeaklyPersistentArray.xcodeproj">
+      </FileRef>
+   </Group>
 </Workspace>
