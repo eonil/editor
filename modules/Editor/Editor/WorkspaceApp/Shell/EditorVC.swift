@@ -24,6 +24,7 @@ final class EditorVC: NSViewController, WorkspaceFeatureDependent {
         watch += loop
         loop.step = { [weak self] in self?.render() }
         render()
+        codeView?.textViewDelegate = self
     }
 
     private func render() {
@@ -33,4 +34,11 @@ final class EditorVC: NSViewController, WorkspaceFeatureDependent {
     }
 
     @IBOutlet private weak var codeView: CodeView?
+}
+extension EditorVC: NSTextViewDelegate {
+    func textDidChange(_ notification: Notification) {
+        guard let features = features else { return }
+        guard let s = codeView?.string else { return }
+        features.process(.codeEditing(.setContent(s)))
+    }
 }

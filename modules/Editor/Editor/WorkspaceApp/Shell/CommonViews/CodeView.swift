@@ -53,8 +53,11 @@ final class CodeView: NSView {
         install()
     }
 
-    var string = "" {
-        didSet {
+    var string: String {
+        get {
+            return textView.string
+        }
+        set {
             let f = NSFont.userFixedPitchFont(ofSize: NSFont.systemFontSize) ?? .default
 //            let f = NSFont(name: "Menlo", size: NSFont.systemFontSize()) ?? .default
             let s = NSAttributedString(string: string, attributes: [
@@ -63,7 +66,7 @@ final class CodeView: NSView {
             guard let r = textView.textStorage?.wholeRange else { return }
             textView.textStorage?.deleteCharacters(in: r)
             textView.textStorage?.append(s)
-            textView.string = string
+            textView.string = newValue
         }
     }
     var isEnabled = false {
@@ -71,6 +74,10 @@ final class CodeView: NSView {
     }
     var isEditable = false {
         didSet { reconfigure() }
+    }
+    weak var textViewDelegate: NSTextViewDelegate? {
+        get { return textView.delegate }
+        set { textView.delegate = newValue }
     }
 
     private func reconfigure() {
@@ -90,3 +97,5 @@ private extension NSFont {
         return NSFont.systemFont(ofSize: NSFont.systemFontSize)
     }
 }
+
+

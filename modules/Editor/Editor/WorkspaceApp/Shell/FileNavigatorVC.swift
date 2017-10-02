@@ -105,6 +105,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     }
 
 
+    
 
 
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {

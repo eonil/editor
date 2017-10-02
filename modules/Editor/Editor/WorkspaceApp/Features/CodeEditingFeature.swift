@@ -14,6 +14,7 @@ final class CodeEditingFeature: WorkspaceFeatureComponent {
     func process(_ cmd: Command) -> [WorkspaceCommand] {
         switch cmd {
         case .open(let u):
+            let cmds = process(.save)
             guard u != state.location else { break }
             state.location = u
             state.content = nil
@@ -22,7 +23,7 @@ final class CodeEditingFeature: WorkspaceFeatureComponent {
             let s = String(data: d, encoding: .utf8)
             state.content = s
             changes.cast(())
-            return []
+            return cmds
 
         case .save:
             guard let u = state.location else {
@@ -44,6 +45,7 @@ final class CodeEditingFeature: WorkspaceFeatureComponent {
             return []
 
         case .close:
+            let cmds = process(.save)
             guard state.location != nil else {
                 REPORT_ignoredSignal(cmd)
                 break
@@ -51,7 +53,10 @@ final class CodeEditingFeature: WorkspaceFeatureComponent {
             state.location = nil
             state.content = nil
             changes.cast(())
-            return []
+            return cmds
+
+        case .setContent(let s):
+            state.content = s
         }
         return []
     }
@@ -64,6 +69,7 @@ extension CodeEditingFeature {
     enum Command {
         case open(URL)
         case save
+        case setContent(String)
         case close
     }
 }
