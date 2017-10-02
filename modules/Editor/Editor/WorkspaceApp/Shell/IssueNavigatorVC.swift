@@ -28,17 +28,31 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
         super.viewDidLayout()
         tableView?.sizeLastColumnToFit()
         tableView?.rowHeight = tableView?.frame.height ?? 1_000 // Trick to remove unwanted grid lines.
-        tableView?.doubleAction = #selector(userDidDoubleClickOnTableView)
+        tableView?.target = self
+        tableView?.action = #selector(userDidClickOnTableViewCellOrColumnHeader)
+        tableView?.doubleAction = #selector(userDidDoubleClickOnTableViewCellOrColumnHeader)
     }
 
+    private func getClickedIssue() -> CargoDTO.Message? {
+        guard let features = features else { return nil }
+        guard let i = tableView?.clickedRow else { return nil }
+        guard i != -1 else { return nil }
+        return features.build.state.session.prefilteredLogs.cargoMessageReports[i]
+    }
     private func render() {
         tableView?.reloadData()
     }
 
     @IBOutlet private weak var tableView: NSTableView?
 
-    @IBAction
-    private func userDidDoubleClickOnTableView(_: NSObject) {
+    @objc
+    private func userDidClickOnTableViewCellOrColumnHeader() {
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
+        guard let issue = getClickedIssue() else { return }
+        features.log.process(.ADHOC_printAny(issue))
+    }
+    @objc
+    private func userDidDoubleClickOnTableViewCellOrColumnHeader() {
         guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         let i = tableView?.clickedRow ?? -1
         guard i >= 0 else { return }
@@ -79,6 +93,7 @@ extension IssueNavigatorVC: NSTableViewDataSource {
             case .compilerMessage(let m):
                 let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueItem"), owner: self) as! IssueItemTableCellView
                 v.messageTextField?.stringValue = m.message.message
+                m.message.children
                 return v
             default:
                 break

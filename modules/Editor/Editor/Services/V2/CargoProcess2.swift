@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EonilJSON
 
 final class CargoProcess2 {
     let parameters: Parameters
@@ -55,13 +56,15 @@ final class CargoProcess2 {
 
                 case .success(let lines):
                     guard lines.isEmpty == false else { break }
-                    DEBUG_log("Bash STDOUT:\n\(lines)")
+                    DEBUG_log("Bash STDOUT:\n\(lines.joined(separator: "\n"))")
                     let c = logs.issues.count
 
                     do {
-                        let s = lines.joined()
-                        let m = try CargoDTO.Message.from(jsonCode: s)
-                        logs.reports.append(.stdout(m))
+                        // Cargo output one message for each lines.
+                        for s in lines {
+                            let m = try CargoDTO.Message.from(jsonCode: s)
+                            logs.reports.append(.stdout(m))
+                        }
                     }
                     catch let err {
                         assert(false)

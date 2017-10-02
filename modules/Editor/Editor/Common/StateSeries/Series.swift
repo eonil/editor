@@ -11,6 +11,10 @@ import EonilStateSeries
 typealias Series<T> = StateSeries<T>
 
 extension Series: RandomAccessCollection {
+    init<S>(_ s: S) where S: Sequence, S.Element == Element {
+        self = Series()
+        append(contentsOf: s)
+    }
     public var count: Int { return points.count }
     public var startIndex: Int { return points.startIndex }
     public var endIndex: Int { return points.endIndex }

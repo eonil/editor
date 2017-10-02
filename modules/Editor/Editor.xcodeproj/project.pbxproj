@@ -72,6 +72,10 @@
 		4552B7F51EFB91F900E529EE /* MainMenuItemID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */; };
 		4552B7F71EFB94E400E529EE /* App.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4552B7F61EFB94E400E529EE /* App.xib */; };
 		4552B8161EFBAC0200E529EE /* ProjectItemPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B8151EFBAC0200E529EE /* ProjectItemPath.swift */; };
+		45552F381F82727300892CC5 /* InspectorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F371F82727300892CC5 /* InspectorVC.swift */; };
+		45552F3A1F82727B00892CC5 /* Inspector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45552F391F82727B00892CC5 /* Inspector.storyboard */; };
+		45552F3C1F82743900892CC5 /* NSOutlineView.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F3B1F82743900892CC5 /* NSOutlineView.extension.swift */; };
+		45552F3E1F82744700892CC5 /* NSTableView.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F3D1F82744700892CC5 /* NSTableView.extension.swift */; };
 		4555A3FE1EFFBAB400FCB88E /* FunctionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A3FD1EFFBAB400FCB88E /* FunctionUtility.swift */; };
 		4555A4011EFFBAEB00FCB88E /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A4001EFFBAEB00FCB88E /* Function.swift */; };
 		4555A4051EFFC33400FCB88E /* MutableBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A4041EFFC33400FCB88E /* MutableBox.swift */; };
@@ -299,6 +303,10 @@
 		4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuItemID.swift; sourceTree = "<group>"; };
 		4552B7F61EFB94E400E529EE /* App.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = App.xib; sourceTree = "<group>"; };
 		4552B8151EFBAC0200E529EE /* ProjectItemPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectItemPath.swift; sourceTree = "<group>"; };
+		45552F371F82727300892CC5 /* InspectorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectorVC.swift; sourceTree = "<group>"; };
+		45552F391F82727B00892CC5 /* Inspector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inspector.storyboard; sourceTree = "<group>"; };
+		45552F3B1F82743900892CC5 /* NSOutlineView.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSOutlineView.extension.swift; sourceTree = "<group>"; };
+		45552F3D1F82744700892CC5 /* NSTableView.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTableView.extension.swift; sourceTree = "<group>"; };
 		4555A3FD1EFFBAB400FCB88E /* FunctionUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtility.swift; sourceTree = "<group>"; };
 		4555A4001EFFBAEB00FCB88E /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		4555A4041EFFC33400FCB88E /* MutableBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBox.swift; sourceTree = "<group>"; };
@@ -693,7 +701,11 @@
 				45AF89DB1F777A9A00767BC4 /* IssueNavigator.storyboard */,
 				45AF89D91F777A9200767BC4 /* IssueNavigatorVC.swift */,
 				4511D34A1F77DCD600F60401 /* IssueItemTableCellView.swift */,
+				45552F391F82727B00892CC5 /* Inspector.storyboard */,
+				45552F371F82727300892CC5 /* InspectorVC.swift */,
 				4531E1ED1F02886600A6DB2A /* MenuItem.swift */,
+				45552F3B1F82743900892CC5 /* NSOutlineView.extension.swift */,
+				45552F3D1F82744700892CC5 /* NSTableView.extension.swift */,
 				4511D3481F77D4BC00F60401 /* NSColor.extension.swift */,
 				45188C511F81CCC700506284 /* AnyIntIndexingRandomAccessCollection.swift */,
 				45188C631F81D30000506284 /* Sequence.extension.swift */,
@@ -877,6 +889,7 @@
 				45AF89D41F77774800767BC4 /* FileNavigator.storyboard in Resources */,
 				4552B7F71EFB94E400E529EE /* App.xib in Resources */,
 				45FB545B1EF67A6900522E83 /* FileNavigatorViewController.xib in Resources */,
+				45552F3A1F82727B00892CC5 /* Inspector.storyboard in Resources */,
 				45AF89C21F77710D00767BC4 /* Utility.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -918,6 +931,7 @@
 				4511D34B1F77DCD600F60401 /* IssueItemTableCellView.swift in Sources */,
 				45EA45A21EF22E450024D3B1 /* SceneFeature.swift in Sources */,
 				45AF89B81F776BE300767BC4 /* NavigatorVC.swift in Sources */,
+				45552F3C1F82743900892CC5 /* NSOutlineView.extension.swift in Sources */,
 				45EA45EE1EF3B0A20024D3B1 /* RationalInt.swift in Sources */,
 				45641ECB1EFF48A000D4C0D1 /* FSMLoop.swift in Sources */,
 				454843BC1EFE401C00D53763 /* Bash.swift in Sources */,
@@ -930,6 +944,7 @@
 				45B6E0A61F7EA1D1009D90EC /* IncrementalListType.swift in Sources */,
 				454843D41EFE59C200D53763 /* MainMenu2Item.swift in Sources */,
 				45B6E0A81F7EA39C009D90EC /* TransitionalSnapshot.swift in Sources */,
+				45552F3E1F82744700892CC5 /* NSTableView.extension.swift in Sources */,
 				45188C481F81638200506284 /* Series.swift in Sources */,
 				45641EC71EFF420200D4C0D1 /* FSM.swift in Sources */,
 				454843B41EFE3F9900D53763 /* Services.swift in Sources */,
@@ -964,6 +979,7 @@
 				45EA45C51EF232470024D3B1 /* debugLog.swift in Sources */,
 				451CE1B21EF63D4B004721A3 /* REPORT_missingServicesAndFatalError.swift in Sources */,
 				45AF89C81F77711F00767BC4 /* UtilityVC.swift in Sources */,
+				45552F381F82727300892CC5 /* InspectorVC.swift in Sources */,
 				4517ADBA1F787D8800A3DD58 /* WorkspaceFeatureComponent.swift in Sources */,
 				456ABC471F03C97F00928B4B /* OrderedTree2.swift in Sources */,
 				45EA458B1EF22B520024D3B1 /* DriverShell.swift in Sources */,

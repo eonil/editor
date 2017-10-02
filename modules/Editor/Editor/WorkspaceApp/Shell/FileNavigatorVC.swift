@@ -300,10 +300,3 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     }
 }
 
-private extension NSOutlineView {
-    var clickedItem: Any? {
-        let i = clickedRow
-        guard i != NSNotFound else { return nil }
-        return item(atRow: i)
-    }
-}

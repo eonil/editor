@@ -16,53 +16,52 @@ final class LogFeature: ServicesDependent {
     func process(_ cmd: InternalCommand) {
         switch cmd {
         case .startBuildSession:
-            guard state.currentBuildSession == nil else {
-                REPORT_ignoredSignal(cmd)
-                break
-            }
-            state.currentBuildSession = State.BuildSession()
-            changes.cast([.currentBuildSession])
-        case .endBuildSession:
-            guard let bs = state.currentBuildSession else {
-                REPORT_ignoredSignal(cmd)
-                break
-            }
-            state.archivedBuildSessions.append(bs)
-            state.currentBuildSession = nil
+            state.archivedSessions.append(state.currentSession)
+            state.currentSession = Session(kind: .building, items: [])
             changes.cast([.currentBuildSession, .archivedBuildSessions])
-        case .setBuildState(let s):
-            guard var bs = state.currentBuildSession else {
-                REPORT_ignoredSignal(cmd)
-                break
-            }
 
+        case .endBuildSession:
+            state.archivedSessions.append(state.currentSession)
+            state.currentSession = Session(kind: .editing, items: [])
+            changes.cast([.currentBuildSession, .archivedBuildSessions])
+
+        case .setBuildState(let s):
             let items = [
                 s.session.logs.reports.map(Item.cargoReport),
                 s.session.logs.issues.map(Item.cargoIssue),
             ].joined()
-            bs.items = Array(items)
-            state.currentBuildSession = bs
+            state.currentSession.items = Series(items)
             changes.cast([.currentBuildSession])
+
+        case .ADHOC_printAny(let v):
+            state.currentSession.items.append(.ADHOC_any(v))
         }
     }
 }
 extension LogFeature {
     struct State {
-        var currentBuildSession: BuildSession?
-        var archivedBuildSessions = [BuildSession]()
-
-        struct BuildSession {
-            var items = [Item]()
-        }
+        var currentSession = Session(kind: .editing, items: [])
+        var archivedSessions = Series<Session>()
+    }
+    struct Session {
+        var kind: SessionKind
+        var items = Series<Item>()
+    }
+    enum SessionKind {
+        case editing
+        case building
+        case running
     }
     enum Item {
         case cargoReport(CargoProcess2.Report)
         case cargoIssue(CargoProcess2.Issue)
+        case ADHOC_any(Any?)
     }
     enum InternalCommand {
         case startBuildSession
         case endBuildSession
         case setBuildState(BuildFeature.State)
+        case ADHOC_printAny(Any?)
     }
     enum Change {
         case currentBuildSession
