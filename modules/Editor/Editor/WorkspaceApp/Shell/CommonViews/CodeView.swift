@@ -37,10 +37,13 @@ final class CodeView: NSView {
 
         textView.textContainer?.widthTracksTextView = false
         textView.textContainer?.heightTracksTextView = false
+        textView.minSize = CGSize.zero
+        textView.maxSize = CGSize(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: CGFloat.greatestFiniteMagnitude)
         textView.textContainer?.containerSize = CGSize(
             width: CGFloat.greatestFiniteMagnitude,
             height: CGFloat.greatestFiniteMagnitude)
-
         reconfigure()
     }
 

@@ -143,6 +143,9 @@ final class WorkspaceFeatures: ServicesDependent {
                 .plan(.queueTask(.debugLaunch))
                 ])
 
+        case .debugClearConsole:
+            log.process(.startSession(.editing))
+
         default:
             REPORT_recoverableWarning("Processing unimplemented menu command... `\(c)`.")
             MARK_unimplementedButSkipForNow()

@@ -111,6 +111,7 @@ private struct MainMenuPalette {
     let debugStepOver       =   makeClickableItem(.debugStepOver, "Step Over")
     let debugStepInto       =   makeClickableItem(.debugStepInto, "Step Into")
     let debugStepOut        =   makeClickableItem(.debugStepOut, "Step Out")
+    let debugClearConsole   =   makeClickableItem(.debugClearConsole, "Clear Console")
 
     init() {
         app.subitems = [
@@ -146,6 +147,7 @@ private struct MainMenuPalette {
             debugStepOver,
             debugStepInto,
             debugStepOut,
+            debugClearConsole,
         ]
     }
     func getAllTopMenuItems() -> [NSMenuItem] {

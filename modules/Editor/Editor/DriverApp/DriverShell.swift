@@ -46,6 +46,7 @@ final class DriverShell {
             .productBuild,
             .productRun,
             .productStop,
+            .debugClearConsole,
             ])
         mainMenuController.reload(mainMenuState)
         NSApplication.shared.mainMenu = mainMenuController.menu
@@ -85,6 +86,9 @@ final class DriverShell {
             case .fileCloseWorkspace:
                 AUDIT_check(WorkspaceDocument.current != nil)
                 WorkspaceDocument.current?.close()
+
+            case .debugClearConsole:
+                WorkspaceDocument.current?.process(.debugClearConsole)
 
             default:
                 break

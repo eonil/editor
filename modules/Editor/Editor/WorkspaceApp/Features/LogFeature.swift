@@ -15,15 +15,15 @@ final class LogFeature: ServicesDependent {
 
     func process(_ cmd: InternalCommand) {
         switch cmd {
-        case .startBuildSession:
+        case .startSession(let kind):
             state.archivedSessions.append(state.currentSession)
-            state.currentSession = Session(kind: .building, items: [])
-            changes.cast([.currentBuildSession, .archivedBuildSessions])
+            state.currentSession = Session(kind: kind, items: [])
+            changes.cast([.currentSession, .archivedSessions])
 
-        case .endBuildSession:
+        case .endSession:
             state.archivedSessions.append(state.currentSession)
             state.currentSession = Session(kind: .editing, items: [])
-            changes.cast([.currentBuildSession, .archivedBuildSessions])
+            changes.cast([.currentSession, .archivedSessions])
 
         case .setBuildState(let s):
             let items = [
@@ -31,10 +31,11 @@ final class LogFeature: ServicesDependent {
                 s.session.logs.issues.map(Item.cargoIssue),
             ].joined()
             state.currentSession.items = Series(items)
-            changes.cast([.currentBuildSession])
+            changes.cast([.currentSession])
 
         case .ADHOC_printAny(let v):
             state.currentSession.items.append(.ADHOC_any(v))
+            changes.cast([.currentSession])
         }
     }
 }
@@ -55,16 +56,16 @@ extension LogFeature {
     enum Item {
         case cargoReport(CargoProcess2.Report)
         case cargoIssue(CargoProcess2.Issue)
-        case ADHOC_any(Any?)
+        case ADHOC_any(Any)
     }
     enum InternalCommand {
-        case startBuildSession
-        case endBuildSession
+        case startSession(SessionKind)
+        case endSession
         case setBuildState(BuildFeature.State)
-        case ADHOC_printAny(Any?)
+        case ADHOC_printAny(Any)
     }
     enum Change {
-        case currentBuildSession
-        case archivedBuildSessions
+        case currentSession
+        case archivedSessions
     }
 }

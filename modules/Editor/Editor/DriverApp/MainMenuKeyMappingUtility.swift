@@ -27,6 +27,7 @@ enum MainMenuKeyMappingUtility {
         m[.productStop]         =   .command + "."
         m[.productBuild]        =   .command + "b"
         m[.productClean]        =   .command + .shift + "k"
+        m[.debugClearConsole]   =   .command + "k"
         return m
     }
 }

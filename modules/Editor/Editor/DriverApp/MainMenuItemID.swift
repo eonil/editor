@@ -41,4 +41,5 @@ public enum MainMenuItemID {
     case debugStepOver
     case debugStepInto
     case debugStepOut
+    case debugClearConsole
 }
