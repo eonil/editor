@@ -35,6 +35,7 @@ final class LogFeature: ServicesDependent {
                 REPORT_ignoredSignal(cmd)
                 break
             }
+
             let items = [
                 s.session.logs.reports.map(Item.cargoReport),
                 s.session.logs.issues.map(Item.cargoIssue),

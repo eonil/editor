@@ -11,12 +11,6 @@ import AppKit
 final class ConsoleVC: NSViewController, WorkspaceFeatureDependent {
     private let buildChangeWatch = Relay<[BuildFeature.Change]>()
     private let logChangeWatch = Relay<[LogFeature.Change]>()
-    private var filteredStdErrReports = FilteredIncrementalList<BuildFeature.Report>({
-        switch $0 {
-        case .stdout:   return false
-        case .stderr:   return true
-        }
-    })
 
     weak var features: WorkspaceFeatures? {
         didSet {
@@ -41,13 +35,7 @@ final class ConsoleVC: NSViewController, WorkspaceFeatureDependent {
                 switch field {
                 case .id:
                     break
-                case .logs(let field):
-                    switch field {
-                    case .reports(let t):
-                        filteredStdErrReports.apply(idempotentTransition: t)
-                    case .issues(_):
-                        break
-                    }
+                case .logs:
                     render()
                 }
             }

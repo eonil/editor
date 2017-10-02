@@ -28,6 +28,10 @@
 		4514CDD41F7C0DDF00FF978B /* Result.extension.REPORT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514CDD31F7C0DDF00FF978B /* Result.extension.REPORT.swift */; };
 		4514CDDF1F7DC96800FF978B /* VersionedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4514CDDE1F7DC96800FF978B /* VersionedArray.swift */; };
 		4517ADBA1F787D8800A3DD58 /* WorkspaceFeatureComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4517ADB91F787D8800A3DD58 /* WorkspaceFeatureComponent.swift */; };
+		45188C421F815F3300506284 /* libEonilStateSeries.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45188C3A1F815F2B00506284 /* libEonilStateSeries.a */; };
+		45188C481F81638200506284 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45188C471F81638200506284 /* Series.swift */; };
+		45188C521F81CCC700506284 /* AnyIntIndexingRandomAccessCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45188C511F81CCC700506284 /* AnyIntIndexingRandomAccessCollection.swift */; };
+		45188C641F81D30000506284 /* Sequence.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45188C631F81D30000506284 /* Sequence.extension.swift */; };
 		451CE1B01EF635C7004721A3 /* DebugCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CE1AF1EF635C7004721A3 /* DebugCommand.swift */; };
 		451CE1B21EF63D4B004721A3 /* REPORT_missingServicesAndFatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CE1B11EF63D4B004721A3 /* REPORT_missingServicesAndFatalError.swift */; };
 		451CE1B41EF648B7004721A3 /* Tree2Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CE1B31EF648B7004721A3 /* Tree2Mutation.swift */; };
@@ -63,7 +67,6 @@
 		454F77A51EFE964300317763 /* ManualLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F77A41EFE964300317763 /* ManualLoop.swift */; };
 		454F77BA1EFF127000317763 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F77B91EFF127000317763 /* Method.swift */; };
 		4552678A1F7F5EE7001D4006 /* libEonilWeaklyPersistentArray.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 455267871F7F5EE1001D4006 /* libEonilWeaklyPersistentArray.a */; };
-		4552678D1F812112001D4006 /* StateSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552678C1F812112001D4006 /* StateSeries.swift */; };
 		4552678F1F812394001D4006 /* SampleFriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552678E1F812394001D4006 /* SampleFriendList.swift */; };
 		4552B7F31EFB8B7F00E529EE /* TreeOutlineAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */; };
 		4552B7F51EFB91F900E529EE /* MainMenuItemID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */; };
@@ -165,6 +168,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		45188C391F815F2B00506284 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 455267A21F8128BF001D4006;
+			remoteInfo = "EonilStateSeries-macOS";
+		};
+		45188C3B1F815F2B00506284 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45188C1D1F813E4100506284;
+			remoteInfo = "EonilStateSeries-macOS-UnitTests";
+		};
+		45188C3D1F815F2B00506284 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45188C0D1F813A5600506284;
+			remoteInfo = "EonilStateSeries-iOS";
+		};
 		455267841F7F5EE1001D4006 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */;
@@ -228,6 +252,10 @@
 		4514CDDD1F7DC91100FF978B /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
 		4514CDDE1F7DC96800FF978B /* VersionedArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionedArray.swift; sourceTree = "<group>"; };
 		4517ADB91F787D8800A3DD58 /* WorkspaceFeatureComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceFeatureComponent.swift; sourceTree = "<group>"; };
+		45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilStateSeries.xcodeproj; path = "../../submodules/state-series.swift/EonilStateSeries.xcodeproj"; sourceTree = "<group>"; };
+		45188C471F81638200506284 /* Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
+		45188C511F81CCC700506284 /* AnyIntIndexingRandomAccessCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyIntIndexingRandomAccessCollection.swift; sourceTree = "<group>"; };
+		45188C631F81D30000506284 /* Sequence.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.extension.swift; sourceTree = "<group>"; };
 		451CE1AF1EF635C7004721A3 /* DebugCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugCommand.swift; sourceTree = "<group>"; };
 		451CE1B11EF63D4B004721A3 /* REPORT_missingServicesAndFatalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = REPORT_missingServicesAndFatalError.swift; sourceTree = "<group>"; };
 		451CE1B31EF648B7004721A3 /* Tree2Mutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree2Mutation.swift; sourceTree = "<group>"; };
@@ -266,7 +294,6 @@
 		454F77B91EFF127000317763 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		4552677D1F7F5ED2001D4006 /* libEonilWeaklyPersistentArray.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEonilWeaklyPersistentArray.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilWeaklyPersistentArray.xcodeproj; path = "../../submodules/weakly-persistent-array.swift/EonilWeaklyPersistentArray.xcodeproj"; sourceTree = "<group>"; };
-		4552678C1F812112001D4006 /* StateSeries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateSeries.swift; sourceTree = "<group>"; };
 		4552678E1F812394001D4006 /* SampleFriendList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleFriendList.swift; sourceTree = "<group>"; };
 		4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeOutlineAdapter.swift; sourceTree = "<group>"; };
 		4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuItemID.swift; sourceTree = "<group>"; };
@@ -369,6 +396,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45188C421F815F3300506284 /* libEonilStateSeries.a in Frameworks */,
 				4552678A1F7F5EE7001D4006 /* libEonilWeaklyPersistentArray.a in Frameworks */,
 				451CE1BB1EF66E61004721A3 /* LLDBWrapper.framework in Frameworks */,
 				45EA45581EF229B90024D3B1 /* EonilToolbox.framework in Frameworks */,
@@ -391,11 +419,22 @@
 			path = Transition;
 			sourceTree = "<group>";
 		};
+		45188C341F815F2B00506284 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45188C3A1F815F2B00506284 /* libEonilStateSeries.a */,
+				45188C3C1F815F2B00506284 /* EonilStateSeries-macOS-UnitTests.xctest */,
+				45188C3E1F815F2B00506284 /* libEonilStateSeries.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		4529BF591EF21859006A9A39 = {
 			isa = PBXGroup;
 			children = (
 				45EA455A1EF229E60024D3B1 /* Debug.xcconfig */,
 				45EA455B1EF229E60024D3B1 /* Release.xcconfig */,
+				45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */,
 				4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */,
 				45FB544E1EF6775500522E83 /* BTree.framework */,
 				451CE1B91EF66E3D004721A3 /* LLDBWrapper.framework */,
@@ -532,8 +571,8 @@
 		4552678B1F812105001D4006 /* StateSeries */ = {
 			isa = PBXGroup;
 			children = (
-				4552678C1F812112001D4006 /* StateSeries.swift */,
 				4552678E1F812394001D4006 /* SampleFriendList.swift */,
+				45188C471F81638200506284 /* Series.swift */,
 			);
 			path = StateSeries;
 			sourceTree = "<group>";
@@ -656,6 +695,8 @@
 				4511D34A1F77DCD600F60401 /* IssueItemTableCellView.swift */,
 				4531E1ED1F02886600A6DB2A /* MenuItem.swift */,
 				4511D3481F77D4BC00F60401 /* NSColor.extension.swift */,
+				45188C511F81CCC700506284 /* AnyIntIndexingRandomAccessCollection.swift */,
+				45188C631F81D30000506284 /* Sequence.extension.swift */,
 				4552B7F11EFB8B7F00E529EE /* Utility */,
 				45EB4D201F05CED9005C5353 /* CommonViews */,
 			);
@@ -761,6 +802,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 45188C341F815F2B00506284 /* Products */;
+					ProjectRef = 45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */;
+				},
+				{
 					ProductGroup = 4552677F1F7F5EE0001D4006 /* Products */;
 					ProjectRef = 4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */;
 				},
@@ -773,6 +818,27 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		45188C3A1F815F2B00506284 /* libEonilStateSeries.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEonilStateSeries.a;
+			remoteRef = 45188C391F815F2B00506284 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45188C3C1F815F2B00506284 /* EonilStateSeries-macOS-UnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilStateSeries-macOS-UnitTests.xctest";
+			remoteRef = 45188C3B1F815F2B00506284 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45188C3E1F815F2B00506284 /* libEonilStateSeries.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEonilStateSeries.a;
+			remoteRef = 45188C3D1F815F2B00506284 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		455267851F7F5EE1001D4006 /* libEonilWeaklyPersistentArray.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -860,9 +926,11 @@
 				45FB545F1EF6A08B00522E83 /* REPORT_missingFeaturesAndFatalError.swift in Sources */,
 				451CE1B81EF66ABD004721A3 /* Progress.swift in Sources */,
 				45EA45E21EF32FB60024D3B1 /* MutableChannel.extension.swift in Sources */,
+				45188C641F81D30000506284 /* Sequence.extension.swift in Sources */,
 				45B6E0A61F7EA1D1009D90EC /* IncrementalListType.swift in Sources */,
 				454843D41EFE59C200D53763 /* MainMenu2Item.swift in Sources */,
 				45B6E0A81F7EA39C009D90EC /* TransitionalSnapshot.swift in Sources */,
+				45188C481F81638200506284 /* Series.swift in Sources */,
 				45641EC71EFF420200D4C0D1 /* FSM.swift in Sources */,
 				454843B41EFE3F9900D53763 /* Services.swift in Sources */,
 				4511D34F1F77E96600F60401 /* WorkspaceCommand.swift in Sources */,
@@ -949,9 +1017,9 @@
 				454F77BA1EFF127000317763 /* Method.swift in Sources */,
 				454843D81EFE5B1400D53763 /* Relay.swift in Sources */,
 				45EA45611EF22A2E0024D3B1 /* AUDIT_unwrap.swift in Sources */,
+				45188C521F81CCC700506284 /* AnyIntIndexingRandomAccessCollection.swift in Sources */,
 				4514CD9C1F7BCF4E00FF978B /* FiniteIncrementalList.swift in Sources */,
 				45EA459C1EF22E450024D3B1 /* AutoCompletionFeature.swift in Sources */,
-				4552678D1F812112001D4006 /* StateSeries.swift in Sources */,
 				4552B7F31EFB8B7F00E529EE /* TreeOutlineAdapter.swift in Sources */,
 				4511D33E1F77A75E00F60401 /* JSONValue.extension.swift in Sources */,
 				4548439B1EFE32D800D53763 /* FeatureSessionProtocol.swift in Sources */,
@@ -1071,6 +1139,7 @@
 				DEVELOPMENT_TEAM = SYA75M63MP;
 				INFOPLIST_FILE = Editor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1084,6 +1153,7 @@
 				DEVELOPMENT_TEAM = SYA75M63MP;
 				INFOPLIST_FILE = Editor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = Eonil.Editor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

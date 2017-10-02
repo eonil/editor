@@ -25,6 +25,14 @@ final class BuildFeature: WorkspaceFeatureComponent {
         if let exec = exec {
             state.session.logs.reports.append(contentsOf: exec.logs.reports)
             state.session.logs.issues.append(contentsOf: exec.logs.issues)
+            for r in exec.logs.reports {
+                switch r {
+                case .stdout(let m):
+                    state.session.prefilteredLogs.cargoMessageReports.append(m)
+                default:
+                    break
+                }
+            }
             exec.clear()
             changes.cast([.session(.logs)])
         }
@@ -90,12 +98,25 @@ extension BuildFeature {
         struct Session {
             var id = ID()
             var logs = Logs()
+            ///
+            /// Redundant subset filtered of `logs` with various conditions
+            /// for performance. Appending is synced with `log`, but removing
+            /// is not synced. It can be earlier of later.
+            ///
+            var prefilteredLogs = PrefilteredLogs()
         }
         struct ID: Equatable {
             private let oid = ObjectAddressID()
             static func == (_ a: ID, _ b: ID) -> Bool {
                 return a.oid == b.oid
             }
+        }
+        struct Logs {
+            var reports = Series<Report>()
+            var issues = Series<Issue>()
+        }
+        struct PrefilteredLogs {
+            var cargoMessageReports = Series<CargoDTO.Message>()
         }
     }
     enum Command {
@@ -105,7 +126,6 @@ extension BuildFeature {
         case cleanTarget(Target)
         case cancel
     }
-    typealias Logs = CargoProcess2.Logs
     typealias Report = CargoProcess2.Report
     typealias Issue = CargoProcess2.Issue
 

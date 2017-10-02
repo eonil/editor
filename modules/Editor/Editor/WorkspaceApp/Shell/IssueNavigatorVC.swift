@@ -7,9 +7,11 @@
 //
 
 import AppKit
+import EonilStateSeries
 
 final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
     private let buildWatch = Relay<[BuildFeature.Change]>()
+
     weak var features: WorkspaceFeatures? {
         didSet {
             features?.build.changes += buildWatch
@@ -41,16 +43,14 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
         let i = tableView?.clickedRow ?? -1
         guard i >= 0 else { return }
         guard i < tableView?.numberOfRows ?? 0 else { return }
-        let report = reports[i]
-        switch report {
-        case .stdout(let m):
+        if let m = cargoMessages?[i] {
             switch m {
             case .compilerMessage(let m):
                 guard let span = m.message.spans.first else { break }
                 DEBUG_log(span.file_name)
-                let p = ProjectFeature.Path.fromUnixFilePathFromProjectRoot(span.file_name) 
+                let p = ProjectFeature.Path.fromUnixFilePathFromProjectRoot(span.file_name)
                 guard let u = features.project.makeFileURL(for: p) else {
-                    REPORT_ignoredSignal(report)
+                    REPORT_ignoredSignal(m)
                     break
                 }
                 features.process(.codeEditing(.open(u)))
@@ -59,26 +59,22 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
             case .buildScript(let m):
                 REPORT_unimplementedAndContinue()
             }
-        default:
-            MARK_unimplemented()
         }
     }
 }
 extension IssueNavigatorVC: NSTableViewDataSource {
-    private var reports: [BuildFeature.Report] {
-        return features?.build.state.session.logs.reports ?? []
+    private var cargoMessages: Series<CargoDTO.Message>? {
+        return features?.build.state.session.prefilteredLogs.cargoMessageReports
     }
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return reports.count
+        return cargoMessages?.count ?? 0
     }
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 60
     }
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let report = reports[row]
-        // TODO: Generate proper message.
-        switch report {
-        case .stdout(let m):
+        if let m = cargoMessages?[row] {
+            // TODO: Generate proper message.
             switch m {
             case .compilerMessage(let m):
                 let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueItem"), owner: self) as! IssueItemTableCellView
@@ -87,14 +83,14 @@ extension IssueNavigatorVC: NSTableViewDataSource {
             default:
                 break
             }
-        default:
-            break
+            let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueItem"), owner: self) as! IssueItemTableCellView
+            v.textField?.stringValue = "\(m)"
+            return v
         }
-
         let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueItem"), owner: self) as! IssueItemTableCellView
-        v.messageTextField?.stringValue = "\(report)"
         return v
     }
 }
 extension IssueNavigatorVC: NSTableViewDelegate {
 }
+
