@@ -101,6 +101,7 @@ private struct MainMenuPalette {
     let fileSaveAs          =   makeClickableItem(.fileSaveAs, "Save As...")
     let fileClose           =   makeClickableItem(.fileClose, "Close")
     let fileCloseWorkspace  =   makeClickableItem(.fileCloseWorkspace, "Close Workspace")
+    let fileRename          =   makeClickableItem(.fileRename, "Rename")
     let product             =   makeGroupItem("Product")
     let productRun          =   makeClickableItem(.productRun, "Run")
     let productStop         =   makeClickableItem(.productStop, "Stop")
@@ -127,6 +128,7 @@ private struct MainMenuPalette {
             makeSeparatorItem(),
             fileClose,
             fileCloseWorkspace,
+            fileRename,
         ]
         fileNew.subitems = [
             fileNewWorkspace,

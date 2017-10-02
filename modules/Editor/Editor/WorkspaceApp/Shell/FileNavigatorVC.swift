@@ -38,6 +38,8 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         outlineView?.delegate = self
         outlineView?.reloadData()
         outlineView?.menu = ctxm
+        outlineView?.target = self
+        outlineView?.action = #selector(userDidClickOnOutlineViewCellOrColumnHeader)
         ctxm.delegate = self
         ctxm.setDelegateToAllNodes { [weak self] in self?.processContextMenuSignal($0) }
     }
@@ -214,6 +216,16 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
 
 
 
+    @objc
+    private func userDidClickOnOutlineViewCellOrColumnHeader() {
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
+        guard let clickedItem = outlineView?.clickedItem as? TOA.OutlineViewNode else { return }
+        let filePath = clickedItem.key
+        guard let fileURL = features.project.makeFileURL(for: filePath) else { return REPORT_recoverableWarning("Bad file path: \(filePath)") }
+        features.process(.codeEditing(.open(fileURL)))
+    }
+
+
 
 
     private func setMenuAttributes() {
@@ -284,5 +296,13 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         guard let u = features.project.makeFileURL(for: n.key) else { return nil }
         guard let m = NSImage(contentsOf: u) else { return nil }
         return m
+    }
+}
+
+private extension NSOutlineView {
+    var clickedItem: Any? {
+        let i = clickedRow
+        guard i != NSNotFound else { return nil }
+        return item(atRow: i)
     }
 }

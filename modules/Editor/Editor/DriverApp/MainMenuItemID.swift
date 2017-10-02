@@ -31,6 +31,7 @@ public enum MainMenuItemID {
     case fileSaveAs
     case fileClose
     case fileCloseWorkspace
+    case fileRename
     case productClean
     case productBuild
     case productRun

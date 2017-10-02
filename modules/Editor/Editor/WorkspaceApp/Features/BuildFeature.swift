@@ -99,7 +99,7 @@ extension BuildFeature {
             var id = ID()
             var logs = Logs()
             ///
-            /// Redundant subset filtered of `logs` with various conditions
+            /// Redundant subset pre-filtered `logs` with various conditions
             /// for performance. Appending is synced with `log`, but removing
             /// is not synced. It can be earlier of later.
             ///
