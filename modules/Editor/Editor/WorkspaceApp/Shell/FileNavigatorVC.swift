@@ -10,9 +10,9 @@ import AppKit
 import EonilSignet
 
 final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate, NSTextFieldDelegate, WorkspaceFeatureDependent {
-    private typealias TOA = TreeOutlineAdapter<ProjectFeature.Path, ProjectFeature.NodeKind>
-    private let projectTransactionWatch = Relay<ProjectFeature.Change>()
-    private let toa = TOA()
+    private typealias TOA = TreeOutlineAdapter2<ProjectFeature.FileNode>
+    private let projectTransactionWatch = Relay<[ProjectFeature.Change]>()
+    private let toa = TOA(ProjectFeature.FileTree(node: .root)) { subtree in subtree.node.isExpanded == false }
     private var exps = Set<ProjectItemPath>() //< Set of keys to expanded nodes.
     @IBOutlet private weak var outlineView: NSOutlineView?
 
@@ -59,7 +59,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         projectTransactionWatch.delegate = { [weak self] in self?.processProjectTransaction($0) }
         // Reset TOA.
-        toa.process(.apply(features.project.state.files, .reset))
+        toa.applyMutation(.replace(at: []), to: features.project.state.files)
         features.project.changes += projectTransactionWatch
         outlineView?.reloadData()
     }
@@ -73,35 +73,37 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         projectTransactionWatch.delegate = nil
     }
 
-    private func processProjectTransaction(_ cx: ProjectFeature.Change) {
+    private func processProjectTransaction(_ cs: [ProjectFeature.Change]) {
         guard let features = features else { return REPORT_missingFeaturesAndContinue() }
-        switch cx {
-        case .location:
-            break
-
-        case .files(let m):
-            let c = TOA.Command.apply(features.project.state.files, m)
-            let c1 = toa.process(c)
-            switch c1 {
+        func applyOutlineViewCommand(_ oc: TOA.OutlineViewCommand) {
+            switch oc {
             case .reload:
                 outlineView?.reloadData()
             case .insertItems(let children, let parent):
                 DEBUG_log("\(children) \(parent)")
-                //                DEBUG_log("\(toa.rootNode)")
+//                DEBUG_log("\(toa.rootNode)")
                 outlineView?.insertItems(at: children, inParent: parent, withAnimation: [])
-            //                outlineView.reloadItem(parent, reloadChildren: true)
+//                outlineView.reloadItem(parent, reloadChildren: true)
             case .updateItem(let item):
                 outlineView?.reloadItem(item, reloadChildren: true)
             case .deleteItems(let children, let parent):
-                //                outlineView.reloadItem(parent, reloadChildren: true)
+//                outlineView.reloadItem(parent, reloadChildren: true)
                 outlineView?.removeItems(at: children, inParent: parent, withAnimation: [])
             }
-
-        case .selection:
-            break
-
-        case .issues(_):
-            break
+        }
+        for c in cs {
+            switch c {
+            case .files(let mutation):
+                let oc = toa.applyMutation(mutation, to: features.project.state.files)
+                applyOutlineViewCommand(oc)
+                
+            case .filesOptimized(let optimizedMutation):
+                let oc = toa.applyOptimizedMutation(optimizedMutation, to: features.project.state.files)
+                applyOutlineViewCommand(oc)
+                
+            default:
+                break
+            }
         }
     }
 
@@ -110,30 +112,26 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
 
 
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
-        let node = item as! TOA.OutlineViewNode
-        switch node.value {
+        let proxy = item as! TOA.IdentityProxy
+        switch proxy.sourceTree.node.kind {
         case .folder: return true
         case .file: return false
         }
     }
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
-        if let node = item as! TOA.OutlineViewNode? {
-            //            DEBUG_log(node)
-            //            DEBUG_log(node.children)
-            //            DEBUG_log(node.children.count)
-            return node.children.count
+        if let proxy = item as! TOA.IdentityProxy? {
+            return proxy.subproxies.count
         }
         else {
-            return toa.rootNode == nil ? 0 : 1
+            return 1
         }
     }
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
-        if let node = item as! TOA.OutlineViewNode? {
-            let subnode = node[subnode: index]
-            return subnode
+        if let proxy = item as! TOA.IdentityProxy? {
+            return proxy.subproxies[index]
         }
         else {
-            return toa.rootNode!
+            return toa.rootProxy
         }
     }
 
@@ -142,39 +140,43 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         assert(notification.object as? NSObject === outlineView)
         assert(notification.name == NSOutlineView.itemDidCollapseNotification)
         let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
-        let node = item as! TOA.OutlineViewNode
-        //        assert(exps.contains(node.key))
-        exps.remove(node.key)
-        DEBUG_log("End-user did collapse: \(node.key), exps = \(exps)")
+        let proxy = item as! TOA.IdentityProxy
+        let ipath = proxy.resolvePath()
+        let npath = toa.sourceTree.namePath(at: ipath)
+        assert(exps.contains(npath))
+        exps.remove(npath)
+        DEBUG_log("End-user did collapse: \(npath), exps = \(exps)")
     }
     func outlineViewItemDidExpand(_ notification: Notification) {
         // https://developer.apple.com/documentation/appkit/nsoutlineview/1526467-itemdidcollapsenotification?changes=latest_beta
         assert(notification.object as? NSObject === outlineView)
         assert(notification.name == NSOutlineView.itemDidExpandNotification)
         let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
-        let node = item as! TOA.OutlineViewNode
-        //        assert(exps.contains(node.key) == false)
-        exps.insert(node.key)
-        DEBUG_log("End-user did expand: \(node.key), exps = \(exps)")
+        let proxy = item as! TOA.IdentityProxy
+        let ipath = proxy.resolvePath()
+        let npath = toa.sourceTree.namePath(at: ipath)
+        assert(exps.contains(npath) == false)
+        exps.insert(npath)
+        DEBUG_log("End-user did expand: \(npath), exps = \(exps)")
     }
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let v = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "FileItem"), owner: self) as! NSTableCellView
-        let node = item as! TOA.OutlineViewNode
-        v.imageView?.image = makeIconForNode(node)
-        let u = features?.project.makeFileURL(for: node.key)
+        let proxy = item as! TOA.IdentityProxy
+        v.imageView?.image = makeIconForNode(proxy)
+        let ipath = proxy.resolvePath()
+        let npath = toa.sourceTree.namePath(at: ipath)
+        let u = features?.project.makeURLForFile(at: npath)
         v.textField?.stringValue = u?.lastPathComponent ?? ""
         v.textField?.delegate = self
         return v
     }
 
     func outlineViewSelectionDidChange(_ notification: Notification) {
-        guard let sel = makeSelection() else { return }
-        struct PS: ProjectSelection {
-            var toasel: TOA.Selection
-            var items: [ProjectItemPath] { return toasel.items }
-        }
-        let ps = PS(toasel: sel)
-        features?.project.setSelection(AnyProjectSelection(ps))
+        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
+        let newProjectSelection = ProjectSelection(
+            snapshot: features.project.state.files,
+            outlineSelection: makeOutlineSelection())
+        features.process(.project(.setSelection(to: newProjectSelection)))
     }
 
     func menuWillOpen(_ menu: NSMenu) {
@@ -185,35 +187,41 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         DEBUG_log("Clicked row: \(outlineView!.clickedRow)")
         DEBUG_log("Menu command: \(s)")
         guard let features = features else { return REPORT_missingFeaturesAndContinue() }
-        guard let path = getClickedFilePath() else { return }
-        guard let idxp = features.project.state.files.index(of: path) else { return }
-
+        guard let idxp = getIndexPathToClickedFile() else { return }
         switch s {
         case .newFolder:
-            let idxp1 = idxp.appendingLastComponent(0)
-            features.project.makeFile(at: idxp1, content: .folder)
-            let (k, _) = AUDIT_unwrap(
-                features.project.state.files[idxp],
-                "Parent of new node at `\(idxp)` is missing")
-            expandNodeImpl(at: k)
+            let newFolderIndexPath = idxp.appending(0)
+            let r = features.project.makeFile(at: newFolderIndexPath, as: .folder)
+            switch r {
+            case .failure(_):   MARK_unimplemented()
+            case .success(_):   break
+            }
+            expandNodeImpl(at: newFolderIndexPath)
 
         case .newFolderWithSelection:
             MARK_unimplemented()
 
         case .newFile:
-            let idxp1 = idxp.appendingLastComponent(0)
-            features.project.makeFile(at: idxp1, content: .file)
+            let newFolderIndexPath = idxp.appending(0)
+            let r = features.project.makeFile(at: newFolderIndexPath, as: .file)
+            switch r {
+            case .failure(_):   MARK_unimplemented()
+            case .success(_):   break
+            }
 
         case .showInFinder:
-            let ps = getGrabbedFilePathsForContextMenuOperation() ?? []
-            let us = ps.flatMap({ features.project.makeFileURL(for: $0) })
-            NSWorkspace.shared.activateFileViewerSelecting(us)
+            let grabbedIndexPaths = getIndexPathsToGrabbedFilesForContextMenuOperation() ?? []
+            let urls = grabbedIndexPaths.map({ features.project.makeURLForFile(at: $0) })
+            // TODO: Make external I/O to be done in services.
+            NSWorkspace.shared.activateFileViewerSelecting(urls)
 
         case .delete:
-            let ps = getGrabbedFilePathsForContextMenuOperation() ?? []
-            //            let ps = (makeSelection()?.items ?? []) + [getClickedFilePath()].flatMap({$0})
-            let idxps = ps.flatMap({ features.project.state.files.index(of: $0) })
-            features.project.deleteFiles(at: idxps)
+            let grabbedIndexPaths = getIndexPathsToGrabbedFilesForContextMenuOperation() ?? []
+            let newProjectSelection = ProjectSelection(
+                snapshot: features.project.state.files,
+                indexPaths: AnySequence(grabbedIndexPaths))
+            features.process(.project(.setSelection(to: newProjectSelection)))
+            features.process(.project(.deleteSelectedFiles))
         }
     }
 
@@ -222,9 +230,8 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     @objc
     private func userDidClickOnOutlineViewCellOrColumnHeader() {
         guard let features = features else { return REPORT_missingFeaturesAndContinue() }
-        guard let clickedItem = outlineView?.clickedItem as? TOA.OutlineViewNode else { return }
-        let filePath = clickedItem.key
-        guard let fileURL = features.project.makeFileURL(for: filePath) else { return REPORT_recoverableWarning("Bad file path: \(filePath)") }
+        guard let idxp = getIndexPathToClickedFile() else { return }
+        let fileURL = features.project.makeURLForFile(at: idxp)
         features.process(.codeEditing(.open(fileURL)))
 
         guard let outlineView = outlineView else { return }
@@ -235,7 +242,6 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         cellView.textField?.isEditable = true
         // Don't make it first-responder. If you do it, it starts editing
         // immediately instead of having some delay.
-
     }
     @objc
     private func userDidDoubleClickOnOutlineViewCellOrColumnHeader() {
@@ -249,11 +255,10 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         guard let cellView = outlineView.view(atColumn: 0, row: rowIndex, makeIfNecessary: false) as? NSTableCellView else { return }
         guard obj.object as AnyObject? === cellView.textField else { return }
         guard let newName = cellView.textField?.stringValue else { return }
-        guard let item = outlineView.item(atRow: rowIndex) as? TOA.OutlineViewNode else { return }
-        let oldPath = item.key
-        let newPath = oldPath.deletingLastComponent1().appendingComponent(newName)
+        guard let proxy = outlineView.item(atRow: rowIndex) as? TOA.IdentityProxy else { return }
+        let path = proxy.resolvePath()
         guard let features = features else { return }
-        features.process(.spawn(.moveFile(from: oldPath, to: newPath)))
+        features.process(.spawn(.renameFile(at: path, with: newName)))
     }
 
 
@@ -262,16 +267,16 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     private func setMenuAttributes() {
         guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         var ops = Set<FileNavigatorMenuCommand>()
-        if let path = getClickedFilePath() {
+        if let idxp = getIndexPathToClickedFile() {
             ops.formUnion([
                 .showInFinder,
                 ])
-            if path != .root {
+            if idxp != [] {
                 ops.formUnion([
                     .delete
                     ])
             }
-            if features.project.state.files[path] == .folder {
+            if toa.sourceTree.at(idxp).node.kind == .folder {
                 ops.formUnion([
                     .newFolder,
                     .newFolderWithSelection,
@@ -282,21 +287,25 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         ctxm.resetEnabledCommands(ops)
     }
 
-    private func expandNodeImpl(at path: ProjectItemPath) {
-        guard let n = toa.node(for: path) else { return }
-        outlineView?.expandItem(n, expandChildren: false)
-        exps.insert(n.key)
-        DEBUG_log("Expanded: \(n.key), exps = \(exps)")
+    private func expandNodeImpl(at ipath: IndexPath) {
+        guard let outlineView = outlineView else { REPORT_missingIBOutletViewAndFatalError() }
+        guard let proxy = toa.proxy(for: ipath) else { return }
+        outlineView.expandItem(proxy, expandChildren: false)
+        let npath = toa.sourceTree.namePath(at: ipath)
+        exps.insert(npath)
+        DEBUG_log("Expanded: \(npath), exps = \(exps)")
     }
-    private func collapseNodeImpl(at path: ProjectItemPath) {
-        guard let n = toa.node(for: path) else { return }
-        outlineView?.collapseItem(n, collapseChildren: false)
-        exps.remove(n.key)
-        DEBUG_log("Collapsed: \(n.key), exps = \(exps)")
+    private func collapseNodeImpl(at ipath: IndexPath) {
+        guard let outlineView = outlineView else { REPORT_missingIBOutletViewAndFatalError() }
+        let proxy = toa.proxy(for: ipath)
+        outlineView.collapseItem(proxy, collapseChildren: false)
+        let npath = toa.sourceTree.namePath(at: ipath)
+        exps.remove(npath)
+        DEBUG_log("Collapsed: \(npath), exps = \(exps)")
     }
-    private func getGrabbedFilePathsForContextMenuOperation() -> [ProjectItemPath]? {
-        if let p = getClickedFilePath() {
-            let selps = makeSelection()?.items ?? []
+    private func getIndexPathsToGrabbedFilesForContextMenuOperation() -> [IndexPath]? {
+        if let p = getIndexPathToClickedFile() {
+            let selps = makeOutlineSelection().toArray()
             if selps.contains(p) {
                 return selps
             }
@@ -305,26 +314,24 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
             }
         }
         else {
-            return makeSelection()?.items
+            return makeOutlineSelection().toArray()
         }
     }
-    private func getClickedFilePath() -> ProjectItemPath? {
+    private func getIndexPathToClickedFile() -> IndexPath? {
         guard let row = outlineView?.clickedRow else { return nil }
         guard row != -1 else { return nil }
-        guard let item = outlineView?.item(atRow: row) else { return nil }
-        guard let node = item as? TOA.OutlineViewNode else { return nil }
-        let path = node.key
+        guard let proxy = outlineView?.item(atRow: row) as? TOA.IdentityProxy else { return nil }
+        let path = proxy.resolvePath()
         return path
     }
-    private func makeSelection() -> TOA.Selection? {
-        guard let ov = outlineView else { return nil }
-        return toa.makeSelection(
-            selectedRowIndices: ov.selectedRowIndexes,
-            isExpanded: { [exps] k, v in exps.contains(k) })
+    private func makeOutlineSelection() -> TOA.Selection {
+        guard let ov = outlineView else { return TOA.Selection() }
+        return toa.makeSelection(selectedRowIndices: ov.selectedRowIndexes)
     }
-    private func makeIconForNode(_ n: TOA.OutlineViewNode) -> NSImage? {
+    private func makeIconForNode(_ n: TOA.IdentityProxy) -> NSImage? {
         guard let features = features else { return nil }
-        guard let u = features.project.makeFileURL(for: n.key) else { return nil }
+        let ipath = n.resolvePath()
+        let u = features.project.makeURLForFile(at: ipath)
         guard let m = NSImage(contentsOf: u) else { return nil }
         return m
     }

@@ -9,6 +9,7 @@
 import Foundation
 import EonilSignet
 import EonilToolbox
+import EonilTree
 
 ///
 /// Manages project files.
@@ -31,24 +32,46 @@ final class ProjectFeature: ServicesDependent {
     /// signals at exactly when the change happen.
     /// This DOES NOT provide state consistency.
     /// State can be inconsistent between changes.
-    /// If you want to access state only at 
-    /// consistent point, do it with `signal` 
+    /// If you want to access state only at
+    /// consistent point, do it with `signal`
     /// relay.
     ///
     /// This is an intentional design because
     /// "signal" is notification of "timing",
-    /// not data. If you want data-based 
+    /// not data. If you want data-based
     /// signaling, it must be asynchronous, and
     /// that is not how this app is architected.
     /// FRP has been avoided intentionally because
     /// it requires forgetting precise resource
-    /// life-time management, and that is not 
-    /// something I can accept for soft-realtime 
+    /// life-time management, and that is not
+    /// something I can accept for soft-realtime
     /// human-facing application.
     ///
-    let changes = Relay<Change>()
-    private(set) var state = State()
+    let changes = Relay<[Change]>()
+    private(set) var series = Series<State>()
+    var state: State { return series.last! }
+//    private(set) var series = ClippingSeries<State>(State())
+//    var state: State { return series.current }
 
+    private func appendMutation(_ f: (_ state: inout State) -> Void) {
+        var st = state
+        f(&st)
+        series.append(st)
+    }
+
+    func process(_ command: Command) {
+        switch command {
+        case .setSelection(let newSelection):
+            var st = state
+            st.selection = newSelection
+            series.append(st)
+            changes.cast([.location])
+            signal.cast(())
+
+        case .deleteSelectedFiles:
+            deleteFilesWithSortedIndexPaths(at: state.selection.indexPaths)
+        }
+    }
     ///
     /// Sets a new location.
     ///
@@ -61,18 +84,21 @@ final class ProjectFeature: ServicesDependent {
         guard state.location != newLocation else { return }
         guard newLocation != nil else { MARK_unimplemented() }
 
-        if state.location != nil {
-            assert(state.files.isEmpty == false)
-            state.files.delete(at: .root)
-            changes.cast(.files(.delete(.root)))
-        }
-        state.location = newLocation
-        if state.location != nil {
-            let k = Path.root
-            let v = NodeKind.folder
-            state.files.insert(at: .root, (k, v))
-            changes.cast(.files(.insert(.root)))
-        }
+//        if state.location != nil {
+//            assert(state.files.isEmpty == false)
+//            state.files.delete(at: .root)
+//            changes.cast(.files(.delete(.root)))
+//        }
+        var st = state
+        st.location = newLocation
+        series.append(st)
+//        if state.location != nil {
+//            let k = Path.root
+//            let v = NodeKind.folder
+//            state.files.insert(at: .root, (k, v))
+//            changes.cast(.files(.insert(.root)))
+//        }
+        changes.cast([.location])
         signal.cast(())
         restoreProjectFileList()
     }
@@ -85,45 +111,32 @@ final class ProjectFeature: ServicesDependent {
     ///     Intermediate nodes MUST exists. Otherwise this fails.
     ///     Empty index (index to root node) is not allowed.
     ///
-    func makeFile(at idx: FileTree.IndexPath, content: NodeKind) {
+    func makeFile(at idxp: IndexPath, as kind: NodeKind) -> Result<Void, MakeFileIssue> {
         assertMainThread()
-        guard idx != .root else {
-            // Make a root node.
-            state.files.insert(at: .root, (.root, .folder))
-            let m = Tree2Mutation.insert(idx)
-            changes.cast(.files(m))
-            return
-        }
-        let parentIndex = idx.deletingLastComponent()
-        guard let (k, v) = state.files[parentIndex] else {
-            reportIssue("Cannot find parent node.")
-            return
-        }
-        guard v == .folder else {
-            reportIssue("Parent node is not a folder node. Cannot create a subnode in it.")
-            return
-        }
-        guard let cs = state.files.children(of: k) else {
-            reportIssue("Bad parent key `\(k)`.")
-            return
-        }
-        let n = makeNewNodeName(at: idx, kind: content)
-        let ck = k.appendingComponent(n)
-        guard cs.contains(ck) == false else {
-            reportIssue("A same named file or folder already exists in the folder.")
-            return
+        guard idxp != .root else { return .failure(.rootNodeCannotBeInserted) }
+
+        let newNode = FileNode(
+            name: makeNewNodeName(at: idxp, as: kind),
+            kind: kind)
+        var newSubtree = FileTree(node: newNode)
+        appendMutation { state in
+            state.files.insert(at: idxp, newSubtree)
         }
 
-        // Do the job.
-        state.files.insert(at: idx, (ck, content))
-        createActualFileImpl(at: ck, as: content)
+        // Perform I/O.
+        let namep = state.files.namePath(at: idxp)
+        createActualFileImpl(at: namep, as: kind)
 
         // Cast events.
-        let m = Tree2Mutation.insert(idx)
-        changes.cast(.files(m))
-        signal.cast(())
+        changes.cast([.files(.insert(at: idxp))])
+        signal.cast(Void())
         storeProjectFileList()
+        return .success(Void())
     }
+    enum MakeFileIssue {
+        case rootNodeCannotBeInserted
+    }
+
     ///
     /// Imports a subtree from an external file-system location.
     ///
@@ -131,7 +144,7 @@ final class ProjectFeature: ServicesDependent {
     /// You can't import from any file that is already in project directory.
     /// You can't import to anywhere out of project directory.
     ///
-    func importFile(at: FileTree.IndexPath, from externalFileLocation: URL) {
+    func importFile(at: IndexPath, from externalFileLocation: URL) {
         MARK_unimplemented()
     }
     ///
@@ -141,23 +154,76 @@ final class ProjectFeature: ServicesDependent {
     /// You can't export from any file that is not in project directory.
     /// You can't export to anywhere in project directory.
     ///
-    func exportFile(at: FileTree.IndexPath, to externalFileLocation: URL) {
+    func exportFile(at: IndexPath, to externalFileLocation: URL) {
         MARK_unimplemented()
     }
-    func moveFile(from: Path, to: Path) -> Result<Void,MoveFileIssue> {
+
+    func makeURLForFile(at path: IndexPath) -> URL {
+            MARK_unimplemented()
+    }
+    func makeURLForFile(at npath: ProjectItemPath) -> URL {
+        MARK_unimplemented()
+    }
+
+    ///
+    /// - Note:
+    ///     You can rename root node. That renames project directory.
+    ///
+    /// - Note:
+    ///     If old name and new name are equals, return is no-op and returns `.success`.
+    ///
+    func renameFile(at idxp: IndexPath, with newName: String) -> Result<Void,RenameFileIssue> {
+        assertMainThread()
+
+        // Prepare inputs.
+        let targetFileURL = makeURLForFile(at: idxp)
+        let oldName = state.files[idxp].node.name
+        let oldURL = targetFileURL
+        let newURL = oldURL.deletingLastPathComponent().appendingPathComponent(newName)
+
+        // Check input validity.
+        guard oldName != newName else { return .success(Void()) }
+
+        // Perform I/O.
+        do {
+            try services.fileSystem.moveItem(at: oldURL, to: newURL)
+        }
+        catch let err {
+            return .failure(.fileSystemError(err))
+        }
+
+        // Update in-memory representation.
+        appendMutation { (state) in
+            state.files[idxp].node.name = newName
+        }
+        signal.cast(Void())
+        changes.cast([.filesOptimized(.replaceNode(at: idxp))])
+
+        MARK_unimplemented()
+    }
+    enum RenameFileIssue {
+        case filesCollectionIsMissingInProject
+        case fileSystemError(Error)
+    }
+    ///
+    /// Moves a file from one location to another location.
+    ///
+    /// This literally moves a file node to a new position.
+    /// You cannot change file name.
+    /// If `from == to`, this becomes no-op, and return `.success(_)`.
+    ///
+    func moveFile(from: IndexPath, to: IndexPath) -> Result<Void,MoveFileIssue> {
         assertMainThread()
         guard from != to else { return .success(Void()) } // No-op.
 
         // Check input validity.
-        guard state.files.contains(from) else { return .failure(.sourcePathIsNotInProject) }
-        guard state.files.contains(to) == false else { return .failure(.destinationPathIsAlreadyInProject) }
-        guard from.isRoot == false else { return .failure(.sourcePathIsRoot) }
-        guard to.isRoot == false else { return .failure(.destinationPathIsRoot) }
+        guard from != .root else { return .failure(.sourcePathIsRoot) }
+        guard to != .root else { return .failure(.destinationPathIsRoot) }
 
         // Perform I/O.
         // Platform file-system operation.
-        guard let fromURL = makeFileURL(for: from) else { REPORT_criticalBug("File URL for an existing path could not be resolved.") }
-        guard let toURL = makeFileURL(for: to) else { REPORT_criticalBug("File URL for an existing path could not be resolved.") }
+        let fromURL = makeURLForFile(at: from)
+        let toURL = makeURLForFile(at: to)
         do {
             try services.fileSystem.moveItem(at: fromURL, to: toURL)
         }
@@ -166,23 +232,67 @@ final class ProjectFeature: ServicesDependent {
         }
 
         // Mutate in-memory file-tree.
-        let kind = state.files[from]
-        guard let fromIndex = state.files.index(of: from) else { REPORT_criticalBug("Index to an existing path could not be resolved.") }
-        state.files.delete(at: fromIndex)
-        let parentOfTo = to.deletingLastComponent().successValue!
-        guard let indexOfParentOfTo = state.files.index(of: parentOfTo) else { REPORT_criticalBug("Index to an existing path could not be resolved.") }
-        guard let siblings = state.files.children(of: parentOfTo) else { REPORT_criticalBug("Children of an existing path could not be resolved.") }
-        let toIndex = indexOfParentOfTo.appendingLastComponent(siblings.count)
-        let toNode = (to, kind)
-        state.files.insert(at: toIndex, toNode)
+        let nodeToMove = state.files[from].node
+        appendMutation { (state) in
+            state.files.insert(at: to, FileTree(node: nodeToMove))
+        }
+        appendMutation { (state) in
+            // Remove last to prevent changes in indices.
+            state.files.remove(at: from)
+        }
 
         // Cast events.
-        changes.cast(.files(.delete(fromIndex)))
-        changes.cast(.files(.insert(toIndex)))
+        changes.cast([.files(.remove(at: from)), .files(.insert(at: to))])
         signal.cast(())
         storeProjectFileList()
         return .success(Void())
     }
+//    ///
+//    /// Moves a file from one location to another location.
+//    ///
+//    /// This literally moves a file node to a new position.
+//    /// You cannot change file name.
+//    /// If `from == to`, this becomes no-op, and return `.success(_)`.
+//    ///
+//    func moveFileByNamePath(from: ProjectItemPath, to: ProjectItemPath) -> Result<Void,MoveFileIssue> {
+//        assertMainThread()
+//        guard from != to else { return .success(Void()) } // No-op.
+//
+//        // Check input validity.
+//        guard state.files.contains(from) else { return .failure(.sourcePathIsNotInProject) }
+//        guard state.files.contains(to) == false else { return .failure(.destinationPathIsAlreadyInProject) }
+//        guard from.isRoot == false else { return .failure(.sourcePathIsRoot) }
+//        guard to.isRoot == false else { return .failure(.destinationPathIsRoot) }
+//
+//        // Perform I/O.
+//        // Platform file-system operation.
+//        guard let fromURL = makeFileURL(for: from) else { REPORT_criticalBug("File URL for an existing path could not be resolved.") }
+//        guard let toURL = makeFileURL(for: to) else { REPORT_criticalBug("File URL for an existing path could not be resolved.") }
+//        do {
+//            try services.fileSystem.moveItem(at: fromURL, to: toURL)
+//        }
+//        catch let err {
+//            return .failure(.fileSystemError(err))
+//        }
+//
+//        // Mutate in-memory file-tree.
+//        let kind = state.files[from]
+//        guard let fromIndex = state.files.index(of: from) else { REPORT_criticalBug("Index to an existing path could not be resolved.") }
+//        state.files.delete(at: fromIndex)
+//        let parentOfTo = to.deletingLastComponent().successValue!
+//        guard let indexOfParentOfTo = state.files.index(of: parentOfTo) else { REPORT_criticalBug("Index to an existing path could not be resolved.") }
+//        guard let siblings = state.files.children(of: parentOfTo) else { REPORT_criticalBug("Children of an existing path could not be resolved.") }
+//        let toIndex = indexOfParentOfTo.appendingLastComponent(siblings.count)
+//        let toNode = (to, kind)
+//        state.files.insert(at: toIndex, toNode)
+//
+//        // Cast events.
+//        changes.cast(.files(.delete(fromIndex)))
+//        changes.cast(.files(.insert(toIndex)))
+//        signal.cast(())
+//        storeProjectFileList()
+//        return .success(Void())
+//    }
     enum MoveFileIssue {
         case sourcePathIsNotInProject
         case destinationPathIsAlreadyInProject
@@ -191,6 +301,12 @@ final class ProjectFeature: ServicesDependent {
         case fileSystemError(Error)
     }
 
+//    func deleteFiles(at paths: [IndexPath]) -> Result<Void,DeleteIssue> {
+//        // Prepare inputs.
+//        // Delete from leaf to root.
+//        let sortedPathsInDeleteOrder = paths.sorted(by: { $0.count < $1.count }).reversed()
+//        deleteFilesWithSortedIndexPaths(sortedPathsInDeleteOrder)
+//    }
     ///
     /// Delete multiple file nodes at once.
     ///
@@ -202,49 +318,46 @@ final class ProjectFeature: ServicesDependent {
     ///
     /// - Todo: Implementation is currently O(n^2). Optimize this.
     ///
-    func deleteFiles(at locations: [FileTree.IndexPath]) {
+    /// - Note:
+    ///     As this method performs on multiple files, operation
+    ///     can be stopped in the middle of operation. In that
+    ///     case, file-system change will stop there, and in-memory
+    ///     state won't be changed. Also, a `failure(_)` will be
+    ///     returned. In other words, file-system state becomes
+    ///     out-sync.
+    ///
+    private func deleteFilesWithSortedIndexPaths<S>(at idxpsSortedInDFS: S) -> Result<Void,DeleteIssue> where S: Sequence, S.Element == IndexPath {
         assertMainThread()
-        typealias IDXP = FileTree.IndexPath
-        var tops = Set<IDXP>()
-        func isNested(_ p: IDXP) -> Bool {
-            if p == .root { return false }
-            for t in tops {
-                if p.hasPrefix(t) { return true }
+
+        // Perform I/O.
+        for idxp in idxpsSortedInDFS {
+            let targetFileURL = makeURLForFile(at: idxp)
+            do {
+                try services.fileSystem.removeItem(at: targetFileURL)
             }
-            tops.insert(p)
-            return false
+            catch let err {
+                return .failure(.fileSystemError(err))
+            }
         }
-        
-        let topLocations = locations.filter(isNested | not)
-        DEBUG_log("Input locations: \(locations)")
-        DEBUG_log("Filtered locations: \(topLocations)")
-        for location in topLocations {
-            deleteOneFileImpl(at: location)
+
+        // Update in-memory representations.
+        var changeSignals = [Change]()
+        appendMutation { (state) in
+            for idxp in idxpsSortedInDFS {
+                state.files.remove(at: idxp)
+                changeSignals.append(.files(.remove(at: idxp)))
+            }
         }
         signal.cast(())
+        changes.cast(changeSignals)
         storeProjectFileList()
+        return .success(Void())
     }
-    private func deleteOneFileImpl(at idx: FileTree.IndexPath) {
-        assertMainThread()
-        guard let (k, _) = state.files[idx] else {
-            reportIssue("Cannot find a file or folder at location `\(idx)`.")
-            return
-        }
-
-        // Do the job.
-        state.files.delete(at: idx)
-        deleteActualFileImpl(at: k)
-
-        // Cast events.
-        let m = Tree2Mutation.delete(idx)
-        changes.cast(.files(m))
+    enum DeleteIssue {
+        case fileSystemError(Error)
     }
 
-    func setSelection(_ newSelection: AnyProjectSelection) {
-        state.selection = newSelection
-        changes.cast(.location)
-        signal.cast(())
-    }
+
 
 
 
@@ -286,8 +399,10 @@ final class ProjectFeature: ServicesDependent {
             case .success(let newDTO):
                 dto = newDTO
             }
-            state.files = dto.files
-            changes.cast(.files(.reset))
+            appendMutation { (state) in
+                state.files = dto.files
+            }
+            changes.cast([.files(.replace(at: []))])
             signal.cast(())
         }
         catch let err {
@@ -302,7 +417,7 @@ final class ProjectFeature: ServicesDependent {
     /// That's an acceptable and intentional decision.
     ///
     private func createActualFileImpl(at path: ProjectItemPath, as kind: NodeKind) {
-        guard let u = makeFileURL(for: path) else { return }
+        let u = makeURLForFile(at: path)
         do {
             switch kind {
             case .folder:
@@ -315,17 +430,8 @@ final class ProjectFeature: ServicesDependent {
             reportIssue("File I/O error: \(err)")
         }
     }
-    private func deleteActualFileImpl(at path: ProjectItemPath) {
-        guard let u = makeFileURL(for: path) else { return }
-        do {
-            try services.fileSystem.removeItem(at: u)
-        }
-        catch let err {
-            reportIssue("File I/O error: \(err)")
-        }
-    }
 
-    private func makeNewNodeName(at: FileTree.IndexPath, kind: NodeKind) -> String {
+    private func makeNewNodeName(at path: IndexPath, as kind: NodeKind) -> String {
         func makeKindText() -> String {
             switch kind {
             case .file:     return "file"
@@ -341,12 +447,15 @@ final class ProjectFeature: ServicesDependent {
         let b = state.issues.endIndex
         let e = b + 1
         let issue = Issue(state: message)
-        state.issues.append(issue)
+        var st = state
+        st.issues.append(issue)
+        series.append(st)
         let m = ArrayMutation<Issue>.insert(b..<e)
-        changes.cast(.issues(m))
+        changes.cast([.issues(m)])
     }
 }
 extension ProjectFeature {
+//    typealias Series = ClippingSeries<State>
     ///
     /// File-tree state is provided in transition form to
     /// make easy to track changes between states.
@@ -354,7 +463,7 @@ extension ProjectFeature {
     struct State {
         var location: URL?
         ///
-        /// Indicates whether this object is currently performing 
+        /// Indicates whether this object is currently performing
         /// a long running operation.
         ///
         var busy = false
@@ -362,7 +471,7 @@ extension ProjectFeature {
         /// - ToDo:
         ///     Consider migration to `FileTree2` type.
         ///
-        var files = FileTree()
+        var files = FileTree(node: .root)
         ///
         /// All discovered targets.
         ///
@@ -371,19 +480,36 @@ extension ProjectFeature {
         ///
         /// This MSUT guarantee sorted in row-index order.
         ///
-        var selection = AnyProjectSelection.none
+        var selection = ProjectSelection()
     }
-    public typealias FileTree = Tree2<Path, NodeKind>
-    typealias Node = (id: Path, state: NodeKind)
-    typealias Path = ProjectItemPath
+    public typealias FileTree = Tree<FileNode>
+    ///
+    /// A `FileNode` can have any name in memory.
+    /// Anyway, some name can be rejected by OS for some operations.
+    ///
+    public struct FileNode {
+        public var name: String
+        public var kind: NodeKind
+        public var isExpanded: Bool
+
+        init(name: String, kind: NodeKind, isExpanded: Bool = false) {
+            self.name = name
+            self.kind = kind
+            self.isExpanded = isExpanded
+        }
+        static var root: FileNode {
+            return FileNode(name: "", kind: .folder, isExpanded: true)
+        }
+    }
     enum NodeKind {
         case file
         case folder
     }
     enum Change {
         case location
-        case files(Tree2Mutation<Path, NodeKind>)
-        /// 
+        case files(FileTree.Mutation)
+        case filesOptimized(FileTree.OptimizedMutation)
+        ///
         /// Selection snapshot has been changed.
         /// Selection change does not provide mutation details
         /// because there's no such source data and it's
@@ -398,41 +524,45 @@ extension ProjectFeature {
     }
 }
 extension ProjectFeature {
-    ///
-    /// - Returns:
-    ///     `nil` if location is unclear.
-    ///     A URL otherwise.
-    ///
-    func makeFileURL(for path: Path) -> URL? {
-        guard let u = state.location else { return nil }
-        var u1 = u
-        for c in path.components {
-            u1 = u1.appendingPathComponent(c)
-        }
-        return u1
-    }
+//    ///
+//    /// - Returns:
+//    ///     `nil` if location is unclear.
+//    ///     A URL otherwise.
+//    ///
+//    func makeFileURL(for path: Path) -> URL? {
+//        guard let u = state.location else { return nil }
+//        var u1 = u
+//        for c in path.components {
+//            u1 = u1.appendingPathComponent(c)
+//        }
+//        return u1
+//    }
 }
 extension ProjectFeature {
-    func findInsertionPointForNewNode() -> Result<FileTree.IndexPath, String> {
-        guard let last = state.selection.items.last else {
+    func findInsertionPointForNewNode() -> Result<IndexPath, String> {
+        guard let idxp = state.selection.indexPaths.toArray().last else {
             // No item. Unexpected situation. Ignore.
             return .failure([
                 "Tried to find an insertion point when no file node is selected.",
                 "This is unsupported."
                 ].joined(separator: " "))
         }
-        let insertionPoint: FileTree.IndexPath
-        if last == .root {
+        let insertionPoint: IndexPath
+        if idxp == .root {
             // Make a new child node at last.
-            let cs = state.files.children(of: last)!
-            insertionPoint = FileTree.IndexPath.root.appendingLastComponent(cs.count)
+            let tree = state.files.at(idxp)
+            insertionPoint = IndexPath.root.appending(tree.subtrees.count)
         }
         else {
             // Make a new sibling node at next index.
-            let idxp = state.files.index(of: last)!
-            let pidxp = idxp.deletingLastComponent()
-            insertionPoint = pidxp.appendingLastComponent(idxp.components.last! + 1)
+            let parent_idxp = idxp.dropLast()
+            insertionPoint = parent_idxp.appending(idxp.last! + 1)
         }
         return .success(insertionPoint)
     }
 }
+
+extension IndexPath {
+    static var root = IndexPath(indexes: [])
+}
+

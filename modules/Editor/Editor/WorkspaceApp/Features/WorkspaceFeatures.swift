@@ -54,6 +54,9 @@ final class WorkspaceFeatures: ServicesDependent {
                 let cmds = dialogue.process(cmd)
                 cmdq.append(contentsOf: cmds)
 
+            case .project(let cmd):
+                project.process(cmd)
+
             case .codeEditing(let cmd):
                 let cmds = codeEditing.process(cmd)
                 cmdq.append(contentsOf: cmds)
@@ -66,10 +69,18 @@ final class WorkspaceFeatures: ServicesDependent {
                 switch proc {
                 case .moveFile(let from, let to):
                     switch project.moveFile(from: from, to: to) {
-                    case .success(_):
-                        break
                     case .failure(let issue):
                         dialogue.process(.spawn(.error(DialogueFeature.Error.ADHOC_any("\(issue)"))))
+                    case .success(_):
+                        break
+                    }
+                case .renameFile(let at, let with):
+                    let r = project.renameFile(at: at, with: with)
+                    switch r {
+                    case .failure(let issue):
+                        dialogue.process(.spawn(.error(DialogueFeature.Error.ADHOC_any("\(issue)"))))
+                    case .success(_):
+                        break
                     }
                 }
             }
@@ -80,15 +91,15 @@ final class WorkspaceFeatures: ServicesDependent {
         switch c {
         case .testdriveMakeRandomFiles:
             if project.state.files.count > 0 {
-                project.deleteFiles(at: [.root])
+                let psel = ProjectSelection(snapshot: ProjectFeature.FileTree(node: .root), indexPaths: AnySequence([[]]))
+                project.process(.setSelection(to: psel))
+                project.process(.deleteSelectedFiles)
             }
-            typealias IndexPath = ProjectFeature.FileTree.IndexPath
-            let r = IndexPath.root
-            project.makeFile(at: r, content: .folder)
-            project.makeFile(at: r.appendingLastComponent(0), content: .folder)
-            project.makeFile(at: r.appendingLastComponent(1), content: .folder)
-            project.makeFile(at: r.appendingLastComponent(2), content: .folder)
-            project.makeFile(at: r.appendingLastComponent(3), content: .folder)
+            project.makeFile(at: [], as: .folder)
+            project.makeFile(at: [0], as: .folder)
+            project.makeFile(at: [1], as: .folder)
+            project.makeFile(at: [2], as: .folder)
+            project.makeFile(at: [3], as: .folder)
 
         case .testdriveMakeWorkspace:
             break
@@ -112,7 +123,7 @@ final class WorkspaceFeatures: ServicesDependent {
                 REPORT_recoverableWarning(allReason)
             case .success(let insertionPointIndexPath):
                 let idxp = insertionPointIndexPath
-                project.makeFile(at: idxp, content: .folder)
+                project.makeFile(at: idxp, as: .folder)
             }
 
         case .fileNewFile:
@@ -128,11 +139,7 @@ final class WorkspaceFeatures: ServicesDependent {
                 REPORT_recoverableWarning(allReason)
             case .success(let insertionPointIndexPath):
                 let idxp = insertionPointIndexPath
-                project.makeFile(at: idxp, content: .file)
-                let (path, _) = project.state.files[idxp]!
-                // Make actual directory.
-                let u = project.makeFileURL(for: path)!
-                try? makeEmptyData().write(to: u)
+                try! project.makeFile(at: idxp, as: .file)
             }
 
         case .fileOpen:

@@ -4,3 +4,6 @@
 [submodule "submodules/state-series.swift"]
 	path = submodules/state-series.swift
 	url = https://github.com/eonil/state-series.swift
+[submodule "submodules/tree.swift"]
+	path = submodules/tree.swift
+	url = https://github.com/eonil/tree.swift

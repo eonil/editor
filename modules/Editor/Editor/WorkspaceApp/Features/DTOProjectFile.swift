@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import EonilTree
 
 struct DTOProjectFile {
-    var files = ProjectFeature.FileTree()
+    var files = ProjectFeature.FileTree(node: .root)
 
     init() {}
     init(files fs: ProjectFeature.FileTree) {
@@ -45,9 +46,13 @@ extension DTOProjectFile {
     static func encode(_ p: DTOProjectFile) -> String {
         var lines = [String]()
         lines.append(magic)
-        let fs = p.files.stableTopologicalSorting()
-        for (p, c) in fs {
-            let ln = [c.makeCode(), p.makeSerialized()].joined(separator: " ")
+        // DFS is equal to topological sort.
+        let idxps = TreeLazyDepthFirstIndexPathIterator(p.files)
+        for idxp in idxps {
+            let node = p.files.at(idxp).node
+            let namep = p.files.namePath(at: idxp)
+            let kind = node.kind
+            let ln = [kind.makeCode(), namep.makeSerialized()].joined(separator: " ")
             lines.append(ln)
         }
         return lines.map({ $0 + "\n" }).joined()
@@ -67,26 +72,23 @@ extension DTOProjectFile {
             let path = String(ln1.characters.dropFirst(2))
             guard let p = ProjectItemPath(path) else { return .failure("Ill-formed path `\(path)`.") }
             guard let c = ProjectFeature.NodeKind(code: type) else { return .failure("Unknown type code `\(type)`.") }
-            dto.files.append(p, c)
+            // TODO: This can be optimized further.
+            typealias FileTree = ProjectFeature.FileTree
+            typealias FileNode = ProjectFeature.FileNode
+            if p.components.isEmpty {
+                dto.files = FileTree(node: .root)
+            }
+            else {
+                let parent_namep = p.deletingLastComponent1()
+                let parent_idxp = dto.files.indexPath(at: parent_namep)
+                let parent_subtree = dto.files.at(parent_idxp)
+                let idxp = parent_idxp.appending(parent_subtree.subtrees.count)
+                let node = FileNode(name: p.components.last!, kind: c, isExpanded: false)
+                let subtree = FileTree(node: node)
+                dto.files.insert(at: idxp, subtree)
+            }
         }
         return .success(dto)
-    }
-}
-
-extension Tree2 where Key == ProjectItemPath {
-    mutating func append(_ p: ProjectItemPath, _ c: Value) {
-        if p == .root {
-            precondition(isEmpty)
-            insert(at: .root, (p, c))
-        }
-        else {
-            let pp = p.deletingLastComponent1()
-            let pidxp = index(of: pp)!
-            let pcs = children(of: pp)!
-            let i = pcs.count
-            let idxp = pidxp.appendingLastComponent(i)
-            insert(at: idxp, (p, c))
-        }
     }
 }
 

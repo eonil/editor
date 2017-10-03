@@ -27,3 +27,4 @@ extension Series: ExpressibleByArrayLiteral {
         append(contentsOf: elements)
     }
 }
+

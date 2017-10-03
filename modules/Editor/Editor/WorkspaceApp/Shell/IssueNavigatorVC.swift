@@ -62,11 +62,8 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
             case .compilerMessage(let m):
                 guard let span = m.message.spans.first else { break }
                 DEBUG_log(span.file_name)
-                let p = ProjectFeature.Path.fromUnixFilePathFromProjectRoot(span.file_name)
-                guard let u = features.project.makeFileURL(for: p) else {
-                    REPORT_ignoredSignal(m)
-                    break
-                }
+                let p = ProjectItemPath.fromUnixFilePathFromProjectRoot(span.file_name)
+                let u = features.project.makeURLForFile(at: p)
                 features.process(.codeEditing(.open(u)))
             case .compilerArtifact(let m):
                 REPORT_unimplementedAndContinue()
@@ -93,7 +90,7 @@ extension IssueNavigatorVC: NSTableViewDataSource {
             case .compilerMessage(let m):
                 let v = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "IssueItem"), owner: self) as! IssueItemTableCellView
                 v.messageTextField?.stringValue = m.message.message
-                m.message.children
+//                m.message.children
                 return v
             default:
                 break

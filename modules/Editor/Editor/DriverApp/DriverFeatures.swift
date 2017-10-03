@@ -54,19 +54,14 @@ final class DriverFeatures: ServicesDependent {
         cargoProc = p
 
         // Init project file. (`.eews`)
-        var fs = ProjectFeature.FileTree()
-        let rtidx = ProjectFeature.FileTree.IndexPath.root
-        let rtpath = ProjectItemPath.root
-        func idx(_ comps: [Int]) -> ProjectFeature.FileTree.IndexPath {
-            return ProjectFeature.FileTree.IndexPath(components: comps)
-        }
-        func path(_ comps: [String]) -> ProjectItemPath {
-            return ProjectItemPath(components: comps)
-        }
-        fs.insert(at: idx([]),      (path([]), .folder))
-        fs.insert(at: idx([0]),     (path(["Cargo.toml"]), .file))
-        fs.insert(at: idx([1]),     (path(["src"]), .folder))
-        fs.insert(at: idx([1,0]),   (path(["src", "main.rs"]), .file))
+        typealias FileTree = ProjectFeature.FileTree
+        typealias FileNode = ProjectFeature.FileNode
+        let fs = ProjectFeature.FileTree(node: .root, subtrees: [
+            FileTree(node: FileNode(name: "Cargo.toml", kind: .file)),
+            FileTree(node: FileNode(name: "src", kind: .folder), subtrees: [
+                FileTree(node: FileNode(name: "main.rs", kind: .file)),
+                ]),
+            ])
 
         let dto = DTOProjectFile(files: fs)
         let dtou = u.appendingPathComponent(".eews")

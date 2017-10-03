@@ -6,9 +6,10 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-enum Tree2Mutation<Key, Value> where Key: Hashable {
-    case reset
-    case insert(Tree2<Key, Value>.IndexPath)
-    case update(Tree2<Key, Value>.IndexPath)
-    case delete(Tree2<Key, Value>.IndexPath)
-}
+//enum Tree2Mutation<Key, Value> where Key: Hashable {
+//    case reset
+//    case insert(Tree2<Key, Value>.IndexPath)
+//    case update(Tree2<Key, Value>.IndexPath)
+//    case delete(Tree2<Key, Value>.IndexPath)
+//}
+

@@ -8,6 +8,8 @@
 
 extension ProjectFeature {
     enum Command {
-        
+        case setSelection(to: ProjectSelection)
+//        case makeNewFile
+        case deleteSelectedFiles
     }
 }

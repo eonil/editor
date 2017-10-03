@@ -39,6 +39,7 @@
 		451CE1B81EF66ABD004721A3 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451CE1B71EF66ABD004721A3 /* Progress.swift */; };
 		451CE1BB1EF66E61004721A3 /* LLDBWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451CE1B91EF66E3D004721A3 /* LLDBWrapper.framework */; };
 		451CE1BC1EF66E61004721A3 /* LLDBWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 451CE1B91EF66E3D004721A3 /* LLDBWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		451D10691F867CC500153E55 /* Tree.Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451D10681F867CC500153E55 /* Tree.Mutation.swift */; };
 		452683801EFF8BB8006B12BC /* CargoService2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4526837F1EFF8BB8006B12BC /* CargoService2.swift */; };
 		4529BF661EF21859006A9A39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529BF651EF21859006A9A39 /* AppDelegate.swift */; };
 		4529BF681EF21859006A9A39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4529BF671EF21859006A9A39 /* ViewController.swift */; };
@@ -48,6 +49,9 @@
 		4531E1EA1F02834500A6DB2A /* FileNavigatorMenuCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531E1E91F02834500A6DB2A /* FileNavigatorMenuCommand.swift */; };
 		4531E1EE1F02886600A6DB2A /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531E1ED1F02886600A6DB2A /* MenuItem.swift */; };
 		4531E1F01F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4531E1EF1F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift */; };
+		453A5B571F86830600EDAB63 /* TreeOutlineAdapter2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453A5B561F86830600EDAB63 /* TreeOutlineAdapter2.swift */; };
+		453A5B631F86984100EDAB63 /* ClippingSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453A5B621F86984100EDAB63 /* ClippingSeries.swift */; };
+		453A5B651F86A81100EDAB63 /* IndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453A5B641F86A81100EDAB63 /* IndexPath.swift */; };
 		4548439B1EFE32D800D53763 /* FeatureSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548439A1EFE32D800D53763 /* FeatureSessionProtocol.swift */; };
 		454843B41EFE3F9900D53763 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843B31EFE3F9900D53763 /* Services.swift */; };
 		454843BC1EFE401C00D53763 /* Bash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843B51EFE401C00D53763 /* Bash.swift */; };
@@ -78,6 +82,9 @@
 		45552F3E1F82744700892CC5 /* NSTableView.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F3D1F82744700892CC5 /* NSTableView.extension.swift */; };
 		45552F4C1F830B0B00892CC5 /* ProjectFeature.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F4B1F830B0B00892CC5 /* ProjectFeature.Command.swift */; };
 		45552F581F8316D600892CC5 /* REPORT_criticalBug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F571F8316D600892CC5 /* REPORT_criticalBug.swift */; };
+		45552FFD1F83DF3D00892CC5 /* libEonilTree.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45552FF51F83DF3300892CC5 /* libEonilTree.a */; };
+		45552FFF1F83E03100892CC5 /* ProjectFileTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552FFE1F83E03100892CC5 /* ProjectFileTree.swift */; };
+		455530011F83E70400892CC5 /* Tree.extension.FileTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455530001F83E70400892CC5 /* Tree.extension.FileTree.swift */; };
 		4555A3FE1EFFBAB400FCB88E /* FunctionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A3FD1EFFBAB400FCB88E /* FunctionUtility.swift */; };
 		4555A4011EFFBAEB00FCB88E /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A4001EFFBAEB00FCB88E /* Function.swift */; };
 		4555A4051EFFC33400FCB88E /* MutableBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A4041EFFC33400FCB88E /* MutableBox.swift */; };
@@ -97,7 +104,7 @@
 		456ABC401F03B78F00928B4B /* DTOProjectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */; };
 		456ABC431F03BEAC00928B4B /* OrderedTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC421F03BEAC00928B4B /* OrderedTree.swift */; };
 		456ABC471F03C97F00928B4B /* OrderedTree2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC461F03C97F00928B4B /* OrderedTree2.swift */; };
-		456ABC491F03CD6C00928B4B /* FileTree2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC481F03CD6C00928B4B /* FileTree2.swift */; };
+		456ABC491F03CD6C00928B4B /* FileTree3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC481F03CD6C00928B4B /* FileTree3.swift */; };
 		456ABC4B1F0466C400928B4B /* ConsoleFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC4A1F0466C400928B4B /* ConsoleFeature.swift */; };
 		456ABC681F04733200928B4B /* NSMenuItem.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC671F04733200928B4B /* NSMenuItem.extension.swift */; };
 		456ABC6C1F0481A000928B4B /* ManualLoop2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC6B1F0481A000928B4B /* ManualLoop2.swift */; };
@@ -214,6 +221,27 @@
 			remoteGlobalIDString = 4544AE381F7F4B560057437B;
 			remoteInfo = "EonilWeaklyPersistentArray-macOS-UnitTests";
 		};
+		45552FF41F83DF3300892CC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45552FEA1F83DF3300892CC5 /* EonilTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45552F9F1F8344E200892CC5;
+			remoteInfo = "EonilTree-macOS";
+		};
+		45552FF61F83DF3300892CC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45552FEA1F83DF3300892CC5 /* EonilTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45552FCB1F83466F00892CC5;
+			remoteInfo = "EonilTree-macOS-UnitTests";
+		};
+		45552FF81F83DF3300892CC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45552FEA1F83DF3300892CC5 /* EonilTree.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 45552FDA1F8346B800892CC5;
+			remoteInfo = "EonilTree-iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -266,6 +294,7 @@
 		451CE1B51EF6630F004721A3 /* assertMainThread.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = assertMainThread.swift; sourceTree = "<group>"; };
 		451CE1B71EF66ABD004721A3 /* Progress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		451CE1B91EF66E3D004721A3 /* LLDBWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LLDBWrapper.framework; path = ../../Carthage/Build/Mac/LLDBWrapper.framework; sourceTree = "<group>"; };
+		451D10681F867CC500153E55 /* Tree.Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.Mutation.swift; sourceTree = "<group>"; };
 		4526837F1EFF8BB8006B12BC /* CargoService2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoService2.swift; sourceTree = "<group>"; };
 		4529BF621EF21859006A9A39 /* Editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Editor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4529BF651EF21859006A9A39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -278,6 +307,9 @@
 		4531E1E91F02834500A6DB2A /* FileNavigatorMenuCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorMenuCommand.swift; sourceTree = "<group>"; };
 		4531E1ED1F02886600A6DB2A /* MenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		4531E1EF1F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorMenuCommand.extension.swift; sourceTree = "<group>"; };
+		453A5B561F86830600EDAB63 /* TreeOutlineAdapter2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeOutlineAdapter2.swift; sourceTree = "<group>"; };
+		453A5B621F86984100EDAB63 /* ClippingSeries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippingSeries.swift; sourceTree = "<group>"; };
+		453A5B641F86A81100EDAB63 /* IndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexPath.swift; sourceTree = "<group>"; };
 		4548439A1EFE32D800D53763 /* FeatureSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureSessionProtocol.swift; sourceTree = "<group>"; };
 		454843B31EFE3F9900D53763 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		454843B51EFE401C00D53763 /* Bash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bash.swift; sourceTree = "<group>"; };
@@ -309,6 +341,9 @@
 		45552F3D1F82744700892CC5 /* NSTableView.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTableView.extension.swift; sourceTree = "<group>"; };
 		45552F4B1F830B0B00892CC5 /* ProjectFeature.Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFeature.Command.swift; sourceTree = "<group>"; };
 		45552F571F8316D600892CC5 /* REPORT_criticalBug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPORT_criticalBug.swift; sourceTree = "<group>"; };
+		45552FEA1F83DF3300892CC5 /* EonilTree.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilTree.xcodeproj; path = ../../submodules/tree.swift/EonilTree.xcodeproj; sourceTree = "<group>"; };
+		45552FFE1F83E03100892CC5 /* ProjectFileTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFileTree.swift; sourceTree = "<group>"; };
+		455530001F83E70400892CC5 /* Tree.extension.FileTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.extension.FileTree.swift; sourceTree = "<group>"; };
 		4555A3FD1EFFBAB400FCB88E /* FunctionUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtility.swift; sourceTree = "<group>"; };
 		4555A4001EFFBAEB00FCB88E /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		4555A4041EFFC33400FCB88E /* MutableBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBox.swift; sourceTree = "<group>"; };
@@ -328,7 +363,7 @@
 		456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTOProjectFile.swift; sourceTree = "<group>"; };
 		456ABC421F03BEAC00928B4B /* OrderedTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedTree.swift; sourceTree = "<group>"; };
 		456ABC461F03C97F00928B4B /* OrderedTree2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedTree2.swift; sourceTree = "<group>"; };
-		456ABC481F03CD6C00928B4B /* FileTree2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTree2.swift; sourceTree = "<group>"; };
+		456ABC481F03CD6C00928B4B /* FileTree3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileTree3.swift; sourceTree = "<group>"; };
 		456ABC4A1F0466C400928B4B /* ConsoleFeature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsoleFeature.swift; sourceTree = "<group>"; };
 		456ABC671F04733200928B4B /* NSMenuItem.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSMenuItem.extension.swift; sourceTree = "<group>"; };
 		456ABC6B1F0481A000928B4B /* ManualLoop2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualLoop2.swift; sourceTree = "<group>"; };
@@ -404,6 +439,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45552FFD1F83DF3D00892CC5 /* libEonilTree.a in Frameworks */,
 				45188C421F815F3300506284 /* libEonilStateSeries.a in Frameworks */,
 				4552678A1F7F5EE7001D4006 /* libEonilWeaklyPersistentArray.a in Frameworks */,
 				451CE1BB1EF66E61004721A3 /* LLDBWrapper.framework in Frameworks */,
@@ -442,6 +478,7 @@
 			children = (
 				45EA455A1EF229E60024D3B1 /* Debug.xcconfig */,
 				45EA455B1EF229E60024D3B1 /* Release.xcconfig */,
+				45552FEA1F83DF3300892CC5 /* EonilTree.xcodeproj */,
 				45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */,
 				4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */,
 				45FB544E1EF6775500522E83 /* BTree.framework */,
@@ -501,7 +538,7 @@
 				456ABC251F03770100928B4B /* Tree2.extension.swift */,
 				456ABC421F03BEAC00928B4B /* OrderedTree.swift */,
 				456ABC461F03C97F00928B4B /* OrderedTree2.swift */,
-				456ABC481F03CD6C00928B4B /* FileTree2.swift */,
+				456ABC481F03CD6C00928B4B /* FileTree3.swift */,
 				456ABC6B1F0481A000928B4B /* ManualLoop2.swift */,
 				454F77A41EFE964300317763 /* ManualLoop.swift */,
 				45D59DD51EFF99EB00408881 /* ReactiveLoop.swift */,
@@ -582,6 +619,7 @@
 			children = (
 				4552678E1F812394001D4006 /* SampleFriendList.swift */,
 				45188C471F81638200506284 /* Series.swift */,
+				453A5B621F86984100EDAB63 /* ClippingSeries.swift */,
 			);
 			path = StateSeries;
 			sourceTree = "<group>";
@@ -590,8 +628,19 @@
 			isa = PBXGroup;
 			children = (
 				4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */,
+				453A5B561F86830600EDAB63 /* TreeOutlineAdapter2.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		45552FEB1F83DF3300892CC5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				45552FF51F83DF3300892CC5 /* libEonilTree.a */,
+				45552FF71F83DF3300892CC5 /* EonilTree-macOS-UnitTests.xctest */,
+				45552FF91F83DF3300892CC5 /* libEonilTree.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		45641ED01EFF7F6800D4C0D1 /* V2 */ = {
@@ -658,6 +707,9 @@
 				45EA45981EF22E450024D3B1 /* NavigationFeature.swift */,
 				454843C91EFE56C200D53763 /* DialogueFeature.swift */,
 				45EA45991EF22E450024D3B1 /* ProjectFeature.swift */,
+				455530001F83E70400892CC5 /* Tree.extension.FileTree.swift */,
+				451D10681F867CC500153E55 /* Tree.Mutation.swift */,
+				45552FFE1F83E03100892CC5 /* ProjectFileTree.swift */,
 				45552F4B1F830B0B00892CC5 /* ProjectFeature.Command.swift */,
 				454843C31EFE4B5900D53763 /* ProjectSelection.swift */,
 				456ABC221F0364DD00928B4B /* ProjectSerialization.swift */,
@@ -673,6 +725,7 @@
 				4548439A1EFE32D800D53763 /* FeatureSessionProtocol.swift */,
 				4514CDD11F7C0D3000FF978B /* Data.extension.swift */,
 				4514CDD31F7C0DDF00FF978B /* Result.extension.REPORT.swift */,
+				453A5B641F86A81100EDAB63 /* IndexPath.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -818,6 +871,10 @@
 					ProjectRef = 45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */;
 				},
 				{
+					ProductGroup = 45552FEB1F83DF3300892CC5 /* Products */;
+					ProjectRef = 45552FEA1F83DF3300892CC5 /* EonilTree.xcodeproj */;
+				},
+				{
 					ProductGroup = 4552677F1F7F5EE0001D4006 /* Products */;
 					ProjectRef = 4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */;
 				},
@@ -872,6 +929,27 @@
 			remoteRef = 455267881F7F5EE1001D4006 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		45552FF51F83DF3300892CC5 /* libEonilTree.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEonilTree.a;
+			remoteRef = 45552FF41F83DF3300892CC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45552FF71F83DF3300892CC5 /* EonilTree-macOS-UnitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilTree-macOS-UnitTests.xctest";
+			remoteRef = 45552FF61F83DF3300892CC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		45552FF91F83DF3300892CC5 /* libEonilTree.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEonilTree.a;
+			remoteRef = 45552FF81F83DF3300892CC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -916,6 +994,7 @@
 				456ABC431F03BEAC00928B4B /* OrderedTree.swift in Sources */,
 				4511D33C1F77A3F100F60401 /* CargoDTO.swift in Sources */,
 				45EA45A11EF22E450024D3B1 /* ProjectFeature.swift in Sources */,
+				453A5B631F86984100EDAB63 /* ClippingSeries.swift in Sources */,
 				45FB545D1EF680DA00522E83 /* Mutation.swift in Sources */,
 				4511D33B1F77A3F100F60401 /* RustCompilerDTO.swift in Sources */,
 				4552678F1F812394001D4006 /* SampleFriendList.swift in Sources */,
@@ -936,6 +1015,7 @@
 				45EA45C31EF232170024D3B1 /* REPORT_unimplementedAndContinue.swift in Sources */,
 				4511D3511F77EF0900F60401 /* REPORT_ignoredSignal.swift in Sources */,
 				45FB545F1EF6A08B00522E83 /* REPORT_missingFeaturesAndFatalError.swift in Sources */,
+				451D10691F867CC500153E55 /* Tree.Mutation.swift in Sources */,
 				451CE1B81EF66ABD004721A3 /* Progress.swift in Sources */,
 				45EA45E21EF32FB60024D3B1 /* MutableChannel.extension.swift in Sources */,
 				45188C641F81D30000506284 /* Sequence.extension.swift in Sources */,
@@ -960,6 +1040,7 @@
 				45EA45631EF22A380024D3B1 /* AUDIT_check.swift in Sources */,
 				45B6E0A21F7EA132009D90EC /* VersionedType.swift in Sources */,
 				454843C11EFE401C00D53763 /* RustLanguageService.swift in Sources */,
+				453A5B571F86830600EDAB63 /* TreeOutlineAdapter2.swift in Sources */,
 				454843DA1EFE689000D53763 /* Dialogue.extensions.swift in Sources */,
 				455AC75B1F7BBA330084F0D5 /* SequenceReplacement.swift in Sources */,
 				45AF89D61F77780800767BC4 /* FileNavigatorVC.swift in Sources */,
@@ -985,9 +1066,10 @@
 				45EA45B91EF22F910024D3B1 /* ProcessSnapshot.swift in Sources */,
 				45EA45791EF22A7F0024D3B1 /* WorkspaceApp.swift in Sources */,
 				4555A41A1F01AFCF00FCB88E /* TransactionalRelay.swift in Sources */,
+				453A5B651F86A81100EDAB63 /* IndexPath.swift in Sources */,
 				45FB54591EF679BB00522E83 /* REPORT_missingIBOutletViewAndFatalError.swift in Sources */,
 				456ABC261F03770100928B4B /* Tree2.extension.swift in Sources */,
-				456ABC491F03CD6C00928B4B /* FileTree2.swift in Sources */,
+				456ABC491F03CD6C00928B4B /* FileTree3.swift in Sources */,
 				456ABC4B1F0466C400928B4B /* ConsoleFeature.swift in Sources */,
 				4555A4011EFFBAEB00FCB88E /* Function.swift in Sources */,
 				454843CA1EFE56C200D53763 /* DialogueFeature.swift in Sources */,
@@ -995,6 +1077,7 @@
 				4529BF6A1EF21859006A9A39 /* WorkspaceDocument.swift in Sources */,
 				454843C01EFE401C00D53763 /* PseudoTerminal.swift in Sources */,
 				45EA45C01EF231F00024D3B1 /* MARK_poorlyImplemented().swift in Sources */,
+				455530011F83E70400892CC5 /* Tree.extension.FileTree.swift in Sources */,
 				45AF89CC1F77713000767BC4 /* ConsoleVC.swift in Sources */,
 				4531E1EA1F02834500A6DB2A /* FileNavigatorMenuCommand.swift in Sources */,
 				4511D33A1F77A3F100F60401 /* SemverDTO.swift in Sources */,
@@ -1011,6 +1094,7 @@
 				4531E1EE1F02886600A6DB2A /* MenuItem.swift in Sources */,
 				45AF89DA1F777A9200767BC4 /* IssueNavigatorVC.swift in Sources */,
 				454843C81EFE554B00D53763 /* REPORT_recoverableWarning.swift in Sources */,
+				45552FFF1F83E03100892CC5 /* ProjectFileTree.swift in Sources */,
 				45EA45891EF22B520024D3B1 /* DriverFeatures.swift in Sources */,
 				45EA45F61EF3B8730024D3B1 /* ArrayMutation.swift in Sources */,
 				4583498C1F7F1E6F00B08511 /* Transition2.swift in Sources */,
