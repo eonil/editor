@@ -98,6 +98,7 @@ extension DialogueFeature {
 
     }
     enum Error {
+        case ADHOC_any(String)
         case cannotSaveCurrentlyEditingCodeIntoFile
     }
 }

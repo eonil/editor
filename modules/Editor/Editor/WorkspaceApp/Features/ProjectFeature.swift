@@ -127,18 +127,68 @@ final class ProjectFeature: ServicesDependent {
     ///
     /// Imports a subtree from an external file-system location.
     ///
+    /// Whole subtree will be copied.
+    /// You can't import from any file that is already in project directory.
+    /// You can't import to anywhere out of project directory.
+    ///
     func importFile(at: FileTree.IndexPath, from externalFileLocation: URL) {
         MARK_unimplemented()
     }
     ///
     /// Exports a subtree to an external file-system location.
     ///
+    /// Whole subtree will be copied.
+    /// You can't export from any file that is not in project directory.
+    /// You can't export to anywhere in project directory.
+    ///
     func exportFile(at: FileTree.IndexPath, to externalFileLocation: URL) {
         MARK_unimplemented()
     }
-    func moveFile(from: Path, to: Path) {
+    func moveFile(from: Path, to: Path) -> Result<Void,MoveFileIssue> {
         assertMainThread()
-        MARK_unimplemented()
+        guard from != to else { return .success(Void()) } // No-op.
+
+        // Check input validity.
+        guard state.files.contains(from) else { return .failure(.sourcePathIsNotInProject) }
+        guard state.files.contains(to) == false else { return .failure(.destinationPathIsAlreadyInProject) }
+        guard from.isRoot == false else { return .failure(.sourcePathIsRoot) }
+        guard to.isRoot == false else { return .failure(.destinationPathIsRoot) }
+
+        // Perform I/O.
+        // Platform file-system operation.
+        guard let fromURL = makeFileURL(for: from) else { REPORT_criticalBug("File URL for an existing path could not be resolved.") }
+        guard let toURL = makeFileURL(for: to) else { REPORT_criticalBug("File URL for an existing path could not be resolved.") }
+        do {
+            try services.fileSystem.moveItem(at: fromURL, to: toURL)
+        }
+        catch let err {
+            return .failure(.fileSystemError(err))
+        }
+
+        // Mutate in-memory file-tree.
+        let kind = state.files[from]
+        guard let fromIndex = state.files.index(of: from) else { REPORT_criticalBug("Index to an existing path could not be resolved.") }
+        state.files.delete(at: fromIndex)
+        let parentOfTo = to.deletingLastComponent().successValue!
+        guard let indexOfParentOfTo = state.files.index(of: parentOfTo) else { REPORT_criticalBug("Index to an existing path could not be resolved.") }
+        guard let siblings = state.files.children(of: parentOfTo) else { REPORT_criticalBug("Children of an existing path could not be resolved.") }
+        let toIndex = indexOfParentOfTo.appendingLastComponent(siblings.count)
+        let toNode = (to, kind)
+        state.files.insert(at: toIndex, toNode)
+
+        // Cast events.
+        changes.cast(.files(.delete(fromIndex)))
+        changes.cast(.files(.insert(toIndex)))
+        signal.cast(())
+        storeProjectFileList()
+        return .success(Void())
+    }
+    enum MoveFileIssue {
+        case sourcePathIsNotInProject
+        case destinationPathIsAlreadyInProject
+        case sourcePathIsRoot
+        case destinationPathIsRoot
+        case fileSystemError(Error)
     }
 
     ///

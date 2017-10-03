@@ -76,6 +76,8 @@
 		45552F3A1F82727B00892CC5 /* Inspector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45552F391F82727B00892CC5 /* Inspector.storyboard */; };
 		45552F3C1F82743900892CC5 /* NSOutlineView.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F3B1F82743900892CC5 /* NSOutlineView.extension.swift */; };
 		45552F3E1F82744700892CC5 /* NSTableView.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F3D1F82744700892CC5 /* NSTableView.extension.swift */; };
+		45552F4C1F830B0B00892CC5 /* ProjectFeature.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F4B1F830B0B00892CC5 /* ProjectFeature.Command.swift */; };
+		45552F581F8316D600892CC5 /* REPORT_criticalBug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F571F8316D600892CC5 /* REPORT_criticalBug.swift */; };
 		4555A3FE1EFFBAB400FCB88E /* FunctionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A3FD1EFFBAB400FCB88E /* FunctionUtility.swift */; };
 		4555A4011EFFBAEB00FCB88E /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A4001EFFBAEB00FCB88E /* Function.swift */; };
 		4555A4051EFFC33400FCB88E /* MutableBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A4041EFFC33400FCB88E /* MutableBox.swift */; };
@@ -164,9 +166,7 @@
 		45EA45F61EF3B8730024D3B1 /* ArrayMutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA45F51EF3B8730024D3B1 /* ArrayMutation.swift */; };
 		45FB54501EF6775C00522E83 /* BTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45FB544E1EF6775500522E83 /* BTree.framework */; };
 		45FB54511EF6775C00522E83 /* BTree.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 45FB544E1EF6775500522E83 /* BTree.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		45FB54531EF6784A00522E83 /* FileNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB54521EF6784A00522E83 /* FileNavigatorViewController.swift */; };
 		45FB54591EF679BB00522E83 /* REPORT_missingIBOutletViewAndFatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB54581EF679BB00522E83 /* REPORT_missingIBOutletViewAndFatalError.swift */; };
-		45FB545B1EF67A6900522E83 /* FileNavigatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FB545A1EF67A6900522E83 /* FileNavigatorViewController.xib */; };
 		45FB545D1EF680DA00522E83 /* Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB545C1EF680DA00522E83 /* Mutation.swift */; };
 		45FB545F1EF6A08B00522E83 /* REPORT_missingFeaturesAndFatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FB545E1EF6A08B00522E83 /* REPORT_missingFeaturesAndFatalError.swift */; };
 /* End PBXBuildFile section */
@@ -307,6 +307,8 @@
 		45552F391F82727B00892CC5 /* Inspector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Inspector.storyboard; sourceTree = "<group>"; };
 		45552F3B1F82743900892CC5 /* NSOutlineView.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSOutlineView.extension.swift; sourceTree = "<group>"; };
 		45552F3D1F82744700892CC5 /* NSTableView.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTableView.extension.swift; sourceTree = "<group>"; };
+		45552F4B1F830B0B00892CC5 /* ProjectFeature.Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectFeature.Command.swift; sourceTree = "<group>"; };
+		45552F571F8316D600892CC5 /* REPORT_criticalBug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REPORT_criticalBug.swift; sourceTree = "<group>"; };
 		4555A3FD1EFFBAB400FCB88E /* FunctionUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunctionUtility.swift; sourceTree = "<group>"; };
 		4555A4001EFFBAEB00FCB88E /* Function.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		4555A4041EFFC33400FCB88E /* MutableBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBox.swift; sourceTree = "<group>"; };
@@ -392,9 +394,7 @@
 		45EA45F31EF3B7650024D3B1 /* Array.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.extension.swift; sourceTree = "<group>"; };
 		45EA45F51EF3B8730024D3B1 /* ArrayMutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayMutation.swift; sourceTree = "<group>"; };
 		45FB544E1EF6775500522E83 /* BTree.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BTree.framework; path = ../../Carthage/Build/Mac/BTree.framework; sourceTree = "<group>"; };
-		45FB54521EF6784A00522E83 /* FileNavigatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileNavigatorViewController.swift; sourceTree = "<group>"; };
 		45FB54581EF679BB00522E83 /* REPORT_missingIBOutletViewAndFatalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = REPORT_missingIBOutletViewAndFatalError.swift; sourceTree = "<group>"; };
-		45FB545A1EF67A6900522E83 /* FileNavigatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FileNavigatorViewController.xib; sourceTree = "<group>"; };
 		45FB545C1EF680DA00522E83 /* Mutation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mutation.swift; sourceTree = "<group>"; };
 		45FB545E1EF6A08B00522E83 /* REPORT_missingFeaturesAndFatalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = REPORT_missingFeaturesAndFatalError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -519,6 +519,7 @@
 				451CE1B11EF63D4B004721A3 /* REPORT_missingServicesAndFatalError.swift */,
 				45EA45C21EF232170024D3B1 /* REPORT_unimplementedAndContinue.swift */,
 				45EA45641EF22A4A0024D3B1 /* REPORT_fatalError.swift */,
+				45552F571F8316D600892CC5 /* REPORT_criticalBug.swift */,
 				454843C71EFE554B00D53763 /* REPORT_recoverableWarning.swift */,
 				45EA45BE1EF231F00024D3B1 /* MARK_poorlyImplemented().swift */,
 				45EA45BF1EF231F00024D3B1 /* MARK_unimplemented.swift */,
@@ -657,6 +658,7 @@
 				45EA45981EF22E450024D3B1 /* NavigationFeature.swift */,
 				454843C91EFE56C200D53763 /* DialogueFeature.swift */,
 				45EA45991EF22E450024D3B1 /* ProjectFeature.swift */,
+				45552F4B1F830B0B00892CC5 /* ProjectFeature.Command.swift */,
 				454843C31EFE4B5900D53763 /* ProjectSelection.swift */,
 				456ABC221F0364DD00928B4B /* ProjectSerialization.swift */,
 				456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */,
@@ -694,8 +696,6 @@
 				45AF89CB1F77713000767BC4 /* ConsoleVC.swift */,
 				45AF89D31F77774800767BC4 /* FileNavigator.storyboard */,
 				45AF89D51F77780800767BC4 /* FileNavigatorVC.swift */,
-				45FB545A1EF67A6900522E83 /* FileNavigatorViewController.xib */,
-				45FB54521EF6784A00522E83 /* FileNavigatorViewController.swift */,
 				4531E1E91F02834500A6DB2A /* FileNavigatorMenuCommand.swift */,
 				4531E1EF1F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift */,
 				45AF89DB1F777A9A00767BC4 /* IssueNavigator.storyboard */,
@@ -888,7 +888,6 @@
 				45AF89C61F77711900767BC4 /* Editor.storyboard in Resources */,
 				45AF89D41F77774800767BC4 /* FileNavigator.storyboard in Resources */,
 				4552B7F71EFB94E400E529EE /* App.xib in Resources */,
-				45FB545B1EF67A6900522E83 /* FileNavigatorViewController.xib in Resources */,
 				45552F3A1F82727B00892CC5 /* Inspector.storyboard in Resources */,
 				45AF89C21F77710D00767BC4 /* Utility.storyboard in Resources */,
 			);
@@ -906,7 +905,6 @@
 				45EA459E1EF22E450024D3B1 /* DebugFeature.swift in Sources */,
 				45AF89B41F7766B600767BC4 /* FeatureDependent.swift in Sources */,
 				45EA45DF1EF32D850024D3B1 /* Result.swift in Sources */,
-				45FB54531EF6784A00522E83 /* FileNavigatorViewController.swift in Sources */,
 				4529BFB01EF2290D006A9A39 /* Tree2.swift in Sources */,
 				4514CD9E1F7BE10400FF978B /* IncrementalTable.swift in Sources */,
 				45EA459F1EF22E450024D3B1 /* LogFeature.swift in Sources */,
@@ -949,6 +947,7 @@
 				45641EC71EFF420200D4C0D1 /* FSM.swift in Sources */,
 				454843B41EFE3F9900D53763 /* Services.swift in Sources */,
 				4511D34F1F77E96600F60401 /* WorkspaceCommand.swift in Sources */,
+				45552F581F8316D600892CC5 /* REPORT_criticalBug.swift in Sources */,
 				4514CDA01F7BE81700FF978B /* QueueBuffer.swift in Sources */,
 				4531E1F01F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift in Sources */,
 				456ABC091F032FD500928B4B /* functions.swift in Sources */,
@@ -1021,6 +1020,7 @@
 				45B6E0A91F7EA487009D90EC /* Transition.swift in Sources */,
 				454843D31EFE59C200D53763 /* MainMenu2Controller.swift in Sources */,
 				45641ED41EFF857E00D4C0D1 /* CargoProcess2.swift in Sources */,
+				45552F4C1F830B0B00892CC5 /* ProjectFeature.Command.swift in Sources */,
 				4514CDDF1F7DC96800FF978B /* VersionedArray.swift in Sources */,
 				45EA45E81EF33CFD0024D3B1 /* Weak.swift in Sources */,
 				45EA45881EF22B520024D3B1 /* DriverApp.swift in Sources */,

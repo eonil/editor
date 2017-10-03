@@ -7,7 +7,7 @@
 //
 
 ///
-/// Manages execution of long-term sequentially scheduled operations.
+/// Manages execution of long-term, sequentially scheduled operations.
 ///
 final class PlanFeature: WorkspaceFeatureComponent {
     private let changes = Relay<()>()

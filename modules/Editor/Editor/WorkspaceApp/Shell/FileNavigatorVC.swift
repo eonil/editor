@@ -9,7 +9,7 @@
 import AppKit
 import EonilSignet
 
-final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate, WorkspaceFeatureDependent {
+final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlineViewDelegate, NSMenuDelegate, NSTextFieldDelegate, WorkspaceFeatureDependent {
     private typealias TOA = TreeOutlineAdapter<ProjectFeature.Path, ProjectFeature.NodeKind>
     private let projectTransactionWatch = Relay<ProjectFeature.Change>()
     private let toa = TOA()
@@ -40,6 +40,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         outlineView?.menu = ctxm
         outlineView?.target = self
         outlineView?.action = #selector(userDidClickOnOutlineViewCellOrColumnHeader)
+        outlineView?.doubleAction = #selector(userDidDoubleClickOnOutlineViewCellOrColumnHeader)
         ctxm.delegate = self
         ctxm.setDelegateToAllNodes { [weak self] in self?.processContextMenuSignal($0) }
     }
@@ -162,6 +163,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         v.imageView?.image = makeIconForNode(node)
         let u = features?.project.makeFileURL(for: node.key)
         v.textField?.stringValue = u?.lastPathComponent ?? ""
+        v.textField?.delegate = self
         return v
     }
 
@@ -224,6 +226,34 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         let filePath = clickedItem.key
         guard let fileURL = features.project.makeFileURL(for: filePath) else { return REPORT_recoverableWarning("Bad file path: \(filePath)") }
         features.process(.codeEditing(.open(fileURL)))
+
+        guard let outlineView = outlineView else { return }
+        let rowIndex = outlineView.clickedRow
+        guard rowIndex != -1 else { return }
+        guard outlineView.window?.firstResponder === outlineView else { return }
+        guard let cellView = outlineView.view(atColumn: 0, row: rowIndex, makeIfNecessary: false) as? NSTableCellView else { return }
+        cellView.textField?.isEditable = true
+        // Don't make it first-responder. If you do it, it starts editing
+        // immediately instead of having some delay.
+
+    }
+    @objc
+    private func userDidDoubleClickOnOutlineViewCellOrColumnHeader() {
+        MARK_unimplemented()
+    }
+
+    override func controlTextDidEndEditing(_ obj: Notification) {
+        guard let outlineView = outlineView else { return }
+        let rowIndex = outlineView.selectedRow
+        guard rowIndex != -1 else { return }
+        guard let cellView = outlineView.view(atColumn: 0, row: rowIndex, makeIfNecessary: false) as? NSTableCellView else { return }
+        guard obj.object as AnyObject? === cellView.textField else { return }
+        guard let newName = cellView.textField?.stringValue else { return }
+        guard let item = outlineView.item(atRow: rowIndex) as? TOA.OutlineViewNode else { return }
+        let oldPath = item.key
+        let newPath = oldPath.deletingLastComponent1().appendingComponent(newName)
+        guard let features = features else { return }
+        features.process(.spawn(.moveFile(from: oldPath, to: newPath)))
     }
 
 

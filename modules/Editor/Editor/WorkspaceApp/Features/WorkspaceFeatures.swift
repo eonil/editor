@@ -61,6 +61,17 @@ final class WorkspaceFeatures: ServicesDependent {
             case .build(let cmd):
                 let cmds = build.process(cmd)
                 cmdq.append(contentsOf: cmds)
+
+            case .spawn(let proc):
+                switch proc {
+                case .moveFile(let from, let to):
+                    switch project.moveFile(from: from, to: to) {
+                    case .success(_):
+                        break
+                    case .failure(let issue):
+                        dialogue.process(.spawn(.error(DialogueFeature.Error.ADHOC_any("\(issue)"))))
+                    }
+                }
             }
         }
     }
