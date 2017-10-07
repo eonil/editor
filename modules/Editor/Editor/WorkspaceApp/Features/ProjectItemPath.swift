@@ -13,6 +13,9 @@ struct ProjectItemPath: Hashable {
     init(components initialComponents: [String]) {
         components = initialComponents
     }
+    init(_ initialComponents: [String] = []) {
+        components = initialComponents
+    }
     var hashValue: Int {
         return components.last?.hashValue ?? 0
     }
@@ -37,6 +40,10 @@ struct ProjectItemPath: Hashable {
     func splitLastComponent() -> (ProjectItemPath, lastComponent: String) {
         let (a, b) = components.splitLast()
         return (ProjectItemPath(components: Array(a)), b)
+    }
+    func appending(_ subpath: ProjectItemPath) -> ProjectItemPath {
+        let comps = components + subpath.components
+        return ProjectItemPath(components: comps)
     }
     static func == (_ a: ProjectItemPath, _ b: ProjectItemPath) -> Bool {
         return a.components == b.components
@@ -71,4 +78,8 @@ extension ProjectItemPath {
 //    }
 }
 
-
+extension ProjectItemPath: ExpressibleByArrayLiteral {
+    init(arrayLiteral elements: String...) {
+        components = elements
+    }
+}

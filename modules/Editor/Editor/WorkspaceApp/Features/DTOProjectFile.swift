@@ -80,7 +80,7 @@ extension DTOProjectFile {
             }
             else {
                 let parent_namep = p.deletingLastComponent1()
-                let parent_idxp = dto.files.indexPath(at: parent_namep)
+                guard let parent_idxp = dto.files.indexPath(at: parent_namep) else { return .failure("Some intermediate path is missing.") }
                 let parent_subtree = dto.files.at(parent_idxp)
                 let idxp = parent_idxp.appending(parent_subtree.subtrees.count)
                 let node = FileNode(name: p.components.last!, kind: c, isExpanded: false)
