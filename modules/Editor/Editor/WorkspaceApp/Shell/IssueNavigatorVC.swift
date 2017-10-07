@@ -63,8 +63,9 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
                 guard let span = m.message.spans.first else { break }
                 DEBUG_log(span.file_name)
                 let p = ProjectItemPath.fromUnixFilePathFromProjectRoot(span.file_name)
-                let u = features.project.makeURLForFile(at: p)
-                features.process(.codeEditing(.open(u)))
+                if let u = features.project.makeURLForFile(at: p).successValue {
+                    features.process(.codeEditing(.open(u)))
+                }
             case .compilerArtifact(let m):
                 REPORT_unimplementedAndContinue()
             case .buildScript(let m):

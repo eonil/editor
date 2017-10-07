@@ -11,14 +11,11 @@ import AppKit
 
 final class TreeOutlineAdapter2<Node> {
     typealias IdentityProxy = TreeOutlineAdapter2IdentityProxy<Node>
-    
-    private(set) var sourceTree: Tree<Node>
-    private(set) var rootProxy: IdentityProxy
+    private(set) var rootProxy: IdentityProxy?
     private let isFolded: (Tree<Node>) -> Bool
 
-    init(_ initialSourceTree: Tree<Node>, _ isFolded: @escaping (Tree<Node>) -> Bool) {
-        sourceTree = initialSourceTree
-        rootProxy = IdentityProxy(initialSourceTree)
+    init(_ initialSourceTree: Tree<Node>?, _ isFolded: @escaping (Tree<Node>) -> Bool) {
+        rootProxy = initialSourceTree.flatMap({ IdentityProxy($0) })
         self.isFolded = isFolded
     }
 
@@ -29,7 +26,7 @@ final class TreeOutlineAdapter2<Node> {
     /// O(depth)
     ///
     func proxy(for path: IndexPath) -> IdentityProxy? {
-        return rootProxy.findNode(at: path)
+        return rootProxy?.findNode(at: path)
     }
 
     ///
@@ -37,6 +34,7 @@ final class TreeOutlineAdapter2<Node> {
     /// and gets copied together.
     ///
     func makeSelection(selectedRowIndices: IndexSet) -> Selection {
+        guard let sourceTree = rootProxy?.sourceTree else { return Selection() }
         return Selection(sourceTree, selectedRowIndices, isFolded)
     }
     
@@ -52,7 +50,40 @@ final class TreeOutlineAdapter2<Node> {
     ///
     @discardableResult
     func applyMutation(_ mutation: Tree<Node>.Mutation, to snapshot: Tree<Node>) -> OutlineViewCommand {
-        return rootProxy.applyMutation(mutation, to: snapshot)
+        switch mutation {
+        case .insert(let idxp):
+            if idxp == .root {
+                guard rootProxy == nil else { REPORT_criticalBug("Root proxy must be `nil` now.")}
+                rootProxy = IdentityProxy(snapshot)
+                return .reload
+            }
+            else {
+                guard let rootProxy = rootProxy else { REPORT_criticalBug("Missing root-proxy and an operation with non-root path received.") }
+                return rootProxy.applyMutation(mutation, to: snapshot)
+            }
+
+        case .replace(let idxp):
+            if idxp == .root {
+                guard rootProxy != nil else { REPORT_criticalBug("`replace` operation to root cannot be performed with no root proxy object.") }
+                rootProxy = IdentityProxy(snapshot)
+                return .reload
+            }
+            else {
+                guard let rootProxy = rootProxy else { REPORT_criticalBug("`replace` operation to root cannot be performed with no root proxy object.") }
+                return rootProxy.applyMutation(mutation, to: snapshot)
+            }
+
+        case .remove(let idxp):
+            if idxp == .root {
+                guard rootProxy != nil else { REPORT_criticalBug("Root proxy must not be `nil` now.")}
+                rootProxy = nil
+                return .reload
+            }
+            else {
+                guard let rootProxy = rootProxy else { REPORT_criticalBug("Missing root-proxy and an operation with non-root path received.") }
+                return rootProxy.applyMutation(mutation, to: snapshot)
+            }
+        }
     }
     
     ///
@@ -60,6 +91,7 @@ final class TreeOutlineAdapter2<Node> {
     ///
     @discardableResult
     func applyOptimizedMutation(_ mutation: Tree<Node>.OptimizedMutation, to snapshot: Tree<Node>) -> OutlineViewCommand {
+        guard let rootProxy = rootProxy else { REPORT_criticalBug("`replaceNode` operation to root cannot be performed with no root proxy object.") }
         return rootProxy.applyOptimizedMutation(mutation, to: snapshot)
     }
 }

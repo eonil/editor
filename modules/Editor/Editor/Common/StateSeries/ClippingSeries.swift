@@ -15,11 +15,12 @@ struct ClippingSeries<Snapshot>: StateSeriesType {
     private var core = Series<Snapshot>()
     
     init(_ initialState: Snapshot, capacity: Int = 2) {
+        precondition(capacity >= 1)
         cap = capacity
         core.append(initialState)
         clipToCapacity()
     }
-    var current: Snapshot {
+    var latest: Snapshot {
         return core.last!
     }
     var points: PointCollection {
@@ -34,7 +35,7 @@ struct ClippingSeries<Snapshot>: StateSeriesType {
         core.removeFirst(n1)
     }
     mutating func clipToCapacity() {
-        guard core.count < cap else { return }
-        core.removeFirst(cap - core.count)
+        guard core.count > cap else { return }
+        core.removeFirst(core.count - cap)
     }
 }

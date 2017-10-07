@@ -139,34 +139,33 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         // https://developer.apple.com/documentation/appkit/nsoutlineview/1526467-itemdidcollapsenotification?changes=latest_beta
         assert(notification.object as? NSObject === outlineView)
         assert(notification.name == NSOutlineView.itemDidCollapseNotification)
+        guard let rootProxy = toa.rootProxy else { REPORT_criticalBug("`NSOutlineView` event has been discovered with no root-proxy object.") }
         let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
         let proxy = item as! TOA.IdentityProxy
-        let ipath = proxy.resolvePath()
-        let npath = toa.sourceTree.namePath(at: ipath)
-        assert(exps.contains(npath))
-        exps.remove(npath)
-        DEBUG_log("End-user did collapse: \(npath), exps = \(exps)")
+        let idxp = proxy.resolvePath()
+        let namep = rootProxy.sourceTree.namePath(at: idxp)
+        assert(exps.contains(namep))
+        exps.remove(namep)
+        DEBUG_log("End-user did collapse: \(namep), exps = \(exps)")
     }
     func outlineViewItemDidExpand(_ notification: Notification) {
         // https://developer.apple.com/documentation/appkit/nsoutlineview/1526467-itemdidcollapsenotification?changes=latest_beta
         assert(notification.object as? NSObject === outlineView)
         assert(notification.name == NSOutlineView.itemDidExpandNotification)
+        guard let rootProxy = toa.rootProxy else { REPORT_criticalBug("`NSOutlineView` event has been discovered with no root-proxy object.") }
         let item = AUDIT_unwrap(notification.userInfo!["NSObject"])
         let proxy = item as! TOA.IdentityProxy
-        let ipath = proxy.resolvePath()
-        let npath = toa.sourceTree.namePath(at: ipath)
-        assert(exps.contains(npath) == false)
-        exps.insert(npath)
-        DEBUG_log("End-user did expand: \(npath), exps = \(exps)")
+        let idxp = proxy.resolvePath()
+        let namep = rootProxy.sourceTree.namePath(at: idxp)
+        assert(exps.contains(namep) == false)
+        exps.insert(namep)
+        DEBUG_log("End-user did expand: \(namep), exps = \(exps)")
     }
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let v = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "FileItem"), owner: self) as! NSTableCellView
         let proxy = item as! TOA.IdentityProxy
         v.imageView?.image = makeIconForNode(proxy)
-        let ipath = proxy.resolvePath()
-        let npath = toa.sourceTree.namePath(at: ipath)
-        let u = features?.project.makeURLForFile(at: npath)
-        v.textField?.stringValue = u?.lastPathComponent ?? ""
+        v.textField?.stringValue = proxy.sourceTree.node.name
         v.textField?.delegate = self
         return v
     }
@@ -211,7 +210,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
 
         case .showInFinder:
             let grabbedIndexPaths = getIndexPathsToGrabbedFilesForContextMenuOperation() ?? []
-            let urls = grabbedIndexPaths.map({ features.project.makeURLForFile(at: $0) })
+            let urls = grabbedIndexPaths.flatMap({ features.project.makeURLForFile(at: $0).successValue })
             // TODO: Make external I/O to be done in services.
             NSWorkspace.shared.activateFileViewerSelecting(urls)
 
@@ -231,8 +230,9 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     private func userDidClickOnOutlineViewCellOrColumnHeader() {
         guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         guard let idxp = getIndexPathToClickedFile() else { return }
-        let fileURL = features.project.makeURLForFile(at: idxp)
-        features.process(.codeEditing(.open(fileURL)))
+        if let fileURL = features.project.makeURLForFile(at: idxp).successValue {
+            features.process(.codeEditing(.open(fileURL)))
+        }
 
         guard let outlineView = outlineView else { return }
         let rowIndex = outlineView.clickedRow
@@ -276,7 +276,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
                     .delete
                     ])
             }
-            if toa.sourceTree.at(idxp).node.kind == .folder {
+            if let rootProxy = toa.rootProxy, rootProxy.sourceTree[idxp].node.kind == .folder {
                 ops.formUnion([
                     .newFolder,
                     .newFolderWithSelection,
@@ -287,21 +287,23 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         ctxm.resetEnabledCommands(ops)
     }
 
-    private func expandNodeImpl(at ipath: IndexPath) {
+    private func expandNodeImpl(at idxp: IndexPath) {
         guard let outlineView = outlineView else { REPORT_missingIBOutletViewAndFatalError() }
-        guard let proxy = toa.proxy(for: ipath) else { return }
+        guard let rootProxy = toa.rootProxy else { REPORT_criticalBug("An operation on a node cannot be performed with no root-proxy object.") }
+        guard let proxy = toa.proxy(for: idxp) else { return }
         outlineView.expandItem(proxy, expandChildren: false)
-        let npath = toa.sourceTree.namePath(at: ipath)
-        exps.insert(npath)
-        DEBUG_log("Expanded: \(npath), exps = \(exps)")
+        let namep = rootProxy.sourceTree.namePath(at: idxp)
+        exps.insert(namep)
+        DEBUG_log("Expanded: \(namep), exps = \(exps)")
     }
-    private func collapseNodeImpl(at ipath: IndexPath) {
+    private func collapseNodeImpl(at idxp: IndexPath) {
         guard let outlineView = outlineView else { REPORT_missingIBOutletViewAndFatalError() }
-        let proxy = toa.proxy(for: ipath)
+        guard let rootProxy = toa.rootProxy else { REPORT_criticalBug("An operation on a node cannot be performed with no root-proxy object.") }
+        let proxy = toa.proxy(for: idxp)
         outlineView.collapseItem(proxy, collapseChildren: false)
-        let npath = toa.sourceTree.namePath(at: ipath)
-        exps.remove(npath)
-        DEBUG_log("Collapsed: \(npath), exps = \(exps)")
+        let namep = rootProxy.sourceTree.namePath(at: idxp)
+        exps.remove(namep)
+        DEBUG_log("Collapsed: \(namep), exps = \(exps)")
     }
     private func getIndexPathsToGrabbedFilesForContextMenuOperation() -> [IndexPath]? {
         if let p = getIndexPathToClickedFile() {
@@ -330,8 +332,8 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     }
     private func makeIconForNode(_ n: TOA.IdentityProxy) -> NSImage? {
         guard let features = features else { return nil }
-        let ipath = n.resolvePath()
-        let u = features.project.makeURLForFile(at: ipath)
+        let idxp = n.resolvePath()
+        guard let u = features.project.makeURLForFile(at: idxp).successValue else { return nil }
         guard let m = NSImage(contentsOf: u) else { return nil }
         return m
     }

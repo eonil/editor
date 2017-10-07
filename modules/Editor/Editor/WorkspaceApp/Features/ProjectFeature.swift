@@ -48,10 +48,8 @@ final class ProjectFeature: ServicesDependent {
     /// human-facing application.
     ///
     let changes = Relay<[Change]>()
-    private(set) var series = Series<State>()
-    var state: State { return series.last! }
-//    private(set) var series = ClippingSeries<State>(State())
-//    var state: State { return series.current }
+    private(set) var series = Series(State())
+    var state: State { return series.latest }
 
     private func appendMutation(_ f: (_ state: inout State) -> Void) {
         var st = state
@@ -134,6 +132,8 @@ final class ProjectFeature: ServicesDependent {
         return .success(Void())
     }
     enum MakeFileIssue {
+        case makeFileSystemURLIssue(MakeFileSystemURLIssue)
+        case fileSystemError(Error)
         case rootNodeCannotBeInserted
     }
 
@@ -158,12 +158,6 @@ final class ProjectFeature: ServicesDependent {
         MARK_unimplemented()
     }
 
-    func makeURLForFile(at path: IndexPath) -> URL {
-            MARK_unimplemented()
-    }
-    func makeURLForFile(at npath: ProjectItemPath) -> URL {
-        MARK_unimplemented()
-    }
 
     ///
     /// - Note:
@@ -176,9 +170,13 @@ final class ProjectFeature: ServicesDependent {
         assertMainThread()
 
         // Prepare inputs.
-        let targetFileURL = makeURLForFile(at: idxp)
+        let targetFileSystemURL: URL
+        switch makeURLForFile(at: idxp) {
+        case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
+        case .success(let url):     targetFileSystemURL = url
+        }
         let oldName = state.files[idxp].node.name
-        let oldURL = targetFileURL
+        let oldURL = targetFileSystemURL
         let newURL = oldURL.deletingLastPathComponent().appendingPathComponent(newName)
 
         // Check input validity.
@@ -202,7 +200,7 @@ final class ProjectFeature: ServicesDependent {
         MARK_unimplemented()
     }
     enum RenameFileIssue {
-        case filesCollectionIsMissingInProject
+        case makeFileSystemURLIssue(MakeFileSystemURLIssue)
         case fileSystemError(Error)
     }
     ///
@@ -222,10 +220,18 @@ final class ProjectFeature: ServicesDependent {
 
         // Perform I/O.
         // Platform file-system operation.
-        let fromURL = makeURLForFile(at: from)
-        let toURL = makeURLForFile(at: to)
+        let fromFileSystemURL: URL
+        let toFileSystemURL: URL
+        switch makeURLForFile(at: from) {
+        case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
+        case .success(let url):     fromFileSystemURL = url
+        }
+        switch makeURLForFile(at: to) {
+        case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
+        case .success(let url):     toFileSystemURL = url
+        }
         do {
-            try services.fileSystem.moveItem(at: fromURL, to: toURL)
+            try services.fileSystem.moveItem(at: fromFileSystemURL, to: toFileSystemURL)
         }
         catch let err {
             return .failure(.fileSystemError(err))
@@ -294,8 +300,9 @@ final class ProjectFeature: ServicesDependent {
 //        return .success(Void())
 //    }
     enum MoveFileIssue {
-        case sourcePathIsNotInProject
-        case destinationPathIsAlreadyInProject
+        case makeFileSystemURLIssue(MakeFileSystemURLIssue)
+//        case sourcePathIsNotInProject
+//        case destinationPathIsAlreadyInProject
         case sourcePathIsRoot
         case destinationPathIsRoot
         case fileSystemError(Error)
@@ -331,9 +338,13 @@ final class ProjectFeature: ServicesDependent {
 
         // Perform I/O.
         for idxp in idxpsSortedInDFS {
-            let targetFileURL = makeURLForFile(at: idxp)
+            let targetFileSystemURL: URL
+            switch makeURLForFile(at: idxp) {
+            case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
+            case .success(let url):     targetFileSystemURL = url
+            }
             do {
-                try services.fileSystem.removeItem(at: targetFileURL)
+                try services.fileSystem.removeItem(at: targetFileSystemURL)
             }
             catch let err {
                 return .failure(.fileSystemError(err))
@@ -354,6 +365,7 @@ final class ProjectFeature: ServicesDependent {
         return .success(Void())
     }
     enum DeleteIssue {
+        case makeFileSystemURLIssue(MakeFileSystemURLIssue)
         case fileSystemError(Error)
     }
 
@@ -416,19 +428,24 @@ final class ProjectFeature: ServicesDependent {
     /// lead the node to be an invalid node.
     /// That's an acceptable and intentional decision.
     ///
-    private func createActualFileImpl(at path: ProjectItemPath, as kind: NodeKind) {
-        let u = makeURLForFile(at: path)
+    private func createActualFileImpl(at path: ProjectItemPath, as kind: NodeKind) -> Result<Void, MakeFileIssue> {
+        let targetFileSystemURL: URL
+        switch makeURLForFile(at: path) {
+        case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
+        case .success(let url):     targetFileSystemURL = url
+        }
         do {
             switch kind {
             case .folder:
-                try services.fileSystem.createDirectory(at: u, withIntermediateDirectories: true, attributes: nil)
+                try services.fileSystem.createDirectory(at: targetFileSystemURL, withIntermediateDirectories: true, attributes: nil)
             case .file:
-                try! Data().write(to: u, options: [.atomicWrite])
+                try Data().write(to: targetFileSystemURL, options: [.atomicWrite])
             }
         }
         catch let err {
-            reportIssue("File I/O error: \(err)")
+            return .failure(.fileSystemError(err))
         }
+        return .success(Void())
     }
 
     private func makeNewNodeName(at path: IndexPath, as kind: NodeKind) -> String {
@@ -455,7 +472,7 @@ final class ProjectFeature: ServicesDependent {
     }
 }
 extension ProjectFeature {
-//    typealias Series = ClippingSeries<State>
+    typealias Series = ClippingSeries<State>
     ///
     /// File-tree state is provided in transition form to
     /// make easy to track changes between states.
@@ -537,6 +554,41 @@ extension ProjectFeature {
 //        }
 //        return u1
 //    }
+
+    enum MakeFileSystemURLIssue {
+        case projectHasNoLocationOnFileSystem
+    }
+    ///
+    /// - Returns:
+    ///     `nil` if `location == nil`.
+    ///     Otherwise a URL.
+    ///
+    /// - Note:
+    ///     This requires an existing file node at the index-path.
+    ///     If a file node does not exist at the path, this crash
+    ///     the app.
+    ///
+    func makeURLForFile(at idxp: IndexPath) -> Result<URL, MakeFileSystemURLIssue> {
+        guard let u = state.location else { return .failure(.projectHasNoLocationOnFileSystem) }
+        var u1 = u
+        let namep = state.files.namePath(at: idxp)
+        for n in namep.components {
+            u1 = u1.appendingPathComponent(n)
+        }
+        return .success(u1)
+    }
+    ///
+    /// This doesn't require an existing file node in state.
+    /// Works always.
+    ///
+    func makeURLForFile(at namep: ProjectItemPath) -> Result<URL, MakeFileSystemURLIssue> {
+        guard let u = state.location else { return .failure(.projectHasNoLocationOnFileSystem) }
+        var u1 = u
+        for n in namep.components {
+            u1 = u1.appendingPathComponent(n)
+        }
+        return .success(u1)
+    }
 }
 extension ProjectFeature {
     func findInsertionPointForNewNode() -> Result<IndexPath, String> {
