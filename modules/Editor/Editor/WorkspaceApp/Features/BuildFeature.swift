@@ -9,6 +9,8 @@
 import EonilToolbox
 
 final class BuildFeature: WorkspaceFeatureComponent {
+    typealias Production = Void
+
     let changes = Relay<[Change]>()
     private(set) var state = State()
     private let loop = ReactiveLoop()
@@ -21,6 +23,7 @@ final class BuildFeature: WorkspaceFeatureComponent {
         watch += loop
         loop.step = { [weak self] in self?.step() }
     }
+
     private func step() {
         if let exec = exec {
             state.session.logs.reports.append(contentsOf: exec.logs.reports)
@@ -76,11 +79,14 @@ final class BuildFeature: WorkspaceFeatureComponent {
             }
         }
     }
-    func process(_ command: Command) -> [WorkspaceCommand] {
+    func process(_ command: Command) -> Result<Void,ProcessIssue> {
         cmdq.append(command)
         loop.signal()
-        return []
+        return .success(Void())
     }
+    enum ProcessIssue {
+    }
+
     func setProjectState(_ newProjectState: ProjectFeature.State) {
         project = newProjectState
         loop.signal()
@@ -90,7 +96,9 @@ extension BuildFeature {
     struct State {
         var phase = Phase.idle
         var session = Session()
-        
+
+        typealias Report = CargoProcess2.Report
+        typealias Issue = CargoProcess2.Issue
         enum Phase {
             case idle
             case running
@@ -126,8 +134,6 @@ extension BuildFeature {
         case cleanTarget(Target)
         case cancel
     }
-    typealias Report = CargoProcess2.Report
-    typealias Issue = CargoProcess2.Issue
 
     enum Change {
         case phase

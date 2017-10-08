@@ -8,46 +8,71 @@
 
 import Foundation
 
-struct ProjectItemPath: Hashable {
-    var components = [String]()
-    init(components initialComponents: [String]) {
-        components = initialComponents
+struct ProjectItemPath: Hashable, RandomAccessCollection, RangeReplaceableCollection {
+    var comps = [String]()
+    init() {
     }
-    init(_ initialComponents: [String] = []) {
-        components = initialComponents
+    init(components initialComponents: [String]) {
+        comps = initialComponents
+    }
+    init(_ initialComponents: [String]) {
+        comps = initialComponents
     }
     var hashValue: Int {
         return components.last?.hashValue ?? 0
     }
+
+    var startIndex: Int { return comps.startIndex }
+    var endIndex: Int { return comps.endIndex }
+    subscript(position: Int) -> String {
+        return comps[position]
+    }
+    mutating func replaceSubrange<C, R>(_ subrange: R, with newElements: C) where C : Collection, R : RangeExpression, ProjectItemPath.Element == C.Element, Int == R.Bound {
+        comps.replaceSubrange(subrange, with: newElements)
+    }
+
+    @available(*, deprecated: 0)
+    var components: [String] {
+        return comps
+    }
+    @available(*, deprecated: 0)
     var isRoot: Bool {
         return components.isEmpty
     }
+    @available(*, deprecated: 0)
     func appendingComponent(_ component: String) -> ProjectItemPath {
         return ProjectItemPath(components: components + [component])
     }
+    @available(*, deprecated: 0)
     func deletingLastComponent() -> Result<ProjectItemPath, String> {
         guard components.isEmpty == false else { return .failure("This is root path(`/`). Cannot delete more.") }
         return .success(ProjectItemPath(components: Array(components.dropLast())))
     }
+    @available(*, deprecated: 0)
     func deletingLastComponent1() -> ProjectItemPath {
         precondition(components.isEmpty == false)
         return ProjectItemPath(components: Array(components.dropLast()))
     }
+    @available(*, deprecated: 0)
     func splitFirstComponent() -> (fistComponent: String, ProjectItemPath) {
         let (a, b) = components.splitFirst()
         return (a, ProjectItemPath(components: Array(b)))
     }
+    @available(*, deprecated: 0)
     func splitLastComponent() -> (ProjectItemPath, lastComponent: String) {
         let (a, b) = components.splitLast()
         return (ProjectItemPath(components: Array(a)), b)
     }
+    @available(*, deprecated: 0)
     func appending(_ subpath: ProjectItemPath) -> ProjectItemPath {
         let comps = components + subpath.components
         return ProjectItemPath(components: comps)
     }
+    @available(*, deprecated: 0)
     static func == (_ a: ProjectItemPath, _ b: ProjectItemPath) -> Bool {
         return a.components == b.components
     }
+
     static var root: ProjectItemPath {
         return ProjectItemPath(components: [])
     }
@@ -80,6 +105,6 @@ extension ProjectItemPath {
 
 extension ProjectItemPath: ExpressibleByArrayLiteral {
     init(arrayLiteral elements: String...) {
-        components = elements
+        comps = elements
     }
 }

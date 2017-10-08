@@ -57,19 +57,59 @@ final class ProjectFeature: ServicesDependent {
         series.append(st)
     }
 
-    func process(_ command: Command) {
+    func process(_ command: Command) -> Result<Void, ProcessIssue> {
         switch command {
+        case .setNodeFoldingState(let idxp, let isFolded):
+            guard state.files[idxp].node.isFolded != isFolded else { return .success(Void()) }
+            // Update in-memory state.
+            appendMutation({ (state) in
+                state.files[idxp].node.isFolded = isFolded
+            })
+            // Perform I/O.
+            storeProjectFileList()
+            // Broadcast changes.
+            changes.cast([.filesOptimized(.replaceNode(at: idxp))])
+            signal.cast(Void())
+            return .success(Void())
+
         case .setSelection(let newSelection):
-            var st = state
-            st.selection = newSelection
-            series.append(st)
-            changes.cast([.location])
-            signal.cast(())
+            guard newSelection.isValid(for: self) else { return .failure(.setSelection(.timepointMismatch)) }
+            appendMutation({ (state) in
+                state.selection = newSelection
+            })
+            changes.cast([.selection])
+            signal.cast(Void())
+            return .success(Void())
+
+        case .makeFile(let idxp, let kind):
+            return makeFile(at: idxp, as: kind).mapIssue(ProcessIssue.makeFile)
+
+        case .makeFileAtInferredPosition(let kind):
+            return makeFileAtInferredPosition(as: kind).mapIssue(ProcessIssue.makeFile)
+
+        case .renameFile(let idxp, let newName):
+            return renameFile(at: idxp, with: newName).mapIssue(ProcessIssue.renameFile)
+
+        case .moveFile(let old_idxp, let new_idxp):
+            return moveFile(from: old_idxp, to: new_idxp).mapIssue(ProcessIssue.moveFile)
 
         case .deleteSelectedFiles:
-            deleteFilesWithSortedIndexPaths(at: state.selection.indexPaths)
+            let r = deleteFiles(in: state.selection)
+            return r.mapIssue(ProcessIssue.deleteFilesIssue)
         }
     }
+    enum ProcessIssue {
+        case makeFile(MakeFileIssue)
+        case setSelection(SetSelectionIssue)
+        case renameFile(RenameFileIssue)
+        case moveFile(MoveFileIssue)
+        case deleteFilesIssue(DeleteFilesIssue)
+    }
+
+    enum SetSelectionIssue {
+        case timepointMismatch
+    }
+
     ///
     /// Sets a new location.
     ///
@@ -102,6 +142,15 @@ final class ProjectFeature: ServicesDependent {
     }
 
     ///
+    /// Make a new node right under the current selection.
+    ///
+    private func makeFileAtInferredPosition(as kind: NodeKind) -> Result<Void, MakeFileIssue> {
+        switch findInsertionPointForNewNode() {
+        case .failure(let issue):   return .failure(.noGoodInsertionPoint(reason: issue))
+        case .success(let idxp):    return makeFile(at: idxp, as: kind)
+        }
+    }
+    ///
     /// Add a new node of specified type.
     ///
     /// - Parameter at:
@@ -109,32 +158,39 @@ final class ProjectFeature: ServicesDependent {
     ///     Intermediate nodes MUST exists. Otherwise this fails.
     ///     Empty index (index to root node) is not allowed.
     ///
-    func makeFile(at idxp: IndexPath, as kind: NodeKind) -> Result<Void, MakeFileIssue> {
+    private func makeFile(at idxp: IndexPath, as kind: NodeKind) -> Result<Void, MakeFileIssue> {
         assertMainThread()
         guard idxp != .root else { return .failure(.rootNodeCannotBeInserted) }
 
-        let newNode = FileNode(
-            name: makeNewNodeName(at: idxp, as: kind),
-            kind: kind)
-        var newSubtree = FileTree(node: newNode)
+        let newName = makeNewNodeName(at: idxp, as: kind)
+        let newNode = FileNode(name: newName, kind: kind)
+        let newSubtree = FileTree(node: newNode)
         appendMutation { state in
             state.files.insert(at: idxp, newSubtree)
         }
 
         // Perform I/O.
+        // Though I/O fails, in-memory representation keeps changes.
         let namep = state.files.namePath(at: idxp)
-        createActualFileImpl(at: namep, as: kind)
+        let r = createActualFileImpl(at: namep, as: newNode.kind)
+        storeProjectFileList()
 
         // Cast events.
         changes.cast([.files(.insert(at: idxp))])
         signal.cast(Void())
-        storeProjectFileList()
-        return .success(Void())
+        return r
     }
     enum MakeFileIssue {
         case makeFileSystemURLIssue(MakeFileSystemURLIssue)
         case fileSystemError(Error)
         case rootNodeCannotBeInserted
+        ///
+        /// Program could not find a good insertion point
+        /// for new file-node with current selection.
+        /// This can happen if selected item does not support
+        /// adding new subitems.
+        ///
+        case noGoodInsertionPoint(reason: String)
     }
 
     ///
@@ -182,6 +238,11 @@ final class ProjectFeature: ServicesDependent {
         // Check input validity.
         guard oldName != newName else { return .success(Void()) }
 
+        // Update in-memory representation.
+        appendMutation { (state) in
+            state.files[idxp].node.name = newName
+        }
+
         // Perform I/O.
         do {
             try services.fileSystem.moveItem(at: oldURL, to: newURL)
@@ -189,15 +250,11 @@ final class ProjectFeature: ServicesDependent {
         catch let err {
             return .failure(.fileSystemError(err))
         }
+        storeProjectFileList()
 
-        // Update in-memory representation.
-        appendMutation { (state) in
-            state.files[idxp].node.name = newName
-        }
         signal.cast(Void())
         changes.cast([.filesOptimized(.replaceNode(at: idxp))])
-
-        MARK_unimplemented()
+        return .success(Void())
     }
     enum RenameFileIssue {
         case makeFileSystemURLIssue(MakeFileSystemURLIssue)
@@ -218,6 +275,16 @@ final class ProjectFeature: ServicesDependent {
         guard from != .root else { return .failure(.sourcePathIsRoot) }
         guard to != .root else { return .failure(.destinationPathIsRoot) }
 
+        // Mutate in-memory file-tree.
+        let nodeToMove = state.files[from].node
+        appendMutation { (state) in
+            state.files.insert(at: to, FileTree(node: nodeToMove))
+        }
+        appendMutation { (state) in
+            // Remove last to prevent changes in indices.
+            state.files.remove(at: from)
+        }
+
         // Perform I/O.
         // Platform file-system operation.
         let fromFileSystemURL: URL
@@ -236,16 +303,7 @@ final class ProjectFeature: ServicesDependent {
         catch let err {
             return .failure(.fileSystemError(err))
         }
-
-        // Mutate in-memory file-tree.
-        let nodeToMove = state.files[from].node
-        appendMutation { (state) in
-            state.files.insert(at: to, FileTree(node: nodeToMove))
-        }
-        appendMutation { (state) in
-            // Remove last to prevent changes in indices.
-            state.files.remove(at: from)
-        }
+        storeProjectFileList()
 
         // Cast events.
         changes.cast([.files(.remove(at: from)), .files(.insert(at: to))])
@@ -309,9 +367,6 @@ final class ProjectFeature: ServicesDependent {
     }
 
 //    func deleteFiles(at paths: [IndexPath]) -> Result<Void,DeleteIssue> {
-//        // Prepare inputs.
-//        // Delete from leaf to root.
-//        let sortedPathsInDeleteOrder = paths.sorted(by: { $0.count < $1.count }).reversed()
 //        deleteFilesWithSortedIndexPaths(sortedPathsInDeleteOrder)
 //    }
     ///
@@ -333,11 +388,25 @@ final class ProjectFeature: ServicesDependent {
     ///     returned. In other words, file-system state becomes
     ///     out-sync.
     ///
-    private func deleteFilesWithSortedIndexPaths<S>(at idxpsSortedInDFS: S) -> Result<Void,DeleteIssue> where S: Sequence, S.Element == IndexPath {
+    private func deleteFiles(in selection: ProjectSelection) -> Result<Void, DeleteFilesIssue> {
         assertMainThread()
 
+        // Prepare inputs.
+        // Delete from leaf to root.
+        // We don't need proper stable sort. Just leaf-to-root is enough.
+        let sorted_idxps = ProjectItemPathClustering.sortLeafToRoot(selection)
+
+        // Update in-memory representations.
+        var changeSignals = [Change]()
+        appendMutation { (state) in
+            for idxp in sorted_idxps {
+                state.files.remove(at: idxp)
+                changeSignals.append(.files(.remove(at: idxp)))
+            }
+        }
+
         // Perform I/O.
-        for idxp in idxpsSortedInDFS {
+        for idxp in sorted_idxps {
             let targetFileSystemURL: URL
             switch makeURLForFile(at: idxp) {
             case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
@@ -351,20 +420,12 @@ final class ProjectFeature: ServicesDependent {
             }
         }
 
-        // Update in-memory representations.
-        var changeSignals = [Change]()
-        appendMutation { (state) in
-            for idxp in idxpsSortedInDFS {
-                state.files.remove(at: idxp)
-                changeSignals.append(.files(.remove(at: idxp)))
-            }
-        }
         signal.cast(())
         changes.cast(changeSignals)
         storeProjectFileList()
         return .success(Void())
     }
-    enum DeleteIssue {
+    enum DeleteFilesIssue {
         case makeFileSystemURLIssue(MakeFileSystemURLIssue)
         case fileSystemError(Error)
     }
@@ -507,15 +568,15 @@ extension ProjectFeature {
     public struct FileNode {
         public var name: String
         public var kind: NodeKind
-        public var isExpanded: Bool
+        public var isFolded: Bool
 
-        init(name: String, kind: NodeKind, isExpanded: Bool = false) {
+        init(name: String, kind: NodeKind, isFolded: Bool = true) {
             self.name = name
             self.kind = kind
-            self.isExpanded = isExpanded
+            self.isFolded = isFolded
         }
         static var root: FileNode {
-            return FileNode(name: "", kind: .folder, isExpanded: true)
+            return FileNode(name: "", kind: .folder, isFolded: false)
         }
     }
     enum NodeKind {
@@ -591,8 +652,8 @@ extension ProjectFeature {
     }
 }
 extension ProjectFeature {
-    func findInsertionPointForNewNode() -> Result<IndexPath, String> {
-        guard let idxp = state.selection.indexPaths.toArray().last else {
+    private func findInsertionPointForNewNode() -> Result<IndexPath, String> {
+        guard let idxp = state.selection.toArray().last else {
             // No item. Unexpected situation. Ignore.
             return .failure([
                 "Tried to find an insertion point when no file node is selected.",

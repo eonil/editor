@@ -70,7 +70,6 @@
 		454843DA1EFE689000D53763 /* Dialogue.extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843D91EFE689000D53763 /* Dialogue.extensions.swift */; };
 		454F77A51EFE964300317763 /* ManualLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F77A41EFE964300317763 /* ManualLoop.swift */; };
 		454F77BA1EFF127000317763 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F77B91EFF127000317763 /* Method.swift */; };
-		4552678A1F7F5EE7001D4006 /* libEonilWeaklyPersistentArray.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 455267871F7F5EE1001D4006 /* libEonilWeaklyPersistentArray.a */; };
 		4552678F1F812394001D4006 /* SampleFriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552678E1F812394001D4006 /* SampleFriendList.swift */; };
 		4552B7F31EFB8B7F00E529EE /* TreeOutlineAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */; };
 		4552B7F51EFB91F900E529EE /* MainMenuItemID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */; };
@@ -99,7 +98,6 @@
 		45641ED21EFF7F9500D4C0D1 /* BashProcess2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45641ED11EFF7F9500D4C0D1 /* BashProcess2.swift */; };
 		45641ED41EFF857E00D4C0D1 /* CargoProcess2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45641ED31EFF857E00D4C0D1 /* CargoProcess2.swift */; };
 		456ABC091F032FD500928B4B /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC081F032FD500928B4B /* functions.swift */; };
-		456ABC231F0364DD00928B4B /* ProjectSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC221F0364DD00928B4B /* ProjectSerialization.swift */; };
 		456ABC261F03770100928B4B /* Tree2.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC251F03770100928B4B /* Tree2.extension.swift */; };
 		456ABC401F03B78F00928B4B /* DTOProjectFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */; };
 		456ABC431F03BEAC00928B4B /* OrderedTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABC421F03BEAC00928B4B /* OrderedTree.swift */; };
@@ -112,6 +110,11 @@
 		4583498C1F7F1E6F00B08511 /* Transition2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583498B1F7F1E6F00B08511 /* Transition2.swift */; };
 		4583498E1F7F21EA00B08511 /* IncrementalList.extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583498D1F7F21EA00B08511 /* IncrementalList.extensions.swift */; };
 		459EA0221F88F1BC000581FC /* EditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EA0211F88F1BC000581FC /* EditorTests.swift */; };
+		459EA0471F8932F7000581FC /* DTOProjectItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EA0461F8932F7000581FC /* DTOProjectItem.swift */; };
+		459EA0491F89339E000581FC /* DTOProjectCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EA0481F89339E000581FC /* DTOProjectCoding.swift */; };
+		459EA04B1F89459F000581FC /* ProjectItemPathClustering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EA04A1F89459F000581FC /* ProjectItemPathClustering.swift */; };
+		459EA04D1F899757000581FC /* WorkspaceIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EA04C1F899757000581FC /* WorkspaceIssue.swift */; };
+		459EA04F1F899BAD000581FC /* AlienIssue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EA04E1F899BAD000581FC /* AlienIssue.swift */; };
 		45AF89AA1F7762FD00767BC4 /* Navigator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45AF89A91F7762FD00767BC4 /* Navigator.storyboard */; };
 		45AF89B21F7765CA00767BC4 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AF89B11F7765CA00767BC4 /* Resources.swift */; };
 		45AF89B41F7766B600767BC4 /* FeatureDependent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AF89B31F7766B600767BC4 /* FeatureDependent.swift */; };
@@ -200,27 +203,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 45188C0D1F813A5600506284;
 			remoteInfo = "EonilStateSeries-iOS";
-		};
-		455267841F7F5EE1001D4006 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4544AE161F7F4B090057437B;
-			remoteInfo = "EonilWeaklyPersistentArray-iOS";
-		};
-		455267861F7F5EE1001D4006 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4544AE241F7F4B130057437B;
-			remoteInfo = "EonilWeaklyPersistentArray-macOS";
-		};
-		455267881F7F5EE1001D4006 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4544AE381F7F4B560057437B;
-			remoteInfo = "EonilWeaklyPersistentArray-macOS-UnitTests";
 		};
 		45552FF41F83DF3300892CC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -337,7 +319,6 @@
 		454F77A41EFE964300317763 /* ManualLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualLoop.swift; sourceTree = "<group>"; };
 		454F77B91EFF127000317763 /* Method.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		4552677D1F7F5ED2001D4006 /* libEonilWeaklyPersistentArray.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEonilWeaklyPersistentArray.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilWeaklyPersistentArray.xcodeproj; path = "../../submodules/weakly-persistent-array.swift/EonilWeaklyPersistentArray.xcodeproj"; sourceTree = "<group>"; };
 		4552678E1F812394001D4006 /* SampleFriendList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleFriendList.swift; sourceTree = "<group>"; };
 		4552B7F21EFB8B7F00E529EE /* TreeOutlineAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeOutlineAdapter.swift; sourceTree = "<group>"; };
 		4552B7F41EFB91F900E529EE /* MainMenuItemID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuItemID.swift; sourceTree = "<group>"; };
@@ -366,7 +347,6 @@
 		45641ED11EFF7F9500D4C0D1 /* BashProcess2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashProcess2.swift; sourceTree = "<group>"; };
 		45641ED31EFF857E00D4C0D1 /* CargoProcess2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CargoProcess2.swift; sourceTree = "<group>"; };
 		456ABC081F032FD500928B4B /* functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
-		456ABC221F0364DD00928B4B /* ProjectSerialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectSerialization.swift; sourceTree = "<group>"; };
 		456ABC251F03770100928B4B /* Tree2.extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree2.extension.swift; sourceTree = "<group>"; };
 		456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTOProjectFile.swift; sourceTree = "<group>"; };
 		456ABC421F03BEAC00928B4B /* OrderedTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedTree.swift; sourceTree = "<group>"; };
@@ -381,6 +361,11 @@
 		459EA01F1F88F1BC000581FC /* EditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		459EA0211F88F1BC000581FC /* EditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorTests.swift; sourceTree = "<group>"; };
 		459EA0231F88F1BC000581FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		459EA0461F8932F7000581FC /* DTOProjectItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOProjectItem.swift; sourceTree = "<group>"; };
+		459EA0481F89339E000581FC /* DTOProjectCoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOProjectCoding.swift; sourceTree = "<group>"; };
+		459EA04A1F89459F000581FC /* ProjectItemPathClustering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectItemPathClustering.swift; sourceTree = "<group>"; };
+		459EA04C1F899757000581FC /* WorkspaceIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkspaceIssue.swift; sourceTree = "<group>"; };
+		459EA04E1F899BAD000581FC /* AlienIssue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlienIssue.swift; sourceTree = "<group>"; };
 		45AF89A91F7762FD00767BC4 /* Navigator.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Navigator.storyboard; sourceTree = "<group>"; };
 		45AF89B11F7765CA00767BC4 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		45AF89B31F7766B600767BC4 /* FeatureDependent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureDependent.swift; sourceTree = "<group>"; };
@@ -452,7 +437,6 @@
 			files = (
 				45552FFD1F83DF3D00892CC5 /* libEonilTree.a in Frameworks */,
 				45188C421F815F3300506284 /* libEonilStateSeries.a in Frameworks */,
-				4552678A1F7F5EE7001D4006 /* libEonilWeaklyPersistentArray.a in Frameworks */,
 				451CE1BB1EF66E61004721A3 /* LLDBWrapper.framework in Frameworks */,
 				45EA45581EF229B90024D3B1 /* EonilToolbox.framework in Frameworks */,
 				45FB54501EF6775C00522E83 /* BTree.framework in Frameworks */,
@@ -498,7 +482,6 @@
 				45EA455B1EF229E60024D3B1 /* Release.xcconfig */,
 				45552FEA1F83DF3300892CC5 /* EonilTree.xcodeproj */,
 				45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */,
-				4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */,
 				45FB544E1EF6775500522E83 /* BTree.framework */,
 				451CE1B91EF66E3D004721A3 /* LLDBWrapper.framework */,
 				4529BFCB1EF22963006A9A39 /* EonilToolbox.framework */,
@@ -624,16 +607,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4552677F1F7F5EE0001D4006 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				455267851F7F5EE1001D4006 /* libEonilWeaklyPersistentArray.a */,
-				455267871F7F5EE1001D4006 /* libEonilWeaklyPersistentArray.a */,
-				455267891F7F5EE1001D4006 /* EonilWeaklyPersistentArray-macOS-UnitTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4552678B1F812105001D4006 /* StateSeries */ = {
 			isa = PBXGroup;
 			children = (
@@ -731,18 +704,21 @@
 			children = (
 				45EA459B1EF22E450024D3B1 /* WorkspaceFeatures.swift */,
 				4511D34E1F77E96600F60401 /* WorkspaceCommand.swift */,
+				459EA04C1F899757000581FC /* WorkspaceIssue.swift */,
 				4517ADB91F787D8800A3DD58 /* WorkspaceFeatureComponent.swift */,
 				4511D3521F77F62400F60401 /* PlanFeature.swift */,
 				45EA45981EF22E450024D3B1 /* NavigationFeature.swift */,
 				454843C91EFE56C200D53763 /* DialogueFeature.swift */,
 				45EA45991EF22E450024D3B1 /* ProjectFeature.swift */,
+				459EA04A1F89459F000581FC /* ProjectItemPathClustering.swift */,
 				455530001F83E70400892CC5 /* Tree.extension.FileTree.swift */,
 				451D10681F867CC500153E55 /* Tree.Mutation.swift */,
 				45552FFE1F83E03100892CC5 /* ProjectFileTree.swift */,
 				45552F4B1F830B0B00892CC5 /* ProjectFeature.Command.swift */,
 				454843C31EFE4B5900D53763 /* ProjectSelection.swift */,
-				456ABC221F0364DD00928B4B /* ProjectSerialization.swift */,
 				456ABC3F1F03B78F00928B4B /* DTOProjectFile.swift */,
+				459EA0461F8932F7000581FC /* DTOProjectItem.swift */,
+				459EA0481F89339E000581FC /* DTOProjectCoding.swift */,
 				4552B8151EFBAC0200E529EE /* ProjectItemPath.swift */,
 				4511D3541F780B7B00F60401 /* CodeEditingFeature.swift */,
 				45EA45941EF22E450024D3B1 /* AutoCompletionFeature.swift */,
@@ -755,6 +731,7 @@
 				4514CDD11F7C0D3000FF978B /* Data.extension.swift */,
 				4514CDD31F7C0DDF00FF978B /* Result.extension.REPORT.swift */,
 				453A5B641F86A81100EDAB63 /* IndexPath.swift */,
+				459EA04E1F899BAD000581FC /* AlienIssue.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -925,10 +902,6 @@
 					ProductGroup = 45552FEB1F83DF3300892CC5 /* Products */;
 					ProjectRef = 45552FEA1F83DF3300892CC5 /* EonilTree.xcodeproj */;
 				},
-				{
-					ProductGroup = 4552677F1F7F5EE0001D4006 /* Products */;
-					ProjectRef = 4552677E1F7F5EE0001D4006 /* EonilWeaklyPersistentArray.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -958,27 +931,6 @@
 			fileType = archive.ar;
 			path = libEonilStateSeries.a;
 			remoteRef = 45188C3D1F815F2B00506284 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		455267851F7F5EE1001D4006 /* libEonilWeaklyPersistentArray.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libEonilWeaklyPersistentArray.a;
-			remoteRef = 455267841F7F5EE1001D4006 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		455267871F7F5EE1001D4006 /* libEonilWeaklyPersistentArray.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libEonilWeaklyPersistentArray.a;
-			remoteRef = 455267861F7F5EE1001D4006 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		455267891F7F5EE1001D4006 /* EonilWeaklyPersistentArray-macOS-UnitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "EonilWeaklyPersistentArray-macOS-UnitTests.xctest";
-			remoteRef = 455267881F7F5EE1001D4006 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		45552FF51F83DF3300892CC5 /* libEonilTree.a */ = {
@@ -1039,6 +991,7 @@
 			files = (
 				4514CDD41F7C0DDF00FF978B /* Result.extension.REPORT.swift in Sources */,
 				45EA45A81EF22E6A0024D3B1 /* WorkspaceShell.swift in Sources */,
+				459EA0471F8932F7000581FC /* DTOProjectItem.swift in Sources */,
 				45EA459E1EF22E450024D3B1 /* DebugFeature.swift in Sources */,
 				45AF89B41F7766B600767BC4 /* FeatureDependent.swift in Sources */,
 				45EA45DF1EF32D850024D3B1 /* Result.swift in Sources */,
@@ -1061,7 +1014,6 @@
 				4555A4051EFFC33400FCB88E /* MutableBox.swift in Sources */,
 				45EA45C11EF231F00024D3B1 /* MARK_unimplemented.swift in Sources */,
 				4583498E1F7F21EA00B08511 /* IncrementalList.extensions.swift in Sources */,
-				456ABC231F0364DD00928B4B /* ProjectSerialization.swift in Sources */,
 				45EA459D1EF22E450024D3B1 /* BuildFeature.swift in Sources */,
 				456ABC681F04733200928B4B /* NSMenuItem.extension.swift in Sources */,
 				4511D34B1F77DCD600F60401 /* IssueItemTableCellView.swift in Sources */,
@@ -1091,6 +1043,7 @@
 				4531E1F01F0289EF00A6DB2A /* FileNavigatorMenuCommand.extension.swift in Sources */,
 				456ABC091F032FD500928B4B /* functions.swift in Sources */,
 				454843D11EFE59C200D53763 /* MainMenuKeyMappingUtility.swift in Sources */,
+				459EA0491F89339E000581FC /* DTOProjectCoding.swift in Sources */,
 				454843C41EFE4B5900D53763 /* ProjectSelection.swift in Sources */,
 				45D840171F6CF02B00F154A0 /* ServiceProtocol.swift in Sources */,
 				4511D3431F77AAD800F60401 /* Codable.extension.swift in Sources */,
@@ -1101,6 +1054,7 @@
 				454843C11EFE401C00D53763 /* RustLanguageService.swift in Sources */,
 				453A5B571F86830600EDAB63 /* TreeOutlineAdapter2.swift in Sources */,
 				454843DA1EFE689000D53763 /* Dialogue.extensions.swift in Sources */,
+				459EA04F1F899BAD000581FC /* AlienIssue.swift in Sources */,
 				455AC75B1F7BBA330084F0D5 /* SequenceReplacement.swift in Sources */,
 				45AF89D61F77780800767BC4 /* FileNavigatorVC.swift in Sources */,
 				451CE1B61EF6630F004721A3 /* assertMainThread.swift in Sources */,
@@ -1111,6 +1065,8 @@
 				4529BF661EF21859006A9A39 /* AppDelegate.swift in Sources */,
 				45EA45BD1EF230F00024D3B1 /* Target.swift in Sources */,
 				4511D3551F780B7B00F60401 /* CodeEditingFeature.swift in Sources */,
+				459EA04D1F899757000581FC /* WorkspaceIssue.swift in Sources */,
+				459EA04B1F89459F000581FC /* ProjectItemPathClustering.swift in Sources */,
 				45D59DD61EFF99EB00408881 /* ReactiveLoop.swift in Sources */,
 				4552B8161EFBAC0200E529EE /* ProjectItemPath.swift in Sources */,
 				45AF89BE1F776ED000767BC4 /* DivisionVC.swift in Sources */,

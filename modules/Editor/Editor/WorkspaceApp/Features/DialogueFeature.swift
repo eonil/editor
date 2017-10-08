@@ -14,10 +14,10 @@ final class DialogueFeature: WorkspaceFeatureComponent {
     private(set) var state = State()
     private var queue = [Command]()
 
-    func process(_ cmd: Command) -> [WorkspaceCommand] {
+    func process(_ cmd: Command) -> Result<Void, Void> {
         queue.append(cmd)
         step()
-        return []
+        return .success(Void())
     }
     private func step() {
         if state.running == nil {
@@ -34,7 +34,7 @@ final class DialogueFeature: WorkspaceFeatureComponent {
                 let id = ID()
                 state.running = (id, content)
                 return
-            case .kill(let id):
+            case .kill(_):
                 REPORT_ignoredSignal(cmd)
             }
         }
@@ -42,7 +42,7 @@ final class DialogueFeature: WorkspaceFeatureComponent {
     private func stepRunning() {
         while let cmd = queue.removeFirstIfAvailable() {
             switch cmd {
-            case .spawn(let content):
+            case .spawn(_):
                 queue.insert(cmd, at: 0) // Restore command.
                 return
             case .kill(let id):
@@ -88,9 +88,14 @@ extension DialogueFeature {
     enum Note {
         case DEV_any(String)
     }
+    ///
+    /// - Note:
+    ///     Workspace-open should be handled from driver app, not in each
+    ///     workspaces.
+    ///
     enum Query {
         case selectFileURLForWorkspaceSave
-        case selectFileURLForWorkspaceOpen
+//        case selectFileURLForWorkspaceOpen
         case selectFileURLForNodeImport
         case selectFileURLForNodeExport
     }
@@ -98,7 +103,7 @@ extension DialogueFeature {
 
     }
     enum Error {
+        case workspace(WorkspaceIssue)
         case ADHOC_any(String)
-        case cannotSaveCurrentlyEditingCodeIntoFile
     }
 }

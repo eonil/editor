@@ -16,7 +16,7 @@ final class PlanFeature: WorkspaceFeatureComponent {
     ///
     /// Processes a command and returns workspace commands if needed.
     ///
-    func process(_ cmd: Command) -> [WorkspaceCommand] {
+    func process(_ cmd: Command) -> Result<[WorkspaceCommand],ProcessIssue> {
         switch cmd {
         case .step:
             return step()
@@ -28,29 +28,32 @@ final class PlanFeature: WorkspaceFeatureComponent {
             return step()
         }
     }
-    private func step() -> [WorkspaceCommand] {
+    enum ProcessIssue {
+    }
+
+    private func step() -> Result<[WorkspaceCommand],ProcessIssue> {
         if state.runningTask == nil {
             state.runningTask = state.scheduledTasks.removeFirstIfAvailable()
             changes.cast(())
         }
-        guard let rtask = state.runningTask else { return [] }
+        guard let rtask = state.runningTask else { return .success([]) }
         switch rtask {
         case .buildLaunch:
             switch state.parameters.buildState.phase {
             case .idle:
                 REPORT_ignoredSignal(rtask)
-                return []
+                return .success([])
             case .running:
-                return [.build(.build)]
+                return .success([.build(.build)])
             }
 
         case .buildWaitForCompletion:
             switch state.parameters.buildState.phase {
             case .running:
                 // Wait more...
-                return []
+                return .success([])
             case .idle:
-                return [.plan(.step)]
+                return .success([.plan(.step)])
             }
 
         case .debugLaunch:
@@ -58,7 +61,6 @@ final class PlanFeature: WorkspaceFeatureComponent {
 
         case .debugWaitForCompletion:
             MARK_unimplemented()
-
         }
     }
 }

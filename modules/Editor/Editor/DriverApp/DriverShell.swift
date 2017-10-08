@@ -60,8 +60,9 @@ final class DriverShell {
         case .click(let id):
             switch id {
             case .testdriveMakeWorkspace:
-                let u = URL(fileURLWithPath: "/Users/Eonil/Temp/t3/t111")
+//                let u = URL(fileURLWithPath: "/Users/Eonil/Temp/t3/t111")
 //                features.makeWorkspaceDirectiry(at: u)
+                MARK_unimplemented()
 
             case .appQuit:
                 NSApplication.shared.terminate(self)
@@ -103,7 +104,7 @@ final class DriverShell {
     /// No-op if there's no feature.
     ///
     private func connectToFeatures() {
-        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
+//        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
     }
 
     ///
@@ -111,6 +112,6 @@ final class DriverShell {
     /// No-op if there's no feature.
     ///
     private func disconnectFromFeatures() {
-        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
+//        guard let features = features else { return REPORT_missingFeaturesAndContinue() }
     }
 }

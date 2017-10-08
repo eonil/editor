@@ -41,47 +41,46 @@ final class WorkspaceFeatures: ServicesDependent {
         build.setProjectState(project.state)
         log.process(.setBuildState(build.state))
 
+        func queueCommands(_ commands: [WorkspaceCommand]) {
+            cmdq.append(contentsOf: commands)
+        }
+        func spawnErrorDialogue(with issue: WorkspaceIssue) {
+            queueCommands([.dialogue(.spawn(.error(.workspace(issue))))])
+        }
+
         while let cmd = cmdq.removeFirstIfAvailable() {
             switch cmd {
             case .menu(let id):
                 processMenuMenuItem(id)
 
             case .plan(let cmd):
-                let cmds = plan.process(cmd)
-                cmdq.append(contentsOf: cmds)
+                switch plan.process(cmd) {
+                case .failure(let issue):   spawnErrorDialogue(with: .plan(issue))
+                case .success(let cmds):    queueCommands(cmds)
+                }
 
             case .dialogue(let cmd):
-                let cmds = dialogue.process(cmd)
-                cmdq.append(contentsOf: cmds)
+                switch dialogue.process(cmd) {
+                case .failure(let issue):   REPORT_criticalBug("A dialogue could not be presented: \(issue)")
+                case .success(_):           break
+                }
 
             case .project(let cmd):
-                project.process(cmd)
+                switch project.process(cmd) {
+                case .failure(let issue):   spawnErrorDialogue(with: .project(issue))
+                case .success(_):           break
+                }
 
             case .codeEditing(let cmd):
-                let cmds = codeEditing.process(cmd)
-                cmdq.append(contentsOf: cmds)
+                switch codeEditing.process(cmd) {
+                case .failure(let issue):   spawnErrorDialogue(with: .codeEditing(issue))
+                case .success(_):           break
+                }
 
             case .build(let cmd):
-                let cmds = build.process(cmd)
-                cmdq.append(contentsOf: cmds)
-
-            case .spawn(let proc):
-                switch proc {
-                case .moveFile(let from, let to):
-                    switch project.moveFile(from: from, to: to) {
-                    case .failure(let issue):
-                        dialogue.process(.spawn(.error(DialogueFeature.Error.ADHOC_any("\(issue)"))))
-                    case .success(_):
-                        break
-                    }
-                case .renameFile(let at, let with):
-                    let r = project.renameFile(at: at, with: with)
-                    switch r {
-                    case .failure(let issue):
-                        dialogue.process(.spawn(.error(DialogueFeature.Error.ADHOC_any("\(issue)"))))
-                    case .success(_):
-                        break
-                    }
+                switch build.process(cmd) {
+                case .failure(let issue):   spawnErrorDialogue(with: .build(issue))
+                case .success(_):           break
                 }
             }
         }
@@ -91,68 +90,25 @@ final class WorkspaceFeatures: ServicesDependent {
         switch c {
         case .testdriveMakeRandomFiles:
             if project.state.files.count > 0 {
-                let psel = ProjectSelection(snapshot: ProjectFeature.FileTree(node: .root), indexPaths: AnySequence([[]]))
-                project.process(.setSelection(to: psel))
-                project.process(.deleteSelectedFiles)
+                let newSelection = project.makeSelection(with: [])
+                project.process(.setSelection(to: newSelection)).successValue!
+                project.process(.deleteSelectedFiles).successValue!
             }
-            project.makeFile(at: [], as: .folder)
-            project.makeFile(at: [0], as: .folder)
-            project.makeFile(at: [1], as: .folder)
-            project.makeFile(at: [2], as: .folder)
-            project.makeFile(at: [3], as: .folder)
+            process(.project(.makeFile(at: [], as: .folder)))
+            process(.project(.makeFile(at: [0], as: .folder)))
+            process(.project(.makeFile(at: [1], as: .folder)))
+            process(.project(.makeFile(at: [2], as: .folder)))
+            process(.project(.makeFile(at: [3], as: .folder)))
 
-        case .testdriveMakeWorkspace:
-            break
-
-        case .appQuit:
-            break
-
-        case .fileNewWorkspace:
-            break
-
-        case .fileNewFolder:
-            // Make a new node right under the current selection.
-            switch project.findInsertionPointForNewNode() {
-            case .failure(let reason):
-                let underlyingReason = [
-                    "Received menu command `\(c)`,",
-                    "and could not find an insertion point.",
-                    "Ignored.",
-                ].joined(separator: " ")
-                let allReason = [underlyingReason, reason,].joined(separator: "\n")
-                REPORT_recoverableWarning(allReason)
-            case .success(let insertionPointIndexPath):
-                let idxp = insertionPointIndexPath
-                project.makeFile(at: idxp, as: .folder)
-            }
-
-        case .fileNewFile:
-            // Make a new node right under the current selection.
-            switch project.findInsertionPointForNewNode() {
-            case .failure(let reason):
-                let underlyingReason = [
-                    "Received menu command `\(c)`,",
-                    "and could not find an insertion point.",
-                    "Ignored.",
-                    ].joined(separator: " ")
-                let allReason = [underlyingReason, reason,].joined(separator: "\n")
-                REPORT_recoverableWarning(allReason)
-            case .success(let insertionPointIndexPath):
-                let idxp = insertionPointIndexPath
-                try! project.makeFile(at: idxp, as: .file)
-            }
-
-        case .fileOpen:
-            break
-
-        case .fileClose:
-            codeEditing.process(.close)
-
-        case .productClean:
-            build.process(.cleanAll)
-
-        case .productBuild:
-            build.process(.build)
+        case .testdriveMakeWorkspace:   break // This MUST already been handled in driver-app.
+        case .appQuit:                  break // This MUST already been handled in driver-app.
+        case .fileNewWorkspace:         break // This MUST already been handled in driver-app.
+        case .fileNewFolder:            process(.project(.makeFileAtInferredPosition(as: .file)))
+        case .fileNewFile:              process(.project(.makeFileAtInferredPosition(as: .folder)))
+        case .fileOpen:                 break // This MUST already been handled in driver-app.
+        case .fileClose:                process(.codeEditing(.close))
+        case .productClean:             process(.build(.cleanAll))
+        case .productBuild:             process(.build(.build))
 
         case .productRun:
             processSequence([

@@ -8,7 +8,9 @@
 
 protocol WorkspaceFeatureComponent: ServicesDependent {
     associatedtype Command
-    func process(_ cmd: Command) -> [WorkspaceCommand]
+    associatedtype Production
+    associatedtype Issue
+    func process(_ cmd: Command) -> Result<Production, Issue>
 }
 
 //protocol ADHOC_WorkspaceCommandProcessor {

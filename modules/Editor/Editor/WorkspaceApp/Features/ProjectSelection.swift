@@ -6,56 +6,79 @@
 //  Copyright © 2017 Eonil. All rights reserved.
 //
 
-struct ProjectSelection {
-    var snapshot: ProjectFeature.FileTree
-    var indexPaths: AnySequence<IndexPath>
+import EonilStateSeries
 
-    init() {
-        snapshot = ProjectFeature.FileTree(node: ProjectFeature.FileNode.root) // This is bogus value.
-        indexPaths = AnySequence([])
-    }
-    init(snapshot: ProjectFeature.FileTree, indexPaths: AnySequence<IndexPath>) {
-        self.snapshot = snapshot
-        self.indexPaths = indexPaths
-    }
-    init(snapshot: ProjectFeature.FileTree, outlineSelection: TreeOutlineAdapter2<ProjectFeature.FileNode>.Selection) {
-        self.snapshot = snapshot
-        self.indexPaths = AnySequence(outlineSelection)
+//extension StateSeriesType where Snapshot == ProjectFeature.FileTree {
+//    func makeSelection<S>(with idxps: S) -> ProjectSelection where S: Sequence, S.Element == IndexPath {
+//
+//    }
+//}
+extension ProjectFeature {
+    func makeSelection<S>(with idxps: S) -> ProjectSelection where S: Sequence, S.Element == IndexPath {
+        guard let point = series.points.last else { return ProjectSelection() }
+        return ProjectSelection(point: point, items: idxps)
     }
 }
+struct ProjectSelection: Sequence {
+    ///
+    /// Designates valid time-point of project state for captured index-paths.
+    /// If capturing time-point is out of current project-feature state,
+    /// project-feature can reject requested operation.
+    ///
+    private typealias Point = ProjectFeature.Series.Point
+    private typealias Items = AnySequence<IndexPath>
+    private enum Content {
+        case none
+        indirect case some(Point, Items)
+    }
+    private var content = Content.none
 
-/////
-///// Immutable collection of `ProjectItemPath`s
-///// which represents selection.
-/////
-///// MUST be guaranteed to be sorted in DFS manner.
-/////
-//protocol ProjectSelection: Sequence where Element == ProjectItemPath {
-//}
-//struct AnyProjectSelection: ProjectSelection {
-//    private let impl: () -> AnyIterator<ProjectItemPath>
-//    init() {
-//        impl = { AnyIterator({ nil }) }
-//    }
-//    init<T>(_ raw: T) where T: ProjectSelection {
-//        impl = { AnyIterator(raw.makeIterator()) }
-//    }
-//    init(snapshot: ProjectFeature.FileTree, selection: TreeOutlineAdapter2<ProjectFeature.FileNode>.Selection) {
-//        impl = {
-//            let idxpsIter = selection.makeIterator()
-//            return AnyIterator { () -> ProjectItemPath? in
-//                guard let idxp = idxpsIter.next() else { return nil }
-//                return snapshot.namePath(at: idxp)
+    init() {
+    }
+    init<S>(point: ProjectFeature.Series.Point, items: S) where S: Sequence, S.Element == IndexPath {
+        content = .some(point, AnySequence { items.makeIterator() })
+    }
+    init(point: ProjectFeature.Series.Point, outlineSelection: TreeOutlineAdapter2<ProjectFeature.FileNode>.Selection) {
+        content = .some(point, AnySequence(outlineSelection))
+    }
+    ///
+    /// - Returns:
+    ///     Whether this selection can be used for snapshot at the time-point.
+    ///
+    func isValid(for timepoint: ProjectFeature.Series.PointID) -> Bool {
+        switch content {
+        case .none:                 return false
+        case .some(let point, _):   return point.id == timepoint
+        }
+    }
+    ///
+    /// - Returns:
+    ///     Whether this selection can be used for current state of project-feature.
+    ///
+    func isValid(for project: ProjectFeature) -> Bool {
+        guard let latest = project.series.points.last else { return false }
+        return isValid(for: latest.id)
+    }
+    func makeIterator() -> AnyIterator<IndexPath> {
+        switch content {
+        case .none:
+            return AnyIterator([].makeIterator())
+        case .some(_, let items):
+            return items.makeIterator()
+        }
+    }
+
+//    func makeIterator() -> AnyIterator<ProjectItemPath> {
+//        switch content {
+//        case .none:
+//            return AnyIterator([].makeIterator())
+//        case .some(let point, let items):
+//            let idxps = items.makeIterator()
+//            return AnyIterator {
+//                guard let idxp = idxps.next() else { return nil }
+//                let namep = point.state.files.namePath(at: idxp)
+//                return namep
 //            }
 //        }
 //    }
-//    func makeIterator() -> AnyIterator<ProjectItemPath> {
-//        return impl()
-//    }
-//}
-//extension ProjectSelection {
-//    static var none: AnyProjectSelection {
-//        return AnyProjectSelection()
-//    }
-//}
-
+}
