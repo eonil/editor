@@ -63,7 +63,7 @@ final class IssueNavigatorVC: NSViewController, WorkspaceFeatureDependent {
                 guard let span = m.message.spans.first else { break }
                 DEBUG_log(span.file_name)
                 let p = ProjectItemPath.fromUnixFilePathFromProjectRoot(span.file_name)
-                if let u = features.project.makeURLForFile(at: p).successValue {
+                if let u = features.project.state.makeLocationOnFileSystemForFile(at: p).successValue {
                     features.process(.codeEditing(.open(u)))
                 }
             case .compilerArtifact(let m):

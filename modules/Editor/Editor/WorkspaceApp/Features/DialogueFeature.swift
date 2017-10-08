@@ -10,7 +10,7 @@ import EonilSignet
 import EonilToolbox
 
 final class DialogueFeature: WorkspaceFeatureComponent {
-    let transaction = Relay<Void>()
+    let changes = Relay<[Change]>()
     private(set) var state = State()
     private var queue = [Command]()
 
@@ -33,6 +33,7 @@ final class DialogueFeature: WorkspaceFeatureComponent {
             case .spawn(let content):
                 let id = ID()
                 state.running = (id, content)
+                changes.cast([])
                 return
             case .kill(_):
                 REPORT_ignoredSignal(cmd)
@@ -44,6 +45,7 @@ final class DialogueFeature: WorkspaceFeatureComponent {
             switch cmd {
             case .spawn(_):
                 queue.insert(cmd, at: 0) // Restore command.
+                changes.cast([])
                 return
             case .kill(let id):
                 guard id == state.running?.id else {
@@ -51,6 +53,8 @@ final class DialogueFeature: WorkspaceFeatureComponent {
                     break
                 }
                 state.running = nil
+                changes.cast([])
+                return
             }
         }
     }
@@ -60,10 +64,6 @@ final class DialogueFeature: WorkspaceFeatureComponent {
 extension DialogueFeature {
     struct State {
         var running: (id: ID, alert: Alert)?
-    }
-    enum Command {
-        case spawn(Alert)
-        case kill(ID)
     }
     struct ID: Equatable {
         private let oid = ObjectAddressID()
@@ -106,4 +106,11 @@ extension DialogueFeature {
         case workspace(WorkspaceIssue)
         case ADHOC_any(String)
     }
+}
+extension DialogueFeature {
+    enum Command {
+        case spawn(Alert)
+        case kill(ID)
+    }
+    typealias Change = Void
 }

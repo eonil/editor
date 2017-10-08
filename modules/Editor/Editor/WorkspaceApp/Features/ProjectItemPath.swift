@@ -9,6 +9,7 @@
 import Foundation
 
 struct ProjectItemPath: Hashable, RandomAccessCollection, RangeReplaceableCollection {
+    typealias SubSequence = ProjectItemPath
     var comps = [String]()
     init() {
     }
@@ -26,6 +27,9 @@ struct ProjectItemPath: Hashable, RandomAccessCollection, RangeReplaceableCollec
     var endIndex: Int { return comps.endIndex }
     subscript(position: Int) -> String {
         return comps[position]
+    }
+    subscript(range: Range<Int>) -> ProjectItemPath {
+        return ProjectItemPath(comps[range])
     }
     mutating func replaceSubrange<C, R>(_ subrange: R, with newElements: C) where C : Collection, R : RangeExpression, ProjectItemPath.Element == C.Element, Int == R.Bound {
         comps.replaceSubrange(subrange, with: newElements)
@@ -53,16 +57,7 @@ struct ProjectItemPath: Hashable, RandomAccessCollection, RangeReplaceableCollec
         precondition(components.isEmpty == false)
         return ProjectItemPath(components: Array(components.dropLast()))
     }
-    @available(*, deprecated: 0)
-    func splitFirstComponent() -> (fistComponent: String, ProjectItemPath) {
-        let (a, b) = components.splitFirst()
-        return (a, ProjectItemPath(components: Array(b)))
-    }
-    @available(*, deprecated: 0)
-    func splitLastComponent() -> (ProjectItemPath, lastComponent: String) {
-        let (a, b) = components.splitLast()
-        return (ProjectItemPath(components: Array(a)), b)
-    }
+    
     @available(*, deprecated: 0)
     func appending(_ subpath: ProjectItemPath) -> ProjectItemPath {
         let comps = components + subpath.components

@@ -52,6 +52,7 @@ final class TreeOutlineAdapter2<Node> {
     ///
     @discardableResult
     func applyMutation(_ mutation: Tree<Node>.Mutation, to snapshot: Tree<Node>) -> OutlineViewCommand {
+        sourceTree = snapshot
         switch mutation {
         case .insert(let idxp):
             if idxp == .root {
@@ -61,7 +62,14 @@ final class TreeOutlineAdapter2<Node> {
             }
             else {
                 guard let rootProxy = rootProxy else { REPORT_criticalBug("Missing root-proxy and an operation with non-root path received.") }
-                return rootProxy.applyMutation(mutation, to: snapshot)
+                precondition(idxp.isEmpty == false, "You cannot insert at root. Result cannot be defined.")
+                let newSubtree = snapshot[idxp]
+                let (parentPath, i) = idxp.splitLast()
+                let parentProxy = rootProxy.findNode(at: parentPath)
+                let childProxy = TreeOutlineAdapter2IdentityProxy(tree: newSubtree)
+                childProxy.parent = parentProxy
+                parentProxy.children.insert(childProxy, at: i)
+                return .insertItems(children: [i], parent: parentProxy)
             }
 
         case .replace(let idxp):
@@ -72,7 +80,31 @@ final class TreeOutlineAdapter2<Node> {
             }
             else {
                 guard let rootProxy = rootProxy else { REPORT_criticalBug("`replace` operation to root cannot be performed with no root proxy object.") }
-                return rootProxy.applyMutation(mutation, to: snapshot)
+                //
+                // Basically, this adapter assumes you would notify any
+                // insert/remove operations using explicit insert/remove
+                // mutations and replace operations to be used only for
+                // node data update.
+                //
+                assert(false, "Please use `replaceNode` mutation signal instead of.")
+                //
+                // Though we asserted a condition, program should work as expected.
+                // This still produces a correct result, but far more expensive.
+                // I don't optimize this because there's no generic way to optimize
+                // this to satisfying level (O(1)), so optimization is uselessly
+                // complex and not worth to it. Instead force use to use optimized
+                // signals. (`Tree.OptimizedMutation.replaceNode`)
+                //
+                let newSubtree = snapshot[idxp]
+                let targetProxy = rootProxy.findNode(at: idxp)
+                targetProxy.sourceNode = newSubtree.node
+                targetProxy.children.removeAll()
+                for subtree in newSubtree.subtrees {
+                    let childProxy = TreeOutlineAdapter2IdentityProxy(tree: subtree)
+                    childProxy.parent = targetProxy
+                    targetProxy.children.append(childProxy)
+                }
+                return .updateItem(targetProxy)
             }
 
         case .remove(let idxp):
@@ -83,7 +115,13 @@ final class TreeOutlineAdapter2<Node> {
             }
             else {
                 guard let rootProxy = rootProxy else { REPORT_criticalBug("Missing root-proxy and an operation with non-root path received.") }
-                return rootProxy.applyMutation(mutation, to: snapshot)
+                precondition(idxp.isEmpty == false, "You cannot remove at root. Result cannot be defined.")
+                let (parentPath, i) = idxp.splitLast()
+                let parentProxy = rootProxy.findNode(at: parentPath)
+                let childProxy = parentProxy.children[i]
+                childProxy.parent = nil
+                parentProxy.children.remove(at: i)
+                return .deleteItems(children: [i], parent: parentProxy)
             }
         }
     }
@@ -94,7 +132,13 @@ final class TreeOutlineAdapter2<Node> {
     @discardableResult
     func applyOptimizedMutation(_ mutation: Tree<Node>.OptimizedMutation, to snapshot: Tree<Node>) -> OutlineViewCommand {
         guard let rootProxy = rootProxy else { REPORT_criticalBug("`replaceNode` operation to root cannot be performed with no root proxy object.") }
-        return rootProxy.applyOptimizedMutation(mutation, to: snapshot)
+        switch mutation {
+        case .replaceNode(let idxp):
+            let newNode = snapshot[idxp].node
+            let targetProxy = rootProxy.findNode(at: idxp)
+            targetProxy.sourceNode = newNode
+            return .updateItem(targetProxy)
+        }
     }
 }
 extension TreeOutlineAdapter2 {
@@ -166,25 +210,25 @@ extension TreeOutlineAdapter2 {
 /// A proxy object which provides referential identity to `NSOutlineView`.
 ///
 final class TreeOutlineAdapter2IdentityProxy<T> {
-    private(set) var sourceNode: T
-    fileprivate(set) weak var containerProxy: TreeOutlineAdapter2IdentityProxy?
-    private(set) var subproxies = [TreeOutlineAdapter2IdentityProxy]()
+    var sourceNode: T
+    fileprivate(set) weak var parent: TreeOutlineAdapter2IdentityProxy?
+    var children = [TreeOutlineAdapter2IdentityProxy]()
 
     init(tree: Tree<T>) {
         sourceNode = tree.node
         for subtree in tree.subtrees {
-            let subproxy = TreeOutlineAdapter2IdentityProxy(tree: subtree)
-            subproxy.containerProxy = self
-            subproxies.append(subproxy)
+            let childProxy = TreeOutlineAdapter2IdentityProxy(tree: subtree)
+            childProxy.parent = self
+            children.append(childProxy)
         }
     }
     ///
     /// O(depth * average width)
     ///
     func resolvePath() -> IndexPath {
-        guard let containerProxy = containerProxy else { return [] }
-        guard let i = containerProxy.subproxies.index(where: { $0 === self }) else { REPORT_criticalBug("Path to self proxy object due to bad container proxy.") }
-        return containerProxy.resolvePath().appending(i)
+        guard let parentProxy = parent else { return [] } // This is a root.
+        guard let i = parentProxy.children.index(where: { $0 === self }) else { REPORT_criticalBug("Path to self proxy object due to bad container proxy.") }
+        return parentProxy.resolvePath().appending(i)
     }
     ///
     /// O(depth)
@@ -194,72 +238,6 @@ final class TreeOutlineAdapter2IdentityProxy<T> {
     fileprivate func findNode(at path: IndexPath) -> TreeOutlineAdapter2IdentityProxy {
         if path.isEmpty { return self }
         let (i, subpath) = path.splitFirst()
-        return subproxies[i].findNode(at: subpath)
-    }
-    
-    ///
-    /// Applies `muation` to `snapshot` and returns commands for `NSOutlineView`.
-    ///
-    func applyMutation(_ mutation: Tree<T>.Mutation, to snapshot: Tree<T>) -> TreeOutlineAdapter2<T>.OutlineViewCommand {
-        switch mutation {
-        case .insert(let path):
-            precondition(path.isEmpty == false, "You cannot insert at root. Result cannot be defined.")
-            let newSubtree = snapshot[path]
-            let (containerPath, i) = path.splitLast()
-            let containerProxy = findNode(at: containerPath)
-            let subproxy = TreeOutlineAdapter2IdentityProxy(tree: newSubtree)
-            subproxy.containerProxy = self
-            containerProxy.subproxies.insert(subproxy, at: i)
-            return .insertItems(children: [i], parent: containerProxy)
-            
-        case .replace(let path):
-            //
-            // Basically, this adapter assumes you would notify any
-            // insert/remove operations using explicit insert/remove
-            // mutations and replace operations to be used only for
-            // node data update.
-            //
-            assert(false, "Please use `replaceNode` mutation signal instead of.")
-            //
-            // Though we asserted a condition, program should wor as expected.
-            // This still produces a correct result, but far more expensive.
-            // I don't optimize this because there's no generic way to optimize
-            // this to satisfying level (O(1)), so optimization is uselessly
-            // complex and not worth to it. Instead force use to use optimized
-            // signals. (`Tree.OptimizedMutation.replaceNode`)
-            //
-            let newSubtree = snapshot[path]
-            let containerProxy = path.isEmpty ? self : findNode(at: path)
-            containerProxy.sourceNode = newSubtree.node
-            containerProxy.subproxies = []
-            for subtree in newSubtree.subtrees {
-                let subproxy = TreeOutlineAdapter2IdentityProxy(tree: subtree)
-                subproxy.containerProxy = self
-                containerProxy.subproxies.append(subproxy)
-            }
-            return .updateItem(self)
-            
-        case .remove(let path):
-            precondition(path.isEmpty == false, "You cannot remove at root. Result cannot be defined.")
-            let (containerPath, i) = path.splitLast()
-            let containerProxy = findNode(at: containerPath)
-            let subproxy = containerProxy.subproxies[i]
-            subproxy.containerProxy = nil
-            containerProxy.subproxies.remove(at: i)
-            return .deleteItems(children: [i], parent: containerProxy)
-        }
-    }
-    
-    ///
-    /// Applies `muation` to `snapshot` and returns commands for `NSOutlineView`.
-    ///
-    func applyOptimizedMutation(_ mutation: Tree<T>.OptimizedMutation, to snapshot: Tree<T>) -> TreeOutlineAdapter2<T>.OutlineViewCommand {
-        switch mutation {
-        case .replaceNode(let path):
-            let newNode = snapshot[path].node
-            let containerNode = findNode(at: path)
-            containerNode.sourceNode = newNode
-            return .updateItem(containerNode)
-        }
+        return children[i].findNode(at: subpath)
     }
 }

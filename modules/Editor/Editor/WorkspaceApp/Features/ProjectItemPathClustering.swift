@@ -17,7 +17,7 @@ struct ProjectItemPathClustering {
         var clusters = [[IndexPath]]()
         func ensureClusterCount(_ n: Int) {
             guard n > clusters.count else { return }
-            let c = n - clusters.count
+            let c = n - clusters.count + 1
             clusters.append(contentsOf: repeatElement([], count: c))
         }
         for namep in nameps {

@@ -32,7 +32,7 @@ extension Tree where Node == ProjectFeature.FileNode {
         case 0:
             return IndexPath()
         default:
-            let (name, nameSubpath) = namePath.splitFirstComponent()
+            let (name, nameSubpath) = namePath.splitFirst()
             for i in 0..<subtrees.count {
                 let subtree = subtrees[i]
                 if subtree.node.name == name {
@@ -46,14 +46,3 @@ extension Tree where Node == ProjectFeature.FileNode {
     }
 }
 
-internal extension IndexPath {
-    func splitFirst() -> (Int, IndexPath) {
-        precondition(count > 0)
-        return (self[0], self[1...])
-    }
-    func splitLast() -> (IndexPath, Int) {
-        precondition(count > 0)
-        let i = endIndex - 1
-        return (self[..<i], self[i])
-    }
-}

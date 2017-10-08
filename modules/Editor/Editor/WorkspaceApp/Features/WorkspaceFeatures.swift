@@ -43,6 +43,7 @@ final class WorkspaceFeatures: ServicesDependent {
 
         func queueCommands(_ commands: [WorkspaceCommand]) {
             cmdq.append(contentsOf: commands)
+            step()
         }
         func spawnErrorDialogue(with issue: WorkspaceIssue) {
             queueCommands([.dialogue(.spawn(.error(.workspace(issue))))])

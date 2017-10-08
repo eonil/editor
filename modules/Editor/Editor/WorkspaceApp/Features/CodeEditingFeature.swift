@@ -14,16 +14,24 @@ final class CodeEditingFeature: WorkspaceFeatureComponent {
     func process(_ cmd: Command) -> Result<Void, ProcessIsse> {
         switch cmd {
         case .open(let u):
-            switch process(.save) {
-            case .failure(let issue):   return .failure(issue)
-            case .success(_):           break
+            guard u != state.location else { return .success(Void()) }
+
+            // Save if needed.
+            if state.location != nil {
+                switch process(.save) {
+                case .failure(let issue):   return .failure(issue)
+                case .success(_):           break
+                }
             }
-            guard u != state.location else { return .failure(.open(.missingFileLocation)) }
-            state.location = u
-            state.content = nil
-            changes.cast(())
+
+            // Perform input I/O first.
+            // Be transactional.
+            // No in-memory change on failure.
             guard let d = try? Data(contentsOf: u) else { return .failure(.open(.fileContentCannotBeDecodedFromUInt8ArrayUsingUTF8)) }
             let s = String(data: d, encoding: .utf8)
+
+            // Update in-memory state & cast.
+            state.location = u
             state.content = s
             changes.cast(())
             return .success(Void())

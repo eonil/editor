@@ -9,3 +9,5 @@
 import Foundation
 
 typealias IndexPath = Foundation.IndexPath
+typealias URL = Foundation.URL
+

@@ -8,6 +8,8 @@
 
 extension ProjectFeature {
     enum Command {
+        case relocate(to: URL)
+
         case setNodeFoldingState(at: IndexPath, isFolded: Bool)
         case setSelection(to: ProjectSelection)
 

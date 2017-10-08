@@ -32,7 +32,7 @@ class WorkspaceDocument: NSDocument {
         addWindowController(app.rootWindowController)
     }
     override func read(from url: URL, ofType typeName: String) throws {
-        app.features.project.relocate(url)
+        app.features.process(.project(.relocate(to: url)))
     }
 
 

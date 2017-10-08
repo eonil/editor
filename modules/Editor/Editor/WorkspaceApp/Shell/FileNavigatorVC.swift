@@ -117,7 +117,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     }
     func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if let proxy = item as! TOA.IdentityProxy? {
-            return proxy.subproxies.count
+            return proxy.children.count
         }
         else {
             return 1
@@ -125,7 +125,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     }
     func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         if let proxy = item as! TOA.IdentityProxy? {
-            return proxy.subproxies[index]
+            return proxy.children[index]
         }
         else {
             guard let rootProxy = toa.rootProxy else { REPORT_criticalBug("`NSOutlineView` in file-navigator VC wants a top level node at a certain index, but root-proxy is missing now.") }
@@ -193,7 +193,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
 
         case .showInFinder:
             let grabbedIndexPaths = getIndexPathsToGrabbedFilesForContextMenuOperation() ?? []
-            let urls = grabbedIndexPaths.flatMap({ features.project.makeURLForFile(at: $0).successValue })
+            let urls = grabbedIndexPaths.flatMap({ features.project.state.makeLocationOnFileSystemForFile(at: $0).successValue })
             // TODO: Make external I/O to be done in services.
             NSWorkspace.shared.activateFileViewerSelecting(urls)
 
@@ -211,7 +211,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     private func userDidClickOnOutlineViewCellOrColumnHeader() {
         guard let features = features else { return REPORT_missingFeaturesAndContinue() }
         guard let idxp = getIndexPathToClickedFile() else { return }
-        if let fileURL = features.project.makeURLForFile(at: idxp).successValue {
+        if let fileURL = features.project.state.makeLocationOnFileSystemForFile(at: idxp).successValue {
             features.process(.codeEditing(.open(fileURL)))
         }
 
@@ -309,7 +309,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
     private func makeIconForNode(_ n: TOA.IdentityProxy) -> NSImage? {
         guard let features = features else { return nil }
         let idxp = n.resolvePath()
-        guard let u = features.project.makeURLForFile(at: idxp).successValue else { return nil }
+        guard let u = features.project.state.makeLocationOnFileSystemForFile(at: idxp).successValue else { return nil }
         guard let m = NSImage(contentsOf: u) else { return nil }
         return m
     }

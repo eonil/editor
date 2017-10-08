@@ -59,17 +59,19 @@ final class ProjectFeature: ServicesDependent {
 
     func process(_ command: Command) -> Result<Void, ProcessIssue> {
         switch command {
+        case .relocate(let newURL):
+            return relocate(newURL).mapIssue(ProcessIssue.relocate)
+
         case .setNodeFoldingState(let idxp, let isFolded):
             guard state.files[idxp].node.isFolded != isFolded else { return .success(Void()) }
-            // Update in-memory state.
+            // Update in-memory state & cast.
             appendMutation({ (state) in
                 state.files[idxp].node.isFolded = isFolded
             })
-            // Perform I/O.
-            storeProjectFileList()
-            // Broadcast changes.
             changes.cast([.filesOptimized(.replaceNode(at: idxp))])
             signal.cast(Void())
+            // Perform I/O.
+            storeProjectFileList()
             return .success(Void())
 
         case .setSelection(let newSelection):
@@ -99,6 +101,7 @@ final class ProjectFeature: ServicesDependent {
         }
     }
     enum ProcessIssue {
+        case relocate(RelocateIssue)
         case makeFile(MakeFileIssue)
         case setSelection(SetSelectionIssue)
         case renameFile(RenameFileIssue)
@@ -118,27 +121,19 @@ final class ProjectFeature: ServicesDependent {
     ///
     /// Idempotent.
     ///
-    func relocate(_ newLocation: URL?) {
-        guard state.location != newLocation else { return }
+    private func relocate(_ newLocation: URL?) -> Result<Void,RelocateIssue> {
+        guard state.location != newLocation else { return .success(Void()) }
         guard newLocation != nil else { MARK_unimplemented() }
-
-//        if state.location != nil {
-//            assert(state.files.isEmpty == false)
-//            state.files.delete(at: .root)
-//            changes.cast(.files(.delete(.root)))
-//        }
         var st = state
         st.location = newLocation
         series.append(st)
-//        if state.location != nil {
-//            let k = Path.root
-//            let v = NodeKind.folder
-//            state.files.insert(at: .root, (k, v))
-//            changes.cast(.files(.insert(.root)))
-//        }
         changes.cast([.location])
         signal.cast(())
-        restoreProjectFileList()
+        let r = restoreProjectFileList()
+        return r.mapIssue(RelocateIssue.projectFileRestoring)
+    }
+    enum RelocateIssue {
+        case projectFileRestoring(ProjectFileRestoringIssue)
     }
 
     ///
@@ -162,26 +157,25 @@ final class ProjectFeature: ServicesDependent {
         assertMainThread()
         guard idxp != .root else { return .failure(.rootNodeCannotBeInserted) }
 
+        // Update in-memory state & cast.
         let newName = makeNewNodeName(at: idxp, as: kind)
         let newNode = FileNode(name: newName, kind: kind)
         let newSubtree = FileTree(node: newNode)
         appendMutation { state in
             state.files.insert(at: idxp, newSubtree)
         }
+        changes.cast([.files(.insert(at: idxp))])
+        signal.cast(Void())
 
         // Perform I/O.
         // Though I/O fails, in-memory representation keeps changes.
         let namep = state.files.namePath(at: idxp)
         let r = createActualFileImpl(at: namep, as: newNode.kind)
         storeProjectFileList()
-
-        // Cast events.
-        changes.cast([.files(.insert(at: idxp))])
-        signal.cast(Void())
         return r
     }
     enum MakeFileIssue {
-        case makeFileSystemURLIssue(MakeFileSystemURLIssue)
+        case makeFileSystemURLIssue(State.MakeLocationOnFileSystemIssue)
         case fileSystemError(Error)
         case rootNodeCannotBeInserted
         ///
@@ -227,7 +221,7 @@ final class ProjectFeature: ServicesDependent {
 
         // Prepare inputs.
         let targetFileSystemURL: URL
-        switch makeURLForFile(at: idxp) {
+        switch state.makeLocationOnFileSystemForFile(at: idxp) {
         case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
         case .success(let url):     targetFileSystemURL = url
         }
@@ -238,10 +232,12 @@ final class ProjectFeature: ServicesDependent {
         // Check input validity.
         guard oldName != newName else { return .success(Void()) }
 
-        // Update in-memory representation.
+        // Update in-memory state & cast.
         appendMutation { (state) in
             state.files[idxp].node.name = newName
         }
+        signal.cast(Void())
+        changes.cast([.filesOptimized(.replaceNode(at: idxp))])
 
         // Perform I/O.
         do {
@@ -251,13 +247,10 @@ final class ProjectFeature: ServicesDependent {
             return .failure(.fileSystemError(err))
         }
         storeProjectFileList()
-
-        signal.cast(Void())
-        changes.cast([.filesOptimized(.replaceNode(at: idxp))])
         return .success(Void())
     }
     enum RenameFileIssue {
-        case makeFileSystemURLIssue(MakeFileSystemURLIssue)
+        case makeFileSystemURLIssue(State.MakeLocationOnFileSystemIssue)
         case fileSystemError(Error)
     }
     ///
@@ -275,25 +268,26 @@ final class ProjectFeature: ServicesDependent {
         guard from != .root else { return .failure(.sourcePathIsRoot) }
         guard to != .root else { return .failure(.destinationPathIsRoot) }
 
-        // Mutate in-memory file-tree.
+        // Update in-memory state & cast.
         let nodeToMove = state.files[from].node
+        let oldState = state
         appendMutation { (state) in
             state.files.insert(at: to, FileTree(node: nodeToMove))
-        }
-        appendMutation { (state) in
             // Remove last to prevent changes in indices.
             state.files.remove(at: from)
         }
+        changes.cast([.files(.remove(at: from)), .files(.insert(at: to))])
+        signal.cast(())
 
         // Perform I/O.
         // Platform file-system operation.
         let fromFileSystemURL: URL
         let toFileSystemURL: URL
-        switch makeURLForFile(at: from) {
+        switch oldState.makeLocationOnFileSystemForFile(at: from) {
         case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
         case .success(let url):     fromFileSystemURL = url
         }
-        switch makeURLForFile(at: to) {
+        switch oldState.makeLocationOnFileSystemForFile(at: to) {
         case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
         case .success(let url):     toFileSystemURL = url
         }
@@ -304,71 +298,15 @@ final class ProjectFeature: ServicesDependent {
             return .failure(.fileSystemError(err))
         }
         storeProjectFileList()
-
-        // Cast events.
-        changes.cast([.files(.remove(at: from)), .files(.insert(at: to))])
-        signal.cast(())
-        storeProjectFileList()
         return .success(Void())
     }
-//    ///
-//    /// Moves a file from one location to another location.
-//    ///
-//    /// This literally moves a file node to a new position.
-//    /// You cannot change file name.
-//    /// If `from == to`, this becomes no-op, and return `.success(_)`.
-//    ///
-//    func moveFileByNamePath(from: ProjectItemPath, to: ProjectItemPath) -> Result<Void,MoveFileIssue> {
-//        assertMainThread()
-//        guard from != to else { return .success(Void()) } // No-op.
-//
-//        // Check input validity.
-//        guard state.files.contains(from) else { return .failure(.sourcePathIsNotInProject) }
-//        guard state.files.contains(to) == false else { return .failure(.destinationPathIsAlreadyInProject) }
-//        guard from.isRoot == false else { return .failure(.sourcePathIsRoot) }
-//        guard to.isRoot == false else { return .failure(.destinationPathIsRoot) }
-//
-//        // Perform I/O.
-//        // Platform file-system operation.
-//        guard let fromURL = makeFileURL(for: from) else { REPORT_criticalBug("File URL for an existing path could not be resolved.") }
-//        guard let toURL = makeFileURL(for: to) else { REPORT_criticalBug("File URL for an existing path could not be resolved.") }
-//        do {
-//            try services.fileSystem.moveItem(at: fromURL, to: toURL)
-//        }
-//        catch let err {
-//            return .failure(.fileSystemError(err))
-//        }
-//
-//        // Mutate in-memory file-tree.
-//        let kind = state.files[from]
-//        guard let fromIndex = state.files.index(of: from) else { REPORT_criticalBug("Index to an existing path could not be resolved.") }
-//        state.files.delete(at: fromIndex)
-//        let parentOfTo = to.deletingLastComponent().successValue!
-//        guard let indexOfParentOfTo = state.files.index(of: parentOfTo) else { REPORT_criticalBug("Index to an existing path could not be resolved.") }
-//        guard let siblings = state.files.children(of: parentOfTo) else { REPORT_criticalBug("Children of an existing path could not be resolved.") }
-//        let toIndex = indexOfParentOfTo.appendingLastComponent(siblings.count)
-//        let toNode = (to, kind)
-//        state.files.insert(at: toIndex, toNode)
-//
-//        // Cast events.
-//        changes.cast(.files(.delete(fromIndex)))
-//        changes.cast(.files(.insert(toIndex)))
-//        signal.cast(())
-//        storeProjectFileList()
-//        return .success(Void())
-//    }
     enum MoveFileIssue {
-        case makeFileSystemURLIssue(MakeFileSystemURLIssue)
-//        case sourcePathIsNotInProject
-//        case destinationPathIsAlreadyInProject
+        case makeFileSystemURLIssue(State.MakeLocationOnFileSystemIssue)
         case sourcePathIsRoot
         case destinationPathIsRoot
         case fileSystemError(Error)
     }
 
-//    func deleteFiles(at paths: [IndexPath]) -> Result<Void,DeleteIssue> {
-//        deleteFilesWithSortedIndexPaths(sortedPathsInDeleteOrder)
-//    }
     ///
     /// Delete multiple file nodes at once.
     ///
@@ -396,19 +334,22 @@ final class ProjectFeature: ServicesDependent {
         // We don't need proper stable sort. Just leaf-to-root is enough.
         let sorted_idxps = ProjectItemPathClustering.sortLeafToRoot(selection)
 
-        // Update in-memory representations.
+        // Update in-memory state & cast.
         var changeSignals = [Change]()
+        let oldState = state
         appendMutation { (state) in
             for idxp in sorted_idxps {
                 state.files.remove(at: idxp)
                 changeSignals.append(.files(.remove(at: idxp)))
             }
         }
+        signal.cast(())
+        changes.cast(changeSignals)
 
         // Perform I/O.
         for idxp in sorted_idxps {
             let targetFileSystemURL: URL
-            switch makeURLForFile(at: idxp) {
+            switch oldState.makeLocationOnFileSystemForFile(at: idxp) {
             case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
             case .success(let url):     targetFileSystemURL = url
             }
@@ -419,14 +360,11 @@ final class ProjectFeature: ServicesDependent {
                 return .failure(.fileSystemError(err))
             }
         }
-
-        signal.cast(())
-        changes.cast(changeSignals)
         storeProjectFileList()
         return .success(Void())
     }
     enum DeleteFilesIssue {
-        case makeFileSystemURLIssue(MakeFileSystemURLIssue)
+        case makeFileSystemURLIssue(State.MakeLocationOnFileSystemIssue)
         case fileSystemError(Error)
     }
 
@@ -455,32 +393,33 @@ final class ProjectFeature: ServicesDependent {
             reportIssue("File I/O error: \(err)")
         }
     }
-    private func restoreProjectFileList() {
+    private func restoreProjectFileList() -> Result<Void,ProjectFileRestoringIssue> {
+        // Perform I/O (input)
+        let code: String
         do {
-            guard let loc = state.location?.appendingPathComponent(".eews") else {
-                reportIssue("Cannot locate project.")
-                return
-            }
+            guard let loc = state.location?.appendingPathComponent(".eews") else { return .failure(.projectHasNoLocationOnFileSystem) }
             let d = try Data(contentsOf: loc)
             let s = String(data: d, encoding: .utf8) ?? ""
-            let r = DTOProjectFile.decode(s)
-            let dto: DTOProjectFile
-            switch r {
-            case .failure(let issue):
-                reportIssue(issue)
-                return
-            case .success(let newDTO):
-                dto = newDTO
-            }
-            appendMutation { (state) in
-                state.files = dto.files
-            }
-            changes.cast([.files(.replace(at: []))])
-            signal.cast(())
+            code = s
         }
-        catch let err {
-            reportIssue("File I/O error: \(err)")
+        catch let err { return .failure(.fileSystemError(err)) }
+
+        let files: FileTree
+        switch DTOProjectFile.decode(code) {
+        case .failure(let issue):   return .failure(.decoding(issue))
+        case .success(let dto):     files = dto.files
         }
+        appendMutation { (state) in
+            state.files = files
+        }
+        changes.cast([.files(.replace(at: []))])
+        signal.cast(())
+        return .success(Void())
+    }
+    enum ProjectFileRestoringIssue {
+        case projectHasNoLocationOnFileSystem
+        case fileSystemError(Error)
+        case decoding(String)
     }
 
     ///
@@ -491,7 +430,7 @@ final class ProjectFeature: ServicesDependent {
     ///
     private func createActualFileImpl(at path: ProjectItemPath, as kind: NodeKind) -> Result<Void, MakeFileIssue> {
         let targetFileSystemURL: URL
-        switch makeURLForFile(at: path) {
+        switch state.makeLocationOnFileSystemForFile(at: path) {
         case .failure(let issue):   return .failure(.makeFileSystemURLIssue(issue))
         case .success(let url):     targetFileSystemURL = url
         }
@@ -616,40 +555,6 @@ extension ProjectFeature {
 //        return u1
 //    }
 
-    enum MakeFileSystemURLIssue {
-        case projectHasNoLocationOnFileSystem
-    }
-    ///
-    /// - Returns:
-    ///     `nil` if `location == nil`.
-    ///     Otherwise a URL.
-    ///
-    /// - Note:
-    ///     This requires an existing file node at the index-path.
-    ///     If a file node does not exist at the path, this crash
-    ///     the app.
-    ///
-    func makeURLForFile(at idxp: IndexPath) -> Result<URL, MakeFileSystemURLIssue> {
-        guard let u = state.location else { return .failure(.projectHasNoLocationOnFileSystem) }
-        var u1 = u
-        let namep = state.files.namePath(at: idxp)
-        for n in namep.components {
-            u1 = u1.appendingPathComponent(n)
-        }
-        return .success(u1)
-    }
-    ///
-    /// This doesn't require an existing file node in state.
-    /// Works always.
-    ///
-    func makeURLForFile(at namep: ProjectItemPath) -> Result<URL, MakeFileSystemURLIssue> {
-        guard let u = state.location else { return .failure(.projectHasNoLocationOnFileSystem) }
-        var u1 = u
-        for n in namep.components {
-            u1 = u1.appendingPathComponent(n)
-        }
-        return .success(u1)
-    }
 }
 extension ProjectFeature {
     private func findInsertionPointForNewNode() -> Result<IndexPath, String> {
