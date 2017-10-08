@@ -4,3 +4,6 @@
 [submodule "submodules/tree.swift"]
 	path = submodules/tree.swift
 	url = https://github.com/eonil/tree.swift
+[submodule "submodules/json.swift"]
+	path = submodules/json.swift
+	url = https://github.com/eonil/json.swift

@@ -11,11 +11,13 @@ import AppKit
 
 final class TreeOutlineAdapter2<Node> {
     typealias IdentityProxy = TreeOutlineAdapter2IdentityProxy<Node>
+    private var sourceTree: Tree<Node>?
     private(set) var rootProxy: IdentityProxy?
     private let isFolded: (Tree<Node>) -> Bool
 
     init(_ initialSourceTree: Tree<Node>?, _ isFolded: @escaping (Tree<Node>) -> Bool) {
-        rootProxy = initialSourceTree.flatMap({ IdentityProxy($0) })
+        sourceTree = initialSourceTree
+        rootProxy = initialSourceTree.flatMap({ IdentityProxy(tree: $0) })
         self.isFolded = isFolded
     }
 
@@ -34,7 +36,7 @@ final class TreeOutlineAdapter2<Node> {
     /// and gets copied together.
     ///
     func makeSelection(selectedRowIndices: IndexSet) -> Selection {
-        guard let sourceTree = rootProxy?.sourceTree else { return Selection() }
+        guard let sourceTree = sourceTree else { return Selection() }
         return Selection(sourceTree, selectedRowIndices, isFolded)
     }
     
@@ -54,7 +56,7 @@ final class TreeOutlineAdapter2<Node> {
         case .insert(let idxp):
             if idxp == .root {
                 guard rootProxy == nil else { REPORT_criticalBug("Root proxy must be `nil` now.")}
-                rootProxy = IdentityProxy(snapshot)
+                rootProxy = IdentityProxy(tree: snapshot)
                 return .reload
             }
             else {
@@ -65,7 +67,7 @@ final class TreeOutlineAdapter2<Node> {
         case .replace(let idxp):
             if idxp == .root {
                 guard rootProxy != nil else { REPORT_criticalBug("`replace` operation to root cannot be performed with no root proxy object.") }
-                rootProxy = IdentityProxy(snapshot)
+                rootProxy = IdentityProxy(tree: snapshot)
                 return .reload
             }
             else {
@@ -164,14 +166,14 @@ extension TreeOutlineAdapter2 {
 /// A proxy object which provides referential identity to `NSOutlineView`.
 ///
 final class TreeOutlineAdapter2IdentityProxy<T> {
-    private(set) var sourceTree: Tree<T>
+    private(set) var sourceNode: T
     fileprivate(set) weak var containerProxy: TreeOutlineAdapter2IdentityProxy?
     private(set) var subproxies = [TreeOutlineAdapter2IdentityProxy]()
-    
-    init(_ tree: Tree<T>) {
-        sourceTree = tree
+
+    init(tree: Tree<T>) {
+        sourceNode = tree.node
         for subtree in tree.subtrees {
-            let subproxy = TreeOutlineAdapter2IdentityProxy(subtree)
+            let subproxy = TreeOutlineAdapter2IdentityProxy(tree: subtree)
             subproxy.containerProxy = self
             subproxies.append(subproxy)
         }
@@ -205,7 +207,7 @@ final class TreeOutlineAdapter2IdentityProxy<T> {
             let newSubtree = snapshot[path]
             let (containerPath, i) = path.splitLast()
             let containerProxy = findNode(at: containerPath)
-            let subproxy = TreeOutlineAdapter2IdentityProxy(newSubtree)
+            let subproxy = TreeOutlineAdapter2IdentityProxy(tree: newSubtree)
             subproxy.containerProxy = self
             containerProxy.subproxies.insert(subproxy, at: i)
             return .insertItems(children: [i], parent: containerProxy)
@@ -228,10 +230,10 @@ final class TreeOutlineAdapter2IdentityProxy<T> {
             //
             let newSubtree = snapshot[path]
             let containerProxy = path.isEmpty ? self : findNode(at: path)
-            containerProxy.sourceTree = newSubtree
+            containerProxy.sourceNode = newSubtree.node
             containerProxy.subproxies = []
             for subtree in newSubtree.subtrees {
-                let subproxy = TreeOutlineAdapter2IdentityProxy(subtree)
+                let subproxy = TreeOutlineAdapter2IdentityProxy(tree: subtree)
                 subproxy.containerProxy = self
                 containerProxy.subproxies.append(subproxy)
             }
@@ -256,7 +258,7 @@ final class TreeOutlineAdapter2IdentityProxy<T> {
         case .replaceNode(let path):
             let newNode = snapshot[path].node
             let containerNode = findNode(at: path)
-            containerNode.sourceTree.node = newNode
+            containerNode.sourceNode = newNode
             return .updateItem(containerNode)
         }
     }

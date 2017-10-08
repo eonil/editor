@@ -110,7 +110,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
 
     func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         let proxy = item as! TOA.IdentityProxy
-        switch proxy.sourceTree.node.kind {
+        switch proxy.sourceNode.kind {
         case .folder: return true
         case .file: return false
         }
@@ -157,7 +157,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         let v = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "FileItem"), owner: self) as! NSTableCellView
         let proxy = item as! TOA.IdentityProxy
         v.imageView?.image = makeIconForNode(proxy)
-        v.textField?.stringValue = proxy.sourceTree.node.name
+        v.textField?.stringValue = proxy.sourceNode.name
         v.textField?.delegate = self
         return v
     }
@@ -256,7 +256,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
                     .delete
                     ])
             }
-            if let rootProxy = toa.rootProxy, rootProxy.sourceTree[idxp].node.kind == .folder {
+            if let rootProxy = toa.rootProxy, rootProxy.sourceNode.kind == .folder {
                 ops.formUnion([
                     .newFolder,
                     .newFolderWithSelection,

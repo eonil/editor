@@ -12,8 +12,6 @@
 		4511D33B1F77A3F100F60401 /* RustCompilerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511D3381F77A3F000F60401 /* RustCompilerDTO.swift */; };
 		4511D33C1F77A3F100F60401 /* CargoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511D3391F77A3F100F60401 /* CargoDTO.swift */; };
 		4511D33E1F77A75E00F60401 /* JSONValue.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511D33D1F77A75E00F60401 /* JSONValue.extension.swift */; };
-		4511D3401F77A7CE00F60401 /* EonilJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4511D33F1F77A7CE00F60401 /* EonilJSON.framework */; };
-		4511D3411F77A7CE00F60401 /* EonilJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4511D33F1F77A7CE00F60401 /* EonilJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4511D3431F77AAD800F60401 /* Codable.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511D3421F77AAD800F60401 /* Codable.extension.swift */; };
 		4511D3491F77D4BC00F60401 /* NSColor.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511D3481F77D4BC00F60401 /* NSColor.extension.swift */; };
 		4511D34B1F77DCD600F60401 /* IssueItemTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4511D34A1F77DCD600F60401 /* IssueItemTableCellView.swift */; };
@@ -68,6 +66,7 @@
 		454843D61EFE59C200D53763 /* MainMenu2State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843D01EFE59C200D53763 /* MainMenu2State.swift */; };
 		454843D81EFE5B1400D53763 /* Relay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843D71EFE5B1400D53763 /* Relay.swift */; };
 		454843DA1EFE689000D53763 /* Dialogue.extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454843D91EFE689000D53763 /* Dialogue.extensions.swift */; };
+		454B2B5A1F89B12F001D8FAF /* libEonilTree.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45552FF51F83DF3300892CC5 /* libEonilTree.a */; };
 		454F77A51EFE964300317763 /* ManualLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F77A41EFE964300317763 /* ManualLoop.swift */; };
 		454F77BA1EFF127000317763 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F77B91EFF127000317763 /* Method.swift */; };
 		4552678F1F812394001D4006 /* SampleFriendList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4552678E1F812394001D4006 /* SampleFriendList.swift */; };
@@ -81,7 +80,6 @@
 		45552F3E1F82744700892CC5 /* NSTableView.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F3D1F82744700892CC5 /* NSTableView.extension.swift */; };
 		45552F4C1F830B0B00892CC5 /* ProjectFeature.Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F4B1F830B0B00892CC5 /* ProjectFeature.Command.swift */; };
 		45552F581F8316D600892CC5 /* REPORT_criticalBug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552F571F8316D600892CC5 /* REPORT_criticalBug.swift */; };
-		45552FFD1F83DF3D00892CC5 /* libEonilTree.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 45552FF51F83DF3300892CC5 /* libEonilTree.a */; };
 		45552FFF1F83E03100892CC5 /* ProjectFileTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45552FFE1F83E03100892CC5 /* ProjectFileTree.swift */; };
 		455530011F83E70400892CC5 /* Tree.extension.FileTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455530001F83E70400892CC5 /* Tree.extension.FileTree.swift */; };
 		4555A3FE1EFFBAB400FCB88E /* FunctionUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A3FD1EFFBAB400FCB88E /* FunctionUtility.swift */; };
@@ -109,6 +107,7 @@
 		456B9F211F7898BD00691591 /* CompactingIncrementalID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456B9F201F7898BD00691591 /* CompactingIncrementalID.swift */; };
 		4583498C1F7F1E6F00B08511 /* Transition2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583498B1F7F1E6F00B08511 /* Transition2.swift */; };
 		4583498E1F7F21EA00B08511 /* IncrementalList.extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4583498D1F7F21EA00B08511 /* IncrementalList.extensions.swift */; };
+		458E59AE1F89B0FF0050C1CF /* libEonilJSON.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 458E59AB1F89B0FF0050C1CF /* libEonilJSON.a */; };
 		459EA0221F88F1BC000581FC /* EditorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EA0211F88F1BC000581FC /* EditorTests.swift */; };
 		459EA0471F8932F7000581FC /* DTOProjectItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EA0461F8932F7000581FC /* DTOProjectItem.swift */; };
 		459EA0491F89339E000581FC /* DTOProjectCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459EA0481F89339E000581FC /* DTOProjectCoding.swift */; };
@@ -225,6 +224,34 @@
 			remoteGlobalIDString = 45552FDA1F8346B800892CC5;
 			remoteInfo = "EonilTree-iOS";
 		};
+		458E59991F89B01D0050C1CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 458E59921F89B01D0050C1CF /* EonilJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451C94541D044ABD00C5F640;
+			remoteInfo = "EonilJSON-iOS";
+		};
+		458E599B1F89B01D0050C1CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 458E59921F89B01D0050C1CF /* EonilJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 451C946D1D0451D800C5F640;
+			remoteInfo = "EonilJSON-iOS-Tests";
+		};
+		458E59AA1F89B0FF0050C1CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 458E59921F89B01D0050C1CF /* EonilJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 458E59551F89ACE00050C1CF;
+			remoteInfo = "EonilJSON-macOS";
+		};
+		458E59AC1F89B0FF0050C1CF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 458E59921F89B01D0050C1CF /* EonilJSON.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 458E59661F89AE100050C1CF;
+			remoteInfo = "EonilJSON-macOS-Tests";
+		};
 		459EA0241F88F1BC000581FC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4529BF5A1EF21859006A9A39 /* Project object */;
@@ -245,7 +272,6 @@
 				45EA45591EF229B90024D3B1 /* EonilToolbox.framework in Embed Frameworks */,
 				45FB54511EF6775C00522E83 /* BTree.framework in Embed Frameworks */,
 				45AF89D21F77752800767BC4 /* SnapKit.framework in Embed Frameworks */,
-				4511D3411F77A7CE00F60401 /* EonilJSON.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -258,7 +284,6 @@
 		4511D3381F77A3F000F60401 /* RustCompilerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RustCompilerDTO.swift; path = ../../../../Editor6Services/Editor6Services/Service/DTO/RustCompilerDTO.swift; sourceTree = "<group>"; };
 		4511D3391F77A3F100F60401 /* CargoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CargoDTO.swift; path = ../../../../Editor6Services/Editor6Services/Service/DTO/CargoDTO.swift; sourceTree = "<group>"; };
 		4511D33D1F77A75E00F60401 /* JSONValue.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValue.extension.swift; sourceTree = "<group>"; };
-		4511D33F1F77A7CE00F60401 /* EonilJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EonilJSON.framework; path = ../../Carthage/Build/Mac/EonilJSON.framework; sourceTree = "<group>"; };
 		4511D3421F77AAD800F60401 /* Codable.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.extension.swift; sourceTree = "<group>"; };
 		4511D3481F77D4BC00F60401 /* NSColor.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.extension.swift; sourceTree = "<group>"; };
 		4511D34A1F77DCD600F60401 /* IssueItemTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueItemTableCellView.swift; sourceTree = "<group>"; };
@@ -358,6 +383,7 @@
 		456B9F201F7898BD00691591 /* CompactingIncrementalID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactingIncrementalID.swift; sourceTree = "<group>"; };
 		4583498B1F7F1E6F00B08511 /* Transition2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition2.swift; sourceTree = "<group>"; };
 		4583498D1F7F21EA00B08511 /* IncrementalList.extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncrementalList.extensions.swift; sourceTree = "<group>"; };
+		458E59921F89B01D0050C1CF /* EonilJSON.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = EonilJSON.xcodeproj; path = ../../submodules/json.swift/EonilJSON.xcodeproj; sourceTree = "<group>"; };
 		459EA01F1F88F1BC000581FC /* EditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EditorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		459EA0211F88F1BC000581FC /* EditorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorTests.swift; sourceTree = "<group>"; };
 		459EA0231F88F1BC000581FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -435,13 +461,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45552FFD1F83DF3D00892CC5 /* libEonilTree.a in Frameworks */,
+				454B2B5A1F89B12F001D8FAF /* libEonilTree.a in Frameworks */,
+				458E59AE1F89B0FF0050C1CF /* libEonilJSON.a in Frameworks */,
 				45188C421F815F3300506284 /* libEonilStateSeries.a in Frameworks */,
 				451CE1BB1EF66E61004721A3 /* LLDBWrapper.framework in Frameworks */,
 				45EA45581EF229B90024D3B1 /* EonilToolbox.framework in Frameworks */,
 				45FB54501EF6775C00522E83 /* BTree.framework in Frameworks */,
 				45AF89D11F77752800767BC4 /* SnapKit.framework in Frameworks */,
-				4511D3401F77A7CE00F60401 /* EonilJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -480,12 +506,12 @@
 			children = (
 				45EA455A1EF229E60024D3B1 /* Debug.xcconfig */,
 				45EA455B1EF229E60024D3B1 /* Release.xcconfig */,
+				458E59921F89B01D0050C1CF /* EonilJSON.xcodeproj */,
 				45552FEA1F83DF3300892CC5 /* EonilTree.xcodeproj */,
 				45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */,
 				45FB544E1EF6775500522E83 /* BTree.framework */,
 				451CE1B91EF66E3D004721A3 /* LLDBWrapper.framework */,
 				4529BFCB1EF22963006A9A39 /* EonilToolbox.framework */,
-				4511D33F1F77A7CE00F60401 /* EonilJSON.framework */,
 				45AF89D01F77752800767BC4 /* SnapKit.framework */,
 				4529BF641EF21859006A9A39 /* Editor */,
 				459EA0201F88F1BC000581FC /* EditorTests */,
@@ -650,6 +676,17 @@
 				4511D3421F77AAD800F60401 /* Codable.extension.swift */,
 			);
 			path = V2;
+			sourceTree = "<group>";
+		};
+		458E59931F89B01D0050C1CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				458E599A1F89B01D0050C1CF /* libEonilJSON.a */,
+				458E599C1F89B01D0050C1CF /* EonilJSON-iOS-Tests.xctest */,
+				458E59AB1F89B0FF0050C1CF /* libEonilJSON.a */,
+				458E59AD1F89B0FF0050C1CF /* EonilJSON-macOS-Tests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		459EA0201F88F1BC000581FC /* EditorTests */ = {
@@ -895,6 +932,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 458E59931F89B01D0050C1CF /* Products */;
+					ProjectRef = 458E59921F89B01D0050C1CF /* EonilJSON.xcodeproj */;
+				},
+				{
 					ProductGroup = 45188C341F815F2B00506284 /* Products */;
 					ProjectRef = 45188C331F815F2B00506284 /* EonilStateSeries.xcodeproj */;
 				},
@@ -952,6 +993,34 @@
 			fileType = archive.ar;
 			path = libEonilTree.a;
 			remoteRef = 45552FF81F83DF3300892CC5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		458E599A1F89B01D0050C1CF /* libEonilJSON.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEonilJSON.a;
+			remoteRef = 458E59991F89B01D0050C1CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		458E599C1F89B01D0050C1CF /* EonilJSON-iOS-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilJSON-iOS-Tests.xctest";
+			remoteRef = 458E599B1F89B01D0050C1CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		458E59AB1F89B0FF0050C1CF /* libEonilJSON.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libEonilJSON.a;
+			remoteRef = 458E59AA1F89B0FF0050C1CF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		458E59AD1F89B0FF0050C1CF /* EonilJSON-macOS-Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "EonilJSON-macOS-Tests.xctest";
+			remoteRef = 458E59AC1F89B0FF0050C1CF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
