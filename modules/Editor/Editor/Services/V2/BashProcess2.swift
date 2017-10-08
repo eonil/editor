@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EditorCommon
 
 ///
 /// You create this object, and the bash process

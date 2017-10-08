@@ -134,7 +134,7 @@ final class WorkspaceFeatures: ServicesDependent {
 
         default:
             REPORT_recoverableWarning("Processing unimplemented menu command... `\(c)`.")
-            MARK_unimplementedButSkipForNow()
+            MARK_unimplementedButSkipForNow(Void())
         }
     }
 }
