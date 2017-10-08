@@ -31,13 +31,8 @@ final class ConsoleVC: NSViewController, WorkspaceFeatureDependent {
             switch c {
             case .phase:
                 break
-            case .session(let field):
-                switch field {
-                case .id:
-                    break
-                case .logs:
-                    render()
-                }
+            case .session:
+                render()
             }
         }
     }

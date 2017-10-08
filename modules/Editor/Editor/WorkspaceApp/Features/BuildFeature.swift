@@ -37,7 +37,7 @@ final class BuildFeature: WorkspaceFeatureComponent {
                 }
             }
             exec.clear()
-            changes.cast([.session(.logs)])
+            changes.cast([.session])
         }
         if exec?.state == .complete {
             exec = nil
@@ -49,8 +49,8 @@ final class BuildFeature: WorkspaceFeatureComponent {
             switch cmd {
             case .cleanAll:
                 guard let loc = project.location else { MARK_unimplemented() }
-                state.session.id = .init()
-                changes.cast([.session(.id)])
+                state.session = .init()
+                changes.cast([.session])
                 let ps = CargoProcess2.Parameters(
                     location: loc,
                     command: .clean)
@@ -61,8 +61,8 @@ final class BuildFeature: WorkspaceFeatureComponent {
 
             case .build:
                 guard let loc = project.location else { MARK_unimplemented() }
-                state.session.id = .init()
-                changes.cast([.session(.id)])
+                state.session = .init()
+                changes.cast([.session])
                 let ps = CargoProcess2.Parameters(
                     location: loc,
                     command: .build)
@@ -137,15 +137,6 @@ extension BuildFeature {
 
     enum Change {
         case phase
-        case session(Session)
-
-        enum Session {
-            ///
-            /// `session.id` has been changed.
-            /// This means a new session has been started.
-            ///
-            case id
-            case logs
-        }
+        case session
     }
 }

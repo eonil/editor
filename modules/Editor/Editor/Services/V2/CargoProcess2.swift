@@ -30,6 +30,7 @@ final class CargoProcess2 {
         bash.signal += loop
         let args = ps.command.makeCommandLineArguments()
         let script = [
+            "unset MallocNanoZone", // This is required for Xcode debugging context: https://stackoverflow.com/a/42601407/246776
             "cd \(parameters.location.path)",
             (["cargo"] + args).joined(separator: " "),
             "exit $?",

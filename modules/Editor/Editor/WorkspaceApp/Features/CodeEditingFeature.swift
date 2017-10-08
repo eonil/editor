@@ -27,6 +27,11 @@ final class CodeEditingFeature: WorkspaceFeatureComponent {
             // Perform input I/O first.
             // Be transactional.
             // No in-memory change on failure.
+//            let isDir: Bool?
+//            do { isDir = (try u.resourceValues(forKeys: [.isDirectoryKey])).isDirectory }
+//            catch let err { return .failure(.open(.fileSystemError(err))) }
+//            guard let isDir = isDir else { return .failure(.open(.unableToCheckFileForDirectoryFile)) }
+//            guard isDir == false else {  }
             guard let d = try? Data(contentsOf: u) else { return .failure(.open(.fileContentCannotBeDecodedFromUInt8ArrayUsingUTF8)) }
             let s = String(data: d, encoding: .utf8)
 
@@ -43,6 +48,10 @@ final class CodeEditingFeature: WorkspaceFeatureComponent {
             do { try d.write(to: u) }
             catch let err { return .failure(.save(.fileSystemError(err))) }
             return .success(Void())
+
+        case .saveIfNeeded:
+            guard state.location != nil else { return .success(Void()) }
+            return process(.save)
 
         case .close:
             switch process(.save) {
@@ -67,6 +76,8 @@ final class CodeEditingFeature: WorkspaceFeatureComponent {
         enum OpenIssue {
             case missingFileLocation
             case fileContentCannotBeDecodedFromUInt8ArrayUsingUTF8
+            case unableToCheckFileForDirectoryFile
+            case fileSystemError(Error)
         }
         enum SaveIssue {
             case missingFileLocation
@@ -82,8 +93,26 @@ extension CodeEditingFeature {
         var content: String?
     }
     enum Command {
+        ///
+        /// Open and load contents of file at designated URL.
+        /// If this fails for any reason, that will be treated as an error.
+        /// Do not send this command for file entries that are not supported.
+        /// (e.g., directory files)
+        ///
         case open(URL)
+        ///
+        /// Save currently editing file.
+        /// This returns a failure for any error.
+        ///
         case save
+        ///
+        /// Save only if needed. Otherwise, this is no-op.
+        /// Unlike `save`, this just ignores if nothing is currently loaded
+        /// in editor.
+        /// Anyway, if there's a loaded file and if the file cannot be saved,
+        /// this also returns a failure.
+        ///
+        case saveIfNeeded
         case setContent(String)
         case close
     }

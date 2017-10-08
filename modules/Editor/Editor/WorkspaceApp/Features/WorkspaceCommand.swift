@@ -11,10 +11,16 @@ enum WorkspaceCommand {
     case dialogue(DialogueFeature.Command)
     case project(ProjectFeature.Command)
     case codeEditing(CodeEditingFeature.Command)
-    case build(BuildFeature.Command)
+//    case build(BuildFeature.Command)
     case plan(PlanFeature.Command)
-//    case spawn(Process)
-//    enum Process {
-//
-//    }
+
+    ///
+    /// If `project.state.selection.count == 1`,
+    /// edit it.
+    ///
+    case editSelectedFile
+    ///
+    /// Executes a build command after saving any changes.
+    ///
+    case saveAndBuild(BuildFeature.Command)
 }

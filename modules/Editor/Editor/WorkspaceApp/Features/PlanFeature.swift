@@ -44,7 +44,7 @@ final class PlanFeature: WorkspaceFeatureComponent {
                 REPORT_ignoredSignal(rtask)
                 return .success([])
             case .running:
-                return .success([.build(.build)])
+                return .success([.saveAndBuild(.build)])
             }
 
         case .buildWaitForCompletion:

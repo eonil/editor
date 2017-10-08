@@ -152,7 +152,7 @@ extension TreeOutlineAdapter2 {
         case updateItem(Any?)
         case deleteItems(children: IndexSet, parent: Any?)
     }
-    struct Selection: Sequence {
+    struct Selection: IntCountableSequence {
         private let sourceTree: Tree<Node>?
         private let selectedRowIndices: IndexSet
         private let isFolded: (Tree<Node>) -> Bool
@@ -168,6 +168,9 @@ extension TreeOutlineAdapter2 {
             self.sourceTree = sourceTree
             self.selectedRowIndices = selectedRowIndices
             self.isFolded = isFolded
+        }
+        var count: Int {
+            return selectedRowIndices.count
         }
         func makeIterator() -> AnyIterator<IndexPath> {
             guard let sourceTreeCopy = sourceTree else { return AnyIterator { nil } }

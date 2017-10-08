@@ -13,7 +13,6 @@
 /// You need to do it if you need it.
 ///
 final class CargoService2 {
-//    private(set) var runnings = [CargoProcess2]()
     func spawn(_ ps: CargoProcess2.Parameters) -> CargoProcess2 {
         return CargoProcess2(ps)
     }

@@ -78,7 +78,18 @@ final class WorkspaceFeatures: ServicesDependent {
                 case .success(_):           break
                 }
 
-            case .build(let cmd):
+            case .editSelectedFile:
+                let selection = project.state.selection
+                guard selection.count == 1 else { break }
+                let idxp = Array(selection)[0]
+                // Ignore non-file entries...
+                guard project.state.files[idxp].node.kind == .file else { break }
+                // Ignore if final location cannot be resolved...
+                guard let fileURL = project.state.makeLocationOnFileSystemForFile(at: idxp).successValue else { break }
+                process(.codeEditing(.open(fileURL)))
+
+            case .saveAndBuild(let cmd):
+                process(.codeEditing(.saveIfNeeded))
                 switch build.process(cmd) {
                 case .failure(let issue):   spawnErrorDialogue(with: .build(issue))
                 case .success(_):           break
@@ -108,8 +119,8 @@ final class WorkspaceFeatures: ServicesDependent {
         case .fileNewFile:              process(.project(.makeFileAtInferredPosition(as: .folder)))
         case .fileOpen:                 break // This MUST already been handled in driver-app.
         case .fileClose:                process(.codeEditing(.close))
-        case .productClean:             process(.build(.cleanAll))
-        case .productBuild:             process(.build(.build))
+        case .productClean:             process(.saveAndBuild(.cleanAll))
+        case .productBuild:             process(.saveAndBuild(.build))
 
         case .productRun:
             processSequence([

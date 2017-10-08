@@ -8,17 +8,6 @@
 
 import EonilStateSeries
 
-//extension StateSeriesType where Snapshot == ProjectFeature.FileTree {
-//    func makeSelection<S>(with idxps: S) -> ProjectSelection where S: Sequence, S.Element == IndexPath {
-//
-//    }
-//}
-extension ProjectFeature {
-    func makeSelection<S>(with idxps: S) -> ProjectSelection where S: Sequence, S.Element == IndexPath {
-        guard let point = series.points.last else { return ProjectSelection() }
-        return ProjectSelection(point: point, items: idxps)
-    }
-}
 struct ProjectSelection: Sequence {
     ///
     /// Designates valid time-point of project state for captured index-paths.
@@ -26,7 +15,7 @@ struct ProjectSelection: Sequence {
     /// project-feature can reject requested operation.
     ///
     private typealias Point = ProjectFeature.Series.Point
-    private typealias Items = AnySequence<IndexPath>
+    private typealias Items = AnyIntCountableSequence<IndexPath>
     private enum Content {
         case none
         indirect case some(Point, Items)
@@ -35,11 +24,17 @@ struct ProjectSelection: Sequence {
 
     init() {
     }
-    init<S>(point: ProjectFeature.Series.Point, items: S) where S: Sequence, S.Element == IndexPath {
-        content = .some(point, AnySequence { items.makeIterator() })
+    init<S>(point: ProjectFeature.Series.Point, items: S) where S: IntCountableSequence, S.Element == IndexPath {
+        content = .some(point, AnyIntCountableSequence(items))
     }
     init(point: ProjectFeature.Series.Point, outlineSelection: TreeOutlineAdapter2<ProjectFeature.FileNode>.Selection) {
-        content = .some(point, AnySequence(outlineSelection))
+        content = .some(point, AnyIntCountableSequence(outlineSelection))
+    }
+    var count: Int {
+        switch content {
+        case .none:                 return 0
+        case .some(_, let items):   return items.count
+        }
     }
     ///
     /// - Returns:
@@ -67,18 +62,11 @@ struct ProjectSelection: Sequence {
             return items.makeIterator()
         }
     }
+}
 
-//    func makeIterator() -> AnyIterator<ProjectItemPath> {
-//        switch content {
-//        case .none:
-//            return AnyIterator([].makeIterator())
-//        case .some(let point, let items):
-//            let idxps = items.makeIterator()
-//            return AnyIterator {
-//                guard let idxp = idxps.next() else { return nil }
-//                let namep = point.state.files.namePath(at: idxp)
-//                return namep
-//            }
-//        }
-//    }
+extension ProjectFeature {
+    func makeSelection<S>(with idxps: S) -> ProjectSelection where S: IntCountableSequence, S.Element == IndexPath {
+        guard let point = series.points.last else { return ProjectSelection() }
+        return ProjectSelection(point: point, items: idxps)
+    }
 }

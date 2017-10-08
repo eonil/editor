@@ -86,6 +86,8 @@
 		4555A4051EFFC33400FCB88E /* MutableBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A4041EFFC33400FCB88E /* MutableBox.swift */; };
 		4555A41A1F01AFCF00FCB88E /* TransactionalRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4555A4191F01AFCF00FCB88E /* TransactionalRelay.swift */; };
 		455AC75B1F7BBA330084F0D5 /* SequenceReplacement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455AC75A1F7BBA330084F0D5 /* SequenceReplacement.swift */; };
+		455E9FA31F89E14E00F10B8F /* AnyIntCountableSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455E9FA21F89E14E00F10B8F /* AnyIntCountableSequence.swift */; };
+		455E9FB01F89E15B00F10B8F /* IntCountableSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455E9FAF1F89E15B00F10B8F /* IntCountableSequence.swift */; };
 		45641EAF1EFF258500D4C0D1 /* LineBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45641EAE1EFF258500D4C0D1 /* LineBuilder.swift */; };
 		45641EB21EFF3AA200D4C0D1 /* BashExecution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45641EB11EFF3AA200D4C0D1 /* BashExecution.swift */; };
 		45641EC71EFF420200D4C0D1 /* FSM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45641EC61EFF420200D4C0D1 /* FSM.swift */; };
@@ -349,6 +351,8 @@
 		4555A4041EFFC33400FCB88E /* MutableBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBox.swift; sourceTree = "<group>"; };
 		4555A4191F01AFCF00FCB88E /* TransactionalRelay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionalRelay.swift; sourceTree = "<group>"; };
 		455AC75A1F7BBA330084F0D5 /* SequenceReplacement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequenceReplacement.swift; sourceTree = "<group>"; };
+		455E9FA21F89E14E00F10B8F /* AnyIntCountableSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyIntCountableSequence.swift; sourceTree = "<group>"; };
+		455E9FAF1F89E15B00F10B8F /* IntCountableSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntCountableSequence.swift; sourceTree = "<group>"; };
 		45641EAE1EFF258500D4C0D1 /* LineBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineBuilder.swift; sourceTree = "<group>"; };
 		45641EB11EFF3AA200D4C0D1 /* BashExecution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BashExecution.swift; sourceTree = "<group>"; };
 		45641EC61EFF420200D4C0D1 /* FSM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FSM.swift; sourceTree = "<group>"; };
@@ -716,6 +720,8 @@
 				4514CDD31F7C0DDF00FF978B /* Result.extension.REPORT.swift */,
 				453A5B641F86A81100EDAB63 /* LocalImports.swift */,
 				459EA04E1F899BAD000581FC /* AlienIssue.swift */,
+				455E9FA21F89E14E00F10B8F /* AnyIntCountableSequence.swift */,
+				455E9FAF1F89E15B00F10B8F /* IntCountableSequence.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -1062,6 +1068,7 @@
 				4529BF681EF21859006A9A39 /* ViewController.swift in Sources */,
 				45641EC91EFF454800D4C0D1 /* FMSLoop.swift in Sources */,
 				45EA45631EF22A380024D3B1 /* AUDIT_check.swift in Sources */,
+				455E9FB01F89E15B00F10B8F /* IntCountableSequence.swift in Sources */,
 				454843C11EFE401C00D53763 /* RustLanguageService.swift in Sources */,
 				453A5B571F86830600EDAB63 /* TreeOutlineAdapter2.swift in Sources */,
 				454843DA1EFE689000D53763 /* Dialogue.extensions.swift in Sources */,
@@ -1111,6 +1118,7 @@
 				456ABC401F03B78F00928B4B /* DTOProjectFile.swift in Sources */,
 				45EA45A31EF22E450024D3B1 /* WorkspaceFeatures.swift in Sources */,
 				45AF89B21F7765CA00767BC4 /* Resources.swift in Sources */,
+				455E9FA31F89E14E00F10B8F /* AnyIntCountableSequence.swift in Sources */,
 				454F77A51EFE964300317763 /* ManualLoop.swift in Sources */,
 				4552B7F51EFB91F900E529EE /* MainMenuItemID.swift in Sources */,
 				451CE1B41EF648B7004721A3 /* Tree2Mutation.swift in Sources */,

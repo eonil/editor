@@ -167,6 +167,7 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         let outlineSelection = makeOutlineSelection()
         let newProjectSelection = features.project.makeSelection(with: outlineSelection)
         features.process(.project(.setSelection(to: newProjectSelection)))
+        features.process(.editSelectedFile)
     }
 
     func menuWillOpen(_ menu: NSMenu) {
@@ -205,17 +206,11 @@ final class FileNavigatorVC: NSViewController, NSOutlineViewDataSource, NSOutlin
         }
     }
 
-
-
     @objc
     private func userDidClickOnOutlineViewCellOrColumnHeader() {
         guard let features = features else { return REPORT_missingFeaturesAndContinue() }
-        guard let idxp = getIndexPathToClickedFile() else { return }
-        if let fileURL = features.project.state.makeLocationOnFileSystemForFile(at: idxp).successValue {
-            features.process(.codeEditing(.open(fileURL)))
-        }
-
         guard let outlineView = outlineView else { return }
+        guard let idxp = getIndexPathToClickedFile() else { return }
         let rowIndex = outlineView.clickedRow
         guard rowIndex != -1 else { return }
         guard outlineView.window?.firstResponder === outlineView else { return }
