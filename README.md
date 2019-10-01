@@ -1,8 +1,8 @@
+DEVELOPMENT HAS BEEN MOVED TO ANOTHER REPOSITORY: https://github.com/eonil/edit
 
+THIS REPOSITORY WON'T BE MAINTAINED ANYMORE.
 
-
-
-
+--------
 
 (Under development...)
 
